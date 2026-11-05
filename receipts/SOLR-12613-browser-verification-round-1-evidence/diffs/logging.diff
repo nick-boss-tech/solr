@@ -1,0 +1,13 @@
+diff --git a/solr/webapp/web/js/angular/controllers/logging.js b/solr/webapp/web/js/angular/controllers/logging.js
+index ce13bde316d..c35a62fff44 100644
+--- a/solr/webapp/web/js/angular/controllers/logging.js
++++ b/solr/webapp/web/js/angular/controllers/logging.js
+@@ -112,7 +112,7 @@ solrAdminApp.controller('LoggingController',
+     };
+ 
+     $scope.refresh = function() {
+-      LoggingV2.listAllLoggersAndLevels(function(error, data, response) {
++      LoggingV2.listAllLoggersAndLevels({}, function(error, data, response) {
+         $timeout(function() {
+           if (error) { ApiErrorHandler.handle(response); return; }
+           var payload = data || {};

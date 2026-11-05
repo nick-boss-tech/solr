@@ -1,0 +1,547 @@
+Downloading gradle-wrapper.jar from https://raw.githubusercontent.com/gradle/gradle/v8.10.2/gradle/wrapper/gradle-wrapper.jar
+Generating gradle.properties
+Starting a Gradle Daemon, 2 incompatible Daemons could not be reused, use --status for details
+Unable to locate English counter names in registry Perflib 009. Assuming English counters. Error 0x80070057. See https://support.microsoft.com/en-us/help/300956/how-to-manually-rebuild-performance-counter-library-values
+Unable to locate English counter names in registry Perflib 009. Counters may need to be rebuilt: 
+com.sun.jna.platform.win32.Win32Exception: The parameter is incorrect.
+	at com.sun.jna.platform.win32.Advapi32Util.registryGetStringArray(SourceFile:921)
+	at com.sun.jna.platform.win32.Advapi32Util.registryGetStringArray(SourceFile:898)
+	at com.gradle.scan.plugin.internal.dep.oshi.driver.windows.registry.HkeyPerformanceDataUtil.mapCounterIndicesFromRegistry(SourceFile:274)
+	at com.gradle.scan.plugin.internal.dep.oshi.driver.windows.registry.HkeyPerformanceDataUtil.<clinit>(SourceFile:51)
+	at com.gradle.scan.plugin.internal.dep.oshi.driver.windows.registry.ProcessPerformanceData.buildProcessMapFromRegistry(SourceFile:45)
+	at com.gradle.scan.plugin.internal.dep.oshi.software.os.windows.WindowsOperatingSystem.queryProcessMapFromRegistry(SourceFile:328)
+	at com.gradle.scan.plugin.internal.dep.oshi.util.Memoizer$1.get(SourceFile:65)
+	at com.gradle.scan.plugin.internal.dep.oshi.software.os.windows.WindowsOperatingSystem.processMapToList(SourceFile:298)
+	at com.gradle.scan.plugin.internal.dep.oshi.software.os.windows.WindowsOperatingSystem.queryAllProcesses(SourceFile:257)
+	at com.gradle.scan.plugin.internal.dep.oshi.software.common.AbstractOperatingSystem.getProcesses(SourceFile:86)
+	at com.gradle.scan.plugin.internal.resourceusage.capture.a.h.a(SourceFile:200)
+	at com.gradle.scan.plugin.internal.resourceusage.capture.a.h.<init>(SourceFile:73)
+	at com.gradle.scan.plugin.internal.resourceusage.capture.b.a(SourceFile:255)
+	at com.gradle.scan.plugin.internal.resourceusage.capture.b.a(SourceFile:263)
+	at java.base@21.0.11/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base@21.0.11/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1708)
+	at java.base@21.0.11/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base@21.0.11/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base@21.0.11/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921)
+	at java.base@21.0.11/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base@21.0.11/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:682)
+	at com.gradle.scan.plugin.internal.resourceusage.capture.b.j(SourceFile:227)
+	at org.gradle.internal.enterprise.impl.DefaultDevelocityPluginUnsafeConfigurationService.withConfigurationInputTrackingDisabled(DefaultDevelocityPluginUnsafeConfigurationService.java:38)
+	at com.gradle.scan.plugin.internal.service.b.b(SourceFile:355)
+	at com.gradle.scan.plugin.internal.service.b.a(SourceFile:80)
+	at com.gradle.scan.plugin.internal.service.b$a$1.a(SourceFile:322)
+	at com.gradle.scan.plugin.internal.resourceusage.capture.b.g(SourceFile:206)
+	at com.gradle.scan.plugin.internal.resourceusage.capture.b.l(SourceFile:94)
+	at java.base@21.0.11/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base@21.0.11/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base@21.0.11/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base@21.0.11/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base@21.0.11/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base@21.0.11/java.lang.Thread.run(Thread.java:1583)
+Unable to locate English counter names in registry Perflib 009. Assuming English counters. Error 0x80070057. See https://support.microsoft.com/en-us/help/300956/how-to-manually-rebuild-performance-counter-library-values
+Unable to locate English counter names in registry Perflib 009. Assuming English counters. Error 0x80070057. See https://support.microsoft.com/en-us/help/300956/how-to-manually-rebuild-performance-counter-library-values
+> Task :build-infra:compileJava FROM-CACHE
+> Task :build-infra:pluginDescriptors
+> Task :build-infra:processResources
+> Task :build-infra:classes
+> Task :build-infra:jar
+
+> Task :randomizationInfo
+Running tests with randomization seed: tests.seed=12613F00D
+
+> Task :solr:webapp:cleanTest UP-TO-DATE
+> Task :solr:api:processResources NO-SOURCE
+> Task :gitStatus
+
+> Task :errorProneSkipped
+WARNING: errorprone disabled (skipped on builds not running inside CI environments, pass -Pvalidation.errorprone=true to enable)
+
+> Task :solr:core:processResources
+> Task :solr:solrj:processResources
+> Task :solr:solrj-jetty:processResources NO-SOURCE
+> Task :solr:solrj-streaming:processResources
+> Task :solr:solrj-zookeeper:processResources NO-SOURCE
+> Task :solr:test-framework:processResources
+> Task :solr:webapp:downloadUiWasm
+> Task :solr:webapp:verifyUiWasm
+> Task :solr:api:compileJava FROM-CACHE
+> Task :solr:api:classes UP-TO-DATE
+
+> Task :solr:webapp:prepareUiResources
+Solr Admin UI: using downloaded artifact for commit 473a55ef64a9a1605e00eb6c1c386887d4cb7dac
+
+> Task :solr:api:jar
+> Task :solr:api:resolve FROM-CACHE
+> Task :solr:solrj:openApiGenerate FROM-CACHE
+> Task :solr:solrj:generatedSpotlessHelper
+> Task :solr:solrj:generatedSpotless
+> Task :solr:webapp:processResources
+> Task :solr:webapp:processTestResources
+> Task :solr:modules:sql:processResources
+> Task :solr:api:buildJSClient FROM-CACHE
+> Task :solr:solrj:compileJava
+> Task :solr:webapp:js-client:nodeSetup
+> Task :solr:solrj:compileJava FROM-CACHE
+> Task :solr:solrj-jetty:compileJava FROM-CACHE
+> Task :solr:solrj-streaming:compileJava
+> Task :solr:solrj-streaming:compileJava FROM-CACHE
+> Task :solr:solrj-zookeeper:compileJava FROM-CACHE
+> Task :solr:core:compileJava
+> Task :solr:core:compileJava FROM-CACHE
+> Task :solr:core:classes
+> Task :solr:core:jar
+> Task :solr:solrj:classes
+> Task :solr:solrj:jar
+> Task :solr:solrj-jetty:classes UP-TO-DATE
+> Task :solr:solrj-streaming:classes
+> Task :solr:solrj-jetty:jar
+> Task :solr:solrj-zookeeper:classes UP-TO-DATE
+> Task :solr:solrj-zookeeper:jar
+> Task :solr:solrj-streaming:jar
+> Task :solr:webapp:compileJava NO-SOURCE
+> Task :solr:webapp:classes
+> Task :solr:test-framework:compileJava
+> Task :solr:modules:sql:compileJava FROM-CACHE
+> Task :solr:modules:sql:classes
+> Task :solr:modules:sql:jar
+> Task :solr:webapp:js-client:npmSetup SKIPPED
+> Task :solr:test-framework:compileJava FROM-CACHE
+> Task :solr:test-framework:classes
+> Task :solr:test-framework:jar
+> Task :solr:webapp:compileTestJava FROM-CACHE
+> Task :solr:webapp:testClasses
+> Task :solr:webapp:js-client:downloadBrowserify
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+
+added 178 packages, and changed 1 package in 1m
+
+39 packages are looking for funding
+  run `npm fund` for details
+
+> Task :solr:webapp:js-client:syncJSClientSourceCode
+> Task :solr:webapp:js-client:jsClientDownloadDeps
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm warn deprecated @babel/plugin-proposal-nullish-coalescing-operator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-nullish-coalescing-operator instead.
+npm warn deprecated @babel/plugin-proposal-numeric-separator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-numeric-separator instead.
+npm warn deprecated @babel/plugin-proposal-json-strings@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-json-strings instead.
+npm warn deprecated @babel/plugin-proposal-export-namespace-from@7.18.9: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-export-namespace-from instead.
+npm warn deprecated @babel/plugin-proposal-class-properties@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-class-properties instead.
+npm warn deprecated @babel/plugin-proposal-logical-assignment-operators@7.20.7: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-logical-assignment-operators instead.
+npm warn deprecated @babel/plugin-proposal-optional-chaining@7.21.0: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-optional-chaining instead.
+npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated glob@7.1.6: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated formidable@1.2.6: Please upgrade to latest, formidable@v2 or formidable@v3! Check these notes: https://bit.ly/2ZEqIau
+npm warn deprecated @sinonjs/text-encoding@0.7.3: Deprecated: no longer maintained and no longer used by Sinon packages. See
+npm warn deprecated   https://github.com/sinonjs/nise/issues/243 for replacement details.
+npm warn deprecated superagent@5.3.1: Please upgrade to superagent v10.2.2+, see release notes at https://github.com/forwardemail/superagent/releases/tag/v10.2.2 - maintenance is supported by Forward Email @ https://forwardemail.net
+npm warn deprecated sinon@7.5.0: 16.1.1
+
+> v2_api@11.0.0 prepare
+> npm run build
+
+
+> v2_api@11.0.0 build
+> babel src -d dist
+
+Successfully compiled 221 files with Babel (33320ms).
+
+added 332 packages, and audited 333 packages in 3m
+
+43 packages are looking for funding
+  run `npm fund` for details
+
+6 vulnerabilities (1 low, 5 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> Task :solr:webapp:js-client:jsClientBuild
+
+> v2_api@11.0.0 build
+> babel src -d dist
+
+Successfully compiled 221 files with Babel (28401ms).
+
+> Task :solr:webapp:js-client:generateJsClientBundle
+> Task :solr:webapp:js-client:finalizeJsBundleDir
+
+WARNING: Using incubator modules: jdk.incubator.vector
+> Task :solr:webapp:test
+
+AdminUiNodeContractTest > testThreadsUseCallbackOnlyContract FAILED
+    java.lang.AssertionError: the existing API accepts only its callback expected:<1> but was:<2>
+        at __randomizedtesting.SeedInfo.seed([12613F00D:331DF67A8291BEED]:0)
+        at org.junit.Assert.fail(Assert.java:89)
+        at org.junit.Assert.failNotEquals(Assert.java:835)
+        at org.junit.Assert.assertEquals(Assert.java:647)
+        at org.apache.solr.webapp.AdminUiNodeContractTest.assertNativeCallback(AdminUiNodeContractTest.java:97)
+        at org.apache.solr.webapp.AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract(AdminUiNodeContractTest.java:48)
+        at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:959)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:995)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+        at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)
+        at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+        at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+        at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+        at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+        at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+        at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+        at com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+        at com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+        at com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+        at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+        at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+        at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+        at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+        at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+        at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+        at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+        at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+        at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+        at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+        at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+        at java.base/java.lang.Thread.run(Thread.java:1583)
+
+org.apache.solr.webapp.AdminUiNodeContractTest > test suite's output saved to C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-mutation-threads-windows-20261105\solr\webapp\build\test-results\test\outputs\OUTPUT-org.apache.solr.webapp.AdminUiNodeContractTest.txt, copied below:
+  2> Nov 05, 2026 5:42:16 AM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+  2> WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+  2> 20176 INFO  (SUITE-AdminUiNodeContractTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of 'C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-mutation-threads-windows-20261105\solr\server\solr\configsets\_default\conf'
+  2> 20342 INFO  (SUITE-AdminUiNodeContractTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-mutation-threads-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiNodeContractTest_12613F00D-001\data-dir-1-001
+  2> 20447 INFO  (SUITE-AdminUiNodeContractTest-seed#[12613F00D]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-1 for ERROR logs matching regex: ignore_exception
+  2> 20996 INFO  (SUITE-AdminUiNodeContractTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=false
+  2> 21698 WARN  (SUITE-AdminUiNodeContractTest-seed#[12613F00D]-worker) [] o.e.j.u.r.ResourceFactory Leaked C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-mutation-threads-windows-20261105\solr\test-framework\build\libs\solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///C:/Users/shaninna/dev/Solr-issues/worktrees/solr-12613-mutation-threads-windows-20261105/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+  2> 21698 INFO  (SUITE-AdminUiNodeContractTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.SolrTestCaseJ4.SuppressSSL(bugUrl="Admin UI browser tests drive plain http")
+  2> 22176 INFO  (SUITE-AdminUiNodeContractTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=null
+  2> 22176 WARN  (SUITE-AdminUiNodeContractTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 System property java.security.egd was not set by test runner, forcibly set to expected: file:/dev/./urandom
+  2> Nov 05, 2026 2:42:35 ICHAMTHI org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+  2> WARNING: Unable to find CDP implementation matching 157
+  2> 36057 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Starting testThreadsUseCallbackOnlyContract
+  2> 36808 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.s.c.MiniSolrCloudCluster Starting cluster of 2 servers in C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-mutation-threads-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiNodeContractTest_12613F00D-001\tempDir-001
+  2> 36863 WARN  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.s.c.ZkTestServer TEST_PATH() does not exist - solrj test?
+  2> 36895 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.s.c.ZkTestServer STARTING ZK TEST SERVER
+  2> 37030 WARN  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.s.c.ZkTestServer ZkTestServer requires the 'stat' command, temporarily manipulating your whitelist
+  2> 37049 INFO  (ZkTestServer Run Thread) [] o.a.s.c.ZkTestServer client port: /127.0.0.1:0
+  2> 37049 INFO  (ZkTestServer Run Thread) [] o.a.s.c.ZkTestServer Starting server
+  2> 38448 WARN  (ZkTestServer Run Thread) [] o.a.z.s.ServerCnxnFactory maxCnxns is not configured, using default value 0.
+  2> 38743 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.s.c.ZkTestServer start zk server on port: 62411
+  2> 41934 WARN  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 41938 WARN  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 44715 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+  2> 45698 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+  2> 46038 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+  2> 46399 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 46433 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 47220 WARN  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 47220 WARN  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 47258 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+  2> 47287 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+  2> 47347 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+  2> 47347 WARN  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 47349 WARN  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 47351 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+  2> 47358 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 47358 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 47445 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+  2> 47477 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+  2> 47481 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 47489 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 47570 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+  2> 53400 INFO  (jetty-launcher-8-thread-2) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+  2> 53400 INFO  (jetty-launcher-8-thread-1) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+  2> 53441 INFO  (jetty-launcher-8-thread-2) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+  2> 53445 INFO  (jetty-launcher-8-thread-1) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+  2> 53639 INFO  (jetty-launcher-8-thread-2) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.11+10-LTS
+  2> 53643 INFO  (jetty-launcher-8-thread-1) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.11+10-LTS
+  2> 53838 INFO  (jetty-launcher-8-thread-2) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+  2> 53844 INFO  (jetty-launcher-8-thread-1) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+  2> 54284 INFO  (jetty-launcher-8-thread-1) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@733b8c23{/solr,/solr,b=file:///C:/Users/shaninna/dev/Solr-issues/worktrees/solr-12613-mutation-threads-windows-20261105/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@1651d402{STARTED}}
+  2> 54282 INFO  (jetty-launcher-8-thread-2) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@7ba5f599{/solr,/solr,b=file:///C:/Users/shaninna/dev/Solr-issues/worktrees/solr-12613-mutation-threads-windows-20261105/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@3efe2fff{STARTED}}
+  2> 54352 INFO  (jetty-launcher-8-thread-1) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=61619, zkHost=127.0.0.1:62411/solr}
+  2> 54361 INFO  (jetty-launcher-8-thread-2) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=61618, zkHost=127.0.0.1:62411/solr}
+  2> 54415 ERROR (jetty-launcher-8-thread-1) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+  2> 54416 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+  2> 54416 ERROR (jetty-launcher-8-thread-2) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+  2> 54419 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+  2> 54555 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 4e8aa913fce4a40b529fe89d8b5dd7930c29a86e [snapshot build, details omitted]
+  2> 54557 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in cloud mode on port null
+  2> 54557 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-mutation-threads-windows-20261105\solr
+  2> 54557 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-11-05T10:42:53.968467100Z
+  2> 54555 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 4e8aa913fce4a40b529fe89d8b5dd7930c29a86e [snapshot build, details omitted]
+  2> 54573 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in cloud mode on port null
+  2> 54573 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-mutation-threads-windows-20261105\solr
+  2> 54575 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-11-05T10:42:53.986021500Z
+  2> 54919 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider Solr Home: C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-mutation-threads-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiNodeContractTest_12613F00D-001\tempDir-001\node2 (source: servlet config: solr.solr.home)
+  2> 54919 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider Solr Home: C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-mutation-threads-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiNodeContractTest_12613F00D-001\tempDir-001\node1 (source: servlet config: solr.solr.home)
+  2> 55535 WARN  (jetty-launcher-8-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 55537 WARN  (jetty-launcher-8-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 55541 WARN  (jetty-launcher-8-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 55541 WARN  (jetty-launcher-8-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 55547 INFO  (jetty-launcher-8-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+  2> 55555 INFO  (jetty-launcher-8-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+  2> 55583 INFO  (jetty-launcher-8-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+  2> 55594 INFO  (jetty-launcher-8-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+  2> 55636 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+  2> 55652 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+  2> 55658 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 55658 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 55658 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 55660 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 55660 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+  2> 55664 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+  2> 55823 INFO  (jetty-launcher-8-thread-1) [] o.a.s.c.SolrXmlConfig Loading solr.xml from C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-mutation-threads-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiNodeContractTest_12613F00D-001\tempDir-001\node1\solr.xml
+  2> 55823 INFO  (jetty-launcher-8-thread-2) [] o.a.s.c.SolrXmlConfig Loading solr.xml from C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-mutation-threads-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiNodeContractTest_12613F00D-001\tempDir-001\node2\solr.xml
+  2> 58610 INFO  (jetty-launcher-8-thread-2) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+  2> 58952 INFO  (jetty-launcher-8-thread-1) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+  2> 58964 INFO  (jetty-launcher-8-thread-2) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+  2> 68492 INFO  (jetty-launcher-8-thread-1) [] o.a.s.c.ZkContainer Zookeeper client=127.0.0.1:62411/solr
+  2> 68518 INFO  (jetty-launcher-8-thread-2) [] o.a.s.c.ZkContainer Zookeeper client=127.0.0.1:62411/solr
+  2> 68652 WARN  (jetty-launcher-8-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 68654 WARN  (jetty-launcher-8-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 68646 WARN  (jetty-launcher-8-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 68656 WARN  (jetty-launcher-8-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 68662 INFO  (jetty-launcher-8-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+  2> 68666 INFO  (jetty-launcher-8-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+  2> 68680 INFO  (jetty-launcher-8-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+  2> 68680 INFO  (jetty-launcher-8-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+  2> 68733 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+  2> 68737 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+  2> 68739 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 68739 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 68741 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 68754 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 68754 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+  2> 68756 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+  2> 69013 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:61618_solr] o.a.c.f.i.CuratorFrameworkImpl Starting
+  2> 69013 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:61619_solr] o.a.c.f.i.CuratorFrameworkImpl Starting
+  2> 69039 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:61618_solr] o.a.c.f.i.CuratorFrameworkImpl Default schema
+  2> 69041 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:61619_solr] o.a.c.f.i.CuratorFrameworkImpl Default schema
+  2> 69092 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+  2> 69120 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 69120 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+  2> 69124 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 69130 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 69134 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 70069 WARN  (jetty-launcher-8-thread-1) [n:127.0.0.1:61619_solr] o.a.s.c.ZkController Contents of zookeeper /security.json are world-readable; consider setting up ACLs as described in https://solr.apache.org/guide/solr/latest/deployment-guide/zookeeper-access-control.html
+  2> 70073 WARN  (jetty-launcher-8-thread-2) [n:127.0.0.1:61618_solr] o.a.s.c.ZkController Contents of zookeeper /security.json are world-readable; consider setting up ACLs as described in https://solr.apache.org/guide/solr/latest/deployment-guide/zookeeper-access-control.html
+  2> 70474 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:61618_solr] o.a.s.c.ZkController The Overseer is enabled.  It will process all cluster commands & state updates.
+  2> 70474 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:61619_solr] o.a.s.c.ZkController The Overseer is enabled.  It will process all cluster commands & state updates.
+  2> 70699 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:61619_solr] o.a.s.c.OverseerElectionContext I am going to be the leader 127.0.0.1:61619_solr
+  2> 70705 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:61618_solr] o.a.s.c.ZkController Register node as live in ZooKeeper: /live_nodes/127.0.0.1:61618_solr
+  2> 70780 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:61619_solr] o.a.s.c.Overseer Overseer (id=72109939788152839-127.0.0.1:61619_solr-n_0000000000) starting
+  2> 71228 INFO  (zkCallback-39-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (0) -> (1)
+  2> 71228 INFO  (zkCallback-41-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (0) -> (1)
+  2> 71933 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:61619_solr] o.a.s.c.ZkController Publish node=127.0.0.1:61619_solr as DOWN
+  2> 71955 INFO  (OverseerStateUpdate-72109939788152839-127.0.0.1:61619_solr-n_0000000000) [n:127.0.0.1:61619_solr] o.a.s.c.Overseer Starting to work on the main queue : 127.0.0.1:61619_solr
+  2> 72077 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:61619_solr] o.a.s.c.ZkController Register node as live in ZooKeeper: /live_nodes/127.0.0.1:61619_solr
+  2> 72119 INFO  (zkCallback-39-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (1) -> (2)
+  2> 72123 INFO  (zkCallback-41-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (1) -> (2)
+  2> 72705 WARN  (jetty-launcher-8-thread-1) [n:127.0.0.1:61619_solr] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+  2> 72705 WARN  (jetty-launcher-8-thread-2) [n:127.0.0.1:61618_solr] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+  2> 77736 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:61619_solr] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-mutation-threads-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiNodeContractTest_12613F00D-001\tempDir-001\node1
+  2> 77736 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:61618_solr] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-mutation-threads-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiNodeContractTest_12613F00D-001\tempDir-001\node2
+  2> 87275 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:61619_solr] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@733b8c23{/solr,/solr,b=file:///C:/Users/shaninna/dev/Solr-issues/worktrees/solr-12613-mutation-threads-windows-20261105/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@1651d402{STARTED}}
+  2> 87279 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:61618_solr] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@7ba5f599{/solr,/solr,b=file:///C:/Users/shaninna/dev/Solr-issues/worktrees/solr-12613-mutation-threads-windows-20261105/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@3efe2fff{STARTED}}
+  2> 87309 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:61619_solr] o.e.j.s.AbstractConnector Started oejs.ServerConnector@58365448{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:61619}
+  2> 87307 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:61618_solr] o.e.j.s.AbstractConnector Started oejs.ServerConnector@4e74583c{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:61618}
+  2> 87339 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:61618_solr] o.e.j.s.Server Started oejs.Server@4289e920{STARTING}[12.1.14,sto=0] @33869ms
+  2> 87339 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:61619_solr] o.e.j.s.Server Started oejs.Server@6d0b6a51{STARTING}[12.1.14,sto=0] @33863ms
+  2> 87370 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.s.c.MiniSolrCloudCluster waitForAllNodes: numServers=2
+  2> 87372 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.s.c.MiniSolrCloudCluster waitForNode: 127.0.0.1:61619_solr
+  2> 87374 WARN  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 87374 WARN  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+  2> 87376 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+  2> 87380 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+  2> 87416 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+  2> 87418 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 87418 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+  2> 87422 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (0) -> (2)
+  2> 87426 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.s.c.s.i.ZkClientClusterStateProvider Cluster at 127.0.0.1:62411/solr ready
+  2> 87426 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.s.c.MiniSolrCloudCluster waitForNode: 127.0.0.1:61618_solr
+  2> 101348 INFO  (qtp1653766646-77-null-1) [n:127.0.0.1:61619_solr t:null-1] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875419447&indexInfo=false} entity={} status=0 QTime=1036
+  2> 104705 INFO  (qtp1653766646-70-null-2) [n:127.0.0.1:61619_solr t:null-2] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875419449} entity={} status=0 QTime=4251
+  2> 104823 INFO  (qtp1653766646-72-null-3) [n:127.0.0.1:61619_solr t:null-3] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875424188} entity={} status=0 QTime=17
+  2> 104891 INFO  (qtp1653766646-82-null-4) [n:127.0.0.1:61619_solr t:null-4] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875424189} entity={} status=0 QTime=24
+  2> 105221 INFO  (qtp1653766646-70-null-7) [n:127.0.0.1:61619_solr t:null-7] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875424540} entity={} status=0 QTime=15
+  2> 105328 INFO  (qtp1653766646-77-null-6) [n:127.0.0.1:61619_solr t:null-6] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875424530&detailed=true} entity={} status=0 QTime=122
+  2> 105569 INFO  (qtp1653766646-72-null-8) [n:127.0.0.1:61619_solr t:null-8] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875424881} entity={} status=0 QTime=12
+  2> 105942 INFO  (qtp1653766646-74-null-5) [n:127.0.0.1:61619_solr t:null-5] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875424530} entity={} status=0 QTime=738
+  2> 106077 INFO  (qtp1653766646-77-null-12) [n:127.0.0.1:61619_solr t:null-12] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875425445} entity={} status=0 QTime=6
+  2> 106108 INFO  (qtp1653766646-72-null-13) [n:127.0.0.1:61619_solr t:null-13] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875425445} entity={} status=0 QTime=9
+  2> 106365 INFO  (qtp1653766646-74-null-14) [n:127.0.0.1:61619_solr t:null-14] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875425701} entity={} status=0 QTime=23
+  2> 107086 INFO  (qtp1653766646-74-null-15) [n:127.0.0.1:61619_solr t:null-15] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875426026} entity={} status=0 QTime=439
+  2> 107177 INFO  (qtp1653766646-74-null-18) [n:127.0.0.1:61619_solr t:null-18] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875426518} entity={} status=0 QTime=29
+  2> 107185 INFO  (qtp1653766646-72-null-17) [n:127.0.0.1:61619_solr t:null-17] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875426517} entity={} status=0 QTime=40
+  2> 107311 INFO  (qtp1653766646-143-null-19) [n:127.0.0.1:61619_solr t:null-19] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875426658} entity={} status=0 QTime=4
+  2> 107368 INFO  (qtp1653766646-143-null-20) [n:127.0.0.1:61619_solr t:null-20] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875426697&indexInfo=false} entity={} status=0 QTime=32
+  2> 107708 INFO  (qtp1653766646-77-null-16) [n:127.0.0.1:61619_solr t:null-16] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875426026} entity={} status=0 QTime=606
+  2> 108933 INFO  (qtp1653766646-74-null-9) [n:127.0.0.1:61619_solr t:null-9] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=1140
+  2> 109049 INFO  (qtp1653766646-143-null-11) [n:127.0.0.1:61619_solr t:null-11] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793875424530} status=0 QTime=1256
+  2> 109051 INFO  (qtp372940841-76-null-10) [n:127.0.0.1:61618_solr t:null-10] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793875424530} status=0 QTime=1258
+  2> 109167 INFO  (qtp372940841-81-null-9) [n:127.0.0.1:61618_solr t:null-9] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=1374
+  2> 109197 INFO  (qtp1653766646-70-null-11) [n:127.0.0.1:61619_solr t:null-11] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:61619_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793875424530} status=0 QTime=3492
+  2> 109201 INFO  (qtp1653766646-82-null-10) [n:127.0.0.1:61619_solr t:null-10] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:61618_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793875424530} status=0 QTime=3550
+  2> 109320 INFO  (qtp1653766646-72-null-21) [n:127.0.0.1:61619_solr t:null-21] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875427422} entity={} status=0 QTime=1222
+  2> 109456 INFO  (qtp372940841-73-null-22) [n:127.0.0.1:61618_solr t:null-22] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875427423} entity={} status=0 QTime=1299
+  2> 109675 INFO  (qtp1653766646-74-null-23) [n:127.0.0.1:61619_solr t:null-23] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875428961} entity={} status=0 QTime=4
+  2> 109677 INFO  (qtp1653766646-79-null-9) [n:127.0.0.1:61619_solr t:null-9] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875425019&nodes=127.0.0.1:61618_solr,127.0.0.1:61619_solr} entity={} status=0 QTime=4026
+  2> 109700 INFO  (qtp1653766646-143-null-24) [n:127.0.0.1:61619_solr t:null-24] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875428961} entity={} status=0 QTime=2
+  2> 110035 INFO  (qtp372940841-75-null-25) [n:127.0.0.1:61618_solr t:null-25] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875429337&indexInfo=false} entity={} status=0 QTime=6
+  2> 110076 INFO  (qtp1653766646-70-null-26) [n:127.0.0.1:61619_solr t:null-26] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875429341} entity={} status=0 QTime=7
+  2> 110320 INFO  (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Ending testThreadsUseCallbackOnlyContract
+  2> 110510 INFO  (qtp372940841-78-null-28) [n:127.0.0.1:61618_solr t:null-28] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875429671} entity={} status=0 QTime=165
+  2> 110681 ERROR (TEST-AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract-seed#[12613F00D]) [] o.a.s.w.AdminUiTestBase UI test failure artifacts saved to C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-mutation-threads-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiNodeContractTest_12613F00D-001\ui-failure-testThreadsUseCallbackOnlyContract-001
+   >     java.lang.AssertionError: the existing API accepts only its callback expected:<1> but was:<2>
+   >         at __randomizedtesting.SeedInfo.seed([12613F00D:331DF67A8291BEED]:0)
+   >         at org.junit.Assert.fail(Assert.java:89)
+   >         at org.junit.Assert.failNotEquals(Assert.java:835)
+   >         at org.junit.Assert.assertEquals(Assert.java:647)
+   >         at org.apache.solr.webapp.AdminUiNodeContractTest.assertNativeCallback(AdminUiNodeContractTest.java:97)
+   >         at org.apache.solr.webapp.AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract(AdminUiNodeContractTest.java:48)
+   >         at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+   >         at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner.invoke(RandomizedRunner.java:1780)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$8.evaluate(RandomizedRunner.java:959)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$9.evaluate(RandomizedRunner.java:995)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$10.evaluate(RandomizedRunner.java:1009)
+   >         at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:61)
+   >         at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+   >         at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at org.apache.lucene.tests.util.TestRuleSetupTeardownChained$1.evaluate(TestRuleSetupTeardownChained.java:48)
+   >         at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at org.apache.lucene.tests.util.TestRuleThreadAndTestName$1.evaluate(TestRuleThreadAndTestName.java:45)
+   >         at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+   >         at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+   >         at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl.forkTimeoutingTask(ThreadLeakControl.java:843)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl$3.evaluate(ThreadLeakControl.java:490)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner.runSingleTest(RandomizedRunner.java:968)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$5.evaluate(RandomizedRunner.java:853)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$6.evaluate(RandomizedRunner.java:904)
+   >         at com.carrotsearch.randomizedtesting.RandomizedRunner$7.evaluate(RandomizedRunner.java:915)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at com.carrotsearch.randomizedtesting.rules.SystemPropertiesRestoreRule$1.evaluate(SystemPropertiesRestoreRule.java:80)
+   >         at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at org.apache.lucene.tests.util.TestRuleStoreClassName$1.evaluate(TestRuleStoreClassName.java:38)
+   >         at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+   >         at com.carrotsearch.randomizedtesting.rules.NoShadowingOrOverridesOnMethodsRule$1.evaluate(NoShadowingOrOverridesOnMethodsRule.java:40)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at org.apache.lucene.tests.util.TestRuleAssertionsRequired$1.evaluate(TestRuleAssertionsRequired.java:53)
+   >         at org.apache.lucene.tests.util.AbstractBeforeAfterRule$1.evaluate(AbstractBeforeAfterRule.java:43)
+   >         at org.apache.lucene.tests.util.TestRuleMarkFailure$1.evaluate(TestRuleMarkFailure.java:44)
+   >         at org.apache.lucene.tests.util.TestRuleIgnoreAfterMaxFailures$1.evaluate(TestRuleIgnoreAfterMaxFailures.java:60)
+   >         at org.apache.lucene.tests.util.TestRuleIgnoreTestSuites$1.evaluate(TestRuleIgnoreTestSuites.java:47)
+   >         at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+   >         at com.carrotsearch.randomizedtesting.rules.StatementAdapter.evaluate(StatementAdapter.java:36)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl$StatementRunner.run(ThreadLeakControl.java:390)
+   >         at com.carrotsearch.randomizedtesting.ThreadLeakControl.lambda$forkTimeoutingTask$0(ThreadLeakControl.java:850)
+   >         at java.base/java.lang.Thread.run(Thread.java:1583)
+  2> NOTE: reproduce with: gradlew test --tests AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract -Dtests.seed=12613F00D -Dtests.locale=asa-Latn-TZ -Dtests.timezone=Europe/Astrakhan -Dtests.asserts=true -Dtests.file.encoding=UTF-8
+  2> 110931 INFO  (qtp1653766646-77-null-27) [n:127.0.0.1:61619_solr t:null-27] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793875429670} entity={} status=0 QTime=592
+  2> 112459 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+  2> 112620 INFO  (jetty-closer-62-thread-2) [] o.e.j.s.Server Stopped oejs.Server@4289e920{STOPPING}[12.1.14,sto=0]
+  2> 112626 INFO  (jetty-closer-62-thread-1) [] o.e.j.s.Server Stopped oejs.Server@6d0b6a51{STOPPING}[12.1.14,sto=0]
+  2> 112630 INFO  (jetty-closer-62-thread-2) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@4e74583c{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+  2> 112632 INFO  (jetty-closer-62-thread-1) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@58365448{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+  2> 112646 INFO  (jetty-closer-62-thread-1) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=289509315
+  2> 112646 INFO  (jetty-closer-62-thread-2) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=660915492
+  2> 112646 INFO  (jetty-closer-62-thread-1) [] o.a.s.c.ZkController Remove node as live in ZooKeeper:/live_nodes/127.0.0.1:61619_solr
+  2> 112649 INFO  (jetty-closer-62-thread-2) [] o.a.s.c.ZkController Remove node as live in ZooKeeper:/live_nodes/127.0.0.1:61618_solr
+  2> 112663 INFO  (zkCallback-39-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (2) -> (0)
+  2> 112663 INFO  (zkCallback-41-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (2) -> (0)
+  2> 112731 INFO  (jetty-closer-62-thread-1) [] o.a.s.c.ZkController Publish this node as DOWN...
+  2> 112731 INFO  (jetty-closer-62-thread-1) [] o.a.s.c.ZkController Publish node=127.0.0.1:61619_solr as DOWN
+  2> 112731 INFO  (jetty-closer-62-thread-2) [] o.a.s.c.ZkController Publish this node as DOWN...
+  2> 112731 INFO  (jetty-closer-62-thread-2) [] o.a.s.c.ZkController Publish node=127.0.0.1:61618_solr as DOWN
+  2> Nov 05, 2026 2:43:52 ICHAMTHI io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+  2> WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+  2> 112758 INFO  (closeThreadPool-66-thread-2) [] o.a.s.c.Overseer Overseer (id=72109939788152839-127.0.0.1:61619_solr-n_0000000000) closing
+  2> 112760 INFO  (OverseerStateUpdate-72109939788152839-127.0.0.1:61619_solr-n_0000000000) [n:127.0.0.1:61619_solr] o.a.s.c.Overseer Overseer Loop exiting : 127.0.0.1:61619_solr
+  2> 112768 INFO  (closeThreadPool-66-thread-1) [] o.a.s.c.Overseer Overseer (id=72109939788152839-127.0.0.1:61619_solr-n_0000000000) closing
+  2> 112772 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+  2> Nov 05, 2026 2:43:52 ICHAMTHI io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+  2> WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+  2> 112808 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+  2> 112950 INFO  (jetty-closer-62-thread-1) [] o.a.s.c.Overseer Overseer (id=72109939788152839-127.0.0.1:61619_solr-n_0000000000) closing
+  2> 112989 INFO  (jetty-closer-62-thread-1) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@733b8c23{/solr,/solr,b=file:///C:/Users/shaninna/dev/Solr-issues/worktrees/solr-12613-mutation-threads-windows-20261105/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@1651d402{STOPPED}}
+  2> 112989 INFO  (jetty-closer-62-thread-2) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@7ba5f599{/solr,/solr,b=file:///C:/Users/shaninna/dev/Solr-issues/worktrees/solr-12613-mutation-threads-windows-20261105/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@3efe2fff{STOPPED}}
+  2> 112995 INFO  (SUITE-AdminUiNodeContractTest-seed#[12613F00D]-worker) [] o.a.s.c.ZkTestServer Shutting down ZkTestServer.
+  2> 112995 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+  2> 113139 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+  2> 113256 WARN  (ZkTestServer Run Thread) [] o.a.s.c.ZkTestServer Watch limit violations: 
+  2> Maximum concurrent create/delete watches above limit:
+  2> 
+  2> 	3	/solr/aliases.json
+  2> 	3	/solr/clusterprops.json
+  2> 	2	/solr/packages.json
+  2> 	2	/solr/security.json
+  2> 
+  2> Maximum concurrent data watches above limit:
+  2> 
+  2> 	20	/zookeeper/config
+  2> 
+  2> Maximum concurrent children watches above limit:
+  2> 
+  2> 	9	/solr/live_nodes
+  2> 	4	/solr/overseer/queue
+  2> 	3	/solr/collections
+  2> 
+  2> 113410 INFO  (SUITE-AdminUiNodeContractTest-seed#[12613F00D]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-1 after muting 0 log messages
+  2> NOTE: leaving temporary files on disk at: C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-mutation-threads-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiNodeContractTest_12613F00D-001
+  2> NOTE: test params are: codec=Asserting(Lucene104): {}, docValues:{}, maxPointsInLeafNode=1987, maxMBSortInHeap=7.008458100823198, sim=Asserting(RandomSimilarity(queryNorm=true): {}), locale=asa-Latn-TZ, timezone=Europe/Astrakhan
+  2> NOTE: Windows 11 10.0 amd64/Eclipse Adoptium 21.0.11 (64-bit)/cpus=1,threads=4,free=200299424,total=260046848
+  2> NOTE: All tests run in this JVM: [AdminUiNodeContractTest]
+
+:solr:webapp:test (FAILURE): 1 test(s), 1 failure(s)
+
+1 test completed, 1 failed
+
+> Task :solr:webapp:test FAILED
+> Task :solr:webapp:wipeTaskTemp
+ERROR: The following test(s) have failed:
+  - org.apache.solr.webapp.AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract (:solr:webapp)
+    Test history: https://develocity.apache.org/scans/tests?search.rootProjectNames=solr-root&tests.container=org.apache.solr.webapp.AdminUiNodeContractTest&tests.test=testThreadsUseCallbackOnlyContract http://fucit.org/solr-jenkins-reports/history-trend-of-recent-failures.html#series/org.apache.solr.webapp.AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract
+    Test output: C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-mutation-threads-windows-20261105\solr\webapp\build\test-results\test\outputs\OUTPUT-org.apache.solr.webapp.AdminUiNodeContractTest.txt
+    Reproduce with: ./gradlew :solr:webapp:test --tests "org.apache.solr.webapp.AdminUiNodeContractTest.testThreadsUseCallbackOnlyContract" "-Ptests.jvmargs=-XX:TieredStopAtLevel=1 -XX:+UseParallelGC -XX:ActiveProcessorCount=1 -XX:ReservedCodeCacheSize=120m" -Ptests.seed=12613F00D -Ptests.useSecurityManager=true -Ptests.file.encoding=UTF-8 -Ptests.selenium=true
+
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':solr:webapp:test'.
+> There were failing tests. See the results at: file:///C:/Users/shaninna/dev/Solr-issues/worktrees/solr-12613-mutation-threads-windows-20261105/solr/webapp/build/test-results/test/
+
+BUILD FAILED in 26m 10s
+49 actionable tasks: 35 executed, 13 from cache, 1 up-to-date

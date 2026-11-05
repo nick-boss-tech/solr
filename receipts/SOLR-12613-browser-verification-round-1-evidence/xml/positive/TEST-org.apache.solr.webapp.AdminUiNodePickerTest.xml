@@ -1,0 +1,1237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.webapp.AdminUiNodePickerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-05T09:03:37.981Z" hostname="NCBIPC0140" time="157.301">
+  <properties/>
+  <testcase name="testCloudLandingShowsNodesAndEmptyNodeSelector" classname="org.apache.solr.webapp.AdminUiNodePickerTest" time="74.963"/>
+  <testcase name="testSelectRemoteNodeUpdatesDashboardAndPersistsAcrossReload" classname="org.apache.solr.webapp.AdminUiNodePickerTest" time="17.28"/>
+  <testcase name="testLoggingLevelsHidesNodeBadge" classname="org.apache.solr.webapp.AdminUiNodePickerTest" time="10.821"/>
+  <testcase name="testNodeSelectionSurvivesInAppNavigation" classname="org.apache.solr.webapp.AdminUiNodePickerTest" time="9.278"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Nov 05, 2026 4:03:47 AM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+17783 INFO  (SUITE-AdminUiNodePickerTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of 'C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr\server\solr\configsets\_default\conf'
+17890 INFO  (SUITE-AdminUiNodePickerTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiNodePickerTest_12613F00D-001\data-dir-1-001
+17983 INFO  (SUITE-AdminUiNodePickerTest-seed#[12613F00D]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-1 for ERROR logs matching regex: ignore_exception
+18497 INFO  (SUITE-AdminUiNodePickerTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=true
+20257 WARN  (SUITE-AdminUiNodePickerTest-seed#[12613F00D]-worker) [] o.e.j.u.r.ResourceFactory Leaked C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr\test-framework\build\libs\solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///C:/Users/shaninna/dev/Solr-issues/worktrees/solr-12613-selenium-baseline-windows-20261105/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+20259 INFO  (SUITE-AdminUiNodePickerTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.SolrTestCaseJ4.SuppressSSL(bugUrl="Admin UI browser tests drive plain http")
+21614 INFO  (SUITE-AdminUiNodePickerTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=null
+21626 WARN  (SUITE-AdminUiNodePickerTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 System property java.security.egd was not set by test runner, forcibly set to expected: file:/dev/./urandom
+nov. 05, 2026 1:04:22 AM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+AVERTISSEMENT: Unable to find CDP implementation matching 157
+52247 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Starting testCloudLandingShowsNodesAndEmptyNodeSelector
+53005 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.s.c.MiniSolrCloudCluster Starting cluster of 2 servers in C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiNodePickerTest_12613F00D-001\tempDir-001
+53051 WARN  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.s.c.ZkTestServer TEST_PATH() does not exist - solrj test?
+53118 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.s.c.ZkTestServer STARTING ZK TEST SERVER
+53164 WARN  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.s.c.ZkTestServer ZkTestServer requires the 'stat' command, temporarily manipulating your whitelist
+53202 INFO  (ZkTestServer Run Thread) [] o.a.s.c.ZkTestServer client port: /127.0.0.1:0
+53204 INFO  (ZkTestServer Run Thread) [] o.a.s.c.ZkTestServer Starting server
+53860 WARN  (ZkTestServer Run Thread) [] o.a.z.s.ServerCnxnFactory maxCnxns is not configured, using default value 0.
+53970 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.s.c.ZkTestServer start zk server on port: 49448
+56079 WARN  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+56089 WARN  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+57999 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+58514 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+59444 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+60507 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+60509 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+62408 WARN  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+62409 WARN  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+62435 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+62518 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+62572 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+62573 WARN  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+62573 WARN  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+62576 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+62576 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+62585 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+62608 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+62661 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+62667 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+62668 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+62708 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+66747 INFO  (jetty-launcher-8-thread-1) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+66762 INFO  (jetty-launcher-8-thread-2) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+66789 INFO  (jetty-launcher-8-thread-1) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+66789 INFO  (jetty-launcher-8-thread-2) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+66855 INFO  (jetty-launcher-8-thread-2) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.11+10-LTS
+66858 INFO  (jetty-launcher-8-thread-1) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.11+10-LTS
+66908 INFO  (jetty-launcher-8-thread-1) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+66908 INFO  (jetty-launcher-8-thread-2) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+67194 INFO  (jetty-launcher-8-thread-1) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@70962454{/solr,/solr,b=file:///C:/Users/shaninna/dev/Solr-issues/worktrees/solr-12613-selenium-baseline-windows-20261105/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@696f8b23{STARTED}}
+67192 INFO  (jetty-launcher-8-thread-2) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@40d033e8{/solr,/solr,b=file:///C:/Users/shaninna/dev/Solr-issues/worktrees/solr-12613-selenium-baseline-windows-20261105/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@4bb3894f{STARTED}}
+67214 INFO  (jetty-launcher-8-thread-1) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=55843, zkHost=127.0.0.1:49448/solr}
+67214 INFO  (jetty-launcher-8-thread-2) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=55842, zkHost=127.0.0.1:49448/solr}
+67252 ERROR (jetty-launcher-8-thread-1) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+67254 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+67260 ERROR (jetty-launcher-8-thread-2) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+67260 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+67285 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 4e8aa913fce4a40b529fe89d8b5dd7930c29a86e [snapshot build, details omitted]
+67285 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 4e8aa913fce4a40b529fe89d8b5dd7930c29a86e [snapshot build, details omitted]
+67285 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in cloud mode on port null
+67287 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr
+67287 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-11-05T09:04:38.407654200Z
+67287 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in cloud mode on port null
+67295 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr
+67295 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-11-05T09:04:38.415685600Z
+67384 INFO  (jetty-launcher-8-thread-1) [] o.a.s.s.CoreContainerProvider Solr Home: C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiNodePickerTest_12613F00D-001\tempDir-001\node2 (source: servlet config: solr.solr.home)
+67384 INFO  (jetty-launcher-8-thread-2) [] o.a.s.s.CoreContainerProvider Solr Home: C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiNodePickerTest_12613F00D-001\tempDir-001\node1 (source: servlet config: solr.solr.home)
+67531 WARN  (jetty-launcher-8-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+67533 WARN  (jetty-launcher-8-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+67535 WARN  (jetty-launcher-8-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+67537 WARN  (jetty-launcher-8-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+67539 INFO  (jetty-launcher-8-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+67543 INFO  (jetty-launcher-8-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+67553 INFO  (jetty-launcher-8-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+67556 INFO  (jetty-launcher-8-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+67572 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+67576 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+67580 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+67584 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+67584 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+67586 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+67588 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+67602 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+67722 INFO  (jetty-launcher-8-thread-1) [] o.a.s.c.SolrXmlConfig Loading solr.xml from C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiNodePickerTest_12613F00D-001\tempDir-001\node2\solr.xml
+67724 INFO  (jetty-launcher-8-thread-2) [] o.a.s.c.SolrXmlConfig Loading solr.xml from C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiNodePickerTest_12613F00D-001\tempDir-001\node1\solr.xml
+68700 INFO  (jetty-launcher-8-thread-2) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+68825 INFO  (jetty-launcher-8-thread-1) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+68829 INFO  (jetty-launcher-8-thread-2) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+77441 INFO  (jetty-launcher-8-thread-2) [] o.a.s.c.ZkContainer Zookeeper client=127.0.0.1:49448/solr
+77461 INFO  (jetty-launcher-8-thread-1) [] o.a.s.c.ZkContainer Zookeeper client=127.0.0.1:49448/solr
+77537 WARN  (jetty-launcher-8-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+77538 WARN  (jetty-launcher-8-thread-1) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+77542 WARN  (jetty-launcher-8-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+77542 WARN  (jetty-launcher-8-thread-2) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+77544 INFO  (jetty-launcher-8-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+77553 INFO  (jetty-launcher-8-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+77593 INFO  (jetty-launcher-8-thread-1) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+77617 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+77619 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+77619 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+77619 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+77627 INFO  (jetty-launcher-8-thread-2) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+77645 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+77648 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+77648 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+77654 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+77842 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:55843_solr] o.a.c.f.i.CuratorFrameworkImpl Starting
+77842 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:55842_solr] o.a.c.f.i.CuratorFrameworkImpl Starting
+77895 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:55843_solr] o.a.c.f.i.CuratorFrameworkImpl Default schema
+77907 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+77911 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+77913 INFO  (jetty-launcher-8-thread-1-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+77923 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:55842_solr] o.a.c.f.i.CuratorFrameworkImpl Default schema
+77934 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+77938 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+77938 INFO  (jetty-launcher-8-thread-2-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+78324 WARN  (jetty-launcher-8-thread-2) [n:127.0.0.1:55842_solr] o.a.s.c.ZkController Contents of zookeeper /security.json are world-readable; consider setting up ACLs as described in https://solr.apache.org/guide/solr/latest/deployment-guide/zookeeper-access-control.html
+78324 WARN  (jetty-launcher-8-thread-1) [n:127.0.0.1:55843_solr] o.a.s.c.ZkController Contents of zookeeper /security.json are world-readable; consider setting up ACLs as described in https://solr.apache.org/guide/solr/latest/deployment-guide/zookeeper-access-control.html
+78556 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:55842_solr] o.a.s.c.ZkController The Overseer is disabled.  Cluster commands & state updates will happen on any/all nodes.
+78560 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:55843_solr] o.a.s.c.ZkController The Overseer is disabled.  Cluster commands & state updates will happen on any/all nodes.
+79006 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:55842_solr] o.a.s.c.OverseerElectionContext I am going to be the leader 127.0.0.1:55842_solr
+79010 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:55843_solr] o.a.s.c.ZkController Register node as live in ZooKeeper: /live_nodes/127.0.0.1:55843_solr
+79028 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:55842_solr] o.a.s.c.Overseer Overseer (id=72109553554489352-127.0.0.1:55842_solr-n_0000000000) starting
+79145 INFO  (zkCallback-41-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (0) -> (1)
+79147 INFO  (zkCallback-39-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (0) -> (1)
+79196 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:55842_solr] o.a.s.c.ZkController Publish node=127.0.0.1:55842_solr as DOWN
+79230 INFO  (OverseerStateUpdate-72109553554489352-127.0.0.1:55842_solr-n_0000000000) [n:127.0.0.1:55842_solr] o.a.s.c.Overseer Starting to work on the main queue : 127.0.0.1:55842_solr
+79245 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:55842_solr] o.a.s.c.ZkController Register node as live in ZooKeeper: /live_nodes/127.0.0.1:55842_solr
+79281 INFO  (zkCallback-39-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (1) -> (2)
+79283 INFO  (zkCallback-41-thread-1) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (1) -> (2)
+79704 WARN  (jetty-launcher-8-thread-2) [n:127.0.0.1:55842_solr] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+79704 WARN  (jetty-launcher-8-thread-1) [n:127.0.0.1:55843_solr] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+82437 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:55843_solr] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiNodePickerTest_12613F00D-001\tempDir-001\node2
+82437 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:55842_solr] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiNodePickerTest_12613F00D-001\tempDir-001\node1
+92600 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:55843_solr] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@70962454{/solr,/solr,b=file:///C:/Users/shaninna/dev/Solr-issues/worktrees/solr-12613-selenium-baseline-windows-20261105/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@696f8b23{STARTED}}
+92620 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:55842_solr] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@40d033e8{/solr,/solr,b=file:///C:/Users/shaninna/dev/Solr-issues/worktrees/solr-12613-selenium-baseline-windows-20261105/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@4bb3894f{STARTED}}
+92647 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:55843_solr] o.e.j.s.AbstractConnector Started oejs.ServerConnector@455035f3{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:55843}
+92649 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:55842_solr] o.e.j.s.AbstractConnector Started oejs.ServerConnector@362aba6b{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:55842}
+92659 INFO  (jetty-launcher-8-thread-2) [n:127.0.0.1:55842_solr] o.e.j.s.Server Started oejs.Server@5a8b1ddc{STARTING}[12.1.14,sto=0] @25855ms
+92659 INFO  (jetty-launcher-8-thread-1) [n:127.0.0.1:55843_solr] o.e.j.s.Server Started oejs.Server@6bcc4327{STARTING}[12.1.14,sto=0] @25851ms
+92686 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.s.c.MiniSolrCloudCluster waitForAllNodes: numServers=2
+92686 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.s.c.MiniSolrCloudCluster waitForNode: 127.0.0.1:55842_solr
+92688 WARN  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.s.c.c.SolrZkClient Using default ZkCredentialsInjector. ZkCredentialsInjector is not secure, it creates an empty list of credentials which leads to 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+92690 WARN  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.s.c.c.SolrZkClient Using default ZkACLProvider. DefaultZkACLProvider is not secure, it creates 'OPEN_ACL_UNSAFE' ACLs to Zookeeper nodes
+92694 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.c.f.i.CuratorFrameworkImpl Starting
+92700 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.c.f.i.CuratorFrameworkImpl Default schema
+92724 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]-EventThread) [] o.a.c.f.s.ConnectionStateManager State change: CONNECTED
+92726 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+92726 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]-EventThread) [] o.a.c.f.i.EnsembleTracker New config event received: {}
+92732 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (0) -> (2)
+92736 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.s.c.s.i.ZkClientClusterStateProvider Cluster at 127.0.0.1:49448/solr ready
+92738 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.s.c.MiniSolrCloudCluster waitForNode: 127.0.0.1:55843_solr
+104614 INFO  (qtp1000239215-73-null-1) [n:127.0.0.1:55842_solr t:null-1] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869514702&indexInfo=false} entity={} status=0 QTime=896
+110758 INFO  (qtp1000239215-72-null-2) [n:127.0.0.1:55842_solr t:null-2] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869514704} entity={} status=0 QTime=7065
+110977 INFO  (qtp1000239215-76-null-3) [n:127.0.0.1:55842_solr t:null-3] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869521980} entity={} status=0 QTime=74
+110996 INFO  (qtp1000239215-78-null-4) [n:127.0.0.1:55842_solr t:null-4] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869521981} entity={} status=0 QTime=60
+111057 INFO  (qtp1000239215-73-null-6) [n:127.0.0.1:55842_solr t:null-6] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869522117&detailed=true} entity={} status=0 QTime=41
+111184 INFO  (qtp1000239215-72-null-7) [n:127.0.0.1:55842_solr t:null-7] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869522225} entity={} status=0 QTime=17
+111190 INFO  (qtp1000239215-77-null-8) [n:127.0.0.1:55842_solr t:null-8] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869522291} entity={} status=0 QTime=13
+112749 INFO  (qtp1000239215-74-null-5) [n:127.0.0.1:55842_solr t:null-5] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869522116} entity={} status=0 QTime=1735
+nov. 05, 2026 1:05:24 AM org.glassfish.jersey.server.ServerRuntime$Responder writeResponse
+GRAVE: An I/O error has occurred while writing a response message entity to the container output stream.
+org.glassfish.jersey.server.internal.process.MappableException: org.eclipse.jetty.io.EofException: An established connection was aborted by the software in your host machine
+	at org.glassfish.jersey.server.internal.MappableExceptionWrapperInterceptor.aroundWriteTo(MappableExceptionWrapperInterceptor.java:67)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:139)
+	at org.glassfish.jersey.message.internal.MessageBodyFactory.writeTo(MessageBodyFactory.java:1118)
+	at org.glassfish.jersey.server.ServerRuntime$Responder.writeResponse(ServerRuntime.java:691)
+	at org.glassfish.jersey.server.ServerRuntime$Responder.processResponse(ServerRuntime.java:398)
+	at org.glassfish.jersey.server.ServerRuntime$Responder.process(ServerRuntime.java:388)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:277)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:266)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:253)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:703)
+	at org.apache.solr.api.V2HttpCall.invokeJerseyRequest(V2HttpCall.java:348)
+	at org.apache.solr.api.V2HttpCall.invokeJerseyRequest(V2HttpCall.java:311)
+	at org.apache.solr.api.V2HttpCall.handleAdmin(V2HttpCall.java:397)
+	at org.apache.solr.servlet.HttpSolrCall.handleAdminRequest(HttpSolrCall.java:733)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:499)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.NodeTargetProxyFilter.doFilter(NodeTargetProxyFilter.java:114)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler$LastRuleHandler.handle(RewriteHandler.java:162)
+	at org.eclipse.jetty.rewrite.handler.Rule$Handler.handle(Rule.java:109)
+	at org.eclipse.jetty.rewrite.handler.Rule$Handler.handle(Rule.java:109)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:143)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.server.internal.HttpConnection.onFillable(HttpConnection.java:420)
+	at org.eclipse.jetty.server.internal.HttpConnection$FillableCallback.succeeded(HttpConnection.java:1789)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:105)
+	at org.eclipse.jetty.io.SelectableChannelEndPoint$1.run(SelectableChannelEndPoint.java:54)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.eclipse.jetty.io.EofException: An established connection was aborted by the software in your host machine
+	at org.eclipse.jetty.io.SocketChannelEndPoint.flush(SocketChannelEndPoint.java:118)
+	at org.eclipse.jetty.io.WriteFlusher.flush(WriteFlusher.java:461)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:309)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:288)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:350)
+	at org.eclipse.jetty.server.internal.HttpConnection$SendCallback.process(HttpConnection.java:948)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:376)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:353)
+	at org.eclipse.jetty.server.internal.HttpConnection$HttpStreamOverHTTP1.send(HttpConnection.java:1548)
+	at org.eclipse.jetty.server.HttpStream$Wrapper.send(HttpStream.java:202)
+	at org.eclipse.jetty.server.internal.HttpChannelState$ChannelResponse.write(HttpChannelState.java:1430)
+	at org.eclipse.jetty.server.Response$Wrapper.write(Response.java:841)
+	at org.eclipse.jetty.server.handler.ContextResponse.write(ContextResponse.java:56)
+	at org.eclipse.jetty.ee10.servlet.ServletContextResponse.write(ServletContextResponse.java:230)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.channelWrite(HttpOutput.java:249)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.channelWrite(HttpOutput.java:242)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.flush(HttpOutput.java:778)
+	at org.apache.solr.servlet.ServletOutputStreamWrapper.flush(ServletOutputStreamWrapper.java:52)
+	at org.glassfish.jersey.message.internal.CommittingOutputStream.flush(CommittingOutputStream.java:273)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$UnCloseableOutputStream.flush(WriterInterceptorExecutor.java:281)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator.flush(UTF8JsonGenerator.java:1205)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1063)
+	at org.glassfish.jersey.jackson.internal.jackson.jaxrs.base.ProviderBase.writeTo(ProviderBase.java:671)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor.invokeWriteTo(WriterInterceptorExecutor.java:242)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor.aroundWriteTo(WriterInterceptorExecutor.java:227)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:139)
+	at org.glassfish.jersey.server.internal.JsonWithPaddingInterceptor.aroundWriteTo(JsonWithPaddingInterceptor.java:85)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:139)
+	at org.glassfish.jersey.server.internal.MappableExceptionWrapperInterceptor.aroundWriteTo(MappableExceptionWrapperInterceptor.java:61)
+	... 63 more
+Caused by: java.io.IOException: An established connection was aborted by the software in your host machine
+	at java.base/sun.nio.ch.SocketDispatcher.writev0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.writev(SocketDispatcher.java:62)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:227)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:158)
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:574)
+	at java.base/java.nio.channels.SocketChannel.write(SocketChannel.java:660)
+	at org.eclipse.jetty.io.SocketChannelEndPoint.flush(SocketChannelEndPoint.java:112)
+	... 91 more
+
+113879 INFO  (qtp1000239215-77-null-10) [n:127.0.0.1:55842_solr t:null-10] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793869522116} status=0 QTime=931
+113879 INFO  (qtp1681385255-75-null-11) [n:127.0.0.1:55843_solr t:null-11] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793869522116} status=0 QTime=921
+113932 INFO  (qtp1000239215-78-null-11) [n:127.0.0.1:55842_solr t:null-11] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:55843_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793869522116} status=0 QTime=2641
+113940 INFO  (qtp1000239215-73-null-10) [n:127.0.0.1:55842_solr t:null-10] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:55842_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793869522116} status=0 QTime=2658
+114754 INFO  (qtp1000239215-77-null-13) [n:127.0.0.1:55842_solr t:null-13] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869525812&indexInfo=false} entity={} status=0 QTime=12
+115211 INFO  (qtp1000239215-72-null-12) [n:127.0.0.1:55842_solr t:null-12] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869522930} entity={} status=0 QTime=3360
+nov. 05, 2026 1:05:26 AM org.glassfish.jersey.server.ServerRuntime$Responder writeResponse
+GRAVE: An I/O error has occurred while writing a response message entity to the container output stream.
+org.glassfish.jersey.server.internal.process.MappableException: org.eclipse.jetty.io.EofException: An established connection was aborted by the software in your host machine
+	at org.glassfish.jersey.server.internal.MappableExceptionWrapperInterceptor.aroundWriteTo(MappableExceptionWrapperInterceptor.java:67)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:139)
+	at org.glassfish.jersey.message.internal.MessageBodyFactory.writeTo(MessageBodyFactory.java:1118)
+	at org.glassfish.jersey.server.ServerRuntime$Responder.writeResponse(ServerRuntime.java:691)
+	at org.glassfish.jersey.server.ServerRuntime$Responder.processResponse(ServerRuntime.java:398)
+	at org.glassfish.jersey.server.ServerRuntime$Responder.process(ServerRuntime.java:388)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:277)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:266)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:253)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:703)
+	at org.apache.solr.api.V2HttpCall.invokeJerseyRequest(V2HttpCall.java:348)
+	at org.apache.solr.api.V2HttpCall.invokeJerseyRequest(V2HttpCall.java:311)
+	at org.apache.solr.api.V2HttpCall.handleAdmin(V2HttpCall.java:397)
+	at org.apache.solr.servlet.HttpSolrCall.handleAdminRequest(HttpSolrCall.java:733)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:499)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.NodeTargetProxyFilter.doFilter(NodeTargetProxyFilter.java:114)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler$LastRuleHandler.handle(RewriteHandler.java:162)
+	at org.eclipse.jetty.rewrite.handler.Rule$Handler.handle(Rule.java:109)
+	at org.eclipse.jetty.rewrite.handler.Rule$Handler.handle(Rule.java:109)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:143)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.server.internal.HttpConnection.onFillable(HttpConnection.java:420)
+	at org.eclipse.jetty.server.internal.HttpConnection$FillableCallback.succeeded(HttpConnection.java:1789)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:105)
+	at org.eclipse.jetty.io.SelectableChannelEndPoint$1.run(SelectableChannelEndPoint.java:54)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.eclipse.jetty.io.EofException: An established connection was aborted by the software in your host machine
+	at org.eclipse.jetty.io.SocketChannelEndPoint.flush(SocketChannelEndPoint.java:118)
+	at org.eclipse.jetty.io.WriteFlusher.flush(WriteFlusher.java:461)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:309)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:288)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:350)
+	at org.eclipse.jetty.server.internal.HttpConnection$SendCallback.process(HttpConnection.java:948)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:376)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:353)
+	at org.eclipse.jetty.server.internal.HttpConnection$HttpStreamOverHTTP1.send(HttpConnection.java:1548)
+	at org.eclipse.jetty.server.HttpStream$Wrapper.send(HttpStream.java:202)
+	at org.eclipse.jetty.server.internal.HttpChannelState$ChannelResponse.write(HttpChannelState.java:1430)
+	at org.eclipse.jetty.server.Response$Wrapper.write(Response.java:841)
+	at org.eclipse.jetty.server.handler.ContextResponse.write(ContextResponse.java:56)
+	at org.eclipse.jetty.ee10.servlet.ServletContextResponse.write(ServletContextResponse.java:230)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.channelWrite(HttpOutput.java:249)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.channelWrite(HttpOutput.java:242)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.flush(HttpOutput.java:778)
+	at org.apache.solr.servlet.ServletOutputStreamWrapper.flush(ServletOutputStreamWrapper.java:52)
+	at org.glassfish.jersey.message.internal.CommittingOutputStream.flush(CommittingOutputStream.java:273)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$UnCloseableOutputStream.flush(WriterInterceptorExecutor.java:281)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator.flush(UTF8JsonGenerator.java:1205)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1063)
+	at org.glassfish.jersey.jackson.internal.jackson.jaxrs.base.ProviderBase.writeTo(ProviderBase.java:671)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor.invokeWriteTo(WriterInterceptorExecutor.java:242)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor.aroundWriteTo(WriterInterceptorExecutor.java:227)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:139)
+	at org.glassfish.jersey.server.internal.JsonWithPaddingInterceptor.aroundWriteTo(JsonWithPaddingInterceptor.java:85)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:139)
+	at org.glassfish.jersey.server.internal.MappableExceptionWrapperInterceptor.aroundWriteTo(MappableExceptionWrapperInterceptor.java:61)
+	... 63 more
+Caused by: java.io.IOException: An established connection was aborted by the software in your host machine
+	at java.base/sun.nio.ch.SocketDispatcher.writev0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.writev(SocketDispatcher.java:62)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:227)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:158)
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:574)
+	at java.base/java.nio.channels.SocketChannel.write(SocketChannel.java:660)
+	at org.eclipse.jetty.io.SocketChannelEndPoint.flush(SocketChannelEndPoint.java:112)
+	... 91 more
+
+119280 INFO  (qtp1681385255-81-null-9) [n:127.0.0.1:55843_solr t:null-9] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=6321
+119276 INFO  (qtp1000239215-142-null-9) [n:127.0.0.1:55842_solr t:null-9] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=6323
+119487 INFO  (qtp1000239215-73-null-14) [n:127.0.0.1:55842_solr t:null-14] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869525813} entity={} status=0 QTime=4695
+119648 INFO  (qtp1000239215-74-null-15) [n:127.0.0.1:55842_solr t:null-15] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869530636} entity={} status=0 QTime=2
+119670 INFO  (qtp1000239215-143-null-16) [n:127.0.0.1:55842_solr t:null-16] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869530636} entity={} status=0 QTime=9
+119743 INFO  (qtp1000239215-78-null-18) [n:127.0.0.1:55842_solr t:null-18] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869530810&detailed=true} entity={} status=0 QTime=9
+119778 INFO  (qtp1000239215-142-null-19) [n:127.0.0.1:55842_solr t:null-19] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869530874} entity={} status=0 QTime=12
+119857 INFO  (qtp1000239215-73-null-20) [n:127.0.0.1:55842_solr t:null-20] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869530889} entity={} status=0 QTime=60
+119984 INFO  (qtp1000239215-76-null-9) [n:127.0.0.1:55842_solr t:null-9] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869522392&nodes=127.0.0.1:55842_solr,127.0.0.1:55843_solr} entity={} status=0 QTime=8704
+120011 INFO  (qtp1681385255-79-null-23) [n:127.0.0.1:55843_solr t:null-23] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793869530810} status=0 QTime=52
+120019 INFO  (qtp1000239215-142-null-23) [n:127.0.0.1:55842_solr t:null-23] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:55843_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793869530810} status=0 QTime=62
+120022 INFO  (qtp1000239215-73-null-22) [n:127.0.0.1:55842_solr t:null-22] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793869530810} status=0 QTime=52
+nov. 05, 2026 1:05:31 AM org.glassfish.jersey.server.ServerRuntime$Responder writeResponse
+GRAVE: An I/O error has occurred while writing a response message entity to the container output stream.
+org.glassfish.jersey.server.internal.process.MappableException: org.eclipse.jetty.io.EofException: An established connection was aborted by the software in your host machine
+	at org.glassfish.jersey.server.internal.MappableExceptionWrapperInterceptor.aroundWriteTo(MappableExceptionWrapperInterceptor.java:67)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:139)
+	at org.glassfish.jersey.message.internal.MessageBodyFactory.writeTo(MessageBodyFactory.java:1118)
+	at org.glassfish.jersey.server.ServerRuntime$Responder.writeResponse(ServerRuntime.java:691)
+	at org.glassfish.jersey.server.ServerRuntime$Responder.processResponse(ServerRuntime.java:398)
+	at org.glassfish.jersey.server.ServerRuntime$Responder.process(ServerRuntime.java:388)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:277)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:266)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:253)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:703)
+	at org.apache.solr.api.V2HttpCall.invokeJerseyRequest(V2HttpCall.java:348)
+	at org.apache.solr.api.V2HttpCall.invokeJerseyRequest(V2HttpCall.java:311)
+	at org.apache.solr.api.V2HttpCall.handleAdmin(V2HttpCall.java:397)
+	at org.apache.solr.servlet.HttpSolrCall.handleAdminRequest(HttpSolrCall.java:733)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:499)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.NodeTargetProxyFilter.doFilter(NodeTargetProxyFilter.java:114)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler$LastRuleHandler.handle(RewriteHandler.java:162)
+	at org.eclipse.jetty.rewrite.handler.Rule$Handler.handle(Rule.java:109)
+	at org.eclipse.jetty.rewrite.handler.Rule$Handler.handle(Rule.java:109)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:143)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.server.internal.HttpConnection.onFillable(HttpConnection.java:420)
+	at org.eclipse.jetty.server.internal.HttpConnection$FillableCallback.succeeded(HttpConnection.java:1789)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:105)
+	at org.eclipse.jetty.io.SelectableChannelEndPoint$1.run(SelectableChannelEndPoint.java:54)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.eclipse.jetty.io.EofException: An established connection was aborted by the software in your host machine
+	at org.eclipse.jetty.io.SocketChannelEndPoint.flush(SocketChannelEndPoint.java:118)
+	at org.eclipse.jetty.io.WriteFlusher.flush(WriteFlusher.java:461)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:309)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:288)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:350)
+	at org.eclipse.jetty.server.internal.HttpConnection$SendCallback.process(HttpConnection.java:948)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:376)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:353)
+	at org.eclipse.jetty.server.internal.HttpConnection$HttpStreamOverHTTP1.send(HttpConnection.java:1548)
+	at org.eclipse.jetty.server.HttpStream$Wrapper.send(HttpStream.java:202)
+	at org.eclipse.jetty.server.internal.HttpChannelState$ChannelResponse.write(HttpChannelState.java:1430)
+	at org.eclipse.jetty.server.Response$Wrapper.write(Response.java:841)
+	at org.eclipse.jetty.server.handler.ContextResponse.write(ContextResponse.java:56)
+	at org.eclipse.jetty.ee10.servlet.ServletContextResponse.write(ServletContextResponse.java:230)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.channelWrite(HttpOutput.java:249)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.channelWrite(HttpOutput.java:242)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.write(HttpOutput.java:907)
+	at org.apache.solr.servlet.ServletOutputStreamWrapper.write(ServletOutputStreamWrapper.java:157)
+	at org.glassfish.jersey.message.internal.CommittingOutputStream.write(CommittingOutputStream.java:210)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$UnCloseableOutputStream.write(WriterInterceptorExecutor.java:276)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator._flushBuffer(UTF8JsonGenerator.java:2293)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator._writeStringSegment2(UTF8JsonGenerator.java:1548)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator._writeStringSegment(UTF8JsonGenerator.java:1482)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator._writeStringSegments(UTF8JsonGenerator.java:1355)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator.writeString(UTF8JsonGenerator.java:522)
+	at com.fasterxml.jackson.databind.ser.std.StringSerializer.serialize(StringSerializer.java:40)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:732)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:760)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:183)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:732)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:760)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:183)
+	at com.fasterxml.jackson.databind.ser.BeanPropertyWriter.serializeAsField(BeanPropertyWriter.java:732)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:760)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:183)
+	at com.fasterxml.jackson.databind.ser.std.MapSerializer.serializeOptionalFields(MapSerializer.java:868)
+	at com.fasterxml.jackson.databind.ser.std.MapSerializer.serializeWithoutTypeInfo(MapSerializer.java:759)
+	at com.fasterxml.jackson.databind.ser.AnyGetterWriter.getAndSerialize(AnyGetterWriter.java:82)
+	at com.fasterxml.jackson.databind.ser.AnyGetterWriter.serializeAsField(AnyGetterWriter.java:90)
+	at com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields(BeanSerializerBase.java:760)
+	at com.fasterxml.jackson.databind.ser.BeanSerializer.serialize(BeanSerializer.java:183)
+	at com.fasterxml.jackson.databind.ser.DefaultSerializerProvider._serialize(DefaultSerializerProvider.java:503)
+	at com.fasterxml.jackson.databind.ser.DefaultSerializerProvider.serializeValue(DefaultSerializerProvider.java:342)
+	at com.fasterxml.jackson.databind.ObjectWriter$Prefetch.serialize(ObjectWriter.java:1587)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1061)
+	at org.glassfish.jersey.jackson.internal.jackson.jaxrs.base.ProviderBase.writeTo(ProviderBase.java:671)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor.invokeWriteTo(WriterInterceptorExecutor.java:242)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor.aroundWriteTo(WriterInterceptorExecutor.java:227)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:139)
+	at org.glassfish.jersey.server.internal.JsonWithPaddingInterceptor.aroundWriteTo(JsonWithPaddingInterceptor.java:85)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:139)
+	at org.glassfish.jersey.server.internal.MappableExceptionWrapperInterceptor.aroundWriteTo(MappableExceptionWrapperInterceptor.java:61)
+	... 63 more
+Caused by: java.io.IOException: An established connection was aborted by the software in your host machine
+	at java.base/sun.nio.ch.SocketDispatcher.writev0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.writev(SocketDispatcher.java:62)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:227)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:158)
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:574)
+	at java.base/java.nio.channels.SocketChannel.write(SocketChannel.java:660)
+	at org.eclipse.jetty.io.SocketChannelEndPoint.flush(SocketChannelEndPoint.java:112)
+	... 114 more
+
+120033 INFO  (qtp1000239215-78-null-22) [n:127.0.0.1:55842_solr t:null-22] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:55842_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793869530810} status=0 QTime=81
+123078 INFO  (qtp1000239215-77-null-17) [n:127.0.0.1:55842_solr t:null-17] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869530810} entity={} status=0 QTime=3360
+123195 INFO  (qtp1000239215-78-null-26) [n:127.0.0.1:55842_solr t:null-26] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869534261} entity={} status=0 QTime=2
+123197 INFO  (qtp1000239215-73-null-25) [n:127.0.0.1:55842_solr t:null-25] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869534260} entity={} status=0 QTime=22
+123379 INFO  (qtp1000239215-143-null-27) [n:127.0.0.1:55842_solr t:null-27] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869534439} entity={} status=0 QTime=8
+123479 INFO  (qtp1681385255-71-null-21) [n:127.0.0.1:55843_solr t:null-21] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=3539
+123506 INFO  (qtp1000239215-72-null-21) [n:127.0.0.1:55842_solr t:null-21] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=3562
+123548 INFO  (qtp1000239215-74-null-21) [n:127.0.0.1:55842_solr t:null-21] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869531018&nodes=127.0.0.1:55842_solr,127.0.0.1:55843_solr} entity={} status=0 QTime=3630
+124093 INFO  (qtp1000239215-142-null-24) [n:127.0.0.1:55842_solr t:null-24] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869533255} entity={} status=0 QTime=1913
+124177 INFO  (qtp1000239215-76-null-28) [n:127.0.0.1:55842_solr t:null-28] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869535233} entity={} status=0 QTime=4
+124180 INFO  (qtp1000239215-77-null-29) [n:127.0.0.1:55842_solr t:null-29] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869535234} entity={} status=0 QTime=4
+124359 INFO  (qtp1000239215-73-null-30) [n:127.0.0.1:55842_solr t:null-30] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869535352} entity={} status=0 QTime=18
+125037 INFO  (qtp1000239215-78-null-31) [n:127.0.0.1:55842_solr t:null-31] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869535378} entity={} status=0 QTime=696
+125070 INFO  (qtp1000239215-74-null-34) [n:127.0.0.1:55842_solr t:null-34] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869536183} entity={} status=0 QTime=1
+125072 INFO  (qtp1000239215-72-null-33) [n:127.0.0.1:55842_solr t:null-33] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869536182} entity={} status=0 QTime=2
+125237 INFO  (qtp1681385255-80-null-35) [n:127.0.0.1:55843_solr t:null-35] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869536291&indexInfo=false} entity={} status=0 QTime=36
+125247 INFO  (qtp1000239215-76-null-36) [n:127.0.0.1:55842_solr t:null-36] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869536318} entity={} status=0 QTime=36
+125760 INFO  (qtp1681385255-82-null-32) [n:127.0.0.1:55843_solr t:null-32] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869535378} entity={} status=0 QTime=679
+126755 INFO  (TEST-AdminUiNodePickerTest.testCloudLandingShowsNodesAndEmptyNodeSelector-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Ending testCloudLandingShowsNodesAndEmptyNodeSelector
+126840 INFO  (TEST-AdminUiNodePickerTest.testSelectRemoteNodeUpdatesDashboardAndPersistsAcrossReload-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Starting testSelectRemoteNodeUpdatesDashboardAndPersistsAcrossReload
+130530 INFO  (qtp1000239215-78-null-37) [n:127.0.0.1:55842_solr t:null-37] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869541541&indexInfo=false} entity={} status=0 QTime=11
+131280 INFO  (qtp1000239215-72-null-38) [n:127.0.0.1:55842_solr t:null-38] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869541542} entity={} status=0 QTime=755
+131438 INFO  (qtp1000239215-142-null-40) [n:127.0.0.1:55842_solr t:null-40] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869542418} entity={} status=0 QTime=1
+131439 INFO  (qtp1000239215-74-null-39) [n:127.0.0.1:55842_solr t:null-39] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869542418} entity={} status=0 QTime=7
+131501 INFO  (qtp1000239215-143-null-42) [n:127.0.0.1:55842_solr t:null-42] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869542582&detailed=true} entity={} status=0 QTime=11
+131512 INFO  (qtp1000239215-77-null-43) [n:127.0.0.1:55842_solr t:null-43] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869542593} entity={} status=0 QTime=7
+131688 INFO  (qtp1000239215-73-null-44) [n:127.0.0.1:55842_solr t:null-44] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869542756} entity={} status=0 QTime=8
+132185 INFO  (qtp1681385255-81-null-47) [n:127.0.0.1:55843_solr t:null-47] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793869542581} status=0 QTime=243
+132207 INFO  (qtp1000239215-142-null-46) [n:127.0.0.1:55842_solr t:null-46] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793869542581} status=0 QTime=311
+132207 INFO  (qtp1000239215-143-null-47) [n:127.0.0.1:55842_solr t:null-47] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:55843_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793869542581} status=0 QTime=284
+132221 INFO  (qtp1000239215-72-null-46) [n:127.0.0.1:55842_solr t:null-46] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:55842_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793869542581} status=0 QTime=342
+133394 INFO  (qtp1000239215-76-null-41) [n:127.0.0.1:55842_solr t:null-41] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869542581} entity={} status=0 QTime=1907
+133437 INFO  (qtp1000239215-77-null-48) [n:127.0.0.1:55842_solr t:null-48] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869544527} entity={} status=0 QTime=4
+133439 INFO  (qtp1000239215-73-null-49) [n:127.0.0.1:55842_solr t:null-49] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869544528} entity={} status=0 QTime=1
+133539 INFO  (qtp1000239215-143-null-50) [n:127.0.0.1:55842_solr t:null-50] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869544624} entity={} status=0 QTime=7
+134297 INFO  (qtp1000239215-74-null-45) [n:127.0.0.1:55842_solr t:null-45] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=2393
+134300 INFO  (qtp1681385255-75-null-45) [n:127.0.0.1:55843_solr t:null-45] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=2400
+134305 INFO  (qtp1000239215-78-null-45) [n:127.0.0.1:55842_solr t:null-45] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869542921&nodes=127.0.0.1:55842_solr,127.0.0.1:55843_solr} entity={} status=0 QTime=2441
+136342 INFO  (qtp1000239215-72-null-51) [n:127.0.0.1:55842_solr t:null-51] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869545630} entity={} status=0 QTime=1808
+136344 INFO  (qtp1000239215-142-null-52) [n:127.0.0.1:55842_solr t:null-52] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869545631} entity={} status=0 QTime=1803
+136524 INFO  (qtp1000239215-76-null-53) [n:127.0.0.1:55842_solr t:null-53] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869547521} entity={} status=0 QTime=3
+136526 INFO  (qtp1000239215-77-null-54) [n:127.0.0.1:55842_solr t:null-54] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869547522} entity={} status=0 QTime=3
+136658 INFO  (qtp1000239215-73-null-55) [n:127.0.0.1:55842_solr t:null-55] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869547732&indexInfo=false} entity={} status=0 QTime=5
+136703 INFO  (qtp1000239215-143-null-56) [n:127.0.0.1:55842_solr t:null-56] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869547751} entity={} status=0 QTime=5
+138217 INFO  (qtp1000239215-74-null-57) [n:127.0.0.1:55842_solr t:null-57] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869548768} entity={} status=0 QTime=562
+138241 INFO  (qtp1000239215-72-null-59) [n:127.0.0.1:55842_solr t:null-59] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869549347} entity={} status=0 QTime=3
+138242 INFO  (qtp1000239215-142-null-60) [n:127.0.0.1:55842_solr t:null-60] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869549347} entity={} status=0 QTime=4
+138273 INFO  (qtp1681385255-71-null-61) [n:127.0.0.1:55843_solr t:null-61] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869549377&indexInfo=false} entity={} status=0 QTime=2
+138276 INFO  (qtp1000239215-77-null-62) [n:127.0.0.1:55842_solr t:null-62] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869549378} entity={} status=0 QTime=5
+139224 INFO  (qtp1681385255-79-null-58) [n:127.0.0.1:55843_solr t:null-58] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869548768} entity={} status=0 QTime=994
+141454 INFO  (qtp1000239215-74-null-63) [n:127.0.0.1:55842_solr t:null-63] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869552527&indexInfo=false} entity={} status=0 QTime=1
+143039 INFO  (qtp1000239215-72-null-64) [n:127.0.0.1:55842_solr t:null-64] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869552527} entity={} status=0 QTime=1425
+143118 INFO  (qtp1000239215-77-null-66) [n:127.0.0.1:55842_solr t:null-66] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869554208} entity={} status=0 QTime=5
+143122 INFO  (qtp1000239215-142-null-65) [n:127.0.0.1:55842_solr t:null-65] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869554208} entity={} status=0 QTime=11
+143140 INFO  (qtp1000239215-76-null-67) [n:127.0.0.1:55842_solr t:null-67] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869554249} entity={} status=0 QTime=5
+143162 INFO  (qtp1681385255-80-null-68) [n:127.0.0.1:55843_solr t:null-68] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869554261&indexInfo=false} entity={} status=0 QTime=2
+143722 INFO  (qtp1681385255-82-null-69) [n:127.0.0.1:55843_solr t:null-69] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869554262} entity={} status=0 QTime=557
+144062 INFO  (TEST-AdminUiNodePickerTest.testSelectRemoteNodeUpdatesDashboardAndPersistsAcrossReload-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Ending testSelectRemoteNodeUpdatesDashboardAndPersistsAcrossReload
+144078 INFO  (TEST-AdminUiNodePickerTest.testLoggingLevelsHidesNodeBadge-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Starting testLoggingLevelsHidesNodeBadge
+145170 INFO  (qtp1000239215-72-null-70) [n:127.0.0.1:55842_solr t:null-70] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869556242&indexInfo=false} entity={} status=0 QTime=8
+145873 INFO  (qtp1000239215-77-null-71) [n:127.0.0.1:55842_solr t:null-71] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869556243} entity={} status=0 QTime=707
+145939 INFO  (qtp1000239215-142-null-72) [n:127.0.0.1:55842_solr t:null-72] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869557030} entity={} status=0 QTime=1
+145948 INFO  (qtp1000239215-76-null-73) [n:127.0.0.1:55842_solr t:null-73] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869557030} entity={} status=0 QTime=5
+145996 INFO  (qtp1000239215-73-null-75) [n:127.0.0.1:55842_solr t:null-75] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869557085&detailed=true} entity={} status=0 QTime=17
+146019 INFO  (qtp1000239215-143-null-76) [n:127.0.0.1:55842_solr t:null-76] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869557123} entity={} status=0 QTime=8
+146022 INFO  (qtp1000239215-74-null-77) [n:127.0.0.1:55842_solr t:null-77] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869557133} entity={} status=0 QTime=1
+146141 INFO  (qtp1681385255-81-null-80) [n:127.0.0.1:55843_solr t:null-80] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793869557084} status=0 QTime=61
+146144 INFO  (qtp1000239215-142-null-80) [n:127.0.0.1:55842_solr t:null-80] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:55843_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793869557084} status=0 QTime=86
+146148 INFO  (qtp1000239215-76-null-79) [n:127.0.0.1:55842_solr t:null-79] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793869557084} status=0 QTime=62
+146150 INFO  (qtp1000239215-77-null-79) [n:127.0.0.1:55842_solr t:null-79] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:55842_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793869557084} status=0 QTime=98
+148063 INFO  (qtp1000239215-78-null-74) [n:127.0.0.1:55842_solr t:null-74] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869557085} entity={} status=0 QTime=2085
+148097 INFO  (qtp1000239215-74-null-81) [n:127.0.0.1:55842_solr t:null-81] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869559196} entity={} status=0 QTime=6
+148099 INFO  (qtp1000239215-143-null-82) [n:127.0.0.1:55842_solr t:null-82] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869559197} entity={} status=0 QTime=3
+148125 INFO  (qtp1000239215-142-null-83) [n:127.0.0.1:55842_solr t:null-83] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869559234} entity={} status=0 QTime=7
+148388 INFO  (qtp1681385255-75-null-78) [n:127.0.0.1:55843_solr t:null-78] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=2308
+148722 INFO  (qtp1000239215-73-null-78) [n:127.0.0.1:55842_solr t:null-78] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=2633
+148741 INFO  (qtp1000239215-72-null-78) [n:127.0.0.1:55842_solr t:null-78] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869557156&nodes=127.0.0.1:55842_solr,127.0.0.1:55843_solr} entity={} status=0 QTime=2693
+151095 INFO  (qtp1000239215-77-null-84) [n:127.0.0.1:55842_solr t:null-84] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869559542} entity={} status=0 QTime=2598
+151097 INFO  (qtp1000239215-76-null-85) [n:127.0.0.1:55842_solr t:null-85] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869559543} entity={} status=0 QTime=2598
+151271 INFO  (qtp1000239215-78-null-86) [n:127.0.0.1:55842_solr t:null-86] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869562254} entity={} status=0 QTime=102
+151271 INFO  (qtp1000239215-74-null-87) [n:127.0.0.1:55842_solr t:null-87] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869562255} entity={} status=0 QTime=96
+151371 INFO  (qtp1000239215-143-null-88) [n:127.0.0.1:55842_solr t:null-88] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869562473&indexInfo=false} entity={} status=0 QTime=10
+151449 INFO  (qtp1000239215-142-null-89) [n:127.0.0.1:55842_solr t:null-89] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869562475} entity={} status=0 QTime=12
+152032 INFO  (qtp1681385255-79-null-93) [n:127.0.0.1:55843_solr t:null-93] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869563062&since=0} entity={} status=0 QTime=63
+152321 INFO  (qtp1000239215-74-null-95) [n:127.0.0.1:55842_solr t:null-95] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869563416} entity={} status=0 QTime=14
+154884 INFO  (TEST-AdminUiNodePickerTest.testLoggingLevelsHidesNodeBadge-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Ending testLoggingLevelsHidesNodeBadge
+154920 INFO  (TEST-AdminUiNodePickerTest.testNodeSelectionSurvivesInAppNavigation-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Starting testNodeSelectionSurvivesInAppNavigation
+157004 INFO  (qtp1681385255-71-null-91) [n:127.0.0.1:55843_solr t:null-91] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869562840} entity={} status=0 QTime=5265
+157549 INFO  (qtp1000239215-73-null-90) [n:127.0.0.1:55842_solr t:null-90] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869562839} entity={} status=0 QTime=5825
+nov. 05, 2026 1:06:08 AM org.glassfish.jersey.server.ServerRuntime$Responder writeResponse
+GRAVE: An I/O error has occurred while writing a response message entity to the container output stream.
+org.glassfish.jersey.server.internal.process.MappableException: org.eclipse.jetty.io.EofException: An established connection was aborted by the software in your host machine
+	at org.glassfish.jersey.server.internal.MappableExceptionWrapperInterceptor.aroundWriteTo(MappableExceptionWrapperInterceptor.java:67)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:139)
+	at org.glassfish.jersey.message.internal.MessageBodyFactory.writeTo(MessageBodyFactory.java:1118)
+	at org.glassfish.jersey.server.ServerRuntime$Responder.writeResponse(ServerRuntime.java:691)
+	at org.glassfish.jersey.server.ServerRuntime$Responder.processResponse(ServerRuntime.java:398)
+	at org.glassfish.jersey.server.ServerRuntime$Responder.process(ServerRuntime.java:388)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:277)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:266)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:253)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:703)
+	at org.apache.solr.api.V2HttpCall.invokeJerseyRequest(V2HttpCall.java:348)
+	at org.apache.solr.api.V2HttpCall.invokeJerseyRequest(V2HttpCall.java:311)
+	at org.apache.solr.api.V2HttpCall.handleAdmin(V2HttpCall.java:397)
+	at org.apache.solr.servlet.HttpSolrCall.handleAdminRequest(HttpSolrCall.java:733)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:499)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.NodeTargetProxyFilter.doFilter(NodeTargetProxyFilter.java:114)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler$LastRuleHandler.handle(RewriteHandler.java:162)
+	at org.eclipse.jetty.rewrite.handler.Rule$Handler.handle(Rule.java:109)
+	at org.eclipse.jetty.rewrite.handler.Rule$Handler.handle(Rule.java:109)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:143)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.server.internal.HttpConnection.onFillable(HttpConnection.java:420)
+	at org.eclipse.jetty.server.internal.HttpConnection$FillableCallback.succeeded(HttpConnection.java:1789)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:105)
+	at org.eclipse.jetty.io.SelectableChannelEndPoint$1.run(SelectableChannelEndPoint.java:54)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.eclipse.jetty.io.EofException: An established connection was aborted by the software in your host machine
+	at org.eclipse.jetty.io.SocketChannelEndPoint.flush(SocketChannelEndPoint.java:118)
+	at org.eclipse.jetty.io.WriteFlusher.flush(WriteFlusher.java:461)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:309)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:288)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:350)
+	at org.eclipse.jetty.server.internal.HttpConnection$SendCallback.process(HttpConnection.java:948)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:376)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:353)
+	at org.eclipse.jetty.server.internal.HttpConnection$HttpStreamOverHTTP1.send(HttpConnection.java:1548)
+	at org.eclipse.jetty.server.HttpStream$Wrapper.send(HttpStream.java:202)
+	at org.eclipse.jetty.server.internal.HttpChannelState$ChannelResponse.write(HttpChannelState.java:1430)
+	at org.eclipse.jetty.server.Response$Wrapper.write(Response.java:841)
+	at org.eclipse.jetty.server.handler.ContextResponse.write(ContextResponse.java:56)
+	at org.eclipse.jetty.ee10.servlet.ServletContextResponse.write(ServletContextResponse.java:230)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.channelWrite(HttpOutput.java:249)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.channelWrite(HttpOutput.java:242)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.flush(HttpOutput.java:778)
+	at org.apache.solr.servlet.ServletOutputStreamWrapper.flush(ServletOutputStreamWrapper.java:52)
+	at org.glassfish.jersey.message.internal.CommittingOutputStream.flush(CommittingOutputStream.java:273)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$UnCloseableOutputStream.flush(WriterInterceptorExecutor.java:281)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator.flush(UTF8JsonGenerator.java:1205)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1063)
+	at org.glassfish.jersey.jackson.internal.jackson.jaxrs.base.ProviderBase.writeTo(ProviderBase.java:671)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor.invokeWriteTo(WriterInterceptorExecutor.java:242)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor.aroundWriteTo(WriterInterceptorExecutor.java:227)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:139)
+	at org.glassfish.jersey.server.internal.JsonWithPaddingInterceptor.aroundWriteTo(JsonWithPaddingInterceptor.java:85)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:139)
+	at org.glassfish.jersey.server.internal.MappableExceptionWrapperInterceptor.aroundWriteTo(MappableExceptionWrapperInterceptor.java:61)
+	... 63 more
+Caused by: java.io.IOException: An established connection was aborted by the software in your host machine
+	at java.base/sun.nio.ch.SocketDispatcher.writev0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.writev(SocketDispatcher.java:62)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:227)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:158)
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:574)
+	at java.base/java.nio.channels.SocketChannel.write(SocketChannel.java:660)
+	at org.eclipse.jetty.io.SocketChannelEndPoint.flush(SocketChannelEndPoint.java:112)
+	... 91 more
+
+157933 INFO  (qtp1000239215-143-null-98) [n:127.0.0.1:55842_solr t:null-98] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869568980&indexInfo=false} entity={} status=0 QTime=10
+158076 INFO  (qtp1000239215-76-null-92) [n:127.0.0.1:55842_solr t:null-92] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869563062} entity={} status=0 QTime=6109
+nov. 05, 2026 1:06:09 AM org.glassfish.jersey.server.ServerRuntime$Responder writeResponse
+GRAVE: An I/O error has occurred while writing a response message entity to the container output stream.
+org.glassfish.jersey.server.internal.process.MappableException: org.eclipse.jetty.io.EofException: An established connection was aborted by the software in your host machine
+	at org.glassfish.jersey.server.internal.MappableExceptionWrapperInterceptor.aroundWriteTo(MappableExceptionWrapperInterceptor.java:67)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:139)
+	at org.glassfish.jersey.message.internal.MessageBodyFactory.writeTo(MessageBodyFactory.java:1118)
+	at org.glassfish.jersey.server.ServerRuntime$Responder.writeResponse(ServerRuntime.java:691)
+	at org.glassfish.jersey.server.ServerRuntime$Responder.processResponse(ServerRuntime.java:398)
+	at org.glassfish.jersey.server.ServerRuntime$Responder.process(ServerRuntime.java:388)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:277)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:266)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:253)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:703)
+	at org.apache.solr.api.V2HttpCall.invokeJerseyRequest(V2HttpCall.java:348)
+	at org.apache.solr.api.V2HttpCall.invokeJerseyRequest(V2HttpCall.java:311)
+	at org.apache.solr.api.V2HttpCall.handleAdmin(V2HttpCall.java:397)
+	at org.apache.solr.servlet.HttpSolrCall.handleAdminRequest(HttpSolrCall.java:733)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:499)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.NodeTargetProxyFilter.doFilter(NodeTargetProxyFilter.java:114)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler$LastRuleHandler.handle(RewriteHandler.java:162)
+	at org.eclipse.jetty.rewrite.handler.Rule$Handler.handle(Rule.java:109)
+	at org.eclipse.jetty.rewrite.handler.Rule$Handler.handle(Rule.java:109)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:143)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.server.internal.HttpConnection.onFillable(HttpConnection.java:420)
+	at org.eclipse.jetty.server.internal.HttpConnection$FillableCallback.succeeded(HttpConnection.java:1789)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:105)
+	at org.eclipse.jetty.io.SelectableChannelEndPoint$1.run(SelectableChannelEndPoint.java:54)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.eclipse.jetty.io.EofException: An established connection was aborted by the software in your host machine
+	at org.eclipse.jetty.io.SocketChannelEndPoint.flush(SocketChannelEndPoint.java:118)
+	at org.eclipse.jetty.io.WriteFlusher.flush(WriteFlusher.java:461)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:309)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:288)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:350)
+	at org.eclipse.jetty.server.internal.HttpConnection$SendCallback.process(HttpConnection.java:948)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:376)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:353)
+	at org.eclipse.jetty.server.internal.HttpConnection$HttpStreamOverHTTP1.send(HttpConnection.java:1548)
+	at org.eclipse.jetty.server.HttpStream$Wrapper.send(HttpStream.java:202)
+	at org.eclipse.jetty.server.internal.HttpChannelState$ChannelResponse.write(HttpChannelState.java:1430)
+	at org.eclipse.jetty.server.Response$Wrapper.write(Response.java:841)
+	at org.eclipse.jetty.server.handler.ContextResponse.write(ContextResponse.java:56)
+	at org.eclipse.jetty.ee10.servlet.ServletContextResponse.write(ServletContextResponse.java:230)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.channelWrite(HttpOutput.java:249)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.channelWrite(HttpOutput.java:242)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.flush(HttpOutput.java:778)
+	at org.apache.solr.servlet.ServletOutputStreamWrapper.flush(ServletOutputStreamWrapper.java:52)
+	at org.glassfish.jersey.message.internal.CommittingOutputStream.flush(CommittingOutputStream.java:273)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$UnCloseableOutputStream.flush(WriterInterceptorExecutor.java:281)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator.flush(UTF8JsonGenerator.java:1205)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1063)
+	at org.glassfish.jersey.jackson.internal.jackson.jaxrs.base.ProviderBase.writeTo(ProviderBase.java:671)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor.invokeWriteTo(WriterInterceptorExecutor.java:242)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor.aroundWriteTo(WriterInterceptorExecutor.java:227)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:139)
+	at org.glassfish.jersey.server.internal.JsonWithPaddingInterceptor.aroundWriteTo(JsonWithPaddingInterceptor.java:85)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:139)
+	at org.glassfish.jersey.server.internal.MappableExceptionWrapperInterceptor.aroundWriteTo(MappableExceptionWrapperInterceptor.java:61)
+	... 63 more
+Caused by: java.io.IOException: An established connection was aborted by the software in your host machine
+	at java.base/sun.nio.ch.SocketDispatcher.writev0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.writev(SocketDispatcher.java:62)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:227)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:158)
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:574)
+	at java.base/java.nio.channels.SocketChannel.write(SocketChannel.java:660)
+	at org.eclipse.jetty.io.SocketChannelEndPoint.flush(SocketChannelEndPoint.java:112)
+	... 91 more
+
+158275 INFO  (qtp1000239215-77-null-94) [n:127.0.0.1:55842_solr t:null-94] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869563415} entity={} status=0 QTime=5973
+nov. 05, 2026 1:06:09 AM org.glassfish.jersey.server.ServerRuntime$Responder writeResponse
+GRAVE: An I/O error has occurred while writing a response message entity to the container output stream.
+org.glassfish.jersey.server.internal.process.MappableException: org.eclipse.jetty.io.EofException: An established connection was aborted by the software in your host machine
+	at org.glassfish.jersey.server.internal.MappableExceptionWrapperInterceptor.aroundWriteTo(MappableExceptionWrapperInterceptor.java:67)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:139)
+	at org.glassfish.jersey.message.internal.MessageBodyFactory.writeTo(MessageBodyFactory.java:1118)
+	at org.glassfish.jersey.server.ServerRuntime$Responder.writeResponse(ServerRuntime.java:691)
+	at org.glassfish.jersey.server.ServerRuntime$Responder.processResponse(ServerRuntime.java:398)
+	at org.glassfish.jersey.server.ServerRuntime$Responder.process(ServerRuntime.java:388)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:277)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:266)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:253)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:703)
+	at org.apache.solr.api.V2HttpCall.invokeJerseyRequest(V2HttpCall.java:348)
+	at org.apache.solr.api.V2HttpCall.invokeJerseyRequest(V2HttpCall.java:311)
+	at org.apache.solr.api.V2HttpCall.handleAdmin(V2HttpCall.java:397)
+	at org.apache.solr.servlet.HttpSolrCall.handleAdminRequest(HttpSolrCall.java:733)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:499)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.NodeTargetProxyFilter.doFilter(NodeTargetProxyFilter.java:114)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler$LastRuleHandler.handle(RewriteHandler.java:162)
+	at org.eclipse.jetty.rewrite.handler.Rule$Handler.handle(Rule.java:109)
+	at org.eclipse.jetty.rewrite.handler.Rule$Handler.handle(Rule.java:109)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:143)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.server.internal.HttpConnection.onFillable(HttpConnection.java:420)
+	at org.eclipse.jetty.server.internal.HttpConnection$FillableCallback.succeeded(HttpConnection.java:1789)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:105)
+	at org.eclipse.jetty.io.SelectableChannelEndPoint$1.run(SelectableChannelEndPoint.java:54)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.eclipse.jetty.io.EofException: An established connection was aborted by the software in your host machine
+	at org.eclipse.jetty.io.SocketChannelEndPoint.flush(SocketChannelEndPoint.java:118)
+	at org.eclipse.jetty.io.WriteFlusher.flush(WriteFlusher.java:461)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:309)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:288)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:350)
+	at org.eclipse.jetty.server.internal.HttpConnection$SendCallback.process(HttpConnection.java:948)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:376)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:353)
+	at org.eclipse.jetty.server.internal.HttpConnection$HttpStreamOverHTTP1.send(HttpConnection.java:1548)
+	at org.eclipse.jetty.server.HttpStream$Wrapper.send(HttpStream.java:202)
+	at org.eclipse.jetty.server.internal.HttpChannelState$ChannelResponse.write(HttpChannelState.java:1430)
+	at org.eclipse.jetty.server.Response$Wrapper.write(Response.java:841)
+	at org.eclipse.jetty.server.handler.ContextResponse.write(ContextResponse.java:56)
+	at org.eclipse.jetty.ee10.servlet.ServletContextResponse.write(ServletContextResponse.java:230)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.channelWrite(HttpOutput.java:249)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.channelWrite(HttpOutput.java:242)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.flush(HttpOutput.java:778)
+	at org.apache.solr.servlet.ServletOutputStreamWrapper.flush(ServletOutputStreamWrapper.java:52)
+	at org.glassfish.jersey.message.internal.CommittingOutputStream.flush(CommittingOutputStream.java:273)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$UnCloseableOutputStream.flush(WriterInterceptorExecutor.java:281)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator.flush(UTF8JsonGenerator.java:1205)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1063)
+	at org.glassfish.jersey.jackson.internal.jackson.jaxrs.base.ProviderBase.writeTo(ProviderBase.java:671)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor.invokeWriteTo(WriterInterceptorExecutor.java:242)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor.aroundWriteTo(WriterInterceptorExecutor.java:227)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:139)
+	at org.glassfish.jersey.server.internal.JsonWithPaddingInterceptor.aroundWriteTo(JsonWithPaddingInterceptor.java:85)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:139)
+	at org.glassfish.jersey.server.internal.MappableExceptionWrapperInterceptor.aroundWriteTo(MappableExceptionWrapperInterceptor.java:61)
+	... 63 more
+Caused by: java.io.IOException: An established connection was aborted by the software in your host machine
+	at java.base/sun.nio.ch.SocketDispatcher.writev0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.writev(SocketDispatcher.java:62)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:227)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:158)
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:574)
+	at java.base/java.nio.channels.SocketChannel.write(SocketChannel.java:660)
+	at org.eclipse.jetty.io.SocketChannelEndPoint.flush(SocketChannelEndPoint.java:112)
+	... 91 more
+
+158864 INFO  (qtp1000239215-142-null-96) [n:127.0.0.1:55842_solr t:null-96] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869566157} entity={} status=0 QTime=3747
+nov. 05, 2026 1:06:09 AM org.glassfish.jersey.server.ServerRuntime$Responder writeResponse
+GRAVE: An I/O error has occurred while writing a response message entity to the container output stream.
+org.glassfish.jersey.server.internal.process.MappableException: org.eclipse.jetty.io.EofException: An established connection was aborted by the software in your host machine
+	at org.glassfish.jersey.server.internal.MappableExceptionWrapperInterceptor.aroundWriteTo(MappableExceptionWrapperInterceptor.java:67)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:139)
+	at org.glassfish.jersey.message.internal.MessageBodyFactory.writeTo(MessageBodyFactory.java:1118)
+	at org.glassfish.jersey.server.ServerRuntime$Responder.writeResponse(ServerRuntime.java:691)
+	at org.glassfish.jersey.server.ServerRuntime$Responder.processResponse(ServerRuntime.java:398)
+	at org.glassfish.jersey.server.ServerRuntime$Responder.process(ServerRuntime.java:388)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:277)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:266)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:253)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:703)
+	at org.apache.solr.api.V2HttpCall.invokeJerseyRequest(V2HttpCall.java:348)
+	at org.apache.solr.api.V2HttpCall.invokeJerseyRequest(V2HttpCall.java:311)
+	at org.apache.solr.api.V2HttpCall.handleAdmin(V2HttpCall.java:397)
+	at org.apache.solr.servlet.HttpSolrCall.handleAdminRequest(HttpSolrCall.java:733)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:499)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.NodeTargetProxyFilter.doFilter(NodeTargetProxyFilter.java:114)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler$LastRuleHandler.handle(RewriteHandler.java:162)
+	at org.eclipse.jetty.rewrite.handler.Rule$Handler.handle(Rule.java:109)
+	at org.eclipse.jetty.rewrite.handler.Rule$Handler.handle(Rule.java:109)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:143)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.server.internal.HttpConnection.onFillable(HttpConnection.java:420)
+	at org.eclipse.jetty.server.internal.HttpConnection$FillableCallback.succeeded(HttpConnection.java:1789)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:105)
+	at org.eclipse.jetty.io.SelectableChannelEndPoint$1.run(SelectableChannelEndPoint.java:54)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.eclipse.jetty.io.EofException: An established connection was aborted by the software in your host machine
+	at org.eclipse.jetty.io.SocketChannelEndPoint.flush(SocketChannelEndPoint.java:118)
+	at org.eclipse.jetty.io.WriteFlusher.flush(WriteFlusher.java:461)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:309)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:288)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:350)
+	at org.eclipse.jetty.server.internal.HttpConnection$SendCallback.process(HttpConnection.java:948)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:376)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:353)
+	at org.eclipse.jetty.server.internal.HttpConnection$HttpStreamOverHTTP1.send(HttpConnection.java:1548)
+	at org.eclipse.jetty.server.HttpStream$Wrapper.send(HttpStream.java:202)
+	at org.eclipse.jetty.server.internal.HttpChannelState$ChannelResponse.write(HttpChannelState.java:1430)
+	at org.eclipse.jetty.server.Response$Wrapper.write(Response.java:841)
+	at org.eclipse.jetty.server.handler.ContextResponse.write(ContextResponse.java:56)
+	at org.eclipse.jetty.ee10.servlet.ServletContextResponse.write(ServletContextResponse.java:230)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.channelWrite(HttpOutput.java:249)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.channelWrite(HttpOutput.java:242)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.flush(HttpOutput.java:778)
+	at org.apache.solr.servlet.ServletOutputStreamWrapper.flush(ServletOutputStreamWrapper.java:52)
+	at org.glassfish.jersey.message.internal.CommittingOutputStream.flush(CommittingOutputStream.java:273)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$UnCloseableOutputStream.flush(WriterInterceptorExecutor.java:281)
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator.flush(UTF8JsonGenerator.java:1205)
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1063)
+	at org.glassfish.jersey.jackson.internal.jackson.jaxrs.base.ProviderBase.writeTo(ProviderBase.java:671)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor.invokeWriteTo(WriterInterceptorExecutor.java:242)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor$TerminalWriterInterceptor.aroundWriteTo(WriterInterceptorExecutor.java:227)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:139)
+	at org.glassfish.jersey.server.internal.JsonWithPaddingInterceptor.aroundWriteTo(JsonWithPaddingInterceptor.java:85)
+	at org.glassfish.jersey.message.internal.WriterInterceptorExecutor.proceed(WriterInterceptorExecutor.java:139)
+	at org.glassfish.jersey.server.internal.MappableExceptionWrapperInterceptor.aroundWriteTo(MappableExceptionWrapperInterceptor.java:61)
+	... 63 more
+Caused by: java.io.IOException: An established connection was aborted by the software in your host machine
+	at java.base/sun.nio.ch.SocketDispatcher.writev0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.writev(SocketDispatcher.java:62)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:227)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:158)
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:574)
+	at java.base/java.nio.channels.SocketChannel.write(SocketChannel.java:660)
+	at org.eclipse.jetty.io.SocketChannelEndPoint.flush(SocketChannelEndPoint.java:112)
+	... 91 more
+
+158896 INFO  (qtp1681385255-80-null-97) [n:127.0.0.1:55843_solr t:null-97] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869566158} entity={} status=0 QTime=3771
+158922 WARN  (qtp1000239215-74-null-97) [n:127.0.0.1:55842_solr t:null-97] o.a.s.s.NodeTargetProxyFilter Error proxying request to node 127.0.0.1:55843_solr
+java.lang.RuntimeException: org.eclipse.jetty.io.EofException: An established connection was aborted by the software in your host machine
+	at org.apache.solr.servlet.HttpSolrProxy$2.onContent(HttpSolrProxy.java:119)
+	at org.eclipse.jetty.client.Response$ContentListener.onContent(Response.java:174)
+	at org.eclipse.jetty.client.Response$AsyncContentListener.onContentSource(Response.java:228)
+	at org.eclipse.jetty.client.Response$AsyncContentListener.lambda$onContentSource$0(Response.java:206)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.client.transport.HttpReceiver$ContentSource.invokeDemandCallback(HttpReceiver.java:839)
+	at org.eclipse.jetty.client.transport.HttpReceiver$ContentSource.processDemand(HttpReceiver.java:820)
+	at org.eclipse.jetty.util.thread.SerializedInvoker$Link.run(SerializedInvoker.java:274)
+	at org.eclipse.jetty.util.thread.SerializedInvoker.run(SerializedInvoker.java:174)
+	at org.eclipse.jetty.client.transport.HttpReceiver.responseHeaders(HttpReceiver.java:247)
+	at org.eclipse.jetty.http2.client.transport.internal.HttpReceiverOverHTTP2.lambda$onResponse$0(HttpReceiverOverHTTP2.java:178)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.SerializedInvoker$Link.run(SerializedInvoker.java:274)
+	at org.apache.solr.common.util.ExecutorUtil$MDCAwareThreadPoolExecutor.lambda$execute$0(ExecutorUtil.java:405)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.eclipse.jetty.io.EofException: An established connection was aborted by the software in your host machine
+	at org.eclipse.jetty.io.SocketChannelEndPoint.flush(SocketChannelEndPoint.java:118)
+	at org.eclipse.jetty.io.WriteFlusher.flush(WriteFlusher.java:461)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:309)
+	at org.eclipse.jetty.io.WriteFlusher.write(WriteFlusher.java:288)
+	at org.eclipse.jetty.io.AbstractEndPoint.write(AbstractEndPoint.java:350)
+	at org.eclipse.jetty.server.internal.HttpConnection$SendCallback.process(HttpConnection.java:948)
+	at org.eclipse.jetty.util.IteratingCallback.processing(IteratingCallback.java:376)
+	at org.eclipse.jetty.util.IteratingCallback.iterate(IteratingCallback.java:353)
+	at org.eclipse.jetty.server.internal.HttpConnection$HttpStreamOverHTTP1.send(HttpConnection.java:1548)
+	at org.eclipse.jetty.server.HttpStream$Wrapper.send(HttpStream.java:202)
+	at org.eclipse.jetty.server.internal.HttpChannelState$ChannelResponse.write(HttpChannelState.java:1430)
+	at org.eclipse.jetty.server.Response$Wrapper.write(Response.java:841)
+	at org.eclipse.jetty.server.handler.ContextResponse.write(ContextResponse.java:56)
+	at org.eclipse.jetty.ee10.servlet.ServletContextResponse.write(ServletContextResponse.java:230)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.channelWrite(HttpOutput.java:249)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.channelWrite(HttpOutput.java:242)
+	at org.eclipse.jetty.ee10.servlet.HttpOutput.flush(HttpOutput.java:778)
+	at org.apache.solr.servlet.ServletOutputStreamWrapper.flush(ServletOutputStreamWrapper.java:52)
+	at org.apache.solr.servlet.HttpSolrProxy$2.onContent(HttpSolrProxy.java:117)
+	... 16 more
+Caused by: java.io.IOException: An established connection was aborted by the software in your host machine
+	at java.base/sun.nio.ch.SocketDispatcher.writev0(Native Method)
+	at java.base/sun.nio.ch.SocketDispatcher.writev(SocketDispatcher.java:62)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:227)
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:158)
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:574)
+	at java.base/java.nio.channels.SocketChannel.write(SocketChannel.java:660)
+	at org.eclipse.jetty.io.SocketChannelEndPoint.flush(SocketChannelEndPoint.java:112)
+	... 34 more
+158930 WARN  (qtp1000239215-74) [] o.e.j.e.s.ServletChannel /solr/____v2/node/system
+java.lang.IllegalStateException: Committed
+	at org.eclipse.jetty.ee10.servlet.ServletApiResponse.sendError(ServletApiResponse.java:160)
+	at jakarta.servlet.http.HttpServletResponseWrapper.sendError(HttpServletResponseWrapper.java:92)
+	at org.apache.solr.servlet.NodeTargetProxyFilter.proxyToNode(NodeTargetProxyFilter.java:185)
+	at org.apache.solr.servlet.NodeTargetProxyFilter.doFilter(NodeTargetProxyFilter.java:111)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler$LastRuleHandler.handle(RewriteHandler.java:162)
+	at org.eclipse.jetty.rewrite.handler.Rule$Handler.handle(Rule.java:109)
+	at org.eclipse.jetty.rewrite.handler.Rule$Handler.handle(Rule.java:109)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:143)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.server.internal.HttpConnection.onFillable(HttpConnection.java:420)
+	at org.eclipse.jetty.server.internal.HttpConnection$FillableCallback.succeeded(HttpConnection.java:1789)
+	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:105)
+	at org.eclipse.jetty.io.SelectableChannelEndPoint$1.run(SelectableChannelEndPoint.java:54)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+159080 INFO  (qtp1000239215-73-null-99) [n:127.0.0.1:55842_solr t:null-99] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869568981} entity={} status=0 QTime=1121
+159168 INFO  (qtp1000239215-76-null-100) [n:127.0.0.1:55842_solr t:null-100] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869570208} entity={} status=0 QTime=14
+159183 INFO  (qtp1000239215-143-null-101) [n:127.0.0.1:55842_solr t:null-101] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869570209} entity={} status=0 QTime=5
+159247 INFO  (qtp1000239215-142-null-103) [n:127.0.0.1:55842_solr t:null-103] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869570334&detailed=true} entity={} status=0 QTime=8
+159273 INFO  (qtp1000239215-74-null-104) [n:127.0.0.1:55842_solr t:null-104] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869570348} entity={} status=0 QTime=11
+159335 INFO  (qtp1000239215-78-null-105) [n:127.0.0.1:55842_solr t:null-105] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869570396} entity={} status=0 QTime=29
+159555 INFO  (qtp1000239215-72-null-107) [n:127.0.0.1:55842_solr t:null-107] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793869570334} status=0 QTime=98
+159561 INFO  (qtp1000239215-76-null-107) [n:127.0.0.1:55842_solr t:null-107] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:55842_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793869570334} status=0 QTime=121
+159579 INFO  (qtp1681385255-81-null-108) [n:127.0.0.1:55843_solr t:null-108] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793869570334} status=0 QTime=46
+159581 INFO  (qtp1000239215-74-null-108) [n:127.0.0.1:55842_solr t:null-108] o.a.s.s.HttpSolrCall [admin] path=/admin/metrics params={node=127.0.0.1:55843_solr&name=solr_disk_space_megabytes,solr_core_index_size_megabytes,solr_core_indexsearcher_index_num_docs,solr_core_indexsearcher_index_docs,solr_core_indexsearcher_open_time_milliseconds&wt=prometheus&_=1793869570334} status=0 QTime=86
+161268 INFO  (qtp1000239215-77-null-102) [n:127.0.0.1:55842_solr t:null-102] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869570334} entity={} status=0 QTime=2033
+161328 INFO  (qtp1000239215-143-null-110) [n:127.0.0.1:55842_solr t:null-110] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869572431} entity={} status=0 QTime=2
+161330 INFO  (qtp1000239215-72-null-111) [n:127.0.0.1:55842_solr t:null-111] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869572431} entity={} status=0 QTime=1
+161365 INFO  (qtp1000239215-76-null-112) [n:127.0.0.1:55842_solr t:null-112] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869572469&indexInfo=false} entity={} status=0 QTime=1
+161377 INFO  (qtp1000239215-74-null-113) [n:127.0.0.1:55842_solr t:null-113] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869572478} entity={} status=0 QTime=8
+161381 INFO  (qtp1681385255-82-null-106) [n:127.0.0.1:55843_solr t:null-106] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=1933
+161525 INFO  (qtp1000239215-142-null-106) [n:127.0.0.1:55842_solr t:null-106] o.a.s.s.HttpSolrCall method=GET path= query-params={wt=json} entity={} status=0 QTime=2060
+161531 INFO  (qtp1000239215-73-null-106) [n:127.0.0.1:55842_solr t:null-106] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869570516&nodes=127.0.0.1:55842_solr,127.0.0.1:55843_solr} entity={} status=0 QTime=2114
+161870 INFO  (qtp1000239215-78-null-109) [n:127.0.0.1:55842_solr t:null-109] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869571997} entity={} status=0 QTime=970
+161907 INFO  (qtp1000239215-143-null-115) [n:127.0.0.1:55842_solr t:null-115] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869573019} entity={} status=0 QTime=3
+161916 INFO  (qtp1000239215-72-null-116) [n:127.0.0.1:55842_solr t:null-116] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869573020} entity={} status=0 QTime=8
+161982 INFO  (qtp1000239215-76-null-117) [n:127.0.0.1:55842_solr t:null-117] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869573070&indexInfo=false} entity={} status=0 QTime=6
+161984 INFO  (qtp1000239215-74-null-118) [n:127.0.0.1:55842_solr t:null-118] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869573073} entity={} status=0 QTime=3
+162926 INFO  (qtp1000239215-77-null-114) [n:127.0.0.1:55842_solr t:null-114] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869571997} entity={} status=0 QTime=1028
+163468 INFO  (qtp1000239215-73-null-119) [n:127.0.0.1:55842_solr t:null-119] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869573197} entity={} status=0 QTime=1350
+163500 INFO  (qtp1000239215-78-null-121) [n:127.0.0.1:55842_solr t:null-121] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869574608} entity={} status=0 QTime=3
+163502 INFO  (qtp1000239215-143-null-122) [n:127.0.0.1:55842_solr t:null-122] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869574608} entity={} status=0 QTime=1
+163512 INFO  (qtp1681385255-75-null-120) [n:127.0.0.1:55843_solr t:null-120] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869573198} entity={} status=0 QTime=1382
+163557 INFO  (qtp1681385255-79-null-123) [n:127.0.0.1:55843_solr t:null-123] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869574663&indexInfo=false} entity={} status=0 QTime=1
+163567 INFO  (qtp1000239215-74-null-124) [n:127.0.0.1:55842_solr t:null-124] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869574665} entity={} status=0 QTime=12
+163874 INFO  (qtp1681385255-71-null-126) [n:127.0.0.1:55843_solr t:null-126] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869574978} entity={} status=0 QTime=5
+164161 INFO  (TEST-AdminUiNodePickerTest.testNodeSelectionSurvivesInAppNavigation-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Ending testNodeSelectionSurvivesInAppNavigation
+164324 INFO  (qtp1000239215-77-null-125) [n:127.0.0.1:55842_solr t:null-125] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793869574978} entity={} status=0 QTime=459
+178797 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+179048 INFO  (jetty-closer-66-thread-2) [] o.e.j.s.Server Stopped oejs.Server@6bcc4327{STOPPING}[12.1.14,sto=0]
+179050 INFO  (jetty-closer-66-thread-1) [] o.e.j.s.Server Stopped oejs.Server@5a8b1ddc{STOPPING}[12.1.14,sto=0]
+179054 INFO  (jetty-closer-66-thread-1) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@362aba6b{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+179055 INFO  (jetty-closer-66-thread-2) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@455035f3{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+179065 INFO  (jetty-closer-66-thread-1) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=567905851
+179065 INFO  (jetty-closer-66-thread-2) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1352937153
+179067 INFO  (jetty-closer-66-thread-2) [] o.a.s.c.ZkController Remove node as live in ZooKeeper:/live_nodes/127.0.0.1:55843_solr
+179075 INFO  (jetty-closer-66-thread-1) [] o.a.s.c.ZkController Remove node as live in ZooKeeper:/live_nodes/127.0.0.1:55842_solr
+179109 INFO  (zkCallback-39-thread-2) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (2) -> (0)
+179109 INFO  (zkCallback-41-thread-2) [] o.a.s.c.c.ZkStateReader Updated live nodes from ZooKeeper... (2) -> (0)
+179113 INFO  (jetty-closer-66-thread-2) [] o.a.s.c.ZkController Publish this node as DOWN...
+179113 INFO  (jetty-closer-66-thread-2) [] o.a.s.c.ZkController Publish node=127.0.0.1:55843_solr as DOWN
+179115 INFO  (jetty-closer-66-thread-1) [] o.a.s.c.ZkController Publish this node as DOWN...
+179115 INFO  (jetty-closer-66-thread-1) [] o.a.s.c.ZkController Publish node=127.0.0.1:55842_solr as DOWN
+nov. 05, 2026 1:06:30 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+AVERTISSEMENT: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+nov. 05, 2026 1:06:30 AM io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+AVERTISSEMENT: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+179148 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+179148 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+179152 INFO  (closeThreadPool-72-thread-2) [] o.a.s.c.Overseer Overseer (id=72109553554489352-127.0.0.1:55842_solr-n_0000000000) closing
+179156 INFO  (OverseerStateUpdate-72109553554489352-127.0.0.1:55842_solr-n_0000000000) [n:127.0.0.1:55842_solr] o.a.s.c.Overseer Overseer Loop exiting : 127.0.0.1:55842_solr
+179158 INFO  (closeThreadPool-72-thread-1) [] o.a.s.c.Overseer Overseer (id=72109553554489352-127.0.0.1:55842_solr-n_0000000000) closing
+179261 INFO  (jetty-closer-66-thread-1) [] o.a.s.c.Overseer Overseer (id=72109553554489352-127.0.0.1:55842_solr-n_0000000000) closing
+179269 INFO  (jetty-closer-66-thread-1) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@40d033e8{/solr,/solr,b=file:///C:/Users/shaninna/dev/Solr-issues/worktrees/solr-12613-selenium-baseline-windows-20261105/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@4bb3894f{STOPPED}}
+179269 INFO  (jetty-closer-66-thread-2) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@70962454{/solr,/solr,b=file:///C:/Users/shaninna/dev/Solr-issues/worktrees/solr-12613-selenium-baseline-windows-20261105/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@696f8b23{STOPPED}}
+179271 INFO  (SUITE-AdminUiNodePickerTest-seed#[12613F00D]-worker) [] o.a.s.c.ZkTestServer Shutting down ZkTestServer.
+179273 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+179403 INFO  (Curator-Framework-0) [] o.a.c.f.i.CuratorFrameworkImpl backgroundOperationsLoop exiting
+179520 WARN  (ZkTestServer Run Thread) [] o.a.s.c.ZkTestServer Watch limit violations: 
+Maximum concurrent create/delete watches above limit:
+
+	3	/solr/aliases.json
+	3	/solr/clusterprops.json
+	2	/solr/packages.json
+	2	/solr/security.json
+
+Maximum concurrent data watches above limit:
+
+	20	/zookeeper/config
+
+Maximum concurrent children watches above limit:
+
+	9	/solr/live_nodes
+	3	/solr/collections
+
+179539 INFO  (SUITE-AdminUiNodePickerTest-seed#[12613F00D]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-1 after muting 0 log messages
+]]></system-err>
+</testsuite>

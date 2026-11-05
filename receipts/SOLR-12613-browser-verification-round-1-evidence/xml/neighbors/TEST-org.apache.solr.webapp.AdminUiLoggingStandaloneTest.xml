@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.webapp.AdminUiLoggingStandaloneTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-11-05T09:13:59.575Z" hostname="NCBIPC0140" time="51.042">
+  <properties/>
+  <testcase name="testChangeLogLevelViaUi" classname="org.apache.solr.webapp.AdminUiLoggingStandaloneTest" time="27.816"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[216333 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of 'C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr\server\solr\configsets\_default\conf'
+216357 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiLoggingStandaloneTest_12613F00D-001\data-dir-2-001
+216357 WARN  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 startTrackingSearchers: numOpens=5 numCloses=5
+216357 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-2 for ERROR logs matching regex: ignore_exception
+216377 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=true
+216444 WARN  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.e.j.u.r.ResourceFactory Leaked C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr\test-framework\build\libs\solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///C:/Users/shaninna/dev/Solr-issues/worktrees/solr-12613-selenium-baseline-windows-20261105/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+216446 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.SolrTestCaseJ4.SuppressSSL(bugUrl="Admin UI browser tests drive plain http")
+216446 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=null
+216446 WARN  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 System property java.security.egd was not set by test runner, forcibly set to expected: file:/dev/./urandom
+now. 05, 2026 2:14:12 POPOŁDNJU org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find CDP implementation matching 157
+231821 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.SolrTestCaseJ4 Writing core.properties file to C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiLoggingStandaloneTest_12613F00D-001\standalone-home-001\collection1
+231891 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+231891 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+231891 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 21.0.11+10-LTS
+231910 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+231942 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@20074623{/solr,/solr,b=file:///C:/Users/shaninna/dev/Solr-issues/worktrees/solr-12613-selenium-baseline-windows-20261105/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@1cb29611{STARTED}}
+231943 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=62715}
+231943 ERROR (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+231970 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+231970 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT 4e8aa913fce4a40b529fe89d8b5dd7930c29a86e [snapshot build, details omitted]
+231970 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+231970 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr
+231972 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-11-05T09:14:15.785020800Z
+231972 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.s.CoreContainerProvider Solr Home: C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiLoggingStandaloneTest_12613F00D-001\standalone-home-001 (source: servlet config: solr.solr.home)
+231987 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.c.SolrXmlConfig Loading solr.xml from C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiLoggingStandaloneTest_12613F00D-001\standalone-home-001\solr.xml
+232011 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+232011 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+238147 WARN  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+238171 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.c.CorePropertiesLocator Found 1 core definitions underneath C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiLoggingStandaloneTest_12613F00D-001\standalone-home-001
+238171 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.c.CorePropertiesLocator Cores are: [collection1]
+238505 INFO  (coreLoadExecutor-57-thread-1) [ x:collection1] o.a.s.s.IndexSchema Loaded schema default-config/1.7 with uniqueid field id
+238505 INFO  (coreLoadExecutor-57-thread-1) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from instancedir C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiLoggingStandaloneTest_12613F00D-001\standalone-home-001\collection1
+238511 INFO  (coreLoadExecutor-57-thread-1) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiLoggingStandaloneTest_12613F00D-001\standalone-home-001\collection1], dataDir=[C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiLoggingStandaloneTest_12613F00D-001\standalone-home-001\collection1\data\]
+238675 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@20074623{/solr,/solr,b=file:///C:/Users/shaninna/dev/Solr-issues/worktrees/solr-12613-selenium-baseline-windows-20261105/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@1cb29611{STARTED}}
+238689 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@6d582f7a{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:62715}
+238691 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.e.j.s.Server Started oejs.Server@62ac309a{STARTING}[12.1.14,sto=0] @6800ms
+238945 INFO  (coreLoadExecutor-57-thread-1) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+238945 INFO  (coreLoadExecutor-57-thread-1) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+238946 INFO  (coreLoadExecutor-57-thread-1) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 3000ms; 
+238985 INFO  (coreLoadExecutor-57-thread-1) [ x:collection1] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: C:\Users\shaninna\dev\Solr-issues\worktrees\solr-12613-selenium-baseline-windows-20261105\solr\webapp\build\tmp\tests-tmp\org.apache.solr.webapp.AdminUiLoggingStandaloneTest_12613F00D-001\standalone-home-001\collection1\conf
+238987 INFO  (coreLoadExecutor-57-thread-1) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+238987 INFO  (searcherExecutor-59-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+238989 INFO  (searcherExecutor-59-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+239027 INFO  (TEST-AdminUiLoggingStandaloneTest.testChangeLogLevelViaUi-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Starting testChangeLogLevelViaUi
+253019 INFO  (qtp1266411053-113-null-67) [ t:null-67] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793870076690&indexInfo=false} entity={} status=0 QTime=17
+253708 INFO  (qtp1266411053-114-null-68) [ t:null-68] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793870076692} entity={} status=0 QTime=703
+255459 INFO  (qtp1266411053-112-null-70) [ t:null-70] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793870079218&indexInfo=false} entity={} status=0 QTime=9
+255652 INFO  (qtp1266411053-117-null-72) [ t:null-72] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793870079219} entity={} status=0 QTime=124
+255806 INFO  (qtp1266411053-113-null-69) [ t:null-69] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793870077531} entity={} status=0 QTime=1929
+257642 INFO  (qtp1266411053-114-null-71) [ t:null-71] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793870079218} entity={} status=0 QTime=2183
+260154 INFO  (qtp1266411053-115-null-73) [ t:null-73] o.a.s.l.l.Log4j2Watcher Setting log level to 'WARN' for logger: org.apache.solr.core
+260158 WARN  (qtp1266411053-115-null-73) [ t:null-73] o.a.s.j.PostRequestLoggingFilter No reflection data found for request-body type java.util.ArrayList for request node/logging/levels; omitting request-body details from logging
+260159 INFO  (qtp1266411053-115-null-73) [ t:null-73] o.a.s.s.HttpSolrCall method=PUT path= query-params={} entity={} status=0 QTime=34
+260251 INFO  (qtp1266411053-114-null-74) [ t:null-74] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793870083990} entity={} status=0 QTime=63
+260336 INFO  (qtp1266411053-112-null-75) [ t:null-75] o.a.s.s.HttpSolrCall [admin] path=/admin/info/logging params={wt=javabin} status=0 QTime=20
+265276 INFO  (qtp1266411053-115-null-76) [ t:null-76] o.a.s.l.l.Log4j2Watcher Setting log level to 'null' for logger: org.apache.solr.core
+265279 WARN  (qtp1266411053-115-null-76) [ t:null-76] o.a.s.j.PostRequestLoggingFilter No reflection data found for request-body type java.util.ArrayList for request node/logging/levels; omitting request-body details from logging
+265280 INFO  (qtp1266411053-115-null-76) [ t:null-76] o.a.s.s.HttpSolrCall method=PUT path= query-params={} entity={} status=0 QTime=10
+265399 INFO  (qtp1266411053-116-null-78) [ t:null-78] o.a.s.s.HttpSolrCall [admin] path=/admin/info/logging params={wt=javabin} status=0 QTime=67
+265403 INFO  (qtp1266411053-114-null-77) [ t:null-77] o.a.s.s.HttpSolrCall method=GET path= query-params={_=1793870089102} entity={} status=0 QTime=99
+266804 INFO  (TEST-AdminUiLoggingStandaloneTest.testChangeLogLevelViaUi-seed#[12613F00D]) [] o.a.s.SolrTestCaseJ4 ###Ending testChangeLogLevelViaUi
+266817 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.e.j.s.Server Stopped oejs.Server@62ac309a{STOPPING}[12.1.14,sto=0]
+266819 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@6d582f7a{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+266832 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=914305115
+266857 INFO  (coreCloseExecutor-66-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@42dc8d5 collection1
+266860 INFO  (coreCloseExecutor-66-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close()  ... SKIPPED (unnecessary).
+now. 05, 2026 2:14:50 POPOŁDNJU io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+266915 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@20074623{/solr,/solr,b=file:///C:/Users/shaninna/dev/Solr-issues/worktrees/solr-12613-selenium-baseline-windows-20261105/solr/webapp/web/,a=AVAILABLE,h=oeje10s.ServletHandler@1cb29611{STOPPED}}
+308290 INFO  (SUITE-AdminUiLoggingStandaloneTest-seed#[12613F00D]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-2 after muting 0 log messages
+]]></system-err>
+</testsuite>
