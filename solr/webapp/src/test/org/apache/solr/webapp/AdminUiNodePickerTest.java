@@ -35,9 +35,7 @@ public class AdminUiNodePickerTest extends AdminUiTestBase {
 
   @Before
   public void clearPersistedNodeSelection() {
-    ensureCloudCluster();
-    driver.get(baseUrl + "/index.html#/");
-    waitFor(By.id("node-selector-item"));
+    openPage("", By.id("index"));
     ((JavascriptExecutor) driver)
         .executeScript("sessionStorage.removeItem('adminui.selectedNode');");
   }
