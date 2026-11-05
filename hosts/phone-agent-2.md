@@ -3,7 +3,8 @@
 Pool Linux host. Shared capabilities and operating rules are in [pool-linux.md](pool-linux.md).
 
 - Identity: Phone Agent 2, distinct from [Phone Agent](phone-agent.md), the host formerly called vm1. Use `phone-agent-2` in new claims.
-- Capability tags: review, draft, records, gate, npm. This sandbox does not have BATS or Docker; do not dispatch BATS/Docker work here.
+- Capability tags: review, draft, records, gate, npm, selenium. This sandbox does not have BATS or Docker; do not dispatch BATS/Docker work here.
+- Verified Selenium stack: Google Chrome 155.0.8059.39; cached ChromeDriver 155.0.8059.84 (compatible 155.0.8059 build); Java Selenium modules and JDK 21 available; standard detached gate preflight/runner available.
 - Verified toolchain for the current alias instance: Ubuntu 24.04.4 LTS; OpenJDK 21.0.12.1 including `javac`; Gradle 9.7.0 wrapper (verified by detached tidy preflight); Git 2.43.0; Python 3.12.3; Node.js 24.22.1; npm 11.19.1.
 - Local JDK: `/usr/lib/jvm/java-21-openjdk-amd64`. Use the target source checkout's Gradle wrapper for builds and follow the shared build lock and disk guard rules.
 - Role beyond the pool: none. Takes work by claim at Nick's direction, like other pool hosts.

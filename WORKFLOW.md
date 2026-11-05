@@ -29,7 +29,8 @@ This branch is an open pool, not addressed mail. Any agent that polls it may tak
 - `records`: hosts whose file lists it.
 - `implementation`: hosts whose file lists it; build and test proof stays with a capable Linux host.
 - `gate`, `premise-run`, `settling-run`, `sweep`, `bats`: Linux hosts with the toolchain.
-- `selenium`, `windows-check`: the Windows host.
+- `selenium`: any host with a verified compatible browser/driver; this includes the Windows host and Linux `phone-agent-2` (see host records).
+- `windows-check`: the Windows host.
 - `ui`: work in the `ui/` build. Linux hosts; the build facts are in `UI-PLAYBOOK.md`.
 
 ## Claims
