@@ -19,6 +19,7 @@ package org.apache.solr.servlet;
 
 import static org.apache.solr.servlet.NodeTargetProxyFilter.TARGET_NODE_HEADER;
 
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import org.apache.solr.client.solrj.SolrRequest;
@@ -153,6 +154,88 @@ public class NodeTargetProxyFilterTest extends SolrCloudTestCase {
         systemInfoRequest(
             SolrRequest.METHOD.GET, params().set(TARGET_NODE_HEADER, targetNode.getNodeName()));
     assertEquals(targetNode.getNodeName(), respondingNode(receivingNode, req));
+  }
+
+  @Test
+  public void testEncodedQueryParamProxiesGet() throws Exception {
+    for (String path : List.of("/solr/admin/info/system", "/api/node/system")) {
+      for (String key : List.of("%58-Solr-targetNode", "X%2dSolr-targetNode", "X%2DSolr-targetNode")) {
+        var rsp =
+            receivingNode
+                .getSolrClient()
+                .getHttpClient()
+                .newRequest(receivingNode.getBaseUrl().toString())
+                .path(path + "?wt=json&" + key + "=" + targetNode.getNodeName())
+                .send();
+        assertEquals(200, rsp.getStatus());
+        Map<?, ?> body = (Map<?, ?>) Utils.fromJSONString(rsp.getContentAsString());
+        assertEquals(targetNode.getNodeName(), body.get("node"));
+      }
+    }
+  }
+
+  @Test
+  public void testEncodedQueryParamAndHeaderAreRejected() throws Exception {
+    var rsp =
+        receivingNode
+            .getSolrClient()
+            .getHttpClient()
+            .newRequest(receivingNode.getBaseUrl().toString())
+            .path("/solr/admin/info/system?%58-Solr-targetNode=" + targetNode.getNodeName())
+            .headers(h -> h.add(TARGET_NODE_HEADER, targetNode.getNodeName()))
+            .send();
+    assertEquals(400, rsp.getStatus());
+  }
+
+  @Test
+  public void testEncodedQueryValuePreservesHeader() throws Exception {
+    var rsp =
+        receivingNode
+            .getSolrClient()
+            .getHttpClient()
+            .newRequest(receivingNode.getBaseUrl().toString())
+            .path("/solr/admin/info/system?wt=json&foo=%58-Solr-targetNode")
+            .headers(h -> h.add(TARGET_NODE_HEADER, targetNode.getNodeName()))
+            .send();
+    assertEquals(200, rsp.getStatus());
+    Map<?, ?> body = (Map<?, ?>) Utils.fromJSONString(rsp.getContentAsString());
+    assertEquals(targetNode.getNodeName(), body.get("node"));
+  }
+
+  @Test
+  public void testEncodedQueryParamIgnoredForPost() throws Exception {
+    var rsp =
+        receivingNode
+            .getSolrClient()
+            .getHttpClient()
+            .newRequest(receivingNode.getBaseUrl().toString())
+            .method("POST")
+            .path("/solr/admin/info/system?wt=json&%58-Solr-targetNode=" + targetNode.getNodeName())
+            .send();
+    assertEquals(200, rsp.getStatus());
+    Map<?, ?> body = (Map<?, ?>) Utils.fromJSONString(rsp.getContentAsString());
+    assertEquals(receivingNode.getNodeName(), body.get("node"));
+  }
+
+  @Test
+  public void testEncodedQueryDirectiveConsumedWhenForwardingToReplica() throws Exception {
+    var rsp =
+        receivingNode
+            .getSolrClient()
+            .getHttpClient()
+            .newRequest(receivingNode.getBaseUrl().toString())
+            .path(
+                "/solr/"
+                    + COLLECTION
+                    + "/echo?wt=json&%58-Solr-targetNode="
+                    + targetNode.getNodeName()
+                    + "&foo=bar")
+            .send();
+    assertEquals(200, rsp.getStatus());
+    Map<?, ?> body = (Map<?, ?>) Utils.fromJSONString(rsp.getContentAsString());
+    Map<?, ?> echoedParams = (Map<?, ?>) body.get("params");
+    assertEquals("bar", echoedParams.get("foo"));
+    assertFalse(echoedParams.containsKey(TARGET_NODE_HEADER));
   }
 
   @Test

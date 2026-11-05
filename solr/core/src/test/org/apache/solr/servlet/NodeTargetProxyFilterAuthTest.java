@@ -19,11 +19,15 @@ package org.apache.solr.servlet;
 
 import static org.apache.solr.servlet.NodeTargetProxyFilter.TARGET_NODE_HEADER;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import java.util.Map;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.request.GenericSolrRequest;
 import org.apache.solr.cloud.SolrCloudAuthTestCase;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.params.SolrParams;
+import org.apache.solr.common.util.Utils;
 import org.apache.solr.embedded.JettySolrRunner;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -79,6 +83,40 @@ public class NodeTargetProxyFilterAuthTest extends SolrCloudAuthTestCase {
     req.setBasicAuthCredentials(USER, PASSWORD);
     var e = expectThrows(SolrException.class, () -> receivingNode.getSolrClient().request(req));
     assertEquals(400, e.code());
+  }
+
+  @Test
+  public void testEncodedQueryParamProxiesWhenAuthenticated() throws Exception {
+    var rsp =
+        receivingNode
+            .getSolrClient()
+            .getHttpClient()
+            .newRequest(receivingNode.getBaseUrl().toString())
+            .path("/solr/admin/info/system?wt=json&%58-Solr-targetNode=" + targetNode.getNodeName())
+            .headers(h -> h.add("Authorization", basicAuthHeader()))
+            .send();
+    assertEquals(200, rsp.getStatus());
+    Map<?, ?> body = (Map<?, ?>) Utils.fromJSONString(rsp.getContentAsString());
+    assertEquals(targetNode.getNodeName(), body.get("node"));
+  }
+
+  @Test
+  public void testMalformedEncodedQueryIs400WhenAuthenticated() throws Exception {
+    var rsp =
+        receivingNode
+            .getSolrClient()
+            .getHttpClient()
+            .newRequest(receivingNode.getBaseUrl().toString())
+            .path("/solr/admin/info/system?wt=json&foo=%FF")
+            .headers(h -> h.add("Authorization", basicAuthHeader()))
+            .send();
+    assertEquals(400, rsp.getStatus());
+  }
+
+  private static String basicAuthHeader() {
+    return "Basic "
+        + Base64.getEncoder()
+            .encodeToString((USER + ":" + PASSWORD).getBytes(StandardCharsets.UTF_8));
   }
 
   @Test
