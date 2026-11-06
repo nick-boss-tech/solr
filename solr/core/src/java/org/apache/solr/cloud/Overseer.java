@@ -223,6 +223,19 @@ public class Overseer implements SolrCloseable {
     public void run() {
       MDCLoggingContext.setNode(zkController.getNodeName());
 
+      if (distributedClusterStateUpdater.isDistributedStateUpdate()) {
+        try {
+          prioritizeOverseerNodes(myId);
+        } catch (InterruptedException e) {
+          Thread.currentThread().interrupt();
+          return;
+        } catch (Exception e) {
+          if (!zkClient.isClosed()) {
+            log.error("Unable to prioritize overseer", e);
+          }
+        }
+      }
+
       LeaderStatus isLeader = amILeader();
       while (isLeader == LeaderStatus.DONT_KNOW) {
         log.debug("am_i_leader unclear {}", isLeader);
@@ -467,11 +480,9 @@ public class Overseer implements SolrCloseable {
       try {
         Map<?, ?> m = (Map<?, ?>) Utils.fromJSON(data);
         String id = (String) m.get(ID);
-        if (overseerCollectionConfigSetProcessor.getId().equals(id)) {
+        if (myId.equals(id)) {
           try {
-            log.warn(
-                "I (id={}) am exiting, but I'm still the leader",
-                overseerCollectionConfigSetProcessor.getId());
+            log.warn("I (id={}) am exiting, but I'm still the leader", myId);
             zkClient.delete(path, stat.getVersion());
           } catch (KeeperException.BadVersionException e) {
             // no problem ignore it some other Overseer has already taken over
@@ -748,25 +759,29 @@ public class Overseer implements SolrCloseable {
     // as we have an Overseer, we need to support this.
     OverseerNodePrioritizer overseerPrioritizer =
         new OverseerNodePrioritizer(reader, this, adminPath, shardHandler.getShardHandlerFactory());
-    overseerCollectionConfigSetProcessor =
-        new OverseerCollectionConfigSetProcessor(
-            reader,
-            id,
-            shardHandler,
-            adminPath,
-            stats,
-            Overseer.this,
-            overseerPrioritizer,
-            solrMetricsContext);
-    ccThread =
-        new OverseerThread(
-            ccTg,
-            overseerCollectionConfigSetProcessor,
-            "OverseerCollectionConfigSetProcessor-" + id);
-    ccThread.setDaemon(true);
+    if (!distributedClusterStateUpdater.isDistributedStateUpdate()) {
+      overseerCollectionConfigSetProcessor =
+          new OverseerCollectionConfigSetProcessor(
+              reader,
+              id,
+              shardHandler,
+              adminPath,
+              stats,
+              Overseer.this,
+              overseerPrioritizer,
+              solrMetricsContext);
+      ccThread =
+          new OverseerThread(
+              ccTg,
+              overseerCollectionConfigSetProcessor,
+              "OverseerCollectionConfigSetProcessor-" + id);
+      ccThread.setDaemon(true);
+    }
 
     updaterThread.start();
-    ccThread.start();
+    if (ccThread != null) {
+      ccThread.start();
+    }
 
     getCoreContainer().getClusterSingletons().startClusterSingletons();
 
@@ -775,6 +790,13 @@ public class Overseer implements SolrCloseable {
 
   public Stats getStats() {
     return stats;
+  }
+
+  void prioritizeOverseerNodes(String overseerId) throws Exception {
+    if (overseerId != null) {
+      new OverseerNodePrioritizer(reader, this, adminPath, shardHandler.getShardHandlerFactory())
+          .prioritizeOverseerNodes(overseerId);
+    }
   }
 
   ZkController getZkController() {

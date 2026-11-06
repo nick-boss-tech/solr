@@ -362,11 +362,6 @@ public class ZkController implements Closeable {
     // Refuse to start if ZK has a non-empty /clusterstate.json or a /solr.xml file
     checkNoOldClusterstate(zkClient);
 
-    this.overseerRunningMap = Overseer.getRunningMap(zkClient);
-    this.overseerCompletedMap = Overseer.getCompletedMap(zkClient);
-    this.overseerFailureMap = Overseer.getFailureMap(zkClient);
-    this.asyncIdsMap = Overseer.getAsyncIdsMap(zkClient);
-
     createClusterZkNodes(zkClient);
 
     zkStateReader =
@@ -386,6 +381,11 @@ public class ZkController implements Closeable {
                 zkStateReader.getClusterProperty(
                     ZkStateReader.OVERSEER_ENABLED,
                     EnvUtils.getPropertyAsBool("solr.cloud.overseer.enabled", true))));
+
+    this.overseerRunningMap = overseerEnabled ? Overseer.getRunningMap(zkClient) : null;
+    this.overseerCompletedMap = overseerEnabled ? Overseer.getCompletedMap(zkClient) : null;
+    this.overseerFailureMap = overseerEnabled ? Overseer.getFailureMap(zkClient) : null;
+    this.asyncIdsMap = overseerEnabled ? Overseer.getAsyncIdsMap(zkClient) : null;
 
     if (overseerEnabled) {
       log.info("The Overseer is enabled.  It will process all cluster commands & state updates.");
@@ -409,8 +409,8 @@ public class ZkController implements Closeable {
     } else {
       this.overseerJobQueue = overseer.getStateUpdateQueue();
     }
-    this.overseerCollectionQueue = overseer.getCollectionQueue(zkClient);
-    this.overseerConfigSetQueue = overseer.getConfigSetQueue(zkClient);
+    this.overseerCollectionQueue = overseerEnabled ? overseer.getCollectionQueue(zkClient) : null;
+    this.overseerConfigSetQueue = overseerEnabled ? overseer.getConfigSetQueue(zkClient) : null;
     this.sysPropsCacher = new NodesSysPropsCacher(cc.getDefaultHttpSolrClient(), zkStateReader);
     assert ObjectReleaseTracker.track(this);
   }
@@ -2662,6 +2662,22 @@ public class ZkController implements Closeable {
   }
 
   public void setPreferredOverseer() throws KeeperException, InterruptedException {
+    if (distributedClusterStateUpdater.isDistributedStateUpdate()) {
+      // Prioritization may contact this node while it is still finishing startup.
+      customThreadPool.execute(
+          () -> {
+            try {
+              overseer.prioritizeOverseerNodes(OverseerTaskProcessor.getLeaderId(zkClient));
+            } catch (InterruptedException e) {
+              Thread.currentThread().interrupt();
+            } catch (Exception e) {
+              if (!zkClient.isClosed()) {
+                log.error("Unable to prioritize Overseer nodes", e);
+              }
+            }
+          });
+      return;
+    }
     MapWriter props =
         ew ->
             ew.put(

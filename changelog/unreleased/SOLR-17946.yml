@@ -1,0 +1,7 @@
+title: Avoid creating unused Overseer collection queues and task maps when the Overseer is disabled.
+type: fixed
+authors:
+  - name: Nick Shanin
+links:
+  - name: SOLR-17946
+    url: https://issues.apache.org/jira/browse/SOLR-17946
