@@ -1,0 +1,13 @@
+# Coordination board cutover: coordination-v2
+
+Status: CUTOVER. Nick authorized the switch and stated that the other jobs were ready. This record is the activation marker: from the commit that adds it, `nick-boss-tech/solr:coordination-v2` is the live coordination board for new work. The old `coordination-ui` board is retained as historical reference; do not start new assignments, claims or gates there.
+
+- New-board head verified immediately before this announcement: `0b6401b25bc69f30b2dc4c86f21f2fc25861155e` on `coordination-v2`. Refresh its live head before taking work, then read `START-HERE.md`, `WORKFLOW.md` and `tools/README.md` at one snapshot.
+- Old-board head verified immediately before this announcement: `5a84b95f716a128da78009220f48f5a1d9c60781` on `coordination-ui`. The adding commit is the cutover record; preserve the branch and its history.
+- The new queue starts fresh. Old records are not automatically imported or claimed. Use the v2 legacy catalog as a starting point, refresh the old board, and carry work forward one item at a time with exact source heads, evidence and ownership. Do not duplicate any still-running job or gate.
+- Hosts must update their bootstraps and writers to the v2 structured-record workflow before taking new work. The Git client protocol uses one canonical claim path per job, immutable releases, and a new successor ID; a release is not proof that an executor stopped. Review actual process state before reassignment. Existing old-branch scripts are not v2 writers.
+- This announcement records the owner's direction; it does not claim that every host posted a readiness acknowledgment, that all old claims were closed, or that Git prevents late old-board writes. If a late old-board write appears, preserve it, inspect active ownership and evidence, and reconcile it into v2 without silently duplicating execution. The old board remains readable.
+- Windows must retain the established ICLA identity, fork-push and public-write rules, the Linux gate requirement, and the prohibition on Gradle and the retired local test queue. The current Windows poster for `coordination-ui` is fenced after this marker; other legacy scripts may require separate host updates.
+- Rollback: if a serious coordination problem requires reverting to the old board, first stop and reconcile v2 writers and in-flight work, agree on one effective cutover point, record both branch heads and a new explicit owner-directed notice, then update host selectors. Do not force-push, erase records, or treat either branch as active merely because an old instruction says so.
+
+Prepared 2026-11-06 21:32 UTC. No PR or Jira action is implied by this internal board transition.
