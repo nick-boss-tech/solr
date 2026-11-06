@@ -8,4 +8,6 @@ Read [the coordination skill](.agents/skills/solr-coordination/SKILL.md) and [th
 
 For a reusable, project-neutral explanation of the Git-branch board and its relationship to the Elephant-Goldfish Model, read [the portable design](docs/portable-board.md). It is a proposal and example, not an installed or independently reviewed implementation.
 
+An isolated, experimental Git writer and snapshot index are in [tools](tools/README.md). They use structured records and do not read or migrate the legacy live board. Their limitations, including the absence of takeover and release, are documented there.
+
 This is a proposed foundation, not an authorization or instruction to switch agents. A later migration must inventory and reconcile live records, preserve provenance, make tooling work for the new destination, and verify a coordinated cutover. Until then the current board's rules govern.
