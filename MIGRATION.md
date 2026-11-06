@@ -1,23 +1,19 @@
-# Migration plan for review
+# Fresh-board transition plan
 
-## Goals
+**Review preview only:** `coordination-ui` remains the live board. The intended direction is to start `coordination-v2` fresh and consider old work individually, not bulk-import the old queue. Preserve the old branch and its history as a reference.
 
-Make live work and its ownership easy to find, separate it from historical evidence, preserve exact-head proof and links, and give agents concise, discoverable coordination instructions. Avoid treating an index, old receipt, or branch name as authoritative without checking the underlying records.
+## Working from old records
 
-## Proposed shape
+The [legacy work catalog](migration/legacy-work-catalog.md) lists assignments, claims and gates at one pinned source snapshot; the [full inventory](migration/legacy-inventory-0d91325.json) includes all tree paths and Git blob IDs, including evidence. Their statuses and references are observations, not conclusions about current ownership or completion. Refresh the source tip before deciding what to do with an item; use `tools/inventory.py` to compare snapshots and find later changes.
 
-- Keep assignments, claims, gate requests, receipts and reports as traceable records, with ownership and status derived from the relevant records. An index is a convenience, not authority.
-- Keep large raw evidence and completed history at stable, pinned locations on the old branch or a separately decided archive; carry explicit links and source revisions. Do not discard, rewrite or assume availability of evidence.
-- Use a short coordination skill as the entry point; follow current host, public-write and gate requirements. Integrate with the separately reviewed Solr skills rather than copying their domain workflows.
-- Identify a single live board explicitly. A preview is never a second claim queue.
+To carry an item over, first read the current old-board assignment, claims, gates, receipts, reports and relevant host state; verify the live source branch or PR head and any in-flight execution. Write a new, scoped v2 assignment that links the old record, its source snapshot, existing owner and the exact evidence needed. Coordinate a handoff with any active owner; never duplicate a running gate, infer that an old claim has expired from time alone, or treat an old receipt as proof for a changed head. Carry links to historical evidence instead of silently rewriting its provenance. Old work is not automatically open on the fresh board.
 
-## Before cutover
+## Before switching
 
-1. At a fresh source SHA inventory assignments and gates, their claims, terminal records, host activity, receipts, reports and external branch heads. Reconcile ambiguities rather than deriving closure from `OPEN-WORK.md` alone. Preserve source paths, blob hashes and exact source commit in a machine-readable manifest. Include paused, handed, owner-decision and active work as well as open work; carry dependencies and evidence links.
-2. Produce a reviewable migration set and a mapping from every carried record to its old path. Keep active claims owned by their existing holders; do not create duplicate claims or rerun gates. Explicitly identify unclassified records and missing dependencies. Verify links and blob hashes.
-3. Audit all board readers, writers, host bootstrap instructions, scheduled jobs, wrappers and skills for hard-coded `coordination-ui`, including the Windows poster and Linux `pool/bin` scripts. Update and test each against an isolated test target; do not redirect existing production writers prematurely. Account for every host, including agents that are offline.
-4. Reconcile source changes since the inventory snapshot. Arrange a coordinated write freeze or another verified atomic handover with all active hosts; preserve in-flight work and ensure old writers cannot create split ownership. A timed-out agent or an empty generated index is not evidence of quiescence.
-5. Publish the verified migration and instructions; redirect the designated bootstraps and tools only at the agreed cutover. Verify live reads, add-only claims, compare-and-swap edits, ancestry and evidence access on the new board. Publish a clear pointer on the old board and retain its historical access. Record exact source and destination heads and the time.
-6. Monitor for late writes to the old branch, reconcile them without losing work, and keep a documented rollback path. Never delete or force-push the old branch as part of this plan.
+1. Agree how ongoing old-board work is finished or handed off. A fresh queue does not stop old workers. Identify active hosts and in-flight executions and establish a coordinated write freeze or equivalent single-writer handover, including a plan for offline and late writers. Do not infer quiescence from a stale heartbeat or a generated index.
+2. Choose the production record format, canonical claim identity, and safe release/takeover protocol. Test simultaneous claims and process-failure recovery, and verify that all writers enforce the same rules. The preview writer lacks release and takeover; the legacy-compatible writer cannot prevent duplicate claims at different paths.
+3. Audit and update the live board selector in each host's bootstrap, scripts, skills and scheduled tasks. Test each on an isolated target, including authentication, concurrency and error handling. No production default is changed by this preview. Capture host readiness explicitly.
+4. Confirm that users can navigate the old branch and pinned evidence; document access and retention. Refresh the old snapshot and preserve a change report for late-arriving records. Make a deliberate one-by-one decision for any item that must remain active at the transition, including ongoing gate ownership and source head. Do not require every old record to be classified before starting fresh.
+5. Publish the approved fresh-board instructions and make the single active-board switch in a coordinated window. Verify reads, claims, writes, evidence access, host defaults and the ability to find old work; record exact old and new heads. Keep a rollback plan and reconcile late old-board writes without duplicating work. Never force-push or delete the old branch.
 
-The migration is not complete until the manifest, reconciled live state, host readiness, tested tooling and cutover checks exist. This preview performs none of those actions.
+An inventory, a preview branch, or a passing local writer test alone does not establish cutover readiness. Until the switch is actually coordinated and verified, all hosts continue to use `coordination-ui`.

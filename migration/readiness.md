@@ -2,6 +2,8 @@
 
 Status: **NOT READY TO SWITCH**. `coordination-ui` remains the sole live board. This is a preparation snapshot; no live host has been redirected and no legacy job has been marked complete by this record.
 
+Direction: start the new board fresh. Old work remains in the preserved source branch and may be considered individually; do not automatically carry forward its assignments, claims or gates. See the [work catalog](legacy-work-catalog.md) for source links and the [fresh-board transition plan](../MIGRATION.md).
+
 ## Snapshot and preservation
 
 The [inventory](legacy-inventory-0d91325.json) describes all 3,618 files (50,088,435 bytes of blob contents) at `coordination-ui` commit `0d91325c0c618abb14f4be29884fc681cf07886b`: 205 assignment paths, 601 claim paths, 218 gate paths, 1,043 receipt paths and 874 report paths, including nested evidence. These are file counts, not counts of active jobs or passing tests. It also records all other roots and Git modes/object IDs. Titles, reported status and mentions are extracted from 2,258 bounded Markdown files and can be incomplete or ambiguous. Source content and raw evidence are accessible at the pinned source commit; the manifest alone is not a replacement for them.
@@ -19,10 +21,10 @@ The existing six-skill package's independent review at this source commit report
 
 ## Cutover blockers
 
-1. Reconcile assignments, live ownership, in-flight gate processes, receipts, evidence links and branch heads from a fresh source snapshot. The inventory intentionally does not classify a claim as live or stale. Decide how to carry each active record without losing its path, history or owner; unclassified records remain visible.
-2. Prepare a complete target snapshot and test every carried blob, mode, link and referenced evidence. Decide how archived data is retained without breaking existing links. `coordination-v2` currently does not contain the legacy records and its structured JSON index does not index them.
+1. Identify old-board work still executing and coordinate its completion or an explicit handoff before switching. The inventory intentionally does not classify claims as live or stale; there is no need to classify or import every historical item. Preserve a reliable route to the source branch and evidence.
+2. For each item deliberately carried over, verify the relevant source snapshot, owner, source head and evidence, and preserve its provenance. `coordination-v2` intentionally starts without the legacy records; its structured JSON index does not index them.
 3. Agree and implement a canonical claim identity and a release/takeover protocol that prevents duplicate execution; expected-blob checks on arbitrary legacy filenames are not enough. Replace or safely adapt every writer, including retry logic and shared checkouts. Verify host-specific configuration and remote service behavior in isolated targets. Do not redirect production defaults during preview.
 4. Obtain readiness and quiescence evidence for every active host and in-flight execution, including offline or late writers. Establish a safe, coordinated write freeze or equivalent single-writer handover. A heartbeat timeout alone does not prove a process stopped.
-5. At cutover, compare the final source snapshot against the carried target, reconcile every late change, verify access and single-board operation, update all bootstraps and writers, and record exact heads and a rollback procedure. Until those checks complete, no host should claim work on `coordination-v2`.
+5. At cutover, review late changes on the final source snapshot and reconcile any in-flight or selectively carried work, verify historical access and single-board operation, update all bootstraps and writers, and record exact heads and a rollback procedure. Until those checks complete, no host should claim work on `coordination-v2`.
 
 This document is not a cutover instruction and is not evidence that any host has acknowledged a freeze.
