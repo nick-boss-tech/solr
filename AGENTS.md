@@ -64,6 +64,7 @@ Before diving into code on these topics, read the matching doc in `dev-docs/`. W
 Internals:
 
 - `dev-docs/overseer/overseer.adoc` — Overseer: cluster state updates, ZkStateWriter, collection API message flow
+- `dev-docs/distributed-control-plane-experiments.md` — distributed cluster processing contention and recovery experiment plan
 - `dev-docs/shard-split/shard-split.adoc` — SPLITSHARD: shard/replica states, tlog buffering during split
 - `dev-docs/distributed-update-internals.adoc` — SolrCloud update path: routing, `_version_`/optimistic concurrency, tlog durability, replication acks, shard terms (user-facing consistency model: ref-guide page `solrcloud-update-consistency.adoc`)
 - `dev-docs/plugins-modules-packages.adoc` — plugin/module/package concepts
