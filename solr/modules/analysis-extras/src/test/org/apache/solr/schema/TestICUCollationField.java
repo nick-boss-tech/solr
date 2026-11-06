@@ -23,7 +23,11 @@ import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Map;
 import org.apache.lucene.analysis.util.FilesystemResourceLoader;
+import org.apache.lucene.index.DocValuesType;
+import org.apache.lucene.index.IndexableField;
 import org.apache.lucene.util.ResourceLoader;
 import org.apache.solr.SolrTestCaseJ4;
 import org.junit.BeforeClass;
@@ -101,6 +105,51 @@ public class TestICUCollationField extends SolrTestCaseJ4 {
     assertEquals(tailoredCollator, readCollator);
 
     return tmpFile.toAbsolutePath().toString();
+  }
+
+  public void testIgnoredField() {
+    FieldType fieldType = h.getCore().getLatestSchema().getFieldType("sort_de");
+    for (boolean multiValued : new boolean[] {false, true}) {
+      SchemaField field =
+          SchemaField.create(
+              "ignored",
+              fieldType,
+              Map.of(
+                  "indexed", false,
+                  "stored", false,
+                  "docValues", false,
+                  "multiValued", multiValued));
+      assertFalse(field.indexed());
+      assertFalse(field.stored());
+      assertFalse(field.hasDocValues());
+      assertTrue(field.createFields("ignored").isEmpty());
+    }
+  }
+
+  public void testDocValuesOnlyField() {
+    FieldType fieldType = h.getCore().getLatestSchema().getFieldType("sort_de");
+    for (boolean multiValued : new boolean[] {false, true}) {
+      SchemaField field =
+          SchemaField.create(
+              "dv_only",
+              fieldType,
+              Map.of(
+                  "indexed", false,
+                  "stored", false,
+                  "docValues", true,
+                  "multiValued", multiValued));
+      List<IndexableField> docValues =
+          field.createFields("value").stream()
+              .filter(f -> f != null && f.fieldType().docValuesType() != DocValuesType.NONE)
+              .toList();
+      assertEquals(1, docValues.size());
+      IndexableField docValue = docValues.get(0);
+      assertEquals(
+          multiValued ? DocValuesType.SORTED_SET : DocValuesType.SORTED,
+          docValue.fieldType().docValuesType());
+      assertEquals(field.getName(), docValue.name());
+      assertTrue(docValue.binaryValue().length > 0);
+    }
   }
 
   /**

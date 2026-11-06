@@ -688,7 +688,7 @@ public class TrieField extends NumericFieldType {
 
       return fields;
     } else {
-      return List.of(createField(sf, value));
+      return super.createFields(sf, value);
     }
   }
 

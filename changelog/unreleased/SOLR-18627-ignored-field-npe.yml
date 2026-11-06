@@ -1,8 +1,8 @@
-title: Indexing a document that contains an ignored field no longer fails with a NullPointerException.
+title: Ignored string, boolean, binary, sortable text, collation, and legacy Trie fields no longer cause a NullPointerException when indexing documents.
 type: fixed
 authors:
   - name: Li Enlai
-    nick: linslee75
+  - name: Nick Shanin
 links:
   - name: SOLR-18627
     url: https://issues.apache.org/jira/browse/SOLR-18627

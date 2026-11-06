@@ -332,7 +332,7 @@ public class ICUCollationField extends FieldType {
       }
       return fields;
     } else {
-      return List.of(createField(field, value));
+      return super.createFields(field, value);
     }
   }
 
