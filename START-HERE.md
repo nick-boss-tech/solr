@@ -1,3 +1,7 @@
+# Board transition notice
+
+Nick directed a fresh `coordination-v2` board. The switch becomes effective when `reports/coordination-v2-cutover-2026-11-06.md` exists on this branch. Until then, the existing `coordination-ui` instructions below remain live. After that record exists, use `coordination-v2` for new assignments and read its `START-HERE.md` and `WORKFLOW.md`; the instructions below describe the historical board. Preserve this branch and consult it for old records and late-write reconciliation. Do not automatically duplicate existing jobs or gates.
+
 # Start here
 
 This board coordinates Nick Shanin's Solr factory. Its mission, set 2026-10-23: help the new Admin UI effort (Christos Malliaridis's Kotlin/Compose UI, the `ui/` module in apache/solr), keep the follow-ups on Nick's open PRs moving, and work from today's signals rather than the backlog.
