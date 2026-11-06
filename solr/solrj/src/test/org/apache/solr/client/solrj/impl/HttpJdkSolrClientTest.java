@@ -652,8 +652,8 @@ public class HttpJdkSolrClientTest extends HttpSolrClientTestBase {
           h2cClient.headSucceededByBaseUri.containsValue(Boolean.TRUE));
       addDocument(http1Client, "http1-first");
 
-      // JDK 21 and 25 default to expiring idle HTTP connections after 30 seconds.
-      TimeUnit.SECONDS.sleep(35);
+      // The gate sets the JDK keepalive timeout to one second; default to 30 seconds otherwise.
+      TimeUnit.SECONDS.sleep(httpClientKeepAliveTimeoutSeconds() + 2);
 
       // Keep an HTTP/1.1 control beside the h2c case from the mailing-list report.
       addDocument(http1Client, "http1-after-idle");
@@ -665,6 +665,18 @@ public class HttpJdkSolrClientTest extends HttpSolrClientTestBase {
     SolrInputDocument document = new SolrInputDocument();
     document.addField("id", id);
     client.add(DEFAULT_COLLECTION, document);
+  }
+
+  private long httpClientKeepAliveTimeoutSeconds() {
+    String timeout =
+        System.getProperty(
+            "jdk.httpclient.keepalive.timeout.h2",
+            System.getProperty("jdk.httpclient.keepalive.timeout", "30"));
+    try {
+      return Long.parseLong(timeout);
+    } catch (NumberFormatException e) {
+      return 30;
+    }
   }
 
   @Test(timeout = 30000)
