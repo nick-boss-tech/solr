@@ -254,9 +254,7 @@ public class DeleteReplicaTest extends SolrCloudTestCase {
     request.setFollowAliases(false);
 
     SolrException e =
-        expectThrows(
-            SolrException.class,
-            () -> request.process(cluster.getSolrClient()));
+        expectThrows(SolrException.class, () -> request.process(cluster.getSolrClient()));
     assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, e.code());
     assertTrue(e.getMessage().contains("Could not find collection : " + aliasName));
     waitForState(
