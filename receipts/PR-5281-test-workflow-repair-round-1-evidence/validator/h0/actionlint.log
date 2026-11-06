@@ -1,4 +1,0 @@
-../../gates/logs/phone-agent-2/pr-5281-test-workflow-repair-round-1/validator/h0/pr-triage-test.yml:26:0: could not parse as YAML: could not find expected ':' [syntax-check]
-   |
-26 | python3 -m unittest discover -s dev-tools/scripts/tests -p test_pr_triage.py -v
-   | 

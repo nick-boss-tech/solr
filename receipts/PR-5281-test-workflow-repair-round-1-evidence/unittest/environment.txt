@@ -1,1 +1,0 @@
-environment: env -i PATH=/opt/manus/python/bin:/usr/local/bin:/usr/bin:/bin HOME=<empty-temp-home> LANG=C.UTF-8

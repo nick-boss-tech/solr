@@ -1,1 +1,0 @@
-command: actionlint -shellcheck /usr/bin/shellcheck .github/workflows/pr-triage-test.yml .github/workflows/pr-triage-llm.yml

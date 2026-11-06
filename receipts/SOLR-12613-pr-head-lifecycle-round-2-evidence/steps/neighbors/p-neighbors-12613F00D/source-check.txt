@@ -1,5 +1,0 @@
-started_utc=2026-11-05T21:22:23Z
-head=6b5d830132b941faa85856347099ade8b190be0e
-mode=clean
-checkout=/workspace/worktrees/solr-12613-lifecycle-round2-P
-status_before=<clean>

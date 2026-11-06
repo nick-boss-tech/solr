@@ -1,7 +1,0 @@
-{
-  "query_positive_executions": 18,
-  "query_mask_dropped_expected_failures": 6,
-  "backcompat_positive_method_executions": 10,
-  "backcompat_fixture_cases": 70,
-  "data_fault_expected_failures": 2
-}

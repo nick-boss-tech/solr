@@ -1,7 +1,0 @@
-restored_utc=2026-11-05T21:27:04Z
-head=b0e096ae19ad637107227e1bc04e951b9023a680
-appjs_f2_blob=d23e89b33a13eac833872a57f1b9d8ce10e82dea
-candidate_test_blob=d1ec6d38d0b5eb0e4fff712b17b9e1c8ebd54ee0
-status_after=
-tracked_tree_clean=yes
-appjs_matches_F2=yes

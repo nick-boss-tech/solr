@@ -1,3 +1,0 @@
-# Evidence safety scan
-
-The final pre-publication scan covered 140 staged text files across the evidence set, receipt and failure verdict. It found zero actual `Authorization:` / `Proxy-Authorization:` header lines, zero bearer-like values, and zero password/passwd/secret/token/API-key assignments; no text file was flagged. The staged Add Core screenshot was visually reviewed and shows only the UI failure state, with no credentials or private account data. Original run logs, XML, HTML, diffs and metadata are copied byte-for-byte as verified in [`source-copy-verification.txt`](source-copy-verification.txt); no evidence was redacted or rewritten.

@@ -1,9 +1,0 @@
-# Addendum to `claims/pool-phone-agent-2-gate-solr-18628-h2c-fail-before-round-1.md`
-
-This addendum supersedes the original claim's `SOLR_JAVA_HOME` runtime-selector reference. The exact H1 source at `gradle/testing/alternative-jdk-support.gradle:34-40` selects the alternative JVM from Gradle property `runtime.java.home` or environment variable `RUNTIME_JAVA_HOME`; lines 65-70 set each `Test` task's executable to that JVM. The correct test-step environment is therefore `RUNTIME_JAVA_HOME=/workspace/tools/jdk25/jdk-25.0.5+8`, while the guarded runner keeps Gradle on JDK 21 at `/usr/lib/jvm/java-21-openjdk-amd64`. The focused test step will pass `JAVA_TOOL_OPTIONS=-Djdk.httpclient.keepalive.timeout=1` and use `--no-daemon` to ensure a fresh Gradle process. The compile step will remain on JDK 21 without the alternative-runtime selector.
-
-The Temurin 25.0.5+8 installation is now verified at `/workspace/tools/jdk25/jdk-25.0.5+8`; its downloaded official Linux x64 asset matched SHA-256 `68982529869257d0ee6b824ec5aa270ff8b118bb438670da0b97ebdab178d7fb`, and `java -version`/`javac -version` report 25.0.5.
-
-Process note: at approximately `2026-11-06T17:21:42Z`, `./gradlew --version` was used only to verify wrapper and JVM versions. It ran outside the host lock, but executed no Gradle task and no test; the H1 worktree remains clean, no Gradle/test process remains, and a subsequent nonblocking lock check confirmed the host lock is free. This is recorded as a procedural deviation; all subsequent Gradle tasks will use `/workspace/gates/scripts/solr-gate-step.sh`, which holds the serialized host lock and resource guard.
-
-No 18628 compile or test task has run yet. The live fork remains at H1 `aebe1d8e9b0f226948e092f2610682c9c2596f27`; the test-only worktree is clean, and no source, PR, Jira, or comment changes have been made.

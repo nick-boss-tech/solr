@@ -1,3 +1,0 @@
-2026-11-06T05:00:46+00:00	before	inodes_free=741064/1868096	free_pct=39.6695	disk_free_bytes=44735799296
-2026-11-06T05:00:49+00:00	sample	inodes_free=741086/1868096	free_pct=39.6707	disk_free_bytes=44736028672
-2026-11-06T05:00:49+00:00	after rc=0	inodes_free=741086/1868096	free_pct=39.6707	disk_free_bytes=44736028672

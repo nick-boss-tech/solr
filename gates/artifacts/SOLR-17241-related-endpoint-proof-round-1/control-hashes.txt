@@ -1,2 +1,0 @@
-7a3e48192f160fc2f0e27a330e7c891c6b6f2504a6404e9328a14b06fbfe102c  solr/core/src/java/org/apache/solr/jersey/MediaTypeOverridingFilter.java
-78a99153f792f014d70125a8c5a4d990db075469ddd0f9993e162d1b8e0bbeba  solr/core/src/java/org/apache/solr/jersey/MessageBodyWriters.java

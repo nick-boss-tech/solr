@@ -1,5 +1,0 @@
-started_utc=2026-11-05T21:25:18Z
-head=b0e096ae19ad637107227e1bc04e951b9023a680
-mode=appjs-overlay
-checkout=/workspace/worktrees/solr-12613-lifecycle-round2-fail-before
-status_before= M solr/webapp/web/js/angular/app.js

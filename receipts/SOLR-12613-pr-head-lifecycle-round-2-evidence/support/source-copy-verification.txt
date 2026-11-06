@@ -1,3 +1,0 @@
-verified_utc=2026-11-05T21:40:48Z
-Copied original files under preflight/, tidy/, compile/, generation/, and steps/ are byte-identical to the local run record.
-Compressed run tar archives and their sidecar hashes were intentionally omitted; the individual logs, XML, commands, status, output, screenshot/HTML diagnostics, diffs, and resource traces remain.
