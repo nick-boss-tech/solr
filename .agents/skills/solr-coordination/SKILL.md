@@ -12,3 +12,5 @@ Resolve the requested work from its assignment, claims, gate and receipts, inclu
 For board writes follow the live board's add-only and concurrency rules, use its approved posting mechanism, and verify the posted content and reachable commit. A handoff is a board record, not just chat. Do not infer public PR or Jira posting permission from an internal assignment; follow the user's explicit direction and applicable standing authorization. Preserve the host's test restrictions.
 
 For this draft's cutover requirements, read [the migration plan](../../../MIGRATION.md). For Solr navigation, review, implementation or proof itself, use the relevant established workflow or skill; this coordination skill does not replace those procedures.
+
+For a project-neutral board example and the proposed Elephant-Goldfish relationship, read [the portable design](../../../docs/portable-board.md). A fresh-context review requires authorized delegation and independent context; do not report that review was performed when it was not. The board stores the resulting records, but does not itself provide independent review or enforce process locks.
