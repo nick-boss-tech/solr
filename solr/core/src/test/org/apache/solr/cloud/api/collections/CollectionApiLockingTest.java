@@ -17,6 +17,7 @@
 
 package org.apache.solr.cloud.api.collections;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -55,6 +56,7 @@ public class CollectionApiLockingTest extends SolrTestCaseJ4 {
                 new ZkDistributedCollectionLockFactory(zkClient, "/apiLockTestRoot"));
 
         monothreadedTests(apiLockFactory);
+        unknownShardLockTests(apiLockFactory);
         multithreadedTests(apiLockFactory);
         testCallingLockIdSubLocks(apiLockFactory);
       }
@@ -173,6 +175,72 @@ public class CollectionApiLockingTest extends SolrTestCaseJ4 {
 
     // Release remaining lock to allow the multithreaded locking to succeed
     replicaShard2Lock.release();
+  }
+
+  private void unknownShardLockTests(CollectionApiLockFactory apiLockFactory) {
+    for (CollectionParams.CollectionAction action :
+        List.of(
+            CollectionParams.CollectionAction.SPLITSHARD,
+            CollectionParams.CollectionAction.DELETEREPLICA)) {
+      for (boolean unknownFirst : List.of(true, false)) {
+        List<DistributedMultiLock> locks = new ArrayList<>();
+        try {
+          DistributedMultiLock first =
+              apiLockFactory.createCollectionApiLock(
+                  new AdminCmdContext(action),
+                  COLLECTION_NAME,
+                  unknownFirst ? null : SHARD1_NAME,
+                  null);
+          locks.add(first);
+          assertTrue("First command should acquire its lock", first.isAcquired());
+          DistributedMultiLock second =
+              apiLockFactory.createCollectionApiLock(
+                  new AdminCmdContext(action),
+                  COLLECTION_NAME,
+                  unknownFirst ? SHARD1_NAME : null,
+                  null);
+          locks.add(second);
+          assertFalse(
+              action + " without a shard must conflict with a command naming a real shard",
+              second.isAcquired());
+
+          DistributedMultiLock unrelated =
+              apiLockFactory.createCollectionApiLock(
+                  new AdminCmdContext(action), "otherCollection", SHARD1_NAME, null);
+          locks.add(unrelated);
+          assertTrue("Another collection must remain independent", unrelated.isAcquired());
+
+          first.release();
+          locks.remove(first);
+          assertTrue("Waiting command should acquire after release", second.isAcquired());
+        } finally {
+          for (DistributedMultiLock lock : locks) {
+            lock.release();
+          }
+        }
+      }
+
+      DistributedMultiLock parent =
+          apiLockFactory.createCollectionApiLock(
+              new AdminCmdContext(action), COLLECTION_NAME, null, null);
+      try {
+        assertTrue(parent.isAcquired());
+        DistributedMultiLock nested =
+            apiLockFactory.createCollectionApiLock(
+                new AdminCmdContext(CollectionParams.CollectionAction.ADDREPLICA)
+                    .withCallingLockId(parent.getLockId()),
+                COLLECTION_NAME,
+                SHARD1_NAME,
+                null);
+        try {
+          assertTrue("Nested command should reuse the collection lock", nested.isAcquired());
+        } finally {
+          nested.release();
+        }
+      } finally {
+        parent.release();
+      }
+    }
   }
 
   private void multithreadedTests(CollectionApiLockFactory apiLockingHelper) throws Exception {
