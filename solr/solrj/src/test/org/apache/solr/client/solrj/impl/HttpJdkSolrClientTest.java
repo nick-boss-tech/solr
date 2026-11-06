@@ -53,11 +53,13 @@ import org.apache.solr.client.solrj.response.JavaBinResponseParser;
 import org.apache.solr.client.solrj.response.ResponseParser;
 import org.apache.solr.client.solrj.response.SolrPingResponse;
 import org.apache.solr.client.solrj.response.XMLResponseParser;
+import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.params.CommonParams;
 import org.apache.solr.common.params.MapSolrParams;
 import org.apache.solr.common.util.ExecutorUtil;
 import org.apache.solr.util.ServletFixtures.DebugServlet;
 import org.junit.After;
+import org.junit.Assume;
 import org.junit.Test;
 
 public class HttpJdkSolrClientTest extends HttpSolrClientTestBase {
@@ -636,6 +638,33 @@ public class HttpJdkSolrClientTest extends HttpSolrClientTestBase {
         assertTrue(DebugServlet.headers.containsKey("content-type"));
       }
     }
+  }
+
+  @Test(timeout = 90000)
+  public void testStreamedUpdatesAfterIdleH2cConnectionExpires() throws Exception {
+    Assume.assumeFalse("This regression is specific to cleartext h2c", isSSLMode());
+    String url = solrTestRule.getBaseUrl();
+    try (HttpJdkSolrClient h2cClient = builder(url).build();
+        HttpJdkSolrClient http1Client = builder(url).useHttp1_1(true).build()) {
+      addDocument(h2cClient, "h2c-first");
+      assertTrue(
+          "The streamed h2c update should have completed a successful HEAD probe",
+          h2cClient.headSucceededByBaseUri.containsValue(Boolean.TRUE));
+      addDocument(http1Client, "http1-first");
+
+      // JDK 21 and 25 default to expiring idle HTTP connections after 30 seconds.
+      TimeUnit.SECONDS.sleep(35);
+
+      // Keep an HTTP/1.1 control beside the h2c case from the mailing-list report.
+      addDocument(http1Client, "http1-after-idle");
+      addDocument(h2cClient, "h2c-after-idle");
+    }
+  }
+
+  private void addDocument(HttpJdkSolrClient client, String id) throws Exception {
+    SolrInputDocument document = new SolrInputDocument();
+    document.addField("id", id);
+    client.add(DEFAULT_COLLECTION, document);
   }
 
   @Test(timeout = 30000)
