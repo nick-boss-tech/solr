@@ -1,0 +1,24 @@
+H1=aebe1d8e9b0f226948e092f2610682c9c2596f27
+parent=ac85e718803994d258c766e66d18831c5de24d3a
+subject=SOLR-18628: shorten idle reconnect reproduction
+commit_date=2026-11-06T03:08:11-05:00
+
+--- test file history ---
+aebe1d8e9b (HEAD, origin/solr-18628-submit) SOLR-18628: shorten idle reconnect reproduction
+ac85e71880 SOLR-18628: reproduce streamed h2c idle reconnect failure
+282346f941 SOLR-18312: HttpJdkSolrClient: Fix Thread Pool Starvation (#4655)
+aa9e3f1a78 SOLR-17707: HttpJdkSolrClient fix thread leak when async request fails (#4639)
+f43171e145 SolrJ: simplify ResponseParser.getContentType processing (#4528)
+8d3f995c6a SOLR-17968: HttpSolrClient as new base class (#3829)
+1af33ac699 SOLR-18164: Remove use of .singleton (#4222)
+6b82523c38 Migrate Solr tests from SolrJettyTestBase to using SolrJettyTestRule (#3947)
+
+--- production client history ---
+78862e7f54 SOLR-18351: remove ContentStream from SolrJ's client write path (#4811)
+282346f941 SOLR-18312: HttpJdkSolrClient: Fix Thread Pool Starvation (#4655)
+aa9e3f1a78 SOLR-17707: HttpJdkSolrClient fix thread leak when async request fails (#4639)
+f43171e145 SolrJ: simplify ResponseParser.getContentType processing (#4528)
+9b9ecbf312 SOLR-17810 :  Jetty & Jdk SolrClient requests should be recognized by rate limiter (#4282)
+8d3f995c6a SOLR-17968: HttpSolrClient as new base class (#3829)
+5d1149e128 SOLR-18065: ConcurrentUpdateBaseSolrClient: support for HttpJdkSolrClient (#4050)
+fbec447130 BIG: Move some SolrJ classes (#3889)

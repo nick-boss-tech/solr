@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.apache.solr.client.solrj.impl.HttpJdkSolrClientTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-11-06T17:27:29.206Z" hostname="0609f7968656" time="8.067">
+  <properties/>
+  <testcase name="testStreamedUpdatesAfterIdleH2cConnectionExpires" classname="org.apache.solr.client.solrj.impl.HttpJdkSolrClientTest" time="3.674"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Nov 06, 2026 10:27:29 AM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+1333 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/server/solr/configsets/_default/conf'
+1343 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-tmp/org.apache.solr.client.solrj.impl.HttpJdkSolrClientTest_18628C0DE-001/data-dir-1-001
+1355 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-1 for ERROR logs matching regex: ignore_exception
+1386 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=true
+1423 WARN  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+1423 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+1437 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+1733 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+1735 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+1740 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 25.0.5+8-LTS
+1748 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+1750 WARN  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@411b3389{/solr,/solr,b=file:///workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@2eecfed4{STOPPED}}. May not be supported in future releases.
+1759 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-cwd/
+1769 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@411b3389{/solr,/solr,b=file:///workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@2eecfed4{STARTED}}
+1772 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=35811}
+1776 ERROR (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+1776 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+1779 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT aebe1d8e9b0f226948e092f2610682c9c2596f27 [snapshot build, details omitted]
+1780 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+1780 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr
+1780 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-11-06T17:27:30.364475994Z
+1827 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-tmp/org.apache.solr.client.solrj.impl.HttpJdkSolrClientTest_18628C0DE-001/tempDir-001 (source: servlet config: solr.solr.home)
+1837 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.c.SolrXmlConfig solr.xml not found in SOLR_HOME, using built-in default
+1838 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/server/solr/solr.xml
+1926 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+1933 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+2907 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.c.CoreContainer Allowing use of paths: [/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/server/solr]
+3265 WARN  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+3420 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-tmp/org.apache.solr.client.solrj.impl.HttpJdkSolrClientTest_18628C0DE-001/tempDir-001
+3947 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@411b3389{/solr,/solr,b=file:///workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@2eecfed4{STARTED}}
+3951 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@4e568956{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:35811}
+3953 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.s.Server Started oejs.Server@303821cf{STARTING}[12.1.14,sto=0] @2216ms
+3958 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#35811
+4335 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.rest.schema.analysis.ManagedWordSetResource for path /schema/analysis/stopwords/english
+4336 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.rest.schema.analysis.ManagedSynonymGraphFilterFactory$SynonymManager for path /schema/analysis/synonyms/english
+4337 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.RestManager Added observer of type org.apache.solr.rest.schema.analysis.ManagedStopFilterFactory to existing ManagedResource /schema/analysis/stopwords/english
+4337 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.RestManager Added observer of type org.apache.solr.rest.schema.analysis.ManagedSynonymGraphFilterFactory to existing ManagedResource /schema/analysis/synonyms/english
+4345 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.s.IndexSchema Loaded schema example/1.7 with uniqueid field id
+4374 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/server/solr/configsets/sample_techproducts_configs
+4402 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-tmp/org.apache.solr.client.solrj.impl.HttpJdkSolrClientTest_18628C0DE-001/tempDir-001/collection1], dataDir=[/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-tmp/org.apache.solr.client.solrj.impl.HttpJdkSolrClientTest_18628C0DE-001/tempDir-001/collection1/data/]
+4710 WARN  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.D.s.PingRequestHandler Solr loaded a deprecated plugin/analysis class [solr.PingRequestHandler]. Please consult documentation how to replace it accordingly.
+4917 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+4919 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+4919 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 3000ms; 
+4970 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/server/solr/configsets/sample_techproducts_configs/conf
+4972 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.ManagedResourceStorage Loaded LinkedHashMap at path _rest_managed.json using file:dir=/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/server/solr/configsets/sample_techproducts_configs/conf
+4972 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.ManagedResource Loaded initArgs {} for /rest/managed
+4973 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.ManagedResourceStorage Loaded LinkedHashMap at path _schema_analysis_stopwords_english.json using file:dir=/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/server/solr/configsets/sample_techproducts_configs/conf
+4973 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.ManagedResource Loaded initArgs {ignoreCase=true} for /schema/analysis/stopwords/english
+4974 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.s.a.ManagedWordSetResource Loaded 35 words for /schema/analysis/stopwords/english
+4974 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.ManagedResource Notified 2 observers of /schema/analysis/stopwords/english
+4975 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.ManagedResourceStorage Loaded LinkedHashMap at path _schema_analysis_synonyms_english.json using file:dir=/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/server/solr/configsets/sample_techproducts_configs/conf
+4975 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.ManagedResource Loaded initArgs {ignoreCase=true, format=solr} for /schema/analysis/synonyms/english
+4975 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.s.a.ManagedSynonymGraphFilterFactory Loaded 3 synonym mappings for /schema/analysis/synonyms/english
+4977 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.ManagedResource Notified 2 observers of /schema/analysis/synonyms/english
+4993 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.h.c.SuggestComponent Initializing SuggestComponent
+4995 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.s.s.SolrSuggester init: {name=mySuggester, lookupImpl=FuzzyLookupFactory, dictionaryImpl=DocumentDictionaryFactory, field=cat, weightField=price, suggestAnalyzerFieldType=string, buildOnStartup=false}
+5004 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.s.s.SolrSuggester Dictionary loaded with params: {name=mySuggester, lookupImpl=FuzzyLookupFactory, dictionaryImpl=DocumentDictionaryFactory, field=cat, weightField=price, suggestAnalyzerFieldType=string, buildOnStartup=false}
+5013 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+5025 INFO  (TEST-HttpJdkSolrClientTest.testStreamedUpdatesAfterIdleH2cConnectionExpires-seed#[18628C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ###Starting testStreamedUpdatesAfterIdleH2cConnectionExpires
+5072 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.S.Request path=null params={q=static+firstSearcher+warming+in+solrconfig.xml&distrib=false&event=firstSearcher} hits=0 status=0 QTime=55
+5073 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.QuerySenderListener QuerySenderListener done.
+5073 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+5073 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: wordbreak
+5077 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+5334 INFO  (qtp178818925-26-null-1) [ x:collection1 t:null-1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{} 0 22
+5334 ERROR (qtp178818925-26-null-1) [ x:collection1 t:null-1] o.a.s.h.RequestHandlerBase Client exception
+org.apache.solr.common.SolrException: missing content stream
+	at org.apache.solr.handler.ContentStreamHandlerBase.handleRequestBody(ContentStreamHandlerBase.java:94)
+	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:728)
+	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:519)
+	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+	at org.apache.solr.servlet.NodeTargetProxyFilter.doFilter(NodeTargetProxyFilter.java:114)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+5538 INFO  (qtp178818925-27-null-2) [ x:collection1 t:null-2] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[h2c-first (1881130720518209536)]} 0 183
+5552 INFO  (qtp178818925-29-null-3) [ x:collection1 t:null-3] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[http1-first (1881130720700661760)]} 0 2
+8561 INFO  (qtp178818925-28-null-4) [ x:collection1 t:null-4] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[http1-after-idle (1881130723854778368)]} 0 2
+8566 INFO  (qtp178818925-25-null-5) [ x:collection1 t:null-5] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{} 0 0
+8687 INFO  (TEST-HttpJdkSolrClientTest.testStreamedUpdatesAfterIdleH2cConnectionExpires-seed#[18628C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ###Ending testStreamedUpdatesAfterIdleH2cConnectionExpires
+8693 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-1 after muting 0 log messages
+8697 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.s.Server Stopped oejs.Server@303821cf{STOPPING}[12.1.14,sto=0]
+8698 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@4e568956{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+8700 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1899976729
+8702 INFO  (coreCloseExecutor-26-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@670b2d87 collection1
+8703 INFO  (coreCloseExecutor-26-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close() .
+8752 ERROR (commitScheduler-20-thread-1) [ x:collection1] o.a.s.u.CommitTracker auto commit error...
+org.apache.solr.common.SolrException: Error opening new searcher
+	at org.apache.solr.core.SolrCore.openNewSearcher(SolrCore.java:2451)
+	at org.apache.solr.core.SolrCore.getSearcher(SolrCore.java:2585)
+	at org.apache.solr.update.DirectUpdateHandler2.commit(DirectUpdateHandler2.java:893)
+	at org.apache.solr.update.CommitTracker.run(CommitTracker.java:280)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:309)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: org.apache.solr.common.SolrException: openNewSearcher called on closed core
+	at org.apache.solr.core.SolrCore.openNewSearcher(SolrCore.java:2438)
+	... 9 more
+పాండు 06, 2026 6:27:37 పి ఎమ్ io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+8793 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@411b3389{/solr,/solr,b=file:///workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@2eecfed4{STOPPED}}
+]]></system-err>
+</testsuite>

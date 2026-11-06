@@ -1,0 +1,1334 @@
+Picked up JAVA_TOOL_OPTIONS: -Djdk.httpclient.keepalive.timeout=1
+Initialized native services in: /workspace/gradle-home/native
+Initialized jansi services in: /workspace/gradle-home/native
+The current JVM process isn't compatible with build requirement. The maximum heap size is insufficient.
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.7.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Starting process 'Gradle build daemon'. Working directory: /workspace/gradle-home/daemon/9.7.0 Command: /usr/lib/jvm/java-21-openjdk-amd64/bin/java --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.prefs/java.util.prefs=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED --add-opens=java.base/java.nio.charset=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens=java.xml/javax.xml.namespace=ALL-UNNAMED --add-opens=java.base/java.time=ALL-UNNAMED -XX:ReservedCodeCacheSize=256m -XX:TieredStopAtLevel=1 -XX:+UseParallelGC -XX:ActiveProcessorCount=1 --add-exports jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -Xmx2g -Dfile.encoding=UTF-8 -Djava.io.tmpdir=/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/.gradle/tmp -Duser.country -Duser.language=en -Duser.variant -cp /workspace/gradle-home/wrapper/dists/gradle-9.7.0-bin/d4tj7w02tcgubx9zk9hbippn6/gradle-9.7.0/lib/gradle-daemon-server-9.7.0.jar -javaagent:/workspace/gradle-home/wrapper/dists/gradle-9.7.0-bin/d4tj7w02tcgubx9zk9hbippn6/gradle-9.7.0/lib/agents/gradle-instrumentation-agent-9.7.0.jar org.gradle.launcher.daemon.bootstrap.GradleDaemon 9.7.0
+Successfully started process 'Gradle build daemon'
+An attempt to start the daemon took 1.012 secs.
+The client will now receive all logging from the daemon (pid: 708664). The daemon log file: /workspace/gradle-home/daemon/9.7.0/daemon-708664.out.log
+Daemon will be stopped at the end of the build 
+Using 4 worker leases.
+Operational build model parameters: {cachingModelBuilding=false, configurationCache=false, configurationCacheDisabledReason=null, configurationCacheParallelLoad=false, configurationCacheParallelStore=false, configureOnDemand=false, invalidateCoupledProjects=false, isolatedProjects=false, isolatedProjectsDiagnostics=false, isolatedProjectsDangerouslyIgnoreProblems=false, modelAsProjectDependency=false, modelBuilding=false, parallelModelBuilding=false, parallelProjectConfiguration=false, parallelProjectExecution=true, vintage=true}
+Received JVM installation metadata from '/usr/lib/jvm/java-21-openjdk-amd64': {JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64, JAVA_VERSION=21.0.12.1, JAVA_VENDOR=Ubuntu, RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=21.0.12.1+1-1-24.04.4-Ubuntu, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=21.0.12.1+1-1-24.04.4-Ubuntu, VM_VENDOR=Ubuntu, OS_ARCH=amd64}
+Watching the file system is configured to be enabled if available
+Now considering [/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1] as hierarchies to watch
+File system watching is active
+Starting Build
+Now considering [/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/build-tools/build-infra, /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1] as hierarchies to watch
+Loaded state for lock with ID 'incomingCatalogForLibs0'
+Loaded state for lock with ID 'incomingCatalogForLibs0'
+
+> Configure project :build-infra
+Evaluating project ':build-infra' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/build-tools/build-infra/build.gradle'.
+Resolved plugin [id: 'java-gradle-plugin']
+Resolved plugin [id: 'com.diffplug.spotless', version: '8.10.0', apply: false]
+Resolved plugin [id: 'com.gradle.develocity', version: '4.2.2']
+Resolved plugin [id: 'com.gradle.common-custom-user-data-gradle-plugin', version: '2.4.0']
+Resolved plugin [id: 'com.autonomousapps.build-health', version: '3.16.0']
+Settings evaluated using settings file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/settings.gradle'.
+Now considering [/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/build-tools/missing-doclet, /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/build-tools/build-infra, /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1] as hierarchies to watch
+Loaded state for lock with ID 'incomingCatalogForLibs0'
+Loaded state for lock with ID 'incomingCatalogForLibs0'
+Projects loaded. Root project using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/build.gradle'.
+Included projects: [root project 'solr-root', project ':platform', project ':solr', project ':solr:api', project ':solr:benchmark', project ':solr:core', project ':solr:cross-dc-manager', project ':solr:distribution', project ':solr:docker', project ':solr:documentation', project ':solr:example', project ':solr:modules', project ':solr:packaging', project ':solr:server', project ':solr:solr-ref-guide', project ':solr:solrj', project ':solr:solrj-jetty', project ':solr:solrj-streaming', project ':solr:solrj-zookeeper', project ':solr:test-framework', project ':solr:webapp', project ':solr:modules:analysis-extras', project ':solr:modules:clustering', project ':solr:modules:cross-dc', project ':solr:modules:cuvs', project ':solr:modules:extraction', project ':solr:modules:gcs-repository', project ':solr:modules:jwt-auth', project ':solr:modules:langid', project ':solr:modules:language-models', project ':solr:modules:ltr', project ':solr:modules:opentelemetry', project ':solr:modules:s3-repository', project ':solr:modules:scripting', project ':solr:modules:sql', project ':solr:webapp:js-client']
+AGP not on classpath; assuming non-Android project
+Loaded state for lock with ID 'incomingCatalogForLibs0'
+Loaded state for lock with ID 'incomingCatalogForLibs0'
+
+> Configure project :missing-doclet
+Evaluating project ':missing-doclet' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/build-tools/missing-doclet/build.gradle'.
+Resolved plugin [id: 'java-library']
+Resolved plugin [id: 'com.diffplug.spotless', version: '8.10.0', apply: false]
+Registering project ':missing-doclet' in composite build. Will substitute for module 'org.apache.solr.tools:missing-doclet'.
+Resolve mutations for :build-infra:compileJava (Thread[#64,Execution worker,5,main]) started.
+:build-infra:compileJava (Thread[#64,Execution worker,5,main]) started.
+
+> Configure project :
+Evaluating root project 'solr-root' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/build.gradle'.
+Resolved plugin [id: 'base']
+Resolved plugin [id: 'solr.build-infra']
+Resolved plugin [id: 'org.owasp.dependencycheck', version: '13.0.0']
+Resolved plugin [id: 'org.barfuin.gradle.jacocolog', version: '4.0.2', apply: false]
+Resolved plugin [id: 'io.github.ben-manes.versions', version: '0.61.0']
+Resolved plugin [id: 'nl.littlerobots.version-catalog-update', version: '1.1.1', apply: false]
+Resolved plugin [id: 'de.thetaphi.forbiddenapis', version: '3.10', apply: false]
+Resolved plugin [id: 'net.ltgt.errorprone', version: '5.1.1', apply: false]
+Resolved plugin [id: 'com.diffplug.spotless', version: '8.10.0', apply: false]
+Resolved plugin [id: 'com.github.node-gradle.node', version: '7.1.0', apply: false]
+Resolved plugin [id: 'org.openapi.generator', version: '7.25.0', apply: false]
+Resolved plugin [id: 'dev.logchange', version: '1.19.16']
+
+> Task :build-infra:compileJava
+Caching disabled for task ':build-infra:compileJava' because:
+  Build cache is disabled
+Task ':build-infra:compileJava' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+The input changes require a full rebuild for incremental task ':build-infra:compileJava'.
+Compilation mode: in-process compilation
+Full recompilation is required because no incremental change information is available. This is usually caused by clean builds or changing compiler arguments.
+Compiling with toolchain '/usr/lib/jvm/java-21-openjdk-amd64'.
+Compiling with JDK Java compiler API.
+Note: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/build-tools/build-infra/src/main/java/org/apache/lucene/gradle/Checksum.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Class dependency analysis for incremental compilation took 0.016 secs.
+Created classpath snapshot for incremental compilation in 0.507 secs.
+Resolve mutations for :build-infra:pluginDescriptors (Thread[#64,Execution worker,5,main]) started.
+:build-infra:pluginDescriptors (Thread[#64,Execution worker,5,main]) started.
+
+> Task :build-infra:pluginDescriptors
+Caching disabled for task ':build-infra:pluginDescriptors' because:
+  Build cache is disabled
+  Not worth caching
+Task ':build-infra:pluginDescriptors' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+Resolve mutations for :build-infra:processResources (Thread[#64,Execution worker,5,main]) started.
+:build-infra:processResources (Thread[#64,Execution worker,5,main]) started.
+
+> Task :build-infra:processResources
+Caching disabled for task ':build-infra:processResources' because:
+  Build cache is disabled
+  Not worth caching
+Task ':build-infra:processResources' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+file or directory '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/build-tools/build-infra/src/main/resources', not found
+Resolve mutations for :build-infra:classes (Thread[#64,Execution worker,5,main]) started.
+:build-infra:classes (Thread[#64,Execution worker,5,main]) started.
+
+> Task :build-infra:classes
+Skipping task ':build-infra:classes' as it has no actions.
+Resolve mutations for :build-infra:jar (Thread[#64,Execution worker,5,main]) started.
+:build-infra:jar (Thread[#64,Execution worker,5,main]) started.
+
+> Task :build-infra:jar
+Caching disabled for task ':build-infra:jar' because:
+  Build cache is disabled
+  Not worth caching
+Task ':build-infra:jar' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+
+> Configure project :
+Starting process 'command '/workspace/tools/jdk25/jdk-25.0.5+8/bin/java''. Working directory: /workspace/gradle-home/.tmp/tmp-jvm8889098515259451201probe Command: /workspace/tools/jdk25/jdk-25.0.5+8/bin/java -Xmx32m -Xms32m -cp . JavaProbe
+Successfully started process 'command '/workspace/tools/jdk25/jdk-25.0.5+8/bin/java''
+Received JVM installation metadata from '/workspace/tools/jdk25/jdk-25.0.5+8': {JAVA_HOME=/workspace/tools/jdk25/jdk-25.0.5+8, JAVA_VERSION=25.0.5, JAVA_VENDOR=Eclipse Adoptium, RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=25.0.5+8-LTS, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=25.0.5+8-LTS, VM_VENDOR=Eclipse Adoptium, OS_ARCH=amd64}
+Setting up :gradlewScriptsTweaked as no-output.
+Setting up :validateSourcePatterns as no-output.
+Setting up :platform:validateSourcePatterns as no-output.
+Setting up :solr:validateSourcePatterns as no-output.
+Setting up :solr:api:validateSourcePatterns as no-output.
+Setting up :solr:benchmark:validateSourcePatterns as no-output.
+Setting up :solr:core:validateSourcePatterns as no-output.
+Setting up :solr:cross-dc-manager:validateSourcePatterns as no-output.
+Setting up :solr:distribution:validateSourcePatterns as no-output.
+Setting up :solr:docker:validateSourcePatterns as no-output.
+Setting up :solr:documentation:validateSourcePatterns as no-output.
+Setting up :solr:example:validateSourcePatterns as no-output.
+Setting up :solr:modules:validateSourcePatterns as no-output.
+Setting up :solr:packaging:validateSourcePatterns as no-output.
+Setting up :solr:server:validateSourcePatterns as no-output.
+Setting up :solr:solr-ref-guide:validateSourcePatterns as no-output.
+Setting up :solr:solrj:validateSourcePatterns as no-output.
+Setting up :solr:solrj-jetty:validateSourcePatterns as no-output.
+Setting up :solr:solrj-streaming:validateSourcePatterns as no-output.
+Setting up :solr:solrj-zookeeper:validateSourcePatterns as no-output.
+Setting up :solr:test-framework:validateSourcePatterns as no-output.
+Setting up :solr:webapp:validateSourcePatterns as no-output.
+Setting up :solr:modules:analysis-extras:validateSourcePatterns as no-output.
+Setting up :solr:modules:clustering:validateSourcePatterns as no-output.
+Setting up :solr:modules:cross-dc:validateSourcePatterns as no-output.
+Setting up :solr:modules:cuvs:validateSourcePatterns as no-output.
+Setting up :solr:modules:extraction:validateSourcePatterns as no-output.
+Setting up :solr:modules:gcs-repository:validateSourcePatterns as no-output.
+Setting up :solr:modules:jwt-auth:validateSourcePatterns as no-output.
+Setting up :solr:modules:langid:validateSourcePatterns as no-output.
+Setting up :solr:modules:language-models:validateSourcePatterns as no-output.
+Setting up :solr:modules:ltr:validateSourcePatterns as no-output.
+Setting up :solr:modules:opentelemetry:validateSourcePatterns as no-output.
+Setting up :solr:modules:s3-repository:validateSourcePatterns as no-output.
+Setting up :solr:modules:scripting:validateSourcePatterns as no-output.
+Setting up :solr:modules:sql:validateSourcePatterns as no-output.
+Setting up :solr:webapp:js-client:validateSourcePatterns as no-output.
+
+> Configure project :solr
+Evaluating project ':solr' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/build.gradle'.
+
+> Configure project :solr:example
+Evaluating project ':solr:example' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/example/build.gradle'.
+
+> Configure project :solr:server
+Evaluating project ':solr:server' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/server/build.gradle'.
+Setting up :solr:server:ecjLintMain as no-output.
+Setting up :solr:server:ecjLintTest as no-output.
+Setting up :solr:server:ecjLint as no-output.
+Setting up :solr:server:validateLogCalls as no-output.
+You are running forbidden-apis in the Gradle Daemon; disabling classloading cache by default to work around resource leak.
+
+> Configure project :solr:core
+Evaluating project ':solr:core' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/core/build.gradle'.
+Setting up :solr:core:ecjLintMain as no-output.
+Setting up :solr:core:ecjLintTest as no-output.
+Setting up :solr:core:ecjLint as no-output.
+Setting up :solr:core:validateLogCalls as no-output.
+
+> Configure project :solr:api
+Evaluating project ':solr:api' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/api/build.gradle'.
+Resolved plugin [id: 'java-library']
+Resolved plugin [id: 'io.swagger.core.v3.swagger-gradle-plugin', version: '2.2.54']
+Resolved plugin [id: 'org.openapi.generator', version: '7.25.0']
+Setting up :solr:api:ecjLintMain as no-output.
+Setting up :solr:api:ecjLintTest as no-output.
+Setting up :solr:api:ecjLint as no-output.
+Setting up :solr:api:validateLogCalls as no-output.
+
+> Configure project :solr:solrj
+Evaluating project ':solr:solrj' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build.gradle'.
+Resolved plugin [id: 'org.openapi.generator', version: '7.25.0']
+Resolved plugin [id: 'com.diffplug.spotless', version: '8.10.0']
+Resolved plugin [id: 'java-library']
+Setting up :solr:solrj:ecjLintMain as no-output.
+Setting up :solr:solrj:ecjLintTest as no-output.
+Setting up :solr:solrj:ecjLint as no-output.
+Setting up :solr:solrj:validateLogCalls as no-output.
+
+> Configure project :platform
+Evaluating project ':platform' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/platform/build.gradle'.
+Resolved plugin [id: 'java-platform']
+
+> Configure project :solr:benchmark
+Evaluating project ':solr:benchmark' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/benchmark/build.gradle'.
+Resolved plugin [id: 'io.morethan.jmhreport', version: '0.9.6']
+Resolved plugin [id: 'java-library']
+Setting up :solr:benchmark:ecjLintMain as no-output.
+Setting up :solr:benchmark:ecjLintTest as no-output.
+Setting up :solr:benchmark:ecjLint as no-output.
+Setting up :solr:benchmark:validateLogCalls as no-output.
+
+> Configure project :solr:cross-dc-manager
+Evaluating project ':solr:cross-dc-manager' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/cross-dc-manager/build.gradle'.
+Setting up :solr:cross-dc-manager:ecjLintMain as no-output.
+Setting up :solr:cross-dc-manager:ecjLintTest as no-output.
+Setting up :solr:cross-dc-manager:ecjLint as no-output.
+Setting up :solr:cross-dc-manager:validateLogCalls as no-output.
+
+> Configure project :solr:docker
+Evaluating project ':solr:docker' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/docker/build.gradle'.
+
+> Configure project :solr:documentation
+Evaluating project ':solr:documentation' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/documentation/build.gradle'.
+
+> Configure project :solr:modules
+Evaluating project ':solr:modules' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/modules/build.gradle'.
+
+> Configure project :solr:packaging
+Evaluating project ':solr:packaging' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/packaging/build.gradle'.
+Resolved plugin [id: 'base']
+Resolved plugin [id: 'distribution']
+
+> Configure project :solr:solr-ref-guide
+Evaluating project ':solr:solr-ref-guide' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solr-ref-guide/build.gradle'.
+Setting up :solr:solr-ref-guide:ecjLintMain as no-output.
+Setting up :solr:solr-ref-guide:ecjLintTest as no-output.
+Setting up :solr:solr-ref-guide:ecjLint as no-output.
+Setting up :solr:solr-ref-guide:validateLogCalls as no-output.
+
+> Configure project :solr:solrj-jetty
+Evaluating project ':solr:solrj-jetty' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj-jetty/build.gradle'.
+Resolved plugin [id: 'java-library']
+Setting up :solr:solrj-jetty:ecjLintMain as no-output.
+Setting up :solr:solrj-jetty:ecjLintTest as no-output.
+Setting up :solr:solrj-jetty:ecjLint as no-output.
+Setting up :solr:solrj-jetty:validateLogCalls as no-output.
+
+> Configure project :solr:solrj-streaming
+Evaluating project ':solr:solrj-streaming' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj-streaming/build.gradle'.
+Setting up :solr:solrj-streaming:ecjLintMain as no-output.
+Setting up :solr:solrj-streaming:ecjLintTest as no-output.
+Setting up :solr:solrj-streaming:ecjLint as no-output.
+Setting up :solr:solrj-streaming:validateLogCalls as no-output.
+
+> Configure project :solr:solrj-zookeeper
+Evaluating project ':solr:solrj-zookeeper' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj-zookeeper/build.gradle'.
+Setting up :solr:solrj-zookeeper:ecjLintMain as no-output.
+Setting up :solr:solrj-zookeeper:ecjLintTest as no-output.
+Setting up :solr:solrj-zookeeper:ecjLint as no-output.
+Setting up :solr:solrj-zookeeper:validateLogCalls as no-output.
+
+> Configure project :solr:test-framework
+Evaluating project ':solr:test-framework' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/test-framework/build.gradle'.
+Setting up :solr:test-framework:ecjLintMain as no-output.
+Setting up :solr:test-framework:ecjLintTest as no-output.
+Setting up :solr:test-framework:ecjLint as no-output.
+Setting up :solr:test-framework:validateLogCalls as no-output.
+
+> Configure project :solr:webapp
+Evaluating project ':solr:webapp' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/webapp/build.gradle'.
+Resolved plugin [id: 'java']
+Resolved plugin [id: 'war']
+Setting up :solr:webapp:ecjLintMain as no-output.
+Setting up :solr:webapp:ecjLintTest as no-output.
+Setting up :solr:webapp:ecjLint as no-output.
+Setting up :solr:webapp:validateLogCalls as no-output.
+
+> Configure project :solr:modules:analysis-extras
+Evaluating project ':solr:modules:analysis-extras' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/modules/analysis-extras/build.gradle'.
+Setting up :solr:modules:analysis-extras:ecjLintMain as no-output.
+Setting up :solr:modules:analysis-extras:ecjLintTest as no-output.
+Setting up :solr:modules:analysis-extras:ecjLint as no-output.
+Setting up :solr:modules:analysis-extras:validateLogCalls as no-output.
+
+> Configure project :solr:distribution
+Evaluating project ':solr:distribution' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/distribution/build.gradle'.
+Resolved plugin [id: 'signing']
+
+> Configure project :solr:modules:clustering
+Evaluating project ':solr:modules:clustering' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/modules/clustering/build.gradle'.
+Setting up :solr:modules:clustering:ecjLintMain as no-output.
+Setting up :solr:modules:clustering:ecjLintTest as no-output.
+Setting up :solr:modules:clustering:ecjLint as no-output.
+Setting up :solr:modules:clustering:validateLogCalls as no-output.
+
+> Configure project :solr:modules:cross-dc
+Evaluating project ':solr:modules:cross-dc' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/modules/cross-dc/build.gradle'.
+Setting up :solr:modules:cross-dc:ecjLintMain as no-output.
+Setting up :solr:modules:cross-dc:ecjLintTest as no-output.
+Setting up :solr:modules:cross-dc:ecjLint as no-output.
+Setting up :solr:modules:cross-dc:validateLogCalls as no-output.
+
+> Configure project :solr:modules:cuvs
+Evaluating project ':solr:modules:cuvs' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/modules/cuvs/build.gradle'.
+Setting up :solr:modules:cuvs:ecjLintMain as no-output.
+Setting up :solr:modules:cuvs:ecjLintTest as no-output.
+Setting up :solr:modules:cuvs:ecjLint as no-output.
+Setting up :solr:modules:cuvs:validateLogCalls as no-output.
+
+> Configure project :solr:modules:extraction
+Evaluating project ':solr:modules:extraction' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/modules/extraction/build.gradle'.
+Setting up :solr:modules:extraction:ecjLintMain as no-output.
+Setting up :solr:modules:extraction:ecjLintTest as no-output.
+Setting up :solr:modules:extraction:ecjLint as no-output.
+Setting up :solr:modules:extraction:validateLogCalls as no-output.
+
+> Configure project :solr:modules:gcs-repository
+Evaluating project ':solr:modules:gcs-repository' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/modules/gcs-repository/build.gradle'.
+Setting up :solr:modules:gcs-repository:ecjLintMain as no-output.
+Setting up :solr:modules:gcs-repository:ecjLintTest as no-output.
+Setting up :solr:modules:gcs-repository:ecjLint as no-output.
+Setting up :solr:modules:gcs-repository:validateLogCalls as no-output.
+
+> Configure project :solr:modules:jwt-auth
+Evaluating project ':solr:modules:jwt-auth' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/modules/jwt-auth/build.gradle'.
+Setting up :solr:modules:jwt-auth:ecjLintMain as no-output.
+Setting up :solr:modules:jwt-auth:ecjLintTest as no-output.
+Setting up :solr:modules:jwt-auth:ecjLint as no-output.
+Setting up :solr:modules:jwt-auth:validateLogCalls as no-output.
+
+> Configure project :solr:modules:langid
+Evaluating project ':solr:modules:langid' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/modules/langid/build.gradle'.
+Setting up :solr:modules:langid:ecjLintMain as no-output.
+Setting up :solr:modules:langid:ecjLintTest as no-output.
+Setting up :solr:modules:langid:ecjLint as no-output.
+Setting up :solr:modules:langid:validateLogCalls as no-output.
+
+> Configure project :solr:modules:language-models
+Evaluating project ':solr:modules:language-models' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/modules/language-models/build.gradle'.
+Setting up :solr:modules:language-models:ecjLintMain as no-output.
+Setting up :solr:modules:language-models:ecjLintTest as no-output.
+Setting up :solr:modules:language-models:ecjLint as no-output.
+Setting up :solr:modules:language-models:validateLogCalls as no-output.
+
+> Configure project :solr:modules:ltr
+Evaluating project ':solr:modules:ltr' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/modules/ltr/build.gradle'.
+Setting up :solr:modules:ltr:ecjLintMain as no-output.
+Setting up :solr:modules:ltr:ecjLintTest as no-output.
+Setting up :solr:modules:ltr:ecjLint as no-output.
+Setting up :solr:modules:ltr:validateLogCalls as no-output.
+
+> Configure project :solr:modules:opentelemetry
+Evaluating project ':solr:modules:opentelemetry' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/modules/opentelemetry/build.gradle'.
+Setting up :solr:modules:opentelemetry:ecjLintMain as no-output.
+Setting up :solr:modules:opentelemetry:ecjLintTest as no-output.
+Setting up :solr:modules:opentelemetry:ecjLint as no-output.
+Setting up :solr:modules:opentelemetry:validateLogCalls as no-output.
+
+> Configure project :solr:modules:s3-repository
+Evaluating project ':solr:modules:s3-repository' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/modules/s3-repository/build.gradle'.
+Setting up :solr:modules:s3-repository:ecjLintMain as no-output.
+Setting up :solr:modules:s3-repository:ecjLintTest as no-output.
+Setting up :solr:modules:s3-repository:ecjLint as no-output.
+Setting up :solr:modules:s3-repository:validateLogCalls as no-output.
+
+> Configure project :solr:modules:scripting
+Evaluating project ':solr:modules:scripting' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/modules/scripting/build.gradle'.
+Setting up :solr:modules:scripting:ecjLintMain as no-output.
+Setting up :solr:modules:scripting:ecjLintTest as no-output.
+Setting up :solr:modules:scripting:ecjLint as no-output.
+Setting up :solr:modules:scripting:validateLogCalls as no-output.
+
+> Configure project :solr:modules:sql
+Evaluating project ':solr:modules:sql' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/modules/sql/build.gradle'.
+Setting up :solr:modules:sql:ecjLintMain as no-output.
+Setting up :solr:modules:sql:ecjLintTest as no-output.
+Setting up :solr:modules:sql:ecjLint as no-output.
+Setting up :solr:modules:sql:validateLogCalls as no-output.
+
+> Configure project :solr:webapp:js-client
+Evaluating project ':solr:webapp:js-client' using build file '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/webapp/js-client/build.gradle.kts'.
+Resolved plugin [id: 'base']
+Resolved plugin [id: 'com.github.node-gradle.node', version: '7.1.0']
+All projects evaluated.
+Task path ':solr:solrj:cleanTest' matched project ':solr:solrj'
+Task name matched 'cleanTest'
+Task path ':solr:solrj:test' matched project ':solr:solrj'
+Task name matched 'test'
+Selected primary task 'cleanTest' from project :solr:solrj
+Selected primary task 'test' from project :solr:solrj
+Loaded state for lock with ID 'compileClasspath'
+Loaded state for lock with ID 'compileClasspath'
+Loaded state for lock with ID 'testCompileClasspath'
+Loaded state for lock with ID 'testCompileClasspath'
+Loaded state for lock with ID 'testRuntimeClasspath'
+Loaded state for lock with ID 'testRuntimeClasspath'
+Loaded state for lock with ID 'annotationProcessor'
+Loaded state for lock with ID 'annotationProcessor'
+Loaded state for lock with ID 'compileClasspath'
+Loaded state for lock with ID 'compileClasspath'
+Loaded state for lock with ID 'annotationProcessor'
+Loaded state for lock with ID 'annotationProcessor'
+Loaded state for lock with ID 'compileClasspath'
+Loaded state for lock with ID 'compileClasspath'
+Loaded state for lock with ID 'annotationProcessor'
+Loaded state for lock with ID 'annotationProcessor'
+Loaded state for lock with ID 'openApiSpecFile'
+Loaded state for lock with ID 'openApiSpecFile'
+Loaded state for lock with ID 'openApiGeneratorExtra'
+Loaded state for lock with ID 'runtimeClasspath'
+Loaded state for lock with ID 'runtimeClasspath'
+Loaded state for lock with ID 'swaggerBuild'
+Loaded state for lock with ID 'swaggerBuild'
+Loaded state for lock with ID 'annotationProcessor'
+Loaded state for lock with ID 'annotationProcessor'
+Loaded state for lock with ID 'compileClasspath'
+Loaded state for lock with ID 'compileClasspath'
+Loaded state for lock with ID 'annotationProcessor'
+Loaded state for lock with ID 'annotationProcessor'
+Loaded state for lock with ID 'compileClasspath'
+Loaded state for lock with ID 'compileClasspath'
+Loaded state for lock with ID 'annotationProcessor'
+Loaded state for lock with ID 'annotationProcessor'
+Loaded state for lock with ID 'compileClasspath'
+Loaded state for lock with ID 'compileClasspath'
+Loaded state for lock with ID 'testAnnotationProcessor'
+Loaded state for lock with ID 'testAnnotationProcessor'
+Loaded state for lock with ID 'annotationProcessor'
+Loaded state for lock with ID 'annotationProcessor'
+Loaded state for lock with ID 'compileClasspath'
+Loaded state for lock with ID 'compileClasspath'
+Tasks to be executed: [task ':solr:solrj:cleanTest', task ':gitStatus', task ':altJvmWarning', task ':errorProneSkipped', task ':solr:api:compileJava', task ':solr:api:processResources', task ':solr:api:classes', task ':solr:api:resolve', task ':solr:solrj:openApiGenerate', task ':solr:solrj:generatedSpotlessHelper', task ':solr:solrj:generatedSpotless', task ':solr:solrj:compileJava', task ':solr:solrj:processResources', task ':solr:solrj:classes', task ':solr:solrj:jar', task ':randomizationInfo', task ':solr:api:jar', task ':solr:solrj-jetty:compileJava', task ':solr:solrj-streaming:compileJava', task ':solr:solrj-zookeeper:compileJava', task ':solr:core:compileJava', task ':solr:core:processResources', task ':solr:core:classes', task ':solr:core:jar', task ':solr:test-framework:compileJava', task ':solr:solrj:compileTestJava', task ':solr:solrj:processTestResources', task ':solr:solrj:testClasses', task ':solr:solrj-jetty:processResources', task ':solr:solrj-jetty:classes', task ':solr:solrj-jetty:jar', task ':solr:solrj-streaming:processResources', task ':solr:solrj-streaming:classes', task ':solr:solrj-streaming:jar', task ':solr:solrj-zookeeper:processResources', task ':solr:solrj-zookeeper:classes', task ':solr:solrj-zookeeper:jar', task ':solr:test-framework:processResources', task ':solr:test-framework:classes', task ':solr:test-framework:jar', task ':solr:solrj:test', task ':solr:solrj:wipeTaskTemp']
+Tasks that were excluded: []
+Resolve mutations for :solr:solrj:cleanTest (Thread[#63,included builds,5,main]) started.
+Resolve mutations for :gitStatus (Thread[#66,Execution worker Thread 3,5,main]) started.
+:gitStatus (Thread[#66,Execution worker Thread 3,5,main]) started.
+:solr:solrj:cleanTest (Thread[#63,included builds,5,main]) started.
+destroyer locations for task group 0 (Thread[#64,Execution worker,5,main]) started.
+Resolve mutations for :solr:api:processResources (Thread[#64,Execution worker,5,main]) started.
+Resolve mutations for :solr:core:processResources (Thread[#65,Execution worker Thread 2,5,main]) started.
+:solr:api:processResources (Thread[#65,Execution worker Thread 2,5,main]) started.
+:solr:core:processResources (Thread[#64,Execution worker,5,main]) started.
+
+> Task :solr:solrj:cleanTest UP-TO-DATE
+Caching disabled for task ':solr:solrj:cleanTest' because:
+  Build cache is disabled
+Task ':solr:solrj:cleanTest' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :solr:solrj:processResources (Thread[#63,included builds,5,main]) started.
+:solr:solrj:processResources (Thread[#63,included builds,5,main]) started.
+
+> Task :solr:api:processResources NO-SOURCE
+Skipping task ':solr:api:processResources' as it has no source files and no previous output files.
+Resolve mutations for :solr:solrj-jetty:processResources (Thread[#65,Execution worker Thread 2,5,main]) started.
+:solr:solrj-jetty:processResources (Thread[#65,Execution worker Thread 2,5,main]) started.
+
+> Task :solr:solrj-jetty:processResources NO-SOURCE
+Skipping task ':solr:solrj-jetty:processResources' as it has no source files and no previous output files.
+Resolve mutations for :solr:solrj-streaming:processResources (Thread[#65,Execution worker Thread 2,5,main]) started.
+:solr:solrj-streaming:processResources (Thread[#65,Execution worker Thread 2,5,main]) started.
+
+> Task :solr:solrj-streaming:processResources
+Caching disabled for task ':solr:solrj-streaming:processResources' because:
+  Build cache is disabled
+  Not worth caching
+Task ':solr:solrj-streaming:processResources' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+Resolve mutations for :solr:solrj-zookeeper:processResources (Thread[#65,Execution worker Thread 2,5,main]) started.
+
+> Task :solr:solrj:processResources
+Caching disabled for task ':solr:solrj:processResources' because:
+  Build cache is disabled
+  Not worth caching
+Task ':solr:solrj:processResources' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+Resolve mutations for :solr:solrj:processTestResources (Thread[#63,included builds,5,main]) started.
+:solr:solrj-zookeeper:processResources (Thread[#65,Execution worker Thread 2,5,main]) started.
+:solr:solrj:processTestResources (Thread[#63,included builds,5,main]) started.
+
+> Task :solr:core:processResources
+Caching disabled for task ':solr:core:processResources' because:
+  Build cache is disabled
+  Not worth caching
+Task ':solr:core:processResources' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+Resolve mutations for :solr:test-framework:processResources (Thread[#64,Execution worker,5,main]) started.
+:solr:test-framework:processResources (Thread[#64,Execution worker,5,main]) started.
+
+> Task :gitStatus
+Caching disabled for task ':gitStatus' because:
+  Build cache is disabled
+Task ':gitStatus' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :altJvmWarning (Thread[#66,Execution worker Thread 3,5,main]) started.
+:altJvmWarning (Thread[#66,Execution worker Thread 3,5,main]) started.
+
+> Task :solr:test-framework:processResources
+Caching disabled for task ':solr:test-framework:processResources' because:
+  Build cache is disabled
+  Not worth caching
+Task ':solr:test-framework:processResources' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+
+> Task :altJvmWarning
+Caching disabled for task ':altJvmWarning' because:
+  Build cache is disabled
+Task ':altJvmWarning' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+NOTE: Alternative java toolchain will be used for compilation and tests:
+  Project will use 25 (Eclipse Temurin JDK 25 (25.0.5+8-LTS) 25.0.5+8-LTS, home at: /workspace/tools/jdk25/jdk-25.0.5+8)
+  Gradle runs with 21 (Ubuntu JDK 21 (21.0.12.1+1-1-24.04.4-Ubuntu) 21.0.12.1+1-1-24.04.4-Ubuntu, home at: /usr/lib/jvm/java-21-openjdk-amd64)
+
+Resolve mutations for :errorProneSkipped (Thread[#66,Execution worker Thread 3,5,main]) started.
+:errorProneSkipped (Thread[#66,Execution worker Thread 3,5,main]) started.
+
+> Task :errorProneSkipped
+Caching disabled for task ':errorProneSkipped' because:
+  Build cache is disabled
+Task ':errorProneSkipped' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+WARNING: errorprone disabled (skipped on builds not running inside CI environments, pass -Pvalidation.errorprone=true to enable)
+Resolve mutations for :solr:api:compileJava (Thread[#66,Execution worker Thread 3,5,main]) started.
+Resolve mutations for :randomizationInfo (Thread[#64,Execution worker,5,main]) started.
+:randomizationInfo (Thread[#64,Execution worker,5,main]) started.
+:solr:api:compileJava (Thread[#66,Execution worker Thread 3,5,main]) started.
+
+> Task :randomizationInfo
+Caching disabled for task ':randomizationInfo' because:
+  Build cache is disabled
+Task ':randomizationInfo' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Running tests with randomization seed: tests.seed=18628C0DE
+
+> Task :solr:solrj-zookeeper:processResources NO-SOURCE
+Skipping task ':solr:solrj-zookeeper:processResources' as it has no source files and no previous output files.
+
+> Task :solr:solrj:processTestResources
+Caching disabled for task ':solr:solrj:processTestResources' because:
+  Build cache is disabled
+  Not worth caching
+Task ':solr:solrj:processTestResources' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+
+> Task :solr:api:compileJava
+Caching disabled for task ':solr:api:compileJava' because:
+  Build cache is disabled
+Task ':solr:api:compileJava' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+The input changes require a full rebuild for incremental task ':solr:api:compileJava'.
+Compilation mode: command line compilation
+Full recompilation is required because no incremental change information is available. This is usually caused by clean builds or changing compiler arguments.
+Compiling with toolchain '/workspace/tools/jdk25/jdk-25.0.5+8'.
+Compiling with Java command line compiler '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac'.
+Starting process 'command '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac''. Working directory: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/api Command: /workspace/tools/jdk25/jdk-25.0.5+8/bin/javac -J-XX:+UseParallelGC -J-XX:TieredStopAtLevel=1 -J-XX:ActiveProcessorCount=1 @/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/api/build/tmp/compileJava/java-compiler-args.txt
+Successfully started process 'command '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac''
+Picked up JAVA_TOOL_OPTIONS: -Djdk.httpclient.keepalive.timeout=1
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Class dependency analysis for incremental compilation took 0.07 secs.
+Created classpath snapshot for incremental compilation in 0.001 secs.
+work action resolve main (project ':solr:api') (Thread[#66,Execution worker Thread 3,5,main]) started.
+Resolve mutations for :solr:api:classes (Thread[#66,Execution worker Thread 3,5,main]) started.
+:solr:api:classes (Thread[#66,Execution worker Thread 3,5,main]) started.
+
+> Task :solr:api:classes
+Skipping task ':solr:api:classes' as it has no actions.
+Resolve mutations for :solr:api:resolve (Thread[#66,Execution worker Thread 3,5,main]) started.
+:solr:api:resolve (Thread[#66,Execution worker Thread 3,5,main]) started.
+
+> Task :solr:api:resolve
+Caching disabled for task ':solr:api:resolve' because:
+  Build cache is disabled
+Task ':solr:api:resolve' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+Resolving OpenAPI specification..
+work action resolve solr-openapi-11.0.0-SNAPSHOT.json (project ':solr:api') (Thread[#66,Execution worker Thread 3,5,main]) started.
+Resolve mutations for :solr:solrj:openApiGenerate (Thread[#66,Execution worker Thread 3,5,main]) started.
+Resolve mutations for :solr:api:jar (Thread[#63,included builds,5,main]) started.
+:solr:solrj:openApiGenerate (Thread[#63,included builds,5,main]) started.
+:solr:api:jar (Thread[#64,Execution worker,5,main]) started.
+
+> Task :solr:api:jar
+Caching disabled for task ':solr:api:jar' because:
+  Build cache is disabled
+  Not worth caching
+Task ':solr:api:jar' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+file or directory '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/api/build/resources/main', not found
+work action resolve solr-api-11.0.0-SNAPSHOT.jar (project ':solr:api') (Thread[#64,Execution worker,5,main]) started.
+
+> Task :solr:solrj:openApiGenerate
+Caching disabled for task ':solr:solrj:openApiGenerate' because:
+  Build cache is disabled
+  Gradle does not know how file 'build/generated/src/main/java/org/apache/solr/client/solrj/request/ZookeeperReadApi.java' was created (output property 'outputDir'). Task output caching requires exclusive access to output paths to guarantee correctness (i.e. multiple tasks are not allowed to produce output in the same location).
+Task ':solr:solrj:openApiGenerate' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+Cleaned up output directory /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated before code generation.
+[openApiGenerate] Worker isolation: classloader (fast startup, but generator classes accumulate in Gradle daemon Metaspace - consider workerIsolation = "process" if you hit metaspace pressure)
+Generating with dryRun=false
+Output directory (/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated) does not exist, or is inaccessible. No file (.openapi-generator-ignore) will be evaluated.
+OpenAPI Generator: java (client)
+Generator 'java' is considered stable.
+Environment variable JAVA_POST_PROCESS_FILE not defined so the Java code may not be properly formatted. To define it, try 'export JAVA_POST_PROCESS_FILE="/usr/local/bin/clang-format -i"' (Linux/Mac)
+NOTE: To enable file post-processing, 'enablePostProcessFile' must be set to `true` (--enable-post-process-file for CLI).
+Invoker Package Name, originally not set, is now derived from api package name: org.apache.solr.client.solrj
+Inline schema created as FileListResponse_exception_cause_stackTrace_inner. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings FileListResponse_exception_cause_stackTrace_inner=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings FileListResponse_exception_cause_stackTrace_inner=NewModel,ModelA=NewModelA in CLI).
+Inline schema created as FileListResponse_exception_cause_suppressed_inner. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings FileListResponse_exception_cause_suppressed_inner=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings FileListResponse_exception_cause_suppressed_inner=NewModel,ModelA=NewModelA in CLI).
+Inline schema created as FileListResponse_exception_cause. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings FileListResponse_exception_cause=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings FileListResponse_exception_cause=NewModel,ModelA=NewModelA in CLI).
+Inline schema created as FileListResponse_exception. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings FileListResponse_exception=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings FileListResponse_exception=NewModel,ModelA=NewModelA in CLI).
+Processing operation addReplicaProperty
+Processing operation deleteReplicaProperty
+Processing operation getAliasProperty
+Processing operation createOrUpdateAliasProperty
+Processing operation deleteAliasProperty
+Processing operation getAllAliasProperties
+Processing operation updateAliasProperties
+Processing operation balanceReplicas
+Processing operation balanceShardUnique
+Processing operation deleteAllClusterCommandStatuses
+Processing operation getClusterCommandStatus
+Processing operation deleteClusterCommandStatus
+Processing operation getFile
+Processing operation uploadFile
+Processing operation deleteFile
+Processing operation fetchFile
+Processing operation getMetadata
+Processing operation syncFile
+Processing operation getClusterProperty
+Processing operation createOrUpdateClusterProperty
+Processing operation deleteClusterProperty
+Processing operation listClusterProperties
+Processing operation createOrUpdateNestedClusterProperty
+Processing operation createCollectionBackup
+Processing operation restoreCollection
+Processing operation getCollectionProperty
+Processing operation createOrUpdateCollectionProperty
+Processing operation deleteCollectionProperty
+Processing operation listCollectionProperties
+Processing operation createCollectionSnapshot
+Processing operation deleteCollectionSnapshot
+Processing operation listSnapshots
+Processing operation getCollectionStatus
+Processing operation deleteCollection
+Processing operation getConfig
+Processing operation getConfigComponent
+Processing operation getConfigComponentByName
+Processing operation getOverlay
+Processing operation getRequestHandler
+Processing operation getZnodeVersion
+Processing operation listConfigSet
+Processing operation cloneExistingConfigSet
+Processing operation uploadConfigSet
+Processing operation deleteConfigSet
+Processing operation downloadConfigSet
+Processing operation getConfigSetFile
+Processing operation uploadConfigSetFile
+Processing operation getAllCoreStatus
+Processing operation createCore
+Processing operation getCoreStatus
+Processing operation createSnapshot
+Processing operation deleteSnapshot
+Processing operation listSnapshots_1
+Processing operation getAliases
+Processing operation createAlias
+Processing operation listCollections
+Processing operation createCollection
+Processing operation createBackup
+Processing operation createReplica
+Processing operation deleteReplicasByCount
+Processing operation createShard
+Processing operation getAliasByName
+Processing operation deleteAlias
+Processing operation listBackupsAtLocation
+Processing operation deleteMultipleBackupsByRecency
+Processing operation deleteSingleBackupById
+Processing operation garbageCollectUnusedBackupFiles
+Processing operation deleteNode
+Processing operation deleteReplicaByName
+Processing operation deleteReplicasByCountAllShards
+Processing operation deleteShard
+Processing operation forceShardLeader
+Processing operation getCommandStatus
+Processing operation getPublicKey
+Processing operation getSchemaInfo
+Processing operation getSchemaName
+Processing operation getSchemaSimilarity
+Processing operation getSchemaUniqueKey
+Processing operation getSchemaVersion
+Processing operation getSchemaZkVersion
+Processing operation getDynamicFieldInfo
+Processing operation addDynamicField
+Processing operation deleteDynamicField
+Processing operation getFieldInfo
+Processing operation addField
+Processing operation deleteField
+Processing operation getFieldTypeInfo
+Processing operation addFieldType
+Processing operation deleteFieldType
+Processing operation listCopyFields
+Processing operation listDynamicFields
+Processing operation listSchemaFieldTypes
+Processing operation listSchemaFields
+Processing operation installCoreData
+Processing operation installShardData
+Processing operation listClusterNodes
+Processing operation mergeIndexes
+Processing operation getMetrics
+Processing operation migrateReplicas
+Processing operation healthcheck
+Processing operation fetchLocalLogMessages
+Processing operation listAllLoggersAndLevels
+Processing operation modifyLocalLogLevel
+Processing operation setMessageThreshold
+Processing operation getNodeProperties
+Processing operation getNodeProperty
+Processing operation getNodeSystemInfo
+Processing operation getThreadDump
+Processing operation getParamSet
+Processing operation listParamSets
+Processing operation reloadCollection
+Processing operation reloadCore
+Processing operation renameCollection
+Processing operation renameCore
+Processing operation replaceNode
+Processing operation fetchCommits
+Processing operation fetchFile_1
+Processing operation fetchFileList
+Processing operation fetchIndexVersion
+Processing operation fetchReplicationDetails
+Processing operation setReplicationEnabled
+Processing operation fetchRestoreStatus
+Processing operation setReplicationPolling
+Processing operation createBackup_1
+Processing operation restoreCore
+Processing operation getInfo
+Processing operation updateSchemaObject
+Processing operation addSchemaObject
+Processing operation cleanupTempSchema
+Processing operation analyze
+Processing operation getSampleValue
+Processing operation getSchemaDiff
+Processing operation listCollectionsForConfig
+Processing operation listDesignerConfigs
+Processing operation prepNewSchema
+Processing operation publish
+Processing operation query
+Processing operation updateFileContents
+Processing operation getSegmentData
+Processing operation query_1
+Processing operation jsonQuery
+Processing operation splitShard
+Processing operation swapCores
+Processing operation syncShard
+Processing operation getTaskStatus
+Processing operation cancelRunningTask
+Processing operation listAllActiveTasks
+Processing operation unloadCore
+Processing operation bulkSchemaModification
+Processing operation listNodes
+Processing operation readNode
+'host' (OAS 2.0) or 'servers' (OAS 3.0) not defined in the spec. Default to [http://localhost] for server URL [http://localhost/]
+File (reserved word) cannot be used as model name. Renamed to ModelFile
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/AliasPropertiesApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/AliasPropertiesApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/AliasPropertiesApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/AliasesApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/AliasesApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/AliasesApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/ClusterApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/ClusterApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/ClusterApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/ClusterPropertiesApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/ClusterPropertiesApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/ClusterPropertiesApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/CollectionBackupsApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/CollectionBackupsApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/CollectionBackupsApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/CollectionPropertiesApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/CollectionPropertiesApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/CollectionPropertiesApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/CollectionSnapshotsApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/CollectionSnapshotsApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/CollectionSnapshotsApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/CollectionsApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/CollectionsApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/CollectionsApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/ConfigApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/ConfigApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/ConfigApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/ConfigsetsApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/ConfigsetsApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/ConfigsetsApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/CoreBackupsApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/CoreBackupsApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/CoreBackupsApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/CoreSnapshotsApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/CoreSnapshotsApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/CoreSnapshotsApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/CoresApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/CoresApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/CoresApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/FileStoreApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/FileStoreApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/FileStoreApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/LoggingApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/LoggingApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/LoggingApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/MetricsApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/MetricsApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/MetricsApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/NodeApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/NodeApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/NodeApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/ParamSetsApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/ParamSetsApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/ParamSetsApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/QueryingApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/QueryingApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/QueryingApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/ReplicaPropertiesApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/ReplicaPropertiesApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/ReplicaPropertiesApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/ReplicasApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/ReplicasApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/ReplicasApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/ReplicationApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/ReplicationApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/ReplicationApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/ReplicationBackupsApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/ReplicationBackupsApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/ReplicationBackupsApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/SchemaApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/SchemaApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/SchemaApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/SchemaDesignerApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/SchemaDesignerApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/SchemaDesignerApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/SegmentsApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/SegmentsApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/SegmentsApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/ShardsApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/ShardsApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/ShardsApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/SystemApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/SystemApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/SystemApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/TasksApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/TasksApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/TasksApi.md (Skipped by apiDocs options supplied by user.)
+writing file /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/main/java/org/apache/solr/client/solrj/request/ZookeeperReadApi.java
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/src/test/java/org/apache/solr/client/solrj/request/ZookeeperReadApiTest.java (Skipped by apiTests options supplied by user.)
+Skipped /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated/docs/ZookeeperReadApi.md (Skipped by apiDocs options supplied by user.)
+Skipping generation of Webhooks.
+Skipping generation of supporting files.
+############################################################################################
+# Thanks for using OpenAPI Generator.                                                      #
+# We appreciate your support! Please consider donating to help us maintain this project.   #
+# https://opencollective.com/openapi_generator/donate                                      #
+############################################################################################
+Successfully generated code to /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/generated
+Resolve mutations for :solr:solrj:generatedSpotlessHelper (Thread[#63,included builds,5,main]) started.
+:solr:solrj:generatedSpotlessHelper (Thread[#63,included builds,5,main]) started.
+
+> Task :solr:solrj:generatedSpotlessHelper
+Caching disabled for task ':solr:solrj:generatedSpotlessHelper' because:
+  Build cache is disabled
+Task ':solr:solrj:generatedSpotlessHelper' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+The input changes require a full rebuild for incremental task ':solr:solrj:generatedSpotlessHelper'.
+Not incremental: removing prior outputs
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/AliasesApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/AliasPropertiesApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/ClusterApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/ClusterPropertiesApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/CollectionBackupsApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/CollectionPropertiesApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/CollectionsApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/CollectionSnapshotsApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/ConfigApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/ConfigsetsApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/CoreBackupsApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/CoresApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/CoreSnapshotsApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/FileStoreApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/LoggingApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/MetricsApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/NodeApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/ParamSetsApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/QueryingApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/ReplicaPropertiesApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/ReplicasApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/ReplicationApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/ReplicationBackupsApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/SchemaApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/SchemaDesignerApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/SegmentsApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/ShardsApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/SystemApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/TasksApi.java
+Writing clean file: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/spotless-clean/generatedSpotlessHelper/build/generated/src/main/java/org/apache/solr/client/solrj/request/ZookeeperReadApi.java
+Resolve mutations for :solr:solrj:generatedSpotless (Thread[#63,included builds,5,main]) started.
+:solr:solrj:generatedSpotless (Thread[#63,included builds,5,main]) started.
+
+> Task :solr:solrj:generatedSpotless
+Caching disabled for task ':solr:solrj:generatedSpotless' because:
+  Build cache is disabled
+Task ':solr:solrj:generatedSpotless' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :solr:solrj:compileJava (Thread[#63,included builds,5,main]) started.
+:solr:solrj:compileJava (Thread[#63,included builds,5,main]) started.
+
+> Task :solr:solrj:compileJava
+Caching disabled for task ':solr:solrj:compileJava' because:
+  Build cache is disabled
+Task ':solr:solrj:compileJava' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+The input changes require a full rebuild for incremental task ':solr:solrj:compileJava'.
+Compilation mode: command line compilation
+Full recompilation is required because no incremental change information is available. This is usually caused by clean builds or changing compiler arguments.
+Compiling with toolchain '/workspace/tools/jdk25/jdk-25.0.5+8'.
+Compiling with Java command line compiler '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac'.
+Starting process 'command '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac''. Working directory: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj Command: /workspace/tools/jdk25/jdk-25.0.5+8/bin/javac -J-XX:+UseParallelGC -J-XX:TieredStopAtLevel=1 -J-XX:ActiveProcessorCount=1 @/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/compileJava/java-compiler-args.txt
+Successfully started process 'command '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac''
+Picked up JAVA_TOOL_OPTIONS: -Djdk.httpclient.keepalive.timeout=1
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Class dependency analysis for incremental compilation took 0.24 secs.
+Created classpath snapshot for incremental compilation in 0.008 secs.
+work action resolve main (project ':solr:solrj') (Thread[#63,included builds,5,main]) started.
+Resolve mutations for :solr:solrj:classes (Thread[#63,included builds,5,main]) started.
+Resolve mutations for :solr:solrj-jetty:compileJava (Thread[#65,Execution worker Thread 2,5,main]) started.
+Resolve mutations for :solr:solrj-streaming:compileJava (Thread[#64,Execution worker,5,main]) started.
+Resolve mutations for :solr:solrj-zookeeper:compileJava (Thread[#66,Execution worker Thread 3,5,main]) started.
+:solr:solrj:classes (Thread[#63,included builds,5,main]) started.
+
+> Task :solr:solrj:classes
+Skipping task ':solr:solrj:classes' as it has no actions.
+Resolve mutations for :solr:solrj:jar (Thread[#65,Execution worker Thread 2,5,main]) started.
+:solr:solrj-jetty:compileJava (Thread[#63,included builds,5,main]) started.
+:solr:solrj-zookeeper:compileJava (Thread[#66,Execution worker Thread 3,5,main]) started.
+:solr:solrj:jar (Thread[#65,Execution worker Thread 2,5,main]) started.
+:solr:solrj-streaming:compileJava (Thread[#64,Execution worker,5,main]) started.
+
+> Task :solr:solrj:jar
+Caching disabled for task ':solr:solrj:jar' because:
+  Build cache is disabled
+  Not worth caching
+Task ':solr:solrj:jar' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+work action resolve solr-solrj-11.0.0-SNAPSHOT.jar (project ':solr:solrj') (Thread[#65,Execution worker Thread 2,5,main]) started.
+
+> Task :solr:solrj-jetty:compileJava
+Caching disabled for task ':solr:solrj-jetty:compileJava' because:
+  Build cache is disabled
+Task ':solr:solrj-jetty:compileJava' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+The input changes require a full rebuild for incremental task ':solr:solrj-jetty:compileJava'.
+Compilation mode: command line compilation
+Full recompilation is required because no incremental change information is available. This is usually caused by clean builds or changing compiler arguments.
+Compiling with toolchain '/workspace/tools/jdk25/jdk-25.0.5+8'.
+Compiling with Java command line compiler '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac'.
+Starting process 'command '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac''. Working directory: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj-jetty Command: /workspace/tools/jdk25/jdk-25.0.5+8/bin/javac -J-XX:+UseParallelGC -J-XX:TieredStopAtLevel=1 -J-XX:ActiveProcessorCount=1 @/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj-jetty/build/tmp/compileJava/java-compiler-args.txt
+Successfully started process 'command '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac''
+Picked up JAVA_TOOL_OPTIONS: -Djdk.httpclient.keepalive.timeout=1
+Note: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj-jetty/src/java/org/apache/solr/client/solrj/jetty/HttpJettySolrClient.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Class dependency analysis for incremental compilation took 0.008 secs.
+Created classpath snapshot for incremental compilation in 0.013 secs.
+work action resolve main (project ':solr:solrj-jetty') (Thread[#63,included builds,5,main]) started.
+Resolve mutations for :solr:solrj-jetty:classes (Thread[#63,included builds,5,main]) started.
+:solr:solrj-jetty:classes (Thread[#63,included builds,5,main]) started.
+
+> Task :solr:solrj-jetty:classes
+Skipping task ':solr:solrj-jetty:classes' as it has no actions.
+Resolve mutations for :solr:solrj-jetty:jar (Thread[#63,included builds,5,main]) started.
+:solr:solrj-jetty:jar (Thread[#63,included builds,5,main]) started.
+
+> Task :solr:solrj-jetty:jar
+Caching disabled for task ':solr:solrj-jetty:jar' because:
+  Build cache is disabled
+  Not worth caching
+Task ':solr:solrj-jetty:jar' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+file or directory '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj-jetty/build/resources/main', not found
+work action resolve solr-solrj-jetty-11.0.0-SNAPSHOT.jar (project ':solr:solrj-jetty') (Thread[#63,included builds,5,main]) started.
+
+> Task :solr:solrj-zookeeper:compileJava
+Caching disabled for task ':solr:solrj-zookeeper:compileJava' because:
+  Build cache is disabled
+Task ':solr:solrj-zookeeper:compileJava' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+The input changes require a full rebuild for incremental task ':solr:solrj-zookeeper:compileJava'.
+Compilation mode: command line compilation
+Full recompilation is required because no incremental change information is available. This is usually caused by clean builds or changing compiler arguments.
+Compiling with toolchain '/workspace/tools/jdk25/jdk-25.0.5+8'.
+Compiling with Java command line compiler '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac'.
+Starting process 'command '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac''. Working directory: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj-zookeeper Command: /workspace/tools/jdk25/jdk-25.0.5+8/bin/javac -J-XX:+UseParallelGC -J-XX:TieredStopAtLevel=1 -J-XX:ActiveProcessorCount=1 @/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj-zookeeper/build/tmp/compileJava/java-compiler-args.txt
+Successfully started process 'command '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac''
+Picked up JAVA_TOOL_OPTIONS: -Djdk.httpclient.keepalive.timeout=1
+Class dependency analysis for incremental compilation took 0.028 secs.
+Created classpath snapshot for incremental compilation in 0.043 secs.
+work action resolve main (project ':solr:solrj-zookeeper') (Thread[#66,Execution worker Thread 3,5,main]) started.
+Resolve mutations for :solr:solrj-zookeeper:classes (Thread[#66,Execution worker Thread 3,5,main]) started.
+:solr:solrj-zookeeper:classes (Thread[#66,Execution worker Thread 3,5,main]) started.
+
+> Task :solr:solrj-zookeeper:classes
+Skipping task ':solr:solrj-zookeeper:classes' as it has no actions.
+Resolve mutations for :solr:solrj-zookeeper:jar (Thread[#66,Execution worker Thread 3,5,main]) started.
+:solr:solrj-zookeeper:jar (Thread[#66,Execution worker Thread 3,5,main]) started.
+
+> Task :solr:solrj-streaming:compileJava
+Caching disabled for task ':solr:solrj-streaming:compileJava' because:
+  Build cache is disabled
+Task ':solr:solrj-streaming:compileJava' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+The input changes require a full rebuild for incremental task ':solr:solrj-streaming:compileJava'.
+Compilation mode: command line compilation
+Full recompilation is required because no incremental change information is available. This is usually caused by clean builds or changing compiler arguments.
+Compiling with toolchain '/workspace/tools/jdk25/jdk-25.0.5+8'.
+Compiling with Java command line compiler '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac'.
+Starting process 'command '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac''. Working directory: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj-streaming Command: /workspace/tools/jdk25/jdk-25.0.5+8/bin/javac -J-XX:+UseParallelGC -J-XX:TieredStopAtLevel=1 -J-XX:ActiveProcessorCount=1 @/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj-streaming/build/tmp/compileJava/java-compiler-args.txt
+Successfully started process 'command '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac''
+Picked up JAVA_TOOL_OPTIONS: -Djdk.httpclient.keepalive.timeout=1
+
+> Task :solr:solrj-zookeeper:jar
+Caching disabled for task ':solr:solrj-zookeeper:jar' because:
+  Build cache is disabled
+  Not worth caching
+Task ':solr:solrj-zookeeper:jar' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+file or directory '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj-zookeeper/build/resources/main', not found
+work action resolve solr-solrj-zookeeper-11.0.0-SNAPSHOT.jar (project ':solr:solrj-zookeeper') (Thread[#66,Execution worker Thread 3,5,main]) started.
+
+> Task :solr:solrj-streaming:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Class dependency analysis for incremental compilation took 0.106 secs.
+Created classpath snapshot for incremental compilation in 0.01 secs.
+work action resolve main (project ':solr:solrj-streaming') (Thread[#64,Execution worker,5,main]) started.
+Resolve mutations for :solr:core:compileJava (Thread[#64,Execution worker,5,main]) started.
+Resolve mutations for :solr:solrj-streaming:classes (Thread[#63,included builds,5,main]) started.
+:solr:solrj-streaming:classes (Thread[#63,included builds,5,main]) started.
+
+> Task :solr:solrj-streaming:classes
+Skipping task ':solr:solrj-streaming:classes' as it has no actions.
+Resolve mutations for :solr:solrj-streaming:jar (Thread[#63,included builds,5,main]) started.
+:solr:core:compileJava (Thread[#64,Execution worker,5,main]) started.
+:solr:solrj-streaming:jar (Thread[#63,included builds,5,main]) started.
+
+> Task :solr:solrj-streaming:jar
+Caching disabled for task ':solr:solrj-streaming:jar' because:
+  Build cache is disabled
+  Not worth caching
+Task ':solr:solrj-streaming:jar' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+work action resolve solr-solrj-streaming-11.0.0-SNAPSHOT.jar (project ':solr:solrj-streaming') (Thread[#63,included builds,5,main]) started.
+
+> Task :solr:core:compileJava
+Caching disabled for task ':solr:core:compileJava' because:
+  Build cache is disabled
+Task ':solr:core:compileJava' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+The input changes require a full rebuild for incremental task ':solr:core:compileJava'.
+Compilation mode: command line compilation
+Full recompilation is required because no incremental change information is available. This is usually caused by clean builds or changing compiler arguments.
+Compiling with toolchain '/workspace/tools/jdk25/jdk-25.0.5+8'.
+Compiling with Java command line compiler '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac'.
+Starting process 'command '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac''. Working directory: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/core Command: /workspace/tools/jdk25/jdk-25.0.5+8/bin/javac -J-XX:+UseParallelGC -J-XX:TieredStopAtLevel=1 -J-XX:ActiveProcessorCount=1 @/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/core/build/tmp/compileJava/java-compiler-args.txt
+Successfully started process 'command '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac''
+Picked up JAVA_TOOL_OPTIONS: -Djdk.httpclient.keepalive.timeout=1
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Class dependency analysis for incremental compilation took 0.616 secs.
+Created classpath snapshot for incremental compilation in 0.09 secs.
+work action resolve main (project ':solr:core') (Thread[#64,Execution worker,5,main]) started.
+Resolve mutations for :solr:core:classes (Thread[#64,Execution worker,5,main]) started.
+Resolve mutations for :solr:test-framework:compileJava (Thread[#63,included builds,5,main]) started.
+:solr:core:classes (Thread[#64,Execution worker,5,main]) started.
+
+> Task :solr:core:classes
+Skipping task ':solr:core:classes' as it has no actions.
+Resolve mutations for :solr:core:jar (Thread[#64,Execution worker,5,main]) started.
+:solr:test-framework:compileJava (Thread[#63,included builds,5,main]) started.
+:solr:core:jar (Thread[#64,Execution worker,5,main]) started.
+
+> Task :solr:core:jar
+Caching disabled for task ':solr:core:jar' because:
+  Build cache is disabled
+  Not worth caching
+Task ':solr:core:jar' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+work action resolve solr-core-11.0.0-SNAPSHOT.jar (project ':solr:core') (Thread[#64,Execution worker,5,main]) started.
+
+> Task :solr:test-framework:compileJava
+Caching disabled for task ':solr:test-framework:compileJava' because:
+  Build cache is disabled
+Task ':solr:test-framework:compileJava' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+The input changes require a full rebuild for incremental task ':solr:test-framework:compileJava'.
+Compilation mode: command line compilation
+Full recompilation is required because no incremental change information is available. This is usually caused by clean builds or changing compiler arguments.
+Compiling with toolchain '/workspace/tools/jdk25/jdk-25.0.5+8'.
+Compiling with Java command line compiler '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac'.
+Starting process 'command '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac''. Working directory: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/test-framework Command: /workspace/tools/jdk25/jdk-25.0.5+8/bin/javac -J-XX:+UseParallelGC -J-XX:TieredStopAtLevel=1 -J-XX:ActiveProcessorCount=1 @/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/test-framework/build/tmp/compileJava/java-compiler-args.txt
+Successfully started process 'command '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac''
+Picked up JAVA_TOOL_OPTIONS: -Djdk.httpclient.keepalive.timeout=1
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Class dependency analysis for incremental compilation took 0.06 secs.
+Created classpath snapshot for incremental compilation in 0.091 secs.
+work action resolve main (project ':solr:test-framework') (Thread[#63,included builds,5,main]) started.
+Resolve mutations for :solr:solrj:compileTestJava (Thread[#63,included builds,5,main]) started.
+Resolve mutations for :solr:test-framework:classes (Thread[#64,Execution worker,5,main]) started.
+:solr:test-framework:classes (Thread[#64,Execution worker,5,main]) started.
+
+> Task :solr:test-framework:classes
+Skipping task ':solr:test-framework:classes' as it has no actions.
+Resolve mutations for :solr:test-framework:jar (Thread[#64,Execution worker,5,main]) started.
+:solr:test-framework:jar (Thread[#64,Execution worker,5,main]) started.
+:solr:solrj:compileTestJava (Thread[#63,included builds,5,main]) started.
+
+> Task :solr:test-framework:jar
+Caching disabled for task ':solr:test-framework:jar' because:
+  Build cache is disabled
+  Not worth caching
+Task ':solr:test-framework:jar' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+work action resolve solr-test-framework-11.0.0-SNAPSHOT.jar (project ':solr:test-framework') (Thread[#64,Execution worker,5,main]) started.
+
+> Task :solr:solrj:compileTestJava
+Caching disabled for task ':solr:solrj:compileTestJava' because:
+  Build cache is disabled
+Task ':solr:solrj:compileTestJava' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+The input changes require a full rebuild for incremental task ':solr:solrj:compileTestJava'.
+Compilation mode: command line compilation
+Full recompilation is required because no incremental change information is available. This is usually caused by clean builds or changing compiler arguments.
+Compiling with toolchain '/workspace/tools/jdk25/jdk-25.0.5+8'.
+Compiling with Java command line compiler '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac'.
+Starting process 'command '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac''. Working directory: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj Command: /workspace/tools/jdk25/jdk-25.0.5+8/bin/javac -J-XX:+UseParallelGC -J-XX:TieredStopAtLevel=1 -J-XX:ActiveProcessorCount=1 @/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/compileTestJava/java-compiler-args.txt
+Successfully started process 'command '/workspace/tools/jdk25/jdk-25.0.5+8/bin/javac''
+Picked up JAVA_TOOL_OPTIONS: -Djdk.httpclient.keepalive.timeout=1
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Class dependency analysis for incremental compilation took 0.07 secs.
+Created classpath snapshot for incremental compilation in 0.039 secs.
+Resolve mutations for :solr:solrj:testClasses (Thread[#63,included builds,5,main]) started.
+:solr:solrj:testClasses (Thread[#63,included builds,5,main]) started.
+
+> Task :solr:solrj:testClasses
+Skipping task ':solr:solrj:testClasses' as it has no actions.
+Resolve mutations for :solr:solrj:test (Thread[#63,included builds,5,main]) started.
+:solr:solrj:test (Thread[#63,included builds,5,main]) started.
+Gradle Test Executor 1 started executing tests.
+
+> Task :solr:solrj:test
+Custom actions are attached to task ':solr:solrj:test'.
+Caching disabled for task ':solr:solrj:test' because:
+  Build cache is disabled
+Task ':solr:solrj:test' is not up-to-date because:
+  Executed with '--rerun-tasks'.
+Test folders for :solr:solrj: cwd=/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-cwd, tmp=/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-tmp
+Test report disabled, omitting generation of the HTML test report.
+Starting process 'Gradle Test Executor 1'. Working directory: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-cwd Command: /workspace/tools/jdk25/jdk-25.0.5+8/bin/java -Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom -Djava.util.logging.config.file=/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/gradle/testing/defaults-tests/logging.properties -Djdk.map.althashing.threshold=0 -Djetty.insecurerandom=1 -Djetty.testMode=1 -Djunit4.childvm.count=1 -Djunit4.childvm.id=0 -Dorg.gradle.internal.worker.tmpdir=/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/test/work -DtempDir=/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-tmp -Dtests.LUCENE_VERSION=10.4.0 -Dtests.asserts=true -Dtests.codec=random -Dtests.coverage=false -Dtests.directory=random -Dtests.docvaluesformat=random -Dtests.dups=0 -Dtests.failfast=false -Dtests.file.encoding=ISO-8859-1 -Dtests.haltonfailure=true -Dtests.heapsize=512m -Dtests.infostream=false -Dtests.jvmargs=-XX:TieredStopAtLevel=1 -XX:+UseParallelGC -XX:ActiveProcessorCount=1 -XX:ReservedCodeCacheSize=120m -Dtests.jvms=4 -Dtests.leaveTemporary=false -Dtests.linedocsfile=europarl.lines.txt.gz -Dtests.locale=random -Dtests.luceneMatchVersion=10.4.0 -Dtests.minheapsize=256m -Dtests.monster=false -Dtests.multiplier=1 -Dtests.neverUpToDate=true -Dtests.nightly=false -Dtests.postingsformat=random -Dtests.profile=false -Dtests.seed=18628C0DE -Dtests.selenium=false -Dtests.slowestSuites=true -Dtests.slowestTests=true -Dtests.timezone=random -Dtests.useSecurityManager=false -Dtests.verbose=false -Dtests.weekly=false -Dtests.workDir=build/tmp/tests-tmp -XX:TieredStopAtLevel=1 -XX:+UseParallelGC -XX:ActiveProcessorCount=1 -XX:ReservedCodeCacheSize=120m --add-modules jdk.incubator.vector --enable-native-access=ALL-UNNAMED -esa @/workspace/gradle-home/.tmp/gradle-worker-classpath6505833024238523769txt -Xms256m -Xmx512m -Dfile.encoding=UTF-8 -Djava.io.tmpdir=/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-tmp -Duser.country -Duser.language=en -Duser.variant -ea worker.org.gradle.process.internal.worker.GradleWorkerMain 'Gradle Test Executor 1'
+Successfully started process 'Gradle Test Executor 1'
+Picked up JAVA_TOOL_OPTIONS: -Djdk.httpclient.keepalive.timeout=1
+WARNING: Using incubator modules: jdk.incubator.vector
+
+HttpJdkSolrClientTest STANDARD_ERROR
+    Nov 06, 2026 10:27:29 AM org.apache.lucene.internal.vectorization.VectorizationProvider lookup
+    WARNING: C2 compiler is disabled; Java vector incubator API can't be enabled
+    1333 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.SolrTestCase Setting 'solr.configset.default.confdir' system property to test-framework derived value of '/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/server/solr/configsets/_default/conf'
+    1343 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Created dataDir: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-tmp/org.apache.solr.client.solrj.impl.HttpJdkSolrClientTest_18628C0DE-001/data-dir-1-001
+    1355 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.u.ErrorLogMuter Creating ErrorLogMuter-regex-1 for ERROR logs matching regex: ignore_exception
+    1386 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Using PointFields (NUMERIC_POINTS_SYSPROP=true) w/NUMERIC_DOCVALUES_SYSPROP=true
+    1423 WARN  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.u.r.ResourceFactory Leaked /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar for jar:file:///workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/test-framework/build/libs/solr-test-framework-11.0.0-SNAPSHOT.jar!/SSLTestConfig.hostname-and-ip-missmatch.keystore
+    1423 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.SolrTestCaseJ4 Randomized ssl (false) and clientAuth (false) via: @org.apache.solr.util.RandomizeSSL(reason="", value=0.0/0.0, ssl=0.0/0.0, clientAuth=0.0/0.0)
+    1437 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.SolrTestCaseJ4 SecureRandom sanity checks: test.solr.allowed.securerandom=null & java.security.egd=file:/dev/./urandom
+    1733 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.e.JettySolrRunner Start Jetty (configured port=0, binding port=0)
+    1735 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.e.JettySolrRunner Trying to start Jetty on port 0 try number 2 ...
+    1740 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.s.Server jetty-12.1.14; built: 2026-10-02T05:48:05.032Z; git: 15cecbd757a2f6b0fdc6a8944f4c6d0020b17da0; jvm 25.0.5+8-LTS
+    1748 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.s.DefaultSessionIdManager Session workerName=node0
+    1750 WARN  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.e.s.ServletContextHandler BaseResource file:///workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-cwd/./ is aliased to file:///workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-cwd/ in oeje10s.ServletContextHandler@411b3389{/solr,/solr,b=file:///workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-cwd/./,a=STOPPED,h=oeje10s.ServletHandler@2eecfed4{STOPPED}}. May not be supported in future releases.
+    1759 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.s.h.ContextHandler /solr Base Resource is an alias: file:///workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-cwd/./ -> file:///workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-cwd/
+    1769 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.s.h.ContextHandler Started oeje10s.ServletContextHandler@411b3389{/solr,/solr,b=file:///workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@2eecfed4{STARTED}}
+    1772 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.e.JettySolrRunner Jetty properties: {hostPort=35811}
+    1776 ERROR (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.u.StartupLoggingUtils Missing Java Option solr.logs.dir. Logging may be missing or incomplete.
+    1776 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.s.CoreContainerProvider Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+    1779 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.s.CoreContainerProvider  ___      _       Welcome to Apache Solr™ version 11.0.0-SNAPSHOT aebe1d8e9b0f226948e092f2610682c9c2596f27 [snapshot build, details omitted]
+    1780 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.s.CoreContainerProvider / __| ___| |_ _   Starting in standalone mode on port null
+    1780 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.s.CoreContainerProvider \__ \/ _ \ | '_|  Install dir: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr
+    1780 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.s.CoreContainerProvider |___/\___/_|_|    Start time: 2026-11-06T17:27:30.364475994Z
+    1827 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.s.CoreContainerProvider Solr Home: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-tmp/org.apache.solr.client.solrj.impl.HttpJdkSolrClientTest_18628C0DE-001/tempDir-001 (source: servlet config: solr.solr.home)
+    1837 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.c.SolrXmlConfig solr.xml not found in SOLR_HOME, using built-in default
+    1838 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.c.SolrXmlConfig Loading solr.xml from /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/server/solr/solr.xml
+    1926 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.c.OpenTelemetryConfigurator OpenTelemetry loaded with simple propagation only.
+    1933 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.m.OtelRuntimeJvmMetrics JVM metrics are disabled
+    2907 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.c.CoreContainer Allowing use of paths: [/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/server/solr]
+    3265 WARN  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+    3420 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-tmp/org.apache.solr.client.solrj.impl.HttpJdkSolrClientTest_18628C0DE-001/tempDir-001
+    3947 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.e.s.ServletContextHandler Started oeje10s.ServletContextHandler@411b3389{/solr,/solr,b=file:///workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-cwd/,a=AVAILABLE,h=oeje10s.ServletHandler@2eecfed4{STARTED}}
+    3951 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.s.AbstractConnector Started oejs.ServerConnector@4e568956{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:35811}
+    3953 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.s.Server Started oejs.Server@303821cf{STARTING}[12.1.14,sto=0] @2216ms
+    3958 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.u.SolrJettyTestRule Jetty Assigned Port#35811
+    4335 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.rest.schema.analysis.ManagedWordSetResource for path /schema/analysis/stopwords/english
+    4336 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.RestManager Registered ManagedResource impl org.apache.solr.rest.schema.analysis.ManagedSynonymGraphFilterFactory$SynonymManager for path /schema/analysis/synonyms/english
+    4337 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.RestManager Added observer of type org.apache.solr.rest.schema.analysis.ManagedStopFilterFactory to existing ManagedResource /schema/analysis/stopwords/english
+    4337 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.RestManager Added observer of type org.apache.solr.rest.schema.analysis.ManagedSynonymGraphFilterFactory to existing ManagedResource /schema/analysis/synonyms/english
+    4345 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.s.IndexSchema Loaded schema example/1.7 with uniqueid field id
+    4374 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.c.CoreContainer Creating SolrCore 'collection1' using configuration from configset /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/server/solr/configsets/sample_techproducts_configs
+    4402 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.c.SolrCore Opening new SolrCore at [/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-tmp/org.apache.solr.client.solrj.impl.HttpJdkSolrClientTest_18628C0DE-001/tempDir-001/collection1], dataDir=[/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-tmp/org.apache.solr.client.solrj.impl.HttpJdkSolrClientTest_18628C0DE-001/tempDir-001/collection1/data/]
+    4710 WARN  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.D.s.PingRequestHandler Solr loaded a deprecated plugin/analysis class [solr.PingRequestHandler]. Please consult documentation how to replace it accordingly.
+    4917 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10
+    4919 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+    4919 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.u.CommitTracker Soft AutoCommit: if uncommitted for 3000ms; 
+    4970 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/server/solr/configsets/sample_techproducts_configs/conf
+    4972 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.ManagedResourceStorage Loaded LinkedHashMap at path _rest_managed.json using file:dir=/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/server/solr/configsets/sample_techproducts_configs/conf
+    4972 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.ManagedResource Loaded initArgs {} for /rest/managed
+    4973 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.ManagedResourceStorage Loaded LinkedHashMap at path _schema_analysis_stopwords_english.json using file:dir=/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/server/solr/configsets/sample_techproducts_configs/conf
+    4973 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.ManagedResource Loaded initArgs {ignoreCase=true} for /schema/analysis/stopwords/english
+    4974 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.s.a.ManagedWordSetResource Loaded 35 words for /schema/analysis/stopwords/english
+    4974 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.ManagedResource Notified 2 observers of /schema/analysis/stopwords/english
+    4975 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.ManagedResourceStorage Loaded LinkedHashMap at path _schema_analysis_synonyms_english.json using file:dir=/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/server/solr/configsets/sample_techproducts_configs/conf
+    4975 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.ManagedResource Loaded initArgs {ignoreCase=true, format=solr} for /schema/analysis/synonyms/english
+    4975 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.s.a.ManagedSynonymGraphFilterFactory Loaded 3 synonym mappings for /schema/analysis/synonyms/english
+    4977 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.r.ManagedResource Notified 2 observers of /schema/analysis/synonyms/english
+    4993 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.h.c.SuggestComponent Initializing SuggestComponent
+    4995 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.s.s.SolrSuggester init: {name=mySuggester, lookupImpl=FuzzyLookupFactory, dictionaryImpl=DocumentDictionaryFactory, field=cat, weightField=price, suggestAnalyzerFieldType=string, buildOnStartup=false}
+    5004 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.s.s.SolrSuggester Dictionary loaded with params: {name=mySuggester, lookupImpl=FuzzyLookupFactory, dictionaryImpl=DocumentDictionaryFactory, field=cat, weightField=price, suggestAnalyzerFieldType=string, buildOnStartup=false}
+    5013 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [ x:collection1] o.a.s.h.ReplicationHandler Commits will be reserved for 10000 ms
+
+HttpJdkSolrClientTest > testStreamedUpdatesAfterIdleH2cConnectionExpires STANDARD_ERROR
+    5025 INFO  (TEST-HttpJdkSolrClientTest.testStreamedUpdatesAfterIdleH2cConnectionExpires-seed#[18628C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ###Starting testStreamedUpdatesAfterIdleH2cConnectionExpires
+    5072 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.S.Request path=null params={q=static+firstSearcher+warming+in+solrconfig.xml&distrib=false&event=firstSearcher} hits=0 status=0 QTime=55
+    5073 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.QuerySenderListener QuerySenderListener done.
+    5073 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+    5073 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: wordbreak
+    5077 INFO  (searcherExecutor-16-thread-1-processing-collection1) [ x:collection1] o.a.s.c.SolrCore Registered new searcher autowarm time: 0 ms
+    5334 INFO  (qtp178818925-26-null-1) [ x:collection1 t:null-1] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={}{} 0 22
+    5334 ERROR (qtp178818925-26-null-1) [ x:collection1 t:null-1] o.a.s.h.RequestHandlerBase Client exception
+    org.apache.solr.common.SolrException: missing content stream
+    	at org.apache.solr.handler.ContentStreamHandlerBase.handleRequestBody(ContentStreamHandlerBase.java:94)
+    	at org.apache.solr.handler.RequestHandlerBase.handleRequest(RequestHandlerBase.java:251)
+    	at org.apache.solr.core.SolrCore.execute(SolrCore.java:2893)
+    	at org.apache.solr.servlet.HttpSolrCall.executeCoreRequest(HttpSolrCall.java:728)
+    	at org.apache.solr.servlet.HttpSolrCall.call(HttpSolrCall.java:519)
+    	at org.apache.solr.servlet.SolrServlet.dispatch(SolrServlet.java:114)
+    	at org.apache.solr.servlet.SolrServlet.service(SolrServlet.java:90)
+    	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:723)
+    	at org.eclipse.jetty.ee10.servlet.ServletHolder.handle(ServletHolder.java:754)
+    	at org.eclipse.jetty.ee10.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1642)
+    	at org.apache.solr.servlet.NodeTargetProxyFilter.doFilter(NodeTargetProxyFilter.java:114)
+    	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+    	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+    	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+    	at org.apache.solr.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:79)
+    	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+    	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+    	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+    	at org.apache.solr.servlet.TracingFilter.doFilter(TracingFilter.java:55)
+    	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+    	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+    	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+    	at org.apache.solr.servlet.RateLimitFilter.doFilter(RateLimitFilter.java:50)
+    	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+    	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+    	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+    	at org.apache.solr.servlet.RequiredSolrRequestFilter.doFilter(RequiredSolrRequestFilter.java:79)
+    	at jakarta.servlet.http.HttpFilter.doFilter(HttpFilter.java:97)
+    	at org.eclipse.jetty.ee10.servlet.FilterHolder.doFilter(FilterHolder.java:205)
+    	at org.eclipse.jetty.ee10.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1601)
+    	at org.eclipse.jetty.ee10.servlet.ServletHandler$MappedServlet.handle(ServletHandler.java:1556)
+    	at org.eclipse.jetty.ee10.servlet.ServletChannel.dispatch(ServletChannel.java:871)
+    	at org.eclipse.jetty.ee10.servlet.ServletChannel.handle(ServletChannel.java:449)
+    	at org.eclipse.jetty.ee10.servlet.ServletHandler.handle(ServletHandler.java:469)
+    	at org.eclipse.jetty.server.handler.ContextHandler.handle(ContextHandler.java:1253)
+    	at org.eclipse.jetty.server.Handler$Wrapper.handle(Handler.java:794)
+    	at org.eclipse.jetty.rewrite.handler.RewriteHandler.handle(RewriteHandler.java:138)
+    	at org.eclipse.jetty.server.Server.handle(Server.java:197)
+    	at org.eclipse.jetty.server.internal.HttpChannelState$HandlerInvoker.run(HttpChannelState.java:804)
+    	at org.eclipse.jetty.http2.server.internal.HttpStreamOverHTTP2.lambda$onRequest$0(HttpStreamOverHTTP2.java:132)
+    	at org.eclipse.jetty.util.thread.Invocable$ReadyTask.run(Invocable.java:178)
+    	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:1009)
+    	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1240)
+    	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1194)
+    	at java.base/java.lang.Thread.run(Thread.java:1474)
+    5538 INFO  (qtp178818925-27-null-2) [ x:collection1 t:null-2] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[h2c-first (1881130720518209536)]} 0 183
+    5552 INFO  (qtp178818925-29-null-3) [ x:collection1 t:null-3] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[http1-first (1881130720700661760)]} 0 2
+    8561 INFO  (qtp178818925-28-null-4) [ x:collection1 t:null-4] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{add=[http1-after-idle (1881130723854778368)]} 0 2
+    8566 INFO  (qtp178818925-25-null-5) [ x:collection1 t:null-5] o.a.s.u.p.LogUpdateProcessorFactory path=/update params={wt=javabin}{} 0 0
+    8687 INFO  (TEST-HttpJdkSolrClientTest.testStreamedUpdatesAfterIdleH2cConnectionExpires-seed#[18628C0DE]-worker) [] o.a.s.SolrTestCaseJ4 ###Ending testStreamedUpdatesAfterIdleH2cConnectionExpires
+
+HttpJdkSolrClientTest STANDARD_ERROR
+    8693 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.u.ErrorLogMuter Closing ErrorLogMuter-regex-1 after muting 0 log messages
+    8697 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.s.Server Stopped oejs.Server@303821cf{STOPPING}[12.1.14,sto=0]
+    8698 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.s.AbstractConnector Stopped oejs.ServerConnector@4e568956{HTTP/1.1, (http/1.1, h2c)}{127.0.0.1:0}
+    8700 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.a.s.c.CoreContainer Shutting down CoreContainer instance=1899976729
+    8702 INFO  (coreCloseExecutor-26-thread-1) [ x:collection1] o.a.s.c.SolrCore CLOSING SolrCore org.apache.solr.core.SolrCore@670b2d87 collection1
+    8703 INFO  (coreCloseExecutor-26-thread-1) [ x:collection1] o.a.s.u.DirectUpdateHandler2 Committing on IndexWriter.close() .
+    8752 ERROR (commitScheduler-20-thread-1) [ x:collection1] o.a.s.u.CommitTracker auto commit error...
+    org.apache.solr.common.SolrException: Error opening new searcher
+    	at org.apache.solr.core.SolrCore.openNewSearcher(SolrCore.java:2451)
+    	at org.apache.solr.core.SolrCore.getSearcher(SolrCore.java:2585)
+    	at org.apache.solr.update.DirectUpdateHandler2.commit(DirectUpdateHandler2.java:893)
+    	at org.apache.solr.update.CommitTracker.run(CommitTracker.java:280)
+    	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+    	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328)
+    	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:309)
+    	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+    	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+    	at java.base/java.lang.Thread.run(Thread.java:1474)
+    Caused by: org.apache.solr.common.SolrException: openNewSearcher called on closed core
+    	at org.apache.solr.core.SolrCore.openNewSearcher(SolrCore.java:2438)
+    	... 9 more
+    పాండు 06, 2026 6:27:37 పి ఎమ్ io.opentelemetry.sdk.common.internal.ThrottlingLogger doLog
+    WARNING: CallbackRegistration{instrumentDescriptors=[InstrumentDescriptor{name=solr.client.request.async_permits, description=Outstanding async HTTP request permits in the Jetty SolrJ client (state=max: configured ceiling; state=available: currently unused permits)., unit=, type=OBSERVABLE_GAUGE, valueType=LONG, advice=Advice{explicitBucketBoundaries=null, attributes=null}}]} has called close() multiple times.
+    8793 INFO  (SUITE-HttpJdkSolrClientTest-seed#[18628C0DE]-worker) [] o.e.j.e.s.ServletContextHandler Stopped oeje10s.ServletContextHandler@411b3389{/solr,/solr,b=file:///workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/tmp/tests-cwd/./,a=AVAILABLE,h=oeje10s.ServletHandler@2eecfed4{STOPPED}}
+
+Gradle Test Executor 1 finished executing tests.
+
+> Task :solr:solrj:test
+:solr:solrj:test (SUCCESS): 1 test(s)
+Finished generating test XML results (0.033 secs) into: /workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1/solr/solrj/build/test-results/test
+Resolve mutations for :solr:solrj:wipeTaskTemp (Thread[#63,included builds,5,main]) started.
+:solr:solrj:wipeTaskTemp (Thread[#63,included builds,5,main]) started.
+
+> Task :solr:solrj:wipeTaskTemp
+Caching disabled for task ':solr:solrj:wipeTaskTemp' because:
+  Build cache is disabled
+Task ':solr:solrj:wipeTaskTemp' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+The slowest tests (exceeding 500 ms) during this run:
+   3.67s HttpJdkSolrClientTest.testStreamedUpdatesAfterIdleH2cConnectionExpires (:solr:solrj)
+The slowest suites (exceeding 1s) during this run:
+   8.18s HttpJdkSolrClientTest (:solr:solrj)
+
+BUILD SUCCESSFUL in 1m 25s
+35 actionable tasks: 34 executed, 1 up-to-date
+rc=0

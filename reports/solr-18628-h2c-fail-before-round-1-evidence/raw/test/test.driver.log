@@ -1,0 +1,6 @@
+step-start 2026-11-06T17:26:11Z name=h2c-fail-before-H1-seed-18628C0DE worktree=/workspace/worktrees/solr-18628-h2c-fail-before-round-1-H1 NODE_ENV=unset
+monitor 2026-11-06T17:26:31Z elapsed=20s free_inodes=507159/1868096 (27 free approx)
+monitor 2026-11-06T17:26:51Z elapsed=40s free_inodes=507269/1868096 (27 free approx)
+monitor 2026-11-06T17:27:11Z elapsed=60s free_inodes=508878/1868096 (27 free approx)
+monitor 2026-11-06T17:27:31Z elapsed=80s free_inodes=506964/1868096 (27 free approx)
+runner-end 2026-11-06T17:27:38Z rc=0

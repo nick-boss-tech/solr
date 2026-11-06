@@ -1,0 +1,17 @@
+verified_utc=2026-11-06T17:33:43Z
+fork_ref=aebe1d8e9b0f226948e092f2610682c9c2596f27
+worktree_head=aebe1d8e9b0f226948e092f2610682c9c2596f27
+worktree_status=clean
+compile_status=0
+test_status=0
+host_lock=free
+
+process_scan:
+
+filesystem:
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root        72G   34G   38G  47% /
+
+inodes:
+Filesystem      Inodes   IUsed  IFree IUse% Mounted on
+/dev/root      1868096 1361136 506960   73% /

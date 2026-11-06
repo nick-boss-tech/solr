@@ -1,0 +1,7 @@
+H1=aebe1d8e9b0f226948e092f2610682c9c2596f27
+JDK21=/usr/lib/jvm/java-21-openjdk-amd64
+preflight_script_sha256=bab0cbe545c05ef8ba4ce96c4c2fa022c4992daf1ebb2dd377c054a218021b52
+guard_sha256=41cf2c800b1ac257cb99e4feea624e43fab9e1021721904a2723a46557ad9247
+started_utc=2026-11-06T17:14:37Z
+preflight_rc=0
+completed_utc=2026-11-06T17:15:56Z
