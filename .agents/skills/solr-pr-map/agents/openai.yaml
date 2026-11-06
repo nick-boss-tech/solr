@@ -1,0 +1,4 @@
+interface:
+  display_name: "Map Solr PR activity"
+  short_description: "Group captured PR activity and scan coverage"
+  default_prompt: "Use $solr-pr-map for the requested Solr workflow using the supplied sources."

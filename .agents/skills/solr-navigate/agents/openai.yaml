@@ -1,0 +1,4 @@
+interface:
+  display_name: "Navigate Solr"
+  short_description: "Find source, tests and relevant Solr history"
+  default_prompt: "Use $solr-navigate for the requested Solr workflow using the supplied sources."

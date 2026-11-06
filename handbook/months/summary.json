@@ -1,0 +1,59 @@
+{
+  "months": {
+    "2026-08": {
+      "coverage": {
+        "complete at another head": 0,
+        "complete at captured head": 44,
+        "not complete": 105
+      },
+      "population": 149,
+      "status": {
+        "Draft": 5,
+        "Merged": 137,
+        "Open": 7
+      }
+    },
+    "2026-09": {
+      "coverage": {
+        "complete at another head": 0,
+        "complete at captured head": 6,
+        "not complete": 130
+      },
+      "population": 136,
+      "status": {
+        "Draft": 4,
+        "Merged": 120,
+        "Open": 12
+      }
+    },
+    "2026-10": {
+      "coverage": {
+        "complete at another head": 0,
+        "complete at captured head": 16,
+        "not complete": 272
+      },
+      "population": 288,
+      "status": {
+        "Draft": 104,
+        "Merged": 155,
+        "Open": 29
+      }
+    },
+    "2026-11": {
+      "coverage": {
+        "complete at another head": 0,
+        "complete at captured head": 23,
+        "not complete": 7
+      },
+      "population": 30,
+      "status": {
+        "Draft": 3,
+        "Merged": 14,
+        "Open": 13
+      }
+    }
+  },
+  "population": 603,
+  "snapshot_sha256": "507530af0abaa479b788c7a7d380d19be4dc00c861ba852c364c365d2b577d65",
+  "unmatched_scan_numbers": []
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Prepare Solr contributions"
+  short_description: "Draft contributions from the formula and evidence"
+  default_prompt: "Use $solr-contribute for the requested Solr workflow using the supplied sources."

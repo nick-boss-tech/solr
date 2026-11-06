@@ -1,0 +1,11 @@
+test_duplicates_invalid_states_and_future_dates_are_rejected (test_monthly_index.MonthlyIndexTest.test_duplicates_invalid_states_and_future_dates_are_rejected) ... ok
+test_existing_nonempty_output_is_preserved (test_monthly_index.MonthlyIndexTest.test_existing_nonempty_output_is_preserved) ... ok
+test_import_rejects_duplicate_scan_and_invalid_raw_state (test_monthly_index.MonthlyIndexTest.test_import_rejects_duplicate_scan_and_invalid_raw_state) ... ok
+test_merge_month_is_utc_and_uses_merge_not_creation (test_monthly_index.MonthlyIndexTest.test_merge_month_is_utc_and_uses_merge_not_creation) ... ok
+test_reproduction_is_byte_deterministic_and_titles_are_text (test_monthly_index.MonthlyIndexTest.test_reproduction_is_byte_deterministic_and_titles_are_text) ... ok
+test_totals_and_stale_coverage_reconcile (test_monthly_index.MonthlyIndexTest.test_totals_and_stale_coverage_reconcile) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 1.327s
+
+OK

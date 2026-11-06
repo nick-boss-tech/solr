@@ -1,0 +1,29 @@
+{
+  "name": "solr-agent-skills-foundation",
+  "version": "0.1.0",
+  "status": "First-level implementation; independent behavior review and installation pending",
+  "skills": [
+    "solr-navigate",
+    "solr-pr-map",
+    "solr-review",
+    "solr-proof",
+    "solr-contribute",
+    "solr-maintain"
+  ],
+  "entrypoint": "handbook/INDEX.md",
+  "basis_board_sha": "9d68d65d455fd0fae68eb43b745c8d9f2c0b8722",
+  "scan_project": "research/pr-adjacency/campaigns/since-2026-08-01",
+  "scan_scope": "Consume existing metadata only; no new source archaeology",
+  "board_report": "reports/agent-skills-foundation-round-1.md",
+  "review_assignment": "assignments/agent-skills-bundle-review-round-1.md",
+  "automation_assignment": "assignments/agent-skills-automation-followup-round-1.md",
+  "assignment_urls": {
+    "solr-navigate": "https://github.com/nick-boss-tech/solr/blob/coordination-ui/assignments/agent-skill-solr-navigate-round-1.md",
+    "solr-pr-map": "https://github.com/nick-boss-tech/solr/blob/coordination-ui/assignments/agent-skill-solr-pr-map-round-1.md",
+    "solr-review": "https://github.com/nick-boss-tech/solr/blob/coordination-ui/assignments/agent-skill-solr-review-round-1.md",
+    "solr-proof": "https://github.com/nick-boss-tech/solr/blob/coordination-ui/assignments/agent-skill-solr-proof-round-1.md",
+    "solr-contribute": "https://github.com/nick-boss-tech/solr/blob/coordination-ui/assignments/agent-skill-solr-contribute-round-1.md",
+    "solr-maintain": "https://github.com/nick-boss-tech/solr/blob/coordination-ui/assignments/agent-skill-solr-maintain-round-1.md"
+  },
+  "activation": "No host installation or scheduled job created"
+}

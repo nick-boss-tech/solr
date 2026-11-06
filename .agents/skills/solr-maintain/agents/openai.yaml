@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maintain Solr contributions"
+  short_description: "Reconcile PR changes, receipts and next actions"
+  default_prompt: "Use $solr-maintain for the requested Solr workflow using the supplied sources."

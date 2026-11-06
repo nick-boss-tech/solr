@@ -1,0 +1,4 @@
+interface:
+  display_name: "Prepare Solr proof"
+  short_description: "Prepare Linux gates and assess exact revision proof"
+  default_prompt: "Use $solr-proof for the requested Solr workflow using the supplied sources."

@@ -1,0 +1,78 @@
+{
+  "skills": [
+    {
+      "skill": "solr-navigate",
+      "exit_code": 0,
+      "result": "Skill is valid!"
+    },
+    {
+      "skill": "solr-pr-map",
+      "exit_code": 0,
+      "result": "Skill is valid!"
+    },
+    {
+      "skill": "solr-review",
+      "exit_code": 0,
+      "result": "Skill is valid!"
+    },
+    {
+      "skill": "solr-proof",
+      "exit_code": 0,
+      "result": "Skill is valid!"
+    },
+    {
+      "skill": "solr-contribute",
+      "exit_code": 0,
+      "result": "Skill is valid!"
+    },
+    {
+      "skill": "solr-maintain",
+      "exit_code": 0,
+      "result": "Skill is valid!"
+    }
+  ],
+  "relative_links_checked": 23,
+  "monthly_index_cli_reproduction": "byte-identical",
+  "population": 603,
+  "monthly_unit_checks": {
+    "executed": 6,
+    "exit_code": 0,
+    "source": "Full subprocess output in monthly-checks.txt"
+  },
+  "agent_behavior_evaluation": "Pending independent review; scenarios are not executed passes",
+  "file_sha256": {
+    ".agents/skills/solr-contribute/agents/openai.yaml": "c4e5e169de41772a8b729122c87f2d0122ecf7e13527f6f66155f3efe4962375",
+    ".agents/skills/solr-contribute/references/drafting-guide.md": "1afd919286ef3e0d333b2ef2e9d04acb241dd572c6caf69f74c050c427cb28fd",
+    ".agents/skills/solr-contribute/SKILL.md": "69be9c43f44994f49bd9a24aa1e6f861b01d77f497b71766743bdbb26387a256",
+    ".agents/skills/solr-maintain/agents/openai.yaml": "6e3941027bfeb180295d3b6a4f8e61ae586d874edb782243def215c36a12f259",
+    ".agents/skills/solr-maintain/references/automation-contract.md": "78f9cb1a6e5fe2d9e6fbd9da94fa289c281db7438756ee55fe8b53a2a09c7dd9",
+    ".agents/skills/solr-maintain/SKILL.md": "b06a952cb21c13e7daccbc9b6c65ed2989b642be18c4b15a27a747476b7b6cd4",
+    ".agents/skills/solr-navigate/agents/openai.yaml": "7d0db895a071c0e29c775dd149aebc7a5c0eb1e974212e977c5ab3428c3e0fee",
+    ".agents/skills/solr-navigate/references/source-map.md": "d83333aec96854105f0d3082869adf5322ca1bdc8801a78c222fdf6bf9edcd62",
+    ".agents/skills/solr-navigate/SKILL.md": "c1d19e1f82df604e441d4089b02cd1f32d327b3cc2abd0bd7800b358e34ec1bc",
+    ".agents/skills/solr-pr-map/agents/openai.yaml": "b928efc25314e1df5ece4a6b682ca54304b92e59d8834f058ceacf5bd4834b00",
+    ".agents/skills/solr-pr-map/references/monthly-contract.md": "b59ea756cfb3d945ba49fc9325748c55ab88bdfff52199eab01cb4e0458b0a05",
+    ".agents/skills/solr-pr-map/scripts/monthly_index.py": "284c98f07b7cf5f1cae81d04b5b1a80b53824813100ad5265929e6094b1e477b",
+    ".agents/skills/solr-pr-map/scripts/test_monthly_index.py": "c76a08cd3b4ec8a2d2785802c893fc6e2d094aa33994724d342398a0f33e7cc4",
+    ".agents/skills/solr-pr-map/SKILL.md": "12d7bc7e3076f1cf0f438f0c41fb17dee220ec463865c431c61cda8a3b487c46",
+    ".agents/skills/solr-proof/agents/openai.yaml": "8da6bf6513053b833f129a2e810db4d620d0991582d30065d278d84bc01bef19",
+    ".agents/skills/solr-proof/references/gate-contract.md": "09f40df0996e24a30afc8b6a1547e23fc254f49a7e0a38c9cf65b633878bda42",
+    ".agents/skills/solr-proof/SKILL.md": "ab13d7fecc20434002d216cca7ea49c5b81707d55c770f80c094bbe67e82364b",
+    ".agents/skills/solr-review/agents/openai.yaml": "f30129471bde958c5763aff4921153e0e7055748f692227631a7c5af96086027",
+    ".agents/skills/solr-review/references/review-worksheet.md": "53f1dd41353bc1edf104608a973f3cdde18851173c51bfafb3107ace0b17f36f",
+    ".agents/skills/solr-review/SKILL.md": "ce1d450d5c19da86d343b17d018a9f3494b72be10ff6ff7136a44822d0c085b4",
+    "evaluation/monthly-checks.txt": "85308e409d69d6e48dc9b8db6101c34943e0a46c4df8cf13b7b6de642de27477",
+    "evaluation/REVIEW.md": "635b192a48e588470e7d2035423e147f7976d84f1d3a872ed3c8a602e28b3920",
+    "evaluation/scenarios.json": "12c97c119251c2db1cc6b340019e9578de6339353b3fc15d4123d598d7ce9d92",
+    "evaluation/validate_package.py": "29a24cad57252f7dba02c467285d68d2ed7c18147a5bf00d78f82d0c02ffdf05",
+    "handbook/INDEX.md": "419af6020d9d2dad6cd69abcd330ab2cbec5e7d6216d2474bfc256e7d9212dbb",
+    "handbook/months/2026-08.md": "90565eb487403719de63f85d45806c36acf34a30e759958bfa4054a336d71249",
+    "handbook/months/2026-09.md": "df06a6c8b9d8faf87847ad4130e49e3b14db12defbfa90073c1d64925ee83866",
+    "handbook/months/2026-10.md": "1930649ee756ac1cebb02362cc7c3d7a86bc68d0c9a8e06ac0697ca66dea09a8",
+    "handbook/months/2026-11.md": "75b19656b41ebf3243905b692810b9fba46020f3e17fbf9fd51457576953a2a3",
+    "handbook/months/INDEX.md": "48b5da70a1ca08376ce32e041a0ad6d82b3caaeff2d9282a00eab9054c7d8937",
+    "handbook/months/snapshot.json": "507530af0abaa479b788c7a7d380d19be4dc00c861ba852c364c365d2b577d65",
+    "handbook/months/summary.json": "2a09bf448e47f5a398737abc4fe6fcc935f6033d1cabfe44cc1764116c536551",
+    "package.json": "59eab843e120e17ed1e8cb8ab08633f1f8374797b722dc32e8cfd24b378434d4"
+  }
+}
