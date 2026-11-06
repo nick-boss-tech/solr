@@ -241,6 +241,31 @@ public class DeleteReplicaTest extends SolrCloudTestCase {
   }
 
   @Test
+  public void deleteReplicaByCountDoesNotFollowAliasesWhenDisabled() throws Exception {
+    final String collectionName = "deleteByCountNoFollow";
+    final String aliasName = "deleteByCountNoFollowAlias";
+    CollectionAdminRequest.createCollection(collectionName, "conf", 1, 3)
+        .process(cluster.getSolrClient());
+    cluster.waitForActiveCollection(collectionName, 1, 3);
+    CollectionAdminRequest.createAlias(aliasName, collectionName).process(cluster.getSolrClient());
+
+    CollectionAdminRequest.DeleteReplica request =
+        CollectionAdminRequest.deleteReplicasFromShard(aliasName, "shard1", 1);
+    request.setFollowAliases(false);
+
+    SolrException e =
+        expectThrows(
+            SolrException.class,
+            () -> request.process(cluster.getSolrClient()));
+    assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, e.code());
+    assertTrue(e.getMessage().contains("Could not find collection : " + aliasName));
+    waitForState(
+        "Expected the aliased collection to remain unchanged when followAliases is false",
+        collectionName,
+        clusterShape(1, 3));
+  }
+
+  @Test
   public void deleteReplicaFromClusterState() throws Exception {
     final String collectionName = "deleteFromClusterStateCollection";
     CollectionAdminRequest.createCollection(collectionName, "conf", 1, 3)
