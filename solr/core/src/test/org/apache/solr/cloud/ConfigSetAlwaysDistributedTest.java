@@ -36,7 +36,7 @@ public class ConfigSetAlwaysDistributedTest extends SolrCloudTestCase {
 
   @BeforeClass
   public static void setUpClass() throws Exception {
-    configureCluster(1).configure();
+    configureCluster(1).withOverseer(true).configure();
   }
 
   private static ConfigSetService getConfigSetService() {
@@ -47,8 +47,9 @@ public class ConfigSetAlwaysDistributedTest extends SolrCloudTestCase {
   public void testConfigSetCommandsRunDistributedWithOverseerEnabled() throws Exception {
     ZkController zkController =
         cluster.getJettySolrRunners().get(0).getCoreContainer().getZkController();
-    assertTrue(
-        "Overseer is expected to be enabled in this cluster", zkController.isOverseerEnabled());
+    assertFalse(
+        "Overseer is expected to be enabled in this cluster",
+        zkController.getDistributedClusterStateUpdater().isDistributedStateUpdate());
     assertTrue(
         "Distributed runner must be present even with the Overseer enabled",
         zkController.getDistributedCommandRunner().isPresent());
