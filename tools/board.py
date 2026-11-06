@@ -11,7 +11,7 @@ import sys
 import tempfile
 import uuid
 
-KINDS = {"assignment", "claim", "gate", "receipt", "report", "evidence"}
+KINDS = {"assignment", "claim", "release", "gate", "receipt", "report", "evidence"}
 ID = re.compile(r"^[a-z0-9][a-z0-9._-]{0,99}$")
 SHA = re.compile(r"^[0-9a-f]{40,64}$")
 
@@ -44,8 +44,20 @@ def validate(record):
     ident(record.get("job"), "job")
     if kind == "assignment" and record["id"] != record["job"]:
         raise BoardError("assignment id must equal job")
+    if kind == "assignment" and "successor_of" in record:
+        ident(record["successor_of"], "successor_of")
+        if record["successor_of"] == record["job"]:
+            raise BoardError("a successor must have a new job id")
     if kind == "claim" and record["id"] != record["job"]:
         raise BoardError("claim id must equal job: all claimants must contend for one path")
+    if kind == "claim" and not str(record.get("owner", "")).strip():
+        raise BoardError("claim requires an owner")
+    if kind == "release":
+        if record["id"] != record["job"]:
+            raise BoardError("release id must equal job")
+        for field in ("actor", "reason", "evidence"):
+            if not isinstance(record.get(field), str) or not record[field].strip():
+                raise BoardError(f"release requires {field}")
     if kind in ("gate", "receipt") and not SHA.fullmatch(str(record.get("head", ""))):
         raise BoardError("gate and receipt require a full lowercase source head")
     if kind == "receipt":
@@ -97,6 +109,14 @@ def publish(repo, remote, branch, record):
             raise BoardError(f"record already exists: {path}; reconcile ownership or use a new record id")
         if kind != "assignment" and read_record(repo, parent, f"records/assignment/{record['job']}.json") is None:
             raise BoardError("assignment is absent from the fetched snapshot")
+        if kind not in ("assignment", "release") and read_record(repo, parent, f"records/release/{record['job']}.json") is not None:
+            raise BoardError("job is released; no further records may be added to it by this writer")
+        if kind == "assignment" and "successor_of" in record:
+            old = record["successor_of"]
+            if read_record(repo, parent, f"records/release/{old}.json") is None:
+                raise BoardError("successor requires a recorded release for the previous job")
+        if kind == "release" and read_record(repo, parent, f"records/claim/{record['job']}.json") is None:
+            raise BoardError("release requires an existing claim")
         if kind == "receipt":
             gate = read_record(repo, parent, f"records/gate/{record['gate']}.json")
             if gate is None or gate.get("job") != record["job"]:
@@ -137,7 +157,7 @@ def index(repo, snapshot):
     records = []
     warnings = []
     for path in listing:
-        if not re.fullmatch(r"records/(assignment|claim|gate|receipt|report|evidence)/[a-z0-9][a-z0-9._-]{0,99}\.json", path):
+        if not re.fullmatch(r"records/(assignment|claim|release|gate|receipt|report|evidence)/[a-z0-9][a-z0-9._-]{0,99}\.json", path):
             warnings.append(f"unrecognized path: {path}")
             continue
         try:
@@ -156,10 +176,15 @@ def index(repo, snapshot):
         job_records = [r for _, r in records if r["job"] == job_id]
         assignments = [r for r in job_records if r["type"] == "assignment" and r["id"] == job_id]
         claims = [r for r in job_records if r["type"] == "claim"]
+        releases = [r for r in job_records if r["type"] == "release"]
         receipts = [r for r in job_records if r["type"] == "receipt"]
         gates = {r["id"]: r for r in job_records if r["type"] == "gate"}
         if not assignments:
             job["status"] = "unconfirmed: missing canonical assignment"
+        elif releases and not claims:
+            job["status"] = "unconfirmed: release without claim"
+        elif releases:
+            job["status"] = "release recorded: verify evidence and any successor"
         elif receipts:
             job["status"] = "receipt recorded: inspect linked gate and proof"
         elif claims:

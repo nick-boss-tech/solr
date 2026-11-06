@@ -8,7 +8,7 @@ Read [the coordination skill](.agents/skills/solr-coordination/SKILL.md) and [th
 
 For a reusable, project-neutral explanation of the Git-branch board and its relationship to the Elephant-Goldfish Model, read [the portable design](docs/portable-board.md). It is a proposal and example, not an installed or independently reviewed implementation.
 
-Isolated experimental writers and inventory tools are in [tools](tools/README.md). The structured-record index does not index the legacy board; the separate inventory can read a pinned legacy snapshot but does not migrate it. Their limitations, including the absence of takeover and release, are documented there.
+Isolated experimental writers and inventory tools are in [tools](tools/README.md). The structured-record index does not index the legacy board; the separate inventory can read a pinned legacy snapshot but does not migrate it. Manual releases require verified stop evidence; automatic takeover is not provided.
 
 The [switchover readiness assessment](migration/readiness.md) inventories a pinned legacy snapshot and records concrete compatibility and claim-safety blockers. It does not declare the new board ready.
 
