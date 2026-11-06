@@ -1,6 +1,6 @@
 # Fresh-board transition plan
 
-**Review preview only:** `coordination-ui` remains the live board. The intended direction is to start `coordination-v2` fresh and consider old work individually, not bulk-import the old queue. Preserve the old branch and its history as a reference.
+This is the transition plan and historical checklist. The cutover is effective when `reports/coordination-v2-cutover-2026-11-06.md` is present on `coordination-ui`; until then the old board remains live. Start `coordination-v2` fresh and consider old work individually, not by bulk-importing the old queue. Preserve the old branch and its history as a reference.
 
 ## Working from old records
 
@@ -16,4 +16,4 @@ To carry an item over, first read the current old-board assignment, claims, gate
 4. Confirm that users can navigate the old branch and pinned evidence; document access and retention. Refresh the old snapshot and preserve a change report for late-arriving records. Make a deliberate one-by-one decision for any item that must remain active at the transition, including ongoing gate ownership and source head. Do not require every old record to be classified before starting fresh.
 5. Publish the approved fresh-board instructions and make the single active-board switch in a coordinated window. Verify reads, claims, writes, evidence access, host defaults and the ability to find old work; record exact old and new heads. Keep a rollback plan and reconcile late old-board writes without duplicating work. Never force-push or delete the old branch.
 
-An inventory, a preview branch, or a passing local writer test alone does not establish cutover readiness. Until the switch is actually coordinated and verified, all hosts continue to use `coordination-ui`.
+An inventory or a passing local writer test alone does not establish host readiness. The owner authorized the switch after indicating the other jobs were ready; no unobserved host acknowledgments should be inferred. At and after the announced cutover, monitor late old-board writes and reconcile them without assuming they are obsolete.

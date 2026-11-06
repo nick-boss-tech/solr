@@ -1,6 +1,6 @@
 # Coordination v2 switchover readiness
 
-Status: **NOT READY TO SWITCH**. `coordination-ui` remains the sole live board. This is a preparation snapshot; no live host has been redirected and no legacy job has been marked complete by this record.
+Status: **HISTORICAL PRE-CUTOVER ASSESSMENT**. This records what was known before the owner's subsequent authorization and statement that the other jobs were ready. It does not establish that individual hosts acknowledged or that their writers were updated. See the cutover announcement named in `START-HERE.md` for the current board.
 
 Direction: start the new board fresh. Old work remains in the preserved source branch and may be considered individually; do not automatically carry forward its assignments, claims or gates. See the [work catalog](legacy-work-catalog.md) for source links and the [fresh-board transition plan](../MIGRATION.md).
 

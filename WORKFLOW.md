@@ -1,6 +1,6 @@
 # Coordination v2 workflow
 
-**Preview only.** `coordination-ui` remains live until an explicit cutover record and host readiness verification say otherwise. The old branch is preserved; the new queue starts empty. Do not create real work on this preview.
+The [cutover announcement](https://github.com/nick-boss-tech/solr/blob/coordination-ui/reports/coordination-v2-cutover-2026-11-06.md) on `coordination-ui` activates this workflow. If it is absent, the old board remains live and no real work should be created here. Once present, the old branch is historical and the new queue starts empty. Host configurations that have not been updated must be corrected before those hosts take new work.
 
 ## Records and ownership
 

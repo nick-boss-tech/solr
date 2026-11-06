@@ -1,6 +1,6 @@
 # Start here: coordination v2
 
-**PREVIEW: do not use as the live queue until the coordinated cutover is recorded.** Until then, `coordination-ui` is the sole live board.
+The owner-directed cutover is effective when [the cutover announcement](https://github.com/nick-boss-tech/solr/blob/coordination-ui/reports/coordination-v2-cutover-2026-11-06.md) exists on `coordination-ui`. After that, `coordination-v2` is the live queue and `coordination-ui` is historical. If the announcement is absent, continue using `coordination-ui` and do not claim real work here.
 
 This branch is a fresh Git-backed work board. It begins with no inherited work. Consult the [legacy catalog](migration/legacy-work-catalog.md) and current `coordination-ui` tip when selectively bringing work forward. Read [WORKFLOW.md](WORKFLOW.md), then [the tool guide](tools/README.md). The local workspace's instructions and the user's actual authorization govern host restrictions and external actions.
 

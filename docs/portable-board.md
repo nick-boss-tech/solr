@@ -1,6 +1,6 @@
 # A Git branch as a multi-agent coordination board
 
-Status: design draft for review. The Solr board remains on `coordination-ui`; this document does not authorize a cutover or describe an implementation that has already been tested.
+Status: portable design draft. The Solr board changes to `coordination-v2` when the cutover announcement named in `START-HERE.md` is present. Local prototype tests and their limits are documented in `tools/README.md`; this design does not by itself validate a deployment.
 
 ## The idea
 

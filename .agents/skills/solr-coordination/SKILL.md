@@ -5,7 +5,7 @@ description: Coordinate Solr factory assignments, claims, gate handoffs and rece
 
 # Solr coordination
 
-Find the currently designated live board from the workspace bootstrap and explicit owner direction. The `coordination-v2` branch containing this preview is **not live**; use `coordination-ui` until a verified cutover says otherwise. Read its current tip and relevant workflow instructions before acting. Take all status and ownership decisions from one fetched snapshot, then refresh and reconcile immediately before a write.
+Find the currently designated live board from the workspace bootstrap and explicit owner direction. The owner-directed switch to `coordination-v2` is effective when `reports/coordination-v2-cutover-2026-11-06.md` exists on `coordination-ui`; before that use the old board. Afterward, use `coordination-v2` and consult the old board for historical or late records. Read the live tip and relevant workflow instructions before acting. Take all status and ownership decisions from one fetched snapshot, then refresh and reconcile immediately before a write.
 
 Resolve the requested work from its assignment, claims, gate and receipts, including newer reports and superseding records. Generated indexes can lag. Check host capability and active ownership before claiming; preserve existing claims and never run the same gate concurrently. Link source snapshots and exact fork heads in handoffs. A Linux receipt proves only the named head and completed proof legs; distinguish a failed, incomplete or non-reproduced run from a green gate.
 

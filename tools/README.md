@@ -1,6 +1,6 @@
 # Portable board prototype
 
-This prototype is for isolated evaluation, not the live Solr board or the v2 migration. It needs Python 3 and Git, a pre-existing repository and branch, configured Git identity, and push access. It uses normal Git credentials; do not put credentials in record JSON, command arguments or remote URLs. Every writer must follow the same protocol. The server's branch protection and permissions still apply.
+These tools need Python 3 and Git, a pre-existing repository and branch, configured Git identity, and push access. It uses normal Git credentials; do not put credentials in record JSON, command arguments or remote URLs. Every writer must follow the same protocol. The server's branch protection and permissions still apply. Check the [cutover announcement](https://github.com/nick-boss-tech/solr/blob/coordination-ui/reports/coordination-v2-cutover-2026-11-06.md) before using v2 as the live queue.
 
 ## Records and writes
 
@@ -42,7 +42,7 @@ Example release and successor (the release does not itself create or claim the s
 {"type":"assignment","id":"demo-2","job":"demo-2","successor_of":"demo-1","summary":"Continue after the documented handoff"}
 ```
 
-Write each example to a local JSON file and publish separately, e.g. `python tools/board.py --repo . publish --remote origin --branch YOUR_TEST_BRANCH --file /tmp/claim.json`. Before cutover this is permitted only against an isolated test branch, not the preview or live queue. To inspect an already fetched commit, use `python tools/board.py --repo . index --snapshot COMMIT`.
+Write each example to a local JSON file and publish separately, e.g. `python tools/board.py --repo . publish --remote origin --branch YOUR_TEST_BRANCH --file /tmp/claim.json`. Use an isolated test branch for examples, not the live queue. For real work use the active board branch and actual task data. To inspect an already fetched commit, use `python tools/board.py --repo . index --snapshot COMMIT`.
 
 On Windows, `tools/board-windows.ps1` can supply a Git binary directory and author identity without changing the repository configuration. Its optional `-CredentialFile` loads a GitHub token only in the process and invokes `gh auth setup-git`; omit it for a local test repository. It takes the board subcommand and arguments after its named options. The workspace operator must use the correct local Git, Python and credential-file paths; do not print or commit the credential. The wrapper does not select or activate a board branch.
 
@@ -56,7 +56,7 @@ On Windows, `tools/board-windows.ps1` can supply a Git binary directory and auth
 
 ## Tests
 
-`python tools/test_board.py` creates temporary local Git repositories and tests simultaneous claims, conservative indexing, mismatched gate heads and evidence hashing. `python tools/test_release.py ReleaseTest.test_release_and_successor_require_prior_claim` checks the release and successor preconditions. These tests never contact a network service or the live board. Git credential helpers, remote APIs, host-specific environments, process death and late writes remain untested. Review and extend these tests before deployment.
+`python tools/test_board.py` creates temporary local Git repositories and tests simultaneous claims, conservative indexing, mismatched gate heads and evidence hashing. `python tools/test_release.py ReleaseTest.test_release_and_successor_require_prior_claim` checks the release and successor preconditions. These tests never contact a network service or the live board. Windows authentication and sequential duplicate refusal were separately tested on an isolated fork branch; other host environments, remote concurrent claims, process death and late writes remain untested.
 
 ## Legacy Markdown compatibility
 
