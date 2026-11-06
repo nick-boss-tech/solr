@@ -1,0 +1,344 @@
+# Workspace generated-output cleanup
+
+Cleanup followed the published Solr board closeouts at commit `a7c971a03a05fc074c6b3da57cffccf52b7e2b06`. No source checkout, tracked file, published branch, board file, receipt, evidence directory, or raw log was removed. No build or test was launched.
+
+## Inode availability
+
+| Measurement | Used | Free | Total | Free |
+|---|---:|---:|---:|---:|
+| Before cleanup | 1,361,508 | 506,588 | 1,868,096 | 27.12% |
+| After isolated worktree outputs | 1,169,721 | 698,375 | 1,868,096 | 37.38% |
+| After idle Gradle caches and scratch files (final) | 1,026,405 | 841,691 | 1,868,096 | 45.06% |
+
+The 15% minimum-free-inode floor was not approached. `du --inodes` counted 335,103 inode entries under 305 deleted generated directories/cache roots; actual filesystem free inodes increased by 335,103. Reaching 50% free from the final measurement would require another 92,357 inodes, which would require clearing outputs in active or ambiguous worktrees; those were left intact.
+
+## Exact generated directories removed
+
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/.gradle` — 27 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/build` — 4 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/build-tools/build-infra/.gradle` — 9 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/build-tools/build-infra/build` — 45 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/build-tools/missing-doclet/.gradle` — 4 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/api/build` — 323 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/benchmark/build` — 5 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/core/build` — 6,003 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/cross-dc-manager/build` — 5 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/modules/analysis-extras/build` — 33 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/modules/clustering/build` — 5 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/modules/cross-dc/build` — 5 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/modules/cuvs/build` — 5 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/modules/extraction/build` — 5 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/modules/gcs-repository/build` — 5 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/modules/jwt-auth/build` — 5 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/modules/langid/build` — 5 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/modules/language-models/build` — 5 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/modules/ltr/build` — 5 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/modules/opentelemetry/build` — 5 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/modules/s3-repository/build` — 5 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/modules/scripting/build` — 5 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/modules/sql/build` — 5 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/server/build` — 5 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/solr-ref-guide/build` — 5 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/solrj-jetty/build` — 57 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/solrj-streaming/build` — 504 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/solrj-zookeeper/build` — 115 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/solrj/build` — 970 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/test-framework/build` — 279 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-H/solr/webapp/build` — 5 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/.gradle` — 27 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/build` — 4 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/build-tools/build-infra/.gradle` — 9 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/build-tools/build-infra/build` — 51 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/build-tools/missing-doclet/.gradle` — 9 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/build-tools/missing-doclet/build` — 7 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/api/build` — 329 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/benchmark/build` — 11 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/core/build` — 6,108 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/cross-dc-manager/build` — 11 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/modules/analysis-extras/build` — 39 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/modules/clustering/build` — 11 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/modules/cross-dc/build` — 11 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/modules/cuvs/build` — 11 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/modules/extraction/build` — 11 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/modules/gcs-repository/build` — 11 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/modules/jwt-auth/build` — 11 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/modules/langid/build` — 11 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/modules/language-models/build` — 11 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/modules/ltr/build` — 11 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/modules/opentelemetry/build` — 11 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/modules/s3-repository/build` — 11 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/modules/scripting/build` — 11 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/modules/sql/build` — 11 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/server/build` — 11 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/solr-ref-guide/build` — 11 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/solrj-jetty/build` — 63 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/solrj-streaming/build` — 510 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/solrj-zookeeper/build` — 121 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/solrj/build` — 974 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/test-framework/build` — 285 inode entries
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2/solr/webapp/build` — 11 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/.gradle` — 27 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/build` — 4 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/build-tools/build-infra/.gradle` — 9 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/build-tools/build-infra/build` — 45 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/build-tools/missing-doclet/.gradle` — 4 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/api/build` — 323 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/benchmark/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/core/build` — 6,000 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/cross-dc-manager/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/modules/analysis-extras/build` — 33 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/modules/clustering/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/modules/cross-dc/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/modules/cuvs/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/modules/extraction/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/modules/gcs-repository/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/modules/jwt-auth/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/modules/langid/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/modules/language-models/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/modules/ltr/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/modules/opentelemetry/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/modules/s3-repository/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/modules/scripting/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/modules/sql/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/server/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/solr-ref-guide/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/solrj-jetty/build` — 57 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/solrj-streaming/build` — 504 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/solrj-zookeeper/build` — 115 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/solrj/build` — 970 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/test-framework/build` — 279 inode entries
+- `/workspace/worktrees/solr18169-r3-baseline/solr/webapp/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/.gradle` — 28 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/build` — 4 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/build-tools/build-infra/.gradle` — 9 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/build-tools/build-infra/build` — 51 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/build-tools/missing-doclet/.gradle` — 9 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/build-tools/missing-doclet/build` — 34 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/api/build` — 788 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/benchmark/build` — 14 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/core/build` — 6,020 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/cross-dc-manager/build` — 71 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/docker/build` — 23 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/documentation/build` — 14,486 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/example/build` — 33 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/modules/analysis-extras/build` — 60 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/modules/clustering/build` — 52 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/modules/cross-dc/build` — 83 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/modules/cuvs/build` — 46 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/modules/extraction/build` — 69 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/modules/gcs-repository/build` — 106 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/modules/jwt-auth/build` — 56 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/modules/langid/build` — 51 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/modules/language-models/build` — 72 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/modules/ltr/build` — 137 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/modules/opentelemetry/build` — 49 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/modules/s3-repository/build` — 87 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/modules/scripting/build` — 52 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/modules/sql/build` — 100 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/packaging/build` — 5,323 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/server/build` — 999 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/solr-ref-guide/build` — 1,496 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/solr-ref-guide/.gradle` — 15,069 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/solrj-jetty/build` — 66 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/solrj-streaming/build` — 513 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/solrj-zookeeper/build` — 124 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/solrj/build` — 977 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/test-framework/build` — 288 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/webapp/build` — 128 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/webapp/js-client/.gradle` — 9,099 inode entries
+- `/workspace/worktrees/solr18169-r3-candidate/solr/webapp/js-client/build` — 7,713 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/.gradle` — 27 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/build` — 4 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/build-tools/build-infra/.gradle` — 9 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/build-tools/build-infra/build` — 45 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/build-tools/missing-doclet/.gradle` — 4 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/api/build` — 323 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/benchmark/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/core/build` — 6,259 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/cross-dc-manager/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/modules/analysis-extras/build` — 33 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/modules/clustering/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/modules/cross-dc/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/modules/cuvs/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/modules/extraction/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/modules/gcs-repository/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/modules/jwt-auth/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/modules/langid/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/modules/language-models/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/modules/ltr/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/modules/opentelemetry/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/modules/s3-repository/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/modules/scripting/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/modules/sql/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/server/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/solr-ref-guide/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/solrj-jetty/build` — 57 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/solrj-streaming/build` — 504 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/solrj-zookeeper/build` — 115 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/solrj/build` — 970 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/test-framework/build` — 279 inode entries
+- `/workspace/worktrees/solr18169-r3-fail-before/solr/webapp/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/.gradle` — 27 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/build` — 4 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/build-tools/build-infra/.gradle` — 9 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/build-tools/build-infra/build` — 45 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/build-tools/missing-doclet/.gradle` — 4 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/api/build` — 323 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/benchmark/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/core/build` — 6,008 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/cross-dc-manager/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/modules/analysis-extras/build` — 33 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/modules/clustering/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/modules/cross-dc/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/modules/cuvs/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/modules/extraction/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/modules/gcs-repository/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/modules/jwt-auth/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/modules/langid/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/modules/language-models/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/modules/ltr/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/modules/opentelemetry/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/modules/s3-repository/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/modules/scripting/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/modules/sql/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/server/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/solr-ref-guide/build` — 5 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/solrj-jetty/build` — 57 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/solrj-streaming/build` — 504 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/solrj-zookeeper/build` — 115 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/solrj/build` — 970 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/test-framework/build` — 279 inode entries
+- `/workspace/worktrees/solr18169-r3-films-mutation/solr/webapp/build` — 5 inode entries
+- `/workspace/worktrees/solr18619-gate/.gradle` — 29 inode entries
+- `/workspace/worktrees/solr18619-gate/build` — 4 inode entries
+- `/workspace/worktrees/solr18619-gate/build-tools/build-infra/.gradle` — 9 inode entries
+- `/workspace/worktrees/solr18619-gate/build-tools/build-infra/build` — 51 inode entries
+- `/workspace/worktrees/solr18619-gate/build-tools/missing-doclet/.gradle` — 9 inode entries
+- `/workspace/worktrees/solr18619-gate/build-tools/missing-doclet/build` — 7 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/api/build` — 785 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/benchmark/build` — 11 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/core/build` — 3,426 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/cross-dc-manager/build` — 11 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/modules/analysis-extras/build` — 39 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/modules/clustering/build` — 11 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/modules/cross-dc/build` — 72 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/modules/cuvs/build` — 11 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/modules/extraction/build` — 11 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/modules/gcs-repository/build` — 11 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/modules/jwt-auth/build` — 11 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/modules/langid/build` — 11 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/modules/language-models/build` — 11 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/modules/ltr/build` — 11 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/modules/opentelemetry/build` — 34 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/modules/s3-repository/build` — 11 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/modules/scripting/build` — 11 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/modules/sql/build` — 74 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/server/build` — 11 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/solr-ref-guide/build` — 11 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/solrj-jetty/build` — 63 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/solrj-streaming/build` — 510 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/solrj-zookeeper/build` — 121 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/solrj/build` — 933 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/test-framework/build` — 285 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/webapp/build` — 201 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/webapp/js-client/.gradle` — 9,099 inode entries
+- `/workspace/worktrees/solr18619-gate/solr/webapp/js-client/build` — 7,713 inode entries
+- `/workspace/tmp/solr6595-round4-positive/.gradle` — 29 inode entries
+- `/workspace/tmp/solr6595-round4-positive/build` — 4 inode entries
+- `/workspace/tmp/solr6595-round4-positive/build-tools/build-infra/.gradle` — 9 inode entries
+- `/workspace/tmp/solr6595-round4-positive/build-tools/build-infra/build` — 45 inode entries
+- `/workspace/tmp/solr6595-round4-positive/build-tools/missing-doclet/.gradle` — 4 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/api/build` — 323 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/benchmark/build` — 5 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/core/build` — 6,011 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/cross-dc-manager/build` — 5 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/modules/analysis-extras/build` — 33 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/modules/clustering/build` — 5 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/modules/cross-dc/build` — 5 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/modules/cuvs/build` — 5 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/modules/extraction/build` — 5 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/modules/gcs-repository/build` — 5 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/modules/jwt-auth/build` — 5 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/modules/langid/build` — 5 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/modules/language-models/build` — 5 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/modules/ltr/build` — 5 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/modules/opentelemetry/build` — 5 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/modules/s3-repository/build` — 5 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/modules/scripting/build` — 5 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/modules/sql/build` — 5 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/server/build` — 5 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/solr-ref-guide/build` — 5 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/solrj-jetty/build` — 57 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/solrj-streaming/build` — 504 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/solrj-zookeeper/build` — 115 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/solrj/build` — 970 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/test-framework/build` — 279 inode entries
+- `/workspace/tmp/solr6595-round4-positive/solr/webapp/build` — 5 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/.gradle` — 30 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/build` — 11 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/build-tools/build-infra/.gradle` — 9 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/build-tools/build-infra/build` — 45 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/build-tools/missing-doclet/.gradle` — 9 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/build-tools/missing-doclet/build` — 28 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/platform/build` — 6 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/build` — 6 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/api/build` — 992 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/benchmark/build` — 633 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/core/build` — 10,261 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/cross-dc-manager/build` — 196 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/distribution/build` — 6 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/docker/build` — 6 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/documentation/build` — 14,491 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/example/build` — 6 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/modules/build` — 6 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/modules/analysis-extras/build` — 141 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/modules/clustering/build` — 143 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/modules/cross-dc/build` — 237 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/modules/cuvs/build` — 101 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/modules/extraction/build` — 187 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/modules/gcs-repository/build` — 109 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/modules/jwt-auth/build` — 155 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/modules/langid/build` — 129 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/modules/language-models/build` — 236 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/modules/ltr/build` — 520 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/modules/opentelemetry/build` — 111 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/modules/s3-repository/build` — 123 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/modules/scripting/build` — 152 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/modules/sql/build` — 733 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/packaging/build` — 6 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/server/build` — 20 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/solr-ref-guide/build` — 1,670 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/solr-ref-guide/.gradle` — 15,069 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/solrj-jetty/build` — 165 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/solrj-streaming/build` — 1,543 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/solrj-zookeeper/build` — 339 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/solrj/build` — 2,877 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/test-framework/build` — 770 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/webapp/build` — 184 inode entries
+- `/workspace/tmp/solr6595-round4-rootcheck/solr/webapp/js-client/build` — 6 inode entries
+- `/workspace/gradle-home/caches` — 116,780 inode entries (idle rebuildable Gradle cache)
+- `/home/ubuntu/.gradle/caches` — 26,021 inode entries (idle rebuildable Gradle cache)
+- `/workspace/gradle-home/.tmp` — 515 inode entries (idle Gradle scratch files)
+
+## Preserved work and tradeoffs
+
+- All source worktrees remain in place at their recorded commits and still have clean Git status. Only ignored `.gradle`, `build`, `node_modules`, or `.kotlin` directories inside these completed/inactive worktrees were eligible.
+- The PR #5303 H2/F2 source refs and SOLR-6595 round-4 source ref remain exact at their verified fork heads. SOLR-18619 is covered by its published GREEN receipt and the board stale/inactive record.
+- The SOLR-18169 tested commit `f2166af983d2536d51e4b7ba3bc875e89cbdc1bd` remains an ancestor of live fork branch head `5d0c3dc6a0d5c135a36b77ed26ea16ddd8963060`. Its source worktrees and branch were retained; only ignored outputs were removed, with the receipt and raw proof logs preserved.
+- Evidence roots and raw logs under `/workspace/gates/logs/` were not touched. The `coordination-ui` source worktree, local-only edits, all unrelated worktrees, and all published refs were preserved. Gradle wrapper distributions, daemon/native state, and build-scan data were also retained.
+- The idle rebuildable caches `/workspace/gradle-home/caches` and `/home/ubuntu/.gradle/caches` plus `/workspace/gradle-home/.tmp` were removed only after confirming no Gradle process, lock holder, or open file was using them. Generated outputs belonging to still-live or ambiguous SOLR-12532, SOLR-12613, and SOLR-18624 work were left untouched; that leaves free inodes at 45.06%, below the roughly 50% target.
+- Live-board reconciliation: the local SOLR-18624 publish-branch claim, original-seed replay claim, and publish report are byte-identical to the files on the live board. The modified local `hosts/phone-agent-2.md` is an older/different copy whose diff would remove newer remote heartbeat entries and change capability tags, so it was preserved locally and not published over the live ledger.
+
+## Worktrees inspected
+
+- `/workspace/worktrees/pr-5303-phrase-coverage-H` — clean at `fd106e02428bf1d619128029c73ea053fb4aedcb`
+- `/workspace/worktrees/pr-5303-phrase-coverage-round-2` — clean at `07328d6973c4bb3385ca6d50bfe871f8808c1550`
+- `/workspace/worktrees/solr18169-r3-baseline` — clean at `4f3346a3064aa137d8eb4be5de9adb1e9635adc5`
+- `/workspace/worktrees/solr18169-r3-candidate` — clean at `f2166af983d2536d51e4b7ba3bc875e89cbdc1bd`
+- `/workspace/worktrees/solr18169-r3-fail-before` — clean at `4f3346a3064aa137d8eb4be5de9adb1e9635adc5`
+- `/workspace/worktrees/solr18169-r3-films-mutation` — clean at `f2166af983d2536d51e4b7ba3bc875e89cbdc1bd`
+- `/workspace/worktrees/solr18619-gate` — clean at `35b5c45ec6ddb8ec8d54b89bbf9ca97368d2a8ca`
+- `/workspace/tmp/solr6595-round4-positive` — clean at `58dae6adb336b70d7b909e853e3dfa36de4cf091`
+- `/workspace/tmp/solr6595-round4-rootcheck` — clean at `58dae6adb336b70d7b909e853e3dfa36de4cf091`
+
+Cleanup record updated at 2026-11-06T00:26:46Z.
