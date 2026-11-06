@@ -1,0 +1,50 @@
+test_commits_staged_unstaged_and_untracked (test_pr_triage.FromGitTest.test_commits_staged_unstaged_and_untracked) ... ok
+test_detects_the_branch_it_stemmed_from (test_pr_triage.FromGitTest.test_detects_the_branch_it_stemmed_from) ... ok
+test_no_commits_uses_branch_name (test_pr_triage.FromGitTest.test_no_commits_uses_branch_name) ... ok
+test_access_notice_exceptions (test_pr_triage.TriageTest.test_access_notice_exceptions) ... ok
+test_all_satisfied_skips_the_model (test_pr_triage.TriageTest.test_all_satisfied_skips_the_model) ... ok
+test_changelog_not_worthy (test_pr_triage.TriageTest.test_changelog_not_worthy) ... ok
+test_changelog_title_block_scalar_marker_is_dropped (test_pr_triage.TriageTest.test_changelog_title_block_scalar_marker_is_dropped) ... ok
+test_changelog_title_is_input_to_every_judgement (test_pr_triage.TriageTest.test_changelog_title_is_input_to_every_judgement) ... ok
+test_changelog_title_on_following_lines (test_pr_triage.TriageTest.test_changelog_title_on_following_lines) ... ok
+test_changelog_type_agreeing_with_entry (test_pr_triage.TriageTest.test_changelog_type_agreeing_with_entry) ... ok
+test_changelog_type_differing_from_entry_is_highlighted (test_pr_triage.TriageTest.test_changelog_type_differing_from_entry_is_highlighted) ... ok
+test_changelog_type_outside_choices_is_unknown (test_pr_triage.TriageTest.test_changelog_type_outside_choices_is_unknown) ... ok
+test_changelog_type_without_entry_is_missing (test_pr_triage.TriageTest.test_changelog_type_without_entry_is_missing) ... ok
+test_comment_does_not_emit_active_model_markup (test_pr_triage.TriageTest.test_comment_does_not_emit_active_model_markup) ... ok
+test_configured_evidence_families (test_pr_triage.TriageTest.test_configured_evidence_families) ... ok
+test_configured_jira_evidence (test_pr_triage.TriageTest.test_configured_jira_evidence) ... ok
+test_deleted_evidence_is_missing (test_pr_triage.TriageTest.test_deleted_evidence_is_missing) ... ok
+test_diff_budget_prioritises_production_and_excludes_patches (test_pr_triage.TriageTest.test_diff_budget_prioritises_production_and_excludes_patches) ... ok
+test_dry_run_never_calls_model (test_pr_triage.TriageTest.test_dry_run_never_calls_model) ... ok
+test_error_shaped_or_truncated_response_is_no_answer (test_pr_triage.TriageTest.test_error_shaped_or_truncated_response_is_no_answer) ... ok
+test_exact_revision_is_reported (test_pr_triage.TriageTest.test_exact_revision_is_reported) ... ok
+test_fenced_json_is_accepted (test_pr_triage.TriageTest.test_fenced_json_is_accepted) ... ok
+test_hidden_evidence_is_absent_from_prompt (test_pr_triage.TriageTest.test_hidden_evidence_is_absent_from_prompt) ... ok
+test_incomplete_files_refused_before_model (test_pr_triage.TriageTest.test_incomplete_files_refused_before_model) ... ok
+test_invalid_answer_fields_are_unknown (test_pr_triage.TriageTest.test_invalid_answer_fields_are_unknown) ... ok
+test_main_does_not_warn (test_pr_triage.TriageTest.test_main_does_not_warn) ... ok
+test_malformed_answer_is_unknown (test_pr_triage.TriageTest.test_malformed_answer_is_unknown) ... ok
+test_metadata_is_escaped (test_pr_triage.TriageTest.test_metadata_is_escaped) ... ok
+test_missing_answer_is_unknown (test_pr_triage.TriageTest.test_missing_answer_is_unknown) ... ok
+test_model_request_is_mocked_at_http_boundary (test_pr_triage.TriageTest.test_model_request_is_mocked_at_http_boundary) ... ok
+test_no_changelog_title_without_entry (test_pr_triage.TriageTest.test_no_changelog_title_without_entry) ... ok
+test_non_main_notice_precedes_model_table (test_pr_triage.TriageTest.test_non_main_notice_precedes_model_table) ... ok
+test_only_evidence_files_changed_posts_nothing (test_pr_triage.TriageTest.test_only_evidence_files_changed_posts_nothing) ... ok
+test_personal_fork_edits_disabled (test_pr_triage.TriageTest.test_personal_fork_edits_disabled) ... ok
+test_present_evidence_statuses (test_pr_triage.TriageTest.test_present_evidence_statuses) ... ok
+test_reason_is_bounded_and_cannot_reintroduce_entities (test_pr_triage.TriageTest.test_reason_is_bounded_and_cannot_reintroduce_entities) ... ok
+test_response_header_says_checked_once (test_pr_triage.TriageTest.test_response_header_says_checked_once) ... ok
+test_reverse_mismatch_and_low_confidence (test_pr_triage.TriageTest.test_reverse_mismatch_and_low_confidence) ... ok
+test_skip_when_included_does_not_ask_the_model (test_pr_triage.TriageTest.test_skip_when_included_does_not_ask_the_model) ... ok
+test_textual_boolean_verdicts_are_accepted (test_pr_triage.TriageTest.test_textual_boolean_verdicts_are_accepted) ... ok
+test_unknown_answer_does_not_suppress_valid_answers (test_pr_triage.TriageTest.test_unknown_answer_does_not_suppress_valid_answers) ... ok
+test_unreachable_model_posts_nothing (test_pr_triage.TriageTest.test_unreachable_model_posts_nothing) ... ok
+test_unusable_reply_posts_nothing (test_pr_triage.TriageTest.test_unusable_reply_posts_nothing) ... ok
+test_verdicts_file_replaces_model (test_pr_triage.TriageTest.test_verdicts_file_replaces_model) ... Base: main
+ok
+
+----------------------------------------------------------------------
+Ran 44 tests in 0.204s
+
+OK

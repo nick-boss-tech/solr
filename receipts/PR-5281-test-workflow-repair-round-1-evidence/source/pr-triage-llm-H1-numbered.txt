@@ -1,0 +1,145 @@
+     1	name: PR Triage (LLM)
+     2	
+     3	# Once per PR, asks an LLM (via the ASF gateway, llm.apache.org) the yes/no
+     4	# questions in .github/pr-triage/judgements.json (does this change warrant a
+     5	# changelog entry, docs, ...?) and posts one comment comparing each verdict with
+     6	# what the PR actually includes, highlighting mismatches. Advisory only: it never
+     7	# fails the PR (no comment is posted if the model gives no usable answer), and it
+     8	# does not run again on later pushes.
+     9	#
+    10	# Why pull_request_target: PRs from forks get no secrets under 'pull_request',
+    11	# and the gateway key is a secret. pull_request_target runs this file and the
+    12	# script from the trusted workflow commit. PR content is only ever fetched through the API
+    13	# and handed to the model as text; no PR code is checked out or executed.
+    14	#
+    15	# Two jobs, so the one holding the LLM key has a read-only token, and the one
+    16	# that can comment never sees the key or talks to the model.
+    17	#
+    18	# Setup: repository secret ASF_LLM_API_KEY (an automation key from
+    19	# llm.apache.org), and optionally repository variable LLM_MODEL.
+    20	on:
+    21	  pull_request_target:
+    22	    # 'ready_for_review' covers PRs opened as drafts; drafts themselves are skipped.
+    23	    types:
+    24	      - opened
+    25	      - ready_for_review
+    26	
+    27	concurrency:
+    28	  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+    29	
+    30	permissions: {}
+    31	
+    32	jobs:
+    33	  judge:
+    34	    name: Ask the model
+    35	    if: |
+    36	      github.event.pull_request.draft == false &&
+    37	      github.event.pull_request.user.login != 'solrbot'
+    38	    runs-on: ubuntu-latest
+    39	    timeout-minutes: 10
+    40	    continue-on-error: true  # advisory: never put a red X on a PR
+    41	
+    42	    permissions:
+    43	      contents: read
+    44	      issues: read         # earlier triage comment
+    45	      pull-requests: read  # the PR and its changed files
+    46	
+    47	    outputs:
+    48	      result: ${{ steps.judge.outputs.result }}
+    49	
+    50	    env:
+    51	      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    52	      REPO: ${{ github.repository }}
+    53	      PR_NUMBER: ${{ github.event.pull_request.number }}
+    54	
+    55	    steps:
+    56	      # A PR toggled draft -> ready -> draft -> ready would otherwise be triaged twice.
+    57	      # Every triaged PR gets a comment, so the comment is the record that it ran.
+    58	      - name: Check for an earlier triage comment
+    59	        id: guard
+    60	        run: |
+    61	          set -euo pipefail
+    62	          marker='<!-- llm-pr-triage -->'
+    63	          # The triage comment is posted seconds after open/ready, so it is on the first page.
+    64	          n=$(gh api "repos/${REPO}/issues/${PR_NUMBER}/comments?per_page=100" \
+    65	            --jq "[.[] | select(.user.login == \"github-actions[bot]\" and (.body | startswith(\"${marker}\")))] | length" \
+    66	            | awk '{s+=$1} END {print s+0}')
+    67	          if [ "$n" -gt 0 ]; then
+    68	            echo "::notice::PR#${PR_NUMBER} was already triaged; skipping"
+    69	            echo "done=true" >> "$GITHUB_OUTPUT"
+    70	          fi
+    71	
+    72	      # Use the trusted workflow revision even when the PR targets an older branch.
+    73	      - name: Checkout the triage script
+    74	        if: steps.guard.outputs.done != 'true'
+    75	        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+    76	        with:
+    77	          ref: ${{ github.workflow_sha }}
+    78	          sparse-checkout: |
+    79	            dev-tools/scripts/pr-triage-llm.py
+    80	            .github/pr-triage
+    81	          sparse-checkout-cone-mode: false
+    82	          fetch-depth: 1
+    83	          persist-credentials: false
+    84	
+    85	      - name: Fetch the PR from the API
+    86	        if: steps.guard.outputs.done != 'true'
+    87	        run: |
+    88	          set -euo pipefail
+    89	          gh api "repos/${REPO}/pulls/${PR_NUMBER}" \
+    90	            --jq '{title, body, head, base, maintainer_can_modify, changed_files}' > "$RUNNER_TEMP/pr.json"
+    91	          gh api --paginate "repos/${REPO}/pulls/${PR_NUMBER}/files" \
+    92	            --jq '.[] | {filename, status, additions, deletions, patch}' \
+    93	            | jq -s . > "$RUNNER_TEMP/files.json"
+    94	          echo "Files changed: $(jq length "$RUNNER_TEMP/files.json")"
+    95	          # The paginated file list must describe the same revision as the metadata.
+    96	          gh api "repos/${REPO}/pulls/${PR_NUMBER}" > "$RUNNER_TEMP/pr-after.json"
+    97	          jq -e --slurpfile after "$RUNNER_TEMP/pr-after.json" \
+    98	            '.head.sha == $after[0].head.sha and .base.sha == $after[0].base.sha' \
+    99	            "$RUNNER_TEMP/pr.json" > /dev/null
+   100	
+   101	      - name: Judge
+   102	        id: judge
+   103	        if: steps.guard.outputs.done != 'true'
+   104	        env:
+   105	          LLM_BASE_URL: https://llm.apache.org/v1
+   106	          LLM_API_KEY: ${{ secrets.ASF_LLM_API_KEY }}
+   107	          LLM_MODEL: ${{ vars.LLM_MODEL || 'qwen3.8-27b' }}
+   108	        run: |
+   109	          set -euo pipefail
+   110	          python3 dev-tools/scripts/pr-triage-llm.py \
+   111	            --config .github/pr-triage/judgements.json \
+   112	            --pr "$RUNNER_TEMP/pr.json" \
+   113	            --files "$RUNNER_TEMP/files.json" \
+   114	            --out "$RUNNER_TEMP/result.json"
+   115	          # No result file when the model gave no usable answer or nothing was judgeable.
+   116	          [ -f "$RUNNER_TEMP/result.json" ] || exit 0
+   117	          echo "result=$(base64 -w0 < "$RUNNER_TEMP/result.json")" >> "$GITHUB_OUTPUT"
+   118	          {
+   119	            echo "### LLM triage (${LLM_MODEL})"
+   120	            echo '```json'
+   121	            jq '.results' "$RUNNER_TEMP/result.json"
+   122	            echo '```'
+   123	          } >> "$GITHUB_STEP_SUMMARY"
+   124	
+   125	  comment:
+   126	    name: Post the triage comment
+   127	    needs: judge
+   128	    if: needs.judge.outputs.result != ''
+   129	    runs-on: ubuntu-latest
+   130	    timeout-minutes: 5
+   131	
+   132	    permissions:
+   133	      pull-requests: write
+   134	
+   135	    steps:
+   136	      - name: Post comment
+   137	        env:
+   138	          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+   139	          REPO: ${{ github.repository }}
+   140	          PR_NUMBER: ${{ github.event.pull_request.number }}
+   141	          RESULT: ${{ needs.judge.outputs.result }}
+   142	        run: |
+   143	          set -euo pipefail
+   144	          printf '%s' "$RESULT" | base64 -d | jq -r '.comment' > comment.md
+   145	          gh pr comment "$PR_NUMBER" --repo "$REPO" --body-file comment.md

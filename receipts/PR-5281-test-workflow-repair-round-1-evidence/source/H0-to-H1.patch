@@ -1,0 +1,15 @@
+diff --git a/.github/workflows/pr-triage-test.yml b/.github/workflows/pr-triage-test.yml
+index 2e63eef612..6890c5fff5 100644
+--- a/.github/workflows/pr-triage-test.yml
++++ b/.github/workflows/pr-triage-test.yml
+@@ -18,9 +18,9 @@ jobs:
+       contents: read
+     steps:
+       # Untrusted PR code runs only here, with no secrets or write permissions.
+       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+         with:
+           persist-credentials: false
+       - name: Test triage without GitHub or model credentials
+         run: |
+-python3 -m unittest discover -s dev-tools/scripts/tests -p test_pr_triage.py -v
++          python3 -m unittest discover -s dev-tools/scripts/tests -p test_pr_triage.py -v

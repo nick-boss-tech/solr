@@ -1,0 +1,4 @@
+posted: claims/pool-phone-agent-2-gate-pr-5281-test-workflow-repair-round-1.md at commit 00882704978a15511953b92b32c20e63d2448d06
+live_board_after_claim=00882704978a15511953b92b32c20e63d2448d06
+claim_path=claims/pool-phone-agent-2-gate-pr-5281-test-workflow-repair-round-1.md
+claim_blob=afbe32fa1fd47b2f390029b0e2e3c6bea4fc7ace

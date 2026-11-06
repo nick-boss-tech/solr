@@ -1,0 +1,1 @@
+command: python3 -m unittest discover -s dev-tools/scripts/tests -p test_pr_triage.py -v

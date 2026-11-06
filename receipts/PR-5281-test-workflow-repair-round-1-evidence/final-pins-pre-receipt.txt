@@ -1,0 +1,4 @@
+live_fork=a3a930aa07d9676315f6133bdb1d7c88a1940942
+upstream_main=00a5f9701ea9850a26b1bc1ba83326edbd92f383
+live_board=00882704978a15511953b92b32c20e63d2448d06
+upstream_main_is_H0=yes
