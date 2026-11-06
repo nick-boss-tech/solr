@@ -1,0 +1,6 @@
+{
+  "id": "windows-probe",
+  "job": "windows-probe",
+  "summary": "isolated writer test",
+  "type": "assignment"
+}
