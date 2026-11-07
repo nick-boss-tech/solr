@@ -1,0 +1,11 @@
+{
+  "description": "The PR description still says both slim demo cases check the failure, but the Tini slim case now skips; that sentence and the previously noted stale CI wording need a separately authorized PR body edit.",
+  "discussion": "No public reply posted; review follow-up comment is not authorized without the required clean exact-head gate or specific permission.",
+  "head": "332ca62da783073ef8f1e233af5fd18985590039",
+  "id": "pr-5310-demo-simplify-332ca62d",
+  "job": "pr-5310-demo-simplify-20261107",
+  "pr": "https://github.com/apache/solr/pull/5310",
+  "summary": "Addressed Eric's demo-test complexity concern by simplifying state and exit-code polling, keeping the 60-second limit, diagnostic check and cleanup, and skipping the duplicate slim Tini error check. Full image demo and Tini tests remain unchanged. The previous green full/slim Docker CI applies to 2f275eccdcf092c96b25960c8b11571b784bf027, not this head.",
+  "type": "report",
+  "verification": "Only two Docker test shell files changed; git diff --check passed and the scoped diff was reviewed. No Gradle, compilation, tests or Docker ran on Windows. The new Docker workflow https://github.com/apache/solr/actions/runs/42410241530 is action_required. Linux gate pr-5310-demo-simplified-linux-20261107 requests shell stub coverage and build checks."
+}
