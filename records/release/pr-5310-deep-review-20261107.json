@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-pr5310-deep-review",
+  "evidence": "Report pr-5310-deep-review-c01cf983 records the reviewed head, finding, and proof limits. No build, test, or other executor was started.",
+  "id": "pr-5310-deep-review-20261107",
+  "job": "pr-5310-deep-review-20261107",
+  "reason": "Read-only review complete; findings handed back to owner",
+  "type": "release"
+}
