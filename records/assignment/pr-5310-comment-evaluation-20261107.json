@@ -1,0 +1,10 @@
+{
+  "head": "2f275eccdcf092c96b25960c8b11571b784bf027",
+  "host": "Windows source review; no Gradle or Docker",
+  "id": "pr-5310-comment-evaluation-20261107",
+  "job": "pr-5310-comment-evaluation-20261107",
+  "source": "https://github.com/apache/solr/pull/5310#discussion_r4503457707",
+  "successor_of": "pr-5310-scope-body-20261107",
+  "summary": "Evaluate the latest reviewer comment about the slim demo test complexity and report options and live exact-head CI state. Read-only; no source or public changes.",
+  "type": "assignment"
+}
