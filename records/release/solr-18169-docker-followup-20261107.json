@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-pr5289-followup",
+  "evidence": "PR 5310 is at 75e3ce76cd7709b1704e468c33d66a44b32c9be7; implementation worker has completed and launched no test executor. Report solr-18169-docker-followup-review-75e3ce76 records handoff.",
+  "id": "solr-18169-docker-followup-20261107",
+  "job": "solr-18169-docker-followup-20261107",
+  "reason": "Implementation and source review complete; exact-head proof pending separately",
+  "type": "release"
+}
