@@ -1,0 +1,10 @@
+{
+  "base": "b771587e9707c49847d728fd1f3ff259a182692c",
+  "host": "Windows implementation; no Docker or Gradle available",
+  "id": "solr-18169-docker-followup-20261107",
+  "job": "solr-18169-docker-followup-20261107",
+  "limitations": "Docker proof unavailable on our hosts; disclose on PR. Prior legacy SOLR-18169 work completed before merge; this is new regression work.",
+  "source": "https://github.com/apache/solr/pull/5289#issuecomment-6703184783",
+  "summary": "Prepare a follow-up fix for the merged PR 5289 slim Docker test regression and an authorized upstream PR",
+  "type": "assignment"
+}
