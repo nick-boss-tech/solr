@@ -31,8 +31,6 @@ teardown() {
 }
 
 @test "secure example starts two HTTPS nodes with authentication and ZooKeeper ACLs" {
-  mkdir -p "$SOLR_HOME/node1"
-  printf 'left over\n' > "$SOLR_HOME/node1/incomplete-file"
   run env SOLR_ULIMIT_CHECKS=true solr start -e secure --no-prompt --solr-home "$SOLR_HOME" -p "$SOLR_PORT"
   assert_success
   assert_output --partial 'Two-node secure example is ready'
@@ -42,9 +40,14 @@ teardown() {
   refute_output --partial 'set SOLR_ULIMIT_CHECKS to false'
   assert_output --partial 'Check status: SOLR_INCLUDE='
 
-  run ls -a "$SOLR_HOME"
+  run cat "$SOLR_HOME/.solr-secure-example"
   assert_success
-  refute_output --partial '.secure-example'
+  assert_output 'Solr secure example'
+
+  printf 'left over\n' > "$SOLR_HOME/node1/incomplete-file"
+  run solr start -e secure --no-prompt --solr-home "$SOLR_HOME" -p "$SOLR_PORT"
+  assert_success
+  assert_output --partial 'Two-node secure example is ready'
   run ls -a "$SOLR_HOME/node1"
   assert_success
   refute_output --partial 'incomplete-file'
