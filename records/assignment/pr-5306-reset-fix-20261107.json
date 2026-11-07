@@ -1,0 +1,10 @@
+{
+  "host": "Windows implementation only; no builds or tests",
+  "id": "pr-5306-reset-fix-20261107",
+  "job": "pr-5306-reset-fix-20261107",
+  "scope": "Reject unowned example roots before reset, preserve safe reruns, add focused coverage and update user documentation; push fork branch and publish Linux gate.",
+  "source_head": "01c65183ab01411e292c90ba5ab10c1c7056c219",
+  "successor_of": "pr-5306-review-20261107",
+  "summary": "Implement review fix for PR 5306 secure example reset and hand off exact-head Linux gate",
+  "type": "assignment"
+}
