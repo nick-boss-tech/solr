@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr-5306-review",
+  "evidence": "records/report/pr-5306-review-20261107-report.json; read-only review finished and no background review process or Linux executor was started.",
+  "id": "pr-5306-review-20261107",
+  "job": "pr-5306-review-20261107",
+  "reason": "Review complete; no executor or build was launched",
+  "type": "release"
+}
