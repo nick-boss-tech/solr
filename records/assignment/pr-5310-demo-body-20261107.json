@@ -1,0 +1,9 @@
+{
+  "head": "332ca62da783073ef8f1e233af5fd18985590039",
+  "id": "pr-5310-demo-body-20261107",
+  "job": "pr-5310-demo-body-20261107",
+  "source": "https://github.com/apache/solr/pull/5310",
+  "successor_of": "pr-5310-demo-simplify-20261107",
+  "summary": "At Nick's explicit direction, correct the single PR-body sentence about the slim demo and Tini tests; leave all other wording untouched and verify read-back.",
+  "type": "assignment"
+}
