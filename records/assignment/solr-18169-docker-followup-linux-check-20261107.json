@@ -1,0 +1,14 @@
+{
+  "head": "75e3ce76cd7709b1704e468c33d66a44b32c9be7",
+  "host": "Linux gate host; Docker is unavailable on our hosts",
+  "id": "solr-18169-docker-followup-linux-check-20261107",
+  "job": "solr-18169-docker-followup-linux-check-20261107",
+  "requirements": [
+    "Run tidy and report any tracked changes; formatting changes invalidate this head's proof",
+    "Run check -x test and record command and results",
+    "Docker testDocker for both full and slim remains separately pending GitHub Actions or another Docker-capable environment; do not claim it passed"
+  ],
+  "source": "nick-boss-tech/solr:solr-18169-docker-ci-followup",
+  "summary": "Run non-Docker Linux checks for the PR 5289 Docker regression follow-up",
+  "type": "assignment"
+}
