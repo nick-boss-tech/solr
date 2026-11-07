@@ -1,0 +1,5 @@
+PR 5305 ignored-field sibling fixes gate, round 1 (phone agent)
+Candidate F: 219fee78bf7cae5039e50fe885108a1d4937ccd3
+Archive: pr-5305-ignored-fields-round-1-evidence.tar.gz
+SHA-256: b57cddb838c83b7c9dd1d878ab9bc8dbb159e8714ea9f75f9f1dccfc35038d5d
+Receipt: receipts/PR-5305-ignored-fields-round-1.md
