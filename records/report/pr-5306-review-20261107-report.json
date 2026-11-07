@@ -1,0 +1,11 @@
+{
+  "evidence": "https://github.com/apache/solr/pull/5306; https://github.com/apache/solr/actions/runs/42283177177",
+  "head": "01c65183ab01411e292c90ba5ab10c1c7056c219",
+  "id": "pr-5306-review-20261107-report",
+  "job": "pr-5306-review-20261107",
+  "limitations": "No Windows build or test; no PR comment or source change.",
+  "review": "C:/Users/shaninna/dev/Solr-issues/research/branch-reviews/2026-11-07-pr-batch/SOLR-18527-review.md",
+  "summary": "Read-only source review found unrestricted recursive deletion of the selected example home, including unrelated preexisting data, when --no-prompt is used. Script workflow is incomplete: ordinary script step passed and experimental picocli step cancelled.",
+  "type": "report",
+  "verdict": "not ready"
+}
