@@ -1,0 +1,15 @@
+{
+  "head": "c01cf98310aaae0969791132979d48dbee3e6d17",
+  "host": "Linux gate host; Docker unavailable on our hosts",
+  "id": "pr-5310-ci-followup-linux-20261107",
+  "job": "pr-5310-ci-followup-linux-20261107",
+  "requirements": [
+    "Run tidy and report any tracked changes",
+    "Run check -x test and record exact-head results",
+    "Docker testDocker on full and slim is separate and requires a Docker-capable environment; do not treat these checks as Docker proof"
+  ],
+  "source": "nick-boss-tech/solr:solr-18169-docker-ci-followup",
+  "summary": "Check the PR 5310 CI repair on Linux without Docker",
+  "supersedes": "solr-18169-docker-followup-linux-check-20261107",
+  "type": "assignment"
+}
