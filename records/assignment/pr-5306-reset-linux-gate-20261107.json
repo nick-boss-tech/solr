@@ -1,0 +1,13 @@
+{
+  "base": "01c65183ab01411e292c90ba5ab10c1c7056c219",
+  "head": "f9bc92c5a38b082a0dd3cc2fd1f1f64f54d1f22b",
+  "id": "pr-5306-reset-linux-gate-20261107",
+  "instructions": "Claim this gate job before executing; publish a gate receipt with fresh logs and JUnit XML. No Windows execution.",
+  "intended_host": "Linux gate host; JDK 21, Git, curl, OpenSSL, free loopback ports, and the standard Solr BATS dependencies",
+  "job": "pr-5306-reset-linux-gate-20261107",
+  "related_job": "pr-5306-reset-fix-20261107",
+  "source": "nick-boss-tech/solr:solr-18527-submit",
+  "status": "open for Linux executor claim",
+  "summary": "Linux exact-head proof for PR 5306 secure example reset safety fix",
+  "type": "assignment"
+}
