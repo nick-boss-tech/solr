@@ -1,0 +1,14 @@
+{
+  "environment": "Linux gate host, no Docker",
+  "head": "2f275eccdcf092c96b25960c8b11571b784bf027",
+  "id": "pr-5310-demo-timeout-linux-20261107-gate",
+  "job": "pr-5310-demo-timeout-linux-20261107",
+  "requirements": [
+    "Run bash -n solr/docker/tests/shared.sh at the exact head.",
+    "Exercise assert_demo_unavailable in an isolated shell with a stub docker command: expected exit 1 and matching diagnostic succeeds and removes the container; an always-running container times out, fails and is forcibly removed; unexpected exit status, missing diagnostic, and inspect failure each fail. Stub sleep to avoid a real 60-second wait and capture invocations. Report commands and results.",
+    "Run ./gradlew tidy and report any tracked changes; changed files require a new committed head and new gate.",
+    "Run ./gradlew check -x test and report the exact outcome.",
+    "Full and slim :solr:docker:testDocker require real Docker and remain pending in GitHub Actions; do not describe the stub or non-Docker checks as Docker proof."
+  ],
+  "type": "gate"
+}
