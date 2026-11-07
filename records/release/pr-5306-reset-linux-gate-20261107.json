@@ -1,0 +1,9 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "Final receipt: https://raw.githubusercontent.com/nick-boss-tech/solr/ae9a43ede88fa9988b465270dfd037fd9c1f5997/records/receipt/pr-5306-reset-linux-gate-20261107-receipt.json . Gate report: https://raw.githubusercontent.com/nick-boss-tech/solr/143d1c764642019d9572a5654b19653c483444e8/records/report/pr-5306-reset-linux-gate-20261107-report.json . Evidence pointer: https://raw.githubusercontent.com/nick-boss-tech/solr/d0b5cf0fc428c0c8be3db7ad85a85559d783e760/records/evidence/pr-5306-reset-linux-gate-20261107-evidence-bundle.json . The 72,680-byte archive is pinned at https://raw.githubusercontent.com/nick-boss-tech/solr/52bb1d76965f097aef53121b1a40e33a5d2c1cab/artifacts/pr-5306-reset-linux-gate-20261107-evidence.tar.gz with SHA-256 294fa7040d27566d87defd2389d6fa40fa01636de53dc23f24b8d262ff62a6ad. All gate commands and background jobs completed; the final check exited 0. Both gate-owned baseline test nodes were stopped after process verification; no live Solr test nodes remained, the phone-agent-2 Gradle lock was free, and the running-job list was empty at release time. The evidence bundle includes the cleanup log and inode samples.",
+  "id": "pr-5306-reset-linux-gate-20261107",
+  "job": "pr-5306-reset-linux-gate-20261107",
+  "reason": "The exact-head Linux gate is complete. All required proof legs have been recorded, the evidence archive and its pointer are published, and no further execution work remains for this claim.",
+  "recorded_at_utc": "2026-11-07T18:18:00Z",
+  "type": "release"
+}
