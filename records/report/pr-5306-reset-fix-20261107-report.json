@@ -1,0 +1,11 @@
+{
+  "base": "01c65183ab01411e292c90ba5ab10c1c7056c219",
+  "gate_job": "pr-5306-reset-linux-gate-20261107",
+  "head": "f9bc92c5a38b082a0dd3cc2fd1f1f64f54d1f22b",
+  "id": "pr-5306-reset-fix-20261107-report",
+  "job": "pr-5306-reset-fix-20261107",
+  "limitations": "No Gradle or tests on Windows. git diff --check passed. Original PR was not modified or commented on.",
+  "source": "https://github.com/nick-boss-tech/solr/tree/solr-18527-submit",
+  "summary": "Implemented ownership marker, unowned/symlink/install-root refusal, safe rerun coverage and tutorial update; fork head verified. Linux proof pending.",
+  "type": "report"
+}
