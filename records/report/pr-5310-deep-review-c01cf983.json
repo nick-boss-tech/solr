@@ -1,0 +1,12 @@
+{
+  "disposition": "Read-only review; no source changes or public comments. Bound and clean up the test on timeout, then obtain fresh exact-head Linux and full/slim Docker proof.",
+  "head": "c01cf98310aaae0969791132979d48dbee3e6d17",
+  "id": "pr-5310-deep-review-c01cf983",
+  "job": "pr-5310-deep-review-20261107",
+  "pr": "https://github.com/apache/solr/pull/5310",
+  "review": "C:/Users/shaninna/dev/Solr-issues/research/branch-reviews/2026-11-07-pr-batch/PR-5310-deep-review.md",
+  "summary": "Deeper source review found that the slim demo assertion has no timeout; if solr-demo unexpectedly starts successfully the test blocks instead of failing promptly, potentially until the workflow timeout. The shared helper affects both slim demo cases.",
+  "type": "report",
+  "verdict": "needs work",
+  "verification": "git diff --check passed; no Gradle or Docker run on Windows; full and slim Docker CI at this head remain action_required; no receipt for the separate no-Docker Linux gate at the reviewed board snapshot."
+}
