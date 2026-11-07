@@ -1,0 +1,11 @@
+{
+  "head": "2f275eccdcf092c96b25960c8b11571b784bf027",
+  "id": "pr-5310-demo-timeout-fix-2f275ecc",
+  "job": "pr-5310-demo-timeout-fix-20261107",
+  "pr": "https://github.com/apache/solr/pull/5310",
+  "public_actions": "No public comment or PR description edit authorized for this follow-up.",
+  "review": "Only solr/docker/tests/shared.sh changed; git diff --check passed; reviewed run, inspect, exit status, log and cleanup branches. No Gradle, Docker, compilation or test execution on Windows.",
+  "summary": "Pushed a bounded 60-second poll of the named slim demo container, explicit timeout failure, and container removal. Expected failure still requires exit status 1 and the full-distribution diagnostic; both slim demo cases share the helper.",
+  "type": "report",
+  "verification": "Full and slim Docker remain unverified. New Docker workflow https://github.com/apache/solr/actions/runs/42400920756 is action_required at this head. The prior Linux gate pr-5310-ci-followup-linux-20261107 covers c01cf98310aaae0969791132979d48dbee3e6d17 and is superseded for the new head; it had no claim at board snapshot ae85caf17997a5eabb0164ecedc1ddda5b013bae. The new no-Docker gate is pr-5310-demo-timeout-linux-20261107."
+}
