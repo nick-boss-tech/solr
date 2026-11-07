@@ -1,0 +1,11 @@
+{
+  "comment": "https://github.com/apache/solr/pull/5310#discussion_r4503457707",
+  "head": "2f275eccdcf092c96b25960c8b11571b784bf027",
+  "id": "pr-5310-comment-evaluation-2f275ecc",
+  "job": "pr-5310-comment-evaluation-20261107",
+  "review": "C:/Users/shaninna/dev/Solr-issues/research/branch-reviews/2026-11-07-pr-batch/PR-5310-deep-review.md",
+  "scope": "Read-only evaluation; no code or public replies.",
+  "summary": "Eric's complexity concern is valid: the shared helper polls, inspects, checks logs and removes the container, and both slim demo cases repeat the same negative assertion. Recommend preserving the diagnostic, bounded wait and cleanup while simplifying and keeping one slim negative assertion; replacing the wait with a timeout executable needs a portability check. Skipping slim demos altogether is simpler but removes diagnostic coverage.",
+  "type": "report",
+  "verification": "GitHub https://github.com/apache/solr/actions/runs/42400920756 completed successfully at this exact head: both full and slim jobs built images and passed their Docker test steps. Gradle precommit and changelog checks also passed. A future patch requires fresh exact-head verification."
+}
