@@ -1,0 +1,10 @@
+{
+  "head": "332ca62da783073ef8f1e233af5fd18985590039",
+  "host": "Linux gate host without Docker",
+  "id": "pr-5310-demo-simplified-linux-20261107",
+  "job": "pr-5310-demo-simplified-linux-20261107",
+  "source": "nick-boss-tech/solr:solr-18169-docker-ci-followup",
+  "summary": "Verify PR 5310's simplified slim demo helper at the exact pushed head without Docker; real full and slim Docker proof remains separate.",
+  "supersedes": "pr-5310-demo-timeout-linux-20261107",
+  "type": "assignment"
+}
