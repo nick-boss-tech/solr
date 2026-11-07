@@ -1,0 +1,12 @@
+{
+  "environment": "Linux gate host, no Docker",
+  "head": "75e3ce76cd7709b1704e468c33d66a44b32c9be7",
+  "id": "solr-18169-docker-followup-linux-check-20261107-gate",
+  "job": "solr-18169-docker-followup-linux-check-20261107",
+  "requirements": [
+    "./gradlew tidy, report tracked changes",
+    "./gradlew check -x test",
+    "Docker full and slim testDocker proof is separately pending; no Docker execution is requested on this host"
+  ],
+  "type": "gate"
+}
