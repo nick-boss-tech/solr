@@ -1,0 +1,10 @@
+{
+  "head": "2f275eccdcf092c96b25960c8b11571b784bf027",
+  "id": "pr-5310-scope-body-edit-20261107",
+  "job": "pr-5310-scope-body-20261107",
+  "pr": "https://github.com/apache/solr/pull/5310",
+  "readback": "2026-11-07T18:49:50Z: stored body matches draft, head and ready state unchanged, discussion counts and inline comment IDs unchanged. Prior CI status and links were deliberately preserved at Nick's earlier instruction; the old CI wording is stale.",
+  "review": "C:/Users/shaninna/dev/Solr-issues/research/branch-reviews/2026-11-07-pr-batch/PR-5310-deep-review.md",
+  "summary": "At Nick's explicit request, updated the PR body to explain that 14 of 20 changed files are test scripts replacing the missing fixture, and clarified distribution wiring and the slim demo timeout.",
+  "type": "report"
+}
