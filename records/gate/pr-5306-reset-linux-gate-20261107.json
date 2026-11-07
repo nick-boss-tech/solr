@@ -1,0 +1,24 @@
+{
+  "acceptance": [
+    "All named commands pass at the exact head; tidy makes no source changes. Stop and report any formatting change rather than treating that head as green.",
+    "Both CLI modes execute all four reset-safety cases and the secure example startup plus marked-directory rerun; no skips. Picocli task also runs its configured curated suites. Preserve fresh BATS JUnit XML, logs, exit codes, source head and environment.",
+    "Negative proof: in a separate clean checkout at contributor head 01c65183ab01411e292c90ba5ab10c1c7056c219, copy only solr/packaging/test/test_secure_example_reset.bats from the offered head, then run ./gradlew :solr:packaging:integrationTests --tests test_secure_example_reset.bats -Ptests.seed=18527C0FFEE. Require the unowned-home regression to fail for the missing refusal or deleted sentinel, not because of setup, compilation, skips or harness errors. All test homes and the fake installation must be isolated under BATS_TEST_TMPDIR; never target a real Solr installation or non-test data. Capture baseline logs and JUnit XML.",
+    "Confirm the regression tests preserve sentinel data at the offered head; check symlink and fake installation tests and the successful rerun. Report each proof leg individually and distinguish failures from environmental issues."
+  ],
+  "branch": "nick-boss-tech/solr:solr-18527-submit",
+  "commands": [
+    "./gradlew tidy",
+    "git diff --exit-code",
+    "./gradlew :solr:packaging:integrationTests --tests test_secure_example.bats --tests test_secure_example_reset.bats -Ptests.seed=18527C0FFEE",
+    "./gradlew :solr:packaging:integrationTestsPicocli --tests test_secure_example.bats --tests test_secure_example_reset.bats -Ptests.seed=18527C0FFEE",
+    "./gradlew check -x test -Ptests.seed=18527C0FFEE"
+  ],
+  "contributor_head": "01c65183ab01411e292c90ba5ab10c1c7056c219",
+  "environment": "Clean Linux checkout at exact fork head, JDK 21, openssl and curl installed, network/dependency access, loopback and free Solr/ZooKeeper ports; preserve security defaults.",
+  "head": "f9bc92c5a38b082a0dd3cc2fd1f1f64f54d1f22b",
+  "id": "pr-5306-reset-linux-gate-20261107",
+  "job": "pr-5306-reset-linux-gate-20261107",
+  "receipt": "Publish records/receipt/<unique-id>.json for this gate job with gate ID, exact head, verdict and all proof legs; provide retrievable evidence locations and hashes.",
+  "seed": "18527C0FFEE",
+  "type": "gate"
+}
