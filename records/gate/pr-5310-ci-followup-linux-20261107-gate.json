@@ -1,0 +1,12 @@
+{
+  "environment": "Linux gate host, no Docker",
+  "head": "c01cf98310aaae0969791132979d48dbee3e6d17",
+  "id": "pr-5310-ci-followup-linux-20261107-gate",
+  "job": "pr-5310-ci-followup-linux-20261107",
+  "requirements": [
+    "./gradlew tidy, report tracked changes",
+    "./gradlew check -x test",
+    "Full and slim testDocker remain pending separately"
+  ],
+  "type": "gate"
+}
