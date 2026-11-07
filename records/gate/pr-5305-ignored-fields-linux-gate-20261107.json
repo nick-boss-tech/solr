@@ -1,0 +1,40 @@
+{
+  "acceptance": [
+    "At clean exact F, tidy succeeds without tracked changes. The two modified classes execute all 10 core and 9 ICU methods with no errors, failures or skips; all ignored and docValues preservation methods must execute, including all five Trie subclasses. Save fresh XML before another cleanTest.",
+    "Neighboring core and ICU suites pass with per-class XML and counts; BasicFunctionalityTest.testIgnoredFields executes and passes. Identify all assumptions/skips individually; no required boundary can be skipped. Root check succeeds with no additional task exclusions.",
+    "Verify source/test hashes, overlay identity, exact heads/tree, final clean status and live fork ref; record commands, exit codes, failures, environment, method counts and skips, and retrievable logs/XML with hashes. The six core negative methods include the test utility; six production siblings comprise five core classes plus ICU. DocValues assertions are preservation coverage, not mutation-proven unless separately demonstrated."
+  ],
+  "branch": "nick-boss-tech/solr:pr-5305-solr-18627-ignored-fields",
+  "contributor_head": "00292cd3729126194235e939afe38e351d850c70",
+  "environment": "Clean detached Linux worktrees, JDK 21, build lock and adequate disk/inodes, working Gradle dependencies and ICU/Mockito fixture. Keep logs and runner outside source; do not alter security defaults.",
+  "fail_before": {
+    "acceptance": "Require exactly the six named core ignored-field methods to fail at their corresponding List.of(null) boundaries, with four core controls passing (10 methods total); ICU ignored-field test fails at its List.of(null) boundary with eight ICU methods passing (9 total); contributor integration control passes. Save fresh logs/XML after each command. Setup, compile errors, wrong exceptions, unexpected passes or skips are not negative proof. See linked legacy gate for each method and originating class.",
+    "commands": [
+      "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.schema.PrimitiveFieldTypeTest -Ptests.seed=18627C0DE -Ptests.failfast=false -Ptests.maxfailures=100",
+      "./gradlew :solr:modules:analysis-extras:cleanTest :solr:modules:analysis-extras:test --tests org.apache.solr.schema.TestICUCollationField -Ptests.seed=18627C0DE -Ptests.failfast=false -Ptests.maxfailures=100",
+      "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.BasicFunctionalityTest.testIgnoredFields -Ptests.seed=18627C0DE"
+    ],
+    "setup": "In a fresh detached F worktree, retain both F test files and contributor StrField fix, restore only BinaryField.java, BoolField.java, CollationField.java, SortableTextField.java, TrieField.java, ICUCollationField.java and test-framework SortableBinaryField.java from contributor O. Follow legacy gate's full paths, record overlay diff, hashes and synthetic overlay tree; verify restored files byte-identical to O and tests byte-identical to F. Never push overlay."
+  },
+  "full_protocol": "https://github.com/nick-boss-tech/solr/blob/d3a0709eecf1cb729a09446cd954586bc40e37d7/gates/pr-5305-ignored-fields-round-1.md",
+  "head": "219fee78bf7cae5039e50fe885108a1d4937ccd3",
+  "id": "pr-5305-ignored-fields-linux-gate-20261107",
+  "job": "pr-5305-ignored-fields-linux-gate-20261107",
+  "positive_commands": [
+    "./gradlew tidy",
+    "git diff --check",
+    "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.schema.PrimitiveFieldTypeTest -Ptests.seed=18627C0DE",
+    "./gradlew :solr:modules:analysis-extras:cleanTest :solr:modules:analysis-extras:test --tests org.apache.solr.schema.TestICUCollationField -Ptests.seed=18627C0DE",
+    "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.BasicFunctionalityTest --tests org.apache.solr.schema.BooleanFieldTest --tests org.apache.solr.schema.TestBinaryField --tests org.apache.solr.schema.TestSortableTextField --tests org.apache.solr.TestTrie --tests org.apache.solr.schema.TestCollationField --tests org.apache.solr.schema.TestCollationFieldDocValues --tests org.apache.solr.schema.DocValuesTest --tests org.apache.solr.schema.DocValuesMultiTest --tests org.apache.solr.schema.TestUseDocValuesAsStored -Ptests.seed=18627C0DE",
+    "./gradlew :solr:modules:analysis-extras:cleanTest :solr:modules:analysis-extras:test --tests org.apache.solr.schema.TestICUCollationFieldDocValues -Ptests.seed=18627C0DE",
+    "./gradlew check -x test"
+  ],
+  "preflight": [
+    "Reconcile actual Linux executor state and late legacy writes as specified in the assignment; a missing claim is not proof that a worker stopped. Verify fork head, exact tree and contributor direct parent before execution.",
+    "Use detached tidy preflight under the legacy job repair rules. If formatting or source changes, do not report this head green; push scoped repair only as authorized and create a superseding exact-head gate. Record unexpected test failures and investigate before any retry; do not weaken tests or exclude required tasks."
+  ],
+  "receipt": "Publish a v2 receipt with this gate ID, exact head, verdict and every proof leg, plus a report and accessible evidence locations/hashes. Reconcile the current PR head and discussion for a factual future comment draft; do not post a comment or alter the public PR under this assignment.",
+  "seed": "18627C0DE",
+  "tree": "0f979d6c070da09f889b829f51c915743df77239",
+  "type": "gate"
+}
