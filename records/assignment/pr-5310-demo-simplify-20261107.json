@@ -1,0 +1,10 @@
+{
+  "head": "2f275eccdcf092c96b25960c8b11571b784bf027",
+  "host": "Windows implementation host; no Gradle or Docker",
+  "id": "pr-5310-demo-simplify-20261107",
+  "job": "pr-5310-demo-simplify-20261107",
+  "source": "https://github.com/apache/solr/pull/5310#discussion_r4503457707",
+  "successor_of": "pr-5310-comment-evaluation-20261107",
+  "summary": "At Nick's direction, simplify the slim demo assertion while preserving its bounded wait, cleanup and diagnostic check; retain one slim negative case and the full demo/Tini cases; push and request fresh proof.",
+  "type": "assignment"
+}
