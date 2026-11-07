@@ -1,0 +1,10 @@
+{
+  "head": "332ca62da783073ef8f1e233af5fd18985590039",
+  "id": "pr-5310-demo-body-edit-20261107",
+  "job": "pr-5310-demo-body-20261107",
+  "pr": "https://github.com/apache/solr/pull/5310",
+  "readback": "2026-11-07T20:22:25Z: stored body matched draft; head, ready state, discussion counts and inline comment IDs unchanged. Prior CI wording and links were intentionally preserved at Nick's earlier instruction; that wording remains stale.",
+  "review": "C:/Users/shaninna/dev/Solr-issues/research/branch-reviews/2026-11-07-pr-batch/PR-5310-deep-review.md",
+  "summary": "At Nick's explicit direction, corrected the single PR description sentence to say the regular slim demo test checks the error and the slim Tini case is skipped; the full-image checks remain.",
+  "type": "report"
+}
