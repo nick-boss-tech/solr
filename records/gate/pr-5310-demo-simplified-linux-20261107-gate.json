@@ -1,0 +1,14 @@
+{
+  "environment": "Linux gate host, no Docker",
+  "head": "332ca62da783073ef8f1e233af5fd18985590039",
+  "id": "pr-5310-demo-simplified-linux-20261107-gate",
+  "job": "pr-5310-demo-simplified-linux-20261107",
+  "requirements": [
+    "Run bash -n on solr/docker/tests/shared.sh, solr/docker/tests/cases/demo/test.sh, and solr/docker/tests/cases/demo-tini/test.sh at the exact head.",
+    "Exercise assert_demo_unavailable in an isolated shell with a stub Docker command: exit status 1 and matching diagnostic succeeds and removes the container; an always-running container times out, fails and is forcibly removed; wrong exit status, missing diagnostic, failed inspect and failed logs each fail. Stub sleep to avoid a real 60-second wait. Capture actual commands, stub behavior and results.",
+    "Run ./gradlew tidy and report tracked changes; changed files require a new committed head and gate.",
+    "Run ./gradlew check -x test and record the result.",
+    "Full and slim :solr:docker:testDocker require real Docker and remain pending separately in GitHub Actions. Do not call stub or non-Docker checks Docker proof."
+  ],
+  "type": "gate"
+}
