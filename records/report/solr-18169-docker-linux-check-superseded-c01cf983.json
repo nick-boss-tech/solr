@@ -1,0 +1,8 @@
+{
+  "head": "75e3ce76cd7709b1704e468c33d66a44b32c9be7",
+  "id": "solr-18169-docker-linux-check-superseded-c01cf983",
+  "job": "solr-18169-docker-followup-linux-check-20261107",
+  "new_job": "pr-5310-ci-followup-linux-20261107",
+  "summary": "Superseded: PR 5310 now points to c01cf98310aaae0969791132979d48dbee3e6d17; do not run this old-head gate as proof of the updated PR. New exact-head assignment is pr-5310-ci-followup-linux-20261107. No claim for the prior gate was present at board snapshot e9d18cf9f7239156c9f059baabaad1247c182c39.",
+  "type": "report"
+}
