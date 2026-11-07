@@ -1,0 +1,10 @@
+{
+  "head": "c01cf98310aaae0969791132979d48dbee3e6d17",
+  "host": "Windows review host; no Gradle or Docker",
+  "id": "pr-5310-deep-review-20261107",
+  "job": "pr-5310-deep-review-20261107",
+  "source": "https://github.com/apache/solr/pull/5310",
+  "successor_of": "pr-5310-ci-review-followup-20261107",
+  "summary": "Read-only deeper review of PR 5310 at its live head, including Docker workflow, changed test paths, and available proof.",
+  "type": "assignment"
+}
