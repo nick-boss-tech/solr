@@ -1,0 +1,8 @@
+{
+  "id": "pr-5310-scope-body-20261107",
+  "job": "pr-5310-scope-body-20261107",
+  "source": "https://github.com/apache/solr/pull/5310",
+  "successor_of": "pr-5310-demo-timeout-fix-20261107",
+  "summary": "At Nick's explicit direction, clarify the PR description's scope, preserve the existing proof and CI wording, and verify the stored body.",
+  "type": "assignment"
+}
