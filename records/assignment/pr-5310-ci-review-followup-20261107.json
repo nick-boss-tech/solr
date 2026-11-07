@@ -1,0 +1,17 @@
+{
+  "deliverables": [
+    "Review and fix CI failure and address reviewer concerns",
+    "Push the exact follow-up to the fork PR branch",
+    "Request exact-head Linux checks and track external Docker CI",
+    "Report actual proof and limitations"
+  ],
+  "evidence": "Prior implementation worker completed and released; current board shows no claim for the prior Linux check. Both exact-head Docker CI matrix jobs fail at build.gradle line 783 before test cases execute. Review requests JSON consideration, simpler demo handling, and explanation of the distribution setting.",
+  "head": "75e3ce76cd7709b1704e468c33d66a44b32c9be7",
+  "host": "Windows implementation; no Docker or Gradle",
+  "id": "pr-5310-ci-review-followup-20261107",
+  "job": "pr-5310-ci-review-followup-20261107",
+  "source": "https://github.com/apache/solr/pull/5310",
+  "successor_of": "solr-18169-docker-followup-20261107",
+  "summary": "Address PR 5310 Docker CI failures and reviewer comments",
+  "type": "assignment"
+}
