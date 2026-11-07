@@ -1,0 +1,13 @@
+{
+  "comment": "https://github.com/apache/solr/pull/5289#issuecomment-6703991095",
+  "docker_run": "https://github.com/apache/solr/actions/runs/42352448043",
+  "docker_status": "action_required; neither distribution has run",
+  "head": "75e3ce76cd7709b1704e468c33d66a44b32c9be7",
+  "id": "solr-18169-docker-followup-review-75e3ce76",
+  "job": "solr-18169-docker-followup-20261107",
+  "limitations": "Windows ran no Gradle or Docker; CI approval is needed. Linux gate cannot provide Docker proof.",
+  "pr": "https://github.com/apache/solr/pull/5310",
+  "review": "C:/Users/shaninna/dev/Solr-issues/research/pr5310-review-2026-11-07.md",
+  "summary": "Implemented and reviewed the Docker follow-up; PR 5310 is open as a draft. Fourteen tests use an inline XML document, demo cases distinguish the configured distribution, and CI has full/slim jobs. No remaining source-level finding in reviewed scope; exact-head Docker proof and Linux checks remain pending.",
+  "type": "report"
+}
