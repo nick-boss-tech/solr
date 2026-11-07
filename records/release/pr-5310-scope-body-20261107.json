@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-pr5310-scope-body",
+  "evidence": "Report pr-5310-scope-body-edit-20261107 records read-back and PR head; no build or test executor was started.",
+  "id": "pr-5310-scope-body-20261107",
+  "job": "pr-5310-scope-body-20261107",
+  "reason": "Authorized PR body edit completed and verified",
+  "type": "release"
+}
