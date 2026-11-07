@@ -1,0 +1,28 @@
+{
+  "cleanup": "The two gate-owned test nodes were stopped after command-line verification; no live Solr test nodes remained, and the build lock was free at completion. Test temp homes, partial download and disposable baseline checkout were removed; logs and JUnit were retained.",
+  "contributor_base": "01c65183ab01411e292c90ba5ab10c1c7056c219",
+  "environment_and_safety": "phone-agent-2 Linux, Ubuntu 24.04.4, OpenJDK 21.0.12.1, BATS 1.10.0; Docker unavailable. All Gradle/build legs were serialized behind the phone-agent-2 lock and guarded. Lowest free-inode sample was 20.9295% across 631 samples, above the 15% stop threshold. No source, PR, Jira or original coordination-ui checkout state was changed.",
+  "evidence_location": "https://raw.githubusercontent.com/nick-boss-tech/solr/52bb1d76965f097aef53121b1a40e33a5d2c1cab/artifacts/pr-5306-reset-linux-gate-20261107-evidence.tar.gz",
+  "evidence_pointer_id": "pr-5306-reset-linux-gate-20261107-evidence-bundle",
+  "evidence_sha256": "294fa7040d27566d87defd2389d6fa40fa01636de53dc23f24b8d262ff62a6ad",
+  "gate": "pr-5306-reset-linux-gate-20261107",
+  "head": "f9bc92c5a38b082a0dd3cc2fd1f1f64f54d1f22b",
+  "id": "pr-5306-reset-linux-gate-20261107-report",
+  "job": "pr-5306-reset-linux-gate-20261107",
+  "limitations": [
+    "Three Docker-dependent Tika extraction cases in the Picocli curated suite were skipped because Docker is unavailable; this was authorized by the active claim and user instruction. No required secure-example or reset-safety case was skipped.",
+    "The unchanged raw baseline JUnit XML contains 1,408 literal backspace controls and is not strict XML 1.0; a sanitized copy is included and parses to the same failures."
+  ],
+  "proof_summary": {
+    "baseline_negative": "At contributor base, the copied reset test alone ran and returned 1 as expected; the unowned-home command succeeded where refusal was expected. JUnit: 4 assertion failures, 0 errors, 0 skips.",
+    "final_check": "./gradlew check -x test -Ptests.seed=18527C0FFEE returned 0 after cleanup; CLI docs and Antora/site checks passed.",
+    "picocli_cli": "47 tests, 0 failures, 3 Docker-dependent Tika extraction skips; all six required secure/reset tests passed without skips. The skips were explicitly authorized and not counted as passed.",
+    "standard_cli": "6/6 targeted tests passed, 0 failures, 0 skips.",
+    "tidy_and_diff": "./gradlew tidy and git diff --exit-code both returned 0; no source changes."
+  },
+  "recorded_at_utc": "2026-11-07T18:16:25Z",
+  "retry_history": "The first full-check attempt hit an Antora UI-bundle download timeout. A later attempt failed during CLI documentation generation while two gate-owned Solr processes from the baseline negative run remained. Both processes were verified and stopped; the final exact-head full check then passed.",
+  "source": "https://github.com/nick-boss-tech/solr/tree/solr-18527-submit",
+  "summary": "The exact-head Linux gate passed: tidy left the source unchanged; both CLI modes passed every required secure-example/reset case; the final full check passed; and the contributor-base negative control reproduced the unowned-home regression.",
+  "type": "report"
+}
