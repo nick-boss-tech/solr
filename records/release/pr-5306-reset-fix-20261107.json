@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr-5306-reset-fix",
+  "evidence": "records/report/pr-5306-reset-fix-20261107-report.json and records/gate/pr-5306-reset-linux-gate-20261107.json; Windows implementation worker has stopped editing; no local test executor was started.",
+  "id": "pr-5306-reset-fix-20261107",
+  "job": "pr-5306-reset-fix-20261107",
+  "reason": "Implementation complete and exact-head Linux gate handed off",
+  "type": "release"
+}
