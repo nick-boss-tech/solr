@@ -1,0 +1,133 @@
+{
+  "check_attempt_history": [
+    {
+      "attempt": "initial",
+      "command": "./gradlew check -x test -Ptests.seed=18527C0FFEE",
+      "exit_code": 1,
+      "result": "Antora UI-bundle download timed out; retained as an earlier failed attempt, not counted as passing proof."
+    },
+    {
+      "attempt": "retry before cleanup",
+      "command": "./gradlew check -x test -Ptests.seed=18527C0FFEE",
+      "exit_code": 1,
+      "result": "CLI documentation generation failed while two local Solr test processes from the baseline negative run remained active. Both gate-owned processes were verified and stopped."
+    },
+    {
+      "attempt": "final after cleanup",
+      "command": "./gradlew check -x test -Ptests.seed=18527C0FFEE",
+      "exit_code": 0,
+      "result": "passed; successful CLI-doc freshness and Antora/site checks are in the final log."
+    }
+  ],
+  "cleanup": {
+    "baseline_test_processes_stopped": 2,
+    "build_lock_free_after_completion": true,
+    "final_live_solr_test_nodes": 0,
+    "temporary_data": "Gate BATS homes, partial download, and disposable contributor-base checkout removed; logs and JUnit evidence retained.",
+    "verification": "Process command lines were checked against this gate's isolated BATS temp tree before graceful termination."
+  },
+  "environment": {
+    "bats": "Bats 1.10.0",
+    "build_lock": "/workspace/tools/.gradle-phone-agent-2.lock",
+    "docker": "unavailable; not installed",
+    "host_id": "phone-agent-2",
+    "inode_samples": 631,
+    "inode_stop_floor_percent": 15.0,
+    "java": "OpenJDK 21.0.12.1",
+    "minimum_free_inode_percent": 20.9295,
+    "platform": "Ubuntu 24.04.4 x86_64 Linux"
+  },
+  "evidence": [
+    {
+      "bytes": 72680,
+      "contents": "README.md, SHA256SUMS, environment and source heads, exact commands and exit codes, all fresh positive/baseline logs and JUnit XML, raw and sanitized baseline reports, final check log, inode samples, cleanup records, and the exact BATS reset test with hash.",
+      "location": "https://raw.githubusercontent.com/nick-boss-tech/solr/52bb1d76965f097aef53121b1a40e33a5d2c1cab/artifacts/pr-5306-reset-linux-gate-20261107-evidence.tar.gz",
+      "pointer_record_id": "pr-5306-reset-linux-gate-20261107-evidence-bundle",
+      "pointer_record_path": "records/evidence/pr-5306-reset-linux-gate-20261107-evidence-bundle.json",
+      "sha256": "294fa7040d27566d87defd2389d6fa40fa01636de53dc23f24b8d262ff62a6ad"
+    }
+  ],
+  "gate": "pr-5306-reset-linux-gate-20261107",
+  "head": "f9bc92c5a38b082a0dd3cc2fd1f1f64f54d1f22b",
+  "id": "pr-5306-reset-linux-gate-20261107-receipt",
+  "job": "pr-5306-reset-linux-gate-20261107",
+  "limitations": [
+    "Three Docker-dependent Tika extraction tests in the Picocli configured suite were skipped because Docker is unavailable; all six required startup/reset cases passed in both CLI modes without skips.",
+    "The raw baseline JUnit XML is preserved but contains 1,408 literal backspace controls from test progress output and is not strict XML 1.0. A separate visibly escaped copy is included and parses to the same four assertion failures.",
+    "The receipt covers only the exact source head and proof legs listed here; it does not assert behavior outside those checks."
+  ],
+  "proof_legs": [
+    {
+      "command": "./gradlew tidy",
+      "exit_code": 0,
+      "name": "tidy",
+      "result": "passed"
+    },
+    {
+      "command": "git diff --exit-code",
+      "exit_code": 0,
+      "name": "source diff after tidy",
+      "result": "passed; no source changes"
+    },
+    {
+      "command": "./gradlew :solr:packaging:integrationTests --tests test_secure_example.bats --tests test_secure_example_reset.bats -Ptests.seed=18527C0FFEE",
+      "exit_code": 0,
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 6
+      },
+      "name": "standard CLI integration tests",
+      "required_cases": "Secure-example startup, marked-directory rerun, and all four reset-safety cases passed.",
+      "result": "passed"
+    },
+    {
+      "command": "./gradlew :solr:packaging:integrationTestsPicocli --tests test_secure_example.bats --tests test_secure_example_reset.bats -Ptests.seed=18527C0FFEE",
+      "exit_code": 0,
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 3,
+        "tests": 47
+      },
+      "name": "Picocli CLI integration tests and configured suites",
+      "required_cases": "All six secure-example/reset cases passed with no skips.",
+      "result": "passed with explicitly authorized Docker-only skips",
+      "skip_detail": "Only the three Docker-dependent Tika extraction cases in test_extraction.bats were skipped because Docker was unavailable; they were not counted as passed. This is explicitly allowed by the active claim and user instruction."
+    },
+    {
+      "command": "./gradlew check -x test -Ptests.seed=18527C0FFEE",
+      "details": "BUILD SUCCESSFUL in 3m 50s; checkCliDocsUpToDate, buildLocalAntoraSite, buildLocalSite, checkSiteLinks and top-level check completed. Final checkout diff and status were clean.",
+      "exit_code": 0,
+      "name": "full exact-head check, final clean-state run",
+      "result": "passed"
+    },
+    {
+      "checkout_head": "01c65183ab01411e292c90ba5ab10c1c7056c219",
+      "command": "./gradlew :solr:packaging:integrationTests --tests test_secure_example_reset.bats -Ptests.seed=18527C0FFEE",
+      "exit_code": 1,
+      "isolation": "Test homes and fake installation were under the BATS test temporary directories; no real Solr installation or non-test data was targeted.",
+      "junit": {
+        "errors": 0,
+        "failures": 4,
+        "skipped": 0,
+        "tests": 4
+      },
+      "name": "contributor-base negative regression proof",
+      "only_untracked_file": "solr/packaging/test/test_secure_example_reset.bats",
+      "required_case": "The unowned-home case failed specifically because assert_failure observed that the command succeeded when refusal was expected; this was not a setup, compilation, skip or harness failure.",
+      "result": "expected regression reproduced"
+    }
+  ],
+  "recorded_at_utc": "2026-11-07T18:15:45Z",
+  "seed": "18527C0FFEE",
+  "source": {
+    "branch": "solr-18527-submit",
+    "contributor_base": "01c65183ab01411e292c90ba5ab10c1c7056c219",
+    "head": "f9bc92c5a38b082a0dd3cc2fd1f1f64f54d1f22b",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "receipt",
+  "verdict": "passed"
+}
