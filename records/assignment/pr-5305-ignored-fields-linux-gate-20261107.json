@@ -1,0 +1,22 @@
+{
+  "context": "Nick requested a Linux gate so the sibling repair can be offered to the PR author. Eric requested including the other affected field types in the same PR: https://github.com/apache/solr/pull/5305#issuecomment-6710843682. The contributor head's upstream checks passed, but do not cover the added sibling commit. No public comment is authorized by this gate assignment.",
+  "contributor_head": "00292cd3729126194235e939afe38e351d850c70",
+  "head": "219fee78bf7cae5039e50fe885108a1d4937ccd3",
+  "id": "pr-5305-ignored-fields-linux-gate-20261107",
+  "instructions": "Wait for the matching structured gate record before claiming. Read the linked legacy gate for the exact overlay, test hashes, expected method names, repair rules and evidence requirements; the structured gate is authoritative for current board routing. Confirm both source heads and ancestry. Claim the canonical v2 job path only after legacy execution reconciliation, then publish a receipt and report with fresh evidence. Do not run on Windows. A changed source or formatting head requires a superseding exact-head gate. Refresh PR discussion and head after proof; prepare a factual offer for the author, but do not post it under this assignment.",
+  "intended_host": "Capable Linux gate host with JDK 21 and working Gradle dependencies, ICU and Mockito test fixture; serialize under the host build lock and disk/inode guards",
+  "job": "pr-5305-ignored-fields-linux-gate-20261107",
+  "legacy_gate": "https://github.com/nick-boss-tech/solr/blob/d3a0709eecf1cb729a09446cd954586bc40e37d7/gates/pr-5305-ignored-fields-round-1.md",
+  "legacy_implementation": "https://github.com/nick-boss-tech/solr/blob/d3a0709eecf1cb729a09446cd954586bc40e37d7/reports/pr-5305-ignored-fields-implementation-round-1.md",
+  "legacy_reconciliation": "At old board d3a0709eecf1cb729a09446cd954586bc40e37d7 the only matching claim was a completed Windows implementation claim; the legacy gate was open, with no matching Linux execution claim or receipt visible. Absence is not proof that no executor is running. Before claiming or executing, refresh both boards and inspect actual Linux host execution and any late legacy writes; do not duplicate active work. Reconcile any active executor or completed matching proof before proceeding. The old board is historical and must not receive new records.",
+  "public_pr": "https://github.com/apache/solr/pull/5305",
+  "source": "nick-boss-tech/solr:pr-5305-solr-18627-ignored-fields",
+  "status": "open for Linux executor claim, subject to legacy-execution reconciliation",
+  "summary": "Linux exact-head proof for PR 5305 ignored-field sibling fixes",
+  "tags": [
+    "gate",
+    "review",
+    "records"
+  ],
+  "type": "assignment"
+}
