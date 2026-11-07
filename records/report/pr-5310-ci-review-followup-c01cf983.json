@@ -1,0 +1,14 @@
+{
+  "head": "c01cf98310aaae0969791132979d48dbee3e6d17",
+  "id": "pr-5310-ci-review-followup-c01cf983",
+  "job": "pr-5310-ci-review-followup-20261107",
+  "limitations": "No Gradle or Docker was run on Windows; source review and git diff --check only. Review-thread replies pending authorization or proof.",
+  "new_run": "https://github.com/apache/solr/actions/runs/42395961122",
+  "new_run_status": "action_required; no Docker proof at the new head",
+  "pr": "https://github.com/apache/solr/pull/5310",
+  "prior_failure": "https://github.com/apache/solr/actions/runs/42352448043",
+  "prior_failure_detail": "Both distributions fail at build.gradle line 783 before any Docker test case starts; Gradle precommit passed at the prior head.",
+  "review": "C:/Users/shaninna/dev/Solr-issues/research/pr5310-review-2026-11-07.md",
+  "summary": "Pushed a repair for both Docker jobs' unset worker property, simplified the slim demo check, and changed the test fixture to JSON. PR description was edited only to describe JSON at Nick's direction; the old CI wording and pinned commits were intentionally left unchanged.",
+  "type": "report"
+}
