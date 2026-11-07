@@ -1,0 +1,9 @@
+{
+  "head": "01c65183ab01411e292c90ba5ab10c1c7056c219",
+  "host": "Windows; no builds or tests",
+  "id": "pr-5306-review-20261107",
+  "job": "pr-5306-review-20261107",
+  "scope": "Review source, documentation, tests, discussion and CI; record findings locally. No public writes or source changes.",
+  "summary": "Read-only review of Apache Solr PR 5306, SOLR-18527, requested by Nick",
+  "type": "assignment"
+}
