@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-pr5310-timeout-fix",
+  "evidence": "Report pr-5310-demo-timeout-fix-2f275ecc records verified PR and fork head 2f275eccdcf092c96b25960c8b11571b784bf027; no local build or test executor was launched.",
+  "id": "pr-5310-demo-timeout-fix-20261107",
+  "job": "pr-5310-demo-timeout-fix-20261107",
+  "reason": "Implementation pushed; proof handed to separate Linux gate and Docker CI",
+  "type": "release"
+}
