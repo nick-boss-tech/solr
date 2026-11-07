@@ -92,4 +92,3 @@ teardown() {
   assert_success
   assert_output 'keep this data'
 }
-
