@@ -1,0 +1,8 @@
+{
+  "head": "f9bc92c5a38b082a0dd3cc2fd1f1f64f54d1f22b",
+  "id": "pr-5306-reset-linux-gate-20261107-evidence-bundle",
+  "job": "pr-5306-reset-linux-gate-20261107",
+  "location": "https://raw.githubusercontent.com/nick-boss-tech/solr/52bb1d76965f097aef53121b1a40e33a5d2c1cab/artifacts/pr-5306-reset-linux-gate-20261107-evidence.tar.gz",
+  "sha256": "294fa7040d27566d87defd2389d6fa40fa01636de53dc23f24b8d262ff62a6ad",
+  "type": "evidence"
+}
