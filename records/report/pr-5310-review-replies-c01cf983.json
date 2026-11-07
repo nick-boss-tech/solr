@@ -1,0 +1,14 @@
+{
+  "comments": [
+    "https://github.com/apache/solr/pull/5310#discussion_r4503006379",
+    "https://github.com/apache/solr/pull/5310#discussion_r4503007062",
+    "https://github.com/apache/solr/pull/5310#discussion_r4503007859"
+  ],
+  "docker_run": "https://github.com/apache/solr/actions/runs/42395961122",
+  "docker_status": "action_required at the time of posting",
+  "head": "c01cf98310aaae0969791132979d48dbee3e6d17",
+  "id": "pr-5310-review-replies-c01cf983",
+  "job": "pr-5310-ci-review-followup-20261107",
+  "summary": "At Nick's explicit direction, replied to Eric's JSON, demo simplification, and distribution-setting threads and separately read back each reply; threads remain open. The JSON reply identifies the Docker workflow as awaiting approval.",
+  "type": "report"
+}
