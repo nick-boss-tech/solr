@@ -1,0 +1,13 @@
+{
+  "claimed_at": "2026-11-07T10:21:00-07:00",
+  "environment_id": "sandbox:root:WjqhQFAOcph6TntYk7aM4m",
+  "host_id": "phone-agent-2",
+  "id": "pr-5306-reset-linux-gate-20261107",
+  "job": "pr-5306-reset-linux-gate-20261107",
+  "lock": "/workspace/tools/.gradle-phone-agent-2.lock",
+  "owner": "phone-agent-2",
+  "scope": "Run the exact-head Linux gate commands and the baseline negative proof; preserve fresh logs, BATS JUnit XML, exit codes and source-head evidence. The three Docker-dependent Tika extraction cases in the configured Picocli suite may skip because Docker is unavailable; they will not be counted as passed.",
+  "source_head": "f9bc92c5a38b082a0dd3cc2fd1f1f64f54d1f22b",
+  "toolchain": "Ubuntu 24.04.4 x86_64; OpenJDK 21.0.12.1; Git, curl and OpenSSL present; BATS 1.10.0 installed; Docker unavailable.",
+  "type": "claim"
+}
