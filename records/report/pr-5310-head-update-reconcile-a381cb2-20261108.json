@@ -1,0 +1,22 @@
+{
+  "evidence_record": "records/evidence/pr-5310-worker-dist-linux-gate-20261108-evidence.json",
+  "gate_receipt": "records/receipt/pr-5310-worker-dist-linux-gate-20261108-receipt.json",
+  "gate_verdict": "incomplete",
+  "head": "a381cb21292ed433d9911d8c8ddea1b32afd66c4",
+  "id": "pr-5310-head-update-reconcile-a381cb2-20261108",
+  "job": "pr-5310-head-update-reconcile-20261108",
+  "limitations": "No Docker command or engine was used. Full/slim image builds, container startup, and testDockerfileOfficialFull/testDockerfileOfficialSlim remain unrun. The exact-head receipt remains incomplete for these Docker-dependent legs.",
+  "passed_checks": [
+    "tidy at exact head",
+    "shell syntax and diff checks",
+    "static per-worker SOLR_DOCKER_DIST mapping and legacy-flag scan",
+    "mocked full/slim shell matrix, including unset-variable full default",
+    "check -x test after a dry-run confirmed no Docker tasks were scheduled"
+  ],
+  "pr": "https://github.com/apache/solr/pull/5310",
+  "previous_pr_head": "332ca62da783073ef8f1e233af5fd18985590039",
+  "source_branch": "nick-boss-tech/solr:solr-18169-docker-ci-followup",
+  "summary": "Updated the existing PR head to the already-gated candidate at the exact receipt head. Docker-dependent proof remains outstanding.",
+  "type": "report",
+  "update": "Fast-forwarded the existing PR source branch to the reviewed candidate, which is a direct child of the previous head. GitHub read-back confirms PR #5310 remains open on the same source branch at this exact SHA. No new PR or public comment was created."
+}
