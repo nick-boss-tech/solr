@@ -1,0 +1,15 @@
+{
+  "active_process_check": "No Gradle, Maven, Ant or Solr test/build executor was found in the initial process scan; perform a fresh open-file and lock scan immediately before deletion.",
+  "hard_stop_free_percent": 15,
+  "host_id": "phone-agent-2",
+  "id": "inode-cleanup-2026-11-08",
+  "job": "inode-cleanup-2026-11-08",
+  "no_docker": true,
+  "owner": "phone-agent-2",
+  "scope": "Owner clarified that local Solr checkouts, worktrees, logs/evidence, caches and inactive replay state may be discarded even if locally dirty; remote GitHub branches and existing coordination-v2 records must remain unchanged. New append-only cleanup records are allowed.",
+  "starting_free_percent": 21.7,
+  "starting_inode_free": 405466,
+  "starting_inode_total": 1868096,
+  "type": "claim",
+  "type_note": "Cleanup only; no build or test will be run."
+}
