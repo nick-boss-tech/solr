@@ -1,0 +1,8 @@
+{
+  "actor": "Windows Codex implementation session",
+  "evidence": "Commit 5df2caa0e59a9bbbd0d6e91e74bfbfc80797b69f pushed and independently verified; report pr-5305-test-trim-windows-20261108-report and gate pr-5305-ignored-fields-linux-gate-20261108. No local test executor was started.",
+  "id": "pr-5305-test-trim-windows-20261108",
+  "job": "pr-5305-test-trim-windows-20261108",
+  "reason": "Implementation complete; Linux proof handed off",
+  "type": "release"
+}
