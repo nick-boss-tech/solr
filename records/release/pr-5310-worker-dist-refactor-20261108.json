@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "Report records head a381cb21292ed433d9911d8c8ddea1b32afd66c4 on nick-boss-tech/solr:solr-18169-docker-dist-per-worker-20261108; remote ref read-back matched. No Docker process or test executor was started. Report: records/report/pr-5310-worker-dist-refactor-a381cb21.json.",
+  "id": "pr-5310-worker-dist-refactor-20261108",
+  "job": "pr-5310-worker-dist-refactor-20261108",
+  "reason": "Source refactor, exact-diff self-review, owner-authorized fork-branch publication, and Docker-free static/tidy proof are complete; full exact-head Linux checks are handed to a separate gate job.",
+  "type": "release"
+}
