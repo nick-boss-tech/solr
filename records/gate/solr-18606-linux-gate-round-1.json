@@ -1,0 +1,17 @@
+{
+  "base": "b771587e9707c49847d728fd1f3ff259a182692c",
+  "branch": "solr-18606-submit",
+  "environment": "Linux, JDK 21; record actual JDK, host and commit; fresh clean checkout",
+  "head": "8b6bf455ee652fef03e165e44b9a28fae04a11a8",
+  "id": "solr-18606-linux-gate-round-1",
+  "job": "solr-18606-linux-gate-round-1",
+  "requirements": [
+    "Verify fork head and clean checkout; record git SHA and status.",
+    "Run ./gradlew :solr:solrj:test --tests org.apache.solr.client.solrj.impl.CloudSolrClientCacheTest --tests org.apache.solr.client.solrj.impl.CloudSolrClientRoutingTest -Ptests.seed=18606CAFE; record fresh XML counts, skips and logs.",
+    "Run ./gradlew tidy and ./gradlew check -x test; a changed tracked file invalidates exact-head proof and needs a committed successor and new gate.",
+    "Fail-before: on base b771587e9707c49847d728fd1f3ff259a182692c overlay the two test files only, run CloudSolrClientCacheTest.testMissingCollectionRoutesThroughLiveNode and CloudSolrClientRoutingTest.testRouteWhenClientCollectionStateIsMissing with the same seed; require assertion/runtime behavior failures at the old collection-not-found path, not compilation or setup failures.",
+    "Inspect failures, no-live-node and strict-direct-leader test results, and alias/collection URL preservation. Attach fresh logs and XML; report every leg and execution condition."
+  ],
+  "type": "gate",
+  "verdict_policy": "Passing requires all requested legs at the exact head. Do not claim unexecuted checks passed."
+}
