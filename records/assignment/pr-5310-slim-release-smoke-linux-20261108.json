@@ -1,0 +1,22 @@
+{
+  "head": "dc720a2ba63aff4d2ee34beec45a173795166628",
+  "id": "pr-5310-slim-release-smoke-linux-20261108",
+  "instructions": "Read the matching gate record before claiming. Refresh the board and check actual execution/liveness of the prior investigation; a missing claim does not establish that no worker is active. Reconcile any in-flight work and evidence rather than duplicating it. Verify fork head, parent and tree. Run the named proof on real matching full and slim release artifacts. Publish a receipt with each proof leg and accessible evidence; do not post public comments, alter the PR or open another PR under this assignment.",
+  "intended_host": "Isolated non-root Linux gate host with JDK 21, Python 3, tar, Git, network/dependencies, adequate disk/inodes and the host build lock; no existing Solr on the selected ports",
+  "job": "pr-5310-slim-release-smoke-linux-20261108",
+  "parent_head": "a381cb21292ed433d9911d8c8ddea1b32afd66c4",
+  "parent_pr": "https://github.com/apache/solr/pull/5310",
+  "prior_investigation": "solr-18169-slim-smoketest-linux-investigation-20261108",
+  "related_implementation": "solr-18169-smoketest-pr5310-windows-20261108",
+  "source": "nick-boss-tech/solr:pr-5310-slim-smoketest",
+  "status": "open for Linux executor claim, subject to execution reconciliation",
+  "summary": "Verify the slim release smoketest repair on real full and slim artifacts",
+  "tags": [
+    "linux",
+    "gate",
+    "release",
+    "records"
+  ],
+  "tree": "8c87c1a2fd8531f1c2652db91b1d27ddbefcbf44",
+  "type": "assignment"
+}
