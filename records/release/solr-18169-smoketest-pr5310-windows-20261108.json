@@ -1,0 +1,8 @@
+{
+  "actor": "Windows Codex implementation session",
+  "evidence": "Fork head dc720a2ba63aff4d2ee34beec45a173795166628 verified; implementation report solr-18169-smoketest-pr5310-windows-20261108-report and separate Linux gate pr-5310-slim-release-smoke-linux-20261108. The local offline Python fixture completed and no Solr, Java or Gradle executor was started.",
+  "id": "solr-18169-smoketest-pr5310-windows-20261108",
+  "job": "solr-18169-smoketest-pr5310-windows-20261108",
+  "reason": "Patch branch pushed; real release verification handed off",
+  "type": "release"
+}
