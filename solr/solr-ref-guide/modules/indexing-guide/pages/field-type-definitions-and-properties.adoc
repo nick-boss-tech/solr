@@ -208,6 +208,8 @@ The table below includes the default value for most `FieldType` implementations 
 |`termVectors`, `termPositions`, `termOffsets`, `termPayloads` |These options instruct Solr to maintain full term vectors for each document, optionally including position, offset, and payload information for each term occurrence in those vectors. These can be used to accelerate highlighting and other ancillary functionality, but impose a substantial cost in terms of index size. They are not necessary for typical uses of Solr. |`false`
 |`required` |Instructs Solr to reject any attempts to add a document which does not have a value for this field. This property defaults to false. |`false`
 |`useDocValuesAsStored` |If the field has xref:docvalues.adoc[] enabled, setting this to true would allow the field to be returned as if it were a stored field (even if it has `stored=false`) when matching "`*`" in an xref:query-guide:common-query-parameters.adoc#fl-field-list-parameter[fl parameter]. |`true`
+
+|`matchesWildcard` |Controls whether a field is returned by `fl=*` or a field-list glob. A field set to `false` can still be requested explicitly by name or used as the source of an alias or transformer. If omitted, stored fields match and non-stored DocValues fields follow `useDocValuesAsStored`. An explicit value overrides that default. |Depends on the field
 |`large` |Large fields are always lazy loaded and will only take up space in the document cache if the actual value is < 512KB. This option requires `stored="true"` and `multiValued="false"`. It's intended for fields that might have very large values so that they don't get cached in memory. |`false`
 |===
 

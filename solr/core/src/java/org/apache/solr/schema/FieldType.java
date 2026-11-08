@@ -1289,6 +1289,9 @@ public abstract class FieldType extends FieldProperties {
       namedPropertyValues.add(getPropertyName(MULTIVALUED), hasProperty(MULTIVALUED));
       namedPropertyValues.add(getPropertyName(LARGE_FIELD), hasProperty(LARGE_FIELD));
       namedPropertyValues.add(getPropertyName(UNINVERTIBLE), hasProperty(UNINVERTIBLE));
+      if (((trueProperties | falseProperties) & MATCHES_WILDCARD) != 0) {
+        namedPropertyValues.add(getPropertyName(MATCHES_WILDCARD), hasProperty(MATCHES_WILDCARD));
+      }
       if (hasProperty(SORT_MISSING_FIRST)) {
         namedPropertyValues.add(getPropertyName(SORT_MISSING_FIRST), true);
       } else if (hasProperty(SORT_MISSING_LAST)) {

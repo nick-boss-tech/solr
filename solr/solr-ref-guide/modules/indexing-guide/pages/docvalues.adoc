@@ -118,6 +118,7 @@ For schema versions >= 1.6, the implicit default is `useDocValuesAsStored="true"
 See xref:field-type-definitions-and-properties.adoc[] and xref:fields.adoc[] for more details.
 
 When `useDocValuesAsStored="false"`, non-stored DocValues fields can still be explicitly requested by name in the xref:query-guide:common-query-parameters.adoc#fl-field-list-parameter[`fl` parameter], but will not match glob patterns (`"*"`).
+The `matchesWildcard` field property can override this behavior; see xref:field-type-definitions-and-properties.adoc#field-default-properties[Field Default Properties].
 
 Returning DocValues along with "regular" stored fields at query time has performance implications that stored fields may not because DocValues are column-oriented and may therefore incur additional cost to retrieve for each returned document.
 

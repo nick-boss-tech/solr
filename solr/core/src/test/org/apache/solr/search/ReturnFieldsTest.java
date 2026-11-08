@@ -218,6 +218,54 @@ public class ReturnFieldsTest extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testSchemaWildcardSelection() {
+    try {
+      assertU(
+          adoc(
+              "id", "wildcard-test",
+              "wild_hidden", "hidden",
+              "wild_legacy", "legacy",
+              "wild_dv_hidden", "dv-hidden",
+              "wild_dv_shown", "dv-shown",
+              "wild_type_hidden", "type-hidden",
+              "wild_type_override", "type-override",
+              "dynamic_wild_hidden", "dynamic-hidden"));
+      assertU(commit());
+      String[] wildcardAssertions = {
+        "count(//doc/*[@name='wild_hidden'])=0",
+        "count(//doc/*[@name='wild_dv_hidden'])=0",
+        "count(//doc/*[@name='wild_type_hidden'])=0",
+        "count(//doc/*[@name='dynamic_wild_hidden'])=0",
+        "count(//doc/*[@name='wild_legacy'])=1",
+        "count(//doc/*[@name='wild_dv_shown'])=1",
+        "count(//doc/*[@name='wild_type_override'])=1"
+      };
+      assertQ(req("q", "id:wildcard-test"), wildcardAssertions);
+      assertQ(req("q", "id:wildcard-test", "fl", "*"), wildcardAssertions);
+      assertQ(
+          req("q", "id:wildcard-test", "fl", "wild_*"),
+          "count(//doc/*[@name='wild_hidden'])=0",
+          "count(//doc/*[@name='wild_dv_hidden'])=0",
+          "count(//doc/*[@name='wild_dv_shown'])=1",
+          "count(//doc/*[@name='wild_legacy'])=1");
+      assertQ(
+          req("q", "id:wildcard-test", "fl", "*,wild_hidden,wild_dv_hidden"),
+          "count(//doc/*[@name='wild_hidden'])=1",
+          "count(//doc/*[@name='wild_dv_hidden'])=1");
+      assertQ(
+          req("q", "id:wildcard-test", "fl", "alias:wild_hidden"),
+          "count(//doc/*[@name='alias'])=1");
+      assertQ(
+          req("q", "id:wildcard-test", "fl", "*,alias:wild_hidden"),
+          "count(//doc/*[@name='alias'])=1",
+          "count(//doc/*[@name='wild_hidden'])=0");
+    } finally {
+      assertU(delQ("id:wildcard-test"));
+      assertU(commit());
+    }
+  }
+
+  @Test
   public void testManyParameters() {
     ReturnFields rf =
         new SolrReturnFields(req("fl", "id name", "fl", "test subject", "fl", "score"));

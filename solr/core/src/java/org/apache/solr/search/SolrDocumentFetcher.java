@@ -174,6 +174,8 @@ public class SolrDocumentFetcher {
     for (FieldInfo fieldInfo : searcher.getFieldInfos()) {
       final SchemaField schemaField = searcher.getSchema().getFieldOrNull(fieldInfo.name);
       if (schemaField == null) {
+        // Preserve indexed fields whose schema definition has since been removed.
+        allStoreds.add(fieldInfo.name);
         continue;
       }
       if (canSubstituteDvForStored(fieldInfo, schemaField)) {
@@ -830,7 +832,17 @@ public class SolrDocumentFetcher {
       final Set<String> storedFields = new HashSet<>();
       Set<String> fnames = returnFields.getLuceneFieldNames();
       if (returnFields.returnsAllFields()) {
-        return null;
+        boolean excluded = false;
+        for (String s : getAllStored()) {
+          if (returnFields.loadsField(s)) {
+            storedFields.add(s);
+          } else {
+            excluded = true;
+          }
+        }
+        if (!excluded) {
+          return null;
+        }
       } else if (returnFields.hasPatternMatching()) {
         for (String s : getAllStored()) {
           if (returnFields.loadsField(s)) {
@@ -865,7 +877,13 @@ public class SolrDocumentFetcher {
       // always return not null
       final Set<String> result = new HashSet<>();
       if (returnFields.returnsAllFields()) {
-        result.addAll(getNonStoredDVsUsedAsStored());
+        for (String s : getNonStoredDVs()) {
+          SchemaField field = searcher.getSchema().getFieldOrNull(s);
+          if (returnFields.loadsFieldExplicitly(s)
+              || (field != null && field.matchesWildcard() && returnFields.loadsField(s))) {
+            result.add(s);
+          }
+        }
         // check whether there are no additional fields
         Set<String> fieldNames = returnFields.getLuceneFieldNames(true);
         if (fieldNames != null) {
@@ -878,9 +896,10 @@ public class SolrDocumentFetcher {
         }
       } else if (returnFields.hasPatternMatching()) {
         for (String s : getNonStoredDVs()) {
-          // a glob only matches useDocValuesAsStored fields, unlike naming the field explicitly
+          // An explicitly requested field is loaded even when it does not match wildcards.
+          SchemaField field = searcher.getSchema().getFieldOrNull(s);
           if (returnFields.loadsFieldExplicitly(s)
-              || (getNonStoredDVsUsedAsStored().contains(s) && returnFields.loadsField(s))) {
+              || (field != null && field.matchesWildcard() && returnFields.loadsField(s))) {
             result.add(s);
           }
         }

@@ -149,6 +149,15 @@ public final class SchemaField extends FieldProperties implements IndexableField
     return (properties & USE_DOCVALUES_AS_STORED) != 0;
   }
 
+  /** Whether this field is included by a wildcard field list. */
+  public boolean matchesWildcard() {
+    if (args.containsKey("matchesWildcard")
+        || ((type.trueProperties | type.falseProperties) & MATCHES_WILDCARD) != 0) {
+      return (properties & MATCHES_WILDCARD) != 0;
+    }
+    return stored() || useDocValuesAsStored();
+  }
+
   public boolean multiValued() {
     return (properties & MULTIVALUED) != 0;
   }
@@ -466,6 +475,7 @@ public final class SchemaField extends FieldProperties implements IndexableField
       properties.add(getPropertyName(REQUIRED), isRequired());
       properties.add(getPropertyName(TOKENIZED), isTokenized());
       properties.add(getPropertyName(USE_DOCVALUES_AS_STORED), useDocValuesAsStored());
+      properties.add(getPropertyName(MATCHES_WILDCARD), matchesWildcard());
       // The BINARY property is always false
       // properties.add(getPropertyName(BINARY), isBinary());
     } else {

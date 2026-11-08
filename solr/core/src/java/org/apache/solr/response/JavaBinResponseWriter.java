@@ -40,6 +40,7 @@ import org.apache.solr.schema.IndexSchema;
 import org.apache.solr.schema.SchemaField;
 import org.apache.solr.search.DocList;
 import org.apache.solr.search.ReturnFields;
+import org.apache.solr.search.SolrReturnFields;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -124,7 +125,8 @@ public class JavaBinResponseWriter implements QueryResponseWriter {
 
     @Override
     public boolean wantsAllFields() {
-      return returnFields.returnsAllFields();
+      return returnFields.returnsAllFields()
+          && (!(returnFields instanceof SolrReturnFields fields) || !fields.filtersWildcardFields());
     }
 
     protected void writeResultsBody(ResultContext res, JavaBinCodec codec) throws IOException {

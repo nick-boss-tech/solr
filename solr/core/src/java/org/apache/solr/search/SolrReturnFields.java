@@ -43,6 +43,8 @@ import org.apache.solr.response.transform.RenameFieldTransformer;
 import org.apache.solr.response.transform.ScoreAugmenter;
 import org.apache.solr.response.transform.TransformerFactory;
 import org.apache.solr.response.transform.ValueSourceAugmenter;
+import org.apache.solr.schema.IndexSchema;
+import org.apache.solr.schema.SchemaField;
 import org.apache.solr.search.SolrDocumentFetcher.RetrieveFieldsOptimizer;
 
 /** The default implementation of return fields parsing for Solr. */
@@ -53,6 +55,7 @@ public class SolrReturnFields extends ReturnFields {
   public static final String ORIGINAL_SCORE = "originalScore()";
 
   private final List<String> globs = new ArrayList<>(1);
+  private IndexSchema schema;
 
   // The lucene field names to request from the SolrIndexSearcher
   // This *may* include fields that will not be in the final response
@@ -106,6 +109,7 @@ public class SolrReturnFields extends ReturnFields {
   }
 
   public SolrReturnFields(String fl, SolrQueryRequest req) {
+    schema = req == null ? null : req.getSchema();
     //    this( (fl==null)?null:SolrPluginUtils.split(fl), req );
     if (fl == null) {
       parseFieldList((String[]) null, req);
@@ -125,6 +129,7 @@ public class SolrReturnFields extends ReturnFields {
   }
 
   public SolrReturnFields(String[] fl, SolrQueryRequest req) {
+    schema = req == null ? null : req.getSchema();
     parseFieldList(fl, req);
   }
 
@@ -184,11 +189,9 @@ public class SolrReturnFields extends ReturnFields {
     for (DeferredRenameEntry e : deferredRenameAugmenters) {
       DocTransformer t = e.create(renamedNotCopied, explicitReturnFields);
       augmenters.addTransformer(t);
-      if (!_returnAllFields) {
-        final String[] extraRequestFields = t.getExtraRequestFields();
-        if (extraRequestFields != null) {
-          Collections.addAll(loadFields, extraRequestFields);
-        }
+      final String[] extraRequestFields = t.getExtraRequestFields();
+      if (extraRequestFields != null) {
+        Collections.addAll(loadFields, extraRequestFields);
       }
     }
     if (!renamedNotCopied.isEmpty()) {
@@ -363,11 +366,9 @@ public class SolrReturnFields extends ReturnFields {
           } else if (factory != null) {
             DocTransformer t = factory.create(disp, augmenterParams, req);
             if (t != null) {
-              if (!_returnAllFields) {
-                String[] extra = t.getExtraRequestFields();
-                if (extra != null) {
-                  Collections.addAll(loadFields, extra);
-                }
+              String[] extra = t.getExtraRequestFields();
+              if (extra != null) {
+                Collections.addAll(loadFields, extra);
               }
               augmenters.addTransformer(t);
             }
@@ -530,7 +531,13 @@ public class SolrReturnFields extends ReturnFields {
 
   @Override
   public boolean loadsField(String field) {
-    if (_returnAllFields || loadFields.contains(field)) {
+    if (loadFields.contains(field)) {
+      return true;
+    }
+    if (!matchesWildcard(field)) {
+      return false;
+    }
+    if (_returnAllFields) {
       return true;
     }
     if (explicitReturnFields != null && explicitReturnFields.contains(field)) {
@@ -551,7 +558,13 @@ public class SolrReturnFields extends ReturnFields {
 
   @Override
   public boolean returnsField(String name) {
-    if (_returnAllFields || returnFields.contains(name)) {
+    if (returnFields.contains(name)) {
+      return true;
+    }
+    if (!matchesWildcard(name)) {
+      return false;
+    }
+    if (_returnAllFields) {
       return true;
     }
     for (String s : globs) {
@@ -566,6 +579,16 @@ public class SolrReturnFields extends ReturnFields {
   @Override
   public boolean returnsAllFields() {
     return _returnAllFields;
+  }
+
+  private boolean matchesWildcard(String name) {
+    SchemaField field = schema == null ? null : schema.getFieldOrNull(name);
+    return field == null || field.matchesWildcard();
+  }
+
+  /** Whether schema rules may exclude fields from a wildcard. */
+  public boolean filtersWildcardFields() {
+    return schema != null;
   }
 
   @Override

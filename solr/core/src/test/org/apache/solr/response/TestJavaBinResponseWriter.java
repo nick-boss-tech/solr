@@ -135,4 +135,24 @@ public class TestJavaBinResponseWriter extends SolrTestCaseJ4 {
     assertEquals("Wrong number of fields found", 2, out.getFieldNames().size());
     req.close();
   }
+
+  public void testWildcardSchemaFieldsInJavaBin() throws Exception {
+    try {
+      assertU(adoc("id", "wildcard-javabin", "wild_hidden", "hidden", "wild_dv_shown", "shown"));
+      assertU(commit());
+      for (String fl : new String[] {"*", "*,wild_hidden"}) {
+        try (SolrQueryRequest req = req("q", "id:wildcard-javabin", "fl", fl)) {
+          SolrQueryResponse rsp = h.queryAndResponse(null, req);
+          NamedList<Object> result = JavaBinResponseWriter.getParsedResponse(req, rsp);
+          SolrDocumentList docs = (SolrDocumentList) result.get("response");
+          assertEquals(1, docs.size());
+          assertEquals("shown", docs.get(0).getFieldValue("wild_dv_shown"));
+          assertEquals(fl.contains("wild_hidden"), docs.get(0).containsKey("wild_hidden"));
+        }
+      }
+    } finally {
+      assertU(delQ("id:wildcard-javabin"));
+      assertU(commit());
+    }
+  }
 }

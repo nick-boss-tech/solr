@@ -815,4 +815,12 @@
 
   <copyField source="foo_copysource_*" dest="bar_copydest_*"/>
 
+  <fieldType name="wildcard_hidden_type" class="solr.StrField" matchesWildcard="false"/>
+  <field name="wild_hidden" type="string" stored="true" matchesWildcard="false"/>
+  <field name="wild_legacy" type="string" stored="true" useDocValuesAsStored="false"/>
+  <field name="wild_dv_hidden" type="string" stored="false" docValues="true" useDocValuesAsStored="true" matchesWildcard="false"/>
+  <field name="wild_dv_shown" type="string" stored="false" docValues="true" useDocValuesAsStored="false" matchesWildcard="true"/>
+  <field name="wild_type_hidden" type="wildcard_hidden_type" stored="true"/>
+  <field name="wild_type_override" type="wildcard_hidden_type" stored="true" matchesWildcard="true"/>
+  <dynamicField name="*_wild_hidden" type="string" stored="true" matchesWildcard="false"/>
 </schema>
