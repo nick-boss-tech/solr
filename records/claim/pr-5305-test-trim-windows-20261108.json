@@ -1,0 +1,9 @@
+{
+  "id": "pr-5305-test-trim-windows-20261108",
+  "job": "pr-5305-test-trim-windows-20261108",
+  "notes": "Nick explicitly requested refinement. Review scope is local implementation, fork-only push, and a Linux proof handoff. No public response or Windows build.",
+  "owner": "Windows Codex implementation session",
+  "source_head": "219fee78bf7cae5039e50fe885108a1d4937ccd3",
+  "type": "claim",
+  "worktree": "C:/Users/shaninna/dev/Solr-issues/wt/PR-5305-ignored-fields"
+}
