@@ -1,0 +1,26 @@
+{
+  "base": "332ca62da783073ef8f1e233af5fd18985590039",
+  "branch": "nick-boss-tech/solr:solr-18169-docker-dist-per-worker-20261108",
+  "commit": "https://github.com/nick-boss-tech/solr/commit/a381cb21292ed433d9911d8c8ddea1b32afd66c4",
+  "evidence_paths": [
+    "/workspace/gates/logs/phone-agent-2/pr5310-worker-dist-refactor-20261108/static-and-shell-matrix.log",
+    "/workspace/gates/logs/phone-agent-2/pr5310-worker-dist-refactor-20261108/shell-matrix.sh",
+    "/workspace/gates/logs/phone-agent-2/pr5310-worker-dist-refactor-20261108/tidy/tidy.log",
+    "/workspace/gates/logs/phone-agent-2/pr5310-worker-dist-refactor-20261108/tidy/tidy.status"
+  ],
+  "head": "a381cb21292ed433d9911d8c8ddea1b32afd66c4",
+  "id": "pr-5310-worker-dist-refactor-a381cb21",
+  "job": "pr-5310-worker-dist-refactor-20261108",
+  "limitations": "No Docker command, image build, container or Docker test task was run. Full/slim Docker behavior remains untested; a separate exact-head Linux gate is pending. No upstream PR was modified and no PR/comment was created or posted.",
+  "review": "Exact staged diff self-reviewed: only solr/docker/build.gradle, solr/docker/tests/cases/demo/test.sh, and solr/docker/tests/cases/demo-tini/test.sh changed (5 insertions, 3 deletions). Independent review found no issue. Shell script executable modes are preserved.",
+  "summary": "Mapped each TestDockerImageTask worker's SOLR_DOCKER_DIST to slim/full from its own slimImage parameter, removed SOLR_DOCKER_TEST_SLIM, and changed both demo scripts to branch on SOLR_DOCKER_DIST with full as the default.",
+  "type": "report",
+  "type_note": "Implementation report; gate result must be recorded separately at this exact head.",
+  "verification": {
+    "bash_n": "passed for both changed scripts and the mock harness",
+    "git_diff_check": "passed",
+    "mocked_shell_matrix": "passed for slim demo assertion/cleanup, slim Tini skip, full demo/Tini branches, and unset-variable full default; used only a Bash function mock, not a Docker executable or engine",
+    "static_mapping_assertions": "passed; task derives slim/full from getSlimImage(); both scripts consume SOLR_DOCKER_DIST; no old flag remains in solr/docker",
+    "tidy": "passed, rc=0, 62 actionable tasks; no additional tracked files changed"
+  }
+}
