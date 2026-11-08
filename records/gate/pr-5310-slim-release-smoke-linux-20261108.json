@@ -1,0 +1,33 @@
+{
+  "acceptance": [
+    "All five offline regression methods pass with no skips. Tidy succeeds without changing tracked files; diff-check and root check -x test succeed at the exact head.",
+    "assembleRelease succeeds and yields the full and slim tarballs from the same head. The full release smoketest completes against the local release directory, including full techproducts indexing/query, slim start in user-managed mode, core creation, JSON indexing/query, v2 cores API, cleanup, source release and other normal smoke steps. If the full run cannot complete, record the exact leg and mark incomplete rather than green.",
+    "Verify from actual tar listings that the full archive has example and the slim archive does not. Exercise or otherwise verify the slim validator rejects an unexpected example and full validator requires it. Confirm the slim smoke run stops only its own process and leaves no running Solr instance. Capture all command exit codes, logs and artifact hashes; confirm clean tree and live remote head at finish.",
+    "A Linux pass does not prove Cygwin. Record whether any Cygwin-specific command path was checked and do not claim it ran without evidence. If source or formatting changes, push a new scoped head and request a superseding gate rather than reporting this one green."
+  ],
+  "branch": "nick-boss-tech/solr:pr-5310-slim-smoketest",
+  "commands": [
+    "python3 -m unittest discover -s dev-tools/scripts/tests -p test_smoke_release_slim.py",
+    "./gradlew tidy",
+    "git diff --check",
+    "./gradlew check -x test",
+    "./gradlew -p solr/distribution assembleRelease -Dversion.release=11.0.0-SNAPSHOT",
+    "python3 -u dev-tools/scripts/smokeTestRelease.py --tmp-dir <new-absolute-tmp-dir> --not-signed --revision skip --version 11.0.0-SNAPSHOT file://<absolute-checkout>/solr/distribution/build/release"
+  ],
+  "environment": "Clean detached Linux clone at exact head, non-root JDK 21, Python 3, tar, network/dependencies, available localhost HTTP and stop ports, no shared real Solr process or cluster, build lock and disk/inode guards. Keep artifacts/logs outside tracked source. Record environment and cleanup.",
+  "fail_before": [
+    "Build real matching release artifacts at the pinned head. With the parent script a381cb21292ed433d9911d8c8ddea1b32afd66c4 and the same slim artifact in a separate isolated workspace, execute verifyBinaryUnpacked and require the expected file example is missing failure; distinguish setup or compile errors from this behavioral failure.",
+    "In another isolated parent-script copy remove example from only the slim expected-root list and execute against the same real slim artifact. Establish whether the subsequent films example fails because the example directory is absent, preserving output and actual command/status. For a focused diagnostic only, unrelated JAR checks may be stubbed if documented; never count a stubbed Solr process or setup failure as a behavioral reproduction. Do not push the overlay."
+  ],
+  "head": "dc720a2ba63aff4d2ee34beec45a173795166628",
+  "id": "pr-5310-slim-release-smoke-linux-20261108",
+  "job": "pr-5310-slim-release-smoke-linux-20261108",
+  "parent_head": "a381cb21292ed433d9911d8c8ddea1b32afd66c4",
+  "preflight": [
+    "Read the assignment and current board, reconcile prior Linux investigation/executor before claiming, and verify current remote head, source tree and parent against the record.",
+    "Use an isolated non-root release workspace and neutralize inherited ZK_HOST, SOLR_CONNECTION and external SOLR_INCLUDE or other settings that could target an existing service. Select only free ports, protect real installations and never kill unrelated processes. Record resource guards and exact paths."
+  ],
+  "receipt": "Publish a v2 receipt with exact head, verdict, each proof leg, actual counts and accessible log/artifact hashes. Explain failures and environmental limitations separately. Do not make a public comment or change the live PR as part of this gate.",
+  "tree": "8c87c1a2fd8531f1c2652db91b1d27ddbefcbf44",
+  "type": "gate"
+}
