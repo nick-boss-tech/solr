@@ -1,0 +1,7 @@
+{
+  "details": "Nick requested a patch branch based on PR 5310 instead of an investigation-only handoff. Windows is preparing the separable source change; Linux proof remains required. At the inspected snapshot no Linux execution claim or receipt was present; this is not proof that an executor stopped. Reconcile actual execution and any late evidence before taking overlapping work. Do not independently implement the same change; a separate exact-head Linux proof assignment will follow the pushed patch.",
+  "id": "solr-18169-smoke-pr5310-direction-20261108",
+  "job": "solr-18169-slim-smoketest-linux-investigation-20261108",
+  "status": "implementation redirected by Nick; preserve Linux evidence and avoid duplicate implementation",
+  "type": "report"
+}
