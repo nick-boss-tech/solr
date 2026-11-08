@@ -1,0 +1,9 @@
+{
+  "actor": "Nick Shanin",
+  "evidence": "The receipt and report reference the verified evidence pointer at records/evidence/pr-5310-slim-release-smoke-linux-20261108-evidence.json (bundle SHA-256 e48652f4be5a7f530d293b44396bf8eaec9e6f084cf81c553663b8ca861aefb5; uploaded download independently matched). All assigned build and smoke commands completed. Final inspection showed the candidate worktree clean at dc720a2ba63aff4d2ee34beec45a173795166628, the fork branch still at that head, no active Solr/smoke/Gradle gate process, no Solr listener, and the host Gradle lock free. The smoke temp tree and both fail-before extraction workspaces were removed; free inodes were 405352, above the 15% stop floor.",
+  "head": "dc720a2ba63aff4d2ee34beec45a173795166628",
+  "id": "pr-5310-slim-release-smoke-linux-20261108",
+  "job": "pr-5310-slim-release-smoke-linux-20261108",
+  "reason": "The assigned exact-head Linux release-smoke gate is complete; the final receipt and report were published before this release, and this claimant is stopping work on the job.",
+  "type": "release"
+}
