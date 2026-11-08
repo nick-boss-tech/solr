@@ -1,0 +1,7 @@
+{
+  "id": "solr-18606-implementation-windows-round-1",
+  "job": "solr-18606-implementation-windows-round-1",
+  "owner": "windows-codex-nick-shanin",
+  "scope": "Investigate, implement, and push SOLR-18606; Linux proof remains separate.",
+  "type": "claim"
+}
