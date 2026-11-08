@@ -1,0 +1,18 @@
+{
+  "base": "b771587e9707c49847d728fd1f3ff259a182692c",
+  "gate": "solr-18592-linux-gate-round-1",
+  "head": "25bdab4e926261a70a0cae399d22ed4fa6600ef6",
+  "host_requirements": [
+    "linux",
+    "jdk21",
+    "Solr Gradle"
+  ],
+  "id": "solr-18592-linux-gate-round-1",
+  "implementation_job": "solr-18592-implementation-windows-round-1",
+  "job": "solr-18592-linux-gate-round-1",
+  "receipt": "records/receipt/solr-18592-linux-gate-round-1.json",
+  "source": "nick-boss-tech/solr:solr-18592-submit",
+  "status": "open for a Linux executor to claim",
+  "summary": "Linux exact-head verification for SOLR-18592 wildcard field selection",
+  "type": "assignment"
+}
