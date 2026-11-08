@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-nick-shanin",
+  "evidence": "Fork branch solr-18592-submit verified at 25bdab4e926261a70a0cae399d22ed4fa6600ef6; report solr-18592-implementation-windows-round-1-report. No local build or test executor was started; this worker is stopping implementation.",
+  "id": "solr-18592-implementation-windows-round-1",
+  "job": "solr-18592-implementation-windows-round-1",
+  "reason": "Implementation complete; handing exact-head proof to separate Linux gate.",
+  "type": "release"
+}
