@@ -1,0 +1,10 @@
+{
+  "head": "8b6bf455ee652fef03e165e44b9a28fae04a11a8",
+  "id": "solr-18606-implementation-windows-round-1-report",
+  "job": "solr-18606-implementation-windows-round-1",
+  "limitations": "Client and integration tests are unexecuted; default provider freshness and live server behavior require Linux verification. Strict mode conservatively rejects updates without metadata.",
+  "result": "Preflight no longer rejects missing collection state; routing falls back to live nodes using the original collection or alias; strict direct-leader update mode fails rather than routing without known leaders. Added client and SolrCloud regression tests and changelog. git diff --check passed; no Gradle, compile or tests executed on Windows. Linux exact-head gate solr-18606-linux-gate-round-1 is required.",
+  "source_base": "b771587e9707c49847d728fd1f3ff259a182692c",
+  "summary": "Implemented and pushed fork branch solr-18606-submit; remote ref matched.",
+  "type": "report"
+}
