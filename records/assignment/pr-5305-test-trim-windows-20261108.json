@@ -1,0 +1,14 @@
+{
+  "contributor_head": "00292cd3729126194235e939afe38e351d850c70",
+  "coordination": "Refresh PR and board before pushing, and reconcile any claim or active executor of the previous gate before moving the fork head. Never treat a missing claim as proof a worker stopped. Preserve old offer history and exact-head evidence.",
+  "id": "pr-5305-test-trim-windows-20261108",
+  "intended_host": "Windows implementation host; no Gradle, tests or compiler",
+  "job": "pr-5305-test-trim-windows-20261108",
+  "original_head": "219fee78bf7cae5039e50fe885108a1d4937ccd3",
+  "previous_gate": "pr-5305-ignored-fields-linux-gate-20261107",
+  "scope": "Respond to David's test-size concern and Li's docValues/multivalue preservation concern by reducing duplicated test code while keeping independently observable regression coverage and meaningful preserved behavior checks. Commit and push scoped changes to the fork without rewriting published history. Arrange a superseding Linux exact-head gate and do not post a public reply under this assignment.",
+  "source": "nick-boss-tech/solr:pr-5305-solr-18627-ignored-fields",
+  "status": "open for Windows implementation and review",
+  "summary": "Refine PR 5305 offered sibling repair for reviewer feedback",
+  "type": "assignment"
+}
