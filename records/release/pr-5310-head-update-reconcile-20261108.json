@@ -1,0 +1,8 @@
+{
+  "actor": "cue-pr-head-reconciliation",
+  "evidence": "Report records/report/pr-5310-head-update-reconcile-a381cb2-20261108.json links the exact GitHub head and the predecessor gate receipt/evidence. This report-only job started no build or Docker executor.",
+  "id": "pr-5310-head-update-reconcile-20261108",
+  "job": "pr-5310-head-update-reconcile-20261108",
+  "reason": "The PR head was verified and the final board report was published; no further work or source changes are in scope.",
+  "type": "release"
+}
