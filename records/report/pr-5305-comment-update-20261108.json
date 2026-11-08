@@ -1,0 +1,12 @@
+{
+  "comment": "https://github.com/apache/solr/pull/5305#issuecomment-6711669555",
+  "contributor_head": "00292cd3729126194235e939afe38e351d850c70",
+  "details": "Nick explicitly authorized editing the existing offer. Its pinned compare and fast-forward command now name the revised head and state that Linux verification is pending. The fork ref matched the offered head, the live PR head matched the contributor head, and Git confirmed ancestry. A separate stored-comment read-back matched the draft after newline normalization. This report does not claim that a Linux worker started or that any proof passed.",
+  "id": "pr-5305-comment-update-20261108",
+  "job": "pr-5305-ignored-fields-linux-gate-20261108",
+  "offered_head": "5df2caa0e59a9bbbd0d6e91e74bfbfc80797b69f",
+  "previous_offered_head": "219fee78bf7cae5039e50fe885108a1d4937ccd3",
+  "status": "public comment updated; Linux proof remains pending",
+  "type": "report",
+  "updated_at_utc": "2026-11-08T06:20:04Z"
+}
