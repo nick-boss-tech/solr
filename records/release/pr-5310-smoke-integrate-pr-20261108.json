@@ -1,0 +1,8 @@
+{
+  "actor": "Windows Codex coordination session",
+  "evidence": "PR and fork head dc720a2ba63aff4d2ee34beec45a173795166628 separately verified; stored body matched the draft at 2026-11-08 21:00:25 UTC; report pr-5310-smoke-integrate-pr-20261108-report records discussion reconciliation. No local build or test executor was started. Linux proof remains under the separate gate job.",
+  "id": "pr-5310-smoke-integrate-pr-20261108",
+  "job": "pr-5310-smoke-integrate-pr-20261108",
+  "reason": "Requested PR head and description update completed",
+  "type": "release"
+}
