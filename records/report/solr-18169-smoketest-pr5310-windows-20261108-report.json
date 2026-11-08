@@ -1,0 +1,15 @@
+{
+  "gate": "pr-5310-slim-release-smoke-linux-20261108",
+  "head": "dc720a2ba63aff4d2ee34beec45a173795166628",
+  "id": "solr-18169-smoketest-pr5310-windows-20261108-report",
+  "job": "solr-18169-smoketest-pr5310-windows-20261108",
+  "parent_head": "a381cb21292ed433d9911d8c8ddea1b32afd66c4",
+  "parent_pr": "https://github.com/apache/solr/pull/5310",
+  "public_action": "No public PR or comment was created and the current PR branch was not changed.",
+  "scope": "Slim release root validation no longer requires example. The slim path starts standalone user-managed Solr, creates a core from the packaged default configset, indexes and queries a JSON document, checks the v2 cores API and stops its server; the full distribution continues to exercise techproducts. Added five isolated Python unit tests for layout, routing and cleanup. The source/release test and full distribution retain the techproducts example path.",
+  "source": "nick-boss-tech/solr:pr-5310-slim-smoketest",
+  "status": "implemented on fork, Linux proof pending",
+  "tree": "8c87c1a2fd8531f1c2652db91b1d27ddbefcbf44",
+  "type": "report",
+  "verification": "Fork ref separately matched the pushed full head, and the PR parent was unchanged at push. git diff --check passed. Five offline Python unit tests passed on Windows with Solr subprocesses, HTTP and JAR checks mocked; no Gradle, Java process, real Solr or release artifact was used. Real Linux build and end-to-end release proof remain pending. Cygwin was not run."
+}
