@@ -1,0 +1,9 @@
+{
+  "host": "Windows implementation; Linux proof required",
+  "id": "solr-18592-implementation-windows-round-1",
+  "job": "solr-18592-implementation-windows-round-1",
+  "owner_request": "Nick requested implementation of a branch on 2026-11-08.",
+  "scope": "Inspect wildcard field selection and schema behavior; implement a defensible scoped solution with regression tests and documentation, push fork branch and request exact-head Linux gate. Do not execute Gradle on Windows.",
+  "summary": "Investigate and implement SOLR-18592 on an isolated fork branch",
+  "type": "assignment"
+}
