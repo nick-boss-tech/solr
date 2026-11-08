@@ -1,0 +1,18 @@
+{
+  "authorization": "Nick explicitly authorized inode cleanup and stated stale local content can be fetched again from GitHub.",
+  "cleanup_boundary": "No source checkout or worktree root will be removed; only named stale scratch directories and generated/cache subdirectories may be removed.",
+  "id": "inode-cleanup-2026-11-08",
+  "intended_host": "phone-agent-2 Linux sandbox",
+  "job": "inode-cleanup-2026-11-08",
+  "scope": [
+    "Recheck live inode use and confirm no build/test executor is active.",
+    "Remove only stale disposable Solr scratch copies, idle Gradle dependency cache, and generated build outputs whose task evidence is archived or otherwise verified.",
+    "Keep a hard stop at 15% free inodes and aim for about 50% free.",
+    "Preserve the dirty /workspace/solr checkout, all coordination records, gate logs and evidence archives, source worktrees, and active or ambiguous task state including the SOLR-18624 replay work.",
+    "Do not install or run Docker; do not run builds or tests.",
+    "Publish before/after inode counts and an exact path/count manifest to coordination-v2."
+  ],
+  "status": "Owner-approved maintenance; claim required before cleanup",
+  "summary": "Restore safe inode headroom in the Solr sandbox and publish a verified cleanup manifest",
+  "type": "assignment"
+}
