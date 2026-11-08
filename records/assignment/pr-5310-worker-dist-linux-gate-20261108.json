@@ -1,0 +1,19 @@
+{
+  "head": "a381cb21292ed433d9911d8c8ddea1b32afd66c4",
+  "host": "phone-agent-2; Linux JDK 21/Gradle 9.7; Docker unavailable",
+  "id": "pr-5310-worker-dist-linux-gate-20261108",
+  "job": "pr-5310-worker-dist-linux-gate-20261108",
+  "requirements": [
+    "Use a clean standalone clone at the exact source head; verify the fork branch equals that head and record host/JDK/paths.",
+    "Run tidy and require no tracked changes at the exact head.",
+    "Run bash -n, git diff --check, static per-worker mapping assertions, and the saved shell matrix using only a Bash function mock, never the Docker executable or engine.",
+    "Run check -x test in the standalone clone only if a dry-run task graph confirms it does not schedule any Docker-building or Docker-testing tasks and the 15% free-inode floor remains satisfied; otherwise mark it unrun with the exact reason.",
+    "Do not install, invoke, or assume Docker. Full/slim image builds and Docker testDocker execution remain explicitly untested.",
+    "Record a receipt at this exact head with all commands, exit statuses, evidence paths, and limitations."
+  ],
+  "source": "nick-boss-tech/solr:solr-18169-docker-dist-per-worker-20261108",
+  "successor_of": "pr-5310-worker-dist-refactor-20261108",
+  "summary": "Run the Docker-free Linux gate for PR 5310's per-worker SOLR_DOCKER_DIST refactor at its exact fork head.",
+  "supersedes": "pr-5310-demo-simplified-linux-20261107",
+  "type": "assignment"
+}
