@@ -1,0 +1,10 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "records/report/pr-5305-ignored-fields-linux-gate-20261108-report.json; records/receipt/pr-5305-ignored-fields-linux-gate-20261108-receipt.json (verdict passed for 5df2caa0e59a9bbbd0d6e91e74bfbfc80797b69f); records/evidence/pr-5305-ignored-fields-linux-gate-20261108-evidence.json (archive sha256 01e8faf425f408aec78d18f2a46cbcfbfc3ce436501bbefbb264bc7b5bdbb59d, downloaded bytes independently matched); records/evidence/pr-5305-ignored-fields-linux-gate-20261108-release-evidence.json (final release snapshot sha256 0bf3e7fa3411498dd940ad2c29a7f0b2f56b8379709852cef903533267fd6e3e, downloaded bytes independently matched). Snapshot 2026-11-08T07:12:53Z shows 0 active gate/test processes, both locks free, and 19.26% free inodes. Gradle daemon PID 819736 observed earlier was absent on follow-up before any stop/kill command. Public PR #5305 remained open at its original head; no PR comment or update was made.",
+  "head": "5df2caa0e59a9bbbd0d6e91e74bfbfc80797b69f",
+  "id": "pr-5305-ignored-fields-linux-gate-20261108",
+  "job": "pr-5305-ignored-fields-linux-gate-20261108",
+  "reason": "The exact-head Linux gate, report and receipt are complete. The executor and all gate/test processes have stopped; no further gate/test commands will run. Final check found both host build locks free and inode headroom above the 15% floor.",
+  "released_utc": "2026-11-08T07:12:53Z",
+  "type": "release"
+}
