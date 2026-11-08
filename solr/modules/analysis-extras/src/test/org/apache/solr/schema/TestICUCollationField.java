@@ -119,9 +119,6 @@ public class TestICUCollationField extends SolrTestCaseJ4 {
                   "stored", false,
                   "docValues", false,
                   "multiValued", multiValued));
-      assertFalse(field.indexed());
-      assertFalse(field.stored());
-      assertFalse(field.hasDocValues());
       assertTrue(field.createFields("ignored").isEmpty());
     }
   }

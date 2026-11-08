@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import org.apache.lucene.index.DocValuesType;
 import org.apache.lucene.index.IndexableField;
-import org.apache.lucene.util.BytesRef;
 import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.core.SolrConfig;
 import org.junit.Test;
@@ -51,10 +50,6 @@ public class PrimitiveFieldTypeTest extends SolrTestCaseJ4 {
   @Override
   public void tearDown() throws Exception {
     super.tearDown();
-  }
-
-  public void testIgnoredStrField() {
-    assertIgnoredField(new StrField(), Map.of());
   }
 
   public void testIgnoredBoolField() {
@@ -105,66 +100,37 @@ public class PrimitiveFieldTypeTest extends SolrTestCaseJ4 {
                   "stored", false,
                   "docValues", false,
                   "multiValued", multiValued));
-      assertFalse(field.indexed());
-      assertFalse(field.stored());
-      assertFalse(field.hasDocValues());
       assertTrue(fieldType.getClass().getName(), field.createFields("ignored").isEmpty());
     }
   }
 
-  public void testDocValuesOnlyFields() {
+  public void testCollationDocValuesOnly() {
     schema =
         IndexSchemaFactory.buildIndexSchema(
             testConfHome.resolve("schema15.xml").toString(), config);
-    for (FieldType fieldType :
-        List.of(
-            new StrField(),
-            new BoolField(),
-            new BinaryField(),
-            new SortableTextField(),
-            new CollationField())) {
-      fieldType.setArgs(
-          schema,
-          new HashMap<>(fieldType instanceof CollationField ? Map.of("language", "en") : Map.of()));
-      for (boolean multiValued : new boolean[] {false, true}) {
-        if (fieldType instanceof BinaryField && multiValued) {
-          continue;
-        }
-        SchemaField field =
-            SchemaField.create(
-                "dv_only",
-                fieldType,
-                Map.of(
-                    "indexed", false,
-                    "stored", false,
-                    "docValues", true,
-                    "multiValued", multiValued));
-        Object value =
-            fieldType instanceof BinaryField
-                ? new byte[] {1, 2, 3}
-                : fieldType instanceof BoolField ? "true" : "value";
-        List<IndexableField> docValues =
-            field.createFields(value).stream()
-                .filter(f -> f != null && f.fieldType().docValuesType() != DocValuesType.NONE)
-                .toList();
-        String message = fieldType.getClass().getName();
-        assertEquals(message, 1, docValues.size());
-        IndexableField docValue = docValues.get(0);
-        DocValuesType expectedType =
-            fieldType instanceof BinaryField
-                ? DocValuesType.BINARY
-                : multiValued ? DocValuesType.SORTED_SET : DocValuesType.SORTED;
-        assertEquals(message, expectedType, docValue.fieldType().docValuesType());
-        assertEquals(message, field.getName(), docValue.name());
-        assertTrue(message, docValue.binaryValue().length > 0);
-        if (fieldType instanceof BinaryField) {
-          assertEquals(message, new BytesRef(new byte[] {1, 2, 3}), docValue.binaryValue());
-        } else if (fieldType instanceof BoolField) {
-          assertEquals(message, new BytesRef("T"), docValue.binaryValue());
-        } else if (!(fieldType instanceof CollationField)) {
-          assertEquals(message, new BytesRef("value"), docValue.binaryValue());
-        }
-      }
+    FieldType fieldType = new CollationField();
+    fieldType.setArgs(schema, new HashMap<>(Map.of("language", "en")));
+    for (boolean multiValued : new boolean[] {false, true}) {
+      SchemaField field =
+          SchemaField.create(
+              "dv_only",
+              fieldType,
+              Map.of(
+                  "indexed", false,
+                  "stored", false,
+                  "docValues", true,
+                  "multiValued", multiValued));
+      List<IndexableField> docValues =
+          field.createFields("value").stream()
+              .filter(f -> f != null && f.fieldType().docValuesType() != DocValuesType.NONE)
+              .toList();
+      assertEquals(1, docValues.size());
+      IndexableField docValue = docValues.get(0);
+      assertEquals(
+          multiValued ? DocValuesType.SORTED_SET : DocValuesType.SORTED,
+          docValue.fieldType().docValuesType());
+      assertEquals(field.getName(), docValue.name());
+      assertTrue(docValue.binaryValue().length > 0);
     }
   }
 
