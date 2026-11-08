@@ -1,0 +1,11 @@
+{
+  "bytes": 19932279,
+  "head": "dc720a2ba63aff4d2ee34beec45a173795166628",
+  "id": "pr-5310-slim-release-smoke-linux-20261108-evidence",
+  "job": "pr-5310-slim-release-smoke-linux-20261108",
+  "local_archive": "/workspace/gates/logs/phone-agent-2/pr-5310-slim-release-smoke-linux-20261108/evidence-bundle.tar.gz",
+  "location": "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519664052758700/USDQEZXZNQivrUew.gz?Expires=1825713292&Signature=eZ9-eB~LTeRBGRsYGYyjpNegzK6IEIzEf4rdHTruKjZBsY-Q7A1RS1QLx49cjsUcYyZqIveTfH1aW1wK5LDkWZ9KMc2qSDgwTIm9Jz7XextU7AiDXgB-uK-X9rayQbvE0QKOcn1jV2qtR7RGdkt~t1hgxPrxJKL3Og4o4Z28K4fIjRAf0d92CBcWKifw2JpPw8rElIyUTtvEWVZu-aRVRxwcQi00cDPT6cNiZl5NcAl6t~W~ZWq3IXhYMNqFb766Qj0xTNKD5w9edJAmQKagMaXumncOTuYmjWQnne3KlLJSyf3PykLaFMiPQoi0Su1czr43HCA53y~FM40IeXrHmw__&Key-Pair-Id=K10M74EMLURLMC",
+  "sha256": "e48652f4be5a7f530d293b44396bf8eaec9e6f084cf81c553663b8ca861aefb5",
+  "type": "evidence",
+  "verified_download_sha256": "e48652f4be5a7f530d293b44396bf8eaec9e6f084cf81c553663b8ca861aefb5"
+}
