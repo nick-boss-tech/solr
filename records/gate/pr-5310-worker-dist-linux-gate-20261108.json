@@ -1,0 +1,15 @@
+{
+  "environment": "phone-agent-2 Linux; Ubuntu cloud sandbox; JDK 21; Gradle 9.7; Docker unavailable and prohibited",
+  "head": "a381cb21292ed433d9911d8c8ddea1b32afd66c4",
+  "id": "pr-5310-worker-dist-linux-gate-20261108",
+  "job": "pr-5310-worker-dist-linux-gate-20261108",
+  "requirements": [
+    "Clean standalone checkout and exact fork-ref verification at the pinned head.",
+    "Tidy at exact head with no tracked changes.",
+    "Shell syntax, diff checks, static worker mapping assertions, and mocked shell matrix for slim/full branches and default-full behavior; no Docker executable or engine.",
+    "Check -x test only if a dry-run graph proves no Docker image/test tasks are scheduled and inode headroom remains above 15%; otherwise explicitly record skipped.",
+    "Full/slim Docker image and testDocker behavior untested; do not claim Docker proof."
+  ],
+  "source": "nick-boss-tech/solr:solr-18169-docker-dist-per-worker-20261108",
+  "type": "gate"
+}
