@@ -1,0 +1,10 @@
+{
+  "head": "25bdab4e926261a70a0cae399d22ed4fa6600ef6",
+  "id": "solr-18592-implementation-windows-round-1-report",
+  "job": "solr-18592-implementation-windows-round-1",
+  "limitations": "Regression and compatibility tests are unexecuted. Distributed search, real-time get before commit, transformer behavior and performance effects remain to be verified. The user-visible property name and exact semantics are subject to maintainer review.",
+  "result": "Adds schema matchesWildcard option with field/type inheritance and legacy stored/docValues defaults; handles wildcard field loading, explicit names and aliases, and JavaBin filtering. Adds XML and JavaBin tests, documentation and changelog. git diff --check passed; no Gradle, compile or tests executed on Windows. Linux exact-head gate solr-18592-linux-gate-round-1 is required.",
+  "source_base": "b771587e9707c49847d728fd1f3ff259a182692c",
+  "summary": "Implemented and pushed fork branch solr-18592-submit; remote ref matched.",
+  "type": "report"
+}
