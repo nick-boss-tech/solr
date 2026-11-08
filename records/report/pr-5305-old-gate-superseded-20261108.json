@@ -1,0 +1,10 @@
+{
+  "details": "The fork moved by a test-only follow-up; do not start this old-head gate for current proof. At the last inspected board there was no matching execution claim or receipt, which does not prove a worker stopped. Reconcile actual host execution and preserve any evidence; no old-head result proves the new head.",
+  "id": "pr-5305-old-gate-superseded-20261108",
+  "job": "pr-5305-ignored-fields-linux-gate-20261107",
+  "new_gate": "pr-5305-ignored-fields-linux-gate-20261108",
+  "new_head": "5df2caa0e59a9bbbd0d6e91e74bfbfc80797b69f",
+  "old_head": "219fee78bf7cae5039e50fe885108a1d4937ccd3",
+  "status": "superseded for live fork head",
+  "type": "report"
+}
