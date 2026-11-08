@@ -1,0 +1,283 @@
+{
+  "active_board": "nick-boss-tech/solr:coordination-v2",
+  "coverage_limits": [
+    "DocValues tests are preservation coverage, not mutation-proven and not exhaustive across every field type.",
+    "Root check was ./gradlew check -x test, with no additional exclusions.",
+    "One unrelated randomized TestTrie assumption skip: points=true and DocValues=false; required ignored-Trie coverage ran.",
+    "No Docker-dependent coverage was required."
+  ],
+  "evidence": {
+    "local_archive": "/workspace/gates/archives/pr-5305-ignored-fields-linux-gate-20261108-evidence.tar.gz",
+    "location": "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519664052758700/GJwBLCrAatPMaQCe.gz?Expires=1825657675&Signature=hqh~72zu9RaVksga6eaQC7ceOEQfsFMRGRZv2pWPqVZdz63X5RyIQuM~UpnyA~OerLqTAxO3sU6p9yYIzTfDKWQl~Kupa-v~QIahjnX8u~4cmKAIXhfgKaXOz-LWE4affU06VAIHIRZNGr0i8fSeHhOd4qFExsTfKnqnjMjrMHfGDH8MEUkSIEV2nB2wH~Zw3IOvGf7E-wx8qDmsA5x6sOWT0D8KxZ8MdU-WP2F7lpV8BsRhRjph5Fr5eN5BwbV00fQDJ6P6e9dQeW2RE9dD0RoWB4-Ol3BhMrZ~HmGCDbxNRZa7mP3rRDYmM~nf8bJVYot29C6DRqqsTmi9c6KleQ__&Key-Pair-Id=K10M74EMLURLMC",
+    "record_id": "pr-5305-ignored-fields-linux-gate-20261108-evidence",
+    "record_path": "records/evidence/pr-5305-ignored-fields-linux-gate-20261108-evidence.json",
+    "sha256": "01e8faf425f408aec78d18f2a46cbcfbfc3ce436501bbefbb264bc7b5bdbb59d",
+    "verified_download_sha256": "01e8faf425f408aec78d18f2a46cbcfbfc3ce436501bbefbb264bc7b5bdbb59d"
+  },
+  "execution_note": "One initial runner invocation exited 2 before any Gradle command due to a phase argument typo; corrected runner then passed tidy once. No source or PR state changed.",
+  "future_pr_comment_draft": "I ran the Linux gate on candidate head `5df2caa0e59a9bbbd0d6e91e74bfbfc80797b69f` (parent `219fee78bf7cae5039e50fe885108a1d4937ccd3`). The focused `PrimitiveFieldTypeTest` and `TestICUCollationField` suites each passed 9/9 with no skips. The neighboring core and ICU DocValues suites also passed, including `TestSortableTextField.testWhiteboxCreateFields`, `TestUseDocValuesAsStored.testBinary`, and the DocValues test classes.\n\nFor an actual multivalued case, `DocValuesMultiTest.testBoolDocValuesMatch` indexes a document with both `true` and `false` values for the same field and passed. The new core and ICU collation DocValues-only tests exercise both single- and multivalued configurations; the ignored-field helper also covers both shapes, and its Trie test loops over all five legacy Trie field classes. `./gradlew check -x test` succeeded as well.\n\nThere was one unrelated assumption skip in `TestTrie.testTrieFacet_PrecisionStep`: its randomized configuration was points=true and DocValues=false, while that facet test requires DocValues. The required ignored-Trie coverage ran and passed. These results cover the exercised preservation cases; they are not a mutation proof or an exhaustive test of every DocValues path. The public PR is still at `00292cd3729126194235e939afe38e351d850c70`; this gate verifies the separate candidate head above, and no PR update or comment has been made.",
+  "host": {
+    "docker": null,
+    "final_locks_free": {
+      "/workspace/tools/.gradle-0609f7968656.lock": true,
+      "/workspace/tools/.gradle-phone-agent-2.lock": true
+    },
+    "final_test_processes": [],
+    "gradle": "9.7.0 via wrapper",
+    "hostname": "0609f7968656",
+    "id": "phone-agent-2",
+    "java": "OpenJDK 21.0.12.1",
+    "lowest_free_inodes": "359926/1868096 (19.27%)",
+    "minimum_free_inodes": "15%",
+    "platform": "Ubuntu 24.04.4 LTS x86_64"
+  },
+  "id": "pr-5305-ignored-fields-linux-gate-20261108-report",
+  "job": "pr-5305-ignored-fields-linux-gate-20261108",
+  "public_pr": {
+    "base": "65a33d03ce4fe6ddad8968b3d0de8c1aeab77165",
+    "head": "00292cd3729126194235e939afe38e351d850c70",
+    "head_repo": "linslee75/solr",
+    "last_review_comment": {
+      "created_at": "2026-11-08T04:57:04Z",
+      "topic": "asked whether delegation to super.createFields() preserves DocValues and multivalued behavior",
+      "user": "linslee75"
+    },
+    "public_comment_posted": false,
+    "public_pr_updated": false,
+    "state": "open",
+    "url": "https://github.com/apache/solr/pull/5305"
+  },
+  "results": {
+    "all_expected_results_match": true,
+    "per_class_neighbor_counts": {
+      "core": [
+        {
+          "class": "org.apache.solr.BasicFunctionalityTest",
+          "errors": 0,
+          "failures": 0,
+          "sha256": "fe93570c2620b9b5717bd13daca869c6f6d2e67f71d3f4496b0d8aba90944b95",
+          "skipped": 0,
+          "tests": 23
+        },
+        {
+          "class": "org.apache.solr.TestTrie",
+          "errors": 0,
+          "failures": 0,
+          "sha256": "5d8aeded215fc9772d2d009a2364b674f2e741fab5269a9365e0f226385bdc00",
+          "skipped": 1,
+          "tests": 8
+        },
+        {
+          "class": "org.apache.solr.schema.BooleanFieldTest",
+          "errors": 0,
+          "failures": 0,
+          "sha256": "4c446ab7e9955d6479312c2e5d678070057392750972d83c3ba229a124bcf2a6",
+          "skipped": 0,
+          "tests": 1
+        },
+        {
+          "class": "org.apache.solr.schema.DocValuesMultiTest",
+          "errors": 0,
+          "failures": 0,
+          "sha256": "ea1d05778f361a4931e298e45ce67a813985dbc376f4da3a8d1e5215e1d6edc2",
+          "skipped": 0,
+          "tests": 6
+        },
+        {
+          "class": "org.apache.solr.schema.DocValuesTest",
+          "errors": 0,
+          "failures": 0,
+          "sha256": "77107b03515826d879af91c1b449d838df0ee72a1c76812762a3d0ad72f35b50",
+          "skipped": 0,
+          "tests": 8
+        },
+        {
+          "class": "org.apache.solr.schema.TestBinaryField",
+          "errors": 0,
+          "failures": 0,
+          "sha256": "66becce5902248a54409d350dd77b41e33d0685ae9ba6ef7b4e4f8f7fad09d1c",
+          "skipped": 0,
+          "tests": 1
+        },
+        {
+          "class": "org.apache.solr.schema.TestCollationField",
+          "errors": 0,
+          "failures": 0,
+          "sha256": "b46282b1f1195dda78462a566bd64807729abecb575004c82847fd6509c86c85",
+          "skipped": 0,
+          "tests": 8
+        },
+        {
+          "class": "org.apache.solr.schema.TestCollationFieldDocValues",
+          "errors": 0,
+          "failures": 0,
+          "sha256": "6cdbb85fc2ed22797bde169ccad597da08386c2dfdae7cc3770c427041997a5d",
+          "skipped": 0,
+          "tests": 8
+        },
+        {
+          "class": "org.apache.solr.schema.TestSortableTextField",
+          "errors": 0,
+          "failures": 0,
+          "sha256": "30bd58f6d5776862b64a18acbb428527feb834d4738a030a279b8d96fe4f2d59",
+          "skipped": 0,
+          "tests": 7
+        },
+        {
+          "class": "org.apache.solr.schema.TestUseDocValuesAsStored",
+          "errors": 0,
+          "failures": 0,
+          "sha256": "8500b1ea7a5be0e32414fa17e8c5bbec86d40324e7b2e438d902c50e66366a50",
+          "skipped": 0,
+          "tests": 11
+        }
+      ],
+      "icu_docvalues": [
+        {
+          "class": "org.apache.solr.schema.TestICUCollationFieldDocValues",
+          "errors": 0,
+          "failures": 0,
+          "sha256": "aff84d1e7f86c40ba5881c3d402141fb7a80fb672ce5d419992a737654792dbb",
+          "skipped": 0,
+          "tests": 7
+        }
+      ]
+    },
+    "single_assumption_skip": [
+      {
+        "class": "org.apache.solr.TestTrie",
+        "message": "org.junit.AssumptionViolatedException: Skipping test: Points+facets require docValues, but randomizer: points=true && DV=false",
+        "method": "testTrieFacet_PrecisionStep"
+      }
+    ],
+    "steps": [
+      {
+        "actual_rc": "0",
+        "command": "./gradlew tidy",
+        "end_utc": "2026-11-08T06:38:29Z",
+        "expected_rc": "0",
+        "result": "match",
+        "start_utc": "2026-11-08T06:36:29Z",
+        "step": "tidy"
+      },
+      {
+        "actual_rc": "0",
+        "command": "git diff --check",
+        "end_utc": "2026-11-08T06:38:29Z",
+        "expected_rc": "0",
+        "result": "match",
+        "start_utc": "2026-11-08T06:38:29Z",
+        "step": "git-diff-check"
+      },
+      {
+        "actual_rc": "0",
+        "command": "git diff --exit-code",
+        "end_utc": "2026-11-08T06:38:29Z",
+        "expected_rc": "0",
+        "result": "match",
+        "start_utc": "2026-11-08T06:38:29Z",
+        "step": "git-diff-exit-code"
+      },
+      {
+        "actual_rc": "1",
+        "command": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.schema.PrimitiveFieldTypeTest -Ptests.seed=18627C0DE -Ptests.failfast=false -Ptests.maxfailures=100",
+        "end_utc": "2026-11-08T06:42:10Z",
+        "expected_rc": "1",
+        "result": "match",
+        "start_utc": "2026-11-08T06:39:10Z",
+        "step": "fail-before-core"
+      },
+      {
+        "actual_rc": "1",
+        "command": "./gradlew :solr:modules:analysis-extras:cleanTest :solr:modules:analysis-extras:test --tests org.apache.solr.schema.TestICUCollationField -Ptests.seed=18627C0DE -Ptests.failfast=false -Ptests.maxfailures=100",
+        "end_utc": "2026-11-08T06:43:11Z",
+        "expected_rc": "1",
+        "result": "match",
+        "start_utc": "2026-11-08T06:42:10Z",
+        "step": "fail-before-icu"
+      },
+      {
+        "actual_rc": "0",
+        "command": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.BasicFunctionalityTest.testIgnoredFields -Ptests.seed=18627C0DE",
+        "end_utc": "2026-11-08T06:44:11Z",
+        "expected_rc": "0",
+        "result": "match",
+        "start_utc": "2026-11-08T06:43:11Z",
+        "step": "fail-before-basic-control"
+      },
+      {
+        "actual_rc": "0",
+        "command": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.schema.PrimitiveFieldTypeTest -Ptests.seed=18627C0DE",
+        "end_utc": "2026-11-08T06:47:01Z",
+        "expected_rc": "0",
+        "result": "match",
+        "start_utc": "2026-11-08T06:45:01Z",
+        "step": "positive-core-focused"
+      },
+      {
+        "actual_rc": "0",
+        "command": "./gradlew :solr:modules:analysis-extras:cleanTest :solr:modules:analysis-extras:test --tests org.apache.solr.schema.TestICUCollationField -Ptests.seed=18627C0DE",
+        "end_utc": "2026-11-08T06:48:01Z",
+        "expected_rc": "0",
+        "result": "match",
+        "start_utc": "2026-11-08T06:47:01Z",
+        "step": "positive-icu-focused"
+      },
+      {
+        "actual_rc": "0",
+        "command": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.BasicFunctionalityTest --tests org.apache.solr.schema.BooleanFieldTest --tests org.apache.solr.schema.TestBinaryField --tests org.apache.solr.schema.TestSortableTextField --tests org.apache.solr.TestTrie --tests org.apache.solr.schema.TestCollationField --tests org.apache.solr.schema.TestCollationFieldDocValues --tests org.apache.solr.schema.DocValuesTest --tests org.apache.solr.schema.DocValuesMultiTest --tests org.apache.solr.schema.TestUseDocValuesAsStored -Ptests.seed=18627C0DE",
+        "end_utc": "2026-11-08T06:50:32Z",
+        "expected_rc": "0",
+        "result": "match",
+        "start_utc": "2026-11-08T06:48:32Z",
+        "step": "positive-core-neighbors"
+      },
+      {
+        "actual_rc": "0",
+        "command": "./gradlew :solr:modules:analysis-extras:cleanTest :solr:modules:analysis-extras:test --tests org.apache.solr.schema.TestICUCollationFieldDocValues -Ptests.seed=18627C0DE",
+        "end_utc": "2026-11-08T06:51:32Z",
+        "expected_rc": "0",
+        "result": "match",
+        "start_utc": "2026-11-08T06:50:32Z",
+        "step": "positive-icu-docvalues"
+      },
+      {
+        "actual_rc": "0",
+        "command": "./gradlew check -x test",
+        "end_utc": "2026-11-08T06:58:25Z",
+        "expected_rc": "0",
+        "result": "match",
+        "start_utc": "2026-11-08T06:52:25Z",
+        "step": "root-check"
+      }
+    ]
+  },
+  "self_review": {
+    "changed_paths": 10,
+    "changelog": "Expanded title and author list for the sibling-field fixes.",
+    "production_siblings": [
+      "BinaryField",
+      "BoolField",
+      "CollationField",
+      "SortableTextField",
+      "TrieField",
+      "ICUCollationField"
+    ],
+    "test_framework_helper": "SortableBinaryField",
+    "tests": [
+      "PrimitiveFieldTypeTest adds ignored-field tests, all five Trie classes and single/multivalued shapes, plus CollationField DocValues-only single/multivalued assertions.",
+      "TestICUCollationField adds ignored-field and DocValues-only cases for single/multivalued shapes."
+    ]
+  },
+  "source": {
+    "branch": "pr-5305-solr-18627-ignored-fields",
+    "contributor_head": "00292cd3729126194235e939afe38e351d850c70",
+    "head": "5df2caa0e59a9bbbd0d6e91e74bfbfc80797b69f",
+    "parent": "219fee78bf7cae5039e50fe885108a1d4937ccd3",
+    "repository": "nick-boss-tech/solr",
+    "tree": "b73928c755ef8dc02b6ffeaf3bc58b20b908ff14"
+  },
+  "title": "SOLR-18627 ignored-field candidate Linux gate report",
+  "type": "report",
+  "verdict": "passed"
+}
