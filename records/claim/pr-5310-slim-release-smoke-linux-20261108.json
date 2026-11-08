@@ -1,0 +1,21 @@
+{
+  "build_lock": "/workspace/tools/.gradle-cue-gate-sandbox.lock",
+  "host_id": "phone-agent-2",
+  "id": "pr-5310-slim-release-smoke-linux-20261108",
+  "inode_guard": "Check before and throughout each leg; stop at or below 15% free inodes. No additional cache cleanup without approval.",
+  "job": "pr-5310-slim-release-smoke-linux-20261108",
+  "owner": "phone-agent-2",
+  "prior_execution_reconciliation": "The prior Linux investigation has no canonical claim or release. Its only matching report documents Windows synthetic fixture work and explicitly says no Java, Solr, Gradle, or Linux executor started. No matching local Gradle, smokeTestRelease, or Solr process/workspace was found. The separate PR-integration claim is assigned to a Windows coordination host and does not perform release execution.",
+  "scope": "Run only the exact-head Linux release-smoke gate. Do not edit source, change or comment on the public PR, open a PR, or use Docker. Store logs and artifacts outside the source checkout; report Docker-dependent behavior as unrun if it arises.",
+  "source": "nick-boss-tech/solr:pr-5310-slim-smoketest",
+  "source_head": "dc720a2ba63aff4d2ee34beec45a173795166628",
+  "source_tree": "8c87c1a2fd8531f1c2652db91b1d27ddbefcbf44",
+  "toolchain": {
+    "git": "2.43.0",
+    "gradle_user_home": "/workspace/gradle-home",
+    "java": "OpenJDK 21.0.12.1",
+    "java_home": "/usr/lib/jvm/java-21-openjdk-amd64",
+    "python": "3.12.3"
+  },
+  "type": "claim"
+}
