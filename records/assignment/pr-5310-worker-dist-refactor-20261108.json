@@ -1,0 +1,20 @@
+{
+  "base_branch": "solr-18169-docker-ci-followup",
+  "candidate_branch": "solr-18169-docker-dist-per-worker-20261108",
+  "fork": "nick-boss-tech/solr",
+  "host": "phone-agent-2; owner-directed source work and Docker-free proof",
+  "id": "pr-5310-worker-dist-refactor-20261108",
+  "job": "pr-5310-worker-dist-refactor-20261108",
+  "requirements": [
+    "Set SOLR_DOCKER_DIST=slim or full inside each test worker, derived from that worker's slimImage parameter; do not read the ambient build-process setting for this decision.",
+    "Update both demo test scripts to select behavior using SOLR_DOCKER_DIST.",
+    "Self-review the exact diff and publish only to a separate branch on nick-boss-tech/solr.",
+    "Do not create a PR, modify the upstream PR, or post a public comment.",
+    "Do not invoke or install Docker; clearly mark real Docker behavior untested."
+  ],
+  "source": "https://github.com/apache/solr/pull/5310#discussion_r4506660934",
+  "source_head": "332ca62da783073ef8f1e233af5fd18985590039",
+  "summary": "Refactor PR 5310 Docker test workers to set SOLR_DOCKER_DIST from each task's slimImage, avoiding the test-wide SOLR_DOCKER_TEST_SLIM flag when full and slim smoke tests run together.",
+  "supersedes": "pr-5310-demo-simplified-linux-20261107",
+  "type": "assignment"
+}
