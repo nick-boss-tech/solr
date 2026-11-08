@@ -1,0 +1,19 @@
+{
+  "base": "b771587e9707c49847d728fd1f3ff259a182692c",
+  "gate": "solr-18606-linux-gate-round-1",
+  "head": "8b6bf455ee652fef03e165e44b9a28fae04a11a8",
+  "host_requirements": [
+    "linux",
+    "jdk21",
+    "Solr Gradle",
+    "SolrCloud test capability"
+  ],
+  "id": "solr-18606-linux-gate-round-1",
+  "implementation_job": "solr-18606-implementation-windows-round-1",
+  "job": "solr-18606-linux-gate-round-1",
+  "receipt": "records/receipt/solr-18606-linux-gate-round-1.json",
+  "source": "nick-boss-tech/solr:solr-18606-submit",
+  "status": "open for a Linux executor to claim",
+  "summary": "Linux exact-head verification for SOLR-18606 unknown-collection routing",
+  "type": "assignment"
+}
