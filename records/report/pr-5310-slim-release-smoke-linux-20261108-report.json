@@ -1,0 +1,21 @@
+{
+  "cygwin_limit": "Cygwin-specific command/path was not executed on this Linux host; no Cygwin coverage is claimed.",
+  "details": "The unmodified a381cb2 parent validator fails on the slim archive with file \"example\" is missing. In an isolated local-only overlay that removes example from only the slim expected-root list, the real bin/solr start -e films path fails because the slim distribution has no default example directory; only the unrelated JAR metadata scan was stubbed. Temporary workspaces were removed and no Solr process remained. The evidence archive includes command logs and exit codes, artifact listings and SHA-256 hashes, source JUnit reports, and both fail-before logs/diff.",
+  "docker_limit": "The stock smoke helper attempted its docker info availability probe, reported Docker unavailable, and skipped Docker-based integration tests. No Docker engine, image or container was run. Docker-dependent behavior remains unrun and is not claimed as passed.",
+  "evidence_path": "records/evidence/pr-5310-slim-release-smoke-linux-20261108-evidence.json",
+  "evidence_sha256": "e48652f4be5a7f530d293b44396bf8eaec9e6f084cf81c553663b8ca861aefb5",
+  "gate": "pr-5310-slim-release-smoke-linux-20261108",
+  "head": "dc720a2ba63aff4d2ee34beec45a173795166628",
+  "id": "pr-5310-slim-release-smoke-linux-20261108-report",
+  "job": "pr-5310-slim-release-smoke-linux-20261108",
+  "pr": "https://github.com/apache/solr/pull/5310",
+  "receipt_path": "records/receipt/pr-5310-slim-release-smoke-linux-20261108-receipt.json",
+  "resource_cleanup": "The 3.45 GB / 46,178-file smoke temp tree and both fail-before extraction workspaces were removed. The 15% inode floor was maintained; no Solr process remained and the build lock was free at handoff.",
+  "source_branch": "nick-boss-tech/solr:pr-5310-slim-smoketest",
+  "source_head": "dc720a2ba63aff4d2ee34beec45a173795166628",
+  "source_parent": "a381cb21292ed433d9911d8c8ddea1b32afd66c4",
+  "source_tree": "8c87c1a2fd8531f1c2652db91b1d27ddbefcbf44",
+  "status": "Exact-head Linux release-smoke gate completed; receipt and evidence pointer prepared for publication.",
+  "summary": "The exact-head Linux acceptance steps passed: five offline regression tests with no skips, tidy, diff-check, root check -x test, full/slim release assembly and the full local release smoke. The full archive contains example/ entries and the slim archive contains none. Both requested parent fail-before controls reproduced against the same real slim artifact. The source branch remained unchanged by this gate, and no PR comment or update was made.",
+  "type": "report"
+}
