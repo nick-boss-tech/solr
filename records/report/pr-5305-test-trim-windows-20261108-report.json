@@ -1,0 +1,13 @@
+{
+  "details": "Responding to review, removed duplicate ignored-StrField control and reused existing boolean, binary and sortable-text docValues tests. Retained individual ignored-field tests and direct single/multivalued docValues-only collation tests in core and ICU. Test additions versus contributor head dropped from 167 to 130 lines. Commit was plain-pushed and fork ref independently matched. Windows performed git diff --check and source review; no formatter, compile, Gradle or tests. Linux proof is pending.",
+  "head": "5df2caa0e59a9bbbd0d6e91e74bfbfc80797b69f",
+  "id": "pr-5305-test-trim-windows-20261108-report",
+  "job": "pr-5305-test-trim-windows-20261108",
+  "new_gate": "pr-5305-ignored-fields-linux-gate-20261108",
+  "next": "Reconcile author head/discussion and the exact-head receipt before any updated offer; the earlier public comment names the old head and must not be represented as offering this new one.",
+  "parent": "219fee78bf7cae5039e50fe885108a1d4937ccd3",
+  "previous_public_offer": "https://github.com/apache/solr/pull/5305#issuecomment-6711669555",
+  "public_pr": "https://github.com/apache/solr/pull/5305",
+  "status": "implemented, proof pending",
+  "type": "report"
+}
