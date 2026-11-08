@@ -1,0 +1,17 @@
+{
+  "base": "b771587e9707c49847d728fd1f3ff259a182692c",
+  "branch": "solr-18592-submit",
+  "environment": "Linux, JDK 21; record actual JDK, host and commit; fresh clean checkout",
+  "head": "25bdab4e926261a70a0cae399d22ed4fa6600ef6",
+  "id": "solr-18592-linux-gate-round-1",
+  "job": "solr-18592-linux-gate-round-1",
+  "requirements": [
+    "Verify fork head and clean checkout; record git SHA and status.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.search.ReturnFieldsTest --tests org.apache.solr.response.TestJavaBinResponseWriter --tests org.apache.solr.response.TestCSVResponseWriter --tests org.apache.solr.search.LargeFieldTest -Ptests.seed=18592CAFE; record fresh XML counts, skips and logs.",
+    "Run ./gradlew tidy and ./gradlew check -x test; a changed tracked file invalidates exact-head proof and needs a committed successor and new gate.",
+    "Runtime mutation proof: in an isolated copy of this head, temporarily replace SchemaField.matchesWildcard() body with return true; run ReturnFieldsTest.testSchemaWildcardSelection and require a runtime assertion failure because excluded fields appear. Restore the exact head and rerun the test successfully. The unchanged base does not accept the new schema property and a setup failure there is not negative proof.",
+    "Inspect default and explicit fields, wildcard globs, aliases, type inheritance, non-stored doc values, JavaBin serialization and compatibility tests. Record that distributed search and uncommitted real-time-get behavior are not covered unless independently tested. Attach fresh logs and XML."
+  ],
+  "type": "gate",
+  "verdict_policy": "Passing requires all requested legs at the exact head. Do not claim unexecuted checks passed."
+}
