@@ -1,0 +1,16 @@
+{
+  "evidence": "The PR head update was performed at the user's explicit direction before this report-only job was opened. GitHub's live PR API read-back confirmed the existing PR now points to the exact candidate head; the predecessor gate's receipt and evidence are already published.",
+  "head": "a381cb21292ed433d9911d8c8ddea1b32afd66c4",
+  "host": "Cue delegated agent; board reconciliation only",
+  "id": "pr-5310-head-update-reconcile-20261108",
+  "job": "pr-5310-head-update-reconcile-20261108",
+  "requirements": [
+    "Verify the PR remains open on its existing source branch at the exact gated SHA.",
+    "Publish a report linking the existing incomplete gate receipt and evidence record.",
+    "Do not create a PR, post a public comment, run Docker tests, or change source branches."
+  ],
+  "source": "https://github.com/apache/solr/pull/5310",
+  "successor_of": "pr-5310-worker-dist-linux-gate-20261108",
+  "summary": "Record the owner-authorized fast-forward of existing PR #5310 to the already-gated candidate and verify its final state; no further PR or source changes are in scope.",
+  "type": "assignment"
+}
