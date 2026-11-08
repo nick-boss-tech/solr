@@ -1,0 +1,38 @@
+{
+  "build_locks": [
+    "/workspace/tools/.gradle-phone-agent-2.lock",
+    "/workspace/tools/.gradle-0609f7968656.lock"
+  ],
+  "claimed_at": "2026-11-08T06:29:00Z",
+  "contributor_head": "00292cd3729126194235e939afe38e351d850c70",
+  "evidence_root": "/workspace/gates/logs/phone-agent-2/pr-5305-ignored-fields-linux-gate-20261108",
+  "host_id": "phone-agent-2",
+  "hostname": "0609f7968656",
+  "id": "pr-5305-ignored-fields-linux-gate-20261108",
+  "inode_guard": "Check before and throughout every leg; stop at or below 15% free inodes. No cleanup without explicit approval.",
+  "job": "pr-5305-ignored-fields-linux-gate-20261108",
+  "owner": "phone-agent-2",
+  "platform": "Ubuntu 24.04.4 LTS x86_64",
+  "prior_execution_reconciliation": {
+    "current_host": "No Gradle, Solr test, BATS or JUnit processes; alias and hostname flocks were available at pre-claim check.",
+    "pr5098": "Historical coordination-ui completion record says GATE GREEN and host lock released; gate is terminal.",
+    "pr5306": "Live coordination-v2 receipt/release records show the prior gate completed; release records no live Solr test nodes and the phone-agent-2 lock free."
+  },
+  "runner": "/workspace/gates/scripts/pr-5305-ignored-fields-linux-gate-20261108.sh",
+  "scope": "Run only the exact-head PR-5305 fail-before, focused and neighboring proof legs and root check. Do not modify source or public PR state. Docker is not installed and no Docker-dependent coverage is in scope.",
+  "source": "nick-boss-tech/solr:pr-5305-solr-18627-ignored-fields",
+  "source_head": "5df2caa0e59a9bbbd0d6e91e74bfbfc80797b69f",
+  "source_tree": "b73928c755ef8dc02b6ffeaf3bc58b20b908ff14",
+  "toolchain": {
+    "git": "2.43.0",
+    "gradle": "9.7.0 via the source checkout wrapper",
+    "gradle_user_home": "/workspace/gradle-home",
+    "java": "OpenJDK 21.0.12.1",
+    "java_home": "/usr/lib/jvm/java-21-openjdk-amd64"
+  },
+  "type": "claim",
+  "worktrees": {
+    "fail_before": "/workspace/worktrees/pr-5305-ignored-fields-linux-gate-20261108-fail-before",
+    "positive": "/workspace/worktrees/pr-5305-ignored-fields-linux-gate-20261108-positive"
+  }
+}
