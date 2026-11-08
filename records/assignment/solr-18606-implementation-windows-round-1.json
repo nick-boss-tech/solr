@@ -1,0 +1,9 @@
+{
+  "host": "Windows implementation; Linux proof required",
+  "id": "solr-18606-implementation-windows-round-1",
+  "job": "solr-18606-implementation-windows-round-1",
+  "owner_request": "Nick requested implementation of a branch on 2026-11-08.",
+  "scope": "Inspect current CloudSolrClient stale collection behavior and historical regression; implement a defensible focused fix with regression tests, push fork branch and request exact-head Linux gate. Do not execute Gradle on Windows.",
+  "summary": "Investigate and implement SOLR-18606 on an isolated fork branch",
+  "type": "assignment"
+}
