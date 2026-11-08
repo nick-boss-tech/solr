@@ -1,0 +1,19 @@
+{
+  "contributor_head": "00292cd3729126194235e939afe38e351d850c70",
+  "head": "5df2caa0e59a9bbbd0d6e91e74bfbfc80797b69f",
+  "id": "pr-5305-ignored-fields-linux-gate-20261108",
+  "instructions": "Wait for the matching gate record. Refresh both boards and inspect actual host execution before claiming; do not duplicate any prior executor. The old gate is stale for the live source head. Retain exact-head fail-before, focused and neighboring proofs and root checks. Publish a receipt and report with accessible fresh evidence, and do not post a public comment under this assignment.",
+  "intended_host": "Capable Linux gate host with JDK 21, working Gradle dependencies and ICU/Mockito fixture, build lock and disk/inode guards",
+  "job": "pr-5305-ignored-fields-linux-gate-20261108",
+  "related_job": "pr-5305-test-trim-windows-20261108",
+  "source": "nick-boss-tech/solr:pr-5305-solr-18627-ignored-fields",
+  "status": "open for Linux executor claim, subject to prior-execution reconciliation",
+  "summary": "Linux proof for revised PR 5305 ignored-field sibling fix and leaner tests",
+  "supersedes_gate": "pr-5305-ignored-fields-linux-gate-20261107",
+  "tags": [
+    "gate",
+    "review",
+    "records"
+  ],
+  "type": "assignment"
+}
