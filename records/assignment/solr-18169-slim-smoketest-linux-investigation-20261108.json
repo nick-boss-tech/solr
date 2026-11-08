@@ -1,0 +1,27 @@
+{
+  "context": "PR 5289 removed examples from the slim distribution. Jenkins build 19 reports RuntimeError file example is missing in verifyBinaryUnpacked. Static inspection at observed_source_head confirms the slim root list still requires example at dev-tools/scripts/smokeTestRelease.py:693-694. It also confirms verifyBinaryUnpacked calls testSolrExample for slim, which selects films, invokes bin/solr start -e films, changes into example, and queries that example. Removing the root-list entry alone cannot complete the slim smoke test. PR 5310 is a separate Docker test fix, not a release-smoketest fix.",
+  "coordination": "Refresh v2 and legacy records, upstream main and the PR discussion before claiming. Search for any newly created duplicate work or upstream fix. Claim the canonical v2 job path; do not rely on absence of a claim as proof a worker stopped. Reconcile any active executor and preserve its results before proceeding.",
+  "evidence_requirements": "Record exact source and artifact revisions, commands, log/XML paths, exit codes and cleanup. Distinguish the reported root-list error, a demonstrated downstream failure, and any test-environment issue. Do not present a candidate as fixed without a complete exact-head proof.",
+  "handoff": "Publish a v2 report with findings and a release when the worker and any child executor have stopped. If a separate gate is created, that job requires its own claim and receipt.",
+  "id": "solr-18169-slim-smoketest-linux-investigation-20261108",
+  "intended_host": "Linux host with JDK 21, Python 3, tar, Git, network and dependencies for a Solr release build and smoketest; adequate disk/inodes and serialized build lock",
+  "jenkins_failure": "https://ci-builds.apache.org/job/Solr/job/Solr-Smoketest-main/19/consoleText",
+  "job": "solr-18169-slim-smoketest-linux-investigation-20261108",
+  "observed_source_head": "b771587e9707c49847d728fd1f3ff259a182692c",
+  "public_comment": "https://github.com/apache/solr/pull/5289#issuecomment-6717497175",
+  "scope": [
+    "On an isolated Linux checkout at a recorded current upstream head, reproduce or otherwise establish the reported slim artifact-root failure using real, matching release artifacts where feasible. After a temporary root-list-only change, investigate and record the downstream slim example path; do not count a setup, dependency or compilation failure as behavioral proof.",
+    "Audit the remainder of the release smoke flow for assumptions that slim includes example data. Design the smallest complete repair that keeps full-distribution example coverage and meaningfully smoke-tests the slim distribution without bundled example content. Identify any intentional coverage loss or upstream design decision explicitly; do not silently skip the slim runtime check.",
+    "Document the proposed source changes, verification commands, observed results and limitations. If a patch is established, publish it only to Nick's fork with the existing ICLA identity and no history rewrite; create a separate exact-head Linux gate covering full and slim artifacts, fail-before evidence, appropriate checks and final cleanup. Do not open a PR or post a public comment under this assignment."
+  ],
+  "source": "apache/solr main",
+  "status": "open for a capable Linux worker to claim",
+  "summary": "Investigate and design a complete slim release smoketest repair after PR 5289",
+  "tags": [
+    "linux",
+    "investigation",
+    "release",
+    "records"
+  ],
+  "type": "assignment"
+}
