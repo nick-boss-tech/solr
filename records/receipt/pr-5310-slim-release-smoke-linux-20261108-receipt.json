@@ -1,0 +1,175 @@
+{
+  "counts": {
+    "builds": {
+      "assemble": "BUILD SUCCESSFUL; 93 actionable tasks, 11 executed, 82 up-to-date",
+      "documentation": "BUILD SUCCESSFUL; 54 actionable tasks, 50 executed, 4 up-to-date",
+      "integrationTest": "BUILD SUCCESSFUL; 92 actionable tasks, 50 executed, 42 up-to-date",
+      "rat": "BUILD SUCCESSFUL; 40 actionable tasks, 40 executed",
+      "test": "BUILD SUCCESSFUL; 159 actionable tasks, 131 executed, 28 up-to-date"
+    },
+    "integration_test_script_assertions": {
+      "not_ok": 0,
+      "ok": 132
+    },
+    "offline_regression_tests": {
+      "failed": 0,
+      "passed": 5,
+      "skipped": 0
+    },
+    "source_junit": {
+      "class_reports": 1511,
+      "errors": 0,
+      "failures": 0,
+      "selection_note": "The smoke runner reported that @Nightly and @BadApple tests were not run; 538 skipped tests are included in the JUnit count.",
+      "skipped": 538,
+      "tests": 9280
+    }
+  },
+  "coverage_limits": {
+    "cygwin": "Cygwin-specific command/path was not executed on this Linux host; no Cygwin coverage is claimed.",
+    "docker_dependent_legs": "Skipped/unrun after the stock smoke helper reported Docker unavailable. No Docker installation, engine, image or container was used; no Docker-dependent result is claimed."
+  },
+  "evidence": {
+    "bytes": 19932279,
+    "local_archive": "/workspace/gates/logs/phone-agent-2/pr-5310-slim-release-smoke-linux-20261108/evidence-bundle.tar.gz",
+    "record_id": "pr-5310-slim-release-smoke-linux-20261108-evidence",
+    "record_path": "records/evidence/pr-5310-slim-release-smoke-linux-20261108-evidence.json",
+    "sha256": "e48652f4be5a7f530d293b44396bf8eaec9e6f084cf81c553663b8ca861aefb5",
+    "verified_download_sha256": "e48652f4be5a7f530d293b44396bf8eaec9e6f084cf81c553663b8ca861aefb5"
+  },
+  "gate": "pr-5310-slim-release-smoke-linux-20261108",
+  "head": "dc720a2ba63aff4d2ee34beec45a173795166628",
+  "id": "pr-5310-slim-release-smoke-linux-20261108-receipt",
+  "intermediate_recovery": [
+    "The first smoke attempt exited 1 because the local release lacked generated Changes.html. It was rendered from CHANGELOG using the documented local release-change renderer (exit 0), the release was reassembled, and the exact-head smoke rerun exited 0. Both smoke logs are included.",
+    "An initial diff-check from the parent shell directory was not in the candidate worktree and exited 1; diff-check was rerun from the exact-head candidate repository and exited 0. Both results are included."
+  ],
+  "job": "pr-5310-slim-release-smoke-linux-20261108",
+  "proof_legs": {
+    "archive_layout": {
+      "full_archive_example_entries": 32,
+      "full_archive_sha256": "bae6b05232bc4a4ff0565a63b42920722002b08f061bb9637daf35ba2fcce642",
+      "logs": [
+        "full-release.tar-list.txt",
+        "slim-release.tar-list.txt",
+        "release-artifact-sha256.txt"
+      ],
+      "slim_archive_example_entries": 0,
+      "slim_archive_sha256": "699fa089e2c0631977260c7e2d3727aceb415285758fe3d0bd7f4caebf7976f4",
+      "source_archive_sha256": "6526681aa1ae692ff5f9688a1d9b19ef9fd9e73196c3dbd4b6f6f0ca0cd7c795",
+      "status": "passed"
+    },
+    "diff_check": {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "log": "diff-check.log",
+      "status": "passed"
+    },
+    "offline_regression": {
+      "command": "python3 -m unittest discover -s dev-tools/scripts/tests -p test_smoke_release_slim.py",
+      "coverage": "dispatch, slim startup/index/query/stop behavior, and cleanup after start/create/query failures",
+      "exit_code": 0,
+      "failed": 0,
+      "log": "offline-tests.log",
+      "passed": 5,
+      "skipped": 0,
+      "status": "passed"
+    },
+    "parent_fail_before_original_script": {
+      "command": "verifyBinaryUnpacked on the real slim tarball using the unchanged a381cb2 script in a separate workspace",
+      "exit_code": 1,
+      "failure": "RuntimeError: file \"example\" is missing, raised while checking the slim expected-root list before JAR validation or Solr startup",
+      "log": "fail-before/parent-original.log",
+      "metadata": "fail-before/parent-original-metadata.txt",
+      "parent_head": "a381cb21292ed433d9911d8c8ddea1b32afd66c4",
+      "same_slim_artifact_sha256": "699fa089e2c0631977260c7e2d3727aceb415285758fe3d0bd7f4caebf7976f4",
+      "status": "expected_behavior_reproduced"
+    },
+    "parent_fail_before_overlay": {
+      "cleanup": "the real bin/solr stop path ran in finally and reported no process on port 8961; no Solr process remained",
+      "exit_code": 1,
+      "failure": "RuntimeError: Failed to run the films example",
+      "jar_validation": "the unrelated JAR metadata scan only was stubbed as allowed; testSolrExample and its subprocesses were not stubbed",
+      "log": "fail-before/parent-overlay.log",
+      "overlay": "one local-only change removed example from the slim expected-root list; no overlay was pushed",
+      "overlay_diff": "fail-before/parent-overlay.diff",
+      "parent_head": "a381cb21292ed433d9911d8c8ddea1b32afd66c4",
+      "real_solr_command": "bin/solr start -e films -p 8961 returned nonzero with: The default example directory does not exist or is not a directory. This is expected when using the slim Solr distribution.",
+      "same_slim_artifact_sha256": "699fa089e2c0631977260c7e2d3727aceb415285758fe3d0bd7f4caebf7976f4",
+      "status": "expected_downstream_behavior_reproduced"
+    },
+    "release_assembly": {
+      "actionable_tasks": 215,
+      "command": "./gradlew -p solr/distribution assembleRelease -Dversion.release=11.0.0-SNAPSHOT",
+      "executed": 55,
+      "exit_code": 0,
+      "log": "assemble-release-with-changes.log",
+      "status": "passed",
+      "up_to_date": 160
+    },
+    "release_smoke": {
+      "command": "env -u ZK_HOST -u SOLR_CONNECTION -u SOLR_INCLUDE -u SOLR_HOME -u SOLR_PORT -u SOLR_URL -u SOLR_OPTS -u SOLR_JAVA_MEM -u SOLR_JAVA_HOME -u SOLR_AUTH_TYPE -u SOLR_AUTHENTICATION_OPTS -u SOLR_BASIC_AUTH NO_PROXY=localhost\\,127.0.0.1\\,::1 no_proxy=localhost\\,127.0.0.1\\,::1 python3 -u /workspace/worktrees/pr-5310-slim-release-smoke-linux-20261108/dev-tools/scripts/smokeTestRelease.py --tmp-dir /workspace/gates/logs/phone-agent-2/pr-5310-slim-release-smoke-linux-20261108/smoke-tmp --not-signed --revision skip --version 11.0.0-SNAPSHOT file:///workspace/worktrees/pr-5310-slim-release-smoke-linux-20261108/solr/distribution/build/release",
+      "docker_note": "The upstream smoke helper attempted its built-in docker info availability probe, reported Docker unavailable, and skipped Docker-based integration tests. No Docker engine, image or container was run; no Docker-dependent pass is claimed.",
+      "exit_code": 0,
+      "full_release": "techproducts example started, indexed and queried; only its assigned local server was stopped",
+      "log": "release-smoke-with-changes.log",
+      "slim_release": "slim smoke completed, including user-managed startup, core creation, JSON indexing/query and v2 cores API; its own server was stopped",
+      "source_release_and_maven_checks": "completed successfully; Maven checks included digests and binary-distribution equivalence",
+      "status": "passed"
+    },
+    "root_check_minus_tests": {
+      "actionable_tasks": 556,
+      "command": "./gradlew check -x test",
+      "docker_task_dry_run": "No dockerBuild, testDocker, dockerTag/dockerPrune, or testDockerfile task was scheduled; Docker-module static checks appeared as skipped in dry-run. No Docker engine/image/container task was run by Gradle.",
+      "dry_run_log": "check-dry-run.log",
+      "executed": 552,
+      "exit_code": 0,
+      "log": "root-check.log",
+      "status": "passed",
+      "up_to_date": 4
+    },
+    "tidy": {
+      "actionable_tasks": 62,
+      "command": "./gradlew tidy",
+      "executed": 58,
+      "exit_code": 0,
+      "log": "tidy.log",
+      "status": "passed",
+      "tracked_changes_after_tidy": false,
+      "up_to_date": 4
+    }
+  },
+  "resource_guard": {
+    "active_solr_processes_after_cleanup": 0,
+    "build_lock_free_at_release": true,
+    "fail_before_workspaces_removed": true,
+    "floor": "15% free inodes",
+    "free_inodes_after_fail_before_workspace_cleanup": 405352,
+    "free_inodes_after_smoke_temp_cleanup": 405374,
+    "free_inodes_before_smoke": 408852,
+    "minimum_observed_free_inodes": 352509,
+    "minimum_observed_free_percent": 18.87,
+    "temporary_smoke_tree_removed": {
+      "bytes": 3452194596,
+      "files": 46178
+    }
+  },
+  "scope": {
+    "final_source_branch_readback_matches_assigned_head": true,
+    "live_pr_changes": false,
+    "public_pr_comments": false,
+    "source_branch_pushed_by_gate": false,
+    "source_edits_by_gate": false
+  },
+  "source": {
+    "branch": "nick-boss-tech/solr:pr-5310-slim-smoketest",
+    "candidate_worktree": "clean",
+    "head": "dc720a2ba63aff4d2ee34beec45a173795166628",
+    "parent_head": "a381cb21292ed433d9911d8c8ddea1b32afd66c4",
+    "remote_branch_readback_at_finish": "dc720a2ba63aff4d2ee34beec45a173795166628",
+    "tree": "8c87c1a2fd8531f1c2652db91b1d27ddbefcbf44"
+  },
+  "summary": "All required exact-head Linux release-smoke acceptance legs completed successfully at dc720a2ba63aff4d2ee34beec45a173795166628. The full and slim archives were built, inspected and smoke-tested; both requested parent fail-before behaviors reproduced against the same real slim archive. Docker-dependent tests and the Cygwin-specific path remain unrun and are not claimed as passes.",
+  "type": "receipt",
+  "verdict": "passed"
+}
