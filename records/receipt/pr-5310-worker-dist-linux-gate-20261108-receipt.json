@@ -1,0 +1,39 @@
+{
+  "checks": {
+    "bash_n": "passed for both changed scripts and shell harness",
+    "check_dry_run": "passed; parsed 804 task entries; no dockerBuild/testDocker/dockerTag/dockerPrune/testDockerfile tasks scheduled",
+    "check_minus_test": "passed; BUILD SUCCESSFUL in 4m21s; 556 actionable tasks, 552 executed, 4 up-to-date; link check parsed 859 files with zero errors/warnings",
+    "committed_diff_check": "passed",
+    "exact_head_clone": "clean standalone clone at a381cb21292ed433d9911d8c8ddea1b32afd66c4; fork branch read-back matched",
+    "mock_shell_matrix": "passed for slim demo assertion/cleanup, slim Tini skip, both full branches, and default-full behavior; Bash function mock only",
+    "static_mapping_and_legacy_scan": "passed; no SOLR_DOCKER_TEST_SLIM remains in solr/docker",
+    "tidy": "passed at exact head; 62 actionable tasks; clean tracked tree"
+  },
+  "docker_dependent_legs": "Not run: no Docker environment was available, and the task explicitly prohibited invoking or installing Docker. Full/slim official image builds, container startup, and testDockerfileOfficialFull/testDockerfileOfficialSlim remain untested.",
+  "evidence": {
+    "local_archive": "/workspace/gates/archives/pr-5310-worker-dist-linux-gate-20261108-evidence.tar.gz",
+    "location": "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519664052758700/GFWTLhFYLBrBbufs.gz?Expires=1825691504&Signature=cWlzP-oF~-fiDVkEn9mF2W4bcwsM5kIxS-hVDLJe~BEj5v2OXMRMOAzpb0oaYhzuRefa3WmBw-uaIQ27T-q~w99ZuYdSK1dCfB5lu9VMzJJTcvJzk5eKytNPUaYtRZxOzk0LSPJGUmHsJB3DKHlrKW-Dy27XwcZflcJltWfLDI03paB3K81kDbCNapBiQi969XNQxv51~tCm6br2E1DTjtJsGLNs6McDdhXguHhIDd14Q4V2An3cI84JvdwdUdh5qh7b5SdKibuRCOkc5iemMEUj1h6Adw2rphFBU6I20P899vr~giI~5FddR~baCIr~fJ5t0uM8WBtNO7uYSYpExA__&Key-Pair-Id=K10M74EMLURLMC",
+    "record_id": "pr-5310-worker-dist-linux-gate-20261108-evidence",
+    "record_path": "records/evidence/pr-5310-worker-dist-linux-gate-20261108-evidence.json",
+    "sha256": "ccf3f49e9d1b2f5d9b27ad517564a7ea8d26ac846d891d06fe65c1091a93e9d2",
+    "verified_download_sha256": "ccf3f49e9d1b2f5d9b27ad517564a7ea8d26ac846d891d06fe65c1091a93e9d2"
+  },
+  "gate": "pr-5310-worker-dist-linux-gate-20261108",
+  "gate_result_path": "/workspace/gates/logs/phone-agent-2/pr5310-worker-dist-refactor-20261108/gate-summary.md",
+  "head": "a381cb21292ed433d9911d8c8ddea1b32afd66c4",
+  "id": "pr-5310-worker-dist-linux-gate-20261108-receipt",
+  "job": "pr-5310-worker-dist-linux-gate-20261108",
+  "resource_guard": {
+    "floor": "15%",
+    "free_inodes_after_check": 381219,
+    "free_inodes_before_check": 433946,
+    "minimum_observed_percent_approx": 20,
+    "protocol": "host build lock and live inode guard used"
+  },
+  "source_branch": "nick-boss-tech/solr:solr-18169-docker-dist-per-worker-20261108",
+  "source_parent": "332ca62da783073ef8f1e233af5fd18985590039",
+  "summary": "All Docker-free exact-head checks passed on a clean standalone clone. The per-worker slim/full mapping and mock shell branches passed; tidy and root check -x test passed. The dry-run graph had no Docker build/test tasks, and the actual check did not schedule them. Real full/slim Docker image builds and testDocker behavior remain untested.",
+  "type": "receipt",
+  "verdict": "incomplete",
+  "warnings": "The ref-guide Node dependency installation emitted npm audit notices, including 7 vulnerabilities (6 moderate, 1 high); unrelated to the patch and not remediated. No Docker process was invoked."
+}
