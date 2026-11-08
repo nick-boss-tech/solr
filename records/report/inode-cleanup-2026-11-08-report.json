@@ -1,0 +1,468 @@
+{
+  "actual_free_inode_delta": 1181345,
+  "after": {
+    "filesystem": "/dev/root",
+    "free": 1586788,
+    "free_percent": 84.9415,
+    "total": 1868096,
+    "used": 281308,
+    "used_percent": "16%"
+  },
+  "authorization": "The owner explicitly superseded earlier local-preservation limits: local checkouts, worktrees, local logs/evidence, caches and inactive replay state could be discarded. No existing remote branch or record was edited or deleted; only additive records are being published.",
+  "before": {
+    "filesystem": "/dev/root",
+    "free": 405443,
+    "free_percent": 21.7035,
+    "total": 1868096,
+    "used": 1462653,
+    "used_percent": "79%"
+  },
+  "deleted_inode_entries_inventory": 1181345,
+  "deleted_path_count": 69,
+  "deleted_paths": [
+    {
+      "inode_entries_before": 5406,
+      "path": "/workspace/solr",
+      "reason": "Local dirty coordination-ui checkout; remote records remain intact",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 644921,
+      "path": "/workspace/worktrees",
+      "reason": "Local Solr worktrees; owner authorized re-fetch/recreation",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 5,
+      "path": "/workspace/gates/logs/cue-gate-sandbox",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 3,
+      "path": "/workspace/gates/logs/phone-agent-2/solr18169-reviewer-followup-r3-preflight",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 5,
+      "path": "/workspace/gates/logs/phone-agent-2/solr6595-response-status-round-3-preflight",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 1,
+      "path": "/workspace/gates/logs/phone-agent-2/solr6595-repair-head.txt",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 3,
+      "path": "/workspace/gates/logs/phone-agent-2/solr6595-response-status-round-4-preflight",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 77,
+      "path": "/workspace/gates/logs/phone-agent-2/solr6595-response-status-round-4",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 110,
+      "path": "/workspace/gates/logs/phone-agent-2/solr18169-reviewer-followup-r3",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 37,
+      "path": "/workspace/gates/logs/phone-agent-2/solr-18619-selenium-failure-fixes-round-1",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 81,
+      "path": "/workspace/gates/logs/phone-agent-2/solr-18624-original-seed-replay-round-3",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 87,
+      "path": "/workspace/gates/logs/phone-agent-2/solr-12532-15611-phrase-slop-round-1",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 146,
+      "path": "/workspace/gates/logs/phone-agent-2/solr-12613-pr-head-lifecycle-round-1",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 382,
+      "path": "/workspace/gates/logs/phone-agent-2/solr-12613-pr-head-lifecycle-round-2",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 131,
+      "path": "/workspace/gates/logs/phone-agent-2/pr-5303-phrase-coverage-round-1",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 3,
+      "path": "/workspace/gates/logs/phone-agent-2/pr-5303-phrase-coverage-round-2-refresh",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 62913,
+      "path": "/workspace/gates/logs/phone-agent-2/pr-5303-phrase-coverage-round-2",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 1,
+      "path": "/workspace/gates/logs/phone-agent-2/pr-5281-test-workflow-repair-round-1-board-fetch.log",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 1,
+      "path": "/workspace/gates/logs/phone-agent-2/pr-5281-test-workflow-repair-round-1-source-fetch.log",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 1,
+      "path": "/workspace/gates/logs/phone-agent-2/pr-5281-test-workflow-repair-round-1-clone.log",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 123,
+      "path": "/workspace/gates/logs/phone-agent-2/pr-5281-test-workflow-repair-round-1",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 13,
+      "path": "/workspace/gates/logs/phone-agent-2/pr-5259-solr-18602-alias-optout-control-test-round-1",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 89,
+      "path": "/workspace/gates/logs/phone-agent-2/pr-5259-solr-18602-alias-optout-control-test-round-2",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 262,
+      "path": "/workspace/gates/logs/phone-agent-2/pr-5098-direct-leader-only-round-1",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 65,
+      "path": "/workspace/gates/logs/phone-agent-2/solr-18628-h2c-fail-before-round-1",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 1,
+      "path": "/workspace/gates/logs/phone-agent-2/solr-18628-source-facts.md",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 108,
+      "path": "/workspace/gates/logs/phone-agent-2/pr5306-reset-linux-gate-20261107",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 169,
+      "path": "/workspace/gates/logs/phone-agent-2/pr-5305-ignored-fields-linux-gate-20261108",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 47,
+      "path": "/workspace/gates/logs/phone-agent-2/pr5310-worker-dist-refactor-20261108",
+      "reason": "Local gate logs/evidence; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 3,
+      "path": "/workspace/gates/claims",
+      "reason": "Local gate output; owner authorized local evidence removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 4,
+      "path": "/workspace/gates/scripts",
+      "reason": "Local gate output; owner authorized local evidence removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 3,
+      "path": "/workspace/gates/archives",
+      "reason": "Local gate output; owner authorized local evidence removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 34336,
+      "path": "/workspace/gradle-home",
+      "reason": "Local Gradle cache/daemon state; no daemon/process/lock active",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 16623,
+      "path": "/workspace/solr-pr-5282",
+      "reason": "Local Solr source checkout",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 10101,
+      "path": "/workspace/solr-review-round1",
+      "reason": "Local Solr source checkout",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 1,
+      "path": "/workspace/solr-inode-cleanup-2026-11-05.md",
+      "reason": "Local historical cleanup evidence",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 1,
+      "path": "/workspace/cue-gate-sandbox-local-before-fastforward.md",
+      "reason": "Local Solr gate evidence",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 10471,
+      "path": "/workspace/tmp/solr6595-tidy-repair.wLQRKk",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 10301,
+      "path": "/workspace/tmp/solr6595-round4-positive",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 10340,
+      "path": "/workspace/tmp/solr6595-round4-rootcheck",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 18768,
+      "path": "/workspace/tmp/solr6595-round4-parent",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 18770,
+      "path": "/workspace/tmp/solr6595-round4-detection",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 18770,
+      "path": "/workspace/tmp/solr6595-round4-header",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 18770,
+      "path": "/workspace/tmp/solr6595-round4-v1-http",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 18770,
+      "path": "/workspace/tmp/solr6595-round4-v2-http",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 2,
+      "path": "/workspace/tmp/solr-post-home.XW2lBG",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 1,
+      "path": "/workspace/tmp/solr18619-gate-claim.md",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 1,
+      "path": "/workspace/tmp/phone-agent-2-host-response.json",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 1,
+      "path": "/workspace/tmp/phone-agent-2-host-updated.md",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 1,
+      "path": "/workspace/tmp/phone-agent-2-host-final-response.json",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 1,
+      "path": "/workspace/tmp/SOLR-18619-selenium-failure-fixes-round-1-receipt.md",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 1,
+      "path": "/workspace/tmp/phone-agent-2-host-final-updated.md",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 56340,
+      "path": "/workspace/tmp/solr-18624-original-seed-replay-round-3",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 62772,
+      "path": "/workspace/tmp/solr12532-15611-phrase-slop-r1",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 18835,
+      "path": "/workspace/tmp/solr12532-15611-failbefore-mut-r1",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 2,
+      "path": "/workspace/tmp/solr12532-receipt-home",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 62342,
+      "path": "/workspace/tmp/pr-5098-root-check",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 1,
+      "path": "/workspace/tmp/solr-12613-phone-agent-2.md",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 1,
+      "path": "/workspace/tmp/solr-12613-gate-claim.md",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 1,
+      "path": "/workspace/tmp/solr-12613-host-heartbeat.md",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 7470,
+      "path": "/workspace/tmp/solr12613-post-home",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 62797,
+      "path": "/workspace/tmp/pr-5303-root-check-20261105",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 3965,
+      "path": "/workspace/tmp/skills-review-validate.WAsYNH",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 1,
+      "path": "/workspace/tmp/solr12613-claim-readback.md",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 1,
+      "path": "/workspace/tmp/solr12613-host-phone-agent-2-round2.md",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 1,
+      "path": "/workspace/tmp/solr12613-phone-agent-2-host-live.md",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 59,
+      "path": "/workspace/tmp/skills-review-package-only.nVxhfd",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 5525,
+      "path": "/workspace/tmp/skills-review-python39",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    },
+    {
+      "inode_entries_before": 1,
+      "path": "/workspace/tmp/pr-5310-slim-release-smoke-linux-20261108.claim.json",
+      "reason": "Local scratch/cache/evidence/inactive replay state; owner authorized removal",
+      "removed": true
+    }
+  ],
+  "hard_stop_floor_inodes": 280214,
+  "hard_stop_free_percent": 15,
+  "id": "inode-cleanup-2026-11-08-report",
+  "inode_exhaustion_note": "Each filesystem object consumes an inode. At zero free inodes, new files/directories and many build/log operations fail with ENOSPC even when disk blocks remain; services may appear stuck while writes/retries fail.",
+  "job": "inode-cleanup-2026-11-08",
+  "local_scope": "Local Solr checkouts/worktrees, caches, gate logs/evidence, temporary clones and inactive replay state were deleted per owner authorization. The dirty /workspace/solr checkout and all source worktrees were intentionally discarded; they remain recoverable from remote sources as authorized.",
+  "manifest_local_path": "/workspace/inode-cleanup-2026-11-08-manifest.json",
+  "manifest_sha256": "31e8749df02f8fa296aa4368b4e73749b3c9a86e0419a6bb07e68551275b6ba8",
+  "no_build_or_test_run": true,
+  "no_docker": true,
+  "post_delete_executor_check": "No Gradle, Maven, Ant or Solr build/test executor was active. Two live shell sessions had cwd in the retained PR 5310 evidence directory; that directory was excluded. No active locks were found in the deletion scope.",
+  "pre_delete_active_locks": [],
+  "pre_delete_process_references": [],
+  "preserved_paths": {
+    "/workspace/gates/logs/phone-agent-2/pr-5310-slim-release-smoke-linux-20261108": {
+      "exists": true,
+      "reason": "Two live shell sessions have cwd here; do not remove"
+    },
+    "/workspace/tmp/coordination-v2-pr5306-gate-20261107": {
+      "exists": true,
+      "reason": "Temporary coordination-v2 publisher retained until report/release are posted"
+    },
+    "/workspace/tmp/cue-home": {
+      "exists": true,
+      "reason": "Small temporary home outside cleanup scope"
+    }
+  },
+  "remote_scope": "The only remote changes are new records on coordination-v2: assignment, claim, this report and a final release. No existing record or branch was deleted, edited, reset or force-pushed.",
+  "summary": "Owner-approved local cleanup removed 69 paths and freed 1,181,345 inodes: 405,443/1,868,096 free (21.70%) to 1,586,788/1,868,096 free (84.94%).",
+  "type": "report"
+}
