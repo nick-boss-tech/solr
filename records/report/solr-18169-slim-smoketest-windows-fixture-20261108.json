@@ -1,0 +1,19 @@
+{
+  "command": "bundled Python research/scratch/pr5289-smoketest-fixture-repro.py",
+  "exit_code": 0,
+  "host": "Windows, bundled Python; temporary synthetic directory layouts",
+  "id": "solr-18169-slim-smoketest-windows-fixture-20261108",
+  "job": "solr-18169-slim-smoketest-linux-investigation-20261108",
+  "limits": "No real release archive, Solr or Java process, Gradle task, full smoketest, Linux run or production patch was used. JAR and changelog checks and subprocess calls were mocked. The fixture and verified source snapshot are local Windows scratch files; Linux worker should independently reproduce from the named source head and real artifacts. This report does not claim or release the Linux assignment.",
+  "local_evidence": "research/scratch/pr5289-smoketest-fixture-repro.py and research/scratch/pr5289-smokeTestRelease-b771.py; summary in research/branch-reviews/2026-11-07-pr-batch/PR-5289-2026-11-08-smoketest-followup.md",
+  "recorded_at_utc": "2026-11-08T19:39:05Z",
+  "results": [
+    "The real pinned verifyBinaryUnpacked function raised file example is missing for a synthetic slim root without example, matching the Jenkins build 19 error.",
+    "A temporary variant removing example only from the slim root list then reached the actual testSolrExample function and selected bin/solr start -e films. The subprocess was intercepted; its simulated nonzero return is not a real Solr failure.",
+    "The temporary variant rejected example in a synthetic slim root, still required it in a full root, and accepted a full root containing it before invoking a mocked full example test."
+  ],
+  "source_blob": "ebaba69fbc2603286d3a1d2e4d92eea88890f1e1",
+  "source_head": "b771587e9707c49847d728fd1f3ff259a182692c",
+  "status": "supporting synthetic fixture evidence; Linux investigation remains open",
+  "type": "report"
+}
