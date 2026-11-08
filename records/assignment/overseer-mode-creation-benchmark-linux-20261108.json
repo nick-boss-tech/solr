@@ -1,0 +1,18 @@
+{
+  "context": "Owner requested current repeatable numbers for the Overseer discussion; this is an exploratory benchmark, not a claim that either mode is faster. One-host numbers cannot establish production scale behavior.",
+  "gate": "overseer-mode-creation-benchmark-linux-20261108",
+  "head": "48a8565f384034202702c8cba37923fb3046c386",
+  "host_requirements": [
+    "linux",
+    "jdk21",
+    "disposable local SolrCloud cluster",
+    "sufficient memory and disk for benchmark; run only when host is available"
+  ],
+  "id": "overseer-mode-creation-benchmark-linux-20261108",
+  "job": "overseer-mode-creation-benchmark-linux-20261108",
+  "receipt": "records/receipt/overseer-mode-creation-benchmark-linux-20261108.json",
+  "source": "apache/solr pinned commit 48a8565f384034202702c8cba37923fb3046c386",
+  "status": "open for a Linux executor to claim",
+  "summary": "Measure concurrent collection creation in both SolrCloud coordination modes on the existing Linux gate host",
+  "type": "assignment"
+}
