@@ -1,0 +1,11 @@
+{
+  "gate": "pr-5310-adjacent-fix-linux-20261108",
+  "head": "be781470e4f7b1586e402a1367de6607f663cfa7",
+  "id": "pr-5310-adjacent-fix-be781470-20261108",
+  "job": "pr-5310-adjacent-fix-windows-20261108",
+  "parent": "dc720a2ba63aff4d2ee34beec45a173795166628",
+  "scope": "Four files only; PR branch was fast-forwarded without force. No public comment or PR body edit.",
+  "summary": "Pushed and separately verified PR/fork head. Slim smoke filters inherited Solr/ZooKeeper/JVM configuration, pins include/home/PID to the extracted distribution and converts Cygwin launcher paths. Port probing includes the stop port. A PR workflow runs the Python tests. The rolling-upgrade test posts inline JSON and verifies the document after upgrade.",
+  "type": "report",
+  "verification": "Nine offline Python tests passed on Windows with Solr subprocesses, HTTP and Cygwin conversion mocked; git diff --check passed. No Gradle, Java, real Solr, Docker, release artifacts or Cygwin ran on this host. Fresh Linux gate required; native Cygwin remains unverified."
+}
