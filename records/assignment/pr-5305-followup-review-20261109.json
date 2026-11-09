@@ -1,0 +1,12 @@
+{
+  "host": "Windows source review; no builds or tests",
+  "id": "pr-5305-followup-review-20261109",
+  "job": "pr-5305-followup-review-20261109",
+  "related_jobs": [
+    "pr-5305-test-trim-windows-20261108",
+    "pr-5305-ignored-fields-linux-gate-20261108"
+  ],
+  "source": "apache/solr PR 5305 head 6b1513313e55f4589c78e72fd614c63aaf518903",
+  "summary": "Review contributor's updated PR 5305 at its live head, prior findings, discussion and evidence",
+  "type": "assignment"
+}
