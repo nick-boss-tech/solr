@@ -1,0 +1,10 @@
+{
+  "head": "b7dce4b74984e468862fc7508d9eea827baf43ee",
+  "id": "pr-5310-limits-body-b7dce4-20261109",
+  "job": "pr-5310-limits-body-20261109",
+  "pr": "https://github.com/apache/solr/pull/5310",
+  "review": "research/branch-reviews/2026-11-09-pr-batch/PR-5310-area-ci-review.md",
+  "summary": "At the user's direction updated the PR body at 2026-11-09T06:53:32Z: the Limits section now describes the possibility that a failed slim startup leaves its launched process running, with cleanup outside this PR's scope. Removed pending or missing-proof statements while retaining historical verification attributed to the tested commits.",
+  "type": "report",
+  "verification": "Read live body, head and discussion before editing; source snapshot matched. Separately read back stored body and verified exact match to draft, unchanged head and discussion counts. No source change or public comment."
+}
