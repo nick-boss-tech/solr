@@ -1,0 +1,19 @@
+{
+  "head": "76e4e1bf6192468070ca200a09b1f6e7e9b81dd8",
+  "id": "pr-5310-reviewer-release-linux-20261108",
+  "instructions": "Refresh the board and reconcile any worker or execution of the superseded be781470 gate before starting; a missing claim or a supersession notice does not prove no worker is active. Read the gate record, verify PR and fork heads and claim this job. Run actual release and Docker proof without reintroducing the removed unit-test suite. Do not post a comment, edit the PR or publish images.",
+  "intended_host": "Isolated non-root Linux gate host with JDK 21, Python 3, Docker, network/dependencies, adequate disk and host build lock",
+  "job": "pr-5310-reviewer-release-linux-20261108",
+  "parent_head": "be781470e4f7b1586e402a1367de6607f663cfa7",
+  "pr": "https://github.com/apache/solr/pull/5310",
+  "source": "nick-boss-tech/solr:solr-18169-docker-ci-followup",
+  "summary": "Gate the slim release smoke fix after removing its mocked test suite",
+  "supersedes_gate": "pr-5310-adjacent-fix-linux-20261108",
+  "tags": [
+    "linux",
+    "gate",
+    "release",
+    "docker"
+  ],
+  "type": "assignment"
+}
