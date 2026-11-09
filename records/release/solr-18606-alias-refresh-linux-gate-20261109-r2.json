@@ -1,0 +1,9 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "Live coordination-v2 report records/records/report/solr-18606-alias-refresh-linux-gate-20261109-r2-report.json and passing receipt records/receipt/solr-18606-alias-refresh-linux-gate-20261109-r2-receipt.json were published and read back with semantic content match. Evidence record records/evidence/solr-18606-alias-refresh-linux-gate-20261109-r2-evidence.json points to a 137,059-byte archive whose downloaded SHA-256 was verified as 6936df39ae0e37ad1ec7924880f78b8869a30b9f2213a7a2d7721e6522fa6914. The source branch solr-18606-submit still matched 29caa4258ff8b9def71db25d48bfe07c5ddcbb48 at 2026-11-09T20:37:02Z. ./gradlew --stop exited 0 and stopped four gate-created Gradle daemons; final process inspection found no Gradle/JUnit executor; both /workspace/tools/.gradle-phone-agent-2.lock and /workspace/tools/.gradle-0609f7968656.lock were free; disposable source worktrees/clones were removed. Pre-release live board tip was 7e6d5ee97f52b8786e5afaf02e67f9402db1cfa1.",
+  "id": "solr-18606-alias-refresh-linux-gate-20261109-r2",
+  "job": "solr-18606-alias-refresh-linux-gate-20261109-r2",
+  "observed_at_utc": "2026-11-09T20:37:02Z",
+  "reason": "The assigned exact-head Linux follow-up gate, evidence, report, and receipt are complete. No ticket source branch or PR was modified; this worker is stopping.",
+  "type": "release"
+}
