@@ -1,0 +1,11 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "Verified records/evidence/pr-5301-real-zk-handoff-linux-20261109-evidence-bundle.json (SHA-256 155fc03dfc608064b2a60c2a314b76b566a9250b668827ed9accab9043923130), records/evidence/pr-5301-real-zk-handoff-linux-20261109-executor-stop-final.json (SHA-256 73cb5756d3a4b9e19745e8b09e60b7caac98e38e87c9141b5b20aa6837871f51), report pr-5301-real-zk-handoff-linux-20261109-report, and receipt pr-5301-real-zk-handoff-linux-20261109-receipt. The executor-stop JSON was uploaded and byte-verified; it records Gradle --stop exit 0, no active Gradle/Solr/ZooKeeper/JUnit processes, both host locks free, the parent-blob worktree removed, and a clean exact-head source checkout.",
+  "head": "4feb9dd6f33dfca5cd982934aaea7f8b22ea8069",
+  "id": "pr-5301-real-zk-handoff-linux-20261109",
+  "job": "pr-5301-real-zk-handoff-linux-20261109",
+  "reason": "The assigned PR 5301 Linux gate execution and its evidence/report/receipt publication are complete. The receipt verdict is incomplete, not green, because the new regression test still has unscoped disconnected/stale-event latches and an unchecked thirdCreationRequested await; a conditional proxy setup-cleanup edge is also reported. The live owner clarification assigns any source/test repair to the implementor and requires a superseding exact-head gate if changed. This worker will start no further build/test executor for this assignment.",
+  "receipt": "pr-5301-real-zk-handoff-linux-20261109-receipt",
+  "report": "pr-5301-real-zk-handoff-linux-20261109-report",
+  "type": "release"
+}
