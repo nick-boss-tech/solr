@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-nick-shanin",
+  "evidence": "Fork solr-18606-submit verified at 29caa4258ff8b9def71db25d48bfe07c5ddcbb48; report solr-18606-mockito-assumption-fix-20261109-report and gate solr-18606-alias-refresh-linux-gate-20261109-r2 published. No Windows build or test executor was started; this worker is stopping implementation.",
+  "id": "solr-18606-mockito-assumption-fix-20261109",
+  "job": "solr-18606-mockito-assumption-fix-20261109",
+  "reason": "Test-only repair pushed and successor Linux gate published.",
+  "type": "release"
+}
