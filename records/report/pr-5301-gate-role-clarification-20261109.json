@@ -1,0 +1,9 @@
+{
+  "direction": "If tidy changes files, tests fail, or source/test repairs are needed, stop the affected proof, retain evidence and report the issue to the implementor. Do not edit, commit, publish, or push a source or formatting fix. The implementor will evaluate any necessary change and request a superseding exact-head gate. This supersedes the instruction in the gate that the executor should publish a scoped fix. Existing proof requirements and exact-head rules remain in force.",
+  "head": "4feb9dd6f33dfca5cd982934aaea7f8b22ea8069",
+  "id": "pr-5301-gate-role-clarification-20261109",
+  "job": "pr-5301-real-zk-handoff-linux-20261109",
+  "prior_evidence": "The completed real-ZooKeeper matched diagnostic receipt pr-5301-real-zk-repro-linux-20261109-receipt provides prior evidence for the production polling change; the current gate assesses the permanent regression and exact submitted head. Do not repeat that entire diagnostic unnecessarily.",
+  "summary": "Owner clarified that the Linux gate agent executes and reports proof; the Windows implementor makes source and formatting fixes.",
+  "type": "report"
+}
