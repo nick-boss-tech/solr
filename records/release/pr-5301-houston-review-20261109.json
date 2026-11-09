@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr-5301-houston-review",
+  "evidence": "records/report/pr-5301-houston-review-20261109-report.json; records/gate/pr-5301-houston-current-linux-20261109.json. No source-edit or test executor started on Windows; review work has stopped.",
+  "id": "pr-5301-houston-review-20261109",
+  "job": "pr-5301-houston-review-20261109",
+  "reason": "Source review recorded and exact-head Linux diagnostic handed off",
+  "type": "release"
+}
