@@ -1,0 +1,13 @@
+{
+  "details": "Updated implementation explanation, 45-test exact-head Linux result, four mutation controls, sync and alias scope limits, and source/changelog links. Preserved AI disclosure and draft status.",
+  "head": "9d4dc33e5d829d2bc9d1304054b5af6746879b34",
+  "id": "solr-18606-pr5314-body-update-20261109-report",
+  "job": "solr-18606-pr5314-body-update-20261109",
+  "observed_at_utc": "2026-11-09T23:53:29Z",
+  "pr": "https://github.com/apache/solr/pull/5314",
+  "receipt": "records/receipt/solr-18606-pr5314-review-fixes-linux-20261109-receipt.json",
+  "record": "research/branch-reviews/2026-11-09-pr-batch/PR-5314-review.md",
+  "summary": "User-authorized PR body update published and verified.",
+  "type": "report",
+  "verification": "Separate PR read-back exactly matched scratchpad draft; PR head remained 9d4dc33e5d829d2bc9d1304054b5af6746879b34, open and draft, no comments or reviews. PR body contains no en or em dashes."
+}
