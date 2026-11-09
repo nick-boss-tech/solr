@@ -33,6 +33,7 @@ import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.api.ContainerPluginsRegistry;
 import org.apache.solr.client.solrj.impl.SolrZkClientTimeout;
 import org.apache.solr.cloud.ClusterSingleton;
+import org.apache.solr.cloud.ZkTestServer;
 import org.apache.solr.cluster.placement.plugins.AffinityPlacementFactory;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.search.CacheConfig;
@@ -602,12 +603,31 @@ public class TestSolrXml extends SolrTestCaseJ4 {
   public void testStartUpZkTimeOutDefaultsToZkClientTimeout() {
     System.clearProperty("solr.cloud.wait.for.zk.seconds");
     assertEquals(
-        SolrZkClientTimeout.DEFAULT_ZK_CLIENT_TIMEOUT, NodeConfig.getStartUpZkTimeOutSeconds());
+        SolrZkClientTimeout.DEFAULT_ZK_CLIENT_TIMEOUT, NodeConfig.getStartUpZkTimeOutMillis());
   }
 
   public void testStartUpZkTimeOutConvertsSecondsToMillis() {
     System.setProperty("solr.cloud.wait.for.zk.seconds", "60");
-    assertEquals(60_000, NodeConfig.getStartUpZkTimeOutSeconds());
+    assertEquals(60_000, NodeConfig.getStartUpZkTimeOutMillis());
+  }
+
+  public void testStartUpZkTimeOutRejectsMalformedValue() {
+    System.setProperty("solr.cloud.wait.for.zk.seconds", "not-a-number");
+    assertThrows(NumberFormatException.class, NodeConfig::getStartUpZkTimeOutMillis);
+  }
+
+  public void testStartupWithDefaultZkWait() throws Exception {
+    System.clearProperty("solr.cloud.wait.for.zk.seconds");
+    Files.writeString(solrHome.resolve("solr.xml"), "<solr/>");
+    ZkTestServer server = new ZkTestServer(createTempDir("zkData"));
+    server.run();
+    try {
+      Properties props = new Properties();
+      props.setProperty(SolrXmlConfig.ZK_HOST, server.getZkHost());
+      assertNotNull(NodeConfig.loadNodeConfig(solrHome, props));
+    } finally {
+      server.shutdown();
+    }
   }
 
   public static class CS implements ClusterSingleton {

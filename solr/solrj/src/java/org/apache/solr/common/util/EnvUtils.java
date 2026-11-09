@@ -23,11 +23,13 @@ import java.io.InputStreamReader;
 import java.lang.invoke.MethodHandles;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
+import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
@@ -49,6 +51,8 @@ public class EnvUtils {
 
   /** Maps deprecated sys prop keys to current sys prop keys with special/custom mappings */
   private static final Map<String, String> DEPRECATED_MAPPINGS = new HashMap<>();
+
+  private static final Set<String> MULTI_ALIAS_TARGETS = new HashSet<>();
 
   private static final Map<String, String> camelCaseToDotsMap = new ConcurrentHashMap<>();
 
@@ -76,7 +80,9 @@ public class EnvUtils {
         }
         for (String key : deprecatedProps.stringPropertyNames()) {
           // A property may have several legacy names, separated by commas
-          for (String legacyName : deprecatedProps.getProperty(key).split(",")) {
+          String[] legacyNames = deprecatedProps.getProperty(key).split(",");
+          if (legacyNames.length > 1) MULTI_ALIAS_TARGETS.add(key);
+          for (String legacyName : legacyNames) {
             DEPRECATED_MAPPINGS.put(camelCaseToDotSeparated(legacyName.trim()), key);
           }
         }
@@ -219,10 +225,19 @@ public class EnvUtils {
       }
     }
 
-    for (String deprecatedKey : sysProperties.stringPropertyNames()) {
+    Set<String> propertyNames = sysProperties.stringPropertyNames();
+    Set<String> resolvedTargets = new HashSet<>();
+    for (String deprecatedKey : propertyNames.stream().sorted().toList()) {
       var dotKey = camelCaseToDotSeparated(deprecatedKey);
       if (DEPRECATED_MAPPINGS.containsKey(dotKey)
           || DEPRECATED_MAPPINGS.containsKey("!" + dotKey)) {
+        String target =
+            DEPRECATED_MAPPINGS.getOrDefault(dotKey, DEPRECATED_MAPPINGS.get("!" + dotKey));
+        // For multiple aliases, the current name wins; otherwise the first name in sorted order wins.
+        if (MULTI_ALIAS_TARGETS.contains(target)
+            && (propertyNames.contains(target) || !resolvedTargets.add(target))) {
+          continue;
+        }
         applyDeprecatedPropertyMapping(deprecatedKey, dotKey, sysProperties);
       }
     }

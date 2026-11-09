@@ -168,6 +168,20 @@ public class EnvUtilsTest extends SolrTestCase {
   }
 
   @Test
+  public void waitForZkAliasesHaveDeterministicPrecedence() {
+    String current = "solr.cloud.wait.for.zk.seconds";
+    System.clearProperty(current);
+    System.setProperty("waitForZk", "60");
+    System.setProperty("solr.wait.for.zk", "45");
+    EnvUtils.init(false, Map.of(), System.getProperties());
+    assertEquals("45", EnvUtils.getProperty(current));
+
+    System.setProperty(current, "30");
+    EnvUtils.init(false, Map.of(), System.getProperties());
+    assertEquals("30", EnvUtils.getProperty(current));
+  }
+
+  @Test
   public void testFlippingDisabledToEnabledPropertyName() {
 
     var env = Map.of("SOLR_ADMIN_UI_DISABLED", "true");
@@ -235,7 +249,9 @@ public class EnvUtilsTest extends SolrTestCase {
     Map<String, String> reverseDeprecatedMappings = new HashMap<>();
     for (String newSysProp : deprecatedMappings.stringPropertyNames()) {
       for (String legacyName : deprecatedMappings.getProperty(newSysProp).split(",")) {
-        reverseDeprecatedMappings.put(legacyName.trim(), newSysProp);
+        assertNull(
+            "duplicate deprecated property " + legacyName,
+            reverseDeprecatedMappings.put(legacyName.trim(), newSysProp));
       }
     }
 
