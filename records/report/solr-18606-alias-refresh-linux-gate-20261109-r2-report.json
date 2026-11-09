@@ -1,0 +1,186 @@
+{
+  "coverage_limits": {
+    "alias_hot_path": "The known-alias test verifies a mocked provider interaction count, not request latency or a performance benchmark.",
+    "real_zk_test": "Verifies provider discovery/refresh while the reader update lock prevents watcher publication; it does not prove a complete client request.",
+    "remaining_risk": "Stale alias snapshots and repeated missing collection names may still cause extra ZooKeeper reads; neither was benchmarked or resolved."
+  },
+  "docker_dependent_proof": {
+    "details": "No Docker CLI, engine, image, or container was invoked or installed. Static Gradle checks in the :solr:docker module did execute during the successful root check; no Docker-dependent test proof is credited.",
+    "status": "not_run"
+  },
+  "environment": {
+    "gradle": "9.7.0",
+    "gradle_user_home": "/workspace/gradle-home",
+    "host_alias": "phone-agent-2",
+    "hostname": "0609f7968656",
+    "jdk": "OpenJDK 21.0.12.1",
+    "os": "Ubuntu 24.04.4 LTS, Linux x86_64"
+  },
+  "evidence": {
+    "artifact": "solr-18606-alias-refresh-linux-gate-20261109-r2-evidence.tar.gz",
+    "bytes": 137059,
+    "record_id": "solr-18606-alias-refresh-linux-gate-20261109-r2-evidence",
+    "sha256": "6936df39ae0e37ad1ec7924880f78b8869a30b9f2213a7a2d7721e6522fa6914",
+    "verified_download_sha256": "6936df39ae0e37ad1ec7924880f78b8869a30b9f2213a7a2d7721e6522fa6914"
+  },
+  "gate": "solr-18606-alias-refresh-linux-gate-20261109-r2",
+  "head": "29caa4258ff8b9def71db25d48bfe07c5ddcbb48",
+  "id": "solr-18606-alias-refresh-linux-gate-20261109-r2-report",
+  "job": "solr-18606-alias-refresh-linux-gate-20261109-r2",
+  "locks": [
+    "/workspace/tools/.gradle-phone-agent-2.lock",
+    "/workspace/tools/.gradle-0609f7968656.lock"
+  ],
+  "observed_at_utc": "2026-11-09T20:34:50Z",
+  "prewrite_live_board_tip": "8837b4df851f1bf2db980cc0672bfddb2f0eaaa3",
+  "proof_legs": {
+    "alias_guard_mutation": {
+      "command": "./gradlew :solr:core:test --tests org.apache.solr.cloud.overseer.ZkStateReaderTest.testProviderDoesNotRefreshKnownAlias -Ptests.seed=18606CAFE",
+      "control_result": "passed: expected runtime red with the alias guard removed",
+      "errors": 0,
+      "failure": "Mockito NeverWantedButInvoked: forceUpdateCollection(\"existing_alias\") was called from ZkClientClusterStateProvider.getState; no compilation/setup failure.",
+      "failures": 1,
+      "mutation": "In a separate clean offered-head checkout, changed only `if (ref != null || reader.getAliases().hasAlias(collection))` to `if (ref != null)` in ZkClientClusterStateProvider.java.",
+      "mutation_patch": "artifacts/alias-guard-mutation.patch",
+      "restored_and_verified_clean": true,
+      "runner_exit_code": 1,
+      "skipped": 0,
+      "tests": 1,
+      "xml": "results/alias-mutation/TEST-org.apache.solr.cloud.overseer.ZkStateReaderTest.xml"
+    },
+    "alias_integration_test": {
+      "command": "./gradlew :solr:core:test --tests org.apache.solr.cloud.AliasIntegrationTest -Ptests.seed=18606CAFE",
+      "driver_log": "logs/alias-integration.driver.log",
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 9,
+      "time_seconds": 35.191,
+      "xml": "results/alias-integration/TEST-org.apache.solr.cloud.AliasIntegrationTest.xml"
+    },
+    "check_dry_run": {
+      "command": "./gradlew check -x test --dry-run",
+      "driver_log": "logs/check-dry-run.driver.log",
+      "exit_code": 0,
+      "note": "Task-graph inspection only; not proof of task completion."
+    },
+    "fail_before": {
+      "base": "b771587e9707c49847d728fd1f3ff259a182692c",
+      "command": "./gradlew :solr:core:test --tests org.apache.solr.cloud.overseer.ZkStateReaderTest.testProviderRefreshesCollectionMissingFromLocalState -Ptests.seed=18606CAFE",
+      "control_result": "passed: expected runtime red on the base",
+      "errors": 0,
+      "failure": "AssertionError at assertNotNull(refreshed), ZkStateReaderTest.java:178, after the real ZooKeeper write while the reader update lock was held; compilation/setup completed.",
+      "failures": 1,
+      "overlay": "Only solr/core/src/test/org/apache/solr/cloud/overseer/ZkStateReaderTest.java from the offered head; no other path changed.",
+      "overlay_diff": "artifacts/base-test-overlay.diff",
+      "runner_exit_code": 1,
+      "skipped": 0,
+      "tests": 1,
+      "xml": "results/fail-before/TEST-org.apache.solr.cloud.overseer.ZkStateReaderTest.xml"
+    },
+    "gradle_cleanup": {
+      "both_locks_free_after_cleanup": true,
+      "command": "./gradlew --stop",
+      "daemons_stopped": 4,
+      "disposable_worktrees_removed": true,
+      "driver_log": "logs/gradle-stop.driver.log",
+      "exit_code": 0,
+      "remaining_executor_processes": 0
+    },
+    "root_check": {
+      "command": "./gradlew check -x test",
+      "final_attempt": {
+        "antora_task": ":solr:solr-ref-guide:buildLocalAntoraSite passed",
+        "build_result": "BUILD SUCCESSFUL; 556 actionable tasks executed",
+        "driver_log": "logs/root-check-retry.driver.log",
+        "environment": "Clean normal clone with a .git directory at the same exact head.",
+        "exit_code": 0,
+        "head": "29caa4258ff8b9def71db25d48bfe07c5ddcbb48",
+        "source_pattern_task": ":solr:core:validateSourcePatterns passed"
+      },
+      "first_attempt": {
+        "cause": "Antora reported `Local content source must be a git repository` for the linked worktree because its .git entry was a pointer file.",
+        "classification": "setup failure; preserved but not credited as a pass",
+        "driver_log": "logs/root-check.driver.log",
+        "exit_code": 1,
+        "failed_task": ":solr:solr-ref-guide:buildLocalAntoraSite"
+      }
+    },
+    "solrj_cache_and_routing_tests": {
+      "classes": {
+        "CloudSolrClientCacheTest": {
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 6,
+          "time_seconds": 1.789
+        },
+        "CloudSolrClientRoutingTest": {
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 2,
+          "time_seconds": 8.607
+        }
+      },
+      "command": "./gradlew :solr:solrj:test --tests org.apache.solr.client.solrj.impl.CloudSolrClientCacheTest --tests org.apache.solr.client.solrj.impl.CloudSolrClientRoutingTest -Ptests.seed=18606CAFE",
+      "driver_log": "logs/solrj-client-tests.driver.log",
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "skipped": 0,
+      "total_tests": 8,
+      "xml_directory": "results/solrj-client-tests/"
+    },
+    "tidy": {
+      "command": "./gradlew tidy",
+      "driver_log": "logs/tidy.driver.log",
+      "exit_code": 0,
+      "git_status": "results/tidy/git-status.txt",
+      "tracked_changes_after": false
+    },
+    "zksr_reader_test": {
+      "command": "./gradlew :solr:core:test --tests org.apache.solr.cloud.overseer.ZkStateReaderTest -Ptests.seed=18606CAFE",
+      "driver_log": "logs/zksr-class.driver.log",
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "required_provider_tests": {
+        "testProviderDoesNotRefreshKnownAlias": "passed",
+        "testProviderRefreshesCollectionMissingFromLocalState": "passed",
+        "testProviderUnknownCollectionAndInterruptedRefresh": "passed"
+      },
+      "skipped": 0,
+      "tests": 19,
+      "time_seconds": 13.811,
+      "xml": "results/zksr-class/TEST-org.apache.solr.cloud.overseer.ZkStateReaderTest.xml"
+    }
+  },
+  "resource_guard": {
+    "all_monitored_legs_stopped_by_guard": false,
+    "disk_floor_bytes": 2147483648,
+    "free_inode_stop_floor_pct": 15,
+    "initial_free_inode_pct": 80.5339,
+    "initial_free_inodes": 1504450,
+    "initial_total_inodes": 1868096,
+    "inode_total": 1868096,
+    "minimum_free_disk_bytes": 54747246592,
+    "minimum_free_inode_pct": 71.7988,
+    "minimum_observed_free_inodes": 1341271,
+    "monitor_samples": 290
+  },
+  "source": {
+    "base": "b771587e9707c49847d728fd1f3ff259a182692c",
+    "branch": "solr-18606-submit",
+    "final_remote_head": "29caa4258ff8b9def71db25d48bfe07c5ddcbb48",
+    "final_remote_head_verified_at_utc": "2026-11-09T20:34:20Z",
+    "head": "29caa4258ff8b9def71db25d48bfe07c5ddcbb48",
+    "repository": "nick-boss-tech/solr",
+    "temporary_controls": "The fail-before test overlay was limited to ZkStateReaderTest.java in a disposable clean-base worktree. The alias guard mutation was isolated to a separate head worktree, restored, and verified clean. All disposable worktrees/clones were removed after execution.",
+    "tested_head": "29caa4258ff8b9def71db25d48bfe07c5ddcbb48",
+    "ticket_branch_or_pr_modified": false
+  },
+  "summary": "The SOLR-18606 successor Linux gate passed at exact source head 29caa4258ff8b9def71db25d48bfe07c5ddcbb48. All 36 targeted positive tests passed with zero failures, errors, or skips; the fail-before and alias-guard controls produced their expected runtime failures; tidy made no tracked changes; and the final root check succeeded. The first root-check attempt failed only because Antora rejected the linked worktree's .git pointer; after investigating, the root check was rerun in a clean normal clone at the same SHA and passed. Docker-dependent proof remains unrun.",
+  "type": "report"
+}
