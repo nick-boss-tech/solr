@@ -1,0 +1,9 @@
+{
+  "head": "b7dce4b74984e468862fc7508d9eea827baf43ee",
+  "id": "pr-5310-limits-body-20261109",
+  "intended_host": "Windows public PR body edit explicitly requested by user",
+  "job": "pr-5310-limits-body-20261109",
+  "scope": "Preserve existing scope and accurately attributed historical verification; replace missing-proof discussion with a concise behavioral limit. Do not modify source or post comments.",
+  "summary": "Update PR 5310 body to describe the deferred startup-cleanup limitation",
+  "type": "assignment"
+}
