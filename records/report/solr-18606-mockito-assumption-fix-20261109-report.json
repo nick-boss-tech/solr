@@ -1,0 +1,11 @@
+{
+  "failed_receipt": "solr-18606-alias-refresh-linux-gate-20261109-receipt",
+  "head": "29caa4258ff8b9def71db25d48bfe07c5ddcbb48",
+  "id": "solr-18606-mockito-assumption-fix-20261109-report",
+  "job": "solr-18606-mockito-assumption-fix-20261109",
+  "limitations": "Previous test and mutation results apply only to fa8cd9f4; successor gate must re-execute required legs at the new head and report skips, source validation, tidy and root check.",
+  "previous_head": "fa8cd9f4c490fc0bacbcde5c7ac02742ce3b3389",
+  "result": "The failed Linux receipt reported 36 tests passing, both negative controls behaving as expected and tidy clean, but root check failed because the added test file uses Mockito without assumeWorkingMockito(). Added the assumption separately to the two Mockito-using tests, leaving the real ZK test and unrelated class tests runnable on unsupported runtimes. Diff has only two added lines; git diff --check passed; verified fork head at 29caa4258ff8b9def71db25d48bfe07c5ddcbb48. No Gradle or tests ran on Windows.",
+  "summary": "Fixed Mockito source-pattern failure and pushed; fresh exact-head proof required.",
+  "type": "report"
+}
