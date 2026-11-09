@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex",
+  "evidence": "Implementation report pr-5301-real-zk-handoff-windows-20261109-report records verified fork head 4feb9dd6f33dfca5cd982934aaea7f8b22ea8069. No Gradle, test runner, or background source-edit executor was started on Windows. Linux gate pr-5301-real-zk-handoff-linux-20261109 is a separate job.",
+  "id": "pr-5301-real-zk-handoff-windows-20261109",
+  "job": "pr-5301-real-zk-handoff-windows-20261109",
+  "reason": "Implementation and fork push completed; handing exact-head validation to the separate Linux gate job.",
+  "type": "release"
+}
