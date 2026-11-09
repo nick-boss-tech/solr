@@ -1,0 +1,11 @@
+{
+  "bytes": 99141,
+  "filename": "solr-18606-alias-refresh-linux-gate-20261109-evidence.tar.gz",
+  "head": "fa8cd9f4c490fc0bacbcde5c7ac02742ce3b3389",
+  "id": "solr-18606-alias-refresh-linux-gate-20261109-evidence",
+  "job": "solr-18606-alias-refresh-linux-gate-20261109",
+  "location": "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519664052758700/NnUrXKYhuLvcGWbG.gz?Expires=1825790200&Signature=eeSqMEAyBQTRzL0khixd0VsWWSozBNhFlOjpkcRmmeYPRm9h6NgfigJ3tyxumVnjiR7Oet0LhUWYJ4WAsZnGoZmIFStysoIwszStHTESK2y130bf9Z2zTIH2cFULolXBiUQnooAsfeAXPsxx5TwX~f7zSGCuJGBM8Lmon6y0QVvXVPZt7D5mXAIbFoHA2woocWyoRoExbf8so2FHpItY51f6przDhJy41Lsmwv0LYUKtksy0sWfUlVrFGLi~S4FmZXN8gKKxopODH1NSjNkiNEebmL-V~4UUlcuSgU66wsLsfcbbf1OrP8Bb38-3cYcf1sTkfYyapCulXXHQThl5XQ__&Key-Pair-Id=K10M74EMLURLMC",
+  "sha256": "7c4a58079bb03021ecd2be721bfa863ffa25b4036260071fff0b3e20327746d3",
+  "type": "evidence",
+  "verified_download_sha256": "7c4a58079bb03021ecd2be721bfa863ffa25b4036260071fff0b3e20327746d3"
+}
