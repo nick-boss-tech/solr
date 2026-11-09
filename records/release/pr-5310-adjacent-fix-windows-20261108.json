@@ -1,0 +1,8 @@
+{
+  "actor": "windows-implementation-agent",
+  "evidence": "records/report/pr-5310-adjacent-fix-be781470-20261108.json documents the verified PR and fork head, local offline checks and limitations. No local Solr, Docker, Gradle or external executor was started.",
+  "id": "pr-5310-adjacent-fix-windows-20261108",
+  "job": "pr-5310-adjacent-fix-windows-20261108",
+  "reason": "Implementation pushed and Linux gate handed off; worker stopping.",
+  "type": "release"
+}
