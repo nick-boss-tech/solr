@@ -1,0 +1,8 @@
+{
+  "head": "76e4e1bf6192468070ca200a09b1f6e7e9b81dd8",
+  "id": "pr-5310-maintainability-patch-20261108",
+  "job": "pr-5310-maintainability-patch-20261108",
+  "owner": "windows-implementation-agent",
+  "scope": "Implementation and PR body only; Linux gate worker remains independent and has not been declared stopped.",
+  "type": "claim"
+}
