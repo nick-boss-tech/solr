@@ -1,0 +1,11 @@
+{
+  "evidence": "research/branch-reviews/2026-11-09-pr-batch/evidence/PR-5287/",
+  "head": "7aeb2b691f69a9c4afff47fbf537daa3096ecad7",
+  "id": "pr-5287-review-2026-11-09-report",
+  "job": "pr-5287-review-2026-11-09",
+  "public_writes": "none",
+  "review_record": "research/branch-reviews/2026-11-09-pr-batch/PR-5287-review.md",
+  "summary": "Read-only follow-up review completed. Only documentation changed since contributor head 19f7c83812a4c81227601ff1abadca84beb05cb9. Prior source findings remain, and the review identifies unbounded aggregate memory and unchecked file-size conversion. Repository access policy needs a maintainer decision. Previous fork offer d0cf2471f37ae973ca06390ec195cf51f8fccbb3 is not incorporated; its old fast-forward instructions are stale. Current-head upstream checks report success; no tests or Gradle were run on Windows. Prior fork gate does not prove the current PR head; S3 was skipped there.",
+  "type": "report",
+  "verdict": "needs work"
+}
