@@ -1,0 +1,9 @@
+{
+  "actor": "Nick Shanin",
+  "evidence": "Evidence pointer records verified bundle SHA-256 6e2bdd49af1546692d3178fe6d5cfba5fe1a0daf061d5f13e68503d6358e5b8a at records/evidence/pr-5310-reviewer-release-linux-20261108-evidence.json; incomplete receipt and report are records/receipt/pr-5310-reviewer-release-linux-20261108-receipt.json and records/report/pr-5310-reviewer-release-linux-76e4e1bf-20261109.json. Tested head 76e4e1bf6192468070ca200a09b1f6e7e9b81dd8; final fork and PR head readback b7dce4b74984e468862fc7508d9eea827baf43ee. Exact-head checkout was clean, no source/PR changes were made, no Solr or Gradle executor remained, both host build locks were free, and free inodes were 76.48% at handoff. This release is only a stop/reconciliation record and does not approve b7dce4.",
+  "head": "76e4e1bf6192468070ca200a09b1f6e7e9b81dd8",
+  "id": "pr-5310-reviewer-release-linux-20261108",
+  "job": "pr-5310-reviewer-release-linux-20261108",
+  "reason": "The claimed Linux worker has completed its safe non-Docker checks and stopped. This job is released as incomplete because Docker-dependent acceptance and the stock full release smoke were not run under the owner's explicit no-Docker instruction; the source head also advanced during execution. No pass is claimed for the newer head.",
+  "type": "release"
+}
