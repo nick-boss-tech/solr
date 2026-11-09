@@ -1,0 +1,11 @@
+{
+  "branch": "nick-boss-tech/solr:solr-18169-docker-ci-followup",
+  "execution_hold": "Reconcile actual execution and host locks for the unclaimed superseded b7dce4 job and the separate startup ownership job before conflicting work. The earlier 76e4e1bf receipt and release report the executor stopped. Do not infer liveness from a missing claim, release alone, or this record. Respect any owner no-Docker instruction for the assigned host; report forbidden or unavailable legs incomplete.",
+  "head": "b6a7177125d3a2b24a253c12269bb5ca424c6dd4",
+  "id": "pr-5310-inline-document-linux-20261109",
+  "intended_host": "Capable Linux gate host, Docker only where owner authorization permits",
+  "job": "pr-5310-inline-document-linux-20261109",
+  "summary": "Gate PR 5310 after inlining Docker document commands",
+  "supersedes_gate": "pr-5310-maintainability-linux-20261108",
+  "type": "assignment"
+}
