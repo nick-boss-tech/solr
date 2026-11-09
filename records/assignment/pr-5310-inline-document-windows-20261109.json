@@ -1,0 +1,10 @@
+{
+  "head": "b7dce4b74984e468862fc7508d9eea827baf43ee",
+  "id": "pr-5310-inline-document-windows-20261109",
+  "intended_host": "Windows implementation; Linux proof pending",
+  "job": "pr-5310-inline-document-windows-20261109",
+  "review": "https://github.com/apache/solr/pull/5310#discussion_r4512525849",
+  "scope": "User authorized patch and plain push to existing PR fork branch. Inline identical command and document in 14 test scripts, preserve core arguments and assertions; remove helper. No public comment or PR body edit.",
+  "summary": "Inline Docker test document commands per PR 5310 review",
+  "type": "assignment"
+}
