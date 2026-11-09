@@ -1,0 +1,13 @@
+{
+  "branch": "nick-boss-tech/solr:solr-18169-docker-ci-followup",
+  "head": "b6a7177125d3a2b24a253c12269bb5ca424c6dd4",
+  "id": "pr-5310-inline-document-b6a71771-20261109",
+  "job": "pr-5310-inline-document-windows-20261109",
+  "parent_head": "b7dce4b74984e468862fc7508d9eea827baf43ee",
+  "pr": "https://github.com/apache/solr/pull/5310",
+  "prior_gate": "The b7dce4 maintainability gate is superseded by the new head and had no claim at board snapshot d49ff12fe3c9ca5f5c42fcd5d047653448f0666d. Verify execution state; absence of a claim is not proof of no worker. The 76e4e1bf gate has an incomplete receipt and release reporting stopped executors; no result applies to the new head.",
+  "public_actions": "No PR comment or body edit. Existing PR body says the JSON is shared and must be reconciled separately before it is presented as current.",
+  "summary": "Inlined identical docker exec JSON document command into all 14 callers, retaining core names and query assertions; removed shared helper. Plain-pushed to the existing PR branch and independently verified fork and PR heads.",
+  "type": "report",
+  "verification": "git diff --check passed; Bash -n passed for all 15 changed scripts. Windows ran no Gradle, Docker, Solr, or integration tests. Exact-head Linux and Docker proof pending."
+}
