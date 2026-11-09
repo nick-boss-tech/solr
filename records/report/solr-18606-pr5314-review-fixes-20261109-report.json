@@ -1,0 +1,22 @@
+{
+  "base": "29caa4258ff8b9def71db25d48bfe07c5ddcbb48",
+  "changes": [
+    "Await Curator sync completion with client-timeout bound before the ZooKeeper collection read; propagate callback failure and interruption; skip sync for locally known aliases.",
+    "Read missing collection through the checked exception path and seed its lazy ref, retaining server error classification at the provider.",
+    "Tests cover sync/read ordering, callback wait and failure, read errors and interruption, alias guard, and existing real-ZK stale-local-view behavior."
+  ],
+  "commits": [
+    "8dda263b33c66bfec94e2e123d0162a24923edc5",
+    "9d4dc33e5d829d2bc9d1304054b5af6746879b34"
+  ],
+  "evidence": "Remote fork and live PR head verified equal to offered SHA; clean worktree and git diff --check. No build/test execution on Windows.",
+  "gate": "records/gate/solr-18606-pr5314-review-fixes-linux-20261109.json",
+  "head": "9d4dc33e5d829d2bc9d1304054b5af6746879b34",
+  "id": "solr-18606-pr5314-review-fixes-20261109-report",
+  "job": "solr-18606-pr5314-review-fixes-20261109",
+  "limits": "No real ZooKeeper quorum-lag test or latency benchmark; repeated missing names cause sync and read; stale alias view remains out of scope. Curator sync is asynchronous and must not be described as a strict quorum guarantee. PR body still cites earlier tested head and requires separately authorized update.",
+  "local_note": "research/solr-18606-research-note.md",
+  "pr": "https://github.com/apache/solr/pull/5314",
+  "summary": "Pushed synchronized missing-collection refresh, checked read failure propagation, and focused tests; Linux proof pending.",
+  "type": "report"
+}
