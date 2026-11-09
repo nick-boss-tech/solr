@@ -1,0 +1,27 @@
+{
+  "base_head": "358f13d9fdfaed260143a51100cd5657a582d562",
+  "commands": [
+    "./gradlew :solr:core:test --tests org.apache.solr.core.TestSolrXml -Ptests.seed=5313C0DE",
+    "./gradlew :solr:solrj:test --tests org.apache.solr.common.util.EnvUtilsTest -Ptests.seed=5313C0DE",
+    "./gradlew :solr:core:test --tests org.apache.solr.cloud.ZkFailoverTest -Ptests.seed=5313C0DE",
+    "./gradlew tidy",
+    "./gradlew check -x test"
+  ],
+  "environment": "Clean Linux checkout at this head, project-supported JDK, host capable of all checks including any root-check prerequisites; preserve logs, fresh JUnit XML, commands, exit codes, environment and source SHAs. Do not amend the offered commit during proof.",
+  "head": "4be1ad602621d2af96565355dce3804ee4744aae",
+  "id": "pr5313-startup-wait-linux-gate-round2-20261109",
+  "job": "pr5313-startup-wait-linux-gate-round2-20261109",
+  "previous_head": "bc9e533b4abc81652754e12bf9465296779aa7de",
+  "previous_receipt": "records/receipt/pr5313-startup-wait-linux-gate-20261109-receipt.json",
+  "requirements": [
+    "Run all three named suites afresh on this head, preserving XML; verify default startup connects to a real ZooKeeper server, and configured seconds and invalid value cases run. Report the pre-existing @Ignore separately.",
+    "In clean fresh JVMs exercise startup with waitForZk system property and SOLR_WAIT_FOR_ZK environment variable before EnvUtils first initialization, including an explicitly supplied zkHost. Confirm both reach the startup timeout. Verify modern property wins when combined with an alias and that solr.wait.for.zk wins over waitForZk when both aliases are present; record exact probes and observed values.",
+    "In a fresh JVM set solr.zookeeper.client.timeout to a non-round-second millisecond value, for example 30001, before class initialization and verify the absent startup property passes exactly that value to both builder timeouts; also verify explicit startup seconds override it. Record executable probe and observations.",
+    "Demonstrate the new real-server startup regression fails on contributor head 358f13d9fdfaed260143a51100cd5657a582d562: transplant only the new startup integration method and ZkTestServer import to that head and run that single method with the usual 30000 ms client timeout. Show ArithmeticException from timeout conversion; compile, setup or unrelated errors do not count.",
+    "Run tidy and confirm no tracked changes; if formatting modifies files, stop and hand back a new head for a new gate. Run root check without excluding anything except tests and record any execution conditions. If host prerequisites are unavailable, record the leg incomplete and return it to a capable host.",
+    "Investigate executed failures before retrying; do not call incomplete or non-reproducing legs green. Publish a receipt with exact commands, outputs, XML, source heads and each leg separately."
+  ],
+  "seed": "5313C0DE",
+  "source": "https://github.com/nick-boss-tech/solr/tree/solr-18630-submit",
+  "type": "gate"
+}
