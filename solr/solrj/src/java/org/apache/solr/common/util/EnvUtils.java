@@ -233,7 +233,8 @@ public class EnvUtils {
           || DEPRECATED_MAPPINGS.containsKey("!" + dotKey)) {
         String target =
             DEPRECATED_MAPPINGS.getOrDefault(dotKey, DEPRECATED_MAPPINGS.get("!" + dotKey));
-        // For multiple aliases, the current name wins; otherwise the first name in sorted order wins.
+        // For multiple aliases, the current name wins; otherwise the first name in sorted order
+        // wins.
         if (MULTI_ALIAS_TARGETS.contains(target)
             && (propertyNames.contains(target) || !resolvedTargets.add(target))) {
           continue;
