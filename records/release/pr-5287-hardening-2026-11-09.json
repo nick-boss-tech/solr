@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-implementation",
+  "evidence": "Report records/report/pr-5287-hardening-2026-11-09-report.json records the verified fork head and comment. The separate gate job pr-5287-hardening-2026-11-09-linux-gate owns remaining proof. No Windows test executor was started.",
+  "id": "pr-5287-hardening-2026-11-09",
+  "job": "pr-5287-hardening-2026-11-09",
+  "reason": "Implementation, fork push and Linux gate handoff complete; Windows implementation worker is stopping.",
+  "type": "release"
+}
