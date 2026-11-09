@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "Verified records/evidence/pr-5301-real-zk-repro-linux-20261109-evidence-bundle.json (SHA-256 4ff32b71c73ee9f5d09caa2ae60ad69e5c53156c500ba6f5ceccedf938671353), records/evidence/pr-5301-real-zk-repro-linux-20261109-executor-stop-final.json (SHA-256 65b4153a5366ee7c7e6c3d6d8267398b4f9ece8d04d8257c7c324e130c747b56), and prior stop record pr-5301-real-zk-repro-linux-20261109-executor-stop. The final stop JSON was downloaded and byte-verified immediately before release; it confirms no active Gradle/Solr/ZooKeeper/JUnit process and both host flocks free.",
+  "id": "pr-5301-real-zk-repro-linux-20261109",
+  "job": "pr-5301-real-zk-repro-linux-20261109",
+  "reason": "The assigned real-ZooKeeper gate is complete; the report, receipt, evidence pointers, and executor-stop proof are published. No further build/test executor will be started for this assignment.",
+  "type": "release"
+}
