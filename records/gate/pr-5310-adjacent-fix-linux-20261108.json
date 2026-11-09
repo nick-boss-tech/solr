@@ -1,0 +1,19 @@
+{
+  "branch": "nick-boss-tech/solr:solr-18169-docker-ci-followup",
+  "environment": "Isolated non-root Linux checkout at exact head, JDK 21, Python 3, tar, Docker, host build lock, safe ports, disk/inode guards and disposable home/data directories. Do not use real installations, ZooKeeper, or pre-existing Solr processes. Record tool versions, resources, command exit codes and cleanup.",
+  "head": "be781470e4f7b1586e402a1367de6607f663cfa7",
+  "id": "pr-5310-adjacent-fix-linux-20261108",
+  "job": "pr-5310-adjacent-fix-linux-20261108",
+  "parent_head": "dc720a2ba63aff4d2ee34beec45a173795166628",
+  "previous_receipt": "records/receipt/pr-5310-slim-release-smoke-linux-20261108-receipt.json",
+  "requirements": [
+    "Run python3 -m unittest discover -s dev-tools/scripts/tests -p test_smoke_release_slim.py -v: nine tests, zero skipped. Verify the PR workflow path filters and command cover the new tests.",
+    "Run ./gradlew tidy, require no tracked changes, git diff --check and ./gradlew check -x test. Do not report a formatting-modified head as passing.",
+    "Build full, slim and source release artifacts at this head with ./gradlew -p solr/distribution assembleRelease -Dversion.release=11.0.0-SNAPSHOT, generate Changes.html as required by the local release workflow, then run the full local smokeTestRelease.py with --not-signed --revision skip and correct version. Record archive hashes, full example, slim standalone index/query/stop and source/maven coverage and skipped legs.",
+    "Against the built slim artifact, run the new slim path with deliberately contaminated SOLR_HOME, SOLR_DATA_HOME, SOLR_INCLUDE, SOLR_JAVA_HOME, SOLR_CONNECTION, ZK_HOST, STOP_PORT and JAVA_TOOL_OPTIONS pointing only to isolated sentinel fixtures. Verify the created core and data stay within the extracted distribution, no external sentinel files or services are modified, no external ZooKeeper is contacted, and cleanup stops only the owned process. Use safe dummy values and never connect to a real service. Include a busy default stop-port control and verify a different port is selected without touching the listener.",
+    "Run actual full and slim testDocker on the new head. Run the packaging rolling-upgrade BATS test with its normal previous-major slim starting image and the current image as end image. Also exercise the new example-free-start path using an actual locally built slim image with no example/ directory as the start, without publishing an image externally. If the test's unconditional docker pull prevents using a local tag, run an isolated temporary harness copy or narrowly scoped docker wrapper that only makes pull of that exact already-inspected local tag succeed, delegates all other operations, and document the overlay and image IDs. Verify indexed document survives and remove only gate-owned containers, networks and volumes. If image access or Docker is unavailable, mark the affected leg incomplete, not passed.",
+    "Run fail-before controls on parent dc720a2: demonstrate the environment-isolation and busy-stop-port regression assertions fail for the intended behavior using the same new tests in an isolated parent copy; do not count setup/compile errors. The Cygwin-path unit assertion may be run with mocked cygpath but does not constitute a real Cygwin test.",
+    "Publish a receipt with each required command, exit code, test counts, artifact/log hashes, source/fork/PR head readback, runtime image identities and cleanup. Do not treat the prior dc720a2 Linux receipt or parent Docker CI as proof for this head. Explicitly state Cygwin native execution remains pending unless separately verified on a capable host."
+  ],
+  "type": "gate"
+}
