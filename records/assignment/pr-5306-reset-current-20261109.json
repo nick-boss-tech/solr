@@ -1,0 +1,11 @@
+{
+  "host": "Windows implementation; Linux proof separate",
+  "id": "pr-5306-reset-current-20261109",
+  "job": "pr-5306-reset-current-20261109",
+  "pr_head": "4801dff841eb60412d2cefb630336fa240a1179a",
+  "previous_fix": "f9bc92c5a38b082a0dd3cc2fd1f1f64f54d1f22b",
+  "scope": "Refuse unsafe reset targets, preserve legitimate rerun, add focused coverage and push fork branch.",
+  "successor_of": "pr-5306-reset-fix-20261107",
+  "summary": "Adapt reset safety fix to PR 5306 current head and request exact-head Linux proof",
+  "type": "assignment"
+}
