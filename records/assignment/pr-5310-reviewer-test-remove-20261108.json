@@ -1,0 +1,10 @@
+{
+  "head": "be781470e4f7b1586e402a1367de6607f663cfa7",
+  "id": "pr-5310-reviewer-test-remove-20261108",
+  "intended_host": "Windows implementation host; Linux proof on a separate gate",
+  "job": "pr-5310-reviewer-test-remove-20261108",
+  "scope": "Remove the added mocked smoketester test suite and its dedicated CI workflow; preserve the slim smoke implementation and adjacent fixes. Push the fork PR branch, reconcile the prior gate, and request exact-head artifact verification. No public comment or PR body edit.",
+  "source_comment": "https://github.com/apache/solr/pull/5310#discussion_r4509289338",
+  "summary": "Address reviewer concern about excessive smoketester unit tests",
+  "type": "assignment"
+}
