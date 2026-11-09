@@ -1,0 +1,8 @@
+{
+  "actor": "windows-review-agent",
+  "evidence": "Edit and independent readback recorded in records/report/pr-5310-limits-body-b7dce4-20261109.json and the local review. No build, test or other executor was started.",
+  "id": "pr-5310-limits-body-20261109",
+  "job": "pr-5310-limits-body-20261109",
+  "reason": "User-directed PR body edit and readback completed.",
+  "type": "release"
+}
