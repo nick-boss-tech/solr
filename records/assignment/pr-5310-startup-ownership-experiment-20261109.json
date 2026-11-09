@@ -1,0 +1,9 @@
+{
+  "head": "b7dce4b74984e468862fc7508d9eea827baf43ee",
+  "id": "pr-5310-startup-ownership-experiment-20261109",
+  "intended_host": "Windows source implementation and bounded local process tests; native Cygwin and Linux gate proof pending",
+  "job": "pr-5310-startup-ownership-experiment-20261109",
+  "scope": "Preserve the PR head while experimenting, do not alter or stop other workers, compare exact source heads, push an isolated patch branch if a defensible fix is produced. No public comments or body edits.",
+  "summary": "Experiment with safely cleaning up a failed PR 5310 smoke startup on a separate fork branch",
+  "type": "assignment"
+}
