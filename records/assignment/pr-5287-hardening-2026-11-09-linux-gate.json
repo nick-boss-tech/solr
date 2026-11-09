@@ -1,0 +1,18 @@
+{
+  "branch": "nick-boss-tech/solr:pr-5287-configset-hardening-v2",
+  "capabilities": [
+    "linux",
+    "gate",
+    "gradle",
+    "docker"
+  ],
+  "contributor_parent": "7aeb2b691f69a9c4afff47fbf537daa3096ecad7",
+  "head": "8269d726303a002b0286df6b968e41e20c1ec540",
+  "host": "Linux gate host with JDK 21 and serialized Solr build lock; Docker required for S3 test leg",
+  "id": "pr-5287-hardening-2026-11-09-linux-gate",
+  "implementation_report": "records/report/pr-5287-hardening-2026-11-09-report.json",
+  "job": "pr-5287-hardening-2026-11-09-linux-gate",
+  "status": "open; executor claim required",
+  "summary": "Linux exact-head proof for PR 5287 follow-up: source exclusivity, local path checks, hidden directories, bounded repository staging and oversized file rejection.",
+  "type": "assignment"
+}
