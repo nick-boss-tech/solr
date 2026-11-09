@@ -1,0 +1,9 @@
+{
+  "head": "76e4e1bf6192468070ca200a09b1f6e7e9b81dd8",
+  "id": "pr-5310-cygwin-windows-20261108",
+  "intended_host": "Windows host with isolated user-scoped Cygwin and JDK 21; disposable local Solr resources",
+  "job": "pr-5310-cygwin-windows-20261108",
+  "scope": "Check installed tools and same-head release artifact, install isolated non-admin Cygwin if needed, and attempt native Cygwin execution without using the retired queue or disabling guards. Nick explicitly permitted a Gradle build in this turn. Record exact head, evidence, conditions and any blockers; do not modify PR or public discussion.",
+  "summary": "Attempt real Cygwin execution of PR 5310 slim smoketest on the Windows host at Nick's explicit request",
+  "type": "assignment"
+}
