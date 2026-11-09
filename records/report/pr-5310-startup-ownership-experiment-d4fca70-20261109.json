@@ -1,0 +1,12 @@
+{
+  "branch": "nick-boss-tech/solr:pr-5310-startup-ownership",
+  "head": "d4fca70cde0ebfef602969499cb08dee21b1a28f",
+  "id": "pr-5310-startup-ownership-experiment-d4fca70-20261109",
+  "job": "pr-5310-startup-ownership-experiment-20261109",
+  "limits": "Do not merge or present the Cygwin path as proven without native Cygwin execution. Linux real-release gate and native Cygwin proof remain pending. The PR's previously claimed Linux gate remains independent and must be reconciled before conflicting execution.",
+  "parent_head": "b7dce4b74984e468862fc7508d9eea827baf43ee",
+  "review": "research/branch-reviews/2026-11-09-pr-batch/PR-5310-startup-experiment.md",
+  "summary": "Pushed an experimental isolated branch; the PR head is not changed. Candidate uses a foreground owned launcher, existing assert readiness, and targeted process-tree cleanup on Cygwin or subprocess termination on Unix. A stopped command that leaves the process alive is reported as a failure. Separate remote branch readback matches the pushed head.",
+  "type": "report",
+  "verification": "Native Windows process-tree probe passed for a controlled parent and child with an unrelated sentinel surviving. Five separate Python logic probes passed for readiness failure, combined create/stop failure, stop failure alone, stop success with a still-live process, and successful cleanup; these used real disposable native Python processes and simulated Solr commands and HTTP responses. One earlier combined probe timed out; one exact controlled child was identified and stopped. Diff check and Python syntax passed. No actual Solr, Gradle, Docker, native Cygwin, Cygwin /proc PID mapping or real Windows batch launcher ran. Local test code remains scratch only."
+}
