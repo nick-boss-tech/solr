@@ -810,7 +810,8 @@ def testSolrSlim(binaryDistPath, javaPath):
         try:
           server.wait(timeout=10)
         except subprocess.TimeoutExpired:
-          pass
+          if cleanup_error is None:
+            cleanup_error = RuntimeError('Slim Solr did not exit after stop on port %d' % port)
       if server.poll() is None:
         if cygwin:
           with open('/proc/%d/winpid' % server.pid, encoding='ascii') as pid_file:
