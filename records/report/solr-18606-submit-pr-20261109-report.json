@@ -1,0 +1,10 @@
+{
+  "head": "29caa4258ff8b9def71db25d48bfe07c5ddcbb48",
+  "id": "solr-18606-submit-pr-20261109-report",
+  "job": "solr-18606-submit-pr-20261109",
+  "limitations": "PR remains under human review; performance was not benchmarked and stale alias views and repeated missing names are noted in the PR. GitHub CI remains pending or incomplete.",
+  "pr": "https://github.com/apache/solr/pull/5314",
+  "result": "Opened PR #5314 against apache/solr main as a draft in accordance with the documented open-PR cap. Read-back confirmed title, body, draft state, base and exact head. Prior Linux receipt solr-18606-alias-refresh-linux-gate-20261109-r2-receipt passed at that head; no intervening changes to touched files were found on upstream main. First PR check showed labeler pending and triage jobs skipped. Local JIRA draft research/solr-18606-jira-refresh-draft.md was shortened after PR creation; no JIRA comment was posted.",
+  "summary": "Opened user-authorized SOLR-18606 draft PR and prepared a JIRA follow-up draft.",
+  "type": "report"
+}
