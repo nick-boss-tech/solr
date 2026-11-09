@@ -1,0 +1,143 @@
+{
+  "board_prepublication_tip": "678b6232cc263a0e7b930512093b9a2fdbe0d732",
+  "cleanup": {
+    "both_build_locks_free": true,
+    "daemon_cleanup_record": "results/daemon-cleanup.txt",
+    "gate_owned_gradle_daemons_remaining": false,
+    "solr_zookeeper_bats_processes_remaining": false,
+    "source_or_pr_changes": false
+  },
+  "contributor_head": "4801dff841eb60412d2cefb630336fa240a1179a",
+  "environment": {
+    "bats": "1.10.0",
+    "curl": "8.5.0",
+    "git": "2.43.0",
+    "gradle_wrapper": "9.7.0",
+    "host_id": "phone-agent-2",
+    "hostname": "0609f7968656",
+    "java": "OpenJDK 21.0.12.1",
+    "locks": [
+      "/workspace/tools/.gradle-phone-agent-2.lock",
+      "/workspace/tools/.gradle-0609f7968656.lock"
+    ],
+    "minimum_free_disk_bytes": 53304770560,
+    "minimum_free_inodes_percent": 71.88,
+    "openssl": "3.0.13",
+    "platform": "Linux x86_64 sandbox host",
+    "seed": "18527C0FFEE"
+  },
+  "evidence": [
+    {
+      "bytes": 59648,
+      "location": "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519664052758700/FjxwIVyNKdfrxvkz.gz?Expires=1825797376&Signature=DWcI5veXYueazYApV433gERRryiZLl53~BgsoP477Or6urdSoMCfeQ-c0F5-Yno5ddSRE11mfczLAi24HgoP3LXGoZr8eKKtqFQE9YqRl9coWuFWJvfYjuTbsNTIjnHidAG~Xoavnaa8tNTrQ3BSpild-W9IRImyOQA2AmXVlHSFzFHi2iJKzyuxipiOUj0Ifqoq1Ttg6MVpICxLaiA-rrJ46bmmLwp4sp6d8rZTT54ElZMAeKVDnP4xBA8XUVV~rE9Ch8K~Su4cVMBBz3EZIRr6-612SqKEBdk-NrWrPOzgDzKvFfJkFNCn19bckwzshAVGN0dIJ4nS7s5aUedpbw__&Key-Pair-Id=K10M74EMLURLMC",
+      "record_id": "pr-5306-reset-current-linux-20261109-evidence",
+      "sha256": "7c4670d3cdf8bc7b6f75c8856b2759f660b138f22d42c0f2f0dda7bebb0fbbca"
+    }
+  ],
+  "gate": "pr-5306-reset-current-linux-20261109",
+  "head": "1a1f5996d4471a65eec2034f71bcc59e85b0123e",
+  "id": "pr-5306-reset-current-linux-20261109-receipt",
+  "job": "pr-5306-reset-current-linux-20261109",
+  "limitations": [
+    "Overall gate is failed because the required Picocli positive leg and root check exited 1.",
+    "Docker-dependent proof remains unrun/incomplete; no Windows proof was assigned."
+  ],
+  "results": {
+    "docker_dependent_proof": {
+      "reason": "Docker unavailable; not installed; no Docker-dependent proof was run or substituted.",
+      "status": "unrun_incomplete"
+    },
+    "fail_before": {
+      "baseline_head": "4801dff841eb60412d2cefb630336fa240a1179a",
+      "command": "./gradlew :solr:packaging:integrationTests --tests test_secure_example_reset.bats -Ptests.seed=18527C0FFEE",
+      "decisive_failure": "The unowned-home case failed at assert_failure because the old code succeeded, reset the unowned home, and started both Solr nodes. The task reached and executed BATS; this was not a setup or compilation failure.",
+      "errors": 0,
+      "exit_code": 1,
+      "failures": 4,
+      "overlay": "Only test_secure_example_reset.bats copied from the offered head; SHA-256 matched.",
+      "skipped": 0,
+      "status": "reproduced",
+      "tests": 4
+    },
+    "picocli_integration_tests": {
+      "command": "./gradlew :solr:packaging:integrationTestsPicocli --tests test_secure_example.bats --tests test_secure_example_reset.bats -Ptests.seed=18527C0FFEE",
+      "errors": 0,
+      "exit_code": 1,
+      "failure": "The secure-example startup/ACL case failed at ./bin/solr zk updateacls. Picocli StatusTool initialization raised NoSuchElementException from SolrProcessManager. The other secure-example test and all four reset-safety cases passed; startup/marked-home rerun did not complete in Picocli mode. This was a real test failure, not a Docker skip; not retried.",
+      "failures": 1,
+      "passed": 5,
+      "skipped": 0,
+      "status": "failed",
+      "suites": {
+        "test_secure_example.bats": {
+          "failures": 1,
+          "passed": 1,
+          "tests": 2
+        },
+        "test_secure_example_reset.bats": {
+          "passed": 4,
+          "tests": 4
+        }
+      },
+      "tests": 6
+    },
+    "positive_tidy": {
+      "command": "./gradlew tidy",
+      "exit_code": 0,
+      "status": "passed"
+    },
+    "root_check": {
+      "command": "./gradlew check -x test -Ptests.seed=18527C0FFEE",
+      "exit_code": 1,
+      "failure": "Its npx subprocess exited 1. The captured Gradle output provided no more specific Antora/npm diagnostic; not retried.",
+      "failure_task": ":solr:solr-ref-guide:buildLocalAntoraSite",
+      "status": "failed"
+    },
+    "source_diff_after_tidy": {
+      "command": "git diff --exit-code",
+      "exit_code": 0,
+      "meaning": "No source diff after tidy; positive worktree remained clean.",
+      "status": "passed"
+    },
+    "standard_integration_tests": {
+      "command": "./gradlew :solr:packaging:integrationTests --tests test_secure_example.bats --tests test_secure_example_reset.bats -Ptests.seed=18527C0FFEE",
+      "detail": "Secure-example startup and marked-home rerun completed; all four reset-safety cases executed.",
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "passed": 6,
+      "skipped": 0,
+      "status": "passed",
+      "suites": {
+        "test_secure_example.bats": {
+          "passed": 2,
+          "tests": 2
+        },
+        "test_secure_example_reset.bats": {
+          "passed": 4,
+          "tests": 4
+        }
+      },
+      "tests": 6
+    },
+    "windows_proof": {
+      "status": "not_assigned_not_run"
+    }
+  },
+  "seed": "18527C0FFEE",
+  "source": {
+    "apache_pr": 5306,
+    "apache_pr_base": "b8f0c275faa2536d11f34f9f1f1581d7daef0557",
+    "apache_pr_head": "4801dff841eb60412d2cefb630336fa240a1179a",
+    "apache_pr_head_ref": "SOLR-18527",
+    "apache_pr_head_repository": "epugh/solr",
+    "apache_pr_state": "open",
+    "branch": "solr-18527-submit",
+    "checked_at": "2026-11-09T14:57:16-07:00",
+    "head": "1a1f5996d4471a65eec2034f71bcc59e85b0123e",
+    "repository": "nick-boss-tech/solr",
+    "tree": "689863a348d09ea4c74e1716cf97a3ef5916b8c3"
+  },
+  "type": "receipt",
+  "verdict": "failed"
+}
