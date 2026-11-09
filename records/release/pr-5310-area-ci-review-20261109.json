@@ -1,0 +1,8 @@
+{
+  "actor": "windows-review-agent",
+  "evidence": "Finding, CI map and limitations recorded in records/report/pr-5310-area-ci-review-b7dce4-20261109.json and the local review. No build, Docker, Solr or test executor was started by this review; Linux gate ownership remains independent.",
+  "id": "pr-5310-area-ci-review-20261109",
+  "job": "pr-5310-area-ci-review-20261109",
+  "reason": "Read-only source and CI review completed and worker stopping.",
+  "type": "release"
+}
