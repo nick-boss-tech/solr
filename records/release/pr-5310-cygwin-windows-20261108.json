@@ -1,0 +1,8 @@
+{
+  "actor": "windows-cygwin-investigator",
+  "evidence": "records/report/pr-5310-cygwin-check-76e4e1bf-20261108.json records the checked tools, automatic installer rejection, and unverified proof. No installer, Gradle, Solr or test executor was started.",
+  "id": "pr-5310-cygwin-windows-20261108",
+  "job": "pr-5310-cygwin-windows-20261108",
+  "reason": "Cygwin execution could not proceed; investigator stopping after documenting the failed installation attempt.",
+  "type": "release"
+}
