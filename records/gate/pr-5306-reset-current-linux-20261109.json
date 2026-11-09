@@ -1,0 +1,23 @@
+{
+  "acceptance": [
+    "All commands pass at exact head; tidy leaves source unchanged. The secure example BATS file is nightly tagged: verify explicitly selected tests actually execute, including startup and marked-home rerun, and all four reset-safety cases in both CLI modes without skips. Record any other skipped configured suites separately, not as passes.",
+    "Negative proof: on a separate clean checkout at contributor head 4801dff841eb60412d2cefb630336fa240a1179a copy only test_secure_example_reset.bats from the offered head and run the standard integrationTests task selecting that file. Require unowned-home refusal assertion to fail due to old behavior, not setup, compilation, or skips. Isolate every test home and fake installation under BATS_TEST_TMPDIR, never target real data or installation; stop any processes the baseline starts and record cleanup.",
+    "Preserve fresh command logs, exit codes, JUnit XML, environment, seed, head, exact case counts and any setup failures. Investigate failures rather than silently retrying. Formatting edits require a new head and gate."
+  ],
+  "branch": "nick-boss-tech/solr:solr-18527-submit",
+  "commands": [
+    "./gradlew tidy",
+    "git diff --exit-code",
+    "./gradlew :solr:packaging:integrationTests --tests test_secure_example.bats --tests test_secure_example_reset.bats -Ptests.seed=18527C0FFEE",
+    "./gradlew :solr:packaging:integrationTestsPicocli --tests test_secure_example.bats --tests test_secure_example_reset.bats -Ptests.seed=18527C0FFEE",
+    "./gradlew check -x test -Ptests.seed=18527C0FFEE"
+  ],
+  "contributor_head": "4801dff841eb60412d2cefb630336fa240a1179a",
+  "environment": "Clean Linux checkout, JDK 21, openssl and curl, free loopback Solr and ZooKeeper ports; retain security defaults. Use isolated temporary homes and verify no remaining test nodes.",
+  "head": "1a1f5996d4471a65eec2034f71bcc59e85b0123e",
+  "id": "pr-5306-reset-current-linux-20261109",
+  "job": "pr-5306-reset-current-linux-20261109",
+  "receipt": "Publish a separate receipt for this gate with verdict, results per proof leg and evidence locations.",
+  "seed": "18527C0FFEE",
+  "type": "gate"
+}
