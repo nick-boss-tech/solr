@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-nick-shanin",
+  "evidence": "Fork and PR verified at 9d4dc33e5d829d2bc9d1304054b5af6746879b34; implementation report and Linux gate solr-18606-pr5314-review-fixes-linux-20261109 published. No build executor was started; this worker is stopping implementation.",
+  "id": "solr-18606-pr5314-review-fixes-20261109",
+  "job": "solr-18606-pr5314-review-fixes-20261109",
+  "reason": "Implementation pushed and exact-head Linux gate published.",
+  "type": "release"
+}
