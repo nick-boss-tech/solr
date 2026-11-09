@@ -1,0 +1,10 @@
+{
+  "base_head": "29caa4258ff8b9def71db25d48bfe07c5ddcbb48",
+  "deliverables": "Commit and push ticket branch; create exact-head Linux gate assignment",
+  "host": "Windows implementation; Linux gate required",
+  "id": "solr-18606-pr5314-review-fixes-20261109",
+  "job": "solr-18606-pr5314-review-fixes-20261109",
+  "successor_of": "solr-18606-pr5314-review-20261109",
+  "summary": "Implement PR 5314 review fixes for ZooKeeper synchronization and error handling, with focused tests",
+  "type": "assignment"
+}
