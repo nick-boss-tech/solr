@@ -1,0 +1,99 @@
+{
+  "evidence": [
+    {
+      "record": "records/evidence/pr5313-startup-wait-linux-gate-20261109-evidence-bundle.json",
+      "sha256": "350286fe2861d2106f2447223554991c4027dacb476eef659ce1adb37fa02e21"
+    },
+    {
+      "record": "records/evidence/pr5313-startup-wait-linux-gate-20261109-executor-stop-final.json",
+      "sha256": "9b0983dddd584f3c95f5b70997d0483af0e2410aa750313a47fcf52d3637fed6"
+    }
+  ],
+  "evidence_bundle_id": "pr5313-startup-wait-linux-gate-20261109-evidence-bundle",
+  "executor_stop_id": "pr5313-startup-wait-linux-gate-20261109-executor-stop-final",
+  "gate": "pr5313-startup-wait-linux-gate-20261109",
+  "hash_manifest_sha256": "02410fa8b3f866e40fbfdc0d8a77b8a822aeb0f1ed2f10ac8cf33461ab30cc7d",
+  "head": "bc9e533b4abc81652754e12bf9465296779aa7de",
+  "id": "pr5313-startup-wait-linux-gate-20261109-receipt",
+  "job": "pr5313-startup-wait-linux-gate-20261109",
+  "limitations": [
+    "No Docker was used or installed by the worker; root check was not run, so any Docker-dependent proof there remains unrun.",
+    "No native Windows/Cygwin proof is claimed; this assignment was Linux-only.",
+    "No source, branch, PR body, comment, or upstream push was made by the worker.",
+    "The source checkout was restored clean to the exact offered head after preserving the tidy diff."
+  ],
+  "proof_legs": [
+    {
+      "command": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.core.TestSolrXml -Ptests.seed=5313C0DE --rerun-tasks",
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "junit_sha256": "8f7bf500b0cd5f8be13c45930828b517b62d876bd986ef8c1fe8873b53100b46",
+      "name": "TestSolrXml",
+      "skip": "testFailAtConfigParseTimeWhenSolrConfigParamsAreDuplicated is annotated @Ignore; not a pass",
+      "skipped": 1,
+      "tests": 38
+    },
+    {
+      "command": "./gradlew :solr:solrj:cleanTest :solr:solrj:test --tests org.apache.solr.common.util.EnvUtilsTest -Ptests.seed=5313C0DE --rerun-tasks",
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "junit_sha256": "9143094006126bc22acb40940e265492e56434ae39d09e8f1a82ff70c4a54f01",
+      "name": "EnvUtilsTest",
+      "skipped": 0,
+      "tests": 15
+    },
+    {
+      "command": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.cloud.ZkFailoverTest -Ptests.seed=5313C0DE --rerun-tasks",
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "junit_sha256": "3121cb8f284eb2e124b9964965a5b45a531a88eb8d821e2d6bfe7d62f1856b05",
+      "name": "ZkFailoverTest",
+      "skipped": 0,
+      "tests": 1
+    },
+    {
+      "changed_path": "solr/solrj/src/java/org/apache/solr/common/util/EnvUtils.java",
+      "command": "./gradlew tidy",
+      "diff_sha256": "6f1f60d051db48b70f08b0ac65823168c75cdbfb06b96a4bf307bfec5d90c728",
+      "exit_code": 0,
+      "name": "tidy",
+      "status": "stop_condition_triggered",
+      "tracked_changes": true
+    },
+    {
+      "name": "fresh_jvm_alias_startup_timeout_probes",
+      "reason": "The assigned gate requires stopping when tidy modifies tracked files.",
+      "status": "unrun"
+    },
+    {
+      "name": "builder_timeouts_30001ms_and_explicit_seconds_probe",
+      "reason": "The assigned gate requires stopping when tidy modifies tracked files.",
+      "status": "unrun"
+    },
+    {
+      "name": "base_head_fail_before",
+      "reason": "The assigned gate requires stopping when tidy modifies tracked files.",
+      "status": "unrun"
+    },
+    {
+      "command": "./gradlew check -x test",
+      "name": "root_check",
+      "reason": "The assigned gate requires stopping when tidy modifies tracked files.",
+      "status": "unrun"
+    }
+  ],
+  "results": "The three assigned named suites passed with fresh XML at the exact offered head. Then ./gradlew tidy exited 0 but wrapped one tracked comment in EnvUtils.java, triggering the gate's explicit stop rule. The exact local diff was preserved, the isolated checkout was restored clean to bc9e533b4abc81652754e12bf9465296779aa7de, Gradle was stopped, both required locks were free, and no active test/build executor remained. Fresh-JVM alias/timeout probes, builder timeout value probe, base-head fail-before, and root check were not run and are not represented as green. Overall verdict: incomplete.",
+  "source": {
+    "base_head": "358f13d9fdfaed260143a51100cd5657a582d562",
+    "branch": "solr-18630-submit",
+    "head": "bc9e533b4abc81652754e12bf9465296779aa7de",
+    "repository": "nick-boss-tech/solr",
+    "source_or_pr_changes_by_gate_worker": false,
+    "upstream_pr_head": "358f13d9fdfaed260143a51100cd5657a582d562"
+  },
+  "type": "receipt",
+  "verdict": "incomplete"
+}
