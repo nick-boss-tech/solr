@@ -1,0 +1,8 @@
+{
+  "head": "de36597d1414a6ac24d0d03f80f5b61ceb542ed7",
+  "id": "pr-5301-real-zk-handoff-windows-20261109",
+  "job": "pr-5301-real-zk-handoff-windows-20261109",
+  "owner": "windows-codex",
+  "scope": "Review and prepare the real-ZooKeeper regression and production fix on a fresh fork branch, request exact-head Linux proof, and prepare the requested contributor handoff. No Windows Gradle or local queue.",
+  "type": "claim"
+}
