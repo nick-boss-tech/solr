@@ -1,0 +1,25 @@
+{
+  "acceptance": "All named positive suites must execute with zero failures, errors or skips; report exact fresh XML counts. Confirm the new oversized tests actually execute and prove the original 4-GiB-to-zero narrowing and preservation of an existing ConfigSet. Inspect temporary staging cleanup on both success and failed read, and validate the documented client jute.maxbuffer behavior including default, a configured hexadecimal value, and size boundary without a huge allocation. Confirm bounded heap for a directory whose combined files exceed a single-file limit using a controlled diagnostic or explicitly report that proof incomplete. Required tidy, Error Prone, root check, fail-before legs and final remote SHA must all succeed; a skipped S3 suite is incomplete.",
+  "branch": "nick-boss-tech/solr:pr-5287-configset-hardening-v2",
+  "commands": [
+    "Parse changelog/unreleased/SOLR-18618-configset-upload-from-repository.yml using repository changelog parser.",
+    "./gradlew tidy; require no changes and git diff --check clean.",
+    "./gradlew :solr:core:compileJava :solr:core:compileTestJava :solr:test-framework:compileTestJava :solr:modules:s3-repository:compileTestJava :solr:modules:gcs-repository:compileTestJava -Pvalidation.errorprone=true",
+    "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.handler.configsets.UploadConfigSetAPITest --tests org.apache.solr.handler.configsets.UploadConfigSetFileAPITest --tests org.apache.solr.cloud.LocalFSConfigSetUploadFromRepositoryTest -Ptests.seed=5287C0DE --rerun-tasks",
+    "./gradlew :solr:modules:s3-repository:cleanTest :solr:modules:s3-repository:test --tests org.apache.solr.s3.S3ConfigSetUploadFromRepositoryTest -Ptests.seed=5287C0DE --rerun-tasks",
+    "./gradlew :solr:modules:gcs-repository:cleanTest :solr:modules:gcs-repository:test --tests org.apache.solr.gcs.GCSConfigSetUploadFromRepositoryTest -Ptests.seed=5287C0DE --rerun-tasks",
+    "./gradlew check -x test",
+    "Separately re-read fork ref and require the same full tested head; verify checkout clean."
+  ],
+  "contributor_parent": "7aeb2b691f69a9c4afff47fbf537daa3096ecad7",
+  "environment": "Clean task-specific Linux checkout, JDK 21, host gate runner and build lock. Record host, JDK, seed, start/end, logs, fresh JUnit XML, exact exit codes and environment. Docker is required to execute the S3 testcontainer; if unavailable mark S3 and overall gate incomplete, not passed.",
+  "fail_before": "In a disposable checkout of this head restore only ConfigSetsHandler.java, ConfigSetAPIBase.java and UploadConfigSet.java from contributor parent 7aeb2b691f69a9c4afff47fbf537daa3096ecad7 while retaining the new tests and test policy. Run the focused core, LocalFS, S3 and GCS suites with the same seed and fresh XML. Require runtime discrimination for mixed-body V1 and V2, local directory and single-file symlinks, dot-directory import, and both oversized length tests testRepositoryFileLengthCannotWrap and testOversizedRepositoryFileDoesNotPartiallyOverwrite. Record each observed failure and any different exception; missing tests, compile errors, setup errors or skips are not behavioral proof. Prior receipt observed the V2 zero-available baseline may fail with an NPE after reaching the original path; classify explicitly rather than labeling it a clean assertion failure. Restore clean head before positive runs.",
+  "head": "8269d726303a002b0286df6b968e41e20c1ec540",
+  "id": "pr-5287-hardening-2026-11-09-linux-proof",
+  "job": "pr-5287-hardening-2026-11-09-linux-gate",
+  "preflight": "Refresh live board and PR discussion, claim canonical gate job, verify fork tip equals head and contributor parent is ancestor, inspect diff. Stop and reconcile if head changed. Do not run on Windows or alter contributor branch.",
+  "receipt": "Publish a v2 receipt under this job naming this gate and exact head, all commands, results, XML counts, proof-leg outcomes, logs/evidence locations, and any execution conditions. No public PR or JIRA write is authorized as part of the gate.",
+  "repair": "If tidy changes source or a code fix is needed, do not treat this head as passed. Commit only a scoped fork repair, verify its fork SHA, and create a superseding exact-head gate. Investigate executed failures rather than silently rerunning or weakening checks.",
+  "seed": "5287C0DE",
+  "type": "gate"
+}
