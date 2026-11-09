@@ -1,0 +1,8 @@
+{
+  "host": "Windows",
+  "id": "pr-5306-reset-current-20261109",
+  "job": "pr-5306-reset-current-20261109",
+  "owner": "codex-windows-pr-5306-current",
+  "scope": "Implement and push current-head reset safety follow-up; no Gradle on Windows.",
+  "type": "claim"
+}
