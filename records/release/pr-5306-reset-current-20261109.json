@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr-5306-current",
+  "evidence": "records/report/pr-5306-reset-current-20261109-report.json and records/gate/pr-5306-reset-current-linux-20261109.json; no Windows build executor started; implementation editing completed.",
+  "id": "pr-5306-reset-current-20261109",
+  "job": "pr-5306-reset-current-20261109",
+  "reason": "Implementation pushed and Linux gate handed off",
+  "type": "release"
+}
