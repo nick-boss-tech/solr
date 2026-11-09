@@ -1,0 +1,12 @@
+{
+  "contributor_head": "4801dff841eb60412d2cefb630336fa240a1179a",
+  "deliverable": "Execute gate and publish receipt with fresh logs and JUnit XML. No Windows execution.",
+  "head": "1a1f5996d4471a65eec2034f71bcc59e85b0123e",
+  "host": "Linux gate host",
+  "id": "pr-5306-reset-current-linux-20261109",
+  "job": "pr-5306-reset-current-linux-20261109",
+  "related_job": "pr-5306-reset-current-20261109",
+  "source": "nick-boss-tech/solr:solr-18527-submit",
+  "summary": "Linux exact-head proof for PR 5306 reset safety follow-up",
+  "type": "assignment"
+}
