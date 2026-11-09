@@ -1,0 +1,10 @@
+{
+  "host": "Windows implementation; Linux proof pending",
+  "id": "pr-5287-hardening-2026-11-09",
+  "job": "pr-5287-hardening-2026-11-09",
+  "prior_offer": "https://github.com/apache/solr/pull/5287#issuecomment-6653195270",
+  "prior_review": "records/report/pr-5287-review-2026-11-09-report.json",
+  "source_head": "7aeb2b691f69a9c4afff47fbf537daa3096ecad7",
+  "summary": "Carry forward and extend repository ConfigSet upload fixes on the current PR 5287 head, push a separate fork branch, record explicit public security comment, and request exact-head Linux proof.",
+  "type": "assignment"
+}
