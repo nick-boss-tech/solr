@@ -1,0 +1,13 @@
+{
+  "branch": "nick-boss-tech/solr:solr-18169-docker-ci-followup",
+  "head": "b7dce4b74984e468862fc7508d9eea827baf43ee",
+  "id": "pr-5310-maintainability-patch-b7dce4-20261108",
+  "job": "pr-5310-maintainability-patch-20261108",
+  "parent_head": "76e4e1bf6192468070ca200a09b1f6e7e9b81dd8",
+  "pr": "https://github.com/apache/solr/pull/5310",
+  "public_action": "User explicitly authorized PR body update. Updated at 2026-11-09T04:53:26Z to explain scope and historical versus pending proof; independently read back exact body, head and discussion counts. No PR comment posted.",
+  "review": "research/branch-reviews/2026-11-08-pr-batch/PR-5310-maintainability-review.md",
+  "summary": "Plain-pushed simplification of the single-use slim-demo assertion using bounded Bash read of docker wait, with EXIT cleanup, and preserved original smoke exception if stopping also fails. Retained rolling-upgrade fix as the same example-free-image issue. Fork and PR heads matched pushed commit. The prior claimed gate is historical and has not been declared stopped.",
+  "type": "report",
+  "verification": "Scoped git diff --check, Bash syntax checks and Python syntax parsing passed. No real Docker, Solr, Gradle or Cygwin executed on Windows. Real exact-head Linux release, Docker, sentinel and rolling-upgrade proof is pending; replacement gate must reconcile prior worker before conflicting execution."
+}
