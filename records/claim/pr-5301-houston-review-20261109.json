@@ -1,0 +1,8 @@
+{
+  "head": "684354d21476e44458e45c83a810dd25d16ba284",
+  "id": "pr-5301-houston-review-20261109",
+  "job": "pr-5301-houston-review-20261109",
+  "owner": "codex-windows-pr-5301-houston-review",
+  "scope": "Read-only source review and Linux validation handoff; no Windows builds.",
+  "type": "claim"
+}
