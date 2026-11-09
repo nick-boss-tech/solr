@@ -1,0 +1,9 @@
+{
+  "head": "8b6bf455ee652fef03e165e44b9a28fae04a11a8",
+  "id": "solr-18606-alias-refresh-research-20261109-report",
+  "job": "solr-18606-alias-refresh-research-20261109",
+  "limitations": "Read-only source analysis; no patch, execution, performance measurement or Linux proof. Existing forwarding gate is independent and remains pending.",
+  "result": "CloudSolrClient probes collection state before resolving aliases, and does not retain negative cache entries. Reverting unconditional ZK forceUpdateCollection removed the repeated alias hot path. Candidate designs must keep known alias probes cheap, preserve collection precedence and resolve truly missing targets; stale alias metadata, repeated nonexistent names and ZK synchronization remain open. HTTP provider behavior differs. The existing forwarding test permanently masks state and does not prove an actual ZK refresh. See research/solr-18606-research-note.md for source paths and proposed proof.",
+  "summary": "Read current and historical source for the suggested alias-aware refresh alternative.",
+  "type": "report"
+}
