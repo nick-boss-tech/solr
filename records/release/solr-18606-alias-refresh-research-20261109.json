@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-nick-shanin",
+  "evidence": "Report solr-18606-alias-refresh-research-20261109-report and local research/solr-18606-research-note.md record the findings; this worker is stopping its investigation.",
+  "id": "solr-18606-alias-refresh-research-20261109",
+  "job": "solr-18606-alias-refresh-research-20261109",
+  "reason": "Source-reading investigation complete; no implementation or executor started.",
+  "type": "release"
+}
