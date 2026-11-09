@@ -1,0 +1,8 @@
+{
+  "head": "be781470e4f7b1586e402a1367de6607f663cfa7",
+  "id": "pr-5310-reviewer-test-remove-20261108",
+  "job": "pr-5310-reviewer-test-remove-20261108",
+  "owner": "windows-implementation-agent",
+  "scope": "Remove test-of-test and CI workflow, push PR fork, and hand off fresh Linux gate.",
+  "type": "claim"
+}
