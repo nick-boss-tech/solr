@@ -1,0 +1,11 @@
+{
+  "branch": "solr-18630-submit",
+  "gate_job": "pr5313-startup-wait-linux-gate-round2-20261109",
+  "head": "4be1ad602621d2af96565355dce3804ee4744aae",
+  "id": "pr5313-tidy-repair-report-20261109",
+  "job": "pr5313-tidy-repair-windows-20261109",
+  "previous_head": "bc9e533b4abc81652754e12bf9465296779aa7de",
+  "prior_receipt": "records/receipt/pr5313-startup-wait-linux-gate-20261109-receipt.json",
+  "result": "Applied exactly the Linux gate's preserved one-comment formatter diff, whose SHA-256 6f1f60d051db48b70f08b0ac65823168c75cdbfb06b96a4bf307bfec5d90c728 was verified from the evidence archive. Committed and verified fork ref at new head. Cached diff check passed; no builds or tests were run on Windows. Prior suites passed only at previous head; remaining prior proof legs were unrun. Proof pending at new head.",
+  "type": "report"
+}
