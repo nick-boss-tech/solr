@@ -1,0 +1,156 @@
+{
+  "evidence": [
+    {
+      "record": "records/evidence/pr-5301-real-zk-handoff-linux-20261109-evidence-bundle.json",
+      "sha256": "155fc03dfc608064b2a60c2a314b76b566a9250b668827ed9accab9043923130"
+    },
+    {
+      "record": "records/evidence/pr-5301-real-zk-handoff-linux-20261109-executor-stop-final.json",
+      "sha256": "73cb5756d3a4b9e19745e8b09e60b7caac98e38e87c9141b5b20aa6837871f51"
+    }
+  ],
+  "evidence_bundle_id": "pr-5301-real-zk-handoff-linux-20261109-evidence-bundle",
+  "executor_stop_id": "pr-5301-real-zk-handoff-linux-20261109-executor-stop-final",
+  "gate": "pr-5301-real-zk-handoff-linux-20261109",
+  "hash_manifest_sha256": "bc317e6f45a7def3b2f039cf060ccae846cf8e8d5e08934bec5bbb352e42dc82",
+  "head": "4feb9dd6f33dfca5cd982934aaea7f8b22ea8069",
+  "id": "pr-5301-real-zk-handoff-linux-20261109-receipt",
+  "job": "pr-5301-real-zk-handoff-linux-20261109",
+  "limitations": [
+    "No Docker was used/installed; none of the assigned legs required Docker.",
+    "No native Windows/Cygwin proof is claimed; that separate assignment was not run here.",
+    "No source, branch, PR body, public comment, or upstream push was made by this gate worker.",
+    "Only the current PR 5301 gate was claimed/run; PR 5313 was not claimed or run."
+  ],
+  "proof_legs": [
+    {
+      "commands": [
+        "./gradlew tidy",
+        "git diff --check"
+      ],
+      "exit_codes": [
+        0,
+        0
+      ],
+      "name": "tidy_and_diff_check",
+      "tracked_changes": false
+    },
+    {
+      "command": "./gradlew :solr:core:validateSourcePatterns",
+      "exit_code": 0,
+      "name": "source_patterns"
+    },
+    {
+      "checked_entries": [
+        "SOLR-18623 replacement-session retry (Nick Shanin)",
+        "SOLR-18623 out-of-order ZooKeeper event fix (Houston Putman)"
+      ],
+      "command": "./gradlew logchangeGenerate",
+      "exit_code": 0,
+      "name": "logchange"
+    },
+    {
+      "command": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.cloud.ConnectionManagerRealZkRecoveryTest.testExpiredReplacementDoesNotBlockRecovery -Ptests.seed=5301C0DE --rerun-tasks",
+      "name": "focused_real_zookeeper",
+      "runs": [
+        {
+          "errors": 0,
+          "exit_code": 0,
+          "failures": 0,
+          "id": "10-realzk-run-1",
+          "junit_sha256": "3cb022e4a5b022d71f84b9a68a79e470756a6378e1a6d4c64aa434e1dea6dc14",
+          "runtime_seconds": 5.169,
+          "skipped": 0,
+          "tests": 1
+        },
+        {
+          "errors": 0,
+          "exit_code": 0,
+          "failures": 0,
+          "id": "11-realzk-run-2",
+          "junit_sha256": "1fec77016f15d978cc1edfbadc5f8a92179ce861800b2ddf8954ee05bc8d6cb1",
+          "runtime_seconds": 5.756,
+          "skipped": 0,
+          "tests": 1
+        },
+        {
+          "errors": 0,
+          "exit_code": 0,
+          "failures": 0,
+          "id": "12-realzk-run-3",
+          "junit_sha256": "0622fc4c022e154278e7bfe93f339b880d24b8ff83466a75ea975fb78204e389",
+          "runtime_seconds": 4.765,
+          "skipped": 0,
+          "tests": 1
+        }
+      ]
+    },
+    {
+      "command": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.cloud.ConnectionManagerRealZkRecoveryTest.testExpiredReplacementDoesNotBlockRecovery -Ptests.seed=5301C0DE --rerun-tasks",
+      "errors": 0,
+      "exit_code": 1,
+      "expected_runtime_failure": "java.lang.AssertionError: connection manager did not recover",
+      "failures": 1,
+      "junit_sha256": "09d3b43f2a3bfedaee7766a2156381956352e8773569d7a5a718f254a7250621",
+      "name": "parent_blob_fail_before",
+      "only_file_changed": "solr/solrj-zookeeper/src/java/org/apache/solr/common/cloud/ConnectionManager.java",
+      "parent_blob": "5f094c80f1e23e1695a6a5839df038eac5d63558",
+      "runtime_seconds": 30.208,
+      "skipped": 0,
+      "test_blob_unchanged": "6fb5d023821869d44aa63dd7dd4ddbe56472c44e",
+      "tests": 1
+    },
+    {
+      "command": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.cloud.ConnectionManagerTest --tests org.apache.solr.cloud.TestConnectionManagerReconnectStress -Ptests.nightly=true -Ptests.seed=5301C0DE --rerun-tasks",
+      "errors": 0,
+      "executed": 3,
+      "exit_code": 0,
+      "failures": 0,
+      "ignored": "ConnectionManagerTest.testConnectionManager (@Ignore)",
+      "name": "related_connection_manager_tests",
+      "skipped": 1,
+      "tests_reported": 4
+    },
+    {
+      "command": "./gradlew :solr:solrj-zookeeper:cleanTest :solr:solrj-zookeeper:test --tests org.apache.solr.common.cloud.SolrZkClientTest -Ptests.seed=5301C0DE --rerun-tasks",
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "junit_sha256": "867b7f01068a2a7a76f504d6db0275e3d5169f51c6498c80d3b6fdb40b8dc4f4",
+      "name": "SolrZkClientTest",
+      "skipped": 0,
+      "tests": 7
+    },
+    {
+      "command": "./gradlew check -x test",
+      "duration_seconds": 275,
+      "exit_code": 0,
+      "name": "root_check"
+    },
+    {
+      "command": "./gradlew :solr:solrj-zookeeper:compileJava :solr:core:compileTestJava -Pvalidation.errorprone=true -Pjavac.failOnWarnings=false",
+      "duration_seconds": 195,
+      "exit_code": 0,
+      "name": "error_prone_compile",
+      "warning": "FloatRangeFieldTest.java:328 FloatingPointLiteralPrecision on an unchanged file; matches the location/type named by the gate, warning-tolerant rather than warning-free."
+    }
+  ],
+  "results": "All assigned Linux proof legs completed at exact source head 4feb9dd6f33dfca5cd982934aaea7f8b22ea8069 (parent/upstream PR head de36597d1414a6ac24d0d03f80f5b61ceb542ed7). Tidy, diff-check, source-pattern validation, logchange, three focused real-ZooKeeper runs, related ConnectionManager/reconnect tests, SolrZkClientTest, root check -x test, and Error Prone compilation all exited 0. The exact-parent-blob fail-before ran one test and failed at the required runtime assertion 'connection manager did not recover'. The focused JUnit durations were 5.169s, 5.756s, and 4.765s; each run executed 1 test with 0 failures/errors/skips. Related tests reported 4 cases: 3 executed, 0 failures/errors, 1 @Ignore skip (ConnectionManagerTest.testConnectionManager), not counted as a pass. SolrZkClientTest ran 7 tests with 0 failures/errors/skips. Root check succeeded in 275s. Error Prone compilation succeeded in 195s with warnings tolerated; it emitted the gate-cited unchanged FloatRangeFieldTest.java:328 FloatingPointLiteralPrecision warning, so it is not warning-free. The gate is incomplete rather than green because the test review found unscoped generic disconnected/stale-event latches and an unchecked thirdCreationRequested await; a potential proxy setup-cleanup edge is also documented. The 60s callback hold itself is guarded by holdTimedOut and did not expire in any run.",
+  "review_findings": [
+    "ConnectionManagerRealZkRecoveryTest.java lines 244-247: generic disconnected/stale-connected logging latches are not scoped to manager/session B.",
+    "Line 125: result of thirdCreationRequested.await(5, TimeUnit.SECONDS) is ignored; intended C-gate ordering is not enforced by an assertion.",
+    "Lines 150-151: proxy close is conditional on open succeeding; a constructor-acquired resource may need cleanup if setup fails earlier. No leak was observed.",
+    "The 60-second callback hold is covered by assertFalse(holdTimedOut.get()) and did not time out in the recorded runs."
+  ],
+  "source_hashes": {
+    "ConnectionManager_head_sha256": "193c9b4b0c0679c27abb995b53073f6a375de53bfe7d63e19e6ef574bebe74ae",
+    "changelog_patch_sha256": "6d675999406eea99996ec2fe33483aafae9ba6e0fb6fce880b14f3916883623c",
+    "focused_test_git_blob": "6fb5d023821869d44aa63dd7dd4ddbe56472c44e",
+    "focused_test_sha256": "f3972ed9e190ddb28fa4ad1d89f667544a63b0c0030095f520c5efa0a0890db8",
+    "parent_ConnectionManager_git_blob": "5f094c80f1e23e1695a6a5839df038eac5d63558",
+    "parent_blob_patch_sha256": "dbc605ac18d419920cc8358ddfae96d689533a2bf711e36d6683396d3a3ce7b6",
+    "source_patch_sha256": "6a6d62bff1f4455dcb4ce45e860915b91bcf5aa4829844254c2b205dba92d2aa"
+  },
+  "type": "receipt",
+  "verdict": "incomplete"
+}
