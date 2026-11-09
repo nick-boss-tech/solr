@@ -1,0 +1,17 @@
+{
+  "branch": "nick-boss-tech/solr:pr-5310-startup-ownership",
+  "environment": "Clean isolated non-root Linux checkout, JDK 21, Python 3, isolated temporary home, ports, logs and processes, host build locks and disk/inode guard. Reconcile the prior 76e4e1bf claimed worker and any b7dce4 gate activity before starting conflicting work. Do not touch unrelated processes or installations.",
+  "head": "d4fca70cde0ebfef602969499cb08dee21b1a28f",
+  "id": "pr-5310-startup-ownership-linux-20261109",
+  "job": "pr-5310-startup-ownership-linux-20261109",
+  "parent_head": "b7dce4b74984e468862fc7508d9eea827baf43ee",
+  "requirements": [
+    "Verify exact fork head and expected PR parent. Reconcile prior execution, release and host liveness; no takeover is implied by a missing heartbeat or claim.",
+    "Run ./gradlew tidy and require no tracked changes; run git diff --check and ./gradlew check -x test. Any formatting-modified source requires a new pushed head and gate.",
+    "Build full, slim and source release artifacts using ./gradlew -p solr/distribution assembleRelease -Dversion.release=11.0.0-SNAPSHOT, render Changes.html as needed, then run the full local smokeTestRelease.py with --not-signed --revision skip and matching version. Capture artifact and log hashes and actual full/slim/source/Maven outcomes.",
+    "On an isolated real slim distribution, exercise normal foreground startup/index/query/stop and confirm its exact owned process is gone. Exercise fail-after-spawn by a strictly scoped temporary launcher or readiness overlay that allows the actual server to start and then causes the readiness assertion to fail; require the original failure and termination of the owned process while an unrelated disposable sentinel remains alive. Capture overlay and logs; do not alter committed source or touch unrelated processes.",
+    "With a strictly scoped temporary stop-command overlay that returns success without stopping the actual owned server, require cleanup to terminate only the owned process and report the still-running failure. Also verify stop failure remains secondary when an earlier operation failed. Capture overlay, process IDs and cleanup evidence.",
+    "Report each result and skip honestly in an exact-head receipt. This Linux job cannot prove Cygwin Python, native batch launch, /proc Cygwin-to-Windows PID mapping, Windows taskkill process-tree behavior or paths with spaces. Those remain separate native Cygwin proof before offering the experiment for PR incorporation. This focused gate does not replace pending Docker or rolling-upgrade proof for the base PR."
+  ],
+  "type": "gate"
+}
