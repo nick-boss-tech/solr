@@ -1,0 +1,11 @@
+{
+  "base_head": "358f13d9fdfaed260143a51100cd5657a582d562",
+  "branch": "solr-18630-submit",
+  "evidence": "https://github.com/nick-boss-tech/solr/compare/358f13d9fdfaed260143a51100cd5657a582d562...bc9e533b4abc81652754e12bf9465296779aa7de",
+  "gate_job": "pr5313-startup-wait-linux-gate-20261109",
+  "head": "bc9e533b4abc81652754e12bf9465296779aa7de",
+  "id": "pr5313-startup-wait-implementation-20261109",
+  "job": "pr5313-startup-wait-windows-20261109",
+  "result": "Implemented, proof pending. Fork ref verified at exact head. Millisecond fallback and startup builder units repaired, EnvUtils accessor and deterministic multi-alias precedence added, with focused tests and real-ZooKeeper default-startup case. Malformed seconds now fail under EnvUtils integer parsing. Source diff and cached diff --check inspected; no build, formatting task or tests run on Windows. No public comment. The initial checkout was interrupted and converted to sparse; unrelated incomplete local files were not staged. The commit contains only the five listed task files.",
+  "type": "report"
+}
