@@ -1,0 +1,27 @@
+{
+  "context": "Houston questions the production change because the real-ZooKeeper stress test passes without it. His new PR head de36597d is a child of 01e820f and incorporates the stress-test changes only. The prior fork offer dfde9bde contains the proposed ConnectionManager change and simulated deterministic test; it is not an ancestor of the new PR head. The previous Linux receipt proved that simulated test fails against original production code, not that the real event sequence occurs. This new experiment is distinct from the completed legacy gate, not a rerun or a takeover.",
+  "head": "de36597d1414a6ac24d0d03f80f5b61ceb542ed7",
+  "id": "pr-5301-real-zk-repro-linux-20261109",
+  "instructions": "Read the companion gate record before claiming. Refresh PR and fork refs; reconcile head movement, board claims, host build locks and active executors. The legacy execution claim says DONE with a dated completed receipt; independently check for conflicting running work before starting. This assignment does not authorize public replies, PR edits, changes to the contributor branch, or source-branch pushes. Publish a truthful receipt and report, then release the claim after the executor has stopped.",
+  "intended_host": "Linux gate host with implementation, test and records capabilities; preferably the prior phone-agent executor if available",
+  "job": "pr-5301-real-zk-repro-linux-20261109",
+  "sources": [
+    "https://github.com/apache/solr/pull/5301#issuecomment-6750209820",
+    "https://github.com/apache/solr/pull/5301#issuecomment-6673432147",
+    "https://github.com/apache/solr/compare/01e820f0539cddc4697d26176d216614a776a99a...de36597d1414a6ac24d0d03f80f5b61ceb542ed7",
+    "https://github.com/nick-boss-tech/solr/compare/01e820f0539cddc4697d26176d216614a776a99a...dfde9bde0a348ad44e6f6ceec197d478ef11bfd0",
+    "https://github.com/nick-boss-tech/solr/blob/coordination-ui/gates/pr-5301-reconnect-liveness-round-3.md",
+    "https://github.com/nick-boss-tech/solr/blob/coordination-ui/claims/pr-5301-reconnect-liveness-round-3-phone-agent.md",
+    "https://github.com/nick-boss-tech/solr/blob/coordination-ui/receipts/PR-5301-reconnect-liveness-round-3.md"
+  ],
+  "status": "open; execution host must claim the canonical job before work",
+  "summary": "Investigate and, if feasible, reproduce replacement-session reconnect liveness with real ZooKeeper for PR 5301",
+  "tags": [
+    "linux",
+    "gate",
+    "reproduction",
+    "zookeeper",
+    "pr-5301"
+  ],
+  "type": "assignment"
+}
