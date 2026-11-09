@@ -1,0 +1,8 @@
+{
+  "details": "The earlier diagnostic used shared static hooks in two production classes, reflection, a separate trace framework, and a real ZkTestServer and proxy. It established the event sequence but is too invasive as a permanent test. The new test uses real ZooKeeper, the existing stress-test log4j delay pattern, DefaultConnectionStrategy and SocketProxy, without adding production test hooks. It still adds test infrastructure and relies on logs to control scheduling; Linux review and repeated fail-before/pass-after proof must assess its ordering and maintenance. The production ConnectionManager blob is identical to the previously tested fork offer. Diff is three scoped files including a changelog fragment. Windows did not run Gradle or tests. The new head is an ordinary child of contributor head de36597d and was verified on the fork after a non-force push. No public reply has been posted. The prior green diagnostic receipt does not cover the rewritten test.",
+  "head": "4feb9dd6f33dfca5cd982934aaea7f8b22ea8069",
+  "id": "pr-5301-real-zk-handoff-windows-20261109-report",
+  "job": "pr-5301-real-zk-handoff-windows-20261109",
+  "summary": "Reviewed the disposable real-ZooKeeper probe, prepared and pushed a smaller regression and replacement-session fix atop the live contributor head; Linux proof pending.",
+  "type": "report"
+}
