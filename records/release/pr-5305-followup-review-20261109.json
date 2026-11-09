@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "Report pr-5305-followup-review-20261109-report and local review record document the completed source pass. No test executor or other worker was started; this review worker is stopping.",
+  "id": "pr-5305-followup-review-20261109",
+  "job": "pr-5305-followup-review-20261109",
+  "reason": "Source review complete; current-head runtime proof remains outstanding",
+  "type": "release"
+}
