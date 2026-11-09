@@ -754,15 +754,25 @@ def testSolrSlim(binaryDistPath, javaPath):
   env['SOLR_HOME'] = launcherPath(os.path.join(binaryDistPath, 'server', 'solr'))
   env['SOLR_PID_DIR'] = launcherPath(os.path.join(binaryDistPath, 'bin'))
 
-  def solr(args):
+  def solrCommand(args):
     if cygwin:
-      command = 'env "PATH=`cygpath -S -w`:$PATH" bin/solr.cmd ' + ' '.join(args)
-      return subprocess.call(command, shell=True, cwd=binaryDistPath, env=env)
-    return subprocess.call(['bin/solr'] + args, cwd=binaryDistPath, env=env)
+      return 'env "PATH=`cygpath -S -w`:$PATH" bin/solr.cmd ' + ' '.join(args)
+    return ['bin/solr'] + args
 
-  if solr(['start', '--user-managed', '-p', str(port)]) != 0:
-    raise RuntimeError('Failed to start slim Solr on port %d' % port)
+  def solr(args):
+    return subprocess.call(solrCommand(args), shell=cygwin, cwd=binaryDistPath, env=env)
+
+  start = solrCommand(['start', '--user-managed', '-p', str(port), '-f'])
+  if cygwin:
+    # Keep the shell alive until cleanup so its Windows process ID cannot be reused.
+    start = ['sh', '-c', start + '; read -r ignored']
+  server = subprocess.Popen(start, cwd=binaryDistPath, env=env,
+                            stdin=subprocess.PIPE if cygwin else None)
+  started = False
   try:
+    if solr(['assert', '--started', solrUrl, '--timeout', '180000']) != 0:
+      raise RuntimeError('Failed to start slim Solr on port %d' % port)
+    started = True
     if solr(['create', '-c', 'smoke', '--solr-url', solrUrl]) != 0:
       raise RuntimeError('Failed to create the slim smoke core')
 
@@ -787,13 +797,40 @@ def testSolrSlim(binaryDistPath, javaPath):
       raise RuntimeError('Slim cores API request failed: %s' % result)
   finally:
     failed = sys.exc_info()[0] is not None
+    cleanup_error = None
     try:
-      if solr(['stop', '-p', str(port)]) != 0:
+      if started and solr(['stop', '-p', str(port)]) != 0:
         raise RuntimeError('Failed to stop slim Solr on port %d' % port)
     except Exception as error:
-      if not failed:
-        raise
-      print('Cleanup failed: %s' % error, file=sys.stderr)
+      cleanup_error = error
+    try:
+      if started:
+        if cygwin:
+          server.stdin.close()
+        try:
+          server.wait(timeout=10)
+        except subprocess.TimeoutExpired:
+          pass
+      if server.poll() is None:
+        if cygwin:
+          with open('/proc/%d/winpid' % server.pid, encoding='ascii') as pid_file:
+            winpid = pid_file.read().strip()
+          system_dir = subprocess.check_output(['cygpath', '-S'], text=True).strip()
+          subprocess.run([os.path.join(system_dir, 'taskkill.exe'), '/PID', winpid, '/T', '/F'],
+                         check=True)
+        else:
+          server.terminate()
+        server.wait(timeout=30)
+    except Exception as error:
+      if cleanup_error is None:
+        cleanup_error = error
+      else:
+        print('Process cleanup failed: %s' % error, file=sys.stderr)
+    if cleanup_error is not None:
+      if failed:
+        print('Cleanup failed: %s' % cleanup_error, file=sys.stderr)
+      else:
+        raise cleanup_error
 
 
 def testSolrExample(binaryDistPath, javaPath):
