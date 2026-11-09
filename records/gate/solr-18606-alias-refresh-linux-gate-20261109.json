@@ -1,0 +1,20 @@
+{
+  "base": "b771587e9707c49847d728fd1f3ff259a182692c",
+  "branch": "solr-18606-submit",
+  "environment": "Linux, JDK 21, clean exact-head checkout. Record host, JDK, source SHA and clean status; retain fresh logs and XML.",
+  "head": "fa8cd9f4c490fc0bacbcde5c7ac02742ce3b3389",
+  "id": "solr-18606-alias-refresh-linux-gate-20261109",
+  "job": "solr-18606-alias-refresh-linux-gate-20261109",
+  "requirements": [
+    "Verify fork branch head equals the exact head before execution; stop and reconcile if it moved.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.cloud.overseer.ZkStateReaderTest -Ptests.seed=18606CAFE; capture XML counts, skips, and logs. The new stale-view test holds the reader update lock while writing actual ZK state; monitor for harness deadlock or timeout, and report as failure/incomplete rather than passing.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.cloud.AliasIntegrationTest -Ptests.seed=18606CAFE and ./gradlew :solr:solrj:test --tests org.apache.solr.client.solrj.impl.CloudSolrClientCacheTest --tests org.apache.solr.client.solrj.impl.CloudSolrClientRoutingTest -Ptests.seed=18606CAFE; record fresh XML counts, skips, failures and logs.",
+    "Fail-before: on clean base b771587e9707c49847d728fd1f3ff259a182692c overlay only the changed ZkStateReaderTest.java from the offered head and run ./gradlew :solr:core:test --tests org.apache.solr.cloud.overseer.ZkStateReaderTest.testProviderRefreshesCollectionMissingFromLocalState -Ptests.seed=18606CAFE. Require an assertion/runtime failure at the missing refreshed reference, not a compile or setup failure.",
+    "Alias regression mutation: in a separate clean checkout of the offered head change only the getState guard from 'if (ref != null || reader.getAliases().hasAlias(collection))' to 'if (ref != null)', leaving tests unchanged. Run ./gradlew :solr:core:test --tests org.apache.solr.cloud.overseer.ZkStateReaderTest.testProviderDoesNotRefreshKnownAlias -Ptests.seed=18606CAFE. Require the Mockito never-refresh assertion to fail, not compilation or setup failure. Discard the mutation and verify clean state before subsequent checks.",
+    "Run ./gradlew tidy and ./gradlew check -x test on the clean offered head; report any tracked change and stop because formatting changes require a new pushed head and fresh gate.",
+    "Explicitly report the limits: the real-ZK test covers provider discovery rather than a complete client request; alias hot-path check counts a mocked provider interaction rather than benchmarking latency; stale alias snapshots and repeated missing names may still cause extra ZK reads. Do not claim these cases are resolved or performance measured.",
+    "If any test, setup or mutation fails, preserve logs and XML, distinguish setup from behavior, investigate before any retry, and record actual conditions and outcome in the receipt."
+  ],
+  "type": "gate",
+  "verdict_policy": "Pass only when every required proof leg passes at the exact head with runtime negative and mutation failures demonstrated. A setup failure, compilation error, skipped test, non-reproduction or changed head is not a pass."
+}
