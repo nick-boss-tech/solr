@@ -26,16 +26,20 @@ import static org.mockito.Mockito.when;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+import org.apache.lucene.store.IOContext;
+import org.apache.lucene.store.IndexInput;
 import org.apache.solr.SolrTestCase;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.core.CoreContainer;
 import org.apache.solr.core.FileSystemConfigSetService;
+import org.apache.solr.core.backup.repository.BackupRepository;
 import org.apache.solr.core.backup.repository.LocalFileSystemRepository;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -350,5 +354,43 @@ public class UploadConfigSetAPITest extends SolrTestCase {
             () -> api.uploadConfigSet("newconfig", true, false, "local", "/repository", stream));
 
     assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, e.code());
+  }
+
+  @Test
+  public void testOversizedRepositoryFileDoesNotPartiallyOverwrite() throws Exception {
+    createExistingConfigSet("existing", "solrconfig.xml", "original");
+    final var repository = mock(BackupRepository.class);
+    final var smallInput = mock(IndexInput.class);
+    final var largeInput = mock(IndexInput.class);
+    final URI dir = URI.create("s3:/dir/");
+    final URI smallFile = URI.create("s3:/dir/solrconfig.xml");
+    final URI largeFile = URI.create("s3:/dir/huge.txt");
+    when(mockCoreContainer.newBackupRepository("s3")).thenReturn(repository);
+    when(repository.getBackupLocation("/dir")).thenReturn("/dir");
+    when(repository.createURI("x")).thenReturn(URI.create("s3:/x"));
+    when(repository.createDirectoryURI("/dir")).thenReturn(dir);
+    when(repository.exists(dir)).thenReturn(true);
+    when(repository.listAll(dir)).thenReturn(new String[] {"solrconfig.xml", "huge.txt"});
+    when(repository.resolve(dir, "solrconfig.xml")).thenReturn(smallFile);
+    when(repository.resolve(dir, "huge.txt")).thenReturn(largeFile);
+    when(repository.getPathType(smallFile)).thenReturn(BackupRepository.PathType.FILE);
+    when(repository.getPathType(largeFile)).thenReturn(BackupRepository.PathType.FILE);
+    when(repository.openInput(dir, "solrconfig.xml", IOContext.DEFAULT)).thenReturn(smallInput);
+    when(repository.openInput(dir, "huge.txt", IOContext.DEFAULT)).thenReturn(largeInput);
+    when(smallInput.length()).thenReturn(1L);
+    when(largeInput.length()).thenReturn(1L << 32);
+
+    final var api = new UploadConfigSet(mockCoreContainer, null, null);
+    final var e =
+        expectThrows(
+            SolrException.class,
+            () -> api.uploadConfigSet("existing", true, true, "s3", "/dir", null));
+
+    assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, e.code());
+    assertEquals(
+        "original",
+        new String(
+            configSetService.downloadFileFromConfig("existing", "solrconfig.xml"),
+            StandardCharsets.UTF_8));
   }
 }

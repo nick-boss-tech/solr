@@ -36,6 +36,7 @@ import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 import org.apache.lucene.store.IOContext;
 import org.apache.lucene.store.IndexInput;
+import org.apache.lucene.util.IOUtils;
 import org.apache.solr.client.api.endpoint.ConfigsetsApi;
 import org.apache.solr.client.api.model.SolrJerseyResponse;
 import org.apache.solr.client.solrj.util.SolrIdentifierValidator;
@@ -166,18 +167,24 @@ public class UploadConfigSet extends ConfigSetAPIBase
       }
       ensureLocalRepositoryPathAllowed(repository, source);
 
-      // Read everything before writing so a failure doesn't leave a half-uploaded configset.
-      final Map<String, byte[]> files = new LinkedHashMap<>();
-      readConfigFilesFromRepository(repository, source, "", files);
-      if (files.isEmpty()) {
-        throw new SolrException(
-            SolrException.ErrorCode.BAD_REQUEST,
-            "No configset files were found at " + source + " in the backup repository");
-      }
+      // Stage all reads before modifying the ConfigSet, without retaining the entire tree in heap.
+      final Path stagingDir = Files.createTempDirectory("solr-configset-repository-");
+      try {
+        final Map<String, Path> files = new LinkedHashMap<>();
+        readConfigFilesFromRepository(repository, source, "", stagingDir, files);
+        if (files.isEmpty()) {
+          throw new SolrException(
+              SolrException.ErrorCode.BAD_REQUEST,
+              "No configset files were found at " + source + " in the backup repository");
+        }
 
-      for (var file : files.entrySet()) {
-        filesToDelete.remove(file.getKey());
-        configSetService.uploadFileToConfig(configSetName, file.getKey(), file.getValue(), true);
+        for (var file : files.entrySet()) {
+          filesToDelete.remove(file.getKey());
+          configSetService.uploadFileToConfig(
+              configSetName, file.getKey(), Files.readAllBytes(file.getValue()), true);
+        }
+      } finally {
+        IOUtils.rm(stagingDir);
       }
     }
   }
@@ -215,7 +222,7 @@ public class UploadConfigSet extends ConfigSetAPIBase
   }
 
   private void readConfigFilesFromRepository(
-      BackupRepository repository, URI dir, String prefix, Map<String, byte[]> files)
+      BackupRepository repository, URI dir, String prefix, Path stagingDir, Map<String, Path> files)
       throws IOException {
     for (String name : repository.listAll(dir)) {
       final String filePath = prefix + name;
@@ -224,7 +231,11 @@ public class UploadConfigSet extends ConfigSetAPIBase
       switch (repository.getPathType(path)) {
         case DIRECTORY:
           readConfigFilesFromRepository(
-              repository, repository.resolveDirectory(dir, name), filePath + "/", files);
+              repository,
+              repository.resolveDirectory(dir, name),
+              filePath + "/",
+              stagingDir,
+              files);
           break;
         case FILE:
           if (ConfigSetService.isFileForbiddenInConfigSets(filePath)) {
@@ -237,7 +248,9 @@ public class UploadConfigSet extends ConfigSetAPIBase
                 "Not uploading file {} from repository, as it matched the MAGIC signature of a forbidden mime type",
                 filePath);
           } else {
-            files.put(filePath, data);
+            final Path stagedFile = Files.createTempFile(stagingDir, "file-", ".tmp");
+            Files.write(stagedFile, data);
+            files.put(filePath, stagedFile);
           }
           break;
       }
@@ -260,6 +273,17 @@ public class UploadConfigSet extends ConfigSetAPIBase
   private static byte[] readRepositoryFile(BackupRepository repository, URI dir, String name)
       throws IOException {
     try (IndexInput in = repository.openInput(dir, name, IOContext.DEFAULT)) {
+      // ConfigSet files are ZooKeeper nodes; honor the client buffer limit before allocating.
+      final int maxSize = Integer.getInteger("jute.maxbuffer", 0xfffff);
+      if (in.length() > maxSize) {
+        throw new SolrException(
+            SolrException.ErrorCode.BAD_REQUEST,
+            "Repository file "
+                + name
+                + " exceeds the ZooKeeper client limit of "
+                + maxSize
+                + " bytes");
+      }
       final byte[] data = new byte[(int) in.length()];
       in.readBytes(data, 0, data.length);
       return data;

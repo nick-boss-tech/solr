@@ -235,6 +235,10 @@ The directory in the repository that holds the configset's files. Required if `r
 
 Providing both a request body and `repository`/`location` is an error.
 The `overwrite` and `cleanup` parameters work the same way as for zip uploads.
+Repository imports stage files in the node's temporary directory before uploading them.
+Each file must fit within the ZooKeeper client `jute.maxbuffer` limit, which defaults to 1 MB; see xref:deployment-guide:zookeeper-ensemble.adoc[ZooKeeper file size limits].
+Users allowed to upload configsets can import files accessible to the configured repository credentials.
+Users who can read those configsets can then read their imported contents, so restrict repository credentials and ConfigSet permissions accordingly.
 
 [tabs#uploadconfigsetrepo]
 ======

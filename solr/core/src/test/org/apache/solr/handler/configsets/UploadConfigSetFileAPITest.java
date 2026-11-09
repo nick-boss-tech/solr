@@ -26,14 +26,18 @@ import static org.mockito.Mockito.when;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import org.apache.lucene.store.IOContext;
+import org.apache.lucene.store.IndexInput;
 import org.apache.solr.SolrTestCase;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.core.CoreContainer;
 import org.apache.solr.core.FileSystemConfigSetService;
+import org.apache.solr.core.backup.repository.BackupRepository;
 import org.apache.solr.core.backup.repository.LocalFileSystemRepository;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -150,6 +154,34 @@ public class UploadConfigSetFileAPITest extends SolrTestCase {
                 api.uploadConfigSetFile("newconfig", "schema.xml", "local", link.toString(), null));
 
     assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, e.code());
+    assertFalse(configSetService.checkConfigExists("newconfig"));
+  }
+
+  @Test
+  public void testRepositoryFileLengthCannotWrap() throws Exception {
+    final var repository = mock(BackupRepository.class);
+    final var input = mock(IndexInput.class);
+    final URI dir = URI.create("s3:/dir/");
+    final URI file = URI.create("s3:/dir/huge.txt");
+    when(mockCoreContainer.newBackupRepository("s3")).thenReturn(repository);
+    when(repository.getBackupLocation("/dir/huge.txt")).thenReturn("/dir/huge.txt");
+    when(repository.createURI("x")).thenReturn(URI.create("s3:/x"));
+    when(repository.createDirectoryURI("/dir")).thenReturn(dir);
+    when(repository.resolve(dir, "huge.txt")).thenReturn(file);
+    when(repository.exists(file)).thenReturn(true);
+    when(repository.getPathType(file)).thenReturn(BackupRepository.PathType.FILE);
+    when(repository.openInput(dir, "huge.txt", IOContext.DEFAULT)).thenReturn(input);
+    // An unchecked cast of this length produces zero and would upload an empty file.
+    when(input.length()).thenReturn(1L << 32);
+
+    final var api = new UploadConfigSet(mockCoreContainer, null, null);
+    final var e =
+        expectThrows(
+            SolrException.class,
+            () -> api.uploadConfigSetFile("newconfig", "schema.xml", "s3", "/dir/huge.txt", null));
+
+    assertEquals(SolrException.ErrorCode.BAD_REQUEST.code, e.code());
+    assertTrue(e.getMessage().contains("exceeds the ZooKeeper client limit"));
     assertFalse(configSetService.checkConfigExists("newconfig"));
   }
 }
