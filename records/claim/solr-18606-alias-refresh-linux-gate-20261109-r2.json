@@ -1,0 +1,13 @@
+{
+  "host": "phone-agent-2 Linux, hostname 0609f7968656, OpenJDK 21.0.12.1",
+  "id": "solr-18606-alias-refresh-linux-gate-20261109-r2",
+  "job": "solr-18606-alias-refresh-linux-gate-20261109-r2",
+  "locks": [
+    "/workspace/tools/.gradle-phone-agent-2.lock",
+    "/workspace/tools/.gradle-0609f7968656.lock"
+  ],
+  "owner": "phone-agent-2",
+  "scope": "Execute only the live coordination-v2 successor gate at exact source head 29caa4258ff8b9def71db25d48bfe07c5ddcbb48; no source, branch, or PR changes; do not use or install Docker. Preflight confirmed the fork branch tip matches the assigned head, no relevant Gradle/Solr/JUnit executors are active, both required host locks are nonblocking/free, and root has 1,504,450/1,868,096 free inodes (80.5339%) and more than 2 GiB free disk. Serialize each Gradle leg behind both listed locks and maintain live resource guards, stopping at or below 15% free inodes or below 2 GiB free disk.",
+  "source_head": "29caa4258ff8b9def71db25d48bfe07c5ddcbb48",
+  "type": "claim"
+}
