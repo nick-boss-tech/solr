@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr5313",
+  "evidence": "records/report/pr5313-startup-wait-implementation-20261109.json; records/gate/pr5313-startup-wait-linux-gate-20261109.json; fork head bc9e533b4abc81652754e12bf9465296779aa7de",
+  "id": "pr5313-startup-wait-windows-20261109",
+  "job": "pr5313-startup-wait-windows-20261109",
+  "reason": "Implementation finished and handed to separate Linux gate; worker and any executors have stopped work on the source branch.",
+  "type": "release"
+}
