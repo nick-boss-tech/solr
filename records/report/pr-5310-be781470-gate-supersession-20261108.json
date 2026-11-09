@@ -1,0 +1,8 @@
+{
+  "comment": "https://github.com/apache/solr/pull/5310#discussion_r4509289338",
+  "head": "be781470e4f7b1586e402a1367de6607f663cfa7",
+  "id": "pr-5310-be781470-gate-supersession-20261108",
+  "job": "pr-5310-adjacent-fix-linux-20261108",
+  "summary": "Reviewer objects to the added smoketester unit-test suite. Windows implementation is removing that suite and its dedicated workflow; PR head will move and the current test-dependent gate will be superseded. Before starting or continuing, refresh the live PR head and reconcile with the replacement gate. Any ongoing worker remains responsible for reporting actual execution and stopping safely; this report does not assert worker liveness or release its claim.",
+  "type": "report"
+}
