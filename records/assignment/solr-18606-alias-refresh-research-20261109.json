@@ -1,0 +1,11 @@
+{
+  "existing_branch_head": "8b6bf455ee652fef03e165e44b9a28fae04a11a8",
+  "host": "Windows source reading; Linux runtime proof required for any proposed change",
+  "id": "solr-18606-alias-refresh-research-20261109",
+  "job": "solr-18606-alias-refresh-research-20261109",
+  "related_gate": "solr-18606-linux-gate-round-1",
+  "scope": "Read current and historical source to assess the maintainer-suggested alias-aware refresh alternative, the SOLR-17275 regression, correctness and performance risks, and required proof. No implementation or test execution in this investigation.",
+  "source_base": "b771587e9707c49847d728fd1f3ff259a182692c",
+  "summary": "Investigate alias-aware client state refresh for SOLR-18606",
+  "type": "assignment"
+}
