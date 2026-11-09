@@ -1,0 +1,13 @@
+{
+  "id": "pr-formula-test-adequacy-20261109",
+  "intended_host": "Windows documentation work",
+  "job": "pr-formula-test-adequacy-20261109",
+  "references": [
+    "https://github.com/apache/solr/pull/5310#discussion_r4509289338",
+    "records/report/pr-5310-reviewer-test-remove-76e4e1bf-20261108.json",
+    "https://github.com/nick-boss-tech/solr/blob/95e2574f5091fbf1425fd9bfc4cef98c746b42f6/pr-formula.md"
+  ],
+  "scope": "Preserve the old coordination-ui branch read-only. Publish new original guidance and discovery link on coordination-v2, with canonical structured assignment and claim; update the local review guide. Do not change source PRs or post public comments.",
+  "summary": "Add test adequacy and minimalism guidance to PR review and formula",
+  "type": "assignment"
+}
