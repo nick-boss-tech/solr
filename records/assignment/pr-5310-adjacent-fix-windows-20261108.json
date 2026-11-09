@@ -1,0 +1,14 @@
+{
+  "head": "dc720a2ba63aff4d2ee34beec45a173795166628",
+  "id": "pr-5310-adjacent-fix-windows-20261108",
+  "intended_host": "Windows implementation host; Linux proof on separate gate",
+  "job": "pr-5310-adjacent-fix-windows-20261108",
+  "scope": "Isolate slim smoke, correct Cygwin path handling, wire Python tests to CI, address stop-port and rolling-upgrade example dependencies where feasible. Commit scoped changes and fast-forward Nick's PR fork branch, then create exact-head Linux gate. No public comments or PR body edit.",
+  "summary": "Patch PR 5310 review findings and closely related slim assumptions",
+  "tags": [
+    "windows",
+    "implementation",
+    "pr-5310"
+  ],
+  "type": "assignment"
+}
