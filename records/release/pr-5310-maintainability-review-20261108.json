@@ -1,0 +1,8 @@
+{
+  "actor": "windows-review-agent",
+  "evidence": "Findings and limits are in records/report/pr-5310-maintainability-review-76e4e1bf-20261108.json and the local review. No build, test, Docker or external executor was started by this review; the separately claimed Linux gate is independent.",
+  "id": "pr-5310-maintainability-review-20261108",
+  "job": "pr-5310-maintainability-review-20261108",
+  "reason": "Read-only review completed and worker stopping.",
+  "type": "release"
+}
