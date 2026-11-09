@@ -1,0 +1,244 @@
+{
+  "coverage_limits": {
+    "current_head": "The live PR/fork head is b7dce4b74984e468862fc7508d9eea827baf43ee; this receipt applies only to assigned 76e4e1bf and does not test the newer head.",
+    "cygwin": "No native Cygwin proof on Linux.",
+    "docker": "Unrun; explicitly prohibited. No Docker install, command, engine, image or container was used.",
+    "parent_fail_before": "Independent parent root-list and films controls not run.",
+    "source_release": "Archive structure was checked; full source-release smoke was not run."
+  },
+  "evidence": {
+    "bundle_bytes": 237158,
+    "record_id": "pr-5310-reviewer-release-linux-20261108-evidence",
+    "record_path": "records/evidence/pr-5310-reviewer-release-linux-20261108-evidence.json",
+    "sha256": "6e2bdd49af1546692d3178fe6d5cfba5fe1a0daf061d5f13e68503d6358e5b8a",
+    "verified_download_sha256": "6e2bdd49af1546692d3178fe6d5cfba5fe1a0daf061d5f13e68503d6358e5b8a"
+  },
+  "gate": "pr-5310-reviewer-release-linux-20261108",
+  "head": "76e4e1bf6192468070ca200a09b1f6e7e9b81dd8",
+  "id": "pr-5310-reviewer-release-linux-20261108-receipt",
+  "intermediate_recovery": [
+    {
+      "attempt": "Initial root check from linked Git worktree",
+      "exit_code": 1,
+      "logs": [
+        "check-minus-test.driver.log",
+        "check-minus-test.monitor.log",
+        "check-minus-test-clone.driver.log",
+        "check-minus-test-clone.monitor.log"
+      ],
+      "observation": "Failed at Antora npx stage; the same exact-head ./gradlew check -x test passed in a normal clone."
+    },
+    {
+      "attempt": "First combined Maven harness",
+      "exit_code": 1,
+      "logs": [
+        "binary-smoke-complete.driver.log",
+        "maven-check-recheck.driver.log"
+      ],
+      "observation": "Upstream checkJARMetaData raised RuntimeError('BUG in smokeTestRelease!'); separate recheck after initializing NOTICE/LICENSE metadata from the full release passed."
+    },
+    {
+      "attempt": "First binary wrapper",
+      "logs": [
+        "binary-only-smoke.driver.log",
+        "upstream-binary-smoke.driver.log"
+      ],
+      "observation": "Failed before server startup because its SimpleNamespace lacked the .version field; direct upstream-helper invocation with its Java configuration then passed full/slim smoke."
+    }
+  ],
+  "job": "pr-5310-reviewer-release-linux-20261108",
+  "observed_at_utc": "2026-11-09T07:22:00Z",
+  "proof_legs": {
+    "changes_html": {
+      "command": "python3 -u dev-tools/scripts/changes2html.py CHANGELOG.md --output-dir solr/documentation/build/site/changes",
+      "exit_code": 0,
+      "log": "render-changes.monitor.log",
+      "sha256": "d3165b87b36bc3b5f255cc5c1d4daab6cdab84af10a957d21606df2bb643f3d7",
+      "status": "passed"
+    },
+    "cygwin": {
+      "reason": "This is a Linux host; no native Cygwin launcher/process-tree coverage is claimed.",
+      "status": "not_run"
+    },
+    "diff_check": {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "log": "diff-check.exit",
+      "status": "passed"
+    },
+    "docker_legs": {
+      "legs": [
+        "full/slim testDocker",
+        "packaging rolling-upgrade BATS",
+        "example-free local start-image proof",
+        "Docker-dependent source smoke",
+        "Docker image builds/pulls"
+      ],
+      "reason": "Docker is explicitly prohibited by the owner and unavailable on this host; no Docker CLI/engine/image/container was used.",
+      "status": "not_run"
+    },
+    "full_binary_smoke": {
+      "details": "Direct upstream helper validation; full techproducts example started, indexed 13 documents, queried and stopped.",
+      "log": "upstream-binary-smoke.driver.log",
+      "monitor": "upstream-binary-smoke.monitor.log",
+      "status": "passed"
+    },
+    "local_changes_openapi": {
+      "details": "Changes.html check and OpenAPI specification check both emitted PASS markers.",
+      "log": "binary-smoke-complete.driver.log",
+      "note": "The combined harness later failed in Maven checkJARMetaData; the standalone Maven recheck passed.",
+      "status": "passed"
+    },
+    "local_maven_check": {
+      "checks": [
+        "deployed POMs",
+        "MD5/SHA-1 digests",
+        "sources and Javadoc artifacts",
+        "POM coordinates",
+        "Maven-to-binary artifact identity",
+        "JAR metadata and no java.* or javax.* classes"
+      ],
+      "exit_code": 0,
+      "log": "maven-check-recheck.driver.log",
+      "monitor": "maven-check-recheck.monitor.log",
+      "status": "passed"
+    },
+    "parent_fail_before_controls": {
+      "legs": [
+        "parent root-list failure",
+        "films failure on the same slim artifact"
+      ],
+      "note": "The gate record described these as feasible independent controls; neither was attempted.",
+      "status": "not_run"
+    },
+    "release_assembly": {
+      "actionable_tasks": 215,
+      "command": "./gradlew -p solr/distribution assembleRelease -Dversion.release=11.0.0-SNAPSHOT",
+      "docker_note": "The Gradle build generated Dockerfile packaging outputs; no Docker CLI, daemon, image or container was used.",
+      "executed": 143,
+      "exit_code": 0,
+      "log": "assemble-release.driver.log",
+      "monitor": "assemble-release.monitor.log",
+      "status": "passed",
+      "up_to_date": 72
+    },
+    "root_check_dry_run": {
+      "command": "./gradlew check -x test --dry-run",
+      "docker_task_note": "Only Docker-module static checks appeared as SKIPPED; no Docker engine-dependent task was invoked.",
+      "exit_code": 0,
+      "log": "check-dry-run.driver.log",
+      "status": "passed"
+    },
+    "root_check_minus_tests": {
+      "actionable_tasks": 556,
+      "command": "./gradlew check -x test",
+      "executed": 542,
+      "exit_code": 0,
+      "log": "check-minus-test-clone.driver.log",
+      "monitor": "check-minus-test-clone.monitor.log",
+      "status": "passed",
+      "unit_test_tasks_excluded": true,
+      "up_to_date": 14
+    },
+    "slim_binary_smoke": {
+      "details": "Direct upstream helper validation; slim standalone startup, core creation, JSON indexing/query and stop passed.",
+      "log": "upstream-binary-smoke.driver.log",
+      "monitor": "upstream-binary-smoke.monitor.log",
+      "status": "passed"
+    },
+    "slim_environment_isolation": {
+      "core_and_data_inside_distribution": true,
+      "dummy_listener_preserved": true,
+      "dummy_stop_port": 9901,
+      "external_zookeeper_contacts": 0,
+      "first_candidate_port": 8901,
+      "log": "upstream-binary-smoke.driver.log",
+      "safe_retry_port": 8902,
+      "sentinels_unchanged": [
+        "SOLR_HOME",
+        "SOLR_DATA_HOME",
+        "SOLR_INCLUDE",
+        "SOLR_JAVA_HOME",
+        "SOLR_CONNECTION",
+        "ZK_HOST",
+        "STOP_PORT",
+        "JAVA_TOOL_OPTIONS"
+      ],
+      "status": "passed"
+    },
+    "source_archive_structure": {
+      "coverage_limit": "Structural check only; the full source-release smoke leg was not run.",
+      "entries": 10159,
+      "jar_war_entries": 0,
+      "log": "binary-smoke-complete.driver.log",
+      "status": "passed"
+    },
+    "stock_full_smoke_test_release": {
+      "reason": "The stock end-to-end path includes Docker availability/integration proof; the owner explicitly prohibited Docker. Permitted non-Docker binary helper functions and local Maven/Changes/OpenAPI checks were run separately.",
+      "status": "not_run"
+    },
+    "tidy": {
+      "actionable_tasks": 62,
+      "command": "./gradlew tidy",
+      "executed": 62,
+      "exit_code": 0,
+      "log": "tidy.driver.log",
+      "monitor": "tidy.monitor.log",
+      "status": "passed",
+      "tracked_changes_after_tidy": false
+    }
+  },
+  "release_artifacts": [
+    {
+      "bytes": 273757340,
+      "name": "solr-11.0.0-SNAPSHOT.tgz",
+      "sha256": "26d9c71da9f33f605e26a74bfeb05bee8927d943591ad2cf10b7f7d5a6dfa6f1"
+    },
+    {
+      "bytes": 86537092,
+      "name": "solr-11.0.0-SNAPSHOT-slim.tgz",
+      "sha256": "345d5e97e124fc06f655c5f84741041668ca80e50b8ab3dad31db7d6dd291a71"
+    },
+    {
+      "bytes": 88660812,
+      "name": "solr-11.0.0-SNAPSHOT-src.tgz",
+      "sha256": "b68fe1484a12d51cf32a89e5b18ef7f25c95c2db8a684d21c4b57bdab98ec00a"
+    }
+  ],
+  "resource_guard": {
+    "active_gradle_daemons_after_cleanup": 0,
+    "active_solr_processes_after_cleanup": 0,
+    "disk_free_at_handoff": "52G",
+    "floor": "15% free inodes",
+    "free_inodes_at_handoff_pct": 76.48,
+    "gradle_stop_command": "./gradlew --stop",
+    "gradle_stop_exit_code": 0,
+    "gradle_stop_output": "No Gradle daemons are running.",
+    "host_build_locks_free": true,
+    "locks": [
+      "/workspace/tools/.gradle-phone-agent-2.lock",
+      "/workspace/tools/.gradle-0609f7968656.lock"
+    ]
+  },
+  "scope": {
+    "images_published": false,
+    "pr_changes": false,
+    "public_pr_comments": false,
+    "source_branch_push_by_gate": false,
+    "source_edits_by_gate": false
+  },
+  "source": {
+    "branch": "nick-boss-tech/solr:solr-18169-docker-ci-followup",
+    "checkout_state": "detached exact-head checkout; clean; no source edits by this gate",
+    "fork_branch_head_at_final_readback": "b7dce4b74984e468862fc7508d9eea827baf43ee",
+    "pr_head_at_final_readback": "b7dce4b74984e468862fc7508d9eea827baf43ee",
+    "pr_state": "open",
+    "pr_updated_at": "2026-11-09T07:07:06Z",
+    "tested_head": "76e4e1bf6192468070ca200a09b1f6e7e9b81dd8",
+    "tested_tree": "59ce84ea0e4a40583827283c636a2253a6d356da"
+  },
+  "summary": "All performed non-Docker Linux checks passed at the exact assigned head 76e4e1bf6192468070ca200a09b1f6e7e9b81dd8. The overall gate remains incomplete: the required stock end-to-end release smoke and Docker/image/BATS legs were not run under the owner's no-Docker instruction; full source-release smoke, the optional parent fail-before controls, and Cygwin proof were also not run. The fork and open PR advanced to b7dce4b74984e468862fc7508d9eea827baf43ee while this gate ran; no result is claimed for the newer head.",
+  "supersession_report": "records/report/pr-5310-76e4e1bf-gate-superseded-b7dce4-20261108.json",
+  "type": "receipt",
+  "verdict": "incomplete"
+}
