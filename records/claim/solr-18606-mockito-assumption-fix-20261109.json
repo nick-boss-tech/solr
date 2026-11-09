@@ -1,0 +1,7 @@
+{
+  "id": "solr-18606-mockito-assumption-fix-20261109",
+  "job": "solr-18606-mockito-assumption-fix-20261109",
+  "owner": "windows-codex-nick-shanin",
+  "scope": "Repair the source-pattern check failure, push and hand off fresh Linux proof.",
+  "type": "claim"
+}
