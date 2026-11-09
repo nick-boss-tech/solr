@@ -1,0 +1,16 @@
+{
+  "disposition": "Needs investigation; retain observed historical event ordering separately from untested current-head outcome. Linux gate must establish liveness, stale-expiry effects and live-disconnected control; avoid duplicate gate work.",
+  "head": "684354d21476e44458e45c83a810dd25d16ba284",
+  "id": "pr-5301-houston-review-20261109-report",
+  "job": "pr-5301-houston-review-20261109",
+  "references": [
+    "https://github.com/apache/solr/blob/684354d21476e44458e45c83a810dd25d16ba284/solr/solrj-zookeeper/src/java/org/apache/solr/common/cloud/ConnectionManager.java#L150",
+    "https://github.com/apache/solr/blob/684354d21476e44458e45c83a810dd25d16ba284/solr/solrj-zookeeper/src/java/org/apache/solr/common/cloud/SolrZkClient.java#L863",
+    "records/receipt/pr-5301-real-zk-repro-linux-20261109-receipt.json",
+    "records/assignment/pr-5301-houston-current-linux-20261109.json",
+    "records/gate/pr-5301-houston-current-linux-20261109.json"
+  ],
+  "summary": "Read-only source review: contributor's terminal-session polling addresses the earlier wait path, but unconditional Expired handling can process a queued old B expiry after newer C is connected and initiate another recovery. Earlier real-ZooKeeper evidence observed this ordering on the older offer; the new contributor head has not been run under it, so actual behavior is pending Linux validation.",
+  "type": "report",
+  "verification": "PR ref matched live head; diff --check passed; Apache Crave and gradle check workflows succeeded at exact contributor head. No Gradle, compilation or test execution on Windows. No public communication or source edits."
+}
