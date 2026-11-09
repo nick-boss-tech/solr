@@ -1,0 +1,8 @@
+{
+  "head": "b7dce4b74984e468862fc7508d9eea827baf43ee",
+  "id": "pr-5310-76e4e1bf-gate-superseded-b7dce4-20261108",
+  "job": "pr-5310-maintainability-patch-20261108",
+  "prior_gate": "pr-5310-reviewer-release-linux-20261108",
+  "summary": "The public PR and fork head moved from 76e4e1bf6192468070ca200a09b1f6e7e9b81dd8 to b7dce4b74984e468862fc7508d9eea827baf43ee. Proof at the old head is historical only. The old gate was claimed by phone-agent-2; this notice does not assert that its worker or executor has stopped. Reconcile its actual receipt, release and host execution before starting any conflicting new gate work.",
+  "type": "report"
+}
