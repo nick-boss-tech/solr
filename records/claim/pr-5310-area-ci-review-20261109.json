@@ -1,0 +1,8 @@
+{
+  "head": "b7dce4b74984e468862fc7508d9eea827baf43ee",
+  "id": "pr-5310-area-ci-review-20261109",
+  "job": "pr-5310-area-ci-review-20261109",
+  "owner": "windows-review-agent",
+  "scope": "Source and CI review only; independently claimed Linux gate is not disturbed.",
+  "type": "claim"
+}
