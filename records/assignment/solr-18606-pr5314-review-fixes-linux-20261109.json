@@ -1,0 +1,19 @@
+{
+  "branch": "solr-18606-submit",
+  "deliverables": "Publish exact-head receipt and fresh logs/XML, report all proof legs and release executor.",
+  "gate": "solr-18606-pr5314-review-fixes-linux-20261109",
+  "head": "9d4dc33e5d829d2bc9d1304054b5af6746879b34",
+  "host": "Linux gate host only",
+  "id": "solr-18606-pr5314-review-fixes-linux-20261109",
+  "job": "solr-18606-pr5314-review-fixes-linux-20261109",
+  "pr": "https://github.com/apache/solr/pull/5314",
+  "status": "open",
+  "summary": "Linux proof for PR 5314 review fixes: ZooKeeper sync and read errors",
+  "tags": [
+    "linux",
+    "gradle",
+    "solr",
+    "proof"
+  ],
+  "type": "assignment"
+}
