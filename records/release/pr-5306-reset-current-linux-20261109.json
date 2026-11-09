@@ -1,0 +1,22 @@
+{
+  "actor": "phone-agent-2",
+  "cleanup": {
+    "both_build_locks_free": true,
+    "gate_owned_gradle_daemons_remaining": false,
+    "solr_zookeeper_bats_processes_remaining": false,
+    "source_or_pr_changes": false
+  },
+  "evidence": "records/evidence/pr-5306-reset-current-linux-20261109-evidence.json (sha256=7c4670d3cdf8bc7b6f75c8856b2759f660b138f22d42c0f2f0dda7bebb0fbbca, bytes=59648); records/report/pr-5306-reset-current-linux-20261109-report.json; records/receipt/pr-5306-reset-current-linux-20261109-receipt.json. Evidence includes exact command logs, raw/sanitized JUnit, environment, source refs, resource monitors and cleanup verification.",
+  "head": "1a1f5996d4471a65eec2034f71bcc59e85b0123e",
+  "id": "pr-5306-reset-current-linux-20261109",
+  "job": "pr-5306-reset-current-linux-20261109",
+  "reason": "Assigned Linux gate execution and fail-before proof are complete. This operational release does not indicate a passing gate: the Picocli positive leg failed one selected secure-example test and the root check failed at buildLocalAntoraSite; the contributor-head fail-before proof reproduced the unowned-home regression.",
+  "records": {
+    "evidence": "pr-5306-reset-current-linux-20261109-evidence",
+    "receipt": "pr-5306-reset-current-linux-20261109-receipt",
+    "report": "pr-5306-reset-current-linux-20261109-report"
+  },
+  "released_at": "2026-11-09T14:59:29-07:00",
+  "type": "release",
+  "verdict": "failed"
+}
