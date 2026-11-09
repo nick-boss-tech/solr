@@ -1,0 +1,37 @@
+{
+  "board_snapshot": "9c93916d7f3f11c2d914c378307d9218658d5ed4",
+  "build_locks": [
+    "/workspace/tools/.gradle-phone-agent-2.lock",
+    "/workspace/tools/.gradle-0609f7968656.lock"
+  ],
+  "claimed_at": "2026-11-09T14:36:05-07:00",
+  "contributor_head": "4801dff841eb60412d2cefb630336fa240a1179a",
+  "environment_id": "sandbox:root:2gs65OWHMlOcMbeBxlEq3t",
+  "evidence_root": "/workspace/gates/logs/phone-agent-2/pr-5306-reset-current-linux-20261109",
+  "host_id": "phone-agent-2",
+  "hostname": "0609f7968656",
+  "id": "pr-5306-reset-current-linux-20261109",
+  "inode_guard": "Use solr-live-build.py for every build/test command; stop at or below 15% free inodes or below 2 GiB free disk. Check before, during and after each leg.",
+  "job": "pr-5306-reset-current-linux-20261109",
+  "owner": "phone-agent-2",
+  "runner": "Invoke /workspace/tools/solr-live-build.py under both build locks listed above for every Gradle command; logs remain outside the source worktrees.",
+  "scope": "Run only the current assigned Linux exact-head gate, including its required fail-before proof; no source or PR changes, no Windows execution, no Docker installation or substitution. Preserve each command log, exit code, BATS JUnit XML, environment, seed and cleanup evidence.",
+  "source": "nick-boss-tech/solr:solr-18527-submit",
+  "source_head": "1a1f5996d4471a65eec2034f71bcc59e85b0123e",
+  "source_tree": "689863a348d09ea4c74e1716cf97a3ef5916b8c3",
+  "toolchain": {
+    "bats": "1.10.0",
+    "docker": "unavailable; not installed; Docker-dependent proof will remain unrun/incomplete",
+    "git": "2.43.0",
+    "gradle_user_home": "/workspace/gradle-home",
+    "java": "OpenJDK 21.0.12.1",
+    "java_home": "/usr/lib/jvm/java-21-openjdk-amd64",
+    "openssl": "OpenSSL 3.0.13",
+    "platform": "Linux x86_64 sandbox host"
+  },
+  "type": "claim",
+  "worktrees": {
+    "fail_before": "/workspace/worktrees/pr-5306-reset-current-linux-20261109-fail-before",
+    "positive": "/workspace/worktrees/pr-5306-reset-current-linux-20261109-positive"
+  }
+}
