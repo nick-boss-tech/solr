@@ -1,0 +1,9 @@
+{
+  "head": "b7dce4b74984e468862fc7508d9eea827baf43ee",
+  "id": "pr-5310-area-ci-review-20261109",
+  "intended_host": "Windows read-only source and CI review",
+  "job": "pr-5310-area-ci-review-20261109",
+  "scope": "Review Docker, slim release, Cygwin, rolling upgrade, failure handling and CI; local findings only, no source patch or public comment.",
+  "summary": "Review all PR 5310 areas and map exact-head upstream CI coverage",
+  "type": "assignment"
+}
