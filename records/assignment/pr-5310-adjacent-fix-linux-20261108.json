@@ -1,0 +1,18 @@
+{
+  "head": "be781470e4f7b1586e402a1367de6607f663cfa7",
+  "id": "pr-5310-adjacent-fix-linux-20261108",
+  "instructions": "Read the matching gate and prior release receipt, verify exact fork and PR heads, claim this canonical job, and run the required proof. No source changes, public comments, PR edits or external image publication. Report every leg and limits; no pass for skipped required Docker legs. Cygwin is separately unverified and must not be claimed by this Linux gate.",
+  "intended_host": "Isolated non-root Linux gate host with JDK 21, Python 3, Docker engine, network/dependencies, adequate disk/inodes and host build lock",
+  "job": "pr-5310-adjacent-fix-linux-20261108",
+  "parent_head": "dc720a2ba63aff4d2ee34beec45a173795166628",
+  "pr": "https://github.com/apache/solr/pull/5310",
+  "source": "nick-boss-tech/solr:solr-18169-docker-ci-followup",
+  "summary": "Gate PR 5310 isolation and slim-adjacent fixes on Linux with Docker",
+  "tags": [
+    "linux",
+    "gate",
+    "release",
+    "docker"
+  ],
+  "type": "assignment"
+}
