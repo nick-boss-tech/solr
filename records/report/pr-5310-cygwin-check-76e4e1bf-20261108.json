@@ -1,0 +1,12 @@
+{
+  "artifact": "No matching PR-head release archive was found in the implementation worktree. The existing Linux gate remains the source for actual artifact verification. Nick explicitly authorized Gradle in this turn; no Gradle command was run because no native Cygwin runtime was available for the requested check.",
+  "head": "76e4e1bf6192468070ca200a09b1f6e7e9b81dd8",
+  "id": "pr-5310-cygwin-check-76e4e1bf-20261108",
+  "installation_attempt": "Downloaded the official Cygwin installer to a scratch directory and Windows Authenticode reported a valid signature. Automatic approval review rejected execution of the non-admin isolated installation command as blocked by policy; no installation was performed and no alternate route was used to evade that rejection.",
+  "job": "pr-5310-cygwin-windows-20261108",
+  "limitations": "No native Cygwin Python, Windows Solr launcher, release archive, Solr process, Java test or Gradle build was run. The native Cygwin behavior remains unverified. User was asked for an existing Cygwin path if known.",
+  "public_actions": "No source edits or public comments.",
+  "status": "incomplete",
+  "summary": "Attempted to locate an existing Cygwin runtime for native execution at Nick's request. The sim-anything Rust toolchain notes point to w64devkit (uname Windows_NT); Git for Windows provides an MSYS shell (uname MSYS_NT), not Cygwin Python. Cygwin was not found in checked locations or the standard registry keys; search was not exhaustive.",
+  "type": "report"
+}
