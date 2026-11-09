@@ -1,0 +1,9 @@
+{
+  "head": "76e4e1bf6192468070ca200a09b1f6e7e9b81dd8",
+  "id": "pr-5310-maintainability-review-20261108",
+  "intended_host": "Windows source review only",
+  "job": "pr-5310-maintainability-review-20261108",
+  "scope": "Review whole PR and maintainer feedback; local report only, no source changes, builds or public comments.",
+  "summary": "Review PR 5310 for excessive complexity and scope at current head",
+  "type": "assignment"
+}
