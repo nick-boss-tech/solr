@@ -1,0 +1,70 @@
+{
+  "coverage_limits": {
+    "cygwin": "No native Cygwin launcher/process-tree coverage on this Linux host.",
+    "docker": "No Docker install, command, engine, image, or container was used. Full/slim testDocker, packaging rolling-upgrade BATS, Docker-dependent source smoke, and image builds/pulls remain unrun.",
+    "newer_head": "No build or tests were run at b7dce4 or later.",
+    "parent_fail_before": "Independent root-list and films failure controls were not run.",
+    "source_release": "Source archive structure was checked (10,159 entries; zero JAR/WAR), but full source-release smoke was not run.",
+    "stock_smoke": "The stock smokeTestRelease.py end-to-end entry point was not run because its path includes Docker availability/integration proof; non-Docker helper legs were run separately."
+  },
+  "details": {
+    "binary_smoke": "Direct upstream helper checks passed for the full techproducts example (13 documents indexed, query, stop), slim standalone startup/core/index/query/stop, and slim sentinel/port-collision isolation at 76e4e1bf.",
+    "maven": "Separate local Maven check passed POM, digest, Javadoc/sources, coordinates, artifact identity, and JAR metadata checks at 76e4e1bf.",
+    "release_assembly": "Full, slim, and source 11.0.0-SNAPSHOT archives built successfully. The Gradle task generated Dockerfile packaging outputs only; no Docker CLI or engine was used.",
+    "root_check": "./gradlew check -x test passed (556 actionable tasks: 542 executed, 14 up-to-date); unit-test tasks were excluded. Its dry-run showed Docker-module static checks as SKIPPED.",
+    "source": "Checkout at assigned head was clean and unmodified; no source push, PR change, PR comment, or image publication was made."
+  },
+  "evidence_path": "records/evidence/pr-5310-reviewer-release-linux-20261108-evidence.json",
+  "evidence_sha256": "6e2bdd49af1546692d3178fe6d5cfba5fe1a0daf061d5f13e68503d6358e5b8a",
+  "final_live_readback": {
+    "fork_head": "b7dce4b74984e468862fc7508d9eea827baf43ee",
+    "observed_at_utc": "2026-11-09T07:22:00Z",
+    "pr_head": "b7dce4b74984e468862fc7508d9eea827baf43ee",
+    "pr_state": "open",
+    "pr_updated_at": "2026-11-09T07:07:06Z"
+  },
+  "gate": "pr-5310-reviewer-release-linux-20261108",
+  "head": "76e4e1bf6192468070ca200a09b1f6e7e9b81dd8",
+  "head_change_assessment": {
+    "base_tested_head": "76e4e1bf6192468070ca200a09b1f6e7e9b81dd8",
+    "behavioral_effect": [
+      "In smokeTestRelease.py's slim smoke finally block, a stop failure no longer masks an earlier test failure: it is logged while the original failure propagates. If no earlier test failure occurred, a stop failure still raises. The successful slim start/core/index/query/API/stop path is unchanged by this hunk.",
+      "The slim branch of the Docker demo test now performs the unavailable-demo assertion inline with an EXIT cleanup trap, docker wait, and checks for exit status 1 plus the expected full-distribution diagnostic; the old shared assert_demo_unavailable helper is removed.",
+      "No Solr runtime/core source files changed. The Docker test changes and the new cleanup-on-prior-failure behavior were not run at b7dce4."
+    ],
+    "commit": "b7dce4b74984e468862fc7508d9eea827baf43ee",
+    "commit_after_build_start_seconds": 686,
+    "commit_count": 1,
+    "commit_subject": "SOLR-18169: Simplify smoke test failure handling",
+    "commit_timestamp": "2026-11-08T23:50:13-05:00",
+    "commit_timestamp_utc": "2026-11-09T04:50:13Z",
+    "compare_url": "https://github.com/nick-boss-tech/solr/compare/76e4e1bf6192468070ca200a09b1f6e7e9b81dd8...b7dce4b74984e468862fc7508d9eea827baf43ee",
+    "current_head": "b7dce4b74984e468862fc7508d9eea827baf43ee",
+    "diff_stat": "3 files changed, 19 insertions(+), 25 deletions(-)",
+    "effect_on_gate_results": "Every build/test command in this gate used the detached 76e4e1bf checkout. Results remain valid only for that commit. The 76e4 direct binary checks covered the unchanged successful smoke path, not the new cleanup behavior on a failing smoke; Docker test logic was not exercised. The new source archive and root checks were not rebuilt at b7dce4. The overall gate therefore remains incomplete and no acceptance is claimed for the live head.",
+    "files_changed": [
+      "dev-tools/scripts/smokeTestRelease.py",
+      "solr/docker/tests/cases/demo/test.sh",
+      "solr/docker/tests/shared.sh"
+    ],
+    "first_build_step_start_utc": "2026-11-09T04:38:47Z"
+  },
+  "id": "pr-5310-reviewer-release-linux-76e4e1bf-20261109",
+  "intermediate_recovery": [
+    "An initial root-check attempt from a Git worktree failed at Antora's npx stage; the same exact-head command passed in a normal clone.",
+    "The first combined Maven harness reached upstream checkJARMetaData RuntimeError('BUG in smokeTestRelease!'); a standalone recheck after initializing metadata from the full release passed.",
+    "An early binary wrapper failed before startup because its SimpleNamespace lacked .version; direct upstream-helper full/slim checks passed. Attempt logs are preserved in the evidence bundle."
+  ],
+  "job": "pr-5310-reviewer-release-linux-20261108",
+  "pr": "https://github.com/apache/solr/pull/5310",
+  "receipt_path": "records/receipt/pr-5310-reviewer-release-linux-20261108-receipt.json",
+  "release_note": "The successor startup-ownership assignment was held pending the prior worker's actual receipt/release and process/lock readback. This release closes the old job as incomplete; it is not approval of the newer source head.",
+  "resource_cleanup": "No Solr or active Gradle executor remained. ./gradlew --stop exited 0 and reported no daemons running; both serialized host locks were free. At handoff 76.48% of inodes were free (above the 15% floor) and 52 GB remained.",
+  "source_branch": "nick-boss-tech/solr:solr-18169-docker-ci-followup",
+  "status": "incomplete; executor stopped; exact head superseded",
+  "summary": "At the assigned 76e4e1bf head, tidy, diff-check, check -x test, release assembly, generated Changes/OpenAPI checks, source archive structural inspection, direct non-Docker full/slim binary smoke, slim environment isolation, and standalone Maven validation passed. Overall status is incomplete, not passed: the required stock end-to-end release smoke and Docker/image/BATS legs could not be run under the owner's explicit no-Docker instruction; full source-release smoke, independent parent fail-before controls, and Cygwin proof were not run. The source moved to b7dce4 while this job ran; that one commit changes smoke-test failure cleanup and Docker demo test scripts, but contains no Solr runtime/core source changes. No test result here applies to b7dce4.",
+  "supersession_report": "records/report/pr-5310-76e4e1bf-gate-superseded-b7dce4-20261108.json",
+  "tested_head": "76e4e1bf6192468070ca200a09b1f6e7e9b81dd8",
+  "tested_tree": "59ce84ea0e4a40583827283c636a2253a6d356da",
+  "type": "report"
+}
