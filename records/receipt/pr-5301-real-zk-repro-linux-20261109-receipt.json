@@ -1,0 +1,60 @@
+{
+  "attempts": "See bundled attempts.md; the earlier compile-only and trace-output attempts were corrected and are not counted as behavioral results.",
+  "baseline": {
+    "errors": 0,
+    "exit_code": 1,
+    "failure": "expected bounded recovery assertion: no healthy C/reconnect within deadline",
+    "failures": 1,
+    "junit_tests": 1,
+    "skipped": 0,
+    "trace": "logs/trace-baseline-retry2.txt"
+  },
+  "comparison_head": "dfde9bde0a348ad44e6f6ceec197d478ef11bfd0",
+  "evidence": {
+    "bundle_record": "pr-5301-real-zk-repro-linux-20261109-evidence-bundle",
+    "bundle_sha256": "4ff32b71c73ee9f5d09caa2ae60ad69e5c53156c500ba6f5ceccedf938671353",
+    "executor_stop_record": "pr-5301-real-zk-repro-linux-20261109-executor-stop",
+    "executor_stop_sha256": "c4c2afaafdcef834ff07ec0b6200302b125023b5f6e463909fccc52a48fe0c15"
+  },
+  "gate": "pr-5301-real-zk-repro-linux-20261109",
+  "head": "de36597d1414a6ac24d0d03f80f5b61ceb542ed7",
+  "id": "pr-5301-real-zk-repro-linux-20261109-receipt",
+  "job": "pr-5301-real-zk-repro-linux-20261109",
+  "limitations": [
+    "Focused Linux test only; no full suite/CI or Windows/Cygwin proof.",
+    "No Docker used or installed for this task; no Docker-dependent proof claimed.",
+    "Observer/test hooks are diagnostic-only and uncommitted; permanent regression seam requires maintainer review.",
+    "No PR, source branch, or public comment was changed."
+  ],
+  "overlay": {
+    "B_expired_sequence": 6,
+    "C_session": "0x100163b8a880005",
+    "C_sync_sequence": 7,
+    "errors": 0,
+    "exit_code": 0,
+    "failures": 0,
+    "junit_tests": 1,
+    "queued_B_expired": "rejected stale after C connected",
+    "reconnect_notification": "completed",
+    "skipped": 0,
+    "trace": "logs/trace-offer-overlay.txt"
+  },
+  "sequence": "A Expired 3; B SyncConnected 4 held before state application; B Disconnected 5 applied; B Expired 6 delivered while the previous reconnect path remained blocked; direct control session connected to the real server; held B SyncConnected 4 rejected stale after release.",
+  "source_mapping": {
+    "offered_ConnectionManager_blob": "47fd3d2cb73bde7a0984071cdabcda065d355197",
+    "offered_head": "dfde9bde0a348ad44e6f6ceec197d478ef11bfd0",
+    "overlay_scope": "Only the offered ConnectionManager production change; identical uncommitted observer hooks and test source in both legs.",
+    "pr_head": "de36597d1414a6ac24d0d03f80f5b61ceb542ed7",
+    "pr_head_original_ConnectionManager_blob": "5f094c80f1e23e1695a6a5839df038eac5d63558",
+    "pr_original_head": "01e820f0539cddc4697d26176d216614a776a99a"
+  },
+  "summary": "Assigned real-ZooKeeper proof completed: original PR-head baseline reproduced the intended bounded failure, and the exact offered ConnectionManager overlay passed the identical scenario.",
+  "test": {
+    "command": "./gradlew :solr:core:test --tests org.apache.solr.common.cloud.ConnectionManagerRealZkReproTest -Ptests.seed=5301C0DE --rerun-tasks --no-daemon --console=plain",
+    "environment": "Linux; JDK 21.0.12.1; Gradle wrapper 8.10.2; both required physical flocks.",
+    "seed": "5301C0DE",
+    "test_source_sha256": "54f6ac8a395d11d715f024105e2aae6cd963c8f1af71ef386770202cdf83061e"
+  },
+  "type": "receipt",
+  "verdict": "passed"
+}
