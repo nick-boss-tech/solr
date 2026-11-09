@@ -1,0 +1,10 @@
+{
+  "branch": "nick-boss-tech/solr:pr-5310-startup-ownership",
+  "execution_hold": "Do not claim or start conflicting builds while the previously claimed pr-5310-reviewer-release-linux-20261108 worker or any relevant executor may still be running. Reconcile claims, receipt, release, locks and host execution; do not treat this assignment as proof of stoppage.",
+  "head": "d4fca70cde0ebfef602969499cb08dee21b1a28f",
+  "id": "pr-5310-startup-ownership-linux-20261109",
+  "intended_host": "Linux gate host; non-Docker focused proof",
+  "job": "pr-5310-startup-ownership-linux-20261109",
+  "summary": "Validate experimental PR 5310 startup ownership on real Linux release artifacts",
+  "type": "assignment"
+}
