@@ -1,0 +1,8 @@
+{
+  "actor": "windows-documentation-agent",
+  "evidence": "Published result and verification are recorded in records/report/pr-formula-test-adequacy-report-20261109.json; no build, test or external executor was started by this task.",
+  "id": "pr-formula-test-adequacy-20261109",
+  "job": "pr-formula-test-adequacy-20261109",
+  "reason": "Guidance and discovery links published; documentation work completed.",
+  "type": "release"
+}
