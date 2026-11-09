@@ -1,0 +1,13 @@
+{
+  "host": "Windows implementation",
+  "id": "pr5313-startup-wait-windows-20261109",
+  "job": "pr5313-startup-wait-windows-20261109",
+  "source": "https://github.com/apache/solr/pull/5313",
+  "summary": "Implement focused PR 5313 startup timeout and alias review fixes atop contributor head 358f13d9fdfaed260143a51100cd5657a582d562; push to Nick's fork and request exact-head Linux proof.",
+  "tags": [
+    "implementation",
+    "windows",
+    "linux-proof-pending"
+  ],
+  "type": "assignment"
+}
