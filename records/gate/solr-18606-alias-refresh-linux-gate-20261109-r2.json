@@ -1,0 +1,21 @@
+{
+  "base": "b771587e9707c49847d728fd1f3ff259a182692c",
+  "branch": "solr-18606-submit",
+  "environment": "Linux, JDK 21, clean exact-head checkout. Record host, JDK, source SHA and clean status; retain fresh logs and XML.",
+  "head": "29caa4258ff8b9def71db25d48bfe07c5ddcbb48",
+  "id": "solr-18606-alias-refresh-linux-gate-20261109-r2",
+  "job": "solr-18606-alias-refresh-linux-gate-20261109-r2",
+  "previous_failure": "Prior exact-head gate fa8cd9f4 failed :solr:core:validateSourcePatterns because Mockito tests lacked assumeWorkingMockito(). The sole change adds that call to each Mockito test. Treat the earlier receipt as historical evidence only.",
+  "requirements": [
+    "Verify fork branch head equals the exact head before execution; stop and reconcile if it moved.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.cloud.overseer.ZkStateReaderTest -Ptests.seed=18606CAFE; capture fresh XML counts, skips and logs. Require all three new provider tests to execute and pass, including both Mockito tests; skips are not proof. The real-ZK test holds the update lock during ZK writes; report any timeout or deadlock as failure/incomplete.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.cloud.AliasIntegrationTest -Ptests.seed=18606CAFE and ./gradlew :solr:solrj:test --tests org.apache.solr.client.solrj.impl.CloudSolrClientCacheTest --tests org.apache.solr.client.solrj.impl.CloudSolrClientRoutingTest -Ptests.seed=18606CAFE; record fresh XML counts, skips, failures and logs.",
+    "Fail-before: on clean base b771587e9707c49847d728fd1f3ff259a182692c overlay only the changed ZkStateReaderTest.java from the offered head and run ./gradlew :solr:core:test --tests org.apache.solr.cloud.overseer.ZkStateReaderTest.testProviderRefreshesCollectionMissingFromLocalState -Ptests.seed=18606CAFE. Require the runtime assertion on the missing refreshed reference, not compilation, setup failure or skip.",
+    "Alias regression mutation: in a separate clean checkout of the offered head change only the getState guard from 'if (ref != null || reader.getAliases().hasAlias(collection))' to 'if (ref != null)', leaving tests unchanged. Run ./gradlew :solr:core:test --tests org.apache.solr.cloud.overseer.ZkStateReaderTest.testProviderDoesNotRefreshKnownAlias -Ptests.seed=18606CAFE. Require the Mockito never-refresh assertion to fail, not compilation, setup failure or skip. Restore the mutation before subsequent checks.",
+    "Run ./gradlew tidy and ./gradlew check -x test on the clean offered head; explicitly report :solr:core:validateSourcePatterns and root check. A tracked change from tidy requires a committed successor and fresh gate; do not treat a modified tree as proof for this head.",
+    "State limits: real-ZK test verifies provider discovery rather than a complete client request; mocked alias interaction count is not a latency benchmark; stale alias snapshots and repeated missing names may still cause extra ZK reads. Preserve fresh logs/XML and investigate failures before any retry.",
+    "Report Docker-dependent checks only if actually executed; no setup failure, unexecuted check, skip, compilation failure or stale head counts as a pass."
+  ],
+  "type": "gate",
+  "verdict_policy": "Pass only when all named proof legs complete at the exact head, with expected runtime failures for fail-before and mutation and no skipped required tests."
+}
