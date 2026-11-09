@@ -1,0 +1,13 @@
+{
+  "contributor_head": "4801dff841eb60412d2cefb630336fa240a1179a",
+  "gate_job": "pr-5306-reset-current-linux-20261109",
+  "head": "1a1f5996d4471a65eec2034f71bcc59e85b0123e",
+  "id": "pr-5306-reset-current-20261109-report",
+  "job": "pr-5306-reset-current-20261109",
+  "notes": "Fork branch was updated with force-with-lease pinned to prior fork head; contributor PR was not modified.",
+  "previous_fork_head": "f9bc92c5a38b082a0dd3cc2fd1f1f64f54d1f22b",
+  "source": "https://github.com/nick-boss-tech/solr/tree/solr-18527-submit",
+  "summary": "Adapted prior reset-safety fix to the current contributor head; unsafe or unowned homes are refused, owned reruns preserved, regression tests and tutorial updated.",
+  "type": "report",
+  "verification": "git diff --cached --check passed; Windows host did not compile or run tests. Prior gate was at the older fork head and does not establish proof for this head."
+}
