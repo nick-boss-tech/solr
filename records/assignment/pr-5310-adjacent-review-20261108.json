@@ -1,0 +1,9 @@
+{
+  "head": "dc720a2ba63aff4d2ee34beec45a173795166628",
+  "id": "pr-5310-adjacent-review-20261108",
+  "intended_host": "Windows source review; no builds or tests",
+  "job": "pr-5310-adjacent-review-20261108",
+  "scope": "Read-only source review and local review record; no public comments or code changes.",
+  "summary": "Review PR 5310 and adjacent release and Docker paths at the live head",
+  "type": "assignment"
+}
