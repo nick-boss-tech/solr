@@ -25,6 +25,7 @@ import java.net.Socket;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
@@ -79,6 +80,9 @@ import org.noggit.JSONWriter;
       "  bin/solr start -e techproducts --no-prompt"
     })
 public class RunExampleTool extends ToolBase {
+
+  private static final String SECURE_EXAMPLE_MARKER = ".solr-secure-example";
+  private static final String SECURE_EXAMPLE_MARKER_CONTENT = "Solr secure example\n";
 
   private static final String PROMPT_FOR_NUMBER = "Please enter %s [%d]: ";
   private static final String PROMPT_FOR_NUMBER_IN_RANGE =
@@ -1011,12 +1015,29 @@ public class RunExampleTool extends ToolBase {
 
   private void resetSecureExampleHome(Path home, Map<String, String> environment)
       throws IOException {
+    if (Files.isSymbolicLink(home)
+        || serverDir.getParent().toRealPath().startsWith(home.toRealPath())) {
+      throw new IllegalArgumentException("The secure example home must be a dedicated directory.");
+    }
+    Path marker = home.resolve(SECURE_EXAMPLE_MARKER);
+    boolean owned =
+        Files.isRegularFile(marker, LinkOption.NOFOLLOW_LINKS)
+            && SECURE_EXAMPLE_MARKER_CONTENT.equals(Files.readString(marker));
+    try (var entries = Files.list(home)) {
+      if (!owned && entries.findAny().isPresent()) {
+        throw new IllegalArgumentException(
+            "The secure example home must be empty or created by the secure example: " + home);
+      }
+    }
     echo("Resetting the secure example in " + secureExampleDisplayArgument(home.toString()));
-    Map<String, String> stopEnvironment = new HashMap<>(environment);
-    stopEnvironment.put("SOLR_INCLUDE", "/dev/null");
-    runSecureCommand(stopEnvironment, script, "stop", "--all");
-    PathUtils.deleteDirectory(home);
-    Files.createDirectories(home);
+    if (owned) {
+      Map<String, String> stopEnvironment = new HashMap<>(environment);
+      stopEnvironment.put("SOLR_INCLUDE", "/dev/null");
+      runSecureCommand(stopEnvironment, script, "stop", "--all");
+      PathUtils.deleteDirectory(home);
+      Files.createDirectories(home);
+    }
+    Files.writeString(marker, SECURE_EXAMPLE_MARKER_CONTENT, StandardOpenOption.CREATE_NEW);
   }
 
   private void startSecureNodes(

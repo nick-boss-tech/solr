@@ -487,8 +487,10 @@ bin/solr start -e secure
 
 The shortcut uses `example/secure`, independently of the tutorial's `tutorial/secure` directory.
 Stop the manual tutorial nodes first if you use the same ports.
-Each invocation stops the nodes recorded in this example's PID directory and replaces its generated certificates, accounts, and collection data.
-All contents of the example home are deleted; only pass a dedicated, disposable directory to `--solr-home`.
+The example requires a new or empty home directory on its first run and marks it as owned by the secure example.
+Each later invocation stops the nodes recorded in that home and replaces its generated certificates, accounts, and collection data.
+All contents of an example-owned home are deleted on a rerun, so use a dedicated, disposable directory with `--solr-home`.
+A nonempty directory without the marker is refused; choose a new empty directory for an example created before this marker was introduced.
 Stop any other cluster first if it uses the same ports.
 The example creates isolated homes in `example/secure/node1/solr` and `example/secure/node2/solr`, plus certificates and configuration in `example/secure/tls`.
 Each node writes its logs beside its home, in `node1/logs` or `node2/logs`.
