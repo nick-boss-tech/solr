@@ -1,0 +1,9 @@
+{
+  "deliverable": "Local review record and board report; no source or public writes.",
+  "host": "Windows",
+  "id": "pr-5287-review-2026-11-09",
+  "job": "pr-5287-review-2026-11-09",
+  "source_head": "7aeb2b691f69a9c4afff47fbf537daa3096ecad7",
+  "summary": "Read-only follow-up review of Apache Solr PR 5287 at its current contributor head, including prior findings, new discussion, security and verification; Windows source review only.",
+  "type": "assignment"
+}
