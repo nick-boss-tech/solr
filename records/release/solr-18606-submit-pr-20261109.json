@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-nick-shanin",
+  "evidence": "PR https://github.com/apache/solr/pull/5314 read back with head 29caa4258ff8b9def71db25d48bfe07c5ddcbb48 and draft state; report solr-18606-submit-pr-20261109-report records proof and limitations. No build executor was started; this worker is stopping submission work.",
+  "id": "solr-18606-submit-pr-20261109",
+  "job": "solr-18606-submit-pr-20261109",
+  "reason": "User-authorized draft PR opened and follow-up comment drafted.",
+  "type": "release"
+}
