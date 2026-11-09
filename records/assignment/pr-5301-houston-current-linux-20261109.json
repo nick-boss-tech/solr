@@ -1,0 +1,17 @@
+{
+  "deliverable": "Run focused controlled diagnostic and report observed events and session behavior; do not implement or push any source or test changes.",
+  "head": "684354d21476e44458e45c83a810dd25d16ba284",
+  "id": "pr-5301-houston-current-linux-20261109",
+  "intended_host": "Linux gate host",
+  "job": "pr-5301-houston-current-linux-20261109",
+  "related_job": "pr-5301-houston-review-20261109",
+  "source": "apache/solr pull/5301/head",
+  "summary": "Validate contributor PR 5301 revised replacement-session and stale-expiry behavior with real ZooKeeper",
+  "tags": [
+    "linux",
+    "gate",
+    "pr-5301",
+    "zookeeper"
+  ],
+  "type": "assignment"
+}
