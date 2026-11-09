@@ -1,0 +1,11 @@
+{
+  "head": "29caa4258ff8b9def71db25d48bfe07c5ddcbb48",
+  "host": "Windows submission and read-only review; no local builds",
+  "id": "solr-18606-submit-pr-20261109",
+  "job": "solr-18606-submit-pr-20261109",
+  "owner_request": "Nick directed opening the PR and redrafting the JIRA comment afterward.",
+  "receipt": "solr-18606-alias-refresh-linux-gate-20261109-r2-receipt",
+  "scope": "Verify live source head, gate, upstream and discussion; prepare disclosed PR description with limitations and create the user-authorized PR. Redraft but do not post the JIRA comment. Observe the documented open-PR cap.",
+  "summary": "Prepare and open the SOLR-18606 PR and redraft its JIRA follow-up",
+  "type": "assignment"
+}
