@@ -1,0 +1,11 @@
+{
+  "evidence": "Prior Linux job released with executor-stop evidence; see its receipt, report and archived probe bundle. User requested review and a PR handoff atop the current head. Refresh source heads and claims before work.",
+  "head": "de36597d1414a6ac24d0d03f80f5b61ceb542ed7",
+  "id": "pr-5301-real-zk-handoff-windows-20261109",
+  "intended_host": "Windows implementation and review host; Linux gate for execution",
+  "job": "pr-5301-real-zk-handoff-windows-20261109",
+  "predecessor": "pr-5301-real-zk-repro-linux-20261109",
+  "scope": "Review diagnostic and existing test seams, implement a maintainable real-session regression and proposed liveness fix on an isolated fork branch based on the current contributor head, push without force and request exact-head Linux validation. Draft the requested contributor handoff, reconcile public discussion and post only once required proof and applicable public-write rules are satisfied.",
+  "summary": "Review and prepare a contributor-ready PR 5301 real-ZooKeeper regression and reconnect fix on the current PR head",
+  "type": "assignment"
+}
