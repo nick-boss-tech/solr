@@ -1,0 +1,9 @@
+{
+  "head": "76e4e1bf6192468070ca200a09b1f6e7e9b81dd8",
+  "id": "pr-5310-maintainability-patch-20261108",
+  "intended_host": "Windows implementation, Linux proof pending",
+  "job": "pr-5310-maintainability-patch-20261108",
+  "scope": "Patch fork PR branch with scoped fast-forward changes; retain rolling-upgrade coverage and explain scope in the explicitly authorized PR body. Do not perform Linux gate work or post comments.",
+  "summary": "Simplify PR 5310 demo check and preserve smoke failure diagnostics; update authorized PR body",
+  "type": "assignment"
+}
