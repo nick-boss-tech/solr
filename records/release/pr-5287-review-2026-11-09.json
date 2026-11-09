@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-review",
+  "evidence": "Final report pr-5287-review-2026-11-09-report and local review record document the completed review; no tests or background executor were started.",
+  "id": "pr-5287-review-2026-11-09",
+  "job": "pr-5287-review-2026-11-09",
+  "reason": "Read-only review completed; no executor or continuing work.",
+  "type": "release"
+}
