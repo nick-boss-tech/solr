@@ -1,0 +1,11 @@
+{
+  "failed_gate": "solr-18606-alias-refresh-linux-gate-20261109",
+  "host": "Windows source implementation; Linux verification required",
+  "id": "solr-18606-mockito-assumption-fix-20261109",
+  "job": "solr-18606-mockito-assumption-fix-20261109",
+  "previous_head": "fa8cd9f4c490fc0bacbcde5c7ac02742ce3b3389",
+  "scope": "Investigate failed exact-head receipt solr-18606-alias-refresh-linux-gate-20261109-receipt, correct Mockito assumptions only in the relevant tests, review and push the ticket branch, and post a successor exact-head Linux gate. No Windows Gradle or retired queue.",
+  "successor_of": "solr-18606-alias-refresh-implementation-20261109",
+  "summary": "Fix the Mockito source-pattern failure in SOLR-18606 tests",
+  "type": "assignment"
+}
