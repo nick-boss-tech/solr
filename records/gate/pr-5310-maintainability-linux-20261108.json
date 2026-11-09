@@ -1,0 +1,19 @@
+{
+  "branch": "nick-boss-tech/solr:solr-18169-docker-ci-followup",
+  "environment": "Clean isolated non-root Linux checkout, JDK 21, Python 3, tar, Docker, host build locks and disposable resources. Reconcile the claimed prior gate worker and all executor activity before starting; do not duplicate a live execution. Record exact toolchain, source and remote heads, fresh logs and cleanup.",
+  "head": "b7dce4b74984e468862fc7508d9eea827baf43ee",
+  "id": "pr-5310-maintainability-linux-20261108",
+  "job": "pr-5310-maintainability-linux-20261108",
+  "parent_head": "76e4e1bf6192468070ca200a09b1f6e7e9b81dd8",
+  "prior_gate": "pr-5310-reviewer-release-linux-20261108",
+  "requirements": [
+    "Read prior gate, claim, execution and eventual receipt/release; do not claim or start conflicting work until actual worker/executor stoppage is established. Verify PR and fork head equal this head.",
+    "Run ./gradlew tidy, require no tracked formatting changes, git diff --check, and ./gradlew check -x test. A changed source head needs a new gate.",
+    "Build full, slim and source release artifacts with ./gradlew -p solr/distribution assembleRelease -Dversion.release=11.0.0-SNAPSHOT; generate Changes.html as needed, then run the full local smokeTestRelease.py with --not-signed --revision skip and matching version. Capture artifact hashes and full example, slim startup/index/query/stop, source and Maven results, and all skipped legs.",
+    "Using the built slim archive, exercise inherited SOLR_HOME, SOLR_DATA_HOME, SOLR_INCLUDE, SOLR_JAVA_HOME, SOLR_CONNECTION, ZK_HOST, STOP_PORT and JAVA_TOOL_OPTIONS as isolated sentinels; verify no external state or ZooKeeper is used and owned process cleanup. Safely bind the default stop port and confirm a different port is chosen. For changed cleanup diagnostics, verify a primary failure remains visible if stop also fails and stop-only failure is still surfaced, without affecting unrelated processes.",
+    "Run actual full and slim Docker testDocker at this head, including slim demo successful expected-failure, wrong-message or wrong-status, timeout, and owned-container cleanup behavior; do not hang indefinitely or affect unrelated containers. Run rolling-upgrade BATS with normal previous-major slim start and current end, plus a locally built example-free slim start; handle the unconditional pull with a strictly scoped isolated wrapper if necessary. Verify document survives upgrade and record image IDs and any overlay.",
+    "Prior dc720a2 receipt and the claimed 76e4e1bf gate are historical evidence only. Reproduce fail-before controls if practical; record any skipped legs honestly. No deleted mocked Python test suite is required.",
+    "Publish exact-head receipt with commands, exit codes, archive and log hashes, remote and PR readback, actual cleanup and limits. Linux does not establish native Cygwin; report it separately as unverified unless actually run on a capable host."
+  ],
+  "type": "gate"
+}
