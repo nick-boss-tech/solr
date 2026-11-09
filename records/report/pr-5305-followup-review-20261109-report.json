@@ -1,0 +1,10 @@
+{
+  "head": "6b1513313e55f4589c78e72fd614c63aaf518903",
+  "id": "pr-5305-followup-review-20261109-report",
+  "job": "pr-5305-followup-review-20261109",
+  "local_review": "C:/Users/shaninna/dev/Solr-issues/research/branch-reviews/2026-11-09-pr-batch/PR-5305-followup-review.md",
+  "prior_gate": "pr-5305-ignored-fields-linux-gate-20261108",
+  "public_pr": "https://github.com/apache/solr/pull/5305",
+  "summary": "Full source follow-up found no new production defect. All previously identified sibling null paths have guards; DocValues branches are unchanged. The author independently implemented the changes and replaced the offered tests with smaller integration coverage. The PR body should describe the expanded scope. Exact-head tests and checks remain unverified: current-head Validate Changelog, Gradle Precommit and Solr Tests via Crave are action_required; Labeler passed. The older Linux receipt covers 5df2caa0e59a9bbbd0d6e91e74bfbfc80797b69f, not this different tree. Windows ran no tests or builds; git diff --check passed. No public write was made.",
+  "type": "report"
+}
