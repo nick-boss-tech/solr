@@ -1,0 +1,16 @@
+{
+  "branch": "nick-boss-tech/solr:pr-5301-real-zk-handoff",
+  "context": "A new PR-head-based follow-up replaces the prior disposable global production observer with a log4j callback delay similar to the existing stress test. It retains the previously proposed production fix and adds an ordinary real-ZooKeeper regression. The earlier real-ZooKeeper receipt establishes the diagnostic scenario, but did not test this rewritten test or this source head. Read the associated gate before claiming. Reconcile the completed prior experiment, release and executor-stop proof, current host locks and live heads before work.",
+  "head": "4feb9dd6f33dfca5cd982934aaea7f8b22ea8069",
+  "id": "pr-5301-real-zk-handoff-linux-20261109",
+  "intended_host": "Linux gate host with Solr build, test and records capability",
+  "job": "pr-5301-real-zk-handoff-linux-20261109",
+  "summary": "Validate PR 5301 contributor-ready real-ZooKeeper recovery test and production fix at the exact pushed head",
+  "tags": [
+    "linux",
+    "gate",
+    "pr-5301",
+    "zookeeper"
+  ],
+  "type": "assignment"
+}
