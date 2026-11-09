@@ -1,0 +1,13 @@
+{
+  "deliverables": "Local review record and board report; no source changes or public comments",
+  "head": "29caa4258ff8b9def71db25d48bfe07c5ddcbb48",
+  "host": "Windows; no Gradle",
+  "id": "solr-18606-pr5314-review-20261109",
+  "job": "solr-18606-pr5314-review-20261109",
+  "sources": [
+    "https://github.com/apache/solr/pull/5314",
+    "records/receipt/solr-18606-alias-refresh-linux-gate-20261109-r2-receipt.json"
+  ],
+  "summary": "Read-only review of PR 5314, emphasizing test simplicity and clear decisions",
+  "type": "assignment"
+}
