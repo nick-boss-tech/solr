@@ -1,0 +1,9 @@
+{
+  "deliverables": "Update and read back PR body; record exact head and proof",
+  "head": "9d4dc33e5d829d2bc9d1304054b5af6746879b34",
+  "host": "Windows",
+  "id": "solr-18606-pr5314-body-update-20261109",
+  "job": "solr-18606-pr5314-body-update-20261109",
+  "summary": "Update PR 5314 body after exact-head Linux gate passed, as explicitly authorized by Nick",
+  "type": "assignment"
+}
