@@ -1,0 +1,35 @@
+{
+  "assignment_snapshot": "81f9bd453639f6793d4a35ecfb05ecebbd4ffc76",
+  "comparison_head": "dfde9bde0a348ad44e6f6ceec197d478ef11bfd0",
+  "host": "phone-agent-2 Linux sandbox, JDK 21, Gradle 8.10, GRADLE_USER_HOME=/workspace/gradle-home",
+  "id": "pr-5301-real-zk-repro-linux-20261109",
+  "job": "pr-5301-real-zk-repro-linux-20261109",
+  "live_refs": {
+    "fork_ref": "nick-boss-tech/solr:solr-18623-reconnect-liveness@dfde9bde0a348ad44e6f6ceec197d478ef11bfd0",
+    "original_head": "01e820f0539cddc4697d26176d216614a776a99a",
+    "pull_request": "https://github.com/apache/solr/pull/5301",
+    "pull_request_base": "branch_9x@4c61bb8b1a31d2a01779d083031d551160c70130",
+    "pull_request_head": "de36597d1414a6ac24d0d03f80f5b61ceb542ed7",
+    "pull_request_state": "open"
+  },
+  "owner": "phone-agent-2",
+  "preflight": {
+    "current_board_claim": "absent at the fetched live snapshot; canonical claim path was checked absent",
+    "host_processes": "No Gradle, Solr, ZooKeeper, JUnit, test-runner or wrapper executor process found",
+    "inode_preflight": {
+      "free": 1494197,
+      "stop_when_free_percent_at_or_below": 15,
+      "total": 1868096
+    },
+    "lock_preflight": "Both physical flocks acquired and released successfully immediately before claim",
+    "locks": [
+      "/workspace/tools/.gradle-phone-agent-2.lock",
+      "/workspace/tools/.gradle-0609f7968656.lock"
+    ],
+    "pr5301_worktree": "No PR-5301 worktree or active gate directory found",
+    "prior_legacy_round_3": "DONE; dated execution 2026-11-05T23:38:41Z to 2026-11-06T00:12:27Z; receipt says mocked ordering proof and prior stress proof do not establish this new real-ZooKeeper sequence"
+  },
+  "scope": "Run only the assigned bounded real-ZooKeeper reproduction at the exact PR head, with a disposable uncommitted diagnostic hook and only the specified ConnectionManager.java comparison overlay if feasible. No source branch or PR edits/pushes, no public communication, no Docker. Serialize every Gradle/build command under both physical flocks; recheck inode headroom and stop at <=15% free. Work and evidence: /workspace/gates/logs/phone-agent-2/pr-5301-real-zk-repro-linux-20261109/",
+  "source_head": "de36597d1414a6ac24d0d03f80f5b61ceb542ed7",
+  "type": "claim"
+}
