@@ -1,0 +1,8 @@
+{
+  "head": "b7dce4b74984e468862fc7508d9eea827baf43ee",
+  "id": "pr-5310-limits-body-20261109",
+  "job": "pr-5310-limits-body-20261109",
+  "owner": "windows-review-agent",
+  "scope": "Single user-directed PR body edit and readback; no source or test executor.",
+  "type": "claim"
+}
