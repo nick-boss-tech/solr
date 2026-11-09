@@ -1,0 +1,18 @@
+{
+  "documents": [
+    "docs/pr-test-adequacy.md",
+    "START-HERE.md",
+    "research/research-note-review-guide.md"
+  ],
+  "head": "85fe594ab77537755f5cfe9ee5f8648086c844ae",
+  "id": "pr-formula-test-adequacy-report-20261109",
+  "job": "pr-formula-test-adequacy-20261109",
+  "sources": [
+    "https://github.com/apache/solr/pull/5310#discussion_r4509289338",
+    "records/report/pr-5310-reviewer-test-remove-76e4e1bf-20261108.json",
+    "https://github.com/nick-boss-tech/solr/blob/95e2574f5091fbf1425fd9bfc4cef98c746b42f6/pr-formula.md"
+  ],
+  "summary": "Published original PR-formula test adequacy and minimalism guidance on coordination-v2 and linked it from START-HERE. The checks assess existing coverage and scheduling, behavior-level proof, unique value and maintenance cost of new suites and workflows, mocks versus real integration, and scope. They explicitly preserve justified unit, compatibility and negative tests. Added a short reference in the local review guide.",
+  "type": "report",
+  "verification": "Reviewed the old formula at the pinned historical branch tip and the live v2 instructions and records. The v2 doc and discovery link were committed and fast-forward pushed; the separately read fork ref matched 85fe594ab77537755f5cfe9ee5f8648086c844ae and source content was read back. git show --check passed; local review-guide reference verified. No build or runtime test was needed for documentation. No source PR or old-board write occurred."
+}
