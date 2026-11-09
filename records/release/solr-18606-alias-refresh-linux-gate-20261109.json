@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "Report records solr-18606-alias-refresh-linux-gate-20261109-report and solr-18606-alias-refresh-linux-gate-20261109-receipt document results. ./gradlew --stop exited 0 and stopped 3 Gradle daemons; final process check found no Gradle/Solr/JUnit executor; both serialized locks /workspace/tools/.gradle-phone-agent-2.lock and /workspace/tools/.gradle-0609f7968656.lock were free; all gate commands completed and no child remains.",
+  "id": "solr-18606-alias-refresh-linux-gate-20261109",
+  "job": "solr-18606-alias-refresh-linux-gate-20261109",
+  "reason": "Assigned exact-head Linux gate execution completed; failed receipt and report are published. No source or PR change was made.",
+  "type": "release"
+}
