@@ -1,0 +1,10 @@
+{
+  "head": "76e4e1bf6192468070ca200a09b1f6e7e9b81dd8",
+  "id": "pr-5310-maintainability-review-76e4e1bf-20261108",
+  "job": "pr-5310-maintainability-review-20261108",
+  "local_review": "research/branch-reviews/2026-11-08-pr-batch/PR-5310-maintainability-review.md",
+  "pr": "https://github.com/apache/solr/pull/5310",
+  "summary": "Whole-diff source review identifies the single-use slim-demo container poll as the clearest simplification opportunity while retaining bounded execution and cleanup; rolling-upgrade test is adjacent optional scope; slim smoke cleanup can mask an initial failure. Shared document helper, distribution propagation, matrix, and real slim smoke steps have concrete purposes. Removed mocked suite remains absent.",
+  "type": "report",
+  "verification": "PR head and fetched ref matched; diff check passed. Source-only: no runtime tests. Exact-head Linux gate was claimed for non-Docker legs; no exact-head receipt observed at board snapshot 4a33de988d4d939f80c841e3062849b7244b33ce. Docker and native Cygwin remain unverified. No source changes or public actions."
+}
