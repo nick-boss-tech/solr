@@ -1,0 +1,212 @@
+{
+  "evidence_bundle_id": "pr-5301-real-zk-handoff-linux-20261109-evidence-bundle",
+  "evidence_records": [
+    {
+      "path": "records/evidence/pr-5301-real-zk-handoff-linux-20261109-evidence-bundle.json",
+      "sha256": "155fc03dfc608064b2a60c2a314b76b566a9250b668827ed9accab9043923130"
+    },
+    {
+      "path": "records/evidence/pr-5301-real-zk-handoff-linux-20261109-executor-stop-final.json",
+      "sha256": "73cb5756d3a4b9e19745e8b09e60b7caac98e38e87c9141b5b20aa6837871f51"
+    }
+  ],
+  "executor_stop_id": "pr-5301-real-zk-handoff-linux-20261109-executor-stop-final",
+  "gate": "pr-5301-real-zk-handoff-linux-20261109",
+  "hashes": {
+    "ConnectionManager_head_file_sha256": "193c9b4b0c0679c27abb995b53073f6a375de53bfe7d63e19e6ef574bebe74ae",
+    "ConnectionManager_parent_git_blob": "5f094c80f1e23e1695a6a5839df038eac5d63558",
+    "changelog_generated_patch_sha256": "6d675999406eea99996ec2fe33483aafae9ba6e0fb6fce880b14f3916883623c",
+    "evidence_archive_sha256": "155fc03dfc608064b2a60c2a314b76b566a9250b668827ed9accab9043923130",
+    "evidence_manifest_sha256": "bc317e6f45a7def3b2f039cf060ccae846cf8e8d5e08934bec5bbb352e42dc82",
+    "executor_stop_sha256": "73cb5756d3a4b9e19745e8b09e60b7caac98e38e87c9141b5b20aa6837871f51",
+    "focused_test_git_blob": "6fb5d023821869d44aa63dd7dd4ddbe56472c44e",
+    "focused_test_sha256": "f3972ed9e190ddb28fa4ad1d89f667544a63b0c0030095f520c5efa0a0890db8",
+    "parent_blob_patch_sha256": "dbc605ac18d419920cc8358ddfae96d689533a2bf711e36d6683396d3a3ce7b6",
+    "source_patch_sha256": "6a6d62bff1f4455dcb4ce45e860915b91bcf5aa4829844254c2b205dba92d2aa"
+  },
+  "head": "4feb9dd6f33dfca5cd982934aaea7f8b22ea8069",
+  "id": "pr-5301-real-zk-handoff-linux-20261109-report",
+  "job": "pr-5301-real-zk-handoff-linux-20261109",
+  "limitations": [
+    "No Docker was used or installed; the assigned Linux proof legs did not require Docker.",
+    "No native Windows/Cygwin proof is claimed; the separate Windows assignment was not run here.",
+    "The live owner clarification assigns source/test changes to the implementor. A test fix and superseding exact-head gate are outstanding if the implementor accepts the review findings.",
+    "Only the current PR 5301 gate was claimed/run; the separate PR 5313 assignment remains untouched."
+  ],
+  "proof_legs": [
+    {
+      "commands": [
+        "./gradlew tidy",
+        "git diff --check"
+      ],
+      "exit_codes": {
+        "diff_check": 0,
+        "tidy": 0
+      },
+      "logs": [
+        "01-tidy.driver.log",
+        "01-tidy.monitor.log",
+        "01-diff-check.log"
+      ],
+      "name": "tidy-and-diff-check",
+      "tracked_status_after_tidy": "clean"
+    },
+    {
+      "command": "./gradlew :solr:core:validateSourcePatterns",
+      "exit_code": 0,
+      "logs": [
+        "02-validate-source-patterns.driver.log",
+        "02-validate-source-patterns.monitor.log"
+      ],
+      "monitor_seconds": 15,
+      "name": "source-pattern-validation"
+    },
+    {
+      "command": "./gradlew logchangeGenerate",
+      "entries_checked": [
+        "Retry ZooKeeper reconnection when a replacement session expires before its connection callback is applied (Nick Shanin, SOLR-18623)",
+        "Fix a race that could leave a node treating ZooKeeper as disconnected after it had reconnected, by ignoring out-of-order connection state events (Houston Putman, SOLR-18623)"
+      ],
+      "evidence": [
+        "03-changelog-review.txt",
+        "03-generated-CHANGELOG.patch",
+        "03-generated-version-summary.md",
+        "03-restored-status.txt"
+      ],
+      "exit_code": 0,
+      "final_worktree_clean": true,
+      "generated_output_captured_then_restored": true,
+      "name": "logchange"
+    },
+    {
+      "command": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.cloud.ConnectionManagerRealZkRecoveryTest.testExpiredReplacementDoesNotBlockRecovery -Ptests.seed=5301C0DE --rerun-tasks",
+      "name": "focused-real-zookeeper-repeats",
+      "observed_events": "Each fresh XML logs connected/disconnected/expired events, one stale-connected rejection, later recovery and proxy/server cleanup. Test assertions confirm distinct replacement sessions, a reachable direct control client, and no callback-hold timeout. Generic disconnected/stale latches are not scoped to the manager/session.",
+      "runs": [
+        {
+          "errors": 0,
+          "exit_code": 0,
+          "failures": 0,
+          "id": "10-realzk-run-1",
+          "junit": "junit/10-realzk-run-1/test/TEST-org.apache.solr.cloud.ConnectionManagerRealZkRecoveryTest.xml",
+          "junit_runtime_seconds": 5.169,
+          "junit_sha256": "3cb022e4a5b022d71f84b9a68a79e470756a6378e1a6d4c64aa434e1dea6dc14",
+          "skipped": 0,
+          "tests": 1
+        },
+        {
+          "errors": 0,
+          "exit_code": 0,
+          "failures": 0,
+          "id": "11-realzk-run-2",
+          "junit": "junit/11-realzk-run-2/test/TEST-org.apache.solr.cloud.ConnectionManagerRealZkRecoveryTest.xml",
+          "junit_runtime_seconds": 5.756,
+          "junit_sha256": "1fec77016f15d978cc1edfbadc5f8a92179ce861800b2ddf8954ee05bc8d6cb1",
+          "skipped": 0,
+          "tests": 1
+        },
+        {
+          "errors": 0,
+          "exit_code": 0,
+          "failures": 0,
+          "id": "12-realzk-run-3",
+          "junit": "junit/12-realzk-run-3/test/TEST-org.apache.solr.cloud.ConnectionManagerRealZkRecoveryTest.xml",
+          "junit_runtime_seconds": 4.765,
+          "junit_sha256": "0622fc4c022e154278e7bfe93f339b880d24b8ff83466a75ea975fb78204e389",
+          "skipped": 0,
+          "tests": 1
+        }
+      ]
+    },
+    {
+      "changed_only": "solr/solrj-zookeeper/src/java/org/apache/solr/common/cloud/ConnectionManager.java",
+      "checkout_head": "4feb9dd6f33dfca5cd982934aaea7f8b22ea8069",
+      "command": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.cloud.ConnectionManagerRealZkRecoveryTest.testExpiredReplacementDoesNotBlockRecovery -Ptests.seed=5301C0DE --rerun-tasks",
+      "errors": 0,
+      "event_notes": "Replacement B connected, disconnected and expired; the test log shows a stale-connected rejection; a direct control-client server-reachability assertion succeeded before the final recovery assertion. The unscoped stale-event latch is an attribution limitation recorded in the review.",
+      "evidence": [
+        "fail-before/connection-manager-parent-blob.patch",
+        "fail-before-source-manifest.txt",
+        "fail-before/source-and-junit.sha256",
+        "fail-before/20-parent-fail-before-events.txt"
+      ],
+      "exit_code": 1,
+      "expected_runtime_failure": true,
+      "failure": "java.lang.AssertionError: connection manager did not recover",
+      "failures": 1,
+      "junit": "fail-before/junit/test/TEST-org.apache.solr.cloud.ConnectionManagerRealZkRecoveryTest.xml",
+      "junit_runtime_seconds": 30.208,
+      "junit_sha256": "09d3b43f2a3bfedaee7766a2156381956352e8773569d7a5a718f254a7250621",
+      "name": "parent-blob-fail-before",
+      "new_test_blob_unchanged": "6fb5d023821869d44aa63dd7dd4ddbe56472c44e",
+      "parent_commit": "de36597d1414a6ac24d0d03f80f5b61ceb542ed7",
+      "parent_file_blob": "5f094c80f1e23e1695a6a5839df038eac5d63558",
+      "skipped": 0,
+      "temporary_checkout_removed": true,
+      "tests": 1
+    },
+    {
+      "command": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.cloud.ConnectionManagerTest --tests org.apache.solr.cloud.TestConnectionManagerReconnectStress -Ptests.nightly=true -Ptests.seed=5301C0DE --rerun-tasks",
+      "errors": 0,
+      "executed": 3,
+      "exit_code": 0,
+      "failures": 0,
+      "junit_sha256": {
+        "ConnectionManagerTest.xml": "f1ebdbedc0b751b901ba345ee16891656bf932d2a22c1d986301772d73576712",
+        "TestConnectionManagerReconnectStress.xml": "956d0c633b4f03fbd613c49e8dab76b843aba214ac676602ee1ffd296fe107a1"
+      },
+      "name": "related-connection-manager-tests",
+      "skip": "ConnectionManagerTest.testConnectionManager is annotated @Ignore; recorded as skipped, not a pass.",
+      "skipped": 1,
+      "tests_reported": 4
+    },
+    {
+      "command": "./gradlew :solr:solrj-zookeeper:cleanTest :solr:solrj-zookeeper:test --tests org.apache.solr.common.cloud.SolrZkClientTest -Ptests.seed=5301C0DE --rerun-tasks",
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "junit_sha256": "867b7f01068a2a7a76f504d6db0275e3d5169f51c6498c80d3b6fdb40b8dc4f4",
+      "name": "SolrZkClientTest",
+      "skipped": 0,
+      "tests": 7
+    },
+    {
+      "command": "./gradlew check -x test",
+      "duration_seconds": 275,
+      "exit_code": 0,
+      "name": "root-check",
+      "result": "BUILD SUCCESSFUL"
+    },
+    {
+      "command": "./gradlew :solr:solrj-zookeeper:compileJava :solr:core:compileTestJava -Pvalidation.errorprone=true -Pjavac.failOnWarnings=false",
+      "driver_log_sha256": "334f3669bd99de9763db3ee2705c207374d67343721413ef4e9e723c270e1b10",
+      "duration_seconds": 195,
+      "exit_code": 0,
+      "name": "error-prone-compile",
+      "result": "BUILD SUCCESSFUL; warning-tolerant, not warning-free",
+      "warning": "Unchanged solr/core/src/test/org/apache/solr/schema/numericrange/FloatRangeFieldTest.java:328 [FloatingPointLiteralPrecision] for literal 5.6699998E+10f. It matches the exact baseline warning location/type named by this gate; this source file is not in the PR diff."
+    }
+  ],
+  "review_findings": [
+    "The generic zkClient-has-disconnected and Ignoring-stale-connected-event latches are not scoped to ConnectionManager instance/session B (test lines 244–247).",
+    "The boolean result of thirdCreationRequested.await(5, TimeUnit.SECONDS) is ignored (line 125), so C reaching its gate is not asserted before B callback release.",
+    "The 60-second callback hold is guarded by holdTimedOut and did not expire; the conditional proxy cleanup at lines 150–151 is a possible setup-failure edge if construction acquires resources before open returns."
+  ],
+  "source": {
+    "branch": "pr-5301-real-zk-handoff",
+    "changed_paths": [
+      "changelog/unreleased/SOLR-18623-reconnect-liveness.yml",
+      "solr/core/src/test/org/apache/solr/cloud/ConnectionManagerRealZkRecoveryTest.java",
+      "solr/solrj-zookeeper/src/java/org/apache/solr/common/cloud/ConnectionManager.java"
+    ],
+    "final_worktree_clean": true,
+    "head": "4feb9dd6f33dfca5cd982934aaea7f8b22ea8069",
+    "parent_and_upstream_pr_head": "de36597d1414a6ac24d0d03f80f5b61ceb542ed7",
+    "repository": "nick-boss-tech/solr",
+    "source_or_pr_changes_by_gate_worker": false,
+    "upstream_pr_comments_or_body_edits": false
+  },
+  "summary": "All assigned Linux proof legs executed at the exact source head. Three focused real-ZooKeeper runs passed and the exact-parent-blob fail-before reproduced the required runtime assertion. Related tests and compilation checks passed, with one existing @Ignore and one warning-tolerant Error Prone warning. The test-maintenance review found unscoped event latches and an unchecked C-creation wait; therefore the gate's complete-green criterion is not met.",
+  "type": "report",
+  "verdict": "incomplete"
+}
