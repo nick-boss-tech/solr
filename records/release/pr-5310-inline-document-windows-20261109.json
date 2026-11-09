@@ -1,0 +1,8 @@
+{
+  "actor": "windows-implementation-agent-inline-document",
+  "evidence": "Report records pushed head and checks. No Gradle, Docker, Solr or external test executor was started by this implementation; only completed Bash syntax checks.",
+  "id": "pr-5310-inline-document-windows-20261109",
+  "job": "pr-5310-inline-document-windows-20261109",
+  "reason": "Implementation pushed and handed off for exact-head Linux proof.",
+  "type": "release"
+}
