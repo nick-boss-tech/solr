@@ -1,0 +1,16 @@
+{
+  "decisions": "Clarify that repeated unknown-name ZK lookups are newly introduced. Stale alias refresh and negative caching remain separate scope choices.",
+  "evidence": "PR 5314 and exact-head Linux gate solr-18606-alias-refresh-linux-gate-20261109-r2; 36 tests, negative proof, tidy and root check pass. GitHub Validate Changelog, Solr Tests via Crave, and Gradle Precommit require action.",
+  "findings": [
+    "A missing-state refresh uses an unsynchronized ZooKeeper read; a lagging ensemble member can still miss a just-created collection. This is a source-and-guarantee inference, not a reproduced failure.",
+    "The mocked interruption bypasses getCollectionLive, which wraps actual missing-state ZooKeeper errors as BAD_REQUEST before the new provider catches; the test does not establish real error classification."
+  ],
+  "head": "29caa4258ff8b9def71db25d48bfe07c5ddcbb48",
+  "id": "solr-18606-pr5314-review-20261109-report",
+  "job": "solr-18606-pr5314-review-20261109",
+  "limitations": "No builds or tests run on Windows; no quorum-lag reproduction or latency benchmark; no source or public PR writes.",
+  "local_record": "research/branch-reviews/2026-11-09-pr-batch/PR-5314-review.md",
+  "test_review": "Existing real-ZK fixture and watcher lock provide a meaningful deterministic local-view test; focused alias guard mock has mutation proof. The alias loop is redundant and class setup starts real ZooKeeper for mock-only tests. Avoid new infrastructure merely to remove startup.",
+  "type": "report",
+  "verdict": "needs work"
+}
