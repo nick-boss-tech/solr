@@ -1,0 +1,8 @@
+{
+  "actor": "windows-implementation-agent",
+  "evidence": "Branch push and tests are recorded in records/report/pr-5310-startup-ownership-experiment-d4fca70-20261109.json and the local review. All individual test child processes completed or were terminated by their test. One exact child from a timed-out combined probe was independently identified and stopped. No Gradle, real Solr, Docker or native Cygwin executor was started by this implementation; old gate execution is independent.",
+  "id": "pr-5310-startup-ownership-experiment-20261109",
+  "job": "pr-5310-startup-ownership-experiment-20261109",
+  "reason": "Separate experiment branch and local controlled process checks completed; real runtime proof pending.",
+  "type": "release"
+}
