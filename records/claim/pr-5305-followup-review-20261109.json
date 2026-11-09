@@ -1,0 +1,7 @@
+{
+  "id": "pr-5305-followup-review-20261109",
+  "job": "pr-5305-followup-review-20261109",
+  "owner": "codex-windows",
+  "scope": "Read-only source review and local report; no public PR writes or test execution",
+  "type": "claim"
+}
