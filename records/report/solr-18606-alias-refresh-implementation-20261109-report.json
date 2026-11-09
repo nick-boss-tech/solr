@@ -1,0 +1,11 @@
+{
+  "head": "fa8cd9f4c490fc0bacbcde5c7ac02742ce3b3389",
+  "id": "solr-18606-alias-refresh-implementation-20261109-report",
+  "job": "solr-18606-alias-refresh-implementation-20261109",
+  "limitations": "Tests unexecuted. Alias cache can itself be stale; repeated nonexistent names can still invoke synchronized ZooKeeper work; the underlying forceUpdateCollection lacks a ZK sync. These are decision points, not proven regressions or solved by this patch.",
+  "previous_head": "8b6bf455ee652fef03e165e44b9a28fae04a11a8",
+  "result": "Restores a forced refresh for absent ZK collection state while skipping known aliases. Adds deterministic real-ZK stale-state test, repeated known-alias interaction check, unknown-name and interruption checks. Fork head verified; git diff --check clean; Windows executed no builds or tests. The old unclaimed solr-18606-linux-gate-round-1 targets the superseded forwarding head and should not be taken as proof for this head; use solr-18606-alias-refresh-linux-gate-20261109.",
+  "source_base": "b771587e9707c49847d728fd1f3ff259a182692c",
+  "summary": "Pushed alias-aware ZooKeeper refresh alternative; supersedes the earlier forwarding-head gate.",
+  "type": "report"
+}
