@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr5313",
+  "evidence": "records/report/pr5313-tidy-repair-report-20261109.json; records/gate/pr5313-startup-wait-linux-gate-round2-20261109.json; verified fork head 4be1ad602621d2af96565355dce3804ee4744aae",
+  "id": "pr5313-tidy-repair-windows-20261109",
+  "job": "pr5313-tidy-repair-windows-20261109",
+  "reason": "Formatter repair finished and handed to the separate successor Linux gate; worker and any executors have stopped work on the source branch.",
+  "type": "release"
+}
