@@ -1,0 +1,7 @@
+{
+  "id": "solr-18606-submit-pr-20261109",
+  "job": "solr-18606-submit-pr-20261109",
+  "owner": "windows-codex-nick-shanin",
+  "scope": "Open the authorized SOLR-18606 PR after exact-head checks, then draft a JIRA comment without posting it.",
+  "type": "claim"
+}
