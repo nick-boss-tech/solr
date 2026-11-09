@@ -1,0 +1,13 @@
+{
+  "base": "b771587e9707c49847d728fd1f3ff259a182692c",
+  "host": "Windows source implementation; Linux gate required",
+  "id": "solr-18606-alias-refresh-implementation-20261109",
+  "job": "solr-18606-alias-refresh-implementation-20261109",
+  "previous_gate": "solr-18606-linux-gate-round-1",
+  "previous_head": "8b6bf455ee652fef03e165e44b9a28fae04a11a8",
+  "research": "solr-18606-alias-refresh-research-20261109-report",
+  "scope": "Replace the previous forwarding solution with a scoped ZK refresh solution that avoids the SOLR-17275 known-alias hot path; add meaningful regression coverage, push solr-18606-submit, and request exact-head Linux proof. No Windows Gradle or local queue.",
+  "successor_of": "solr-18606-implementation-windows-round-1",
+  "summary": "Implement the SOLR-18606 alias-aware state refresh alternative",
+  "type": "assignment"
+}
