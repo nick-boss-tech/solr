@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-nick-shanin",
+  "evidence": "Separate PR read-back matched the draft at head 9d4dc33e5d829d2bc9d1304054b5af6746879b34; report records the result. No build or other executor was started; this worker is stopping.",
+  "id": "solr-18606-pr5314-body-update-20261109",
+  "job": "solr-18606-pr5314-body-update-20261109",
+  "reason": "Authorized PR body update completed and verified.",
+  "type": "release"
+}
