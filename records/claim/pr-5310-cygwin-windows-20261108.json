@@ -1,0 +1,8 @@
+{
+  "head": "76e4e1bf6192468070ca200a09b1f6e7e9b81dd8",
+  "id": "pr-5310-cygwin-windows-20261108",
+  "job": "pr-5310-cygwin-windows-20261108",
+  "owner": "windows-cygwin-investigator",
+  "scope": "Isolated Cygwin setup and focused execution attempt, no public writes.",
+  "type": "claim"
+}
