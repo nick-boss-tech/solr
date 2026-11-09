@@ -1,0 +1,8 @@
+{
+  "actor": "windows-review-agent",
+  "evidence": "Review and limitations recorded in records/report/pr-5310-adjacent-review-dc720a2-20261108.json and the local review file. No build, test, Docker or external executor was started.",
+  "id": "pr-5310-adjacent-review-20261108",
+  "job": "pr-5310-adjacent-review-20261108",
+  "reason": "Read-only review completed and worker stopping.",
+  "type": "release"
+}
