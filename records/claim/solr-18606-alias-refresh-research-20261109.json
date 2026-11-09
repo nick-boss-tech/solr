@@ -1,0 +1,7 @@
+{
+  "id": "solr-18606-alias-refresh-research-20261109",
+  "job": "solr-18606-alias-refresh-research-20261109",
+  "owner": "windows-codex-nick-shanin",
+  "scope": "Source reading and research of an alias-aware refresh alternative; no source changes or Linux execution.",
+  "type": "claim"
+}
