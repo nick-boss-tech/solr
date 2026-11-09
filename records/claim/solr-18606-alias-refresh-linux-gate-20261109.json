@@ -1,0 +1,13 @@
+{
+  "host": "phone-agent-2 Linux, JDK 21",
+  "id": "solr-18606-alias-refresh-linux-gate-20261109",
+  "job": "solr-18606-alias-refresh-linux-gate-20261109",
+  "locks": [
+    "/workspace/tools/.gradle-phone-agent-2.lock",
+    "/workspace/tools/.gradle-0609f7968656.lock"
+  ],
+  "owner": "phone-agent-2",
+  "scope": "Run only the current assigned Linux proof at fa8cd9f4c490fc0bacbcde5c7ac02742ce3b3389; no source, branch or PR changes. Host process and flock preflight was clear. Every Gradle leg will be serialized under /workspace/tools/.gradle-phone-agent-2.lock and /workspace/tools/.gradle-0609f7968656.lock, with live <=15% free-inode and 2-GiB disk guards.",
+  "source_head": "fa8cd9f4c490fc0bacbcde5c7ac02742ce3b3389",
+  "type": "claim"
+}
