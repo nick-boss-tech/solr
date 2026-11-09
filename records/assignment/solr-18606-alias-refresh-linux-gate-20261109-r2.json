@@ -1,0 +1,21 @@
+{
+  "base": "b771587e9707c49847d728fd1f3ff259a182692c",
+  "gate": "solr-18606-alias-refresh-linux-gate-20261109-r2",
+  "head": "29caa4258ff8b9def71db25d48bfe07c5ddcbb48",
+  "host_requirements": [
+    "linux",
+    "jdk21",
+    "Solr Gradle",
+    "ZooKeeper test capability"
+  ],
+  "id": "solr-18606-alias-refresh-linux-gate-20261109-r2",
+  "implementation_job": "solr-18606-mockito-assumption-fix-20261109",
+  "job": "solr-18606-alias-refresh-linux-gate-20261109-r2",
+  "prior_failed_receipt": "solr-18606-alias-refresh-linux-gate-20261109-receipt",
+  "receipt": "records/receipt/solr-18606-alias-refresh-linux-gate-20261109-r2-receipt.json",
+  "source": "nick-boss-tech/solr:solr-18606-submit",
+  "status": "open for a Linux executor to claim",
+  "successor_of": "solr-18606-alias-refresh-linux-gate-20261109",
+  "summary": "Linux exact-head verification after SOLR-18606 Mockito assumption repair",
+  "type": "assignment"
+}
