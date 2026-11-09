@@ -1,0 +1,12 @@
+{
+  "adjacent": "Existing port probe checks port + 1000 rather than the Unix stop port at port - 1000. Existing rolling-upgrade test reads example data from its start image; current default was not tested, but overrides and future defaults using new example-free slim images are affected.",
+  "evidence": "research/branch-reviews/2026-11-08-pr-batch/evidence/PR-5310/ and records/receipt/pr-5310-slim-release-smoke-linux-20261108-receipt.json",
+  "head": "dc720a2ba63aff4d2ee34beec45a173795166628",
+  "id": "pr-5310-adjacent-review-dc720a2-20261108",
+  "job": "pr-5310-adjacent-review-20261108",
+  "limits": "Static source review; no Windows tests, Gradle, Docker or Solr execution and no public communication or source patch.",
+  "local_review": "research/branch-reviews/2026-11-08-pr-batch/PR-5310-adjacent-review.md",
+  "pr": "https://github.com/apache/solr/pull/5310",
+  "summary": "Read-only review found inherited Solr home and settings can redirect the new slim smoke to external resources, a likely Cygwin JAVA_HOME path conversion failure, and no normal CI invocation for the new Python tests. Reviewed the passing exact-head Linux receipt; Docker and Cygwin were not covered.",
+  "type": "report"
+}
