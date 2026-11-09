@@ -1,0 +1,96 @@
+{
+  "cleanup": {
+    "both_locks_free": true,
+    "daemons_stopped": 4,
+    "gradle_stop_exit_code": 0,
+    "no_executor_remained": true,
+    "temporary_worktrees_removed": true
+  },
+  "coverage_limits": {
+    "alias_hot_path": "Mocked provider interaction count only; not a latency benchmark.",
+    "real_zk_test": "Provider discovery/refresh only; not a complete client request.",
+    "remaining_risk": "Stale alias snapshots and repeated missing names may cause extra ZooKeeper reads; neither was benchmarked or resolved."
+  },
+  "docker_dependent_proof": {
+    "details": "Docker was not invoked or installed. Static :solr:docker Gradle checks executed during the passing root check; Docker-dependent tests remain unrun and are not credited.",
+    "status": "not_run"
+  },
+  "evidence": {
+    "artifact": "solr-18606-alias-refresh-linux-gate-20261109-r2-evidence.tar.gz",
+    "bytes": 137059,
+    "location": "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519664052758700/BGOgZPLFTsWZNuyw.gz?Expires=1825792423&Signature=oeYyHd4jQv3DldgAn~1sbAmA3SJKdWk6Urid9xZf7BfKQgKQ3njaAdTrlUYrwCNVaV7hdr1BI7y9yNivAtKociaKB3MaU~vlBq34JXS36-k715-LbXyApWH~nkaP0VEKsuvQzomZ500yUEPq0jxrB-Wy0S5-r14NgyXfD~1BR3hVwdHNjF9A~-17BJrZFeqkbLFLwKFG6NKmIrcZXzxqH3YUiDB79MdhHiuO5zTObukEx~DwdUFE6onX223SD5oGknCGnpSHo3PwOKNCqG1B0smvjZgfE6-rSK1Efkh~6-speZV~eS7cSqaa-vbOvLATZK35iWmAljwIcFCx3Tpa-g__&Key-Pair-Id=K10M74EMLURLMC",
+    "record_id": "solr-18606-alias-refresh-linux-gate-20261109-r2-evidence",
+    "sha256": "6936df39ae0e37ad1ec7924880f78b8869a30b9f2213a7a2d7721e6522fa6914",
+    "verified_download_sha256": "6936df39ae0e37ad1ec7924880f78b8869a30b9f2213a7a2d7721e6522fa6914"
+  },
+  "gate": "solr-18606-alias-refresh-linux-gate-20261109-r2",
+  "head": "29caa4258ff8b9def71db25d48bfe07c5ddcbb48",
+  "id": "solr-18606-alias-refresh-linux-gate-20261109-r2-receipt",
+  "job": "solr-18606-alias-refresh-linux-gate-20261109-r2",
+  "locks": [
+    "/workspace/tools/.gradle-phone-agent-2.lock",
+    "/workspace/tools/.gradle-0609f7968656.lock"
+  ],
+  "observed_at_utc": "2026-11-09T20:34:50Z",
+  "prewrite_live_board_tip": "8837b4df851f1bf2db980cc0672bfddb2f0eaaa3",
+  "proof_legs": {
+    "alias_guard_mutation": {
+      "errors": 0,
+      "expected_mockito_never_refresh_failure": true,
+      "failures": 1,
+      "mutation_restored_and_checkout_clean": true,
+      "runner_exit_code": 1,
+      "skipped": 0,
+      "tests": 1
+    },
+    "alias_integration_test": {
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 9
+    },
+    "fail_before": {
+      "errors": 0,
+      "expected_runtime_assertion_at_missing_reference": true,
+      "failures": 1,
+      "runner_exit_code": 1,
+      "skipped": 0,
+      "tests": 1
+    },
+    "root_check": {
+      "final_attempt_exit_code": 0,
+      "final_attempt_result": "BUILD SUCCESSFUL; :solr:core:validateSourcePatterns passed; 556 tasks executed",
+      "first_attempt_setup_failure": "Antora rejected the linked worktree .git pointer at buildLocalAntoraSite; not credited as a pass"
+    },
+    "solrj_cache_and_routing_tests": {
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 8
+    },
+    "tidy": {
+      "exit_code": 0,
+      "tracked_changes": false
+    },
+    "zksr_reader_test": {
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "required_provider_tests_passed": 3,
+      "skipped": 0,
+      "tests": 19
+    }
+  },
+  "resource_guard": {
+    "disk_floor_bytes": 2147483648,
+    "guard_stopped_a_leg": false,
+    "minimum_free_disk_bytes": 54747246592,
+    "minimum_free_inode_pct": 71.7988,
+    "stop_floor_pct": 15
+  },
+  "summary": "All required successor-gate proof legs completed at the exact assigned head. The three positive test groups passed (36 tests, zero failures/errors/skips); both negative controls produced their expected runtime failures; tidy made no tracked changes; and the final root check succeeded after an investigated Antora setup failure in the first worktree attempt. The fork branch still matched the assigned SHA. No source branch or PR changes were made.",
+  "type": "receipt",
+  "verdict": "passed"
+}
