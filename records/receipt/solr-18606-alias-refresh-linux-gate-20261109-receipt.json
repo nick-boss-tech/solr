@@ -1,0 +1,164 @@
+{
+  "coverage_limits": {
+    "alias_hot_path": "The known-alias test verifies a mocked provider interaction count, not request latency or a performance benchmark.",
+    "docker_dependent_proof": {
+      "details": "No Docker CLI, engine, image, or container was used or installed. The actual check invoked only static Gradle tasks in the Docker module; Docker-dependent proof remains unrun and is not credited.",
+      "status": "not_run"
+    },
+    "overall_gate": "Failed because the required ./gradlew check -x test leg failed at :solr:core:validateSourcePatterns. The executed test legs and both negative controls behaved as expected; this is not a passing receipt.",
+    "real_zk_test": "The real-ZooKeeper test verifies provider discovery/refresh while the reader update lock prevents watcher publication; it does not prove a complete end-to-end client request.",
+    "remaining_risk": "Stale alias snapshots and repeated missing collection names may still trigger extra ZooKeeper reads; neither was benchmarked or resolved by this gate.",
+    "source_and_pr_changes": "No source branch, PR, or tracked file was changed by the gate. The fail-before test overlay and alias mutation were isolated to separate disposable worktrees; the mutation was restored."
+  },
+  "environment": {
+    "gradle": "9.7.0",
+    "gradle_user_home": "/workspace/gradle-home",
+    "host_alias": "phone-agent-2",
+    "hostname": "0609f7968656",
+    "jdk": "OpenJDK 21.0.12.1",
+    "os": "Linux x86_64"
+  },
+  "evidence": {
+    "artifact": "solr-18606-alias-refresh-linux-gate-20261109-evidence.tar.gz",
+    "bundle_bytes": 99141,
+    "record_id": "solr-18606-alias-refresh-linux-gate-20261109-evidence",
+    "record_path": "records/evidence/solr-18606-alias-refresh-linux-gate-20261109-evidence.json",
+    "sha256": "7c4a58079bb03021ecd2be721bfa863ffa25b4036260071fff0b3e20327746d3",
+    "verified_download_sha256": "7c4a58079bb03021ecd2be721bfa863ffa25b4036260071fff0b3e20327746d3"
+  },
+  "gate": "solr-18606-alias-refresh-linux-gate-20261109",
+  "head": "fa8cd9f4c490fc0bacbcde5c7ac02742ce3b3389",
+  "id": "solr-18606-alias-refresh-linux-gate-20261109-receipt",
+  "job": "solr-18606-alias-refresh-linux-gate-20261109",
+  "live_board_snapshot": "board-snapshot/snapshot-manifest.json",
+  "locks": [
+    "/workspace/tools/.gradle-phone-agent-2.lock",
+    "/workspace/tools/.gradle-0609f7968656.lock"
+  ],
+  "observed_at_utc": "2026-11-09T19:57:58+00:00",
+  "prewrite_live_board_tip": "72d6eb69546e0d8425d09d7ca188178f03de6755",
+  "proof_legs": {
+    "alias_guard_mutation": {
+      "command": "./gradlew :solr:core:test --tests org.apache.solr.cloud.overseer.ZkStateReaderTest.testProviderDoesNotRefreshKnownAlias -Ptests.seed=18606CAFE",
+      "control_result": "passed: expected runtime red with guard removed",
+      "errors": 0,
+      "failure": "Mockito NeverWantedButInvoked: forceUpdateCollection(\"existing_alias\") was called; no compile/setup failure. The one-line mutation was restored.",
+      "failures": 1,
+      "runner_exit_code": 1,
+      "skipped": 0,
+      "tests": 1,
+      "time_seconds": 2.43,
+      "xml": "results/alias-mutation/TEST-org.apache.solr.cloud.overseer.ZkStateReaderTest.xml"
+    },
+    "alias_integration_test": {
+      "command": "./gradlew :solr:core:test --tests org.apache.solr.cloud.AliasIntegrationTest -Ptests.seed=18606CAFE",
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "skipped": 0,
+      "status": "passed",
+      "tests": 9,
+      "time_seconds": 35.12,
+      "xml": "results/alias-integration/TEST-org.apache.solr.cloud.AliasIntegrationTest.xml"
+    },
+    "check_dry_run": {
+      "command": "./gradlew check -x test --dry-run",
+      "exit_code": 0,
+      "note": "Task graph inspection only; Docker module checks were shown as skipped in dry-run.",
+      "status": "passed"
+    },
+    "check_minus_test": {
+      "command": "./gradlew check -x test",
+      "exit_code": 1,
+      "failed_task": ":solr:core:validateSourcePatterns",
+      "failure": "Found source pattern violation: file uses Mockito but has no assumeWorkingMockito() call. The source validation rule requires that call (unless the test class extends MockV2APITest). No source changes were authorized or made.",
+      "status": "failed"
+    },
+    "fail_before": {
+      "command": "./gradlew :solr:core:test --tests org.apache.solr.cloud.overseer.ZkStateReaderTest.testProviderRefreshesCollectionMissingFromLocalState -Ptests.seed=18606CAFE",
+      "control_result": "passed: expected runtime red on base",
+      "errors": 0,
+      "failure": "AssertionError at assertNotNull(refreshed), ZkStateReaderTest.java:178, after a real ZooKeeper collection write while holding reader.getUpdateLock(); compilation/setup completed.",
+      "failures": 1,
+      "runner_exit_code": 1,
+      "skipped": 0,
+      "tests": 1,
+      "time_seconds": 1.927,
+      "xml": "results/fail-before/TEST-org.apache.solr.cloud.overseer.ZkStateReaderTest.xml"
+    },
+    "gradle_cleanup": {
+      "active_gradle_solr_test_processes_after_cleanup": 0,
+      "both_locks_free_after_cleanup": true,
+      "command": "./gradlew --stop",
+      "daemons_stopped": 3,
+      "exit_code": 0,
+      "status": "passed"
+    },
+    "solrj_cache_and_routing_tests": {
+      "classes": {
+        "CloudSolrClientCacheTest": {
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 6,
+          "time_seconds": 1.798,
+          "xml": "results/solrj-client-tests/TEST-org.apache.solr.client.solrj.impl.CloudSolrClientCacheTest.xml"
+        },
+        "CloudSolrClientRoutingTest": {
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 2,
+          "time_seconds": 8.585,
+          "xml": "results/solrj-client-tests/TEST-org.apache.solr.client.solrj.impl.CloudSolrClientRoutingTest.xml"
+        }
+      },
+      "command": "./gradlew :solr:solrj:test --tests org.apache.solr.client.solrj.impl.CloudSolrClientCacheTest --tests org.apache.solr.client.solrj.impl.CloudSolrClientRoutingTest -Ptests.seed=18606CAFE",
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "skipped": 0,
+      "status": "passed",
+      "total_tests": 8
+    },
+    "tidy": {
+      "command": "./gradlew tidy",
+      "exit_code": 0,
+      "status": "passed",
+      "tracked_changes_after": false
+    },
+    "zksr_reader_test": {
+      "command": "./gradlew :solr:core:test --tests org.apache.solr.cloud.overseer.ZkStateReaderTest -Ptests.seed=18606CAFE",
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "skipped": 0,
+      "status": "passed",
+      "target_results": "both passed",
+      "target_tests": [
+        "testProviderRefreshesCollectionMissingFromLocalState",
+        "testProviderDoesNotRefreshKnownAlias"
+      ],
+      "tests": 19,
+      "time_seconds": 14.058,
+      "xml": "results/zksr-class/TEST-org.apache.solr.cloud.overseer.ZkStateReaderTest.xml"
+    }
+  },
+  "resource_guard": {
+    "all_monitored_legs_stopped_by_guard": false,
+    "disk_floor_bytes": 2147483648,
+    "minimum_free_disk_bytes": 56883425280,
+    "minimum_free_inode_pct": 77.48,
+    "required_floor_pct": 15
+  },
+  "source": {
+    "base": "b771587e9707c49847d728fd1f3ff259a182692c",
+    "branch": "solr-18606-submit",
+    "repository": "nick-boss-tech/solr",
+    "source_branch_head_at_final_prewrite_check": "fa8cd9f4c490fc0bacbcde5c7ac02742ce3b3389",
+    "tested_head": "fa8cd9f4c490fc0bacbcde5c7ac02742ce3b3389"
+  },
+  "summary": "Required exact-head gate failed at :solr:core:validateSourcePatterns because ZkStateReaderTest uses Mockito without assumeWorkingMockito(). The specified tests and negative controls otherwise produced the recorded results; no source or PR change was made.",
+  "type": "receipt",
+  "verdict": "failed"
+}
