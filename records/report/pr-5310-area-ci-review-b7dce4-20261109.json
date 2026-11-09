@@ -1,0 +1,11 @@
+{
+  "ci": "At the reviewed head Docker, Solr Script Tests, Gradle Precommit and Validate Changelog workflow runs report action_required and zero jobs; labeler passed. Docker CI covers normal full/slim image tests. Script BATS can skip rolling upgrade when the end image is unavailable; the example-free start is not configured. Neither cited PR workflow executes the release smoketester or native Cygwin.",
+  "finding": "The slim start is outside its cleanup try/finally. On Cygwin solr.cmd can launch Java and then fail readiness, leaving a slow owned process running; source finding, not reproduced. Any fix must establish ownership rather than blindly stop a port.",
+  "head": "b7dce4b74984e468862fc7508d9eea827baf43ee",
+  "id": "pr-5310-area-ci-review-b7dce4-20261109",
+  "job": "pr-5310-area-ci-review-20261109",
+  "limits": "Full diff and adjacent launcher, Gradle and workflow paths reviewed; fetched and live PR heads match, diff check passed. No Gradle, Docker, Solr, native Cygwin or tests run here; no source patch or public comment. Linux exact-head gate remains subject to prior execution reconciliation.",
+  "local_review": "research/branch-reviews/2026-11-09-pr-batch/PR-5310-area-ci-review.md",
+  "pr": "https://github.com/apache/solr/pull/5310",
+  "type": "report"
+}
