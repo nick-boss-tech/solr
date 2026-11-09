@@ -1,0 +1,8 @@
+{
+  "head": "b7dce4b74984e468862fc7508d9eea827baf43ee",
+  "id": "pr-5310-inline-document-windows-20261109",
+  "job": "pr-5310-inline-document-windows-20261109",
+  "owner": "windows-implementation-agent-inline-document",
+  "scope": "Scoped source implementation only; no Linux executor",
+  "type": "claim"
+}
