@@ -1,0 +1,13 @@
+{
+  "branch": "pr-5287-configset-hardening-v2",
+  "comment": "https://github.com/apache/solr/pull/5287#issuecomment-6745536672 posted 2026-11-09T16:36:52Z under explicit owner direction; separate read-back matched draft. Warns prior fast-forward command is stale.",
+  "contributor_parent": "7aeb2b691f69a9c4afff47fbf537daa3096ecad7",
+  "head": "8269d726303a002b0286df6b968e41e20c1ec540",
+  "id": "pr-5287-hardening-2026-11-09-report",
+  "job": "pr-5287-hardening-2026-11-09",
+  "previous_evidence": "Historical gate receipts/PR-5287-configset-upload-hardening-round-2.md covered d0cf2471f37ae973ca06390ec195cf51f8fccbb3, not this head; S3 was skipped there.",
+  "review_record": "research/branch-reviews/2026-11-09-pr-batch/PR-5287-review.md",
+  "summary": "Carried forward the prior three fix commits on the current contributor head; added disk staging, a per-file ZooKeeper client buffer limit, oversized file regression tests, and repository access and staging documentation. Fork ref was separately verified at the full head. Implemented, Linux proof pending. Windows ran no Gradle or tests.",
+  "type": "report",
+  "verification": "Source diff reviewed and git diff --check passed; tests, tidy, Error Prone and root checks deferred to Linux gate. The configured buffer limit and use of temporary disk are behavior changes documented in the guide. Repository access authorization policy still needs maintainer decision."
+}
