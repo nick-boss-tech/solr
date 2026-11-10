@@ -1,0 +1,18 @@
+{
+  "branch": "solr-18592-sortable-dv-fix-20261110",
+  "environment": "Linux and JDK 21, fresh clean checkout; record actual host, JDK, Git heads, status, execution launcher and material environment conditions.",
+  "head": "b225cd5bb2a5886c187b13009e7016c9165414ce",
+  "id": "solr-18592-sortable-dv-fix-linux-20261110",
+  "job": "solr-18592-sortable-dv-fix-linux-20261110",
+  "requirements": [
+    "Claim the canonical Linux job. Verify the live fork head and the exact clean head b225cd5bb2a5886c187b13009e7016c9165414ce, and record the diff versus upstream base. The fix head must descend from the independently reproduced unfixed head b9aed02ac1cde907a06d04fdbd96568ca38b85a9.",
+    "Fail-before with exact final tests: in an isolated disposable checkout at unfixed head b9aed02ac1cde907a06d04fdbd96568ca38b85a9, overlay only solr/core/src/test/org/apache/solr/schema/TestSortableTextField.java from the fix head; verify this file is byte-identical to the fix head and the production SolrDocumentFetcher.java is byte-identical to the unfixed head, and record overlay diff and hashes. Run the controls method and then testStoredDocValuesExplicitPreservesFullValue individually using :solr:core:cleanTest :solr:core:test and seed 18592D0C, preserving separate fresh XML and logs. Controls must pass; the explicit test must compile, execute and fail specifically at the first assertion because the output is 'apple ' rather than 'apple pear orange'. Record actual response, counts, skip counts, exit codes and assertion; a setup failure, compilation failure, missing field, unrelated assertion or unexpected pass is not fail-before proof. Never push the overlay.",
+    "Positive fixed head: run ./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.schema.TestSortableTextField --tests org.apache.solr.response.TestRetrieveFieldsOptimizer --tests org.apache.solr.schema.TestUseDocValuesAsStored --tests org.apache.solr.schema.DocValuesTest --tests org.apache.solr.schema.DocValuesMultiTest -Ptests.seed=18592D0C. Require both new methods to execute and pass, including the full single-field result, the mixed stored+non-stored-DV result, wildcard, stored-only and ordinary string controls. Record fresh per-class XML, actual test counts, failures, errors and skips; classify every skip against required methods.",
+    "Inspect whether normal stored+DocValues StringField optimization and non-stored DocValues selection remain exercised by the named neighboring tests. Record limits: the fix deliberately avoids the all-DocValues optimization for all stored SortableTextField instances and subclasses, even when currently configured without truncation, because historical indexed values may differ. No latency or I/O benchmark is implied.",
+    "Run ./gradlew tidy, verify no tracked changes, run ./gradlew check -x test and record both exit codes and fresh logs. A tracked formatting change invalidates proof for this head; record the diff and hand it back rather than silently changing or pushing the branch.",
+    "Publish the exact-head receipt and evidence pointers for all legs. A green verdict requires the specific final-test fail-before, all required positive tests and controls, tidy and root check; skips, setup failures, unrelated failures or stale heads do not pass. Record that other field-type representations, distributed search, RTG and performance were not established unless actually tested. No public communication."
+  ],
+  "type": "gate",
+  "unfixed_head": "b9aed02ac1cde907a06d04fdbd96568ca38b85a9",
+  "upstream_base": "d8ae2a03785c78840ee8dc8bf7e600f9d7b57d01"
+}
