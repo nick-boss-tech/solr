@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "Receipt records all completed proof and the unrun root check. The executor-stop evidence confirms both host locks are free, no Gradle process remains, all temporary gate worktrees were removed, the clean source checkout was discarded, and free inodes remained at 72.39%.",
+  "id": "solr-18606-pr5314-followup-linux-20261109",
+  "job": "solr-18606-pr5314-followup-linux-20261109",
+  "reason": "Stopped with an incomplete verdict after the live PR #5314 head moved from the assignment-required base to the assigned fork head; the gate guard correctly prevented the root check. No source or PR edits were made by this worker. Release this executor for coordinator reconciliation; any continuation needs a new or revised exact-head gate assignment.",
+  "type": "release"
+}
