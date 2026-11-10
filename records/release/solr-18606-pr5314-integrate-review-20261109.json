@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-nick-shanin",
+  "evidence": "Fork and PR head verified at 672448a49c33a257e7a2f8722c84e823b100199c; final body read-back and local review recorded in solr-18606-pr5314-integrate-review-20261109-report. No build executor started on Windows; stopping this worker. Linux gate executor is separate and remains responsible for its own status.",
+  "id": "solr-18606-pr5314-integrate-review-20261109",
+  "job": "solr-18606-pr5314-integrate-review-20261109",
+  "reason": "User-authorized integration, body update, and local review complete.",
+  "type": "release"
+}
