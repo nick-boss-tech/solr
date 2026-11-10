@@ -1,0 +1,19 @@
+{
+  "fork_branch": "nick-boss-tech/solr:pr-5201-auth-browser-fix",
+  "gate_assignment": "records/assignment/pr-5201-auth-browser-linux-gate-20261110.json",
+  "gate_claim": "records/claim/pr-5201-auth-browser-linux-gate-20261110.json",
+  "gate_final_report": "records/report/pr-5201-auth-browser-linux-gate-20261110-final-20261110.json",
+  "gate_receipt": "records/receipt/pr-5201-auth-browser-linux-gate-20261110-receipt.json",
+  "gate_release": "records/release/pr-5201-auth-browser-linux-gate-20261110.json",
+  "gate_specification": "records/gate/pr-5201-auth-browser-gate-20261110.json",
+  "head": "2d4f255fefec6e455cfdc35e6281769f9e01fba9",
+  "id": "pr-5201-gate-handoff-corrected-20261110",
+  "job": "pr-5201-handoff-correction-windows-20261110",
+  "limitations": "This is a coordination correction, not a test run or a new execution receipt. The earlier addendum remains valid as a historical snapshot; only its status is stale.",
+  "next_action": "Do not resume this released gate or treat the old missing-spec finding as a blocker. Follow the receipt and user-directed stop rule: a new pushed source head and a superseding gate are required before proof resumes.",
+  "snapshot": "cf3bf84fa6d929347510cb554a1ccd2d4561eef9",
+  "status": "INCOMPLETE; not a passing gate. Linux focused explorer test timed out before issuing the API request. Tidy exited zero but removed the still-referenced scalar-api-reference version entry; the operator stopped per user direction and restored the assigned worktree. Root check, fail-before, packaged production-CSP browser proof and credential-boundary proof remain incomplete. See the actual receipt for all results and execution evidence.",
+  "summary": "CORRECTED HANDOFF: The detailed PR 5201 Linux gate specification exists. Any earlier statement that the gate specification could not be found is invalid. The addendum’s unclaimed/no-proof status described an older snapshot and is superseded by the subsequent claim, incomplete receipt, final report and release.",
+  "supersedes_for_current_status": "records/report/pr-5201-auth-browser-linux-gate-20261110-addendum-20261110.json",
+  "type": "report"
+}
