@@ -1,0 +1,7 @@
+{
+  "id": "solr-18592-sortable-dv-fix-windows-20261110",
+  "job": "solr-18592-sortable-dv-fix-windows-20261110",
+  "owner": "windows-codex-nick-shanin",
+  "scope": "Implement and push the narrow stored SortableTextField fix, retaining the proven reproduction and requesting an independent Linux gate.",
+  "type": "claim"
+}
