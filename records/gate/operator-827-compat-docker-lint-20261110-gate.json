@@ -1,0 +1,16 @@
+{
+  "base": "701be62d578878bf571f732f4b4bb9586b868d53",
+  "environment": "Isolated clean Linux checkout, Go 1.27, Helm, a working Docker engine, and repository dependencies; record actual versions and execution conditions",
+  "head": "2f50da7dc5b11dbfabacd567ca7740ccf70c2dd7",
+  "id": "operator-827-compat-docker-lint-20261110-gate",
+  "job": "operator-827-compat-docker-lint-20261110",
+  "prior_receipt": "records/receipt/operator-827-compat-linux-20261110-receipt.json",
+  "requirements": [
+    "Verify the remote branch head, commit parent and clean checkout. Do not change, commit, or push source.",
+    "Run make lint on the exact head with Docker available. Capture the complete log, exit code and individual results, particularly the ArtifactHub and documentation checks that the prior receipt could not complete. Record warnings and any generated or formatting changes; if the working tree changes, do not claim the checked-in head passed unchanged.",
+    "Confirm the branch remains at the required head and the checkout is clean after lint; publish an exact-head receipt including all results and limitations. Mark the gate incomplete or failed if a required step is skipped or fails.",
+    "The earlier focused tests, unit tests and fail-before proof are in the named prior receipt. This successor only covers missing lint; it does not establish KinD or real-cluster end-to-end proof."
+  ],
+  "source": "nick-boss-tech/solr-operator:pr-827-compatibility-followup",
+  "type": "gate"
+}
