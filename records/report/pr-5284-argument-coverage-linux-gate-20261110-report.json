@@ -1,0 +1,7 @@
+{
+  "id": "pr-5284-argument-coverage-linux-gate-20261110-report",
+  "job": "pr-5284-argument-coverage-linux-gate-20261110",
+  "status": "failed: root check fails on the new test's forbidden reflection; coverage legs themselves pass",
+  "summary": "At b01220cbb66e the new testBodyParametersReachOperation passes and both previously surviving mutations are now detected by assertion (maxAtOnce expected 2, was 99; maxWaitSeconds expected 30, was 999). Tidy is clean and the Error Prone compile passes. The gate still FAILS because root check -x test fails at :solr:core:forbiddenApisTest: the new test calls AccessibleObject.setAccessible at RebalanceLeadersAPITest.java:104-106, which the project's forbidden-API rules ban. The branch needs a non-reflection observation route and a successor gate. The @Nightly testRebalanceLeaders was skipped, as in r2. See the receipt for counts, diffs, and evidence.",
+  "type": "report"
+}

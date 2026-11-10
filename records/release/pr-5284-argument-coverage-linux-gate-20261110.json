@@ -1,0 +1,7 @@
+{
+  "id": "pr-5284-argument-coverage-linux-gate-20261110",
+  "job": "pr-5284-argument-coverage-linux-gate-20261110",
+  "owner": "phone-agent",
+  "status": "released: executor stopped; all legs finished at the gated head including the rerun maxwait mutation, no Gradle process remains from this run",
+  "type": "release"
+}
