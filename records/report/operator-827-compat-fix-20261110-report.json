@@ -1,0 +1,12 @@
+{
+  "actor": "codex-windows-operator-fix",
+  "base": "701be62d578878bf571f732f4b4bb9586b868d53",
+  "head": "2f50da7dc5b11dbfabacd567ca7740ccf70c2dd7",
+  "id": "operator-827-compat-fix-20261110-report",
+  "job": "operator-827-compat-fix-20261110",
+  "limits": "Custom images can contain any Solr version; image tags do not establish their contents. The review and patch need maintainer judgment. No PR comment or contributor-branch modification.",
+  "proof": "No builds or tests run on Windows. git diff --check passed. Linux gate job records/assignment/operator-827-compat-linux-20261110.json and records/gate/operator-827-compat-linux-20261110-gate.json require focused tests, old-head fail-before, full unit and lint checks. KinD proof needs a Docker/KinD-capable host and is not included in those results.",
+  "source": "https://github.com/nick-boss-tech/solr-operator/tree/pr-827-compatibility-followup",
+  "summary": "Implemented a proposed PR 827 follow-up: allow independently versioned custom exporter images while retaining official-image and referenced-cloud guards; refresh observed SolrCloud status while an unsupported tag prevents resource reconciliation; add regressions and update upgrade notes. This is untested and is not offered as merge-ready.",
+  "type": "report"
+}
