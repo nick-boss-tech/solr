@@ -1,0 +1,22 @@
+{
+  "comparison_receipt": "records/receipt/solr-18630-pr5313-mixed-precedence-probe-20261109-receipt.json",
+  "contributor_head": "358f13d9fdfaed260143a51100cd5657a582d562",
+  "host": "Linux gate host capable of all named tests, startup probes, tidy and root check",
+  "id": "solr-18630-pr5313-precedence-repair-linux-gate-20261110",
+  "implementation_job": "solr-18630-pr5313-precedence-repair-windows-20261110",
+  "job": "solr-18630-pr5313-precedence-repair-linux-gate-20261110",
+  "pre_pr_base": "b771587e9707c49847d728fd1f3ff259a182692c",
+  "previous_head": "4be1ad602621d2af96565355dce3804ee4744aae",
+  "source_branch": "nick-boss-tech/solr:solr-18630-submit",
+  "source_head": "a4ce0580ad89ad521a5402e383d96c239cea94fd",
+  "successor_of": "pr5313-startup-wait-linux-gate-round2-20261109",
+  "summary": "LINUX TASK: prove the PR 5313 mixed-source system-property precedence repair and all prior startup requirements at the new exact fork head.",
+  "tags": [
+    "linux",
+    "gate",
+    "solr-18630",
+    "pr-5313",
+    "precedence"
+  ],
+  "type": "assignment"
+}
