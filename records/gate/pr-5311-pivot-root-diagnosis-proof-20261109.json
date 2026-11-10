@@ -1,0 +1,21 @@
+{
+  "acceptance": "Overall exact-head proof is complete only when the original receipt's tidy, 20 focused tests and fail-before legs remain valid and this successor reports the complete unexcluded root check passing after a documented diagnosis or correction. A reproduced setup failure, skipped Antora, unexplained retry, timeout, or different head is not a green gate. State execution conditions clearly. No live-server integration is implied by the prior constructed-response test.",
+  "branch": "nick-boss-tech/solr:pr-5311-pivot-duplicate-keys",
+  "commands": [
+    "After diagnosing and resolving the failure, run ./gradlew check -x test without excluding required tasks; capture full command, exit status, logs and conditions.",
+    "Require a clean tracked checkout, git diff --check, and final fork head equal to b8f10c9e3ea04746ee5f823e57fd9484426b448d."
+  ],
+  "contributor_parent": "cddb3445e81e31e662d6c8c3676c64d11f0158e3",
+  "environment": "Linux host with a clean full checkout, JDK 21, appropriate build locks, and sufficient resources. Record host, tool versions, timestamps, relevant sanitized environment, command exits, logs, evidence paths and cleanup.",
+  "head": "b8f10c9e3ea04746ee5f823e57fd9484426b448d",
+  "id": "pr-5311-pivot-root-diagnosis-proof-20261109",
+  "investigation": "Before retrying the full root check, diagnose the prior failure: inspect retained root-check output and the Antora Gradle task and bundled Node/npm setup; capture relevant redacted npm/Antora diagnostics and environment conditions, including whether NODE_ENV is set, network/proxy availability and dependency installation state. Do not print or publish credential or proxy secrets. If needed, reproduce the specific failing Antora task with --info and --stacktrace and retain logs. Distinguish network, host setup and patch failures using evidence; do not assume a cause from the npx exit alone. Record any correction and its rationale. If diagnosis or correction is unavailable, report the leg incomplete or failed; do not silently retry, exclude Antora, or claim success.",
+  "job": "pr-5311-pivot-root-diagnosis-20261109",
+  "preflight": "Claim this canonical job, read the prior gate, receipt, release and evidence. Verify prior executor stopped and host locks free. Refresh PR discussion and fork ref, fetch a clean task-specific full checkout at the specified head, verify parent ancestry and record environment. Stop and reconcile if either head changes. Do not alter contributor branch or run on Windows.",
+  "previous_gate": "records/gate/pr-5311-pivot-linux-proof-20261109.json",
+  "previous_receipt": "records/receipt/pr-5311-pivot-linux-gate-20261109-receipt.json",
+  "prior_evidence": "The preceding exact-head receipt and SHA-256-verified archive report tidy clean, 20 passing SolrJ tests, and the intended fail-before assertion. The required root check failed at :solr:solr-ref-guide:buildLocalAntoraSite because bundled npx exited 1; the captured root-check driver log has no deeper cause. This is a failed leg, not a pass. Preserve and link this receipt; do not redo passing legs unless the head changes or investigation shows them invalid.",
+  "receipt": "Publish a v2 receipt and report for this successor with diagnosis, each action and result, all root-check logs/evidence, final head, limitations and explicit link to the previous receipt. No public PR or JIRA write is authorized by this job.",
+  "repair": "If source or formatting changes are needed, stop and hand back; any new source head requires its own complete exact-head gate. Investigate new failures before further retries.",
+  "type": "gate"
+}
