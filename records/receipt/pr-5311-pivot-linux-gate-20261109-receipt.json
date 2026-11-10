@@ -1,0 +1,213 @@
+{
+  "environment": {
+    "architecture": "x86_64",
+    "build_locks": [
+      "/workspace/tools/.gradle-phone-agent-2.lock",
+      "/workspace/tools/.gradle-0609f7968656.lock"
+    ],
+    "captured_at_utc": "2026-11-10T02:12:59+00:00",
+    "disk_free_bytes": 54163795968,
+    "docker": "not used or installed; Docker-dependent proof, if any, remains unrun",
+    "fail_before_only_overlay": "solr/solrj/src/java/org/apache/solr/client/solrj/response/QueryResponse.java",
+    "fail_before_worktree": "/workspace/worktrees/pr-5311-pivot-fail-before-20261109",
+    "gradle_user_home": "/workspace/gradle-home",
+    "gradle_wrapper_distribution": "9.7.0",
+    "host_id": "phone-agent-2",
+    "hostname": "0609f7968656",
+    "inode_available": 1350674,
+    "inode_available_percent": 72.3,
+    "inode_total": 1868096,
+    "java_home": "/usr/lib/jvm/java-21-openjdk-amd64",
+    "java_version": "OpenJDK 21.0.12.1",
+    "platform": "Linux-6.18.38+-x86_64-with-glibc2.39",
+    "positive_head": "b8f10c9e3ea04746ee5f823e57fd9484426b448d",
+    "positive_worktree": "/workspace/worktrees/pr-5311-pivot-linux-gate-20261109",
+    "processors": 8,
+    "seed": "5311A11C0FFEE",
+    "windows_cygwin": "not substituted; this assignment is Linux-only"
+  },
+  "evidence": [
+    {
+      "archive_bytes": 74838,
+      "archive_sha256": "213f97933f4329596469835cc3638900ef3638b803c4cc07b0a192155fdb280b",
+      "record": "records/evidence/pr-5311-pivot-linux-gate-20261109-evidence.json",
+      "record_sha256": "1ffd165753d3f1667fc60631642b4aaee43883cb517cd4080c915e83723bea8a"
+    }
+  ],
+  "gate": "pr-5311-pivot-linux-proof-20261109",
+  "head": "b8f10c9e3ea04746ee5f823e57fd9484426b448d",
+  "id": "pr-5311-pivot-linux-gate-20261109-receipt",
+  "job": "pr-5311-pivot-linux-gate-20261109",
+  "limitations": [
+    "Docker-dependent proof unrun; no Docker used or installed.",
+    "No Windows/Cygwin proof assigned or claimed.",
+    "No server integration test; repeated-key behavior was exercised at QueryResponse boundary.",
+    "Root check npx/Antora failure is a real failed required leg, not a pass or a skip."
+  ],
+  "proof_legs": [
+    {
+      "command": "./gradlew tidy",
+      "exit_code": 0,
+      "git_diff_check_exit_code": 0,
+      "logs": [
+        "positive/tidy.driver.log",
+        "positive/tidy.monitor.log"
+      ],
+      "name": "tidy",
+      "status": "passed",
+      "timing": {
+        "end_utc": "2026-11-10T02:14:35+00:00",
+        "runner_exit_code": 0,
+        "start_utc": "2026-11-10T02:13:20+00:00"
+      },
+      "tracked_changes": false
+    },
+    {
+      "command": "./gradlew :solr:solrj:cleanTest :solr:solrj:test --tests org.apache.solr.client.solrj.response.QueryResponseTest --tests org.apache.solr.client.solrj.response.QueryResponseSectionParityTest --tests org.apache.solr.client.solrj.response.QueryResponseJsonParserIntegrationTest --tests org.apache.solr.client.solrj.request.schema.SchemaRequestBodyTest -Ptests.seed=5311A11C0FFEE --rerun-tasks",
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "junit_summary": "positive/named-solrj-suites.junit-summary.json",
+      "logs": [
+        "positive/named-solrj-suites.driver.log",
+        "positive/named-solrj-suites.monitor.log"
+      ],
+      "name": "named_solrj_suites",
+      "skipped": 0,
+      "status": "passed",
+      "suites": [
+        {
+          "errors": 0,
+          "failures": 0,
+          "name": "org.apache.solr.client.solrj.response.QueryResponseTest",
+          "path": "positive/junit/TEST-org.apache.solr.client.solrj.response.QueryResponseTest.xml",
+          "sha256": "9593eb0d9a0d3b80d93a50847f05ad0d6daa4c8ab5f755d092dba59216206e65",
+          "skipped": 0,
+          "tests": 7,
+          "xml": "TEST-org.apache.solr.client.solrj.response.QueryResponseTest.xml"
+        },
+        {
+          "errors": 0,
+          "failures": 0,
+          "name": "org.apache.solr.client.solrj.response.QueryResponseSectionParityTest",
+          "path": "positive/junit/TEST-org.apache.solr.client.solrj.response.QueryResponseSectionParityTest.xml",
+          "sha256": "ea370ddfcf87066a516093371f36d1f72870e6ad918b15a9740a85ed7cbefdab",
+          "skipped": 0,
+          "tests": 8,
+          "xml": "TEST-org.apache.solr.client.solrj.response.QueryResponseSectionParityTest.xml"
+        },
+        {
+          "errors": 0,
+          "failures": 0,
+          "name": "org.apache.solr.client.solrj.response.QueryResponseJsonParserIntegrationTest",
+          "path": "positive/junit/TEST-org.apache.solr.client.solrj.response.QueryResponseJsonParserIntegrationTest.xml",
+          "sha256": "95837af2bc221bf8006de8e80a53850d952e31963ee5022905f78a52eec8d803",
+          "skipped": 0,
+          "tests": 2,
+          "xml": "TEST-org.apache.solr.client.solrj.response.QueryResponseJsonParserIntegrationTest.xml"
+        },
+        {
+          "errors": 0,
+          "failures": 0,
+          "name": "org.apache.solr.client.solrj.request.schema.SchemaRequestBodyTest",
+          "path": "positive/junit/TEST-org.apache.solr.client.solrj.request.schema.SchemaRequestBodyTest.xml",
+          "sha256": "79d6906623525eaf232a3042aa6a49c3fdbac87fe03863c62ac0f79d6a2e6673",
+          "skipped": 0,
+          "tests": 3,
+          "xml": "TEST-org.apache.solr.client.solrj.request.schema.SchemaRequestBodyTest.xml"
+        }
+      ],
+      "tests": 20,
+      "timing": {
+        "end_utc": "2026-11-10T02:15:55+00:00",
+        "runner_exit_code": 0,
+        "start_utc": "2026-11-10T02:14:55+00:00"
+      }
+    },
+    {
+      "command": "./gradlew check -x test",
+      "exit_code": 1,
+      "failure": "The bundled npx subprocess exited 1. The Gradle output offered no deeper npm/Antora cause; not retried.",
+      "failure_task": ":solr:solr-ref-guide:buildLocalAntoraSite",
+      "logs": [
+        "positive/root-check.driver.log",
+        "positive/root-check.monitor.log"
+      ],
+      "name": "root_check",
+      "status": "failed",
+      "timing": {
+        "end_utc": "2026-11-10T02:18:46+00:00",
+        "runner_exit_code": 1,
+        "start_utc": "2026-11-10T02:16:21+00:00"
+      }
+    },
+    {
+      "command": "./gradlew :solr:solrj:cleanTest :solr:solrj:test --tests org.apache.solr.client.solrj.response.QueryResponseTest.testPivotFacetsWithRepeatedKeys -Ptests.seed=5311A11C0FFEE --rerun-tasks",
+      "errors": 0,
+      "failure_line": 72,
+      "failure_message": "java.lang.AssertionError: expected: org.apache.solr.common.util.SimpleOrderedMap<{same=[cat:electronics [3] null], same=[manu:example [2] null]}> but was: org.apache.solr.common.util.SimpleOrderedMap<{same=[cat:electronics [3] null], same=[manu:example [2] null]}>",
+      "failure_source_line": "assertEquals(pivots, pivots.clone());",
+      "failure_type": "java.lang.AssertionError",
+      "failures": 1,
+      "gradle_exit_code": 1,
+      "head": "b8f10c9e3ea04746ee5f823e57fd9484426b448d",
+      "junit_sha256": "50bbbaecc5499eda374b30776fc5830472a93f6a14806a522e1abd100bbb296c",
+      "logs": [
+        "fail-before/repeated-pivot-key-fail-before.driver.log",
+        "fail-before/repeated-pivot-key-fail-before.monitor.log",
+        "fail-before/junit/TEST-org.apache.solr.client.solrj.response.QueryResponseTest.xml"
+      ],
+      "name": "fail_before",
+      "overlay_sha256": "2df9191f1b4b8a62ed342127a35afd5f59bbd402dff22a018adfd47a8b69b5b6",
+      "parent_overlay": "solr/solrj/src/java/org/apache/solr/client/solrj/response/QueryResponse.java",
+      "skipped": 0,
+      "status": "reproduced",
+      "test_case": "testPivotFacetsWithRepeatedKeys",
+      "tests": 1,
+      "timing": {
+        "end_utc": "2026-11-10T02:21:10+00:00",
+        "runner_exit_code": 1,
+        "start_utc": "2026-11-10T02:19:55+00:00"
+      }
+    },
+    {
+      "name": "docker_dependent_proof",
+      "reason": "No Docker was used or installed; any Docker-dependent proof remains unrun.",
+      "status": "unrun"
+    },
+    {
+      "name": "windows_cygwin_proof",
+      "reason": "Linux-only gate assignment; no Linux substitution for Windows/Cygwin.",
+      "status": "not_assigned_not_run"
+    }
+  ],
+  "resource_and_cleanup": {
+    "active_gradle_solr_zookeeper_processes": [],
+    "both_host_locks_free": true,
+    "checked_at_utc": "2026-11-10T02:23:40+00:00",
+    "current_disk_free_bytes": 54474293248,
+    "current_free_inodes_percent": 73.11,
+    "fail_before_worktree_removed": true,
+    "final_worktree_list": "/workspace/solr-board  266e790dd6 [coordination-v2]",
+    "monitored_min_free_inodes_percent": 69.43,
+    "positive_worktree_removed": true,
+    "source_diff": "source.diff.patch",
+    "source_or_pr_changes_by_gate_worker": false
+  },
+  "source": {
+    "assignment_and_checkout_match": true,
+    "contributor_parent": "cddb3445e81e31e662d6c8c3676c64d11f0158e3",
+    "final_fork_ref_sha": "b8f10c9e3ea04746ee5f823e57fd9484426b448d",
+    "final_pr_head_sha": "cddb3445e81e31e662d6c8c3676c64d11f0158e3",
+    "fork_branch": "nick-boss-tech/solr:pr-5311-pivot-duplicate-keys",
+    "pr": "https://github.com/apache/solr/pull/5311",
+    "pr_base": "b771587e9707c49847d728fd1f3ff259a182692c",
+    "pr_head": "cddb3445e81e31e662d6c8c3676c64d11f0158e3",
+    "pr_or_source_changes_by_gate_worker": false,
+    "pr_state": "open",
+    "tested_head": "b8f10c9e3ea04746ee5f823e57fd9484426b448d"
+  },
+  "summary": "Tidy and the four selected SolrJ classes passed (20 tests, 0 failures/errors/skips); fail-before reproduced at the intended final clone-equality assertion. The required root check failed at buildLocalAntoraSite because bundled npx exited 1. Overall gate failed.",
+  "type": "receipt",
+  "verdict": "failed"
+}
