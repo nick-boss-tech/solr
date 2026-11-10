@@ -1,0 +1,17 @@
+{
+  "base_head": "358f13d9fdfaed260143a51100cd5657a582d562",
+  "environment": "Clean Linux checkout at exact head, project-supported JDK. Run fresh isolated JVMs; capture executable probe source, command lines, output, exit codes, source head and evidence hashes. Do not alter the pushed branch.",
+  "head": "4be1ad602621d2af96565355dce3804ee4744aae",
+  "id": "pr5313-startup-boundary-proof-20261109",
+  "job": "pr5313-startup-boundary-proof-20261109",
+  "prior_receipt": "records/receipt/pr5313-startup-wait-linux-gate-round2-20261109-receipt.json",
+  "purpose": "Complete the two named proof requirements that the earlier passed receipt does not independently establish; it does not invalidate its completed test and build results.",
+  "requirements": [
+    "Inspect the prior evidence bundle's probes/StartupWaitProbe.java: it pre-initializes EnvUtils and invokes the helper before calling NodeConfig.loadNodeConfig. In fresh JVMs, arrange -DwaitForZk=1 and SOLR_WAIT_FOR_ZK=1 before application start in separate runs, provide zkHost directly in node properties, and call the real NodeConfig.loadNodeConfig without pre-initializing EnvUtils or invoking the timeout helper. Record class initialization ordering and observe that each legacy setting reaches the actual startup client with the expected wait. Include a clean modern-property precedence case where practical. A probe that itself calls EnvUtils or the helper before startup does not establish this leg.",
+    "Independently verify both the connection and session timeout delivered to the actual temporary ZooKeeper client for the absent-startup-property 30001 ms fallback and an explicit seconds override. The previous probe asserted the helper value and timed a black-hole connection; that alone does not independently observe the configured session timeout. One possible non-mutating approach is to inspect the outgoing ZooKeeper ConnectRequest session-timeout field at a local accepting peer while separately measuring connection wait; another is equivalent instrumentation that observes the real production builder/client fields. Record method and exact observed values for both timeouts. If the protocol or host prevents a direct observation, report the leg incomplete with the precise limitation rather than inferring it from elapsed time.",
+    "Keep the previous receipt's successful exact-head tests, tidy, fail-before and root-check results distinct; no need to rerun those legs unless investigation or a source change invalidates them. Do not describe this follow-up as passing if any required probe is unrun or ambiguous.",
+    "Publish a structured receipt and evidence with exact source head, runnable probes, outputs, limitations and executor-stop evidence; do not modify the source branch or post a public comment."
+  ],
+  "source": "https://github.com/nick-boss-tech/solr/tree/solr-18630-submit",
+  "type": "gate"
+}
