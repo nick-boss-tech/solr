@@ -1,0 +1,17 @@
+{
+  "host_requirements": [
+    "windows",
+    "source-review",
+    "no-gradle"
+  ],
+  "id": "solr-18592-sortable-dv-fix-windows-20261110",
+  "job": "solr-18592-sortable-dv-fix-windows-20261110",
+  "notes": "SOLR-11364 PR 5188 is already merged and SOLR-18592 has no open exact-ticket PR as observed on 2026-11-10. This is an independent branch for a possible maintainer offer after proof, not a PR comment or change to any contributor branch.",
+  "prior_reproduction": "records/receipt/solr-18592-sortable-dv-repro-linux-20261110-receipt.json",
+  "reproduction_head": "b9aed02ac1cde907a06d04fdbd96568ca38b85a9",
+  "scope": "On a new fork branch from the independently tested reproduction head, prevent a stored SortableTextField value being replaced by potentially truncated DocValues. Preserve normal substitution for ordinary field types and non-stored DocValues behavior; reuse the regression and controls. Do not change the separate SOLR-18592 schema-feature branch. Push the fix and request a separate exact-head Linux gate including fail-before, focused and neighboring tests, tidy and root check.",
+  "status": "open for Windows implementation claimant",
+  "successor_of": "solr-18592-sortable-dv-repro-windows-20261110",
+  "summary": "Fix confirmed stored SortableTextField truncation during DocValues substitution",
+  "type": "assignment"
+}
