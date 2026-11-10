@@ -1,0 +1,10 @@
+{
+  "evidence": "Local evidence at research/branch-reviews/2026-11-09-pr-batch/evidence/PR-5311; fetched PR head and final live PR read matched. Review worker completed source analysis; no Linux executor was started.",
+  "head": "cddb3445e81e31e662d6c8c3676c64d11f0158e3",
+  "id": "pr-5311-review-20261109-result",
+  "job": "pr-5311-review-20261109",
+  "review_record": "C:/Users/shaninna/dev/Solr-issues/research/branch-reviews/2026-11-09-pr-batch/PR-5311-review.md",
+  "source": "https://github.com/apache/solr/pull/5311",
+  "summary": "Windows source review found P2: pivot output keys can repeat, so returning a SimpleOrderedMap changes duplicate-list equality and Map behavior. The PR's unqualified javabin compatibility claim also needs narrowing. No build or tests run; no public comment or patch.",
+  "type": "report"
+}
