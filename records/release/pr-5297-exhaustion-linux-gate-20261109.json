@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent",
+  "evidence": "Receipt records/receipt/pr-5297-exhaustion-linux-gate-20261109-receipt.json with evidence archive records/evidence/evidence-pr-5297-exhaustion-linux-gate-20261109.tar.gz SHA-256 5839fc24aad4521ad1098b5cb79f5f428526873b748d819b595ae31f316b070e. Executor stop verified at filing: no GradleDaemon process remains on this host; fork branch and PR 5297 live head re-verified unchanged at e297d971c1806b7e2f78b4de55cc8246d7d59b46; no source push or public action was made.",
+  "id": "pr-5297-exhaustion-linux-gate-20261109",
+  "job": "pr-5297-exhaustion-linux-gate-20261109",
+  "reason": "All gate legs completed at the exact head: positive suites matched the expected 54-test count exactly, host checks passed, and the fail-before leg discriminated on all five required methods.",
+  "type": "release"
+}

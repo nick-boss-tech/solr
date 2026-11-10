@@ -1,0 +1,7 @@
+{
+  "id": "pr-5297-exhaustion-linux-gate-20261109-report",
+  "job": "pr-5297-exhaustion-linux-gate-20261109",
+  "status": "passed at the exact head",
+  "summary": "The PR 5297 exhaustion gate passed at e297d971c1806b7e2f78b4de55cc8246d7d59b46: exactly 54 tests across the seven required classes with zero failures, errors, or skips at seed 5B407A2D9C1310E7; tidy clean; Error Prone compile and root check passed; and all five fail-before methods failed by assertion at the base with only the two test files overlaid. Detail in the receipt.",
+  "type": "report"
+}
