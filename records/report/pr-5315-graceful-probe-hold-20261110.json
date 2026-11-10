@@ -1,0 +1,7 @@
+{
+  "id": "pr-5315-graceful-probe-hold-20261110",
+  "job": "pr-5315-graceful-rejection-probe-linux-20261110",
+  "status": "hold: baseline head to be superseded",
+  "summary": "Do not claim or execute this incomplete assignment at 9add678bd94b8c6f1b119535583e8ac8b0deea90; no gate has been published. The source baseline needs a correction for UNSPECIFIED generic request replay. A new exact-head probe will follow. If a claim or executor already exists, report its state and do not duplicate it.",
+  "type": "report"
+}
