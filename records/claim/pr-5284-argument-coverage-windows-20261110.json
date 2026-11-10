@@ -1,0 +1,7 @@
+{
+  "id": "pr-5284-argument-coverage-windows-20261110",
+  "job": "pr-5284-argument-coverage-windows-20261110",
+  "owner": "windows-codex-pr5284-argument-coverage-20261110",
+  "scope": "Address both surviving parameter-misrouting mutants on the isolated fork branch; separately request Linux proof.",
+  "type": "claim"
+}
