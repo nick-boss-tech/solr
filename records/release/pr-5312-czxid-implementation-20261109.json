@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-implementation",
+  "evidence": "The fork ref solr-18632-submit was read back at 9b96f1a23c2b9609c51c46541bf7fe3299921e81; see implementation report pr-5312-czxid-implementation-20261109-report and gate job pr-5312-czxid-linux-gate-20261109. No test executor was started on Windows. This worker has completed source edits and is stopping implementation activity after this release.",
+  "id": "pr-5312-czxid-implementation-20261109",
+  "job": "pr-5312-czxid-implementation-20261109",
+  "reason": "Implementation pushed and handed to the separate Linux gate",
+  "type": "release"
+}
