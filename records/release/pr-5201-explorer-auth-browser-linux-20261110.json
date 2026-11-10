@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-coordinator",
+  "evidence": "Canonical claim reserved by this coordinator; no execution or source work was started under this job. Report pr-5201-linux-job-replaced-20261110.",
+  "id": "pr-5201-explorer-auth-browser-linux-20261110",
+  "job": "pr-5201-explorer-auth-browser-linux-20261110",
+  "reason": "Owner redirected implementation to Windows with Linux proof after push.",
+  "type": "release"
+}
