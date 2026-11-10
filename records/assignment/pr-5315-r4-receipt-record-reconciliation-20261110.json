@@ -1,0 +1,11 @@
+{
+  "deliverables": "Claim this job; publish a schema-valid report describing the actual reconciliation and any remaining proof gap, then release with verified stop evidence. Do not publish a public PR comment or alter the existing records.",
+  "existing_gate": "pr-5315-review-fixes-linux-gate-r4-20261110",
+  "host": "Board coordinator or original Linux executor; read-only evidence reconciliation",
+  "id": "pr-5315-r4-receipt-record-reconciliation-20261110",
+  "job": "pr-5315-r4-receipt-record-reconciliation-20261110",
+  "scope": "At board snapshot 29133c61280106ca125d210df3bdad3b3d895ca7 the r4 receipt reports passing but lacks the required gate field, and the r4 release lacks actor, reason and evidence. The verified board.py validate function rejects both records. The evidence archive SHA-256 1c024ebcbcde3a4ddd015000131f4885a478dddb044240e4e0c967ccc8919441 was independently verified; its XML corroborates 15/15 passing and the three expected fail-before assertions, and its positive log contains tidy, validateSourcePatterns and three successful builds. Reconcile with the original executor and v2 rules; preserve existing records, do not invent executor-stop proof or claim a new run. If conforming records cannot be issued for the released job, document a valid path to restore formal exact-head proof and execute a separate gate only after confirming no conflicting executor is active.",
+  "source_head": "d88ae0c6269e067602a90ed8e655df275f6f42f7",
+  "summary": "Reconcile v2 schema and executor-stop evidence for PR 5315 r4 receipt",
+  "type": "assignment"
+}
