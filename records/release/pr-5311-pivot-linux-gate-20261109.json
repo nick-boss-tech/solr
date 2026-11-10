@@ -1,0 +1,24 @@
+{
+  "actor": "phone-agent-2",
+  "cleanup": {
+    "active_gradle_solr_zookeeper_processes": [],
+    "both_host_locks_free": true,
+    "checked_at_utc": "2026-11-10T02:23:40+00:00",
+    "current_disk_free_bytes": 54474293248,
+    "current_free_inodes_percent": 73.11,
+    "fail_before_worktree_removed": true,
+    "final_worktree_list": "/workspace/solr-board  266e790dd6 [coordination-v2]",
+    "monitored_min_free_inodes_percent": 69.43,
+    "positive_worktree_removed": true,
+    "source_diff": "source.diff.patch",
+    "source_or_pr_changes_by_gate_worker": false
+  },
+  "evidence": "records/evidence/pr-5311-pivot-linux-gate-20261109-evidence.json (archive sha256=213f97933f4329596469835cc3638900ef3638b803c4cc07b0a192155fdb280b); records/report/pr-5311-pivot-linux-gate-20261109-report.json (payload sha256=03ee3a5ed719dd48c660962655a4d2ba9b37d1860b97a56635279df4e0d439ed); records/receipt/pr-5311-pivot-linux-gate-20261109-receipt.json (payload sha256=f789127d824dc60b623d0bc0a01d28b5010d537e96a936224029724318ea818d); cleanup.json confirms the executor stopped, both host locks free, no build/Solr processes remain, and disposable worktrees were removed.",
+  "head": "b8f10c9e3ea04746ee5f823e57fd9484426b448d",
+  "id": "pr-5311-pivot-linux-gate-20261109",
+  "job": "pr-5311-pivot-linux-gate-20261109",
+  "reason": "Assigned Linux gate execution is complete. Tidy and the focused SolrJ suites passed, fail-before reproduced at the expected final clone-equality assertion, but the required root check failed at :solr:solr-ref-guide:buildLocalAntoraSite when bundled npx exited 1. This is an operational release of the executor, not a passing gate.",
+  "released_at": "2026-11-10T02:27:41+00:00",
+  "type": "release",
+  "verdict": "failed"
+}
