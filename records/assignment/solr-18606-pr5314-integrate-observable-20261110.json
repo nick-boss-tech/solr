@@ -1,0 +1,13 @@
+{
+  "authorization": "User requested updating the PR head and repairing the comments.",
+  "base": "672448a49c33a257e7a2f8722c84e823b100199c",
+  "head": "5da7243cb75e2f3d2fb7b3557b6e30477dbbf97d",
+  "host": "windows",
+  "id": "solr-18606-pr5314-integrate-observable-20261110",
+  "job": "solr-18606-pr5314-integrate-observable-20261110",
+  "pr": "https://github.com/apache/solr/pull/5314",
+  "receipt": "records/receipt/solr-18606-pr5314-observable-test-linux-r2-20261110-receipt.json",
+  "scope": "Fast-forward only, no code edits, no PR body change.",
+  "summary": "Fast-forward PR 5314 to its proven observable-test follow-up and repair the two review replies to name the PR head.",
+  "type": "assignment"
+}
