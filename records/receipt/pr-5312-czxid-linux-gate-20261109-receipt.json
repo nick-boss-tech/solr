@@ -1,0 +1,167 @@
+{
+  "environment": {
+    "architecture": "x86_64",
+    "build_locks": [
+      "/workspace/tools/.gradle-phone-agent-2.lock",
+      "/workspace/tools/.gradle-0609f7968656.lock"
+    ],
+    "docker": "not used; Docker-dependent proof unrun",
+    "final_disk_free_bytes": 54372401152,
+    "final_free_inode_percent": 72.14,
+    "final_inode_available": 1347653,
+    "final_inode_total": 1868096,
+    "gradle_user_home": "/workspace/gradle-home",
+    "gradle_wrapper_distribution": "9.7.0",
+    "host_id": "phone-agent-2",
+    "hostname": "0609f7968656",
+    "inode_threshold_percent": 15,
+    "java_home": "/usr/lib/jvm/java-21-openjdk-amd64",
+    "java_version": "OpenJDK 21.0.12.1 (2026-08-18)",
+    "monitored_minimum_free_inodes_percent": 70.0,
+    "platform": "Linux-6.18.38+-x86_64-with-glibc2.39",
+    "windows_cygwin": "not assigned or run; Linux was not substituted"
+  },
+  "evidence": [
+    {
+      "archive_bytes": 18689,
+      "archive_sha256": "91af7ca83b343892178034022ed51af6d3af264d41c8e304ee5e3bf7b0f49ca8",
+      "archive_verified_byte_for_byte": true,
+      "record": "records/evidence/pr-5312-czxid-linux-gate-20261109-evidence.json"
+    }
+  ],
+  "gate": "pr-5312-czxid-linux-gate-20261109",
+  "head": "9b96f1a23c2b9609c51c46541bf7fe3299921e81",
+  "id": "pr-5312-czxid-linux-gate-20261109-receipt",
+  "job": "pr-5312-czxid-linux-gate-20261109",
+  "limitations": [
+    "No behavioral test ran; no JUnit XML was produced.",
+    "The fail-before assertion was not reached, so behavioral failure was not reproduced.",
+    "The collision-test setup uses mocked ZooKeeper stats and does not establish a real-time ZooKeeper timestamp-collision integration result.",
+    "No Docker-dependent proof was run; Docker was not used.",
+    "No Windows/Cygwin proof was assigned or run."
+  ],
+  "proof_legs": [
+    {
+      "command": "./gradlew tidy",
+      "exit_code": 0,
+      "log": "positive/tidy.log",
+      "name": "tidy",
+      "runner_metadata": "positive/tidy.log.meta.json",
+      "status": "passed",
+      "tracked_changes": false
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "log": "positive/git-diff-check.log",
+      "name": "git_diff_check",
+      "status": "passed"
+    },
+    {
+      "command": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.util.MultipleManagedSchemasTest -Ptests.seed=18632CAFE",
+      "exit_code": 1,
+      "failure_detail": "Unchecked generic array creation for varargs parameter Pair<String,Stat>[] in Mockito thenReturn at test line 64; javac warnings found and -Werror specified.",
+      "failure_task": ":solr:core:compileTestJava",
+      "junit_xml": [],
+      "logs": [
+        "positive/multiple-managed-schemas.log",
+        "positive/multiple-managed-schemas.log.monitor.jsonl",
+        "positive/multiple-managed-schemas.log.meta.json"
+      ],
+      "name": "multiple_managed_schemas_positive",
+      "status": "blocked_compile_error",
+      "tests_executed": 0,
+      "tests_expected": 3
+    },
+    {
+      "command": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.cloud.api.collections.TestCollectionAPI.testConfigCaching -Ptests.seed=18632CAFE",
+      "exit_code": 1,
+      "failure_detail": "Same compile warning in MultipleManagedSchemasTest.java:64; TestCollectionAPI did not compile or execute.",
+      "failure_task": ":solr:core:compileTestJava",
+      "junit_xml": [],
+      "logs": [
+        "positive/test-config-caching.log",
+        "positive/test-config-caching.log.monitor.jsonl",
+        "positive/test-config-caching.log.meta.json"
+      ],
+      "name": "test_config_caching_positive",
+      "status": "blocked_compile_error",
+      "tests_executed": 0
+    },
+    {
+      "command": "./gradlew check -x test",
+      "exit_code": 1,
+      "failure_detail": "File uses Mockito but has no assumeWorkingMockito() call: MultipleManagedSchemasTest.java.",
+      "failure_task": ":solr:core:validateSourcePatterns",
+      "logs": [
+        "positive/root-check.log",
+        "positive/root-check.log.monitor.jsonl",
+        "positive/root-check.log.meta.json"
+      ],
+      "name": "root_check",
+      "status": "failed"
+    },
+    {
+      "command": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.util.MultipleManagedSchemasTest.testCacheDistinguishesRecreatedZnodesWithSameCreationTime -Ptests.seed=18632CAFE",
+      "exit_code": 1,
+      "failure_task": ":solr:core:compileTestJava",
+      "junit_xml": [],
+      "logs": [
+        "fail-before/exact-seed.log",
+        "fail-before/exact-seed.log.monitor.jsonl",
+        "fail-before/exact-seed.log.meta.json",
+        "fail-before/MultipleManagedSchemasTest.overlay.java"
+      ],
+      "name": "fail_before",
+      "only_changed_path": true,
+      "original_production_files_preserved": true,
+      "overlay_blob": "dab77ceb9e882a50db91c3989e394a842f40b1ca",
+      "overlay_path": "solr/core/src/test/org/apache/solr/util/MultipleManagedSchemasTest.java",
+      "overlay_sha256": "b769f8587af02b7b6c8bf82783cedeb63f28e39c390d06c4521d32c0503e49bc",
+      "status": "blocked_compile_error_not_reproduced",
+      "tests_executed": 0
+    },
+    {
+      "name": "docker_dependent_proof",
+      "reason": "No Docker-dependent proof was run; Docker was not used.",
+      "status": "unrun"
+    },
+    {
+      "name": "windows_cygwin_proof",
+      "reason": "Linux-only gate assignment; no Linux substitution for Windows/Cygwin.",
+      "status": "not_assigned_not_run"
+    }
+  ],
+  "resource_and_cleanup": {
+    "active_gradle_solr_test_processes": [],
+    "both_host_locks_free": true,
+    "fail_before_worktree_removed": true,
+    "final_worktree_list": "/workspace/solr-board at coordination-v2",
+    "gradle_daemons_stopped": 2,
+    "positive_worktree_removed": true,
+    "source_diff": "source.diff.patch",
+    "source_or_pr_changes_by_gate_worker": false
+  },
+  "source": {
+    "assignment_and_checkout_match": true,
+    "contributor_parent": "0848e85fad1290ed604f881abb265b060be3075f",
+    "discussion_snapshot": {
+      "inline_review_comments": 0,
+      "issue_comments": 1,
+      "latest_issue_comment_at": "2026-11-08T08:13:14Z",
+      "reviews": 0
+    },
+    "final_fork_ref_sha": "9b96f1a23c2b9609c51c46541bf7fe3299921e81",
+    "fork_branch": "nick-boss-tech/solr:solr-18632-submit",
+    "pr": "https://github.com/apache/solr/pull/5312",
+    "pr_base": "b771587e9707c49847d728fd1f3ff259a182692c",
+    "pr_head": "0848e85fad1290ed604f881abb265b060be3075f",
+    "pr_or_source_changes_by_gate_worker": false,
+    "pr_state": "open",
+    "tested_head": "9b96f1a23c2b9609c51c46541bf7fe3299921e81",
+    "tree": "4c091e162323ad878371a06999b9fb480c50ef74"
+  },
+  "summary": "Tidy and git diff --check passed cleanly. The full MultipleManagedSchemasTest positive, TestCollectionAPI.testConfigCaching positive, and exact-seed fail-before commands all exited 1 in :solr:core:compileTestJava because MultipleManagedSchemasTest.java:64 emitted an unchecked Mockito thenReturn varargs warning and -Werror promoted it to an error. No tests executed and no JUnit XML was produced. The required root check exited 1 at :solr:core:validateSourcePatterns because the new Mockito test lacks assumeWorkingMockito(). The fail-before behavioral assertion was not reached and was not reproduced.",
+  "type": "receipt",
+  "verdict": "failed"
+}
