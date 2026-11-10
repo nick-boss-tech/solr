@@ -1,0 +1,24 @@
+{
+  "browser_environment": "Google Chrome 155.0.8059.39; chromedriver absent from PATH at claim time.",
+  "claimed_at": "2026-11-10T21:44:13Z",
+  "execution_host": "0609f7968656",
+  "host_id": "phone-agent-2",
+  "id": "pr-5201-auth-browser-linux-gate-20261110",
+  "jdk_identity": [
+    "openjdk version \"21.0.12.1\" 2026-08-18",
+    "OpenJDK Runtime Environment (build 21.0.12.1+1-24.04.4-Ubuntu)",
+    "OpenJDK 64-Bit Server VM (build 21.0.12.1+1-24.04.4-Ubuntu, mixed mode, sharing)"
+  ],
+  "job": "pr-5201-auth-browser-linux-gate-20261110",
+  "logs": "/workspace/gates/logs/phone-agent-2/pr-5201-auth-browser-linux-gate-20261110",
+  "node_environment": "System Node v24.22.1; assigned revision pins Node.js 22.18.0 through Gradle's Node plugin.",
+  "os": "Linux 6.18.38+ x86_64 GNU/Linux",
+  "owner": "phone-agent-2",
+  "reviewed_pr_head": "3f9faa9e9861ce28f3ede3f4305bd91b6e297463",
+  "runner": "Gradle wrapper; each Gradle invocation must hold both mandatory host flock locks.",
+  "scope": "Exact-head Linux gate only; no source branch, fork branch, public PR metadata, or public comment changes.",
+  "source_branch": "nick-boss-tech/solr:pr-5201-auth-browser-fix",
+  "source_head": "2d4f255fefec6e455cfdc35e6281769f9e01fba9",
+  "type": "claim",
+  "worktree": "/workspace/worktrees/pr-5201-auth-browser-linux-gate-20261110"
+}
