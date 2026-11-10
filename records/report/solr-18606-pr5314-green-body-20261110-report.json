@@ -1,0 +1,15 @@
+{
+  "evidence": "Independent read-back 2026-11-10T07:30:05Z matched scratch draft exactly; PR head unchanged and no comments or reviews. AI disclosure retained.",
+  "head": "672448a49c33a257e7a2f8722c84e823b100199c",
+  "id": "solr-18606-pr5314-green-body-20261110-report",
+  "job": "solr-18606-pr5314-green-body-20261110",
+  "pr": "https://github.com/apache/solr/pull/5314",
+  "proof": "47 tests passed, two fail-before and three mutation checks produced expected failures; tidy and root check passed at the same head. Root check retried after host restart using host CA truststore; Docker-dependent checks unrun.",
+  "receipts": [
+    "records/receipt/solr-18606-pr5314-followup-linux-20261109-receipt.json",
+    "records/receipt/solr-18606-pr5314-root-check-linux-20261110-receipt.json"
+  ],
+  "review": "research/branch-reviews/2026-11-10-pr5314-followup/PR-5314-review.md",
+  "summary": "Updated the authorized PR description with reconciled exact-head Linux proof and verified the stored body.",
+  "type": "report"
+}
