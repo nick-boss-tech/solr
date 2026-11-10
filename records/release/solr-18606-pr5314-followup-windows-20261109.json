@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-nick-shanin",
+  "evidence": "Fork branch verified at 672448a49c33a257e7a2f8722c84e823b100199c; PR remains at 9d4dc33e5d829d2bc9d1304054b5af6746879b34; implementation report and gate solr-18606-pr5314-followup-linux-20261109 published. No build executor started on Windows; implementation worker stops.",
+  "id": "solr-18606-pr5314-followup-windows-20261109",
+  "job": "solr-18606-pr5314-followup-windows-20261109",
+  "reason": "Follow-up pushed and exact-head Linux gate handed off.",
+  "type": "release"
+}
