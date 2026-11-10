@@ -1,0 +1,97 @@
+{
+  "cleanup": "Disposable clone removed after filing; probe JVMs exited on their own; Gradle daemons stopped; test-queue lock verified free.",
+  "coverage_limits": [
+    "Only the two named evidence gaps were closed. The round-two receipt's successful exact-head suites, tidy, fail-before and root-check results stand as recorded there and were not rerun.",
+    "Elapsed times are the wall time of the whole loadNodeConfig call, which includes roughly 1.1 to 1.2 seconds of first-touch class initialization inside the call on this host; the configured timeout governs the connection wait portion, corroborated by the client constructor timeout message observed during diagnosis and by the round-two probe timings.",
+    "The wire observation reads the client's initial ConnectRequest only; no server response was sent, so no negotiated session timeout exists in these runs. The observed value is the timeout the client itself delivered, which is what the gate required.",
+    "Linux only; no Windows or Cygwin claim. No Docker was used. No source branch or public PR content was changed."
+  ],
+  "evidence": {
+    "artifact": "pr5313-startup-boundary-proof-20261109-evidence.tar.gz",
+    "bytes": 331196,
+    "location": "records/evidence/pr5313-startup-boundary-proof-20261109-evidence.tar.gz",
+    "record_id": "pr5313-startup-boundary-proof-20261109-evidence",
+    "sha256": "70f200241d47e9e5bc58575ab5f29f63d2b8b90116e93d8140cdd4b50034bcc7"
+  },
+  "gate": "pr5313-startup-boundary-proof-20261109",
+  "head": "4be1ad602621d2af96565355dce3804ee4744aae",
+  "host_note": "Bare JVMs on this host need -Djava.net.preferIPv4Stack=true for loopback networking: without it, loopback connects from a JVM are hairpinned through the sandbox fabric and never reach a local listener (zero accepted connections while the client waits out its full timeout). All probe JVMs were launched with that flag; every Gradle JVM on this host already runs with it via the build launcher.",
+  "id": "pr5313-startup-boundary-proof-20261109-receipt",
+  "job": "pr5313-startup-boundary-proof-20261109",
+  "observed_at_utc": "2026-11-10T02:41:13Z",
+  "proof_legs": [
+    {
+      "cases": [
+        {
+          "accepted_connections": 1,
+          "class_init_order": "NodeConfig initialized at 0.133s, EnvUtils at 0.909s (log line 4394, after the probe marker at line 1553), SolrZkClient at 0.965s; all by thread main",
+          "elapsed_ms": 2247,
+          "expected_wait_ms": 1000,
+          "input": "-DwaitForZk=1",
+          "name": "10-order-sysprop",
+          "result": "PASS"
+        },
+        {
+          "accepted_connections": 1,
+          "class_init_order": "NodeConfig initialized at 0.134s, EnvUtils at 1.249s (log line 4394, after the probe marker at line 1553), SolrZkClient at 1.333s; all by thread main",
+          "elapsed_ms": 2659,
+          "expected_wait_ms": 1000,
+          "input": "SOLR_WAIT_FOR_ZK=1",
+          "name": "11-order-env",
+          "result": "PASS"
+        },
+        {
+          "accepted_connections": 1,
+          "class_init_order": "NodeConfig initialized at 0.153s, EnvUtils at 1.121s, SolrZkClient at 1.139s; all by thread main",
+          "elapsed_ms": 6448,
+          "expected_wait_ms": 5000,
+          "input": "-Dsolr.cloud.wait.for.zk.seconds=5 -DwaitForZk=1",
+          "name": "12-order-modern",
+          "result": "PASS (modern property wins)"
+        },
+        {
+          "accepted_connections": 1,
+          "class_init_order": "NodeConfig initialized at 0.115s, EnvUtils at 0.898s, SolrZkClient at 0.960s; all by thread main",
+          "elapsed_ms": 2297,
+          "expected_wait_ms": 1000,
+          "input": "-Dsolr.wait.for.zk=1 -DwaitForZk=5",
+          "name": "13-order-alias",
+          "result": "PASS (solr.wait.for.zk wins over waitForZk)"
+        }
+      ],
+      "method": "Fresh JVM per case running StartupBoundaryProbe, whose main performs only JDK setup (temp Solr home, silent loopback peer, node properties with the literal zkHost key) before calling the real NodeConfig.loadNodeConfig. It never touches EnvUtils or any NodeConfig member beforehand. JVM class-initialization logging (-Xlog:class+init) records the ordering from the JVM itself.",
+      "name": "leg1_initialization_ordering_at_startup_boundary",
+      "verdict": "passed"
+    },
+    {
+      "cases": [
+        {
+          "accepted_connections": 1,
+          "captured_packet_hex": "0000002d000000000000000000000000000075310000000000000000000000100000000000000000000000000000000000",
+          "captured_packet_length_bytes": 49,
+          "connection_wait_elapsed_ms": 31184,
+          "input": "-Dsolr.zookeeper.client.timeout=30001; startup wait property absent",
+          "name": "20-wire-fallback",
+          "observed_session_timeout_ms": 30001,
+          "result": "PASS"
+        },
+        {
+          "accepted_connections": 1,
+          "captured_packet_hex": "0000002d000000000000000000000000000007d00000000000000000000000100000000000000000000000000000000000",
+          "captured_packet_length_bytes": 49,
+          "connection_wait_elapsed_ms": 3133,
+          "input": "-Dsolr.zookeeper.client.timeout=30001 -Dsolr.cloud.wait.for.zk.seconds=2",
+          "name": "21-wire-override",
+          "observed_session_timeout_ms": 2000,
+          "result": "PASS"
+        }
+      ],
+      "method": "Fresh JVM per case running StartupWireProbe against a local accepting peer that records the bytes the real startup client sends on connect and never answers. The captured 49-byte stream is the ZooKeeper ConnectRequest (4-byte length 45, protocol fields, then password length 16 and readOnly). The session timeout is the 4-byte big-endian field at stream offset 16; it is the only field that differs between the two captured packets, and it carries exactly the configured values 30001 and 2000. The connection wait was measured separately as the elapsed time until loadNodeConfig failed with the startup SolrException against the silent peer.",
+      "name": "leg2_connection_and_session_timeouts_observed",
+      "verdict": "passed"
+    }
+  ],
+  "summary": "Both startup-boundary evidence gaps from the round-two receipt are closed at the exact fork head 4be1ad602621d2af96565355dce3804ee4744aae. Leg 1: in fresh JVMs that never pre-initialize EnvUtils or invoke the timeout helper, the JVM's own class-init log shows NodeConfig initializing first, EnvUtils initializing inside the loadNodeConfig call, and SolrZkClient after it; both legacy settings (-DwaitForZk=1 and SOLR_WAIT_FOR_ZK=1) reached the real startup client with the expected 1 second wait, the modern property won over the legacy one (5 seconds), and solr.wait.for.zk won over waitForZk. Leg 2: the actual ConnectRequest bytes were captured at a local accepting peer; the session-timeout field carried exactly 30001 ms for the absent-property fallback and 2000 ms for the explicit 2 second override, and the connection wait against the silent peer tracked the same configured values (31184 ms and 3133 ms elapsed for the full startup call).",
+  "type": "receipt",
+  "verdict": "passed"
+}

@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent",
+  "evidence": "records/evidence/pr5313-startup-boundary-proof-20261109-evidence.tar.gz",
+  "id": "pr5313-startup-boundary-proof-20261109",
+  "job": "pr5313-startup-boundary-proof-20261109",
+  "reason": "Boundary proof completed and receipt filed with verdict passed at head 4be1ad602621d2af96565355dce3804ee4744aae: leg 1 initialization ordering proven from JVM class-init logs in four fresh JVMs, leg 2 session timeout observed directly in the captured ConnectRequest bytes (30001 fallback, 2000 override) with the connection wait measured separately. No source branch or PR content changed.",
+  "type": "release"
+}
