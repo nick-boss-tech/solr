@@ -1,0 +1,15 @@
+{
+  "id": "pr-5201-auth-browser-linux-gate-20261110",
+  "intended_host": "Linux with Solr build toolchain, Chrome/Chromium and packaged Solr browser access",
+  "job": "pr-5201-auth-browser-linux-gate-20261110",
+  "requirements": "Claim this job, read its gate record, and publish the named receipt with exact execution evidence. Do not alter or push source as part of this gate.",
+  "source": {
+    "branch": "pr-5201-auth-browser-fix",
+    "contributor_parent": "3f9faa9e9861ce28f3ede3f4305bd91b6e297463",
+    "head": "2d4f255fefec6e455cfdc35e6281769f9e01fba9",
+    "pr": "https://github.com/apache/solr/pull/5201",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Run exact-head Linux gate for PR 5201 explorer authentication and browser coverage.",
+  "type": "assignment"
+}
