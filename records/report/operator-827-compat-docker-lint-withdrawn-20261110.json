@@ -1,0 +1,10 @@
+{
+  "actor": "codex-windows-operator-fix",
+  "evidence": "No claim or release was present at the refreshed board snapshot eb41c0d68705fcf096b7c40615c386d82ea859ac. Prior proof: records/receipt/operator-827-compat-linux-20261110-receipt.json. A public PR follow-up is held as a draft for Nick's review; no public comment is authorized by this record.",
+  "head": "2f50da7dc5b11dbfabacd567ca7740ccf70c2dd7",
+  "id": "operator-827-compat-docker-lint-withdrawn-20261110",
+  "instruction": "Do not claim or execute this Docker lint assignment or schedule further testing for this follow-up. Nick said on 2026-11-10 that no further testing is planned. This report supersedes the pending request; it does not change the prior receipt's incomplete verdict.",
+  "job": "operator-827-compat-docker-lint-20261110",
+  "status": "withdrawn",
+  "type": "report"
+}
