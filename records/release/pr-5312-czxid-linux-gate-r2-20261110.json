@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent",
+  "evidence": "records/evidence/pr-5312-czxid-linux-gate-r2-20261110-evidence.tar.gz",
+  "id": "pr-5312-czxid-linux-gate-r2-20261110",
+  "job": "pr-5312-czxid-linux-gate-r2-20261110",
+  "reason": "Gate completed with verdict passed at offered head 1d71a1b3811b1e9c7fe9bcac7ade1c8bc695ecb0: tidy and diff --check clean, all three MultipleManagedSchemasTest methods passed with no skips, TestCollectionAPI.testConfigCaching passed, root check passed with validateSourcePatterns executed, and the fail-before leg reproduced the specified assertSame failure on the contributor head with the byte-identical offered test overlaid. No source, branch, or PR changes were made by the gate.",
+  "type": "release"
+}

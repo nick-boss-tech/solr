@@ -1,0 +1,8 @@
+{
+  "gate": "pr-5312-czxid-linux-gate-r2-20261110",
+  "head": "1d71a1b3811b1e9c7fe9bcac7ade1c8bc695ecb0",
+  "id": "pr-5312-czxid-linux-gate-r2-20261110-report",
+  "job": "pr-5312-czxid-linux-gate-r2-20261110",
+  "summary": "Superseding Linux gate passed at the exact offered head 1d71a1b381. The r1 blockers (Mockito varargs compile error under -Werror and the missing assumeWorkingMockito source-pattern failure) are gone in the repair commit, which touches only the test file. Tidy is clean, all three MultipleManagedSchemasTest methods execute and pass with no skips, TestCollectionAPI.testConfigCaching passes, root check passes with validateSourcePatterns executed, and the fail-before leg fails at exactly the specified assertSame on the contributor head with the offered test overlaid (original cached VersionedConfig returned despite distinct czxid). The offered branch for SOLR-18632 is fully proven on Linux. No public communication was made.",
+  "type": "report"
+}
