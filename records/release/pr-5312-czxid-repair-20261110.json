@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-implementation",
+  "evidence": "Fork ref solr-18632-submit verified at 1d71a1b3811b1e9c7fe9bcac7ade1c8bc695ecb0; see report pr-5312-czxid-repair-20261110-report and gate pr-5312-czxid-linux-gate-r2-20261110. No test executor started on Windows; source edits are complete and this worker stops implementation activity after release.",
+  "id": "pr-5312-czxid-repair-20261110",
+  "job": "pr-5312-czxid-repair-20261110",
+  "reason": "Test-only repair pushed and handed to superseding Linux gate",
+  "type": "release"
+}
