@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-desktop",
+  "evidence": "Report records/report/lucene-106-solr5293-integration-port-20261110.json was published at ef63f245d0df38a15beba7d8eabba6f45558f36a. Fork head e0c53033bb2b6b34939ded24e228443b7d8b576b was verified. HTTP fixture processes exited and the isolated Solr runtime was stopped. No executor remains on this job.",
+  "id": "lucene-106-solr5293-integration-port-20261110",
+  "job": "lucene-106-solr5293-integration-port-20261110",
+  "reason": "Source port and handoff completed; exact-head proof is a separate Linux job.",
+  "type": "release"
+}
