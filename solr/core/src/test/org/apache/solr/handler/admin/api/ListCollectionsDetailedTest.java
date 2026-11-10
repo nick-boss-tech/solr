@@ -155,6 +155,23 @@ public class ListCollectionsDetailedTest extends SolrCloudTestCase {
   }
 
   @Test
+  public void testRouteFilter() throws Exception {
+    final String routeCollection = "routefiltercoll";
+    CollectionAdminRequest.createCollectionWithImplicitRouter(routeCollection, "conf", "a,b", 1)
+        .process(cluster.getSolrClient());
+
+    String query = "?detailed=true&collection=" + routeCollection;
+    assertEquals(
+        Set.of("a", "b"), shards(collection(getCollections(query), routeCollection)).keySet());
+    assertEquals(
+        Set.of("a"),
+        shards(collection(getCollections(query + "&route=a"), routeCollection)).keySet());
+    assertEquals(
+        Set.of("b"),
+        shards(collection(getCollections(query + "&route=b"), routeCollection)).keySet());
+  }
+
+  @Test
   public void testUnknownCollectionIsRejected() throws Exception {
     ContentResponse response = httpGet("?detailed=true&collection=not-a-collection");
     assertEquals(400, response.getStatus());
