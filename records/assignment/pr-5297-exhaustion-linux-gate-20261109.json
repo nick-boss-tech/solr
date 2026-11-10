@@ -1,0 +1,19 @@
+{
+  "acceptance": "Execute all positive and fail-before legs in the gate record and publish exact-head receipt and report; do not claim a pass for omitted or non-reproduced legs.",
+  "fork_branch": "solr-lb-attempt-limits-pr1-submit",
+  "gate_record": "records/gate/pr-5297-exhaustion-linux-gate-20261109.json",
+  "head": "e297d971c1806b7e2f78b4de55cc8246d7d59b46",
+  "id": "pr-5297-exhaustion-linux-gate-20261109",
+  "implementation_job": "pr-5297-exhaustion-fix-windows-20261109",
+  "intended_host": "Linux gate host, JDK 21 and pinned Gradle, full clone; serialize builds under host lock",
+  "job": "pr-5297-exhaustion-linux-gate-20261109",
+  "pr": "https://github.com/apache/solr/pull/5297",
+  "summary": "Linux proof for PR 5297 endpoint-versus-attempt-exhaustion fix",
+  "tags": [
+    "linux",
+    "gate",
+    "solrj",
+    "fail-before"
+  ],
+  "type": "assignment"
+}
