@@ -1,0 +1,10 @@
+{
+  "head": "0848e85fad1290ed604f881abb265b060be3075f",
+  "id": "pr-5312-review-20261109-report",
+  "job": "pr-5312-review-20261109",
+  "reference": "https://zookeeper.apache.org/doc/r3.8.4/zookeeperProgrammers.html",
+  "review_record": "Windows workspace research/branch-reviews/2026-11-09-pr-batch/PR-5312-review.md",
+  "source": "https://github.com/apache/solr/pull/5312",
+  "summary": "Read-only review: P3 cache incarnation collision when two znode creations share the same millisecond ctime and data version; compare czxid and version and test equal ctime with distinct creation IDs. This is source-derived, not reproduced. Normal distinct-ctime case appears addressed. Single-node test covers the intended integration path; author reports fail-before and pass-after, without logs independently examined. Solr test, changelog and precommit workflows require action; no tests or Gradle ran on Windows. No public comment or source edit.",
+  "type": "report"
+}
