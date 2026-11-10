@@ -1,0 +1,14 @@
+{
+  "failed_gate": "pr-5312-czxid-linux-gate-20261109",
+  "host": "Windows",
+  "id": "pr-5312-czxid-repair-20261110",
+  "job": "pr-5312-czxid-repair-20261110",
+  "source_head": "9b96f1a23c2b9609c51c46541bf7fe3299921e81",
+  "successor_of": "pr-5312-czxid-implementation-20261109",
+  "summary": "Repair unchecked Mockito varargs compilation and Mockito assumption blockers from failed PR 5312 gate; push and request superseding exact-head Linux gate",
+  "tags": [
+    "source-implementation",
+    "records"
+  ],
+  "type": "assignment"
+}
