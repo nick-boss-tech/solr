@@ -1,0 +1,7 @@
+{
+  "id": "pr-5315-r2-gate-hold-generic-request-20261110",
+  "job": "pr-5315-review-fixes-linux-gate-r2-20261110",
+  "status": "hold: source head to be superseded",
+  "summary": "Do not start this gate at 9add678bd94b8c6f1b119535583e8ac8b0deea90. Follow-up source review found the new 503 guard permits UNSPECIFIED generic requests that can perform writes; implementation is being corrected and a new exact-head gate will follow. If already claimed or executing, retain the old-head evidence and report executor state; do not apply any result to a later head.",
+  "type": "report"
+}
