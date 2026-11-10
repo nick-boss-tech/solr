@@ -1,0 +1,7 @@
+{
+  "details": "Apache Solr 10.1.0 slim archive SHA-512 verified. Twenty-one Lucene 10.6.0 Maven Central jars individually SHA-512 verified; originals retained. Each instance used its own Solr home and JDK 21.0.11. System endpoints reported Lucene 10.4.0 and 10.6.0 respectively and each isolated core returned its indexed document. Runtime evidence and manifests: research/lucene-solr-windows/baseline-smoke.json, lucene-106-smoke.json, lucene-10.6.0/manifest.json and README.md. Baseline stopped cleanly; alternate server is intentionally left running for Nick on loopback, Windows java PID 44500 at the time of verification. Alternate launcher timed out and logged failure before the server later became ready; HTTP version and indexing/query proof subsequently passed. Solr 10.1 is built against Lucene 10.4; this is a bounded experimental smoke, not evidence of all 10.6 compatibility. It does not contain the Lucene repair at 55c3174bd154b5cc987d9b24e1c77043e23fe71e or Solr PR 5293, and does not prove patched nested sorting. No Gradle, retired queue, source patch, or upstream public action.",
+  "id": "lucene-solr-windows-runtime-20261109-report",
+  "job": "lucene-solr-windows-runtime-20261109",
+  "summary": "Windows isolated Solr 10.1.0 baseline with Lucene 10.4.0 and experimental separate Solr 10.1.0 instance with Lucene 10.6.0 both indexed and returned a document. The latter is running on 127.0.0.1:18984.",
+  "type": "report"
+}
