@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent",
+  "evidence": "records/evidence/solr-18606-pr5314-observable-test-linux-r2-20261110-evidence.tar.gz",
+  "id": "solr-18606-pr5314-observable-test-linux-r2-20261110",
+  "job": "solr-18606-pr5314-observable-test-linux-r2-20261110",
+  "reason": "Gate completed with verdict passed at head 5da7243cb75e2f3d2fb7b3557b6e30477dbbf97d: two-seed real-ZooKeeper alias proof with observed positive control, 37 solrj suite tests and 32 core/ZooKeeper tests passing with no skips in required tests, all five isolated mutations failing at their specified assertions, tidy clean, and root check passed with validateSourcePatterns executed. No source, branch, or PR changes were made by this gate beyond the round-1 tidy commit it verifies.",
+  "type": "release"
+}

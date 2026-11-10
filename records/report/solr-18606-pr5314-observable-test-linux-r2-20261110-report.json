@@ -1,0 +1,8 @@
+{
+  "gate": "solr-18606-pr5314-observable-test-linux-r2-20261110",
+  "head": "5da7243cb75e2f3d2fb7b3557b6e30477dbbf97d",
+  "id": "solr-18606-pr5314-observable-test-linux-r2-20261110-report",
+  "job": "solr-18606-pr5314-observable-test-linux-r2-20261110",
+  "summary": "Linux gate round 2 passed in full at 5da7243cb7, the PR 5314 observable-test branch with round 1's tidy formatting commit on top. The real-ZooKeeper alias test proves its log signal at both seeds, the relocated ClusterStateProviderTest suites pass with every named moved test in both provider variants, and all five isolated mutations fail at precisely their specified assertions, including the guard removal driving the alias read count from 1 to 7. Tidy is clean and root check passes. The branch is ready to be proposed against PR 5314 whenever the owner chooses; the PR head itself was never moved. No public communication was made.",
+  "type": "report"
+}
