@@ -1,0 +1,26 @@
+{
+  "actor": "phone-agent-2",
+  "checked_board_tip": "0cd6650c5d4b5e90f66ac229e66dae7a338a0ca9",
+  "evidence": "Final stop verified at 2026-11-10T01:09:41+00:00 on pre-release coordination-v2 tip 0cd6650c5d4b5e90f66ac229e66dae7a338a0ca9. Executor-stop pointer records/evidence/pr5313-startup-wait-linux-gate-round2-20261109-executor-stop-final.json sha256=8d34cad26374ec8eb116cb135b974b7c69d7937b9945a5709cf2b3cceae188d0, artifact sha256=5fc3243cd6ee1def5c2e0335b4c27813734dd88898618c2c7306390947f32456; release-check pointer records/evidence/pr5313-startup-wait-linux-gate-round2-20261109-release-check.json sha256=39b0020e64370d7927bd81c94f36660b1a0b8cba32d10f88ee5f59c1a9c15f96, artifact sha256=2f158a5e4a4205c6e508f571b1870e708fe392cd7e8dc89d654410f5e7b05b53; passing report records/report/pr5313-startup-wait-linux-gate-round2-20261109-report.json sha256=56cbee639cbaac750339692dc1d4b348820216979c6dd062b0a123eab858fd20; passing receipt records/receipt/pr5313-startup-wait-linux-gate-round2-20261109-receipt.json sha256=983adde59babfb6a3c9413d502959db4d6083e0b424678f932aa75e0dd326698. Current fork ref=4be1ad602621d2af96565355dce3804ee4744aae, public PR #5313 head=358f13d9fdfaed260143a51100cd5657a582d562; no active gate executors, both host locks free, inode free=73.42%, source repo clean, temporary gate worktrees removed.",
+  "executor_state_at_release": {
+    "host_locks": {
+      "/workspace/tools/.gradle-0609f7968656.lock": "free",
+      "/workspace/tools/.gradle-phone-agent-2.lock": "free"
+    },
+    "inode_free_percent": 73.42,
+    "matching_executor_count": 0,
+    "stop_threshold_free_percent": 15
+  },
+  "executor_stop_record": "records/evidence/pr5313-startup-wait-linux-gate-round2-20261109-executor-stop-final.json",
+  "id": "pr5313-startup-wait-linux-gate-round2-20261109",
+  "job": "pr5313-startup-wait-linux-gate-round2-20261109",
+  "public_pr_head": "358f13d9fdfaed260143a51100cd5657a582d562",
+  "reason": "Assigned Linux gate completed with a passing receipt; all gate/build executors are stopped and this worker releases the gate claim to the coordinator/queue.",
+  "receipt_record": "records/receipt/pr5313-startup-wait-linux-gate-round2-20261109-receipt.json",
+  "release_check_record": "records/evidence/pr5313-startup-wait-linux-gate-round2-20261109-release-check.json",
+  "released_at_utc": "2026-11-10T01:09:41+00:00",
+  "report_record": "records/report/pr5313-startup-wait-linux-gate-round2-20261109-report.json",
+  "source_head": "4be1ad602621d2af96565355dce3804ee4744aae",
+  "source_or_pr_changes_by_gate_worker": false,
+  "type": "release"
+}
