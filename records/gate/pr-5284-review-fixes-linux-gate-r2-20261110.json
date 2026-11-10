@@ -1,0 +1,27 @@
+{
+  "commands": [
+    "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.cloud.TestRebalanceLeaders --tests org.apache.solr.cloud.MigrateRouteKeyTest --tests org.apache.solr.handler.admin.api.MigrateDocsAPITest --tests org.apache.solr.handler.admin.api.RebalanceLeadersAPITest --tests org.apache.solr.handler.admin.api.V2CollectionAPIMappingTest --tests org.apache.solr.handler.admin.TestCollectionAPIs --tests org.apache.solr.handler.admin.TestApiFramework --tests org.apache.solr.handler.V2ApiIntegrationTest -Ptests.seed=16398C0DE --rerun-tasks",
+    "./gradlew --no-daemon tidy",
+    "./gradlew --no-daemon :solr:core:compileJava -Pvalidation.errorprone=true",
+    "./gradlew --no-daemon check -x test"
+  ],
+  "environment": "Use an isolated clean Linux checkout of the exact head and JDK 21. Refresh branch and PR heads and check claims and host locks before claiming. Record JDK, actual commands, exit codes, fresh test counts, logs and XML. This is a separate fork branch; do not push to the public PR head or post comments.",
+  "head": "5fce0c06ee5afa8ac3606e32c2e441041da49864",
+  "id": "pr-5284-review-fixes-linux-gate-r2-20261110",
+  "job": "pr-5284-review-fixes-linux-gate-r2-20261110",
+  "previous_head": "f947ff28cf3c591d5d9a230d526df6bdea6d693a",
+  "prior_receipt": "records/receipt/pr-5284-review-fixes-linux-gate-20261110-receipt.json",
+  "requirements": [
+    "Verify this head resolves the prior exact-head ambiguous NamedList.addAll core compilation error and incorporates the verified tidy patch from the previous receipt. The prior generated-client partial compile and all unexecuted tests are not proof for this new head. Run all following legs fresh, including generated clients and selected tests, and stop on new failures under the stated rules.",
+    "Compile generated SolrJ requests from this head's OpenAPI schema; run all named selected suites and report individual test counts and any skips. The new TestRebalanceLeaders.testV2RebalanceLeaders, MigrateRouteKeyTest.testMigrateDocs and testMigrateDocsAsyncWithAliases must execute and pass, proving generated request and typed response deserialization, preferred leader changes and successes/alreadyLeaders, exact migrated IDs and target routing, and async alias handling. TestRebalanceLeaders.testRebalanceLeadersClearsAsyncIds must exercise the existing v1 path.",
+    "Check v1 and v2 rebalance compatibility: original defaults, nonpositive maxAtOnce, v2 body/query precedence and explicit nulls, blank/missing collection validation, response field capitalization and omission, nested success, failure, alreadyLeaders and inactivePreferreds shapes, and preservation of the calling collection lock ID. Inspect actual code and run or create bounded disposable probes where existing tests do not prove an important boundary; helper-only assertions do not prove that values reached the operation. Record what was observed versus source review. Do not weaken tests or change production behavior to obtain green.",
+    "The previously reported V2ApiIntegrationTest malformed-body 500/400 dependency is PR 5285, still open when this job was posted. Run the named suite. If it fails, preserve evidence and compare with the reviewed baseline or otherwise diagnose; do not label the required leg passed or silently exclude it. Record incomplete/failed as appropriate and hand back for the dependency or a new exact-head gate.",
+    "Carry forward the six migrate request-mapping/async omission mutation legs specified in coordination-ui gates/pr-5284-coverage-round-2.md, using unchanged tests at this head and one compiling disposable production mutation at a time. For rebalance, the old parameter-setting mutations no longer apply after the refactor: assess whether current tests distinguish omission or misrouting of each body parameter to the shared operation; report actual observed evidence and gaps rather than claiming mutation proof from helper assertions.",
+    "Require tidy to leave tracked files unchanged and Error Prone and root check to pass without silent exclusions. If tidy changes files, stop and report; a formatting commit requires a new verified head and superseding gate. Record any environment condition, failure and repair precisely.",
+    "Investigate every executed failure before retry. A compile error, setup failure, skip, unmet compatibility probe, unresolved coverage gap, or known dependency failure is not a passing result. Publish a receipt with exact head, commands, results, logs/XML and mutation evidence; then release with executor-stop evidence. Do not edit the live PR, post public comments, or push a source change under this gate."
+  ],
+  "reviewed_pr_head": "415c639e6e5b74d665209024cf29fb68dc32b23f",
+  "seed": "16398C0DE",
+  "source": "https://github.com/nick-boss-tech/solr/tree/solr-16398-pr5284-review-fixes-20261110",
+  "type": "gate"
+}
