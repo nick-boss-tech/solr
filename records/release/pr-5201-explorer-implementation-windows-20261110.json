@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "Commit 2d4f255fefec6e455cfdc35e6281769f9e01fba9 pushed and verified; implementation report pr-5201-auth-browser-implementation-20261110 and gate job pr-5201-auth-browser-linux-gate-20261110. No build or browser executor was started on this Windows host.",
+  "id": "pr-5201-explorer-implementation-windows-20261110",
+  "job": "pr-5201-explorer-implementation-windows-20261110",
+  "reason": "Implementation pushed; handing exact-head verification to the Linux gate.",
+  "type": "release"
+}
