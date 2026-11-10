@@ -1,0 +1,17 @@
+{
+  "branch": "nick-boss-tech/solr:pr-5311-pivot-duplicate-keys",
+  "capabilities": [
+    "linux",
+    "gradle",
+    "solrj-tests"
+  ],
+  "gate": "pr-5311-pivot-linux-proof-20261109",
+  "head": "b8f10c9e3ea04746ee5f823e57fd9484426b448d",
+  "id": "pr-5311-pivot-linux-gate-20261109",
+  "intended_host": "Linux gate host",
+  "job": "pr-5311-pivot-linux-gate-20261109",
+  "source": "https://github.com/apache/solr/pull/5311",
+  "status": "open, unclaimed; proof pending",
+  "summary": "Linux exact-head proof for PR 5311 duplicate-key pivot follow-up",
+  "type": "assignment"
+}
