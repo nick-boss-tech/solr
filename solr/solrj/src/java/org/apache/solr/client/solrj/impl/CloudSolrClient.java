@@ -46,6 +46,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
+import org.apache.solr.client.solrj.RemoteSolrException;
 import org.apache.solr.client.solrj.RequestNotSentException;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrRequest;
@@ -726,8 +727,14 @@ public abstract class CloudSolrClient extends SolrClient {
 
       final boolean wasCommError = wasCommError(exc);
 
-      // 503 emitted on node shutdown and by shard-handler when no replicas available
-      if (wasCommError || errorCode == 503) {
+      // A 503 does not establish whether an update was partially applied.
+      boolean retryOn503 =
+          errorCode == 503
+              && (exc instanceof RouteException
+                  || (request.getRequestType() != SolrRequestType.UPDATE
+                      && !(rootCause instanceof RemoteSolrException remote
+                          && remote.shouldSkipRetry())));
+      if (wasCommError || retryOn503) {
         // if it was a communication error it is likely that
         // the node to which the request to be sent is down . So expire the state
         // so that the next attempt will fetch the fresh state

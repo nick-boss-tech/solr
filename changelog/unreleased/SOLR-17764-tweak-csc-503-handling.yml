@@ -1,5 +1,5 @@
 title: >
-  In order to work better with "graceful" Jetty shutdown, CloudSolrClient now invalidates cached clusterstate on all 503 responses.
+  CloudSolrClient retries eligible non-update collection requests after a 503 response.
 type: fixed
 authors:
   - name: Jason Gerlowski

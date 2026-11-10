@@ -44,10 +44,12 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.client.solrj.RemoteSolrException;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.jetty.LBJettySolrClient;
 import org.apache.solr.client.solrj.request.UpdateRequest;
+import org.apache.solr.client.solrj.request.V2Request;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.cloud.ClusterState;
 import org.apache.solr.common.cloud.DocCollection;
@@ -162,6 +164,104 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
       assertTrue(history.get(0).startsWith(collName + ":"));
       assertNull("Second attempt should skip _stateVer_", history.get(1));
       assertTrue("Expected refresh to be triggered", refGets.get() >= 1);
+    }
+  }
+
+  public void test503DoesNotReplayCompletedRoutedUpdates() throws Exception {
+    String collName = "gettingstarted";
+    Set<String> liveNodes = new HashSet<>(Set.of("192.168.1.108:8983_solr"));
+    AtomicReference<DocCollection> currentDoc = new AtomicReference<>(loadCollection(collName, 1));
+    Map<String, ClusterState.CollectionRef> refs =
+        Map.of(
+            collName, new TestCollectionRef(currentDoc::get, new AtomicInteger(), null, null, -1));
+    AtomicInteger routedUpdates = new AtomicInteger();
+    AtomicInteger commits = new AtomicInteger();
+    LBJettySolrClient mockLbclient = mock(LBJettySolrClient.class);
+    when(mockLbclient.request(any(LBSolrClient.Req.class)))
+        .then(
+            invocation -> {
+              LBSolrClient.Req req = invocation.getArgument(0);
+              UpdateRequest subRequest = (UpdateRequest) req.getRequest();
+              if (subRequest.getDocumentsMap() != null) {
+                routedUpdates.incrementAndGet();
+                LBSolrClient.Rsp rsp = new LBSolrClient.Rsp();
+                rsp.rsp = new NamedList<>();
+                return rsp;
+              }
+              commits.incrementAndGet();
+              throw new RemoteSolrException("test", 503, "unavailable", (Throwable) null);
+            });
+
+    try (ClusterStateProvider provider = getStateProvider(liveNodes, refs);
+        CloudSolrClient client =
+            new CloudSolrClient.Builder(provider) {
+              @Override
+              protected LBSolrClient createOrGetLbClient(HttpSolrClient myClient) {
+                return mockLbclient;
+              }
+            }.build()) {
+      assertTrue(client.isParallelUpdates());
+      UpdateRequest update = new UpdateRequest();
+      update.add("id", "123", "count_i", Map.of("inc", 1));
+      update.setAction(UpdateRequest.ACTION.COMMIT, true, true);
+
+      expectThrows(SolrException.class, () -> client.request(update, collName));
+      assertEquals(1, routedUpdates.get());
+      assertEquals(1, commits.get());
+    }
+  }
+
+  public void test503RetryRespectsV2SkipRetry() throws Exception {
+    try (ClusterStateProvider provider = getStateProvider(Set.of(), Map.of());
+        RecordingCloudSolrClient client = new RecordingCloudSolrClient(provider, 1)) {
+      client.enqueue(
+          (req, cols) -> {
+            throw new RemoteSolrException("test", 503, Map.of("msg", "unavailable"), true);
+          });
+      V2Request request = new V2Request.Builder("/collections/gettingstarted/select").build();
+
+      expectThrows(RemoteSolrException.class, () -> client.request(request, null));
+      assertEquals(1, client.getStateVersionHistory().size());
+    }
+  }
+
+  public void test503RetriesEligibleRead() throws Exception {
+    String collName = "gettingstarted";
+    AtomicReference<DocCollection> currentDoc = new AtomicReference<>(loadCollection(collName, 1));
+    Map<String, ClusterState.CollectionRef> refs =
+        Map.of(
+            collName, new TestCollectionRef(currentDoc::get, new AtomicInteger(), null, null, -1));
+    try (ClusterStateProvider provider =
+            getStateProvider(Set.of("192.168.1.108:8983_solr"), refs);
+        RecordingCloudSolrClient client = new RecordingCloudSolrClient(provider, 1)) {
+      client.enqueue(
+          (req, cols) -> {
+            throw new RemoteSolrException("test", 503, "unavailable", (Throwable) null);
+          });
+      assertNotNull(client.request(new DummyRequest(collName), collName));
+      assertEquals(2, client.getStateVersionHistory().size());
+    }
+  }
+
+  public void test503RouteExceptionRetainsExistingRetry() throws Exception {
+    String collName = "gettingstarted";
+    AtomicReference<DocCollection> currentDoc = new AtomicReference<>(loadCollection(collName, 1));
+    Map<String, ClusterState.CollectionRef> refs =
+        Map.of(
+            collName, new TestCollectionRef(currentDoc::get, new AtomicInteger(), null, null, -1));
+    try (ClusterStateProvider provider =
+            getStateProvider(Set.of("192.168.1.108:8983_solr"), refs);
+        RecordingCloudSolrClient client = new RecordingCloudSolrClient(provider, 1)) {
+      client.enqueue(
+          (req, cols) -> {
+            NamedList<Throwable> errors = new NamedList<>();
+            errors.add(
+                "test", new SolrException(SolrException.ErrorCode.SERVICE_UNAVAILABLE, "test"));
+            throw new CloudSolrClient.RouteException(
+                SolrException.ErrorCode.SERVICE_UNAVAILABLE, errors, Map.of());
+          });
+      assertNotNull(client.request(new DummyUpdateRequest(collName), collName));
+      assertEquals(2, client.getStateVersionHistory().size());
     }
   }
 
