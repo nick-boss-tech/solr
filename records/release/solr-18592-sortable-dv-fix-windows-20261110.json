@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-nick-shanin",
+  "evidence": "Fork ref solr-18592-sortable-dv-fix-20261110 verified at b225cd5bb2a5886c187b13009e7016c9165414ce; report solr-18592-sortable-dv-fix-windows-20261110-report; no Windows build, test or other executor was started.",
+  "id": "solr-18592-sortable-dv-fix-windows-20261110",
+  "job": "solr-18592-sortable-dv-fix-windows-20261110",
+  "reason": "Fix branch pushed; handing exact-head proof to separate Linux gate and stopping the Windows worker.",
+  "type": "release"
+}
