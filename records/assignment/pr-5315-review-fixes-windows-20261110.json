@@ -1,0 +1,11 @@
+{
+  "host": "Windows implementation; Linux gate required",
+  "id": "pr-5315-review-fixes-windows-20261110",
+  "job": "pr-5315-review-fixes-windows-20261110",
+  "prior_review": "pr-5315-review-windows-20261110-report",
+  "scope": "Unsafe new 503 update replays and V2 skipRetry behavior, with focused regressions",
+  "source_head": "dfde089fd9dd0e5e79774593e66dd030e1b7dd22",
+  "source_pr": "https://github.com/apache/solr/pull/5315",
+  "summary": "Implement fixes for PR 5315 review findings and hand exact head to Linux gate",
+  "type": "assignment"
+}
