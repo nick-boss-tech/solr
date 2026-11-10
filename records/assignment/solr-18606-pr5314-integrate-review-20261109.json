@@ -1,0 +1,13 @@
+{
+  "base": "9d4dc33e5d829d2bc9d1304054b5af6746879b34",
+  "branch": "solr-18606-submit",
+  "deliverables": "User directed PR branch fast-forward before gate completes, authorized body update and local PR review. Reconcile gate source refs without changing test head; do not approve or merge PR.",
+  "gate": "solr-18606-pr5314-followup-linux-20261109",
+  "head": "672448a49c33a257e7a2f8722c84e823b100199c",
+  "host": "Windows source review; Linux proof already active",
+  "id": "solr-18606-pr5314-integrate-review-20261109",
+  "job": "solr-18606-pr5314-integrate-review-20261109",
+  "successor_of": "solr-18606-pr5314-body-update-20261109",
+  "summary": "Fast-forward PR 5314 to follow-up, update description, and review exact resulting head",
+  "type": "assignment"
+}
