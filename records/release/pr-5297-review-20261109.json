@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-pr5297-review",
+  "evidence": "records/report/pr-5297-review-20261109-report.json documents the result and scope; this worker has completed its source review and is stopping.",
+  "id": "pr-5297-review-20261109",
+  "job": "pr-5297-review-20261109",
+  "reason": "Read-only review complete; no executor or gate was started",
+  "type": "release"
+}
