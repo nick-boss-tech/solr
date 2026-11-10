@@ -1,0 +1,7 @@
+{
+  "id": "solr5293-lucene106-integration-windows-20261110",
+  "job": "solr5293-lucene106-integration-windows-20261110",
+  "owner": "windows-codex-desktop",
+  "scope": "Execute and report matched Windows Solr integration proof at the pinned heads.",
+  "type": "claim"
+}
