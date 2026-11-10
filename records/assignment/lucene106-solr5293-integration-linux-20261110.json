@@ -1,0 +1,26 @@
+{
+  "deliverables": "Separate Lucene fail-before and passing results, matched Solr original-versus-patched dependency results, artifact identities and reachable artifact handoff where authorized, plus exact-head receipt and executor release. This is proof only, no public action.",
+  "gate": "lucene106-solr5293-integration-linux-20261110",
+  "head": "e0c53033bb2b6b34939ded24e228443b7d8b576b",
+  "host": "Linux gate host with JDK 21, normal isolated clones, Git, Python and serialized build lock",
+  "id": "lucene106-solr5293-integration-linux-20261110",
+  "job": "lucene106-solr5293-integration-linux-20261110",
+  "lucene_base": "4ae946e5a9b99d1e22c23865c99e561b8dcc9d71",
+  "lucene_branch": "lucene-10.6-block-join-integration",
+  "lucene_repository": "https://github.com/nick-boss-tech/lucene.git",
+  "solr_branch": "pr-5293-solr-18622-child-sort-missing",
+  "solr_head": "769ca6e177d77acd3f1993a4a24bd3257ae243c0",
+  "solr_pr_head": "978e2b1e352c7c39a68f7b952e6ab12eabf80890",
+  "solr_repository": "https://github.com/nick-boss-tech/solr.git",
+  "status": "open",
+  "summary": "Prove Lucene 10.6 block-join port and run matched Solr 5293 integration tests",
+  "tags": [
+    "linux",
+    "gradle",
+    "lucene",
+    "solr",
+    "integration",
+    "proof"
+  ],
+  "type": "assignment"
+}
