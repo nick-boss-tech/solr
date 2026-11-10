@@ -51,6 +51,7 @@ import org.apache.solr.client.solrj.jetty.LBJettySolrClient;
 import org.apache.solr.client.solrj.request.UpdateRequest;
 import org.apache.solr.client.solrj.request.V2Request;
 import org.apache.solr.common.SolrException;
+import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.cloud.ClusterState;
 import org.apache.solr.common.cloud.DocCollection;
 import org.apache.solr.common.params.ModifiableSolrParams;
@@ -202,7 +203,9 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
             }.build()) {
       assertTrue(client.isParallelUpdates());
       UpdateRequest update = new UpdateRequest();
-      update.add("id", "123", "count_i", Map.of("inc", 1));
+      SolrInputDocument document = new SolrInputDocument("id", "123");
+      document.setField("count_i", Map.of("inc", 1));
+      update.add(document);
       update.setAction(UpdateRequest.ACTION.COMMIT, true, true);
 
       expectThrows(SolrException.class, () -> client.request(update, collName));
