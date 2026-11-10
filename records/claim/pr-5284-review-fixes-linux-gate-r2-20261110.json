@@ -1,0 +1,37 @@
+{
+  "execution_host": "0609f7968656",
+  "id": "pr-5284-review-fixes-linux-gate-r2-20261110",
+  "jdk_identity": [
+    "openjdk version \"21.0.12.1\" 2026-08-18",
+    "OpenJDK Runtime Environment (build 21.0.12.1+1-1-24.04.4-Ubuntu)",
+    "OpenJDK 64-Bit Server VM (build 21.0.12.1+1-1-24.04.4-Ubuntu, mixed mode, sharing)"
+  ],
+  "job": "pr-5284-review-fixes-linux-gate-r2-20261110",
+  "junit_xml": "/workspace/gates/logs/phone-agent-2/pr-5284-review-fixes-linux-gate-r2-20261110/evidence/junit",
+  "logs": "/workspace/gates/logs/phone-agent-2/pr-5284-review-fixes-linux-gate-r2-20261110",
+  "os": "Linux 6.18.38+ x86_64",
+  "owner": "phone-agent-2",
+  "preflight": {
+    "active_java_or_build_processes": [],
+    "coordination_v2_snapshot": "7ad982a68ea38b6041136d03223c3d8d4421bfc2",
+    "current_assignment_and_gate_verified": true,
+    "current_claim_and_release_absent": true,
+    "fork_ref_head_verified": "5fce0c06ee5afa8ac3606e32c2e441041da49864",
+    "mandatory_host_locks_free": true,
+    "other_active_phone_agent_2_claims": [],
+    "prior_linux_claim_released": true,
+    "public_pr_head_verified": "415c639e6e5b74d665209024cf29fb68dc32b23f",
+    "public_pr_state": "open",
+    "workspace_free_disk": "51G",
+    "workspace_free_inode_percent": 71,
+    "worktree_and_log_paths_absent": true
+  },
+  "previous_head": "f947ff28cf3c591d5d9a230d526df6bdea6d693a",
+  "reviewed_pr_head": "415c639e6e5b74d665209024cf29fb68dc32b23f",
+  "runner": "Gradle wrapper; every Gradle/build invocation is serialized under both /workspace/tools/.gradle-phone-agent-2.lock and /workspace/tools/.gradle-0609f7968656.lock using flock.",
+  "scope": "Linux gate only on the isolated exact-head checkout. Do not modify the source/fork branch, public PR metadata, or public comments. Do not install or use Docker, and do not claim Windows/Cygwin proof.",
+  "source_branch": "nick-boss-tech/solr:solr-16398-pr5284-review-fixes-20261110",
+  "source_head": "5fce0c06ee5afa8ac3606e32c2e441041da49864",
+  "type": "claim",
+  "worktree": "/workspace/worktrees/pr-5284-review-fixes-linux-gate-r2-20261110"
+}
