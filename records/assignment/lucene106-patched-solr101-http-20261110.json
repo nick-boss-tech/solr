@@ -1,0 +1,17 @@
+{
+  "head": "e0c53033bb2b6b34939ded24e228443b7d8b576b",
+  "host": "Windows local host, Java 21, loopback-only isolated Solr installation",
+  "id": "lucene106-patched-solr101-http-20261110",
+  "job": "lucene106-patched-solr101-http-20261110",
+  "scope": "In a separate copy of the previously provisioned Solr 10.1.0 plus released Lucene 10.6 runtime, replace only the Lucene join JAR with the verified local candidate artifact; preserve the original release JAR separately, verify classpath contains exactly one join JAR and check hashes and version provenance. Start isolated Solr on a distinct loopback port and use the same nested sorting HTTP fixture. Compare to the saved unpatched baseline and report exact behavioral and artifact limitations: this is released Solr 10.1, not PR 5293, and cannot prove the PR's missing-value wiring or matched Solr tests. No Solr Gradle, retired queue or public write. Stop the test server after evidence is collected.",
+  "successor_of": "lucene-solr-windows-runtime-20261109",
+  "summary": "Exercise a locally built Lucene 10.6 join repair in an isolated Windows Solr runtime",
+  "tags": [
+    "windows",
+    "lucene",
+    "solr",
+    "runtime",
+    "integration"
+  ],
+  "type": "assignment"
+}
