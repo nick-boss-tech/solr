@@ -1,0 +1,22 @@
+{
+  "findings": [
+    "For a normal request and a view that stays missing, alias resolution and subsequent state-version lookup each cause sync and a forced ZooKeeper read before not-found, absent concurrent coalescing. This includes a newly created alias not yet in the local alias snapshot; effect is source-derived, not benchmarked.",
+    "The changed missing-ref fetch in forceUpdateCollection changes failure types for all reader consumers; consider provider-local error translation or explicitly justify and test a second real consumer."
+  ],
+  "head": "9d4dc33e5d829d2bc9d1304054b5af6746879b34",
+  "history": [
+    "SOLR-17153 create-then-index race reported in high-scale tests; original client fix reverted after SOLR-17275 measured production alias p99 regression.",
+    "SOLR-17275 reporter confirmed actual getData under forceUpdateCollection global lock after initial test missed it.",
+    "SOLR-17947 added per-name in-flight deduplication; current code still waits on an uncached name and removes null results."
+  ],
+  "id": "solr-18606-pr5314-history-minimality-review-20261109-report",
+  "job": "solr-18606-pr5314-history-minimality-review-20261109",
+  "limits": "Read-only Windows source review; no runtime execution, source edit, public comment or comprehensive review of every SolrCloud route.",
+  "local_record": "research/branch-reviews/2026-11-09-historical-review/PR-5314-review.md",
+  "pr": "https://github.com/apache/solr/pull/5314",
+  "proof": "Exact-head Linux gate passed 45 tests, four mutation legs, tidy and check. Tests do not establish quorum lag or latency. GitHub Gradle Precommit, Validate Changelog and Solr Tests via Crave require action.",
+  "recommendation": "Keep selected client refresh direction; prioritize request-level work count and real known-alias behavior using existing fixtures. Reassess sync consistency tradeoff; do not remove callback test while blocking sync remains. No candidate reduced patch was implemented or tested.",
+  "size": "226 added: 160 test, 57 production, 9 changelog. Earlier 29caa head +101 was gated but did not include cross-server sync protection or corrected missing-read error classification.",
+  "summary": "Historical source review found same-request duplicate ZooKeeper work for unknown names and a shared-reader scope change; identified a bounded test/minimality strategy.",
+  "type": "report"
+}
