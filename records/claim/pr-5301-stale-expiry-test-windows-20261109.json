@@ -1,0 +1,8 @@
+{
+  "head": "684354d21476e44458e45c83a810dd25d16ba284",
+  "id": "pr-5301-stale-expiry-test-windows-20261109",
+  "job": "pr-5301-stale-expiry-test-windows-20261109",
+  "owner": "codex-windows-pr-5301-test",
+  "scope": "Implement and push test-only regression; no Windows Gradle or test execution.",
+  "type": "claim"
+}
