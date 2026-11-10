@@ -1,0 +1,13 @@
+{
+  "gate": "records/assignment/pr-5284-argument-coverage-linux-gate-r2-20261110.json",
+  "head": "3d530d7639eeb0b4bd8ee11227a1133fe66aa672",
+  "id": "pr-5284-forbidden-api-repair-windows-20261110-report",
+  "job": "pr-5284-forbidden-api-repair-windows-20261110",
+  "limits": "Windows diff --check clean and no reflection remains in the changed test; no Windows builds or tests. The prior Linux run passed six API tests, four cloud tests with one nightly skip, and detected both mutations; tidy and Error Prone passed, but root check failed on three forbidden setAccessible calls. None of these results prove the new head. The full PR gate remains failed on the baseline malformed-body dependency PR 5285 and remaining compatibility proof.",
+  "previous_head": "b01220cbb66e0a1cca3dfb1fd7427ced6ca4c2a6",
+  "prior_receipt": "records/receipt/pr-5284-argument-coverage-linux-gate-20261110-receipt.json",
+  "public_scope": "PR 5284 head and discussion were not changed.",
+  "status": "Implemented, Focused Proof Pending; Full PR Gate Failed",
+  "summary": "Replaced three forbidden reflective accesses with explicit @VisibleForTesting accessors on the constructed operation, retaining the existing execution seam and assertions for both body values and the lock ID. Pushed and independently verified the fork head.",
+  "type": "report"
+}
