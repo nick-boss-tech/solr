@@ -1,0 +1,202 @@
+{
+  "type": "receipt",
+  "id": "pr-5284-review-fixes-linux-gate-20261110-receipt",
+  "job": "pr-5284-review-fixes-linux-gate-20261110",
+  "gate": "pr-5284-review-fixes-linux-gate-20261110",
+  "head": "f947ff28cf3c591d5d9a230d526df6bdea6d693a",
+  "reviewed_pr_head": "415c639e6e5b74d665209024cf29fb68dc32b23f",
+  "verdict": "incomplete",
+  "recorded_at": "2026-11-10T17:42:57+00:00",
+  "source_refs": {
+    "fork_branch": "nick-boss-tech/solr:solr-16398-pr5284-review-fixes-20261110",
+    "fork_head": "f947ff28cf3c591d5d9a230d526df6bdea6d693a",
+    "public_pr": "https://github.com/apache/solr/pull/5284",
+    "public_pr_state": "open",
+    "public_pr_head": "415c639e6e5b74d665209024cf29fb68dc32b23f",
+    "public_pr_head_repo": "nick-boss-tech/solr",
+    "public_pr_base": "1fdb455a524a7b8d334d5baea04e395ed4d2d7f8",
+    "public_pr_base_repo": "apache/solr"
+  },
+  "results": {
+    "executed_commands": [
+      {
+        "name": "10-focused-suites",
+        "command": "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.cloud.TestRebalanceLeaders --tests org.apache.solr.cloud.MigrateRouteKeyTest --tests org.apache.solr.handler.admin.api.MigrateDocsAPITest --tests org.apache.solr.handler.admin.api.RebalanceLeadersAPITest --tests org.apache.solr.handler.admin.api.V2CollectionAPIMappingTest --tests org.apache.solr.handler.admin.TestCollectionAPIs --tests org.apache.solr.handler.admin.TestApiFramework --tests org.apache.solr.handler.V2ApiIntegrationTest -Ptests.seed=16398C0DE --rerun-tasks",
+        "worktree": "/workspace/gates/worktrees/pr-5284-review-fixes-linux-gate-20261110",
+        "head": "f947ff28cf3c591d5d9a230d526df6bdea6d693a",
+        "started_at": "2026-11-10T17:34:05Z",
+        "ended_at": "2026-11-10T17:35:10Z",
+        "exit_code": 1,
+        "tests_executed": 0,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "junit_files": [],
+        "log_path": "evidence/runs/10-focused-suites.log",
+        "exit_path": "evidence/runs/10-focused-suites.exit",
+        "partial_tasks_passed": [
+          ":solr:solrj:openApiGenerate",
+          ":solr:solrj:compileJava"
+        ],
+        "failure": "CollectionsHandler.java:833: ambiguous NamedList.addAll; both addAll(Map<String,T>) and addAll(NamedList<? extends T>) match. The new v1 adapter expression is absent at reviewed baseline 415c639e and introduced by gate head f947ff28."
+      },
+      {
+        "name": "20-tidy",
+        "command": "./gradlew --no-daemon tidy",
+        "worktree": "/workspace/worktrees/pr-5284-review-fixes-linux-gate-20261110",
+        "head": "f947ff28cf3c591d5d9a230d526df6bdea6d693a",
+        "started_at": "2026-11-10T17:36:13Z",
+        "ended_at": "2026-11-10T17:37:28Z",
+        "exit_code": 0,
+        "tracked_changes": [
+          "solr/core/src/java/org/apache/solr/handler/admin/RebalanceLeaders.java",
+          "solr/core/src/test/org/apache/solr/cloud/MigrateRouteKeyTest.java"
+        ],
+        "tracked_changes_patch": "evidence/runs/20-tidy-tracked.patch",
+        "tracked_changes_patch_sha256": "dff19484519bb532a0941479b3666d5768833439931a92dfd7aa9989a9b0d413",
+        "tracked_files_restored_to_exact_head": true,
+        "log_path": "evidence/runs/20-tidy.log"
+      }
+    ],
+    "proof_legs": [
+      {
+        "name": "Live refs, assignment, claim, locks, resources",
+        "status": "passed",
+        "details": "Target fork branch f947ff28cf3c591d5d9a230d526df6bdea6d693a; public PR #5284 open at reviewed head 415c639e6e5b74d665209024cf29fb68dc32b23f; claim owned by phone-agent-2; no release at start; both locks available; 71% inode headroom."
+      },
+      {
+        "name": "Generated SolrJ client generation and compilation",
+        "status": "partial",
+        "details": "The focused Gradle run completed :solr:solrj:openApiGenerate and :solr:solrj:compileJava, but failed later during :solr:core:compileJava."
+      },
+      {
+        "name": "Required seeded focused suites",
+        "status": "failed-before-tests",
+        "command": "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.cloud.TestRebalanceLeaders --tests org.apache.solr.cloud.MigrateRouteKeyTest --tests org.apache.solr.handler.admin.api.MigrateDocsAPITest --tests org.apache.solr.handler.admin.api.RebalanceLeadersAPITest --tests org.apache.solr.handler.admin.api.V2CollectionAPIMappingTest --tests org.apache.solr.handler.admin.TestCollectionAPIs --tests org.apache.solr.handler.admin.TestApiFramework --tests org.apache.solr.handler.V2ApiIntegrationTest -Ptests.seed=16398C0DE --rerun-tasks",
+        "exit_code": 1,
+        "tests_executed": 0,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "diagnostic": "CollectionsHandler.java:833: ambiguous NamedList.addAll; both addAll(Map<String,T>) and addAll(NamedList<? extends T>) match. The new v1 adapter expression is absent at reviewed baseline 415c639e and introduced by gate head f947ff28.",
+        "log": "evidence/runs/10-focused-suites.log",
+        "junit_summary": "evidence/runs/10-focused-suites.junit-summary.json"
+      },
+      {
+        "name": "tidy",
+        "status": "failed-stop-condition",
+        "command": "./gradlew --no-daemon tidy",
+        "exit_code": 0,
+        "tracked_changes": [
+          "solr/core/src/java/org/apache/solr/handler/admin/RebalanceLeaders.java",
+          "solr/core/src/test/org/apache/solr/cloud/MigrateRouteKeyTest.java"
+        ],
+        "tracked_changes_patch": "evidence/runs/20-tidy-tracked.patch",
+        "tracked_changes_patch_sha256": "dff19484519bb532a0941479b3666d5768833439931a92dfd7aa9989a9b0d413",
+        "restored_to_clean_exact_head": true,
+        "log": "evidence/runs/20-tidy.log"
+      },
+      {
+        "name": "Error Prone compile",
+        "status": "not-run-stop-condition",
+        "reason": "Stopped after tidy changed tracked files as required by the live gate."
+      },
+      {
+        "name": "Root check -x test",
+        "status": "not-run-stop-condition",
+        "reason": "Stopped after tidy changed tracked files as required by the live gate."
+      },
+      {
+        "name": "Six migrate mutation legs",
+        "status": "not-run-stop-condition",
+        "reason": "Stopped after tidy changed tracked files; static review only."
+      },
+      {
+        "name": "Rebalance compatibility and argument-propagation probes",
+        "status": "not-run-stop-condition",
+        "reason": "Stopped after tidy changed tracked files; static review identified remaining gaps."
+      },
+      {
+        "name": "Executor stop",
+        "status": "passed",
+        "details": {
+          "type": "executor-stop-state",
+          "job": "pr-5284-review-fixes-linux-gate-20261110",
+          "stopped_at": "2026-11-10T17:40:10+00:00",
+          "execution_host": "0609f7968656",
+          "active_gradle_processes": [],
+          "source_worktree": {
+            "path": "/workspace/worktrees/pr-5284-review-fixes-linux-gate-20261110",
+            "head_before_removal": "f947ff28cf3c591d5d9a230d526df6bdea6d693a",
+            "clean_before_removal": true,
+            "removed": true
+          },
+          "mandatory_locks": [
+            {
+              "path": "/workspace/tools/.gradle-phone-agent-2.lock",
+              "acquirable": true
+            },
+            {
+              "path": "/workspace/tools/.gradle-0609f7968656.lock",
+              "acquirable": true
+            }
+          ],
+          "workspace_free_inodes_percent": 71,
+          "workspace_disk_df": "/dev/root        72G   22G   50G  31% /",
+          "workspace_inode_df": "/dev/root      1868096 532186 1335910   29% /",
+          "docker_executable": null,
+          "docker_used_or_installed_by_gate": false,
+          "source_branch_or_public_pr_changed": false,
+          "public_comment_or_metadata_changed": false,
+          "stop_reason": "Exact-head compile failure plus tidy changed tracked files; live gate requires stopping after tidy changes."
+        }
+      }
+    ],
+    "static_coverage_review": {
+      "migrate_mutations_expected_to_be_detected_by_unchanged_test": "static review only; no mutation executed",
+      "rebalance_body_values_reaching_shared_operation": "not proven; existing tests assert resolver helpers but do not capture operation constructor arguments",
+      "response_shape_and_lock_id": "source review only; no disposable probe executed"
+    },
+    "stop_state": {
+      "type": "executor-stop-state",
+      "job": "pr-5284-review-fixes-linux-gate-20261110",
+      "stopped_at": "2026-11-10T17:40:10+00:00",
+      "execution_host": "0609f7968656",
+      "active_gradle_processes": [],
+      "source_worktree": {
+        "path": "/workspace/worktrees/pr-5284-review-fixes-linux-gate-20261110",
+        "head_before_removal": "f947ff28cf3c591d5d9a230d526df6bdea6d693a",
+        "clean_before_removal": true,
+        "removed": true
+      },
+      "mandatory_locks": [
+        {
+          "path": "/workspace/tools/.gradle-phone-agent-2.lock",
+          "acquirable": true
+        },
+        {
+          "path": "/workspace/tools/.gradle-0609f7968656.lock",
+          "acquirable": true
+        }
+      ],
+      "workspace_free_inodes_percent": 71,
+      "workspace_disk_df": "/dev/root        72G   22G   50G  31% /",
+      "workspace_inode_df": "/dev/root      1868096 532186 1335910   29% /",
+      "docker_executable": null,
+      "docker_used_or_installed_by_gate": false,
+      "source_branch_or_public_pr_changed": false,
+      "public_comment_or_metadata_changed": false,
+      "stop_reason": "Exact-head compile failure plus tidy changed tracked files; live gate requires stopping after tidy changes."
+    },
+    "summary": "Incomplete: compile failure before tests, followed by a mandatory stop because tidy changed tracked files. Do not treat any test, mutation, compatibility, Error Prone, or root-check leg as passed."
+  },
+  "coverage_limits": [
+    "The required seeded selected suites did not execute: core compilation failed first; no test results or JUnit XML exist.",
+    "tidy exited 0 but changed two tracked files; the exact diff is preserved and the disposable worktree was restored. The live gate requires stopping after tracked tidy changes.",
+    "Error Prone compilation and root check -x test were not run after the tidy stop condition.",
+    "The six migration mutation legs and rebalance compatibility/argument-propagation probes were not run; static mapping review is not mutation proof.",
+    "V2ApiIntegrationTest.testException, including the malformed-body behavior linked to open PR #5285, did not execute.",
+    "No Docker, Windows, or Cygwin proof was performed; Linux is not claimed as a substitute for Windows/Cygwin."
+  ],
+  "scope_attestation": "No source branch, fork branch, public PR metadata, or public comment was changed. The local tidy formatting diff was archived and restored; the exact-head worktree was removed after clean verification."
+}

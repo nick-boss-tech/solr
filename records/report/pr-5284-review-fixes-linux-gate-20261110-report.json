@@ -1,0 +1,158 @@
+{
+  "type": "report",
+  "id": "pr-5284-review-fixes-linux-gate-20261110-report",
+  "job": "pr-5284-review-fixes-linux-gate-20261110",
+  "gate": "records/assignment/pr-5284-review-fixes-linux-gate-20261110.json",
+  "title": "PR #5284 Linux exact-head gate \u2014 incomplete",
+  "head": "f947ff28cf3c591d5d9a230d526df6bdea6d693a",
+  "reviewed_pr_head": "415c639e6e5b74d665209024cf29fb68dc32b23f",
+  "source_refs": {
+    "fork_branch": "nick-boss-tech/solr:solr-16398-pr5284-review-fixes-20261110",
+    "fork_head": "f947ff28cf3c591d5d9a230d526df6bdea6d693a",
+    "public_pr": "https://github.com/apache/solr/pull/5284",
+    "public_pr_state": "open",
+    "public_pr_head": "415c639e6e5b74d665209024cf29fb68dc32b23f",
+    "public_pr_head_repo": "nick-boss-tech/solr",
+    "public_pr_base": "1fdb455a524a7b8d334d5baea04e395ed4d2d7f8",
+    "public_pr_base_repo": "apache/solr"
+  },
+  "status": "incomplete",
+  "created_at": "2026-11-10T17:42:57+00:00",
+  "summary": "The exact-head focused suite failed before any test ran because the changed v1 rebalance adapter has an ambiguous NamedList.addAll call. tidy then changed two tracked files, triggering the live gate stop condition; the local formatting changes were preserved as a diff and restored. No repair or source/public-PR change was made.",
+  "environment": {
+    "host_os": "Linux x86_64",
+    "execution_host": "0609f7968656",
+    "jdk_version": "openjdk version \"21.0.12.1\" 2026-08-18",
+    "java_path": "/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
+    "gradle_wrapper_version": "9.7.0",
+    "gradle_user_home": "/workspace/gradle-home",
+    "host_locks": [
+      {
+        "path": "/workspace/tools/.gradle-phone-agent-2.lock",
+        "acquirable": true
+      },
+      {
+        "path": "/workspace/tools/.gradle-0609f7968656.lock",
+        "acquirable": true
+      }
+    ],
+    "workspace_free_inodes_percent_at_start": 71,
+    "workspace_free_inodes_percent_at_stop": 71,
+    "docker_executable": null,
+    "docker_used_or_installed": false,
+    "worktree_clean_at_stop": true,
+    "worktree_removed": true
+  },
+  "proof_results": [
+    {
+      "name": "Live refs, assignment, claim, locks, resources",
+      "status": "passed",
+      "details": "Target fork branch f947ff28cf3c591d5d9a230d526df6bdea6d693a; public PR #5284 open at reviewed head 415c639e6e5b74d665209024cf29fb68dc32b23f; claim owned by phone-agent-2; no release at start; both locks available; 71% inode headroom."
+    },
+    {
+      "name": "Generated SolrJ client generation and compilation",
+      "status": "partial",
+      "details": "The focused Gradle run completed :solr:solrj:openApiGenerate and :solr:solrj:compileJava, but failed later during :solr:core:compileJava."
+    },
+    {
+      "name": "Required seeded focused suites",
+      "status": "failed-before-tests",
+      "command": "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.cloud.TestRebalanceLeaders --tests org.apache.solr.cloud.MigrateRouteKeyTest --tests org.apache.solr.handler.admin.api.MigrateDocsAPITest --tests org.apache.solr.handler.admin.api.RebalanceLeadersAPITest --tests org.apache.solr.handler.admin.api.V2CollectionAPIMappingTest --tests org.apache.solr.handler.admin.TestCollectionAPIs --tests org.apache.solr.handler.admin.TestApiFramework --tests org.apache.solr.handler.V2ApiIntegrationTest -Ptests.seed=16398C0DE --rerun-tasks",
+      "exit_code": 1,
+      "tests_executed": 0,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "diagnostic": "CollectionsHandler.java:833: ambiguous NamedList.addAll; both addAll(Map<String,T>) and addAll(NamedList<? extends T>) match. The new v1 adapter expression is absent at reviewed baseline 415c639e and introduced by gate head f947ff28.",
+      "log": "evidence/runs/10-focused-suites.log",
+      "junit_summary": "evidence/runs/10-focused-suites.junit-summary.json"
+    },
+    {
+      "name": "tidy",
+      "status": "failed-stop-condition",
+      "command": "./gradlew --no-daemon tidy",
+      "exit_code": 0,
+      "tracked_changes": [
+        "solr/core/src/java/org/apache/solr/handler/admin/RebalanceLeaders.java",
+        "solr/core/src/test/org/apache/solr/cloud/MigrateRouteKeyTest.java"
+      ],
+      "tracked_changes_patch": "evidence/runs/20-tidy-tracked.patch",
+      "tracked_changes_patch_sha256": "dff19484519bb532a0941479b3666d5768833439931a92dfd7aa9989a9b0d413",
+      "restored_to_clean_exact_head": true,
+      "log": "evidence/runs/20-tidy.log"
+    },
+    {
+      "name": "Error Prone compile",
+      "status": "not-run-stop-condition",
+      "reason": "Stopped after tidy changed tracked files as required by the live gate."
+    },
+    {
+      "name": "Root check -x test",
+      "status": "not-run-stop-condition",
+      "reason": "Stopped after tidy changed tracked files as required by the live gate."
+    },
+    {
+      "name": "Six migrate mutation legs",
+      "status": "not-run-stop-condition",
+      "reason": "Stopped after tidy changed tracked files; static review only."
+    },
+    {
+      "name": "Rebalance compatibility and argument-propagation probes",
+      "status": "not-run-stop-condition",
+      "reason": "Stopped after tidy changed tracked files; static review identified remaining gaps."
+    },
+    {
+      "name": "Executor stop",
+      "status": "passed",
+      "details": {
+        "type": "executor-stop-state",
+        "job": "pr-5284-review-fixes-linux-gate-20261110",
+        "stopped_at": "2026-11-10T17:40:10+00:00",
+        "execution_host": "0609f7968656",
+        "active_gradle_processes": [],
+        "source_worktree": {
+          "path": "/workspace/worktrees/pr-5284-review-fixes-linux-gate-20261110",
+          "head_before_removal": "f947ff28cf3c591d5d9a230d526df6bdea6d693a",
+          "clean_before_removal": true,
+          "removed": true
+        },
+        "mandatory_locks": [
+          {
+            "path": "/workspace/tools/.gradle-phone-agent-2.lock",
+            "acquirable": true
+          },
+          {
+            "path": "/workspace/tools/.gradle-0609f7968656.lock",
+            "acquirable": true
+          }
+        ],
+        "workspace_free_inodes_percent": 71,
+        "workspace_disk_df": "/dev/root        72G   22G   50G  31% /",
+        "workspace_inode_df": "/dev/root      1868096 532186 1335910   29% /",
+        "docker_executable": null,
+        "docker_used_or_installed_by_gate": false,
+        "source_branch_or_public_pr_changed": false,
+        "public_comment_or_metadata_changed": false,
+        "stop_reason": "Exact-head compile failure plus tidy changed tracked files; live gate requires stopping after tidy changes."
+      }
+    }
+  ],
+  "coverage_limits": [
+    "The required seeded selected suites did not execute: core compilation failed first; no test results or JUnit XML exist.",
+    "tidy exited 0 but changed two tracked files; the exact diff is preserved and the disposable worktree was restored. The live gate requires stopping after tracked tidy changes.",
+    "Error Prone compilation and root check -x test were not run after the tidy stop condition.",
+    "The six migration mutation legs and rebalance compatibility/argument-propagation probes were not run; static mapping review is not mutation proof.",
+    "V2ApiIntegrationTest.testException, including the malformed-body behavior linked to open PR #5285, did not execute.",
+    "No Docker, Windows, or Cygwin proof was performed; Linux is not claimed as a substitute for Windows/Cygwin."
+  ],
+  "static_review": "evidence/coverage-review.md",
+  "evidence_record": "records/evidence/pr-5284-review-fixes-linux-gate-20261110-evidence.json",
+  "evidence_archive": {
+    "filename": "pr-5284-review-fixes-linux-gate-20261110-evidence.tar.gz",
+    "sha256": "aa2e69f642a182d7cc3b62be5489ca20da85c6b7bad8200ef752d3cee4031ca3",
+    "bytes": 14607,
+    "manifest_sha256": "36b7259b277ec8cc7ae708b058a56075c4f18b8aa7bb7c9a7e89e334eeeb569a",
+    "uploaded_copy_verified": true
+  },
+  "scope_attestation": "No source branch, fork branch, public PR metadata, or public comment was changed. Tidy-only local edits were restored; the disposable checkout was removed after preserving evidence. No Docker, Windows, or Cygwin proof is claimed."
+}
