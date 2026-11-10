@@ -1,0 +1,271 @@
+{
+  "type": "receipt",
+  "id": "pr-5319-route-filter-linux-2026-11-10",
+  "owner": "phone-agent-2",
+  "job": "pr-5319-route-filter-linux-2026-11-10",
+  "gate": "records/gate/pr-5319-route-filter-linux-2026-11-10.json",
+  "head": "d1a47bb29cdd9f69c1b65e813fc2bf13dbb00056",
+  "evidence": "records/evidence/pr-5319-route-filter-linux-2026-11-10-evidence.json",
+  "report": "records/report/pr-5319-route-filter-linux-2026-11-10-report.json",
+  "evidence_sha256": "c407a419acd3946eb656d1810f35274895f1475d593bf85c7ce6e12b0e581a2a",
+  "logs_directory": "/workspace/gates/logs/phone-agent-2/pr-5319-route-filter-linux-2026-11-10",
+  "verdict": "incomplete",
+  "summary": "The exact assigned-head class passes 8/8, including testRouteFilter; the unchanged base passes its original 7/7 tests. Both isolated mutations fail at their intended runtime assertions. tidy passes with no tracked changes, and the remaining root checks pass. The receipt is incomplete because 15 authorized Antora/site-generation and link-validation tasks were excluded, so the gate's no-required-skips condition for a full pass is not met. This is a coverage-only test addition; no production defect has been established.",
+  "results": [
+    {
+      "leg": "exact_head_class",
+      "command": "./gradlew :solr:core:test --tests org.apache.solr.handler.admin.api.ListCollectionsDetailedTest -Ptests.seed=5319C0DE -Ptests.rerun=true",
+      "exit_code": 0,
+      "logs": {
+        "command": "runs/head-class-exact.command",
+        "driver": "runs/head-class-exact.driver.log",
+        "driver_sha256": "b8e9fddbd5f34f5ae9dbfce2ccb594d03b6587938d16122c4d693fcd13a7b272",
+        "monitor": "runs/head-class-exact.monitor.log",
+        "monitor_sha256": "c8957aafd54323d12b38ba90d235cfd4076edb0aa64afe6999257f8d3699fe07"
+      },
+      "tests": 8,
+      "passed": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit_xml": [
+        {
+          "path": "junit/head-class-exact/solr/core/build/test-results/test/TEST-org.apache.solr.handler.admin.api.ListCollectionsDetailedTest.xml",
+          "bytes": 74057,
+          "sha256": "0207caaa8f64560c06c2d38d719ea2efbb94790e3c8f485666910b5e10a49e50"
+        }
+      ],
+      "testRouteFilter": [
+        {
+          "classname": "org.apache.solr.handler.admin.api.ListCollectionsDetailedTest",
+          "name": "testRouteFilter",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "leg": "unchanged_contributor_base_class",
+      "command": "./gradlew :solr:core:test --tests org.apache.solr.handler.admin.api.ListCollectionsDetailedTest -Ptests.seed=5319C0DE -Ptests.rerun=true",
+      "exit_code": 0,
+      "logs": {
+        "command": "runs/base-class-exact.command",
+        "driver": "runs/base-class-exact.driver.log",
+        "driver_sha256": "27d3cfee861631a7c9093f376992676146496660b2130d381ca1d010185601c2",
+        "monitor": "runs/base-class-exact.monitor.log",
+        "monitor_sha256": "605f4bf5d9dfaf6f20fd27423e7983d7de9149ef29d4f2ea7709cd22074889c4"
+      },
+      "tests": 7,
+      "passed": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit_xml": [
+        {
+          "path": "junit/base-class-exact/solr/core/build/test-results/test/TEST-org.apache.solr.handler.admin.api.ListCollectionsDetailedTest.xml",
+          "bytes": 57978,
+          "sha256": "d1545a977329262b58150680b852f7e5d7459ca0452cdceca52aaefeaa12ed76"
+        }
+      ],
+      "testRouteFilter": "absent on unchanged base"
+    },
+    {
+      "leg": "mutation_route_queryparam",
+      "command": "./gradlew :solr:core:test --tests org.apache.solr.handler.admin.api.ListCollectionsDetailedTest.testRouteFilter -Ptests.seed=5319C0DE -Ptests.rerun=true",
+      "exit_code": 1,
+      "logs": {
+        "command": "runs/mutation-route-queryparam-exact.command",
+        "driver": "runs/mutation-route-queryparam-exact.driver.log",
+        "driver_sha256": "28a4e0fc3f20218692ac5e5537d05e03ffa0ce6244a8105999a3fecf4886b2f2",
+        "monitor": "runs/mutation-route-queryparam-exact.monitor.log",
+        "monitor_sha256": "2f3060226932a5e0d7283517800070b74ccba0fa7656a1f043bdd247cae9c34b"
+      },
+      "tests": 1,
+      "passed": 0,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "junit_xml": [
+        {
+          "path": "junit/mutation-route-queryparam-exact/solr/core/build/test-results/test/TEST-org.apache.solr.handler.admin.api.ListCollectionsDetailedTest.xml",
+          "bytes": 52202,
+          "sha256": "edefc0cd1a623dbe39cdb387a7aaab18f639679bca4d4992075a86679ec9401c"
+        }
+      ],
+      "assertion": "java.lang.AssertionError: expected:<[a]> but was:<[a, b]>",
+      "assertion_source_line": "ListCollectionsDetailedTest.java:166",
+      "patch": {
+        "path": "mutations/route-queryparam-exact.patch",
+        "sha256": "2394effed2dc3465e31cd5345e4953f4e90d13a0c7309edf10f483b3c6661c3c"
+      },
+      "test_source_unchanged": true
+    },
+    {
+      "leg": "mutation_route_shardbinding",
+      "command": "./gradlew :solr:core:test --tests org.apache.solr.handler.admin.api.ListCollectionsDetailedTest.testRouteFilter -Ptests.seed=5319C0DE -Ptests.rerun=true",
+      "exit_code": 1,
+      "logs": {
+        "command": "runs/mutation-route-shardbinding-exact.command",
+        "driver": "runs/mutation-route-shardbinding-exact.driver.log",
+        "driver_sha256": "c39846cfcc86be323dcfedb7951a207ecfd1df4acc2555b7610bd0a3ddddc195",
+        "monitor": "runs/mutation-route-shardbinding-exact.monitor.log",
+        "monitor_sha256": "511ab5321559aa8c1f5395358a463446b6e930932dcbb0b959a28f4c89b1e017"
+      },
+      "tests": 1,
+      "passed": 0,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "junit_xml": [
+        {
+          "path": "junit/mutation-route-shardbinding-exact/solr/core/build/test-results/test/TEST-org.apache.solr.handler.admin.api.ListCollectionsDetailedTest.xml",
+          "bytes": 52417,
+          "sha256": "86d68d31186d351d12ba36d353124c6577e2d410e4f87baae3bac5d6f88dc225"
+        }
+      ],
+      "assertion": "java.lang.AssertionError: expected:<[b]> but was:<[a]>",
+      "assertion_source_line": "ListCollectionsDetailedTest.java:169",
+      "patch": {
+        "path": "mutations/route-shardbinding-exact.patch",
+        "sha256": "5464a603b411a7def1575c9ac020cdeb2de613d4221386d18c43b99cead12dbb"
+      },
+      "test_source_unchanged": true
+    },
+    {
+      "leg": "tidy",
+      "command": "./gradlew tidy",
+      "exit_code": 0,
+      "logs": {
+        "command": "runs/tidy-exact-head.command",
+        "driver": "runs/tidy-exact-head.driver.log",
+        "driver_sha256": "20dced2f805325b74dc6c78e46bca5c40caa3cda02e5891ec658391e2268bf73",
+        "monitor": "runs/tidy-exact-head.monitor.log",
+        "monitor_sha256": "32ec38a16226a1a966e3e3879634a75ce9e43c2cd2d1ea8ae3bd0a91adf43bb1"
+      },
+      "task_counts": {
+        "actionable_tasks": 62,
+        "executed": 58,
+        "up_to_date": 4
+      },
+      "tracked_changed_files": [],
+      "worktree_clean_after": true
+    },
+    {
+      "leg": "root_check_x_test_antora_authorized_exclusions",
+      "command": "./gradlew --no-daemon check -x test -x :solr:solr-ref-guide:nodeSetup -x :solr:solr-ref-guide:npmSetup -x :solr:solr-ref-guide:downloadAntoraCli -x :solr:solr-ref-guide:downloadAntoraLunrExtension -x :solr:solr-ref-guide:downloadAntoraSiteGenerator -x :solr:solr-ref-guide:downloadAsciidoctorMathjaxExtension -x :solr:solr-ref-guide:downloadAsciidoctorTabsExtension -x :solr:solr-ref-guide:downloadAntora -x :solr:solr-ref-guide:buildLocalAntoraPlaybookYaml -x :solr:solr-ref-guide:buildLocalAntoraYaml -x :solr:solr-ref-guide:setupLocalSiteStagingDir -x :solr:solr-ref-guide:buildLocalAntoraSite -x :solr:solr-ref-guide:buildLocalSite -x :solr:solr-ref-guide:downloadLinkValidator -x :solr:solr-ref-guide:checkSiteLinks",
+      "exit_code": 0,
+      "logs": {
+        "command": "runs/root-check-excluding-antora.command",
+        "driver": "runs/root-check-excluding-antora.driver.log",
+        "driver_sha256": "179bfaa0d597cf8f8aef679d0aa4cd0c83b067654f95fb6ac66d4199b045c4a7",
+        "monitor": "runs/root-check-excluding-antora.monitor.log",
+        "monitor_sha256": "17865b5f0a64be5187e63397c32244d0b95e6292fdd599e522303caae590ce33"
+      },
+      "task_counts": {
+        "actionable_tasks": 516,
+        "executed": 490,
+        "up_to_date": 26
+      },
+      "tests_excluded": true,
+      "excluded_tasks": [
+        ":solr:solr-ref-guide:nodeSetup",
+        ":solr:solr-ref-guide:npmSetup",
+        ":solr:solr-ref-guide:downloadAntoraCli",
+        ":solr:solr-ref-guide:downloadAntoraLunrExtension",
+        ":solr:solr-ref-guide:downloadAntoraSiteGenerator",
+        ":solr:solr-ref-guide:downloadAsciidoctorMathjaxExtension",
+        ":solr:solr-ref-guide:downloadAsciidoctorTabsExtension",
+        ":solr:solr-ref-guide:downloadAntora",
+        ":solr:solr-ref-guide:buildLocalAntoraPlaybookYaml",
+        ":solr:solr-ref-guide:buildLocalAntoraYaml",
+        ":solr:solr-ref-guide:setupLocalSiteStagingDir",
+        ":solr:solr-ref-guide:buildLocalAntoraSite",
+        ":solr:solr-ref-guide:buildLocalSite",
+        ":solr:solr-ref-guide:downloadLinkValidator",
+        ":solr:solr-ref-guide:checkSiteLinks"
+      ],
+      "non_antora_checks_retained": true,
+      "limitation": "Antora-specific Solr Reference Guide site generation and link validation were skipped per explicit authorization.",
+      "task_graph_dry_run": "runs/root-check-dry-run-antora-excluded.driver.log"
+    }
+  ],
+  "environment": {
+    "execution_host": "phone-agent-2",
+    "host_id": "0609f7968656",
+    "os": "Linux-6.18.38+-x86_64-with-glibc2.39",
+    "uname": {
+      "system": "Linux",
+      "node": "0609f7968656",
+      "release": "6.18.38+",
+      "version": "#1 SMP PREEMPT_DYNAMIC Tue Sep 29 13:29:48 UTC 2026",
+      "machine": "x86_64",
+      "processor": "x86_64"
+    },
+    "jdk": [
+      "openjdk version \"21.0.12.1\" 2026-08-18",
+      "OpenJDK Runtime Environment (build 21.0.12.1+1-24.04.4-Ubuntu)",
+      "OpenJDK 64-Bit Server VM (build 21.0.12.1+1-24.04.4-Ubuntu, mixed mode, sharing)"
+    ],
+    "gradle": "9.7.0",
+    "java_home": "/usr/lib/jvm/java-21-openjdk-amd64",
+    "gradle_user_home": "/workspace/gradle-home",
+    "mandatory_gradle_locks": [
+      "/workspace/tools/.gradle-phone-agent-2.lock",
+      "/workspace/tools/.gradle-0609f7968656.lock"
+    ],
+    "lock_protocol": "Both locks held for each Gradle invocation.",
+    "inode_stop_threshold_free_percent": 15,
+    "final_free_inode_percent": 63.1,
+    "minimum_free_inode_percent_observed_in_monitors": 59.55,
+    "free_disk_bytes": 50114121728,
+    "docker_executable_present": false,
+    "docker_installed_or_used": false,
+    "test_seed": "5319C0DE",
+    "antora_steps_skipped_by_authorization": true
+  },
+  "source": {
+    "fork_branch": "nick-boss-tech/solr:pr-5319-route-filter-tests",
+    "head": "d1a47bb29cdd9f69c1b65e813fc2bf13dbb00056",
+    "base": "3a72ba0436d9decb48868ca46b94a5f52e2dc821",
+    "base_is_ancestor": true,
+    "source_branch_unchanged": true,
+    "public_pr": "https://github.com/apache/solr/pull/5319",
+    "public_pr_state": "open",
+    "public_pr_head": "3a72ba0436d9decb48868ca46b94a5f52e2dc821",
+    "public_pr_head_repository": "epugh/solr",
+    "source_or_pr_changes_made": false
+  },
+  "executor_stop_verification": {
+    "active_gate_task_process": false,
+    "matching_executor_processes": [],
+    "gradle_daemons_stopped": 4,
+    "gradle_stop_command": "./gradlew --stop",
+    "gradle_stop_exit_code": 0,
+    "required_gradle_locks": [
+      {
+        "path": "/workspace/tools/.gradle-phone-agent-2.lock",
+        "available": true
+      },
+      {
+        "path": "/workspace/tools/.gradle-0609f7968656.lock",
+        "available": true
+      }
+    ],
+    "assigned_source_head": "d1a47bb29cdd9f69c1b65e813fc2bf13dbb00056",
+    "assigned_worktree": "Clean at exact assigned SHA before removal; disposable worktrees removed after evidence capture.",
+    "mutations_restored": true,
+    "source_branch_or_public_pr_changed": false,
+    "evidence_file": "executor-stop.json"
+  },
+  "cleanup": {
+    "mutations_restored": true,
+    "mutation_worktrees_removed": true,
+    "exact_head_and_base_worktrees_removed": true,
+    "gradle_daemons_stopped": true,
+    "source_worktree_clean_at_assigned_head": true
+  },
+  "limitations": [
+    "Verdict is incomplete because 15 Antora/site-chain tasks were excluded with authorization; the gate policy requires no required skips for a full pass.",
+    "This is a coverage-only addition; no production defect has been established."
+  ],
+  "recorded_at": "2026-11-10T23:01:30Z"
+}
