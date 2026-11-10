@@ -1,0 +1,229 @@
+{
+  "environment": {
+    "build_serialization_locks": [
+      "/workspace/tools/.gradle-phone-agent-2.lock",
+      "/workspace/tools/.gradle-0609f7968656.lock"
+    ],
+    "gradle_no_daemon": true,
+    "host": "Linux",
+    "inode_guard": {
+      "free_percent_at_executor_stop": 73.42,
+      "minimum_free_inodes_observed": 1250409,
+      "minimum_free_percent_observed_across_all_runs": 66.93,
+      "stop_at_or_below_free_percent": 15
+    },
+    "jdk": "OpenJDK 21.0.12.1",
+    "matching_executors_at_stop": 0
+  },
+  "evidence_bundle_id": "pr5313-startup-wait-linux-gate-round2-20261109-evidence-bundle",
+  "evidence_records": [
+    {
+      "path": "records/evidence/pr5313-startup-wait-linux-gate-round2-20261109-evidence-bundle.json",
+      "sha256": "3443e47dd0b84af7eceb6714e9f6e4b00c34176aaed81b7e575a6a9bae80d3fd"
+    },
+    {
+      "path": "records/evidence/pr5313-startup-wait-linux-gate-round2-20261109-executor-stop-final.json",
+      "sha256": "8d34cad26374ec8eb116cb135b974b7c69d7937b9945a5709cf2b3cceae188d0"
+    }
+  ],
+  "execution_notes": [
+    "All Gradle invocations were serialized through runners that acquired both required host locks and monitored inode/disk headroom.",
+    "The lowest free-inode percentage observed in the monitor logs was 66.93%, above the 15% stop threshold; at final executor stop it was 73.42%.",
+    "The first probe-classpath init-script attempt failed during Gradle project lifecycle setup; the hook was corrected and the retry plus external probe compilation succeeded. No source files were changed.",
+    "An extra capture-only TestSolrXml run omitted the fixed seed; it was not counted and is excluded from the evidence bundle. The authoritative preserved XML is from exact-seed run 67 with tests.seed=5313C0DE and --rerun-tasks.",
+    "The Antora dependency setup emitted npm advisory counts of 8 vulnerabilities (6 moderate, 2 high); no npm audit fix was run, and the temporary standard clone was removed after proof."
+  ],
+  "executor_stop_id": "pr5313-startup-wait-linux-gate-round2-20261109-executor-stop-final",
+  "gate": "pr5313-startup-wait-linux-gate-round2-20261109",
+  "hashes": {
+    "EnvUtilsTest_junit_sha256": "e28737faf756f960ac9138cb2aa8a0e077df0e837b70fec4a7a2c88c1a6aa777",
+    "TestSolrXml_junit_sha256": "c88cef45a39c6b4c14f989980e1edd20952e885053829cd1ddd74ed62649459a",
+    "ZkFailoverTest_junit_sha256": "2a2d4d85017e90b571a0e759148df46d6f53bf20ba8c04c465ee73ff2406095d",
+    "base_fail_before_junit_sha256": "77e95f35761372b626097ec9ed4f1ed884604ff363fd3a6b3706bf3e3b77fd88",
+    "evidence_archive_sha256": "b62fa25d76943978afc416a24e1d3e85c91649a3981f3c15d2d68271846ffe16",
+    "evidence_manifest_sha256": "4e10a8e3bc1baeee1882c9194c6e9006ae49d4f79684bdda01aa18b67d5ee5ef",
+    "executor_stop_sha256": "5fc3243cd6ee1def5c2e0335b4c27813734dd88898618c2c7306390947f32456"
+  },
+  "head": "4be1ad602621d2af96565355dce3804ee4744aae",
+  "id": "pr5313-startup-wait-linux-gate-round2-20261109-report",
+  "job": "pr5313-startup-wait-linux-gate-round2-20261109",
+  "limitations": [
+    "The assigned proof applies only to nick-boss-tech/solr:solr-18630-submit at 4be1ad602621d2af96565355dce3804ee4744aae; the public Apache Solr PR #5313 head remained at 358f13d9fdfaed260143a51100cd5657a582d562, so this is not proof for a public PR update.",
+    "No Docker installation or invocation was performed by the worker. Docker-dependent tests/builds remain unrun; only static :solr:docker:check validators ran as part of check -x test.",
+    "No Windows or Cygwin proof is claimed; this was a Linux-only gate.",
+    "No source branch, public PR content, or PR discussion was changed by the gate worker."
+  ],
+  "proof_legs": [
+    {
+      "authoritative_run": "67-test-solrxml-exact-seed",
+      "command": "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.core.TestSolrXml -Ptests.seed=5313C0DE --rerun-tasks",
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "junit": "evidence/junit/TEST-org.apache.solr.core.TestSolrXml.xml",
+      "junit_sha256": "c88cef45a39c6b4c14f989980e1edd20952e885053829cd1ddd74ed62649459a",
+      "name": "TestSolrXml",
+      "notable_cases_passed": [
+        "testStartupWithDefaultZkWait (uses an embedded ZkTestServer)",
+        "testStartUpZkTimeOutConvertsSecondsToMillis",
+        "testStartUpZkTimeOutRejectsMalformedValue"
+      ],
+      "passed": 37,
+      "skipped": 1,
+      "skipped_case": "testFailAtConfigParseTimeWhenSolrConfigParamsAreDuplicated (@Ignore, pre-existing; not counted as a pass)",
+      "tests": 38
+    },
+    {
+      "command": "./gradlew --no-daemon :solr:solrj:test --tests org.apache.solr.common.util.EnvUtilsTest -Ptests.seed=5313C0DE --rerun-tasks",
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "junit": "evidence/junit/TEST-org.apache.solr.common.util.EnvUtilsTest.xml",
+      "junit_sha256": "e28737faf756f960ac9138cb2aa8a0e077df0e837b70fec4a7a2c88c1a6aa777",
+      "name": "EnvUtilsTest",
+      "notable_case_passed": "waitForZkAliasesHaveDeterministicPrecedence",
+      "passed": 15,
+      "skipped": 0,
+      "tests": 15
+    },
+    {
+      "case_passed": "testRestartZkWhenClusterDown",
+      "command": "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.cloud.ZkFailoverTest -Ptests.seed=5313C0DE --rerun-tasks",
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "junit": "evidence/junit/TEST-org.apache.solr.cloud.ZkFailoverTest.xml",
+      "junit_sha256": "2a2d4d85017e90b571a0e759148df46d6f53bf20ba8c04c465ee73ff2406095d",
+      "name": "ZkFailoverTest",
+      "passed": 1,
+      "skipped": 0,
+      "tests": 1
+    },
+    {
+      "all_explicit_local_zkhost_connections_accepted": true,
+      "all_fresh_jvms": true,
+      "all_probe_assertions": "startup_timeout_probe=PASS",
+      "command_records": "40-45-probe-*.command in the evidence bundle",
+      "name": "fresh_jvm_startup_timeout_probes",
+      "note": "The probe peer accepts the loopback connection and intentionally does not complete the ZooKeeper handshake; the expected SolrException occurs at the measured startup timeout.",
+      "probe_implementation": "probes/StartupWaitProbe.java",
+      "probes": [
+        {
+          "accepted_local_connections": 1,
+          "effective_startup_timeout_ms": 1000,
+          "elapsed_ms": 1343,
+          "input": "-DwaitForZk=1",
+          "label": "system-waitForZk",
+          "zk_host": "127.0.0.1:33705"
+        },
+        {
+          "accepted_local_connections": 1,
+          "effective_startup_timeout_ms": 1000,
+          "elapsed_ms": 1339,
+          "input": "SOLR_WAIT_FOR_ZK=1",
+          "label": "env-SOLR_WAIT_FOR_ZK",
+          "zk_host": "127.0.0.1:37141"
+        },
+        {
+          "accepted_local_connections": 1,
+          "effective_startup_timeout_ms": 5000,
+          "elapsed_ms": 5334,
+          "input": "-Dsolr.cloud.wait.for.zk.seconds=5 -DwaitForZk=1",
+          "label": "modern-property-beats-waitForZk",
+          "zk_host": "127.0.0.1:34657"
+        },
+        {
+          "accepted_local_connections": 1,
+          "effective_startup_timeout_ms": 1000,
+          "elapsed_ms": 1336,
+          "input": "-Dsolr.wait.for.zk=1 -DwaitForZk=5",
+          "label": "solr.wait.for.zk-beats-waitForZk",
+          "zk_host": "127.0.0.1:39519"
+        },
+        {
+          "accepted_local_connections": 1,
+          "effective_startup_timeout_ms": 30001,
+          "elapsed_ms": 30249,
+          "input": "-Dsolr.zookeeper.client.timeout=30001 (startup property absent)",
+          "label": "default-client-timeout-30001ms",
+          "zk_host": "127.0.0.1:45881"
+        },
+        {
+          "accepted_local_connections": 1,
+          "effective_startup_timeout_ms": 2000,
+          "elapsed_ms": 2333,
+          "input": "-Dsolr.zookeeper.client.timeout=30001 -Dsolr.cloud.wait.for.zk.seconds=2",
+          "label": "explicit-startup-seconds-overrides-30001ms-client-timeout",
+          "zk_host": "127.0.0.1:45919"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "cause": "java.lang.ArithmeticException: integer overflow at Math.toIntExact",
+      "command": "env -u SOLR_WAIT_FOR_ZK ./gradlew --no-daemon -Dsolr.zookeeper.client.timeout=30000 :solr:core:test --tests org.apache.solr.core.TestSolrXml.testStartupWithDefaultZkWait -Ptests.seed=5313C0DE --rerun-tasks",
+      "errors": 0,
+      "exit_code": 1,
+      "expected_failure_reproduced": true,
+      "failures": 1,
+      "head": "358f13d9fdfaed260143a51100cd5657a582d562",
+      "junit": "evidence/junit/TEST-org.apache.solr.core.TestSolrXml.fail-before.xml",
+      "junit_sha256": "77e95f35761372b626097ec9ed4f1ed884604ff363fd3a6b3706bf3e3b77fd88",
+      "name": "base_head_fail_before_control",
+      "overlay": "Only the new startup integration method and the ZkTestServer import were transplanted; see probes/fail-before-overlay.diff.",
+      "skipped": 0,
+      "test": "org.apache.solr.core.TestSolrXml.testStartupWithDefaultZkWait",
+      "tests": 1,
+      "top_level_exception": "org.apache.solr.common.SolrException"
+    },
+    {
+      "command": "./gradlew --no-daemon tidy",
+      "exit_code": 0,
+      "final_assigned_worktree_status": "clean before the temporary worktree was removed",
+      "name": "tidy",
+      "tracked_changes": false
+    },
+    {
+      "command": "./gradlew --no-daemon check -x test",
+      "docker_cli_invocations": 0,
+      "docker_dependent_tests_or_builds": "unrun; root check excluded test tasks as required and no Docker executable/image/container task was invoked",
+      "initial_attempt": {
+        "checkout": "linked worktree at the assigned head",
+        "diagnosis": "Antora reported: Local content source must be a git repository at the linked-worktree path.",
+        "exit_code": 1
+      },
+      "name": "root_check",
+      "recovery": {
+        "antora_site_task_passed": true,
+        "checkout": "clean conventional clone with a .git directory at the exact assigned head",
+        "result": "BUILD SUCCESSFUL in 4m 36s; 556 actionable tasks (542 executed, 14 up-to-date)",
+        "root_check_exit_code": 0
+      },
+      "static_docker_check_tasks_in_root_check": [
+        ":solr:docker:collectJarInfos",
+        ":solr:docker:validateJarChecksums",
+        ":solr:docker:rat",
+        ":solr:docker:validateSourcePatterns",
+        ":solr:docker:validateJarLicenses",
+        ":solr:docker:licenses",
+        ":solr:docker:check"
+      ],
+      "status": "passed"
+    }
+  ],
+  "source": {
+    "applies_to_public_pr_head": false,
+    "assigned_worktree_clean_at_head_before_removal": true,
+    "base_head": "358f13d9fdfaed260143a51100cd5657a582d562",
+    "branch": "solr-18630-submit",
+    "head": "4be1ad602621d2af96565355dce3804ee4744aae",
+    "repository": "nick-boss-tech/solr",
+    "source_or_pr_changes_by_gate_worker": false,
+    "upstream_pr": "https://github.com/apache/solr/pull/5313",
+    "upstream_pr_head_at_preflight": "358f13d9fdfaed260143a51100cd5657a582d562",
+    "upstream_pr_head_at_stop": "358f13d9fdfaed260143a51100cd5657a582d562"
+  },
+  "summary": "The assigned Linux gate passed on the exact nick-boss-tech/solr fork head 4be1ad602621d2af96565355dce3804ee4744aae. All three named test suites passed with one pre-existing @Ignore skip; the six fresh-JVM startup timeout/alias probes passed; the base-head control reproduced the required integer-overflow failure; tidy left no tracked changes; and root check -x test passed after recovering from an Antora linked-worktree checkout-layout failure. Results do not validate the public PR's current head, which remains 358f13d9fdfaed260143a51100cd5657a582d562.",
+  "type": "report",
+  "verdict": "passed"
+}
