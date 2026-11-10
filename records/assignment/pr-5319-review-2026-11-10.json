@@ -1,0 +1,9 @@
+{
+  "host": "Windows source review; Linux for any build or runtime proof",
+  "id": "pr-5319-review-2026-11-10",
+  "job": "pr-5319-review-2026-11-10",
+  "scope": "Read-only review and local review record; no public posting or source changes",
+  "source": "https://github.com/apache/solr/pull/5319",
+  "summary": "Review Apache Solr PR 5319 (SOLR-18553) at its live head",
+  "type": "assignment"
+}
