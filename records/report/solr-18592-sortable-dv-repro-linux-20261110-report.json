@@ -1,0 +1,8 @@
+{
+  "gate": "solr-18592-sortable-dv-repro-linux-20261110",
+  "head": "b9aed02ac1cde907a06d04fdbd96568ca38b85a9",
+  "id": "solr-18592-sortable-dv-repro-linux-20261110-report",
+  "job": "solr-18592-sortable-dv-repro-linux-20261110",
+  "summary": "Reproduction confirmed on Linux. With all controls passing, an explicit fl on a stored SortableTextField with maxCharsForDocValues=6 and useDocValuesAsStored=false returns 'apple ' (6 chars) instead of the stored 'apple pear orange': the DocValues substitution leaks the truncated sort value into the stored-field response. The neighboring useDocValuesAsStored path is unaffected. This validates the Windows side's source-derived hypothesis as a real defect (related SOLR-18592 / SOLR-8344 line). No fix was attempted and nothing was posted publicly; whether to open this as its own ticket or fold it into SOLR-18592 is the owner's call.",
+  "type": "report"
+}

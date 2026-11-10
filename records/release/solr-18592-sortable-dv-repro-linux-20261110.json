@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent",
+  "evidence": "records/evidence/solr-18592-sortable-dv-repro-linux-20261110-evidence.tar.gz",
+  "id": "solr-18592-sortable-dv-repro-linux-20261110",
+  "job": "solr-18592-sortable-dv-repro-linux-20261110",
+  "reason": "Gate completed with verdict passed in the gate's reproduction sense at head b9aed02ac1cde907a06d04fdbd96568ca38b85a9: controls passed in full, the explicit-field test failed at the specified assertion with the value truncated to exactly 6 characters ('apple ' of 'apple pear orange'), the neighboring useDocValuesAsStored test passed, tidy was clean, and root check passed with validateSourcePatterns executed. No source, branch, or PR changes were made.",
+  "type": "release"
+}
