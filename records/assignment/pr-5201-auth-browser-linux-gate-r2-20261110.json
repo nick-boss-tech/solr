@@ -1,0 +1,16 @@
+{
+  "id": "pr-5201-auth-browser-linux-gate-r2-20261110",
+  "intended_host": "Linux with Solr build toolchain and Chrome/Chromium",
+  "job": "pr-5201-auth-browser-linux-gate-r2-20261110",
+  "prior_receipt": "records/receipt/pr-5201-auth-browser-linux-gate-20261110-receipt.json",
+  "requirements": "Claim this job and follow the separate gate record. Use a normal clone for root check because the previous linked worktree Antora diagnostic failed. No source or public changes as part of the gate.",
+  "source": {
+    "branch": "pr-5201-auth-browser-fix",
+    "contributor_parent": "3f9faa9e9861ce28f3ede3f4305bd91b6e297463",
+    "head": "0355023c3170c87a84cd9e5688ae6b4f3e4df3ae",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5201-auth-browser-linux-gate-20261110",
+  "summary": "Run superseding exact-head Linux gate for PR 5201 after receipt follow-up.",
+  "type": "assignment"
+}
