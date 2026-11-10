@@ -1,0 +1,16 @@
+{
+  "environment": "Linux, JDK 21, clean normal clone of exact PR ref, isolated build directories and serialized build lock.",
+  "head": "918e579155b109e6acab176c07c8c5f97bf21f3b",
+  "id": "pr5108-reverse-cursor-integration-linux-20261110",
+  "job": "pr5108-reverse-cursor-integration-linux-20261110",
+  "requirements": [
+    "Verify live apache/solr PR 5108 head and fetched PR ref both equal 918e579155b109e6acab176c07c8c5f97bf21f3b. Stop and reconcile if moved. The exact head's dependency catalog names Lucene 10.4.0; record resolved actual artifacts and hashes. No user-owned source branch or public PR is changed.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.search.SortSpecReverseTest --tests org.apache.solr.search.CursorMarkTest --tests org.apache.solr.CursorPagingTest --tests org.apache.solr.cloud.DistribCursorPagingTest -Ptests.seed=5108C0DE -Ptests.rerun=true. Preserve fresh XML and logs, counts, failures and skips. Confirm SortSpecReverseTest.testInverseSelectionAndSearchAfter and single-node and distributed testReverseCursorPaging actually executed.",
+    "Run ./gradlew :solr:solrj:test --tests org.apache.solr.client.solrj.response.QueryResponseTest -Ptests.seed=5108C0DE -Ptests.rerun=true. Preserve fresh XML and exact counts. Run the requested focused tests and formatting/check tasks named by the executor's host policy; if formatting changes the exact PR head, do not commit or report a pass for the original source.",
+    "Build a runnable Solr package from the same exact PR head with the documented solr/packaging assemble task. Record source identity, JDK, Gradle commands, archive hash, dependency inventory and clean state. Supply an authorized retrievable artifact location for Windows if available; otherwise report the path and handoff limitation. Do not publish binaries to an unapproved public location.",
+    "Report that this PR uses its own SortSpec.ReverseSortField wrapper and does not call apache/lucene PR 14775's inverseSort API. Passing these tests establishes the Solr behavior only, not an upstream Lucene patch or custom-subclass fallback. Lucene PR 14775 has open tie-breaking and searchBefore design questions; do not alter it or post publicly.",
+    "Publish a receipt with each leg's result, exact head and artifacts, and release after all executors have stopped. Report failed, skipped, stale or unrun checks explicitly. No public PR, issue or comment."
+  ],
+  "type": "gate",
+  "verdict_policy": "Pass the Solr build-and-test job only when the named exact-head tests and package succeed. An inaccessible package is an incomplete Windows handoff. Do not call any Lucene inverse API integration tested by this job."
+}
