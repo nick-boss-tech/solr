@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-nick-shanin",
+  "evidence": "records/report/solr-18606-pr5314-integrate-observable-20261110-report.json; Linux gate executor and Windows implementation worker previously released; no executor was started in this task.",
+  "id": "solr-18606-pr5314-integrate-observable-20261110",
+  "job": "solr-18606-pr5314-integrate-observable-20261110",
+  "reason": "Requested integration and comment corrections completed.",
+  "type": "release"
+}
