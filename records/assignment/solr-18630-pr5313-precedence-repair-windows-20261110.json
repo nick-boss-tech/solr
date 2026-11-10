@@ -1,0 +1,19 @@
+{
+  "comparison_receipt": "records/receipt/solr-18630-pr5313-mixed-precedence-probe-20261109-receipt.json",
+  "host": "Windows implementation",
+  "id": "solr-18630-pr5313-precedence-repair-windows-20261110",
+  "job": "solr-18630-pr5313-precedence-repair-windows-20261110",
+  "scope": "Preserve a supplied legacy Java system property's priority over an environment-sourced current name, retain deterministic alias handling and the current-name preference when both are Java properties, add focused regression tests, push to the fork, and request an exact-head Linux gate. No upstream write.",
+  "source_branch": "nick-boss-tech/solr:solr-18630-submit",
+  "source_head": "4be1ad602621d2af96565355dce3804ee4744aae",
+  "successor_of": "pr5313-tidy-repair-windows-20261109",
+  "summary": "Implement SOLR-18630 / PR 5313 mixed-source precedence repair after the Linux comparison confirmed an existing legacy system property loses to a modern environment variable at the offered head.",
+  "tags": [
+    "windows",
+    "implementation",
+    "solr-18630",
+    "pr-5313",
+    "linux-proof-pending"
+  ],
+  "type": "assignment"
+}
