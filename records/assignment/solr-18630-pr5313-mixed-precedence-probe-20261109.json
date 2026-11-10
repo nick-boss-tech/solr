@@ -1,0 +1,20 @@
+{
+  "contributor_head": "358f13d9fdfaed260143a51100cd5657a582d562",
+  "host": "Linux gate host",
+  "id": "solr-18630-pr5313-mixed-precedence-probe-20261109",
+  "job": "solr-18630-pr5313-mixed-precedence-probe-20261109",
+  "pre_pr_base": "b771587e9707c49847d728fd1f3ff259a182692c",
+  "prior_boundary_receipt": "records/receipt/pr5313-startup-boundary-proof-20261109-receipt.json",
+  "scope": "Read-only verification and compatibility recommendation. Do not modify a source branch or post a public comment. This is a distinct mixed-source precedence question; do not treat the earlier passing boundary receipt as a test of it.",
+  "source_branch": "nick-boss-tech/solr:solr-18630-submit",
+  "source_head": "4be1ad602621d2af96565355dce3804ee4744aae",
+  "summary": "LINUX TASK: SOLR-18630 / PR 5313. Run a controlled fresh-JVM comparison of a legacy Java system property against the current-name environment variable at the pre-PR baseline, contributor head, and offered fork head; recommend the compatibility rule from the observed results and documented evidence.",
+  "tags": [
+    "linux",
+    "probe",
+    "solr-18630",
+    "pr-5313",
+    "configuration-compatibility"
+  ],
+  "type": "assignment"
+}
