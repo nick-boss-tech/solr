@@ -1,0 +1,15 @@
+{
+  "base": "24e5430ed5675b53e74c6db6b5745fb49adc659d",
+  "host": "Windows source-only",
+  "id": "lucene14775-comparator-probe-windows-20261110",
+  "job": "lucene14775-comparator-probe-windows-20261110",
+  "scope": "Create a separate Nick fork branch from the contributor PR head; add one focused test with a custom SortField subclass and distinct values; preserve production code and existing PR history. Review, commit and normally push to fork, then request a separate Linux runtime proof. The test is a candidate reproducer, not executed proof or a proposed API decision. No Gradle or retired queue on Windows, and no public comment or PR.",
+  "summary": "Prepare a focused real-collector test for the custom SortField inverse concern on Lucene PR 14775",
+  "tags": [
+    "lucene",
+    "tests",
+    "implementation",
+    "integration"
+  ],
+  "type": "assignment"
+}
