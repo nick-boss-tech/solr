@@ -1,0 +1,12 @@
+{
+  "gate": "records/assignment/pr-5284-review-fixes-linux-gate-r2-20261110.json",
+  "head": "5fce0c06ee5afa8ac3606e32c2e441041da49864",
+  "id": "pr-5284-gate-repair-windows-20261110-report",
+  "job": "pr-5284-gate-repair-windows-20261110",
+  "limits": "Windows git diff --check was clean; no build or tests executed. Previous Linux run compiled generated SolrJ only, ran zero tests, and remains incomplete. No argument-propagation, mutation, Error Prone, root check or malformed-body proof yet. PR 5285 remained open at last read. PR 5284 head was not changed.",
+  "prior_head": "f947ff28cf3c591d5d9a230d526df6bdea6d693a",
+  "status": "Implemented, Proof Pending",
+  "summary": "Repaired ambiguous addAll overload by declaring the shared operation return as NamedList<Object>, preserving the SimpleOrderedMap instance. Applied the Linux tidy patch from the failed receipt after independently verifying its SHA-256. Pushed and independently verified the new fork head.",
+  "tidy_patch_sha256": "dff19484519bb532a0941479b3666d5768833439931a92dfd7aa9989a9b0d413",
+  "type": "report"
+}
