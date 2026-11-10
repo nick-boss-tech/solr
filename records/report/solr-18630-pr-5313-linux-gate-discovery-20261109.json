@@ -1,0 +1,15 @@
+{
+  "assignment": "records/assignment/pr5313-startup-boundary-proof-20261109.json",
+  "canonical_job": "pr5313-startup-boundary-proof-20261109",
+  "claim": "records/claim/pr5313-startup-boundary-proof-20261109.json",
+  "fork_branch": "nick-boss-tech/solr:solr-18630-submit",
+  "gate": "records/gate/pr5313-startup-boundary-proof-20261109.json",
+  "head": "4be1ad602621d2af96565355dce3804ee4744aae",
+  "id": "solr-18630-pr-5313-linux-gate-discovery-20261109",
+  "instructions": "Fetch coordination-v2; read the current canonical assignment and gate; confirm no claim or release and verify the fork head; a capable Linux worker claims this exact job ID before running the two startup-boundary proof legs. Publish the receipt and executor-stop evidence under this job. The previous successful test/build legs remain separately recorded in the round-two receipt.",
+  "intended_host": "Linux gate host",
+  "job": "pr5313-startup-boundary-proof-20261109",
+  "status_at_snapshot": "Open and unclaimed at board snapshot 46876e39160c65f2a042db73fd5c7211b58df69e; check the current canonical claim and release before taking it.",
+  "summary": "OPEN LINUX TASK: SOLR-18630 / apache/solr PR #5313 startup-boundary proof. The existing canonical assignment and gate are published on coordination-v2, not coordination-ui. This report is a discoverability pointer, not a second assignment or an execution claim.",
+  "type": "report"
+}
