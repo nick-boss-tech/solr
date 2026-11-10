@@ -1,0 +1,21 @@
+{
+  "acceptance": "All positive named suites, tidy, diff check and root check must execute successfully with zero failures, errors or skips, with exact fresh XML counts. The named regression must pass at the offered head and exhibit the specified behavioral failure at the contributor parent with the new test retained. Record all proof legs and any execution conditions; absent or skipped legs mean incomplete. The isolated input models the repeated-key javabin response at the QueryResponse boundary; it does not claim an executed server integration test.",
+  "branch": "nick-boss-tech/solr:pr-5311-pivot-duplicate-keys",
+  "commands": [
+    "./gradlew tidy; require exit 0 and a clean tracked tree, then git diff --check.",
+    "./gradlew :solr:solrj:cleanTest :solr:solrj:test --tests org.apache.solr.client.solrj.response.QueryResponseTest --tests org.apache.solr.client.solrj.response.QueryResponseSectionParityTest --tests org.apache.solr.client.solrj.response.QueryResponseJsonParserIntegrationTest --tests org.apache.solr.client.solrj.request.schema.SchemaRequestBodyTest -Ptests.seed=5311A11C0FFEE --rerun-tasks",
+    "./gradlew check -x test",
+    "Re-read the fork ref and confirm it still equals the tested head and the clean checkout remains unchanged."
+  ],
+  "contributor_parent": "cddb3445e81e31e662d6c8c3676c64d11f0158e3",
+  "environment": "Clean task-specific full Linux checkout, JDK 21 and host build lock. Record host, toolchain, seed, UTC start/end, exit codes, logs and fresh JUnit XML. Do not run on Windows.",
+  "fail_before": "In a separate disposable checkout of the offered head, replace only solr/solrj/src/java/org/apache/solr/client/solrj/response/QueryResponse.java with its version at contributor parent cddb3445e81e31e662d6c8c3676c64d11f0158e3; retain the new QueryResponseTest unchanged. Run ./gradlew :solr:solrj:cleanTest :solr:solrj:test --tests org.apache.solr.client.solrj.response.QueryResponseTest.testPivotFacetsWithRepeatedKeys -Ptests.seed=5311A11C0FFEE --rerun-tasks. Require the test to execute and fail on the final clone equality assertion after the duplicate entry and field assertions pass. Record fresh XML, exact assertion and exit code. A compilation, environment, startup or unrelated assertion failure is not fail-before proof. Preserve this checkout separately from the clean positive run.",
+  "head": "b8f10c9e3ea04746ee5f823e57fd9484426b448d",
+  "id": "pr-5311-pivot-linux-proof-20261109",
+  "job": "pr-5311-pivot-linux-gate-20261109",
+  "preflight": "Claim the canonical assignment, refresh live PR 5311 and its discussion, fetch the fork branch, require the remote head and checkout equal the specified full head, verify contributor parent is an ancestor and inspect its two-file diff. If either source head moved, stop and reconcile. Do not change the contributor branch.",
+  "receipt": "Publish the v2 receipt for this job and gate at the exact head with all commands, exit codes, fresh XML counts, fail-before outcome and authorized log locations. No PR or JIRA public write is authorized by this gate.",
+  "repair": "If formatting or a patch repair is needed, do not call this head passed; push a scoped follow-up and request a superseding exact-head gate. Investigate executed failures before any retry.",
+  "seed": "5311A11C0FFEE",
+  "type": "gate"
+}
