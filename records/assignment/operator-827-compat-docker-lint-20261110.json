@@ -1,0 +1,18 @@
+{
+  "capabilities": [
+    "linux",
+    "docker",
+    "go-1.27",
+    "helm"
+  ],
+  "head": "2f50da7dc5b11dbfabacd567ca7740ccf70c2dd7",
+  "id": "operator-827-compat-docker-lint-20261110",
+  "instructions": "Claim only on a host that already has the required Docker capability. Read the gate and prior receipt; verify exact head and run the missing lint proof. Do not change or push source, publish images, post comments, or imply the prior incomplete gate passed. Report real-cluster KinD proof as unrun unless separately executed with authorization and evidence.",
+  "intended_host": "Linux gate host with a working Docker engine, Go 1.27, Helm and network; do not install or enable Docker on an unauthorized host",
+  "job": "operator-827-compat-docker-lint-20261110",
+  "prior_evidence": "records/receipt/operator-827-compat-linux-20261110-receipt.json",
+  "source": "https://github.com/nick-boss-tech/solr-operator/tree/pr-827-compatibility-followup",
+  "successor_of": "operator-827-compat-linux-20261110",
+  "summary": "Complete Docker-dependent lint for the Solr Operator PR 827 compatibility follow-up",
+  "type": "assignment"
+}
