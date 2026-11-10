@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-nick-shanin",
+  "evidence": "Read-back matched draft at 672448a49c33a257e7a2f8722c84e823b100199c; implementation report records exact receipt and description state. No build executor started on Windows; this worker is stopping.",
+  "id": "solr-18606-pr5314-green-body-20261110",
+  "job": "solr-18606-pr5314-green-body-20261110",
+  "reason": "Authorized PR body update completed and independently verified.",
+  "type": "release"
+}
