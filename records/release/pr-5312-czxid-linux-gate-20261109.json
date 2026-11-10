@@ -1,0 +1,9 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "records/report/pr-5312-czxid-linux-gate-20261109-report.json; records/receipt/pr-5312-czxid-linux-gate-20261109-receipt.json; records/evidence/pr-5312-czxid-linux-gate-20261109-evidence.json (archive SHA-256 91af7ca83b343892178034022ed51af6d3af264d41c8e304ee5e3bf7b0f49ca8). Cleanup evidence: ./gradlew --stop exited 0 and stopped two daemons; post-stop Gradle/Solr process check was empty; both required host locks were free; positive and fail-before worktrees were removed.",
+  "id": "pr-5312-czxid-linux-gate-20261109",
+  "job": "pr-5312-czxid-linux-gate-20261109",
+  "reason": "Linux gate execution is complete and the failed/incomplete proof outcome is recorded. No source repair was authorized or made; a separately authorized implementation fix and new exact-head gate are needed before proof can pass.",
+  "released_at": "2026-11-10T04:55:30+00:00",
+  "type": "release"
+}
