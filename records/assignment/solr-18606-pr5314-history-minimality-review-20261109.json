@@ -1,0 +1,9 @@
+{
+  "deliverables": "History, actual request paths, test reuse, scoped simplification options and local review record; no source edits or public writes",
+  "head": "9d4dc33e5d829d2bc9d1304054b5af6746879b34",
+  "host": "Windows, read-only source review",
+  "id": "solr-18606-pr5314-history-minimality-review-20261109",
+  "job": "solr-18606-pr5314-history-minimality-review-20261109",
+  "summary": "Read-only historical regression and test-minimality review of PR 5314",
+  "type": "assignment"
+}
