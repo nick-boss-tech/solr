@@ -1,0 +1,10 @@
+{
+  "head": "e7fc01248ea49e2027a654b8631f42bf1cf2c31b",
+  "id": "pr-5189-review-20261109-report",
+  "job": "pr-5189-review-20261109",
+  "local_record": "research/branch-reviews/2026-11-09-pr-batch/PR-5189-followup-review.md",
+  "pr": "https://github.com/apache/solr/pull/5189",
+  "previous_comment": "https://github.com/apache/solr/pull/5189#issuecomment-6389759602",
+  "summary": "Full source and test follow-up review found no actionable correctness defect in reviewed scope. Prior optional failure-path coverage remains absent. Upstream Gradle precommit, changelog and Solr Tests via Crave passed; author's fail-before and repeated test results not independently reproduced. No Windows build or test, patch, or public comment.",
+  "type": "report"
+}
