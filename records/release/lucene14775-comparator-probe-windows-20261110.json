@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-desktop",
+  "evidence": "The source commit fb8b5ea94f4ebc552e3bbafc6de8b2864b7fbb8a is pushed and its fork ref verified. Report records/report/lucene14775-comparator-probe-windows-20261110.json records the result. No test or build executor was started for the Windows source job; source work is stopped.",
+  "id": "lucene14775-comparator-probe-windows-20261110",
+  "job": "lucene14775-comparator-probe-windows-20261110",
+  "reason": "Test-only branch prepared and Linux runtime proof requested separately.",
+  "type": "release"
+}
