@@ -1,0 +1,9 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "Evidence pointer records/evidence/pr-5319-route-filter-linux-2026-11-10-evidence.json; artifact SHA-256 c407a419acd3946eb656d1810f35274895f1475d593bf85c7ce6e12b0e581a2a; uploaded archive contains evidence/executor-stop.json. Final pre-release check confirms stopped executor, free locks, clean/removed source worktrees, and unchanged source/PR.",
+  "id": "pr-5319-route-filter-linux-2026-11-10",
+  "job": "pr-5319-route-filter-linux-2026-11-10",
+  "reason": "Linux gate execution is complete and this executor is stopping. Final pre-release verification at 2026-11-10T23:03:24Z: no active Gradle/test executor, four Gradle daemons stopped with ./gradlew --stop, both required locks available, 63.1% free inodes (above the 15% floor), all disposable source worktrees removed, and the exact source checkout clean before disposal. Fork branch and public PR remained unchanged; no PR comment/body edit or source push was made. The receipt is INCOMPLETE because 15 Antora/site-generation and link-validation tasks were excluded under explicit authorization; the gate requires no required skips for a full pass. Evidence pointer records/evidence/pr-5319-route-filter-linux-2026-11-10-evidence.json (archive SHA-256 c407a419acd3946eb656d1810f35274895f1475d593bf85c7ce6e12b0e581a2a) contains evidence/executor-stop.json; report records/report/pr-5319-route-filter-linux-2026-11-10-report.json and receipt records/receipt/pr-5319-route-filter-linux-2026-11-10-receipt.json record the six proof legs and coverage limitation.",
+  "released_at": "2026-11-10T23:03:24Z",
+  "type": "release"
+}
