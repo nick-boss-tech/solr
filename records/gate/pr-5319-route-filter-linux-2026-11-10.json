@@ -1,0 +1,19 @@
+{
+  "base": "3a72ba0436d9decb48868ca46b94a5f52e2dc821",
+  "branch": "pr-5319-route-filter-tests",
+  "environment": "Linux gate host, JDK 21, clean isolated exact-head checkout, serialized required build locks. Save fresh logs and JUnit XML. No Gradle or test execution on Windows.",
+  "head": "d1a47bb29cdd9f69c1b65e813fc2bf13dbb00056",
+  "id": "pr-5319-route-filter-linux-2026-11-10",
+  "job": "pr-5319-route-filter-linux-2026-11-10",
+  "requirements": [
+    "Verify fork branch head matches assigned head, contributor PR 5319 head matches base, and base is ancestor of assigned head; stop and reconcile if moved. Do not modify the public PR or contributor branch.",
+    "On exact assigned head run ./gradlew :solr:core:test --tests org.apache.solr.handler.admin.api.ListCollectionsDetailedTest -Ptests.seed=5319C0DE -Ptests.rerun=true. Require testRouteFilter and all other class tests to execute without skips and pass; record counts, fresh XML and logs. The new test uses two implicit-router shards, checks the unfiltered set and both route=a and route=b results.",
+    "On an isolated clean checkout of the unchanged contributor base, run the same existing ListCollectionsDetailedTest class with seed 5319C0DE and record results and counts. This is a coverage-only addition: the original suite and the suite with added tests are both expected to pass; no production defect has been established.",
+    "On a separate clean assigned-head checkout mutate only ListCollectionsApi @QueryParam(\"route\") to @QueryParam(\"_route_\"); leave test code unchanged and compilable. Run testRouteFilter with the same seed and require the runtime assertion for route=a to fail because both shards are returned. Record mutation diff, assertion values, fresh XML and logs; compilation, startup or setup failure is not negative proof. Restore/discard this isolated mutation.",
+    "On another separate clean assigned-head checkout mutate only ListCollections.java binding to set ShardParams._ROUTE_ to routeKey == null ? null : \"a\". Keep tests unchanged and compilable. Run testRouteFilter and require baseline and route=a assertions to pass and route=b assertion to fail with shard a instead of b. Record mutation diff, runtime assertion, fresh XML and logs; setup and compile failures are not proof. Restore/discard this isolated mutation.",
+    "Run ./gradlew tidy and ./gradlew --no-daemon check -x test at exact assigned head. Report any tracked formatting changes as a failed/incomplete exact-head gate; do not silently modify or push. Include exact commands, environment conditions, failures and clean-tree state.",
+    "Publish a receipt linked to this gate with exact head and all positive, parent baseline, mutation and formatting/root-check legs, fresh log/XML locations and cleanup. The executor claims this separate gate job and releases only after execution stops. No public PR comment, body edit or issue post."
+  ],
+  "type": "gate",
+  "verdict_policy": "Pass only if all named exact-head and base positive executions, both isolated runtime mutations, tidy and root check satisfy their stated expectations with fresh evidence and no required skips; otherwise report failed or incomplete honestly."
+}
