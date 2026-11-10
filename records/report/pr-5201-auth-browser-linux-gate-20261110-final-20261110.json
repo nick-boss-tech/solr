@@ -1,0 +1,70 @@
+{
+  "evidence_pointer": "records/evidence/pr-5201-auth-browser-linux-gate-20261110-evidence-20261110.json",
+  "evidence_sha256": "e41f1746d77b8c72ec0721e0c13007c3be97016715430bc1a25e665eca972fa7",
+  "executor_stop_verification": "Root-check job ended at exit 130; its dedicated shell was closed; no active gate Gradle/browser task remained; both required Gradle locks were available; assigned source checkout remained clean at the exact assigned SHA. Details are in the evidence bundle.",
+  "head": "2d4f255fefec6e455cfdc35e6281769f9e01fba9",
+  "id": "pr-5201-auth-browser-linux-gate-20261110-final-20261110",
+  "job": "pr-5201-auth-browser-linux-gate-20261110",
+  "results": [
+    {
+      "command": "./gradlew :solr:webapp:test -Ptests.selenium=true --tests org.apache.solr.webapp.AdminUiSecurityAuthTest.testApiExplorerUsesAdminCredentials",
+      "exit_code": 1,
+      "failures": 1,
+      "outcome": "Timed out waiting for the Collections description at AdminUiSecurityAuthTest.java:148 before the API request was issued; this is not behavioral proof.",
+      "seed": "2FDE3FDE7845F9F2",
+      "tests": 1
+    },
+    {
+      "command": "./gradlew :solr:webapp:test -Ptests.selenium=true --tests org.apache.solr.webapp.AdminUiSecurityAuthTest --tests org.apache.solr.webapp.AdminUiSmokeTest",
+      "exit_code": 1,
+      "failed_cases": [
+        "AdminUiSecurityAuthTest.testApiExplorerUsesAdminCredentials: timed out waiting for the Collections description before the request",
+        "AdminUiSecurityAuthTest.testLoginAndSecurityScreen: timed out waiting to type 'solr' into By.id(username)"
+      ],
+      "failures": 2,
+      "passed": 5,
+      "seed": "7193C7A784FBDB4",
+      "smoke_result": "AdminUiSmokeTest: 5 tests, 0 failures.",
+      "tests": 7
+    },
+    {
+      "change": "Removed scalar-api-reference = \"1.46.4\" from gradle/libs.versions.toml; solr/webapp/scalar/build.gradle.kts still references libs.versions.scalar.api.reference at lines 39 and 41.",
+      "command": "./gradlew tidy",
+      "exit_code": 0,
+      "left_clean_tree": false,
+      "recovery": "Exact diff preserved; the assigned source worktree restored and verified clean at 2d4f255fefec6e455cfdc35e6281769f9e01fba9."
+    },
+    {
+      "command": "./gradlew check -x test",
+      "linked_worktree_attempt": "Exited 1 because Antora rejected the linked-worktree local content source as not being a Git repository; focused Antora diagnostic also exited 1.",
+      "normal_clone_retry": "Interrupted on user instruction before completion; job_vxe2nKPf exited 130. No pass claimed."
+    }
+  ],
+  "source_reconciliation": {
+    "assigned_source_worktree": "/workspace/worktrees/pr-5201-auth-browser-linux-gate-20261110",
+    "assigned_source_worktree_clean_at_assigned_head": true,
+    "fork_branch": "nick-boss-tech/solr:pr-5201-auth-browser-fix",
+    "fork_branch_head": "2d4f255fefec6e455cfdc35e6281769f9e01fba9",
+    "public_pr": "https://github.com/apache/solr/pull/5201",
+    "public_pr_head": "3f9faa9e9861ce28f3ede3f4305bd91b6e297463",
+    "public_pr_head_repository": "epugh/solr",
+    "public_pr_state": "open",
+    "source_or_pr_changes_made": false
+  },
+  "status": "incomplete",
+  "stop_rule": {
+    "action": "Stopped the running root-check retry, performed no further Selenium, parent-head, or packaged-browser tests, and made no source/PR changes.",
+    "direction_received_at": "2026-11-10T15:05:28-07:00",
+    "required_before_resuming": "A new pushed head and a superseding gate.",
+    "trigger": "The tidy diff changed the tracked scalar-api-reference version entry."
+  },
+  "summary": "The exact-head Linux gate is incomplete and must not be treated as passing. The focused API Explorer test failed before the target request; the full security/smoke run had two security-class failures and five smoke passes. Tidy exited 0 but removed a tracked version-catalog entry still used by the Scalar build. Per the stop rule, the root-check retry was interrupted and all remaining proof legs were stopped.",
+  "type": "report",
+  "uncompleted_proof": {
+    "cross_origin_credential_boundary": "Unverified.",
+    "fresh_credential_after_login_logout_or_change": "Unverified.",
+    "jwt": "Not exercised.",
+    "negative_fail_before": "Not run. The unchanged new test was transplanted alone onto an isolated parent worktree and the patch was preserved, but it was not executed; no behavioral fail-before proof is claimed.",
+    "packaged_browser_and_production_csp": "Not run."
+  }
+}
