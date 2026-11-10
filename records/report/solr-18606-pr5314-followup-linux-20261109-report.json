@@ -1,0 +1,40 @@
+{
+  "evidence": "Pointer record records/evidence/solr-18606-pr5314-followup-linux-20261109-evidence.json; archive https://raw.githubusercontent.com/nick-boss-tech/solr/coordination-v2/records/evidence/solr-18606-pr5314-followup-linux-20261109-evidence.tar.gz; SHA-256 1764d650008c3c531f8f541a9ac2c5d4f94775923cae06ca57db38bb2a26b4f7.",
+  "gate": "records/gate/solr-18606-pr5314-followup-linux-20261109.json",
+  "head": "672448a49c33a257e7a2f8722c84e823b100199c",
+  "id": "solr-18606-pr5314-followup-linux-20261109-report",
+  "job": "solr-18606-pr5314-followup-linux-20261109",
+  "limits": [
+    "This avoids the second missing-name check between alias resolution and version collection for a single input; repeated explicit input names may still cause additional checks, and misses are not cached across requests.",
+    "A collection created between the two former checks can now require a subsequent request.",
+    "Mock lookup-count tests are not a ZooKeeper latency benchmark.",
+    "The existing real-ZooKeeper test uses one server/session, not a multi-server lag test.",
+    "ZooKeeper sync is not an unconditional quorum guarantee.",
+    "Stale alias view refresh is out of scope.",
+    "Docker-dependent checks remain unrun and are not credited; no Windows/Cygwin proof is claimed."
+  ],
+  "pr": "https://github.com/apache/solr/pull/5314",
+  "proof": {
+    "core": "ZkStateReaderTest: 21 passed; AliasIntegrationTest: 9 passed. All five required provider/sync tests executed and passed.",
+    "fail_before": "The cache test observed getState twice where once was expected; the provider failure test got KeeperException.ConnectionLossException instead of the expected SolrException.",
+    "mutations": "Removing provider sync produced WantedButNotInvoked; disabling the sync timeout wait produced the expected TimeoutException assertion failure; removing the alias guard produced NeverWantedButInvoked for sync(/collections).",
+    "root_check": "Not run: check -x test and :solr:core:validateSourcePatterns were stopped at the source-ref guard after the public PR head moved.",
+    "solrj": "CloudSolrClientCacheTest: 8 passed; CloudSolrClientRoutingTest: 2 passed. testMissingCollectionIsCheckedOncePerRequest and testAliasResolvesToExistingCollection both passed.",
+    "solrj_zookeeper": "SolrZkClientTest: 7 passed.",
+    "tidy": "Passed; no tracked files changed."
+  },
+  "source_refs": {
+    "first_observed_pr_head_change_at_utc": "2026-11-10T02:55:41Z",
+    "fork_head": "672448a49c33a257e7a2f8722c84e823b100199c",
+    "fork_head_parent": "9d4dc33e5d829d2bc9d1304054b5af6746879b34",
+    "pr_head_current": "672448a49c33a257e7a2f8722c84e823b100199c",
+    "pr_head_required_during_gate": "9d4dc33e5d829d2bc9d1304054b5af6746879b34",
+    "pr_is_draft": true,
+    "pr_state": "OPEN",
+    "pr_updated_at": "2026-11-10T03:00:19Z",
+    "source_or_pr_changes_by_gate_worker": false
+  },
+  "status": "incomplete",
+  "summary": "The exact-head positive suites passed 47 tests with zero failures, errors, or skips. Both base fail-before controls and all three isolated safeguard mutations failed at runtime in their expected assertion shapes. Tidy succeeded without tracked changes. The live PR head was first observed moving from the required base 9d4dc33e5d829d2bc9d1304054b5af6746879b34 to the assigned fork head 672448a49c33a257e7a2f8722c84e823b100199c at 2026-11-10T02:55:41Z; the fork branch itself remained unchanged. The gate stopped before the root check because the PR was required to remain at base.",
+  "type": "report"
+}
