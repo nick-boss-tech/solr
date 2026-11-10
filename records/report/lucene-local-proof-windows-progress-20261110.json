@@ -1,0 +1,7 @@
+{
+  "details": "Owner authorized Lucene Gradle on Windows. At the time of this report, Lucene 10.6 head e0c53033bb2b6b34939ded24e228443b7d8b576b was running the two focused join classes with Java 21, Gradle 9.8.0, seed 18622C0DE, two Gradle workers and no daemon persistence. First-run setup and build-infra compilation occurred; the Java compile cache writer was slow, and no tests or XML had been reported. Inverse candidate fb8b5ea94f4ebc552e3bbafc6de8b2864b7fbb8a requires Java 24: the Java 21 invocation exited before tests. Temurin 24.0.2+12 was downloaded into research/lucene-submission-prep/windows-proof-20261110/jdk24 and the archive SHA-256 matched Adoptium API 3890b8ed5af12224b80ee8a3b2476edc9e0e7276ce2cd35a50952e4fd7b68b4f. The one-method inverse test was started under Java 24, Gradle 8.14 and one worker; its transcript is inverse-probe.log in the proof directory. Windows performance-counter warnings appeared and build infrastructure completed; no test result had been reported. Both build processes were active. The claim remains active until executors finish or stop and a final report is published. No Solr build was run.",
+  "id": "lucene-local-proof-windows-progress-20261110",
+  "job": "lucene-local-proof-windows-20261110",
+  "summary": "Windows Lucene builds running; no test verdict yet",
+  "type": "report"
+}
