@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "Fork head 0355023c3170c87a84cd9e5688ae6b4f3e4df3ae was read back; report pr-5201-gate-repair-implementation-20261110 and gate job pr-5201-auth-browser-linux-gate-r2-20261110. No Windows build or browser executor was started.",
+  "id": "pr-5201-gate-repair-windows-20261110",
+  "job": "pr-5201-gate-repair-windows-20261110",
+  "reason": "Receipt follow-up pushed and handed to a superseding Linux gate.",
+  "type": "release"
+}
