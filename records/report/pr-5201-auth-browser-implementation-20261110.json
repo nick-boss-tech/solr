@@ -1,0 +1,21 @@
+{
+  "contributor_parent": "3f9faa9e9861ce28f3ede3f4305bd91b6e297463",
+  "evidence": [
+    "The npm 1.46.4 package integrity was checked, and its source shows onBeforeRequest receives the Request subsequently sent by fetch.",
+    "Windows git diff --check passed. No build, browser or application test was executed on Windows.",
+    "The browser test uses test-served resources and fetch observation; it does not establish packaged WAR or production CSP behavior.",
+    "The author-reported hang remains unverified; the proposed hook and test are proof pending."
+  ],
+  "files": [
+    "solr/webapp/web/libs/scalar/scalar-init.js",
+    "solr/webapp/src/test/org/apache/solr/webapp/AdminUiSecurityAuthTest.java"
+  ],
+  "fork_branch": "pr-5201-auth-browser-fix",
+  "gate_job": "pr-5201-auth-browser-linux-gate-20261110",
+  "head": "2d4f255fefec6e455cfdc35e6281769f9e01fba9",
+  "id": "pr-5201-auth-browser-implementation-20261110",
+  "job": "pr-5201-explorer-implementation-windows-20261110",
+  "remote_verification": "GitHub refs API returned the exact recorded SHA after the non-force push.",
+  "summary": "Implemented same-origin Scalar credential forwarding and an authenticated Selenium explorer test; pushed to Nick’s fork. Implemented, proof pending.",
+  "type": "report"
+}
