@@ -1,0 +1,15 @@
+{
+  "capabilities": [
+    "linux",
+    "go-1.27",
+    "kubernetes-envtest"
+  ],
+  "head": "2f50da7dc5b11dbfabacd567ca7740ccf70c2dd7",
+  "id": "operator-827-compat-linux-20261110",
+  "instructions": "Claim this job, read its gate and verify the source branch head; execute its exact-head checks and report each leg. No public writes, source push or Gradle. A missing Docker/KinD runtime is a limitation for separate E2E proof, not a pass for it.",
+  "intended_host": "Linux gate host with Go 1.27, repository Go dependencies, envtest Kubernetes assets, Helm and network; do not use the Windows test queue",
+  "job": "operator-827-compat-linux-20261110",
+  "source": "https://github.com/nick-boss-tech/solr-operator/tree/pr-827-compatibility-followup",
+  "summary": "Verify solr-operator PR 827 compatibility follow-up on Linux",
+  "type": "assignment"
+}
