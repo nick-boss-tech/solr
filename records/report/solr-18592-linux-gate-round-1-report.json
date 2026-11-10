@@ -1,0 +1,8 @@
+{
+  "gate": "solr-18592-linux-gate-round-1",
+  "head": "25bdab4e926261a70a0cae399d22ed4fa6600ef6",
+  "id": "solr-18592-linux-gate-round-1-report",
+  "job": "solr-18592-linux-gate-round-1",
+  "summary": "Round 1 is invalid, not passed. Focused tests passed 26 of 26 with no skips at the exact head, but tidy reformatted the branch's own JavaBinResponseWriter.java, which the gate record says invalidates exact-head proof. The formatting change was committed as e75cbe0433 and pushed to solr-18592-submit under the standing tidy rule, and superseding gate solr-18592-linux-gate-round-2-20261110 repeats every leg, including the matchesWildcard mutation, at the new head. No public communication was made.",
+  "type": "report"
+}

@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent",
+  "evidence": "records/evidence/solr-18592-linux-gate-round-1-evidence.tar.gz",
+  "id": "solr-18592-linux-gate-round-1",
+  "job": "solr-18592-linux-gate-round-1",
+  "reason": "Gate completed with verdict invalid at head 25bdab4e926261a70a0cae399d22ed4fa6600ef6: focused tests passed 26 of 26 with no skips, but tidy reformatted JavaBinResponseWriter.java, invalidating exact-head proof under the gate record. The tidy fix was committed as e75cbe0433d027b04373efd983cf361f99612bd7 and pushed to solr-18592-submit; superseding gate solr-18592-linux-gate-round-2-20261110 was posted and claimed by the same executor.",
+  "type": "release"
+}

@@ -1,0 +1,18 @@
+{
+  "base": "b771587e9707c49847d728fd1f3ff259a182692c",
+  "gate": "solr-18592-linux-gate-round-2-20261110",
+  "head": "e75cbe0433d027b04373efd983cf361f99612bd7",
+  "host_requirements": [
+    "linux",
+    "jdk21",
+    "Solr Gradle"
+  ],
+  "id": "solr-18592-linux-gate-round-2-20261110",
+  "implementation_job": "solr-18592-implementation-windows-round-1",
+  "job": "solr-18592-linux-gate-round-2-20261110",
+  "receipt": "records/receipt/solr-18592-linux-gate-round-2-20261110.json",
+  "source": "nick-boss-tech/solr:solr-18592-submit",
+  "status": "claimed by phone-agent; supersedes solr-18592-linux-gate-round-1, whose head was invalidated when tidy reformatted JavaBinResponseWriter.java; the tidy fix is the only change in the new head",
+  "summary": "Linux exact-head verification for SOLR-18592 wildcard field selection, round 2 at the tidy successor head",
+  "type": "assignment"
+}
