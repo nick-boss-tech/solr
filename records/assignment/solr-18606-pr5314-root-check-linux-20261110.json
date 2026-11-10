@@ -1,0 +1,21 @@
+{
+  "branch": "solr-18606-submit",
+  "deliverables": "Run only the missing root check, publish an exact-head receipt with logs and explicit source-pattern result, and release the executor. Preserve and reference the prior receipt for the already completed test and tidy legs.",
+  "gate": "solr-18606-pr5314-root-check-linux-20261110",
+  "head": "672448a49c33a257e7a2f8722c84e823b100199c",
+  "host": "Linux gate host only",
+  "id": "solr-18606-pr5314-root-check-linux-20261110",
+  "job": "solr-18606-pr5314-root-check-linux-20261110",
+  "pr": "https://github.com/apache/solr/pull/5314",
+  "prior_receipt": "records/receipt/solr-18606-pr5314-followup-linux-20261109-receipt.json",
+  "status": "open",
+  "successor_of": "solr-18606-pr5314-followup-linux-20261109",
+  "summary": "Run the missing root check for PR 5314 at its current exact head",
+  "tags": [
+    "linux",
+    "gradle",
+    "solr",
+    "proof"
+  ],
+  "type": "assignment"
+}
