@@ -1,0 +1,32 @@
+{
+  "id": "pr5313-startup-wait-linux-gate-round2-20261109",
+  "job": "pr5313-startup-wait-linux-gate-round2-20261109",
+  "owner": "phone-agent-2",
+  "preflight": {
+    "assignment": "records/assignment/pr5313-startup-wait-linux-gate-round2-20261109.json",
+    "board_snapshot": "e4f89cf0af7d870f4f0deb347cb0a73ba2bf11bb",
+    "executor_preflight": "No matching Gradle, Maven, Ant, Solr, ZooKeeper, JUnit or BATS executor was observed on this Linux host.",
+    "fork_branch": "nick-boss-tech/solr:solr-18630-submit",
+    "fork_head": "4be1ad602621d2af96565355dce3804ee4744aae",
+    "gate": "records/gate/pr5313-startup-wait-linux-gate-round2-20261109.json",
+    "jdk": "OpenJDK 21.0.12.1",
+    "locks_preflight": {
+      "/workspace/tools/.gradle-0609f7968656.lock": "free",
+      "/workspace/tools/.gradle-phone-agent-2.lock": "free"
+    },
+    "predecessor_release": "records/release/pr5313-startup-wait-linux-gate-20261109.json",
+    "public_pr": "https://github.com/apache/solr/pull/5313",
+    "public_pr_head": "358f13d9fdfaed260143a51100cd5657a582d562",
+    "public_pr_head_note": "The live PR head remains at the gate's recorded base; the board explicitly assigns the separate nick-boss-tech/solr fork branch at 4be1ad6. Results apply only to that assigned fork head, not the current public PR head.",
+    "repair_release": "records/release/pr5313-tidy-repair-windows-20261109.json",
+    "resources_preflight": {
+      "free_disk_bytes_approx": 54672326656,
+      "free_inode_percent_approx": 73.9,
+      "free_inodes": 1379727,
+      "stop_at_or_below_free_inode_percent": 15,
+      "total_inodes": 1868096
+    }
+  },
+  "scope": "Execute only the open coordination-v2 successor Linux gate on nick-boss-tech/solr branch solr-18630-submit at exact fork head 4be1ad602621d2af96565355dce3804ee4744aae. Do not change source or PR content. Use Linux only; do not install or invoke Docker; do not claim Windows/Cygwin proof.",
+  "type": "claim"
+}
