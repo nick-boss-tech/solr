@@ -1,0 +1,19 @@
+{
+  "host": "Windows",
+  "id": "lucene-block-join-shared-audit-20261109",
+  "job": "lucene-block-join-shared-audit-20261109",
+  "scope": "Read-only source, tests, iterator contracts, historical proof and available runtime artifacts. No public action or source modification; Solr build and proof remain on the Linux gate host under workspace rules.",
+  "source_head": "55c3174bd154b5cc987d9b24e1c77043e23fe71e",
+  "sources": [
+    "reports/lucene-block-join-windows-proof-round-1.md on historical coordination-ui",
+    "receipts/lucene-block-join-missing-values-windows-round-1.md on historical coordination-ui",
+    "https://github.com/apache/solr/pull/5293#issuecomment-6650656181"
+  ],
+  "summary": "Audit the shared Lucene block-join missing-value iterator and assess Solr integration evidence for Nick",
+  "tags": [
+    "review",
+    "lucene",
+    "block-join"
+  ],
+  "type": "assignment"
+}
