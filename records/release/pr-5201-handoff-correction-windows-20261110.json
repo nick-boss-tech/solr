@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-coordinator",
+  "evidence": "Report pr-5201-gate-handoff-corrected-20261110 records the reconciled source head, gate specification, claim, actual receipt and release. No source or test executor was started.",
+  "id": "pr-5201-handoff-correction-windows-20261110",
+  "job": "pr-5201-handoff-correction-windows-20261110",
+  "reason": "Remote handoff correction published.",
+  "type": "release"
+}
