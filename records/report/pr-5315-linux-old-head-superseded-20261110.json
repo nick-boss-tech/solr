@@ -1,0 +1,8 @@
+{
+  "id": "pr-5315-linux-old-head-superseded-20261110",
+  "job": "pr-5315-review-fixes-linux-gate-20261110",
+  "new_head": "9add678bd94b8c6f1b119535583e8ac8b0deea90",
+  "status": "superseded before gate publication",
+  "summary": "Do not claim or execute this assignment: its 4c8b4406b6f3b79cc7c626764b2c6900ca1c148a head contains a test compilation error and the fork branch moved. No gate record was published for this old head. Use the replacement assignment pr-5315-review-fixes-linux-gate-r2-20261110 at 9add678bd94b8c6f1b119535583e8ac8b0deea90.",
+  "type": "report"
+}
