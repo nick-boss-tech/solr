@@ -1,0 +1,11 @@
+{
+  "branch": "pr-5319-route-filter-tests",
+  "contributor_head": "3a72ba0436d9decb48868ca46b94a5f52e2dc821",
+  "gate": "pr-5319-route-filter-linux-2026-11-10",
+  "head": "d1a47bb29cdd9f69c1b65e813fc2bf13dbb00056",
+  "id": "pr-5319-route-tests-impl-2026-11-10-report",
+  "job": "pr-5319-route-tests-impl-2026-11-10",
+  "summary": "Added one multi-shard HTTP route-filter test, committed and pushed to fork; exact-head Linux proof pending.",
+  "type": "report",
+  "verification": "git diff --check passed; no Windows Gradle or tests; verified fork head matches commit. Public PR head was not moved."
+}
