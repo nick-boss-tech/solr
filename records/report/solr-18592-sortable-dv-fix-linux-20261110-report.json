@@ -1,0 +1,8 @@
+{
+  "gate": "solr-18592-sortable-dv-fix-linux-20261110",
+  "head": "b225cd5bb2a5886c187b13009e7016c9165414ce",
+  "id": "solr-18592-sortable-dv-fix-linux-20261110-report",
+  "job": "solr-18592-sortable-dv-fix-linux-20261110",
+  "summary": "Linux fix gate passed at b225cd5bb2. The fail-before leg pairs the fix branch's final tests with the unfixed production code and fails at exactly the truncation assertion ('apple ' returned instead of 'apple pear orange') while controls pass; at the fix head all 35 tests across TestSortableTextField, TestRetrieveFieldsOptimizer, TestUseDocValuesAsStored, DocValuesTest and DocValuesMultiTest pass with no skips, tidy is clean, and root check passes. The SolrDocumentFetcher change (never substitute DocValues for a stored SortableTextField value) fixes the reproduced SOLR-18592 truncation defect on Linux. Its deliberate tradeoff stands: the all-DocValues optimization is skipped for every stored SortableTextField, even untruncated configurations, and no performance measurement was taken. No public communication was made.",
+  "type": "report"
+}

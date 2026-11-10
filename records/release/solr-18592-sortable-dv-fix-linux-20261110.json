@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent",
+  "evidence": "records/evidence/solr-18592-sortable-dv-fix-linux-20261110-evidence.tar.gz",
+  "id": "solr-18592-sortable-dv-fix-linux-20261110",
+  "job": "solr-18592-sortable-dv-fix-linux-20261110",
+  "reason": "Gate completed with verdict passed at head b225cd5bb2a5886c187b13009e7016c9165414ce: fail-before with the final test file on unfixed production code failed at the specified truncation assertion with controls passing, the five-class positive suite passed 35 of 35 with no skips, tidy left no tracked changes, and root check passed with validateSourcePatterns executed. No source, branch, or PR changes were made.",
+  "type": "release"
+}
