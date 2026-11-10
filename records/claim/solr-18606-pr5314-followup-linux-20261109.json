@@ -1,0 +1,31 @@
+{
+  "id": "solr-18606-pr5314-followup-linux-20261109",
+  "job": "solr-18606-pr5314-followup-linux-20261109",
+  "owner": "phone-agent-2",
+  "preflight": {
+    "active_matching_executor_observed": false,
+    "assignment": "records/assignment/solr-18606-pr5314-followup-linux-20261109.json",
+    "board_snapshot": "b226cf94b19d63c58d184c514f4b7ad2e6750cbd",
+    "canonical_claim_absent_at_preflight": true,
+    "existing_windows_implementation_release": "records/release/solr-18606-pr5314-followup-windows-20261109.json",
+    "fork_branch": "nick-boss-tech/solr:solr-18606-pr5314-followup",
+    "fork_head": "672448a49c33a257e7a2f8722c84e823b100199c",
+    "fork_parent_and_base": "9d4dc33e5d829d2bc9d1304054b5af6746879b34",
+    "free_inode_percent_approx": 73.1,
+    "free_inodes": 1365789,
+    "gate": "records/gate/solr-18606-pr5314-followup-linux-20261109.json",
+    "jdk": "OpenJDK 21.0.12.1",
+    "locks_preflight": {
+      "/workspace/tools/.gradle-0609f7968656.lock": "free",
+      "/workspace/tools/.gradle-phone-agent-2.lock": "free"
+    },
+    "public_pr": "https://github.com/apache/solr/pull/5314",
+    "public_pr_head": "9d4dc33e5d829d2bc9d1304054b5af6746879b34",
+    "public_pr_head_equals_gate_head": false,
+    "public_pr_state": "open_draft",
+    "stop_at_or_below_free_inode_percent": 15,
+    "total_inodes": 1868096
+  },
+  "scope": "Run only the coordination-v2 exact-head Linux gate for nick-boss-tech/solr:solr-18606-pr5314-followup at 672448a49c33a257e7a2f8722c84e823b100199c. Do not change source or PR content. Linux proof only; do not invoke or install Docker; mark Docker-dependent proof unrun. Stop and reconcile if either source ref moves.",
+  "type": "claim"
+}
