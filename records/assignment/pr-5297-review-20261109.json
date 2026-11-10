@@ -1,0 +1,10 @@
+{
+  "host": "Windows source review only; no builds or tests",
+  "id": "pr-5297-review-20261109",
+  "job": "pr-5297-review-20261109",
+  "legacy_receipt": "https://github.com/nick-boss-tech/solr/blob/2fd7e0ab416f182b89633f4477adb163831e47af/receipts/SOLR-18613-selection-round-2.md",
+  "prior_review": "research/branch-reviews/2026-11-05-pr-batch/PR-5297-review.md",
+  "source_head": "fe557633a169c34dcb835696470cc6e69ba00be4",
+  "summary": "Read-only follow-up review of PR 5297 at live head, including whole-patch correctness, test adequacy and proof reconciliation on Windows",
+  "type": "assignment"
+}
