@@ -1,0 +1,25 @@
+{
+  "commands": [
+    "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.handler.admin.api.RebalanceLeadersAPITest --tests org.apache.solr.cloud.TestRebalanceLeaders -Ptests.seed=16398C0DE --rerun-tasks",
+    "./gradlew --no-daemon tidy",
+    "./gradlew --no-daemon :solr:core:compileJava -Pvalidation.errorprone=true",
+    "./gradlew --no-daemon check -x test"
+  ],
+  "environment": "Clean isolated Linux checkout at the named full SHA, JDK 21, and required serialized host locks. Verify live heads and executor liveness before claiming. Preserve fresh logs, exit codes, XML, mutation diffs and stop evidence. No public PR action or source push is authorized.",
+  "head": "3d530d7639eeb0b4bd8ee11227a1133fe66aa672",
+  "id": "pr-5284-argument-coverage-linux-gate-r2-20261110",
+  "job": "pr-5284-argument-coverage-linux-gate-r2-20261110",
+  "previous_head": "b01220cbb66e0a1cca3dfb1fd7427ced6ca4c2a6",
+  "prior_failed_receipt": "records/receipt/pr-5284-argument-coverage-linux-gate-20261110-receipt.json",
+  "requirements": [
+    "Previous focused gate at b01220c passed the positive argument test and both mutation legs but failed root check at :solr:core:forbiddenApisTest for three AccessibleObject.setAccessible calls. Confirm the actual new test uses the annotated accessors of the real constructed operation with no forbidden reflection, and that root check runs forbiddenApisTest successfully. The prior test and mutation results are not proof for this new head; rerun all legs below.",
+    "Run the named positive suites at the exact head, with fresh XML. The new testBodyParametersReachOperation must actually execute and pass and verify maxAtOnce=2, maxWaitSeconds=30 and calling lock ID on the real object passed by the resource. Verify the pre-existing v2 real leader movement and v1 async cleanup tests also execute and pass. Explicitly report any nightly skip.",
+    "Repeat the two previously surviving production mutations one at a time on disposable checkouts: replace the actual maxAtOnce constructor argument with the query/default-derived value 99, and separately replace the maxWaitSeconds constructor argument with query/default-derived 999. Run the new testBodyParametersReachOperation for each under the named seed. Require an assertion failure at the respective observed operation field, not a compile, setup or skipped-test failure. Preserve mutation diffs, logs and fresh XML; restore each mutation. Review whether the introduced execution seam actually captures the constructed operation without bypassing the argument routing.",
+    "Require tidy to leave tracked files unchanged, Error Prone compile and root check -x test to pass without unapproved exclusions. Record environmental failures and successful repair conditions. Stop if formatting changes tracked files; a formatting change needs a newly pushed exact head and successor gate.",
+    "This is only a parameter-coverage phase. Do not treat its pass as a green full gate: V2ApiIntegrationTest.testException failed at both 5fce0c and reviewed PR head 415c639e with HTTP 500 instead of 400, linked to still-open PR 5285; the previous full gate also listed unproven compatibility probes and a skipped nightly test. After the dependency is resolved, obtain a fresh full exact-head gate covering all prior requirements and reconcile PR ancestry; do not silently exclude the known failure or count previous-head receipts as new-head proof.",
+    "Investigate executed failures before retries. A compile/setup error, skipped test, surviving mutant or unchanged helper assertion is not a pass. Publish exact-head receipt and evidence with counts and stop/release evidence. Do not make a public comment, edit the PR, or push source changes under this gate."
+  ],
+  "seed": "16398C0DE",
+  "source": "https://github.com/nick-boss-tech/solr/tree/solr-16398-pr5284-review-fixes-20261110",
+  "type": "gate"
+}
