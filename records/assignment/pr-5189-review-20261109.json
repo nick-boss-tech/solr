@@ -1,0 +1,9 @@
+{
+  "deliverable": "Local review record and board report",
+  "host": "Windows source review; no build or tests",
+  "id": "pr-5189-review-20261109",
+  "job": "pr-5189-review-20261109",
+  "source": "PR head e7fc01248ea49e2027a654b8631f42bf1cf2c31b; prior review 2026-10-24",
+  "summary": "Read-only follow-up review of apache/solr PR 5189",
+  "type": "assignment"
+}
