@@ -1,0 +1,8 @@
+{
+  "details": "Reviewed ToParentDocValues, BlockJoinSelector, ToParentBlockJoinSortField, comparator and iterator contracts, Solr childfield consumer, changed tests and the historical Windows proof receipt. The old exact-head receipt reports 10 focused tests passed, 104 join tests passed with 3 nightly skips, four runtime fail-before failures, tidy and check -x test passed. This audit ran no tests or builds. Historical receipt: receipts/lucene-block-join-missing-values-windows-round-1.md on coordination-ui. Internal detailed review: research/lucene-submission-prep/block-join-shared-audit.md. Local Lucene 12 snapshot jar alone is not evidence of a compatible Solr 10.6 artifact. Upstream main e0a3a951e7ef2e7b4e04b6b9966468099e642056 had no changes in the five named iterator, selector, sort field and changed test paths since base aa366ae209ae8296dd70d2835c6d47f8fc201972. No public action or source change.",
+  "head": "55c3174bd154b5cc987d9b24e1c77043e23fe71e",
+  "id": "lucene-block-join-shared-audit-20261109-report",
+  "job": "lucene-block-join-shared-audit-20261109",
+  "summary": "Read-only shared iterator and consumer audit completed. No additional iterator correctness defect established. Existing null-string documentation conflicts with tested behavior and needs a contract decision. Patched-Solr integration and direct cross-type float/double proof remain unverified.",
+  "type": "report"
+}
