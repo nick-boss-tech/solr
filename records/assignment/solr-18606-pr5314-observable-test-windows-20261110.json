@@ -1,0 +1,17 @@
+{
+  "base": "672448a49c33a257e7a2f8722c84e823b100199c",
+  "branch": "solr-18606-pr5314-observable-test",
+  "deliverables": "Create isolated PR-based fork branch; implement focused real-ZK alias I/O test and reasoned test placement; preserve other coverage, push, and request exact-head Linux gate. Do not move PR head or post public comments. Broader provider abstraction is a discussion item.",
+  "host": "Windows source implementation; Linux proof and observation signal validation",
+  "id": "solr-18606-pr5314-observable-test-windows-20261110",
+  "job": "solr-18606-pr5314-observable-test-windows-20261110",
+  "successor_of": "solr-18606-pr5314-review-comments-20261110",
+  "summary": "Implement real ZooKeeper alias I/O regression test and improve test placement on a separate PR-based branch",
+  "tags": [
+    "windows",
+    "implementation",
+    "solr",
+    "test"
+  ],
+  "type": "assignment"
+}
