@@ -1,0 +1,7 @@
+{
+  "id": "lucene14775-comparator-probe-windows-20261110",
+  "job": "lucene14775-comparator-probe-windows-20261110",
+  "owner": "windows-codex-desktop",
+  "scope": "Prepare and push one test-only fork branch; obtain Linux proof separately.",
+  "type": "claim"
+}
