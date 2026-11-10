@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-pr5284-repair-20261110",
+  "evidence": "records/report/pr-5284-gate-repair-windows-20261110-report.json; fork head independently verified at 5fce0c06ee5afa8ac3606e32c2e441041da49864; no Linux executor started by this worker.",
+  "id": "pr-5284-gate-repair-windows-20261110",
+  "job": "pr-5284-gate-repair-windows-20261110",
+  "reason": "Source repair stopped; superseding Linux gate handed off.",
+  "type": "release"
+}
