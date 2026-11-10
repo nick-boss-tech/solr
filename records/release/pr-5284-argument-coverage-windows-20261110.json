@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-pr5284-argument-coverage-20261110",
+  "evidence": "records/report/pr-5284-argument-coverage-windows-20261110-report.json; independently verified fork head b01220cbb66e0a1cca3dfb1fd7427ced6ca4c2a6; no Linux execution started by this worker.",
+  "id": "pr-5284-argument-coverage-windows-20261110",
+  "job": "pr-5284-argument-coverage-windows-20261110",
+  "reason": "Implementation stopped after pushing; focused Linux proof handed off.",
+  "type": "release"
+}
