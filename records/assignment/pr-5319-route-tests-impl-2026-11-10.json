@@ -1,0 +1,17 @@
+{
+  "host": "Windows source implementation; Linux phase gate for proof",
+  "id": "pr-5319-route-tests-impl-2026-11-10",
+  "job": "pr-5319-route-tests-impl-2026-11-10",
+  "pr": "https://github.com/apache/solr/pull/5319",
+  "pr_head": "3a72ba0436d9decb48868ca46b94a5f52e2dc821",
+  "prior_review": "records/report/pr-5319-review-2026-11-10-report.json",
+  "scope": "Add focused test to existing suite; push contributor-descended fork branch; request Linux proof; no public comments",
+  "successor_of": "pr-5319-review-2026-11-10",
+  "summary": "Implement focused route parameter HTTP regression for PR 5319",
+  "tags": [
+    "windows",
+    "implementation",
+    "tests"
+  ],
+  "type": "assignment"
+}
