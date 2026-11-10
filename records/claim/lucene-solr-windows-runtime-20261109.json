@@ -1,0 +1,7 @@
+{
+  "id": "lucene-solr-windows-runtime-20261109",
+  "job": "lucene-solr-windows-runtime-20261109",
+  "owner": "windows-codex-desktop",
+  "scope": "Isolated binary runtime setup and proof, without Gradle or the retired queue.",
+  "type": "claim"
+}
