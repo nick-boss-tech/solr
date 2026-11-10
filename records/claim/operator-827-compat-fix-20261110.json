@@ -1,0 +1,7 @@
+{
+  "id": "operator-827-compat-fix-20261110",
+  "job": "operator-827-compat-fix-20261110",
+  "owner": "codex-windows-operator-fix",
+  "scope": "Windows source implementation and fork push; Linux proof is a separate job",
+  "type": "claim"
+}
