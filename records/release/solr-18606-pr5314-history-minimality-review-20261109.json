@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-nick-shanin",
+  "evidence": "Report and local review record contain findings at exact head. No build executor or source patch was started; this worker is stopping.",
+  "id": "solr-18606-pr5314-history-minimality-review-20261109",
+  "job": "solr-18606-pr5314-history-minimality-review-20261109",
+  "reason": "Historical and minimality review completed.",
+  "type": "release"
+}
