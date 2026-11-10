@@ -1,0 +1,241 @@
+{
+  "coverage_limits": [
+    "One existing @Nightly cloud test was skipped because tests.nightly is not enabled.",
+    "The malformed-body focused test fails on this head but reproduces identically at the reviewed PR #5284 baseline; PR #5285 is still open at the final check.",
+    "Both actual maxAtOnce and maxWaitSeconds rebalance body-to-operation misrouting mutants survived the current API test.",
+    "Source review was completed, but no independent runtime assertions were added for blank collection, nonpositive maxAtOnce, callingLockId preservation, raw JSON field capitalization/null omission, or failure/inactivePreferreds response maps."
+  ],
+  "environment": {
+    "docker_installed_or_used": false,
+    "gradle_locks": [
+      "/workspace/tools/.gradle-phone-agent-2.lock",
+      "/workspace/tools/.gradle-0609f7968656.lock"
+    ],
+    "host": "0609f7968656",
+    "jdk": "OpenJDK 21.0.12.1 (2026-08-18)",
+    "os": "Linux 6.18.38+ x86_64",
+    "seed": "16398C0DE",
+    "windows_or_cygwin_claimed": false
+  },
+  "evidence_archive_sha256": "0bd37db0afac18dd8f223814fd1c485fa01c943aae2006ede5f628e9ab9b763d",
+  "evidence_records": [
+    "records/evidence/pr-5284-review-fixes-linux-gate-r2-20261110-evidence.json",
+    "records/evidence/pr-5284-review-fixes-linux-gate-r2-20261110-stop-evidence.json"
+  ],
+  "executor_stop": {
+    "active_gradle_processes": 0,
+    "both_host_locks_free": true,
+    "final_stop_evidence_record": "records/evidence/pr-5284-review-fixes-linux-gate-r2-20261110-stop-evidence.json",
+    "final_stop_sha256": "1114e2aed32f0cc1c779e1cf9e5526bdacab9262dd0cc1e31b14846aaf1f81fe",
+    "source_branch_still_at_assigned_head": true
+  },
+  "gate": "pr-5284-review-fixes-linux-gate-r2-20261110",
+  "head": "5fce0c06ee5afa8ac3606e32c2e441041da49864",
+  "id": "pr-5284-review-fixes-linux-gate-r2-20261110-receipt",
+  "job": "pr-5284-review-fixes-linux-gate-r2-20261110",
+  "previous_head": "f947ff28cf3c591d5d9a230d526df6bdea6d693a",
+  "recorded_at": "2026-11-10T19:43:00Z",
+  "results": {
+    "error_prone_compile": {
+      "command": "./gradlew --no-daemon :solr:core:compileJava -Pvalidation.errorprone=true",
+      "exit_code": 0
+    },
+    "focused_suites": {
+      "command": "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.cloud.TestRebalanceLeaders --tests org.apache.solr.cloud.MigrateRouteKeyTest --tests org.apache.solr.handler.admin.api.MigrateDocsAPITest --tests org.apache.solr.handler.admin.api.RebalanceLeadersAPITest --tests org.apache.solr.handler.admin.api.V2CollectionAPIMappingTest --tests org.apache.solr.handler.admin.TestCollectionAPIs --tests org.apache.solr.handler.admin.TestApiFramework --tests org.apache.solr.handler.V2ApiIntegrationTest -Ptests.seed=16398C0DE --rerun-tasks",
+      "exit_code": 1,
+      "failure": {
+        "actual": 500,
+        "expected": 400,
+        "test": "org.apache.solr.handler.V2ApiIntegrationTest.testException"
+      },
+      "generated_client_tasks": [
+        ":solr:solrj:openApiGenerate",
+        ":solr:solrj:compileJava",
+        ":solr:core:compileJava"
+      ],
+      "junit_by_class": [
+        {
+          "class": "org.apache.solr.cloud.MigrateRouteKeyTest",
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 5
+        },
+        {
+          "class": "org.apache.solr.cloud.TestRebalanceLeaders",
+          "errors": 0,
+          "failures": 0,
+          "skipped": 1,
+          "tests": 5
+        },
+        {
+          "class": "org.apache.solr.handler.V2ApiIntegrationTest",
+          "errors": 0,
+          "failures": 1,
+          "skipped": 0,
+          "tests": 13
+        },
+        {
+          "class": "org.apache.solr.handler.admin.TestApiFramework",
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 3
+        },
+        {
+          "class": "org.apache.solr.handler.admin.TestCollectionAPIs",
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 2
+        },
+        {
+          "class": "org.apache.solr.handler.admin.api.MigrateDocsAPITest",
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 10
+        },
+        {
+          "class": "org.apache.solr.handler.admin.api.RebalanceLeadersAPITest",
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 5
+        },
+        {
+          "class": "org.apache.solr.handler.admin.api.V2CollectionAPIMappingTest",
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 2
+        }
+      ],
+      "skip": {
+        "reason": "@Nightly test group is not enabled (tests.nightly).",
+        "test": "org.apache.solr.cloud.TestRebalanceLeaders.testRebalanceLeaders"
+      },
+      "test_totals": {
+        "errors": 0,
+        "failures": 1,
+        "passed": 43,
+        "skipped": 1,
+        "tests": 45
+      }
+    },
+    "migrate_docs_mutations": {
+      "all_six_detected": true,
+      "mutations": [
+        {
+          "id": "migrate-01-omit-source-collection",
+          "outcome": "killed-by-assertion",
+          "restored_clean": true
+        },
+        {
+          "id": "migrate-02-omit-target-collection",
+          "outcome": "killed-by-assertion",
+          "restored_clean": true
+        },
+        {
+          "id": "migrate-03-omit-split-key",
+          "outcome": "killed-by-assertion",
+          "restored_clean": true
+        },
+        {
+          "id": "migrate-04-omit-forward-timeout",
+          "outcome": "killed-by-assertion",
+          "restored_clean": true
+        },
+        {
+          "id": "migrate-05-omit-follow-aliases",
+          "outcome": "killed-by-assertion",
+          "restored_clean": true
+        },
+        {
+          "id": "migrate-06-drop-async-id",
+          "outcome": "killed-by-assertion",
+          "restored_clean": true
+        }
+      ],
+      "seed": "16398C0DE",
+      "test": "org.apache.solr.handler.admin.api.MigrateDocsAPITest.testAllPropertiesAndAsyncId"
+    },
+    "rebalance_operation_argument_mutations": {
+      "direct_body_to_shared_operation_mapping_proven": false,
+      "mutations": [
+        {
+          "id": "rebalance-01-query-wins-max-at-once",
+          "outcome": "survived-test",
+          "restored_clean": true
+        },
+        {
+          "id": "rebalance-02-query-wins-max-wait",
+          "outcome": "survived-test",
+          "restored_clean": true
+        }
+      ],
+      "seed": "16398C0DE",
+      "test": "org.apache.solr.handler.admin.api.RebalanceLeadersAPITest.testBodyParametersOverrideQueryParameters"
+    },
+    "reviewed_baseline_comparison": {
+      "command": "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.handler.V2ApiIntegrationTest.testException -Ptests.seed=16398C0DE --rerun-tasks",
+      "exit_code": 1,
+      "head": "415c639e6e5b74d665209024cf29fb68dc32b23f",
+      "result": "The same test failed with expected HTTP 400 but received HTTP 500 at the reviewed PR #5284 baseline head."
+    },
+    "root_check": {
+      "actionable_tasks_executed": "555/555",
+      "additional_antora_only_retry": false,
+      "attempts": [
+        {
+          "cause": "Pinned wasm archive in the generated build cache was truncated and failed checksum/ZIP validation.",
+          "exit_code": 1,
+          "run": "40-root-check"
+        },
+        {
+          "cause": "Antora local content Git-source validation rejected the linked worktree metadata; no source change.",
+          "exit_code": 1,
+          "run": "41-root-check-retry"
+        },
+        {
+          "cause": "Exact command succeeded in a normal detached clone after seeding the generated wasm output with the checksum-verified artifact from the configured pinned URL.",
+          "exit_code": 0,
+          "run": "42-root-check-normal-clone"
+        }
+      ],
+      "command": "./gradlew --no-daemon check -x test",
+      "final_exit_code": 0,
+      "final_worktree": "normal detached clone at the exact assigned head"
+    },
+    "tidy": {
+      "command": "./gradlew --no-daemon tidy",
+      "exit_code": 0,
+      "tracked_changes_after_run": 0
+    }
+  },
+  "reviewed_public_pr_head": "415c639e6e5b74d665209024cf29fb68dc32b23f",
+  "scope_attestation": {
+    "docker_used": false,
+    "executor_mutations_restored": true,
+    "public_pr_5284_metadata_or_comments_modified": false,
+    "source_branch_modified": false,
+    "task_owned_checkouts_removed": true
+  },
+  "source_refs": {
+    "assigned_branch": "nick-boss-tech/solr:solr-16398-pr5284-review-fixes-20261110",
+    "assigned_head_verified_after_runs": "5fce0c06ee5afa8ac3606e32c2e441041da49864",
+    "assigned_source": "https://github.com/nick-boss-tech/solr/tree/solr-16398-pr5284-review-fixes-20261110",
+    "dependency_pr_5285": {
+      "relevance": "Malformed v2 request body handling; the baseline test failure matches the issue addressed by this PR.",
+      "state_at_final_check": "open",
+      "url": "https://github.com/apache/solr/pull/5285"
+    },
+    "public_pr_5284": {
+      "head": "415c639e6e5b74d665209024cf29fb68dc32b23f",
+      "state": "open",
+      "url": "https://github.com/apache/solr/pull/5284"
+    }
+  },
+  "type": "receipt",
+  "verdict": "failed"
+}
