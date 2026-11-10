@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent",
+  "evidence": "Receipt records/receipt/pr-5315-graceful-rejection-probe-linux-r3-20261110-receipt.json with evidence archive records/evidence/evidence-pr-5315-graceful-rejection-probe-linux-r3-20261110.tar.gz SHA-256 190620078e30d04e5c7db9fd0779572b83edf04eb192d33782dbfc95be1857ed. Executor stop verified at filing: no GradleDaemon and no start.jar process remains on this host; fork branch solr-17764-submit and PR 5315 head re-verified unchanged (d88ae0c6269e067602a90ed8e655df275f6f42f7 and dfde089fd9dd0e5e79774593e66dd030e1b7dd22); nothing was pushed from the probe clone.",
+  "id": "pr-5315-graceful-rejection-probe-linux-r3-20261110",
+  "job": "pr-5315-graceful-rejection-probe-linux-r3-20261110",
+  "reason": "Probe executed in a disposable clone and filed with an incomplete verdict: real-node marker, controls, both-client detection, guarded LB-subrequest retry, and packaged-server legs are evidenced in the archive; the two-node multi-shard fan-out, async LB path, real mixed-version server, and proxy cases remain uncovered, as the receipt states.",
+  "type": "release"
+}

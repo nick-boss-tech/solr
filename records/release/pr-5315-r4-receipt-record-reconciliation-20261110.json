@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent",
+  "evidence": "Report records/report/pr-5315-r4-receipt-record-reconciliation-20261110.json. Board evidence archive records/evidence/evidence-pr-5315-review-fixes-linux-gate-r4-20261110.tar.gz SHA-256 1c024ebcbcde3a4ddd015000131f4885a478dddb044240e4e0c967ccc8919441 matches the original run's local archive byte for byte. Executor stop verified at filing: no GradleDaemon or start.jar process remains on this host; no new gate run was started under this job.",
+  "id": "pr-5315-r4-receipt-record-reconciliation-20261110",
+  "job": "pr-5315-r4-receipt-record-reconciliation-20261110",
+  "reason": "Reconciliation report published: the r4 receipt and release schema gaps are confirmed against the live records, the r4 evidence archive hash is re-verified identical to the original run's archive, existing records are preserved unaltered, and the valid path to schema-conforming exact-head proof (a separate fresh gate at the unchanged head) is documented.",
+  "type": "release"
+}
