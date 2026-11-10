@@ -1,0 +1,7 @@
+{
+  "details": "On 2026-11-10 Nick directed Lucene builds and tests to run on Windows. The probe is being undertaken under lucene-local-proof-windows-20261110; avoid duplicate execution. This job had no claim at board snapshot 1306dd826b0a0e1c17467762aaf609d09f45ca06.",
+  "id": "lucene14775-windows-proof-direction-20261110",
+  "job": "lucene14775-comparator-probe-linux-20261110",
+  "summary": "Owner directed Lucene probe execution to Windows",
+  "type": "report"
+}
