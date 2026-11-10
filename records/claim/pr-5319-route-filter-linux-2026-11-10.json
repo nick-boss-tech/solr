@@ -1,0 +1,43 @@
+{
+  "base": "3a72ba0436d9decb48868ca46b94a5f52e2dc821",
+  "branch": "pr-5319-route-filter-tests",
+  "claimed_at": "2026-11-10T22:24:06Z",
+  "execution_host": "0609f7968656",
+  "gate": "records/gate/pr-5319-route-filter-linux-2026-11-10.json",
+  "host_id": "phone-agent-2",
+  "id": "pr-5319-route-filter-linux-2026-11-10",
+  "job": "pr-5319-route-filter-linux-2026-11-10",
+  "jdk_identity": [
+    "openjdk version \"21.0.12.1\" 2026-08-18",
+    "OpenJDK Runtime Environment (build 21.0.12.1+1-24.04.4-Ubuntu)",
+    "OpenJDK 64-Bit Server VM (build 21.0.12.1+1-24.04.4-Ubuntu, mixed mode, sharing)"
+  ],
+  "logs": "/workspace/gates/logs/phone-agent-2/pr-5319-route-filter-linux-2026-11-10",
+  "owner": "phone-agent-2",
+  "preflight": {
+    "active_phone_agent_2_claims": [],
+    "base_is_ancestor_of_source_head": true,
+    "board_snapshot": "eec8893dc51dda863d338961983688c787581d91",
+    "docker": "executable absent; will not install or invoke",
+    "fork_branch": "nick-boss-tech/solr:pr-5319-route-filter-tests",
+    "fork_branch_head": "d1a47bb29cdd9f69c1b65e813fc2bf13dbb00056",
+    "host_locks": [
+      "/workspace/tools/.gradle-phone-agent-2.lock",
+      "/workspace/tools/.gradle-0609f7968656.lock"
+    ],
+    "inode_stop_threshold_free_percent": 15,
+    "matching_executor_processes": [],
+    "public_pr": "https://github.com/apache/solr/pull/5319",
+    "public_pr_head": "3a72ba0436d9decb48868ca46b94a5f52e2dc821",
+    "public_pr_state": "open",
+    "source_head": "d1a47bb29cdd9f69c1b65e813fc2bf13dbb00056",
+    "target_claim_absent": true,
+    "target_release_absent": true
+  },
+  "runner": "Gradle wrapper; every invocation serialized under both mandatory host flock locks.",
+  "scope": "Linux gate only on the assigned exact head. No changes to the source branch, contributor PR, public comments, or PR metadata. Mutations are confined to separate disposable worktrees and discarded after preserving diffs and logs. Antora-specific tasks are explicitly skipped if reached by the root check; report this limitation.",
+  "source_branch": "nick-boss-tech/solr:pr-5319-route-filter-tests",
+  "source_head": "d1a47bb29cdd9f69c1b65e813fc2bf13dbb00056",
+  "type": "claim",
+  "worktree": "/workspace/worktrees/pr-5319-route-filter-linux-2026-11-10"
+}
