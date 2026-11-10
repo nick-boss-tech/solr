@@ -1,0 +1,17 @@
+{
+  "authorization": "Nick requested patch and gate in this chat",
+  "base_head": "fe557633a169c34dcb835696470cc6e69ba00be4",
+  "host": "Windows implementation; Linux proof separately",
+  "id": "pr-5297-exhaustion-fix-windows-20261109",
+  "job": "pr-5297-exhaustion-fix-windows-20261109",
+  "pr": "https://github.com/apache/solr/pull/5297",
+  "prior_review_release": "records/release/pr-5297-review-20261109.json",
+  "review": "records/report/pr-5297-review-20261109-report.json",
+  "summary": "Implement PR 5297 review finding: report an attempt limit only when an eligible dispatch is blocked; push atop reviewed PR head and hand off an exact-head Linux gate",
+  "tags": [
+    "implementation",
+    "windows",
+    "solrj"
+  ],
+  "type": "assignment"
+}
