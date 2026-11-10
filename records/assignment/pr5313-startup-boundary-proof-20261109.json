@@ -1,0 +1,19 @@
+{
+  "base_head": "358f13d9fdfaed260143a51100cd5657a582d562",
+  "host": "Linux gate host",
+  "id": "pr5313-startup-boundary-proof-20261109",
+  "job": "pr5313-startup-boundary-proof-20261109",
+  "prior_evidence": "records/evidence/pr5313-startup-wait-linux-gate-round2-20261109-evidence-bundle.json",
+  "prior_receipt": "records/receipt/pr5313-startup-wait-linux-gate-round2-20261109-receipt.json",
+  "reason": "The prior probe explicitly calls EnvUtils.getProperty and the timeout helper before loadNodeConfig, so it does not independently establish initialization ordering at the startup boundary. Its black-hole timing verifies the effective connection wait but does not independently observe the session timeout; the original gate required both builder timeout values.",
+  "source_branch": "solr-18630-submit",
+  "source_head": "4be1ad602621d2af96565355dce3804ee4744aae",
+  "successor_of": "pr5313-startup-wait-linux-gate-round2-20261109",
+  "summary": "Close two startup-boundary evidence gaps in PR 5313 round-two receipt without changing the source branch.",
+  "tags": [
+    "linux",
+    "gate",
+    "startup-probes"
+  ],
+  "type": "assignment"
+}
