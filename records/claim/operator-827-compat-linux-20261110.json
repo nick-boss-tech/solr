@@ -1,0 +1,32 @@
+{
+  "base": "701be62d578878bf571f732f4b4bb9586b868d53",
+  "gate": "records/gate/operator-827-compat-linux-20261110-gate.json",
+  "host": "phone-agent-2 Linux sandbox (0609f7968656)",
+  "id": "operator-827-compat-linux-20261110",
+  "job": "operator-827-compat-linux-20261110",
+  "owner": "phone-agent-2",
+  "plan": "Attempt installation of missing non-Docker prerequisites (Go 1.27, Helm and envtest assets where available), then run all feasible exact-head requirements while serializing gate commands under both host locks and rechecking inode/disk headroom.",
+  "preflight": {
+    "board_snapshot": "84984a91d0798e2cb92809465afcac01e78ae071",
+    "both_locks": "acquired nonblocking and released immediately before claim",
+    "build_locks": [
+      "/workspace/tools/.gradle-phone-agent-2.lock",
+      "/workspace/tools/.gradle-0609f7968656.lock"
+    ],
+    "disk": "51 GiB free",
+    "docker": "not installed; will not install or invoke",
+    "go": "go1.26.8 linux/amd64; assignment expects Go 1.27",
+    "helm": "not installed",
+    "inode_headroom": "1326174/1868096 free (about 71.0%); stop at or below 15% free",
+    "kind": "not installed",
+    "kubectl": "not installed",
+    "other_unreleased_phone_agent_2_claims": [],
+    "relevant_executor_processes": "none observed",
+    "target_claim_absent": true,
+    "target_release_absent": true
+  },
+  "scope": "Verify only the assigned exact head and base: focused controller tests, make unit-tests, make lint, and the required fail-before run with only the two changed controller test files overlaid at base. Do not modify or push source, change PR metadata, or post public comments. Do not install or invoke Docker; report Docker/KinD real-cluster E2E proof as unrun/incomplete. Preserve exact commands, outputs, counts and logs in /workspace/gates/logs/phone-agent-2/operator-827-compat-linux-20261110/.",
+  "source": "nick-boss-tech/solr-operator:pr-827-compatibility-followup",
+  "source_head": "2f50da7dc5b11dbfabacd567ca7740ccf70c2dd7",
+  "type": "claim"
+}
