@@ -126,7 +126,8 @@ public class JavaBinResponseWriter implements QueryResponseWriter {
     @Override
     public boolean wantsAllFields() {
       return returnFields.returnsAllFields()
-          && (!(returnFields instanceof SolrReturnFields fields) || !fields.filtersWildcardFields());
+          && (!(returnFields instanceof SolrReturnFields fields)
+              || !fields.filtersWildcardFields());
     }
 
     protected void writeResultsBody(ResultContext res, JavaBinCodec codec) throws IOException {
