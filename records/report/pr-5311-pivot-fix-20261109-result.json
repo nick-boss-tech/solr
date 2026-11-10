@@ -1,0 +1,12 @@
+{
+  "branch": "nick-boss-tech/solr:pr-5311-pivot-duplicate-keys",
+  "contributor_parent": "cddb3445e81e31e662d6c8c3676c64d11f0158e3",
+  "head": "b8f10c9e3ea04746ee5f823e57fd9484426b448d",
+  "id": "pr-5311-pivot-fix-20261109-result",
+  "job": "pr-5311-pivot-fix-20261109",
+  "public_write": "No PR or JIRA comment, body edit, or contributor-branch change.",
+  "review_record": "C:/Users/shaninna/dev/Solr-issues/research/branch-reviews/2026-11-09-pr-batch/PR-5311-review.md",
+  "source": "https://github.com/apache/solr/pull/5311",
+  "summary": "Restored a duplicate-capable NamedList for QueryResponse pivot results and added a regression checking both values and clone equality. Fork push and exact SHA read-back verified. Windows source review and diff check only; no tests or Gradle were run. Linux proof is pending under pr-5311-pivot-linux-gate-20261109; gate pr-5311-pivot-linux-proof-20261109 names the positive and fail-before legs.",
+  "type": "report"
+}
