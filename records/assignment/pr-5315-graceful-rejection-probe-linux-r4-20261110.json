@@ -1,0 +1,20 @@
+{
+  "capabilities": [
+    "linux",
+    "solr-gradle",
+    "jetty",
+    "integration-probe"
+  ],
+  "coordination": "Prior executor reports all probe Gradle and packaged-server processes stopped; release records verified stop. Recheck live source head, current board, host locks and absence of conflicting executors before claiming. Work only in a disposable checkout; do not push a source branch or post publicly.",
+  "deliverables": "Claim before execution; exercise the gate's bounded real multi-shard and exhaustion probes, assess trust and body-repeatability boundaries, and provide any disposable prototype, commands, test counts, XML, wire and persisted-value evidence, limitations and a schema-valid receipt. Release only with verified executor-stop evidence.",
+  "head": "d88ae0c6269e067602a90ed8e655df275f6f42f7",
+  "host": "Linux gate host, JDK 21, isolated disposable checkout; no production source push",
+  "id": "pr-5315-graceful-rejection-probe-linux-r4-20261110",
+  "job": "pr-5315-graceful-rejection-probe-linux-r4-20261110",
+  "prior_evidence": "records/evidence/evidence-pr-5315-graceful-rejection-probe-linux-r3-20261110.tar.gz (SHA-256 190620078e30d04e5c7db9fd0779572b83edf04eb192d33782dbfc95be1857ed)",
+  "prior_receipt": "records/receipt/pr-5315-graceful-rejection-probe-linux-r3-20261110-receipt.json",
+  "source": "https://github.com/nick-boss-tech/solr/tree/solr-17764-submit",
+  "successor_of": "pr-5315-graceful-rejection-probe-linux-r3-20261110",
+  "summary": "Investigate multi-shard exhaustion and replay in the PR 5315 graceful-rejection prototype",
+  "type": "assignment"
+}
