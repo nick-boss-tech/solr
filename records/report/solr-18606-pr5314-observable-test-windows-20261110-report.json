@@ -1,0 +1,19 @@
+{
+  "base": "672448a49c33a257e7a2f8722c84e823b100199c",
+  "branch": "solr-18606-pr5314-observable-test",
+  "changes": [
+    "New existing-suite integration test proves its session-filtered ZooKeeper debug-log signal with a real missing-state read, then checks repeated warmed alias queries for additional reads of that state path. Guard-removal mutation is required to show the test detects the regression.",
+    "Relocated provider and sync-helper tests into existing ClusterStateProviderTest, keeping the real stale-view fixture isolated. Removed redundant alias-guard and alias-success mocks; original reader test file matches upstream merge base. No new dependencies.",
+    "Broader provider abstraction question remains a maintainer discussion; no production code or live PR head changed."
+  ],
+  "evidence": "Fork branch verified at exact commit; PR remains at base; diff --check clean. No Windows build or tests. Net eventual PR against merge base is +324/-6 vs +279/-6 at prior PR head.",
+  "gate": "records/gate/solr-18606-pr5314-observable-test-linux-20261110.json",
+  "head": "f9988d951a5e15546fcd3b36659a67cc74d0795a",
+  "id": "solr-18606-pr5314-observable-test-windows-20261110-report",
+  "job": "solr-18606-pr5314-observable-test-windows-20261110",
+  "limits": "Log format and session/path detection must be proven on Linux; the test counts real I/O and does not benchmark p99 latency. Shared one-server fixture does not establish distributed lag behavior.",
+  "local_note": "research/solr-18606-research-note.md",
+  "pr": "https://github.com/apache/solr/pull/5314",
+  "summary": "Pushed separate PR-based branch adding a real-ZooKeeper alias I/O test and relocating provider/sync tests; Linux proof pending.",
+  "type": "report"
+}
