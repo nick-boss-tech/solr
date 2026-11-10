@@ -1,0 +1,12 @@
+{
+  "base": "d8ae2a03785c78840ee8dc8bf7e600f9d7b57d01",
+  "gate": "solr-18592-sortable-dv-repro-linux-20261110",
+  "head": "b9aed02ac1cde907a06d04fdbd96568ca38b85a9",
+  "id": "solr-18592-sortable-dv-repro-windows-20261110-report",
+  "job": "solr-18592-sortable-dv-repro-windows-20261110",
+  "limits": "A test failure is not by itself reproduction: confirm the exact truncation assertion, actual value and passing controls. Separate from the schema-feature branch and its older gate.",
+  "result": "Reused TestSortableTextField and its existing schema-sorting-text.xml: two methods compare a full stored value under wildcard and stored-only controls, a normal string and a short DV field, and an explicit-field full-value assertion. One Java test file changed, no production code. git diff --check passed and fork ref read-back matched. No Gradle, compile, formatter or tests were run on Windows; the hypothesis is unproven.",
+  "source": "nick-boss-tech/solr:solr-18592-sortable-dv-repro-20261110",
+  "summary": "Prepared and pushed an isolated test-only SortableTextField DocValues reproduction branch.",
+  "type": "report"
+}
