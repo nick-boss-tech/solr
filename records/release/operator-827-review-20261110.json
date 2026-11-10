@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-operator-review",
+  "evidence": "records/report/operator-827-review-20261110-report.json; local records research/branch-reviews/2026-11-10-solr-operator/PR-827-review.md and PR-879-review.md. Review execution has finished; no subprocess or external gate executor is running.",
+  "id": "operator-827-review-20261110",
+  "job": "operator-827-review-20261110",
+  "reason": "Partial read-only reviews completed and recorded; worker is stopping without source edits or running a test executor.",
+  "type": "release"
+}
