@@ -1,0 +1,49 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "records/evidence/operator-827-compat-linux-20261110-evidence.json (verified artifact SHA-256 4d7ceac015f987ba0b32d5b411e4e2cf64fa86f20ddef640c204ff01a1fa1331); final stop evidence is recorded inline in this release record.",
+  "gate": "operator-827-compat-linux-20261110-gate",
+  "head": "2f50da7dc5b11dbfabacd567ca7740ccf70c2dd7",
+  "id": "operator-827-compat-linux-20261110",
+  "job": "operator-827-compat-linux-20261110",
+  "reason": "Assigned Linux verification is complete. The receipt is incomplete because the Docker-dependent ArtifactHub lint step and Docker/kind real-cluster E2E proof were unavailable. No source or PR writes were made; gate/test processes have stopped and temporary worktrees/overlay are removed.",
+  "stop_evidence": {
+    "active_phone_agent_2_claims": [
+      "operator-827-compat-linux-20261110"
+    ],
+    "board_snapshot": "62eda21fa87718b087d18c8a63aa3209c02a12ea",
+    "captured_at": "2026-11-10T14:27:22-0700",
+    "docker_available": false,
+    "envtest_overlay_removed": true,
+    "evidence_sha256": "4d7ceac015f987ba0b32d5b411e4e2cf64fa86f20ddef640c204ff01a1fa1331",
+    "host_locks": [
+      {
+        "path": "/workspace/tools/.gradle-phone-agent-2.lock",
+        "status": "free"
+      },
+      {
+        "path": "/workspace/tools/.gradle-0609f7968656.lock",
+        "status": "free"
+      }
+    ],
+    "kind_available": false,
+    "matching_gate_processes": [],
+    "receipt_verdict": "incomplete",
+    "release_absent_before_write": true,
+    "remote_records_verified": {
+      "evidence": "records/evidence/operator-827-compat-linux-20261110-evidence.json",
+      "receipt": "records/receipt/operator-827-compat-linux-20261110-receipt.json",
+      "report": "records/report/operator-827-compat-linux-20261110-report.json"
+    },
+    "source_head": "2f50da7dc5b11dbfabacd567ca7740ccf70c2dd7",
+    "source_worktree_clean": true,
+    "source_worktrees": [
+      "/workspace/worktrees/operator-827-compat-linux-20261110/head"
+    ],
+    "temporary_base_worktree_removed": true,
+    "workspace_disk_free_bytes": 50755072000,
+    "workspace_inode_free": 1226393,
+    "workspace_inode_free_percent": 65.65,
+    "workspace_inode_total": 1868096
+  },
+  "type": "release"
+}
