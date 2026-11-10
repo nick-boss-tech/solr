@@ -419,6 +419,58 @@ public class TestSortableTextField extends SolrTestCaseJ4 {
     }
   }
 
+  public void testStoredDocValuesSelectionControls() {
+    SchemaField target = h.getCore().getLatestSchema().getField("whitespace_max6_stxt");
+    assertTrue(target.stored());
+    assertTrue(target.hasDocValues());
+    assertFalse(target.multiValued());
+    assertFalse(target.useDocValuesAsStored());
+
+    SchemaField storedOnly = h.getCore().getLatestSchema().getField("keyword_s");
+    assertTrue(storedOnly.stored());
+    assertFalse(storedOnly.hasDocValues());
+
+    SchemaField ordinaryString = h.getCore().getLatestSchema().getField("keyword_s_dv");
+    assertTrue(ordinaryString.stored());
+    assertTrue(ordinaryString.hasDocValues());
+    assertFalse(ordinaryString.multiValued());
+
+    assertU(
+        adoc(
+            "id", "1",
+            "whitespace_max6_stxt", "apple pear orange",
+            "keyword_s", "stored control",
+            "keyword_s_dv", "ordinary string",
+            "max6_field_has_usedvs", "short"));
+    assertU(commit());
+
+    String fullValue = "//result/doc/str[@name='whitespace_max6_stxt'][.='apple pear orange']";
+    assertQ(req("q", "id:1", "fl", "*"), "//*[@numFound='1']", fullValue);
+    assertQ(
+        req("q", "id:1", "fl", "whitespace_max6_stxt,keyword_s"),
+        "//*[@numFound='1']",
+        fullValue,
+        "//result/doc/str[@name='keyword_s'][.='stored control']");
+    assertQ(
+        req("q", "id:1", "fl", "keyword_s_dv"),
+        "//*[@numFound='1']",
+        "//result/doc/str[@name='keyword_s_dv'][.='ordinary string']");
+    assertQ(
+        req("q", "id:1", "fl", "max6_field_has_usedvs"),
+        "//*[@numFound='1']",
+        "//result/doc/str[@name='max6_field_has_usedvs'][.='short']");
+  }
+
+  public void testStoredDocValuesExplicitPreservesFullValue() {
+    assertU(adoc("id", "1", "whitespace_max6_stxt", "apple pear orange"));
+    assertU(commit());
+
+    assertQ(
+        req("q", "id:1", "fl", "whitespace_max6_stxt"),
+        "//*[@numFound='1']",
+        "//result/doc/str[@name='whitespace_max6_stxt'][.='apple pear orange']");
+  }
+
   /** test how various permutations of useDocValuesAsStored and maxCharsForDocValues interact */
   @SuppressWarnings("try")
   public void testUseDocValuesAsStored() {
