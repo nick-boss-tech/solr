@@ -1,0 +1,8 @@
+{
+  "gate": "solr-18630-pr5313-mixed-precedence-probe-20261109",
+  "head": "4be1ad602621d2af96565355dce3804ee4744aae",
+  "id": "solr-18630-pr5313-mixed-precedence-probe-20261109-report",
+  "job": "solr-18630-pr5313-mixed-precedence-probe-20261109",
+  "summary": "Probe complete, verdict passed. Twelve fresh-JVM runs (four configuration cases at the pre-PR baseline, the contributor head, and the offered fork head) match the gate's predictions exactly: with a legacy system property and a current-name environment variable both set, the legacy property wins at the baseline and the contributor head (result 1) and loses at the offered head (result 5); the both-system-properties row flips the same way, and single-source controls are constant. A search of the PR body, its comments, the SOLR-18630 ticket, and the code comments found no published or maintainer-endorsed cross-source precedence rule, so the receipt concludes the offered patch changes pre-existing mixed-source behavior and recommends restoring the explicitly supplied legacy Java property's precedence over the modern environment variable, with the minimal slice (the multi-alias guard in EnvUtils.syncSystemProperties plus EnvUtilsTest cases) identified for the Windows implementation worker. No source branch or public content was touched.",
+  "type": "report"
+}

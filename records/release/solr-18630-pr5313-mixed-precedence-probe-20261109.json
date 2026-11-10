@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent",
+  "evidence": "records/evidence/solr-18630-pr5313-mixed-precedence-probe-20261109-evidence.tar.gz",
+  "id": "solr-18630-pr5313-mixed-precedence-probe-20261109",
+  "job": "solr-18630-pr5313-mixed-precedence-probe-20261109",
+  "reason": "Probe completed with verdict passed: all 12 runs observed at the three exact revisions with per-revision classpath isolation and class-origin logging; the comparison table and the compatibility conclusion (behavior change confirmed; restore legacy system property precedence; minimal slice identified) are in the receipt. No source, branch, or public content changes were made.",
+  "type": "release"
+}
