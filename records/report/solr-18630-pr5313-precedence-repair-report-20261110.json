@@ -1,0 +1,11 @@
+{
+  "branch": "solr-18630-submit",
+  "gate_job": "solr-18630-pr5313-precedence-repair-linux-gate-20261110",
+  "head": "a4ce0580ad89ad521a5402e383d96c239cea94fd",
+  "id": "solr-18630-pr5313-precedence-repair-report-20261110",
+  "job": "solr-18630-pr5313-precedence-repair-windows-20261110",
+  "previous_head": "4be1ad602621d2af96565355dce3804ee4744aae",
+  "prior_receipt": "records/receipt/solr-18630-pr5313-mixed-precedence-probe-20261109-receipt.json",
+  "result": "The 12-run Linux comparison confirmed the prior fork head changed mixed-source alias precedence. The repair snapshots supplied Java properties before environment mapping so a legacy system property wins over a current-name environment value, and so explicit system aliases win over environment aliases; the current name remains preferred for same-source conflicts and explicit overwrite mode remains supported. Five focused tests cover conflicts and overwrite behavior. The two-file change was source-reviewed, staged diff --check passed, and the fork ref was verified at the new head. No Windows build or test was run. Previous green receipts cover the previous head only; new proof is pending. The upstream PR head remains 358f13d9fdfaed260143a51100cd5657a582d562 and no public comment was made.",
+  "type": "report"
+}
