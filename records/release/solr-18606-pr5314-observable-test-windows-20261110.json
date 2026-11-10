@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-nick-shanin",
+  "evidence": "Fork branch verified at f9988d951a5e15546fcd3b36659a67cc74d0795a; PR remains at 672448a49c33a257e7a2f8722c84e823b100199c; implementation report and Linux gate solr-18606-pr5314-observable-test-linux-20261110 published. No Windows build executor started; stopping implementation worker.",
+  "id": "solr-18606-pr5314-observable-test-windows-20261110",
+  "job": "solr-18606-pr5314-observable-test-windows-20261110",
+  "reason": "Separate fork branch pushed and exact-head Linux gate published.",
+  "type": "release"
+}
