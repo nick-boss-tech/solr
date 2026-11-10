@@ -1,0 +1,7 @@
+{
+  "id": "pr-5297-review-20261109",
+  "job": "pr-5297-review-20261109",
+  "owner": "windows-codex-pr5297-review",
+  "scope": "Read-only review and local record; no source or public writes",
+  "type": "claim"
+}
