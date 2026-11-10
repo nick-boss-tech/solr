@@ -1,0 +1,22 @@
+{
+  "authorization": "Nick explicitly instructed on 2026-11-10 to perform the previously described final step: build and test Solr PR 5293 with the patched Lucene dependency here on Windows. This authorizes the Solr Gradle invocations for this exact integration work; it does not authorize the retired queue, other Windows jobs, or public communication.",
+  "gate": "solr5293-lucene106-integration-windows-20261110",
+  "host": "Windows local host with JDK 21, isolated Solr worktrees and isolated local Maven repositories",
+  "id": "solr5293-lucene106-integration-windows-20261110",
+  "job": "solr5293-lucene106-integration-windows-20261110",
+  "lucene_head": "e0c53033bb2b6b34939ded24e228443b7d8b576b",
+  "lucene_release": "4ae946e5a9b99d1e22c23865c99e561b8dcc9d71",
+  "pr_head": "978e2b1e352c7c39a68f7b952e6ab12eabf80890",
+  "scope": "Run matched original versus patched Lucene tests from the same pinned Solr reproducer using isolated build trees and dependency substitution with verified artifact provenance. Preserve XML and logs, and if successful run full nested-doc suites and build a runnable Solr package for HTTP testing. Account for the known Lucene composite-build baseVersion incompatibility and existing Solr formatting issue; do not mutate contributor heads or make public writes.",
+  "solr_head": "769ca6e177d77acd3f1993a4a24bd3257ae243c0",
+  "summary": "Run matched Solr PR 5293 integration tests with original and repaired Lucene 10.6 on Windows",
+  "tags": [
+    "windows",
+    "solr",
+    "lucene",
+    "gradle",
+    "integration",
+    "proof"
+  ],
+  "type": "assignment"
+}
