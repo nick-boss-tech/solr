@@ -1,0 +1,18 @@
+{
+  "exploratory_gate": "pr-5315-graceful-rejection-probe-linux-r2-20261110",
+  "fork_branch": "solr-17764-submit",
+  "head": "a020611b228b02af90b2a80ef92fe95f463b4e81",
+  "id": "pr-5315-safe-503-retry-design-windows-20261110-report",
+  "job": "pr-5315-safe-503-retry-design-windows-20261110",
+  "limitations": "No runtime or network behavior was tested on Windows. Marker and per-subrequest retry are a hypothesis, not implemented or proven. They would not address 503s after Solr has begun processing and require an intermediary trust contract. Existing RouteException and communication-error retries remain unchanged. Baseline gate and exploratory Linux probe are separate jobs.",
+  "regression_gate": "pr-5315-review-fixes-linux-gate-r3-20261110",
+  "source_evidence": [
+    "Jetty 12.1.14 GracefulHandler.handleShutdownRejection runs before delegation: https://raw.githubusercontent.com/jetty/jetty.project/jetty-12.1.14/jetty-core/jetty-server/src/main/java/org/eclipse/jetty/server/handler/GracefulHandler.java",
+    "Solr server/etc/jetty-graceful.xml and test-framework JettySolrRunner install ordinary GracefulHandler; server/build.gradle disables Java compilation",
+    "Both HTTP transports currently discard headers before shared error classification; UpdateRequest iterator and StreamingUpdateRequest can be non-repeatable",
+    "CloudSolrClient currently retries whole requests for RequestNotSentException and RouteException 503, so neither is a safe marker for partially completed multi-shard requests",
+    "SOLR-18341 contains related unproven broader replay classification; do not equate idempotence with safe replay under arbitrary interleavings"
+  ],
+  "summary": "Narrowed newly added 503 retries to QUERY-typed requests after finding that UNSPECIFIED GenericSolrRequest can mutate data; added generic-write and marked-query tests. Proposed a distinct pre-handler shutdown rejection signal, retried only for a demonstrably repeatable failed LB subrequest.",
+  "type": "report"
+}
