@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr-5189-review",
+  "evidence": "Final report pr-5189-review-20261109-report and local review record. This worker completed the read-only review; no build or test executor was started.",
+  "id": "pr-5189-review-20261109",
+  "job": "pr-5189-review-20261109",
+  "reason": "Review complete; no executor or further work remains",
+  "type": "release"
+}
