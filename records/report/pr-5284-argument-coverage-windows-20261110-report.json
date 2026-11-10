@@ -1,0 +1,14 @@
+{
+  "blocker": "Malformed-body 500/400 reproduces at the reviewed PR head, and PR 5285 was open at last read. A new complete exact-head gate after dependency resolution remains necessary.",
+  "focused_gate": "records/assignment/pr-5284-argument-coverage-linux-gate-20261110.json",
+  "head": "b01220cbb66e0a1cca3dfb1fd7427ced6ca4c2a6",
+  "id": "pr-5284-argument-coverage-windows-20261110-report",
+  "job": "pr-5284-argument-coverage-windows-20261110",
+  "previous_head": "5fce0c06ee5afa8ac3606e32c2e441041da49864",
+  "prior_receipt": "records/receipt/pr-5284-review-fixes-linux-gate-r2-20261110-receipt.json",
+  "public_scope": "PR 5284 head and discussion not changed.",
+  "status": "Implemented, Focused Proof Pending; Full Gate Failed",
+  "summary": "Added a focused test capturing the real rebalance operation constructed by the resource and asserting both body arguments and the lock ID. A small package-local execution seam permits capture while existing tests still exercise the operation. Pushed and independently verified the exact fork head.",
+  "type": "report",
+  "verification": "git diff --check clean; no Windows build or tests. New focused test and mutant kills are not proven until the Linux receipt. Previous gate: 43 passed, one failed, one nightly skipped; tidy and Error Prone passed; root check passed in a normal detached clone after the documented checksum-verified wasm cache repair and linked-worktree Antora issue. Both rebalance mutants survived; all six migration mutants were detected. No previous-head result proves the new head."
+}
