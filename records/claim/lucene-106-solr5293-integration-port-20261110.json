@@ -1,0 +1,7 @@
+{
+  "id": "lucene-106-solr5293-integration-port-20261110",
+  "job": "lucene-106-solr5293-integration-port-20261110",
+  "owner": "windows-codex-desktop",
+  "scope": "Source-only release port, isolated fork push, and Linux integration-gate preparation.",
+  "type": "claim"
+}
