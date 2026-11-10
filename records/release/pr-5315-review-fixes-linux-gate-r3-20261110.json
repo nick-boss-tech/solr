@@ -1,0 +1,7 @@
+{
+  "id": "pr-5315-review-fixes-linux-gate-r3-20261110",
+  "job": "pr-5315-review-fixes-linux-gate-r3-20261110",
+  "owner": "phone-agent",
+  "status": "released: executor stopped; positive and check legs finished, tidy invalidated the head, fail-before legs transferred to the superseding gate r4, no Gradle process remains from this run",
+  "type": "release"
+}

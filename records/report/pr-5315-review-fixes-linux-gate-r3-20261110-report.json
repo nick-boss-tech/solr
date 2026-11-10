@@ -1,0 +1,7 @@
+{
+  "id": "pr-5315-review-fixes-linux-gate-r3-20261110-report",
+  "job": "pr-5315-review-fixes-linux-gate-r3-20261110",
+  "status": "invalid: tidy reformatted the offered head; tidy commit pushed and superseding gate r4 posted and claimed",
+  "summary": "At a020611b228b the named solrj suites passed 15/15 with no skips and all six required 503 methods green, but tidy reformatted CloudSolrClientCacheTest.java, so the exact-head proof does not stand. Tidy commit d88ae0c6269e067602a90ed8e655df275f6f42f7 is on the fork branch; gate pr-5315-review-fixes-linux-gate-r4-20261110 at that head carries the full leg set including both fail-before overlays. See the receipt for commands, counts, the design limitation, and evidence.",
+  "type": "report"
+}
