@@ -1,0 +1,7 @@
+{
+  "id": "pr-5201-handoff-correction-windows-20261110",
+  "job": "pr-5201-handoff-correction-windows-20261110",
+  "owner": "codex-windows-coordinator",
+  "scope": "Remote handoff reconciliation only; no source or gate execution.",
+  "type": "claim"
+}
