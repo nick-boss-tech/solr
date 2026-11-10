@@ -1,0 +1,20 @@
+{
+  "base": "9d4dc33e5d829d2bc9d1304054b5af6746879b34",
+  "branch": "solr-18606-pr5314-followup",
+  "environment": "Linux, JDK 21, clean exact-head checkout; obtain required build locks; retain commands, logs and fresh XML. Windows must not execute.",
+  "head": "672448a49c33a257e7a2f8722c84e823b100199c",
+  "id": "solr-18606-pr5314-followup-linux-20261109",
+  "job": "solr-18606-pr5314-followup-linux-20261109",
+  "requirements": [
+    "Verify fork follow-up branch points at assigned head and PR 5314 still points at base; verify base is ancestor of head. Stop and reconcile if either changed. The follow-up is a separate branch and must not move the PR head.",
+    "On clean head run ./gradlew :solr:solrj:test --tests org.apache.solr.client.solrj.impl.CloudSolrClientCacheTest --tests org.apache.solr.client.solrj.impl.CloudSolrClientRoutingTest -Ptests.seed=18606CAFE. Require testMissingCollectionIsCheckedOncePerRequest and testAliasResolvesToExistingCollection to execute and pass without skips; record XML counts and evidence.",
+    "On clean head run ./gradlew :solr:core:test --tests org.apache.solr.cloud.overseer.ZkStateReaderTest --tests org.apache.solr.cloud.AliasIntegrationTest -Ptests.seed=18606CAFE and ./gradlew :solr:solrj-zookeeper:test --tests org.apache.solr.common.cloud.SolrZkClientTest -Ptests.seed=18606CAFE. Require all five existing provider/sync tests to run without skips: testProviderRefreshesCollectionMissingFromLocalState, testProviderDoesNotRefreshKnownAlias, testProviderUnknownCollection, testProviderPropagatesCollectionReadFailures, and testSyncWaitsForCallbackAndPropagatesFailure. Record counts, skips and fresh logs/XML.",
+    "In a separate clean base checkout overlay only the follow-up CloudSolrClientCacheTest.java and run testMissingCollectionIsCheckedOncePerRequest. Require a runtime assertion/Mockito verification failure showing two getState calls where one is expected; compilation failures, errors or skips are not fail-before evidence. Keep production at base.",
+    "In a separate clean base checkout overlay only the follow-up ZkStateReaderTest.java and run testProviderPropagatesCollectionReadFailures. Require a runtime assertion failure because direct forceUpdateCollection throws the checked ZooKeeper error instead of the expected SolrException. Compilation failures, errors or skips are not fail-before evidence. Keep production at base.",
+    "On separate clean head checkouts mutate only one safeguard per run: remove the provider sync call and run testProviderUnknownCollection; disable the sync helper wait timeout condition and run testSyncWaitsForCallbackAndPropagatesFailure; remove the alias check in the provider guard and run testProviderDoesNotRefreshKnownAlias. Each must fail at runtime for its intended assertion rather than setup or compilation; restore each mutation.",
+    "Run ./gradlew tidy and ./gradlew check -x test on an unmodified offered-head checkout. Report :solr:core:validateSourcePatterns and whether tidy modified tracked files. A tracked formatting change invalidates this head; report it without pushing. Use a normal clean clone for Antora if a linked worktree triggers its known .git pointer issue; record each result.",
+    "Report limits: this avoids the second missing-name check between alias resolution and version collection for a single input; repeated explicit input names may still cause additional checks, and misses are not cached across requests. A collection created between the two former checks can now require a subsequent request. The mock lookup-count tests are not a ZooKeeper latency benchmark. Existing real-ZooKeeper test uses one server/session, not a multi-server lag test. Sync is not an unconditional quorum guarantee. Stale alias view refresh is out of scope. Do not claim unrun Docker checks."
+  ],
+  "type": "gate",
+  "verdict_policy": "Pass only after each named positive and fail-before/mutation leg, tidy and root check complete on exact head without skipped required tests; include fresh evidence and executor cleanup."
+}
