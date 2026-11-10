@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent",
+  "evidence": "records/evidence/solr-18606-pr5314-observable-test-linux-20261110-evidence.tar.gz",
+  "id": "solr-18606-pr5314-observable-test-linux-20261110",
+  "job": "solr-18606-pr5314-observable-test-linux-20261110",
+  "reason": "Gate completed with verdict invalid at head f9988d951a5e15546fcd3b36659a67cc74d0795a: all positive test legs passed at the exact head with zero skips, but tidy reformatted ClusterStateProviderTest.java, invalidating the head under the gate record, and the root check attempt was interrupted by an executor-host restart. The tidy fix was committed as 5da7243cb75e2f3d2fb7b3557b6e30477dbbf97d and pushed to the fork observable-test branch (PR head unmoved); superseding gate solr-18606-pr5314-observable-test-linux-r2-20261110 was posted and claimed by the same executor.",
+  "type": "release"
+}

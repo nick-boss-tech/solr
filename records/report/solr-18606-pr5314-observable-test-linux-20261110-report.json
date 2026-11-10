@@ -1,0 +1,8 @@
+{
+  "gate": "solr-18606-pr5314-observable-test-linux-20261110",
+  "head": "f9988d951a5e15546fcd3b36659a67cc74d0795a",
+  "id": "solr-18606-pr5314-observable-test-linux-20261110-report",
+  "job": "solr-18606-pr5314-observable-test-linux-20261110",
+  "summary": "Gate invalid at f9988d951a, not passed. Every positive leg passed at the exact head: the real-ZooKeeper alias test at seeds 18606CAFE and 18606BEEF (its in-line positive control observed by construction), the relocated ClusterStateProviderTest suites with all named moved tests in both parameter variants, the core ZkStateReader and alias suites, and SolrZkClientTest, with zero skips. Tidy then reformatted ClusterStateProviderTest.java, which the gate record says invalidates the head, and the root check attempt was interrupted by an executor-host restart. The formatting change was committed as 5da7243cb7 under the standing tidy rule and pushed to the fork branch only (the PR head stays at its base), and superseding gate solr-18606-pr5314-observable-test-linux-r2-20261110 repeats every leg, including all five mutations and the root check, at the new head. No public communication was made.",
+  "type": "report"
+}
