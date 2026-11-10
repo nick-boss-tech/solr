@@ -1,0 +1,19 @@
+{
+  "executor_stop": "records/release/pr-5284-review-fixes-linux-gate-r2-20261110.json",
+  "host": "Windows implementation; Linux gate separately",
+  "id": "pr-5284-argument-coverage-windows-20261110",
+  "job": "pr-5284-argument-coverage-windows-20261110",
+  "prior_receipt": "records/receipt/pr-5284-review-fixes-linux-gate-r2-20261110-receipt.json",
+  "scope": "Cover both rebalance body values reaching the shared operation. Preserve v1/v2 behavior. Do not modify PR 5284 head, combine unmerged PR 5285, post public comments, or run Gradle on Windows. The full prior gate remains blocked by the baseline-reproduced malformed-body failure while PR 5285 is open.",
+  "source_branch": "nick-boss-tech/solr:solr-16398-pr5284-review-fixes-20261110",
+  "source_head": "5fce0c06ee5afa8ac3606e32c2e441041da49864",
+  "successor_of": "pr-5284-gate-repair-windows-20261110",
+  "summary": "Close the directly observed rebalance body-to-operation test coverage gap, push an isolated fork update and hand off focused Linux proof.",
+  "tags": [
+    "windows",
+    "implementation",
+    "tests",
+    "pr-5284"
+  ],
+  "type": "assignment"
+}
