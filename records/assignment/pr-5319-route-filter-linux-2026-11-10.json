@@ -1,0 +1,20 @@
+{
+  "base": "3a72ba0436d9decb48868ca46b94a5f52e2dc821",
+  "branch": "pr-5319-route-filter-tests",
+  "deliverables": "Run exact-head suite, unchanged contributor-head suite, isolated discriminating mutations, tidy and root checks; publish fresh evidence and receipt.",
+  "gate": "pr-5319-route-filter-linux-2026-11-10",
+  "head": "d1a47bb29cdd9f69c1b65e813fc2bf13dbb00056",
+  "host": "Linux gate host only",
+  "id": "pr-5319-route-filter-linux-2026-11-10",
+  "job": "pr-5319-route-filter-linux-2026-11-10",
+  "pr": "https://github.com/apache/solr/pull/5319",
+  "status": "open, unclaimed",
+  "summary": "Linux gate for PR 5319 route-filter HTTP regression",
+  "tags": [
+    "linux",
+    "gradle",
+    "solr",
+    "proof"
+  ],
+  "type": "assignment"
+}
