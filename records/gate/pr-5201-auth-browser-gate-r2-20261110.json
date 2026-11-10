@@ -1,0 +1,28 @@
+{
+  "commands": [
+    "./gradlew :solr:webapp:test -Ptests.selenium=true --tests org.apache.solr.webapp.AdminUiSecurityAuthTest.testApiExplorerUsesAdminCredentials",
+    "./gradlew :solr:webapp:test -Ptests.selenium=true --tests org.apache.solr.webapp.AdminUiSecurityAuthTest --tests org.apache.solr.webapp.AdminUiSmokeTest",
+    "./gradlew tidy",
+    "./gradlew check -x test"
+  ],
+  "environment": "Linux normal clone, pinned JDK/Node, Chrome or Chromium and matching driver; record OS, versions, locks, seeds and logs.",
+  "head": "0355023c3170c87a84cd9e5688ae6b4f3e4df3ae",
+  "id": "pr-5201-auth-browser-gate-r2-20261110",
+  "job": "pr-5201-auth-browser-linux-gate-r2-20261110",
+  "prior_incomplete_receipt": "records/receipt/pr-5201-auth-browser-linux-gate-20261110-receipt.json",
+  "proof_status": "not run; all legs pending",
+  "receipt_path": "records/receipt/pr-5201-auth-browser-linux-gate-r2-20261110-receipt.json",
+  "requirements": [
+    "Verify exact fork head and current contributor PR head/discussion before execution. Claim this job.",
+    "Run the focused Selenium test and full security plus neighboring smoke suite. Verify Collections navigation reaches the real request, response and return navigation; confirm session cleanup allows the following login test. Preserve screenshots, console, XML, counts and seeds.",
+    "Run tidy and require no tracked diff, including retaining the scalar-api-reference version and its @keep annotation. Any formatting or source change requires a new pushed head and superseding gate.",
+    "In a normal clone run root check -x test; record actual result, execution conditions and logs. Previous linked-worktree Antora failure and interrupted normal-clone run are not passes.",
+    "Exercise the actual packaged explorer and production Jetty CSP in a browser, with Basic Auth, successful GET /api/collections and navigation back without a browser credential popup. In-JVM test servlets do not prove WAR packaging or production CSP.",
+    "Verify credential refresh on login/logout or change and no credential sent to a controlled cross-origin request. State explicitly if JWT is not exercised; never record secrets.",
+    "Run fail-before behavioral proof using the unchanged revised test transplanted onto the original contributor head 3f9faa9e9861ce28f3ede3f4305bd91b6e297463. A timeout before reaching the request, compile/setup error or skip is not behavioral proof.",
+    "If tests fail, distinguish product behavior from selectors or host setup and record evidence. Do not modify or push source or silently mark a failed/incomplete leg green."
+  ],
+  "source_branch": "pr-5201-auth-browser-fix",
+  "supersedes_gate": "pr-5201-auth-browser-gate-20261110",
+  "type": "gate"
+}
