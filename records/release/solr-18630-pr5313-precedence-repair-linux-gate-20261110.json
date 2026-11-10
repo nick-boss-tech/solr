@@ -1,0 +1,9 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "Evidence pointer records/evidence/solr-18630-pr5313-precedence-repair-linux-gate-20261110-evidence.json; artifact SHA-256 cb0150e7a7423d091b4bc1cabcd871b0dd474d10e693acc0b3eea7de8db4b672; uploaded archive contains evidence/release-stop-state.json. Final pre-release snapshot at 2026-11-10T17:22:44+00:00 verified evidence, report and receipt read back exactly, no active Gradle process, both required locks acquirable, 71% free inodes, and all disposable worktrees removed. Background-job list showed only the root-check job completed and none running. Report records/report/solr-18630-pr5313-precedence-repair-linux-gate-20261110-report; receipt records/receipt/solr-18630-pr5313-precedence-repair-linux-gate-20261110-receipt (verdict incomplete).",
+  "id": "solr-18630-pr5313-precedence-repair-linux-gate-20261110",
+  "job": "solr-18630-pr5313-precedence-repair-linux-gate-20261110",
+  "reason": "Linux gate execution is complete and this executor is stopping. The receipt is incomplete pending owner interpretation of the unqualified added previous-head mixed-precedence expectation; no Windows/Cygwin proof is claimed from this Linux task.",
+  "released_at": "2026-11-10T17:22:44+00:00",
+  "type": "release"
+}
