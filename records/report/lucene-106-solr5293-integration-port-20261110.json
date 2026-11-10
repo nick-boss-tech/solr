@@ -1,0 +1,10 @@
+{
+  "branch": "lucene-10.6-block-join-integration",
+  "details": "Fork push and remote head verified. Port applies the existing repair to release tag 4ae946e5a9b99d1e22c23865c99e561b8dcc9d71. No Gradle or compiled proof was run on Windows. Linux job lucene106-solr5293-integration-linux-20261110 requests fail-before and matched Solr proof against the specified exact heads. Windows HTTP fixtures ran only against released Solr 10.1 with unpatched Lucene 10.6: three block-join cases matched and one differed; stock Solr lacked previousCursorMark as expected. Those fixture results do not prove the PR or fix. A separate Linux gate requests reverse-cursor PR testing. No public upstream action was taken.",
+  "head": "e0c53033bb2b6b34939ded24e228443b7d8b576b",
+  "id": "lucene-106-solr5293-integration-port-20261110",
+  "job": "lucene-106-solr5293-integration-port-20261110",
+  "repository": "https://github.com/nick-boss-tech/lucene",
+  "summary": "Ported the block-join repair to Lucene 10.6 and prepared matched integration proof",
+  "type": "report"
+}
