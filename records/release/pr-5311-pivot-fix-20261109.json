@@ -1,0 +1,8 @@
+{
+  "actor": "Nick Shanin workspace Codex implementation session",
+  "evidence": "records/report/pr-5311-pivot-fix-20261109-result.json and records/gate/pr-5311-pivot-linux-proof-20261109.json. This Windows implementation session has stopped implementation; it started no test or Linux executor. The separate gate claim belongs to the Linux executor.",
+  "id": "pr-5311-pivot-fix-20261109",
+  "job": "pr-5311-pivot-fix-20261109",
+  "reason": "Implementation complete and handed to Linux gate.",
+  "type": "release"
+}
