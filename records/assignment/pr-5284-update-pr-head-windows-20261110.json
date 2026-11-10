@@ -1,0 +1,20 @@
+{
+  "destination_branch": "solr-16398-rebalance-migrate",
+  "direction": "Nick explicitly instructed pushing changes to the PR branch and accepted the known dependent-PR failure mode. Non-force push only; verify exact source, destination and ancestry before push. No public comments, PR metadata changes or JIRA writes authorized.",
+  "host": "Windows",
+  "id": "pr-5284-update-pr-head-windows-20261110",
+  "job": "pr-5284-update-pr-head-windows-20261110",
+  "old_head": "415c639e6e5b74d665209024cf29fb68dc32b23f",
+  "pr": "https://github.com/apache/solr/pull/5284",
+  "proof_limit": "Focused Linux receipt records parameter tests, mutations, tidy, Error Prone and root check passing at target head; one nightly test was skipped. Full suite not green due baseline-reproduced malformed-body failure associated with open PR 5285 and remaining compatibility checks.",
+  "source_branch": "solr-16398-pr5284-review-fixes-20261110",
+  "successor_of": "pr-5284-forbidden-api-repair-windows-20261110",
+  "summary": "At Nick's direct instruction, fast-forward PR 5284's fork branch to the tested follow-up head and verify both fork ref and live PR head.",
+  "tags": [
+    "windows",
+    "integration",
+    "pr-5284"
+  ],
+  "target_head": "3d530d7639eeb0b4bd8ee11227a1133fe66aa672",
+  "type": "assignment"
+}
