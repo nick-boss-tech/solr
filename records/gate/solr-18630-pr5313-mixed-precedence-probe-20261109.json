@@ -1,0 +1,57 @@
+{
+  "case_commands": [
+    {
+      "case": "mixed_legacy_system_current_environment",
+      "command": "env -i HOME=\"$HOME\" PATH=\"$PATH\" LANG=C.UTF-8 SOLR_CLOUD_WAIT_FOR_ZK_SECONDS=5 \"$JAVA\" -Dsolr.wait.for.zk=1 -cp \"$PROBE_CLASSES:$GATE_PROBE_CP\" MixedSourcePrecedenceProbe",
+      "source_prediction": {
+        "contributor_head": "1",
+        "offered_head": "5",
+        "pre_pr_base": "1"
+      }
+    },
+    {
+      "case": "legacy_system_only_control",
+      "command": "env -i HOME=\"$HOME\" PATH=\"$PATH\" LANG=C.UTF-8 \"$JAVA\" -Dsolr.wait.for.zk=1 -cp \"$PROBE_CLASSES:$GATE_PROBE_CP\" MixedSourcePrecedenceProbe",
+      "source_prediction": {
+        "contributor_head": "1",
+        "offered_head": "1",
+        "pre_pr_base": "1"
+      }
+    },
+    {
+      "case": "current_environment_only_control",
+      "command": "env -i HOME=\"$HOME\" PATH=\"$PATH\" LANG=C.UTF-8 SOLR_CLOUD_WAIT_FOR_ZK_SECONDS=5 \"$JAVA\" -cp \"$PROBE_CLASSES:$GATE_PROBE_CP\" MixedSourcePrecedenceProbe",
+      "source_prediction": {
+        "contributor_head": "5",
+        "offered_head": "5",
+        "pre_pr_base": "5"
+      }
+    },
+    {
+      "case": "both_system_properties_control",
+      "command": "env -i HOME=\"$HOME\" PATH=\"$PATH\" LANG=C.UTF-8 \"$JAVA\" -Dsolr.wait.for.zk=1 -Dsolr.cloud.wait.for.zk.seconds=5 -cp \"$PROBE_CLASSES:$GATE_PROBE_CP\" MixedSourcePrecedenceProbe",
+      "source_prediction": {
+        "contributor_head": "1",
+        "offered_head": "5",
+        "pre_pr_base": "1"
+      }
+    }
+  ],
+  "classpath_setup": "For each separate checkout generate and use that checkout's actual Solr runtime classpath. The previous Linux boundary evidence archive records a working core-test classpath init script (print-test-classpath.init.gradle) and lists main-classes/resources directories to prepend; adapt that method for each revision using the host's approved Gradle launcher and locking rules. Do not copy a built classpath or compiled classes from one revision into another. Ensure any project artifacts referenced on the classpath exist and log ENVUTILS_ORIGIN so the loaded class can be tied to that checkout. Compile this unchanged probe with the checkout's classpath: javac -cp \"$GATE_PROBE_CP\" -d \"$PROBE_CLASSES\" MixedSourcePrecedenceProbe.java. Record the exact classpath construction and compile commands; a compile or setup failure is incomplete, not an observed precedence result.",
+  "contributor_head": "358f13d9fdfaed260143a51100cd5657a582d562",
+  "environment": "Linux with a supported JDK and approved host serialization/locks. Use a separate clean disposable checkout and fresh build output for each revision. Verify no existing executor conflicts, verify each full SHA and the live fork/PR heads, and do not modify or push any source branch. Run every configuration case in a separate JVM with a scrubbed environment. Preserve probe source, commands, raw output, exit codes, class origins, checkout identities, and SHA-256 hashes.",
+  "head": "4be1ad602621d2af96565355dce3804ee4744aae",
+  "id": "solr-18630-pr5313-mixed-precedence-probe-20261109",
+  "job": "solr-18630-pr5313-mixed-precedence-probe-20261109",
+  "pre_pr_base": "b771587e9707c49847d728fd1f3ff259a182692c",
+  "probe_source": "import org.apache.solr.common.util.EnvUtils;\n\npublic final class MixedSourcePrecedenceProbe {\n  public static void main(String[] args) {\n    System.out.println(\"INPUT_ENV=\" + System.getenv(\"SOLR_CLOUD_WAIT_FOR_ZK_SECONDS\"));\n    System.out.println(\"INPUT_LEGACY_SYS=\" + System.getProperty(\"solr.wait.for.zk\"));\n    System.out.println(\"INPUT_CURRENT_SYS=\" + System.getProperty(\"solr.cloud.wait.for.zk.seconds\"));\n    String value = EnvUtils.getProperty(\"solr.cloud.wait.for.zk.seconds\");\n    System.out.println(\"RESULT=\" + (value == null ? \"<unset>\" : value));\n    System.out.println(\"ENVUTILS_ORIGIN=\" + EnvUtils.class.getProtectionDomain().getCodeSource().getLocation());\n  }\n}\n",
+  "probe_source_filename": "MixedSourcePrecedenceProbe.java",
+  "repository": "https://github.com/nick-boss-tech/solr",
+  "requirements": [
+    "Run all four cases as separate clean JVMs against all three exact revisions, giving 12 recorded runs. Log the literal input settings, RESULT, ENVUTILS_ORIGIN, process exit code, checkout HEAD and classpath provenance. Do not pass the conflict through a timing-only assertion. Any unexpected result requires investigation, including correct environment scrubbing and revision/classpath isolation; do not report the predicted result as observed.",
+    "The first row is the discriminator: both values configured, so 1 means the legacy Java system property wins and 5 means the current-name environment variable wins. The one-setting rows show that each input is individually read. The both-system-properties row distinguishes modern-name priority from source priority. The pre-PR baseline establishes whether the behavior predates this PR; the contributor head alone is not sufficient for that conclusion.",
+    "Review relevant existing documentation, code comments, history and PR discussion for an actual published or maintainer-endorsed cross-alias precedence rule. Separate a measured behavior change from a normative compatibility decision. If the predicted baseline=1, contributor=1, offered=5 result is observed and no authoritative intentional precedence change is found, conclude that the offered patch changes pre-existing mixed-source behavior and recommend restoring precedence of the explicitly supplied legacy Java property over the modern environment variable; identify the minimal source/test slice for the Windows implementation worker. Do not present that recommendation as an already documented universal contract. If evidence instead supports current-name priority across sources, explain and cite it; if results differ or are ambiguous, report the precise unresolved question rather than declaring a pass.",
+    "The earlier receipt's focused tests, formatting, fail-before, root check and boundary/session probes remain valid for their recorded head and scope. This job does not rerun them or authorize modifying source, a fork branch, or public PR content. Publish a receipt with verdict and a comparison table, the compatibility conclusion or uncertainty, exact commands, output and evidence hashes; document executor stop and release according to the live board workflow."
+  ],
+  "type": "gate"
+}
