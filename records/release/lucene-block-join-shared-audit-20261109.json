@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-desktop",
+  "evidence": "records/report/lucene-block-join-shared-audit-20261109-report.json published at board commit 3091f8028903789787809e81aa16f13a70135873. No test runner, build or other executor was started for this audit. The review worker has stopped making changes to this job.",
+  "id": "lucene-block-join-shared-audit-20261109",
+  "job": "lucene-block-join-shared-audit-20261109",
+  "reason": "Read-only audit and report completed; handing findings to Nick.",
+  "type": "release"
+}
