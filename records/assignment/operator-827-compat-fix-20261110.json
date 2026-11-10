@@ -1,0 +1,11 @@
+{
+  "base_head": "701be62d578878bf571f732f4b4bb9586b868d53",
+  "evidence": "records/report/operator-827-review-20261110-report.json",
+  "host": "Windows implementation; Linux Go and Kubernetes proof pending",
+  "id": "operator-827-compat-fix-20261110",
+  "job": "operator-827-compat-fix-20261110",
+  "scope": "Implement narrowly scoped fixes and focused regressions for the custom exporter image tag and stale status findings, push a non-forced branch to nick-boss-tech/solr-operator, and hand off exact-head Linux proof. No public PR comments or changes to contributor branch.",
+  "source": "https://github.com/apache/solr-operator/pull/827",
+  "summary": "Prepare a fork branch addressing review findings on apache/solr-operator PR 827",
+  "type": "assignment"
+}
