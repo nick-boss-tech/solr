@@ -1,0 +1,18 @@
+{
+  "constraints": [
+    "No public comment or changes to contributor branch without authorization.",
+    "Treat unresolved runtime issues and unknown behavior as proof pending."
+  ],
+  "id": "pr-5201-explorer-implementation-windows-20261110",
+  "intended_host": "Windows implementation host",
+  "job": "pr-5201-explorer-implementation-windows-20261110",
+  "scope": [
+    "Reconcile live PR and discussion; isolate work based on contributor head.",
+    "Implement scoped credential and browser coverage changes; no Gradle, browser or local test queue on Windows.",
+    "Commit with Nick Shanin identity, push a non-forced branch to Nick’s fork, verify remote SHA, and request a separate Linux gate covering real packaged explorer, auth, browser and named proof legs."
+  ],
+  "source_head": "3f9faa9e9861ce28f3ede3f4305bd91b6e297463",
+  "successor_of": "pr-5201-explorer-auth-browser-linux-20261110",
+  "summary": "Implement PR 5201 authentication and explorer browser coverage on Windows, then request an exact-head Linux gate.",
+  "type": "assignment"
+}
