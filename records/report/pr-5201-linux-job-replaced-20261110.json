@@ -1,0 +1,7 @@
+{
+  "id": "pr-5201-linux-job-replaced-20261110",
+  "job": "pr-5201-explorer-auth-browser-linux-20261110",
+  "source_head": "3f9faa9e9861ce28f3ede3f4305bd91b6e297463",
+  "summary": "Nick directed Windows implementation followed by Linux gate. This coordinator claimed the previously unclaimed Linux implementation job solely to retire it; no worker or executor was started by this coordinator. The canonical claim race determines ownership.",
+  "type": "report"
+}
