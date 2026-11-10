@@ -1,0 +1,18 @@
+{
+  "context": "Prior runtime and iterator audits are released in lucene-solr-windows-runtime-20261109 and lucene-block-join-shared-audit-20261109. Inverse-sort PR 14775 is an independent item with unresolved upstream design questions.",
+  "existing_fix_head": "55c3174bd154b5cc987d9b24e1c77043e23fe71e",
+  "host": "Windows",
+  "id": "lucene-106-solr5293-integration-port-20261110",
+  "job": "lucene-106-solr5293-integration-port-20261110",
+  "scope": "Make a separately named fork branch based on Lucene 10.6.0; port the existing fix and relevant tests while preserving release-branch test discovery. Review, commit and push normally, verify the remote, and post a separate Linux build/test and matched Solr integration gate. No Windows Gradle or retired queue. Existing Lucene main branch and Solr PR remain untouched. No public PR or comment.",
+  "solr_reproducer_head": "769ca6e177d77acd3f1993a4a24bd3257ae243c0",
+  "source_base": "4ae946e5a9b99d1e22c23865c99e561b8dcc9d71",
+  "summary": "Prepare a Lucene 10.6 integration-only port of the existing block-join repair and coordinate matched Solr PR 5293 integration proof",
+  "tags": [
+    "lucene",
+    "implementation",
+    "solr",
+    "integration"
+  ],
+  "type": "assignment"
+}
