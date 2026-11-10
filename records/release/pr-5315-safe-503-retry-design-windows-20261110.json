@@ -1,0 +1,8 @@
+{
+  "actor": "Codex Windows source investigation session",
+  "evidence": "Report pr-5315-safe-503-retry-design-windows-20261110-report records the exact pushed head and both Linux jobs. No Windows build or test executor was started; source worktree has no uncommitted task edits.",
+  "id": "pr-5315-safe-503-retry-design-windows-20261110",
+  "job": "pr-5315-safe-503-retry-design-windows-20261110",
+  "reason": "Source correction pushed and separate Linux proof and exploratory probe handed off",
+  "type": "release"
+}
