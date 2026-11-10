@@ -1,0 +1,9 @@
+{
+  "evidence": "C:/Users/shaninna/dev/Solr-issues/research/branch-reviews/2026-11-10-pr-batch/PR-5319-review.md",
+  "head": "3a72ba0436d9decb48868ca46b94a5f52e2dc821",
+  "id": "pr-5319-review-2026-11-10-report",
+  "job": "pr-5319-review-2026-11-10",
+  "summary": "No demonstrated production defect in the reviewed path; existing HTTP test does not exercise the new route parameter or multiple shards. Upstream Crave and Gradle check runs succeeded at the reviewed head. No local builds or tests.",
+  "type": "report",
+  "verdict": "source review complete; route-filter regression coverage missing"
+}
