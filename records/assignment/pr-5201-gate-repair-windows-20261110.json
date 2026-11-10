@@ -1,0 +1,17 @@
+{
+  "id": "pr-5201-gate-repair-windows-20261110",
+  "intended_host": "Windows implementation host",
+  "job": "pr-5201-gate-repair-windows-20261110",
+  "prior_gate": "pr-5201-auth-browser-linux-gate-20261110",
+  "prior_receipt": "records/receipt/pr-5201-auth-browser-linux-gate-20261110-receipt.json",
+  "scope": [
+    "Repair the tracked version-catalog tidy issue using existing project conventions.",
+    "Correct the browser test navigation and session cleanup based on the gate screenshots and results; do not claim the reported request hang or authentication is fixed without Linux proof.",
+    "Commit and non-force push scoped changes to the existing Nick fork branch; verify the remote head and request a separate superseding exact-head Linux gate.",
+    "No Windows Gradle, browser tests or retired local test queue; no public comment or contributor branch changes."
+  ],
+  "source_head": "2d4f255fefec6e455cfdc35e6281769f9e01fba9",
+  "successor_of": "pr-5201-explorer-implementation-windows-20261110",
+  "summary": "Address PR 5201 incomplete Linux gate findings on Windows and request a superseding exact-head Linux gate.",
+  "type": "assignment"
+}
