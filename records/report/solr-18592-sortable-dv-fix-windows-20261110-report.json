@@ -1,0 +1,14 @@
+{
+  "communication": "PR 5188 is merged; no open exact SOLR-18592 PR was found. This is an independent fork branch; no public PR or comment was posted. Linux proof is pending.",
+  "gate": "solr-18592-sortable-dv-fix-linux-20261110",
+  "head": "b225cd5bb2a5886c187b13009e7016c9165414ce",
+  "id": "solr-18592-sortable-dv-fix-windows-20261110-report",
+  "job": "solr-18592-sortable-dv-fix-windows-20261110",
+  "result": "SolrDocumentFetcher no longer treats DocValues as a substitute for the stored value of SortableTextField or subclasses, because those DocValues may be truncated under current or older schema settings. Reuses the reproduced full-value test and controls; adds a mixed stored-plus-nonstored-DocValues result check. Other field types and DV-only fields keep existing logic. Fork head verified; git diff --check passed; no tests, compile, formatter or Gradle on Windows.",
+  "source": "nick-boss-tech/solr:solr-18592-sortable-dv-fix-20261110",
+  "summary": "Implemented and pushed a narrow fix for stored SortableTextField truncation through DocValues substitution.",
+  "tradeoff": "Conservatively disables the all-DocValues stored-field optimization for all stored SortableTextField instances, including configurations whose current values happen to be safe. No performance benchmark was run. Other field type representation risks are outside this targeted fix.",
+  "type": "report",
+  "unfixed_head": "b9aed02ac1cde907a06d04fdbd96568ca38b85a9",
+  "upstream_base": "d8ae2a03785c78840ee8dc8bf7e600f9d7b57d01"
+}
