@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-desktop",
+  "evidence": "records/report/lucene106-patched-solr101-http-result-20261110.json records artifact hashes, observed orders and limitations. Both Solr stop commands returned zero; no listener remained on ports 18984 or 18985. Fixture executors exited, and this worker has stopped changing the runtime job.",
+  "id": "lucene106-patched-solr101-http-20261110",
+  "job": "lucene106-patched-solr101-http-20261110",
+  "reason": "Isolated HTTP comparison completed and servers stopped.",
+  "type": "release"
+}
