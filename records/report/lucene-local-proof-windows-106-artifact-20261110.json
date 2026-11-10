@@ -1,0 +1,8 @@
+{
+  "details": "Windows, Temurin 21.0.11, Gradle 9.8.0, :lucene:join:tidy :lucene:join:jar, exit 0. The candidate source worktree remained clean after Google Java Format. The resulting wt/LUCENE-106-INTEGRATION/lucene/join/build/libs/lucene-join-10.6.0-SNAPSHOT.jar is 193925 bytes and SHA-256 1d6cf07164022466858c76037a47469c17f73796112142c6059f5dbd03e6c8aa. Transcript research/lucene-submission-prep/windows-proof-20261110/join-tidy-jar.log SHA-256 8bd75cd0fb1c3e8816dee3b8fb13d63b66903eb151433471090e1787e42e7514. Gradle reported eclint unavailable and error-prone skipped. This is a Lucene artifact; it is not a built or tested Solr PR.",
+  "head": "e0c53033bb2b6b34939ded24e228443b7d8b576b",
+  "id": "lucene-local-proof-windows-106-artifact-20261110",
+  "job": "lucene-local-proof-windows-20261110",
+  "summary": "Lucene 10.6 tidy and patched join JAR succeeded on Windows",
+  "type": "report"
+}
