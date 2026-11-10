@@ -1,0 +1,8 @@
+{
+  "details": "The Java 21, Gradle 9.8.0 focused block-join invocation was interrupted by the Windows worker after an unusually long first-run build and host responsiveness degraded. It reached build-infra:jar but no Lucene test task or XML was observed. The Gradle client PID 51960 and its daemon PID 59520 were terminated together; the command exited 1 due to that interruption. This is neither a test failure nor a pass. Do not use the first-run result as proof; generated caches may need normal Gradle recovery after abrupt termination. The separate inverse-sort build was still running at the time of this record.",
+  "head": "e0c53033bb2b6b34939ded24e228443b7d8b576b",
+  "id": "lucene-local-proof-windows-106-interrupted-20261110",
+  "job": "lucene-local-proof-windows-20261110",
+  "summary": "Interrupted the 10.6 focused build while investigating host slowness",
+  "type": "report"
+}
