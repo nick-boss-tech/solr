@@ -1,0 +1,11 @@
+{
+  "comment": "https://github.com/apache/solr/pull/5312#issuecomment-6774366289",
+  "draft": "Windows workspace research/branch-reviews/2026-11-09-pr-batch/PR-5312-followup-draft.md",
+  "head": "1d71a1b3811b1e9c7fe9bcac7ade1c8bc695ecb0",
+  "id": "pr-5312-czxid-comment-20261110-report",
+  "job": "pr-5312-czxid-comment-20261110",
+  "pr_head": "0848e85fad1290ed604f881abb265b060be3075f",
+  "receipt": "records/receipt/pr-5312-czxid-linux-gate-r2-20261110-receipt.json",
+  "summary": "Read the r2 receipt and verified its evidence archive SHA-256 6dbf547a63af810db8f71d8326c6df57e4d0ab6bfadc871c4879871be78d7c11 and JUnit XML summaries. Exact-head Linux proof passed: 3 MultipleManagedSchemasTest and 1 TestCollectionAPI.testConfigCaching, no skips, clean tidy and diff check, root check with egress-CA truststore, and expected fail-before assertion on original PR production code with test overlaid. Collision test uses mocked ZooKeeper stats. Refreshed fork head and PR discussion; contributor head remained 0848e85fad1290ed604f881abb265b060be3075f and is an ancestor of offered head. Under standing clean-gate authorization posted one factual follow-up at 2026-11-10T17:29:01Z and separately read it back against the local draft; PR head remained unchanged.",
+  "type": "report"
+}
