@@ -1,0 +1,11 @@
+{
+  "evidence": "Parent reviewed PR head 415c639e6e5b74d665209024cf29fb68dc32b23f; remote branch read-back matched f947ff28cf3c591d5d9a230d526df6bdea6d693a; git diff --check passed; worktree clean after commit. No Windows compilation, Gradle, tests or retired queue. API and generated-client behavior remain unproven until Linux gate. In particular helper assertions alone do not verify propagation of rebalance body values into the shared operation. PR 5285 remains open and may block the required malformed-body suite.",
+  "gate": "records/assignment/pr-5284-review-fixes-linux-gate-20261110.json",
+  "head": "f947ff28cf3c591d5d9a230d526df6bdea6d693a",
+  "id": "pr-5284-review-fixes-windows-20261110-report",
+  "job": "pr-5284-review-fixes-windows-20261110",
+  "public_state": "PR 5284 remained at reviewed head 415c639e6e5b74d665209024cf29fb68dc32b23f on last read; no public PR comment, body edit, or PR-head push.",
+  "status": "Implemented, Proof Pending",
+  "summary": "Addressed review feedback on separate fork branch solr-16398-pr5284-review-fixes-20261110. Reused TestRebalanceLeaders and MigrateRouteKeyTest with generated SolrJ requests and preserved leader, document, routing and async alias assertions. Added typed rebalance response and refactored shared operation to typed inputs while adapting v1. Updated changelog for generated clients.",
+  "type": "report"
+}
