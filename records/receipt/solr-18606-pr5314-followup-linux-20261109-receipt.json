@@ -1,0 +1,178 @@
+{
+  "base": "9d4dc33e5d829d2bc9d1304054b5af6746879b34",
+  "cleanup": {
+    "build_locks_free": {
+      "/workspace/tools/.gradle-0609f7968656.lock": true,
+      "/workspace/tools/.gradle-phone-agent-2.lock": true
+    },
+    "free_inode_percent_approx": 72.39,
+    "gate_worktrees_removed": true,
+    "no_executor_remained": true,
+    "source_checkout_clean_before_removal": true
+  },
+  "commands": "evidence/logs/leg-results.tsv",
+  "coverage_limits": {
+    "alias_refresh_scope": "Stale alias view refresh is out of scope.",
+    "collection_created_between_checks": "A collection created between the two former checks can now require a subsequent request.",
+    "mock_test_scope": "The mock lookup-count tests are not a ZooKeeper latency benchmark.",
+    "real_zookeeper_scope": "The existing real-ZooKeeper test uses one server/session, not a multi-server lag test.",
+    "single_input_missing_collection": "This avoids the second missing-name check between alias resolution and version collection for a single input; repeated explicit input names may still cause additional checks, and misses are not cached across requests.",
+    "sync_guarantee": "ZooKeeper sync is not an unconditional quorum guarantee."
+  },
+  "docker_dependent_proof": {
+    "details": "Docker CLI was absent, was not invoked or installed; Docker-dependent checks remain unrun and are not credited.",
+    "status": "not_run"
+  },
+  "evidence": {
+    "artifact": "solr-18606-pr5314-followup-linux-20261109-evidence.tar.gz",
+    "bytes": 102992,
+    "location": "https://raw.githubusercontent.com/nick-boss-tech/solr/coordination-v2/records/evidence/solr-18606-pr5314-followup-linux-20261109-evidence.tar.gz",
+    "record_id": "solr-18606-pr5314-followup-linux-20261109-evidence",
+    "sha256": "1764d650008c3c531f8f541a9ac2c5d4f94775923cae06ca57db38bb2a26b4f7"
+  },
+  "gate": "solr-18606-pr5314-followup-linux-20261109",
+  "head": "672448a49c33a257e7a2f8722c84e823b100199c",
+  "id": "solr-18606-pr5314-followup-linux-20261109-receipt",
+  "job": "solr-18606-pr5314-followup-linux-20261109",
+  "junit_xml": "evidence/junit/",
+  "observed_at_utc": "2026-11-10T03:02:04Z",
+  "platform_limits": {
+    "windows_cygwin_proof": "not_run_by_design; this is the separate Linux-only gate, and Linux was not substituted for Windows/Cygwin proof."
+  },
+  "positive_total": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 47
+  },
+  "proof_legs": {
+    "alias_integration_test": {
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "seed": "18606CAFE",
+      "skipped": 0,
+      "tests": 9
+    },
+    "fail_before_cache_missing_collection": {
+      "errors": 0,
+      "expected_failure": "TooManyActualInvocations: getState(\"gettingstarted\") was called twice where one call was expected",
+      "failures": 1,
+      "runner_exit_code": 1,
+      "runtime_failure_reproduced": true,
+      "skipped": 0,
+      "tests": 1
+    },
+    "fail_before_reader_propagates_read_failure": {
+      "errors": 0,
+      "expected_failure": "Runtime assertion: expected SolrException but got KeeperException.ConnectionLossException from the base-head direct forceUpdateCollection read",
+      "failures": 1,
+      "runner_exit_code": 1,
+      "runtime_failure_reproduced": true,
+      "skipped": 0,
+      "tests": 1
+    },
+    "mutation_alias_guard_removed": {
+      "errors": 0,
+      "expected_failure": "NeverWantedButInvoked: sync(\"/collections\") was called for a known alias after removing the alias guard",
+      "failures": 1,
+      "isolated_single_guard_mutation": true,
+      "runner_exit_code": 1,
+      "runtime_failure_reproduced": true,
+      "skipped": 0,
+      "tests": 1
+    },
+    "mutation_provider_sync_removed": {
+      "errors": 0,
+      "expected_failure": "WantedButNotInvoked: testProviderUnknownCollection expected solrZkClient.sync(\"/collections\")",
+      "failures": 1,
+      "isolated_single_guard_mutation": true,
+      "runner_exit_code": 1,
+      "runtime_failure_reproduced": true,
+      "skipped": 0,
+      "tests": 1
+    },
+    "mutation_sync_timeout_disabled": {
+      "errors": 0,
+      "expected_failure": "Expected exception TimeoutException but no exception was thrown because the callback wait was disabled",
+      "failures": 1,
+      "isolated_single_guard_mutation": true,
+      "runner_exit_code": 1,
+      "runtime_failure_reproduced": true,
+      "skipped": 0,
+      "tests": 1
+    },
+    "root_check": {
+      "command": "./gradlew --no-daemon check -x test",
+      "exit_code": null,
+      "reason": "The live PR head no longer equaled the assignment-required base; the runner stopped before launching the command.",
+      "status": "not_run_source_ref_changed",
+      "validateSourcePatterns": "not_run"
+    },
+    "solrj_cache_and_routing_tests": {
+      "class_counts": {
+        "CloudSolrClientCacheTest": 8,
+        "CloudSolrClientRoutingTest": 2
+      },
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "required_tests_executed_and_passed": [
+        "testMissingCollectionIsCheckedOncePerRequest",
+        "testAliasResolvesToExistingCollection"
+      ],
+      "seed": "18606CAFE",
+      "skipped": 0,
+      "tests": 10
+    },
+    "solrzk_client_test": {
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "seed": "18606CAFE",
+      "skipped": 0,
+      "tests": 7
+    },
+    "tidy": {
+      "exit_code": 0,
+      "result": "BUILD SUCCESSFUL; 62 actionable tasks; 58 executed, 4 up-to-date",
+      "tracked_changes": false
+    },
+    "zksr_reader_test": {
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "required_tests_executed_and_passed": [
+        "testProviderRefreshesCollectionMissingFromLocalState",
+        "testProviderDoesNotRefreshKnownAlias",
+        "testProviderUnknownCollection",
+        "testProviderPropagatesCollectionReadFailures",
+        "testSyncWaitsForCallbackAndPropagatesFailure"
+      ],
+      "seed": "18606CAFE",
+      "skipped": 0,
+      "tests": 21
+    }
+  },
+  "runner_exit_code": 1,
+  "runner_stop_reason": "Live PR head changed from the required base to the assigned fork head; root check was not started.",
+  "source_refs": {
+    "assigned_head_parent_and_base": "9d4dc33e5d829d2bc9d1304054b5af6746879b34",
+    "fork_branch": "nick-boss-tech/solr:solr-18606-pr5314-followup",
+    "fork_head_current": "672448a49c33a257e7a2f8722c84e823b100199c",
+    "fork_head_expected": "672448a49c33a257e7a2f8722c84e823b100199c",
+    "pr_head_at_preflight": "9d4dc33e5d829d2bc9d1304054b5af6746879b34",
+    "pr_head_current": "672448a49c33a257e7a2f8722c84e823b100199c",
+    "pr_head_equals_fork_head": true,
+    "pr_head_first_observed_changed_at_utc": "2026-11-10T02:55:41Z",
+    "pr_is_draft": true,
+    "pr_last_observed_at_base_utc": "2026-11-10T02:54:10Z",
+    "pr_state": "OPEN",
+    "pr_updated_at": "2026-11-10T03:00:19Z",
+    "public_pr": "https://github.com/apache/solr/pull/5314",
+    "worker_authored_source_or_pr_change": false
+  },
+  "summary": "The assigned head's positive test legs, fail-before controls, mutations, and tidy completed. The overall gate is incomplete because public PR #5314 moved from the required base head to the assigned fork head; the guard stopped before ./gradlew check -x test. No source or PR edits were made by this gate worker.",
+  "type": "receipt",
+  "verdict": "incomplete"
+}
