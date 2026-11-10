@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-pr5284-20261110",
+  "evidence": "records/report/pr-5284-review-fixes-windows-20261110-report.json; implementation process ended after pushing and verifying f947ff28cf3c591d5d9a230d526df6bdea6d693a; no Linux executor started by this worker.",
+  "id": "pr-5284-review-fixes-windows-20261110",
+  "job": "pr-5284-review-fixes-windows-20261110",
+  "reason": "Implementation stopped and exact-head Linux verification handed off.",
+  "type": "release"
+}
