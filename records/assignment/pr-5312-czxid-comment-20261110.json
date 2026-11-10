@@ -1,0 +1,15 @@
+{
+  "contributor_head": "0848e85fad1290ed604f881abb265b060be3075f",
+  "host": "Windows",
+  "id": "pr-5312-czxid-comment-20261110",
+  "job": "pr-5312-czxid-comment-20261110",
+  "receipt": "records/receipt/pr-5312-czxid-linux-gate-r2-20261110-receipt.json",
+  "source_head": "1d71a1b3811b1e9c7fe9bcac7ade1c8bc695ecb0",
+  "successor_of": "pr-5312-czxid-repair-20261110",
+  "summary": "Reconcile green exact-head Linux proof with live PR 5312 and post a factual review follow-up under Nick's standing clean-gate authorization if every condition remains satisfied",
+  "tags": [
+    "review",
+    "records"
+  ],
+  "type": "assignment"
+}
