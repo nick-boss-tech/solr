@@ -1,0 +1,14 @@
+{
+  "environment": "Linux, normal isolated clean clone, repository-required JDK and serialized build lock; no Windows Gradle or retired queue.",
+  "head": "fb8b5ea94f4ebc552e3bbafc6de8b2864b7fbb8a",
+  "id": "lucene14775-comparator-probe-linux-20261110",
+  "job": "lucene14775-comparator-probe-linux-20261110",
+  "requirements": [
+    "Verify fork head and parent against fb8b5ea94f4ebc552e3bbafc6de8b2864b7fbb8a and 24e5430ed5675b53e74c6db6b5745fb49adc659d. Record live apache/lucene PR 14775 head and identify any movement; do not attribute the result to a different head. Confirm the candidate changes only TestSort.java and does not change production code.",
+    "Run ./gradlew :lucene:core:test --tests org.apache.lucene.search.TestSort.testInverseRetainsOverriddenComparator -Ptests.seed=5108C0DE -Ptests.rerun=true on the exact candidate. Preserve fresh XML, log, exit, seed, JDK and clean-state evidence. The forward assertions require B,A; the inverse assertions require A,B. Source inspection suggests the inverse may lose the overridden comparator and return B,A. This is a hypothesis: report the actual assertion and values, and do not classify a compile or setup error as a behavioral reproduction.",
+    "If the outcome differs from the hypothesis, investigate the actual comparator and test setup. Clearly distinguish the Lucene API result from Solr PR 5108's separate wrapper, and preserve the existing open design questions about ties and paging. No production patch, PR, issue or public comment is authorized.",
+    "Publish an exact-head receipt with test name, assertions reached, observed results and evidence location; report unrun work, failures and limitations accurately. Release after executor and build processes stop."
+  ],
+  "type": "gate",
+  "verdict_policy": "A successful reproduction requires the forward control to pass and the inverse assertion to fail for the hypothesized order, with fresh XML and logs. An unexpected pass, setup failure, compile error, missing test or stale head is not a reproduced bug. This is not a green product test."
+}
