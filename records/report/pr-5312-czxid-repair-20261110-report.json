@@ -1,0 +1,10 @@
+{
+  "branch": "nick-boss-tech/solr:solr-18632-submit",
+  "failed_receipt": "records/receipt/pr-5312-czxid-linux-gate-20261109-receipt.json",
+  "gate_job": "pr-5312-czxid-linux-gate-r2-20261110",
+  "head": "1d71a1b3811b1e9c7fe9bcac7ade1c8bc695ecb0",
+  "id": "pr-5312-czxid-repair-20261110-report",
+  "job": "pr-5312-czxid-repair-20261110",
+  "summary": "Failed gate receipt for 9b96f1a23c2b9609c51c46541bf7fe3299921e81 found Mockito generic varargs warning promoted to compile error and missing assumeWorkingMockito() source-pattern requirement; no tests executed and fail-before was not reached. Repaired test only: chain single-value thenReturn calls and use the assumption in that test. Pushed and verified fork head 1d71a1b3811b1e9c7fe9bcac7ade1c8bc695ecb0; diff --check passed; no Windows tests or Gradle. Superseding Linux gate pr-5312-czxid-linux-gate-r2-20261110 repeats all proof legs and requires no skips. Proof pending; no public comment.",
+  "type": "report"
+}
