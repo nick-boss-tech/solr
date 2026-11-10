@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "updated_at": "2026-11-10T20:28:44Z",
+      "url": "https://github.com/apache/solr/pull/5314#discussion_r4529972507"
+    },
+    {
+      "updated_at": "2026-11-10T20:28:55Z",
+      "url": "https://github.com/apache/solr/pull/5314#discussion_r4529979063"
+    }
+  ],
+  "fork": "nick-boss-tech/solr:solr-18606-submit",
+  "head": "5da7243cb75e2f3d2fb7b3557b6e30477dbbf97d",
+  "id": "solr-18606-pr5314-integrate-observable-20261110-report",
+  "job": "solr-18606-pr5314-integrate-observable-20261110",
+  "pr": "https://github.com/apache/solr/pull/5314",
+  "previous_head": "672448a49c33a257e7a2f8722c84e823b100199c",
+  "proof": "records/receipt/solr-18606-pr5314-observable-test-linux-r2-20261110-receipt.json",
+  "summary": "Fast-forwarded PR 5314 to the exact tested head and updated the two review comments to point to that PR head.",
+  "type": "report",
+  "verification": "Read back both comments and confirmed correct parent threads and body; remote fork branch and PR head matched tested SHA. GitHub labeler passed; other checks not established."
+}
