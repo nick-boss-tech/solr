@@ -1,0 +1,14 @@
+{
+  "base": "fe557633a169c34dcb835696470cc6e69ba00be4",
+  "handoff": "records/assignment/pr-5297-exhaustion-linux-gate-20261109.json and records/gate/pr-5297-exhaustion-linux-gate-20261109.json",
+  "head": "e297d971c1806b7e2f78b4de55cc8246d7d59b46",
+  "id": "pr-5297-exhaustion-fix-windows-20261109-report",
+  "job": "pr-5297-exhaustion-fix-windows-20261109",
+  "local_review": "research/branch-reviews/2026-11-09-pr-batch/PR-5297-review.md",
+  "pr_state": "PR 5297 fork branch and public draft PR head both read back at e297d971c1806b7e2f78b4de55cc8246d7d59b46; PR body still reports proof for the previous head. No public comment or body edit.",
+  "source": "https://github.com/nick-boss-tech/solr/compare/fe557633a169c34dcb835696470cc6e69ba00be4...e297d971c1806b7e2f78b4de55cc8246d7d59b46",
+  "status": "implemented, proof pending",
+  "summary": "Moved attempt-limit checks to the point of dispatching an eligible endpoint; ordinary endpoint exhaustion and zero-limit empty lists no longer claim that the limit blocked failover. Added sync standalone, sync Req, and async boundary regressions and updated the exact-limit async expectation.",
+  "type": "report",
+  "validation": "git diff --check passed; no Gradle, tests, compile or formatter ran on Windows. Linux gate is required."
+}
