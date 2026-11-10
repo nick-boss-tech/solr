@@ -1,0 +1,14 @@
+{
+  "finding_location": "https://github.com/apache/solr/blob/fe557633a169c34dcb835696470cc6e69ba00be4/solr/solrj/src/java/org/apache/solr/client/solrj/impl/LBSolrClient.java#L467-L470",
+  "head": "fe557633a169c34dcb835696470cc6e69ba00be4",
+  "id": "pr-5297-review-20261109-report",
+  "job": "pr-5297-review-20261109",
+  "local_review": "research/branch-reviews/2026-11-09-pr-batch/PR-5297-review.md",
+  "prior_finding": "Earlier selection regression repaired; Linux gate receipt at exact head records 49 passing focused and neighboring tests and two fail-before selection methods.",
+  "proof_limits": "Source review and diff-check only on Windows; no Gradle or test run. Existing Linux raw logs were not independently opened. Four original negative tests are historical. Upstream workflows require action.",
+  "public_actions": "None",
+  "standalone_location": "https://github.com/apache/solr/blob/fe557633a169c34dcb835696470cc6e69ba00be4/solr/solrj/src/java/org/apache/solr/client/solrj/impl/LBSolrClient.java#L988-L993",
+  "summary": "P2: EndpointIterator checks the attempt limit before finding no next endpoint, and standalone checks it after all eligible candidates are exhausted. When the number of failing endpoints equals the configured limit, both paths report AttemptLimitExceededException although no remaining attempt was prevented; async preserves it. This conflicts with the exception's public statement that the limit stopped failover. Add contrasting tests for exhausted endpoint sets and a remaining eligible endpoint, or explicitly choose and document weaker threshold-reached semantics.",
+  "type": "report",
+  "verdict": "needs work"
+}
