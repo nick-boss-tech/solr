@@ -1,0 +1,11 @@
+{
+  "deliverables": "Nick explicitly authorized the live body edit. Reconcile the two receipts, preserve the existing text and disclosure, update proof, independently verify stored body and head, report and release.",
+  "head": "672448a49c33a257e7a2f8722c84e823b100199c",
+  "host": "Windows PR description update",
+  "id": "solr-18606-pr5314-green-body-20261110",
+  "job": "solr-18606-pr5314-green-body-20261110",
+  "pr": "https://github.com/apache/solr/pull/5314",
+  "successor_of": "solr-18606-pr5314-integrate-review-20261109",
+  "summary": "Update PR 5314 body with reconciled exact-head Linux verification",
+  "type": "assignment"
+}
