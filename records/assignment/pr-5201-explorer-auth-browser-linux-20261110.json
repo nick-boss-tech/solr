@@ -1,0 +1,38 @@
+{
+  "capability_tags": [
+    "linux",
+    "solr",
+    "selenium",
+    "authentication",
+    "implementation"
+  ],
+  "constraints": [
+    "No public comment, PR body edit, review submission, force push, or direct modification of the contributor branch without separate authorization.",
+    "Use Nick Shanin ICLA identity; no co-author trailer. Follow current board workflow and workspace instructions.",
+    "If source head changes or another worker owns conflicting work, stop and reconcile."
+  ],
+  "handoff_reason": "Windows host cannot run Gradle or browser reproduction, and no implementation change has yet been established.",
+  "id": "pr-5201-explorer-auth-browser-linux-20261110",
+  "intended_host": "Linux capable of Solr builds, browser tests, and fork push",
+  "job": "pr-5201-explorer-auth-browser-linux-20261110",
+  "reference_local_review": "research/branch-reviews/2026-11-09-pr-batch/PR-5201-review.md",
+  "requested_by": "Nick, 2026-11-10; implementation of the author’s request",
+  "scope": [
+    "Refresh PR head and discussion and reconcile any new contributor commits before starting; do not assume the unlocated ed41081 is on the PR.",
+    "Claim this canonical job before work. Reproduce the author-reported Basic Auth popup and request hang on the exact original head using the real packaged explorer and production CSP. Capture observations, logs and exact setup; distinguish failures and setup problems from proof.",
+    "Identify the actual Scalar request flow and implement the smallest safe fix for using current Admin UI credentials for same-origin API calls, with no credential forwarding to other origins and login/logout changes respected. Address an independently reproduced hang if needed for the requested functionality.",
+    "Add meaningful browser coverage using existing infrastructure where practical: load the packaged explorer, render a known operation, issue a harmless request, return to the Admin UI, and verify authenticated behavior and security boundaries. Confirm whether the test uses real distribution assets and production headers; add separate packaging proof if needed.",
+    "Commit ticket-scoped changes on an isolated branch based on the verified contributor head, push non-force to Nick’s fork, and verify the remote SHA; do not modify the contributor PR branch or post publicly.",
+    "Create a separate phase-specific exact-head Linux gate and obtain all required focused, formatting, neighboring and fail-before or mutation proof as applicable. Report actual results, artifacts and limits; do not label an unrun leg green."
+  ],
+  "source": {
+    "author_diagnostic": "https://github.com/apache/solr/pull/5201#discussion_r4520163191",
+    "author_request": "https://github.com/apache/solr/pull/5201#issuecomment-6778419917",
+    "base": "5b2ac4dea21a7c86e31e2ba0cea58c262dc558c8",
+    "observed_head": "3f9faa9e9861ce28f3ede3f4305bd91b6e297463",
+    "pr": "https://github.com/apache/solr/pull/5201",
+    "review": "https://github.com/apache/solr/pull/5201#issuecomment-6757525033"
+  },
+  "summary": "Reproduce and implement the two requested PR 5201 P2 follow-ups: authenticated Scalar requests and real browser coverage.",
+  "type": "assignment"
+}
