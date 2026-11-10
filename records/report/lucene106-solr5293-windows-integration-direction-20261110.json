@@ -1,0 +1,7 @@
+{
+  "details": "On 2026-11-10 Nick expressly requested the previously described final Solr integration build and tests on this Windows host. Windows job solr5293-lucene106-integration-windows-20261110 is carrying the matched Solr integration leg, so avoid a duplicate Linux execution. The Linux job was unclaimed at snapshot eec8893dc51dda863d338961983688c787581d91. Lucene Windows results are in records/report/lucene-local-proof-windows-106-failbefore-20261110.json and related artifact and focused reports.",
+  "id": "lucene106-solr5293-windows-integration-direction-20261110",
+  "job": "lucene106-solr5293-integration-linux-20261110",
+  "summary": "Owner directed the Solr integration leg to Windows",
+  "type": "report"
+}
