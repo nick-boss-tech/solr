@@ -1,0 +1,12 @@
+{
+  "gate_job": "pr-5301-stale-expiry-test-linux-20261109",
+  "head": "b5477834e588888c542409bebbe2d1b76bbade27",
+  "id": "pr-5301-stale-expiry-test-windows-20261109-report",
+  "job": "pr-5301-stale-expiry-test-windows-20261109",
+  "limitations": "Test uses log4j callback holds and real ZkTestServer/SocketProxy; Linux must inspect event attribution, cleanup, intended assertion and positive control. The proxy setup-failure resource edge noted by the prior gate remains an explicit review item. No public communication.",
+  "parent": "684354d21476e44458e45c83a810dd25d16ba284",
+  "source": "https://github.com/nick-boss-tech/solr/tree/pr-5301-stale-expiry-regression",
+  "summary": "Prepared and pushed one test-only regression reproducing delayed B expiry after C is installed. Scoped log barriers by manager and callback thread, asserted C creation, and held the first reconnect and queued expiry callbacks for stable assertions. No production files changed.",
+  "type": "report",
+  "verification": "Fork API verified the pushed head; git diff --cached --check passed; no Gradle, compilation or tests on Windows. The new test has not yet been executed and is intended to fail at the named assertion on unchanged PR production code; prior runtime receipt establishes the scenario only for the earlier diagnostic."
+}
