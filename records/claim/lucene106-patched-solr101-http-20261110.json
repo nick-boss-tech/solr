@@ -1,0 +1,7 @@
+{
+  "id": "lucene106-patched-solr101-http-20261110",
+  "job": "lucene106-patched-solr101-http-20261110",
+  "owner": "windows-codex-desktop",
+  "scope": "Prepare isolated patched-JAR runtime, execute fixture, record provenance and stop server.",
+  "type": "claim"
+}
