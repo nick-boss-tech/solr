@@ -1,0 +1,19 @@
+{
+  "base": "d8ae2a03785c78840ee8dc8bf7e600f9d7b57d01",
+  "gate": "solr-18592-sortable-dv-repro-linux-20261110",
+  "head": "b9aed02ac1cde907a06d04fdbd96568ca38b85a9",
+  "host_requirements": [
+    "linux",
+    "jdk21",
+    "Solr Gradle",
+    "clean isolated checkout"
+  ],
+  "id": "solr-18592-sortable-dv-repro-linux-20261110",
+  "job": "solr-18592-sortable-dv-repro-linux-20261110",
+  "preparation_job": "solr-18592-sortable-dv-repro-windows-20261110",
+  "scope": "Test-only reproduction; independently classify the suspected observable truncation, non-reproduction, or setup/compile failure. No production fix or public posting is authorized by this handoff. The existing solr-18592-linux-gate-round-1 is a different source branch and must not be conflated.",
+  "source": "nick-boss-tech/solr:solr-18592-sortable-dv-repro-20261110",
+  "status": "open for a Linux executor to claim",
+  "summary": "Linux reproduction of possible stored SortableTextField truncation through DocValues substitution",
+  "type": "assignment"
+}
