@@ -1,0 +1,9 @@
+{
+  "assigned_head": "b8f10c9e3ea04746ee5f823e57fd9484426b448d",
+  "board_tip_before_claim": "266e790dd6928dc50b21885a4617e7f39d6b79f3",
+  "claimed_at": "2026-11-09T19:11:33-07:00",
+  "id": "pr-5311-pivot-linux-gate-20261109",
+  "job": "pr-5311-pivot-linux-gate-20261109",
+  "owner": "phone-agent-2",
+  "type": "claim"
+}
