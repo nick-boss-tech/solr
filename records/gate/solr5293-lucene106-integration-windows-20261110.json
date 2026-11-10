@@ -1,0 +1,15 @@
+{
+  "environment": "Windows, JDK 21, exact-head independent Solr worktrees, separate build outputs and isolated local Maven repositories, no retired queue.",
+  "head": "769ca6e177d77acd3f1993a4a24bd3257ae243c0",
+  "id": "solr5293-lucene106-integration-windows-20261110",
+  "job": "solr5293-lucene106-integration-windows-20261110",
+  "requirements": [
+    "Verify Solr PR, reproducer and Lucene fork exact heads and release tag. Record clean status and prior proof. Inspect the unclaimed prior Linux gate; owner explicitly redirected this integration to Windows.",
+    "Use the same Solr source head on both legs and identical test arguments and dependency metadata. The baseline uses the verified Lucene 10.6.0 release join JAR; the candidate uses the verified join JAR built at e0c53033bb2b6b34939ded24e228443b7d8b576b. Use isolated repositories and explicit repository content filtering, no shared Maven cache modifications. Preserve resolved classpath paths, artifact hashes and test JVM class-load origin for each leg. Do not rely on the unsupported unmodified composite build or silently present a local snapshot as the release artifact.",
+    "For original and candidate run individually TestNestedDocsSort.testFilteredChildrenDoNotSupplyMissingValues, testStringChildMissingFirst, testNumericChildMissingValues and testStringChildMissingLast with seed 18622C0DE, recording method-level XML, logs, failures, skips and exact commands. Expected original defects must fail for behavioral reasons and candidate must pass; classify unexpected results honestly.",
+    "If the focused patched tests pass, run full TestNestedDocsSort and neighboring TestCloudNestedDocsSort under the same patched dependency; preserve fresh XML and report results. Distinguish the known pre-existing Solr formatting issue and any host setup limitations.",
+    "If practical, build a runnable Solr distribution from the same candidate dependency, establish exact JAR provenance and run the existing HTTP fixture. Record source, package and artifact hashes and all conditions. No public PR, issue or comment."
+  ],
+  "type": "gate",
+  "verdict_policy": "Pass matched integration only if actual fresh method-level proof shows original behavior fails as expected and all four candidate methods and named neighboring suites pass with independently verified class and artifact provenance. Report omitted, stale, setup-failed and formatting legs separately."
+}
