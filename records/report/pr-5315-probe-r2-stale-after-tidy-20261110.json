@@ -1,0 +1,7 @@
+{
+  "id": "pr-5315-probe-r2-stale-after-tidy-20261110",
+  "job": "pr-5315-graceful-rejection-probe-linux-r2-20261110",
+  "status": "superseded before claim",
+  "summary": "Do not claim this gate: its a020611b228b02af90b2a80ef92fe95f463b4e81 head no longer equals the fork branch. The fork moved to d88ae0c6269e067602a90ed8e655df275f6f42f7 for test-only tidy formatting. At board snapshot 29133c61280106ca125d210df3bdad3b3d895ca7 there was no claim or receipt for this probe. Use the replacement pr-5315-graceful-rejection-probe-linux-r3-20261110 at the current head; recheck ownership before execution.",
+  "type": "report"
+}
