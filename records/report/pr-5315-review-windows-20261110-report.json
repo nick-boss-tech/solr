@@ -1,0 +1,14 @@
+{
+  "base": "acdee50e7b9a1d1418b4145a5396d0f83bc7912a",
+  "evidence": "Local review research/branch-reviews/2026-11-10-pr-batch/PR-5315-review.md and evidence/PR-5315; GitHub checks green at reviewed head; no tests or builds run on Windows",
+  "findings": [
+    "HIGH: 503 after successful routed update can replay non-idempotent updates, including in default parallel mode when subsequent commit or delete-by-query fails",
+    "MEDIUM: collection-scoped V2 GET 503 bypasses RemoteSolrException skipRetry in outer client"
+  ],
+  "head": "dfde089fd9dd0e5e79774593e66dd030e1b7dd22",
+  "id": "pr-5315-review-windows-20261110-report",
+  "job": "pr-5315-review-windows-20261110",
+  "pr": "https://github.com/apache/solr/pull/5315",
+  "type": "report",
+  "verdict": "changes requested; source review, runtime reproduction pending"
+}
