@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-review",
+  "evidence": "Report pr-5312-czxid-comment-20261110-report records receipt, proof, heads and https://github.com/apache/solr/pull/5312#issuecomment-6774366289. No test executor was started; this worker is stopping review activity after release.",
+  "id": "pr-5312-czxid-comment-20261110",
+  "job": "pr-5312-czxid-comment-20261110",
+  "reason": "Exact-head proof reconciled and review follow-up posted and read back",
+  "type": "release"
+}
