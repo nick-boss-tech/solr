@@ -1,0 +1,8 @@
+{
+  "actor": "Codex Windows review session",
+  "evidence": "Review report pr-5315-review-windows-20261110-report and local PR-5315-review.md; no build or test process was launched",
+  "id": "pr-5315-review-windows-20261110",
+  "job": "pr-5315-review-windows-20261110",
+  "reason": "Source review completed; no implementation or executor was started",
+  "type": "release"
+}
