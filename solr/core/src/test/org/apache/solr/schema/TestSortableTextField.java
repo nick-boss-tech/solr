@@ -462,13 +462,22 @@ public class TestSortableTextField extends SolrTestCaseJ4 {
   }
 
   public void testStoredDocValuesExplicitPreservesFullValue() {
-    assertU(adoc("id", "1", "whitespace_max6_stxt", "apple pear orange"));
+    assertU(
+        adoc(
+            "id", "1",
+            "whitespace_max6_stxt", "apple pear orange",
+            "max6_field_has_usedvs", "short"));
     assertU(commit());
 
     assertQ(
         req("q", "id:1", "fl", "whitespace_max6_stxt"),
         "//*[@numFound='1']",
         "//result/doc/str[@name='whitespace_max6_stxt'][.='apple pear orange']");
+    assertQ(
+        req("q", "id:1", "fl", "whitespace_max6_stxt,max6_field_has_usedvs"),
+        "//*[@numFound='1']",
+        "//result/doc/str[@name='whitespace_max6_stxt'][.='apple pear orange']",
+        "//result/doc/str[@name='max6_field_has_usedvs'][.='short']");
   }
 
   /** test how various permutations of useDocValuesAsStored and maxCharsForDocValues interact */

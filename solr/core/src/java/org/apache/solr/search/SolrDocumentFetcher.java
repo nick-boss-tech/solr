@@ -72,6 +72,7 @@ import org.apache.solr.schema.EnumFieldType;
 import org.apache.solr.schema.LatLonPointSpatialField;
 import org.apache.solr.schema.NumberType;
 import org.apache.solr.schema.SchemaField;
+import org.apache.solr.schema.SortableTextField;
 import org.apache.solr.schema.StrField;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -213,6 +214,8 @@ public class SolrDocumentFetcher {
   private boolean canSubstituteDvForStored(FieldInfo fieldInfo, SchemaField schemaField) {
     if (!schemaField.hasDocValues() || !schemaField.stored()) return false;
     if (schemaField.multiValued()) return false;
+    // SortableTextField's DocValues may have been truncated, including under a previous schema.
+    if (schemaField.getType() instanceof SortableTextField) return false;
     DocValuesType docValuesType = fieldInfo.getDocValuesType();
     NumberType numberType = schemaField.getType().getNumberType();
     // can not decode a numeric without knowing its numberType
