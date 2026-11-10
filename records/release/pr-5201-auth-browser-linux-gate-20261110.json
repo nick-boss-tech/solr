@@ -1,0 +1,11 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "See records/report/pr-5201-auth-browser-linux-gate-20261110-final-20261110.json, records/receipt/pr-5201-auth-browser-linux-gate-20261110-receipt.json, and records/evidence/pr-5201-auth-browser-linux-gate-20261110-evidence-20261110.json. Stop verification: root-check job job_vxe2nKPf ended with exit 130 after SIGINT; the dedicated shell was closed; no active gate Gradle/browser task remained; both required Gradle locks were available; assigned source worktree remained clean at the exact assigned head. A shared idle Gradle daemon was left untouched. The evidence archive SHA-256 is e41f1746d77b8c72ec0721e0c13007c3be97016715430bc1a25e665eca972fa7.",
+  "head": "2d4f255fefec6e455cfdc35e6281769f9e01fba9",
+  "id": "pr-5201-auth-browser-linux-gate-20261110",
+  "job": "pr-5201-auth-browser-linux-gate-20261110",
+  "reason": "User-directed stop rule after ./gradlew tidy changed the tracked scalar-api-reference version entry; the gate is incomplete, and no further tests or source/PR changes are authorized under this assignment.",
+  "successor_requirement": "Any resumed proof requires a new pushed head and a superseding gate.",
+  "type": "release",
+  "verdict": "incomplete"
+}
