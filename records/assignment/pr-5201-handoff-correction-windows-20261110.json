@@ -1,0 +1,8 @@
+{
+  "id": "pr-5201-handoff-correction-windows-20261110",
+  "intended_host": "Windows coordination",
+  "job": "pr-5201-handoff-correction-windows-20261110",
+  "scope": "Publish an add-only correction to the old missing-spec/unclaimed handoff; preserve existing immutable records and actual gate status.",
+  "summary": "Correct the PR 5201 remote handoff to reflect the existing gate specification and subsequent Linux receipt.",
+  "type": "assignment"
+}
