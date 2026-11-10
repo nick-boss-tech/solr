@@ -1,0 +1,9 @@
+{
+  "coordination": "The running gate preflight observed PR head 9d4dc33e5d829d2bc9d1304054b5af6746879b34 and tests follow-up head 672448a49c33a257e7a2f8722c84e823b100199c. PR branch is about to fast-forward to that same test commit; the follow-up branch and tested code stay at 672448a49c33a257e7a2f8722c84e823b100199c. If the PR ref moves, reconcile it with this explicit direction and verify both refs and the exact test head. Continue only if the move is exactly that fast-forward; no other gate requirement or proof leg is waived. Do not claim a passing receipt until the run completes.",
+  "gate": "records/gate/solr-18606-pr5314-followup-linux-20261109.json",
+  "head": "672448a49c33a257e7a2f8722c84e823b100199c",
+  "id": "solr-18606-pr5314-integrate-review-20261109-gate-notice",
+  "job": "solr-18606-pr5314-integrate-review-20261109",
+  "summary": "Nick directed fast-forwarding the public PR branch to the exact follow-up SHA while the gate is running.",
+  "type": "report"
+}
