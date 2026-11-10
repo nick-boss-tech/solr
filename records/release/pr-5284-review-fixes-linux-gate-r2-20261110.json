@@ -1,0 +1,9 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "Report: records/report/pr-5284-review-fixes-linux-gate-r2-20261110-report.json; receipt: records/receipt/pr-5284-review-fixes-linux-gate-r2-20261110-receipt.json; complete logs/JUnit/mutation evidence archive: records/evidence/pr-5284-review-fixes-linux-gate-r2-20261110-evidence.json (SHA-256 0bd37db0afac18dd8f223814fd1c485fa01c943aae2006ede5f628e9ab9b763d); final executor-stop proof: records/evidence/pr-5284-review-fixes-linux-gate-r2-20261110-stop-evidence.json (SHA-256 1114e2aed32f0cc1c779e1cf9e5526bdacab9262dd0cc1e31b14846aaf1f81fe). Both uploaded artifacts were independently downloaded and hash-verified before publication.",
+  "id": "pr-5284-review-fixes-linux-gate-r2-20261110",
+  "job": "pr-5284-review-fixes-linux-gate-r2-20261110",
+  "reason": "Executor work is complete and stopped at exact assigned head 5fce0c06ee5afa8ac3606e32c2e441041da49864. The gate verdict is failed, not passed: the selected suite has a baseline-reproduced malformed-body failure and one nightly skip, and both rebalance body-to-operation mutation probes survived. No source or public PR changes were made; all temporary mutations were restored, task-owned checkouts were removed, and no Gradle process or host lock remained at final stop verification.",
+  "recorded_at": "2026-11-10T19:45:00Z",
+  "type": "release"
+}
