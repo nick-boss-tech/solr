@@ -1,0 +1,37 @@
+{
+  "acceptance": [
+    "Tidy succeeds and leaves the offered checkout unchanged. Full MultipleManagedSchemasTest executes all three methods without skips, including the deterministic same-ctime collision regression and both real configset recreation tests. Save fresh XML and logs before the next cleanTest. Explicitly verify Mockito assumption did not skip the collision test.",
+    "TestCollectionAPI.testConfigCaching executes and passes without skip. Root check -x test succeeds without undocumented exclusions and validateSourcePatterns passes. Capture commands, return codes, method counts, skips, environment, head/tree and clean status.",
+    "The collision test supplies mocked ZooKeeper stats and proves the shared cache decision, not a real-time ZooKeeper timestamp-collision integration. The contributor's existing cloud test covers real configset recreation for schema and config."
+  ],
+  "branch": "nick-boss-tech/solr:solr-18632-submit",
+  "contributor_head": "0848e85fad1290ed604f881abb265b060be3075f",
+  "environment": "Clean detached Linux worktrees, JDK 21, working Gradle dependencies and Mockito, build lock and sufficient disk/inodes. Keep logs and XML outside checkout and retain security defaults.",
+  "fail_before": {
+    "acceptance": "Require the single executed test to fail at the assertion expecting recreated VersionedConfig: old ctime comparison returns original object despite distinct czxid. An unexpected pass, compile error, setup failure, assumption skip or unrelated assertion is not fail-before proof. Preserve fresh logs and XML.",
+    "command": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.util.MultipleManagedSchemasTest.testCacheDistinguishesRecreatedZnodesWithSameCreationTime -Ptests.seed=18632CAFE",
+    "setup": "In a separate clean detached checkout at contributor head 0848e85fad1290ed604f881abb265b060be3075f, replace only solr/core/src/test/org/apache/solr/util/MultipleManagedSchemasTest.java with the exact file from offered head 1d71a1b3811b1e9c7fe9bcac7ade1c8bc695ecb0. Verify the sole overlay is this test file, compare its blob with offered head, and retain original production files; never push the overlay."
+  },
+  "head": "1d71a1b3811b1e9c7fe9bcac7ade1c8bc695ecb0",
+  "id": "pr-5312-czxid-linux-gate-r2-20261110",
+  "job": "pr-5312-czxid-linux-gate-r2-20261110",
+  "positive_commands": [
+    "./gradlew tidy",
+    "git diff --check",
+    "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.util.MultipleManagedSchemasTest -Ptests.seed=18632CAFE",
+    "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.cloud.api.collections.TestCollectionAPI.testConfigCaching -Ptests.seed=18632CAFE",
+    "./gradlew check -x test"
+  ],
+  "preflight": [
+    "Verify the remote fork ref and tree match this record, direct parent 9b96f1a23c2b9609c51c46541bf7fe3299921e81 and contributor head 0848e85fad1290ed604f881abb265b060be3075f is an ancestor. Refresh live PR 5312 head and discussion; stop and reconcile if contributor or fork head moved. Check no duplicate active executor; prior gate release records process cleanup.",
+    "Do not modify the offered source, push a formatting repair, or claim a pass after tidy changes tracked files. Record such changes and request a superseding exact-head gate."
+  ],
+  "prior_failure": "At 9b96f1a23c2b9609c51c46541bf7fe3299921e81, tidy and diff check passed but test compilation stopped on unchecked Mockito generic varargs under -Werror; root validateSourcePatterns failed because assumeWorkingMockito() was absent. No tests executed and fail-before was not reproduced. The new commit changes only the test: single-value chained stubs and the required assumption. Do not treat the old compilation failure as behavioral proof.",
+  "prior_receipt": "records/receipt/pr-5312-czxid-linux-gate-20261109-receipt.json",
+  "receipt": "Publish a v2 receipt for this gate and exact head plus a report with commands, return codes, fresh per-leg XML/logs, accessible evidence locations and hashes. Explain setup failures; do not silently retry unexplained failures or alter the public PR.",
+  "seed": "18632CAFE",
+  "supersedes_gate": "pr-5312-czxid-linux-gate-20261109",
+  "tree": "87a0373bcb7bcef89bf98b094339886a5f7971f8",
+  "type": "gate",
+  "verdict_policy": "Passed only when all named positive and fail-before legs complete with stated outcomes, clean tidy and root check, at the exact offered head."
+}
