@@ -1,0 +1,11 @@
+{
+  "base": "9d4dc33e5d829d2bc9d1304054b5af6746879b34",
+  "branch": "solr-18606-pr5314-followup",
+  "deliverables": "Create isolated branch, commit and push to fork, request exact-head Linux proof; do not move PR head",
+  "host": "Windows implementation; Linux proof on separate gate",
+  "id": "solr-18606-pr5314-followup-windows-20261109",
+  "job": "solr-18606-pr5314-followup-windows-20261109",
+  "successor_of": "solr-18606-pr5314-history-minimality-review-20261109",
+  "summary": "Implement reviewed duplicate-lookup and provider-local error follow-ups on a separate branch from PR 5314",
+  "type": "assignment"
+}
