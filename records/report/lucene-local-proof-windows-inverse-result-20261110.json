@@ -1,0 +1,8 @@
+{
+  "details": "At exact clean fork head fb8b5ea94f4ebc552e3bbafc6de8b2864b7fbb8a, with parent PR head 24e5430ed5675b53e74c6db6b5745fb49adc659d, Windows 11, Temurin 24.0.2+12, Gradle 8.14, seed 5108C0DE and one test JVM, :lucene:core:test --tests org.apache.lucene.search.TestSort.testInverseRetainsOverriddenComparator completed with exit 1. Fresh XML reports one test, zero skipped, one assertion failure, zero errors. The failure is TestSort.java line 87, the first inverse assertion: expected A but was B; both preceding forward-order assertions passed. This reproduces the candidate's custom comparator concern; it is not a green build or proof of a general API fix or Solr integration. XML SHA-256 501196a4f7782dae6f1a3e0827a0a2634c63aedfc4993679607bfbf1f6d51088 at wt/LUCENE-PR14775-PROBE/lucene/core/build/test-results/test/TEST-org.apache.lucene.search.TestSort.xml; full transcript SHA-256 e982ff400d41405e05e9078eb78fe17b5bb12cb30a9497afc50b4e2da57d12d2 at research/lucene-submission-prep/windows-proof-20261110/inverse-probe.log. The initial Java 21 attempt exited before tests. Windows Perflib warnings were present; they did not prevent the test execution. No upstream public action.",
+  "head": "fb8b5ea94f4ebc552e3bbafc6de8b2864b7fbb8a",
+  "id": "lucene-local-proof-windows-inverse-result-20261110",
+  "job": "lucene-local-proof-windows-20261110",
+  "summary": "Windows test reproduced custom comparator inverse-order concern",
+  "type": "report"
+}
