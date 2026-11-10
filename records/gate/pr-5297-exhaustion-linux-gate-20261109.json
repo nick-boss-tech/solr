@@ -1,0 +1,19 @@
+{
+  "base": "fe557633a169c34dcb835696470cc6e69ba00be4",
+  "branch": "nick-boss-tech/solr:solr-lb-attempt-limits-pr1-submit",
+  "environment": "Linux, full clean clone, JDK 21, pinned Gradle 9.7.0; serialize builds under the host lock; seed 5B407A2D9C1310E7",
+  "head": "e297d971c1806b7e2f78b4de55cc8246d7d59b46",
+  "id": "pr-5297-exhaustion-linux-gate-20261109",
+  "job": "pr-5297-exhaustion-linux-gate-20261109",
+  "proof_scope": "The limit must produce AttemptLimitExceededException only when a further eligible delegate dispatch is prevented. When no eligible candidate remains, return the ordinary no-endpoint or last endpoint failure. Includes live, zombie and empty-list cases; no HTTP-internal or outer CloudSolrClient limit is claimed.",
+  "requirements": [
+    "Verify fork and PR head equal gate head; capture clean checkout, HEAD and tree. If head moved, stop and reconcile.",
+    "Run ./gradlew tidy and require no tracked changes; formatting modifications require a committed new head and superseding gate.",
+    "Run ./gradlew :solr:solrj:compileJava -Pvalidation.errorprone=true.",
+    "Run fresh :solr:solrj:test with -Ptests.seed=5B407A2D9C1310E7 and --tests for org.apache.solr.client.solrj.impl.LBSolrClientAttemptLimitTest, LBAsyncSolrClientAttemptLimitTest, LBSolrClientTest, LBAsyncSolrClientTest, LBSolrClientRetryUnsentTest, LB2SolrClientTest and LBHttpSolrClientBadInputTest (fully qualify each class). Require fresh XML for all seven: expected 54 tests, zero failures, errors or skips; reconcile any count difference explicitly.",
+    "Run root ./gradlew check -x test; require success, clean git diff --check and clean final checkout.",
+    "Fail-before: use a separate clean checkout of base fe557633a169c34dcb835696470cc6e69ba00be4; copy only the two test files from the gate head, recording synthetic diff and hashes. Execute the five new methods testStandaloneLimitRequiresAnotherEligibleEndpoint, testEndpointLimitRequiresAnotherEligibleEndpoint, testEmptyEndpointsDoNotExhaustZeroLimit, testAsyncLimitRequiresAnotherEligibleEndpoint and testAsyncEmptyEndpointsDoNotExhaustZeroLimit. Require each to execute and fail on the incorrect exception classification or cause; compilation, setup failures, skips or unrelated assertions are not proof. Record each XML and failure.",
+    "Confirm final fork/PR heads remain the gate head and report logs, commands, return codes, XML counts, negative outcomes and clean state. Original earlier regressions are historical unless rerun; do not present them as a new negative leg."
+  ],
+  "type": "gate"
+}
