@@ -1,0 +1,7 @@
+{
+  "id": "pr-5284-review-fixes-windows-20261110",
+  "job": "pr-5284-review-fixes-windows-20261110",
+  "owner": "windows-codex-pr5284-20261110",
+  "scope": "Reviewer feedback implementation on isolated branch; no Linux execution.",
+  "type": "claim"
+}
