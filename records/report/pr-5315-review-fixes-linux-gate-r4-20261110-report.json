@@ -1,0 +1,7 @@
+{
+  "id": "pr-5315-review-fixes-linux-gate-r4-20261110-report",
+  "job": "pr-5315-review-fixes-linux-gate-r4-20261110",
+  "status": "passed",
+  "summary": "Linux gate PASSED at d88ae0c6269e067602a90ed8e655df275f6f42f7. Suites 15/15 no skips with all six required 503 methods green; fail-before A on the reviewed PR head failed both replay methods by assertion (expected 1 submission, saw 6; expected RemoteSolrException, none thrown); fail-before B on the r2 head failed the unspecified-request test by assertion (expected 1, saw 6); tidy clean; root check passed. The 503 retry stays QUERY-only by design and does not fix the original graceful-shutdown indexing case; see the receipt for the full limitation text, commands, counts, and evidence.",
+  "type": "report"
+}
