@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr5313",
+  "evidence": "records/report/solr-18630-pr5313-precedence-repair-report-20261110.json; records/gate/solr-18630-pr5313-precedence-repair-linux-gate-20261110.json; verified fork head a4ce0580ad89ad521a5402e383d96c239cea94fd",
+  "id": "solr-18630-pr5313-precedence-repair-windows-20261110",
+  "job": "solr-18630-pr5313-precedence-repair-windows-20261110",
+  "reason": "Implementation and fork push finished; source work and any associated executors have stopped and the new exact-head Linux gate is the handoff.",
+  "type": "release"
+}
