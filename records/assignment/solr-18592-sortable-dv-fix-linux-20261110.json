@@ -1,0 +1,20 @@
+{
+  "gate": "solr-18592-sortable-dv-fix-linux-20261110",
+  "head": "b225cd5bb2a5886c187b13009e7016c9165414ce",
+  "host_requirements": [
+    "linux",
+    "jdk21",
+    "Solr Gradle",
+    "clean isolated checkout"
+  ],
+  "id": "solr-18592-sortable-dv-fix-linux-20261110",
+  "implementation_job": "solr-18592-sortable-dv-fix-windows-20261110",
+  "job": "solr-18592-sortable-dv-fix-linux-20261110",
+  "scope": "Verify the narrow stored SortableTextField fix and its exact-final-test fail-before proof. Distinct from the earlier reproduction gate and the SOLR-18592 schema-feature gate. No public comment, PR, source fix, or fork push is authorized by this assignment.",
+  "source": "nick-boss-tech/solr:solr-18592-sortable-dv-fix-20261110",
+  "status": "open for a Linux executor to claim",
+  "summary": "Exact-head Linux proof for stored SortableTextField DocValues substitution fix",
+  "type": "assignment",
+  "unfixed_head": "b9aed02ac1cde907a06d04fdbd96568ca38b85a9",
+  "upstream_base": "d8ae2a03785c78840ee8dc8bf7e600f9d7b57d01"
+}
