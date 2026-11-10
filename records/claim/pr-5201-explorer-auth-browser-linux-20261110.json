@@ -1,0 +1,7 @@
+{
+  "id": "pr-5201-explorer-auth-browser-linux-20261110",
+  "job": "pr-5201-explorer-auth-browser-linux-20261110",
+  "owner": "codex-windows-coordinator",
+  "purpose": "Reserve unclaimed job for cancellation and handoff as directed by Nick; no Linux execution.",
+  "type": "claim"
+}
