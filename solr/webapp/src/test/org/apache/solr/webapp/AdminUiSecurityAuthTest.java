@@ -142,9 +142,20 @@ public class AdminUiSecurityAuthTest extends AdminUiTestBase {
     click(By.xpath("//div[@id='login']//button[@type='submit']"));
     waitFor(By.id("index"));
 
-    driver.get(baseUrl + "/index.html#/~api-explorer");
-    driver.switchTo().frame(waitFor(By.cssSelector("#content #api-explorer iframe")));
     try {
+      driver.get(baseUrl + "/index.html#/~api-explorer");
+      driver.switchTo().frame(waitFor(By.cssSelector("#content #api-explorer iframe")));
+      By collectionsGroup =
+          By.xpath(
+              "//button[@aria-expanded and .//div[contains(@class,'group/button-label')"
+                  + " and normalize-space(.)='collections']]");
+      if ("false".equals(waitFor(collectionsGroup).getAttribute("aria-expanded"))) {
+        click(collectionsGroup);
+      }
+      click(
+          By.xpath(
+              "//button[.//div[contains(@class,'group/button-label')"
+                  + " and contains(., 'List all collections in this Solr cluster')]]"));
       waitForPageContains("List all collections in this Solr cluster");
       // Observe the actual request and response without replacing the Solr endpoint.
       // Store only whether the credential matches, never the credential itself.
@@ -186,11 +197,13 @@ public class AdminUiSecurityAuthTest extends AdminUiTestBase {
       assertEquals(Boolean.TRUE, result.get("authenticated"));
       assertEquals("XMLHttpRequest", result.get("requestedWith"));
       waitForTextContains(By.cssSelector("body"), "200 OK");
+      driver.switchTo().defaultContent();
+      driver.get(baseUrl + "/index.html#/~threads");
+      waitFor(By.id("thread-dump"));
     } finally {
       driver.switchTo().defaultContent();
+      ((JavascriptExecutor) driver).executeScript("sessionStorage.clear();");
     }
-    driver.get(baseUrl + "/index.html#/~threads");
-    waitFor(By.id("thread-dump"));
   }
 
   /** Returns the authorization config as fetched with credentials. */
