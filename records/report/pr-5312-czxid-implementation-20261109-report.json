@@ -1,0 +1,10 @@
+{
+  "branch": "nick-boss-tech/solr:solr-18632-submit",
+  "gate_job": "pr-5312-czxid-linux-gate-20261109",
+  "head": "9b96f1a23c2b9609c51c46541bf7fe3299921e81",
+  "id": "pr-5312-czxid-implementation-20261109-report",
+  "job": "pr-5312-czxid-implementation-20261109",
+  "review_record": "Windows workspace research/branch-reviews/2026-11-09-pr-batch/PR-5312-review.md",
+  "summary": "Implemented, proof pending. Fork branch solr-18632-submit at the exact head extends contributor PR 5312 head 0848e85fad1290ed604f881abb265b060be3075f. Both config and schema cache records now use ZooKeeper czxid plus version; the deterministic mocked-stat test checks equal ctime and version with changed czxid, unchanged-cache reuse, and version invalidation. Existing cloud integration test is retained. Git diff --check passed. No Windows Gradle or tests. The phase-specific Linux gate pr-5312-czxid-linux-gate-20261109 covers fail-before on the contributor head, focused and neighboring tests, tidy and root check. No public comment or PR edit.",
+  "type": "report"
+}
