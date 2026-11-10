@@ -1,0 +1,22 @@
+{
+  "type": "claim",
+  "id": "pr-5284-review-fixes-linux-gate-20261110",
+  "job": "pr-5284-review-fixes-linux-gate-20261110",
+  "owner": "phone-agent-2",
+  "scope": "Linux gate only; no source, fork branch, public PR metadata, or comment changes.",
+  "source_branch": "nick-boss-tech/solr:solr-16398-pr5284-review-fixes-20261110",
+  "source_head": "f947ff28cf3c591d5d9a230d526df6bdea6d693a",
+  "reviewed_pr_head": "415c639e6e5b74d665209024cf29fb68dc32b23f",
+  "execution_host": "0609f7968656",
+  "os": "Linux 6.18.38+ x86_64",
+  "jdk_identity": [
+    "openjdk version \"21.0.12.1\" 2026-08-18",
+    "OpenJDK Runtime Environment (build 21.0.12.1+1-1-24.04.4-Ubuntu)",
+    "OpenJDK 64-Bit Server VM (build 21.0.12.1+1-1-24.04.4-Ubuntu, mixed mode, sharing)"
+  ],
+  "runner": "Gradle wrapper; every Gradle invocation must hold both mandatory flock locks.",
+  "worktree": "/workspace/worktrees/pr-5284-review-fixes-linux-gate-20261110",
+  "logs": "/workspace/gates/logs/phone-agent-2/pr-5284-review-fixes-linux-gate-20261110",
+  "junit_xml": "/workspace/gates/logs/phone-agent-2/pr-5284-review-fixes-linux-gate-20261110/evidence/junit",
+  "claimed_at": "2026-11-10T17:28:47+00:00"
+}
