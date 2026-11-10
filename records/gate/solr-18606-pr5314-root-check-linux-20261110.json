@@ -1,0 +1,16 @@
+{
+  "branch": "solr-18606-submit",
+  "environment": "Linux, JDK 21, clean normal clone of exact head (not a linked worktree, because Antora rejected a .git pointer in earlier runs); obtain required build locks, retain fresh command output and environment. Do not use Windows or run Docker.",
+  "head": "672448a49c33a257e7a2f8722c84e823b100199c",
+  "id": "solr-18606-pr5314-root-check-linux-20261110",
+  "job": "solr-18606-pr5314-root-check-linux-20261110",
+  "prior_receipt": "records/receipt/solr-18606-pr5314-followup-linux-20261109-receipt.json",
+  "reconciliation": "The predecessor stopped before root check because PR 5314 moved from 9d4dc33e5d829d2bc9d1304054b5af6746879b34 to the already assigned test head 672448a49c33a257e7a2f8722c84e823b100199c at the user’s direction. Both fork branches and the PR now point to that exact head. The predecessor executor released after stopping and left no build process or worktree. Its other proof legs remain valid only for their recorded head; no result was reported for root check.",
+  "requirements": [
+    "Before execution verify current PR head and fork solr-18606-submit ref both equal 672448a49c33a257e7a2f8722c84e823b100199c; verify the prior receipt head is the same and its release documents the old executor stopped. Stop and reconcile any ref change. The former requirement that the PR remain at the base no longer applies to this successor.",
+    "Run ./gradlew --no-daemon check -x test on a clean normal clone of the assigned head. Retain full output and report exit status and :solr:core:validateSourcePatterns result. Record environment and whether tracked files were modified; any source change invalidates the exact-head result.",
+    "Publish a receipt for this root-check leg with command, full head, results, evidence location and cleanup; release the executor. Do not present Docker-dependent tests or unrun work as passed. Do not rerun the predecessor’s positive, fail-before, mutation or tidy legs unless a real inconsistency requires investigation."
+  ],
+  "type": "gate",
+  "verdict_policy": "Pass this successor only if the exact-head root check, including source-pattern validation, succeeds with no tracked modifications and the executor is cleaned up. The complete PR proof requires separately reconciling this receipt with the predecessor’s exact-head receipt; an incomplete predecessor verdict does not itself become passed."
+}
