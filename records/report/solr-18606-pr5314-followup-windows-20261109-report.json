@@ -1,0 +1,19 @@
+{
+  "base": "9d4dc33e5d829d2bc9d1304054b5af6746879b34",
+  "branch": "solr-18606-pr5314-followup",
+  "changes": [
+    "Avoid the second missing-input collection lookup between alias resolution and state-version construction, without retaining a miss across requests. Alias targets still get their own checks.",
+    "Restore the shared ZkStateReader missing-state error contract and translate ZooKeeper or interrupt causes to server errors at the client provider.",
+    "Reuse the existing cache and reader test fixtures for single-input lookup counts, later creation, alias resolution and reader compatibility."
+  ],
+  "evidence": "Fork branch read back at head; live PR remains open and draft at base with no discussion. Reviewed five-file diff; git diff --check clean. No compilation or tests on Windows.",
+  "gate": "records/gate/solr-18606-pr5314-followup-linux-20261109.json",
+  "head": "672448a49c33a257e7a2f8722c84e823b100199c",
+  "id": "solr-18606-pr5314-followup-windows-20261109-report",
+  "job": "solr-18606-pr5314-followup-windows-20261109",
+  "limits": "A collection created between the two former checks may require another request; repeated explicit input names may still trigger extra lookups. Unknown names are not negatively cached across requests. No latency benchmark, cross-server lag proof, or stale-alias refresh.",
+  "local_note": "research/solr-18606-research-note.md",
+  "pr": "https://github.com/apache/solr/pull/5314",
+  "summary": "Pushed separate PR-based branch with request-local duplicate lookup reduction and provider-local error translation; Linux proof pending.",
+  "type": "report"
+}
