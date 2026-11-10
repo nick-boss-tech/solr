@@ -22,7 +22,7 @@
       {
         "name": "10-focused-suites",
         "command": "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.cloud.TestRebalanceLeaders --tests org.apache.solr.cloud.MigrateRouteKeyTest --tests org.apache.solr.handler.admin.api.MigrateDocsAPITest --tests org.apache.solr.handler.admin.api.RebalanceLeadersAPITest --tests org.apache.solr.handler.admin.api.V2CollectionAPIMappingTest --tests org.apache.solr.handler.admin.TestCollectionAPIs --tests org.apache.solr.handler.admin.TestApiFramework --tests org.apache.solr.handler.V2ApiIntegrationTest -Ptests.seed=16398C0DE --rerun-tasks",
-        "worktree": "/workspace/gates/worktrees/pr-5284-review-fixes-linux-gate-20261110",
+        "worktree": "/workspace/worktrees/pr-5284-review-fixes-linux-gate-20261110",
         "head": "f947ff28cf3c591d5d9a230d526df6bdea6d693a",
         "started_at": "2026-11-10T17:34:05Z",
         "ended_at": "2026-11-10T17:35:10Z",
@@ -198,5 +198,12 @@
     "V2ApiIntegrationTest.testException, including the malformed-body behavior linked to open PR #5285, did not execute.",
     "No Docker, Windows, or Cygwin proof was performed; Linux is not claimed as a substitute for Windows/Cygwin."
   ],
-  "scope_attestation": "No source branch, fork branch, public PR metadata, or public comment was changed. The local tidy formatting diff was archived and restored; the exact-head worktree was removed after clean verification."
+  "scope_attestation": "No source branch, fork branch, public PR metadata, or public comment was changed. The local tidy formatting diff was archived and restored; the exact-head worktree was removed after clean verification.",
+  "publication_corrections": [
+    {
+      "corrected_at": "2026-11-10T17:43:39+00:00",
+      "previous_receipt_sha256": "9eac8e4f043adac0f8aa0fb4605acfa26108c3e95812de2896e50bcb6c0e3db0",
+      "change": "Corrected the recorded worktree path for the focused-suite command; the actual checkout was /workspace/worktrees/pr-5284-review-fixes-linux-gate-20261110. No test result or gate outcome changed."
+    }
+  ]
 }
