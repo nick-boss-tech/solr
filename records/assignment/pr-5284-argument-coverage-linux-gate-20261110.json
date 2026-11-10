@@ -1,0 +1,19 @@
+{
+  "host": "Linux gate host with JDK 21 and build lock",
+  "id": "pr-5284-argument-coverage-linux-gate-20261110",
+  "implementation_job": "pr-5284-argument-coverage-windows-20261110",
+  "job": "pr-5284-argument-coverage-linux-gate-20261110",
+  "prior_executor_stop": "records/release/pr-5284-review-fixes-linux-gate-r2-20261110.json",
+  "prior_receipt": "records/receipt/pr-5284-review-fixes-linux-gate-r2-20261110-receipt.json",
+  "scope_limit": "The full PR gate remains failed: baseline malformed-body test depends on open PR 5285, one nightly test was skipped, and several compatibility probes were not independently run. A passing focused receipt does not waive these requirements.",
+  "source_branch": "nick-boss-tech/solr:solr-16398-pr5284-review-fixes-20261110",
+  "source_head": "b01220cbb66e0a1cca3dfb1fd7427ced6ca4c2a6",
+  "summary": "LINUX TASK: verify direct rebalance operation argument coverage and both previously surviving mutations at the new exact branch head. This is a focused proof phase, not the full PR gate.",
+  "tags": [
+    "linux",
+    "gate",
+    "pr-5284",
+    "tests"
+  ],
+  "type": "assignment"
+}
