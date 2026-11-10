@@ -1,0 +1,21 @@
+{
+  "base": "24e5430ed5675b53e74c6db6b5745fb49adc659d",
+  "branch": "lucene-pr14775-custom-comparator-probe",
+  "deliverables": "An exact-head runtime result with actual XML, logs and explicit classification. This is a test-only hypothesis, not a fix or permission for public communication.",
+  "gate": "lucene14775-comparator-probe-linux-20261110",
+  "head": "fb8b5ea94f4ebc552e3bbafc6de8b2864b7fbb8a",
+  "host": "Linux gate host with compatible JDK, normal isolated clone and serialized build lock",
+  "id": "lucene14775-comparator-probe-linux-20261110",
+  "job": "lucene14775-comparator-probe-linux-20261110",
+  "repository": "https://github.com/nick-boss-tech/lucene.git",
+  "status": "open",
+  "summary": "Run the candidate overridden-comparator inverse-sort reproducer",
+  "tags": [
+    "linux",
+    "gradle",
+    "lucene",
+    "proof",
+    "tests"
+  ],
+  "type": "assignment"
+}
