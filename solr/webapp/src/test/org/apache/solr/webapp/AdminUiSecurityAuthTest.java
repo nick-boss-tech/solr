@@ -131,6 +131,68 @@ public class AdminUiSecurityAuthTest extends AdminUiTestBase {
     waitForPageContains(permission);
   }
 
+  @Test
+  public void testApiExplorerUsesAdminCredentials() throws Exception {
+    ensureCloudCluster();
+    driver.get(baseUrl + "/index.html#/");
+    ((JavascriptExecutor) driver).executeScript("sessionStorage.clear();");
+    openPage("", By.id("login"));
+    setText(By.id("username"), USER);
+    setText(By.id("password"), PASS);
+    click(By.xpath("//div[@id='login']//button[@type='submit']"));
+    waitFor(By.id("index"));
+
+    driver.get(baseUrl + "/index.html#/~api-explorer");
+    driver.switchTo().frame(waitFor(By.cssSelector("#content #api-explorer iframe")));
+    try {
+      waitForPageContains("List all collections in this Solr cluster");
+      // Observe the actual request and response without replacing the Solr endpoint.
+      // Store only whether the credential matches, never the credential itself.
+      ((JavascriptExecutor) driver)
+          .executeScript(
+              "const original = window.fetch;"
+                  + " window.fetch = async function(input, init) {"
+                  + " const request = input instanceof Request ? input : new Request(input, init);"
+                  + " const response = await original.call(this, input, init);"
+                  + " if (new URL(request.url).pathname === '/api/collections'"
+                  + " && request.method === 'GET') {"
+                  + " let collections = false;"
+                  + " try { collections = Array.isArray((await response.clone().json()).collections); }"
+                  + " catch (ignored) {}"
+                  + " const auth = sessionStorage.getItem('auth.header');"
+                  + " window.explorerResult = {status: response.status, collections: collections,"
+                  + " authenticated: !!auth && request.headers.get('Authorization') === auth,"
+                  + " requestedWith: request.headers.get('X-Requested-With')};"
+                  + " } return response; };");
+      click(
+          By.xpath(
+              "//button[contains(@class,'show-api-client-button') and @method='get'"
+                  + " and contains(., '(get /collections)')]"));
+      click(
+          By.xpath(
+              "//div[contains(@class,'scalar-address-bar')]//button"
+                  + "[.//span[contains(., 'Send get request')]]"));
+      waitUntil(
+          "the explorer should receive the collections response",
+          () ->
+              Boolean.TRUE.equals(
+                  ((JavascriptExecutor) driver).executeScript("return !!window.explorerResult;")));
+      @SuppressWarnings("unchecked")
+      Map<String, Object> result =
+          (Map<String, Object>)
+              ((JavascriptExecutor) driver).executeScript("return window.explorerResult;");
+      assertEquals(200L, result.get("status"));
+      assertEquals(Boolean.TRUE, result.get("collections"));
+      assertEquals(Boolean.TRUE, result.get("authenticated"));
+      assertEquals("XMLHttpRequest", result.get("requestedWith"));
+      waitForTextContains(By.cssSelector("body"), "200 OK");
+    } finally {
+      driver.switchTo().defaultContent();
+    }
+    driver.get(baseUrl + "/index.html#/~threads");
+    waitFor(By.id("thread-dump"));
+  }
+
   /** Returns the authorization config as fetched with credentials. */
   private NamedList<Object> authorizationApi() {
     try {

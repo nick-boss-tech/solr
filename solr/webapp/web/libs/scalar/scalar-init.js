@@ -24,6 +24,17 @@ Scalar.createApiReference("#app", {
   hideClientButton: true,
   showDeveloperTools: "never",
   telemetry: false,
+  // The explorer runs outside the Admin UI interceptors. Read the current
+  // credentials for each same-origin request and suppress the Basic Auth popup.
+  onBeforeRequest: ({ request }) => {
+    if (new URL(request.url).origin === window.location.origin) {
+      const authorization = sessionStorage.getItem("auth.header");
+      if (authorization) {
+        request.headers.set("Authorization", authorization);
+      }
+      request.headers.set("X-Requested-With", "XMLHttpRequest");
+    }
+  },
   // The Admin UI has no dark mode of its own; keep the explorer visually consistent with it.
   forceDarkModeState: "light",
   hideDarkModeToggle: true
