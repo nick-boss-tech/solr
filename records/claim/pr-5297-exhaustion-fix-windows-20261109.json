@@ -1,0 +1,7 @@
+{
+  "id": "pr-5297-exhaustion-fix-windows-20261109",
+  "job": "pr-5297-exhaustion-fix-windows-20261109",
+  "owner": "windows-codex-pr5297-fix",
+  "scope": "Implement and fork-push the reviewed fix, then publish a separate Linux gate",
+  "type": "claim"
+}
