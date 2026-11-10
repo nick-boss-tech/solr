@@ -1,0 +1,18 @@
+{
+  "capabilities": [
+    "linux",
+    "solr-gradle",
+    "jetty",
+    "integration-probe"
+  ],
+  "deliverables": "Claim before execution; bounded disposable prototype and receipt with source patch or scripts, commands, observations, logs, XML, limitations and executor-stop evidence. Do not modify source branch or post publicly.",
+  "head": "d88ae0c6269e067602a90ed8e655df275f6f42f7",
+  "host": "Linux gate host, JDK 21, isolated disposable checkout; no production source push",
+  "id": "pr-5315-graceful-rejection-probe-linux-r3-20261110",
+  "job": "pr-5315-graceful-rejection-probe-linux-r3-20261110",
+  "separate_from": "pr-5315-review-fixes-linux-gate-r4-20261110",
+  "source": "https://github.com/nick-boss-tech/solr/tree/solr-17764-submit",
+  "summary": "Probe safe per-subrequest retry for Jetty pre-handler shutdown rejection; repinned after test-only tidy",
+  "supersedes": "pr-5315-graceful-rejection-probe-linux-r2-20261110",
+  "type": "assignment"
+}
