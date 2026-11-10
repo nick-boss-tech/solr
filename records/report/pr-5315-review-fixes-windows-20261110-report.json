@@ -1,0 +1,13 @@
+{
+  "fork_branch": "solr-17764-submit",
+  "head": "9add678bd94b8c6f1b119535583e8ac8b0deea90",
+  "id": "pr-5315-review-fixes-windows-20261110-report",
+  "job": "pr-5315-review-fixes-windows-20261110",
+  "limitation": "503 alone cannot prove a non-idempotent update was not partially applied. The new general update retry is disabled, so the original graceful-shutdown indexing case remains unresolved. Pre-existing RouteException and communication-error replay safety is outside this fix and unproven.",
+  "reviewed_pr_head": "dfde089fd9dd0e5e79774593e66dd030e1b7dd22",
+  "source_pr": "https://github.com/apache/solr/pull/5315",
+  "status": "Implemented, proof pending",
+  "summary": "Avoid newly introduced non-RouteException 503 update replay and honor structured V2 skipRetry; retain the pre-existing RouteException and communication-error paths. Added focused mocked tests and clarified changelog.",
+  "type": "report",
+  "verification": "Source and diff review; git diff --check clean. No build, Gradle, tests, or executor run on Windows. Linux proof is requested separately at pr-5315-review-fixes-linux-gate-r2-20261110."
+}
