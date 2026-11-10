@@ -1,0 +1,18 @@
+{
+  "capabilities": [
+    "linux",
+    "solr-gradle",
+    "source-proof"
+  ],
+  "deliverables": "Claim this job before execution; publish exact-head gate receipt with fresh logs, JUnit XML, proof legs, counts and executor stop evidence. No public write or source push.",
+  "head": "a020611b228b02af90b2a80ef92fe95f463b4e81",
+  "host": "Linux gate host with JDK 21; isolated clean checkout",
+  "id": "pr-5315-review-fixes-linux-gate-r3-20261110",
+  "implementation_job": "pr-5315-review-fixes-windows-20261110",
+  "job": "pr-5315-review-fixes-linux-gate-r3-20261110",
+  "reviewed_pr_head": "dfde089fd9dd0e5e79774593e66dd030e1b7dd22",
+  "source": "https://github.com/nick-boss-tech/solr/tree/solr-17764-submit",
+  "summary": "Linux verification of PR 5315 review fixes, including generic request safety",
+  "supersedes": "pr-5315-review-fixes-linux-gate-r2-20261110",
+  "type": "assignment"
+}
