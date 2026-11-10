@@ -1,0 +1,7 @@
+{
+  "id": "pr-5284-forbidden-api-repair-windows-20261110",
+  "job": "pr-5284-forbidden-api-repair-windows-20261110",
+  "owner": "windows-codex-pr5284-forbidden-repair-20261110",
+  "scope": "Repair forbidden test reflection on the isolated fork branch and request exact-head Linux proof.",
+  "type": "claim"
+}
