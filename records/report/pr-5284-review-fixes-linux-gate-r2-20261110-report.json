@@ -1,0 +1,55 @@
+{
+  "compatibility_review": {
+    "not_independently_proven": "Direct rebalance body values reaching the shared operation, blank collection, nonpositive maxAtOnce, callingLockId preservation, raw JSON capitalization/omission, and failure/inactivePreferreds response maps.",
+    "runtime_proven": "v2 typed success/alreadyLeaders results, v1 async-ID cleanup, migration routing/aliases and all six MigrateDocs mutation assertions.",
+    "source_reviewed": "v1/v2 defaults, body-over-query precedence and null-body fallback, blank/missing collection checks, shared operation lock-ID forwarding, response model field names, nested result maps and null omission."
+  },
+  "evidence_archive_sha256": "0bd37db0afac18dd8f223814fd1c485fa01c943aae2006ede5f628e9ab9b763d",
+  "evidence_records": [
+    "records/evidence/pr-5284-review-fixes-linux-gate-r2-20261110-evidence.json",
+    "records/evidence/pr-5284-review-fixes-linux-gate-r2-20261110-stop-evidence.json"
+  ],
+  "executor_stop_sha256": "1114e2aed32f0cc1c779e1cf9e5526bdacab9262dd0cc1e31b14846aaf1f81fe",
+  "follow_up": "Resolve or account for the open PR #5285 malformed-body dependency and add direct assertions/captures for both rebalance operation arguments before requesting a new exact-head gate.",
+  "gate": "pr-5284-review-fixes-linux-gate-r2-20261110",
+  "head": "5fce0c06ee5afa8ac3606e32c2e441041da49864",
+  "id": "pr-5284-review-fixes-linux-gate-r2-20261110-report",
+  "job": "pr-5284-review-fixes-linux-gate-r2-20261110",
+  "mutation_results": {
+    "migrate_docs": "All six required production mutations were detected by MigrateDocsAPITest.testAllPropertiesAndAsyncId; each was run alone with seed 16398C0DE and restored to the clean exact head.",
+    "rebalance_body_propagation": "Two mutants routing actual maxAtOnce/maxWaitSeconds operation arguments to query/default values both survived RebalanceLeadersAPITest.testBodyParametersOverrideQueryParameters. Direct argument propagation is not proven by current tests."
+  },
+  "passed_legs": [
+    "./gradlew --no-daemon tidy — exit 0, no tracked changes.",
+    "./gradlew --no-daemon :solr:core:compileJava -Pvalidation.errorprone=true — exit 0.",
+    "./gradlew --no-daemon check -x test — exit 0 on the exact head in a normal detached clone; 555/555 actionable tasks executed, no extra exclusions.",
+    "OpenAPI-generated SolrJ client regeneration/compilation and the required v2, v1 async-ID cleanup, migration routing, alias, and async-ID tests executed and passed."
+  ],
+  "recorded_at": "2026-11-10T19:42:00Z",
+  "scope_attestation": "No source branch, public PR metadata, or public comment was changed. The executor's temporary source and probe mutations were restored; task-owned checkouts were removed after remote evidence verification.",
+  "source_refs": {
+    "dependency_pr": "https://github.com/apache/solr/pull/5285",
+    "dependency_pr_state_at_final_check": "open",
+    "fork_branch": "nick-boss-tech/solr:solr-16398-pr5284-review-fixes-20261110",
+    "fork_head": "5fce0c06ee5afa8ac3606e32c2e441041da49864",
+    "previous_head": "f947ff28cf3c591d5d9a230d526df6bdea6d693a",
+    "public_pr": "https://github.com/apache/solr/pull/5284",
+    "public_pr_head": "415c639e6e5b74d665209024cf29fb68dc32b23f",
+    "public_pr_state": "open"
+  },
+  "status": "failed",
+  "summary": "The exact-head Linux gate is not green. The selected suites ran 45 tests (43 passed, 1 failed, 1 skipped). The sole failure, V2ApiIntegrationTest.testException (expected 400, got 500), reproduced at reviewed PR #5284 baseline head 415c639e6e5b74d665209024cf29fb68dc32b23f and is associated with still-open PR #5285. Tidy, Error Prone compile, and the exact root check passed. All six MigrateDocs mutations were detected; both actual rebalance body-to-operation misroutes survived the existing API test, leaving a direct propagation coverage gap.",
+  "test_summary": {
+    "errors": 0,
+    "failing_test": "org.apache.solr.handler.V2ApiIntegrationTest.testException",
+    "failure": "Expected HTTP 400 but received HTTP 500; same result on reviewed PR #5284 baseline.",
+    "failures": 1,
+    "passed": 43,
+    "seed": "16398C0DE",
+    "skip_reason": "@Nightly test; nightly group disabled because tests.nightly is unset.",
+    "skipped": 1,
+    "skipped_test": "org.apache.solr.cloud.TestRebalanceLeaders.testRebalanceLeaders",
+    "tests": 45
+  },
+  "type": "report"
+}
