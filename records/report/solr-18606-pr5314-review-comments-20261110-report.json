@@ -1,0 +1,16 @@
+{
+  "evidence": "PR head and three inline comments refreshed; no other conversation comments. Current GitHub checks observed passing. No source changes, Windows build, tests or public response.",
+  "findings": [
+    "Most tests in ZkStateReaderTest exercise the provider or sync helper; preserve the real stale-view fixture and reader compatibility assertion while considering better test homes.",
+    "ClusterStateProvider already has resolveAlias; moving CloudSolrClient orchestration also affects cache use, collection precedence, multiple targets and both HTTP and ZK provider semantics. Treat this as a design question.",
+    "ZooKeeper 3.9.6 ClientCnxn debug logs completed reply packets with path, request and reply details even for errors. An existing LogListener plus a real ZK-backed alias request is a promising source-backed signal; isolate session/path, add a positive missing-read control, and require a guard-removal mutation on Linux. This remains untested and is not a latency benchmark.",
+    "ZkTestServer watch counts ignore null-watcher reads; server path metrics may omit failing getData requests because registration follows handling."
+  ],
+  "head": "672448a49c33a257e7a2f8722c84e823b100199c",
+  "id": "solr-18606-pr5314-review-comments-20261110-report",
+  "job": "solr-18606-pr5314-review-comments-20261110",
+  "pr": "https://github.com/apache/solr/pull/5314",
+  "review": "research/branch-reviews/2026-11-10-pr5314-followup/PR-5314-review.md",
+  "summary": "Assessed maintainer comments on test placement, alias-resolution ownership and observable real-ZooKeeper regression coverage.",
+  "type": "report"
+}
