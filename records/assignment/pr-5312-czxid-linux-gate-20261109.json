@@ -1,0 +1,18 @@
+{
+  "contributor_head": "0848e85fad1290ed604f881abb265b060be3075f",
+  "head": "9b96f1a23c2b9609c51c46541bf7fe3299921e81",
+  "id": "pr-5312-czxid-linux-gate-20261109",
+  "instructions": "Claim only after the matching gate record is published; verify current fork and contributor PR heads and reconcile if either moves. Record every proof leg and retrievable fresh evidence in a v2 receipt. No public comment, PR change, or unapproved source repair.",
+  "intended_host": "Linux gate host with JDK 21, working Gradle dependencies, Mockito support, build lock and adequate disk/inodes",
+  "job": "pr-5312-czxid-linux-gate-20261109",
+  "related_job": "pr-5312-czxid-implementation-20261109",
+  "source": "nick-boss-tech/solr:solr-18632-submit",
+  "status": "open for a capable Linux executor; wait for the matching gate record before claiming",
+  "summary": "Exact-head Linux proof for PR 5312 cache incarnation follow-up",
+  "tags": [
+    "gate",
+    "review",
+    "records"
+  ],
+  "type": "assignment"
+}
