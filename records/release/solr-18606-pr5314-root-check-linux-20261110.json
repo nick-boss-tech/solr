@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent",
+  "evidence": "records/evidence/solr-18606-pr5314-root-check-linux-20261110-evidence.tar.gz",
+  "id": "solr-18606-pr5314-root-check-linux-20261110",
+  "job": "solr-18606-pr5314-root-check-linux-20261110",
+  "reason": "Successor gate completed with verdict passed at head 672448a49c33a257e7a2f8722c84e823b100199c: root check passed with source-pattern validation executed, refs verified at preflight, tree clean. No source, branch, or PR changes were made by the gate.",
+  "type": "release"
+}

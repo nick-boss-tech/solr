@@ -1,0 +1,8 @@
+{
+  "gate": "solr-18606-pr5314-root-check-linux-20261110",
+  "head": "672448a49c33a257e7a2f8722c84e823b100199c",
+  "id": "solr-18606-pr5314-root-check-linux-20261110-report",
+  "job": "solr-18606-pr5314-root-check-linux-20261110",
+  "summary": "Successor root-check gate passed. At preflight the fork branch solr-18606-submit and the PR 5314 head ref both equalled the assigned head 672448a49c33. The complete root check (check -x test, no exclusions) passed in a clean normal clone: BUILD SUCCESSFUL, 556 actionable tasks, :solr:core:validateSourcePatterns executed, zero tracked modifications, head unchanged. The first attempt was lost to a runtime restart of this host a few minutes in; the filed result is the completed restart run in the same verified clone. This receipt covers only the root-check leg at the moved head and reconciles with the predecessor follow-up receipt, which carries the remaining legs for the same head. No public communication was made.",
+  "type": "report"
+}
