@@ -1,0 +1,19 @@
+{
+  "context": "SOLR-18592 discussion and SOLR-8344 / SOLR-11916 / SOLR-13261; hypothesis is source-derived and unproven. Existing solr-18592-linux-gate-round-1 covers different schema-feature work and is not this reproduction.",
+  "deliverables": [
+    "Pushed independent fork branch and verified full head",
+    "Separate exact-head Linux probe assignment with controls and explicit failure/non-reproduction classifications",
+    "Windows report and release"
+  ],
+  "host_requirements": [
+    "windows",
+    "source-review",
+    "no-gradle"
+  ],
+  "id": "solr-18592-sortable-dv-repro-windows-20261110",
+  "job": "solr-18592-sortable-dv-repro-windows-20261110",
+  "scope": "On a new branch from pinned upstream main, add a focused test that compares full stored values for an explicitly requested single-valued stored+DocValues SortableTextField against wildcard and stored-only controls, with a lossy DocValues value and an ordinary-string or safe-value control. Push the test-only branch to Nick's fork; request a separate Linux reproduction gate. Do not change production code or the existing SOLR-18592 submit branch.",
+  "status": "open for Windows implementation claimant",
+  "summary": "Prepare an isolated test-only reproduction branch for possible truncated SortableTextField return values",
+  "type": "assignment"
+}
