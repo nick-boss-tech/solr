@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-desktop",
+  "evidence": "records/report/lucene-solr-windows-runtime-20261109-report.json was published at b92fdbaf7dc6747c39fba0f1fc710abe9295cf3c. The smoke and preparation executors completed. Baseline server was stopped. The alternate Solr service remains intentionally running as a user-facing local runtime on 127.0.0.1:18984, verified listener PID 44500; it is not a worker consuming coordination jobs. The agent has stopped making changes to this job.",
+  "id": "lucene-solr-windows-runtime-20261109",
+  "job": "lucene-solr-windows-runtime-20261109",
+  "reason": "Runtime setup and smoke checks completed; handing the isolated installation to Nick.",
+  "type": "release"
+}
