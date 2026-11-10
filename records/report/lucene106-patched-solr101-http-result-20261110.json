@@ -1,0 +1,8 @@
+{
+  "details": "Temurin 21.0.11; released Solr 10.1.0 binary, not Solr PR 5293; all Lucene modules 10.6.0 except the candidate join snapshot. Stock and patched runtime copies had identical SHA-256 for the other 117 JARs. Patched join JAR SHA-256 1d6cf07164022466858c76037a47469c17f73796112142c6059f5dbd03e6c8aa matched the built artifact; class-load log showed ToParentDocValues loaded from the snapshot JAR. The same updated HTTP fixture ran against both copies with unique fields and a separate core per run. Both produced the same four orders: numeric ascending and descending and string ascending matched fixture expectations; string missing-first descending returned s2,s1,s3,s4,s5 while the fixture expected s1,s2,s3,s4,s5. Both fixture processes exited 1 for that mismatch. This does not establish whether the Lucene repair works with Solr PR 5293 because released Solr lacks its missing-value wiring. A first patched attempt stopped at schema setup due a pre-existing field type; the fixture was corrected to use unique names and rerun. Comparison and artifact provenance research/lucene-solr-windows/patched-vs-stock-comparison.json SHA-256 3a858caa76c513cd3156127e323fa5afce30ab81d806cd55ba2e4444be0aea43; class-load log SHA-256 df3175d72fd77de5bcb3705378237722a8cae31b37eaf4056767f71abd489312. Both Solr stop commands succeeded; no listener remained on ports 18984 or 18985. No Solr Gradle or public write.",
+  "head": "e0c53033bb2b6b34939ded24e228443b7d8b576b",
+  "id": "lucene106-patched-solr101-http-result-20261110",
+  "job": "lucene106-patched-solr101-http-20261110",
+  "summary": "Compared stock and patched Lucene join JARs in isolated Windows Solr runtimes",
+  "type": "report"
+}
