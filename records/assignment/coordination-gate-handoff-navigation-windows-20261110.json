@@ -1,0 +1,13 @@
+{
+  "id": "coordination-gate-handoff-navigation-windows-20261110",
+  "intended_host": "Windows coordination",
+  "job": "coordination-gate-handoff-navigation-windows-20261110",
+  "scope": [
+    "Update the live coordination-v2 documentation and coordination skill to make gate handoffs discoverable.",
+    "Update the Windows workspace AGENTS.md and env/agents.md bootstraps to match.",
+    "Preserve existing ownership, exact-head, release and test restrictions.",
+    "Do not change active gate records, claims, receipts or source branches."
+  ],
+  "summary": "Clarify how to publish and find gate assignments, claims, specifications and source heads.",
+  "type": "assignment"
+}
