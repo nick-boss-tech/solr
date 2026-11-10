@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent",
+  "evidence": "Receipt records/receipt/pr-5284-argument-coverage-linux-gate-r2-20261110-receipt.json with evidence archive records/evidence/evidence-pr-5284-argument-coverage-linux-gate-r2-20261110.tar.gz SHA-256 39fb77532e3a0f2e92ed11e6f5fb7d88fb81489a8d01049cdb219def05a1c8c3. Executor stop verified at filing: no GradleDaemon process remains on this host; fork branch and PR 5284 head re-verified unchanged (3d530d7639eeb0b4bd8ee11227a1133fe66aa672 and 415c639e6e5b74d665209024cf29fb68dc32b23f); no source push or public action was made.",
+  "id": "pr-5284-argument-coverage-linux-gate-r2-20261110",
+  "job": "pr-5284-argument-coverage-linux-gate-r2-20261110",
+  "reason": "All r2 legs completed at the exact head: positive suites passed, both mutations detected, tidy clean, Error Prone compile and root check passed with forbiddenApisTest executed. The result is a parameter-coverage phase pass only; the full PR gate remains blocked on PR 5285, as the receipt states.",
+  "type": "release"
+}

@@ -1,0 +1,7 @@
+{
+  "id": "pr-5284-argument-coverage-linux-gate-r2-20261110-report",
+  "job": "pr-5284-argument-coverage-linux-gate-r2-20261110",
+  "status": "passed: parameter-coverage phase green at the repaired head; full PR gate still blocked on PR 5285",
+  "summary": "The r2 argument-coverage gate at 3d530d7639eeb0b4bd8ee11227a1133fe66aa672 passed every leg: positive suites (RebalanceLeadersAPITest 6/6 with testBodyParametersReachOperation verifying maxAtOnce=2, maxWaitSeconds=30 and the calling lock ID through the new @VisibleForTesting accessors; TestRebalanceLeaders 4 passed plus the @Nightly skip), both body-routing mutations detected by assertion (99 and 999), tidy clean, Error Prone compile passed, and root check passed with :solr:core:forbiddenApisTest executed, closing the r1 failure. Full detail and counts are in the receipt. This remains a phase result only: the full PR 5284 gate is still blocked by V2ApiIntegrationTest.testException at the reviewed PR head, linked to open PR 5285, and needs a fresh full exact-head gate once that dependency resolves.",
+  "type": "report"
+}
