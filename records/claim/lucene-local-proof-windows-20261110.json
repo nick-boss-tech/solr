@@ -1,0 +1,7 @@
+{
+  "id": "lucene-local-proof-windows-20261110",
+  "job": "lucene-local-proof-windows-20261110",
+  "owner": "windows-codex-desktop",
+  "scope": "Run and report local Lucene tests and build; no Solr Gradle.",
+  "type": "claim"
+}
