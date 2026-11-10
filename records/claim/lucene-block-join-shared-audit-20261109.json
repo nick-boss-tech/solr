@@ -1,0 +1,7 @@
+{
+  "id": "lucene-block-join-shared-audit-20261109",
+  "job": "lucene-block-join-shared-audit-20261109",
+  "owner": "windows-codex-desktop",
+  "scope": "Direct user-requested source audit and integration readiness assessment; no build or test execution.",
+  "type": "claim"
+}
