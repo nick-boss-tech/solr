@@ -1,0 +1,18 @@
+{
+  "assigned_head": "2d4f255fefec6e455cfdc35e6281769f9e01fba9",
+  "assignment": "pr-5201-auth-browser-linux-gate-20261110",
+  "board_snapshot": "4b3a70c6cf9941b13028305252f19f350449a3a7",
+  "gate_record": "pr-5201-auth-browser-gate-20261110",
+  "id": "pr-5201-auth-browser-linux-gate-20261110-addendum-20261110",
+  "job": "pr-5201-auth-browser-linux-gate-20261110",
+  "limitations": "This addendum records board state only. It does not claim the gate assignment, run tests, verify source contents beyond the recorded head, or provide execution evidence. The earlier missing-spec assertion should be corrected against the refreshed live board before any gate work is considered.",
+  "observations": [
+    "The assigned gate record requires exact-head verification, focused and neighboring Selenium tests, packaged WAR/distribution browser proof under production CSP, fresh credential behavior and cross-origin credential-boundary checks, fail-before proof, tidy, and check -x test.",
+    "No records/claim/pr-5201-auth-browser-linux-gate-20261110.json exists at the inspected live snapshot.",
+    "The separate assignment pr-5201-explorer-auth-browser-linux-20261110 has a claim owned by codex-windows-coordinator; its stated purpose is cancellation and handoff, with no Linux execution.",
+    "The separate explorer assignment has no matching records/gate entry in the inspected snapshot."
+  ],
+  "status": "Not claimed; no tests or gate proof run",
+  "summary": "Addendum: the supplied finding that the assigned Linux gate job lacks its required detailed gate specification is contradicted by the refreshed live coordination-v2 snapshot. At commit 4b3a70c6cf9941b13028305252f19f350449a3a7, records/gate/pr-5201-auth-browser-gate-20261110.json exists, matches this job, names the exact assigned head 2d4f255fefec6e455cfdc35e6281769f9e01fba9, and contains detailed commands and acceptance criteria. There is no claim record for this Linux gate job, and no claim or tests were made by this reporter. The separate PR #5201 explorer-auth-browser job is claimed by codex-windows-coordinator specifically for cancellation/handoff; its claim explicitly says no Linux execution. No matching gate record for that separate explorer job was found. No Linux execution was performed.",
+  "type": "report"
+}
