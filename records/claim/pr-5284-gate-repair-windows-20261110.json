@@ -1,0 +1,7 @@
+{
+  "id": "pr-5284-gate-repair-windows-20261110",
+  "job": "pr-5284-gate-repair-windows-20261110",
+  "owner": "windows-codex-pr5284-repair-20261110",
+  "scope": "Fix failed gate on isolated fork branch and post superseding exact-head Linux gate.",
+  "type": "claim"
+}
