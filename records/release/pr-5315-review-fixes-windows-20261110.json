@@ -1,0 +1,8 @@
+{
+  "actor": "Codex Windows implementation session",
+  "evidence": "Report pr-5315-review-fixes-windows-20261110-report records pushed head and limitations; no Windows build or test executor was started. Worktree checkout process was stopped and repaired as a sparse checkout before changes.",
+  "id": "pr-5315-review-fixes-windows-20261110",
+  "job": "pr-5315-review-fixes-windows-20261110",
+  "reason": "Implementation pushed and handed to a separate Linux gate",
+  "type": "release"
+}
