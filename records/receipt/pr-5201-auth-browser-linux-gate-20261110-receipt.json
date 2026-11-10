@@ -1,0 +1,118 @@
+{
+  "environment": {
+    "browser": "Google Chrome 155.0.8059.39",
+    "chromedriver": "Chrome for Testing 155.0.8059.39 installed for Selenium runs",
+    "docker_used": false,
+    "gradle_locking": "Both mandatory host locks held for each Gradle invocation.",
+    "gradle_node": "Pinned Node.js 22.18.0 via Gradle Node plugin",
+    "jdk": "OpenJDK 21.0.12.1",
+    "os": "Linux 6.18.38+ x86_64 GNU/Linux",
+    "system_node": "v24.22.1"
+  },
+  "evidence": [
+    "records/evidence/pr-5201-auth-browser-linux-gate-20261110-evidence-20261110.json",
+    "records/report/pr-5201-auth-browser-linux-gate-20261110-final-20261110.json"
+  ],
+  "evidence_sha256": "e41f1746d77b8c72ec0721e0c13007c3be97016715430bc1a25e665eca972fa7",
+  "executor_stop_verification": {
+    "active_gate_task_process": false,
+    "assigned_worktree": "Clean at exact assigned SHA",
+    "dedicated_shell_closed": true,
+    "evidence_file": "restore-and-stop-verification.txt",
+    "exit_code": 130,
+    "required_gradle_locks": "Both available",
+    "root_check_job": "job_vxe2nKPf"
+  },
+  "gate": "pr-5201-auth-browser-gate-20261110",
+  "head": "2d4f255fefec6e455cfdc35e6281769f9e01fba9",
+  "id": "pr-5201-auth-browser-linux-gate-20261110-receipt",
+  "job": "pr-5201-auth-browser-linux-gate-20261110",
+  "logs_directory": "/workspace/gates/logs/phone-agent-2/pr-5201-auth-browser-linux-gate-20261110",
+  "results": [
+    {
+      "command": "./gradlew :solr:webapp:test -Ptests.selenium=true --tests org.apache.solr.webapp.AdminUiSecurityAuthTest.testApiExplorerUsesAdminCredentials",
+      "exit_code": 1,
+      "failures": 1,
+      "leg": "focused_api_explorer_selenium",
+      "logs": "10-focused-api-explorer.log; screenshot and artifacts are in the evidence archive.",
+      "outcome": "Timed out waiting for page to contain the Collections description (AdminUiSecurityAuthTest.java:148); the target GET /api/collections was not reached. This is not behavioral proof.",
+      "seed": "2FDE3FDE7845F9F2",
+      "tests": 1
+    },
+    {
+      "AdminUiSmokeTest": "5 tests, 0 failures.",
+      "command": "./gradlew :solr:webapp:test -Ptests.selenium=true --tests org.apache.solr.webapp.AdminUiSecurityAuthTest --tests org.apache.solr.webapp.AdminUiSmokeTest",
+      "exit_code": 1,
+      "failed_cases": [
+        "AdminUiSecurityAuthTest.testApiExplorerUsesAdminCredentials: timed out waiting for the Collections description before issuing the request",
+        "AdminUiSecurityAuthTest.testLoginAndSecurityScreen: timed out waiting to type 'solr' at By.id(username)"
+      ],
+      "failures": 2,
+      "leg": "full_security_and_neighboring_smoke_selenium",
+      "logs": "21-full-admin-smoke-corrected.log; JUnit XML, output, and screenshots are in the evidence archive.",
+      "passed": 5,
+      "seed": "7193C7A784FBDB4",
+      "tests": 7
+    },
+    {
+      "exit_code": 127,
+      "leg": "initial_full_suite_invocation_setup",
+      "logs": "20-full-admin-smoke.log",
+      "outcome": "Initial invocation from the wrong directory could not find ./gradlew; corrected invocation and result are recorded above.",
+      "tests": 0
+    },
+    {
+      "command": "./gradlew tidy",
+      "exit_code": 0,
+      "left_clean_tree": false,
+      "leg": "tidy",
+      "logs": "30-tidy.log; exact diff: 30-tidy-tracked.patch",
+      "recovery": "Exact diff was preserved and the assigned worktree restored to the clean assigned SHA.",
+      "tracked_diff": "Removed scalar-api-reference = \"1.46.4\" from gradle/libs.versions.toml; solr/webapp/scalar/build.gradle.kts still references libs.versions.scalar.api.reference at lines 39 and 41."
+    },
+    {
+      "command": "./gradlew check -x test",
+      "leg": "root_check_x_test",
+      "linked_worktree_attempt_exit_code": 1,
+      "linked_worktree_diagnostic": "Antora rejected the linked-worktree local content source as not being a Git repository; focused diagnostic exited 1.",
+      "logs": "40-root-check-x-test.log; 41-antora-diagnostic.log; 42-root-check-full-clone.log and terminal output.",
+      "normal_clone_retry_exit_code": 130,
+      "normal_clone_retry_outcome": "Interrupted on user instruction before completion; do not treat as pass."
+    },
+    {
+      "leg": "negative_fail_before",
+      "prepared_only": "The unchanged new test method was transplanted alone onto the contributor-parent worktree; patch preserved as negative-test-transplant.patch, but no execution was performed and no behavioral fail-before proof is claimed.",
+      "status": "not run"
+    },
+    {
+      "leg": "packaged_browser_production_csp_and_credential_boundaries",
+      "status": "not run",
+      "unverified": [
+        "Production packaged Jetty CSP behavior",
+        "Basic Auth login, rendered iframe/spec, harmless GET /api/collections and return navigation",
+        "Fresh credential after login/logout or credential change",
+        "Controlled cross-origin request credential boundary",
+        "JWT behavior (not exercised)"
+      ]
+    }
+  ],
+  "source": {
+    "assigned_worktree_restored_clean": true,
+    "fork_branch": "nick-boss-tech/solr:pr-5201-auth-browser-fix",
+    "fork_head": "2d4f255fefec6e455cfdc35e6281769f9e01fba9",
+    "public_pr": "https://github.com/apache/solr/pull/5201",
+    "public_pr_head": "3f9faa9e9861ce28f3ede3f4305bd91b6e297463",
+    "public_pr_head_repository": "epugh/solr",
+    "public_pr_state": "open",
+    "source_or_pr_changes_made": false
+  },
+  "stop_rule": {
+    "action": "Stopped the root-check retry and all further Selenium, parent-head, and packaged-browser testing; made no source/PR changes.",
+    "instruction_received_at": "2026-11-10T15:05:28-07:00",
+    "required_before_resuming": "New pushed head plus superseding gate.",
+    "trigger": "tidy changed the tracked scalar-api-reference version entry"
+  },
+  "summary": "Gate stopped under the user-directed stop rule after ./gradlew tidy exited 0 but removed a tracked version-catalog entry still referenced by the Scalar build. This is not a passing receipt. The exact-head worktree was restored clean; a new pushed head and superseding gate are required before resuming proof.",
+  "type": "receipt",
+  "verdict": "incomplete"
+}
