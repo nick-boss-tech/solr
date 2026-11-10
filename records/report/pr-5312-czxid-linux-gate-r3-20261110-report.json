@@ -1,0 +1,7 @@
+{
+  "id": "pr-5312-czxid-linux-gate-r3-20261110-report",
+  "job": "pr-5312-czxid-linux-gate-r3-20261110",
+  "status": "passed",
+  "summary": "Owner-directed re-gate PASSED at the unchanged head 1d71a1b3811b1e9c7fe9bcac7ade1c8bc695ecb0: tidy clean, MultipleManagedSchemasTest 3/3 and TestCollectionAPI.testConfigCaching passed with no skips at seed 18632CAFE, root check passed after one restart-interrupted attempt was rerun at the same head, and the fail-before overlay at the contributor head failed at the specified assertSame. Fresh runs reproduce the round-2 verdict exactly. See the receipt for commands, counts, and evidence.",
+  "type": "report"
+}
