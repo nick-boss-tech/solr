@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-desktop",
+  "evidence": "The focused and full Lucene join runs completed, the four fail-before methods completed against a single restored original production file, and the inverse comparator probe completed. Reports records/report/lucene-local-proof-windows-106-focused-20261110.json, records/report/lucene-local-proof-windows-106-failbefore-20261110.json, records/report/lucene-local-proof-windows-inverse-result-20261110.json and records/report/lucene-local-proof-windows-106-artifact-20261110.json record outcomes and paths. All corresponding Gradle processes exited; the initial interrupted run is recorded separately. The fail-before source file was restored to its candidate-head version after preserving evidence. No Solr Gradle was run.",
+  "id": "lucene-local-proof-windows-20261110",
+  "job": "lucene-local-proof-windows-20261110",
+  "reason": "Windows Lucene proof and artifact work completed; Solr PR integration is separate.",
+  "type": "release"
+}
