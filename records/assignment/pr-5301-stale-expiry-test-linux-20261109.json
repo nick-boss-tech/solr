@@ -1,0 +1,17 @@
+{
+  "branch": "nick-boss-tech/solr:pr-5301-stale-expiry-regression",
+  "deliverable": "Determine whether the new test executes and fails at the intended assertion on unchanged contributor production code, and discriminates a stale-expiry guarded control. Publish exact results; do not implement or push changes.",
+  "head": "b5477834e588888c542409bebbe2d1b76bbade27",
+  "host": "Linux gate host",
+  "id": "pr-5301-stale-expiry-test-linux-20261109",
+  "job": "pr-5301-stale-expiry-test-linux-20261109",
+  "parent_head": "684354d21476e44458e45c83a810dd25d16ba284",
+  "related_job": "pr-5301-stale-expiry-test-windows-20261109",
+  "summary": "Validate test-only stale-expiry regression against PR 5301 current head",
+  "tags": [
+    "linux",
+    "pr-5301",
+    "regression-test"
+  ],
+  "type": "assignment"
+}
