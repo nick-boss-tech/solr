@@ -1,0 +1,11 @@
+{
+  "evidence": "records/receipt/pr-5301-houston-current-linux-20261109-receipt.json and release; controlled real-session diagnostic established B stale expiry closes recovered C and causes second reconnect.",
+  "head": "684354d21476e44458e45c83a810dd25d16ba284",
+  "host": "Windows implementation; Linux proof separate",
+  "id": "pr-5301-stale-expiry-test-windows-20261109",
+  "job": "pr-5301-stale-expiry-test-windows-20261109",
+  "scope": "Adapt the established real-ZooKeeper diagnostic into a focused regression on an isolated fork branch based on the contributor head. Test only, no production fix. Push and request Linux proof of expected failure at that head, preserving diagnostic limitations; prepare but do not post public response without appropriate authorization.",
+  "successor_of": "pr-5301-houston-review-20261109",
+  "summary": "Prepare contributor-facing regression test for stale session expiry on PR 5301",
+  "type": "assignment"
+}
