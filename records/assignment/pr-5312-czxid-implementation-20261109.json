@@ -1,0 +1,14 @@
+{
+  "capabilities": [
+    "source-implementation",
+    "code-review"
+  ],
+  "host": "Windows",
+  "id": "pr-5312-czxid-implementation-20261109",
+  "job": "pr-5312-czxid-implementation-20261109",
+  "review": "records/report/pr-5312-review-20261109-report.json",
+  "successor_of": "pr-5312-review-20261109",
+  "summary": "Implement and push a focused follow-up to PR 5312 replacing timestamp cache identity with ZooKeeper creation transaction identity, with regression coverage; hand exact head to Linux gate",
+  "type": "assignment",
+  "upstream_pr_head": "0848e85fad1290ed604f881abb265b060be3075f"
+}
