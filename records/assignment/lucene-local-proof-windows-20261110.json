@@ -1,0 +1,19 @@
+{
+  "authorization": "Nick directed on 2026-11-10 that Lucene builds and tests be handled on Windows, overriding the prior generic Windows Gradle ban for Lucene work. This does not authorize Solr Gradle or the retired queue.",
+  "heads": [
+    "e0c53033bb2b6b34939ded24e228443b7d8b576b",
+    "fb8b5ea94f4ebc552e3bbafc6de8b2864b7fbb8a"
+  ],
+  "host": "Windows local host with JDK 21 and isolated Lucene checkout",
+  "id": "lucene-local-proof-windows-20261110",
+  "job": "lucene-local-proof-windows-20261110",
+  "scope": "Run the Lucene positive, fail-before, formatting and inverse-comparator probe legs as practical. Record exact heads, JDK, commands, logs, XML, exits and any unrun checks. Build a local Lucene join artifact for Solr integration if possible. No public PR, issue or comment. Prior unclaimed Linux requests lucene106-solr5293-integration-linux-20261110 and lucene14775-comparator-probe-linux-20261110 contain overlapping Lucene legs and should not duplicate this execution; their separate Solr proof requirements are unchanged.",
+  "summary": "Run Lucene 10.6 block-join and inverse-sort probe tests on Windows",
+  "tags": [
+    "windows",
+    "lucene",
+    "gradle",
+    "proof"
+  ],
+  "type": "assignment"
+}
