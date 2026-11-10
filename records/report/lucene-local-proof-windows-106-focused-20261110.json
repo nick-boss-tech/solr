@@ -1,0 +1,8 @@
+{
+  "details": "At clean fork head e0c53033bb2b6b34939ded24e228443b7d8b576b, Java Temurin 21.0.11, Gradle 9.8.0, Windows, seed 18622C0DE and one test JVM/worker, :lucene:join:test --tests org.apache.lucene.search.join.TestBlockJoinSelector --tests org.apache.lucene.search.join.TestBlockJoinSorting completed exit 0: 10 tests passed. The fresh XML explicitly includes testNumericMissingValuesRespectChildFilter, testSortedMissingValuesAreAbsent and testFilteredChildMissingValueNestedSorting; saved XML is under research/lucene-submission-prep/windows-proof-20261110/join-focused-xml. Transcript research/lucene-submission-prep/windows-proof-20261110/join-focused-retry.log SHA-256 41f9b5725a7518aa925ef844e79f6f277ba995f744f0f1a33eee06f4d494e22d. First invocation was interrupted and separately reported; this is the successful retry. Gradle reported optional eclint unavailable and did not run error-prone. Full module, fail-before and tidy are separate checks; this result does not establish Solr integration.",
+  "head": "e0c53033bb2b6b34939ded24e228443b7d8b576b",
+  "id": "lucene-local-proof-windows-106-focused-20261110",
+  "job": "lucene-local-proof-windows-20261110",
+  "summary": "Lucene 10.6 focused join tests passed on Windows",
+  "type": "report"
+}
