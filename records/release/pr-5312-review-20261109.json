@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-review",
+  "evidence": "The review and PR evidence are recorded locally under research/branch-reviews/2026-11-09-pr-batch/PR-5312-review.md and evidence/PR-5312; the board report pr-5312-review-20261109-report summarizes the result. No executor or test process was started; this worker is stopping review activity after publishing this release.",
+  "id": "pr-5312-review-20261109",
+  "job": "pr-5312-review-20261109",
+  "reason": "Read-only review completed",
+  "type": "release"
+}
