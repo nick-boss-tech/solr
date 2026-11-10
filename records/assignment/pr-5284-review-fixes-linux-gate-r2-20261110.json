@@ -1,0 +1,21 @@
+{
+  "host": "Capable Linux gate host, JDK 21, serialized build lock",
+  "id": "pr-5284-review-fixes-linux-gate-r2-20261110",
+  "implementation_job": "pr-5284-gate-repair-windows-20261110",
+  "job": "pr-5284-review-fixes-linux-gate-r2-20261110",
+  "legacy_context": "coordination-ui at 95e2574f5091fbf1425fd9bfc4cef98c746b42f6 gates/pr-5284-coverage-round-2.md and reports/pr-5284-coverage-round-1-windows.md. That older gate named head 08d13e33495689b67561f451b62a3e2d017df720 and no receipt or executor claim was found; it is not proof for this phase.",
+  "previous_head": "f947ff28cf3c591d5d9a230d526df6bdea6d693a",
+  "prior_receipt": "records/receipt/pr-5284-review-fixes-linux-gate-20261110-receipt.json",
+  "reviewed_pr_head": "415c639e6e5b74d665209024cf29fb68dc32b23f",
+  "source_branch": "nick-boss-tech/solr:solr-16398-pr5284-review-fixes-20261110",
+  "source_head": "5fce0c06ee5afa8ac3606e32c2e441041da49864",
+  "successor_of": "pr-5284-review-fixes-linux-gate-20261110",
+  "summary": "LINUX TASK: rerun all PR 5284 review-fix proof after repair of the failed compile and tidy stop at the new exact head.",
+  "tags": [
+    "linux",
+    "gate",
+    "pr-5284",
+    "solr-16398"
+  ],
+  "type": "assignment"
+}
