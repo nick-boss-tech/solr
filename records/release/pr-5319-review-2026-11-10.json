@@ -1,0 +1,8 @@
+{
+  "actor": "Nick Shanin workspace reviewer",
+  "evidence": "Review completed at 3a72ba0436d9decb48868ca46b94a5f52e2dc821; report records/report/pr-5319-review-2026-11-10-report.json published at bce6c613883627f13ded63fc90e305e097873e88; no build or external executor was started.",
+  "id": "pr-5319-review-2026-11-10",
+  "job": "pr-5319-review-2026-11-10",
+  "reason": "Source review completed; no further work or executor remains active",
+  "type": "release"
+}
