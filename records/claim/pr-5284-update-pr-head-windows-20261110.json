@@ -1,0 +1,7 @@
+{
+  "id": "pr-5284-update-pr-head-windows-20261110",
+  "job": "pr-5284-update-pr-head-windows-20261110",
+  "owner": "windows-codex-pr5284-update-head-20261110",
+  "scope": "Directly authorized fast-forward of fork PR branch and independent read-back.",
+  "type": "claim"
+}
