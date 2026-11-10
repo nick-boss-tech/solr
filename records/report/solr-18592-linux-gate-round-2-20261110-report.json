@@ -1,0 +1,8 @@
+{
+  "gate": "solr-18592-linux-gate-round-2-20261110",
+  "head": "e75cbe0433d027b04373efd983cf361f99612bd7",
+  "id": "solr-18592-linux-gate-round-2-20261110-report",
+  "job": "solr-18592-linux-gate-round-2-20261110",
+  "summary": "Linux gate round 2 passed at e75cbe0433, the SOLR-18592 wildcard field-selection branch with the round-1 tidy formatting commit on top. Focused suites pass 26 of 26 with no skips, tidy is clean, root check passes, and the matchesWildcard mutation proof discriminates: the forced return-true body makes testSchemaWildcardSelection fail with the excluded wild_hidden field present in the response, and the restored head passes. The branch is fully proven on Linux. Distributed search and uncommitted real-time-get behavior remain untested, as the gate record notes. No public communication was made.",
+  "type": "report"
+}

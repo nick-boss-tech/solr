@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent",
+  "evidence": "records/evidence/solr-18592-linux-gate-round-2-20261110-evidence.tar.gz",
+  "id": "solr-18592-linux-gate-round-2-20261110",
+  "job": "solr-18592-linux-gate-round-2-20261110",
+  "reason": "Gate completed with verdict passed at head e75cbe0433d027b04373efd983cf361f99612bd7: focused suites 26 of 26 with no skips, tidy and diff --check clean, root check passed with validateSourcePatterns executed, and the matchesWildcard return-true mutation made testSchemaWildcardSelection fail on the excluded wild_hidden field appearing, with the restored head passing. No source, branch, or PR changes were made by this gate beyond the round-1 tidy commit it verifies.",
+  "type": "release"
+}
