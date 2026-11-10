@@ -1,0 +1,12 @@
+{
+  "comment_url": "https://github.com/apache/solr/pull/5301#issuecomment-6758903946",
+  "evidence": "records/receipt/pr-5301-stale-expiry-test-linux-20261109-receipt.json; records/receipt/pr-5301-houston-current-linux-20261109-receipt.json",
+  "id": "pr-5301-stale-expiry-comment-record-20261110-report",
+  "job": "pr-5301-stale-expiry-comment-record-20261110",
+  "posted_at_utc": "2026-11-10T04:22:03Z",
+  "pr_head": "684354d21476e44458e45c83a810dd25d16ba284",
+  "summary": "Nick explicitly approved the follow-up; posted and read back the comment on PR 5301.",
+  "test_head": "b5477834e588888c542409bebbe2d1b76bbade27",
+  "type": "report",
+  "verification": "PR head and discussion refreshed before post; fork test head and single-commit ancestry verified; GitHub API read-back matched approved text. Test intentionally fails on contributor production code and passes with the prior guarded production blob as a control."
+}
