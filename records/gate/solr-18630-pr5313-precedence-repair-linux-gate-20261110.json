@@ -1,0 +1,29 @@
+{
+  "commands": [
+    "./gradlew --no-daemon :solr:solrj:test --tests org.apache.solr.common.util.EnvUtilsTest -Ptests.seed=5313C0DE --rerun-tasks",
+    "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.core.TestSolrXml -Ptests.seed=5313C0DE --rerun-tasks",
+    "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.cloud.ZkFailoverTest -Ptests.seed=5313C0DE --rerun-tasks",
+    "./gradlew --no-daemon tidy",
+    "./gradlew --no-daemon check -x test"
+  ],
+  "contributor_head": "358f13d9fdfaed260143a51100cd5657a582d562",
+  "environment": "Clean isolated Linux checkout at the exact head; use a project-supported JDK and a host capable of all checks. Before starting, verify current source and public PR heads and reconcile other executors and host locks. Preserve fresh logs, JUnit XML, exact commands, process exit codes, hashes, classpath provenance and cleanup/stop evidence. Never alter the pushed branch or public PR.",
+  "head": "a4ce0580ad89ad521a5402e383d96c239cea94fd",
+  "id": "solr-18630-pr5313-precedence-repair-linux-gate-20261110",
+  "job": "solr-18630-pr5313-precedence-repair-linux-gate-20261110",
+  "pre_pr_base": "b771587e9707c49847d728fd1f3ff259a182692c",
+  "previous_head": "4be1ad602621d2af96565355dce3804ee4744aae",
+  "prior_comparison": "records/receipt/solr-18630-pr5313-mixed-precedence-probe-20261109-receipt.json",
+  "prior_startup_receipt": "records/receipt/pr5313-startup-boundary-proof-20261109-receipt.json",
+  "requirements": [
+    "Run all named suites afresh at this head; verify the added mixed-source tests and pre-existing precedence tests execute. Report the pre-existing TestSolrXml @Ignore as a skip, never a pass. tidy must leave the checkout clean; stop and hand back if it modifies tracked files. Run the root check excluding only test, recording environmental prerequisites and any initial failures and recovery.",
+    "Fail-before: in a disposable checkout of the immediately previous production head 4be1ad602621d2af96565355dce3804ee4744aae, overlay only the new EnvUtilsTest.java from this head and run the two new legacyWaitForZkSystemPropertyWinsOverCurrentEnvironment and legacyWaitForZkSystemPropertyWinsOverLegacyEnvironment methods. Each must fail on its expected value assertion, not due to setup or compilation. The same methods must pass at this gate head. Preserve both exact commands and fresh XML.",
+    "Repeat the previous mixed-precedence probe in fresh isolated JVMs at the previous and new head with scrubbed environment and independently built, revision-specific classpaths. For -Dsolr.wait.for.zk=1 plus SOLR_CLOUD_WAIT_FOR_ZK_SECONDS=5, expect previous=5 and new=1; controls: legacy system only=1, modern environment only=5, and both modern and legacy Java system properties=modern 5. Add -DwaitForZk=5 plus SOLR_WAIT_FOR_ZK=1 => 5, and both environment spellings with current=5 legacy=1 => 5. Confirm actual property values, class origins, heads and exit codes. Do not report a predicted result as observed.",
+    "Repeat the startup-boundary proof on this head without pre-initializing EnvUtils or reading the helper before NodeConfig.loadNodeConfig, including waitForZk system and SOLR_WAIT_FOR_ZK environment cases and a modern-property precedence control. Independently observe requested session timeout in the ZooKeeper ConnectRequest and connection wait for a 30001 ms client fallback and a 2 second override, using the previous boundary receipt's method or an equivalent real-client probe. Explain JVM loopback flags if needed; do not infer session timeout from elapsed time.",
+    "In a disposable checkout of contributor head 358f13d9fdfaed260143a51100cd5657a582d562, transplant only testStartupWithDefaultZkWait and the ZkTestServer import, and demonstrate the expected Math.toIntExact integer-overflow failure with the usual 30000 ms client timeout; preserve the exact command, XML and cause. This ensures the original startup regression remains proven alongside the new compatibility test.",
+    "Investigate every executed failure before a retry; setup failures, skips, or non-reproductions are not behavioral passes. Publish a receipt for this exact head, with each leg's actual results and links or hashes for fresh evidence, plus executor-stop evidence and a release. No code changes, fork pushes, or public comments are authorized by this gate."
+  ],
+  "seed": "5313C0DE",
+  "source": "https://github.com/nick-boss-tech/solr/tree/solr-18630-submit",
+  "type": "gate"
+}
