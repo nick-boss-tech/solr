@@ -235,8 +235,7 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     Map<String, ClusterState.CollectionRef> refs =
         Map.of(
             collName, new TestCollectionRef(currentDoc::get, new AtomicInteger(), null, null, -1));
-    try (ClusterStateProvider provider =
-            getStateProvider(Set.of("192.168.1.108:8983_solr"), refs);
+    try (ClusterStateProvider provider = getStateProvider(Set.of("192.168.1.108:8983_solr"), refs);
         RecordingCloudSolrClient client = new RecordingCloudSolrClient(provider, 1)) {
       client.enqueue(
           (req, cols) -> {
@@ -258,8 +257,7 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
         Map.of(
             collName, new TestCollectionRef(currentDoc::get, new AtomicInteger(), null, null, -1));
     AtomicInteger attempts = new AtomicInteger();
-    try (ClusterStateProvider provider =
-            getStateProvider(Set.of("192.168.1.108:8983_solr"), refs);
+    try (ClusterStateProvider provider = getStateProvider(Set.of("192.168.1.108:8983_solr"), refs);
         RecordingCloudSolrClient client = new RecordingCloudSolrClient(provider, 1)) {
       client.setDefaultInvocation(
           (req, cols) -> {
@@ -280,8 +278,7 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     Map<String, ClusterState.CollectionRef> refs =
         Map.of(
             collName, new TestCollectionRef(currentDoc::get, new AtomicInteger(), null, null, -1));
-    try (ClusterStateProvider provider =
-            getStateProvider(Set.of("192.168.1.108:8983_solr"), refs);
+    try (ClusterStateProvider provider = getStateProvider(Set.of("192.168.1.108:8983_solr"), refs);
         RecordingCloudSolrClient client = new RecordingCloudSolrClient(provider, 1)) {
       client.enqueue(
           (req, cols) -> {
@@ -302,8 +299,7 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     Map<String, ClusterState.CollectionRef> refs =
         Map.of(
             collName, new TestCollectionRef(currentDoc::get, new AtomicInteger(), null, null, -1));
-    try (ClusterStateProvider provider =
-            getStateProvider(Set.of("192.168.1.108:8983_solr"), refs);
+    try (ClusterStateProvider provider = getStateProvider(Set.of("192.168.1.108:8983_solr"), refs);
         RecordingCloudSolrClient client = new RecordingCloudSolrClient(provider, 1)) {
       client.enqueue(
           (req, cols) -> {
