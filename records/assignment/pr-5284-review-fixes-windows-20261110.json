@@ -1,0 +1,15 @@
+{
+  "deliverables": "Separate fork branch with reviewer fixes, independent remote SHA verification, report and separate Linux gate job; no public comments or PR branch updates.",
+  "id": "pr-5284-review-fixes-windows-20261110",
+  "intended_host": "Windows implementation; Linux gate separately",
+  "job": "pr-5284-review-fixes-windows-20261110",
+  "legacy_context": "coordination-ui at 95e2574f5091fbf1425fd9bfc4cef98c746b42f6: reports/pr-5284-coverage-round-1-windows.md and gates/pr-5284-coverage-round-2.md; no gate executor claim or receipt found, old head 08d13e33495689b67561f451b62a3e2d017df720 differs from reviewed head.",
+  "source": "https://github.com/apache/solr/pull/5284",
+  "summary": "Implement PR 5284 reviewer feedback on a separate branch based on reviewed head 415c639e6e5b74d665209024cf29fb68dc32b23f; preserve existing behavior and coverage, push and request exact-head Linux proof.",
+  "tags": [
+    "implementation",
+    "review",
+    "windows"
+  ],
+  "type": "assignment"
+}
