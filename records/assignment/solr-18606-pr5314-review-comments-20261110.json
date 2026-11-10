@@ -1,0 +1,11 @@
+{
+  "deliverables": "Trace test placement, provider abstraction and observability; document recommendation and limitations. No patch or public comment.",
+  "head": "672448a49c33a257e7a2f8722c84e823b100199c",
+  "host": "Windows source research, no build or tests",
+  "id": "solr-18606-pr5314-review-comments-20261110",
+  "job": "solr-18606-pr5314-review-comments-20261110",
+  "pr": "https://github.com/apache/solr/pull/5314",
+  "successor_of": "solr-18606-pr5314-green-body-20261110",
+  "summary": "Assess maintainer comments on PR 5314 and propose next steps",
+  "type": "assignment"
+}
