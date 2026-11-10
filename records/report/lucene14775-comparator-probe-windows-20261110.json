@@ -1,0 +1,11 @@
+{
+  "base": "24e5430ed5675b53e74c6db6b5745fb49adc659d",
+  "branch": "lucene-pr14775-custom-comparator-probe",
+  "details": "Normal fork push was verified by GitHub ref read-back. The commit adds one collector-based method to TestSort.java and does not alter production code. Its forward result is a control; inverse order is the assertion under investigation. No build or test ran on Windows. Linux job lucene14775-comparator-probe-linux-20261110 requests exact-head execution and distinguishes behavioral failure from setup or compilation failure. This is not a fix, proven failure, public PR or comment.",
+  "head": "fb8b5ea94f4ebc552e3bbafc6de8b2864b7fbb8a",
+  "id": "lucene14775-comparator-probe-windows-20261110",
+  "job": "lucene14775-comparator-probe-windows-20261110",
+  "repository": "https://github.com/nick-boss-tech/lucene",
+  "summary": "Prepared a test-only probe of inverse sorting with an overridden comparator",
+  "type": "report"
+}
