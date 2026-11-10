@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "records/report/pr-5301-stale-expiry-comment-record-20261110-report.json; https://github.com/apache/solr/pull/5301#issuecomment-6758903946",
+  "id": "pr-5301-stale-expiry-comment-record-20261110",
+  "job": "pr-5301-stale-expiry-comment-record-20261110",
+  "reason": "Comment posted, read back, and recording complete.",
+  "type": "release"
+}
