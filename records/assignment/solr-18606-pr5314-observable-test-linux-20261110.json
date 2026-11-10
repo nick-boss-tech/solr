@@ -1,0 +1,20 @@
+{
+  "base": "672448a49c33a257e7a2f8722c84e823b100199c",
+  "branch": "solr-18606-pr5314-observable-test",
+  "deliverables": "Validate the real log signal and fail-before guard mutation, run moved and neighboring tests, tidy and root check, record exact-head logs/XML and cleanup.",
+  "gate": "solr-18606-pr5314-observable-test-linux-20261110",
+  "head": "f9988d951a5e15546fcd3b36659a67cc74d0795a",
+  "host": "Linux gate host only",
+  "id": "solr-18606-pr5314-observable-test-linux-20261110",
+  "job": "solr-18606-pr5314-observable-test-linux-20261110",
+  "pr": "https://github.com/apache/solr/pull/5314",
+  "status": "open",
+  "summary": "Linux proof for PR 5314 real-ZooKeeper alias I/O regression test and relocated tests",
+  "tags": [
+    "linux",
+    "gradle",
+    "solr",
+    "proof"
+  ],
+  "type": "assignment"
+}
