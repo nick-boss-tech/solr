@@ -1,0 +1,20 @@
+{
+  "base": "9d4dc33e5d829d2bc9d1304054b5af6746879b34",
+  "branch": "solr-18606-pr5314-followup",
+  "deliverables": "Publish exact-head receipt with fresh logs and XML, every proof leg and limitations; release executor.",
+  "gate": "solr-18606-pr5314-followup-linux-20261109",
+  "head": "672448a49c33a257e7a2f8722c84e823b100199c",
+  "host": "Linux gate host only",
+  "id": "solr-18606-pr5314-followup-linux-20261109",
+  "job": "solr-18606-pr5314-followup-linux-20261109",
+  "pr": "https://github.com/apache/solr/pull/5314",
+  "status": "open",
+  "summary": "Linux exact-head proof for SOLR-18606 PR 5314 follow-up branch",
+  "tags": [
+    "linux",
+    "gradle",
+    "solr",
+    "proof"
+  ],
+  "type": "assignment"
+}
