@@ -1,0 +1,25 @@
+{
+  "base": "d8ae2a03785c78840ee8dc8bf7e600f9d7b57d01",
+  "branch": "solr-18592-sortable-dv-repro-20261110",
+  "environment": "Linux with JDK 21; fresh clean checkout; record actual host, JDK, git head, git status and environment.",
+  "head": "b9aed02ac1cde907a06d04fdbd96568ca38b85a9",
+  "hypothesis": "A committed single-valued stored+DocValues SortableTextField, maxCharsForDocValues=6 and useDocValuesAsStored=false, may return only the first six characters under an explicit fl when the optimizer substitutes DocValues. Wildcard and mixed stored-only controls should return the complete stored value. This is an unproven source-derived hypothesis, not a known defect.",
+  "id": "solr-18592-sortable-dv-repro-linux-20261110",
+  "job": "solr-18592-sortable-dv-repro-linux-20261110",
+  "related": [
+    "SOLR-18592",
+    "SOLR-8344",
+    "SOLR-11916",
+    "SOLR-13261"
+  ],
+  "requirements": [
+    "Claim the canonical Linux job before execution. Fetch and verify the fork branch exact head, clean checkout, JDK and host. Inspect the test and existing schema-sorting-text.xml; do not use the distinct SOLR-18592 submit branch.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.schema.TestSortableTextField.testStoredDocValuesSelectionControls -Ptests.seed=18592D0C. Record fresh XML, logs, skips, exact values and exit status. All schema, wildcard, stored-only, ordinary-string and safe non-stored DocValues controls must actually pass to support a reproduction.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.schema.TestSortableTextField.testStoredDocValuesExplicitPreservesFullValue -Ptests.seed=18592D0C. Preserve XML and output separately from the controls. Record the returned value and assertion site; an assertion failure specifically because the returned field is truncated while controls pass is a reproduction, not a passing regression test.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.schema.TestSortableTextField.testUseDocValuesAsStored -Ptests.seed=18592D0C as a neighboring existing check and record fresh XML and logs.",
+    "If controls or the explicit test do not behave as expected, inspect the exact returned response and optimizer path; distinguish non-reproduction from missing fields, query setup, index setup, compilation errors, test skips, timeout and infrastructure errors. Do not modify the test or production sources in place and then call that the pinned result; if further probes are needed, use a separately documented isolated copy and record its diff.",
+    "Run ./gradlew tidy and ./gradlew check -x test as separate checks, recording exit statuses and any tracked changes. A formatter change is not proof for the original exact head; preserve and report any diff rather than silently committing or pushing it.",
+    "Publish a receipt with head, verdict, each command, exit code, test counts, skip counts, precise assertions/actual values, logs and XML pointers. A verdict of passed means the reproduction goal was confirmed with passing controls and the specific expected runtime failure; it does not mean the regression test passed or the issue is fixed. Use non-reproduced if the full value is returned with all relevant controls passing; use incomplete/failed for setup, compile, unrelated assertion, skipped or missing proof. Do not post publicly."
+  ],
+  "type": "gate"
+}
