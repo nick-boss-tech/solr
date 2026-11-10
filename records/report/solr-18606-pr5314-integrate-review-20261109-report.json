@@ -1,0 +1,19 @@
+{
+  "base": "9d4dc33e5d829d2bc9d1304054b5af6746879b34",
+  "changes": [
+    "Fast-forwarded fork solr-18606-submit from 9d4dc33e5d829d2bc9d1304054b5af6746879b34 to 672448a49c33a257e7a2f8722c84e823b100199c without changing follow-up branch.",
+    "Updated the PR body with sync rationale, provider-local error handling, within-request creation timing tradeoff, and accurate prior-head versus pending-current-head proof; final read-back matched at 2026-11-10T03:00:30Z with head unchanged and no discussion.",
+    "Full source review found no new blocker in examined paths; PR is +279/-6 including 198 added test lines. Existing fixtures cover distinct behaviors, while real-ZooKeeper alias traffic and production performance remain unproved."
+  ],
+  "gate": "records/gate/solr-18606-pr5314-followup-linux-20261109.json",
+  "gate_reconciliation": "records/report/solr-18606-pr5314-integrate-review-20261109-gate-notice.json",
+  "head": "672448a49c33a257e7a2f8722c84e823b100199c",
+  "id": "solr-18606-pr5314-integrate-review-20261109-report",
+  "job": "solr-18606-pr5314-integrate-review-20261109",
+  "limits": "User-directed PR ref move must be reconciled by active gate executor as recorded in notice. The code under test is unchanged. No PR comment, approval, merge, or Jira write.",
+  "pr": "https://github.com/apache/solr/pull/5314",
+  "review": "research/branch-reviews/2026-11-10-pr5314-followup/PR-5314-review.md",
+  "summary": "Fast-forwarded PR to exact gate head, updated and read back body, and reviewed full resulting diff.",
+  "type": "report",
+  "verification": "Fork and PR head verified at exact commit; diff --check clean; no Windows Gradle or tests. Earlier 45-test receipt covers old head only. Current gate claimed, no receipt found at last check. GitHub labeler passed; other checks not established."
+}
