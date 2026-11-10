@@ -1,0 +1,92 @@
+{
+  "type": "release",
+  "id": "pr-5284-review-fixes-linux-gate-20261110",
+  "job": "pr-5284-review-fixes-linux-gate-20261110",
+  "actor": "phone-agent-2",
+  "released_at": "2026-11-10T17:44:20+00:00",
+  "claim_released": true,
+  "reason": "Executor stopped under the live gate stop condition after tidy changed tracked files. The required focused suite had already failed before any test ran due an exact-head CollectionsHandler.java:833 ambiguous NamedList.addAll compile error. No source repair was made; all remaining proof legs are explicitly incomplete or not run.",
+  "target": {
+    "fork_branch": "nick-boss-tech/solr:solr-16398-pr5284-review-fixes-20261110",
+    "head": "f947ff28cf3c591d5d9a230d526df6bdea6d693a",
+    "public_pr": "https://github.com/apache/solr/pull/5284",
+    "public_pr_head": "415c639e6e5b74d665209024cf29fb68dc32b23f",
+    "public_pr_state": "open"
+  },
+  "evidence": {
+    "record_path": "records/evidence/pr-5284-review-fixes-linux-gate-20261110-evidence.json",
+    "record_sha256": "c9af2f92e906eefc9e298e71ac8802848f384c64b4a8b8a5759712fa75142c6b",
+    "artifact_filename": "pr-5284-review-fixes-linux-gate-20261110-evidence.tar.gz",
+    "artifact_sha256": "aa2e69f642a182d7cc3b62be5489ca20da85c6b7bad8200ef752d3cee4031ca3",
+    "artifact_bytes": 14607,
+    "uploaded_copy_verified": true
+  },
+  "report": {
+    "record_path": "records/report/pr-5284-review-fixes-linux-gate-20261110-report.json",
+    "sha256": "8ca3ff5457cd639361790743d01afb87c7b46b74688579f3c525c5dcd14e4a6d",
+    "status": "incomplete"
+  },
+  "receipt": {
+    "record_path": "records/receipt/pr-5284-review-fixes-linux-gate-20261110-receipt.json",
+    "sha256": "66cc27e9060d61fb3e3f54c20e6fae65a9dea64265a51e9d56f30f35b3b22108",
+    "verdict": "incomplete",
+    "metadata_correction_count": 1
+  },
+  "pre_release_checks": {
+    "checked_at": "2026-11-10T17:44:02+00:00",
+    "coordination_v2_head": "fe9fee91cc8eb441bb2899d40f59102b86eab4f8",
+    "target_branch_head": "f947ff28cf3c591d5d9a230d526df6bdea6d693a",
+    "public_pr_head": "415c639e6e5b74d665209024cf29fb68dc32b23f",
+    "public_pr_state": "open",
+    "claim_owner": "phone-agent-2",
+    "evidence_sha256": "c9af2f92e906eefc9e298e71ac8802848f384c64b4a8b8a5759712fa75142c6b",
+    "report_sha256": "8ca3ff5457cd639361790743d01afb87c7b46b74688579f3c525c5dcd14e4a6d",
+    "receipt_sha256": "66cc27e9060d61fb3e3f54c20e6fae65a9dea64265a51e9d56f30f35b3b22108",
+    "release_record_absent_before_publish": true,
+    "worktree_removed": true,
+    "active_gradle_processes": [],
+    "host_locks": [
+      {
+        "path": "/workspace/tools/.gradle-phone-agent-2.lock",
+        "acquirable": true
+      },
+      {
+        "path": "/workspace/tools/.gradle-0609f7968656.lock",
+        "acquirable": true
+      }
+    ],
+    "workspace_free_inodes_percent": 71
+  },
+  "final_executor_stop_state": {
+    "type": "executor-stop-state",
+    "job": "pr-5284-review-fixes-linux-gate-20261110",
+    "stopped_at": "2026-11-10T17:40:10+00:00",
+    "execution_host": "0609f7968656",
+    "active_gradle_processes": [],
+    "source_worktree": {
+      "path": "/workspace/worktrees/pr-5284-review-fixes-linux-gate-20261110",
+      "head_before_removal": "f947ff28cf3c591d5d9a230d526df6bdea6d693a",
+      "clean_before_removal": true,
+      "removed": true
+    },
+    "mandatory_locks": [
+      {
+        "path": "/workspace/tools/.gradle-phone-agent-2.lock",
+        "acquirable": true
+      },
+      {
+        "path": "/workspace/tools/.gradle-0609f7968656.lock",
+        "acquirable": true
+      }
+    ],
+    "workspace_free_inodes_percent": 71,
+    "workspace_disk_df": "/dev/root        72G   22G   50G  31% /",
+    "workspace_inode_df": "/dev/root      1868096 532186 1335910   29% /",
+    "docker_executable": null,
+    "docker_used_or_installed_by_gate": false,
+    "source_branch_or_public_pr_changed": false,
+    "public_comment_or_metadata_changed": false,
+    "stop_reason": "Exact-head compile failure plus tidy changed tracked files; live gate requires stopping after tidy changes."
+  },
+  "coverage_note": "No Windows/Cygwin proof is claimed from Linux. No Docker was installed or used. Source/fork/PR metadata and public comments were not changed."
+}
