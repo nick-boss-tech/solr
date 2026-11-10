@@ -1,0 +1,7 @@
+{
+  "id": "solr-18592-sortable-dv-repro-windows-20261110",
+  "job": "solr-18592-sortable-dv-repro-windows-20261110",
+  "owner": "windows-codex-nick-shanin",
+  "scope": "Prepare and push a separate test-only reproduction branch; publish Linux gate handoff. No Windows Gradle or testing.",
+  "type": "claim"
+}
