@@ -1,0 +1,19 @@
+{
+  "contributor_head": "0848e85fad1290ed604f881abb265b060be3075f",
+  "head": "1d71a1b3811b1e9c7fe9bcac7ade1c8bc695ecb0",
+  "id": "pr-5312-czxid-linux-gate-r2-20261110",
+  "instructions": "Read the failed earlier receipt and wait for this job's matching gate record before claiming. Verify current fork and contributor PR heads; reconcile if either moves. Report every proof leg and accessible fresh evidence in a v2 receipt. No public comment, PR change or unapproved source repair.",
+  "intended_host": "Linux gate host with JDK 21, working Gradle dependencies and Mockito, build lock and adequate disk/inodes",
+  "job": "pr-5312-czxid-linux-gate-r2-20261110",
+  "related_job": "pr-5312-czxid-repair-20261110",
+  "source": "nick-boss-tech/solr:solr-18632-submit",
+  "status": "open for a capable Linux executor; wait for the matching gate record before claiming",
+  "summary": "Superseding exact-head Linux proof for PR 5312 after test compilation and source-pattern repair",
+  "supersedes_gate": "pr-5312-czxid-linux-gate-20261109",
+  "tags": [
+    "gate",
+    "review",
+    "records"
+  ],
+  "type": "assignment"
+}
