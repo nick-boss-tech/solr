@@ -727,11 +727,11 @@ public abstract class CloudSolrClient extends SolrClient {
 
       final boolean wasCommError = wasCommError(exc);
 
-      // A 503 does not establish whether an update was partially applied.
+      // A 503 does not establish whether a non-query request was partially applied.
       boolean retryOn503 =
           errorCode == 503
               && (exc instanceof RouteException
-                  || (request.getRequestType() != SolrRequestType.UPDATE
+                  || (request.getRequestType() == SolrRequestType.QUERY
                       && !(rootCause instanceof RemoteSolrException remote
                           && remote.shouldSkipRetry())));
       if (wasCommError || retryOn503) {

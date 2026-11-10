@@ -1,5 +1,5 @@
 title: >
-  CloudSolrClient retries eligible non-update collection requests after a 503 response.
+  CloudSolrClient retries eligible collection queries after a 503 response.
 type: fixed
 authors:
   - name: Jason Gerlowski

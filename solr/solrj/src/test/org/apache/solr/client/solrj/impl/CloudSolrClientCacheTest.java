@@ -48,6 +48,7 @@ import org.apache.solr.client.solrj.RemoteSolrException;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.jetty.LBJettySolrClient;
+import org.apache.solr.client.solrj.request.GenericSolrRequest;
 import org.apache.solr.client.solrj.request.UpdateRequest;
 import org.apache.solr.client.solrj.request.V2Request;
 import org.apache.solr.common.SolrException;
@@ -241,8 +242,57 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
           (req, cols) -> {
             throw new RemoteSolrException("test", 503, "unavailable", (Throwable) null);
           });
-      assertNotNull(client.request(new DummyRequest(collName), collName));
+      GenericSolrRequest query =
+          new GenericSolrRequest(
+                  SolrRequest.METHOD.GET, "/select", SolrRequest.SolrRequestType.QUERY)
+              .setRequiresCollection(true);
+      assertNotNull(client.request(query, collName));
       assertEquals(2, client.getStateVersionHistory().size());
+    }
+  }
+
+  public void test503DoesNotReplayUnspecifiedRequest() throws Exception {
+    String collName = "gettingstarted";
+    AtomicReference<DocCollection> currentDoc = new AtomicReference<>(loadCollection(collName, 1));
+    Map<String, ClusterState.CollectionRef> refs =
+        Map.of(
+            collName, new TestCollectionRef(currentDoc::get, new AtomicInteger(), null, null, -1));
+    AtomicInteger attempts = new AtomicInteger();
+    try (ClusterStateProvider provider =
+            getStateProvider(Set.of("192.168.1.108:8983_solr"), refs);
+        RecordingCloudSolrClient client = new RecordingCloudSolrClient(provider, 1)) {
+      client.setDefaultInvocation(
+          (req, cols) -> {
+            attempts.incrementAndGet();
+            throw new RemoteSolrException("test", 503, "unavailable", (Throwable) null);
+          });
+      GenericSolrRequest request =
+          new GenericSolrRequest(SolrRequest.METHOD.POST, "/update").setRequiresCollection(true);
+
+      expectThrows(RemoteSolrException.class, () -> client.request(request, collName));
+      assertEquals(1, attempts.get());
+    }
+  }
+
+  public void test503MarkedQueryDoesNotRetry() throws Exception {
+    String collName = "gettingstarted";
+    AtomicReference<DocCollection> currentDoc = new AtomicReference<>(loadCollection(collName, 1));
+    Map<String, ClusterState.CollectionRef> refs =
+        Map.of(
+            collName, new TestCollectionRef(currentDoc::get, new AtomicInteger(), null, null, -1));
+    try (ClusterStateProvider provider =
+            getStateProvider(Set.of("192.168.1.108:8983_solr"), refs);
+        RecordingCloudSolrClient client = new RecordingCloudSolrClient(provider, 1)) {
+      client.enqueue(
+          (req, cols) -> {
+            throw new RemoteSolrException("test", 503, Map.of("msg", "unavailable"), true);
+          });
+      GenericSolrRequest query =
+          new GenericSolrRequest(
+                  SolrRequest.METHOD.GET, "/select", SolrRequest.SolrRequestType.QUERY)
+              .setRequiresCollection(true);
+      expectThrows(RemoteSolrException.class, () -> client.request(query, collName));
+      assertEquals(1, client.getStateVersionHistory().size());
     }
   }
 
