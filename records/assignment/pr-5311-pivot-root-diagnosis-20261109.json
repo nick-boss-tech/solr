@@ -1,0 +1,18 @@
+{
+  "branch": "nick-boss-tech/solr:pr-5311-pivot-duplicate-keys",
+  "capabilities": [
+    "linux",
+    "gradle",
+    "antora-diagnostics"
+  ],
+  "gate": "pr-5311-pivot-root-diagnosis-proof-20261109",
+  "head": "b8f10c9e3ea04746ee5f823e57fd9484426b448d",
+  "id": "pr-5311-pivot-root-diagnosis-20261109",
+  "intended_host": "Linux gate host",
+  "job": "pr-5311-pivot-root-diagnosis-20261109",
+  "prior_receipt": "records/receipt/pr-5311-pivot-linux-gate-20261109-receipt.json",
+  "status": "open, unclaimed; diagnosis and root proof pending",
+  "successor_of": "pr-5311-pivot-linux-gate-20261109",
+  "summary": "Diagnose failed Antora/npx root-check leg and, if corrected, complete the exact-head Linux proof for PR 5311 pivot follow-up.",
+  "type": "assignment"
+}
