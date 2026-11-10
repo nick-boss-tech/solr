@@ -1,0 +1,22 @@
+{
+  "commands": [
+    "./gradlew --no-daemon :solr:solrj:test --tests org.apache.solr.client.solrj.impl.CloudSolrClientCacheTest --tests org.apache.solr.client.solrj.impl.CloudHttp2SolrClientRetryTest --tests org.apache.solr.client.solrj.impl.CloudSolrClientRoutingTest -Ptests.seed=17764C0DE --rerun-tasks",
+    "./gradlew --no-daemon tidy",
+    "./gradlew --no-daemon check -x test"
+  ],
+  "environment": "Isolated clean Linux checkout, JDK 21. Verify fork SHA and PR head; claim this job and check host locks before execution. Record actual environment and commands. Do not run on Windows, post public comments, or push source changes.",
+  "head": "9add678bd94b8c6f1b119535583e8ac8b0deea90",
+  "id": "pr-5315-review-fixes-linux-gate-r2-20261110",
+  "job": "pr-5315-review-fixes-linux-gate-r2-20261110",
+  "requirements": [
+    "Run the named suites and verify all four new CloudSolrClientCacheTest methods execute and pass: test503DoesNotReplayCompletedRoutedUpdates, test503RetryRespectsV2SkipRetry, test503RetriesEligibleRead, and test503RouteExceptionRetainsExistingRetry. Record individual test counts, skips, failures, fresh XML and logs. The replay test mocks the LB client and counts routed submissions; it is not proof of persisted index state or real HTTP behavior.",
+    "In a separate disposable checkout at the exact reviewed PR head dfde089fd9dd0e5e79774593e66dd030e1b7dd22, bring over only the unchanged CloudSolrClientCacheTest.java from 9add678bd94b8c6f1b119535583e8ac8b0deea90. Run test503DoesNotReplayCompletedRoutedUpdates and test503RetryRespectsV2SkipRetry with the same seed and record actual assertion failures on the original PR production code, then run the same methods at the fix head and require passes. Compilation, harness setup, timeouts or skipped tests do not count as fail-before behavior. Preserve logs and fresh XML for both legs.",
+    "Run tidy and require no tracked file changes. If formatting changes files, stop and hand back: commit and a superseding exact-head gate are required. Run root check -x test without silent exclusions. Diagnose executed failures before any retry and distinguish environment failures from code or test failures.",
+    "Review and report the material design limitation: newly broadened 503 retry is disabled for ordinary updates because a 503 alone does not prove that no update was applied. Therefore this follow-up does not fix the original graceful-shutdown indexing case; it preserves the pre-existing RouteException and communication-error retry policies, whose partial-update safety is not established by this gate. A green gate proves only the stated changes, not general exactly-once behavior or end-to-end graceful-shutdown recovery.",
+    "Publish a receipt with exact head, all commands, exit codes, test counts, skips, fresh XML and log locations, baseline results, formatting status, and limitations. Mark incomplete or failed for any missing proof leg or unresolved failure. Release the claim only with executor-stop evidence."
+  ],
+  "reviewed_pr_head": "dfde089fd9dd0e5e79774593e66dd030e1b7dd22",
+  "seed": "17764C0DE",
+  "source": "https://github.com/nick-boss-tech/solr/tree/solr-17764-submit",
+  "type": "gate"
+}
