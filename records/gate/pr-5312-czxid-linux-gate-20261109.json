@@ -1,0 +1,34 @@
+{
+  "acceptance": [
+    "Tidy succeeds and leaves the offered checkout unchanged. Full MultipleManagedSchemasTest executes all three test methods without skips: the deterministic same-ctime collision regression, testRecreatedConfigSetIsNotServedFromCache, and testSameCollectionNameWithMultipleSchemas. Save fresh XML and logs before the next cleanTest.",
+    "The existing TestCollectionAPI.testConfigCaching executes and passes without skip; save fresh XML and logs. Root check -x test succeeds without undocumented exclusions. Capture commands, return codes, method counts, skips, environment, head/tree and clean status.",
+    "The collision test supplies mocked ZooKeeper stats and tests the shared cache decision; it is not a real-time ZooKeeper timestamp-collision integration proof. The contributor's existing test exercises real configset recreation for schema and config."
+  ],
+  "branch": "nick-boss-tech/solr:solr-18632-submit",
+  "contributor_head": "0848e85fad1290ed604f881abb265b060be3075f",
+  "environment": "Clean detached Linux worktrees, JDK 21, working Gradle dependencies and Mockito, build lock and sufficient disk/inodes. Keep logs and XML outside the checkout and retain security defaults.",
+  "fail_before": {
+    "acceptance": "Require one executed test to fail at the assertion expecting the recreated VersionedConfig: the old ctime comparison returns the original object despite different czxid. An unexpected pass, compile error, setup failure, skip, or unrelated assertion is not fail-before proof. Preserve fresh logs and XML.",
+    "command": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.util.MultipleManagedSchemasTest.testCacheDistinguishesRecreatedZnodesWithSameCreationTime -Ptests.seed=18632CAFE",
+    "setup": "In a separate clean detached checkout at contributor head 0848e85fad1290ed604f881abb265b060be3075f, replace only solr/core/src/test/org/apache/solr/util/MultipleManagedSchemasTest.java with the exact file from offered head 9b96f1a23c2b9609c51c46541bf7fe3299921e81. Verify the sole overlay is this test file, compare its blob with the offered head, and retain original production files; never push the overlay."
+  },
+  "head": "9b96f1a23c2b9609c51c46541bf7fe3299921e81",
+  "id": "pr-5312-czxid-linux-gate-20261109",
+  "job": "pr-5312-czxid-linux-gate-20261109",
+  "positive_commands": [
+    "./gradlew tidy",
+    "git diff --check",
+    "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.util.MultipleManagedSchemasTest -Ptests.seed=18632CAFE",
+    "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.cloud.api.collections.TestCollectionAPI.testConfigCaching -Ptests.seed=18632CAFE",
+    "./gradlew check -x test"
+  ],
+  "preflight": [
+    "Verify remote fork head and tree match this record and the direct parent is contributor head 0848e85fad1290ed604f881abb265b060be3075f. Refresh live PR 5312 head and discussion; stop and reconcile if contributor head or fork head moved. Verify no duplicate active gate executor.",
+    "Do not modify the offered source, push a formatting repair, or claim a pass after tidy changes tracked files. Record such changes and request a superseding exact-head gate."
+  ],
+  "receipt": "Publish a v2 receipt for this gate and exact head plus a report with commands, return codes, fresh per-leg XML/logs and accessible evidence locations and hashes. Identify host/setup failures separately; do not silently rerun unexplained test failures or alter the public PR.",
+  "seed": "18632CAFE",
+  "tree": "4c091e162323ad878371a06999b9fb480c50ef74",
+  "type": "gate",
+  "verdict_policy": "Passed only when every named positive and fail-before leg completes with the stated results, clean tidy and root check, at the exact offered head."
+}
