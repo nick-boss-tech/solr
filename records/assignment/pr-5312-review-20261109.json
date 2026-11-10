@@ -1,0 +1,8 @@
+{
+  "host": "Windows",
+  "id": "pr-5312-review-20261109",
+  "job": "pr-5312-review-20261109",
+  "source_head": "0848e85fad1290ed604f881abb265b060be3075f",
+  "summary": "Read-only review of Apache Solr PR 5312 at its live head, with a local review record",
+  "type": "assignment"
+}
