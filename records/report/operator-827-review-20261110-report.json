@@ -1,0 +1,20 @@
+{
+  "actor": "codex-windows-operator-review",
+  "heads": {
+    "pr827": "701be62d578878bf571f732f4b4bb9586b868d53",
+    "pr879": "472aefb02edddac622d3e02b3ff496c3f3fb200f"
+  },
+  "id": "operator-827-review-20261110-report",
+  "job": "operator-827-review-20261110",
+  "local_reviews": [
+    "research/branch-reviews/2026-11-10-solr-operator/PR-827-review.md",
+    "research/branch-reviews/2026-11-10-solr-operator/PR-879-review.md"
+  ],
+  "sources": [
+    "https://github.com/apache/solr-operator/pull/827",
+    "https://github.com/apache/solr-operator/pull/879"
+  ],
+  "summary": "Partial read-only reviews of solr-operator PRs 827 and 879. PR 827 has source-derived concerns: arbitrary custom exporter tags with a numeric major >=10 are rejected as Solr 10, and rejecting a SolrCloud image tag stops all status refresh including readyReplicas. PR 879's namespace/name indexing addresses the known cross-namespace watch; its test needs compatible tags and combined transition coverage with PR 827.",
+  "type": "report",
+  "verification": "Source-only; no local build, Go tests or Kubernetes execution. PR 827 has no reported GitHub checks at captured head; PR 879 reports green lint/unit, smoke and Solr 9.11 e2e checks. No public comments or code changes."
+}
