@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-nick-shanin",
+  "evidence": "Fork ref solr-18592-sortable-dv-repro-20261110 verified at b9aed02ac1cde907a06d04fdbd96568ca38b85a9; report solr-18592-sortable-dv-repro-windows-20261110-report; no Windows build, test or other executor was started.",
+  "id": "solr-18592-sortable-dv-repro-windows-20261110",
+  "job": "solr-18592-sortable-dv-repro-windows-20261110",
+  "reason": "Test-only branch delivered; handing execution to separate Linux reproduction gate and stopping the Windows worker.",
+  "type": "release"
+}
