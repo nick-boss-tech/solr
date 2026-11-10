@@ -1,0 +1,7 @@
+{
+  "details": "On 2026-11-10 Nick directed that Lucene builds and tests be handled on Windows. The Lucene proof legs are being undertaken under lucene-local-proof-windows-20261110; avoid duplicate Lucene execution. This notice does not claim that the Solr integration legs are complete or change the Solr Windows restriction. This job had no claim at board snapshot 1306dd826b0a0e1c17467762aaf609d09f45ca06.",
+  "id": "lucene106-windows-proof-direction-20261110",
+  "job": "lucene106-solr5293-integration-linux-20261110",
+  "summary": "Owner directed Lucene proof to Windows",
+  "type": "report"
+}
