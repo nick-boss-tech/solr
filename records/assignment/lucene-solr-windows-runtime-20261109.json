@@ -1,0 +1,16 @@
+{
+  "context": "Prior audit records/assignment/lucene-block-join-shared-audit-20261109.json was released; prior repair was tested on Lucene main, not integrated with Solr 10.6.",
+  "host": "Windows",
+  "id": "lucene-solr-windows-runtime-20261109",
+  "job": "lucene-solr-windows-runtime-20261109",
+  "scope": "Inspect existing or official binary distributions; prepare a disposable localhost-only runtime with a known compatible Lucene version; verify loaded version and a small indexing/query smoke test. No Windows Gradle, retired queue, public write, or unverified claim of patched Lucene integration.",
+  "source_head": "55c3174bd154b5cc987d9b24e1c77043e23fe71e",
+  "summary": "Prepare an isolated Windows Solr runtime with a verifiable selected Lucene version for Nick's block-join investigation",
+  "tags": [
+    "solr",
+    "lucene",
+    "runtime",
+    "windows"
+  ],
+  "type": "assignment"
+}
