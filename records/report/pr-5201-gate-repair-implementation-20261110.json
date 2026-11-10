@@ -1,0 +1,17 @@
+{
+  "evidence": [
+    "Reviewed the receipt and its SHA-256 verified evidence archive. The screenshot showed a loaded spec and collapsed Collections; the XML shows the explorer test preceded the login test, whose screenshot showed the session still authenticated.",
+    "Used existing @keep catalog convention and sorted the entry.",
+    "git diff --check passed; no Gradle or browser execution on Windows.",
+    "Fork ref read back as the recorded head. The author-reported request hang and actual auth behavior remain unverified."
+  ],
+  "gate_job": "pr-5201-auth-browser-linux-gate-r2-20261110",
+  "head": "0355023c3170c87a84cd9e5688ae6b4f3e4df3ae",
+  "id": "pr-5201-gate-repair-implementation-20261110",
+  "job": "pr-5201-gate-repair-windows-20261110",
+  "prior_head": "2d4f255fefec6e455cfdc35e6281769f9e01fba9",
+  "prior_receipt": "records/receipt/pr-5201-auth-browser-linux-gate-20261110-receipt.json",
+  "source_branch": "pr-5201-auth-browser-fix",
+  "summary": "Followed up the incomplete gate receipt: retained Scalar version for catalog tidy, navigated to the collapsed Collections group before selecting the operation, and cleared session storage after the test. Pushed fork branch; proof pending.",
+  "type": "report"
+}
