@@ -1,0 +1,17 @@
+{
+  "base": "701be62d578878bf571f732f4b4bb9586b868d53",
+  "environment": "Isolated Linux checkout, Go 1.27, Helm, envtest assets and required dependencies; record versions and environment",
+  "head": "2f50da7dc5b11dbfabacd567ca7740ccf70c2dd7",
+  "id": "operator-827-compat-linux-20261110-gate",
+  "job": "operator-827-compat-linux-20261110",
+  "requirements": [
+    "Verify fork branch head, commit parent and clean worktree before testing; do not change or push source.",
+    "Run go test ./controllers -run '^(TestReconcileSkipsSolrCloudWithUnknownSolrVersion|TestUnsupportedVersionRefreshesExistingCloudStatus|TestUnsupportedVersionClearsStatusWithoutStatefulSet|TestReconcileDeletesSolrCloudWithUnknownSolrVersion|TestUnsupportedExporterSolrVersion)$' -count=1 -v; record each executed test, exit status and logs.",
+    "Run make unit-tests and make lint, including format and generated-file checks; record exit status and whether tracked files changed. A formatting change invalidates this head and requires a new commit and gate.",
+    "In a separate clean checkout at base 701be62d578878bf571f732f4b4bb9586b868d53, copy only the two changed controller test files from head; run the same focused go test command and show the new custom numeric image case and two stale-status tests fail for the intended behavioral reasons, not compilation or setup failures.",
+    "Do not claim KinD/Kubernetes end-to-end proof from fake-client or envtest runs. Record whether Docker and kind are available; a separate compatible host and real-cluster verification are required for that proof.",
+    "Publish an exact-head receipt with commands, test counts, outputs and limitations; do not call this gate passed if any required leg is skipped or fails."
+  ],
+  "source": "nick-boss-tech/solr-operator:pr-827-compatibility-followup",
+  "type": "gate"
+}
