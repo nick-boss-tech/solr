@@ -1,0 +1,67 @@
+{
+  "coverage_limits": [
+    "make lint is incomplete because the ArtifactHub check invokes Docker; its docs build also requires Docker and was not reached.",
+    "Docker and kind were unavailable. No KinD or real Kubernetes-cluster end-to-end proof was run.",
+    "The successful make unit-tests run used local envtest assets and is not represented as real-cluster proof."
+  ],
+  "environment": {
+    "docker_available": false,
+    "docker_installed_or_used": false,
+    "envtest_kubernetes_assets": "1.37.0",
+    "go": "1.27.3",
+    "helm": "v3.22.1",
+    "host_os": "Linux",
+    "kind_available": false,
+    "source_or_pr_write_made": false,
+    "source_worktree_clean": true,
+    "source_worktree_head": "2f50da7dc5b11dbfabacd567ca7740ccf70c2dd7"
+  },
+  "evidence_bundle": {
+    "bytes": 69169,
+    "filename": "operator-827-compat-linux-20261110-evidence.tar.gz",
+    "sha256": "4d7ceac015f987ba0b32d5b411e4e2cf64fa86f20ddef640c204ff01a1fa1331"
+  },
+  "evidence_record": "records/evidence/operator-827-compat-linux-20261110-evidence.json",
+  "gate": "operator-827-compat-linux-20261110-gate",
+  "head": "2f50da7dc5b11dbfabacd567ca7740ccf70c2dd7",
+  "id": "operator-827-compat-linux-20261110-receipt",
+  "job": "operator-827-compat-linux-20261110",
+  "results": [
+    {
+      "command": "go test ./controllers -run '^(TestReconcileSkipsSolrCloudWithUnknownSolrVersion|TestUnsupportedVersionRefreshesExistingCloudStatus|TestUnsupportedVersionClearsStatusWithoutStatefulSet|TestReconcileDeletesSolrCloudWithUnknownSolrVersion|TestUnsupportedExporterSolrVersion)$' -count=1 -v",
+      "exit_code": 0,
+      "log": "runs/focused-controller-tests-r2.log",
+      "name": "focused-controller-tests",
+      "result": "Passed at the assigned head: all five named test functions, including both deletion subtests and all 13 exporter table cases."
+    },
+    {
+      "command": "make unit-tests",
+      "exit_code": 0,
+      "log": "runs/make-unit-tests-private-overlay.log",
+      "name": "make-unit-tests",
+      "result": "Passed. controllers: 123.636s, 63.8% statement coverage; api/v1beta1 and controllers/util cached; controllers/util/solr_api had no tests. Used Kubernetes 1.37.0 envtest assets through a temporary overlay; the wrapper added --advertise-address=10.0.0.1. This is envtest, not real-cluster E2E."
+    },
+    {
+      "command": "make lint",
+      "exit_code": 2,
+      "log": "runs/make-lint.log",
+      "name": "make-lint",
+      "result": "All checks before the Docker step completed. helm lint reported 2 charts linted, 0 failed, with a missing zookeeper-operator dependency warning. The ArtifactHub command failed at Makefile line 307: docker: command not found. The subsequent docs check was not reached and also requires Docker."
+    },
+    {
+      "base": "701be62d578878bf571f732f4b4bb9586b868d53",
+      "command": "go test ./controllers -run '^(TestReconcileSkipsSolrCloudWithUnknownSolrVersion|TestUnsupportedVersionRefreshesExistingCloudStatus|TestUnsupportedVersionClearsStatusWithoutStatefulSet|TestReconcileDeletesSolrCloudWithUnknownSolrVersion|TestUnsupportedExporterSolrVersion)$' -count=1 -v",
+      "copied_test_hashes": "base-fail-before-copied-test-hashes.txt",
+      "exit_code": 1,
+      "log": "runs/base-fail-before-focused.log",
+      "name": "base-fail-before-focused",
+      "result": "Compilation and test setup succeeded. Intended behavioral failures: TestUnsupportedVersionRefreshesExistingCloudStatus (no 30-second status refresh), TestUnsupportedVersionClearsStatusWithoutStatefulSet (stale status remained), and TestUnsupportedExporterSolrVersion/custom_numeric_image_version (custom numeric tag 10.0.0 incorrectly blocked). Other selected cases passed.",
+      "test_file_overlay": [
+        "controllers/solrcloud_controller_version_test.go",
+        "controllers/solrprometheusexporter_version_test.go"
+      ]
+    }
+  ],
+  "type": "receipt",
+  "verdict": "incomplete"
+}
