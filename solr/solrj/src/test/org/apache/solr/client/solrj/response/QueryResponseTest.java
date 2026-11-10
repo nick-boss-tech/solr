@@ -47,6 +47,32 @@ import org.junit.Test;
 @Limit(bytes = 20000)
 public class QueryResponseTest extends SolrTestCase {
   @Test
+  public void testPivotFacetsWithRepeatedKeys() {
+    NamedList<Object> firstPivot = new SimpleOrderedMap<>();
+    firstPivot.add("field", "cat");
+    firstPivot.add("value", "electronics");
+    firstPivot.add("count", 3);
+    NamedList<Object> secondPivot = new SimpleOrderedMap<>();
+    secondPivot.add("field", "manu");
+    secondPivot.add("value", "example");
+    secondPivot.add("count", 2);
+
+    NamedList<Object> pivotResponse = new SimpleOrderedMap<>();
+    pivotResponse.add("same", List.of(firstPivot));
+    pivotResponse.add("same", List.of(secondPivot));
+    NamedList<Object> facets = new SimpleOrderedMap<>();
+    facets.add("facet_pivot", pivotResponse);
+    NamedList<Object> response = new NamedList<>();
+    response.add("facet_counts", facets);
+
+    NamedList<List<PivotField>> pivots = new QueryResponse(response).getFacetPivot();
+    assertEquals(2, pivots.getAll("same").size());
+    assertEquals("cat", pivots.getVal(0).get(0).getField());
+    assertEquals("manu", pivots.getVal(1).get(0).getField());
+    assertEquals(pivots, pivots.clone());
+  }
+
+  @Test
   public void testRangeFacets() throws Exception {
     XMLResponseParser parser = new XMLResponseParser();
     NamedList<Object> response = null;
