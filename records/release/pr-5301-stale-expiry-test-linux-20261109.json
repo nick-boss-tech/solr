@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent",
+  "evidence": "records/evidence/pr-5301-stale-expiry-test-linux-20261109-evidence.tar.gz",
+  "id": "pr-5301-stale-expiry-test-linux-20261109",
+  "job": "pr-5301-stale-expiry-test-linux-20261109",
+  "reason": "Gate completed with verdict passed at test head b5477834e588888c542409bebbe2d1b76bbade27: tidy and diff --check clean, root check passed, the focused test failed at exactly the intended assertion on the unchanged contributor head with the full event ordering in the trace, and the guarded-overlay discrimination control passed with the byte-identical test. No source, branch, or PR changes were made by the gate.",
+  "type": "release"
+}

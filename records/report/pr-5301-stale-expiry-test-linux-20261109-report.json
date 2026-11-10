@@ -1,0 +1,8 @@
+{
+  "gate": "pr-5301-stale-expiry-test-linux-20261109",
+  "head": "b5477834e588888c542409bebbe2d1b76bbade27",
+  "id": "pr-5301-stale-expiry-test-linux-20261109-report",
+  "job": "pr-5301-stale-expiry-test-linux-20261109",
+  "summary": "Validation passed. The Windows-prepared test-only branch (one added file over the unchanged PR head) runs the full real-ZooKeeper schedule and fails at exactly the designed assertion on the contributor's current production code, while the byte-identical test passes against the sequence-guarded ConnectionManager overlay, so the test discriminates the two expiry behaviors. Tidy, diff --check and root check are clean, and the design review found the callback holds scoped by manager name and thread, every wait bounded with asserted timeout flags, and cleanup finally-guarded on all paths. The test is ready to offer on PR 5301; it will keep failing there until the production expiry handling changes. No public communication was made.",
+  "type": "report"
+}
