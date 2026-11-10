@@ -1,0 +1,9 @@
+{
+  "host": "Windows source review; no local builds or tests",
+  "id": "operator-827-review-20261110",
+  "job": "operator-827-review-20261110",
+  "scope": "Review current PR heads, existing discussion, compatibility and test evidence; report findings locally. No public writes or source patches.",
+  "source": "https://github.com/apache/solr-operator/pull/827",
+  "summary": "Read-only review of apache/solr-operator PR 827 and related PR 879 for release stabilization",
+  "type": "assignment"
+}
