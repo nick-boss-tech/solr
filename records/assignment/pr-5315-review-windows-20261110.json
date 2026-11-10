@@ -1,0 +1,9 @@
+{
+  "deliverables": "Local review record with correctness, architecture, maintenance, and verification assessment",
+  "head": "dfde089fd9dd0e5e79774593e66dd030e1b7dd22",
+  "host": "Windows source review; no builds or tests",
+  "id": "pr-5315-review-windows-20261110",
+  "job": "pr-5315-review-windows-20261110",
+  "summary": "Review Apache Solr PR 5315 at its live head",
+  "type": "assignment"
+}
