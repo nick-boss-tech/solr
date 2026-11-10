@@ -1,0 +1,100 @@
+{
+  "created_at": "2026-11-10T04:54:15+00:00",
+  "evidence": {
+    "archive_bytes": 18689,
+    "archive_sha256": "91af7ca83b343892178034022ed51af6d3af264d41c8e304ee5e3bf7b0f49ca8",
+    "archive_verified_byte_for_byte": true,
+    "local_results": "results.json",
+    "record": "records/evidence/pr-5312-czxid-linux-gate-20261109-evidence.json"
+  },
+  "id": "pr-5312-czxid-linux-gate-20261109-report",
+  "job": "pr-5312-czxid-linux-gate-20261109",
+  "limitations": [
+    "No named positive test executed and no JUnit XML was generated because test compilation failed.",
+    "The fail-before assertion was not reached; behavioral failure was not reproduced.",
+    "The gate-defined collision test models mocked ZooKeeper stats, not a real-time ZooKeeper timestamp-collision integration proof.",
+    "No Docker-dependent proof was run; Docker was not used.",
+    "No Windows/Cygwin proof was assigned or run; Linux was not substituted.",
+    "No source repair, fork branch change, PR metadata change, or public comment was made by the gate worker."
+  ],
+  "next_step": "The implementation owner must address the test compilation/source-pattern blockers in a separately authorized source assignment; any changed head requires a new exact-head gate.",
+  "proof_legs": [
+    {
+      "command": "./gradlew tidy",
+      "exit_code": 0,
+      "log": "positive/tidy.log",
+      "name": "tidy",
+      "status": "passed",
+      "tracked_changes": false
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "log": "positive/git-diff-check.log",
+      "name": "git_diff_check",
+      "status": "passed"
+    },
+    {
+      "command": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.util.MultipleManagedSchemasTest -Ptests.seed=18632CAFE",
+      "exit_code": 1,
+      "failure": "Unchecked generic array creation for Mockito thenReturn varargs parameter Pair<String,Stat>[] at test line 64; warnings found and -Werror specified.",
+      "failure_task": ":solr:core:compileTestJava",
+      "junit_xml": [],
+      "log": "positive/multiple-managed-schemas.log",
+      "name": "MultipleManagedSchemasTest",
+      "status": "blocked_compile_error",
+      "tests_executed": 0
+    },
+    {
+      "command": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.cloud.api.collections.TestCollectionAPI.testConfigCaching -Ptests.seed=18632CAFE",
+      "exit_code": 1,
+      "failure_task": ":solr:core:compileTestJava",
+      "junit_xml": [],
+      "log": "positive/test-config-caching.log",
+      "name": "TestCollectionAPI.testConfigCaching",
+      "status": "blocked_compile_error",
+      "tests_executed": 0
+    },
+    {
+      "command": "./gradlew check -x test",
+      "exit_code": 1,
+      "failure": "The new Mockito test lacks the required assumeWorkingMockito() call.",
+      "failure_task": ":solr:core:validateSourcePatterns",
+      "log": "positive/root-check.log",
+      "name": "root_check",
+      "status": "failed"
+    },
+    {
+      "command": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.util.MultipleManagedSchemasTest.testCacheDistinguishesRecreatedZnodesWithSameCreationTime -Ptests.seed=18632CAFE",
+      "exit_code": 1,
+      "junit_xml": [],
+      "log": "fail-before/exact-seed.log",
+      "name": "fail_before",
+      "only_overlay_path_changed": true,
+      "overlay_blob_matches_offered_head": true,
+      "overlay_path": "solr/core/src/test/org/apache/solr/util/MultipleManagedSchemasTest.java",
+      "production_files_retained_from_contributor_base": true,
+      "status": "blocked_compile_error_not_reproduced",
+      "tests_executed": 0
+    }
+  ],
+  "source": {
+    "direct_parent": "0848e85fad1290ed604f881abb265b060be3075f",
+    "discussion_snapshot": {
+      "inline_review_comments": 0,
+      "issue_comments": 1,
+      "reviews": 0
+    },
+    "fork_branch": "nick-boss-tech/solr:solr-18632-submit",
+    "fork_ref_still_at_tested_head": true,
+    "pr": "https://github.com/apache/solr/pull/5312",
+    "pr_base": "b771587e9707c49847d728fd1f3ff259a182692c",
+    "pr_head": "0848e85fad1290ed604f881abb265b060be3075f",
+    "pr_state": "open",
+    "source_or_pr_changes_by_gate_worker": false,
+    "tested_head": "9b96f1a23c2b9609c51c46541bf7fe3299921e81",
+    "tree": "4c091e162323ad878371a06999b9fb480c50ef74"
+  },
+  "summary": "Gate failed. Tidy and git diff --check passed with no tracked changes, but both named positive tests and the exact-seed fail-before command stopped in compileTestJava because MultipleManagedSchemasTest.java:64 triggers an unchecked Mockito thenReturn varargs warning promoted to an error by -Werror. No tests executed and no JUnit XML was generated. The required root check failed at validateSourcePatterns because the Mockito test lacks assumeWorkingMockito().",
+  "type": "report"
+}
