@@ -1,0 +1,15 @@
+{
+  "base": "701be62d578878bf571f732f4b4bb9586b868d53",
+  "evidence_record": "records/evidence/operator-827-compat-linux-20261110-evidence.json",
+  "gate": "operator-827-compat-linux-20261110-gate",
+  "head": "2f50da7dc5b11dbfabacd567ca7740ccf70c2dd7",
+  "id": "operator-827-compat-linux-20261110-report",
+  "job": "operator-827-compat-linux-20261110",
+  "local_report": "report.md",
+  "receipt_record": "records/receipt/operator-827-compat-linux-20261110-receipt.json",
+  "result": "Linux exact-head verification is incomplete. The five focused controller tests and make unit-tests passed; the base fail-before run reproduced the intended stale-status and custom numeric exporter-image failures. make lint stopped at the Docker-only ArtifactHub check because Docker is unavailable; kind is also unavailable, so no real-cluster E2E proof was run.",
+  "source": "nick-boss-tech/solr-operator:pr-827-compatibility-followup",
+  "source_or_pr_write_made": false,
+  "source_worktree_clean": true,
+  "type": "report"
+}
