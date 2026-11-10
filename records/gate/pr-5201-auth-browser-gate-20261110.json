@@ -1,0 +1,26 @@
+{
+  "commands": [
+    "./gradlew :solr:webapp:test -Ptests.selenium=true --tests org.apache.solr.webapp.AdminUiSecurityAuthTest.testApiExplorerUsesAdminCredentials",
+    "./gradlew :solr:webapp:test -Ptests.selenium=true --tests org.apache.solr.webapp.AdminUiSecurityAuthTest --tests org.apache.solr.webapp.AdminUiSmokeTest",
+    "./gradlew tidy",
+    "./gradlew check -x test"
+  ],
+  "contributor_parent": "3f9faa9e9861ce28f3ede3f4305bd91b6e297463",
+  "environment": "Linux; isolated clean source checkout, pinned JDK and Node versions; headless Chrome/Chromium and Selenium driver. Record OS, tools, seeds and relevant environment.",
+  "head": "2d4f255fefec6e455cfdc35e6281769f9e01fba9",
+  "id": "pr-5201-auth-browser-gate-20261110",
+  "job": "pr-5201-auth-browser-linux-gate-20261110",
+  "proof_status": "not run; all legs required unless explicitly reported incomplete",
+  "receipt_path": "records/receipt/pr-5201-auth-browser-linux-gate-20261110-receipt.json",
+  "requirements": [
+    "Verify fork head is exactly the recorded SHA and PR head/discussion have not introduced conflicting changes; reconcile before running if moved.",
+    "Run ./gradlew :solr:webapp:test -Ptests.selenium=true --tests org.apache.solr.webapp.AdminUiSecurityAuthTest.testApiExplorerUsesAdminCredentials and the full AdminUiSecurityAuthTest; run neighboring AdminUiSmokeTest with Selenium enabled. Record commands, counts, seeds, logs and actual outcomes.",
+    "Verify the actual packaged WAR/distribution with production Jetty Content-Security-Policy in a browser: log in using Basic Auth, open the iframe, render the generated spec, send a harmless GET /api/collections without a browser login popup, verify a 200 response and navigate back. The existing in-JVM suite serves source resources with test servlets and does not establish packaged CSP behavior.",
+    "Verify the credential is read afresh after login/logout or a credential change, and is never attached to a controlled cross-origin request. Do not save or disclose credential values. If JWT is not exercised, explicitly state that limitation.",
+    "Negative proof: transplant the unchanged new test onto an isolated worktree at the contributor parent, preserving test infrastructure, and run it against the original production initializer. Record actual failing behavior, assertion, logs and test count. A setup failure, compilation error, timeout before the target, skip or author report is not fail-before behavioral proof.",
+    "Run ./gradlew tidy and ./gradlew check -x test; record return codes and whether tidy left a clean tree. Any formatting or source change requires a new pushed head and a superseding gate.",
+    "Distinguish production defects, selector/test harness failures, environmental failures, and unverified behavior. If the author-reported request hang prevents the test, diagnose and record evidence; do not silently change the patch, rerun without recording, or claim success."
+  ],
+  "source_branch": "pr-5201-auth-browser-fix",
+  "type": "gate"
+}
