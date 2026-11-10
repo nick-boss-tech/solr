@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent",
+  "evidence": "records/evidence/pr-5311-pivot-root-diagnosis-proof-20261109-evidence.tar.gz",
+  "id": "pr-5311-pivot-root-diagnosis-proof-20261109",
+  "job": "pr-5311-pivot-root-diagnosis-20261109",
+  "reason": "Successor gate completed with verdict passed at head b8f10c9e3ea04746ee5f823e57fd9484426b448d: the Antora failure was diagnosed (not reproducible in a clean normal clone) and the complete unexcluded root check passed twice, the second time with the Antora task executing inside the check; tree clean, head unchanged. No source, branch, or PR changes were made by the gate.",
+  "type": "release"
+}

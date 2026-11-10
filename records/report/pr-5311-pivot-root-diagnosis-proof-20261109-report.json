@@ -1,0 +1,8 @@
+{
+  "gate": "pr-5311-pivot-root-diagnosis-proof-20261109",
+  "head": "b8f10c9e3ea04746ee5f823e57fd9484426b448d",
+  "id": "pr-5311-pivot-root-diagnosis-proof-20261109-report",
+  "job": "pr-5311-pivot-root-diagnosis-20261109",
+  "summary": "Successor gate passed. Diagnosis: the prior root-check failure (bundled npx exit 1 at :solr:solr-ref-guide:buildLocalAntoraSite, no deeper cause captured) does not reproduce at the exact head in a clean normal clone; the Antora task passes standalone with --info in the plain host environment, with no network, certificate, or dependency-install failure. The documented project failure mode with this exact symptom is the git-worktree layout Antora rejects, and the prior executor's other legs are recorded in a worktree, though its driver log alone cannot prove its layout. Proof: the complete unexcluded root check passed twice at b8f10c9e3ea0, the second time with buildLocalAntoraSite executing inside the check after its outputs were removed; tree clean and head unchanged throughout. Together with the prior receipt's tidy, focused-test, and fail-before legs, the exact-head proof for PR 5311's pivot follow-up is complete. No public communication was made.",
+  "type": "report"
+}
