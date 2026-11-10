@@ -182,6 +182,54 @@ public class EnvUtilsTest extends SolrTestCase {
   }
 
   @Test
+  public void legacyWaitForZkSystemPropertyWinsOverCurrentEnvironment() {
+    clearStartupWaitProperties();
+    System.setProperty("solr.wait.for.zk", "1");
+    EnvUtils.init(false, Map.of("SOLR_CLOUD_WAIT_FOR_ZK_SECONDS", "5"), System.getProperties());
+    assertEquals("1", EnvUtils.getProperty("solr.cloud.wait.for.zk.seconds"));
+  }
+
+  @Test
+  public void legacyWaitForZkSystemPropertyWinsOverLegacyEnvironment() {
+    clearStartupWaitProperties();
+    System.setProperty("waitForZk", "5");
+    EnvUtils.init(false, Map.of("SOLR_WAIT_FOR_ZK", "1"), System.getProperties());
+    assertEquals("5", EnvUtils.getProperty("solr.cloud.wait.for.zk.seconds"));
+  }
+
+  @Test
+  public void currentWaitForZkSystemPropertyWinsOverLegacyEnvironment() {
+    clearStartupWaitProperties();
+    System.setProperty("solr.cloud.wait.for.zk.seconds", "5");
+    EnvUtils.init(false, Map.of("SOLR_WAIT_FOR_ZK", "1"), System.getProperties());
+    assertEquals("5", EnvUtils.getProperty("solr.cloud.wait.for.zk.seconds"));
+  }
+
+  @Test
+  public void currentWaitForZkEnvironmentWinsOverLegacyEnvironment() {
+    clearStartupWaitProperties();
+    EnvUtils.init(
+        false,
+        Map.of("SOLR_CLOUD_WAIT_FOR_ZK_SECONDS", "5", "SOLR_WAIT_FOR_ZK", "1"),
+        System.getProperties());
+    assertEquals("5", EnvUtils.getProperty("solr.cloud.wait.for.zk.seconds"));
+  }
+
+  @Test
+  public void waitForZkEnvironmentCanOverwriteLegacySystemPropertyWhenRequested() {
+    clearStartupWaitProperties();
+    System.setProperty("solr.wait.for.zk", "1");
+    EnvUtils.init(true, Map.of("SOLR_CLOUD_WAIT_FOR_ZK_SECONDS", "5"), System.getProperties());
+    assertEquals("5", EnvUtils.getProperty("solr.cloud.wait.for.zk.seconds"));
+  }
+
+  private static void clearStartupWaitProperties() {
+    System.clearProperty("solr.cloud.wait.for.zk.seconds");
+    System.clearProperty("solr.wait.for.zk");
+    System.clearProperty("waitForZk");
+  }
+
+  @Test
   public void testFlippingDisabledToEnabledPropertyName() {
 
     var env = Map.of("SOLR_ADMIN_UI_DISABLED", "true");

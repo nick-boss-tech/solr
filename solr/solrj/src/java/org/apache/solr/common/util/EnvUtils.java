@@ -214,6 +214,18 @@ public class EnvUtils {
    */
   static synchronized void init(
       boolean overwrite, Map<String, String> env, Properties sysProperties) {
+    Set<String> suppliedSystemProperties =
+        overwrite ? Set.of() : sysProperties.stringPropertyNames();
+    Set<String> suppliedAliasTargets = new HashSet<>();
+    for (String name : suppliedSystemProperties) {
+      String dotName = camelCaseToDotSeparated(name);
+      String target =
+          DEPRECATED_MAPPINGS.getOrDefault(dotName, DEPRECATED_MAPPINGS.get("!" + dotName));
+      if (MULTI_ALIAS_TARGETS.contains(target)) {
+        suppliedAliasTargets.add(target);
+      }
+    }
+
     // Convert eligible environment variables to system properties
     for (String key : env.keySet()) {
       if (key.startsWith("SOLR_") || CUSTOM_MAPPINGS.containsKey(key)) {
@@ -233,10 +245,13 @@ public class EnvUtils {
           || DEPRECATED_MAPPINGS.containsKey("!" + dotKey)) {
         String target =
             DEPRECATED_MAPPINGS.getOrDefault(dotKey, DEPRECATED_MAPPINGS.get("!" + dotKey));
-        // For multiple aliases, the current name wins; otherwise the first name in sorted order
-        // wins.
+        // Unless overwriting is requested, system properties take precedence over environment
+        // values. Within the same source, prefer the current name, then sorted aliases.
         if (MULTI_ALIAS_TARGETS.contains(target)
-            && (propertyNames.contains(target) || !resolvedTargets.add(target))) {
+            && (suppliedSystemProperties.contains(target)
+                || (!suppliedSystemProperties.contains(deprecatedKey)
+                    && (propertyNames.contains(target) || suppliedAliasTargets.contains(target)))
+                || !resolvedTargets.add(target))) {
           continue;
         }
         applyDeprecatedPropertyMapping(deprecatedKey, dotKey, sysProperties);
