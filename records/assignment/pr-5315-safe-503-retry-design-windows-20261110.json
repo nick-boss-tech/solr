@@ -1,0 +1,10 @@
+{
+  "existing_gate": "pr-5315-review-fixes-linux-gate-r2-20261110",
+  "host": "Windows source investigation and implementation; Linux gate required",
+  "id": "pr-5315-safe-503-retry-design-windows-20261110",
+  "job": "pr-5315-safe-503-retry-design-windows-20261110",
+  "scope": "Trace shutdown response provenance and partial update boundaries; reconcile related SOLR-18341 retry policy; use separate gate for any new head",
+  "source_head": "9add678bd94b8c6f1b119535583e8ac8b0deea90",
+  "summary": "Investigate and, if supported, implement a safer way to recover from shutdown 503 responses without newly replaying unsafe updates",
+  "type": "assignment"
+}
