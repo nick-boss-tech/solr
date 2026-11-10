@@ -1,0 +1,9 @@
+{
+  "assigned_head": "9b96f1a23c2b9609c51c46541bf7fe3299921e81",
+  "board_tip_before_claim": "9e0a2d5d81a407af67cfe9cf8591112edbc5b0aa",
+  "claimed_at": "2026-11-09T21:42:40-07:00",
+  "id": "pr-5312-czxid-linux-gate-20261109",
+  "job": "pr-5312-czxid-linux-gate-20261109",
+  "owner": "phone-agent-2",
+  "type": "claim"
+}
