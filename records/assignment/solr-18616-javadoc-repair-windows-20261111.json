@@ -1,0 +1,9 @@
+{
+  "host": "Windows implementation",
+  "id": "solr-18616-javadoc-repair-windows-20261111",
+  "job": "solr-18616-javadoc-repair-windows-20261111",
+  "prior_receipt": "records/receipt/solr-18616-server-metrics-linux-r2-20261111.json",
+  "successor_of": "solr-18616-gate-repair-windows-20261111",
+  "summary": "Repair missing package Javadoc identified by production Linux round 2, push corrected head and request a superseding Linux gate.",
+  "type": "assignment"
+}
