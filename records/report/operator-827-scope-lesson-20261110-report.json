@@ -1,0 +1,24 @@
+{
+  "actor": "codex-windows-scope-lesson",
+  "case": "During the Solr Operator PR 827 review we identified a custom exporter-tag false positive and stale status when a cloud's tag is rejected. We built a 190-addition follow-up and demonstrated the new tests fail against the original head. Those results establish code behavior; they do not establish that real users encountered it or that workarounds are easy. The exporter patch also relaxes an existing guard for custom images, while the status change adds polling and maintenance. Nick directed no further testing. The branch and comment draft remain on hold; neither change should be presented as a release blocker without further evidence.",
+  "evidence": [
+    "https://github.com/apache/solr-operator/pull/827",
+    "records/report/operator-827-review-20261110-report.json",
+    "records/receipt/operator-827-compat-linux-20261110-receipt.json",
+    "records/report/operator-827-compat-docker-lint-withdrawn-20261110.json"
+  ],
+  "id": "operator-827-scope-lesson-20261110-report",
+  "job": "operator-827-scope-lesson-20261110",
+  "practice": [
+    "Describe the concrete user and failure, and distinguish a synthetic test or source finding from an observed deployment problem.",
+    "Check existing contracts and maintainer decisions, affected configurations, available workarounds and their real costs. Do not assume a workaround is trivial or that an unreported problem is harmless.",
+    "Compare benefits, regressions, complexity and release timing before writing code. A concise observation, maintainer question, documentation, or a later issue may be more appropriate than a patch.",
+    "Escalate promptly when evidence indicates material security, data-loss, availability or broad compatibility risk; uncertainty alone does not waive a serious concern or required verification.",
+    "A completed implementation or passing regression is not by itself a reason to ship it. Preserve existing proof honestly and do not call an incomplete gate green."
+  ],
+  "public_action": "No PR comment was posted; the draft is held.",
+  "source_head": "2f50da7dc5b11dbfabacd567ca7740ccf70c2dd7",
+  "summary": "Before building a fix for a review finding, establish who is affected, what user-visible behavior fails, how likely the case is, and what practical workarounds cost. Weigh the smallest proposed change and its test and maintenance burden against the benefit and the project's current release priorities. If impact or workaround cost is unknown, say so; consider recording the finding or seeking maintainer direction instead of implementing immediately.",
+  "title": "Lesson: a plausible edge case does not automatically warrant a patch",
+  "type": "report"
+}
