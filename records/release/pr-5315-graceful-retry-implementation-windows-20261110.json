@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr5315",
+  "evidence": "records/report/pr-5315-graceful-retry-implementation-report-20261110.json; verified fork solr-17764-submit head e3ac884531f7a11e0e5715be2cbe7e2dbc86033b. No Windows build executor was started.",
+  "id": "pr-5315-graceful-retry-implementation-windows-20261110",
+  "job": "pr-5315-graceful-retry-implementation-windows-20261110",
+  "reason": "Source implementation was pushed and handed to the separate Linux gate; no more source mutations or builds are running under this claim.",
+  "type": "release"
+}
