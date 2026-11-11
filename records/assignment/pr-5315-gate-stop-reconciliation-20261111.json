@@ -1,0 +1,19 @@
+{
+  "canonical_release": "records/release/pr-5315-graceful-retry-linux-gate-20261110.json",
+  "deliverables": "Claim this reconciliation job and publish a schema-valid report with the actual state, verification evidence, canonical-release outcome and any remaining block; release the reconciliation job with verified stop evidence. The next Linux proof/diagnosis must use a new job only after the prior gate's stop and release are reconciled.",
+  "host": "Original phone-agent gate executor or Linux board coordinator; read-only process and ownership reconciliation",
+  "id": "pr-5315-gate-stop-reconciliation-20261111",
+  "job": "pr-5315-gate-stop-reconciliation-20261111",
+  "noncanonical_release": "records/release/phone-agent-pr-5315-graceful-retry-linux-gate-20261110-release-20261110.json",
+  "prior_claim": "records/claim/pr-5315-graceful-retry-linux-gate-20261110.json",
+  "prior_gate": "records/gate/pr-5315-graceful-retry-linux-gate-20261110.json",
+  "prior_receipt": "records/receipt/pr-5315-graceful-retry-linux-gate-20261110-receipt.json",
+  "scope": "The failed gate's receipt and evidence exist, but its release has an id and path that differ from its job and therefore is not the v2 canonical release. That record asserts no Gradle daemon remains but has no independently captured process listing proving the worker and related executors stopped. Reconcile with the original executor: inspect actual worker and executor state and relevant host locks, record the checks and their time, and ensure no conflicting prior work can continue. Only if verified may the original executor or authorized coordinator publish a schema-valid canonical release for the old gate, including actual actor, reason and evidence. Do not invent evidence or treat the old noncanonical release alone as proof. If stop cannot be verified, report the gap and do not authorize a conflicting successor. This reconciliation does not run a Gradle task or mutate source.",
+  "source": {
+    "branch": "solr-17764-submit",
+    "head": "2ea7f584f0ca91a9de470ebe72b4063e8685de02",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Reconcile PR 5315 gate executor stop and canonical release",
+  "type": "assignment"
+}
