@@ -55,7 +55,12 @@ public class JettyMetricsBridgePrototypeTest extends SolrTestCaseJ4 {
       }
       var valid =
           (HttpURLConnection)
-              jetty.getBaseUrl().toURI().resolve("/solr/admin/info/system").toURL().openConnection();
+              jetty
+                  .getBaseUrl()
+                  .toURI()
+                  .resolve("/solr/admin/info/system")
+                  .toURL()
+                  .openConnection();
       try {
         assertEquals(200, valid.getResponseCode());
       } finally {
@@ -75,22 +80,34 @@ public class JettyMetricsBridgePrototypeTest extends SolrTestCaseJ4 {
                 for (var snapshot : reader.collect()) {
                   if (snapshot.getMetadata().getPrometheusName().equals("solr_jetty_requests")) {
                     put =
-                        ((CounterSnapshot) snapshot).getDataPoints().stream()
-                            .anyMatch(
-                                p -> "PUT".equals(p.getLabels().get("method")) && p.getValue() >= 1);
+                        ((CounterSnapshot) snapshot)
+                            .getDataPoints().stream()
+                                .anyMatch(
+                                    p ->
+                                        "PUT".equals(p.getLabels().get("method"))
+                                            && p.getValue() >= 1);
                     get =
-                        ((CounterSnapshot) snapshot).getDataPoints().stream()
-                            .anyMatch(
-                                p -> "GET".equals(p.getLabels().get("method")) && p.getValue() >= 1);
+                        ((CounterSnapshot) snapshot)
+                            .getDataPoints().stream()
+                                .anyMatch(
+                                    p ->
+                                        "GET".equals(p.getLabels().get("method"))
+                                            && p.getValue() >= 1);
                   } else if (snapshot
                       .getMetadata()
                       .getPrometheusName()
                       .equals("solr_jetty_responses")) {
                     response =
-                        ((CounterSnapshot) snapshot).getDataPoints().stream()
-                            .anyMatch(
-                                p -> "4xx".equals(p.getLabels().get("status")) && p.getValue() >= 1);
-                  } else if (snapshot.getMetadata().getPrometheusName().equals("solr_jetty_threads")) {
+                        ((CounterSnapshot) snapshot)
+                            .getDataPoints().stream()
+                                .anyMatch(
+                                    p ->
+                                        "4xx".equals(p.getLabels().get("status"))
+                                            && p.getValue() >= 1);
+                  } else if (snapshot
+                      .getMetadata()
+                      .getPrometheusName()
+                      .equals("solr_jetty_threads")) {
                     pool = true;
                   }
                 }
