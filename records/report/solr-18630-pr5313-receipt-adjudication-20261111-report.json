@@ -1,0 +1,291 @@
+{
+  "adjudication": {
+    "interpretation": "The expected value 5 applies to the repaired head a4ce0580ad89ad521a5402e383d96c239cea94fd only. The previous head 4be1ad602621d2af96565355dce3804ee4744aae is expected to retain its observed pre-repair value 1; that result is a legitimate negative control for this repair.",
+    "observed_values": {
+      "previous_harness_aggregate_exit_code": 1,
+      "previous_harness_exit_reason": "The harness applied the repaired-head expectation 5 to the previous-head result 1; no JVM setup, compilation, timeout, or process error occurred.",
+      "previous_head": {
+        "class_origin_verified": true,
+        "head": "4be1ad602621d2af96565355dce3804ee4744aae",
+        "input": "-DwaitForZk=5 and SOLR_WAIT_FOR_ZK=1",
+        "process_exit_code": 0,
+        "raw_log": "evidence/probes/mixed-previous/05-system_alias_over_legacy_environment.log",
+        "result": "1"
+      },
+      "repaired_head": {
+        "class_origin_verified": true,
+        "head": "a4ce0580ad89ad521a5402e383d96c239cea94fd",
+        "input": "-DwaitForZk=5 and SOLR_WAIT_FOR_ZK=1",
+        "process_exit_code": 0,
+        "raw_log": "evidence/probes/mixed-current/05-system_alias_over_legacy_environment.log",
+        "result": "5"
+      }
+    },
+    "question": "Does the unqualified expected value 5 for -DwaitForZk=5 plus SOLR_WAIT_FOR_ZK=1 apply to the previous and repaired heads, or only the repaired head?",
+    "rationale": [
+      "The gate's central purpose is to restore explicitly supplied system-property precedence over environment values. The repaired commit is titled 'SOLR-18630: preserve system property precedence'; its production comment states that system properties take precedence over environment values, and it adds the directly corresponding test legacyWaitForZkSystemPropertyWinsOverLegacyEnvironment with expected value 5.",
+      "The gate explicitly scopes the earlier mixed-source discriminator as previous=5 and new=1, demonstrating that the two-head comparison is meant to distinguish pre-repair from repaired behavior rather than impose one invariant value across both revisions. The additional case is written as an unqualified => 5 and follows the repaired-head acceptance criteria; it is best read as the repaired behavior expectation, not a requirement that the old head already implement the fix.",
+      "The previous-head run used its own classpath and loaded EnvUtils from the previous checkout; its raw case log shows -DwaitForZk=5, SOLR_WAIT_FOR_ZK=1, RESULT=1 and process exit 0. The repaired-head log shows the same inputs, RESULT=5 and process exit 0 from the repaired checkout. These are observed values, not predictions.",
+      "The prior comparison harness applied 5 to the disputed previous-head case and therefore returned aggregate exit 1. Its only mismatch was this value; all six individual JVM invocations exited 0. With the expected old behavior correctly interpreted as 1, this is not a behavioral failure of the repair gate and no rerun is needed."
+    ]
+  },
+  "adjudication_scope": {
+    "evidence_sufficient_for_verdict": true,
+    "new_tests_or_builds_run": false,
+    "prior_immutable_records_changed": false,
+    "public_pr_or_jira_posted": false,
+    "source_branch_changed": false
+  },
+  "conclusion": "The existing evidence is sufficient. The prior job's incomplete verdict is left intact as a historical record; this successor resolves its one ambiguity and passes the adjudicated repair gate at head a4ce0580ad89ad521a5402e383d96c239cea94fd.",
+  "coverage_limits": [
+    "The root check explicitly excluded test tasks; the listed seeded suites were run separately.",
+    "The pre-existing @Ignore in TestSolrXml is one skip, not a pass.",
+    "Docker was not installed or used; Docker-dependent tests were unrun. Static solr:docker checks ran as part of the root check.",
+    "No native Windows or Cygwin proof was attempted on Linux."
+  ],
+  "created_at": "2026-11-11T11:34:50-07:00",
+  "evidence": {
+    "archive": "solr-18630-pr5313-precedence-repair-linux-gate-20261110-evidence.tar.gz",
+    "archive_bytes": 780625,
+    "archive_sha256": "cb0150e7a7423d091b4bc1cabcd871b0dd474d10e693acc0b3eea7de8db4b672",
+    "key_artifacts": [
+      {
+        "path": "evidence/probes/mixed-previous/summary.json",
+        "sha256": "e96e3c9bb3f9a7374090d60405d9bcd1fc8efb0d3f3481672f6dff4788621c2c"
+      },
+      {
+        "path": "evidence/probes/mixed-current/summary.json",
+        "sha256": "e1ecd96f7600064d890bb48ba0c7ec2948e3389d8f9743c267752ecac9d8819d"
+      },
+      {
+        "path": "evidence/probes/startup-current/summary.json",
+        "sha256": "6270ebf5efea1b10741f27defd541d3595159029bd079818e13310171339dfe2"
+      },
+      {
+        "path": "evidence/junit/TEST-org.apache.solr.common.util.EnvUtilsTest.xml",
+        "sha256": "ee026532daa9512a0e0f4ac5b82af9ab9d6d010e9c8eb54cad91bd5e58070a2f"
+      },
+      {
+        "path": "evidence/junit/TEST-EnvUtilsTest-previous-head-fail-before.xml",
+        "sha256": "cfece4398678e52ffe3d4315f57e7808579ad69a97ce7522f423da6bfb88baea"
+      },
+      {
+        "path": "evidence/probes/contributor-overflow/TEST-org.apache.solr.core.TestSolrXml.xml",
+        "sha256": "b6a87f1fedca3ecc1b131a9a7627d384e5e5320bcb06b38f3e784baaa0424ad0"
+      },
+      {
+        "path": "evidence/release-stop-state.json",
+        "sha256": "3fb01a26de3880a08730a7f562a592dbf6745c350172a0f9eacbeb3e56b0a1bb"
+      }
+    ],
+    "prior_evidence_pointer": "records/evidence/solr-18630-pr5313-precedence-repair-linux-gate-20261110-evidence.json"
+  },
+  "gate": "solr-18630-pr5313-receipt-adjudication-20261111",
+  "head": "a4ce0580ad89ad521a5402e383d96c239cea94fd",
+  "id": "solr-18630-pr5313-receipt-adjudication-20261111-report",
+  "job": "solr-18630-pr5313-receipt-adjudication-20261111",
+  "prior_records": {
+    "assignment": "records/assignment/solr-18630-pr5313-precedence-repair-linux-gate-20261110.json",
+    "claim": "records/claim/solr-18630-pr5313-precedence-repair-linux-gate-20261110.json",
+    "gate": "records/gate/solr-18630-pr5313-precedence-repair-linux-gate-20261110.json",
+    "receipt": "records/receipt/solr-18630-pr5313-precedence-repair-linux-gate-20261110-receipt.json",
+    "release": "records/release/solr-18630-pr5313-precedence-repair-linux-gate-20261110.json",
+    "report": "records/report/solr-18630-pr5313-precedence-repair-linux-gate-20261110-report.json"
+  },
+  "proof_leg_assessment": [
+    {
+      "name": "Focused seeded suites at the exact repaired head",
+      "results": [
+        {
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "suite": "org.apache.solr.common.util.EnvUtilsTest",
+          "tests": 20
+        },
+        {
+          "errors": 0,
+          "failures": 0,
+          "ignored_case_is_not_a_pass": true,
+          "skipped": 1,
+          "startup_regression_test_executed": true,
+          "suite": "org.apache.solr.core.TestSolrXml",
+          "tests": 38
+        },
+        {
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "suite": "org.apache.solr.cloud.ZkFailoverTest",
+          "tests": 1
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "exit_code": 0,
+      "name": "Tidy",
+      "status": "passed",
+      "tracked_changes": []
+    },
+    {
+      "docker_dependent_tests": "unrun; Docker was not installed or used",
+      "exit_code": 0,
+      "name": "Root check excluding tests",
+      "status": "passed",
+      "tests_excluded_by_command": true
+    },
+    {
+      "classifier_note": "The archived generic expected_assertion_failures_only:false is an early classifier field retained for hash/provenance. The corrected expected_value_assertion_failures_only:true field, corrected classifier note, and raw JUnit XML show that both failures are exact org.junit.ComparisonFailure expected/actual value assertions, with zero setup, compilation, or execution errors.",
+      "errors": 0,
+      "failures": 2,
+      "head": "4be1ad602621d2af96565355dce3804ee4744aae",
+      "name": "Previous-head fail-before value assertions",
+      "overlay_only": "solr/solrj/src/test/org/apache/solr/common/util/EnvUtilsTest.java",
+      "raw_junit_sha256": "cfece4398678e52ffe3d4315f57e7808579ad69a97ce7522f423da6bfb88baea",
+      "skipped": 0,
+      "status": "passed-as-expected-negative-control",
+      "tests": 2
+    },
+    {
+      "all_individual_jvm_exit_codes": 0,
+      "all_revision_class_origins_verified": true,
+      "case_values_previous_then_repaired": [
+        {
+          "case": "mixed legacy system property vs current environment",
+          "expected_previous": "5",
+          "expected_repaired": "1",
+          "values": [
+            "5",
+            "1"
+          ]
+        },
+        {
+          "case": "legacy system property only",
+          "expected_both": "1",
+          "values": [
+            "1",
+            "1"
+          ]
+        },
+        {
+          "case": "current environment only",
+          "expected_both": "5",
+          "values": [
+            "5",
+            "5"
+          ]
+        },
+        {
+          "case": "both Java system properties",
+          "expected_both": "5",
+          "values": [
+            "5",
+            "5"
+          ]
+        },
+        {
+          "case": "legacy system alias vs legacy environment",
+          "expected_previous": "1",
+          "expected_repaired": "5",
+          "interpretation": "The unqualified gate =>5 applies to the repaired head; previous=1 is the expected negative control.",
+          "values": [
+            "1",
+            "5"
+          ]
+        },
+        {
+          "case": "current environment vs legacy environment",
+          "expected_both": "5",
+          "values": [
+            "5",
+            "5"
+          ]
+        }
+      ],
+      "current_aggregate_exit_code": 0,
+      "name": "Six-case mixed-precedence comparison",
+      "previous_aggregate_exit_code_before_adjudication": 1,
+      "previous_head": "4be1ad602621d2af96565355dce3804ee4744aae",
+      "repaired_head": "a4ce0580ad89ad521a5402e383d96c239cea94fd",
+      "status": "passed-after-adjudication"
+    },
+    {
+      "boundary_cases": [
+        {
+          "case": "legacy waitForZk system property",
+          "expected_wait_ms": 1000,
+          "observed_elapsed_ms": 2142,
+          "passed": true
+        },
+        {
+          "case": "SOLR_WAIT_FOR_ZK environment",
+          "expected_wait_ms": 1000,
+          "observed_elapsed_ms": 2233,
+          "passed": true
+        },
+        {
+          "case": "modern-property control",
+          "expected_wait_ms": 5000,
+          "observed_elapsed_ms": 6106,
+          "passed": true
+        },
+        {
+          "case": "legacy alias control",
+          "expected_wait_ms": 1000,
+          "observed_elapsed_ms": 2139,
+          "passed": true
+        }
+      ],
+      "class_initialization_order_verified": true,
+      "envutils_was_not_initialized_before_probe_marker": true,
+      "head": "a4ce0580ad89ad521a5402e383d96c239cea94fd",
+      "name": "Startup boundary and ZooKeeper wire probes",
+      "status": "passed",
+      "timeout_evidence": "The requested session timeout was decoded from the captured ZooKeeper ConnectRequest (including 30001 ms fallback and 2000 ms override); it was not inferred from elapsed time alone.",
+      "wire_cases": [
+        {
+          "case": "30001 ms client fallback",
+          "connect_request_session_timeout_ms": 30001,
+          "observed_connection_wait_ms": 31056,
+          "passed": true
+        },
+        {
+          "case": "2 second override",
+          "connect_request_session_timeout_ms": 2000,
+          "observed_connection_wait_ms": 3235,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "errors": 0,
+      "failures": 1,
+      "head": "358f13d9fdfaed260143a51100cd5657a582d562",
+      "integer_overflow_and_Math.toIntExact_observed": true,
+      "name": "Contributor-head startup overflow negative control",
+      "raw_junit_sha256": "b6a87f1fedca3ecc1b131a9a7627d384e5e5320bcb06b38f3e784baaa0424ad0",
+      "skipped": 0,
+      "status": "passed-as-expected-negative-control",
+      "testcase": "org.apache.solr.core.TestSolrXml.testStartupWithDefaultZkWait",
+      "tests": 1
+    },
+    {
+      "active_gradle_processes": [],
+      "all_disposable_worktrees_removed": true,
+      "evidence_file": "evidence/release-stop-state.json",
+      "name": "Prior executor stopped and disposable checkouts removed",
+      "status": "verified"
+    }
+  ],
+  "source": {
+    "branch": "solr-18630-submit",
+    "head": "a4ce0580ad89ad521a5402e383d96c239cea94fd",
+    "live_head_verified": true,
+    "public_pr_5313_head_from_prior_receipt": "358f13d9fdfaed260143a51100cd5657a582d562",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "solr-18630-pr5313-precedence-repair-linux-gate-20261110",
+  "type": "report",
+  "verdict": "passed"
+}
