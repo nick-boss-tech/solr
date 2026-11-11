@@ -1,0 +1,11 @@
+{
+ "id": "solr-18616-server-metrics-linux-20261111",
+ "type": "release",
+ "job": "solr-18616-server-metrics-linux-20261111",
+ "gate": "solr-18616-server-metrics-linux-20261111",
+ "actor": "phone-agent",
+ "reason": "Gate completed; receipt published before this release. Verdict incomplete per the gate record's rule for heads requiring generated or formatting changes; both patches are preserved in the evidence for the implementation worker.",
+ "evidence": "records/receipt/solr-18616-server-metrics-linux-20261111.json; records/evidence/solr-18616-server-metrics-linux-20261111-evidence.tar.gz (SHA-256 53c7ccb417886fa48877133fafb45bea24705d5592ed2fe1f946c17ab4aa1896).",
+ "executor_stop": "Verified at filing: no Gradle daemon or java process on the host (process check count zero), no holder on the test-queue lock, and the dev node from the metrics run is stopped with its port (18984) verified closed.",
+ "recorded": "2026-11-11"
+}

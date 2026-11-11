@@ -1,0 +1,9 @@
+{
+ "id": "phone-agent-solr-18616-server-metrics-linux-20261111-report",
+ "type": "report",
+ "job": "solr-18616-server-metrics-linux-20261111",
+ "owner": "phone-agent",
+ "status": "completed",
+ "summary": "SOLR-18616 production implementation round 1 filed INCOMPLETE on head-completeness only. Functionally the implementation is proven at this head: bridge tests 2/2, dev distribution builds, and a live node shows the Jetty metrics working end to end, including a PUT to a path outside /solr counted as a PUT with a 4xx response, which is the exact visibility Hoss's ticket says was lost. The head cannot pass check as pushed: it lacks the generated solr/jetty-metrics/gradle.lockfile and solr/licenses/slf4j-api-2.0.17.jar.sha1 (both preserved as a patch in the gate evidence), and tidy reformats the new test file. Next step for the implementation worker: push a new head with the two generated files and the tidy formatting; the superseding gate should then be a short confirmation (bridge test, tidy clean, root check, and the same dev-run scrapes).",
+ "recorded": "2026-11-11"
+}

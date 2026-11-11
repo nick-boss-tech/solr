@@ -1,0 +1,19 @@
+{
+ "id": "solr-18616-server-metrics-linux-20261111",
+ "type": "receipt",
+ "job": "solr-18616-server-metrics-linux-20261111",
+ "gate": "solr-18616-server-metrics-linux-20261111",
+ "owner": "phone-agent",
+ "verdict": "incomplete",
+ "summary": "Production implementation round 1 at fork head 78cbd210c7ed1b5342e83a519fcfc40b9787d8de (branch solr-18616-submit, re-verified live at filing; clean normal clone). THE IMPLEMENTATION WORKS at every functional leg that ran. The bridge test class passes 2/2 at seed 18616 on the unmodified head (the original late-registration probe plus the new testServerMetricsBridge). The dev distribution builds on the unmodified head, and the packaged run verified the gate's metric assertions with before/after scrapes: the handler jar ships at server/lib/solr-jetty-metrics-11.0.0-SNAPSHOT.jar; before traffic, solr_jetty_requests_total was registered for all methods (PUT 0.0), solr_jetty_responses_total 4xx was 0.0, and solr_jetty_threads exposed current 10, idle 5, max 10000, queued 0; after a GET to /solr/admin/info/system (200) and a PUT to a path outside /solr (404), the after scrape shows requests_total PUT 1.0 and GET 3.0, responses_total 4xx 1.0 and 2xx 3.0, and all four thread states still exposed. Server-side handler data reaching the webapp metrics endpoint is the functional classloader-bridge proof; the server log contains no explicit handler banner line (grep recorded in evidence). The node was stopped and the port verified closed. VERDICT INCOMPLETE per the gate record's own rule, because the pushed head requires generated and formatting changes before it can pass check: (1) the scratch lock/license generation (updateLicenses resolveAndLockAll --write-locks, exit 0) produces exactly two files the head lacks, solr/jetty-metrics/gradle.lockfile and solr/licenses/slf4j-api-2.0.17.jar.sha1, preserved in evidence as lockgen-all.diff; root check fails solely at :solr:jetty-metrics:validateJarChecksums for the missing sha1 file (the only 'Execution failed' in the check log), with the error text itself pointing at updateLicenses. (2) Tidy reformats one tracked file, the bridge test JettyMetricsBridgePrototypeTest.java (the implementation's new test lines), diff preserved in evidence. No other leg failed: compilation, packaging, assertions, and startup are all clean, reported separately as the gate record requires. A new pushed head carrying the two generated files and the tidy formatting, plus a superseding gate, completes this round. Out of scope and unproven, per the record: production async behavior, the full verb/status matrix, disabled-metrics behavior, and shutdown lifecycle.",
+ "legs": {
+  "lockgen": "exit 0; two generated files missing from the head (patch preserved)",
+  "bridge_test": "passed 2/2, seed 18616",
+  "tidy": "changes 1 tracked file (bridge test); diff preserved",
+  "dev_build": "passed",
+  "packaged_metrics_run": "passed; all named metric assertions verified before/after",
+  "root_check": "failed only at :solr:jetty-metrics:validateJarChecksums (missing solr/licenses/slf4j-api-2.0.17.jar.sha1)"
+ },
+ "evidence": "records/evidence/solr-18616-server-metrics-linux-20261111-evidence.tar.gz (SHA-256 53c7ccb417886fa48877133fafb45bea24705d5592ed2fe1f946c17ab4aa1896): lockgen log/status/full generated patch, legs log with all exit codes, bridge XML, tidy diff, dev-run log, and the before/after metric scrapes.",
+ "recorded": "2026-11-11"
+}
