@@ -1,0 +1,8 @@
+{
+  "id": "discovery-first-slice-20261111",
+  "intended_host": "Windows research",
+  "job": "discovery-first-slice-20261111",
+  "scope": "Read-only investigation of existing Solr field enumeration, filtered coverage and limits; document an actionable next probe. No source patch, public communication or Windows build.",
+  "summary": "Research a bounded first slice for filtered field discovery",
+  "type": "assignment"
+}
