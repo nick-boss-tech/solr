@@ -1,0 +1,8 @@
+{
+  "head": "2ea7f584f0ca91a9de470ebe72b4063e8685de02",
+  "id": "pr-5315-gate-findings-windows-20261111-report",
+  "job": "pr-5315-gate-findings-windows-20261111",
+  "status": "partial repair pushed; Linux diagnosis pending",
+  "summary": "Verified failed receipt and evidence archive SHA-256 7a8c996b466503eec7ad1a1fad15b7df77345ddd660c90707de1f84c59847665. Fork solr-17764-submit was pushed and verified at 2ea7f584f0ca91a9de470ebe72b4063e8685de02. Applied the actual four-file tidy diff, provisionally added the five compileClasspath lock entries identified by the Linux log and removed compileClasspath from the empty list, added a mixed socket-error/marked-route regression for the outer retry guard, and added actual transport, request counts and full exception-chain diagnostics to the failing async test. The earlier mutation deleted the outer guard but left the additional marked RouteException condition intact; its passing multi-shard test did not prove the outer guard unnecessary. The new mixed-error test targets the separate communication-error route, but has not been run. The async failure cause remains unverified and no fix is claimed. The edited lockfile is provisional until generated and verified by Gradle on Linux; no Windows Gradle or test ran, and diff --check passed. The original gate's release is noncanonical and lacks independently captured worker-stop evidence; reconciliation job pr-5315-gate-stop-reconciliation-20261111 is being published before any conflicting successor. The public PR head remains dfde089fd9dd0e5e79774593e66dd030e1b7dd22 and has a new contributor approval; that is not approval of this separate fork patch. No public comment was posted.",
+  "type": "report"
+}
