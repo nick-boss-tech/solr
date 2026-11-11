@@ -16,6 +16,7 @@
  */
 package org.apache.solr.cloud;
 
+import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -54,7 +55,7 @@ import org.slf4j.LoggerFactory;
 /** Checks update retries and exhaustion across real shards during graceful shutdown. */
 public class ProbeGracefulMultiShardTest extends SolrTestCase {
 
-  private static final Logger log = LoggerFactory.getLogger(ProbeGracefulMultiShardTest.class);
+  private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
   private static final String SUCCESS_COLLECTION = "probe5315success";
   private static final String EXHAUSTION_COLLECTION = "probe5315exhaust";
   private static final String MARKER_PROPERTY = "solr.probe.gracefulMarker";

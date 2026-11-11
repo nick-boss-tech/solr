@@ -413,6 +413,11 @@ public class HttpJettySolrClient extends HttpSolrClient {
                 () -> {
                   InputStream is = listener.getInputStream();
                   try {
+                    // Closing the body can invoke onFailure before processing finishes.
+                    // Publish the known rejection first, away from Jetty's IO thread.
+                    if (isGracefulShutdownRejection(solrRequest, response)) {
+                      future.completeExceptionally(gracefulShutdownRejection(url));
+                    }
                     NamedList<Object> body =
                         processErrorsAndResponse(solrRequest, response, is, url);
                     mdcCopyHelper.onBegin(null);
@@ -607,20 +612,13 @@ public class HttpJettySolrClient extends HttpSolrClient {
   NamedList<Object> processErrorsAndResponse(
       SolrRequest<?> solrRequest, Response response, InputStream is, String urlExceptionMessage)
       throws SolrServerException {
-    if (trustGracefulShutdownRejections
-        && (solrRequest.getRequestType() == SolrRequest.SolrRequestType.UPDATE
-            || solrRequest.getRequestType() == SolrRequest.SolrRequestType.UNSPECIFIED)
-        && solrRequest.getApiVersion() != SolrRequest.ApiVersion.V2
-        && response.getStatus() == 503
-        && GracefulShutdownRejectionException.MARKER_VALUE.equals(
-            response.getHeaders().get(GracefulShutdownRejectionException.MARKER_HEADER))) {
+    if (isGracefulShutdownRejection(solrRequest, response)) {
       // The body is not parsed on this path; close the stream so the response is released.
       try {
         is.close();
       } catch (IOException ignored) {
       }
-      throw new GracefulShutdownRejectionException(
-          urlExceptionMessage, "request rejected during graceful shutdown (marker header present)");
+      throw gracefulShutdownRejection(urlExceptionMessage);
     }
     ResponseParser parser =
         solrRequest.getResponseParser() == null ? this.parser : solrRequest.getResponseParser();
@@ -644,6 +642,21 @@ public class HttpJettySolrClient extends HttpSolrClient {
         encoding,
         isV2ApiRequest(solrRequest),
         urlExceptionMessage);
+  }
+
+  private boolean isGracefulShutdownRejection(SolrRequest<?> solrRequest, Response response) {
+    return trustGracefulShutdownRejections
+        && (solrRequest.getRequestType() == SolrRequest.SolrRequestType.UPDATE
+            || solrRequest.getRequestType() == SolrRequest.SolrRequestType.UNSPECIFIED)
+        && solrRequest.getApiVersion() != SolrRequest.ApiVersion.V2
+        && response.getStatus() == 503
+        && GracefulShutdownRejectionException.MARKER_VALUE.equals(
+            response.getHeaders().get(GracefulShutdownRejectionException.MARKER_HEADER));
+  }
+
+  private static GracefulShutdownRejectionException gracefulShutdownRejection(String url) {
+    return new GracefulShutdownRejectionException(
+        url, "request rejected during graceful shutdown (marker header present)");
   }
 
   private void setBasicAuthHeader(SolrRequest<?> solrRequest, Request req) {
