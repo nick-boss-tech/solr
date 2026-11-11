@@ -1,0 +1,19 @@
+{
+ "id": "solr-18616-server-metrics-linux-r2-20261111",
+ "type": "receipt",
+ "job": "solr-18616-server-metrics-linux-r2-20261111",
+ "gate": "solr-18616-server-metrics-linux-r2-20261111",
+ "owner": "phone-agent",
+ "verdict": "failed",
+ "summary": "Production implementation round 2 at fork head d69d131141bc060f32ebef8b51bbcb1a1e4b32e2 (branch solr-18616-submit, re-verified live at filing; clean normal clone). The repair head is exactly what round 1 returned: the two generated files are byte-identical to the round-1 gate's preserved lockgen patch and the test file carries the tidy formatting; pre-execution diff verified. Every round-1 blocker is cleared: the scratch lock/license generation (updateLicenses resolveAndLockAll --write-locks, exit 0) now produces ZERO changes; tidy makes zero tracked changes; the bridge test class passes 2/2 at seed 18616; the dev distribution builds; and the packaged run re-verified all metric assertions at this head (before: requests_total PUT 0.0, responses_total 4xx 0.0, thread gauges exposed; GET /solr/admin/info/system 200; PUT to a path outside /solr 404; after: PUT 1.0, 4xx 1.0; handler jar at server/lib/solr-jetty-metrics-11.0.0-SNAPSHOT.jar; node stopped, port verified closed). ONE finding keeps the gate red, in a leg round 1 never reached because its check stopped earlier: root check -x test fails only at :solr:jetty-metrics:renderJavadoc with the single error 'org.apache.solr.jetty (package): javadocs are missing' (javadoc tool exit 1; output preserved in evidence). The new module has no package documentation for org.apache.solr.jetty (no package-info.java). The repair is one file; per the gate record it requires a new pushed head and a superseding gate. A mid-gate environment restart interrupted the first lockgen attempt after its start line; it was rerun from scratch under the queue lock and the rerun's outputs are the evidence (disclosed here per the separate-reporting requirement; no branch state was affected). Compilation, packaging, startup, and assertions are otherwise all clean. Out of scope and unproven, unchanged from round 1: production async, the full verb/status matrix, disabled metrics, and shutdown lifecycle.",
+ "legs": {
+  "lockgen": "exit 0, zero generated changes",
+  "bridge_test": "passed 2/2, seed 18616",
+  "tidy": "zero tracked changes",
+  "dev_build": "passed",
+  "packaged_metrics_run": "passed; all named metric assertions verified before/after",
+  "root_check": "failed only at :solr:jetty-metrics:renderJavadoc (package javadocs missing for org.apache.solr.jetty)"
+ },
+ "evidence": "records/evidence/solr-18616-server-metrics-linux-r2-20261111-evidence.tar.gz (SHA-256 bdf113f708fd6f847332ece7e4a6ea52569e53094a279b224296e1f6343f3e8e): lockgen log and empty status, legs log with all exit codes, bridge XML, javadoc error output, dev-run log, before/after metric scrapes.",
+ "recorded": "2026-11-11"
+}

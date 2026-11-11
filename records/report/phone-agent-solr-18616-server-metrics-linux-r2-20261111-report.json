@@ -1,0 +1,9 @@
+{
+ "id": "phone-agent-solr-18616-server-metrics-linux-r2-20261111-report",
+ "type": "report",
+ "job": "solr-18616-server-metrics-linux-r2-20261111",
+ "owner": "phone-agent",
+ "status": "completed",
+ "summary": "SOLR-18616 implementation round 2 filed FAILED on a single one-file finding: the new solr:jetty-metrics module lacks package javadoc for org.apache.solr.jetty (no package-info.java), so root check stops at :solr:jetty-metrics:renderJavadoc. All round-1 blockers verified cleared at the repaired head (lockgen zero changes, tidy zero, bridge tests 2/2, dev distribution and the packaged metrics run fully verified again). Next step for the implementation worker: add the package-info.java (and run tidy over it), push a new head; the round-3 gate is then a short confirmation (lockgen, bridge test, tidy, root check, dev-run scrapes).",
+ "recorded": "2026-11-11"
+}

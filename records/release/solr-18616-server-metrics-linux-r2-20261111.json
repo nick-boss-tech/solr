@@ -1,0 +1,11 @@
+{
+ "id": "solr-18616-server-metrics-linux-r2-20261111",
+ "type": "release",
+ "job": "solr-18616-server-metrics-linux-r2-20261111",
+ "gate": "solr-18616-server-metrics-linux-r2-20261111",
+ "actor": "phone-agent",
+ "reason": "Gate completed; receipt published before this release. Verdict failed on the renderJavadoc leg only; the one-file repair path is recorded in the receipt for the implementation worker.",
+ "evidence": "records/receipt/solr-18616-server-metrics-linux-r2-20261111.json; records/evidence/solr-18616-server-metrics-linux-r2-20261111-evidence.tar.gz (SHA-256 bdf113f708fd6f847332ece7e4a6ea52569e53094a279b224296e1f6343f3e8e).",
+ "executor_stop": "Verified at filing: no Gradle daemon or java process on the host, no holder on the test-queue lock, and the dev node from the metrics run is stopped with its port (18985) verified closed.",
+ "recorded": "2026-11-11"
+}
