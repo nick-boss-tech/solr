@@ -1,0 +1,26 @@
+{
+  "capabilities": [
+    "linux",
+    "solr-gradle",
+    "jetty",
+    "integration-probe"
+  ],
+  "claim_path": "records/claim/pr-5315-graceful-retry-linux-gate-20261110.json",
+  "deliverables": "Before claiming verify current board, source head and host locks. Follow the named gate, record all test counts, skip counts, failures, logs, XML, packaged server evidence and fail-before results. Publish a schema-valid receipt and release only after verified executor stop. Do not push source changes or post public comments.",
+  "gate_id": "pr-5315-graceful-retry-linux-gate-20261110",
+  "gate_record": "records/gate/pr-5315-graceful-retry-linux-gate-20261110.json",
+  "host": "Linux gate host, JDK 21, isolated clean checkout",
+  "id": "pr-5315-graceful-retry-linux-gate-20261110",
+  "job": "pr-5315-graceful-retry-linux-gate-20261110",
+  "phase": "production candidate proof; supersedes regression-only head d88ae0c6269e067602a90ed8e655df275f6f42f7",
+  "prior_probe": "records/receipt/pr-5315-graceful-rejection-probe-linux-r4-20261110-receipt.json",
+  "receipt_path": "records/receipt/pr-5315-graceful-retry-linux-gate-20261110-receipt.json",
+  "source": {
+    "branch": "solr-17764-submit",
+    "head": "e3ac884531f7a11e0e5715be2cbe7e2dbc86033b",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify the PR 5315 opt-in graceful-shutdown retry and packaged server",
+  "superseded_gate": "records/gate/pr-5315-review-fixes-linux-gate-r4-20261110.json",
+  "type": "assignment"
+}
