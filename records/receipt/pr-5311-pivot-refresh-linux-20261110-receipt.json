@@ -1,0 +1,134 @@
+{
+  "claim_owner": "phone-agent-2",
+  "cleanup_before_publication": {
+    "designated_gradle_locks_free": true,
+    "disposable_worktrees_removed": [
+      "/workspace/checkouts/pr-5311-pivot-refresh-linux-20261110",
+      "/workspace/checkouts/pr-5311-pivot-refresh-linux-20261110-fail-before"
+    ],
+    "final_post_publication_stop_check": "to be recorded in the release record after evidence/report/receipt publication",
+    "free_inode_pct": 62.12,
+    "gradle_solr_zookeeper_antora_npm_processes_at_check": 0,
+    "stop_floor_pct": 15,
+    "temporary_claim_json_removed": true
+  },
+  "commands": [
+    {
+      "command": "./gradlew --no-daemon --console=plain tidy; git diff --check",
+      "git_diff_check_exit_code": 0,
+      "gradle_exit_code": 0,
+      "name": "tidy and diff check",
+      "tracked_tree_clean": true
+    },
+    {
+      "command": "./gradlew --no-daemon --console=plain :solr:solrj:cleanTest :solr:solrj:test --tests org.apache.solr.client.solrj.response.QueryResponseTest --tests org.apache.solr.client.solrj.response.QueryResponseSectionParityTest --tests org.apache.solr.client.solrj.response.QueryResponseJsonParserIntegrationTest --tests org.apache.solr.client.solrj.request.schema.SchemaRequestBodyTest -Ptests.seed=5311A11C0FFEE --rerun-tasks",
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "name": "positive SolrJ suites",
+      "seed": "5311A11C0FFEE",
+      "skipped": 0,
+      "suite_counts": {
+        "QueryResponseJsonParserIntegrationTest": 2,
+        "QueryResponseSectionParityTest": 8,
+        "QueryResponseTest": 7,
+        "SchemaRequestBodyTest": 3
+      },
+      "tests": 20
+    },
+    {
+      "command": "./gradlew --no-daemon --console=plain check -x test -x :solr:solr-ref-guide:buildLocalAntoraSite",
+      "diagnostic": "Fresh link-check output reported parsedFiles=0 because its Antora site producer was excluded. This run is retained as diagnosis and superseded by the owner-authorized scope update.",
+      "exit_code": 1,
+      "failed_task": ":solr:solr-ref-guide:checkSiteLinks",
+      "name": "initial root-check attempt under narrower authorization"
+    },
+    {
+      "actionable_tasks": 515,
+      "assigned_test_exclusion": "test",
+      "authorized_site_chain_exclusions": [
+        ":solr:solr-ref-guide:buildLocalAntoraSite",
+        ":solr:solr-ref-guide:checkSiteLinks"
+      ],
+      "command": "./gradlew --no-daemon --console=plain check -x test -x :solr:solr-ref-guide:buildLocalAntoraSite -x :solr:solr-ref-guide:checkSiteLinks",
+      "executed": 172,
+      "exit_code": 0,
+      "failed_tasks": [],
+      "gradle_task_status_counts": {
+        "NO-SOURCE": 28,
+        "SKIPPED": 36
+      },
+      "name": "final root-check remainder",
+      "status": "BUILD SUCCESSFUL",
+      "task_status_note": "Gradle's task-level SKIPPED and NO-SOURCE statuses are recorded in the full log; no further -x task exclusions were applied.",
+      "up_to_date": 343
+    },
+    {
+      "assertion": "assertEquals(pivots, pivots.clone());",
+      "command": "./gradlew --no-daemon --console=plain :solr:solrj:cleanTest :solr:solrj:test --tests org.apache.solr.client.solrj.response.QueryResponseTest.testPivotFacetsWithRepeatedKeys -Ptests.seed=5311A11C0FFEE --rerun-tasks",
+      "contributor_production_sha256": "2df9191f1b4b8a62ed342127a35afd5f59bbd402dff22a018adfd47a8b69b5b6",
+      "errors": 0,
+      "expected_behavioral_failure": true,
+      "failures": 1,
+      "gradle_exit_code": 1,
+      "name": "behavioral fail-before reproduction",
+      "production_overlay_only": "solr/solrj/src/java/org/apache/solr/client/solrj/response/QueryResponse.java",
+      "skipped": 0,
+      "source_line": "QueryResponseTest.java:72",
+      "test_sha256_unchanged": "d34e724d2112109ddb68503aff0e5712fb9f72ea09af103a2b8331840bb852ba",
+      "tests": 1
+    }
+  ],
+  "environment": {
+    "JAVA_TOOL_OPTIONS": "unset",
+    "NODE_ENV": "unset",
+    "docker_available": false,
+    "docker_installed_or_run": false,
+    "gradle_user_home": "/workspace/gradle-home",
+    "gradle_wrapper": "9.7.0",
+    "host_id": "phone-agent-2",
+    "hostname": "0609f7968656",
+    "java_home": "/usr/lib/jvm/java-21-openjdk-amd64",
+    "java_version": "21.0.12.1",
+    "os": "Linux 6.18.38+ x86_64"
+  },
+  "evidence": {
+    "bytes": 62281,
+    "contents_manifest": "/workspace/gates/logs/phone-agent-2/pr-5311-pivot-refresh-linux-20261110/evidence-manifest.json",
+    "downloaded_and_verified_identical": true,
+    "local_archive": "/workspace/gates/artifacts/pr-5311-pivot-refresh-linux-20261110-evidence.tar.gz",
+    "record_path": "records/evidence/pr-5311-pivot-refresh-linux-20261110-evidence.json",
+    "sha256": "814cea49799eddf654caa6591d0dbd4b18700563595654a88fea578d86654f35"
+  },
+  "gate": "pr-5311-pivot-refresh-linux-proof-20261110",
+  "head": "869400c40057d4f94faef5299969a9144bdb9a12",
+  "id": "pr-5311-pivot-refresh-linux-20261110-receipt",
+  "job": "pr-5311-pivot-refresh-linux-20261110",
+  "owner_scope_override": {
+    "assigned_root_check_test_exclusion": "test",
+    "exact_site_chain_exclusions": [
+      ":solr:solr-ref-guide:buildLocalAntoraSite",
+      ":solr:solr-ref-guide:checkSiteLinks"
+    ],
+    "instruction": "Treat checkSiteLinks as part of the Antora chain because it depends on the skipped local-site generation and failed with parsedFiles=0; rerun excluding both exact tasks, and mark green only if the remainder and other required proof are clean.",
+    "no_other_-x_exclusions": true,
+    "received_at": "2026-11-10T22:15:31-07:00"
+  },
+  "source": {
+    "changed_files": [
+      "solr/solrj/src/java/org/apache/solr/client/solrj/response/QueryResponse.java",
+      "solr/solrj/src/test/org/apache/solr/client/solrj/response/QueryResponseTest.java"
+    ],
+    "compare_ahead_by": 2,
+    "compare_behind_by": 0,
+    "contributor_head": "dc40a1c22c4c48a83d0eb492464d10c29e07ad6a",
+    "fork": "nick-boss-tech/solr:pr-5311-pivot-duplicate-keys",
+    "fork_head": "869400c40057d4f94faef5299969a9144bdb9a12",
+    "pr_state": "open",
+    "pr_url": "https://github.com/apache/solr/pull/5311",
+    "public_pr_or_jira_writes": false,
+    "source_modified_or_pushed": false
+  },
+  "type": "receipt",
+  "verdict": "passed"
+}
