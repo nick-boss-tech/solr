@@ -1,0 +1,8 @@
+{
+  "host": "Windows",
+  "id": "solr-18616-jetty-metrics-scope-20261110",
+  "job": "solr-18616-jetty-metrics-scope-20261110",
+  "owner": "codex-windows-solr-18616",
+  "scope": "Source and dependency research only",
+  "type": "claim"
+}
