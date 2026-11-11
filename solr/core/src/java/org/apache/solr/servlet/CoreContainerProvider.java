@@ -18,6 +18,7 @@ package org.apache.solr.servlet;
 
 import static org.apache.solr.core.NodeConfig.loadNodeConfig;
 
+import io.opentelemetry.api.common.Attributes;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
@@ -29,8 +30,10 @@ import java.nio.file.Path;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -46,6 +49,7 @@ import org.apache.solr.core.CoreContainer;
 import org.apache.solr.core.NodeConfig;
 import org.apache.solr.core.SolrCore;
 import org.apache.solr.core.SolrXmlConfig;
+import org.apache.solr.metrics.SolrMetricsContext;
 import org.apache.solr.util.StartupLoggingUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,6 +68,7 @@ public class CoreContainerProvider implements ServletContextListener {
 
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
   private CoreContainer cores;
+  private SolrMetricsContext jettyMetricsContext;
 
   /**
    * Acquires an instance from the context. Never null.
@@ -111,6 +116,10 @@ public class CoreContainerProvider implements ServletContextListener {
 
   private void close() {
     CoreContainer cc = cores;
+    if (jettyMetricsContext != null) {
+      jettyMetricsContext.close();
+      jettyMetricsContext = null;
+    }
 
     // Mark Miller suggested that we should be publishing that we are down before anything else
     // which makes good sense, but the following causes test failures, so that improvement can be
@@ -179,6 +188,7 @@ public class CoreContainerProvider implements ServletContextListener {
               });
 
       coresInit = createCoreContainer(computeSolrHome(servletContext), extraProperties);
+      initJettyMetrics(servletContext, coresInit);
 
       if (log.isDebugEnabled()) {
         log.debug("user.dir={}", System.getProperty("user.dir"));
@@ -193,6 +203,71 @@ public class CoreContainerProvider implements ServletContextListener {
       log.trace("init() done");
       this.cores = coresInit; // crucially final assignment
     }
+  }
+
+  private void initJettyMetrics(ServletContext servletContext, CoreContainer container) {
+    Object source = servletContext.getAttribute("org.apache.solr.jetty.metrics");
+    if (!(source instanceof Supplier<?> supplier)) return;
+    jettyMetricsContext = new SolrMetricsContext(container.getMetricManager(), "solr.jetty");
+    jettyMetricsContext.observableLongCounter(
+        "solr.jetty.requests",
+        "Completed HTTP requests by method",
+        measurement -> {
+          if (supplier.get() instanceof Map<?, ?> values) {
+            values.forEach(
+                (key, value) -> {
+                  if (key instanceof String name
+                      && name.startsWith("method.")
+                      && value instanceof Number count) {
+                    measurement.record(
+                        count.longValue(),
+                        Attributes.builder().put("method", name.substring(7)).build());
+                  }
+                });
+          }
+        });
+    jettyMetricsContext.observableLongCounter(
+        "solr.jetty.responses",
+        "Completed HTTP responses by status class",
+        measurement -> {
+          if (supplier.get() instanceof Map<?, ?> values) {
+            values.forEach(
+                (key, value) -> {
+                  if (key instanceof String name
+                      && name.startsWith("status.")
+                      && value instanceof Number count) {
+                    measurement.record(
+                        count.longValue(),
+                        Attributes.builder().put("status", name.substring(7)).build());
+                  }
+                });
+          }
+        });
+    jettyMetricsContext.observableLongGauge(
+        "solr.jetty.threads",
+        "Jetty thread pool state",
+        measurement -> {
+          if (supplier.get() instanceof Map<?, ?> values) {
+            values.forEach(
+                (key, value) -> {
+                  if (key instanceof String name
+                      && name.startsWith("threads.")
+                      && value instanceof Number count) {
+                    measurement.record(
+                        count.longValue(), Attributes.builder().put("state", name).build());
+                  }
+                });
+          }
+        });
+    jettyMetricsContext.observableLongGauge(
+        "solr.jetty.requests.active",
+        "HTTP requests currently being handled",
+        measurement -> {
+          if (supplier.get() instanceof Map<?, ?> values
+              && values.get("active") instanceof Number count) {
+            measurement.record(count.longValue());
+          }
+        });
   }
 
   private void logWelcomeBanner(Properties props) {

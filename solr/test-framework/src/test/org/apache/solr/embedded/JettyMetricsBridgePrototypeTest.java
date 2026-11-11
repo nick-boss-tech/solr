@@ -38,6 +38,70 @@ import org.junit.Test;
 /** Experimental proof of a Jetty-owned source registered after Solr starts. */
 public class JettyMetricsBridgePrototypeTest extends SolrTestCaseJ4 {
   @Test
+  public void testServerMetricsBridge() throws Exception {
+    Path solrHome = createTempDir();
+    Files.writeString(solrHome.resolve("solr.xml"), "<solr/>", StandardCharsets.UTF_8);
+    var jetty = new JettySolrRunner(solrHome.toString(), JettyConfig.builder().build());
+    try {
+      jetty.start();
+      var connection =
+          (HttpURLConnection)
+              jetty.getBaseUrl().toURI().resolve("/missing-path").toURL().openConnection();
+      connection.setRequestMethod("PUT");
+      try {
+        assertEquals(404, connection.getResponseCode());
+      } finally {
+        connection.disconnect();
+      }
+      var valid =
+          (HttpURLConnection)
+              jetty.getBaseUrl().toURI().resolve("/solr/admin/info/system").toURL().openConnection();
+      try {
+        assertEquals(200, valid.getResponseCode());
+      } finally {
+        valid.disconnect();
+      }
+      var reader =
+          jetty.getCoreContainer().getMetricManager().getPrometheusMetricReader("solr.jetty");
+      assertNotNull(reader);
+      new TimeOut(10, TimeUnit.SECONDS, TimeSource.NANO_TIME)
+          .waitFor(
+              "PUT and 4xx metrics",
+              () -> {
+                boolean put = false;
+                boolean get = false;
+                boolean response = false;
+                boolean pool = false;
+                for (var snapshot : reader.collect()) {
+                  if (snapshot.getMetadata().getPrometheusName().equals("solr_jetty_requests")) {
+                    put =
+                        ((CounterSnapshot) snapshot).getDataPoints().stream()
+                            .anyMatch(
+                                p -> "PUT".equals(p.getLabels().get("method")) && p.getValue() >= 1);
+                    get =
+                        ((CounterSnapshot) snapshot).getDataPoints().stream()
+                            .anyMatch(
+                                p -> "GET".equals(p.getLabels().get("method")) && p.getValue() >= 1);
+                  } else if (snapshot
+                      .getMetadata()
+                      .getPrometheusName()
+                      .equals("solr_jetty_responses")) {
+                    response =
+                        ((CounterSnapshot) snapshot).getDataPoints().stream()
+                            .anyMatch(
+                                p -> "4xx".equals(p.getLabels().get("status")) && p.getValue() >= 1);
+                  } else if (snapshot.getMetadata().getPrometheusName().equals("solr_jetty_threads")) {
+                    pool = true;
+                  }
+                }
+                return put && get && response && pool;
+              });
+    } finally {
+      jetty.stop();
+    }
+  }
+
+  @Test
   public void testLateBridgeIncludesUnroutableRequest() throws Exception {
     Path solrHome = createTempDir();
     Files.writeString(solrHome.resolve("solr.xml"), "<solr/>", StandardCharsets.UTF_8);

@@ -178,7 +178,9 @@
     <!-- Set handler Collection Structure                            -->
     <!-- =========================================================== -->
     <Set name="handler">
-      <Ref refid="RewriteHandler"/>
+      <New id="SolrJettyMetrics" class="org.apache.solr.jetty.JettyMetricsHandler">
+        <Set name="handler"><Ref refid="RewriteHandler"/></Set>
+      </New>
     </Set>
 
     <!-- =========================================================== -->
@@ -200,6 +202,10 @@
         <Arg>
           <New class="org.eclipse.jetty.ee10.webapp.WebAppContext">
             <Set name="contextPath">/solr</Set>
+            <Call name="setAttribute">
+              <Arg>org.apache.solr.jetty.metrics</Arg>
+              <Arg><Ref refid="SolrJettyMetrics"/></Arg>
+            </Call>
             <Set name="war"><Property name="jetty.base"/>/solr-webapp/webapp</Set>
             <Set name="defaultsDescriptor"><Property name="jetty.base"/>/etc/webdefault.xml</Set>
             <Set name="extractWAR">false</Set>

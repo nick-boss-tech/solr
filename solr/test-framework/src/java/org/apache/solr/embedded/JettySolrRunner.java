@@ -53,6 +53,7 @@ import org.apache.solr.common.util.IOUtils;
 import org.apache.solr.common.util.TimeSource;
 import org.apache.solr.common.util.Utils;
 import org.apache.solr.core.CoreContainer;
+import org.apache.solr.jetty.JettyMetricsHandler;
 import org.apache.solr.metrics.SolrMetricManager;
 import org.apache.solr.servlet.AuthenticationFilter;
 import org.apache.solr.servlet.CoreContainerProvider;
@@ -293,12 +294,14 @@ public class JettySolrRunner implements SolrBackend {
       server.setConnectors(new Connector[] {connector});
     }
 
+    JettyMetricsHandler metricsHandler = new JettyMetricsHandler();
     Handler.Wrapper chain;
     {
       // Initialize the servlets
       final ServletContextHandler root =
           new ServletContextHandler("/solr", ServletContextHandler.NO_SESSIONS);
       root.setServer(server);
+      root.getServletContext().setAttribute("org.apache.solr.jetty.metrics", metricsHandler);
       if (config.enableAdminUi) {
         Path webappDir = ExternalPaths.WEBAPP_HOME;
         if (webappDir == null || !Files.exists(webappDir.resolve("index.html"))) {
@@ -404,7 +407,8 @@ public class JettySolrRunner implements SolrBackend {
       chain = rwh;
     }
 
-    server.setHandler(chain);
+    metricsHandler.setHandler(chain);
+    server.setHandler(metricsHandler);
 
     if (config.enableGracefulShutdown) {
       // Mimic "graceful.mod"
