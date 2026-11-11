@@ -1,0 +1,16 @@
+{
+  "actor": "codex-windows-solr-18616",
+  "gate": "records/gate/solr-18616-server-metrics-linux-20261111.json",
+  "id": "solr-18616-server-metrics-implementation-windows-20261111-report",
+  "job": "solr-18616-server-metrics-implementation-windows-20261111",
+  "recorded": "2026-11-11",
+  "source": {
+    "branch": "solr-18616-submit",
+    "head": "78cbd210c7ed1b5342e83a519fcfc40b9787d8de",
+    "prior_head": "4c5d0d642cd538d06ba49f6aad253878a6e0a90a",
+    "repository": "nick-boss-tech/solr"
+  },
+  "status": "draft implementation pushed; proof pending",
+  "summary": "Added server-loaded Jetty handler in new solr:jetty-metrics module; bounded HTTP method and response-class counters, active requests, Jetty pool current/idle/max/queue gauges. The handler implements a JDK Supplier snapshot passed through a servlet context attribute to SolrMetricManager; CoreContainerProvider owns and closes callbacks. Wired distribution Jetty XML and JettySolrRunner, added integration test and documentation/changelog. XML parsing and git diff --check passed. No Gradle or execution on Windows. New module lockfile and dependency/license metadata remain ungenerated and must be obtained on Linux; formatting may require repair. No claim of compile, production startup or readiness. Async, lifecycle, disabled metrics and full matrix require further tests.",
+  "type": "report"
+}
