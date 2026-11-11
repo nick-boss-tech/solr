@@ -1,0 +1,173 @@
+{
+  "adjudication": {
+    "basis": "The patch's stated purpose and production comment explicitly restore system-property-over-environment precedence; the new direct regression test expects 5. The old head's 1 is the behavior being repaired. The earlier aggregate exit 1 came solely from applying the new-head expectation to the old-head observation, not from a JVM, build, setup, or execution error. No rerun was required.",
+    "case": "-DwaitForZk=5 with SOLR_WAIT_FOR_ZK=1",
+    "expected_value_scope": "The unqualified expected value 5 applies to repaired head a4ce0580ad89ad521a5402e383d96c239cea94fd only. Previous head 4be1ad602621d2af96565355dce3804ee4744aae is expected to retain its pre-repair value 1; that observed value is a valid negative control.",
+    "observed": [
+      {
+        "class_origin_verified": true,
+        "head": "4be1ad602621d2af96565355dce3804ee4744aae",
+        "individual_process_exit_code": 0,
+        "result": "1"
+      },
+      {
+        "class_origin_verified": true,
+        "head": "a4ce0580ad89ad521a5402e383d96c239cea94fd",
+        "individual_process_exit_code": 0,
+        "result": "5"
+      }
+    ]
+  },
+  "conclusion": "The ambiguity is resolved as a repaired-head-only expectation. Existing evidence is sufficient, all other required legs are supported, and this successor adjudication passes while the historical prior receipt remains incomplete.",
+  "coverage_limits": [
+    "TestSolrXml's pre-existing @Ignore remains one skipped test, not a pass.",
+    "Docker was not installed or used; Docker-dependent tests are unrun. Static solr:docker checks ran as part of the root check.",
+    "No native Windows or Cygwin proof was attempted on Linux."
+  ],
+  "created_at": "2026-11-11T11:36:20-07:00",
+  "evidence": {
+    "archive_bytes": 780625,
+    "archive_sha256": "cb0150e7a7423d091b4bc1cabcd871b0dd474d10e693acc0b3eea7de8db4b672",
+    "key_artifact_sha256": {
+      "contributor_overflow_junit": "b6a87f1fedca3ecc1b131a9a7627d384e5e5320bcb06b38f3e784baaa0424ad0",
+      "mixed_current_summary": "e1ecd96f7600064d890bb48ba0c7ec2948e3389d8f9743c267752ecac9d8819d",
+      "mixed_previous_summary": "e96e3c9bb3f9a7374090d60405d9bcd1fc8efb0d3f3481672f6dff4788621c2c",
+      "previous_fail_before_junit": "cfece4398678e52ffe3d4315f57e7808579ad69a97ce7522f423da6bfb88baea",
+      "release_stop_state": "3fb01a26de3880a08730a7f562a592dbf6745c350172a0f9eacbeb3e56b0a1bb",
+      "startup_summary": "6270ebf5efea1b10741f27defd541d3595159029bd079818e13310171339dfe2"
+    },
+    "prior_evidence_pointer": "records/evidence/solr-18630-pr5313-precedence-repair-linux-gate-20261110-evidence.json"
+  },
+  "gate": "solr-18630-pr5313-receipt-adjudication-20261111",
+  "head": "a4ce0580ad89ad521a5402e383d96c239cea94fd",
+  "id": "solr-18630-pr5313-receipt-adjudication-20261111-receipt",
+  "job": "solr-18630-pr5313-receipt-adjudication-20261111",
+  "proof_legs": [
+    {
+      "name": "Focused seeded suites at exact repaired head",
+      "results": [
+        {
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "suite": "org.apache.solr.common.util.EnvUtilsTest",
+          "tests": 20
+        },
+        {
+          "errors": 0,
+          "failures": 0,
+          "skipped": 1,
+          "startup_regression_test_executed": true,
+          "suite": "org.apache.solr.core.TestSolrXml",
+          "tests": 38
+        },
+        {
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "suite": "org.apache.solr.cloud.ZkFailoverTest",
+          "tests": 1
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "exit_code": 0,
+      "name": "Tidy",
+      "status": "passed",
+      "tracked_changes": []
+    },
+    {
+      "exit_code": 0,
+      "name": "Root check excluding tests",
+      "status": "passed"
+    },
+    {
+      "classifier_note": "The archived generic expected_assertion_failures_only:false is an early classifier artifact. The corrected expected_value_assertion_failures_only:true note and raw JUnit XML show only the two expected org.junit.ComparisonFailure value mismatches; zero setup, compilation, or execution errors.",
+      "errors": 0,
+      "expected_value_assertion_failures_only": true,
+      "failures": 2,
+      "name": "Previous-head fail-before value assertions",
+      "raw_junit_sha256": "cfece4398678e52ffe3d4315f57e7808579ad69a97ce7522f423da6bfb88baea",
+      "skipped": 0,
+      "status": "passed-as-expected-negative-control",
+      "tests": 2
+    },
+    {
+      "all_revision_class_origins_verified": true,
+      "current_head_cases_matching_expected": 6,
+      "individual_jvm_exit_codes": 0,
+      "name": "Six-case mixed-precedence comparison",
+      "previous_harness_aggregate_exit_code_before_adjudication": 1,
+      "previous_head_disputed_case": "Observed 1, as expected for the pre-fix baseline under this adjudication.",
+      "status": "passed-after-adjudication"
+    },
+    {
+      "EnvUtils_initialized_after_probe_marker": true,
+      "boundary_expected_waits_ms": [
+        1000,
+        1000,
+        5000,
+        1000
+      ],
+      "boundary_observations_ms": [
+        2142,
+        2233,
+        6106,
+        2139
+      ],
+      "class_initialization_order_verified": true,
+      "head": "a4ce0580ad89ad521a5402e383d96c239cea94fd",
+      "name": "Fresh startup-boundary and ZooKeeper wire probes",
+      "status": "passed",
+      "wire_fallback": {
+        "ConnectRequest_session_timeout_ms": 30001,
+        "connection_wait_ms": 31056
+      },
+      "wire_override": {
+        "ConnectRequest_session_timeout_ms": 2000,
+        "connection_wait_ms": 3235
+      }
+    },
+    {
+      "Math.toIntExact_integer_overflow_verified": true,
+      "errors": 0,
+      "failures": 1,
+      "head": "358f13d9fdfaed260143a51100cd5657a582d562",
+      "name": "Contributor-head startup overflow negative control",
+      "raw_junit_sha256": "b6a87f1fedca3ecc1b131a9a7627d384e5e5320bcb06b38f3e784baaa0424ad0",
+      "skipped": 0,
+      "status": "passed-as-expected-negative-control",
+      "testcase": "org.apache.solr.core.TestSolrXml.testStartupWithDefaultZkWait",
+      "tests": 1
+    },
+    {
+      "active_gradle_processes": [],
+      "all_disposable_worktrees_removed": true,
+      "name": "Prior executor stop and disposable checkout removal",
+      "status": "verified"
+    }
+  ],
+  "publication_readback": {
+    "difference": "The board writer canonicalizes object key order; parsed content is identical.",
+    "live_report_sha256": "8f216ca14ad9060a407cb051ec716d57fb953014989a10d3b01b8f6f38fad66c",
+    "local_report_sha256": "4852cfa34166bab6cd0d2a27a4db11db15f643de4575608a822852089428c2c8",
+    "parsed_json_semantically_equal": true,
+    "report_live_commit": "34876afbea83ec48a79ef3d5111384e6d002eb45"
+  },
+  "report": "records/report/solr-18630-pr5313-receipt-adjudication-20261111-report.json",
+  "scope_attestation": {
+    "all_required_existing_proof_legs_supported": true,
+    "new_tests_or_builds_run_for_adjudication": false,
+    "prior_immutable_records_changed": false,
+    "public_pr_or_jira_posted": false,
+    "source_branch_changed": false
+  },
+  "successor_of": {
+    "job": "solr-18630-pr5313-precedence-repair-linux-gate-20261110",
+    "prior_receipt": "records/receipt/solr-18630-pr5313-precedence-repair-linux-gate-20261110-receipt.json",
+    "prior_verdict_retained": "incomplete"
+  },
+  "type": "receipt",
+  "verdict": "passed"
+}
