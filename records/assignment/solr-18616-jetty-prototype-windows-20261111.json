@@ -1,0 +1,11 @@
+{
+  "context": "Prior scoping: records/report/solr-18616-jetty-metrics-scope-progress-20261111.json. Test invalid paths, method and status metrics, thread pool visibility, startup and classloader integration.",
+  "host": "Windows implementation; Linux proof separately",
+  "id": "solr-18616-jetty-prototype-windows-20261111",
+  "job": "solr-18616-jetty-prototype-windows-20261111",
+  "posted_by": "codex-windows-solr-18616",
+  "recorded": "2026-11-11",
+  "successor_of": "solr-18616-jetty-metrics-scope-20261110",
+  "summary": "At Nick's direction, implement an isolated prototype of a server-owned Jetty metrics source and Solr bridge to assess viability. Push fork branch and request exact-head Linux proof. No public PR or comments authorized.",
+  "type": "assignment"
+}
