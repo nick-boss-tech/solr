@@ -1,0 +1,15 @@
+{
+  "host": "Windows implementation host; Linux tests and Gradle lock regeneration required",
+  "id": "pr-5315-gate-findings-windows-20261111",
+  "job": "pr-5315-gate-findings-windows-20261111",
+  "prior_receipt": "records/receipt/pr-5315-graceful-retry-linux-gate-20261110-receipt.json",
+  "scope": "Apply verified Linux tidy diff, correct lockfile entries only as a provisional source change, add a focused mixed-route regression for the outer guard, and make the async failure report the full exception and transport. Do not claim the async cause is fixed without Linux reproduction. Push any implementation commit to the fork and arrange Linux diagnosis, lockfile regeneration and subsequent exact-head gate. Do not run Gradle on Windows or post public comments.",
+  "source": {
+    "branch": "solr-17764-submit",
+    "head": "e3ac884531f7a11e0e5715be2cbe7e2dbc86033b",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5315-graceful-retry-implementation-windows-20261110",
+  "summary": "Repair separable PR 5315 gate findings and improve async diagnosis",
+  "type": "assignment"
+}
