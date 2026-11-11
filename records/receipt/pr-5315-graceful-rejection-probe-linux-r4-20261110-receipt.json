@@ -1,0 +1,16 @@
+{
+  "evidence": "records/evidence/evidence-pr-5315-graceful-rejection-probe-linux-r4-20261110.tar.gz",
+  "evidence_sha256": "4c24572b247aa0e239f7bce9acc602398907d48995d5acc03c32de696e8e1b22",
+  "executor_stop_evidence": "Evidence archive logs/final-executor-stop.txt (SHA-256 3023cc230b26dca8fa727306e587e108305e0da56b877334950d77361108afef).",
+  "gate": "pr-5315-graceful-rejection-probe-linux-r4-20261110",
+  "head": "d88ae0c6269e067602a90ed8e655df275f6f42f7",
+  "id": "pr-5315-graceful-rejection-probe-linux-r4-20261110-receipt",
+  "job": "pr-5315-graceful-rejection-probe-linux-r4-20261110",
+  "owner": "phone-agent-2",
+  "public_pr": "https://github.com/apache/solr/pull/5315",
+  "public_pr_head": "dfde089fd9dd0e5e79774593e66dd030e1b7dd22",
+  "source_branch_head": "d88ae0c6269e067602a90ed8e655df275f6f42f7",
+  "summary": "INCOMPLETE at exact assigned head d88ae0c6269e067602a90ed8e655df275f6f42f7, source branch solr-17764-submit. The r3 archive hash matched its receipt; unchanged r3 probes passed (client 6/6, real-node 3/3), and the unchanged-head CloudSolrClientCacheTest baseline passed 12/12. Run 46 reproduced the concern before correction: in parallel RF=1 exhaustion, a shard already persisted at count_i=1 was replayed until its persisted value reached 6 while the other shard's marked pre-handler rejection exhausted six attempts; the RouteException failed and the assertion observed 6 instead of 1. The narrow disposable correction was rerun at the same seed: final multi-shard run 60 passed 1/1, preserving completed/rejected counts 1/0 in parallel and sequential exhaustion; the RF=2 alternate-replica success leg persisted both atomic increments once, and delete-by-query plus commit succeeded. Final client run 61 passed 12/12, including fail-closed custom/one-shot requests, async marked UPDATE no-replay on both transports, ordinary/unmarked 503 controls, and an explicit forged-marker demonstration. Final Jetty body-close run 62 passed 1/1; the JDK stream-close regression passed in run 61. Fresh XML, commands, logs, per-endpoint counters and persisted values are in the evidence archive. Remaining gaps: marker trust is not enforced (the forged marker triggers retry), materialized documents/params are mutable and not snapshotted, the marker emitter is test-framework-only with no packaged production proof, mixed-version behavior used a fake endpoint rather than an older Solr distribution, async body/query paths are not comprehensive, and the original in-flight indexing 503 remains unresolved. Work stayed in a disposable checkout; no source branch push or public comment. Final run 62 stopped cleanly; both required locks are free, no Gradle/Solr executor remains, and free inodes are 39%. Do not treat the prototype as production-ready.",
+  "type": "receipt",
+  "verdict": "incomplete"
+}
