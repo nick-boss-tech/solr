@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-solr-18616-design",
+  "evidence": "records/report/solr-18616-design-validation-windows-20261111-report.json; fork head 2a5127ff30608f7ea0248277df83c5daea4d1927; no Windows build or test executor started.",
+  "id": "solr-18616-design-validation-windows-20261111",
+  "job": "solr-18616-design-validation-windows-20261111",
+  "reason": "Implementation slice pushed and behavioral Linux validation handed off; Windows work stopped pending results.",
+  "type": "release"
+}
