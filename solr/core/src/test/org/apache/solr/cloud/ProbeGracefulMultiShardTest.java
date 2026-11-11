@@ -261,18 +261,20 @@ public class ProbeGracefulMultiShardTest extends SolrTestCase {
         int successTotalPassed = totalPassed(handlers);
         Map<String, CoreCounts> successCoreCounts =
             snapshotCoreCounts(handlers, successCompletedSlice, successRejectSlice);
-        log.info(
-            "R4_PROBE success barrierEntered={} completedBeforeRelease={} nodeCounts={} coreCounts={} total={}/{} passed={} persisted completed={} retried={} failure={}",
-            successBarrierEntered,
-            successCompletedBeforeRelease,
-            successCounts,
-            describeCoreCounts(successCoreCounts),
-            successTotalRequests,
-            successTotalRejections,
-            successTotalPassed,
-            successCompletedValue,
-            successRejectedValue,
-            describeFailure(successFailure));
+        if (log.isInfoEnabled()) {
+          log.info(
+              "R4_PROBE success barrierEntered={} completedBeforeRelease={} nodeCounts={} coreCounts={} total={}/{} passed={} persisted completed={} retried={} failure={}",
+              successBarrierEntered,
+              successCompletedBeforeRelease,
+              successCounts,
+              describeCoreCounts(successCoreCounts),
+              successTotalRequests,
+              successTotalRejections,
+              successTotalPassed,
+              successCompletedValue,
+              successRejectedValue,
+              describeFailure(successFailure));
+        }
 
         // Exercise the post-route non-routable update phase while one leader is draining. This
         // records actual delete-by-query/commit behavior separately from the atomic-update counts.
@@ -296,13 +298,15 @@ public class ProbeGracefulMultiShardTest extends SolrTestCase {
         String deleteCommitCoreCounts =
             describeCoreCounts(
                 snapshotCoreCounts(handlers, successCompletedSlice, successRejectSlice));
-        log.info(
-            "R4_PROBE deleteByQuery/commit nodeCounts={} coreCounts={} deletedDocPresent={} deleteFailure={} commitFailure={}",
-            deleteCommitCounts,
-            deleteCommitCoreCounts,
-            deletedDocument != null,
-            describeFailure(deleteFailure),
-            describeFailure(commitFailure));
+        if (log.isInfoEnabled()) {
+          log.info(
+              "R4_PROBE deleteByQuery/commit nodeCounts={} coreCounts={} deletedDocPresent={} deleteFailure={} commitFailure={}",
+              deleteCommitCounts,
+              deleteCommitCoreCounts,
+              deletedDocument != null,
+              describeFailure(deleteFailure),
+              describeFailure(commitFailure));
+        }
 
         // The RF=1 collection has no alternate. The target endpoint's first genuine rejection is
         // held at the Jetty boundary until RTG on the other shard proves its atomic increment is
@@ -340,17 +344,19 @@ public class ProbeGracefulMultiShardTest extends SolrTestCase {
                 handlers,
                 exhaustionCollection.getSlice(parallelHealthySlice),
                 exhaustionCollection.getSlice(parallelRejectedSlice));
-        log.info(
-            "R4_PROBE parallel exhaustion barrierEntered={} completedBeforeRelease={} nodeCounts={} coreCounts={} total={}/{} persisted completed={} rejected={} failure={}",
-            parallelBarrierEntered,
-            parallelCompletedBeforeRelease,
-            parallelCounts,
-            describeCoreCounts(parallelCoreCounts),
-            parallelTotalRequests,
-            parallelTotalRejections,
-            parallelHealthyValue,
-            parallelRejectedValue,
-            describeFailure(parallelFailure));
+        if (log.isInfoEnabled()) {
+          log.info(
+              "R4_PROBE parallel exhaustion barrierEntered={} completedBeforeRelease={} nodeCounts={} coreCounts={} total={}/{} persisted completed={} rejected={} failure={}",
+              parallelBarrierEntered,
+              parallelCompletedBeforeRelease,
+              parallelCounts,
+              describeCoreCounts(parallelCoreCounts),
+              parallelTotalRequests,
+              parallelTotalRejections,
+              parallelHealthyValue,
+              parallelRejectedValue,
+              describeFailure(parallelFailure));
+        }
 
         // The same RF=1 topology and ordering test the sequential path independently of the
         // parallel failure above by using a fresh document pair and re-arming the same rejection.
@@ -383,17 +389,19 @@ public class ProbeGracefulMultiShardTest extends SolrTestCase {
                 handlers,
                 exhaustionCollection.getSlice(sequentialFirstSlice),
                 exhaustionCollection.getSlice(sequentialSecondSlice));
-        log.info(
-            "R4_PROBE sequential exhaustion barrierEntered={} completedBeforeRelease={} nodeCounts={} coreCounts={} total={}/{} persisted completed={} rejected={} failure={}",
-            sequentialBarrierEntered,
-            sequentialCompletedBeforeRelease,
-            sequentialCounts,
-            describeCoreCounts(sequentialCoreCounts),
-            sequentialTotalRequests,
-            sequentialTotalRejections,
-            sequentialHealthyValue,
-            sequentialRejectedValue,
-            describeFailure(sequentialFailure));
+        if (log.isInfoEnabled()) {
+          log.info(
+              "R4_PROBE sequential exhaustion barrierEntered={} completedBeforeRelease={} nodeCounts={} coreCounts={} total={}/{} persisted completed={} rejected={} failure={}",
+              sequentialBarrierEntered,
+              sequentialCompletedBeforeRelease,
+              sequentialCounts,
+              describeCoreCounts(sequentialCoreCounts),
+              sequentialTotalRequests,
+              sequentialTotalRejections,
+              sequentialHealthyValue,
+              sequentialRejectedValue,
+              describeFailure(sequentialFailure));
+        }
 
         assertTrue("success path must reach the genuine rejection barrier", successBarrierEntered);
         assertNull("success path should use the alternate and complete", successFailure);

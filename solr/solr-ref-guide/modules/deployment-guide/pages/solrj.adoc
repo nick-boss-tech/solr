@@ -198,6 +198,13 @@ var client = new CloudSolrClient.Builder(solrUrls)
     .build();
 ----
 
+For a packaged Solr server started with `bin/solr`, set `SOLR_JETTY_GRACEFUL=true`
+in the server environment before starting it to enable the graceful shutdown
+module. This setting defaults to false and is separate from the client opt-in.
+During shutdown, a node may reject requests on existing connections with the
+shutdown marker; new connections can instead be refused. This option does not
+make a refused connection a marked rejection.
+
 Only enable this when every endpoint and intermediary in the request path is
 trusted not to add the shutdown header to another response or independently
 retry an already processed request. A header or TLS connection to a proxy does
