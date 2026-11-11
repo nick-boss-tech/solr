@@ -1,0 +1,20 @@
+{
+  "host": "Capable Linux gate host with JDK 21 and serialized host locks",
+  "id": "pr-5284-merge-main-linux-gate-20261110",
+  "implementation_job": "pr-5284-merge-main-windows-20261110",
+  "job": "pr-5284-merge-main-linux-gate-20261110",
+  "known_failure": "The earlier full gate's V2ApiIntegrationTest.testException reported HTTP 500 rather than 400; the same failure reproduced on the reviewed pre-follow-up PR head and is associated with still-open PR 5285. Nick accepted that known failure for the branch update. Run the named suite and report an actual failure honestly; acceptance to push is not a passing test or an instruction to suppress it.",
+  "previous_pr_head": "3d530d7639eeb0b4bd8ee11227a1133fe66aa672",
+  "prior_focused_receipt": "records/receipt/pr-5284-argument-coverage-linux-gate-r2-20261110-receipt.json",
+  "source_branch": "nick-boss-tech/solr:solr-16398-rebalance-migrate",
+  "source_head": "a225b9d4af9f295e3c84b7ff6f35ef7e71ababc1",
+  "summary": "LINUX TASK: verify PR 5284 after the authorized merge of upstream main and import-conflict resolution at the exact new PR head.",
+  "tags": [
+    "linux",
+    "gate",
+    "pr-5284",
+    "merge-conflict"
+  ],
+  "type": "assignment",
+  "upstream_main_parent": "82888694ae248b74d105d9c7b5f60d33c385f325"
+}
