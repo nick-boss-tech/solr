@@ -1,0 +1,27 @@
+{
+  "claim_path": "records/claim/pr-5201-r3-evidence-reconciliation-20261111.json",
+  "expected_report_path": "records/report/pr-5201-r3-evidence-reconciliation-20261111-result.json",
+  "id": "pr-5201-r3-evidence-reconciliation-20261111",
+  "intended_host": "Linux gate executor or host with access to original execution records",
+  "job": "pr-5201-r3-evidence-reconciliation-20261111",
+  "prior_gate": "records/gate/pr-5201-auth-browser-gate-r3-20261111.json",
+  "prior_receipt": "records/receipt/pr-5201-auth-browser-linux-gate-r3-20261111-receipt.json",
+  "prior_release": "records/release/pr-5201-auth-browser-linux-gate-r3-20261111.json",
+  "requirements": [
+    "Refresh board, source and PR heads and inspect prior receipt, gate, report, release and evidence. Claim the canonical path before work; do not duplicate any newer job or change source or public PR.",
+    "The prior receipt has no structured head field, although its summary names the assigned SHA. Verify actual checkout and execution head from original evidence. Publish an add-only correction with the full structured source head, job and gate references, and explain the omission; do not alter the released job's immutable records or imply evidence absent from logs.",
+    "Identify the exact successful root-check command, all exclusions and material environment conditions from original execution records. The archived repair log contains a successful run and :solr:solr-ref-guide:checkSiteLinks, but does not itself identify the full command. Report uncertainty if the command cannot be established.",
+    "Assess the confirmed packaged explorer 401 behavior and the disableJsClient/Scalar npm difference against existing behavior and scope; recommend whether either requires a repair before offering the existing fix. Identify remaining concrete generated-client, proxy, license and network verification gaps without treating an untested concern as established. Separate observed behavior, design choices and unassessed risks.",
+    "Publish a report with evidence and limitations at the expected path; record executor stop and release. This is reconciliation and assessment, not authorization to push code or post a public comment. If evidence cannot support a passing conclusion, state precisely what remains missing."
+  ],
+  "source": {
+    "branch": "pr-5201-auth-browser-fix",
+    "contributor_parent": "3f9faa9e9861ce28f3ede3f4305bd91b6e297463",
+    "head": "0355023c3170c87a84cd9e5688ae6b4f3e4df3ae",
+    "pr": "https://github.com/apache/solr/pull/5201",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5201-auth-browser-linux-gate-r3-20261111",
+  "summary": "Reconcile PR 5201 round-three gate receipt fields, command attribution and outstanding adjacent findings.",
+  "type": "assignment"
+}
