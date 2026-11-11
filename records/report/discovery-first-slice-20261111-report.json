@@ -1,0 +1,8 @@
+{
+  "details": "Local research/discovery-first-slice-2026-11-11.md contains source links, an unexecuted example, semantic limits, and a proposed two-shard Linux probe and performance study. No implementation is recommended until evidence identifies a missing capability; no build, runtime test, source patch or public comment was made.",
+  "id": "discovery-first-slice-20261111-report",
+  "job": "discovery-first-slice-20261111",
+  "source_head": "82888694ae248b74d105d9c7b5f60d33c385f325",
+  "summary": "Source and documentation research identified explicit-list query-facet coverage as a candidate baseline; Luke index field enumeration is not filtered coverage, and facet output limits and existing time/CPU limits are not a hard aggregate resource budget.",
+  "type": "report"
+}
