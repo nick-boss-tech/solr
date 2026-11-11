@@ -1,0 +1,10 @@
+{
+  "host": "Windows implementation",
+  "id": "solr-18616-gate-repair-windows-20261111",
+  "job": "solr-18616-gate-repair-windows-20261111",
+  "prior_gate": "records/gate/solr-18616-server-metrics-linux-20261111.json",
+  "prior_receipt": "records/receipt/solr-18616-server-metrics-linux-20261111.json",
+  "successor_of": "solr-18616-server-metrics-implementation-windows-20261111",
+  "summary": "Review and apply generated dependency and tidy evidence from the incomplete production round 1 gate, push a corrected source head, and request a superseding Linux gate.",
+  "type": "assignment"
+}
