@@ -1,0 +1,9 @@
+{
+ "id": "phone-agent-pr-5315-graceful-retry-linux-gate-20261110-report-20261110",
+ "type": "report",
+ "job": "pr-5315-graceful-retry-linux-gate-20261110",
+ "owner": "phone-agent",
+ "status": "completed",
+ "summary": "Gate filed failed with four itemized findings: an executed async replay failure in the candidate's own client test; a tidy stop condition on four files including two production files; a stale :solr:server lockfile (no compileClasspath entries for its Jetty and slf4j dependencies) that blocks installDist, the packaged-server proof, and root check at the exact head; and a surviving fail-before mutation showing the outer whole-batch suppression is not discriminated by the multi-shard test. The sync core proof (multi-shard exactly-once, graceful shutdown) and all prior regression suites pass. Next step sits with the implementation worker: repair the async path, commit tidy, regenerate the server lockfile, then a successor gate at the new head.",
+ "recorded": "2026-11-10"
+}

@@ -1,0 +1,35 @@
+{
+ "id": "pr-5315-graceful-retry-linux-gate-20261110-receipt",
+ "type": "receipt",
+ "job": "pr-5315-graceful-retry-linux-gate-20261110",
+ "gate": "pr-5315-graceful-retry-linux-gate-20261110",
+ "owner": "phone-agent",
+ "verdict": "failed",
+ "summary": "Production-candidate proof at fork head e3ac884531f7a11e0e5715be2cbe7e2dbc86033b (branch solr-17764-submit; fork and live PR heads re-verified at filing: fork e3ac884531f7, PR 5315 still at reviewed head dfde089fd9dd0e5e79774593e66dd030e1b7dd22, open). Passing legs: the prior gate's regression suites pass (CloudSolrClientCacheTest 12/12, CloudHttp2SolrClientRetryTest 1/1, CloudSolrClientRoutingTest 2/2); ProbeGracefulRejectionJettyBodyCloseTest 1/1; ProbeGracefulMultiShardTest 1/1 (the sync multi-shard exactly-once scenario passes at this head); TestGracefulJettyShutdown 1/1 with nightly enabled. CloudSolrClientCacheTest is unchanged between d88ae0c6269e and this head, so the r4 gate's fail-before regressions are preserved per the gate record's allowance. Four findings make the verdict failed; each is itemized in findings. The candidate is not ready for a successor pass until at least findings 1 to 3 are repaired and a new head is gated.",
+ "findings": [
+  {
+   "n": 1,
+   "leg": "solrj client suites",
+   "detail": "ProbeGracefulRejectionClientTest ran 14 tests with one executed failure: testAsyncMarkedUpdateIsNotReplayedByEitherTransport, java.lang.AssertionError 'async marker failure must surface, not replay the update'. The async transport path does not honor the marked-rejection contract the class asserts. The other 13 tests in the class pass. This is an executed failure in the candidate's own new test at the exact head, not a setup or skip artifact."
+  },
+  {
+   "n": 2,
+   "leg": "tidy",
+   "detail": "Root tidy reformats four tracked files: solr/solrj/src/java/org/apache/solr/client/solrj/impl/GracefulShutdownRejectionException.java, solr/solrj/src/java/org/apache/solr/client/solrj/impl/LBSolrClient.java, solr/solrj/src/test/org/apache/solr/client/solrj/impl/ProbeGracefulRejectionClientTest.java, solr/test-framework/src/java/org/apache/solr/embedded/JettySolrRunner.java. The gate's stop condition was applied: the diff is preserved in evidence (tidy-changes.diff), the checkout was restored, and per the gate an implementation worker must commit the formatting and obtain a successor gate at a new head."
+  },
+  {
+   "n": 3,
+   "leg": "installDist, packaged-server proof, root check",
+   "detail": "The new :solr:server module cannot resolve its compile classpath at this head: solr/server/build.gradle declares compileOnly libs.eclipse.jetty.server, but solr/server/gradle.lockfile records org.eclipse.jetty:jetty-server, jetty-io, jetty-http, jetty-util (12.1.14) and org.slf4j:slf4j-api (2.0.20) only for jarValidation, runtimeClasspath, serverLib and solrCore, with no compileClasspath entries, so dependency locking rejects the resolution ('Resolved ... which is not part of the dependency lock state'). :solr:packaging:installDist therefore fails before producing a distribution, the packaged-server marked-503 leg could not be run at this head, and root check -x test fails at :solr:server:ecjLintMain for the same cause; no other check failure was observed. The repair is a lockfile regeneration for the server module by the implementation worker; it was not applied here because this gate proves the exact head as pushed."
+  },
+  {
+   "n": 4,
+   "leg": "fail-before mutation",
+   "detail": "The prescribed mutation (removing the outer marked-rejection whole-batch suppression in CloudSolrClient, diff preserved as mut-suppression.diff) was applied in a disposable clone with the multi-shard test unchanged and run at seed 17764C0DE: ProbeGracefulMultiShardTest PASSED under the mutation (1/1, exit 0), matched against the unmodified head passing the same test at the same seed. The mutation therefore does not discriminate in this test: the completed-shard resend and persisted count above 1 were not observed. The sync exactly-once behavior is proven by the positive test and the load-balancer layer's handling, but this outer guard's contribution is not fail-before-proven by the named test; either the guard covers a route the test does not exercise, or the test needs a scenario that reaches the outer retry. Recorded as a proof gap, not as a product failure."
+  }
+ ],
+ "packaged_leg_status": "Not run: blocked by finding 3 at the exact head. No distribution could be built, so no packaged startup, in-flight hold, or marked-503 capture exists for this head; nothing from the earlier disposable probes is presented as proof of this head.",
+ "trust_note": "Per the gate record: the client tests accept a forged marker when trust is explicitly enabled by the operator; that is recorded here as an operator-trust precondition of the design, not as provenance verification.",
+ "evidence": "records/evidence/pr-5315-graceful-retry-linux-gate-20261110-evidence.tar.gz (SHA-256 7a8c996b466503eec7ad1a1fad15b7df77345ddd660c90707de1f84c59847665): legs log (all named commands with exit codes), mutation log, tidy diff, mutation diff, seven positive class XML files and the mutation XML.",
+ "recorded": "2026-11-10"
+}

@@ -1,0 +1,10 @@
+{
+ "id": "phone-agent-pr-5315-graceful-retry-linux-gate-20261110-release-20261110",
+ "type": "release",
+ "job": "pr-5315-graceful-retry-linux-gate-20261110",
+ "actor": "phone-agent",
+ "reason": "Gate completed and receipt filed; verdict failed with four itemized findings.",
+ "evidence": "records/receipt/pr-5315-graceful-retry-linux-gate-20261110-receipt.json",
+ "executor_stop": "No Gradle daemon remains after the runs (verified by process check at filing); the disposable mutation clone was deleted.",
+ "recorded": "2026-11-10"
+}
