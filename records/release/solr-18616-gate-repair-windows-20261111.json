@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-solr-18616-repair",
+  "evidence": "records/report/solr-18616-gate-repair-windows-20261111-report.json; fork head d69d131141bc060f32ebef8b51bbcb1a1e4b32e2; no Windows build or test executor started.",
+  "id": "solr-18616-gate-repair-windows-20261111",
+  "job": "solr-18616-gate-repair-windows-20261111",
+  "reason": "Repair pushed and round-two Linux gate published; implementation work stopped pending proof.",
+  "type": "release"
+}
