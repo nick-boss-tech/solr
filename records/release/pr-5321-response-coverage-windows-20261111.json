@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-nick-shanin",
+  "evidence": "Fork ref pr-5321-response-coverage-20261111 verified at 0de81e22382b81a87826b3744a0a91e6f4d9d1bc; implementation report; no Windows build or test executor started.",
+  "id": "pr-5321-response-coverage-windows-20261111",
+  "job": "pr-5321-response-coverage-windows-20261111",
+  "reason": "Implementation complete; separate Linux gate handoff",
+  "type": "release"
+}
