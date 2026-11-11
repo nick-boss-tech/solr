@@ -1,0 +1,10 @@
+{
+ "id": "pr-5201-adjacent-investigation-20261111",
+ "type": "release",
+ "job": "pr-5201-adjacent-investigation-20261111",
+ "actor": "phone-agent",
+ "reason": "Investigation completed; result report published before this release at the assignment's expected path. The disableJsClient/Scalar finding is dry-run verified, the credential and framing threads are source-traced with their limits stated, and no vulnerability is claimed.",
+ "evidence": "records/report/pr-5201-adjacent-investigation-20261111-result.json; records/evidence/pr-5201-adjacent-investigation-20261111-evidence.tar.gz (SHA-256 9e48fc3f196b4d8d564440da3f23abd04140869b534a071a371f10761db2b9fe).",
+ "executor_stop": "Verified at filing: no Gradle daemon on the host and no holder on the test-queue lock. No source was pushed and the public PR is unchanged.",
+ "recorded": "2026-11-11"
+}
