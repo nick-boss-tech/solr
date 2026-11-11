@@ -1,0 +1,11 @@
+{
+ "id": "pr-5315-graceful-retry-linux-gate-r4-20261111",
+ "type": "release",
+ "job": "pr-5315-graceful-retry-linux-gate-r4-20261111",
+ "gate": "pr-5315-graceful-retry-linux-gate-r4-20261111",
+ "actor": "phone-agent",
+ "reason": "Gate completed with verdict failed on the repetition leg; receipt published before this release. All other legs, including root check, the mutation pair, and the packaged graceful capture, are green at this head and evidenced in the receipt; the failing method's instability (2 of 6 runs, identical transport signature) is the repair target for a successor head.",
+ "evidence": "records/receipt/pr-5315-graceful-retry-linux-gate-r4-20261111-receipt.json; records/evidence/pr-5315-graceful-retry-linux-gate-r4-20261111-evidence.tar.gz (SHA-256 cadf6049c961067d5a5b56b9cd701c22574d0271daee8ce8264e0e791a33ebe0).",
+ "executor_stop": "Verified at filing: no Gradle daemon or java process on the host, no holder on the test-queue lock, all packaged nodes from the traces stopped, and the disposable mutation clone restored to a clean tree.",
+ "recorded": "2026-11-11"
+}
