@@ -1,0 +1,24 @@
+{
+  "claim_path": "records/claim/pr-5321-response-coverage-linux-20261111.json",
+  "contributor_parent": "35db4554284ca0d2ca37eb78ed4c7c7dee599db2",
+  "gate_id": "pr-5321-response-coverage-linux-20261111",
+  "gate_record": "records/gate/pr-5321-response-coverage-linux-20261111.json",
+  "host_requirements": [
+    "linux",
+    "jdk21",
+    "Solr Gradle"
+  ],
+  "id": "pr-5321-response-coverage-linux-20261111",
+  "implementation_job": "pr-5321-response-coverage-windows-20261111",
+  "job": "pr-5321-response-coverage-linux-20261111",
+  "phase": "round 1, coverage and compatibility probe",
+  "receipt_path": "records/receipt/pr-5321-response-coverage-linux-20261111-receipt.json",
+  "source": {
+    "branch": "pr-5321-response-coverage-20261111",
+    "head": "0de81e22382b81a87826b3744a0a91e6f4d9d1bc",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify PR 5321 response coverage and probe legacy leading-hyphen behavior",
+  "supersedes": null,
+  "type": "assignment"
+}
