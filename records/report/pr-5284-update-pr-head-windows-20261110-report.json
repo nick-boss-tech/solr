@@ -1,0 +1,11 @@
+{
+  "head": "3d530d7639eeb0b4bd8ee11227a1133fe66aa672",
+  "id": "pr-5284-update-pr-head-windows-20261110-report",
+  "job": "pr-5284-update-pr-head-windows-20261110",
+  "live_state": "PR 5284 open and draft; GitHub reports CONFLICTING/DIRTY after push, and a read-only merge-tree against apache/solr main 82888694ae248b74d105d9c7b5f60d33c385f325 identifies content conflict in solr/core/src/test/org/apache/solr/handler/admin/TestCollectionAPIs.java. The only listed PR check at read-back was labeler, passing; broader CI is not established.",
+  "proof": "Prior focused gate records six API tests passed, four cloud tests passed and one nightly test skipped, two parameter-routing mutations detected, tidy clean, Error Prone and root check passed at the target head. The full suite previously failed at an earlier head on V2ApiIntegrationTest.testException, matching the reviewed baseline and related to still-open PR 5285; migration tests last ran at 5fce0c06, not the target head. Additional compatibility checks remain unproven.",
+  "scope": "No rebase, force push, public comment, PR body edit, PR readiness change, or JIRA write. User asked for draft replies earlier; they remain held.",
+  "status": "PR branch updated; public PR has merge conflict",
+  "summary": "At Nick's direct instruction and acceptance of the known dependent-PR failure, fast-forwarded nick-boss-tech/solr:solr-16398-rebalance-migrate from 415c639e6e5b74d665209024cf29fb68dc32b23f to 3d530d7639eeb0b4bd8ee11227a1133fe66aa672 without force. Independent GitHub API read-back verified the fork ref and apache/solr PR 5284 head both match the target.",
+  "type": "report"
+}
