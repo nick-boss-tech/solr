@@ -1,0 +1,29 @@
+{
+  "acceptance": [
+    "Receipt identifies exact head and each leg's outcome independently, including unexpected values, unsupported configurations, infrastructure failures and incomplete legs; no observed mismatch is relabeled as a pass.",
+    "Archive reproducible scripts and exact fixture/configuration, commands and seeds, full query/Luke responses including headers, expected-versus-observed table and raw logs, shard-failure and limit evidence, measurement data/method, environment and final process-stop evidence. Publish an evidence pointer and SHA-256, and independently verify the stored artifact if the host provides an authorized evidence store.",
+    "A passed receipt means all requested behavioral and measurement legs ran and were classified with evidence, even if findings reveal an API limitation; it does not assert the candidate design is correct or safe. If any required leg is missing, use incomplete; distinguish setup failure from a demonstrated behavior. Do not fabricate fail-before proof for a research probe. No tidy or root check is required because there is no offered production patch."
+  ],
+  "environment": "Isolated Linux host and disposable SolrCloud only. Record OS, resources, JDK, Solr and Gradle versions, exact checkout and git status. Verify remote ref and detached checkout HEAD match the full head before execution. Do not use an existing shared or production collection. Keep all probe-only scripts and fixture changes outside the tracked source tree or archive their exact diff; never present them as production changes.",
+  "execution": [
+    "Fetch the named fork branch and check out the exact head in a clean isolated checkout. Record commands, outputs, source HEAD, remote ref and environment. Use existing Solr test infrastructure or a disposable SolrCloud; record exact commands, schema/configuration, routing and complete fixture data so another host can reproduce. Build or launch only as needed for these probes. Choose and record fixed seeds. Preserve the clean source state and stop all probe processes after evidence capture.",
+    "Create a two-shard collection with controlled routing and known committed live documents. Include a dynamic field on only one shard, a multivalued field with two values in one matching document, a field present only outside the filter, a field present only in a deleted document, plus indexed-only, DocValues-only and stored-only fields. Record schema flags and how deletion and segment state are held so a merge cannot silently invalidate the deleted-only probe. Include a nested parent/child case or separately documented equivalent population test.",
+    "For a known filter and explicit fields, run rows=0 JSON query facets using field existence queries. Capture full requests and responses and compare each result to independently enumerated fixture expectations: domain total; per-field live-document counts; multi-value counts once; dynamic field on one shard; field outside filter; zero-match filter. Run local-per-shard and distributed checks to distinguish routing from aggregation. Record the actual result or error for each field type, especially stored-only and DocValues-only; do not label unsupported as absent. Check nested parent and child domains separately and state which documents are counted.",
+    "Run Luke with numTerms=0 locally on each shard and distributed, recording full responses. Compare actual candidate names with live fixture, deleted-only, dynamic and stored-only fields; record copy/internal fields and any type restrictions observed. Show whether supplying fq changes candidate enumeration by comparing paired requests, without inferring filtered presence from metadata. Record whether the deleted field remains in segment metadata; if it does not, classify that leg incomplete rather than assuming a result.",
+    "Exercise a deliberately unavailable shard against the disposable collection: capture status, body and headers for default behavior and shards.tolerant=true. Restore the shard. Exercise a reproducible limit/partial-result case with full headers, using an existing deterministic test hook if available; otherwise record the attempted method and classify that leg incomplete instead of claiming a timeout or retrying indefinitely. Record partialResults=true versus omitted and whether facet counts are returned; do not assume either outcome.",
+    "Conduct bounded exploratory measurements on the disposable cluster only. Vary explicit field count (1, 10, 50 where supported), matching-document count and shard count (1 and 2), with a fixed documented synthetic data distribution and at least three repeated requests per point after a documented warmup. Capture elapsed latency per request, process CPU and peak or sampled memory with measurement method and units; record data size, host limits, cache state and errors. Cap fixture size and time to avoid host contention; if a resource or tool prevents a cell, identify it as unmeasured. Results are descriptive, not a hard safety bound or representative production benchmark."
+  ],
+  "head": "82888694ae248b74d105d9c7b5f60d33c385f325",
+  "id": "discovery-coverage-linux-20261111-gate",
+  "job": "discovery-coverage-linux-20261111",
+  "objective": "Determine what existing JSON query facets and Luke can actually provide for filtered document coverage and candidate fields, how incomplete requests surface, and how exploratory cost changes with workload. A finding that an approach is unsupported or incorrect is a valid research outcome, not a passing implementation proof.",
+  "phase": "research feasibility round 1",
+  "receipt_path": "records/receipt/discovery-coverage-linux-20261111-receipt.json",
+  "source": {
+    "branch": "discovery-coverage-probe-20261111",
+    "head": "82888694ae248b74d105d9c7b5f60d33c385f325",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes": null,
+  "type": "gate"
+}
