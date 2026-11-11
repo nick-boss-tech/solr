@@ -1,0 +1,27 @@
+{
+  "capabilities": [
+    "linux",
+    "solr-gradle",
+    "jetty",
+    "integration-probe"
+  ],
+  "claim_path": "records/claim/pr-5315-graceful-retry-linux-gate-r2-20261111.json",
+  "deliverables": "Run the named gate against the exact source head and file a schema-valid receipt with actual commands, full failure chains, counts, XML, logs, lockfile and mutation evidence. A failing async test is not repaired merely by improved diagnostics. Release with actor, reason and verified executor-stop evidence. No source push or public comment.",
+  "gate_id": "pr-5315-graceful-retry-linux-gate-r2-20261111",
+  "gate_record": "records/gate/pr-5315-graceful-retry-linux-gate-r2-20261111.json",
+  "host": "Linux gate host, JDK 21, isolated clean checkout",
+  "id": "pr-5315-graceful-retry-linux-gate-r2-20261111",
+  "job": "pr-5315-graceful-retry-linux-gate-r2-20261111",
+  "phase": "successor after failed production candidate gate",
+  "prerequisites": "Before claiming, inspect prior executor-stop reconciliation, the canonical prior release, host locks, worker state and current source head; do not start conflicting work if the prior worker or executor might continue.",
+  "prior_receipt": "records/receipt/pr-5315-graceful-retry-linux-gate-20261110-receipt.json",
+  "receipt_path": "records/receipt/pr-5315-graceful-retry-linux-gate-r2-20261111-receipt.json",
+  "source": {
+    "branch": "solr-17764-submit",
+    "head": "2ea7f584f0ca91a9de470ebe72b4063e8685de02",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5315-graceful-retry-linux-gate-20261110",
+  "summary": "Diagnose the failed async case and verify PR 5315 repair head",
+  "type": "assignment"
+}
