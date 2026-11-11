@@ -1,0 +1,109 @@
+{
+  "environment": {
+    "JAVA_TOOL_OPTIONS": "unset",
+    "NODE_ENV": "unset",
+    "docker_command_present": false,
+    "docker_run_or_install_attempted": false,
+    "gradle": "9.7.0",
+    "host_id": "phone-agent-2",
+    "hostname": "0609f7968656",
+    "java": "OpenJDK 21.0.12.1",
+    "platform": "Linux-6.18.38+-x86_64-with-glibc2.39"
+  },
+  "evidence_record": "records/evidence/pr-5311-pivot-refresh-linux-20261110-evidence.json",
+  "gate": "pr-5311-pivot-refresh-linux-proof-20261110",
+  "head": "869400c40057d4f94faef5299969a9144bdb9a12",
+  "id": "pr-5311-pivot-refresh-linux-20261110-report",
+  "job": "pr-5311-pivot-refresh-linux-20261110",
+  "limitations": [
+    "The Antora site build and checkSiteLinks themselves were not run in the final root-check invocation; the owner explicitly authorized these two exact exclusions. They are not claimed as passed.",
+    "Docker-dependent tests were not run; Docker was not installed or invoked.",
+    "The regression test exercises a constructed QueryResponse boundary, not live Solr server integration."
+  ],
+  "owner_authorization": {
+    "assigned_root_check_test_exclusion": "test",
+    "authorized_site_chain_exclusions": [
+      ":solr:solr-ref-guide:buildLocalAntoraSite",
+      ":solr:solr-ref-guide:checkSiteLinks"
+    ],
+    "no_other_command_exclusions": true,
+    "received_at": "2026-11-10T22:15:31-07:00",
+    "scope": "Treat :solr:solr-ref-guide:checkSiteLinks as part of the Antora task chain because it failed only with parsedFiles=0 after the Antora producer was excluded; rerun excluding both tasks and mark green only if the remainder and other proof are clean."
+  },
+  "results": {
+    "fail_before": {
+      "command": "./gradlew --no-daemon --console=plain :solr:solrj:cleanTest :solr:solrj:test --tests org.apache.solr.client.solrj.response.QueryResponseTest.testPivotFacetsWithRepeatedKeys -Ptests.seed=5311A11C0FFEE --rerun-tasks",
+      "contributor_QueryResponse_sha256": "2df9191f1b4b8a62ed342127a35afd5f59bbd402dff22a018adfd47a8b69b5b6",
+      "errors": 0,
+      "expected_gradle_exit_code": 1,
+      "failure": "java.lang.AssertionError at QueryResponseTest.java:72: assertEquals(pivots, pivots.clone());",
+      "failures": 1,
+      "overlay_changed_only": "solr/solrj/src/java/org/apache/solr/client/solrj/response/QueryResponse.java",
+      "retained_QueryResponseTest_sha256": "d34e724d2112109ddb68503aff0e5712fb9f72ea09af103a2b8331840bb852ba",
+      "skipped": 0,
+      "test_case": "testPivotFacetsWithRepeatedKeys",
+      "tests": 1
+    },
+    "positive_suites": {
+      "command": "./gradlew --no-daemon --console=plain :solr:solrj:cleanTest :solr:solrj:test --tests org.apache.solr.client.solrj.response.QueryResponseTest --tests org.apache.solr.client.solrj.response.QueryResponseSectionParityTest --tests org.apache.solr.client.solrj.response.QueryResponseJsonParserIntegrationTest --tests org.apache.solr.client.solrj.request.schema.SchemaRequestBodyTest -Ptests.seed=5311A11C0FFEE --rerun-tasks",
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "seed": "5311A11C0FFEE",
+      "skipped": 0,
+      "suite_counts": {
+        "QueryResponseJsonParserIntegrationTest": 2,
+        "QueryResponseSectionParityTest": 8,
+        "QueryResponseTest": 7,
+        "SchemaRequestBodyTest": 3
+      },
+      "tests": 20
+    },
+    "root_check": {
+      "final_attempt": {
+        "actionable_tasks": 515,
+        "assigned_test_exclusion": "test",
+        "authorized_site_chain_exclusions": [
+          ":solr:solr-ref-guide:buildLocalAntoraSite",
+          ":solr:solr-ref-guide:checkSiteLinks"
+        ],
+        "command": "./gradlew --no-daemon --console=plain check -x test -x :solr:solr-ref-guide:buildLocalAntoraSite -x :solr:solr-ref-guide:checkSiteLinks",
+        "executed": 172,
+        "exit_code": 0,
+        "failed_tasks": [],
+        "gradle_task_status_counts": {
+          "NO-SOURCE": 28,
+          "SKIPPED": 36
+        },
+        "status": "BUILD SUCCESSFUL",
+        "task_status_note": "These are Gradle task outcomes recorded in the full log, not additional -x command exclusions.",
+        "up_to_date": 343
+      },
+      "initial_attempt": {
+        "command": "./gradlew --no-daemon --console=plain check -x test -x :solr:solr-ref-guide:buildLocalAntoraSite",
+        "diagnostic": "The checker ran without Antora-produced site files and reported parsedFiles=0; this diagnostic was retained.",
+        "exit_code": 1,
+        "failed_task": ":solr:solr-ref-guide:checkSiteLinks"
+      }
+    },
+    "tidy": {
+      "command": "./gradlew --no-daemon --console=plain tidy",
+      "exit_code": 0,
+      "git_diff_check_exit_code": 0,
+      "tracked_changes": false
+    }
+  },
+  "source": {
+    "compare": "fork is 2 commits ahead, 0 behind; only QueryResponse.java and QueryResponseTest.java differ",
+    "contributor_head": "dc40a1c22c4c48a83d0eb492464d10c29e07ad6a",
+    "contributor_pr": "https://github.com/apache/solr/pull/5311",
+    "fork": "nick-boss-tech/solr:pr-5311-pivot-duplicate-keys",
+    "fork_head": "869400c40057d4f94faef5299969a9144bdb9a12",
+    "pr_state": "open",
+    "public_pr_or_jira_writes": false,
+    "source_changed_or_pushed_by_gate": false
+  },
+  "summary": "Exact-head Linux gate passed after the owner-authorized Antora-chain exclusions. All four required positive SolrJ suites passed (20 tests, 0 failures/errors/skips), tidy and diff check passed, the final root-check remainder succeeded, and the expected fail-before regression reproduced at the clone-equality assertion.",
+  "type": "report",
+  "verdict": "passed"
+}
