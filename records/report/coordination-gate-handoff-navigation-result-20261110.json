@@ -1,0 +1,37 @@
+{
+  "board_documentation_commit": "6b3a032eb2155a8a37303075f0ee38000e69f69d",
+  "board_files": [
+    "START-HERE.md",
+    "WORKFLOW.md",
+    "tools/README.md",
+    ".agents/skills/solr-coordination/SKILL.md"
+  ],
+  "changes": [
+    "New gate handoffs name and link the assignment, gate record, canonical claim path, source repository, branch and exact head, expected receipt, phase and board snapshot.",
+    "Readers of older assignments search records/gate by job at a fetched snapshot, inspect each candidate and reconcile missing, ambiguous or superseded records before claiming.",
+    "The gate ID can match or differ from the job ID. The writer does not enforce the new handoff fields.",
+    "The env/agents.md current-board sections now describe coordination-v2 instead of obsolete coordination-ui routing."
+  ],
+  "current_example": {
+    "assignment": "records/assignment/pr-5201-auth-browser-linux-gate-r2-20261110.json",
+    "claim_path": "records/claim/pr-5201-auth-browser-linux-gate-r2-20261110.json",
+    "fork_branch": "nick-boss-tech/solr:pr-5201-auth-browser-fix",
+    "gate": "records/gate/pr-5201-auth-browser-gate-r2-20261110.json",
+    "head": "0355023c3170c87a84cd9e5688ae6b4f3e4df3ae",
+    "job": "pr-5201-auth-browser-linux-gate-r2-20261110",
+    "note": "Refresh the live board and verify ownership and current head before acting."
+  },
+  "id": "coordination-gate-handoff-navigation-result-20261110",
+  "job": "coordination-gate-handoff-navigation-windows-20261110",
+  "summary": "Updated coordination-v2 and Windows workspace guidance to make gate assignment, specification and claim paths explicit.",
+  "type": "report",
+  "verification": [
+    "A non-force push reached the board, and the live ref matched the documentation commit at read-back. All four remote files matched the reviewed content.",
+    "git diff --check passed. All eight JSON examples in tools/README.md parsed. The documented grep command located the existing PR 5201 round-two gate by its exact job ID.",
+    "No Gradle, Linux gate, source patch, or public PR action was performed."
+  ],
+  "workspace_files": [
+    "AGENTS.md",
+    "env/agents.md"
+  ]
+}
