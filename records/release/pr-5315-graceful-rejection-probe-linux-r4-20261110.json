@@ -1,0 +1,8 @@
+{
+  "actor": "Ares/phone-agent-2",
+  "evidence": "Report: records/report/pr-5315-graceful-rejection-probe-linux-r4-20261110-report.json (published at commit f5021e04d47e5f6da136485ce4c2b771892861f6). Receipt: records/receipt/pr-5315-graceful-rejection-probe-linux-r4-20261110-receipt.json (published at commit 1b1188e7eacc56d3e2e97853030616cbaef91026; verdict incomplete). Evidence archive: records/evidence/evidence-pr-5315-graceful-rejection-probe-linux-r4-20261110.tar.gz, SHA-256 4c24572b247aa0e239f7bce9acc602398907d48995d5acc03c32de696e8e1b22; stored bytes independently verified against that hash. Executor stop: logs/final-executor-stop.txt in the archive, SHA-256 3023cc230b26dca8fa727306e587e108305e0da56b877334950d77361108afef; final run 62 ended 2026-11-10T18:39:55-07:00 with exit 0, both designated locks were free, no Gradle/Solr executor was found, and free inodes were 39%. The report/receipt and evidence remain on coordination-v2; the source fork branch remained at the assigned SHA and upstream PR #5315 head remained unchanged at the final source verification.",
+  "id": "pr-5315-graceful-rejection-probe-linux-r4-20261110",
+  "job": "pr-5315-graceful-rejection-probe-linux-r4-20261110",
+  "reason": "The authorized r4 probe is complete with an incomplete verdict. The exact-head report and receipt and the verified evidence archive have been published. Relinquishing this phone-agent-2 claim; no further Solr or Gradle executor work is planned. The prototype stayed disposable; the source branch was not pushed and no public comment was posted.",
+  "type": "release"
+}
