@@ -1,0 +1,19 @@
+{
+  "claim_path": "records/claim/pr-5315-r3-shutdown-investigation-linux-20261111.json",
+  "gate_id": "pr-5315-r3-shutdown-investigation-linux-20261111",
+  "gate_record": "records/gate/pr-5315-r3-shutdown-investigation-linux-20261111.json",
+  "host": "Linux JDK 21, Solr Gradle and packaged-server investigation",
+  "id": "pr-5315-r3-shutdown-investigation-linux-20261111",
+  "job": "pr-5315-r3-shutdown-investigation-linux-20261111",
+  "phase": "R3 diagnostic, after failed R2 gate",
+  "prior_receipt": "records/receipt/pr-5315-graceful-retry-linux-gate-r2-20261111-receipt.json",
+  "receipt_path": "records/receipt/pr-5315-r3-shutdown-investigation-linux-20261111-receipt.json",
+  "scope": "Investigate packaged stop behavior before proposing a server fix; run targeted proof of async candidate and root check. Preserve evidence and report findings. No source push or public comments. This is a diagnostic gate, not a complete production acceptance gate.",
+  "source": {
+    "branch": "solr-17764-submit",
+    "head": "896bef31e74af42812f4b5ba880450dcad0f6815",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Diagnose packaged shutdown and verify candidate async repair",
+  "type": "assignment"
+}
