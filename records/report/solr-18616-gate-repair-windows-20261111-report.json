@@ -1,0 +1,14 @@
+{
+  "actor": "codex-windows-solr-18616-repair",
+  "gate": "records/gate/solr-18616-server-metrics-linux-r2-20261111.json",
+  "id": "solr-18616-gate-repair-windows-20261111-report",
+  "job": "solr-18616-gate-repair-windows-20261111",
+  "source": {
+    "branch": "solr-18616-submit",
+    "head": "d69d131141bc060f32ebef8b51bbcb1a1e4b32e2",
+    "prior_head": "78cbd210c7ed1b5342e83a519fcfc40b9787d8de",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verified round-one evidence archive SHA-256 53c7ccb417886fa48877133fafb45bea24705d5592ed2fe1f946c17ab4aa1896; applied its two generated files and tidy patch, reviewed worktree status and diff, committed and pushed corrected head. No Gradle run on Windows. Exact-head Linux round 2 is proof pending.",
+  "type": "report"
+}
