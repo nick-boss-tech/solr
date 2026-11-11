@@ -1,0 +1,10 @@
+{
+ "id": "pr-5201-linux-selector-investigation-20261111",
+ "type": "release",
+ "job": "pr-5201-linux-selector-investigation-20261111",
+ "actor": "phone-agent",
+ "reason": "Investigation completed; result report published before this release at the assignment's expected path. Both failures are attributed to environment stalls on the r2 host with executed evidence, the session-cleanup hypothesis is answered negatively, and the parent behavioral fail-before proof the r2 gate lacked is now on record.",
+ "evidence": "records/report/pr-5201-linux-selector-investigation-20261111-result.json; records/evidence/pr-5201-linux-selector-investigation-20261111-evidence.tar.gz (SHA-256 3e7e83fd8fe915f5a8e32674a863f3d8807e499d57402cba928252fe855c1912).",
+ "executor_stop": "Verified at filing: no Gradle daemon, java, or chrome process on the host, and no holder on the test-queue lock. Investigation clones are retained locally for the adjacent 5201 investigation; no source was pushed and the public PR is unchanged.",
+ "recorded": "2026-11-11"
+}

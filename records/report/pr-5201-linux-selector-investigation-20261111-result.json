@@ -1,0 +1,46 @@
+{
+ "id": "pr-5201-linux-selector-investigation-20261111-result",
+ "type": "report",
+ "job": "pr-5201-linux-selector-investigation-20261111",
+ "owner": "phone-agent",
+ "status": "completed",
+ "head": "0355023c3170c87a84cd9e5688ae6b4f3e4df3ae",
+ "contributor_parent": "3f9faa9e9861ce28f3ede3f4305bd91b6e297463",
+ "summary": "Both r2 Selenium failures are environment stalls on the r2 host, not product behavior, not a browser-version effect, and not a deterministic selector or session defect. On this host the unmodified tests pass at the exact head and exact seeds in every shape tried, and the unchanged revised test at the contributor parent reaches the request and fails behaviorally, which supplies the fail-before proof the r2 gate could not obtain.",
+ "findings": [
+  "SELECTOR TIMEOUT (seed A6429A38B2BCEB3A): the r2 failure is a NoSuchElementException held for the full 30 s poll at AdminUiSecurityAuthTest.java:155 (operation-button XPath), extracted from the r2 evidence archive (SHA-256 verified against the board record). The same unmodified test at the same head and seed PASSES here on Chrome for Testing 157.0.8103.50 (28.4 s), on Chrome for Testing 155.0.8059.39, the r2 host's exact browser and driver versions (26.5 s), and on 155 under four-way CPU contention that stretched the test to 119.9 s. The element therefore exists and matches in both browser generations; the r2 host's iframe content path stalled past the interaction budget. The r2 console log shows the Scalar bundle loaded and processed the spec, but the failure handler captured only the OUTER page DOM, so the exact stalled resource inside the iframe (spec fetch vs render vs data fetch) cannot be named from the preserved evidence; the r2 receipts themselves record inode-pressure tracking and parallel designated Gradle locks on that host.",
+  "COMBINED LOGIN FAILURE (seed E26F868A06F9131C): the full combined command (AdminUiSecurityAuthTest plus AdminUiSmokeTest) PASSES here, 2/2 and 5/5, at the exact seed. The session-cleanup hypothesis is not supported: the explorer test's finally block clears sessionStorage, the identical sequence passes elsewhere, and the r2 failure point was after a successful login and dashboard load (page never contained BasicAuthPlugin), a data-fetch stall symptom; leftover session state would have failed earlier, at the login-form wait.",
+  "PARENT BEHAVIOR (the r2 gate's missing leg): with the unchanged revised test overlaid on contributor parent 3f9faa9e98 (overlay file SHA-256 98e63e2484665727c612c2ce78878e5d1db0de600eb7b6241c75d450297270fa, identical to the r2 record), the test here gets PAST the Collections selector, issues the request, and fails at the response wait, AdminUiSecurityAuthTest.java:186 'the explorer should receive the collections response' (48.9 s). At the fix head the same test passes with all assertions (status 200, collections array, Authorization header match, X-Requested-With). The test therefore does discriminate the PR's behavior; on a healthy host the proof pair is complete.",
+  "MINIMAL REPAIRS (test harness only; no product change indicated; for a separately coordinated implementation and gate): (1) the failure handler should capture the CURRENT FRAME's DOM and console, not only the outer page; that gap is why the r2 failure needed a second investigation. (2) The explorer step should re-assert the collections group's expansion inside the operation wait instead of expanding once before a 30 s poll, so a sidebar remount during the wait cannot strand it. Neither repair was applied here; this investigation pushes no source, per its scope.",
+  "ENVIRONMENT: Selenium runs on this host with Chrome for Testing and the Selenium-Manager-resolved driver (the bundled Muse Browser at /opt/meta-chromium refuses external launch: 'Hatch WebGL domain policy is required for browser startup'). The relay corrupted the solr-ui-wasm.zip download once (verifyUiWasm checksum mismatch); the artifact was fetched directly from nightlies.apache.org, verified against the gradle.properties pin, and seeded, as in prior gates. JWT was not exercised, as in the r2 gate."
+ ],
+ "runs": [
+  {
+   "command": ":solr:webapp:test --tests AdminUiSecurityAuthTest.testApiExplorerUsesAdminCredentials -Ptests.seed=A6429A38B2BCEB3A",
+   "browser": "Chrome for Testing 157.0.8103.50",
+   "result": "passed 1/1, 28.4 s"
+  },
+  {
+   "command": "same focused test",
+   "browser": "Chrome for Testing 155.0.8059.39",
+   "result": "passed 1/1, 26.5 s"
+  },
+  {
+   "command": "same focused test under 4 CPU burners",
+   "browser": "Chrome for Testing 155.0.8059.39",
+   "result": "passed 1/1, 119.9 s"
+  },
+  {
+   "command": ":solr:webapp:test --tests AdminUiSecurityAuthTest --tests AdminUiSmokeTest -Ptests.seed=E26F868A06F9131C",
+   "browser": "Chrome for Testing 157.0.8103.50",
+   "result": "passed 2/2 and 5/5"
+  },
+  {
+   "command": "same focused test and seed at contributor parent 3f9faa9e98 with the unchanged fix-branch test overlaid",
+   "browser": "Chrome for Testing 157.0.8103.50",
+   "result": "failed behaviorally at the collections-response wait (line 186) after reaching the request, 48.9 s"
+  }
+ ],
+ "evidence": "records/evidence/pr-5201-linux-selector-investigation-20261111-evidence.tar.gz (SHA-256 3e7e83fd8fe915f5a8e32674a863f3d8807e499d57402cba928252fe855c1912): all five run logs and their fresh JUnit XML.",
+ "recorded": "2026-11-11"
+}
