@@ -1,0 +1,27 @@
+{
+  "commands": [
+    "./gradlew --no-daemon :solr:solrj:test --tests org.apache.solr.client.solrj.impl.ProbeGracefulRejectionClientTest.testAsyncMarkedUpdateIsNotReplayedByEitherTransport --tests org.apache.solr.client.solrj.impl.CloudSolrClientCacheTest.testMixedRouteFailureDoesNotReplayMarkedRejection -Ptests.seed=17764C0DE --rerun-tasks",
+    "In an isolated disposable checkout at the exact head, ./gradlew --no-daemon :solr:server:dependencies --write-locks and compare the resulting server lockfile byte-for-byte with the pushed candidate; preserve any diff and do not change the proof checkout.",
+    "Run the prior gate's full suites, package/startup proof, tidy, root check and original-PR fail-before legs when the diagnosed failure is resolved; use the focused mixed-error mutation below instead of the earlier nondiscriminating multi-shard mutation, and report each omitted leg as incomplete."
+  ],
+  "environment": "Linux JDK 21, isolated clean checkout. Reconcile prior worker/executor liveness and canonical release, verify exact remote head, claim and host locks before execution. Do not push source changes or post public comments.",
+  "head": "2ea7f584f0ca91a9de470ebe72b4063e8685de02",
+  "id": "pr-5315-graceful-retry-linux-gate-r2-20261111",
+  "job": "pr-5315-graceful-retry-linux-gate-r2-20261111",
+  "phase": "successor after failed production candidate gate",
+  "requirements": [
+    "The earlier test failed without printing the actual exception. Run its diagnostic version first and preserve the full nested exception stack, transport, attempted/rejected endpoint counts, server handler-entry counts and logs. Identify whether an application update was actually resent; do not infer replay from a missing exception class alone. Test must pass at the exact head for a passed verdict. If it still fails, report the cause and stop or continue independent read-only proof, but do not weaken assertions or silently patch the source head.",
+    "The lockfile was provisionally edited on Windows from the five modules printed in the earlier Linux resolution error; it was not produced by Gradle. In a disposable checkout regenerate :solr:server dependency locks and compare; if the generated result differs, retain the generated patch for implementation and fail/incomplete this exact-head proof. Also run the repository-required dependency/license lock tasks on Linux when applicable and record results and changes.",
+    "Test testMixedRouteFailureDoesNotReplayMarkedRejection on the pushed head, then in a disposable copy remove only the outer whole-batch update guard, keeping the inner RouteException/503 marker guard intact, and rerun the identical test/seed. The new test's first route error is a SocketException and the other route is marked, so this mutation exercises the communication-error path. Require an actual fail-before assertion and pass-after; preserve XML, logs and mutation diff. The previous multi-shard mutation left the other 503 guard intact, so its pass did not prove the outer guard unnecessary.",
+    "If named focused cases pass and lockfile matches, execute the remaining original gate requirements at this exact head: all prior regression and client/core/Jetty suites, real packaged startup and pre-handler marked 503 evidence, tidy with no changes, and root check -x test. Preserve fresh XML, counts, exits, logs, environment and original-PR fail-before evidence. The focused mixed-error mutation above replaces the nondiscriminating multi-shard mutation from the prior gate. Do not extrapolate the earlier gate's passes to this changed head.",
+    "Report passed only if every required proof leg is complete and failures are resolved; otherwise failed or incomplete as appropriate. The trust opt-in depends on the operator controlling all intermediaries, and the candidate does not fix ambiguous in-flight update 503s or all pre-existing communication retry behavior. Publish receipt before release with verified executor-stop evidence."
+  ],
+  "seed": "17764C0DE",
+  "source": {
+    "branch": "solr-17764-submit",
+    "head": "2ea7f584f0ca91a9de470ebe72b4063e8685de02",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes": "pr-5315-graceful-retry-linux-gate-20261110",
+  "type": "gate"
+}
