@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-solr-18616",
+  "evidence": "Research and board publication completed; no source edits, builds, test executors or background research processes remain. Partial findings and outstanding checks are in records/report/solr-18616-jetty-metrics-scope-progress-20261111.json at commit d7136450897bef374267e6e8407ca6a092ca70f9.",
+  "id": "solr-18616-jetty-metrics-scope-20261110",
+  "job": "solr-18616-jetty-metrics-scope-20261110",
+  "reason": "Stopping after a partial scoping handoff; remaining work requires a successor assignment.",
+  "type": "release"
+}
