@@ -1,0 +1,18 @@
+{
+  "claim_path": "records/claim/solr-18616-bridge-prototype-linux-20261111.json",
+  "gate_id": "solr-18616-bridge-prototype-linux-20261111",
+  "gate_record": "records/gate/solr-18616-bridge-prototype-linux-20261111.json",
+  "host": "Linux gate host",
+  "id": "solr-18616-bridge-prototype-linux-20261111",
+  "job": "solr-18616-bridge-prototype-linux-20261111",
+  "phase": "prototype feasibility round 1",
+  "receipt_path": "records/receipt/solr-18616-bridge-prototype-linux-20261111.json",
+  "recorded": "2026-11-11",
+  "source": {
+    "branch": "solr-18616-submit",
+    "head": "061fa32fa78a99f6e7dbc72dcca491ff7cb4fa84",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Run the test-only SOLR-18616 Jetty metrics bridge feasibility prototype; this is not a production implementation or a classloader/packaging proof.",
+  "type": "assignment"
+}
