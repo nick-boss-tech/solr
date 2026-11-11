@@ -1,0 +1,11 @@
+{
+  "gate": "records/assignment/pr-5284-merge-main-linux-gate-20261110.json",
+  "head": "a225b9d4af9f295e3c84b7ff6f35ef7e71ababc1",
+  "id": "pr-5284-merge-main-windows-20261110-report",
+  "job": "pr-5284-merge-main-windows-20261110",
+  "limits": "PR 5285 remained open at last check; the prior malformed-body 500/400 failure is accepted by Nick for the push, not a passing test. Earlier Linux proof at 3d530d76 does not prove the merged head. The PR stays open and draft; no comment, review, body edit, force push or rebase.",
+  "status": "Conflict resolved and pushed; Linux proof pending",
+  "summary": "At Nick's instruction, merged Apache Solr main into PR 5284 and resolved the sole conflict by removing imports for the obsolete migrate-docs helper already deleted by the PR. The resulting TestCollectionAPIs.java matches the prior PR version. The merge commit's parents are the old PR head 3d530d7639eeb0b4bd8ee11227a1133fe66aa672 and upstream main 82888694ae248b74d105d9c7b5f60d33c385f325.",
+  "type": "report",
+  "verification": "git diff --check and staged diff --check passed, no unresolved files, clean worktree after commit. Non-force push to nick-boss-tech/solr:solr-16398-rebalance-migrate succeeded. Independent GitHub ref and PR head read-backs match a225b9d4af9f295e3c84b7ff6f35ef7e71ababc1. GitHub reported MERGEABLE and UNSTABLE; the only listed check at read-back was a passing labeler. No Windows build or test."
+}
