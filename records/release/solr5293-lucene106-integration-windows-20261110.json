@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-desktop",
+  "evidence": "See records/receipt/solr5293-windows-integration-receipt-20261110.json and records/report/solr5293-windows-integration-summary-20261110.json. Both Solr stop commands exited 0 and neither test port 18986 nor 18987 was listening; all associated Gradle and fixture processes completed.",
+  "id": "solr5293-lucene106-integration-windows-20261110",
+  "job": "solr5293-lucene106-integration-windows-20261110",
+  "reason": "Matched Windows integration and isolated HTTP comparison completed",
+  "type": "release"
+}
