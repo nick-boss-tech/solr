@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-solr-18616",
+  "evidence": "Source branch solr-18616-submit at 061fa32fa78a99f6e7dbc72dcca491ff7cb4fa84; report records/report/solr-18616-jetty-prototype-windows-20261111-report.json; no Windows test or build executor started.",
+  "id": "solr-18616-jetty-prototype-windows-20261111",
+  "job": "solr-18616-jetty-prototype-windows-20261111",
+  "reason": "Prototype pushed and Linux feasibility gate handed off; Windows implementation stopped.",
+  "type": "release"
+}
