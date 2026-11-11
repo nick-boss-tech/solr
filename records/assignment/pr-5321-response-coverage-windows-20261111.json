@@ -1,0 +1,8 @@
+{
+  "host": "Windows implementation; Linux proof separately",
+  "id": "pr-5321-response-coverage-windows-20261111",
+  "job": "pr-5321-response-coverage-windows-20261111",
+  "scope": "Investigate leading-hyphen compatibility and add focused response-level coverage for field exclusions at contributor head 35db4554284ca0d2ca37eb78ed4c7c7dee599db2; push fork branch and request exact-head Linux gate. Do not change contributor branch or post publicly.",
+  "summary": "Implement a focused PR 5321 follow-up on a fork branch",
+  "type": "assignment"
+}
