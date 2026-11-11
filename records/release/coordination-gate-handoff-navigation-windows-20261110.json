@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "Board documentation commit 6b3a032eb2155a8a37303075f0ee38000e69f69d was verified on the live branch. Report coordination-gate-handoff-navigation-result-20261110 records the changes and checks. No build or test executor was started.",
+  "id": "coordination-gate-handoff-navigation-windows-20261110",
+  "job": "coordination-gate-handoff-navigation-windows-20261110",
+  "reason": "Workflow documentation published and verified.",
+  "type": "release"
+}
