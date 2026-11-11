@@ -1,0 +1,10 @@
+{
+ "id": "pr-5201-auth-browser-linux-gate-r3-20261111",
+ "type": "release",
+ "job": "pr-5201-auth-browser-linux-gate-r3-20261111",
+ "actor": "phone-agent",
+ "reason": "Gate completed with verdict passed at the exact head; receipt and companion report published before this release. This supersedes the incomplete round 2: every round-2 proof leg now has executed evidence on a single host, including the packaged revocation behavior that round 2 could not run.",
+ "evidence": "records/receipt/pr-5201-auth-browser-linux-gate-r3-20261111-receipt.json; records/report/pr-5201-auth-browser-linux-gate-r3-20261111-report.json; records/evidence/pr-5201-auth-browser-linux-gate-r3-20261111-evidence.tar.gz (SHA-256 d64f2727446fc9666678e26a720fa87721d3adc9604c299a871b67dc69e6e964).",
+ "executor_stop": "Verified at filing: no Gradle daemon, java, or chrome process on the host, no holder on the test-queue lock, the packaged node is stopped, and the temporary cross-origin file server is stopped.",
+ "recorded": "2026-11-11"
+}

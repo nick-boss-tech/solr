@@ -1,0 +1,9 @@
+{
+ "id": "pr-5201-auth-browser-linux-gate-r3-20261111-report",
+ "type": "report",
+ "job": "pr-5201-auth-browser-linux-gate-r3-20261111",
+ "owner": "phone-agent",
+ "status": "gate passed; runtime 401 investigation completed",
+ "summary": "Companion report to the r3 receipt. The runtime credential investigation confirms the adjacent investigation's source trace in every particular: (1) the explorer reads the session's stored Authorization value per request and replays it even after the credential stops working (401 observed, header still stored afterwards); (2) the Admin UI is the component that recovers the session: its next 401 deletes the stored header and shows the login screen; (3) after re-login the explorer recovers on its next request with the new header and no code change; (4) an authenticated user without roles gets a plain 403 rendered in the explorer. Whether the explorer should also clear or flag a dead header on its own 401 is a small product question for the PR owner; nothing in this gate requires a change for correctness, and no change was made. The packaged layout fact worth keeping: the V2 API is mounted at the server root in the packaged server, not under /solr, which is what makes the explorer's relative '/api' server URL resolve correctly in both the harness (root context) and the distribution.",
+ "recorded": "2026-11-11"
+}
