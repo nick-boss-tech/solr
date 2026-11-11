@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-solr-18616",
+  "evidence": "records/report/solr-18616-prototype-tidy-windows-20261111-report.json; branch head 4c5d0d642cd538d06ba49f6aad253878a6e0a90a; no test or build executor started on Windows.",
+  "id": "solr-18616-prototype-tidy-windows-20261111",
+  "job": "solr-18616-prototype-tidy-windows-20261111",
+  "reason": "Formatting fix pushed and replacement Linux gate handed off; Windows work stopped.",
+  "type": "release"
+}
