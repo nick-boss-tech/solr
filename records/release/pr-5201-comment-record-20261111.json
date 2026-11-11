@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-coordinator",
+  "evidence": "records/report/pr-5201-comment-posted-20261111.json; no source or test executor started.",
+  "id": "pr-5201-comment-record-20261111",
+  "job": "pr-5201-comment-record-20261111",
+  "reason": "Approved public follow-up posted, read back and recorded.",
+  "type": "release"
+}
