@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "records/report/discovery-first-slice-20261111-report.json; read-only source and documentation research with no build or asynchronous executor started.",
+  "id": "discovery-first-slice-20261111",
+  "job": "discovery-first-slice-20261111",
+  "reason": "Research completed and handed back; no continuing worker or executor.",
+  "type": "release"
+}
