@@ -1,0 +1,14 @@
+{
+  "actor": "codex-windows-solr-18616-javadoc",
+  "gate": "records/gate/solr-18616-server-metrics-linux-r3-20261111.json",
+  "id": "solr-18616-javadoc-repair-windows-20261111-report",
+  "job": "solr-18616-javadoc-repair-windows-20261111",
+  "source": {
+    "branch": "solr-18616-submit",
+    "head": "932c971636235deed743b2ad99bd4c511d8a85dc",
+    "prior_head": "d69d131141bc060f32ebef8b51bbcb1a1e4b32e2",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Added package documentation for org.apache.solr.jetty to address the round-two renderJavadoc failure; pushed corrected head. No Gradle or test execution on Windows. Linux round three proof pending.",
+  "type": "report"
+}
