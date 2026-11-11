@@ -1,0 +1,60 @@
+{
+ "id": "phone-agent-lucene106-solr5293-integration-linux-20261110-receipt-20261110",
+ "type": "receipt",
+ "job": "lucene106-solr5293-integration-linux-20261110",
+ "gate": "lucene106-solr5293-integration-linux-20261110",
+ "owner": "phone-agent",
+ "verdict": "passed",
+ "summary": "The Lucene 10.6.0 block-join child-sort repair is proven end to end. Lucene legs at the candidate e0c53033bb2b6b34939ded24e228443b7d8b576b (Gradle 9.8.0, JDK 21, seed 18622C0DE): focused TestBlockJoinSelector 6/6 and TestBlockJoinSorting 4/4 passed with the three required new methods present; the full :lucene:join:test passed 93 tests, 0 failures, 0 errors, 1 skipped. The fail-before control (candidate with only ToParentDocValues.java restored from the 10.6.0 release tag object 4ae946e5a9b99d1e22c23865c99e561b8dcc9d71; restored blob 8ba6b0e01b433deb8a8e3f03eb7bd9f226bc3e58 equals the release blob; diff is that one file, 314 lines) failed all four required methods in the intended cases (expected:<7> but was:<-5>; expected:<5> but was:<3>; expected:<7> but was:<2>; IndexOutOfBoundsException). Tidy on the candidate: clean, 0-line diff, after generating gradle.properties from the template with @MAX_WORKERS@ substituted as 2 and @TEST_JVMS@ as 1. Solr legs at the reproducer 769ca6e177d77acd3f1993a4a24bd3257ae243c0, seed 18622C0DE, methods run individually: with Central Lucene 10.6.0 (-Plucene.dev.version=10.6.0) the round-1 result reproduced exactly, testFilteredChildrenDoNotSupplyMissingValues FAILED (expected first doc id 3) and testStringChildMissingFirst FAILED (AssertionError) while testNumericChildMissingValues and testStringChildMissingLast passed; with the candidate published as 10.6.0-SNAPSHOT (-Plucene.dev.version=10.6.0-SNAPSHOT) all four methods passed, the full TestNestedDocsSort passed 15/15, and TestCloudNestedDocsSort passed 1/1.",
+ "refs": {
+  "lucene_candidate": "e0c53033bb2b6b34939ded24e228443b7d8b576b",
+  "lucene_candidate_tree": "163d72895ad6391443ec41d34f5634e4aa5afdb7",
+  "lucene_release_object": "4ae946e5a9b99d1e22c23865c99e561b8dcc9d71",
+  "solr_reproducer": "769ca6e177d77acd3f1993a4a24bd3257ae243c0",
+  "solr_pr_5293_head": "978e2b1e352c7c39a68f7b952e6ab12eabf80890",
+  "refs_reverified_unchanged_at_filing": true
+ },
+ "artifacts": {
+  "lucene_join_jar_from_pristine_candidate": {
+   "name": "lucene-join-10.6.0-SNAPSHOT.jar",
+   "sha256": "ec1fe4a22ab8bd3f125de4e4835262416eb274874ba00a23645686b70eff0dea",
+   "sha512": "dce0d0e8b46e5d569cd9f1bdef43e7870f330be17b901d9fbebb496ca0163bda7cf06b2856c089a468f930e737f8b66e3296546d944df1604ab50318163b287b",
+   "toparent_class_sha256": "7e74b33294f60ad8e02f926e410cdf11058a1f65a16115870c2beb7f5b73321e",
+   "maven_local_published_copy_byte_identical": true
+  },
+  "central_release_join_jar": {
+   "sha256": "05bf382ecb895c01d9fc23efd8da25909aee4e6de96b13dc26bf148a2407690e",
+   "toparent_class_sha256": "f5677c170b055d200cf0c19f236cbab9cd877283ab46a31c9b90fc8f087e8c89",
+   "release_source_built_class_sha256": "f5677c170b055d200cf0c19f236cbab9cd877283ab46a31c9b90fc8f087e8c89",
+   "note": "The class compiled in the fail-before clone from the restored release source file is byte-identical to the class inside the Central 10.6.0 release jar the original Solr leg resolved."
+  },
+  "solr_package_plain": {
+   "name": "solr-11.0.0-SNAPSHOT.tgz",
+   "path_on_this_host": "/home/hatch/workspace/solr-clones/5293-orig/solr/packaging/build/distributions/solr-11.0.0-SNAPSHOT.tgz",
+   "built_from": "pristine reproducer clone at 769ca6e177 with stock Central Lucene 10.6.0 (no version forcing)",
+   "sha256": "8197d3c3bdcc6998c13290e620e76fe3aa10aa0191e52c1c9f7669c89e9b3de5",
+   "sha512": "9fb4bd1bbc2dc48e980f4ccb2c2f936b92257dcdd278d35c613797d60c35b9315b60de86b59c6e7dab71fef778e90c542cba8ef2bd27a21e3cbc6bee3cc36be7"
+  },
+  "lucene_snapshot_jar_set": {
+   "name": "lucene-10.6.0-SNAPSHOT-jars.tar.gz",
+   "path_on_this_host": "/home/hatch/workspace/lucene-10.6.0-SNAPSHOT-jars.tar.gz",
+   "sha256": "ab2793b4ab72867e8a9ce9d08937b3b1fbb7ee0d60799d0f9c99f5b5f2e8f4d7",
+   "note": "All 33 published org.apache.lucene 10.6.0-SNAPSHOT module jars (binary jars only). A Windows follow-up builds the patched package by replacing the plain package's Lucene jars with this set, or publishes the candidate to its own local repository the same way."
+  },
+  "windows_handoff": "No authorized retrievable artifact location was supplied, so the Solr package and the snapshot jar set stay at the paths above on this host with the hashes above; nothing was published publicly, per this gate's verdict policy."
+ },
+ "route_and_environment_disclosures": [
+  "Composite includeBuild via -Plucene.dev.path was attempted first with the sanctioned shim (the identical line String baseVersion = '10.6.0' appended to the root build.gradle of both a release-object clone and a candidate clone; resulting build.gradle SHA-256 516b42c5b6428b8839e6c5177a3850bf476b20fd355477f31bc2355c278a1def in both, zero other tracked changes). It failed for all eight method runs at Solr settings evaluation (the composite settings script reads the version catalog in the settings phase and fails with 'Could not get unknown property libs for settings solr-root'), producing no test evidence; the failure is preserved in the evidence logs.",
+  "The sanctioned Maven-local alternative was then used end to end: the pristine candidate (zero shims, zero source changes) was published with :lucene:lucene:publishJarsPublicationToMavenLocal -x test (the aggregate publishToMavenLocal fails on the signedJars publication: no PGP signatory configured). Publication landed in /root/.m2/repository because the standalone Lucene build resolves user home as /root; the org/apache/lucene tree was copied to /home/hatch/.m2/repository, the location the Solr daemon reads. Both locations' org/apache/lucene subtrees were deleted after the gate and the deletion verified.",
+  "Solr dependency locking rejected the forced snapshot version at artifact resolution ('Did not resolve ... which has been forced / substituted') until --write-locks was passed in the disposable patched clone; that modified only three gradle.lockfile files (solr/core, solr/modules/analysis-extras, solr/test-framework), which are build state in a disposable clone. The Solr source tree stayed at 769ca6e177 untouched, and the original leg needed no lock changes.",
+  "A Solr package embedding the forced snapshot could not be built: the packaging script's detached runtimeLibsCopy configurations fail with a strict-constraint conflict between the catalog 10.6.0 and the consistently resolved 10.6.0-SNAPSHOT, with and without --write-locks. The plain package above was built instead; the patched-side package is a jar replacement away, per the jar-set artifact.",
+  "The plain packaging invocation exited 1 after the distribution archive was written, from a Gradle daemon lifecycle notification failure ('Could not update last-build.bin'; 'Could not receive a message from the daemon'); the archive itself is complete and hashed above.",
+  "Every Lucene Gradle 9.8.0 invocation on this host exited 1 at shutdown with a Failed-to-stop-service gradleTempCleanupService NoSuchFileException on .gradle/tmp, after all tasks completed; task-level evidence (fresh XML, diffs, artifacts) is complete and consistent across runs. Disclosed as a host artifact, not a candidate result.",
+  "One setup-only failure is recorded: the first Lucene attempt used Gradle 8.14 and failed in build-infra compilation before any test ran; Gradle 9.8.0 (the candidate wrapper's version, downloaded as a distribution zip because the Lucene repo commits no wrapper jar) ran all decisive legs. A generated gradle.properties was required in the Lucene clones as described in the tidy note.",
+  "Known pre-existing item recorded separately, not repaired and not counted against the integration verdict: the pinned Solr reproducer head 769ca6e177 has a one-line tidy formatting issue in TestNestedDocsSort.java (line 89), found by the 2026-11-05 round-1 gate and left untouched here per this gate's instructions.",
+  "Host bookkeeping during the run: a disk quota on this VM filled from the day's gate clones and blocked file writes twice; the clones of four already-filed gates were deleted to recover space (41G free at filing). No gate evidence was lost; all evidence for this gate was staged and hashed before cleanup.",
+  "No public PR description, Jira text, or product source was changed. Nothing was committed to a product branch."
+ ],
+ "evidence": "records/evidence/lucene106-solr5293-integration-gate-20261110-evidence.tar.gz (SHA-256 a270341c6a14b74e36bb34186651dac776c9e4b1f75d5aaad837117341ed635a): Lucene focused, repair, full-join and fail-before logs and XML, both tidy diffs, the fail-before diff, the publication log, the composite-attempt and Maven-route Solr logs, the packaging logs, and the Solr original, patched, full and cloud XML files.",
+ "recorded": "2026-11-10"
+}

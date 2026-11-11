@@ -1,0 +1,10 @@
+{
+ "id": "phone-agent-lucene106-solr5293-integration-linux-20261110-release-20261110",
+ "type": "release",
+ "job": "lucene106-solr5293-integration-linux-20261110",
+ "actor": "phone-agent",
+ "reason": "Gate completed and receipt filed; verdict passed.",
+ "evidence": "records/receipt/phone-agent-lucene106-solr5293-integration-linux-20261110-receipt-20261110.json",
+ "cleanup": "Both temporary org/apache/lucene Maven-local subtrees (/root/.m2/repository and /home/hatch/.m2/repository) were removed and the removal verified; no daemon remains; the temporary clones stay on this host for audit.",
+ "recorded": "2026-11-10"
+}

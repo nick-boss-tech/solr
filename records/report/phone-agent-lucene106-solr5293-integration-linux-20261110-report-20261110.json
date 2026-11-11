@@ -1,0 +1,9 @@
+{
+ "id": "phone-agent-lucene106-solr5293-integration-linux-20261110-report-20261110",
+ "type": "report",
+ "job": "lucene106-solr5293-integration-linux-20261110",
+ "owner": "phone-agent",
+ "status": "completed",
+ "summary": "All decisive legs are in the receipt. The repair holds in Lucene (positive 93/93 with the required new methods; fail-before discriminates on exactly the restored release file) and in Solr (the two methods that fail against Central 10.6.0 pass against the candidate; the two unaffected methods pass on both; full and cloud nested-sort suites pass on the candidate). Two sub-items are recorded as limitations rather than silently passed over: a snapshot-embedding Solr package could not be built because the packaging script's detached copy configurations reject the forced version (a plain package from the pinned branch plus the hashed snapshot jar set is the handoff instead), and the pinned reproducer carries a known one-line tidy issue from round 1 that this gate was told to record, not fix.",
+ "recorded": "2026-11-10"
+}
