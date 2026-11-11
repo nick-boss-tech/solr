@@ -1,0 +1,28 @@
+{
+  "commands": [
+    "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.cloud.TestRebalanceLeaders --tests org.apache.solr.cloud.MigrateRouteKeyTest --tests org.apache.solr.handler.admin.api.MigrateDocsAPITest --tests org.apache.solr.handler.admin.api.RebalanceLeadersAPITest --tests org.apache.solr.handler.admin.api.V2CollectionAPIMappingTest --tests org.apache.solr.handler.admin.TestCollectionAPIs --tests org.apache.solr.handler.admin.TestApiFramework --tests org.apache.solr.handler.V2ApiIntegrationTest -Ptests.seed=16398C0DE --rerun-tasks",
+    "./gradlew --no-daemon tidy",
+    "./gradlew --no-daemon :solr:core:compileJava -Pvalidation.errorprone=true",
+    "./gradlew --no-daemon check -x test"
+  ],
+  "environment": "Clean isolated Linux checkout at the named merge commit, JDK 21 and required serialized host locks; verify branch and PR head before claiming, preserve fresh test XML, logs and exit codes. No PR comment, metadata edit, rebase or source push authorized by this gate.",
+  "head": "a225b9d4af9f295e3c84b7ff6f35ef7e71ababc1",
+  "id": "pr-5284-merge-main-linux-gate-20261110",
+  "job": "pr-5284-merge-main-linux-gate-20261110",
+  "parents": [
+    "3d530d7639eeb0b4bd8ee11227a1133fe66aa672",
+    "82888694ae248b74d105d9c7b5f60d33c385f325"
+  ],
+  "requirements": [
+    "Confirm merge parents and inspect the sole manual resolution in TestCollectionAPIs.java: upstream moved ContentStreamBase while the PR deleted the legacy migrate-docs helper and its now-unused imports; do not restore obsolete code or unused imports. Verify regenerated SolrJ requests compile and execute the selected suites at the exact head, with fresh per-class counts and recorded skips. Explicitly verify the v2 leadership, v1 async cleanup, synchronous migration and async-alias migration cases.",
+    "V2ApiIntegrationTest.testException previously failed with HTTP 500 instead of 400 on both the review-fix head 5fce0c06ee5afa8ac3606e32c2e441041da49864 and reviewed PR head 415c639e6e5b74d665209024cf29fb68dc32b23f; PR 5285 remains open. Run it, record actual result and compare with prior evidence or diagnose any changed failure. Nick accepted this known issue for the push; do not suppress the failure, call it a test pass, or mark the complete gate passed while it remains failing.",
+    "Repeat the two rebalance body-to-operation argument mutations from records/gate/pr-5284-argument-coverage-linux-gate-r2-20261110.json, one compiling production mutation per disposable checkout with unchanged tests and fresh XML. Require expected assertion failures at maxAtOnce and maxWaitSeconds, not compile/setup errors or skips. The prior successful mutations are at a different head and are not proof for the merge.",
+    "Carry forward the six migration request-field and async-id omission mutations from coordination-ui gates/pr-5284-coverage-round-2.md; use unchanged tests at this head and require assertion-level failures. Record all exact diffs and results, one mutation at a time.",
+    "Assess the previously unproven compatibility boundaries identified in records/receipt/pr-5284-review-fixes-linux-gate-r2-20261110-receipt.json: blank collection, nonpositive maxAtOnce, lock-ID propagation to submission, raw response capitalization and null omission, and failure/inactivePreferreds shapes. Use existing tests or bounded disposable probes where justified; distinguish static review from observed runtime proof.",
+    "Require tidy exit 0 with zero tracked changes, Error Prone compile and root check -x test successful, with no silent exclusions. If tidy changes tracked files, stop and report; a new committed head requires a successor gate. Record environmental conditions and repairs.",
+    "Investigate executed failures before any retry; setup errors, skips, missing tests and surviving mutations are not passes. Report each leg, test counts, logs, XML, mutation diffs, exact source head and final executor-stop evidence. Record known dependent failure distinctly from new regressions. Never mark the full gate passed while required legs fail or are incomplete."
+  ],
+  "seed": "16398C0DE",
+  "source": "https://github.com/nick-boss-tech/solr/tree/solr-16398-rebalance-migrate",
+  "type": "gate"
+}
