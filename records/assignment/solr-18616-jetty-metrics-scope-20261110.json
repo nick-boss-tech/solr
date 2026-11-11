@@ -1,0 +1,26 @@
+{
+ "id": "solr-18616-jetty-metrics-scope-20261110",
+ "type": "assignment",
+ "job": "solr-18616-jetty-metrics-scope-20261110",
+ "host": "Any capable host; source and dependency research, no browser or packaging host needed",
+ "summary": "Scope SOLR-18616 (Solr 10.+ no longer provides any Jetty metrics) and report the smallest credible restoration path: inventory what was lost, answer whether an existing Jetty or OTel instrumented handler can be adopted, and size a Solr-owned handler if not.",
+ "context": "SOLR-18616 is an open Major sub-task reported by hossman (Chris Hostetter), unassigned. Hoss raised it on the dev list on 2026-11-10 ('Solr 10(.1) jetty layer metrics?'). SOLR-17855's OpenTelemetry migration removed Dropwizard's InstrumentedEE10Handler and InstrumentedQueuedThreadPool (removal commit cee53df8e0a) with no replacement. The ticket names two concrete losses: (1) no existing Solr 10.x metric shows HTTP requests and responses that do not hit a valid collection or core, so a spike of abnormal requests to nonexistent paths is invisible; (2) no existing metric shows Jetty request thread-pool utilization, so saturation of the max thread count gives no warning. Nick's direction: hand this off as a scoping assignment only; the fix is expected to be large, and no implementation is authorized yet.",
+ "requirements": [
+  "Inventory the lost metrics from the pre-removal code (the parent of cee53df8e0a and the 9.x line): which handler and thread-pool metrics Solr exposed, their names and semantics, and where the two Dropwizard pieces were wired into the Jetty server setup.",
+  "Map the current architecture on main: where the production Jetty server and its handler chain are built, where JettySolrRunner mirrors that setup, and where Solr's OTel metrics are registered after SOLR-17855, so a restoration is scoped against the current surface rather than the removed one.",
+  "Answer Hoss's question with evidence: does the Jetty version Solr now uses, or the OTel instrumentation ecosystem already in Solr's dependency set, provide an instrumented handler or a thread-pool metrics source that covers the inventory? Check the actual artifacts and versions in the build before concluding. If an adoptable path exists, scope it; if not, scope the minimal Solr-owned OTel-style handler: insertion point in the handler chain, the metric list matched to the inventory, and explicit coverage of the ticket's two impacts (requests that never reach a collection or core, and thread-pool saturation).",
+  "Read SOLR-18616's parent ticket, its links, and its comments before proposing scope; it is a sub-task and the parent may already constrain the approach. Also read the replies to Hoss's 2026-11-10 dev-list thread in case a maintainer has already narrowed or answered the question.",
+  "Deliverable is a board report: the metric inventory, the adopt-versus-build answer with file and dependency citations, a sized implementation outline (files to touch, tests to add or extend, changelog shape), and the open questions that need Nick's or a maintainer's call. Distinguish verified code facts from inference throughout."
+ ],
+ "out_of_scope": "No implementation, no branch, no prototype under this assignment. No Jira comment, dev-list reply, or PR text; any public text needs Nick's explicit per-text approval. A follow-up implementation assignment is a separate decision after the report.",
+ "tags": [
+  "solr-18616",
+  "metrics",
+  "jetty",
+  "otel",
+  "scoping",
+  "hoss"
+ ],
+ "posted_by": "phone-agent at Nick's direction",
+ "recorded": "2026-11-10"
+}
