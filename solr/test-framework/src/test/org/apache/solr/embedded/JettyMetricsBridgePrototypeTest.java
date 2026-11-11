@@ -66,12 +66,18 @@ public class JettyMetricsBridgePrototypeTest extends SolrTestCaseJ4 {
       var manager = jetty.getCoreContainer().getMetricManager();
       try (var context = new SolrMetricsContext(manager, "solr.jetty.prototype")) {
         context.observableLongCounter(
-            "solr.jetty.prototype.put", "Completed PUT requests", m -> m.record(handler.puts.sum()));
+            "solr.jetty.prototype.put",
+            "Completed PUT requests",
+            m -> m.record(handler.puts.sum()));
         context.observableLongCounter(
-            "solr.jetty.prototype.4xx", "Completed 4xx responses", m -> m.record(handler.errors.sum()));
+            "solr.jetty.prototype.4xx",
+            "Completed 4xx responses",
+            m -> m.record(handler.errors.sum()));
         var pool = (QueuedThreadPool) handler.getServer().getThreadPool();
         context.observableLongGauge(
-            "solr.jetty.prototype.threads.max", "Maximum pool threads", m -> m.record(pool.getMaxThreads()));
+            "solr.jetty.prototype.threads.max",
+            "Maximum pool threads",
+            m -> m.record(pool.getMaxThreads()));
 
         var snapshots = manager.getPrometheusMetricReader("solr.jetty.prototype").collect();
         boolean putFound = false;
@@ -81,11 +87,13 @@ public class JettyMetricsBridgePrototypeTest extends SolrTestCaseJ4 {
           switch (snapshot.getMetadata().getPrometheusName()) {
             case "solr_jetty_prototype_put" -> {
               putFound = true;
-              assertEquals(1.0, ((CounterSnapshot) snapshot).getDataPoints().get(0).getValue(), 0.0);
+              assertEquals(
+                  1.0, ((CounterSnapshot) snapshot).getDataPoints().get(0).getValue(), 0.0);
             }
             case "solr_jetty_prototype_4xx" -> {
               errorFound = true;
-              assertEquals(1.0, ((CounterSnapshot) snapshot).getDataPoints().get(0).getValue(), 0.0);
+              assertEquals(
+                  1.0, ((CounterSnapshot) snapshot).getDataPoints().get(0).getValue(), 0.0);
             }
             case "solr_jetty_prototype_threads_max" -> poolFound = true;
           }
