@@ -1,0 +1,11 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "records/evidence/pr-5201-auth-browser-linux-gate-r2-20261110-evidence-20261110.json (archive SHA-256 72a7a108a5badfc021ee5b41ab7707b4e291c70a34a92000df8ae50f97eb89af), records/report/pr-5201-auth-browser-linux-gate-r2-20261110-final-20261110.json, and records/receipt/pr-5201-auth-browser-linux-gate-r2-20261110-receipt.json. Post-publication stop verification at 2026-11-10T21:15:39-07:00 found no Java/Gradle/Solr/ChromeDriver/headless-Chrome task process, no gate-port listener, both runner-designated Gradle locks available, and temporary clones/runtime absent; see executor-stop-verification.txt in the evidence archive.",
+  "head": "0355023c3170c87a84cd9e5688ae6b4f3e4df3ae",
+  "id": "pr-5201-auth-browser-linux-gate-r2-20261110",
+  "job": "pr-5201-auth-browser-linux-gate-r2-20261110",
+  "reason": "The assigned gate run is complete, but required Selenium runs failed before reaching the target request and the parent-head replay did not provide behavioral fail-before proof. The incomplete result and all evidence are published; no source or public PR change was made.",
+  "successor_requirement": "Any further proof or source changes require a new assignment/job and an exact-head gate. This release does not mark the gate as passed or alter public PR #5201.",
+  "type": "release",
+  "verdict": "incomplete"
+}
