@@ -1,0 +1,7 @@
+{
+  "id": "pr-5315-r2-repair-windows-20261111-report",
+  "job": "pr-5315-r2-repair-windows-20261111",
+  "source_head": "896bef31e74af42812f4b5ba880450dcad0f6815",
+  "summary": "Pushed 896bef31e74af42812f4b5ba880450dcad0f6815: use required logger idiom and publish trusted marked async rejection before response stream close can trigger generic onFailure. Classification remains on the executor, not the Jetty IO thread. This is a candidate fix, untested on Windows; diff check clean. R2 packaged shutdown has no established fix and requires Linux diagnosis. R3 diagnostic gate requested; no full proof or public comment claimed.",
+  "type": "report"
+}
