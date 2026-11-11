@@ -1,0 +1,25 @@
+{
+  "commands": [
+    "./gradlew --no-daemon :solr:solrj:test --tests org.apache.solr.client.solrj.impl.ProbeGracefulRejectionClientTest --rerun-tasks",
+    "./gradlew --no-daemon tidy",
+    "./gradlew --no-daemon check -x test"
+  ],
+  "environment": "Linux, JDK 21, isolated checkout; verify head and claim before work",
+  "head": "896bef31e74af42812f4b5ba880450dcad0f6815",
+  "id": "pr-5315-r3-shutdown-investigation-linux-20261111",
+  "job": "pr-5315-r3-shutdown-investigation-linux-20261111",
+  "phase": "R3 diagnostic, after failed R2 gate",
+  "requirements": [
+    "Read the R2 receipt and its complete archived packaged-attempt evidence, including discarded harness false positive and nonexistent-core caveat. Trace bin/solr stop, Jetty lifecycle and GracefulHandler wiring. Determine why no marked 503 appeared; use a real working core and capture the actual lifecycle, handler invocation, HTTP responses, concurrent in-flight and new requests, and server logs. Distinguish absent rejection window from probe timing; propose a concrete minimal correction or document what remains uncertain. Do not silently patch or push the proof head.",
+    "Run the full ProbeGracefulRejectionClientTest class repeatedly and the named async method on both transports. Preserve XML, failure chains and rejected/healthy endpoint and handler counts. Verify the new early completion avoids the close-callback race without leaks, unsafe retries or completion on the Jetty IO thread; include unmarked and trust-disabled behavior. Exercise a deterministic callback ordering regression if feasible; report any missing proof.",
+    "Run tidy and root check -x test, recording exit codes and changes. Do not modify the proof head to make a pass.",
+    "This diagnostic does not replace full exact-head gate proof: report all omitted requirements as incomplete. The prior multi-shard and mutation results apply only to R2 head. Report actual results and evidence, including hashes; release only after recording executor stop and process/lock evidence."
+  ],
+  "source": {
+    "branch": "solr-17764-submit",
+    "head": "896bef31e74af42812f4b5ba880450dcad0f6815",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes": "pr-5315-graceful-retry-linux-gate-r2-20261111",
+  "type": "gate"
+}
