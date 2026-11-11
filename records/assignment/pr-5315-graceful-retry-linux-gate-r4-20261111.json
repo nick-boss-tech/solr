@@ -1,0 +1,28 @@
+{
+  "capabilities": [
+    "linux",
+    "solr-gradle",
+    "jetty",
+    "integration-probe"
+  ],
+  "claim_path": "records/claim/pr-5315-graceful-retry-linux-gate-r4-20261111.json",
+  "gate_id": "pr-5315-graceful-retry-linux-gate-r4-20261111",
+  "gate_record": "records/gate/pr-5315-graceful-retry-linux-gate-r4-20261111.json",
+  "host": "Linux JDK 21, Solr Gradle and packaged-server integration",
+  "id": "pr-5315-graceful-retry-linux-gate-r4-20261111",
+  "job": "pr-5315-graceful-retry-linux-gate-r4-20261111",
+  "phase": "R4 full candidate gate after R3 diagnostic",
+  "prior_receipts": [
+    "records/receipt/pr-5315-graceful-retry-linux-gate-r2-20261111-receipt.json",
+    "records/receipt/pr-5315-r3-shutdown-investigation-linux-20261111-receipt.json"
+  ],
+  "receipt_path": "records/receipt/pr-5315-graceful-retry-linux-gate-r4-20261111-receipt.json",
+  "scope": "Run all gate requirements at the exact source head; preserve evidence and publish a schema-valid receipt before release. No source push or public comments.",
+  "source": {
+    "branch": "solr-17764-submit",
+    "head": "3c73a59743e3dfe4b5ae5e11b0cdbe8c1e8fcae6",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Full exact-head proof for PR 5315 graceful retry candidate",
+  "type": "assignment"
+}
