@@ -1,0 +1,8 @@
+{
+  "actor": "Nick Shanin workspace Codex implementation session",
+  "evidence": "records/report/pr-5311-pivot-refresh-20261110-result.json and records/gate/pr-5311-pivot-refresh-linux-proof-20261110.json. The Windows implementation session has finished and started no build or Linux executor; the separate Linux job must be claimed by its executor.",
+  "id": "pr-5311-pivot-refresh-20261110",
+  "job": "pr-5311-pivot-refresh-20261110",
+  "reason": "Branch update completed, pushed, and handed to the separate Linux gate.",
+  "type": "release"
+}
