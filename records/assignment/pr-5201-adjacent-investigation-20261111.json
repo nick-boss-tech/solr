@@ -1,0 +1,27 @@
+{
+  "claim_path": "records/claim/pr-5201-adjacent-investigation-20261111.json",
+  "expected_report_path": "records/report/pr-5201-adjacent-investigation-20261111-result.json",
+  "id": "pr-5201-adjacent-investigation-20261111",
+  "intended_host": "Linux with Solr build toolchain, matching browser and driver, and ability to inspect packaged distribution",
+  "job": "pr-5201-adjacent-investigation-20261111",
+  "prior_receipt": "records/receipt/pr-5201-auth-browser-linux-gate-r2-20261110-receipt.json",
+  "related_assignment": "records/assignment/pr-5201-linux-selector-investigation-20261111.json",
+  "requirements": [
+    "Refresh the board, the fork and PR heads before claiming. Read the related claimed selector investigation and prior receipt. Coordinate execution resources with its owner; do not change its checkout, source branch, test selectors or gate, or duplicate its Selenium failure diagnosis. Use an isolated scratch checkout and do not contend for shared Gradle, browser, ports or other resources.",
+    "Investigate expired or revoked Basic and JWT credentials in the explorer: compare 401 presentation and recovery with the Admin UI interceptor, and check 403 and unauthenticated behavior where feasible. Distinguish a demonstrated behavior from a product decision; never retain or publish credentials.",
+    "Trace the shared OpenAPI server metadata into generated Java, JavaScript and Python clients and the distributed specification. Inspect generated defaults and test representative use where practical, including proxy path-prefix assumptions; report concrete compatibility effects separately from hypotheses.",
+    "Inspect the unconditional Scalar npm dependency in WAR and distribution builds with disableJsClient=true, and identify what that flag promises. Where feasible validate a clean or offline workflow without weakening requirements. Assess bundle provenance, embedded dependency licensing and runtime network behavior or identify precise remaining evidence and ownership.",
+    "Assess supported custom proxy and security-header deployment variants for the exact framing policy. Separate default packaged-distribution evidence already in the prior receipt from untested variants. Do not claim a vulnerability without verifying reachability and following SECURITY.md and THREAT_MODEL.md.",
+    "Publish a concise report with exact head, environment, commands, observed results, evidence locations and limitations; rank concrete findings and recommend the smallest changes or follow-up proofs. Record executor stop and publish a release after the report. Use only authorized evidence storage and do not publish secrets.",
+    "This is information gathering, not a passing gate or authorization to push source or change the public PR. If a repair is required, hand it back for a separately coordinated implementation and superseding exact-head gate. If the source head changes, report whether the observations apply rather than silently transferring proof."
+  ],
+  "source": {
+    "branch": "pr-5201-auth-browser-fix",
+    "contributor_parent": "3f9faa9e9861ce28f3ede3f4305bd91b6e297463",
+    "head": "0355023c3170c87a84cd9e5688ae6b4f3e4df3ae",
+    "pr": "https://github.com/apache/solr/pull/5201",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Investigate adjacent authentication, generated-client and packaging impacts of PR 5201 and its proposed fix.",
+  "type": "assignment"
+}
