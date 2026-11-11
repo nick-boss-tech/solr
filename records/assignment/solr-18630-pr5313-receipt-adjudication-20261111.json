@@ -1,0 +1,24 @@
+{
+  "claim_path": "records/claim/solr-18630-pr5313-receipt-adjudication-20261111.json",
+  "gate_id": "solr-18630-pr5313-receipt-adjudication-20261111",
+  "gate_record": "records/gate/solr-18630-pr5313-receipt-adjudication-20261111.json",
+  "id": "solr-18630-pr5313-receipt-adjudication-20261111",
+  "intended_host": "A reviewer with access to the prior gate, receipt, report and evidence archive",
+  "job": "solr-18630-pr5313-receipt-adjudication-20261111",
+  "phase": "receipt adjudication",
+  "prior_gate": "records/gate/solr-18630-pr5313-precedence-repair-linux-gate-20261110.json",
+  "prior_receipt": "records/receipt/solr-18630-pr5313-precedence-repair-linux-gate-20261110-receipt.json",
+  "receipt_path": "records/receipt/solr-18630-pr5313-receipt-adjudication-20261111-receipt.json",
+  "source_branch": "solr-18630-submit",
+  "source_head": "a4ce0580ad89ad521a5402e383d96c239cea94fd",
+  "source_repository": "nick-boss-tech/solr",
+  "successor_of": "solr-18630-pr5313-precedence-repair-linux-gate-20261110",
+  "summary": "Adjudicate the ambiguous prior-head expectation in the completed PR 5313 precedence-repair gate using its preserved evidence; do not rerun tests unless evidence proves insufficient.",
+  "tags": [
+    "review",
+    "solr-18630",
+    "pr-5313",
+    "receipt-adjudication"
+  ],
+  "type": "assignment"
+}
