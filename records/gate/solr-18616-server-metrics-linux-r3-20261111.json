@@ -1,0 +1,24 @@
+{
+  "claim_path": "records/claim/solr-18616-server-metrics-linux-r3-20261111.json",
+  "environment": "Clean Linux checkout with supported JDK, absolute temp directory, no overlapping build. Record tool versions, exact commands, logs and fresh XML; document any vendored Gradle substitution.",
+  "head": "932c971636235deed743b2ad99bd4c511d8a85dc",
+  "id": "solr-18616-server-metrics-linux-r3-20261111",
+  "job": "solr-18616-server-metrics-linux-r3-20261111",
+  "phase": "production implementation round 3",
+  "prior_receipt": "records/receipt/solr-18616-server-metrics-linux-r2-20261111.json",
+  "receipt_path": "records/receipt/solr-18616-server-metrics-linux-r3-20261111.json",
+  "requirements": [
+    "Verify the remote source head and clean checkout. In a separate scratch checkout at the exact head run ./gradlew updateLicenses resolveAndLockAll --write-locks; record exit and all tracked and untracked diffs. Require no generated changes. Do not use a modified checkout for exact-head proof; return any changes for a new head and gate.",
+    "On the unmodified exact head run ./gradlew :solr:test-framework:test --tests org.apache.solr.embedded.JettyMetricsBridgePrototypeTest -Ptests.seed=18616; record actual test counts, failures and fresh XML.",
+    "Build distribution with ./gradlew dev; start a fresh user-managed node from solr/packaging/build/dev using an isolated port and temporary home; issue a successful GET to /solr/admin/info/system and a PUT to a nonexistent path outside /solr; scrape /solr/admin/metrics and verify solr_jetty_requests_total has GET and PUT labels, solr_jetty_responses_total has the 4xx label with increased value, and solr_jetty_threads exposes current, idle, max, queued. Capture exact commands, response codes, before/after metrics, startup logs, and evidence of installed handler jar and server/webapp classloader bridge. Stop node and retain logs. No smoke leg passes on a modified checkout or an endpoint that never started.",
+    "Run ./gradlew tidy; require no tracked or untracked changes and capture diff otherwise. Run ./gradlew check -x test; preserve exits and complete logs. Any lock, source or formatting repair requires a new pushed head and superseding exact-head gate.",
+    "Report startup, compilation, packaging, assertions and environment failures separately; diagnose before retrying. Production async, all verbs/status classes, disabled metrics and shutdown lifecycle remain gaps unless explicitly tested; do not overstate proof."
+  ],
+  "source": {
+    "base": "d69d131141bc060f32ebef8b51bbcb1a1e4b32e2",
+    "branch": "solr-18616-submit",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes": "records/gate/solr-18616-server-metrics-linux-r2-20261111.json",
+  "type": "gate"
+}
