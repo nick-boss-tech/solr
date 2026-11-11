@@ -1,0 +1,24 @@
+{
+  "commands": [
+    "./gradlew --no-daemon :solr:solrj:test --tests org.apache.solr.client.solrj.impl.ProbeGracefulRejectionClientTest -Ptests.seed=17764C0DE --rerun-tasks",
+    "./gradlew --no-daemon :solr:solrj:test --tests org.apache.solr.client.solrj.impl.ProbeGracefulRejectionClientTest.testForgedMarkerOnApplication503AuthorizesRetry -Ptests.seed=17764C0DE --rerun-tasks"
+  ],
+  "environment": "Linux JDK 21, isolated clean exact-head checkout. Inspect prior receipt, release and executor-stop evidence, check current source head, canonical claim and host locks before starting; stop on conflicting execution. Do not push source or post public comments.",
+  "head": "3c73a59743e3dfe4b5ae5e11b0cdbe8c1e8fcae6",
+  "id": "pr-5315-forged-marker-close-repro-linux-20261111",
+  "job": "pr-5315-forged-marker-close-repro-linux-20261111",
+  "phase": "diagnostic reproduction after failed R4 full gate",
+  "requirements": [
+    "Read the R4 receipt and archived fresh repetition XML/logs (SHA-256 cadf6049c961067d5a5b56b9cd701c22574d0271daee8ce8264e0e791a33ebe0). Reproduce the full-class test at the exact head and seed with a bounded repetition campaign, then compare isolated method execution; record every run, ordering, counts, exit and seed, including non-reproduction. Do not reuse stale XML or infer a pass from an unobserved failure.",
+    "Identify which loop iteration/transport and which endpoint was in use; capture server and client connection lifecycle, request and handler entry counts, response status and headers actually sent or received, teardown/order, timing and full exception chains. Preserve fresh logs and XML. Use narrowly scoped disposable instrumentation if necessary and preserve the exact patch, separate results from unmodified-head runs, and disclose any changed timing.",
+    "Trace the endpoint fixture, JDK and Jetty clients and underlying lifecycle to distinguish fixture races, real client defects and host/environment problems. Test the leading hypothesis with a discriminating experiment or control; propose a concrete minimal correction with its rationale and limitations. Do not weaken the forged-marker assertion, add retries merely to mask failure, or claim replay occurred when the assertion was not reached.",
+    "Report exact observations, recurrence and confidence, evidence location and SHA-256, environment, commands and complete exit codes. Use passed only if diagnosis is supported by discriminating evidence; otherwise failed, incomplete or non-reproduced as appropriate. A diagnostic receipt is not a full production gate. Publish receipt before canonical release including executor-stop, process and host-lock evidence."
+  ],
+  "source": {
+    "branch": "solr-17764-submit",
+    "head": "3c73a59743e3dfe4b5ae5e11b0cdbe8c1e8fcae6",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes": "pr-5315-graceful-retry-linux-gate-r4-20261111",
+  "type": "gate"
+}
