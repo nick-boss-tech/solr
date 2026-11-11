@@ -1,0 +1,14 @@
+{
+  "host": "Windows implementation; Linux investigation and proof",
+  "id": "pr-5315-r2-repair-windows-20261111",
+  "job": "pr-5315-r2-repair-windows-20261111",
+  "prior_receipt": "records/receipt/pr-5315-graceful-retry-linux-gate-r2-20261111-receipt.json",
+  "scope": "Inspect R2 findings; implement safe separable source repairs where supported by evidence, push candidate, and hand unresolved shutdown diagnosis and exact-head proof to Linux. No Gradle on Windows or public comment.",
+  "source": {
+    "branch": "solr-17764-submit",
+    "head": "2ea7f584f0ca91a9de470ebe72b4063e8685de02",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Prepare separable repairs and Linux handoff after R2 gate",
+  "type": "assignment"
+}
