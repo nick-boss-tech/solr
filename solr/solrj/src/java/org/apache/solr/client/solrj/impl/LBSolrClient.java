@@ -705,13 +705,13 @@ public abstract class LBSolrClient extends SolrClient {
   }
 
   /**
-   * A graceful-shutdown rejection may be replayed on another endpoint only when
-   * it is the exact base UpdateRequest class, is not a V2 request, has no one-shot document
-   * iterator or request-specific content writer, and the selected HttpSolrClient uses one of the
-   * stock JavaBin/XML serializers. Unknown transports, custom writers, subclasses, and other
-   * request types fail closed. Materialized documents and parameters are still mutable; the client
-   * assumes callers do not mutate them while the synchronous request is in flight and does not
-   * snapshot them.
+   * A graceful-shutdown rejection may be replayed on another endpoint only when it is the exact
+   * base UpdateRequest class, is not a V2 request, has no one-shot document iterator or
+   * request-specific content writer, and the selected HttpSolrClient uses one of the stock
+   * JavaBin/XML serializers. Unknown transports, custom writers, subclasses, and other request
+   * types fail closed. Materialized documents and parameters are still mutable; the client assumes
+   * callers do not mutate them while the synchronous request is in flight and does not snapshot
+   * them.
    */
   static boolean isGracefulRejectionRetryable(SolrRequest<?> request, SolrClient solrClient) {
     if (request.getApiVersion() == SolrRequest.ApiVersion.V2

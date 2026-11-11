@@ -427,25 +427,18 @@ public class JettySolrRunner implements SolrBackend {
     }
   }
 
-  /**
-   * Test handler that marks and counts shutdown rejections when explicitly enabled.
-   */
+  /** Test handler that marks and counts shutdown rejections when explicitly enabled. */
   public static class ProbeMarkingGracefulHandler extends GracefulHandler {
     public static final String MARKER_HEADER = "X-Solr-Graceful-Shutdown";
     public static final String MARKER_VALUE = "rejected";
 
-    private final AtomicInteger updateRequests =
-        new AtomicInteger();
-    private final ConcurrentHashMap<
-            String, AtomicInteger>
-        updateRequestsByCore = new ConcurrentHashMap<>();
-    private final AtomicInteger rejectedUpdateRequests =
-        new AtomicInteger();
-    private final ConcurrentHashMap<
-            String, AtomicInteger>
-        rejectedUpdateRequestsByCore = new ConcurrentHashMap<>();
-    private final AtomicBoolean rejectionGateArmed =
-        new AtomicBoolean();
+    private final AtomicInteger updateRequests = new AtomicInteger();
+    private final ConcurrentHashMap<String, AtomicInteger> updateRequestsByCore =
+        new ConcurrentHashMap<>();
+    private final AtomicInteger rejectedUpdateRequests = new AtomicInteger();
+    private final ConcurrentHashMap<String, AtomicInteger> rejectedUpdateRequestsByCore =
+        new ConcurrentHashMap<>();
+    private final AtomicBoolean rejectionGateArmed = new AtomicBoolean();
     private volatile CountDownLatch rejectionGateEntered;
     private volatile CountDownLatch rejectionGateReleased;
 
@@ -462,8 +455,7 @@ public class JettySolrRunner implements SolrBackend {
       if (isUpdateRequest(request)) {
         updateRequests.incrementAndGet();
         updateRequestsByCore
-            .computeIfAbsent(
-                coreName(request), unused -> new AtomicInteger())
+            .computeIfAbsent(coreName(request), unused -> new AtomicInteger())
             .incrementAndGet();
       }
       return super.handle(request, response, callback);
@@ -474,8 +466,7 @@ public class JettySolrRunner implements SolrBackend {
       if (isUpdateRequest(request)) {
         rejectedUpdateRequests.incrementAndGet();
         rejectedUpdateRequestsByCore
-            .computeIfAbsent(
-                coreName(request), unused -> new AtomicInteger())
+            .computeIfAbsent(coreName(request), unused -> new AtomicInteger())
             .incrementAndGet();
         if (rejectionGateArmed.compareAndSet(true, false)) {
           CountDownLatch entered = rejectionGateEntered;
@@ -545,8 +536,7 @@ public class JettySolrRunner implements SolrBackend {
       rejectionGateArmed.set(true);
     }
 
-    public boolean awaitUpdateRejection(long timeout, TimeUnit unit)
-        throws InterruptedException {
+    public boolean awaitUpdateRejection(long timeout, TimeUnit unit) throws InterruptedException {
       CountDownLatch entered = rejectionGateEntered;
       return entered != null && entered.await(timeout, unit);
     }

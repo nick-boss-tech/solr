@@ -23,6 +23,7 @@ public class GracefulShutdownRejectionException extends SolrException {
 
   /** Response header a gracefully shutting-down server sets on pre-handler rejections. */
   public static final String MARKER_HEADER = "X-Solr-Graceful-Shutdown";
+
   public static final String MARKER_VALUE = "rejected";
 
   public GracefulShutdownRejectionException(String remoteHost, String detail) {

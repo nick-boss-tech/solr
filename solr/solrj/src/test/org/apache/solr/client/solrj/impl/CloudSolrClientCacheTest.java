@@ -314,6 +314,29 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     }
   }
 
+  public void testMixedRouteFailureDoesNotReplayMarkedRejection() throws Exception {
+    String collName = "gettingstarted";
+    AtomicReference<DocCollection> currentDoc = new AtomicReference<>(loadCollection(collName, 1));
+    Map<String, ClusterState.CollectionRef> refs =
+        Map.of(
+            collName, new TestCollectionRef(currentDoc::get, new AtomicInteger(), null, null, -1));
+    try (ClusterStateProvider provider = getStateProvider(Set.of("192.168.1.108:8983_solr"), refs);
+        RecordingCloudSolrClient client = new RecordingCloudSolrClient(provider, 1)) {
+      client.enqueue(
+          (req, cols) -> {
+            NamedList<Throwable> errors = new NamedList<>();
+            errors.add("first", new SocketException("connection reset"));
+            errors.add("second", new GracefulShutdownRejectionException("test", "rejected"));
+            throw new CloudSolrClient.RouteException(
+                SolrException.ErrorCode.SERVER_ERROR, errors, Map.of());
+          });
+      expectThrows(
+          CloudSolrClient.RouteException.class,
+          () -> client.request(new DummyUpdateRequest(collName), collName));
+      assertEquals(1, client.getStateVersionHistory().size());
+    }
+  }
+
   public void testDirectUpdatesToLeadersSkipStateVersionBeforeWait() throws Exception {
     String collName = "gettingstarted";
     Set<String> liveNodes = new HashSet<>(Set.of("192.168.1.108:8983_solr"));

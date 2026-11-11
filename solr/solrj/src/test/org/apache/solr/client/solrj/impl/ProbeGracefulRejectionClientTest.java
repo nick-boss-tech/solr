@@ -21,6 +21,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpHeaders;
@@ -400,8 +402,17 @@ public class ProbeGracefulRejectionClientTest extends SolrTestCaseJ4 {
                                   materializedUpdate(),
                                   List.of(rejecting.endpoint(), healthy.endpoint())))
                           .get(30, TimeUnit.SECONDS));
+          StringWriter trace = new StringWriter();
+          failure.printStackTrace(new PrintWriter(trace));
           assertTrue(
-              "async marker failure must surface, not replay the update",
+              "async marker failure must surface, not replay the update; jetty="
+                  + jetty
+                  + ", rejected requests="
+                  + rejecting.totalHits.get()
+                  + ", healthy requests="
+                  + healthy.totalHits.get()
+                  + "\n"
+                  + trace,
               SolrException.hasCause(failure, GracefulShutdownRejectionException.class));
           assertEquals("client jetty=" + jetty, 1, rejecting.totalHits.get());
           assertEquals("client jetty=" + jetty, 0, rejecting.appHits.get());
@@ -639,7 +650,8 @@ public class ProbeGracefulRejectionClientTest extends SolrTestCaseJ4 {
             () ->
                 lb.request(
                     new LBSolrClient.Req(
-                        materializedUpdate(), List.of(forgedMarker.endpoint(), healthy.endpoint()))));
+                        materializedUpdate(),
+                        List.of(forgedMarker.endpoint(), healthy.endpoint()))));
         assertEquals("client jetty=" + jetty, 1, forgedMarker.appHits.get());
         assertEquals("client jetty=" + jetty, 0, healthy.appHits.get());
       }
