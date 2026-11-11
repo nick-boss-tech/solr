@@ -1,0 +1,32 @@
+{
+  "commands": [
+    "./gradlew --no-daemon :solr:solrj:test --tests org.apache.solr.client.solrj.impl.CloudSolrClientCacheTest --tests org.apache.solr.client.solrj.impl.CloudHttp2SolrClientRetryTest --tests org.apache.solr.client.solrj.impl.CloudSolrClientRoutingTest --tests org.apache.solr.client.solrj.impl.ProbeGracefulRejectionClientTest -Ptests.seed=17764C0DE --rerun-tasks",
+    "./gradlew --no-daemon :solr:solrj-jetty:test --tests org.apache.solr.client.solrj.jetty.ProbeGracefulRejectionJettyBodyCloseTest -Ptests.seed=17764C0DE --rerun-tasks",
+    "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.cloud.ProbeGracefulMultiShardTest --tests org.apache.solr.cloud.TestGracefulJettyShutdown -Ptests.nightly=true -Ptests.seed=17764C0DE --rerun-tasks",
+    "./gradlew --no-daemon :solr:packaging:installDist",
+    "./gradlew --no-daemon tidy",
+    "./gradlew --no-daemon check -x test"
+  ],
+  "environment": "Linux JDK 21, clean isolated checkout. Check source head, current board claim, host locks and executor state before execution; no source push or public comment.",
+  "head": "3c73a59743e3dfe4b5ae5e11b0cdbe8c1e8fcae6",
+  "id": "pr-5315-graceful-retry-linux-gate-r4-20261111",
+  "job": "pr-5315-graceful-retry-linux-gate-r4-20261111",
+  "phase": "R4 full candidate gate after R3 diagnostic",
+  "requirements": [
+    "Execute all named suites on this exact head with fresh XML, counts, logs, skips, failures and exit codes. Verify actual persisted increments and endpoint counts for alternate replica success and parallel and sequential exhaustion, and six prior 503 regressions. Repeat full async client class at least three times, including both transports, and exercise a deterministic callback ordering regression if feasible; record missing coverage.",
+    "Verify both clients' trusted and disabled cases, unmarked and wrong or forged markers, no alternate, one-shot and nested iterators, custom writers, V2 and unspecified requests, sync and async, body closure and materialized updates. The forged marker when trust is enabled is accepted by design: report operator control of all intermediaries as a prerequisite, not marker provenance. Report gaps or disposable test patches explicitly.",
+    "Use installDist and a real working core. With SOLR_JETTY_GRACEFUL=true before startup, capture real marked 503 on an existing keep-alive connection after stop begins while work is in flight, with server lifecycle, request and handler-entry evidence. Show default-disabled behavior and fresh connection refusal separately; record all conditions and timing. Do not count test-only handler or discarded harness results as packaged proof.",
+    "In a disposable exact-head checkout, run testMixedRouteFailureDoesNotReplayMarkedRejection at the named seed; remove only the outer whole-batch guard while retaining the inner marked-503 guard and rerun, requiring a behavioral fail-before and pass-after. Preserve mutation diff, fresh XML, logs and counts. Reproduce or carefully establish validity of the six original reviewed-PR-head fail-before regressions from prior evidence; report proof limitations. Earlier R2 proof is not proof for this head.",
+    "Run tidy with no tracked changes and root check -x test without exclusions; capture output and exits. If formatting changes files, fail the exact-head gate and return the diff for a new commit. Diagnose failures; no compile error, skipped test, setup failure or non-reproduction is a pass.",
+    "Review the strict repeatability whitelist against JavaBin/XML serialization, nested iterators, custom MapWriter/IteratorWriter, mutable documents and parameters, cycles and unsupported values. Check fail-closed behavior, mixed-error exhaustion, skip-retry, V2, default retry compatibility, server packaging and duplicate headers. Explicit trust, no concurrent mutation, existing communication retry risks and ambiguous in-flight 503 limitations remain.",
+    "Publish passed only if all required legs complete successfully; otherwise failed, incomplete or non-reproduced, with actual evidence locations and hashes, head, counts and scope. Publish receipt before canonical release and capture executor-stop, process and host-lock evidence."
+  ],
+  "seed": "17764C0DE",
+  "source": {
+    "branch": "solr-17764-submit",
+    "head": "3c73a59743e3dfe4b5ae5e11b0cdbe8c1e8fcae6",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes": "pr-5315-r3-shutdown-investigation-linux-20261111",
+  "type": "gate"
+}
