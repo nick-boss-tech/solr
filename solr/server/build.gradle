@@ -19,10 +19,7 @@ apply plugin: 'java-library'
 
 description = 'Solr Server'
 
-// No java classes from this module
-jar.enabled(false)
 javadoc.enabled(false)
-compileJava.enabled(false)
 
 configurations {
   libExt
@@ -37,6 +34,8 @@ configurations {
 }
 
 dependencies {
+  compileOnly platform(project(":platform"))
+  compileOnly libs.eclipse.jetty.server
   serverLib platform(project(":platform"))
   serverLib(libs.eclipse.jetty.deploy, {
     exclude group: "org.awaitility", module: "awaitility"
@@ -114,6 +113,10 @@ task assemblePackaging(type: Sync) {
   from(configurations.serverLib - configurations.libExt - configurations.solrCore, {
     into "lib/"
   })
+
+  from(tasks.named("jar")) {
+    into "lib/"
+  }
 
   from {project.configurations.startJar.singleFile} {
     rename {file -> 'start.jar'}

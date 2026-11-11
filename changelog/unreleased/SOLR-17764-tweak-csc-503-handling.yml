@@ -1,8 +1,10 @@
 title: >
-  CloudSolrClient retries eligible collection queries after a 503 response.
+  CloudSolrClient retries eligible collection queries after a 503 response. SolrJ can optionally
+  retry repeatable update subrequests rejected before processing during graceful shutdown.
 type: fixed
 authors:
   - name: Jason Gerlowski
+  - name: Nick Shanin
 links:
   - name: SOLR-17764
     url: https://issues.apache.org/jira/browse/SOLR-17764

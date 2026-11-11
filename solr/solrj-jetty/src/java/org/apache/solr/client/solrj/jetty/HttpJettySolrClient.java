@@ -44,6 +44,7 @@ import org.apache.solr.client.solrj.RequestNotSentException;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.impl.GracefulShutdownRejectionException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.impl.LBSolrClient;
 import org.apache.solr.client.solrj.impl.SolrClientCustomizer;
@@ -603,9 +604,24 @@ public class HttpJettySolrClient extends HttpSolrClient {
     return HttpSolrClient.basicAuthCredentialsToAuthorizationString(user, pass);
   }
 
-  private NamedList<Object> processErrorsAndResponse(
+  NamedList<Object> processErrorsAndResponse(
       SolrRequest<?> solrRequest, Response response, InputStream is, String urlExceptionMessage)
       throws SolrServerException {
+    if (trustGracefulShutdownRejections
+        && (solrRequest.getRequestType() == SolrRequest.SolrRequestType.UPDATE
+            || solrRequest.getRequestType() == SolrRequest.SolrRequestType.UNSPECIFIED)
+        && solrRequest.getApiVersion() != SolrRequest.ApiVersion.V2
+        && response.getStatus() == 503
+        && GracefulShutdownRejectionException.MARKER_VALUE.equals(
+            response.getHeaders().get(GracefulShutdownRejectionException.MARKER_HEADER))) {
+      // The body is not parsed on this path; close the stream so the response is released.
+      try {
+        is.close();
+      } catch (IOException ignored) {
+      }
+      throw new GracefulShutdownRejectionException(
+          urlExceptionMessage, "request rejected during graceful shutdown (marker header present)");
+    }
     ResponseParser parser =
         solrRequest.getResponseParser() == null ? this.parser : solrRequest.getResponseParser();
     String contentType = response.getHeaders().get(HttpHeader.CONTENT_TYPE);

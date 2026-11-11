@@ -8,7 +8,7 @@
 <Configure id="Server" class="org.eclipse.jetty.server.Server">
   <Call name="insertHandler">
     <Arg>
-      <New id="GracefulHandler" class="org.eclipse.jetty.server.handler.GracefulHandler" />
+      <New id="GracefulHandler" class="org.apache.solr.server.GracefulShutdownHandler" />
     </Arg>
   </Call>
   <Set name="stopTimeout"><Property name="jetty.server.stopTimeout" default="5000"/></Set>

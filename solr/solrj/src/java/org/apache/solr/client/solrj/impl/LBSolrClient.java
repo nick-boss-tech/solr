@@ -27,6 +27,7 @@ import java.net.http.HttpConnectTimeoutException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -48,14 +49,20 @@ import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrRequest;
 import org.apache.solr.client.solrj.SolrRequest.SolrRequestType;
 import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.request.JavaBinRequestWriter;
 import org.apache.solr.client.solrj.request.QueryRequest;
 import org.apache.solr.client.solrj.request.RequestWriter;
 import org.apache.solr.client.solrj.request.SolrQuery;
+import org.apache.solr.client.solrj.request.UpdateRequest;
+import org.apache.solr.client.solrj.request.XMLRequestWriter;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.client.solrj.response.ResponseParser;
 import org.apache.solr.client.solrj.util.ClientUtils;
 import org.apache.solr.common.SolrException;
+import org.apache.solr.common.SolrInputDocument;
+import org.apache.solr.common.SolrInputField;
 import org.apache.solr.common.params.CommonParams;
+import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.ExecutorUtil;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.common.util.ObjectReleaseTracker;
@@ -634,11 +641,20 @@ public abstract class LBSolrClient extends SolrClient {
       Endpoint baseUrl, Req req, Rsp rsp, boolean isNonRetryable, boolean isZombie)
       throws SolrServerException, IOException {
     Exception ex = null;
+    SolrClient solrClient = null;
     try {
       rsp.server = baseUrl.toString();
-      rsp.rsp = doRequest(baseUrl, req.getRequest());
+      solrClient = getClient(baseUrl);
+      rsp.rsp = doRequest(solrClient, baseUrl.getBaseUrl(), baseUrl.getCore(), req.getRequest());
       if (isZombie) {
         reviveZombieServer(baseUrl);
+      }
+    } catch (GracefulShutdownRejectionException e) {
+      // Retry the rejected subrequest only; other routes may already have completed.
+      if (solrClient != null && isGracefulRejectionRetryable(req.getRequest(), solrClient)) {
+        ex = e;
+      } else {
+        throw e;
       }
     } catch (SolrException e) {
       if (!isNonRetryable && e instanceof RemoteSolrException rse) {
@@ -686,6 +702,87 @@ public abstract class LBSolrClient extends SolrClient {
     }
 
     return ex;
+  }
+
+  /**
+   * A graceful-shutdown rejection may be replayed on another endpoint only when
+   * it is the exact base UpdateRequest class, is not a V2 request, has no one-shot document
+   * iterator or request-specific content writer, and the selected HttpSolrClient uses one of the
+   * stock JavaBin/XML serializers. Unknown transports, custom writers, subclasses, and other
+   * request types fail closed. Materialized documents and parameters are still mutable; the client
+   * assumes callers do not mutate them while the synchronous request is in flight and does not
+   * snapshot them.
+   */
+  static boolean isGracefulRejectionRetryable(SolrRequest<?> request, SolrClient solrClient) {
+    if (request.getApiVersion() == SolrRequest.ApiVersion.V2
+        || request.getRequestType() != SolrRequestType.UPDATE
+        || request.getClass() != UpdateRequest.class
+        || !(solrClient instanceof HttpSolrClient httpSolrClient)) {
+      return false;
+    }
+    UpdateRequest update = (UpdateRequest) request;
+    if (update.getDocIterator() != null) return false;
+    if (update.getParams() != null && update.getParams().getClass() != ModifiableSolrParams.class) {
+      return false;
+    }
+    if (!isRepeatableValue(update.getDocumentsMap(), 0)
+        || !isRepeatableValue(update.getDeleteByIdMap(), 0)
+        || !isRepeatableValue(update.getDeleteQuery(), 0)) {
+      return false;
+    }
+    RequestWriter requestWriter = httpSolrClient.getRequestWriter();
+    if (requestWriter.getClass() != JavaBinRequestWriter.class
+        && requestWriter.getClass() != XMLRequestWriter.class) {
+      return false;
+    }
+    return request.getContentWriter(requestWriter.getUpdateContentType()) == null;
+  }
+
+  private static boolean isRepeatableValue(Object value, int depth) {
+    if (value == null) return true;
+    if (depth > 32) return false;
+    Class<?> type = value.getClass();
+    if (type == String.class
+        || type == Boolean.class
+        || type == Byte.class
+        || type == Short.class
+        || type == Integer.class
+        || type == Long.class
+        || type == Float.class
+        || type == Double.class
+        || type == byte[].class
+        || type == Date.class) {
+      return true;
+    }
+    if (type == SolrInputDocument.class) {
+      SolrInputDocument doc = (SolrInputDocument) value;
+      for (SolrInputField field : doc) {
+        if (field.getClass() != SolrInputField.class
+            || !isRepeatableValue(field.getValue(), depth + 1)) return false;
+      }
+      return isRepeatableValue(doc.getChildDocuments(), depth + 1);
+    }
+    String name = type.getName();
+    boolean knownContainer =
+        type == ArrayList.class
+            || type == LinkedHashMap.class
+            || type == HashMap.class
+            || name.startsWith("java.util.ImmutableCollections$");
+    if (!knownContainer) return false;
+    if (value instanceof Map<?, ?> map) {
+      for (Map.Entry<?, ?> entry : map.entrySet()) {
+        if (!isRepeatableValue(entry.getKey(), depth + 1)
+            || !isRepeatableValue(entry.getValue(), depth + 1)) return false;
+      }
+      return true;
+    }
+    if (value instanceof Collection<?> collection) {
+      for (Object item : collection) {
+        if (!isRepeatableValue(item, depth + 1)) return false;
+      }
+      return true;
+    }
+    return false;
   }
 
   protected boolean isConnectException(Throwable t) {

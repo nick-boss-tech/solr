@@ -424,6 +424,18 @@ public abstract class CloudSolrClient extends SolrClient {
     return new RouteException(serverError, exceptions, routes);
   }
 
+  private static boolean containsGracefulShutdownRejection(Throwable throwable) {
+    if (throwable == null) return false;
+    if (throwable instanceof GracefulShutdownRejectionException) return true;
+    if (throwable instanceof RouteException routeException) {
+      NamedList<Throwable> routeErrors = routeException.getThrowables();
+      for (int i = 0; i < routeErrors.size(); i++) {
+        if (containsGracefulShutdownRejection(routeErrors.getVal(i))) return true;
+      }
+    }
+    return containsGracefulShutdownRejection(throwable.getCause());
+  }
+
   protected Map<String, ? extends LBSolrClient.Req> createRoutes(
       UpdateRequest updateRequest,
       ModifiableSolrParams routableParams,
@@ -730,11 +742,13 @@ public abstract class CloudSolrClient extends SolrClient {
       // A 503 does not establish whether a non-query request was partially applied.
       boolean retryOn503 =
           errorCode == 503
-              && (exc instanceof RouteException
+              && ((exc instanceof RouteException && !containsGracefulShutdownRejection(exc))
                   || (request.getRequestType() == SolrRequestType.QUERY
                       && !(rootCause instanceof RemoteSolrException remote
                           && remote.shouldSkipRetry())));
-      if (wasCommError || retryOn503) {
+      if ((wasCommError || retryOn503)
+          && !(request.getRequestType() == SolrRequestType.UPDATE
+              && containsGracefulShutdownRejection(exc))) {
         // if it was a communication error it is likely that
         // the node to which the request to be sent is down . So expire the state
         // so that the next attempt will fetch the fresh state

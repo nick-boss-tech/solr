@@ -183,6 +183,35 @@ processing time of the largest update request.
 
 === Cloud Request Routing
 
+==== Retry of shutdown rejections
+
+By default, SolrJ does not use a shutdown response header to retry updates. A
+`CloudSolrClient` can opt in to retrying a repeatable update subrequest that a
+node rejects before processing during graceful shutdown:
+
+[source,java]
+----
+var httpBuilder = HttpSolrClient.builder(null)
+    .withTrustedGracefulShutdownRejections(true);
+var client = new CloudSolrClient.Builder(solrUrls)
+    .withHttpClientBuilder(httpBuilder)
+    .build();
+----
+
+Only enable this when every endpoint and intermediary in the request path is
+trusted not to add the shutdown header to another response or independently
+retry an already processed request. A header or TLS connection to a proxy does
+not establish this property. Incorrect trust can cause an update to be applied
+more than once. Do not mutate the request or its contents while it is in flight.
+The retry is limited to V1 updates with standard request writers and supported
+repeatable field values;
+one-shot streams, custom writers and V2 requests are not included. A missing
+marker, including one from an older node, does not enable this retry.
+
+This option covers pre-handler shutdown rejection, not a 503 returned after
+update processing begins. It does not change the existing behavior for other
+communication failures or guarantee that updates are applied exactly once.
+
 SolrJ `CloudSolrClient` respects the xref:solrcloud-distributed-requests.adoc#shards-preference-parameter[shards.preference parameter].
 Therefore requests sent to single-sharded collections will route requests the same way that distributed requests are routed to individual shards.
 If no `shards.preference` parameter is provided, the clients will default to sorting replicas randomly.

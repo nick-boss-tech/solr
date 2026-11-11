@@ -41,8 +41,12 @@ import java.util.NoSuchElementException;
 import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.solr.SolrBackend;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.jetty.HttpJettySolrClient;
@@ -83,12 +87,15 @@ import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.HttpConfiguration;
 import org.eclipse.jetty.server.HttpConnectionFactory;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Response;
 import org.eclipse.jetty.server.SecureRequestCustomizer;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.SslConnectionFactory;
 import org.eclipse.jetty.server.handler.GracefulHandler;
 import org.eclipse.jetty.session.DefaultSessionIdManager;
+import org.eclipse.jetty.util.Callback;
 import org.eclipse.jetty.util.resource.ResourceFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
@@ -111,6 +118,8 @@ public class JettySolrRunner implements SolrBackend {
   private static final int THREAD_POOL_MAX_IDLE_TIME_MS = 260000;
 
   private Server server;
+
+  private volatile ProbeMarkingGracefulHandler probeMarkingGracefulHandler;
 
   private volatile ServletHolder solrServlet;
 
@@ -408,10 +417,150 @@ public class JettySolrRunner implements SolrBackend {
 
     if (config.enableGracefulShutdown) {
       // Mimic "graceful.mod"
-      GracefulHandler graceful = new GracefulHandler();
-      server.insertHandler(graceful);
+      if (Boolean.getBoolean("solr.probe.gracefulMarker")) {
+        probeMarkingGracefulHandler = new ProbeMarkingGracefulHandler();
+        server.insertHandler(probeMarkingGracefulHandler);
+      } else {
+        server.insertHandler(new GracefulHandler());
+      }
       server.setStopTimeout(15 * 1000);
     }
+  }
+
+  /**
+   * Test handler that marks and counts shutdown rejections when explicitly enabled.
+   */
+  public static class ProbeMarkingGracefulHandler extends GracefulHandler {
+    public static final String MARKER_HEADER = "X-Solr-Graceful-Shutdown";
+    public static final String MARKER_VALUE = "rejected";
+
+    private final AtomicInteger updateRequests =
+        new AtomicInteger();
+    private final ConcurrentHashMap<
+            String, AtomicInteger>
+        updateRequestsByCore = new ConcurrentHashMap<>();
+    private final AtomicInteger rejectedUpdateRequests =
+        new AtomicInteger();
+    private final ConcurrentHashMap<
+            String, AtomicInteger>
+        rejectedUpdateRequestsByCore = new ConcurrentHashMap<>();
+    private final AtomicBoolean rejectionGateArmed =
+        new AtomicBoolean();
+    private volatile CountDownLatch rejectionGateEntered;
+    private volatile CountDownLatch rejectionGateReleased;
+
+    public ProbeMarkingGracefulHandler() {
+      super();
+    }
+
+    public ProbeMarkingGracefulHandler(Handler handler) {
+      super(handler);
+    }
+
+    @Override
+    public boolean handle(Request request, Response response, Callback callback) throws Exception {
+      if (isUpdateRequest(request)) {
+        updateRequests.incrementAndGet();
+        updateRequestsByCore
+            .computeIfAbsent(
+                coreName(request), unused -> new AtomicInteger())
+            .incrementAndGet();
+      }
+      return super.handle(request, response, callback);
+    }
+
+    @Override
+    protected void handleShutdownRejection(Request request, Response response, Callback callback) {
+      if (isUpdateRequest(request)) {
+        rejectedUpdateRequests.incrementAndGet();
+        rejectedUpdateRequestsByCore
+            .computeIfAbsent(
+                coreName(request), unused -> new AtomicInteger())
+            .incrementAndGet();
+        if (rejectionGateArmed.compareAndSet(true, false)) {
+          CountDownLatch entered = rejectionGateEntered;
+          CountDownLatch released = rejectionGateReleased;
+          if (entered != null && released != null) {
+            entered.countDown();
+            try {
+              released.await(60, TimeUnit.SECONDS);
+            } catch (InterruptedException e) {
+              Thread.currentThread().interrupt();
+            }
+          }
+        }
+      }
+      response.getHeaders().put(MARKER_HEADER, MARKER_VALUE);
+      super.handleShutdownRejection(request, response, callback);
+    }
+
+    private static boolean isUpdateRequest(Request request) {
+      return "POST".equalsIgnoreCase(request.getMethod())
+          && request.getHttpURI().getPath().endsWith("/update");
+    }
+
+    private static String coreName(Request request) {
+      String path = request.getHttpURI().getPath();
+      int updatePathStart = path.lastIndexOf("/update");
+      int coreNameStart = path.lastIndexOf('/', updatePathStart - 1) + 1;
+      return path.substring(coreNameStart, updatePathStart);
+    }
+
+    public void resetUpdateCounters() {
+      updateRequests.set(0);
+      rejectedUpdateRequests.set(0);
+      updateRequestsByCore.clear();
+      rejectedUpdateRequestsByCore.clear();
+    }
+
+    public int getUpdateRequestCount() {
+      return updateRequests.get();
+    }
+
+    public int getRejectedUpdateRequestCount() {
+      return rejectedUpdateRequests.get();
+    }
+
+    public int getPassedUpdateRequestCount() {
+      return updateRequests.get() - rejectedUpdateRequests.get();
+    }
+
+    public int getUpdateRequestCount(String coreName) {
+      AtomicInteger count = updateRequestsByCore.get(coreName);
+      return count == null ? 0 : count.get();
+    }
+
+    public int getRejectedUpdateRequestCount(String coreName) {
+      AtomicInteger count = rejectedUpdateRequestsByCore.get(coreName);
+      return count == null ? 0 : count.get();
+    }
+
+    public int getPassedUpdateRequestCount(String coreName) {
+      return getUpdateRequestCount(coreName) - getRejectedUpdateRequestCount(coreName);
+    }
+
+    public void armUpdateRejectionGate() {
+      rejectionGateEntered = new CountDownLatch(1);
+      rejectionGateReleased = new CountDownLatch(1);
+      rejectionGateArmed.set(true);
+    }
+
+    public boolean awaitUpdateRejection(long timeout, TimeUnit unit)
+        throws InterruptedException {
+      CountDownLatch entered = rejectionGateEntered;
+      return entered != null && entered.await(timeout, unit);
+    }
+
+    public void releaseUpdateRejectionGate() {
+      CountDownLatch released = rejectionGateReleased;
+      if (released != null) {
+        released.countDown();
+      }
+    }
+  }
+
+  public ProbeMarkingGracefulHandler getProbeMarkingGracefulHandler() {
+    return probeMarkingGracefulHandler;
   }
 
   /**

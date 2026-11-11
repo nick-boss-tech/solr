@@ -514,9 +514,31 @@ public class HttpJdkSolrClient extends HttpSolrClient {
     return encodingMatcher.find() ? encodingMatcher.group(1) : null;
   }
 
-  private NamedList<Object> processErrorsAndResponse(
+  NamedList<Object> processErrorsAndResponse(
       SolrRequest<?> solrRequest, ResponseParser parser, HttpResponse<InputStream> resp, String url)
       throws SolrServerException {
+    if (trustGracefulShutdownRejections
+        && (solrRequest.getRequestType() == SolrRequest.SolrRequestType.UPDATE
+            || solrRequest.getRequestType() == SolrRequest.SolrRequestType.UNSPECIFIED)
+        && solrRequest.getApiVersion() != SolrRequest.ApiVersion.V2
+        && resp.statusCode() == 503
+        && resp.headers()
+            .firstValue(GracefulShutdownRejectionException.MARKER_HEADER)
+            .filter(GracefulShutdownRejectionException.MARKER_VALUE::equals)
+            .isPresent()) {
+      GracefulShutdownRejectionException rejection =
+          new GracefulShutdownRejectionException(
+              url, "request rejected during graceful shutdown (marker header present)");
+      InputStream body = resp.body();
+      if (body != null) {
+        try {
+          body.close();
+        } catch (IOException closeFailure) {
+          rejection.addSuppressed(closeFailure);
+        }
+      }
+      throw rejection;
+    }
     String contentType = resp.headers().firstValue("Content-Type").orElse(null);
     contentType = contentType == null ? "" : contentType;
     String mimeType = contentTypeToMimeType(contentType);

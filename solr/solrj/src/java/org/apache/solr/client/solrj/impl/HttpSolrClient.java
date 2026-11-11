@@ -89,6 +89,7 @@ public abstract class HttpSolrClient extends SolrClient {
 
   protected final String baseUrl;
   protected final long requestTimeoutMillis;
+  protected final boolean trustGracefulShutdownRejections;
 
   protected final Set<String> urlParamNames;
 
@@ -101,6 +102,8 @@ public abstract class HttpSolrClient extends SolrClient {
   protected HttpSolrClient(String serverBaseUrl, BuilderBase<?, ?> builder) {
     this.baseUrl = extractBaseUrl(serverBaseUrl);
     this.requestTimeoutMillis = builder.getRequestTimeoutMillis();
+    this.trustGracefulShutdownRejections =
+        Boolean.TRUE.equals(builder.trustGracefulShutdownRejections);
     this.basicAuthAuthorizationStr = builder.basicAuthAuthorizationStr;
     if (builder.requestWriter != null) {
       this.requestWriter = builder.requestWriter;
@@ -455,6 +458,7 @@ public abstract class HttpSolrClient extends SolrClient {
     protected int proxyPort;
     protected boolean proxyIsSocks4;
     protected boolean proxyIsSecure;
+    protected Boolean trustGracefulShutdownRejections;
 
     public abstract C build();
 
@@ -479,7 +483,21 @@ public abstract class HttpSolrClient extends SolrClient {
       if (this.urlParamNames == null) {
         this.urlParamNames = httpSolrClient.urlParamNames;
       }
+      if (this.trustGracefulShutdownRejections == null) {
+        this.trustGracefulShutdownRejections = httpSolrClient.trustGracefulShutdownRejections;
+      }
       return (B) (this);
+    }
+
+    /**
+     * Enable retry of repeatable updates rejected before processing during graceful shutdown.
+     * Enable only when every endpoint and intermediary on the request path is trusted not to
+     * fabricate the rejection marker or retry an already processed request. Disabled by default.
+     */
+    @SuppressWarnings("unchecked")
+    public B withTrustedGracefulShutdownRejections(boolean trust) {
+      this.trustGracefulShutdownRejections = trust;
+      return (B) this;
     }
 
     /** Provides the Base Solr Url. */
