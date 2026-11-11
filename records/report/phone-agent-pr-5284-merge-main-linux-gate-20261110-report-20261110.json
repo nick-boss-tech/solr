@@ -1,0 +1,9 @@
+{
+ "id": "phone-agent-pr-5284-merge-main-linux-gate-20261110-report-20261110",
+ "type": "report",
+ "job": "pr-5284-merge-main-linux-gate-20261110",
+ "owner": "phone-agent",
+ "status": "completed",
+ "summary": "Merged head a225b9d4af verifies cleanly apart from the one known, accepted failure: tidy clean, Error Prone and root check pass, all focused and neighboring suites pass, and all eight argument-routing mutations discriminate at this head. V2ApiIntegrationTest.testException still returns 500 instead of 400, byte-identical in shape to the pre-merge heads and dependent on open PR 5285, so the gate is filed failed on that leg alone, as its record requires. The full PR gate still waits on PR 5285.",
+ "recorded": "2026-11-10"
+}

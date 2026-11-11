@@ -1,8 +1,0 @@
-{
-  "details": "On Windows, JDK 21.0.11, Gradle 9.7.0, seed 18622C0DE, one test JVM, and identical Solr head 769ca6e177d77acd3f1993a4a24bd3257ae243c0 in separate source worktrees, TestNestedDocsSort.testStringChildMissingFirst failed with stock Lucene 10.6.0 (one assertion failure during ordinal lookup through ToParentDocValues$SortedDVs.lookupOrd; exit 1) and passed with the repaired Lucene join JAR from e0c53033bb2b6b34939ded24e228443b7d8b576b (one test, zero failures/errors/skips, exit 0). The test classpath hash checks verified the respective stock and patched JARs; JVM class-load logging showed ToParentDocValues from the corresponding isolated local repository. Stock XML SHA-256 68de8609791ff10fce78c40a261a0d508c177adcfba6e8ef0957b426032cd027; patched XML 10f3e86b387b028447f2402f306ae4cf87de4267039f42518a3055187e0ac94b. Logs, XML, exit files and per-process class-load logs are under research/lucene-submission-prep/solr5293-windows-integration. Both legs used -PdisableJsClient=true, skipped Error Prone and emitted security-policy locale warnings. Remaining control methods and suites were not yet complete at this report.",
-  "head": "769ca6e177d77acd3f1993a4a24bd3257ae243c0",
-  "id": "solr5293-windows-string-pair-20261110",
-  "job": "solr5293-lucene106-integration-windows-20261110",
-  "summary": "Matched Solr string missing-first case fails with stock Lucene and passes with the repair",
-  "type": "report"
-}

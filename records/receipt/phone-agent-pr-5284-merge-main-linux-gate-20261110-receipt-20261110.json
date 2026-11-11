@@ -1,0 +1,31 @@
+{
+ "id": "phone-agent-pr-5284-merge-main-linux-gate-20261110-receipt-20261110",
+ "type": "receipt",
+ "job": "pr-5284-merge-main-linux-gate-20261110",
+ "gate": "pr-5284-merge-main-linux-gate-20261110",
+ "owner": "phone-agent",
+ "verdict": "failed",
+ "verdict_basis": "The gate record forbids a pass while a required leg fails. Every leg passes at the merged head except V2ApiIntegrationTest.testException, the known failure Nick accepted for this branch update; it is recorded distinctly below and is the sole reason for the failed verdict. No new regression was found.",
+ "summary": "Verification of PR 5284 at the merged head a225b9d4af9f295e3c84b7ff6f35ef7e71ababc1 (parents confirmed: 3d530d7639eeb0b4bd8ee11227a1133fe66aa672 and upstream main 82888694ae248b74d105d9c7b5f60d33c385f325; fork branch and live PR head re-verified equal before the run and at filing; PR still open and draft). The manual merge resolution in TestCollectionAPIs.java was inspected: the result equals the PR-side parent for that file, with zero ContentStream references (upstream's version has 2), so the deleted legacy migrate-docs helper and its unused imports stay deleted and nothing obsolete was restored. Combined suites at seed 16398C0DE: RebalanceLeadersAPITest 6/6, MigrateDocsAPITest 10/10, MigrateRouteKeyTest 5/5, V2CollectionAPIMappingTest 2/2, TestCollectionAPIs 2/2, TestApiFramework 3/3, TestRebalanceLeaders 4 passed plus the @Nightly testRebalanceLeaders skipped as in prior rounds, V2ApiIntegrationTest 12/13. Root tidy exit 0 with zero tracked changes. Error Prone compile exit 0. Root check -x test passed on rerun (see environment repairs). All eight mutations discriminated by assertion at this head: the two rebalance constructor-argument mutations failed testBodyParametersReachOperation with expected:<2> but was:<99> and expected:<30> but was:<999>; the six MigrateDocs omission mutations each failed testAllPropertiesAndAsyncId with the captured message missing exactly the omitted entry (collection, target.collection, split.key, forward.timeout=45, followAliases=true), and the async mutation failed with 'Wrong asyncId for command expected:<migrateAsyncId> but was:<null>'.",
+ "known_failure": {
+  "test": "org.apache.solr.handler.V2ApiIntegrationTest.testException",
+  "result": "java.lang.AssertionError: expected:<400> but was:<500>",
+  "comparison": "Identical assertion and values to the failures recorded at review-fix head 5fce0c06ee5afa8ac3606e32c2e441041da49864 and reviewed PR head 415c639e6e5b74d665209024cf29fb68dc32b23f; the merge changed neither the failure nor its shape. Linked to still-open PR 5285. Nick accepted this known issue for the push; it is not suppressed and not counted as a pass.",
+  "effect_on_verdict": "Sole failing leg; the gate is filed failed for this reason alone."
+ },
+ "compatibility_boundary_assessment": {
+  "missing_collection": "Runtime-proven: testRejectsMissingCollection executes and passes in both RebalanceLeadersAPITest and MigrateDocsAPITest.",
+  "blank_collection": "Static review only: no dedicated empty-string collection test was found in the executed suites.",
+  "nonpositive_max_at_once": "Static review only: no test covers a zero or negative maxAtOnce; the resource helper falls back body value, then params, then default, with no validation branch to exercise.",
+  "lock_id_propagation": "Runtime-proven at the operation level: testBodyParametersReachOperation asserts getCallingLockId() equals 'lock-id' on the operation object the resource constructs and submits through executeRebalance.",
+  "response_capitalization_and_null_omission": "Capitalization runtime-proven: the resource reads the operation result key 'Summary' and the cloud TestRebalanceLeaders suite verifies the Summary/successes shape while moving preferred leadership. Null omission runtime-proven on the migrate side (testNullOptionalPropertiesAreOmitted) and by the rebalance default-body tests (testEmptyBodyDefaults, testNullBodyDefaults).",
+  "failure_and_inactive_preferreds_shapes": "Static review only: the resource populates failures and inactivePreferreds from the operation result map, but no executed test at this head asserts those two shapes directly."
+ },
+ "environment_repairs": [
+  "The first legs runner was interrupted by a runtime restart during the Error Prone compile leg; the completed tidy leg (exit 0, zero tracked changes) was preserved from its log and the remaining legs ran in a continuation runner. No leg was counted twice and no result was carried over except tidy's, which had fully completed before the interruption.",
+  "The first root check run failed only at :solr:webapp:verifyUiWasm: the egress relay corrupted the solr-ui-wasm.zip download (SHA-256 bf73ab466d43186c11848553929ce88f3c92473a920a55382298c196f5b57697 against the pinned 654494303e4af3b8bfb26a83d250603f19033820295591d88db0597991ce8ad2). The artifact was re-downloaded with curl, verified against the pin, and seeded into solr/webapp/build/ui-download/; the rerun passed with no exclusions.",
+  "No PR comment, metadata edit, rebase or source push was made under this gate."
+ ],
+ "evidence": "records/evidence/pr-5284-merge-main-linux-gate-20261110-evidence.tar.gz (SHA-256 c0a085e962461c555a2410c5debcf59aea34aff27e1b62f490839fe0518355c8): legs log (tidy, Error Prone, combined suites, first check), check rerun log, mutations log, eight positive class XML files, eight mutation XML files and eight mutation diffs.",
+ "recorded": "2026-11-10"
+}
