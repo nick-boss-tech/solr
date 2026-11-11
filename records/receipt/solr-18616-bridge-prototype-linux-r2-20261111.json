@@ -1,0 +1,16 @@
+{
+ "id": "solr-18616-bridge-prototype-linux-r2-20261111",
+ "type": "receipt",
+ "job": "solr-18616-bridge-prototype-linux-r2-20261111",
+ "gate": "solr-18616-bridge-prototype-linux-r2-20261111",
+ "owner": "phone-agent",
+ "verdict": "passed",
+ "summary": "Prototype feasibility round 2 at fork head 4c5d0d642cd538d06ba49f6aad253878a6e0a90a (branch solr-18616-submit, re-verified live at filing; clean normal clone). Head relationship verified before execution: this head's diff against the round-1 head 061fa32fa78a99f6e7dbc72dcca491ff7cb4fa84 is byte-identical to the tidy output recorded in the round-1 evidence, and the resulting prototype file blob is b43c838dac278edb4bc77341400eb7335d9a307d, matching the Windows tidy job's report; the equivalence diff is preserved in this gate's evidence. All legs pass at this head: JettyMetricsBridgePrototypeTest 1 test, 0 failures, 0 errors, 0 skipped at seed 18616 (testLateBridgeIncludesUnroutableRequest); tidy makes no tracked changes; root check -x test exits 0, including the spotless check that failed round 1. Scope, per the gate record: the passing test establishes only the in-process JettySolrRunner late-registration probe, i.e. a handler attached after startup observes an unroutable request and its counters and thread-pool gauge round-trip through SolrMetricManager's Prometheus reader. Production Jetty XML wiring, server/webapp classloader integration, broader method/status coverage, and asynchronous behavior remain unproven, and no production implementation exists yet. Toolchain note: ./gradlew does not run on this host; the identical tasks ran via the vendored Gradle 9.7.0 and JDK 21 toolchain, as the gate record permits when documented.",
+ "legs": {
+  "prototype_test": "passed 1/1, seed 18616",
+  "tidy": "no tracked changes",
+  "root_check": "passed (exit 0)"
+ },
+ "evidence": "records/evidence/solr-18616-bridge-prototype-linux-r2-20261111-evidence.tar.gz (SHA-256 b9d55c812dd2eed6f5daafa061e64e41432c4f7f445aa9e0f92f2c7e2b7b2a68): legs log with all exit codes, the fresh prototype XML, and the head-diff equivalence proof.",
+ "recorded": "2026-11-11"
+}

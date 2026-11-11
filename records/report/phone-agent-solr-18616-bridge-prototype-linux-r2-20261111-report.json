@@ -1,0 +1,9 @@
+{
+ "id": "phone-agent-solr-18616-bridge-prototype-linux-r2-20261111-report",
+ "type": "report",
+ "job": "solr-18616-bridge-prototype-linux-r2-20261111",
+ "owner": "phone-agent",
+ "status": "completed",
+ "summary": "SOLR-18616 bridge prototype round 2 PASSED at 4c5d0d642cd5: the tidy-formatted head (verified byte-identical to the round-1 Linux tidy output) passes the feasibility test, a clean tidy, and root check. The mechanism question Hoss's ticket turns on is now answered at probe level: a Jetty-layer handler registered after startup can observe requests that never reach a core and publish counters plus a thread-pool gauge through Solr's existing metrics registry and Prometheus reader. Everything beyond the probe (production XML wiring, classloaders, method/status coverage, async) remains unproven and belongs to an implementation phase that has not been authorized or designed yet.",
+ "recorded": "2026-11-11"
+}
