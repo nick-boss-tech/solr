@@ -1,0 +1,11 @@
+{
+ "id": "solr-18616-server-metrics-linux-r3-20261111",
+ "type": "release",
+ "job": "solr-18616-server-metrics-linux-r3-20261111",
+ "gate": "solr-18616-server-metrics-linux-r3-20261111",
+ "actor": "phone-agent",
+ "reason": "Gate completed with verdict passed at the exact head; receipt published before this release at the gate record's receipt path. This closes the SOLR-18616 production implementation gate chain (round 1 incomplete on generated files, round 2 failed on the missing package javadoc, round 3 passed).",
+ "evidence": "records/receipt/solr-18616-server-metrics-linux-r3-20261111.json; records/evidence/solr-18616-server-metrics-linux-r3-20261111-evidence.tar.gz (SHA-256 3db40a860ba992d8b02735b39c80221c9528638c32c2b173c1ad50dfcaabeaa6).",
+ "executor_stop": "Verified at filing: no Gradle daemon on the host, no holder on the test-queue lock, and the packaged node from the proof run is stopped with its port verified closed.",
+ "recorded": "2026-11-11"
+}

@@ -1,0 +1,18 @@
+{
+ "id": "solr-18616-server-metrics-linux-r3-20261111",
+ "type": "receipt",
+ "job": "solr-18616-server-metrics-linux-r3-20261111",
+ "gate": "solr-18616-server-metrics-linux-r3-20261111",
+ "owner": "phone-agent",
+ "verdict": "passed",
+ "summary": "SOLR-18616 production Jetty metrics gate PASSED in full at the exact head 932c971636235deed743b2ad99bd4c511d8a85dc (fork head re-verified live at filing; clean normal clone). The round-3 head differs from the r2 head by exactly one file, solr/jetty-metrics/src/java/org/apache/solr/jetty/package-info.java (+19), the repair for the r2 renderJavadoc failure. Scratch lock and license generation (updateLicenses resolveAndLockAll --write-locks) exited 0 with ZERO tracked and zero untracked changes. JettyMetricsBridgePrototypeTest passed 2/2 at seed 18616 from fresh JUnit XML. Tidy exited 0 with zero tracked or untracked changes. Root check -x test exited 0, including :solr:jetty-metrics:renderJavadoc, validateJarChecksums, and validateJarLicenses. The dev distribution built and the packaged run on isolated port 18992 verified the installed handler jar (solr-jetty-metrics-11.0.0-SNAPSHOT.jar, 16,510 bytes, at server/lib) and every named metric assertion with before and after scrapes: before, requests PUT 0.0 and responses 4xx 0.0; GET /solr/admin/info/system returned 200; a PUT to /nonexistent-18616-r3 outside /solr returned 404; after, solr_jetty_requests_total showed PUT 1.0 and GET 3.0, solr_jetty_responses_total showed 4xx 1.0 and 2xx 3.0, and solr_jetty_threads exposed current 10, idle 6, max 10000, queued 0. The node was stopped and the port verified closed. Scope limits, as required: this proves the late-bridge test class, default-configuration packaged GET and PUT counting with status classes and pool gauges, and repository checks at this head. It does not prove production async paths, the full verb and status matrix, disabled-metrics behavior, or the shutdown lifecycle.",
+ "legs": {
+  "scratch_lockgen": "exit 0, zero generated changes",
+  "bridge_tests": "passed 2/2, seed 18616",
+  "tidy": "exit 0, zero changes",
+  "root_check": "passed (exit 0)",
+  "packaged_dev_run": "all named assertions verified on port 18992"
+ },
+ "evidence": "records/evidence/solr-18616-server-metrics-linux-r3-20261111-evidence.tar.gz (SHA-256 3db40a860ba992d8b02735b39c80221c9528638c32c2b173c1ad50dfcaabeaa6): lockgen, legs, and dev-run logs, fresh bridge XML, before and after metrics scrapes, and the packaged server log.",
+ "recorded": "2026-11-11"
+}
