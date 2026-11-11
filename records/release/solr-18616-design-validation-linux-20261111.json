@@ -1,0 +1,10 @@
+{
+ "id": "solr-18616-design-validation-linux-20261111",
+ "type": "release",
+ "job": "solr-18616-design-validation-linux-20261111",
+ "actor": "phone-agent",
+ "reason": "Design validation completed with verdict passed at the exact head; receipt published before this release. All required legs executed, including the behavioral probes and lifecycle legs; the two non-blocking observations and the one unexecuted production path are recorded in the receipt's assessment.",
+ "evidence": "records/receipt/solr-18616-design-validation-linux-20261111.json; records/evidence/solr-18616-design-validation-linux-20261111-evidence.tar.gz (SHA-256 e2cd90387444bdc3ceec037c8964cf18beee7b23df7427ef8f502575d206af7b).",
+ "executor_stop": "Verified at filing: no Gradle daemon, java, or packaged-node process on the host, no holder on the test-queue lock, and both packaged ports closed; the scratch clone retains only the preserved test-only probe files.",
+ "recorded": "2026-11-11"
+}
