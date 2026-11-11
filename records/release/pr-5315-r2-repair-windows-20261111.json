@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "records/report/pr-5315-r2-repair-windows-20261111-report.json; no background executor was launched by this worker; source editing and fork push completed.",
+  "id": "pr-5315-r2-repair-windows-20261111",
+  "job": "pr-5315-r2-repair-windows-20261111",
+  "reason": "Separable implementation pushed and handed off for Linux diagnosis and proof.",
+  "type": "release"
+}
