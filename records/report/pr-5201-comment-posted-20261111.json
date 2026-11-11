@@ -1,0 +1,16 @@
+{
+  "comment": "https://github.com/apache/solr/pull/5201#issuecomment-6807653774",
+  "fork_branch": "nick-boss-tech/solr:pr-5201-auth-browser-fix",
+  "id": "pr-5201-comment-posted-20261111",
+  "job": "pr-5201-comment-record-20261111",
+  "limitations": "JWT not tested; comment discloses the observed 401 recovery behavior.",
+  "offered_head": "0355023c3170c87a84cd9e5688ae6b4f3e4df3ae",
+  "posted_at_utc": "2026-11-11T21:38:55Z",
+  "pr_head": "3f9faa9e9861ce28f3ede3f4305bd91b6e297463",
+  "proof": [
+    "records/receipt/pr-5201-auth-browser-linux-gate-r3-20261111-receipt.json",
+    "records/report/pr-5201-r3-evidence-reconciliation-20261111-result.json"
+  ],
+  "summary": "Nick approved the draft; posted and independently read back the matching PR follow-up. Await contributor response.",
+  "type": "report"
+}
