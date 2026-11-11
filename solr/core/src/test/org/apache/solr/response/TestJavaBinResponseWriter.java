@@ -107,6 +107,24 @@ public class TestJavaBinResponseWriter extends SolrTestCaseJ4 {
     req.close();
   }
 
+  public void testExclusionResponse() throws Exception {
+    assertU(adoc("id", "5321", "foo_s", "kept", "bar_s", "excluded"));
+    assertU(commit());
+    SolrQueryRequest req = req("q", "id:5321", "fl", "*,-bar_s");
+    try {
+      SolrQueryResponse rsp = h.queryAndResponse(null, req);
+      NamedList<Object> response = JavaBinResponseWriter.getParsedResponse(req, rsp);
+      SolrDocumentList docs = (SolrDocumentList) response.get("response");
+      assertEquals(1, docs.size());
+      SolrDocument doc = docs.get(0);
+      assertEquals("5321", doc.getFieldValue("id"));
+      assertTrue(doc.containsKey("foo_s"));
+      assertFalse(doc.containsKey("bar_s"));
+    } finally {
+      req.close();
+    }
+  }
+
   public void testResolverSolrDocumentPartialFields() throws Exception {
     SolrQueryRequestBase req =
         lrf.makeRequest(

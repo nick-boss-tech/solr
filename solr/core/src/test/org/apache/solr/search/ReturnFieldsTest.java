@@ -258,6 +258,20 @@ public class ReturnFieldsTest extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testExclusionResponses() {
+    assertQ(
+        req("q", "id:1", "fl", "-new_id_s"),
+        "//doc/str[@name='id'][.='1']",
+        "count(//doc/*[@name='new_id_s'])=0",
+        "count(//doc/*[@name='#foo_s'])=1");
+    assertQ(
+        req("q", "id:1", "fl", "*", "fl", "-*_s", "fl", "new_id_s"),
+        "//doc/str[@name='id'][.='1']",
+        "count(//doc/*[@name='#foo_s'])=0",
+        "count(//doc/*[@name='new_id_s'])=1");
+  }
+
+  @Test
   public void testManyParameters() {
     ReturnFields rf =
         new SolrReturnFields(req("fl", "id name", "fl", "test subject", "fl", "score"));

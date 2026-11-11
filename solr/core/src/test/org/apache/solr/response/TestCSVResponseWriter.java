@@ -353,6 +353,18 @@ public class TestCSVResponseWriter extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testExclusionResponse() throws Exception {
+    String output = h.query(req("q", "id:1", "wt", "csv", "fl", "id,foo_*,-foo_s"));
+    String[] lines = output.split("\n");
+    assertEquals(2, lines.length);
+    List<String> headers = Arrays.asList(lines[0].split(","));
+    assertTrue(headers.contains("id"));
+    assertTrue(headers.contains("foo_i"));
+    assertFalse(headers.contains("foo_s"));
+    assertFalse(lines[1].contains("hi"));
+  }
+
+  @Test
   public void testPseudoFields() throws Exception {
     // Use Pseudo Field
     assertEquals(
