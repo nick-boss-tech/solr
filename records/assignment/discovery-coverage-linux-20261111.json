@@ -1,0 +1,19 @@
+{
+  "claim_path": "records/claim/discovery-coverage-linux-20261111.json",
+  "gate_id": "discovery-coverage-linux-20261111-gate",
+  "gate_record": "records/gate/discovery-coverage-linux-20261111-gate.json",
+  "id": "discovery-coverage-linux-20261111",
+  "intended_host": "Linux gate host with isolated SolrCloud, JDK and Gradle capability",
+  "job": "discovery-coverage-linux-20261111",
+  "phase": "research feasibility round 1; no superseded gate",
+  "prior_research": "records/report/discovery-first-slice-20261111-report.json",
+  "receipt_path": "records/receipt/discovery-coverage-linux-20261111-receipt.json",
+  "scope": "Run the self-contained research probes in the gate, not a production implementation. Claim before execution. Preserve reproducible probe scripts, fixture, exact commands and raw evidence; publish a receipt and release. Do not push source changes, post publicly, or use a shared production cluster. Performance observations are exploratory and do not establish a safety guarantee.",
+  "source": {
+    "branch": "discovery-coverage-probe-20261111",
+    "head": "82888694ae248b74d105d9c7b5f60d33c385f325",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Linux feasibility probes for filtered field coverage and candidate enumeration",
+  "type": "assignment"
+}
