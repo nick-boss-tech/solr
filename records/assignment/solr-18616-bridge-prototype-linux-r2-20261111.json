@@ -1,0 +1,20 @@
+{
+  "claim_path": "records/claim/solr-18616-bridge-prototype-linux-r2-20261111.json",
+  "gate_id": "solr-18616-bridge-prototype-linux-r2-20261111",
+  "gate_record": "records/gate/solr-18616-bridge-prototype-linux-r2-20261111.json",
+  "host": "Linux gate host",
+  "id": "solr-18616-bridge-prototype-linux-r2-20261111",
+  "job": "solr-18616-bridge-prototype-linux-r2-20261111",
+  "phase": "prototype feasibility round 2",
+  "receipt_path": "records/receipt/solr-18616-bridge-prototype-linux-r2-20261111.json",
+  "recorded": "2026-11-11",
+  "source": {
+    "branch": "solr-18616-submit",
+    "head": "4c5d0d642cd538d06ba49f6aad253878a6e0a90a",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "solr-18616-bridge-prototype-linux-20261111",
+  "summary": "Verify the formatting-only successor of the SOLR-18616 Jetty bridge feasibility prototype.",
+  "supersedes": "records/gate/solr-18616-bridge-prototype-linux-20261111.json",
+  "type": "assignment"
+}
