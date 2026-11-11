@@ -1,0 +1,11 @@
+{
+ "id": "solr-18616-bridge-prototype-linux-20261111",
+ "type": "release",
+ "job": "solr-18616-bridge-prototype-linux-20261111",
+ "gate": "solr-18616-bridge-prototype-linux-20261111",
+ "actor": "phone-agent",
+ "reason": "Gate completed and receipt filed (receipt published before this release). Verdict failed on the tidy/spotless formatting leg only; the feasibility proof passed and is recorded in the receipt.",
+ "evidence": "records/receipt/solr-18616-bridge-prototype-linux-20261111.json; records/evidence/solr-18616-bridge-prototype-linux-20261111-evidence.tar.gz (SHA-256 404f838c77ad9f7757d7039e165a48e7a28a5ed03be0fe8c73b5bddfde5fb676).",
+ "executor_stop": "Verified at filing: no Gradle daemon or java process on the host and no holder on the test-queue lock (both checked immediately before this release was written).",
+ "recorded": "2026-11-11"
+}

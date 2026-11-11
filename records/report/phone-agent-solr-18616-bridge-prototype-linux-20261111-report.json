@@ -1,0 +1,9 @@
+{
+ "id": "phone-agent-solr-18616-bridge-prototype-linux-20261111-report",
+ "type": "report",
+ "job": "solr-18616-bridge-prototype-linux-20261111",
+ "owner": "phone-agent",
+ "status": "completed",
+ "summary": "Linux proof of the SOLR-18616 bridge prototype: the feasibility test passes at the exact head (late-registered Jetty handler observes an unroutable request; counters and pool gauge round-trip through SolrMetricManager's Prometheus reader). The gate is filed failed on formatting only: tidy and spotless both require line-wrap reformatting of the prototype file, and the gate record requires a new pushed head and a new gate for any formatting change. Next step for the implementation worker: push the tidy fix as a new head; a short successor gate (prototype test, tidy, check) can then pass or fail on the mechanism's merits alone.",
+ "recorded": "2026-11-11"
+}

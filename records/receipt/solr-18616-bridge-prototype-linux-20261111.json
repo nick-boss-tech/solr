@@ -1,0 +1,16 @@
+{
+ "id": "solr-18616-bridge-prototype-linux-20261111",
+ "type": "receipt",
+ "job": "solr-18616-bridge-prototype-linux-20261111",
+ "gate": "solr-18616-bridge-prototype-linux-20261111",
+ "owner": "phone-agent",
+ "verdict": "failed",
+ "summary": "Prototype feasibility round 1 at fork head 061fa32fa78a99f6e7dbc72dcca491ff7cb4fa84 (branch solr-18616-submit, re-verified live at filing; base 82888694ae248b74d105d9c7b5f60d33c385f325; clean normal clone, .git a directory). THE FEASIBILITY PROOF ITSELF PASSED: JettyMetricsBridgePrototypeTest ran 1 test, 0 failures, 0 errors, 0 skipped at seed 18616 (testLateBridgeIncludesUnroutableRequest, 6.3 s): a bridge handler registered late in JettySolrRunner observed the outside-context PUT, and its request/status counters and thread-pool gauge registered in SolrMetricManager were read back through the Prometheus reader. Within the gate record's stated limits, this establishes only the in-process late-registration probe; it does not establish production Jetty XML wiring, server/webapp classloader integration, method/status coverage beyond this PUT, asynchronous behavior, or implementation readiness. THE GATE VERDICT IS FAILED on formatting only: tidy reformats the single prototype file (line-wrap changes at three metric-registration call sites; diff preserved in evidence), and root check -x test fails solely at :solr:test-framework:spotlessJavaCheck for the same violations in the same file; no other check task failed. Per the gate record, any formatting change requires a new pushed head and a new gate, so no pass can be recorded at this head. Toolchain note: ./gradlew does not run on this host; the identical tasks ran via the vendored Gradle 9.7.0 and JDK 21 toolchain and the substitution is recorded in the evidence log.",
+ "legs": {
+  "prototype_test": "passed 1/1, seed 18616",
+  "tidy": "changes 1 tracked file (the prototype test); stop condition applied, diff preserved, checkout restored",
+  "root_check": "failed only at :solr:test-framework:spotlessJavaCheck (same file, same violations)"
+ },
+ "evidence": "records/evidence/solr-18616-bridge-prototype-linux-20261111-evidence.tar.gz (SHA-256 404f838c77ad9f7757d7039e165a48e7a28a5ed03be0fe8c73b5bddfde5fb676): legs log with all exit codes, the fresh prototype XML, and the tidy diff.",
+ "recorded": "2026-11-11"
+}
