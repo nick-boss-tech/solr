@@ -1,0 +1,14 @@
+{
+  "host": "Windows implementation",
+  "id": "solr-18616-design-validation-windows-20261111",
+  "job": "solr-18616-design-validation-windows-20261111",
+  "prior_receipt": "records/receipt/solr-18616-server-metrics-linux-r3-20261111.json",
+  "source": {
+    "branch": "solr-18616-submit",
+    "head": "932c971636235deed743b2ad99bd4c511d8a85dc",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "solr-18616-javadoc-repair-windows-20261111",
+  "summary": "Assess and strengthen SOLR-18616's proposed metrics bridge against the ticket's traffic and thread-saturation goals, add focused behavioral coverage and request Linux proof; distinguish any design decision needing further evidence.",
+  "type": "assignment"
+}
