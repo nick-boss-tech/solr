@@ -1,0 +1,8 @@
+{
+  "details": "On Windows, JDK 21.0.11, Gradle 9.7.0, seed 18622C0DE, one JVM and the isolated patched Lucene join JAR SHA-256 1d6cf07164022466858c76037a47469c17f73796112142c6059f5dbd03e6c8aa, :solr:core:test selected TestNestedDocsSort and TestCloudNestedDocsSort together and exited 0. Fresh XML: TestNestedDocsSort 15 tests, 0 failures/errors/skips, SHA-256 dabd0be5e6605da204905a8bf82490cf8bb0705f32de13c300673972f04228dd; TestCloudNestedDocsSort 1 test, 0 failures/errors/skips, SHA-256 4c7b27587f1d47a48e8a56773519ed4b151f7fef50845e63da934ad25880bb89. Full transcript SHA-256 a5e35c9f24b0bbc45f9b97d0106b25323aa4ba490a18fe5ad249ecb8cbe295e5. Evidence under research/lucene-submission-prep/solr5293-windows-integration. Used -PdisableJsClient=true; Error Prone was skipped, and Gradle and the test JVM emitted Windows performance-counter and Java security-policy locale warnings. This is a local test result at the recorded heads, not a Solr release or upstream CI. The separately known Solr formatting issue has not been repaired by this test.",
+  "head": "769ca6e177d77acd3f1993a4a24bd3257ae243c0",
+  "id": "solr5293-windows-patched-suites-20261110",
+  "job": "solr5293-lucene106-integration-windows-20261110",
+  "summary": "Patched Lucene passes the full Solr nested-doc and neighboring SolrCloud suites on Windows",
+  "type": "report"
+}
