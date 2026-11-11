@@ -1,0 +1,7 @@
+{
+  "host": "Windows",
+  "id": "solr-18616-javadoc-repair-windows-20261111",
+  "job": "solr-18616-javadoc-repair-windows-20261111",
+  "owner": "codex-windows-solr-18616-javadoc",
+  "type": "claim"
+}
