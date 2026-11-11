@@ -1,0 +1,9 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "Existing evidence pointer records/evidence/solr-18630-pr5313-precedence-repair-linux-gate-20261110-evidence.json; archive SHA-256 cb0150e7a7423d091b4bc1cabcd871b0dd474d10e693acc0b3eea7de8db4b672 includes evidence/release-stop-state.json. Final pre-release snapshot at 2026-11-11T18:37:33+00:00 verified the adjudication report records/report/solr-18630-pr5313-receipt-adjudication-20261111-report.json and receipt records/receipt/solr-18630-pr5313-receipt-adjudication-20261111-receipt.json are present on the live board, both verdict passed, and both parse semantically identical to the local payloads (board publication sorts JSON object keys). Report commit 34876afbea83ec48a79ef3d5111384e6d002eb45; receipt commit 73d7c68033bf8e967f5299c975bc6d1ea51ad888. Live source branch head remains a4ce0580ad89ad521a5402e383d96c239cea94fd. No active gate Gradle process, both mandatory Gradle locks acquirable, all disposable gate worktrees absent, workspace 62% free inodes, and background-job list empty.",
+  "id": "solr-18630-pr5313-receipt-adjudication-20261111",
+  "job": "solr-18630-pr5313-receipt-adjudication-20261111",
+  "reason": "The successor adjudication is complete and passed: the unqualified =>5 applies to the repaired head, while the previous-head 1 is the expected pre-repair negative control. No new tests were required. This closes the adjudication executor without changing the source branch or historical prior records; no Windows/Cygwin proof is claimed from this Linux task.",
+  "released_at": "2026-11-11T18:37:40+00:00",
+  "type": "release"
+}
