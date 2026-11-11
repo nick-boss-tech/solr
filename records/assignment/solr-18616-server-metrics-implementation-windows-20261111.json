@@ -1,0 +1,10 @@
+{
+  "context": "Prototype gate passed at 4c5d0d642cd538d06ba49f6aad253878a6e0a90a; records/receipt/solr-18616-bridge-prototype-linux-r2-20261111.json. Production packaging, classloaders and async were not proven.",
+  "host": "Windows implementation; Linux proof separately",
+  "id": "solr-18616-server-metrics-implementation-windows-20261111",
+  "job": "solr-18616-server-metrics-implementation-windows-20261111",
+  "recorded": "2026-11-11",
+  "successor_of": "solr-18616-prototype-tidy-windows-20261111",
+  "summary": "At Nick's direction extend the passing SOLR-18616 bridge prototype into a production-scoped implementation. Address server/webapp lifecycle and classloaders, bounded HTTP method and response metrics, thread pool gauges, and focused tests. Push fork branch and request exact-head Linux gate; no public PR or comments authorized.",
+  "type": "assignment"
+}
