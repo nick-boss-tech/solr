@@ -1,0 +1,24 @@
+{
+  "claim_path": "records/claim/solr-18616-design-validation-linux-20261111.json",
+  "environment": "Clean Linux checkout, supported JDK, absolute temp directory, no overlapping builds. Record exact commands, versions, logs and fresh XML; document vendored Gradle substitution. Run exact-head checks before any scratch-only probe changes.",
+  "head": "2a5127ff30608f7ea0248277df83c5daea4d1927",
+  "id": "solr-18616-design-validation-linux-20261111",
+  "job": "solr-18616-design-validation-linux-20261111",
+  "phase": "design validation after busy-thread implementation",
+  "prior_receipt": "records/receipt/solr-18616-server-metrics-linux-r3-20261111.json",
+  "receipt_path": "records/receipt/solr-18616-design-validation-linux-20261111.json",
+  "requirements": [
+    "Verify remote source head and clean checkout. Run ./gradlew :solr:test-framework:test --tests org.apache.solr.embedded.JettyMetricsBridgePrototypeTest -Ptests.seed=18616; record test counts and fresh XML. Run ./gradlew tidy and ./gradlew check -x test; require no tracked or untracked changes and preserve logs and diffs. Build with ./gradlew dev. Any repair needs a new pushed head and superseding gate.",
+    "Packaged Solr: use an isolated port and temporary home, take baseline and after scrapes. Send a successful GET, a GET for an invalid collection or core, and one outside-context PUT returning 404. Verify exact request-method and response-class deltas where traffic is controlled, including one and only one PUT and 4xx increment for that PUT. Record other scraper traffic separately. Verify current, idle, busy, max and queued pool state labels; check busy is nonnegative and consistent with current minus idle allowing independent scrape races. Capture requests, responses and scrapes.",
+    "Behavioral probes in a separate scratch checkout based on the exact head: add test-only harness code, never change production code, and preserve complete patch, commands, seeds and fresh results. Exercise a deliberately held asynchronous request: while held, active requests rises and completed-method count does not; after completion, active returns to baseline and method and response class each increment exactly once. Exercise a failed or unhandled request and verify counts and active return to baseline. Distinguish application handler failure from a transport abort and record actual status semantics. Repeat under concurrent held requests with a bounded test timeout; compare active requests with busy/current/idle/max pool data and explain leased or unrelated pool threads. Do not classify unexecuted or flaky assertions as passes.",
+    "Exercise metrics-disabled startup using a solr.xml with <metrics enabled=\"false\"> and compare to enabled startup, verify normal requests and clean shutdown, and check there is no Jetty registry when disabled. Exercise stop and restart or webapp lifecycle where supported: verify no exception, stale callback or duplicate metrics, and document counter reset behavior. Inspect a non-Jetty or absent-attribute context for safe initialization using an existing harness or a scratch test; preserve any test-only patch. If a scenario cannot be built, identify why and mark it incomplete rather than guessing.",
+    "Record each proof leg and environment failure separately. Provide a design assessment against SOLR-18616: abnormal requests and response visibility, thread-pool saturation visibility, what the bridge changes architecturally, and which historical Dropwizard timing, async, or rate metrics are deliberately absent. Flag any observed lifecycle or semantic defect and whether it requires an implementation change. A gate pass requires all required legs to pass; scratch-only behavioral probes substantiate observations on unchanged production code but are not committed regression tests. Preserve probe patches for implementation follow-up and do not alter the fork branch."
+  ],
+  "source": {
+    "base": "932c971636235deed743b2ad99bd4c511d8a85dc",
+    "branch": "solr-18616-submit",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes": "records/gate/solr-18616-server-metrics-linux-r3-20261111.json",
+  "type": "gate"
+}
