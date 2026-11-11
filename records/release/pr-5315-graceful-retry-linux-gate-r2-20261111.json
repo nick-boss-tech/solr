@@ -1,0 +1,11 @@
+{
+ "id": "pr-5315-graceful-retry-linux-gate-r2-20261111",
+ "type": "release",
+ "job": "pr-5315-graceful-retry-linux-gate-r2-20261111",
+ "gate": "pr-5315-graceful-retry-linux-gate-r2-20261111",
+ "actor": "phone-agent",
+ "reason": "Gate completed; receipt published before this release, per the gate record. Verdict failed with three itemized findings.",
+ "evidence": "records/receipt/pr-5315-graceful-retry-linux-gate-r2-20261111-receipt.json; records/evidence/pr-5315-graceful-retry-linux-gate-r2-20261111-evidence.tar.gz (SHA-256 980a43ec5c3bdb6b677851060cabda5830e83a9e2a5ef79869766e6989711ce1).",
+ "executor_stop": "Verified at filing: no Gradle daemon or java process on the host (process check count zero), no holder on the test-queue lock, and the packaged server from the proof attempts is stopped (bin/solr status reports no nodes running; port 18983 closed).",
+ "recorded": "2026-11-11"
+}

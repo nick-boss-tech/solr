@@ -1,0 +1,9 @@
+{
+ "id": "phone-agent-pr-5315-graceful-retry-linux-gate-r2-20261111-report",
+ "type": "report",
+ "job": "pr-5315-graceful-retry-linux-gate-r2-20261111",
+ "owner": "phone-agent",
+ "status": "completed",
+ "summary": "R2 gate filed failed at 2ea7f584f0ca. The repair genuinely fixed three of the four original findings: the tidy set is committed (tidy clean), the hand-edited server lockfile is byte-for-byte what Gradle generates, and the outer guard now has a discriminating fail-before pair via the new mixed-route test. The sync exactly-once core proof still passes. What remains, in order: (1) the Jetty async path delivers a graceful rejection as a generic SolrServerException from an AsynchronousCloseException when the error stream closes, timing-dependent, so the async test passes alone and fails in the full class; the endpoint counts prove no update is resent, so this is an exception-shape defect in the feature's contract, not a replay. (2) Root check fails on one logger-idiom line in the branch's multi-shard test (line 57). (3) The packaged server, stopped via bin/solr stop with connections mid-upload, shows no graceful rejection phase at all: in-flight uploads are aborted and the socket closes within about a second, zero 503s, no marker; the shipped wiring (graceful module enabled by the launcher) does not produce the deployment behavior the feature exists for, under this stop path. Attempt history for the packaged leg, including a discarded harness false positive, is disclosed in the receipt.",
+ "recorded": "2026-11-11"
+}
