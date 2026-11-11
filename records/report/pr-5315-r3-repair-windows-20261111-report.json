@@ -1,0 +1,7 @@
+{
+  "id": "pr-5315-r3-repair-windows-20261111-report",
+  "job": "pr-5315-r3-repair-windows-20261111",
+  "source_head": "3c73a59743e3dfe4b5ae5e11b0cdbe8c1e8fcae6",
+  "summary": "Pushed 3c73a59743e3dfe4b5ae5e11b0cdbe8c1e8fcae6, guarding four diagnostic log calls and documenting SOLR_JETTY_GRACEFUL=true server opt-in, default false, separate client trust opt-in and existing-connection versus new-connection behavior. Diff check clean; no Gradle or tests on Windows. Full exact-head Linux gate requested.",
+  "type": "report"
+}
