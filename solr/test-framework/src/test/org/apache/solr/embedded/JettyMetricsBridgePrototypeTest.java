@@ -17,6 +17,7 @@
 package org.apache.solr.embedded;
 
 import io.prometheus.metrics.model.snapshots.CounterSnapshot;
+import io.prometheus.metrics.model.snapshots.GaugeSnapshot;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -85,7 +86,7 @@ public class JettyMetricsBridgePrototypeTest extends SolrTestCaseJ4 {
                                 .anyMatch(
                                     p ->
                                         "PUT".equals(p.getLabels().get("method"))
-                                            && p.getValue() >= 1);
+                                            && p.getValue() == 1);
                     get =
                         ((CounterSnapshot) snapshot)
                             .getDataPoints().stream()
@@ -108,7 +109,13 @@ public class JettyMetricsBridgePrototypeTest extends SolrTestCaseJ4 {
                       .getMetadata()
                       .getPrometheusName()
                       .equals("solr_jetty_threads")) {
-                    pool = true;
+                    pool =
+                        ((GaugeSnapshot) snapshot)
+                            .getDataPoints().stream()
+                                .anyMatch(
+                                    p ->
+                                        "threads.busy".equals(p.getLabels().get("state"))
+                                            && p.getValue() >= 0);
                   }
                 }
                 return put && get && response && pool;

@@ -69,8 +69,11 @@ public class JettyMetricsHandler extends EventsHandler implements Supplier<Map<S
     }
     result.put("active", active.sum());
     if (getServer().getThreadPool() instanceof QueuedThreadPool pool) {
-      result.put("threads.current", (long) pool.getThreads());
-      result.put("threads.idle", (long) pool.getIdleThreads());
+      long current = pool.getThreads();
+      long idle = pool.getIdleThreads();
+      result.put("threads.current", current);
+      result.put("threads.idle", idle);
+      result.put("threads.busy", Math.max(0, current - idle));
       result.put("threads.max", (long) pool.getMaxThreads());
       result.put("threads.queued", (long) pool.getQueueSize());
     }

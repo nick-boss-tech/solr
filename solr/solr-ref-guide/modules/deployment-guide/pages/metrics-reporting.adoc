@@ -100,7 +100,7 @@ This is configured by adding `<bool name="aggregateNodeLevelMetricsEnabled">true
 === Jetty Registry
 
 The `solr.jetty` registry reports completed HTTP requests by method and responses by status class, including requests that do not reach a Solr core or collection. Unknown methods are grouped as `OTHER`.
-It also reports active requests and the Jetty thread pool's current, idle, maximum and queued job counts. Thread pool jobs include Jetty work other than request handling.
+It also reports active requests and the Jetty thread pool's current, idle, busy, maximum and queued job counts. Busy is current minus idle and includes leased threads and Jetty work other than request handling; it is not the number of active HTTP requests.
 These metrics are available with the bundled Jetty server when Solr metrics are enabled.
 
 === JVM Registry
