@@ -1,0 +1,25 @@
+{
+  "capabilities": [
+    "linux",
+    "solr-gradle",
+    "http-transport-diagnostics"
+  ],
+  "claim_path": "records/claim/pr-5315-forged-marker-close-repro-linux-20261111.json",
+  "gate_id": "pr-5315-forged-marker-close-repro-linux-20261111",
+  "gate_record": "records/gate/pr-5315-forged-marker-close-repro-linux-20261111.json",
+  "host": "Linux JDK 21, Solr Gradle and HTTP transport diagnostics",
+  "id": "pr-5315-forged-marker-close-repro-linux-20261111",
+  "job": "pr-5315-forged-marker-close-repro-linux-20261111",
+  "phase": "diagnostic reproduction after failed R4 full gate",
+  "prior_receipt": "records/receipt/pr-5315-graceful-retry-linux-gate-r4-20261111-receipt.json",
+  "receipt_path": "records/receipt/pr-5315-forged-marker-close-repro-linux-20261111-receipt.json",
+  "scope": "Reproduce and determine cause of the intermittent no-response-bytes failure, distinguishing fixture, transport, production logic and environment; report actionable repair and evidence. No source push or public comment. Diagnostic only, not acceptance proof.",
+  "source": {
+    "branch": "solr-17764-submit",
+    "head": "3c73a59743e3dfe4b5ae5e11b0cdbe8c1e8fcae6",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5315-graceful-retry-linux-gate-r4-20261111",
+  "summary": "Reproduce and diagnose intermittent connection close in forged-marker test",
+  "type": "assignment"
+}
