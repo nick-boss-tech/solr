@@ -1,0 +1,10 @@
+{
+  "context": "Linux receipt records/receipt/solr-18616-bridge-prototype-linux-20261111.json; prior head 061fa32fa78a99f6e7dbc72dcca491ff7cb4fa84; prototype test passed but tidy and spotless failed.",
+  "host": "Windows implementation",
+  "id": "solr-18616-prototype-tidy-windows-20261111",
+  "job": "solr-18616-prototype-tidy-windows-20261111",
+  "recorded": "2026-11-11",
+  "successor_of": "solr-18616-jetty-prototype-windows-20261111",
+  "summary": "Apply the Linux gate's exact tidy diff to the SOLR-18616 test prototype, push the fork branch, and hand off a superseding exact-head Linux gate.",
+  "type": "assignment"
+}
