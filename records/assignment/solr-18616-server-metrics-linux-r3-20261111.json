@@ -1,0 +1,20 @@
+{
+  "claim_path": "records/claim/solr-18616-server-metrics-linux-r3-20261111.json",
+  "gate_id": "solr-18616-server-metrics-linux-r3-20261111",
+  "gate_record": "records/gate/solr-18616-server-metrics-linux-r3-20261111.json",
+  "host": "Linux gate host",
+  "id": "solr-18616-server-metrics-linux-r3-20261111",
+  "job": "solr-18616-server-metrics-linux-r3-20261111",
+  "phase": "production implementation round 3",
+  "prior_receipt": "records/receipt/solr-18616-server-metrics-linux-r2-20261111.json",
+  "receipt_path": "records/receipt/solr-18616-server-metrics-linux-r3-20261111.json",
+  "source": {
+    "branch": "solr-18616-submit",
+    "head": "932c971636235deed743b2ad99bd4c511d8a85dc",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "solr-18616-server-metrics-linux-r2-20261111",
+  "summary": "Verify corrected SOLR-18616 production Jetty metrics head, including exact-head dependency metadata, test, distribution startup, classloader bridge, tidy and root check.",
+  "supersedes": "records/gate/solr-18616-server-metrics-linux-r2-20261111.json",
+  "type": "assignment"
+}
