@@ -1,0 +1,29 @@
+{
+ "id": "pr-5201-r3-evidence-reconciliation-20261111-result",
+ "type": "report",
+ "job": "pr-5201-r3-evidence-reconciliation-20261111",
+ "owner": "phone-agent",
+ "source": {
+  "branch": "pr-5201-auth-browser-fix",
+  "head": "0355023c3170c87a84cd9e5688ae6b4f3e4df3ae",
+  "contributor_parent": "3f9faa9e9861ce28f3ede3f4305bd91b6e297463",
+  "pr": "https://github.com/apache/solr/pull/5201",
+  "repository": "nick-boss-tech/solr"
+ },
+ "gate": "pr-5201-auth-browser-gate-r3-20261111",
+ "prior_receipt": "records/receipt/pr-5201-auth-browser-linux-gate-r3-20261111-receipt.json",
+ "prior_release": "records/release/pr-5201-auth-browser-linux-gate-r3-20261111.json",
+ "head_correction": "Add-only correction: the round-3 receipt carries no structured head field (its fields are evidence, gate, id, job, legs, owner, recorded, summary, type, verdict); the assigned SHA appears only in the summary prose. The structured execution head is recorded here in full: 0355023c3170c87a84cd9e5688ae6b4f3e4df3ae. That this was the actual execution head, and not only the assigned one, is established by the original legs log (~/workspace/tools/inv-5201/runs/gate-r3-legs.log in the executing host's records, archived in the gate evidence tarball), whose first lines record HEAD=0355023c3170c87a84cd9e5688ae6b4f3e4df3ae with a clean tree before any test ran, and by the fork branch, re-verified live at reconciliation time as still pointing at the same SHA. The public PR head was also re-verified: apache/solr PR 5201 is open, not draft, at contributor head 3f9faa9e9861ce28f3ede3f4305bd91b6e297463, unchanged. The released job's records are not altered by this report.",
+ "root_check_attribution": "The successful root check is identified exactly from the original runner script (run-gate-r3-repair.sh, line 15) and its log (gate-r3-repair.log, archived in the gate evidence): in the normal clone at the head above, the command was solr-gradle.sh --no-daemon check -x test with JAVA_TOOL_OPTIONS setting -Djava.net.preferIPv4Stack=true and the combined Hatch truststore (-Djavax.net.ssl.trustStore). solr-gradle.sh is this host's vendored substitution for ./gradlew (Gradle 9.7.0 with JDK 21), as the gate environment sections disclose. The ONLY exclusion was -x test; no task was individually skipped, and the log shows :solr:solr-ref-guide:checkSiteLinks executing within the run, which exited 0. Material environment conditions: the successful run was a rerun after an environment repair; the first attempt had failed on file writes because the per-user disk quota was exhausted by accumulated gate clones (sources and cached jars verified intact), and five disposable clones of already-filed gates were deleted before the rerun. No uncertainty remains about the command; it is reproduced here from the script that executed it, not reconstructed from memory.",
+ "assessment_401": "Observed behavior (runtime-verified in the packaged leg, not only traced): after the password was rotated, the explorer replayed the stored, dead Authorization header and received 401, keeping the stale value in sessionStorage; the Admin UI's next 401 cleared the stored header and presented the login screen; after re-login the explorer's next request succeeded with the new header. Assessment: this is the pre-existing Admin UI session pattern (the UI interceptor owns session invalidation; the explorer never had a 401 handler), not a regression introduced by this change, whose scope is that the explorer sends the session's current credentials per request. It does not block offering the fix. One disclosure line in the PR is recommended so a reviewer is not surprised. A parity fix (clearing the stored header on an explorer 401) is small but changes shared session semantics and belongs to the PR owner's call.",
+ "assessment_disable_js_client": "Observed in the adjacent investigation's dry runs: with -PdisableJsClient=true every js-client task leaves the war graph, but the Scalar bundle tasks remain, so a node-less or offline build still runs npm to fetch the 3.5 MB standalone bundle, and no solr/licenses entry covers that bundle. Assessment: this is a build-behavior property of the explorer feature's delivery rather than of the auth fix commit itself. It does not block offering the auth fix. Whether disableJsClient should also drop the explorer page is an intent question for the owner (gating the bundle makes the explorer 404); recommend raising it as a question, not silently changing it.",
+ "remaining_gaps": [
+  "Generated Java, JavaScript and Python clients were verified only to carry the declared '/api' server metadata; behavior behind a path-rewriting reverse proxy was not tested. A packaged check did establish that the distribution mounts the V2 API at the server root, which covers the standard layout.",
+  "A split-origin proxy silently stripping Authorization because of the hook's same-origin check is source-grounded, not lab-verified.",
+  "JWT login was not exercised; the harness and the packaged setup configure BasicAuth only. Parity is by construction (the same storage key) but unproven at runtime.",
+  "The explorer under the new UI was not exercised; all browser evidence is the classic webapp at this head.",
+  "Whether the Scalar bundle requires a solr/licenses entry is an open packaging question for the owner, recorded here as unassessed, not as a defect."
+ ],
+ "executor_stop": "This reconciliation started no build, browser, or server process; its verification used board reads, the executing host's original runner scripts and logs, and the GitHub API. Nothing it started remains running.",
+ "recorded": "2026-11-11"
+}

@@ -1,0 +1,10 @@
+{
+ "id": "pr-5201-r3-evidence-reconciliation-20261111",
+ "type": "release",
+ "job": "pr-5201-r3-evidence-reconciliation-20261111",
+ "actor": "phone-agent",
+ "reason": "Reconciliation published: the structured execution head and the exact successful root-check command are now on the board, and the two adjacent findings are assessed against scope with the remaining gaps stated as unassessed risks. The released round-3 records were not altered.",
+ "evidence": "records/report/pr-5201-r3-evidence-reconciliation-20261111-result.json; original runner scripts and logs are archived in records/evidence/pr-5201-auth-browser-linux-gate-r3-20261111-evidence.tar.gz (SHA-256 d64f2727446fc9666678e26a720fa87721d3adc9604c299a871b67dc69e6e964).",
+ "executor_stop": "Verified at filing: this job ran no build, browser or server process; nothing it started is running.",
+ "recorded": "2026-11-11"
+}
