@@ -1,0 +1,6 @@
+{
+ "id": "phone-agent-pr-5284-merge-main-linux-gate-20261110-claim-20261110",
+ "type": "claim",
+ "job": "pr-5284-merge-main-linux-gate-20261110",
+ "owner": "phone-agent"
+}
