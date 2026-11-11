@@ -1,0 +1,34 @@
+{
+  "commands": [
+    "./gradlew --no-daemon :solr:solrj:test --tests org.apache.solr.client.solrj.impl.CloudSolrClientCacheTest --tests org.apache.solr.client.solrj.impl.CloudHttp2SolrClientRetryTest --tests org.apache.solr.client.solrj.impl.CloudSolrClientRoutingTest --tests org.apache.solr.client.solrj.impl.ProbeGracefulRejectionClientTest -Ptests.seed=17764C0DE --rerun-tasks",
+    "./gradlew --no-daemon :solr:solrj-jetty:test --tests org.apache.solr.client.solrj.jetty.ProbeGracefulRejectionJettyBodyCloseTest -Ptests.seed=17764C0DE --rerun-tasks",
+    "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.cloud.ProbeGracefulMultiShardTest --tests org.apache.solr.cloud.TestGracefulJettyShutdown -Ptests.nightly=true -Ptests.seed=17764C0DE --rerun-tasks",
+    "./gradlew --no-daemon :solr:packaging:installDist",
+    "./gradlew --no-daemon tidy",
+    "./gradlew --no-daemon check -x test"
+  ],
+  "environment": "Linux, JDK 21, isolated clean checkout at the exact fork head; canonical claim and host locks required. Recheck fork and upstream PR heads before and after. Record actual conditions and all commands. No source push and no public comment.",
+  "head": "e3ac884531f7a11e0e5715be2cbe7e2dbc86033b",
+  "id": "pr-5315-graceful-retry-linux-gate-20261110",
+  "job": "pr-5315-graceful-retry-linux-gate-20261110",
+  "phase": "production candidate proof",
+  "prior_probe_receipt": "records/receipt/pr-5315-graceful-rejection-probe-linux-r4-20261110-receipt.json",
+  "requirements": [
+    "Execute all named suites, recording commands, exit status, actual test counts, failures, skips, fresh XML and logs. Verify the multi-shard test's real persisted atomic-increment values and endpoint counts for alternate-replica success and no-alternate parallel and sequential exhaustion. Check the six earlier CloudSolrClientCacheTest regressions still pass. A test setup failure, compile error, timeout or skip is not a pass.",
+    "Verify client tests exercise trusted opt-in enabled and disabled for both JDK and Jetty transports, unmarked and wrong/forged marker cases, no alternate, one-shot document iterator, nested iterator and custom writers, V2/unspecified requests, sync and async behavior, body closure and standard materialized updates. The forged marker with trust explicitly enabled is intentionally accepted; report that operator trust is a precondition, not automatic provenance verification. Exercise an added negative test if wrong-marker behavior is not present; report any extra disposable test patch explicitly.",
+    "Prove the shipped distribution actually loads org.apache.solr.server.GracefulShutdownHandler on the Jetty startup classpath: build installDist, start the package, issue a real request, hold an in-flight request while stop begins, and capture a genuine post-stop-begin 503 with X-Solr-Graceful-Shutdown: rejected before the wrapped application handler is reached. Capture startup, process, HTTP headers, handler-entry and exit evidence. Do not count an unobserved rejection window or test-only JettySolrRunner as packaged proof. Record any environment condition such as -Djava.net.preferIPv4Stack=true.",
+    "In a separate disposable checkout apply a focused mutation removing the new outer marked-rejection whole-batch suppression while keeping the rest of this head and the new multi-shard test unchanged; run the same seed and show the completed shard is resent and persisted count exceeds 1, then show the unmodified exact-head test passes. Preserve patch, logs, counts and fresh XML; a compilation or harness failure is not fail-before proof. Also preserve the original reviewed PR head to fix-head regressions from the prior gate or rerun them if the test file changed.",
+    "Run tidy and require no tracked changes. If it changes the checkout, stop and report the exact diff; an implementation worker must commit and obtain a new gate. Run root check -x test without silent exclusions. Diagnose any executed failure before retrying and identify test, build or environment causes distinctly.",
+    "Review the strict repeatability whitelist against JavaBin and XML serialization, including nested iterators, custom MapWriter/IteratorWriter, mutable documents and parameters, cyclic and unsupported values. Check that unknown values fail closed, no alternate cannot cause whole-batch replay even in mixed-error routes, skip-retry and V2 behavior remain correct, and no regression broadens update replay by default. Review the server startup packaging and duplicate header behavior. The branch assumes no concurrent request mutation and explicit trust in all endpoints and intermediaries; neither a header nor proxy TLS alone proves provenance. Existing RouteException/communication retry paths remain separately scoped, and in-flight 503s are not fixed.",
+    "Publish a passed, failed, incomplete or non-reproduced receipt at the assignment's expected path with gate ID, exact head, test evidence and scope limits; report any unresolved failure or missing leg as non-passing. Release with actor, reason and verified executor-stop evidence. Do not present results from the earlier disposable probe as proof of this head."
+  ],
+  "reviewed_pr_head": "dfde089fd9dd0e5e79774593e66dd030e1b7dd22",
+  "seed": "17764C0DE",
+  "source": {
+    "branch": "solr-17764-submit",
+    "head": "e3ac884531f7a11e0e5715be2cbe7e2dbc86033b",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes": "pr-5315-review-fixes-linux-gate-r4-20261110",
+  "type": "gate"
+}
