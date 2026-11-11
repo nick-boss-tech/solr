@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr5315",
+  "evidence": "records/report/pr-5315-gate-findings-windows-20261111-report.json; fork branch solr-17764-submit verified at 2ea7f584f0ca91a9de470ebe72b4063e8685de02. No Gradle or test executor was started on Windows.",
+  "id": "pr-5315-gate-findings-windows-20261111",
+  "job": "pr-5315-gate-findings-windows-20261111",
+  "reason": "Separable source changes were pushed and remaining diagnosis requires Linux; this worker will not mutate the source branch under this claim.",
+  "type": "release"
+}
