@@ -1,0 +1,16 @@
+{
+  "actor": "codex-windows-solr-18616",
+  "id": "solr-18616-jetty-prototype-windows-20261111-report",
+  "job": "solr-18616-jetty-prototype-windows-20261111",
+  "recorded": "2026-11-11",
+  "result": "JettyMetricsBridgePrototypeTest inserts a test-only EventsHandler into JettySolrRunner, sends an outside-context PUT before the metrics bridge is registered, then registers observable request/status counters and a pool gauge in SolrMetricManager and checks its Prometheus reader. No production handler or packaging changes. This is an unrun hypothesis, not a viability proof. Classloader and distribution integration, comprehensive methods and statuses, async and early startup are not proven.",
+  "source": {
+    "base": "82888694ae248b74d105d9c7b5f60d33c385f325",
+    "branch": "solr-18616-submit",
+    "head": "061fa32fa78a99f6e7dbc72dcca491ff7cb4fa84",
+    "repository": "nick-boss-tech/solr"
+  },
+  "status": "test-only prototype pushed; Linux proof pending",
+  "type": "report",
+  "verification": "Windows: git diff --cached --check passed. No Gradle or local queue used. Linux gate records/assignment/solr-18616-bridge-prototype-linux-20261111.json and records/gate/solr-18616-bridge-prototype-linux-20261111.json, expected receipt records/receipt/solr-18616-bridge-prototype-linux-20261111.json."
+}
