@@ -1,0 +1,14 @@
+{
+  "actor": "codex-windows-solr-18616-design",
+  "gate": "records/gate/solr-18616-design-validation-linux-20261111.json",
+  "id": "solr-18616-design-validation-windows-20261111-report",
+  "job": "solr-18616-design-validation-windows-20261111",
+  "source": {
+    "branch": "solr-18616-submit",
+    "head": "2a5127ff30608f7ea0248277df83c5daea4d1927",
+    "prior_head": "932c971636235deed743b2ad99bd4c511d8a85dc",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Re-read SOLR-18616 and scope inventory. Ticket asks for abnormal HTTP visibility and request-pool saturation, not necessarily full Dropwizard parity. Existing draft exports current, idle, max and queued pool values but no direct busy value. Added nonnegative busy = current minus idle, documented that busy includes leased and non-request Jetty work, strengthened focused test to require exactly one outside-context PUT and check the busy gauge. Pushed fork head and requested Linux exact-head checks plus async, concurrency, disabled metrics and lifecycle probes. Earlier gate is stale for this head. No Windows build or test executed; probes and final scope assessment pending.",
+  "type": "report"
+}
