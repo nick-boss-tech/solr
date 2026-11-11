@@ -1,0 +1,14 @@
+{
+  "host": "Windows implementation host; Linux proof pending",
+  "id": "pr-5315-graceful-retry-implementation-windows-20261110",
+  "job": "pr-5315-graceful-retry-implementation-windows-20261110",
+  "prior_receipt": "records/receipt/pr-5315-graceful-rejection-probe-linux-r4-20261110-receipt.json",
+  "scope": "Build the authorized safe retry improvement from the r4 evidence. Preserve the narrow existing 503 protection; restrict any new subrequest retry to demonstrably repeatable bodies and a documented explicitly trusted path, guard outer batch retry, and address server marker packaging. Do not pretend a marker verifies provenance on an untrusted path or solves in-flight errors. Work only on the fork branch, use no Windows Gradle, and gate the exact pushed head on Linux. Report limitations and preserve test evidence.",
+  "source": {
+    "branch": "solr-17764-submit",
+    "head": "d88ae0c6269e067602a90ed8e655df275f6f42f7",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Prepare a guarded graceful-shutdown retry change for PR 5315",
+  "type": "assignment"
+}
