@@ -1,0 +1,28 @@
+{
+  "capabilities": [
+    "linux",
+    "gradle",
+    "solrj-tests"
+  ],
+  "claim_path": "records/claim/pr-5311-pivot-refresh-linux-20261110.json",
+  "contributor_head": "dc40a1c22c4c48a83d0eb492464d10c29e07ad6a",
+  "gate_id": "pr-5311-pivot-refresh-linux-proof-20261110",
+  "gate_record": "records/gate/pr-5311-pivot-refresh-linux-proof-20261110.json",
+  "id": "pr-5311-pivot-refresh-linux-20261110",
+  "intended_host": "Linux gate host",
+  "job": "pr-5311-pivot-refresh-linux-20261110",
+  "phase": "pivot follow-up, refreshed contributor head, round 2",
+  "receipt_path": "records/receipt/pr-5311-pivot-refresh-linux-20261110-receipt.json",
+  "source": {
+    "branch": "pr-5311-pivot-duplicate-keys",
+    "head": "869400c40057d4f94faef5299969a9144bdb9a12",
+    "repository": "nick-boss-tech/solr"
+  },
+  "status": "open, proof pending; Linux executor must claim the canonical job path",
+  "summary": "Linux exact-head proof of the PR 5311 duplicate-key pivot fix after incorporating the author's updated PR head.",
+  "supersedes": [
+    "records/gate/pr-5311-pivot-linux-proof-20261109.json",
+    "records/gate/pr-5311-pivot-root-diagnosis-proof-20261109.json"
+  ],
+  "type": "assignment"
+}
