@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-solr-18616",
+  "id": "solr-18616-prototype-tidy-windows-20261111-report",
+  "job": "solr-18616-prototype-tidy-windows-20261111",
+  "recorded": "2026-11-11",
+  "summary": "Applied the exact tidy diff from the prior Linux evidence archive (SHA-256 404f838c77ad9f7757d7039e165a48e7a28a5ed03be0fe8c73b5bddfde5fb676). Resulting test file blob b43c838dac278edb4bc77341400eb7335d9a307d matches the recorded diff. Diff check passed. Pushed fork solr-18616-submit old 061fa32fa78a99f6e7dbc72dcca491ff7cb4fa84 new 4c5d0d642cd538d06ba49f6aad253878a6e0a90a; remote verified. No Gradle on Windows. Round 2 assignment records/assignment/solr-18616-bridge-prototype-linux-r2-20261111.json and gate records/gate/solr-18616-bridge-prototype-linux-r2-20261111.json; proof pending.",
+  "type": "report"
+}
