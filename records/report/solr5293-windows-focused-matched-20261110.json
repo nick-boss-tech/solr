@@ -1,0 +1,8 @@
+{
+  "details": "Eight separate method invocations on Windows, Java 21.0.11, Gradle 9.7.0, seed 18622C0DE, same Solr head and isolated stock and patched Lucene 10.6 join artifacts. Stock testFilteredChildrenDoNotSupplyMissingValues and testStringChildMissingFirst failed for the expected ordering and ordinal-lookup behavior; both passed with repaired join JAR from e0c53033bb2b6b34939ded24e228443b7d8b576b. testNumericChildMissingValues and testStringChildMissingLast passed with both stock and patched JARs. Each invocation verified its JAR SHA-256 in the test classpath; fresh method-level XML and exit codes were individually validated. Research/lucene-submission-prep/solr5293-windows-integration/focused-results.json SHA-256 d5127d1b58bf31fb54ac05583646e89af440c59413241e004aa4cab1765fef97 lists each XML and log hash. The first stock numeric invocation failed before any test because the Gradle test worker did not connect within 120 seconds; its setup-timeout log is retained. A single retry executed and passed. Both legs used -PdisableJsClient=true, skipped Error Prone and emitted security-policy locale warnings. The full standalone and SolrCloud nested suites and package are separate pending work at the time of this report.",
+  "head": "769ca6e177d77acd3f1993a4a24bd3257ae243c0",
+  "id": "solr5293-windows-focused-matched-20261110",
+  "job": "solr5293-lucene106-integration-windows-20261110",
+  "summary": "All four Solr nested-sort methods completed in matched Windows stock and patched runs",
+  "type": "report"
+}
