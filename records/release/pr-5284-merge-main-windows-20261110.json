@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-pr5284-merge-main-20261110",
+  "evidence": "records/report/pr-5284-merge-main-windows-20261110-report.json; PR and fork heads independently verified at a225b9d4af9f295e3c84b7ff6f35ef7e71ababc1; implementation worker and any related executor stopped; no Linux executor started by this worker.",
+  "id": "pr-5284-merge-main-windows-20261110",
+  "job": "pr-5284-merge-main-windows-20261110",
+  "reason": "Merge resolution pushed and independently verified; Linux verification handed off.",
+  "type": "release"
+}
