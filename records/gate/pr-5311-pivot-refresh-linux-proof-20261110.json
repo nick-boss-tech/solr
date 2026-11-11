@@ -1,0 +1,33 @@
+{
+  "acceptance": "All four named positive suites must execute without failures, errors or skips; record fresh XML test counts. Tidy and diff check must pass with a clean tracked tree. The full root check must pass with Antora executed or demonstrably up-to-date from a successful run at this same head. The specified fail-before assertion must be reproduced on the current contributor production code with the new test retained. The final remote head must match. Previous receipts cover a different head and are historical only. The constructed response tests QueryResponse's boundary, not live server integration. Missing or skipped required legs mean incomplete.",
+  "claim_path": "records/claim/pr-5311-pivot-refresh-linux-20261110.json",
+  "commands": [
+    "./gradlew tidy; require exit 0, no tracked changes, and git diff --check exit 0.",
+    "./gradlew :solr:solrj:cleanTest :solr:solrj:test --tests org.apache.solr.client.solrj.response.QueryResponseTest --tests org.apache.solr.client.solrj.response.QueryResponseSectionParityTest --tests org.apache.solr.client.solrj.response.QueryResponseJsonParserIntegrationTest --tests org.apache.solr.client.solrj.request.schema.SchemaRequestBodyTest -Ptests.seed=5311A11C0FFEE --rerun-tasks",
+    "./gradlew check -x test; require the full root check, including :solr:solr-ref-guide:buildLocalAntoraSite, without exclusions beyond test.",
+    "Re-read the fork ref, require it still equals the named full head, and verify the clean tracked checkout."
+  ],
+  "contributor_head": "dc40a1c22c4c48a83d0eb492464d10c29e07ad6a",
+  "environment": "Linux host, clean normal clone with .git as a directory (the ref-guide Antora task may fail in a linked worktree), JDK 21, host build locks and adequate disk. Record host, toolchain, environment conditions, start/end, logs, fresh JUnit XML and exit codes. If the host uses an egress CA truststore or NODE_ENV adjustment, record it. No Windows execution or retired local queue.",
+  "fail_before": "In a separate disposable clean clone at the offered head, replace only solr/solrj/src/java/org/apache/solr/client/solrj/response/QueryResponse.java with the file from current contributor head dc40a1c22c4c48a83d0eb492464d10c29e07ad6a, keeping the new test unchanged. Run ./gradlew :solr:solrj:cleanTest :solr:solrj:test --tests org.apache.solr.client.solrj.response.QueryResponseTest.testPivotFacetsWithRepeatedKeys -Ptests.seed=5311A11C0FFEE --rerun-tasks. Require the test to execute and fail at assertEquals(pivots, pivots.clone()) after the duplicate-entry and field assertions pass. Record exact assertion, exit code, fresh XML, and environment. A compile, setup, startup or other assertion failure is not behavioral proof.",
+  "failure_policy": "Investigate any failure before retries. Do not silently omit tasks or classify failures as passing. If tidy changes tracked files, a source fix is needed or either head moves, stop; a changed pushed head requires a superseding gate.",
+  "head": "869400c40057d4f94faef5299969a9144bdb9a12",
+  "id": "pr-5311-pivot-refresh-linux-proof-20261110",
+  "job": "pr-5311-pivot-refresh-linux-20261110",
+  "old_tested_fork_head": "b8f10c9e3ea04746ee5f823e57fd9484426b448d",
+  "phase": "pivot follow-up, refreshed contributor head, round 2",
+  "preflight": "Read assignment and this gate at one board snapshot, claim exactly records/claim/pr-5311-pivot-refresh-linux-20261110.json (claim id equals job id, not gate id), and recheck PR 5311 discussion and live contributor and fork heads. Require the fork tip and full clean checkout equal the specified head, the specified contributor head is an ancestor, and the diff from it contains only the QueryResponse duplicate-key fix and QueryResponseTest regression. Stop and reconcile if either head moved. Never change the contributor branch.",
+  "receipt": "Publish the receipt at records/receipt/pr-5311-pivot-refresh-linux-20261110-receipt.json with this gate id and exact head, each command, exit code, test counts, fail-before assertion, cleanup and authorized evidence locations. The claim id must equal the job id. No public PR or JIRA write is authorized by this job.",
+  "receipt_path": "records/receipt/pr-5311-pivot-refresh-linux-20261110-receipt.json",
+  "seed": "5311A11C0FFEE",
+  "source": {
+    "branch": "pr-5311-pivot-duplicate-keys",
+    "head": "869400c40057d4f94faef5299969a9144bdb9a12",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes": [
+    "records/gate/pr-5311-pivot-linux-proof-20261109.json",
+    "records/gate/pr-5311-pivot-root-diagnosis-proof-20261109.json"
+  ],
+  "type": "gate"
+}
