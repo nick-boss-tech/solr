@@ -1,0 +1,13 @@
+{
+  "actor": "phone-agent-2",
+  "completed_at_utc": "2026-11-11T05:24:19.856534+00:00",
+  "evidence": "Post-publication stop check at 2026-11-11T05:23:56.681751+00:00 (snapshot b0d6c9ede9b11e89473ceb303b95a1926b9fba6d), saved at /workspace/gates/logs/phone-agent-2/pr-5311-pivot-refresh-linux-20261110/release-stop-check.json (SHA-256 2457cb1d616d2887a3dac320eb3a81b06e2f4ce8921e89ef2437fc6e2939d4c8): no Gradle/Solr/ZooKeeper/Antora/npm executor processes and no background jobs; both designated Gradle locks free; both disposable worktrees absent; 62.12% free inodes (15% stop floor). Exact fork and contributor heads were re-read, PR remained open, and the evidence, report, and passed receipt were read back from the live board. No further gate/build work will run after this canonical release write.",
+  "head": "869400c40057d4f94faef5299969a9144bdb9a12",
+  "id": "pr-5311-pivot-refresh-linux-20261110",
+  "job": "pr-5311-pivot-refresh-linux-20261110",
+  "reason": "Exact-head Linux gate completed; evidence, report and green receipt are published; release the claim with no further gate execution planned.",
+  "receipt_record": "records/receipt/pr-5311-pivot-refresh-linux-20261110-receipt.json",
+  "stop_check_file": "/workspace/gates/logs/phone-agent-2/pr-5311-pivot-refresh-linux-20261110/release-stop-check.json",
+  "stop_check_sha256": "2457cb1d616d2887a3dac320eb3a81b06e2f4ce8921e89ef2437fc6e2939d4c8",
+  "type": "release"
+}
