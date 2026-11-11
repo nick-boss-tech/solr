@@ -1,0 +1,118 @@
+{
+  "environment": {
+    "browser": "Google Chrome 155.0.8059.39",
+    "chromedriver": "ChromeDriver 155.0.8059.39",
+    "docker_used": false,
+    "gradle": "9.7.0",
+    "gradle_locking": "Both runner-designated locks were held for each Gradle invocation and were available at final stop verification.",
+    "jdk": "OpenJDK 21.0.12.1",
+    "minimum_free_inodes_percent_during_runs": 53,
+    "os": "Ubuntu 24.04.4 LTS, Linux 6.18.38+, x86_64",
+    "project_node": "22.18.0",
+    "system_node": "24.22.1"
+  },
+  "evidence": [
+    "records/evidence/pr-5201-auth-browser-linux-gate-r2-20261110-evidence-20261110.json",
+    "records/report/pr-5201-auth-browser-linux-gate-r2-20261110-final-20261110.json"
+  ],
+  "evidence_sha256": "72a7a108a5badfc021ee5b41ab7707b4e291c70a34a92000df8ae50f97eb89af",
+  "executor_stop_verification": {
+    "active_gate_task_process": false,
+    "assigned_and_parent_clones_removed_after_evidence_capture": true,
+    "evidence_file": "executor-stop-verification.txt in the linked evidence archive",
+    "free_inode_percent_after_cleanup": 62,
+    "gate_port_listeners": false,
+    "java_chromedriver_headless_processes": false,
+    "packaged_runtime_stopped_and_removed_after_evidence_capture": true,
+    "runner_designated_locks_available": [
+      "/workspace/tools/.gradle-cue-gate-sandbox.lock",
+      "/workspace/tools/.gradle-phone-agent-2.lock"
+    ],
+    "verified_at": "2026-11-10T21:12:36-07:00"
+  },
+  "gate": "pr-5201-auth-browser-gate-r2-20261110",
+  "head": "0355023c3170c87a84cd9e5688ae6b4f3e4df3ae",
+  "id": "pr-5201-auth-browser-linux-gate-r2-20261110-receipt",
+  "job": "pr-5201-auth-browser-linux-gate-r2-20261110",
+  "results": [
+    {
+      "exit_code": 1,
+      "failures": 1,
+      "leg": "focused_api_explorer_selenium",
+      "outcome": "Timed out at the Collections operation selector before the target request; exact-seed replay reproduced it.",
+      "seed": "A6429A38B2BCEB3A",
+      "tests": 1
+    },
+    {
+      "exit_code": 1,
+      "leg": "full_security_and_neighboring_smoke_selenium",
+      "outcome": "Exact-seed replay reproduced both security failures. The login/security-screen test passed alone with the same seed, but not in the combined run.",
+      "security_failures": 2,
+      "security_tests": 2,
+      "seed": "E26F868A06F9131C",
+      "smoke_failures": 0,
+      "smoke_tests": 5
+    },
+    {
+      "exit_code": 0,
+      "keep_comment_preserved": true,
+      "leg": "tidy",
+      "scalar_api_reference": "1.46.4",
+      "tracked_diff": false
+    },
+    {
+      "antora_exclusion": ":solr:solr-ref-guide:checkSiteLinks; owner-authorized and only additional root-check exclusion",
+      "cli_docs_check": "Retained and passed.",
+      "command": "./gradlew check -x test -x :solr:solr-ref-guide:checkSiteLinks",
+      "executed": 491,
+      "exit_code": 0,
+      "leg": "root_check_normal_clone",
+      "tasks": 520,
+      "up_to_date": 29
+    },
+    {
+      "exit_code": 0,
+      "leg": "packaged_full_distribution"
+    },
+    {
+      "authorization_matches_current_session": true,
+      "automation_caveat": "DOM click/input event fallbacks were required after native Selenium interaction did not reliably update Scalar controls and the post-logout login form.",
+      "leg": "packaged_browser_same_origin_and_refresh",
+      "logout_clear_and_relogin_refresh": true,
+      "production_csp_enforced": true,
+      "result": "passed",
+      "return_navigation": "thread-dump",
+      "target_get_status": 200,
+      "x_requested_with": "XMLHttpRequest"
+    },
+    {
+      "authorization_present": false,
+      "controlled_status": 200,
+      "generated_spec_restored_byte_for_byte": true,
+      "leg": "controlled_cross_origin_boundary",
+      "result": "passed",
+      "separate_csp_bypass": true,
+      "x_requested_with_present": false
+    },
+    {
+      "exact_seed_replay_exit_code": 1,
+      "first_run_exit_code": 1,
+      "leg": "fail_before_original_parent",
+      "outcome": "Same pre-request selector timeout; not behavioral proof.",
+      "parent_head": "3f9faa9e9861ce28f3ede3f4305bd91b6e297463",
+      "seed": "CA48CFB2566D9D7D"
+    }
+  ],
+  "source": {
+    "contributor_parent": "3f9faa9e9861ce28f3ede3f4305bd91b6e297463",
+    "fork_branch": "nick-boss-tech/solr:pr-5201-auth-browser-fix",
+    "fork_head": "0355023c3170c87a84cd9e5688ae6b4f3e4df3ae",
+    "public_pr": "https://github.com/apache/solr/pull/5201",
+    "public_pr_head": "3f9faa9e9861ce28f3ede3f4305bd91b6e297463",
+    "public_pr_state": "open",
+    "source_or_pr_changes_made": false
+  },
+  "summary": "No green claim. Tidy, the normal-clone root check with the owner-authorized Antora-specific site-link exclusion, and full-distribution packaging passed. Same-origin packaged Basic Auth browser behavior and the separate cross-origin credential boundary passed. Focused and combined Selenium runs failed before the target request; the parent-head exact-seed replay also stopped before the request and is not behavioral fail-before proof. JWT was not exercised.",
+  "type": "receipt",
+  "verdict": "incomplete"
+}
