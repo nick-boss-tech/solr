@@ -1,0 +1,167 @@
+{
+  "actions": {
+    "docker_used": false,
+    "public_comment_posted": false,
+    "source_branch_pushed": false
+  },
+  "disposable_changes": [
+    "JettySolrRunner test-only genuine graceful-rejection marker handler",
+    "GracefulShutdownRejectionException and marked 503 classification/body closure in both HTTP clients",
+    "guarded synchronous LBSolrClient retry only for materialized exact-base V1 UpdateRequest using stock JavaBin/XML serialization",
+    "CloudSolrClient guard suppressing whole-batch retry when a parallel RouteException contains the marked rejection",
+    "four-node/two-shard persisted-value and per-endpoint counter probe; repeatability, async and body-close client tests"
+  ],
+  "environment": {
+    "docker_used": false,
+    "free_inode_floor_percent": 15,
+    "gradle_locks": [
+      "/workspace/tools/.gradle-phone-agent-2.lock",
+      "/workspace/tools/.gradle-0609f7968656.lock"
+    ],
+    "host": "0609f7968656",
+    "java_home": "/usr/lib/jvm/java-21-openjdk-amd64",
+    "minimum_free_inodes_observed_percent": 38,
+    "os": "Linux",
+    "seed": "17764C0DE"
+  },
+  "evidence": {
+    "bytes": 702745,
+    "local_archive": "/workspace/gates/evidence-pr-5315-graceful-rejection-probe-linux-r4-20261110.tar.gz",
+    "manifest_files": 154,
+    "path": "records/evidence/evidence-pr-5315-graceful-rejection-probe-linux-r4-20261110.tar.gz",
+    "sha256": "4c24572b247aa0e239f7bce9acc602398907d48995d5acc03c32de696e8e1b22"
+  },
+  "executor_stop": {
+    "both_required_locks_free": true,
+    "free_inodes_percent": 39,
+    "last_run_ended_at": "2026-11-10T18:39:55-07:00",
+    "last_run_exit_code": 0,
+    "last_run_id": "62-jetty-final",
+    "matching_gradle_or_solr_executor_found": false,
+    "stop_evidence": "logs/final-executor-stop.txt",
+    "stop_evidence_sha256": "3023cc230b26dca8fa727306e587e108305e0da56b877334950d77361108afef"
+  },
+  "final_notes": "The authorized board evidence archive and this report/receipt are the only planned remote writes. No prototype code was committed or pushed to the source branch.",
+  "gate": "pr-5315-graceful-rejection-probe-linux-r4-20261110",
+  "head": "d88ae0c6269e067602a90ed8e655df275f6f42f7",
+  "id": "pr-5315-graceful-rejection-probe-linux-r4-20261110-report",
+  "job": "pr-5315-graceful-rejection-probe-linux-r4-20261110",
+  "limitations": [
+    "No enforced marker provenance/direct-node boundary; a forged marker on an application 503 authorizes retry, and no header-mutating intermediary was tested.",
+    "Materialized UpdateRequest documents and parameters remain mutable; no snapshot is made and concurrent caller mutation during a synchronous request is assumed absent.",
+    "The marker emitter is in test-framework JettySolrRunner only; no production packaged server build/start was performed, so production marker emission remains unresolved.",
+    "Mixed-version behavior used a fake endpoint, not a real older Solr distribution.",
+    "Async marked UPDATE no-replay was tested for both transports, but async response-body closure and query/failover behavior are not comprehensive; the new retry is synchronous only.",
+    "The original in-flight indexing 503 remains unresolved; requests already inside the update handler are outside this pre-handler rejection probe.",
+    "Other pre-existing communication/RequestNotSentException retry paths were not changed or evaluated by this focused marked-RouteException correction."
+  ],
+  "owner": "phone-agent-2",
+  "patch": {
+    "apply_check": "passed in a clean detached worktree at the assigned head",
+    "files": 10,
+    "path": "review/r4-final-disposable.patch",
+    "sha256": "79fe67b64846949b497bad9ab3f5f7d29167e454163d0f2f5afa40ac0835d013"
+  },
+  "predecessor_verification": {
+    "extracted_prototype_patch_sha256": "ecc496789bcec490c3002ba4763d79f61e52f47563cd653dec00425fd9c78a05",
+    "live_archive_sha256": "190620078e30d04e5c7db9fd0779572b83edf04eb192d33782dbfc95be1857ed",
+    "live_r3_archive": "records/evidence/evidence-pr-5315-graceful-rejection-probe-linux-r3-20261110.tar.gz",
+    "r3_receipt_sha256": "190620078e30d04e5c7db9fd0779572b83edf04eb192d33782dbfc95be1857ed"
+  },
+  "proof_runs": [
+    {
+      "command": "./gradlew --no-daemon :solr:solrj:test --tests org.apache.solr.client.solrj.impl.CloudSolrClientCacheTest -Ptests.seed=17764C0DE --rerun-tasks",
+      "exit_code": 0,
+      "failures": 0,
+      "phase": "unchanged-head baseline",
+      "run_id": "10-baseline-cachetest",
+      "skipped": 0,
+      "tests": 12,
+      "xml": "xml/10-baseline-cachetest.xml"
+    },
+    {
+      "command": "./gradlew --no-daemon :solr:solrj:test --tests org.apache.solr.client.solrj.impl.ProbeGracefulRejectionClientTest -Ptests.seed=17764C0DE --rerun-tasks",
+      "exit_code": 0,
+      "failures": 0,
+      "phase": "verified r3 client prototype before r4 changes",
+      "run_id": "20-r3-client-probe",
+      "skipped": 0,
+      "tests": 6,
+      "xml": "xml/20-r3-client-probe.xml"
+    },
+    {
+      "command": "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.cloud.ProbeGracefulRejectionTest -Ptests.seed=17764C0DE --rerun-tasks",
+      "exit_code": 0,
+      "failures": 0,
+      "phase": "verified r3 real-node probe before r4 changes",
+      "run_id": "30-r3-real-node-probe",
+      "skipped": 0,
+      "tests": 3,
+      "xml": "xml/30-r3-real-node-probe.xml"
+    },
+    {
+      "assertion": "parallel exhaustion must not replay the completed shard expected:<1> but was:<6>",
+      "command": "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.cloud.ProbeGracefulMultiShardTest -Ptests.seed=17764C0DE --rerun-tasks",
+      "exit_code": 1,
+      "failures": 1,
+      "finding": "The healthy shard received six updates and persisted count_i=6; the rejected shard had six marked rejects and value 0. The overall request failed with CloudSolrClient$RouteException. Sequential exhaustion did not replay the completed shard.",
+      "phase": "valid same-seed fail-before reproduction",
+      "run_id": "46-directupdate-before",
+      "tests": 1,
+      "xml": "xml/46-directupdate-before.xml"
+    },
+    {
+      "command": "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.cloud.ProbeGracefulMultiShardTest -Ptests.seed=17764C0DE --rerun-tasks",
+      "exit_code": 0,
+      "failures": 0,
+      "finding": "RF=2 success: completed shard replicas each one pass; marked target five rejections; alternate leader one pass; both persisted increments exactly 1. RF=1 parallel and sequential exhaustion: completed shard stayed at one request/value 1; rejected shard stayed at 0; overall request failed. Delete-by-query and commit succeeded; deleted document absent.",
+      "phase": "post-correction final multi-shard probe",
+      "run_id": "60-multishard-final",
+      "skipped": 0,
+      "test_output": "logs/60-multishard-final-test-output.txt",
+      "tests": 1,
+      "xml": "xml/60-multishard-final.xml"
+    },
+    {
+      "command": "./gradlew --no-daemon :solr:solrj:test --tests org.apache.solr.client.solrj.impl.ProbeGracefulRejectionClientTest -Ptests.seed=17764C0DE --rerun-tasks",
+      "coverage": [
+        "one-shot iterator and custom content/request writer fail-closed cases",
+        "materialized V1 update fallback",
+        "V2 and unspecified request fail-closed cases",
+        "unmarked application 503 and unmarked mixed-version-style rejection are not retried",
+        "no-alternate failure surfaces without replay",
+        "marked async UPDATE is not replayed by either JDK or Jetty transport",
+        "forged marker on application 503 is accepted and retries after the application handler was reached"
+      ],
+      "exit_code": 0,
+      "failures": 0,
+      "phase": "post-tidy final client/repeatability/trust/async suite",
+      "run_id": "61-client-final",
+      "skipped": 0,
+      "tests": 12,
+      "xml": "xml/61-client-final.xml"
+    },
+    {
+      "command": "./gradlew --no-daemon :solr:solrj-jetty:test --tests org.apache.solr.client.solrj.jetty.ProbeGracefulRejectionJettyBodyCloseTest -Ptests.seed=17764C0DE --rerun-tasks",
+      "exit_code": 0,
+      "failures": 0,
+      "phase": "post-tidy final Jetty body-close regression",
+      "run_id": "62-jetty-final",
+      "skipped": 0,
+      "tests": 1,
+      "xml": "xml/62-jetty-final.xml"
+    }
+  ],
+  "source": {
+    "branch_head": "d88ae0c6269e067602a90ed8e655df275f6f42f7",
+    "branch_url": "https://github.com/nick-boss-tech/solr/tree/solr-17764-submit",
+    "disposable_checkout_head": "d88ae0c6269e067602a90ed8e655df275f6f42f7",
+    "public_pr_draft": false,
+    "public_pr_head": "dfde089fd9dd0e5e79774593e66dd030e1b7dd22",
+    "public_pr_state": "open",
+    "public_pr_url": "https://github.com/apache/solr/pull/5315"
+  },
+  "summary": "INCOMPLETE. On the exact assigned head, the unchanged r3 prototype reproduced whole-batch replay in parallel multi-shard exhaustion: a completed shard's atomic increment changed from the expected 1 to 6 after the other shard's marked pre-handler rejection exhausted its alternatives. A narrow disposable CloudSolrClient guard was added and rerun at the same seed; the completed shard remained at 1 in both parallel and sequential exhaustion, the rejected shard stayed at 0, the RF=2 alternate-replica success leg applied each increment once, and delete-by-query plus commit succeeded. Client repeatability, async UPDATE no-replay and JDK/Jetty response-close checks passed. This remains an incomplete, non-production probe because the client trusts any marked 503, repeatability is not guaranteed for concurrently mutated materialized requests, production marker packaging was not verified, mixed-version behavior was simulated rather than run against an older Solr, async body/query paths are not comprehensive, and the original in-flight indexing 503 remains unresolved.",
+  "type": "report",
+  "verdict": "incomplete"
+}
