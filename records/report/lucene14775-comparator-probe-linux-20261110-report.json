@@ -1,0 +1,7 @@
+{
+  "id": "lucene14775-comparator-probe-linux-20261110-report",
+  "job": "lucene14775-comparator-probe-linux-20261110",
+  "status": "reproduction confirmed at the exact candidate head",
+  "summary": "The comparator probe reproduced the hypothesized defect at fb8b5ea94f: forward sort with the overridden comparator returned B,A as required, and sort.inverse() returned B,A instead of A,B, failing at TestSort.java:87 with expected:<A> but was:<B> (seed 5108C0DE, fresh XML). The inverse loses the overridden comparator and falls back to the named field. Detail in the receipt.",
+  "type": "report"
+}

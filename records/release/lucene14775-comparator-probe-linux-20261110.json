@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent",
+  "evidence": "Receipt records/receipt/lucene14775-comparator-probe-linux-20261110-receipt.json with evidence archive records/evidence/evidence-lucene14775-comparator-probe-linux-20261110.tar.gz SHA-256 75893aa63facab3bc6a663c8578c7acff9ff2ac6288b3039c1e6d73cad92ea50. Executor stop verified at filing: no GradleDaemon process remains on this host; apache/lucene PR 14775 live head re-verified unchanged at 24e5430ed5675b53e74c6db6b5745fb49adc659d; no source push or public action was made.",
+  "id": "lucene14775-comparator-probe-linux-20261110",
+  "job": "lucene14775-comparator-probe-linux-20261110",
+  "reason": "The probe executed at the exact candidate head and produced the decisive result with fresh XML and logs: the hypothesized inverse-comparator loss is reproduced. No further legs are defined by this job.",
+  "type": "release"
+}
