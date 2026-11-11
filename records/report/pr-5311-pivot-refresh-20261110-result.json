@@ -1,0 +1,11 @@
+{
+  "branch": "nick-boss-tech/solr:pr-5311-pivot-duplicate-keys",
+  "contributor_head": "dc40a1c22c4c48a83d0eb492464d10c29e07ad6a",
+  "head": "869400c40057d4f94faef5299969a9144bdb9a12",
+  "id": "pr-5311-pivot-refresh-20261110-result",
+  "job": "pr-5311-pivot-refresh-20261110",
+  "old_fork_head": "b8f10c9e3ea04746ee5f823e57fd9484426b448d",
+  "public_write": "No public PR or JIRA comment or contributor-branch change.",
+  "summary": "Merged the author's current PR head into the existing pivot-fix fork branch, preserving both histories without force. Pushed and independently verified the exact fork SHA. Against the contributor head, the only diff is the unchanged duplicate-capable QueryResponse fix and its regression test; diff check clean. No Gradle or tests run on Windows. Prior green proof is for the old head only. Fresh Linux gate records/assignment/pr-5311-pivot-refresh-linux-20261110.json and records/gate/pr-5311-pivot-refresh-linux-proof-20261110.json name the new head and required proof.",
+  "type": "report"
+}
