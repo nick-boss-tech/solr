@@ -1,0 +1,19 @@
+{
+  "head": "a4ce0580ad89ad521a5402e383d96c239cea94fd",
+  "id": "solr-18630-pr5313-receipt-adjudication-20261111",
+  "job": "solr-18630-pr5313-receipt-adjudication-20261111",
+  "phase": "receipt adjudication",
+  "prior_evidence": "records/evidence/solr-18630-pr5313-precedence-repair-linux-gate-20261110-evidence.json",
+  "prior_gate": "records/gate/solr-18630-pr5313-precedence-repair-linux-gate-20261110.json",
+  "prior_receipt": "records/receipt/solr-18630-pr5313-precedence-repair-linux-gate-20261110-receipt.json",
+  "prior_report": "records/report/solr-18630-pr5313-precedence-repair-linux-gate-20261110-report.json",
+  "requirements": [
+    "Claim the assignment and verify current branch head, prior gate, released executor, receipt, report and relevant preserved evidence. Do not alter the prior immutable records or source branch. If the source head has moved, report the discrepancy rather than extending proof to the new head.",
+    "Determine whether the unqualified => 5 expectation for -DwaitForZk=5 plus SOLR_WAIT_FOR_ZK=1 applies to the repaired head only or to both heads, considering the repair purpose, gate wording, prior comparison and actual results. Independently verify the previous-head result 1 and repaired-head result 5 and distinguish observed values from expectations.",
+    "Assess whether the preserved evidence establishes every other required proof leg at this exact head, including focused suites, tidy, root check, startup and wire probes, fail-before assertions and contributor-head overflow negative control. Account for skips and the Linux-only coverage limits. Examine raw artifacts when needed, including the corrected fail-before classifier note.",
+    "Publish a new receipt with the independent interpretation, supporting evidence and a clear verdict. If the old-head value is a legitimate negative control and all required legs are supported, the successor may pass while retaining the prior receipt's incomplete verdict. If evidence is insufficient or another defect is identified, report incomplete or failed with the precise remaining work. Do not infer a pass from this assignment.",
+    "No new tests are requested if the existing evidence is sufficient. If new execution is required, document the reason and hand off a separately scoped Linux gate; do not modify source, post to the public PR, or rerun tests under this adjudication task. Publish the report and receipt before release."
+  ],
+  "source": "https://github.com/nick-boss-tech/solr/tree/solr-18630-submit",
+  "type": "gate"
+}
