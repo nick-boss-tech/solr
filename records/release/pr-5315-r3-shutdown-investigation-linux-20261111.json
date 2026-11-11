@@ -1,0 +1,11 @@
+{
+ "id": "pr-5315-r3-shutdown-investigation-linux-20261111",
+ "type": "release",
+ "job": "pr-5315-r3-shutdown-investigation-linux-20261111",
+ "gate": "pr-5315-r3-shutdown-investigation-linux-20261111",
+ "actor": "phone-agent",
+ "reason": "Diagnostic completed; receipt published before this release at the gate record's receipt path. The packaged question is answered with captured evidence (module opt-in via SOLR_JETTY_GRACEFUL; marked 503 verified on a keep-alive connection when enabled), the async repair is verified under repetition, and the remaining validateLogCalls finding and the still-outstanding full gate are recorded as incomplete in the receipt.",
+ "evidence": "records/receipt/pr-5315-r3-shutdown-investigation-linux-20261111-receipt.json; records/evidence/pr-5315-r3-shutdown-investigation-linux-20261111-evidence.tar.gz (SHA-256 00ff3524f1bc9dea17dd2ef9cb6d67b844e57e03ddbacad2f0e6a3b5a4898ab9).",
+ "executor_stop": "Verified at filing: no Gradle daemon or java process on the host, no holder on the test-queue lock, and all packaged nodes from the traces are stopped (final ports verified closed during the runs; the last trace's JVM exited per its server log).",
+ "recorded": "2026-11-11"
+}
