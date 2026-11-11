@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-solr-18616",
+  "evidence": "records/report/solr-18616-server-metrics-implementation-windows-20261111-report.json; fork head 78cbd210c7ed1b5342e83a519fcfc40b9787d8de; no Windows build or test executor started.",
+  "id": "solr-18616-server-metrics-implementation-windows-20261111",
+  "job": "solr-18616-server-metrics-implementation-windows-20261111",
+  "reason": "Draft pushed and Linux proof handed off; implementation stopped pending results.",
+  "type": "release"
+}
