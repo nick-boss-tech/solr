@@ -1,0 +1,26 @@
+{
+  "claim_path": "records/claim/pr-5201-auth-browser-linux-gate-r3-20261111.json",
+  "gate_id": "pr-5201-auth-browser-gate-r3-20261111",
+  "gate_record": "records/gate/pr-5201-auth-browser-gate-r3-20261111.json",
+  "id": "pr-5201-auth-browser-linux-gate-r3-20261111",
+  "intended_host": "Linux normal clone with Solr build toolchain and Chrome or Chromium with matching driver",
+  "investigations": [
+    "records/report/pr-5201-linux-selector-investigation-20261111-result.json",
+    "records/report/pr-5201-adjacent-investigation-20261111-result.json"
+  ],
+  "job": "pr-5201-auth-browser-linux-gate-r3-20261111",
+  "phase": "round 3, superseding incomplete round 2",
+  "prior_gate": "records/gate/pr-5201-auth-browser-gate-r2-20261110.json",
+  "prior_receipt": "records/receipt/pr-5201-auth-browser-linux-gate-r2-20261110-receipt.json",
+  "receipt_path": "records/receipt/pr-5201-auth-browser-linux-gate-r3-20261111-receipt.json",
+  "source": {
+    "branch": "pr-5201-auth-browser-fix",
+    "contributor_parent": "3f9faa9e9861ce28f3ede3f4305bd91b6e297463",
+    "head": "0355023c3170c87a84cd9e5688ae6b4f3e4df3ae",
+    "pr": "https://github.com/apache/solr/pull/5201",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5201-auth-browser-linux-gate-r2-20261110",
+  "summary": "Run superseding exact-head PR 5201 authentication and browser gate and investigate 401 recovery.",
+  "type": "assignment"
+}
