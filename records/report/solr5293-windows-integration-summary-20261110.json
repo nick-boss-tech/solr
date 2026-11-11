@@ -1,0 +1,8 @@
+{
+  "details": "The gate receipt records exact heads, individual test outcomes, the two complete patched test suites, both packaged server HTTP runs, artifact hashes, and limitations. The stock server gave wrong ordering and an HTTP 500 in the two affected cases; the patched server passed all four HTTP cases. Both isolated servers were stopped with successful stop commands; neither test port 18986 nor 18987 was listening when checked. Both Solr source worktrees were clean after the runs. Logs, XML, comparison and a readable summary are on the Windows host under research/lucene-submission-prep/solr5293-windows-integration; HTTP JSON is under research/lucene-solr-windows. No public PR or issue write was made.",
+  "head": "769ca6e177d77acd3f1993a4a24bd3257ae243c0",
+  "id": "solr5293-windows-integration-summary-20261110",
+  "job": "solr5293-lucene106-integration-windows-20261110",
+  "summary": "Matched Solr and Lucene integration reproduced both defects on stock and passed with the patch on Windows",
+  "type": "report"
+}
