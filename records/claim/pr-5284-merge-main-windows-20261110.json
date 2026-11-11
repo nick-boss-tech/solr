@@ -1,0 +1,7 @@
+{
+  "id": "pr-5284-merge-main-windows-20261110",
+  "job": "pr-5284-merge-main-windows-20261110",
+  "owner": "windows-codex-pr5284-merge-main-20261110",
+  "scope": "Merge exact upstream main into the PR branch, resolve the existing test import conflict, ordinary push, verify and hand off.",
+  "type": "claim"
+}
