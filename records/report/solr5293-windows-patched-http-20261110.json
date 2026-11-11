@@ -1,0 +1,8 @@
+{
+  "details": "Windows JDK 21.0.11, Gradle 9.7.0, :solr:packaging:installSlimDist on the clean pinned Solr head with the isolated patched join repository completed exit 0. The distribution at wt/PR-5293-patched-integration/solr/packaging/build/solr-11.0.0-SNAPSHOT-slim contains exactly one lucene-join-10.6.0.jar with SHA-256 1d6cf07164022466858c76037a47469c17f73796112142c6059f5dbd03e6c8aa, equal to the e0c53033bb2b6b34939ded24e228443b7d8b576b Lucene build artifact. Solr started on loopback port 18986; its system response reported Solr build 769ca6e177d77acd3f1993a4a24bd3257ae243c0, and JVM class-load log independently showed ToParentDocValues from the packaged join JAR. The block-join-http.py fixture created a dedicated core and all four expected numeric and string orders matched. Result research/lucene-solr-windows/block-join-http-blockjoin_544502eb7e2d.json SHA-256 b014a5138c2f3eaabd07da884a7d4ac4eb3554c672e96a57cb2a6c7ac1722c65. The Solr stop command exited 0 after the run. Package build log research/lucene-submission-prep/solr5293-windows-integration/patched-package.log SHA-256 cc9446da47dcd709e1ac71fe36b77173a7981dbb74635185adb4f1d0903c60d1. -PdisableJsClient=true disabled JavaScript client tests; the build reported using a verified downloaded UI artifact. Error Prone was skipped and Windows performance-counter warnings appeared. A corresponding stock-jar PR distribution comparison was pending at report time.",
+  "head": "769ca6e177d77acd3f1993a4a24bd3257ae243c0",
+  "id": "solr5293-windows-patched-http-20261110",
+  "job": "solr5293-lucene106-integration-windows-20261110",
+  "summary": "PR-built Solr and the repaired Lucene join JAR passed four Windows HTTP checks",
+  "type": "report"
+}
