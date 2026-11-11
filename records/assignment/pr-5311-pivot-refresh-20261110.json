@@ -1,0 +1,19 @@
+{
+  "capabilities": [
+    "source-implementation"
+  ],
+  "contributor_head": "dc40a1c22c4c48a83d0eb492464d10c29e07ad6a",
+  "deliverables": [
+    "normal non-force fork push",
+    "phase-specific Linux gate"
+  ],
+  "fork_branch": "nick-boss-tech/solr:pr-5311-pivot-duplicate-keys",
+  "id": "pr-5311-pivot-refresh-20261110",
+  "intended_host": "Windows",
+  "job": "pr-5311-pivot-refresh-20261110",
+  "old_fork_head": "b8f10c9e3ea04746ee5f823e57fd9484426b448d",
+  "source_pr": "https://github.com/apache/solr/pull/5311",
+  "successor_of": "pr-5311-pivot-fix-20261109",
+  "summary": "Update the existing fork pivot-fix branch to include PR 5311's current contributor head without rewriting fork history, then request exact-head Linux proof.",
+  "type": "assignment"
+}
