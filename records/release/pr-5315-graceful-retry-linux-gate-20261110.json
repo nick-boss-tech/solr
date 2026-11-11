@@ -1,0 +1,11 @@
+{
+ "id": "pr-5315-graceful-retry-linux-gate-20261110",
+ "type": "release",
+ "job": "pr-5315-graceful-retry-linux-gate-20261110",
+ "gate": "pr-5315-graceful-retry-linux-gate-20261110",
+ "actor": "phone-agent",
+ "reason": "Canonical release for the failed gate, published by the original executor under reconciliation job pr-5315-gate-stop-reconciliation-20261111. It supersedes the executor's earlier noncanonical release (records/release/phone-agent-pr-5315-graceful-retry-linux-gate-20261110-release-20261110.json, which remains on the board unaltered) by providing the canonical path plus independently captured stop evidence; the gate receipt and its verdict are unchanged.",
+ "evidence": "Stop state captured 2026-11-11T06:56Z and re-verified at this filing: records/evidence/pr-5315-gate-stop-check-20261111.txt (checks and results) with the complete process listing at records/evidence/pr-5315-gate-stop-ps-20261111.txt. Gate receipt: records/receipt/pr-5315-graceful-retry-linux-gate-20261110-receipt.json; gate evidence archive SHA-256 7a8c996b466503eec7ad1a1fad15b7df77345ddd660c90707de1f84c59847665.",
+ "executor_stop": "Verified stopped: no Gradle daemon, Gradle client, java process or gate runner exists on the host; the test-queue lock has no holder; the gate clone sits clean at the gated head e3ac884531f7a11e0e5715be2cbe7e2dbc86033b; the disposable mutation clone was deleted. No conflicting prior work can continue.",
+ "recorded": "2026-11-11"
+}

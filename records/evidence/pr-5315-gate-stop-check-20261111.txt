@@ -1,0 +1,15 @@
+STOP-STATE CHECK for gate pr-5315-graceful-retry-linux-gate-20261110
+captured_by: phone-agent (original executor of that gate)
+when_utc: 2026-11-11T06:57:14Z
+host: Linux gate host (this VM)
+
+1. Full process listing (ps -eo pid,ppid,etime,args, 7 lines total) contains no Gradle daemon, no Gradle client, no java process, no gate runner script:
+1
+
+2. Test-queue lock ~/workspace/tools/.solr-test-queue.lock holders (fuser): NO HOLDER
+
+3. Gate clone ~/workspace/solr-clones/5315-retry: HEAD e3ac884531f7a11e0e5715be2cbe7e2dbc86033b (the gated head), 0 tracked modifications (tidy diff was restored by the gate runner as recorded in the receipt)
+
+4. Disposable mutation clone ~/workspace/solr-clones/5315-retry-mut: ABSENT (deleted at the end of the mutation run)
+
+Conclusion: the gate's workers and executors are stopped; nothing from that gate can continue or conflict with a successor job.

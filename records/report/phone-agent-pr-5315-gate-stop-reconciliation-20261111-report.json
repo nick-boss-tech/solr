@@ -1,0 +1,14 @@
+{
+ "id": "phone-agent-pr-5315-gate-stop-reconciliation-20261111-report",
+ "type": "report",
+ "job": "pr-5315-gate-stop-reconciliation-20261111",
+ "owner": "phone-agent",
+ "status": "completed",
+ "summary": "Reconciliation complete. Actual state: the failed gate's receipt and evidence were already on the board and are unchanged; its only release was the executor's noncanonical record (id and path carrying the executor prefix), which asserted executor stop without independently captured proof. Checks run by the original executor on 2026-11-11 at 06:56 UTC and again at filing: full host process listing (preserved) shows no Gradle daemon, Gradle client, java process, or gate runner; fuser shows no holder on the test-queue lock; the gate clone is clean at the gated head e3ac884531f7; the disposable mutation clone is absent. Stop is therefore verified from captured evidence, not asserted. Canonical-release outcome: a schema-valid canonical release for the old gate now exists at records/release/pr-5315-graceful-retry-linux-gate-20261110.json with actor, reason, evidence, and the verified stop statement; the noncanonical release remains unaltered alongside it. Remaining block: none for stop or release. Per the assignment, any next Linux proof or diagnosis of the repaired head (the Windows findings job reports a partial repair pushed at 2ea7f584f0ca91a9de470ebe72b4063e8685de02) must use a new job; this reconciliation ran no Gradle task and mutated no source.",
+ "evidence": [
+  "records/evidence/pr-5315-gate-stop-check-20261111.txt",
+  "records/evidence/pr-5315-gate-stop-ps-20261111.txt",
+  "records/release/pr-5315-graceful-retry-linux-gate-20261110.json"
+ ],
+ "recorded": "2026-11-11"
+}

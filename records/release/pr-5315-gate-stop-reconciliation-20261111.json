@@ -1,0 +1,10 @@
+{
+ "id": "pr-5315-gate-stop-reconciliation-20261111",
+ "type": "release",
+ "job": "pr-5315-gate-stop-reconciliation-20261111",
+ "actor": "phone-agent",
+ "reason": "Reconciliation completed: executor stop verified from independently captured process and lock evidence, and the canonical release for the prior gate published. This job itself ran no build and started no worker.",
+ "evidence": "records/report/phone-agent-pr-5315-gate-stop-reconciliation-20261111-report.json; records/evidence/pr-5315-gate-stop-check-20261111.txt",
+ "executor_stop": "No worker was started by this job; the host state at release is the verified state in the cited stop check.",
+ "recorded": "2026-11-11"
+}

@@ -1,0 +1,7 @@
+    PID    PPID     ELAPSED COMMAND
+      1       0    01:32:11 /usr/lib/systemd/systemd
+     17       1    01:32:11 /usr/lib/systemd/systemd-journald
+     67       0    01:32:10 /opt/hatch/bin/hatch daemon --runtime-cell-leader=2289
+    748       0    01:31:53 /opt/hatch/bin/hatch-execd --runtime-cell-leader=2289
+  18182     748       00:00 /bin/bash --norc --noprofile -c umask 0007; ps -eo pid,ppid,etime,args > ~/workspace/tools/gate-5315-retry/reconciliation/ps-full.txt; grep -E 'GradleDaemon|gradle-cli|org\.gradle|solr-gradle|run-legs|run-mutation|JettySolrRunner|java ' ~/workspace/tools/gate-5315-retry/reconciliation/ps-full.txt | grep -v 'ps-full\|grep' ; echo "matches above (empty = none)"; wc -l ~/workspace/tools/gate-5315-retry/reconciliation/ps-full.txt
+  18183   18182       00:00 ps -eo pid,ppid,etime,args
