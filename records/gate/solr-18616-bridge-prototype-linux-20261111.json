@@ -1,0 +1,21 @@
+{
+  "claim_path": "records/claim/solr-18616-bridge-prototype-linux-20261111.json",
+  "environment": "Clean Linux checkout, supported JDK and absolute temp directory; record versions and exact commands.",
+  "head": "061fa32fa78a99f6e7dbc72dcca491ff7cb4fa84",
+  "id": "solr-18616-bridge-prototype-linux-20261111",
+  "job": "solr-18616-bridge-prototype-linux-20261111",
+  "phase": "prototype feasibility round 1",
+  "receipt_path": "records/receipt/solr-18616-bridge-prototype-linux-20261111.json",
+  "requirements": [
+    "Confirm remote exact head and clean checkout; no source or formatting modifications before proof.",
+    "Run ./gradlew :solr:test-framework:test --tests org.apache.solr.embedded.JettyMetricsBridgePrototypeTest -Ptests.seed=18616; retain complete logs and fresh XML, count tests and report exact failure stage if any.",
+    "Run ./gradlew tidy and record whether it changes tracked files; any formatting change requires a new pushed head and new gate. Run ./gradlew check -x test and record all exits and execution conditions.",
+    "Passing the test establishes only the in-process JettySolrRunner late registration probe. It does not establish production Jetty XML, server/webapp classloader integration, method/status coverage beyond this PUT, asynchronous behavior, or implementation readiness. If test fails, capture and classify the failure rather than calling it a pass or silently retrying; report whether it exposes a design or harness problem."
+  ],
+  "source": {
+    "base": "82888694ae248b74d105d9c7b5f60d33c385f325",
+    "branch": "solr-18616-submit",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "gate"
+}
