@@ -9,6 +9,8 @@ Find the currently designated live board from the workspace bootstrap and explic
 
 Resolve the requested work from its assignment, claims, gate and receipts, including newer reports and superseding records. Generated indexes can lag. Check host capability and active ownership before claiming; preserve existing claims and never run the same gate concurrently. Link source snapshots and exact fork heads in handoffs. A Linux receipt proves only the named head and completed proof legs; distinguish a failed, incomplete or non-reproduced run from a green gate.
 
+When handing off a gate, link the assignment and the exact gate record. Include the job ID, canonical claim path, fork repository and branch, full source head, expected receipt path, and board snapshot SHA. Publish and read back both records first. The gate ID can differ from the job ID. For older assignments without a gate path, search `records/gate/` by job ID at the fetched SHA and verify each candidate's job, head, phase and supersession. Follow [the gate handoff procedure](../../../WORKFLOW.md#find-and-hand-off-a-gate).
+
 For board writes follow the live board's add-only and concurrency rules, use its approved posting mechanism, and verify the posted content and reachable commit. A handoff is a board record, not just chat. Do not infer public PR or Jira posting permission from an internal assignment; follow the user's explicit direction and applicable standing authorization. Preserve the host's test restrictions.
 
 For this draft's cutover requirements, read [the migration plan](../../../MIGRATION.md). For Solr navigation, review, implementation or proof itself, use the relevant established workflow or skill; this coordination skill does not replace those procedures.

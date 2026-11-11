@@ -20,6 +20,29 @@ Example claim:
 {"type":"claim","id":"demo-1","job":"demo-1","owner":"worker-a"}
 ```
 
+For a new gate assignment, name the gate record explicitly. The gate ID may
+be different from the job ID. These extra fields are a handoff convention. The
+writer does not validate their content or verify that the paths match:
+
+```json
+{"type":"assignment","id":"demo-gate-job","job":"demo-gate-job","intended_host":"Linux","gate_record":"records/gate/demo-gate-1.json","gate_id":"demo-gate-1","claim_path":"records/claim/demo-gate-job.json","receipt_path":"records/receipt/demo-receipt-1.json","source":{"repository":"owner/repo","branch":"example","head":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}}
+```
+
+Publish the assignment and gate separately. Read both back before handing them
+off. The recipient checks the host, source head and ownership before claiming
+`records/claim/demo-gate-job.json`.
+
+For an older assignment with no gate path, search the fetched snapshot by job ID.
+For example, from the Windows workspace root, use the full fetched SHA:
+
+```powershell
+.\research\git-source.ps1 grep '-n' 'demo-gate-job' <board-sha> '--' records/gate
+```
+
+Read the candidates and match their `job`, head and phase. Follow
+[WORKFLOW.md](../WORKFLOW.md#find-and-hand-off-a-gate) for missing or superseded
+records. Do not treat a text match or the generated index as proof of ownership.
+
 Example gate and receipt for a separately claimed gate job. Replace the example head and fields with the actual source revision, commands and result; a receipt's `passed` value does not make omitted proof legs pass:
 
 ```json

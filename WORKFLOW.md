@@ -16,7 +16,38 @@ For selective carryover, first inspect the current legacy assignment, claims, re
 
 ## Gate requests
 
-Create a separate gate assignment and claim for the execution host. The gate record names the exact source head, environment, acceptance criteria, commands and any fail-before or mutation legs. The executor records actual results and links fresh evidence in a receipt. A receipt's head must match its gate and the offered source head; passing one leg does not imply all legs passed. A changed patch or formatting head needs a superseding exact-head gate. Never present a compile error, setup failure, skip or non-reproduction as a passing behavioral proof.
+Create a separate gate assignment. The execution host claims that job before running it. The gate record names the exact source head, environment, acceptance criteria, commands and any fail-before or mutation legs. The executor records actual results and links fresh evidence in a receipt. A receipt's head must match its gate and the offered source head; passing one leg does not imply all legs passed. A changed patch or formatting head needs a superseding exact-head gate. Never present a compile error, setup failure, skip or non-reproduction as a passing behavioral proof.
+
+## Find and hand off a gate
+
+A gate assignment and its gate record have independently chosen IDs. The gate ID
+may match the job ID or differ from it. The assignment, claim, and release IDs
+must equal the job ID. Do not derive a gate ID from a job ID or select a gate
+from another job.
+
+When creating a gate:
+
+1. Put the exact gate record path and ID in the assignment. Add the canonical
+   claim path, source repository, branch and full head, expected receipt path,
+   phase or round, and any superseded gate or receipt.
+2. Publish the assignment and gate record. Read both back at a board snapshot.
+   Confirm that their job IDs and source heads match. Verify the remote head.
+3. Give the recipient links to both records, the job ID, claim path, source
+   repository, branch and full head, expected receipt path, and board snapshot
+   SHA. State any claim observed at that snapshot. Sending a handoff does not
+   claim the job or start the gate.
+
+Before claiming a gate, read the assignment, gate, existing claim and release,
+relevant receipts and reports, and current source head. Check host capabilities,
+phase and supersession. Refresh and reconcile before a write. A released job
+needs a successor under the ownership rules above.
+
+For an older assignment with no gate path, search `records/gate/` at the
+fetched board SHA for its job ID. Read each candidate and compare its `job`,
+head, phase and supersession fields. If the gate is missing, check the live tip
+once and search again if it moved. If the result is still missing or ambiguous,
+report that state to the handoff owner. Do not claim or execute a different job.
+The [tool guide](tools/README.md) has record examples and lookup commands.
 
 ## Publishing
 
