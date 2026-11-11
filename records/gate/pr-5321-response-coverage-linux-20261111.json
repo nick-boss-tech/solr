@@ -1,0 +1,19 @@
+{
+  "branch": "pr-5321-response-coverage-20261111",
+  "contributor_parent": "35db4554284ca0d2ca37eb78ed4c7c7dee599db2",
+  "environment": "Linux, JDK 21, clean isolated checkout; record host, toolchain, source ref and clean status",
+  "head": "0de81e22382b81a87826b3744a0a91e6f4d9d1bc",
+  "id": "pr-5321-response-coverage-linux-20261111",
+  "job": "pr-5321-response-coverage-linux-20261111",
+  "phase": "round 1",
+  "repository": "nick-boss-tech/solr",
+  "requirements": [
+    "Verify exact remote head and contributor ancestry; record all commands, exit codes, fresh logs and JUnit XML with test counts, failures, errors and skips.",
+    "Run ./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.search.ReturnFieldsTest --tests org.apache.solr.response.TestCSVResponseWriter --tests org.apache.solr.response.TestJavaBinResponseWriter -Ptests.seed=5321CAFE. Require all three new test methods to execute and pass. Then run tidy and root check -x test; tracked formatting changes invalidate exact-head proof and require a committed successor and new gate.",
+    "Coverage only: the contributor implementation is expected to pass these tests; do not present success as fail-before proof. In a disposable checkout at this exact head, mutate isExcluded to always return false, leaving all tests unchanged. Run the three new methods individually and capture fresh XML and logs. Require the relevant excluded-field assertions to fail at runtime, classify each independently, then restore source and rerun successfully. A compilation/setup failure or skipped test is not mutation proof; record any method not discriminated as a coverage pin.",
+    "Separately investigate the review hypothesis for a real stored field named -foo_s: reuse schema12 dynamic *_s, index -foo_s and a control field, and compare an explicit fl=-foo_s request at contributor parent 35db4554284ca0d2ca37eb78ed4c7c7dee599db2 and its base 780653ba4e9e65052dc7eb7baf77113a6788bbb5 with the same runnable test or isolated test overlay. Record actual serialized response or parser error on each, exact test and logs. Distinguish changed behavior from pre-existing unsupported behavior or harness failure. This is a diagnostic probe; do not modify production or push probe artifacts.",
+    "Report coverage limits: no distributed, RTG, export, handler appends or alias/transformer integration proof unless actually exercised. If positive tests fail, classify cause and stop for implementation owner; do not silently repair or push. A compatibility regression needs a separate decision or repair and superseding gate."
+  ],
+  "type": "gate",
+  "verdict_policy": "A pass requires focused methods, tidy, root check, and recorded mutation and compatibility probe outcomes. A reproduced compatibility regression is a material concern even if coverage tests pass; report it explicitly and do not characterize the overall PR as clean."
+}
