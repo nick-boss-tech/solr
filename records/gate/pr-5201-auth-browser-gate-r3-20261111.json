@@ -1,0 +1,25 @@
+{
+  "commands": [
+    "./gradlew :solr:webapp:test -Ptests.selenium=true --tests org.apache.solr.webapp.AdminUiSecurityAuthTest.testApiExplorerUsesAdminCredentials",
+    "./gradlew :solr:webapp:test -Ptests.selenium=true --tests org.apache.solr.webapp.AdminUiSecurityAuthTest --tests org.apache.solr.webapp.AdminUiSmokeTest",
+    "./gradlew tidy",
+    "./gradlew check -x test"
+  ],
+  "environment": "Linux normal clone, pinned JDK/Node, Chrome or Chromium and matching driver; coordinate locks and resources, record versions, seeds and logs.",
+  "head": "0355023c3170c87a84cd9e5688ae6b4f3e4df3ae",
+  "id": "pr-5201-auth-browser-gate-r3-20261111",
+  "job": "pr-5201-auth-browser-linux-gate-r3-20261111",
+  "phase": "round 3",
+  "receipt_path": "records/receipt/pr-5201-auth-browser-linux-gate-r3-20261111-receipt.json",
+  "requirements": [
+    "Refresh board, fork head and PR head/discussion; inspect the prior gate, receipt, release and both investigations. Claim the canonical job path before running. Stop and report if heads or ownership conflict.",
+    "Run all round-two required proof legs at this exact head: focused and combined Selenium, clean tidy, normal-clone root check, packaged production-CSP Basic Auth and navigation, credential refresh, controlled cross-origin boundary, and fail-before with the unchanged revised test on contributor parent 3f9faa9e9861ce28f3ede3f4305bd91b6e297463. Preserve evidence, counts, seeds and execution conditions. The prior owner's Antora site-link exclusion, if still authorized and necessary, must be explicit; do not add exclusions silently. A pre-request timeout is not fail-before proof.",
+    "Investigate explorer 401 behavior with expired or revoked Basic credentials in a packaged browser, comparing Admin UI recovery, and observe 403 and recovery after re-login. Record actual behavior and whether it warrants a change; do not claim source inference as a runtime result. Exercise JWT if feasible; otherwise state it was not tested. Do not expose credentials.",
+    "Report the disableJsClient Scalar npm dependency and outstanding generated-client, proxy and bundle-license/network questions separately; do not present dry-run or source tracing as full validation. Do not change the PR or source. Any source or formatting change requires a new pushed head and superseding gate.",
+    "Publish actual commands, exit codes, proof-leg results and evidence in the named receipt; never mark omitted or failed legs passed. Publish a report and verified executor-stop evidence before release."
+  ],
+  "source_branch": "pr-5201-auth-browser-fix",
+  "source_repository": "nick-boss-tech/solr",
+  "supersedes_gate": "pr-5201-auth-browser-gate-r2-20261110",
+  "type": "gate"
+}
