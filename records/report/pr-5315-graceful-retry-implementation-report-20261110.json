@@ -1,0 +1,8 @@
+{
+  "head": "e3ac884531f7a11e0e5715be2cbe7e2dbc86033b",
+  "id": "pr-5315-graceful-retry-implementation-report-20261110",
+  "job": "pr-5315-graceful-retry-implementation-windows-20261110",
+  "status": "implemented, Linux proof pending",
+  "summary": "Pushed fork branch solr-17764-submit at e3ac884531f7a11e0e5715be2cbe7e2dbc86033b; public PR 5315 remains at dfde089fd9dd0e5e79774593e66dd030e1b7dd22. Added packaged Jetty pre-handler rejection marker; SolrJ trust opt-in disabled by default; sync retry only for a rejected V1 UpdateRequest subrequest with stock serializer and conservative value checks; outer whole-batch retry guard; tests including multi-shard persistence, stream closure, opt-in behavior, nested iterator and document-iterator restrictions; and trust/coverage documentation. Existing unrelated communication and RouteException retries remain, and in-flight update 503s remain unresolved. The option relies on the caller trusting the full network path, not cryptographic provenance. Ran diff --check only on Windows; no Gradle, build or tests were run. The prior probe results do not prove the new source head. Gate job pr-5315-graceful-retry-linux-gate-20261110 has the exact-head proof and packaging requirements; no public comment was posted.",
+  "type": "report"
+}
