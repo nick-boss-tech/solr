@@ -1,0 +1,9 @@
+{
+  "head": "4b87f9404aced840ca156360f02e4a73970376e1",
+  "id": "pr-5321-response-isolation-windows-20261111-report",
+  "job": "pr-5321-response-isolation-windows-20261111",
+  "prior_head": "0de81e22382b81a87826b3744a0a91e6f4d9d1bc",
+  "prior_receipt": "records/receipt/pr-5321-response-coverage-linux-20261111-receipt.json",
+  "summary": "Delete the test document and commit in the new JavaBin test's finally block to prevent shared-index pollution. Pushed fork branch, remote matched; diff check passed. No tests or Gradle on Windows. Successor Linux gate required.",
+  "type": "report"
+}
