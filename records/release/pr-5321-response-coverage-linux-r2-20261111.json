@@ -1,0 +1,10 @@
+{
+ "actor": "phone-agent",
+ "evidence": "records/receipt/pr-5321-response-coverage-linux-r2-20261111-receipt.json; records/evidence/pr-5321-response-coverage-linux-r2-20261111-evidence.tar.gz (SHA-256 2d221c135fb5e12d1b53356365b3c3304373078d39985fe7f08da3a4a3d5de7d).",
+ "executor_stop": "Verified at filing: no Gradle daemon or runner processes (a resident idle daemon from the mutation runs was killed and the scan repeated clean), the test-queue lock is free, the main clone and the disposable mutation clone are both at 4b87f9404aced840ca156360f02e4a73970376e1 with zero tracked modifications, and no Solr process is running.",
+ "id": "pr-5321-response-coverage-linux-r2-20261111",
+ "job": "pr-5321-response-coverage-linux-r2-20261111",
+ "reason": "Gate completed and filed passed; receipt published before this release. The round-1 isolation defect is repaired by a +2-line test cleanup, verified in the original failing order, with tidy and root check green at the exact head and the coverage mutation discriminating all three new methods.",
+ "recorded": "2026-11-12",
+ "type": "release"
+}

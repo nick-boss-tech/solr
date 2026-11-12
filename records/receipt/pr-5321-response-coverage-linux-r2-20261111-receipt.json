@@ -1,0 +1,46 @@
+{
+ "evidence": "records/evidence/pr-5321-response-coverage-linux-r2-20261111-evidence.tar.gz (SHA-256 2d221c135fb5e12d1b53356365b3c3304373078d39985fe7f08da3a4a3d5de7d): setup log with the diff and ancestry record, leg logs A-D, leg A and restore JUnit XML, the pair-run XML, the mutation diff and the three mutated-run XML files, and the gate/mutation scripts.",
+ "gate": "pr-5321-response-coverage-linux-r2-20261111",
+ "head": "4b87f9404aced840ca156360f02e4a73970376e1",
+ "id": "pr-5321-response-coverage-linux-r2-20261111-receipt",
+ "job": "pr-5321-response-coverage-linux-r2-20261111",
+ "legs": [
+  {
+   "leg": "head, ancestry, diff scope",
+   "result": "Clean isolated checkout at 4b87f9404aced840ca156360f02e4a73970376e1 (0 modified). Contributor parent 35db4554284 is an ancestor; round-1 head 0de81e2238 is an ancestor with exactly one commit on top. Diff round-1 to round-2: 1 file, +2 lines, TestJavaBinResponseWriter.java only: assertU(delI(\"5321\")) and assertU(commit()) added to the finally block of testExclusionResponse. No production source changed."
+  },
+  {
+   "leg": "three-class run (gate command)",
+   "result": ":solr:core:cleanTest :solr:core:test --tests ReturnFieldsTest --tests TestCSVResponseWriter --tests TestJavaBinResponseWriter -Ptests.seed=5321CAFE, rc=0. Fresh XML: ReturnFieldsTest 18/18 (testExclusionResponses executed), TestCSVResponseWriter 4/4 (testExclusionResponse executed), TestJavaBinResponseWriter 5/5 (testExclusionResponse and testUUID both executed). Zero failures, errors and skips across all three suites. JavaBin execution order at this seed: testExclusionResponse immediately before testUUID, the original failing order."
+  },
+  {
+   "leg": "formerly failing two-method combination",
+   "result": ":solr:core:test --tests TestJavaBinResponseWriter.testExclusionResponse --tests TestJavaBinResponseWriter.testUUID -Ptests.seed=5321CAFE, rc=0, 2/2 executed and passed, order testExclusionResponse then testUUID (matches the prior failure's order; no substitute ordering probe was needed)."
+  },
+  {
+   "leg": "tidy",
+   "result": "Root tidy rc=0 with zero tracked changes at the exact head."
+  },
+  {
+   "leg": "root check",
+   "result": "Root check -x test in the normal clone (not a worktree): BUILD SUCCESSFUL in 8m 53s, rc=0, no exclusions beyond the gate's own -x test."
+  },
+  {
+   "leg": "coverage mutation",
+   "result": "Disposable clone at the exact head; SolrReturnFields.isExcluded patched to return false unconditionally (mutation.diff in evidence). Each new method run separately at seed 5321CAFE failed at runtime on its excluded-field assertion: ReturnFieldsTest.testExclusionResponses (xpath count on new_id_s), TestCSVResponseWriter.testExclusionResponse (AssertionError), TestJavaBinResponseWriter.testExclusionResponse (AssertionError). Source restored (mutation string absent, clone clean) and all three classes pass again (18/18, 4/4, 5/5). Disclosure: the first mutation attempt's patch script asserted on a wrong method-signature pattern (the method is isExcluded(String field)) and its three runs executed unmutated code; those runs were discarded and the leg was rerun with the corrected patch, which is the one reported here."
+  },
+  {
+   "leg": "hyphen probe",
+   "result": "Not rerun, per the gate: the round-1 probe stands as historical evidence on the unchanged contributor parent and base, and is not described as previously working explicit retrieval or as covered by this repair."
+  },
+  {
+   "leg": "limits",
+   "result": "Local non-distributed XML/CSV/JavaBin writer paths for stored string fields only. No distributed search, RTG, export handler, handler-appended or default fl, alias/transformer interplay, or DocValues-only/non-stored field proof was executed or is claimed. Commands ran through the host's solr-gradle.sh wrapper (Gradle 9.7.0, vendored JDK 21) with the gate's exact test selections and seed."
+  }
+ ],
+ "owner": "phone-agent",
+ "recorded": "2026-11-12T11:52:21-07:00",
+ "summary": "Round 2 verifies the isolation repair of the coverage branch that round 1 failed. The only change from the round-1 head 0de81e2238 is +2 lines in TestJavaBinResponseWriter.testExclusionResponse: the finally block now deletes the fixture document (delI 5321) and commits, removing the shared-index pollution that broke testUUID. At the exact head, all three suites pass with every named method executed and no skips; the formerly failing two-method combination runs in the original order (testExclusionResponse before testUUID, confirmed in both the full-class XML and the pair XML at seed 5321CAFE) and passes; root tidy leaves zero tracked changes; root check -x test passes in a normal clone; and the isExcluded mutation discriminates all three new methods at runtime, with all three classes passing again after restore. Per the gate's verdict policy this is coverage and isolation proof, not a full PR correctness endorsement.",
+ "type": "receipt",
+ "verdict": "passed"
+}
