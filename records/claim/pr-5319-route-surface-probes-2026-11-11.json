@@ -1,0 +1,11 @@
+{
+ "claimed_at": "2026-11-11T20:27:00-07:00",
+ "claimer": "phone-agent",
+ "head": "babbdaeee25b3ee4687fd1f6a6cef66a9e2d16ed",
+ "host": "linux",
+ "id": "pr-5319-route-surface-probes-2026-11-11",
+ "job": "pr-5319-route-surface-probes-2026-11-11",
+ "note": "Owner authorized taking this job on 2026-11-11. Investigation only: no contributor branch changes, no source pushes, no public comments.",
+ "pre_claim_verification": "Live GitHub API checked before claiming: PR apache/solr#5319 is open, head epugh/solr branch SOLR-18553-fix-param-naming at babbdaeee25b3ee4687fd1f6a6cef66a9e2d16ed, and the epugh/solr branch endpoint returns the same sha. Assigned head matches exactly.",
+ "type": "claim"
+}
