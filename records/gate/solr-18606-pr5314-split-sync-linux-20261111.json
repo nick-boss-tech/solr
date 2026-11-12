@@ -1,0 +1,18 @@
+{
+  "environment": "Linux, JDK 21, clean clone, fixed seed 18606CAFE",
+  "head": "35c7bdd41cfc95cd520ef00afbab86c4086583c1",
+  "id": "solr-18606-pr5314-split-sync-linux-20261111",
+  "job": "solr-18606-pr5314-split-sync-linux-20261111",
+  "phase": "review split sync",
+  "receipt_path": "records/receipt/solr-18606-pr5314-split-sync-linux-20261111-receipt.json",
+  "requirements": [
+    "Run :solr:solrj-zookeeper:test for org.apache.solr.common.cloud.SolrZkClientTest including testSync, :solr:core:test for org.apache.solr.cloud.overseer.ZkStateReaderTest and TestInPlaceUpdatesDistrib; verify exact class names and record tests, skips, fresh logs and XML.",
+    "Use a disposable diagnostic probe to demonstrate sync waits for callback, maps a callback error and honors interruption; the real single-server smoke test alone does not prove these. The prior 5da7243 ClusterStateProviderTest.testSyncWaitsForCallbackAndPropagatesFailure may be adapted as a diagnostic, not represented as real ensemble proof. Prove that forceUpdateCollection invokes sync before reads and does not hold getUpdateLock while waiting; report incomplete if not established.",
+    "Run tidy and root check -x test without exclusions; formatting changes invalidate the head. Record actual commands, results, errors, conditions, and evidence. Do not claim ensemble lag proof from a single server."
+  ],
+  "source": {
+    "branch": "solr-18606-sync-split",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "gate"
+}
