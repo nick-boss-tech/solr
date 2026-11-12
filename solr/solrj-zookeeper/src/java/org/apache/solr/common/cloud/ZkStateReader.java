@@ -489,16 +489,20 @@ public class ZkStateReader implements SolrCloseable {
    * Forcibly refresh a collection's internal state from ZK. Try to avoid having to resort to this
    * when a better design is possible.
    */
-  // TODO shouldn't we call ZooKeeper.sync() at the right places to prevent reading a stale value?
-  // We do so for aliases.
   public void forceUpdateCollection(String collection)
       throws KeeperException, InterruptedException {
 
+    if (clusterState == null) {
+      log.warn("ClusterState watchers have not been initialized");
+      return;
+    }
+    zkClient.sync(COLLECTIONS_ZKNODE);
     synchronized (getUpdateLock()) {
       if (clusterState == null) {
         log.warn("ClusterState watchers have not been initialized");
         return;
       }
+
 
       ClusterState.CollectionRef ref = clusterState.getCollectionRef(collection);
       if (ref == null) {

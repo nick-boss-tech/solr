@@ -61,6 +61,14 @@ public class SolrZkClientTest extends SolrCloudTestCase {
   SolrZkClient defaultClient;
   private CloudSolrClient solrClient;
 
+  @Test
+  public void testSync() throws Exception {
+    byte[] data = "sync-test".getBytes(StandardCharsets.UTF_8);
+    defaultClient.setData(PATH, data);
+    defaultClient.sync(PATH);
+    assertArrayEquals(data, defaultClient.getData(PATH, null, null));
+  }
+
   @Override
   public void setUp() throws Exception {
     super.setUp();
