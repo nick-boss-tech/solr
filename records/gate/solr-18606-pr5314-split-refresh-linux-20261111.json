@@ -1,0 +1,19 @@
+{
+  "environment": "Linux, JDK 21; clean clone, fixed seed 18606CAFE; no Windows Gradle",
+  "head": "33e3f8b8599ea12fad0456ce0444d3a24a4affe6",
+  "id": "solr-18606-pr5314-split-refresh-linux-20261111",
+  "job": "solr-18606-pr5314-split-refresh-linux-20261111",
+  "phase": "review split refresh",
+  "receipt_path": "records/receipt/solr-18606-pr5314-split-refresh-linux-20261111-receipt.json",
+  "requirements": [
+    "Run :solr:solrj:test for org.apache.solr.client.solrj.impl.CloudHttp2SolrClientTest.testZkAliasDoesNotReadAliasCollectionState at seeds 18606CAFE and 18606BEEF, and ClusterStateProviderTest, CloudSolrClientCacheTest, CloudSolrClientRoutingTest; report actual test counts, skips, logs and XML.",
+    "Run :solr:core:test for org.apache.solr.cloud.overseer.ZkStateReaderTest and org.apache.solr.cloud.AliasIntegrationTest (verify class path before invocation); run :solr:solrj-zookeeper:test for SolrZkClientTest.",
+    "In a disposable clone remove only the known-alias guard, rerun the alias regression with its positive control, and require the assertion to fail from extra measured reads; if metrics omit failed getData operations, report non-reproduction, do not claim a pass. Metrics are shared across clients and may include unrelated activity; assess stability and record any noise.",
+    "Run tidy and root check -x test, preserving all default checks; no tracked formatting changes. Formatting changes invalidate this head. Record fresh logs and XML, environmental conditions, all results and limitations."
+  ],
+  "source": {
+    "branch": "solr-18606-submit",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "gate"
+}
