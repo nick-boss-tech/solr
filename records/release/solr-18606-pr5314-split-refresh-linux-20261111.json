@@ -1,0 +1,10 @@
+{
+ "actor": "phone-agent",
+ "evidence": "records/receipt/solr-18606-pr5314-split-refresh-linux-20261111-receipt.json; records/evidence/solr-18606-pr5314-split-refresh-linux-20261111-evidence.tar.gz (SHA-256 64679408768894b44fd81aafcfc886ea62a07a034842e72d6ff267f78630aa9e).",
+ "executor_stop": "Verified at filing: no Gradle daemon or runner processes, the test-queue lock is free, the main clone is at 33e3f8b8599ea12fad0456ce0444d3a24a4affe6 with zero tracked modifications, and the disposable mutation clone retains only its disclosed one-line mutation. No Solr process is running.",
+ "id": "solr-18606-pr5314-split-refresh-linux-20261111",
+ "job": "solr-18606-pr5314-split-refresh-linux-20261111",
+ "reason": "Gate executed in full and filed incomplete; receipt published before this release. All positive legs pass at the exact head (alias regression at both seeds, all named suites, tidy, root check), but the required mutation proof did not reproduce: with the known-alias guard removed, the alias regression still passes because the extra ZooKeeper work is a getData that fails with NoNode on the alias's nonexistent collection-state path and is not counted by the metrics the test asserts on. Reported as non-reproduction per the gate's own instruction; no pass claimed for that leg.",
+ "recorded": "2026-11-12",
+ "type": "release"
+}

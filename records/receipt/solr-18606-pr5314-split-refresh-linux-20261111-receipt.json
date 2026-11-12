@@ -1,0 +1,42 @@
+{
+ "evidence": "records/evidence/solr-18606-pr5314-split-refresh-linux-20261111-evidence.tar.gz (SHA-256 64679408768894b44fd81aafcfc886ea62a07a034842e72d6ff267f78630aa9e): setup log with class verification, per-leg logs and fresh JUnit XML for every run, tidy and check logs, the mutation diff, and the mutated run's log and XML.",
+ "gate": "solr-18606-pr5314-split-refresh-linux-20261111",
+ "head": "33e3f8b8599ea12fad0456ce0444d3a24a4affe6",
+ "id": "solr-18606-pr5314-split-refresh-linux-20261111-receipt",
+ "job": "solr-18606-pr5314-split-refresh-linux-20261111",
+ "legs": [
+  {
+   "leg": "head and class verification",
+   "result": "Clean clone at 33e3f8b8599ea12fad0456ce0444d3a24a4affe6 (0 modified). All gate-named classes verified at their exact paths before invocation: CloudHttp2SolrClientTest, ClusterStateProviderTest, CloudSolrClientCacheTest, CloudSolrClientRoutingTest under solr/solrj org.apache.solr.client.solrj.impl; ZkStateReaderTest under solr/core org.apache.solr.cloud.overseer; AliasIntegrationTest under solr/core org.apache.solr.cloud; SolrZkClientTest under solr/solrj-zookeeper org.apache.solr.common.cloud."
+  },
+  {
+   "leg": "alias regression, both seeds",
+   "result": ":solr:solrj:test --tests CloudHttp2SolrClientTest.testZkAliasDoesNotReadAliasCollectionState at seed 18606CAFE: 1/1 passed, no skips. At seed 18606BEEF: 1/1 passed, no skips. The test's in-test positive control (a deliberate getData of the collection path moves the shared reads counter by exactly 1) executed as part of both runs."
+  },
+  {
+   "leg": "solrj provider suites",
+   "result": "Seed 18606CAFE: ClusterStateProviderTest 22/22, CloudSolrClientCacheTest 7/7, CloudSolrClientRoutingTest 2/2; zero failures, errors and skips."
+  },
+  {
+   "leg": "core suites",
+   "result": "Seed 18606CAFE: ZkStateReaderTest 16/16, AliasIntegrationTest 9/9; zero failures, errors and skips."
+  },
+  {
+   "leg": "solrj-zookeeper suite",
+   "result": "Seed 18606CAFE: SolrZkClientTest 7/7; zero failures, errors and skips."
+  },
+  {
+   "leg": "tidy and root check",
+   "result": "Root tidy rc=0 with zero tracked changes at the exact head. Root check -x test in the normal clone: BUILD SUCCESSFUL in 8m 46s, rc=0."
+  },
+  {
+   "leg": "mutation: known-alias guard removal (NON-REPRODUCTION)",
+   "result": "Disposable clone at the exact head; the only change removed the known-alias disjunct from ZkClientClusterStateProvider.getState (mutation.diff in evidence: 'if (ref != null || reader.getAliases().hasAlias(collection))' became 'if (ref != null)'). The alias regression rerun at seed 18606CAFE PASSED 1/1 with no skips; the reads assertion did not fail. Mechanism, traced in source at this head: without the guard, an alias probe reaches ZkStateReader.forceUpdateCollection, whose LazyCollectionRef fetch issues zkClient.getData on DocCollection.getCollectionPath(alias), a path that does not exist because an alias is not a collection; fetchCollectionState catches the NoNode and returns null, so the forced update ends without a successful read. The metrics listener (a JVM-wide static shared by all SolrZkClients, SolrZkClient.java:82) counts foreground getData traces (SolrZKMetricsListener), and no counted read materialized from the failed fetch. The counter itself is live, as the test's positive control shows (+1 for a deliberate successful getData, passing at both seeds at the head and inside the mutated run's own execution). Whether Curator emits no foreground trace for a failed getData, or the trace is emitted without incrementing, is not distinguishable from this evidence; either way the gate's anticipated case applies: metrics omit the failed getData operations the mutation adds, so the assertion cannot fail from them. Stability note the gate asked for: the metrics are shared across every client in the JVM, yet the exact-equality reads assertions were stable across all runs here (both seeds at head, and the mutated run); no unrelated-activity noise was observed in these runs. Conclusion: non-reproduction, reported per the gate; the mutation leg is not claimed as a pass, and the gate is therefore not filed passed."
+  }
+ ],
+ "owner": "phone-agent",
+ "recorded": "2026-11-12T12:16:30-07:00",
+ "summary": "Every positive leg passes at the exact head, but the required mutation proof did not reproduce, so the gate is filed incomplete rather than passed. The alias regression testZkAliasDoesNotReadAliasCollectionState passes at both seeds 18606CAFE and 18606BEEF; ClusterStateProviderTest 22/22, CloudSolrClientCacheTest 7/7, CloudSolrClientRoutingTest 2/2, ZkStateReaderTest 16/16, AliasIntegrationTest 9/9 and SolrZkClientTest 7/7 all pass with no skips; root tidy leaves zero tracked changes and root check -x test passes in a normal clone. The mutation leg removed only the known-alias guard in ZkClientClusterStateProvider.getState, and the alias regression still passed 1/1: the extra ZooKeeper work the removed guard triggers for an alias name is a getData against the alias's nonexistent collection-state path, which fails with NoNode and produces no counted read in the metrics the test asserts on. Per the gate's own instruction for this case, non-reproduction is reported and no pass is claimed for that leg. The finding for the branch owner: as written, the regression test does not detect removal of the known-alias guard.",
+ "type": "receipt",
+ "verdict": "incomplete"
+}
