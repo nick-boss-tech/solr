@@ -122,6 +122,8 @@ public class TestJavaBinResponseWriter extends SolrTestCaseJ4 {
       assertFalse(doc.containsKey("bar_s"));
     } finally {
       req.close();
+      assertU(delI("5321"));
+      assertU(commit());
     }
   }
 
