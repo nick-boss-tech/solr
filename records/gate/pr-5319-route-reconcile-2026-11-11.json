@@ -1,0 +1,21 @@
+{
+  "branch": "SOLR-18553-fix-param-naming",
+  "environment": "Linux; inspect exact-head source and the prior evidence first. JDK 21 and isolated SolrCloud only if a targeted runtime probe is needed; follow host locking and cleanup rules.",
+  "head": "babbdaeee25b3ee4687fd1f6a6cef66a9e2d16ed",
+  "id": "pr-5319-route-reconcile-2026-11-11",
+  "job": "pr-5319-route-reconcile-2026-11-11",
+  "phase": "route-surface investigation, round 2",
+  "prior_gate": "records/gate/pr-5319-route-surface-probes-2026-11-11.json",
+  "prior_receipt": "records/receipt/pr-5319-route-surface-probes-2026-11-11-receipt.json",
+  "repository": "epugh/solr",
+  "requirements": [
+    "Before claiming, verify the live PR and contributor branch at the assigned full head; stop and report if moved. Verify prior release and executor-stop evidence; claim this successor's canonical path. No source push or public comment.",
+    "Read the prior receipt and verify the SHA-256 of its evidence archive bc3ab9a8c63d98253bcebe0a31a18e21be63c472e99662b6c1ae71f3da738d35. Reuse prior observations and fixtures; do not repeat the full matrix or build merely to restate them. Prior executor reported cleanup and no running Solr JVM. Independently assess actual archived request URLs and source, rather than treating the prior passed verdict as proof of omitted cases.",
+    "Reconcile v2 update: prior inspected probe scripts used /solr/... update URLs even though the gate required both versions. Trace exact v2 update dispatch and request-parameter handling through the relevant add and delete paths to the v1 implementation, including any v2 rewrites or differences. State precisely what prior v1 probes establish and what is inferred for v2. A clear source trace is sufficient; perform the smallest targeted v2 HTTP comparison only if the trace leaves a material ambiguity. If runtime probing is necessary, use two shards and discriminating placement/deletion controls, with no-route, _route_ and route cases for the affected operation; document commands, status, raw results and cleanup.",
+    "Reconcile v2 /select: the prior archive includes v2 no-route, _route_=key A and route=key A; key B and conflicting names were observed on v1. Trace whether both paths use the same parameter handling and report the key B/conflict conclusion as inference, not a direct v2 observation. Run an additional v2 request only if a meaningful path-specific ambiguity remains. Identify archive files and exact source paths supporting the conclusion.",
+    "Reconcile update deletes with route spelling: prior wrong-_route_ probes and source analysis exist, but route was not separately probed. Trace whether route is consumed or passed unchanged into the delete routing logic, and label any conclusion as source inference. Only if source is inconclusive, run a minimal route-versus-no-route delete with a document on a known shard and verify per-shard outcome. Do not generalize compositeId add findings to other router configurations or untested formats.",
+    "Publish a compact corrected matrix distinguishing observed, source-inferred and unresolved results, covering the prior key findings and these gaps; include precise evidence file and source links, exact head, any new commands and logs, and compatibility implications. If a conclusion remains ambiguous report it as unresolved/incomplete rather than claiming runtime proof. Do not change the prior immutable receipt, choose policy, or post publicly. If no new runtime work was needed, state that explicitly; if any started, record verified process stop and cleanup before release. Publish receipt then release."
+  ],
+  "type": "gate",
+  "verdict_policy": "Passed means the prior evidence and all three gaps were reconciled with clear observed-versus-inferred labels, or a material ambiguity was resolved with a discriminating targeted probe. Source inference is acceptable where the path is demonstrably shared. Inaccessible evidence, unreconciled material ambiguity or incomplete cleanup yields incomplete. This investigation does not prove the separate patch gate."
+}
