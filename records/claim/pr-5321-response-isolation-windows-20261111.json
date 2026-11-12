@@ -1,0 +1,7 @@
+{
+  "id": "pr-5321-response-isolation-windows-20261111",
+  "job": "pr-5321-response-isolation-windows-20261111",
+  "owner": "windows-codex-nick-shanin",
+  "scope": "Repair gate-identified test isolation and hand off proof.",
+  "type": "claim"
+}
