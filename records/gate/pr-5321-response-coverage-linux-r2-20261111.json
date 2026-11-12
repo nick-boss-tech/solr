@@ -1,0 +1,21 @@
+{
+  "branch": "pr-5321-response-coverage-20261111",
+  "environment": "Linux JDK 21; clean isolated checkout; record host, toolchain and clean state",
+  "head": "4b87f9404aced840ca156360f02e4a73970376e1",
+  "id": "pr-5321-response-coverage-linux-r2-20261111",
+  "job": "pr-5321-response-coverage-linux-r2-20261111",
+  "phase": "round 2",
+  "prior_receipt": "records/receipt/pr-5321-response-coverage-linux-20261111-receipt.json",
+  "repository": "nick-boss-tech/solr",
+  "requirements": [
+    "Verify remote full head, clean checkout, contributor ancestry, and that only the JavaBin cleanup changed from 0de81e22382b81a87826b3744a0a91e6f4d9d1bc. Record commands, exits, fresh logs and XML counts including skips.",
+    "Run ./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.search.ReturnFieldsTest --tests org.apache.solr.response.TestCSVResponseWriter --tests org.apache.solr.response.TestJavaBinResponseWriter -Ptests.seed=5321CAFE; require all three new methods and the existing testUUID to execute and all suites pass with no unexplained skips. Also rerun the formerly failing two-method combination at this seed and verify both execute and pass. Confirm the order matches the prior failure, or use a controlled executable ordering probe and record it.",
+    "Run tidy and root check -x test. Any tracked formatting change invalidates this head and requires a committed successor and new gate. Record environment conditions and classify earlier setup failures if any.",
+    "Coverage-only mutation proof: in disposable checkout at this exact head, mutate isExcluded to always return false while keeping tests unchanged. Run each of the three new methods separately; require runtime excluded-field assertion failure, then restore production and verify all three pass. Capture mutation diff and fresh XML/logs; missing API, compile, setup or skipped tests do not count. Classify any non-discriminating assertion as a coverage pin.",
+    "The prior receipt's leading-hyphen probe remains historical evidence on unchanged contributor parent and base: base fl=-foo_s failed with NumberFormatException while contributor parent returned a full document. Do not describe it as a previously working explicit retrieval or as covered by this repair. No need to rerun unless source or evidence differs.",
+    "Report limits: no distributed, RTG, export, handler appends, alias or transformer integration, or non-stored DocValues proof unless actually executed. If tests fail classify and stop for owner; no silent repairs or pushes."
+  ],
+  "supersedes": "records/gate/pr-5321-response-coverage-linux-20261111.json",
+  "type": "gate",
+  "verdict_policy": "Pass requires all positive tests including the original failing combination, tidy and root check at the exact head, and completed runtime mutation proof. This is coverage and isolation proof, not a full PR correctness endorsement."
+}
