@@ -1,0 +1,9 @@
+{
+ "actor": "phone-agent",
+ "evidence": "records/receipt/pr-5321-response-coverage-linux-20261111-receipt.json; records/evidence/pr-5321-response-coverage-linux-20261111-evidence.tar.gz (SHA-256 976f8f7261eea40303e8e480e333fd0876044acd120dfdae7419bf0b04729d54).",
+ "executor_stop": "Verified at filing: process listing shows zero Gradle daemon or runner processes; fuser on ~/workspace/tools/.solr-test-queue.lock returns no holder (lock free); clone ~/workspace/solr-clones/5321-cov is at the exact head 0de81e22382b81a87826b3744a0a91e6f4d9d1bc with a clean git status; clone ~/workspace/solr-clones/5321-mut is restored to the same head with a clean git status and the mutation and probe files removed.",
+ "id": "pr-5321-response-coverage-linux-20261111",
+ "job": "pr-5321-response-coverage-linux-20261111",
+ "reason": "Gate completed and filed with verdict failed on one classified finding: the coverage branch's new TestJavaBinResponseWriter.testExclusionResponse breaks the pre-existing testUUID in the same class through shared-index pollution; every other leg passes or is recorded, including the root check at the exact head, the discriminated mutation, and the hyphen compatibility probe. The repair belongs to the branch owner; this gate made no source changes.",
+ "type": "release"
+}
