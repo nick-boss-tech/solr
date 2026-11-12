@@ -1,0 +1,20 @@
+{
+  "gates": [
+    "records/gate/solr-18606-pr5314-split-refresh-linux-20261111.json",
+    "records/gate/solr-18606-pr5314-split-sync-linux-20261111.json"
+  ],
+  "id": "solr-18606-pr5314-split-windows-20261111-report",
+  "job": "solr-18606-pr5314-split-windows-20261111",
+  "refresh_branch": "solr-18606-submit",
+  "refresh_head": "33e3f8b8599ea12fad0456ce0444d3a24a4affe6",
+  "risks": [
+    "Shared metrics count other clients and the positive control is a successful read; mutation must establish that failed missing-state reads are observed. Until then alias test is provisional.",
+    "Sync is now outside the state update lock and affects all forceUpdateCollection callers; diagnostic proof for callback/error/interrupt behavior and lock ordering is pending.",
+    "PR body still describes the former sync and older proof; editing it requires explicit authorization. Prior receipts do not prove either new head."
+  ],
+  "summary": "Split synchronization out of PR 5314, replaced the alias log listener with global Solr ZooKeeper read metrics, removed sync-specific mock tests from PR 5314, and pushed both fork branches. Linux proof pending.",
+  "sync_branch": "solr-18606-sync-split",
+  "sync_head": "35c7bdd41cfc95cd520ef00afbab86c4086583c1",
+  "type": "report",
+  "verification": "Fork heads and PR head confirmed; source diff reviewed; Linux tests not run on Windows. No public comment or PR body edit."
+}
