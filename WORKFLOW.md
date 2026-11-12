@@ -1,5 +1,10 @@
 # Coordination v2 workflow
 
+## Avoid unsolicited GitHub timeline references
+
+Do not include GitHub-autolinked issue or pull request references in commit messages on the fork. Hash references, qualified references, and GitHub issue or PR URLs can create unwanted timeline events on other people's work. Use `PR 5315` or `pr-5315` instead. Check the entire message, including trailers, before pushing. This applies on every host to board, evidence archive, review, and source commits, including manual writes. Required links can remain in board record content. The structured writer's restricted IDs produce safe commit messages; other writers and manual commits need the same care.
+
+
 The [cutover announcement](https://github.com/nick-boss-tech/solr/blob/coordination-ui/reports/coordination-v2-cutover-2026-11-06.md) on `coordination-ui` activates this workflow. If it is absent, the old board remains live and no real work should be created here. Once present, the old branch is historical and the new queue starts empty. Host configurations that have not been updated must be corrected before those hosts take new work.
 
 ## Records and ownership
