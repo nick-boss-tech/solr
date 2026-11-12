@@ -1,0 +1,9 @@
+{
+ "actor": "phone-agent",
+ "evidence": "records/receipt/discovery-coverage-linux-20261111-receipt.json; records/evidence/discovery-coverage-linux-20261111-evidence.tar.gz (SHA-256 27edfaf32595aca6562ab0ff7a58f16f470d52c68f3b8f23fec9f33c167a5368).",
+ "executor_stop": "Verified at filing: process listing shows zero Solr or Gradle processes; both probe nodes were stopped through bin/solr stop and the teardown listings in the evidence show no remaining Solr processes; fuser on ~/workspace/tools/.solr-test-queue.lock returns no holder (lock free); clone ~/workspace/solr-clones/disc-cov is at the exact head 82888694ae248b74d105d9c7b5f60d33c385f325 with a clean git status.",
+ "id": "discovery-coverage-linux-20261111",
+ "job": "discovery-coverage-linux-20261111",
+ "reason": "Research probes completed at the exact head with every leg run and classified: existence facets are a sound coverage mechanism for indexed and DocValues fields, a present stored-only field breaks existence queries with HTTP 400, local Luke (distrib=false) enumerates per-shard field names including deleted-only fields but its counts miss DocValues-only and stored-only presence, tolerant mode returns flagged partial results for a downed shard, and timeAllowed yields a deterministic limit partial. Verdict passed under the gate's acceptance rule (all legs ran with evidence). No production changes, pushes, or posts.",
+ "type": "release"
+}
