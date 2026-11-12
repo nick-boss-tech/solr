@@ -1,0 +1,26 @@
+{
+  "capabilities": [
+    "linux",
+    "solr-gradle",
+    "loopback-packet-capture",
+    "http-transport-diagnostics"
+  ],
+  "claim_path": "records/claim/pr-5315-connection-close-packet-linux-20261111.json",
+  "gate_id": "pr-5315-connection-close-packet-linux-20261111",
+  "gate_record": "records/gate/pr-5315-connection-close-packet-linux-20261111.json",
+  "host": "Linux JDK 21 host with Solr Gradle and authorized loopback packet capture",
+  "id": "pr-5315-connection-close-packet-linux-20261111",
+  "job": "pr-5315-connection-close-packet-linux-20261111",
+  "phase": "packet-capture diagnosis after incomplete connection-close reproduction",
+  "prior_receipt": "records/receipt/pr-5315-forged-marker-close-repro-linux-20261111-receipt.json",
+  "receipt_path": "records/receipt/pr-5315-connection-close-packet-linux-20261111-receipt.json",
+  "source": {
+    "branch": "solr-17764-submit",
+    "head": "3c73a59743e3dfe4b5ae5e11b0cdbe8c1e8fcae6",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5315-forged-marker-close-repro-linux-20261111",
+  "summary": "Identify which side closes the test connection and why",
+  "summary_of_work": "Correlate loopback packets with JDK client and Jetty fixture events to explain the intermittent no-response-bytes failure. Test competing causes and propose a repair only when supported. This is diagnostic work, not acceptance proof. Do not push source or post public comments.",
+  "type": "assignment"
+}
