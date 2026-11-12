@@ -1,0 +1,9 @@
+{
+  "id": "solr-18606-pr5314-split-windows-20261111",
+  "intended_host": "Windows implementation; Linux proof",
+  "job": "solr-18606-pr5314-split-windows-20261111",
+  "source_head": "5da7243cb75e2f3d2fb7b3557b6e30477dbbf97d",
+  "successor_of": "solr-18606-pr5314-integrate-observable-20261110",
+  "summary": "Split ZooKeeper sync from PR 5314 and simplify review tests; push fork branches and request exact-head Linux gates.",
+  "type": "assignment"
+}
