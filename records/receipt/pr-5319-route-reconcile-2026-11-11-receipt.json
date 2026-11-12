@@ -1,0 +1,38 @@
+{
+ "evidence": "records/evidence/pr-5319-route-reconcile-2026-11-11-evidence.tar.gz (SHA-256 d296ad24d7a5789266f87aebf693c103c4e4f5a61e8702cceeec15d223bb11a3): corrected-matrix.md (the reconciled matrix with observed/inferred labels) and source-citations.txt (file and line citations at the exact head, plus the prior archive hash verification).",
+ "gate": "pr-5319-route-reconcile-2026-11-11",
+ "head": "babbdaeee25b3ee4687fd1f6a6cef66a9e2d16ed",
+ "id": "pr-5319-route-reconcile-2026-11-11-receipt",
+ "job": "pr-5319-route-reconcile-2026-11-11",
+ "legs": [
+  {
+   "leg": "pre-claim and prior-evidence verification",
+   "result": "Live PR apache/solr#5319 open at head babbdaeee25b3ee4687fd1f6a6cef66a9e2d16ed (API and branch endpoint agree). Prior receipt and release inspected; prior evidence archive SHA-256 recomputed and matching: bc3ab9a8c63d98253bcebe0a31a18e21be63c472e99662b6c1ae71f3da738d35. The prior probe scripts and archived responses were re-read rather than trusting the prior verdict."
+  },
+  {
+   "leg": "gap 1: v2 update dispatch trace",
+   "result": "V2UpdateRequestHandler.getApis() registers UpdateAPI (V2UpdateRequestHandler.java:39-40). All five v2 update endpoints call updateRequestHandler.handleRequest(req, rsp) with the request unchanged (UpdateAPI.java:45, 50, 55, 61, 66); the only rewrite is the PATH context set to /update/json/docs for /update and /update/json (lines 44, 60), a loader selection inside the same UpdateRequestHandler. V2HttpCall copies the raw query string wholesale into SolrParams (V2HttpCall.java:90) and builds the request with the same SolrRequestParsers.parse used for v1 (line 230), so parameters reach the core's update processor chain identically in both versions. Conclusion: prior v1 update observations (adds placed by document id under every spelling; per-document _route_ stored as a plain field on JSON adds; deletes honoring _route_ in all three forms) are observations of the same implementation that serves v2; the v2 rows are labeled source-inferred equivalence in the corrected matrix. No material ambiguity remained, so no v2 HTTP comparison was run."
+  },
+  {
+   "leg": "gap 2: v2 select key B and conflicts",
+   "result": "Reported as inference, per the gate. There is no v2-specific select implementation: the named /select handler executes for both versions with the shared request parser, and distributed routing reads ShardParams._ROUTE_ in exactly one place (CloudReplicaSource.java:64). Nothing in the v2 layer special-cases a second routing key or the _route_/route pair, so the v1 outcomes for key B (kc narrows to shard2) and for conflicting names (_route_ governs) carry to v2. The directly observed v2 rows (no-route, _route_=key A, route=key A) remain labeled observed."
+  },
+  {
+   "leg": "gap 3: route-spelled update deletes",
+   "result": "Source inference, labeled as such. Delete routing consumes request-level ShardParams._ROUTE_ (DistributedZkUpdateProcessor.java:483, 699), the JSON per-operation _route_ key (JsonLoader.java:413), and the XML id _route_ attribute (XMLLoader.java:283). A search across the update path (update/, handler/loader/, UpdateRequestHandler.java, UpdateAPI.java) finds no read of a bare route parameter, and no layer translates route to _route_. A route-spelled delete therefore behaves exactly as a no-route delete (id-derived routing), and the wrong-key protection observed for _route_ does not extend to it. Source was conclusive, so the optional runtime delete probe was not run."
+  },
+  {
+   "leg": "corrected matrix",
+   "result": "Published in the evidence archive (corrected-matrix.md): every prior key row restated with an observed or source-inferred label, including get (observed on both versions), javabin (source-inferred, unchanged), add-replica (observed), and the compatibility note (the route spelling is silently ignored on select, get and update in both versions; observed for v1 and v2 select/get, inferred for v2 update)."
+  },
+  {
+   "leg": "runtime and cleanup",
+   "result": "No runtime work was needed and none was started: no Solr process ran under this job, no fixture was created, and there is no process-stop or fixture cleanup to record. The source clone remains at the exact head with zero tracked modifications. No source was pushed and no public comment was posted; the prior receipt was not modified."
+  }
+ ],
+ "owner": "phone-agent",
+ "recorded": "2026-11-12T11:53:57-07:00",
+ "summary": "All three evidence gaps from the passed route-surface investigation are reconciled with observed-versus-inferred labels, and no new runtime work was needed: each gap closed by an unambiguous source trace at the exact head. (1) v2 update: the prior probes used v1 update URLs; the trace now shows the v2 update surface is a pure pass-through (UpdateAPI calls UpdateRequestHandler.handleRequest with the unchanged request for every v2 update endpoint), so the v1 add/delete observations describe the same code that serves v2; v2 spelling-level update behavior is labeled source-inferred, not observed. (2) v2 select key B and conflicting names: inferred from the shared path (V2HttpCall wholesale query parsing and the single CloudReplicaSource _ROUTE_ read); the directly observed v2 rows stand as observed. (3) route-spelled deletes: inferred to behave exactly as no-route deletes, because no code in the update path reads a bare route parameter and nothing translates it to _route_; the wrong-key protection observed for _route_ does not extend to the route spelling. The corrected matrix is in the evidence archive with file and line citations. The prior receipt is untouched.",
+ "type": "receipt",
+ "verdict": "passed"
+}

@@ -1,0 +1,10 @@
+{
+ "actor": "phone-agent",
+ "evidence": "records/receipt/pr-5319-route-reconcile-2026-11-11-receipt.json; records/evidence/pr-5319-route-reconcile-2026-11-11-evidence.tar.gz (SHA-256 d296ad24d7a5789266f87aebf693c103c4e4f5a61e8702cceeec15d223bb11a3).",
+ "executor_stop": "Verified at filing: this job started no Solr or Gradle process (source reading only); the probe clone ~/workspace/solr-clones/5319-probes remains at babbdaeee25b3ee4687fd1f6a6cef66a9e2d16ed with zero tracked modifications; the test-queue lock is free.",
+ "id": "pr-5319-route-reconcile-2026-11-11",
+ "job": "pr-5319-route-reconcile-2026-11-11",
+ "reason": "Reconciliation completed and filed passed; receipt published before this release. All three gaps from the prior investigation are closed with observed-versus-inferred labels and exact source citations; no runtime probing proved necessary because each trace was unambiguous, which the receipt states explicitly.",
+ "recorded": "2026-11-12",
+ "type": "release"
+}
