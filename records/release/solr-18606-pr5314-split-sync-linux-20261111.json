@@ -1,0 +1,10 @@
+{
+ "actor": "phone-agent",
+ "evidence": "records/receipt/solr-18606-pr5314-split-sync-linux-20261111-receipt.json; records/evidence/solr-18606-pr5314-split-sync-linux-20261111-evidence.tar.gz (SHA-256 0fb569541c1b5701670bb6f5e3ca14d011c3a0da89394840b754a7175be2a7fc).",
+ "executor_stop": "Verified at filing: no Gradle daemon or runner processes, the test-queue lock is free, the successor clone is at d17427ca2cf164f75d3072b8a07767e1e38f5cc4 with zero tracked modifications, and no Solr process is running.",
+ "id": "solr-18606-pr5314-split-sync-linux-20261111",
+ "job": "solr-18606-pr5314-split-sync-linux-20261111",
+ "reason": "Gate executed and filed failed on the tidy leg only; receipt published before this release. The named suites pass at the gated head, but tidy reformats the branch's own ZkStateReader change, which the gate defines as invalidating the head. The standing tidy remedy (tidy commit, retargeted job, rerun) was applied: successor d17427ca2cf164f75d3072b8a07767e1e38f5cc4 pushed to solr-18606-sync-split and gated as solr-18606-pr5314-split-sync-linux-r2-20261112.",
+ "recorded": "2026-11-12",
+ "type": "release"
+}

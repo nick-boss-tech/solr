@@ -1,0 +1,38 @@
+{
+ "evidence": "records/evidence/solr-18606-pr5314-split-sync-linux-r2-20261112-evidence.tar.gz (SHA-256 aff95f32da514e191823d74a2ebebf5e81e1969523c8e3e9e5081157dfc808a4): run summary, suite/tidy/check/probe logs, fresh JUnit XML for every run, and the full diagnostic probe source.",
+ "gate": "solr-18606-pr5314-split-sync-linux-r2-20261112",
+ "head": "d17427ca2cf164f75d3072b8a07767e1e38f5cc4",
+ "id": "solr-18606-pr5314-split-sync-linux-r2-20261112-receipt",
+ "job": "solr-18606-pr5314-split-sync-linux-r2-20261112",
+ "legs": [
+  {
+   "leg": "head",
+   "result": "Fresh clean clone at d17427ca2cf164f75d3072b8a07767e1e38f5cc4 (0 modified), the round-1 tidy commit on top of gated head 35c7bdd41cfc; the remote branch tip was verified at this head before the runs."
+  },
+  {
+   "leg": "test suites",
+   "result": "Seed 18606CAFE. SolrZkClientTest 8/8 passed including testSync; ZkStateReaderTest 16/16; TestInPlaceUpdatesDistrib 1/1; zero failures, errors and skips."
+  },
+  {
+   "leg": "tidy",
+   "result": "Root tidy rc=0 with zero tracked changes at the successor head."
+  },
+  {
+   "leg": "root check",
+   "result": "Root check -x test: BUILD SUCCESSFUL in 8m 30s, rc=0, no exclusions. Environment remedy disclosed: solr-ui-wasm.zip for UI commit 473a55ef64a9a1605e00eb6c1c386887d4cb7dac was downloaded with curl and seeded into solr/webapp/build/ui-download after its SHA-256 matched the gradle.properties pin (654494303e4af3b8bfb26a83d250603f19033820295591d88db0597991ce8ad2), because the Gradle download of that artifact fails through this host's egress relay (the gated head's check attempt died on exactly that download with an SSL handshake error)."
+  },
+  {
+   "leg": "diagnostic probe: sync semantics",
+   "result": "Disposable clone at the successor head; SyncSplitDiagnosticProbeTest (source in evidence) run as :solr:solrj:test at seed 18606CAFE: 4/4 passed, no skips. testSyncWaitsForCallbackAndMapsError: with the Curator sync callback captured and withheld, the sync call did not complete within 200 ms; firing the callback with a CONNECTIONLOSS result code made the call throw KeeperException.ConnectionLossException. testSyncHonorsInterruption: with the callback withheld, interrupting the waiting thread completed the call within 10 s with InterruptedException (the client timeout is far longer and the callback never fired, so only the interruption released it)."
+  },
+  {
+   "leg": "diagnostic probe: forceUpdateCollection ordering and locking",
+   "result": "testForceUpdateCollectionSyncsBeforeReads: against a live single ZkTestServer, a collection state written directly to ZooKeeper while the update lock kept it unpublished locally; after clearing the spy's recorded invocations, forceUpdateCollection refreshed it, and Mockito InOrder verified zkClient.sync(COLLECTIONS_ZKNODE) was invoked before the getData read of that collection's state path. testForceUpdateCollectionDoesNotHoldUpdateLockWhileSyncWaits: with the sync callback withheld, another thread acquired reader.getUpdateLock() within 5 s while forceUpdateCollection was still waiting in sync; firing the callback with CONNECTIONLOSS then surfaced KeeperException.ConnectionLossException out of forceUpdateCollection before any read. The probe's first two attempts failed on probe-harness defects only (missing JUnit import wiring, then an ObjectTracker release through the Mockito spy instead of the constructed client instance); both are visible in the run history and the final source in evidence is the version that passed. The probe is a diagnostic against a single-server ensemble, as the gate specifies; it does not prove ensemble lag behavior, and the branch's own testSync remains a single-server smoke test."
+  }
+ ],
+ "owner": "phone-agent",
+ "recorded": "2026-11-12T12:54:57-07:00",
+ "summary": "The tidy successor head passes the full split-sync gate. The named suites match the gated head's counts (SolrZkClientTest 8/8 including testSync, ZkStateReaderTest 16/16, TestInPlaceUpdatesDistrib 1/1, no skips), root tidy now leaves zero tracked changes, and root check -x test passes (the UI wasm zip was seeded by curl after verifying its SHA-256 against the gradle.properties pin, the established remedy for the egress relay corrupting that download). The disposable diagnostic probe, adapted from the prior combined-branch ClusterStateProviderTest.testSyncWaitsForCallbackAndPropagatesFailure at 5da7243, demonstrates all four required behaviors against this head: SolrZkClient.sync waits for its callback and maps a callback error to the matching KeeperException; sync honors interruption promptly; forceUpdateCollection invokes sync before its collection-state read (Mockito InOrder against a live single ZooKeeper); and forceUpdateCollection does not hold getUpdateLock while the sync waits (the lock was acquired from another thread mid-wait, and the sync error then surfaced from forceUpdateCollection before any read). This is a single-server diagnostic; no ensemble-lag claim is made.",
+ "type": "receipt",
+ "verdict": "passed"
+}

@@ -1,0 +1,38 @@
+{
+ "evidence": "records/evidence/solr-18606-pr5314-split-sync-linux-20261111-evidence.tar.gz (SHA-256 0fb569541c1b5701670bb6f5e3ca14d011c3a0da89394840b754a7175be2a7fc): setup log, suite logs and fresh JUnit XML, tidy and check logs, and the tidy successor diff.",
+ "gate": "solr-18606-pr5314-split-sync-linux-20261111",
+ "head": "35c7bdd41cfc95cd520ef00afbab86c4086583c1",
+ "id": "solr-18606-pr5314-split-sync-linux-20261111-receipt",
+ "job": "solr-18606-pr5314-split-sync-linux-20261111",
+ "legs": [
+  {
+   "leg": "head and class verification",
+   "result": "Clean clone at 35c7bdd41cfc95cd520ef00afbab86c4086583c1 (0 modified), a single commit on a main-line base. Classes verified at exact paths: SolrZkClientTest (solr/solrj-zookeeper, org.apache.solr.common.cloud, testSync present at line 65), ZkStateReaderTest (solr/core, org.apache.solr.cloud.overseer), TestInPlaceUpdatesDistrib (solr/core, org.apache.solr.update)."
+  },
+  {
+   "leg": "test suites",
+   "result": "Seed 18606CAFE. :solr:solrj-zookeeper:test SolrZkClientTest 8/8 passed including testSync, no skips. :solr:core:test ZkStateReaderTest 16/16 and TestInPlaceUpdatesDistrib 1/1, no skips (the fresh XML for TestInPlaceUpdatesDistrib records one executed test)."
+  },
+  {
+   "leg": "tidy (INVALIDATING)",
+   "result": "Root tidy rc=0 but left one tracked change: removal of a stray blank line in solr/solrj-zookeeper/src/java/org/apache/solr/common/cloud/ZkStateReader.java inside forceUpdateCollection (diff in evidence, tidy-successor.diff). This is the branch's own formatting, not a tooling side effect. Per the gate, formatting changes invalidate this head."
+  },
+  {
+   "leg": "root check at the gated head",
+   "result": "Not completed at this head: the run failed at :solr:webapp:downloadUiWasm with an SSLHandshakeException (remote host terminated the handshake) after 5m 26s, an egress-relay environment failure unrelated to the branch, and a VM replacement then interrupted the chain. The check leg was completed at the tidy successor head instead; see the round-2 receipt."
+  },
+  {
+   "leg": "diagnostic probe",
+   "result": "Deferred to the successor head by the tidy retarget; the probe was executed at d17427ca and is reported in the round-2 receipt. No probe result is claimed for the gated head."
+  },
+  {
+   "leg": "tidy successor (standing rule)",
+   "result": "The tidy change was committed on top of the gated head as d17427ca2cf164f75d3072b8a07767e1e38f5cc4 ('SOLR-18606: Apply tidy formatting to ZkStateReader', authored Nick Shanin) and pushed to nick-boss-tech/solr branch solr-18606-sync-split; the remote tip was verified at the gated head before the push and at the successor after it. Successor gate record solr-18606-pr5314-split-sync-linux-r2-20261112 was created and claimed by this agent."
+  }
+ ],
+ "owner": "phone-agent",
+ "recorded": "2026-11-12T12:54:57-07:00",
+ "summary": "The gated head is invalid on the tidy leg, and only on that leg. All named test suites pass at the exact head: SolrZkClientTest 8/8 including the new testSync, ZkStateReaderTest 16/16, TestInPlaceUpdatesDistrib 1/1, no skips. But root tidy reformats the branch's own code: it removes a stray blank line inside ZkStateReader.forceUpdateCollection that the branch commit itself introduced, and the gate states that formatting changes invalidate the head. The root check at this head did not complete for an environment reason (the :solr:webapp:downloadUiWasm download failed with an SSL handshake error through the sandbox egress relay, then the VM was replaced). Under the owner's standing tidy rule the remedy was applied without asking: the tidy change was committed as d17427ca2cf164f75d3072b8a07767e1e38f5cc4, pushed to solr-18606-sync-split, and the identical gate was retargeted as solr-18606-pr5314-split-sync-linux-r2-20261112, whose receipt carries the completed check and diagnostic-probe legs at the successor head.",
+ "type": "receipt",
+ "verdict": "failed"
+}

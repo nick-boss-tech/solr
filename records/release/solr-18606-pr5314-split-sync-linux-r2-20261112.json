@@ -1,0 +1,10 @@
+{
+ "actor": "phone-agent",
+ "evidence": "records/receipt/solr-18606-pr5314-split-sync-linux-r2-20261112-receipt.json; records/evidence/solr-18606-pr5314-split-sync-linux-r2-20261112-evidence.tar.gz (SHA-256 aff95f32da514e191823d74a2ebebf5e81e1969523c8e3e9e5081157dfc808a4).",
+ "executor_stop": "Verified at filing: no Gradle daemon or runner processes, the test-queue lock is free, the successor clone is at d17427ca2cf164f75d3072b8a07767e1e38f5cc4 with zero tracked modifications, the disposable probe clone differs from the head only by the disclosed diagnostic test file, and no Solr process is running.",
+ "id": "solr-18606-pr5314-split-sync-linux-r2-20261112",
+ "job": "solr-18606-pr5314-split-sync-linux-r2-20261112",
+ "reason": "Retargeted gate completed and filed passed; receipt published before this release. At the tidy successor head the named suites pass, tidy is clean, root check passes, and the diagnostic probe establishes sync's callback waiting, error mapping and interruption behavior plus forceUpdateCollection's sync-before-reads ordering without holding the update lock while waiting.",
+ "recorded": "2026-11-12",
+ "type": "release"
+}
