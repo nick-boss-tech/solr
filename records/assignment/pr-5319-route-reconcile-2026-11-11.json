@@ -1,0 +1,29 @@
+{
+  "claim_path": "records/claim/pr-5319-route-reconcile-2026-11-11.json",
+  "gate_id": "pr-5319-route-reconcile-2026-11-11",
+  "gate_record": "records/gate/pr-5319-route-reconcile-2026-11-11.json",
+  "id": "pr-5319-route-reconcile-2026-11-11",
+  "intended_host": "Linux gate host; source and prior evidence review first; optional targeted SolrCloud probes",
+  "job": "pr-5319-route-reconcile-2026-11-11",
+  "phase": "route-surface investigation, round 2",
+  "prior_evidence": "records/evidence/pr-5319-route-surface-probes-2026-11-11-evidence.tar.gz",
+  "prior_evidence_sha256": "bc3ab9a8c63d98253bcebe0a31a18e21be63c472e99662b6c1ae71f3da738d35",
+  "prior_gate": "records/gate/pr-5319-route-surface-probes-2026-11-11.json",
+  "prior_receipt": "records/receipt/pr-5319-route-surface-probes-2026-11-11-receipt.json",
+  "receipt_path": "records/receipt/pr-5319-route-reconcile-2026-11-11-receipt.json",
+  "source": {
+    "branch": "SOLR-18553-fix-param-naming",
+    "head": "babbdaeee25b3ee4687fd1f6a6cef66a9e2d16ed",
+    "pr": "https://github.com/apache/solr/pull/5319",
+    "repository": "epugh/solr"
+  },
+  "successor_of": "pr-5319-route-surface-probes-2026-11-11",
+  "summary": "Reconcile prior route investigation and resolve material v2 evidence gaps with minimal additional work",
+  "supersession": "Follow-up on gaps in the prior investigation; does not supersede its recorded observations or the separate route-filter patch gate.",
+  "tags": [
+    "linux",
+    "investigation",
+    "evidence-reconciliation"
+  ],
+  "type": "assignment"
+}
