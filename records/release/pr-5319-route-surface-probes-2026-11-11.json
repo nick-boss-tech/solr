@@ -1,0 +1,9 @@
+{
+ "actor": "phone-agent",
+ "evidence": "records/receipt/pr-5319-route-surface-probes-2026-11-11-receipt.json; records/evidence/pr-5319-route-surface-probes-2026-11-11-evidence.tar.gz (SHA-256 bc3ab9a8c63d98253bcebe0a31a18e21be63c472e99662b6c1ae71f3da738d35).",
+ "executor_stop": "Verified at filing: no Solr JVM processes (process scan for the Solr main class returns none), both probe ports refuse connections, all probe nodes were stopped through bin/solr stop, and the checkout ~/workspace/solr-clones/5319-probes is at the exact head babbdaeee25b3ee4687fd1f6a6cef66a9e2d16ed with zero tracked modifications.",
+ "id": "pr-5319-route-surface-probes-2026-11-11",
+ "job": "pr-5319-route-surface-probes-2026-11-11",
+ "reason": "Investigation completed at the exact head with discriminating evidence on every mandatory leg: the v2 detailed list narrows by the renamed route parameter and ignores _route_; v1 CLUSTERSTATUS, select (both paths), real-time get (both paths), and update deletes still route by _route_ only; update adds place by document id regardless of either spelling; add-replica requires a shard on both APIs and the route input never overrides it. Verdict passed under the gate's acceptance rule (all mandatory legs executed and classified, source-assessed scope labeled). No source changes, pushes, or public posts.",
+ "type": "release"
+}

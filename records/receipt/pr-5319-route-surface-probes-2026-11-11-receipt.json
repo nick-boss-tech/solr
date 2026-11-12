@@ -1,0 +1,80 @@
+{
+ "evidence": "records/evidence/pr-5319-route-surface-probes-2026-11-11-evidence.tar.gz (SHA-256 bc3ab9a8c63d98253bcebe0a31a18e21be63c472e99662b6c1ae71f3da738d35): probe drivers (probe.py, probe2.py), run scripts and logs for both runs, the fixture mapping with per-shard placement, every saved request/response with URLs and status codes for all legs in both runs, and the two aborted setup attempts' logs under runs/attempt2 and runs/run-all-attempt1.log.",
+ "gate": "pr-5319-route-surface-probes-2026-11-11",
+ "head": "babbdaeee25b3ee4687fd1f6a6cef66a9e2d16ed",
+ "id": "pr-5319-route-surface-probes-2026-11-11-receipt",
+ "job": "pr-5319-route-surface-probes-2026-11-11",
+ "legs": {
+  "add_replica": "Isolated collection routesar, 2 shards, RF=1 (shard1 replica on node 18984, shard2 on node 18983). v1 ADDREPLICA with _route_=kc and no shard: HTTP 400, \"Missing required parameter: shard\"; the API layer rejects route-only requests even though AddReplicaCmd still contains a route-only fallback (it selects the shard from the route key when no shard is in the message), so that fallback is unreachable through the v1 parameters at this head. v1 with shard=shard1 and _route_=kc: HTTP 200, the new replica is created for shard1 (the shard parameter wins; the conflicting route changes nothing). v2 POST /api/collections/routesar/shards/shard1/replicas with body {\"route\":\"ka\"}: HTTP 200, replica of shard1 created. v2 POST .../shards/shard2/replicas with a conflicting body {\"route\":\"ka\"}: HTTP 200, replica of shard2 created (the path shard wins; CreateReplica carries the body route into the overseer message as _route_, but AddReplicaCmd prefers an explicit shard, so the field does not act as a route-only equivalent on this path). v2 POST /api/collections/routesar/replicas without a shard segment: HTTP 404, \"Cannot find API for the path\"; no such endpoint exists. Cleanup: the added replicas were deleted again and the collection ends at one active replica per shard; in shard2 the deletion order removed the original replica and left an added one as the shard's sole replica (same count, state, and role; disclosed here rather than smoothed over). The whole fixture is disposable and was discarded with the cluster.",
+  "compatibility_notes": "Observations only, no policy chosen. The rename is confined to the v2 detailed-list endpoint and its docs; the ref-guide pages the PR updates describe the v2 parameter as route, and the upgrade note says the v1 CLUSTERSTATUS command is unchanged, which the probes confirm. A client that generalizes the new route spelling to the other surfaces would not get an error anywhere: on select, get, and update the parameter is silently ignored, so routing would silently revert to id-based behavior. The asymmetry inside update (adds ignore the request route parameter while deletes honor it) predates this PR and is recorded here because it is visible in the same matrix.",
+  "fixture_and_mapping": "Collection routes, 2 shards, RF=1, _default configset. Fixture documents with composite route keys ka, kb, kc, kd and plain ids were placed and then read back per shard with distrib=false core queries, giving ground truth independent of the surfaces under test: shard1 (range 80000000-ffffffff) holds ka!a1, ka!a2, kb!b1, plain1; shard2 (range 0-7fffffff) holds kc!c1, kd!d1, plain2. Key-to-shard mapping: ka and kb to shard1, kc and kd to shard2. Probes use KEY_A=ka (shard1) and KEY_B=kc (shard2). A MurmurHash3 implementation in the evidence notes reproduces all nine empirically probed id homes exactly and was used only to attribute placement of ids whose homes were not separately probed. Mutating legs used their own collections (routesrtg, routesupd, routesar, routesimp). Two setup attempts failed before the fixture existed (Solr home directories not pre-created; a doubled /solr path segment in per-core URLs) and their logs are archived in the evidence; no result below comes from those attempts.",
+  "get": "Two configurations. (1) Implicit-router collection routesimp (router.field=route_s), document imp1 with route_s=shard2, verified per shard to live on shard2. v1 /get: no route returns no document (the router cannot locate it without the field value); _route_=shard2 returns imp1; _route_=shard1 returns no document; route=shard2 returns no document (ignored, same as absent). v2 /api/collections/routesimp/get exists and matches v1 exactly (miss, hit with _route_=shard2, miss with route=shard2). (2) Composite collection routesrtg, document kc!g1 on shard2 by its id prefix: no route returns it (key derived from the id); _route_=kc returns it; _route_=ka returns no document (an explicit key overrides the id's own prefix); route=ka returns it (ignored). A home-shard document matrix from the first run (plain id at its hash home) is consistent: _route_ selects the target slice, the new spelling is not read (RealTimeGetComponent consults ShardParams._ROUTE_ only). Forwarding versus fallback is distinguished by the implicit-router controls: the document sits on shard2, the no-route request misses entirely, and the correctly routed request hits, so the hit is attributable to the explicit key.",
+  "javabin_and_xml_add_source_scope": "Source-only, labeled as such per the gate: JavabinLoader reads a per-document route from the javabin document params map (line 217) and the SolrJ JavaBinUpdateRequestCodec writes per-document _route_ params (line 136), so javabin per-operation routing exists by construction; no executable javabin probe was run because it requires a Java client harness. JsonLoader handles _ROUTE_ only in its delete-command parser (line 413), which matches the executable JSON observations. XMLLoader's _route_ handling at this head is on the delete <id> attribute; no XML add-side route directive was found in source.",
+  "list": "v2 GET /api/collections?detailed=true&collection=routes: unfiltered returns shard1+shard2; route=ka returns shard1 only; route=kc returns shard2 only; _route_=ka returns shard1+shard2 (the old name is unbound and ignored, matching the PR test's stated expectation); route=ka&_route_=kc returns shard1 only (route governs). v1 CLUSTERSTATUS on the same collection: unfiltered returns both shards; _route_=ka returns shard1 only; _route_=kc returns shard2 only; route=ka returns both shards (v1 unchanged, new spelling ignored). Source agrees: ListCollections binds only documented params into ClusterStatus (routeKey is set from the renamed binding), while ClusterStatus reads ShardParams._ROUTE_ directly.",
+  "pre_claim_and_environment": "Live GitHub API verified before claiming: PR apache/solr#5319 open, head epugh/solr SOLR-18553-fix-param-naming at babbdaeee25b3ee4687fd1f6a6cef66a9e2d16ed, branch endpoint identical. Environment: Linux, Temurin JDK 21.0.12.1, depth-1 clean checkout of the head (zero tracked modifications at filing), packaged Solr 11.0.0-SNAPSHOT from :solr:packaging:installDist, two packaged nodes (ports 18983/18984, embedded ZooKeeper), IPv4 stack forced. The PR diff itself is one production line (ListCollectionsApi @QueryParam(\"_route_\") -> @QueryParam(\"route\")) plus its test and two docs pages; all other behavior below is pre-existing surface behavior measured at this head, not changed by the PR.",
+  "select": "Distributed /select over the routes fixture (7 docs). v1 path: no route returns all 7; _route_=ka returns exactly shard1's 4 documents; _route_=kc returns exactly shard2's 3; route=ka returns all 7 (ignored); _route_=ka&route=kc returns shard1's 4 (_route_ governs). The v2 path /api/collections/routes/select exists (HTTP 200) and behaves identically: no route 7, _route_=ka 4, route=ka 7. Id-targeted controls separate narrowing from absence: q=id:ka!a1 with _route_=kc returns 0, with _route_=ka returns 1, and with route=kc returns 1 (new spelling ignored, the document is found by normal routing). Source: CloudReplicaSource reads ShardParams._ROUTE_ as shardKeys; no code path reads a route parameter for search.",
+  "teardown": "Both probe nodes stopped through bin/solr stop after each run; final verification shows no Solr JVM processes and connection refused on both ports. Added replicas cleaned up as described. No contributor branch, source tree, or public page was modified; the checkout remains at the exact head with zero tracked changes.",
+  "update": "Adds (compositeId, homes established by no-route control adds and the validated hash): a plain id with request-level _route_ naming the other shard stays on its id-hash shard in both directions (pinA with _route_=kc stays shard1; pinB with _route_=ka stays shard2); route=kc likewise leaves placement by id; both names together leave it by id; an XML add with _route_=ka behaves the same. Source agrees: CompositeIdRouter.sliceHash derives the slice from the id (or a configured router.field value) and never consults the request route parameter. A JSON add carrying a per-document \"_route_\":\"ka\" key returns 200 and stores it as an ordinary document field (the fetched document shows \"_route_\": [\"ka\"]); its placement follows its id (hash-verified home shard1). Deletes discriminate the other way: for document kc!del1 verified on shard2, a delete by id with the wrong route key leaves the document in place in all three forms (JSON per-operation {\"delete\":{\"id\":...,\"_route_\":\"ka\"}}, request-level URL parameter _route_=ka, and XML <id _route_=\"ka\">), and the no-route control delete then removes it. Source agrees: DistributedZkUpdateProcessor selects target slices from ShardParams._ROUTE_ for update distribution, JsonLoader's delete parser and XMLLoader's delete id attribute both set the delete command's route, and no update code reads a route parameter. Format scope: request-level and per-operation behavior is executably probed for JSON and for XML deletes; the XML add path and javabin are source-assessed (next leg)."
+ },
+ "matrix": [
+  {
+   "_route_": "ignored, full tree returned",
+   "both": "route governs",
+   "route": "narrows to the key's shard",
+   "surface": "GET /api/collections?detailed=true (v2)"
+  },
+  {
+   "_route_": "narrows to the key's shard",
+   "both": "not probed; _route_ is the only name read in source",
+   "route": "ignored",
+   "surface": "v1 CLUSTERSTATUS"
+  },
+  {
+   "_route_": "narrows to the key's shard",
+   "both": "_route_ governs",
+   "route": "ignored, all shards searched",
+   "surface": "/select (v1 path and v2 path identical)"
+  },
+  {
+   "_route_": "selects the target slice; wrong key misses, right key hits",
+   "both": "_route_ governs (first-run matrix)",
+   "route": "ignored, behaves as absent",
+   "surface": "/get real-time get (v1 and v2 identical)"
+  },
+  {
+   "_route_": "ignored for placement under compositeId; id governs",
+   "both": "id governs",
+   "route": "ignored",
+   "surface": "update add, request level (JSON and XML)"
+  },
+  {
+   "_route_": "stored as an ordinary field; placement by id",
+   "both": "n/a",
+   "route": "n/a",
+   "surface": "update add, per-document JSON key"
+  },
+  {
+   "_route_": "steers targeting; wrong key leaves the document in place",
+   "both": "n/a",
+   "route": "not read in source; not separately probed",
+   "surface": "update delete by id, request level and per-operation (JSON key, XML id attribute)"
+  },
+  {
+   "_route_": "route-only rejected 400 (shard required); with shard present the route is ignored",
+   "both": "shard wins",
+   "route": "n/a",
+   "surface": "ADDREPLICA v1"
+  },
+  {
+   "_route_": "n/a (body field is named route)",
+   "both": "path shard wins; no-shard path 404",
+   "route": "body field carried as _route_ but does not override the path shard",
+   "surface": "ADDREPLICA v2"
+  }
+ ],
+ "owner": "phone-agent",
+ "recorded": "2026-11-11T21:06:59-07:00",
+ "summary": "Route-key wire behavior mapped at the exact PR head with discriminating controls on every mandatory leg. The PR renames only the v2 detailed-list parameter: GET /api/collections?detailed=true now narrows by route=<key> and silently ignores _route_ (full tree). Every other surface still speaks _route_ only and ignores the route spelling without an error: v1 CLUSTERSTATUS narrows by _route_; /select (v1 and v2 paths) narrows by _route_; real-time get (v1 and v2) targets the slice named by _route_ and misses without it on an implicit-router collection; update deletes are steered by _route_ at request level and per operation (JSON delete key, XML id attribute), while update adds under compositeId are placed by the document id alone and a per-doc JSON \"_route_\" key is stored as an ordinary field. Add-replica: v1 route-only is rejected 400 Missing required parameter: shard before the command layer's route fallback can run; when both are given the shard wins silently on v1, and on v2 the required path shard wins over a conflicting body route; the v2 no-shard path does not exist (404). Matrix and per-leg evidence below; javabin per-operation handling and the XML add path are assessed from source only, as the gate permits, and are labeled as such.",
+ "type": "receipt",
+ "verdict": "passed"
+}
