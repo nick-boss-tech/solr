@@ -1,0 +1,25 @@
+{
+  "claim_path": "records/claim/pr-5321-response-coverage-linux-r2-20261111.json",
+  "contributor_parent": "35db4554284ca0d2ca37eb78ed4c7c7dee599db2",
+  "gate_id": "pr-5321-response-coverage-linux-r2-20261111",
+  "gate_record": "records/gate/pr-5321-response-coverage-linux-r2-20261111.json",
+  "host_requirements": [
+    "linux",
+    "jdk21",
+    "Solr Gradle"
+  ],
+  "id": "pr-5321-response-coverage-linux-r2-20261111",
+  "job": "pr-5321-response-coverage-linux-r2-20261111",
+  "phase": "round 2, isolation repair",
+  "prior_receipt": "records/receipt/pr-5321-response-coverage-linux-20261111-receipt.json",
+  "receipt_path": "records/receipt/pr-5321-response-coverage-linux-r2-20261111-receipt.json",
+  "source": {
+    "branch": "pr-5321-response-coverage-20261111",
+    "head": "4b87f9404aced840ca156360f02e4a73970376e1",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5321-response-coverage-linux-20261111",
+  "summary": "Verify PR 5321 response coverage after test isolation repair",
+  "supersedes": "records/gate/pr-5321-response-coverage-linux-20261111.json",
+  "type": "assignment"
+}
