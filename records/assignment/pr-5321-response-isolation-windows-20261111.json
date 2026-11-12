@@ -1,0 +1,9 @@
+{
+  "host": "Windows implementation; Linux proof separately",
+  "id": "pr-5321-response-isolation-windows-20261111",
+  "job": "pr-5321-response-isolation-windows-20261111",
+  "scope": "Fix the JavaBin test's shared-index pollution documented in records/receipt/pr-5321-response-coverage-linux-20261111-receipt.json, push successor head, and request a superseding exact-head Linux gate. No public comment or contributor-branch modification.",
+  "successor_of": "pr-5321-response-coverage-windows-20261111",
+  "summary": "Repair test isolation after failed PR 5321 response gate",
+  "type": "assignment"
+}
