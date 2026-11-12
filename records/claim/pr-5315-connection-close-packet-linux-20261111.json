@@ -1,0 +1,11 @@
+{
+ "claimed_at": "2026-11-11T21:25:00-07:00",
+ "claimer": "phone-agent",
+ "head": "3c73a59743e3dfe4b5ae5e11b0cdbe8c1e8fcae6",
+ "host": "linux",
+ "id": "pr-5315-connection-close-packet-linux-20261111",
+ "job": "pr-5315-connection-close-packet-linux-20261111",
+ "note": "Owner directed taking this job on 2026-11-11. Diagnostic only: no source pushes, no public comments. Predeclared bounds: up to 6 full-class runs under syscall capture; if none fails, up to 6 untraced runs to confirm tonight's reproduction rate, then up to 6 more captured runs; 4 isolated forged-marker runs. Controls and predictions are declared in the working notes before each control runs.",
+ "pre_claim_verification": "Prior receipt (forged-marker diagnostic, incomplete) and its release with executor-stop evidence inspected. Live fork branch nick-boss-tech/solr solr-17764-submit verified at 3c73a59743e3dfe4b5ae5e11b0cdbe8c1e8fcae6 by ls-remote. Test-queue lock free; no Gradle daemons resident; no conflicting worker. Capture capability established with a substitution, recorded here so the receipt can rely on it: kernel packet capture is impossible on this host (CAP_NET_RAW is absent from the capability bounding set; an AF_PACKET socket returns EPERM; tcpdump is not installed and could not open the interface if it were). The equivalent authorized tool is strace syscall capture of the test JVM (verified working on a child JVM: connect/accept/shutdown traced with microsecond timestamps), which records close order, direction, and error returns (recv 0, ECONNRESET, EPIPE) on the fixture sockets with a single clock for client and fixture, which run in one JVM in this test class.",
+ "type": "claim"
+}
