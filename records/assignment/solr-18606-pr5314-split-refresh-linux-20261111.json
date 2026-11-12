@@ -1,0 +1,18 @@
+{
+  "claim_path": "records/claim/solr-18606-pr5314-split-refresh-linux-20261111.json",
+  "gate_id": "solr-18606-pr5314-split-refresh-linux-20261111",
+  "gate_record": "records/gate/solr-18606-pr5314-split-refresh-linux-20261111.json",
+  "id": "solr-18606-pr5314-split-refresh-linux-20261111",
+  "intended_host": "Linux",
+  "job": "solr-18606-pr5314-split-refresh-linux-20261111",
+  "phase": "review split refresh",
+  "receipt_path": "records/receipt/solr-18606-pr5314-split-refresh-linux-20261111-receipt.json",
+  "source": {
+    "branch": "solr-18606-submit",
+    "head": "33e3f8b8599ea12fad0456ce0444d3a24a4affe6",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify PR 5314 refresh split and metrics-based alias regression test.",
+  "supersedes_gate": "solr-18606-pr5314-observable-test-linux-r2-20261110",
+  "type": "assignment"
+}
