@@ -503,7 +503,6 @@ public class ZkStateReader implements SolrCloseable {
         return;
       }
 
-
       ClusterState.CollectionRef ref = clusterState.getCollectionRef(collection);
       if (ref == null) {
         // We either don't know anything about this collection (maybe it's new?).
