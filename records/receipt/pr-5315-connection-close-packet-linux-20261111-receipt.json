@@ -1,0 +1,58 @@
+{
+ "evidence": "records/evidence/pr-5315-connection-close-packet-linux-20261111-evidence.tar.gz (SHA-256 8568acffc44dceca464f29a2db0aec22978cd13c99032bb7ed28cb16ce87da02): campaign summary with the predeclared bounds and the control prediction, campaign and analyzer scripts, per-run JUnit XML and verdicts for all 29 completed runs, the reconstructed connection timelines for the failing run (connections.txt, jdk-connections.txt), the raw trace extract for the failing and passing-comparison connections, the loadcap lifecycle extract, and control-drain.patch. The full 170 MB data-plane trace of the captured failing run is retained locally at ~/workspace/tools/5315-packet/runs/fullcap2-run1/trace.txt and is available on request; the evidence archive carries its complete failing-connection extract.",
+ "gate": "pr-5315-connection-close-packet-linux-20261111",
+ "head": "3c73a59743e3dfe4b5ae5e11b0cdbe8c1e8fcae6",
+ "id": "pr-5315-connection-close-packet-linux-20261111-receipt",
+ "job": "pr-5315-connection-close-packet-linux-20261111",
+ "legs": [
+  {
+   "leg": "pre-claim verification",
+   "result": "Prior receipt (forged-marker diagnostic, incomplete) and its release with executor-stop evidence inspected. Live fork branch solr-17764-submit verified at 3c73a59743e3dfe4b5ae5e11b0cdbe8c1e8fcae6 by ls-remote. Queue lock free, no conflicting worker."
+  },
+  {
+   "leg": "capture capability",
+   "result": "Kernel packet capture is impossible on this host and is reported explicitly per the gate: CAP_NET_RAW is absent from the capability bounding set (CapBnd 000001fffff7cfff), an AF_PACKET socket returns EPERM, and tcpdump is not installed and could not open the interface if it were. The equivalent authorized tool used is strace syscall capture of the test JVM (verified on a child JVM before claiming): one clock for client and fixture (same JVM in this class), microsecond timestamps, per-socket close/shutdown direction and order plus data-plane reads and writes in the full-capture block. Capture scope was loopback fixture traffic only; extraction filtered to fixture ports and socket inodes."
+  },
+  {
+   "leg": "reproduction, unloaded, lifecycle capture (block cap)",
+   "result": "6 full-class runs at the exact head, seed 17764C0DE, strace %network/close/shutdown: 6 passed, 0 failed."
+  },
+  {
+   "leg": "reproduction, unloaded, untraced (block plain)",
+   "result": "6 full-class runs: 5 passed; run 5 failed, testMarkerIsIgnoredWithoutExplicitTrust, SolrServerException: java.io.IOException: HTTP/1.1 header parser received no bytes. Fresh XML in evidence."
+  },
+  {
+   "leg": "reproduction, loaded, lifecycle capture (block loadcap, 3 CPU burners on 4 CPUs)",
+   "result": "6 full-class runs: 5 passed; run 3 failed with two methods: testMarkedRejectionRetriesMaterializedUpdateOnce (same no-bytes signature) and testNoAlternateEndpointSurfacesFailureWithoutReplay (AssertionError at ProbeGracefulRejectionClientTest.java:600, downstream accounting assertion)."
+  },
+  {
+   "leg": "full data-plane capture (block fullcap2, loaded, strace with read/write/writev/readv added)",
+   "result": "First attempt (fullcap run 1) was interrupted by a VM replacement with no verdict and is disclosed, not counted. Relaunched block captured the failure in its first run: testMarkedRejectionRetriesMaterializedUpdateOnce, same signature. FAILING CONNECTION (client fd 219 inode 144937, ephemeral 60110, to fixture port 38143; server fd 212 inode 150555): 22:42:58.475 client writes HEAD probe (376 B); .497 client reads 503 (248 B); .574 client writes POST headers (385 B, chunked javabin); .575890 server reads POST headers; .579472 server writes the 503 response (739 B) having read only the headers, body never consumed; .582332 and .583751 server shutdown(SHUT_WR); .584580 server close; .580188 client reads the full 503 (739 B); .675278 client writes the first body chunk (47 B) into the closing socket; .677131 client writes the terminal chunk and gets -1 EPIPE (Broken pipe); .705093 client shutdown returns ENOTCONN. The server closed about 93 ms before the client's EPIPE. PASSING COMPARISON on the same trace (fixture port 35399, inodes 138644/138471): the client's body chunks were written before the response completed and the server's shutdown came about 0.9 s after its response; the exchange completed and the marked-503 flow proceeded."
+  },
+  {
+   "leg": "isolated-method comparison (gate command 2)",
+   "result": "testForgedMarkerOnApplication503AuthorizesRetry run isolated at the exact unmodified head after the clone was restored: 2 of 2 passed, fresh XML in evidence. Consistent with the prior receipt: the failure needs full-class load conditions, not this method."
+  },
+  {
+   "leg": "discriminating control (predeclared prediction recorded in campaign-summary.txt before the run)",
+   "result": "Disposable-clone fixture patch (control-drain.patch in evidence): the fixture's counting wrapper drains the request body via Request.asInputStream(request).readAllBytes() before delegating to the graceful handler, so the fixture never closes a connection with an unconsumed body in flight. Prediction: 8 of 8 loaded full-class runs pass; any no-bytes failure refutes the attribution. Outcome: 8 of 8 passed under the identical 3-burner load. The patch touches only test fixture code in a disposable clone; no assertion, hit count, marker behavior or client materialization proof changes."
+  },
+  {
+   "leg": "commands as run",
+   "result": "Gate commands name ./gradlew with --rerun-tasks; per host rules the runs used ~/workspace/tools/solr-gradle.sh --no-daemon :solr:solrj:test --tests org.apache.solr.client.solrj.impl.ProbeGracefulRejectionClientTest -Ptests.seed=17764C0DE, with the test task's outputs deleted before each run to force re-execution (equivalent effect to --rerun-tasks for the test task; mechanics deviation only). Environment: 4 CPUs, Linux 7.0.0-44-generic, vendored JDK 21.0.12.1, Jetty 12.1.14 (from the fixture's own Server header), isolated clone, ephemeral fixture ports on 127.0.0.1."
+  },
+  {
+   "leg": "run totals",
+   "result": "Unmodified head, completed full-class runs tonight: 19 (6 lifecycle-capture unloaded, 6 untraced unloaded, 6 lifecycle-capture loaded, 1 full-capture loaded), of which 3 runs failed (4 method failures total, all the same transport signature or its downstream assertion). Loaded unmodified: 7 runs, 2 failed. Control (drained fixture), loaded: 8 runs, 0 failed."
+  }
+ ],
+ "owner": "phone-agent",
+ "recorded": "2026-11-11T23:32:16-07:00",
+ "summary": "Diagnosis supported by a captured failing exchange and a discriminating control. WHICH SIDE CLOSES: the fixture (server) side closes first, deliberately, milliseconds after answering the POST, because the graceful-rejection path writes the 503 response after reading only the request headers and never consumes the chunked request body; Jetty then shuts down (SHUT_WR) and closes the connection. WHY THE TEST FAILS INTERMITTENTLY: the JDK client's request-body publisher streams the materialized update body on its own schedule. When the body finishes before the close lands, the exchange completes and the marked-503 retry logic runs (passing case, fully traced). When CPU load delays the body by tens of milliseconds, the server's close lands first: the client's remaining body writes hit the closed connection (first chunk write succeeds into the closing socket, terminal chunk write returns EPIPE), and the request dies in the transport with 'HTTP/1.1 header parser received no bytes' instead of surfacing the marked 503, which the trace shows the client had in fact fully received (739 bytes) on that same connection before the EPIPE. Classification: a fixture-transport race between a reject-and-close server and a streaming client body under load. The production graceful-rejection and retry logic is not implicated: in the failing trace the server wrote the complete marked 503 and the client read it; the failure is entirely on the request-body streaming side. A residual client-robustness question is recorded under unresolved alternatives and is not needed to explain the failures. CONTROL: a predeclared fixture patch that drains the request body in the fixture's counting wrapper before the graceful handler can reject (assertions, hit counting, marker behavior and client materialization proofs unchanged) passed 8 of 8 loaded full-class runs, against 2 failures in 7 loaded unmodified runs the same evening and the roughly 1-in-3 loaded rate of the earlier campaigns. The proposed correction is that fixture patch, delivered as evidence and exercised in a disposable clone; nothing was pushed.",
+ "type": "receipt",
+ "unresolved_alternatives": [
+  "Client robustness: in the failing trace the JDK client had fully received the marked 503 before the EPIPE, yet the request surfaced a transport IOException. Whether HttpJdkSolrClient or the JDK exchange should let a completed response win over a late request-publisher failure is a genuine design question for the branch owner; it is not needed to explain the test failures and no production change is proposed or exercised by this job.",
+  "The drain control changes the fixture to consume bodies a real graceful-shutdown server would not consume. It is proposed as a test-determinism fix, not as a claim about how production servers behave; the alternative of asserting through a non-streaming body where materialization is not the point was not exercised."
+ ],
+ "verdict": "passed"
+}

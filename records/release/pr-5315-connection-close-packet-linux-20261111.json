@@ -1,0 +1,10 @@
+{
+ "actor": "phone-agent",
+ "evidence": "records/receipt/pr-5315-connection-close-packet-linux-20261111-receipt.json; records/evidence/pr-5315-connection-close-packet-linux-20261111-evidence.tar.gz (SHA-256 8568acffc44dceca464f29a2db0aec22978cd13c99032bb7ed28cb16ce87da02).",
+ "executor_stop": "Verified at filing: process scan shows no Gradle daemon, gradle runner, strace, campaign script, or CPU-burner processes (sole pgrep hit was the filing shell matching its own command text); fuser on ~/workspace/tools/.solr-test-queue.lock returns no holder (lock free); the diagnostic clone ~/workspace/solr-clones/5315-packet is restored to the exact head 3c73a59743e3dfe4b5ae5e11b0cdbe8c1e8fcae6 with zero tracked modifications (control patch reverted after the control campaign; the patch itself is preserved in the evidence archive).",
+ "id": "pr-5315-connection-close-packet-linux-20261111",
+ "job": "pr-5315-connection-close-packet-linux-20261111",
+ "reason": "Diagnostic completed and filed with verdict passed; receipt published before this release. The closing side and mechanism are established from a captured failing exchange (fixture server shutdown and close precede the client EPIPE by about 93 ms after a 503 written with the chunked request body unconsumed), a same-trace passing comparison brackets the race, and the predeclared body-drain control passed 8 of 8 loaded runs against 2 failures in 7 loaded unmodified runs. Kernel packet capture was impossible on this host (CAP_NET_RAW absent from the bounding set) and the strace substitution is documented in the claim and receipt. The proposed fixture correction is delivered as an evidence patch only; no source was pushed and no public comment was posted. Full candidate acceptance still requires a separate exact-head gate.",
+ "recorded": "2026-11-11",
+ "type": "release"
+}
