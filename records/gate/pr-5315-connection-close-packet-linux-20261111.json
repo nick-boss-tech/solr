@@ -1,0 +1,27 @@
+{
+  "commands": [
+    "./gradlew --no-daemon :solr:solrj:test --tests org.apache.solr.client.solrj.impl.ProbeGracefulRejectionClientTest -Ptests.seed=17764C0DE --rerun-tasks",
+    "./gradlew --no-daemon :solr:solrj:test --tests org.apache.solr.client.solrj.impl.ProbeGracefulRejectionClientTest.testForgedMarkerOnApplication503AuthorizesRetry -Ptests.seed=17764C0DE --rerun-tasks"
+  ],
+  "environment": "Linux JDK 21 with authorized loopback packet capture, isolated clean checkout and isolated test ports. Before claiming inspect the prior receipt and release, verify executor-stop evidence and host locks, confirm the fork head and ensure no conflicting worker remains. Do not push source or post public comments.",
+  "head": "3c73a59743e3dfe4b5ae5e11b0cdbe8c1e8fcae6",
+  "id": "pr-5315-connection-close-packet-linux-20261111",
+  "job": "pr-5315-connection-close-packet-linux-20261111",
+  "phase": "packet-capture diagnosis after incomplete connection-close reproduction",
+  "requirements": [
+    "Start from the previous receipt and its evidence archive, SHA-256 26e832b1202f5dc3e2b79ccbc3e48546fcefa9a43006580c66c72498a580731f. Its unmodified class reproduced the failure and isolated forged-marker runs passed; the affected method varied. The fixture HEAD-body change, HTTP/2 connector and HTTP/1.1 pin did not establish a cure. Do not assume their hypotheses or the receipt's attribution are proven.",
+    "Reproduce on the exact unmodified head with seed 17764C0DE. Run a bounded full-class campaign, record every run and test order, transport, timestamps, counts, exit status and fresh XML. Compare isolated-method runs. Document host CPU count, load, JDK, OS, Jetty and any controlled CPU load. Use a predeclared bound and report non-reproduction or unavailable capture rather than calling an unobserved failure a pass.",
+    "Capture loopback traffic only for the isolated fixture test ports using tcpdump or an equivalent authorized tool. Record capture interface, filter, timestamps, endpoint addresses and ports, and clock alignment with client and server logs. Correlate the HEAD probe, connection reuse, the next POST, any HTTP upgrade and Connection headers, FIN/RST direction and order, and the exception. Identify which peer sent each close and whether it preceded pool reuse and the POST write. Preserve a passing comparison as well as a failing trace. Limit capture to synthetic fixture traffic and store evidence in the authorized board evidence location without unrelated traffic or credentials.",
+    "Add narrowly scoped disposable fixture and client instrumentation if needed to identify transport, individual request, handler entry, response completion, connection IDs and close events. Preserve its exact patch and distinguish unmodified and instrumented results; disclose possible timing changes. Capture full nested exceptions, logs and server-side counts. Do not assume that absence of a server handler entry proves the cause of the connection close.",
+    "Use at least one discriminating control based on captured evidence, such as comparing the first-request upgrade offer, graceful-rejection connection handling, or a controlled delay between HEAD completion and POST reuse. State predictions before each control and preserve patches and outcomes. Distinguish a fixture-only race, a real client or server defect, and host or loopback behavior. Avoid treating a smaller failure rate or a successful rerun as proof of a fix.",
+    "If evidence supports a correction, provide a minimal proposed patch or precise implementation instructions and a deterministic regression plan that preserves the forged-marker and no-replay assertions. Exercise the proposed correction in a disposable checkout where feasible and report failures and limitations. Do not push a source change, weaken assertions or add retries to mask the error.",
+    "File a schema-valid receipt with exact head, commands, run counts, environment, traces, packet-capture filter, evidence locations and SHA-256 hashes, conclusions and unresolved alternatives. Use passed only for a supported diagnosis and discriminating control; otherwise failed, incomplete or non-reproduced. If capture capability or authorization is unavailable, report that explicitly. Publish the receipt before canonical release with executor-stop, process and lock evidence. Full candidate acceptance requires a separate exact-head gate."
+  ],
+  "source": {
+    "branch": "solr-17764-submit",
+    "head": "3c73a59743e3dfe4b5ae5e11b0cdbe8c1e8fcae6",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes": "pr-5315-forged-marker-close-repro-linux-20261111",
+  "type": "gate"
+}
