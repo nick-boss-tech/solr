@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-nick-shanin",
+  "evidence": "records/report/solr-18606-pr5314-split-windows-20261111-report.json; both source commits pushed and remote heads read back; no Linux executor started by this worker.",
+  "id": "solr-18606-pr5314-split-windows-20261111",
+  "job": "solr-18606-pr5314-split-windows-20261111",
+  "reason": "Implementation and Linux gate handoff complete; proof pending.",
+  "type": "release"
+}
