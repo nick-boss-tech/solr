@@ -1,0 +1,25 @@
+{
+  "claim_path": "records/claim/pr-5319-route-surface-probes-2026-11-11.json",
+  "context": "Independent investigation of current PR head; not a rerun or replacement of records/gate/pr-5319-route-filter-linux-2026-11-10.json, which covered a different fork head and had an incomplete root check. No source patch or public communication is requested.",
+  "gate_id": "pr-5319-route-surface-probes-2026-11-11",
+  "gate_record": "records/gate/pr-5319-route-surface-probes-2026-11-11.json",
+  "id": "pr-5319-route-surface-probes-2026-11-11",
+  "intended_host": "Linux gate host with SolrCloud build and HTTP probe capability",
+  "job": "pr-5319-route-surface-probes-2026-11-11",
+  "phase": "route-surface investigation, round 1",
+  "receipt_path": "records/receipt/pr-5319-route-surface-probes-2026-11-11-receipt.json",
+  "source": {
+    "branch": "SOLR-18553-fix-param-naming",
+    "head": "babbdaeee25b3ee4687fd1f6a6cef66a9e2d16ed",
+    "pr": "https://github.com/apache/solr/pull/5319",
+    "repository": "epugh/solr"
+  },
+  "summary": "Investigate v1 and v2 route-key wire behavior for PR 5319 discussion",
+  "tags": [
+    "linux",
+    "investigation",
+    "solrcloud",
+    "http-probes"
+  ],
+  "type": "assignment"
+}
