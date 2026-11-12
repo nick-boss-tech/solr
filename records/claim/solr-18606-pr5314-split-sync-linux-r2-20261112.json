@@ -1,0 +1,10 @@
+{
+ "claimed_at": "2026-11-12T12:33:00-07:00",
+ "claimer": "phone-agent",
+ "head": "d17427ca2cf164f75d3072b8a07767e1e38f5cc4",
+ "host": "linux",
+ "id": "solr-18606-pr5314-split-sync-linux-r2-20261112",
+ "job": "solr-18606-pr5314-split-sync-linux-r2-20261112",
+ "pre_claim_verification": "Successor head is the round-1 executor's own tidy commit on top of the gated head, verified at the remote branch tip by ls-remote after push. Identical requirements to round 1.",
+ "type": "claim"
+}

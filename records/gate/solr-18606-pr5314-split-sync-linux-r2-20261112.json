@@ -1,0 +1,20 @@
+{
+ "environment": "Linux, JDK 21, clean clone, fixed seed 18606CAFE",
+ "head": "d17427ca2cf164f75d3072b8a07767e1e38f5cc4",
+ "id": "solr-18606-pr5314-split-sync-linux-r2-20261112",
+ "job": "solr-18606-pr5314-split-sync-linux-r2-20261112",
+ "phase": "review split sync, round 2 (tidy successor)",
+ "receipt_path": "records/receipt/solr-18606-pr5314-split-sync-linux-r2-20261112-receipt.json",
+ "requirements": [
+  "Run :solr:solrj-zookeeper:test for org.apache.solr.common.cloud.SolrZkClientTest including testSync, :solr:core:test for org.apache.solr.cloud.overseer.ZkStateReaderTest and TestInPlaceUpdatesDistrib; verify exact class names and record tests, skips, fresh logs and XML.",
+  "Use a disposable diagnostic probe to demonstrate sync waits for callback, maps a callback error and honors interruption; the real single-server smoke test alone does not prove these. The prior 5da7243 ClusterStateProviderTest.testSyncWaitsForCallbackAndPropagatesFailure may be adapted as a diagnostic, not represented as real ensemble proof. Prove that forceUpdateCollection invokes sync before reads and does not hold getUpdateLock while waiting; report incomplete if not established.",
+  "Run tidy and root check -x test without exclusions; formatting changes invalidate the head. Record actual commands, results, errors, conditions, and evidence. Do not claim ensemble lag proof from a single server."
+ ],
+ "retarget_note": "Retargeted under the owner's standing tidy rule (2026-10-18): the round-1 gate at 35c7bdd41cfc95cd520ef00afbab86c4086583c1 stopped on the tidy leg only (one stray blank line inside forceUpdateCollection, introduced by the branch commit itself). The tidy change was committed as d17427ca2cf164f75d3072b8a07767e1e38f5cc4 and pushed to solr-18606-sync-split by the round-1 executor; this record retargets the identical requirements to the successor head.",
+ "source": {
+  "branch": "solr-18606-sync-split",
+  "repository": "nick-boss-tech/solr"
+ },
+ "supersedes": "records/gate/solr-18606-pr5314-split-sync-linux-20261111.json",
+ "type": "gate"
+}
