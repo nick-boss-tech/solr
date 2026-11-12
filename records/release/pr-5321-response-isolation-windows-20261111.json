@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-nick-shanin",
+  "evidence": "Fork ref pr-5321-response-coverage-20261111 verified at 4b87f9404aced840ca156360f02e4a73970376e1; repair report. No Windows build or test executor started.",
+  "id": "pr-5321-response-isolation-windows-20261111",
+  "job": "pr-5321-response-isolation-windows-20261111",
+  "reason": "Repair pushed; Linux proof handed to separate successor gate",
+  "type": "release"
+}
