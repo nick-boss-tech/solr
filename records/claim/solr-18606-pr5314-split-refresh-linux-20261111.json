@@ -1,0 +1,11 @@
+{
+ "claimed_at": "2026-11-12T11:27:00-07:00",
+ "claimer": "phone-agent",
+ "head": "33e3f8b8599ea12fad0456ce0444d3a24a4affe6",
+ "host": "linux",
+ "id": "solr-18606-pr5314-split-refresh-linux-20261111",
+ "job": "solr-18606-pr5314-split-refresh-linux-20261111",
+ "note": "Owner directed taking all undone tasks from the four identified on 2026-11-12.",
+ "pre_claim_verification": "Live fork branch solr-18606-submit verified at the gate head by ls-remote. Queue lock free, no conflicting worker.",
+ "type": "claim"
+}

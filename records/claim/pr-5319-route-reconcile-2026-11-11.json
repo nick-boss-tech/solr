@@ -1,0 +1,11 @@
+{
+ "claimed_at": "2026-11-12T11:27:00-07:00",
+ "claimer": "phone-agent",
+ "head": "babbdaeee25b3ee4687fd1f6a6cef66a9e2d16ed",
+ "host": "linux",
+ "id": "pr-5319-route-reconcile-2026-11-11",
+ "job": "pr-5319-route-reconcile-2026-11-11",
+ "note": "Owner directed taking all undone tasks from the four identified on 2026-11-12.",
+ "pre_claim_verification": "Live PR apache/solr#5319 verified open with head babbdaeee25b3ee4687fd1f6a6cef66a9e2d16ed via the GitHub API and the epugh/solr branch endpoint. Prior receipt and release (route-surface probes, passed, filed by this agent) inspected; prior evidence archive SHA-256 verified: bc3ab9a8c63d98253bcebe0a31a18e21be63c472e99662b6c1ae71f3da738d35. Reconciliation only unless a material ambiguity requires a targeted probe; no source push, no public comment.",
+ "type": "claim"
+}

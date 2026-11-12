@@ -1,0 +1,11 @@
+{
+ "claimed_at": "2026-11-12T11:27:00-07:00",
+ "claimer": "phone-agent",
+ "head": "4b87f9404aced840ca156360f02e4a73970376e1",
+ "host": "linux",
+ "id": "pr-5321-response-coverage-linux-r2-20261111",
+ "job": "pr-5321-response-coverage-linux-r2-20261111",
+ "note": "Owner directed taking all undone tasks from the four identified on 2026-11-12.",
+ "pre_claim_verification": "Prior r1 receipt inspected (filed FAILED by this agent: class-suite failure isolated to the coverage branch's own testUUID interaction; production implementation not implicated). Live fork branch pr-5321-response-coverage-20261111 verified at the gate head by ls-remote. Queue lock free, no conflicting worker.",
+ "type": "claim"
+}
