@@ -1,0 +1,17 @@
+{
+  "claim_path": "records/claim/solr-18606-pr5314-split-sync-linux-20261111.json",
+  "gate_id": "solr-18606-pr5314-split-sync-linux-20261111",
+  "gate_record": "records/gate/solr-18606-pr5314-split-sync-linux-20261111.json",
+  "id": "solr-18606-pr5314-split-sync-linux-20261111",
+  "intended_host": "Linux",
+  "job": "solr-18606-pr5314-split-sync-linux-20261111",
+  "phase": "review split sync",
+  "receipt_path": "records/receipt/solr-18606-pr5314-split-sync-linux-20261111-receipt.json",
+  "source": {
+    "branch": "solr-18606-sync-split",
+    "head": "35c7bdd41cfc95cd520ef00afbab86c4086583c1",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify independent sync before forceUpdateCollection, including callback and locking semantics.",
+  "type": "assignment"
+}
