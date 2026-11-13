@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "Round 4 implementation report and verified fork head e92e417843e24dac8a54bd1c3c61d43e7b420cf4; no implementation executor remains running.",
+  "id": "pr5323-tls-isolation-round4-windows",
+  "job": "pr5323-tls-isolation-round4-windows",
+  "reason": "implementation complete and proof handed off",
+  "type": "release"
+}
