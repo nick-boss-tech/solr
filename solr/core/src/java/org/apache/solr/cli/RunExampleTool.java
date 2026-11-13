@@ -682,12 +682,17 @@ public class RunExampleTool extends ToolBase {
             + password
             + " (used for the keystore and all basic-auth/ZooKeeper demonstration accounts below).");
     if (!params.noPrompt()) {
-      prompt(
-          userInputScanner(),
-          "Press Enter to delete and recreate "
-              + secureExampleDisplayArgument(home.toString())
-              + ", or Ctrl-C to cancel: ",
-          "");
+      String response =
+          prompt(
+              userInputScanner(),
+              "Press Enter to delete and recreate "
+                  + secureExampleDisplayArgument(home.toString())
+                  + ", or enter any text to cancel: ",
+              "");
+      if (!response.isEmpty()) {
+        echo("Secure example reset cancelled.");
+        return;
+      }
     }
     resetSecureExampleHome(home, environment);
     Files.setPosixFilePermissions(home, PosixFilePermissions.fromString("rwx------"));
