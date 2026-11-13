@@ -1,0 +1,9 @@
+{
+  "host": "Windows implementation; Linux proof separately",
+  "id": "pr-5334-fix-windows-20261113",
+  "job": "pr-5334-fix-windows-20261113",
+  "scope": "Assess and address Java serialization compatibility and meaningful immutable Map coverage; no public posting or contributor-branch modification.",
+  "source_head": "c64ef9dcc6360bd6bd39cb129d1b9f3e94e8ce67",
+  "summary": "Prepare a focused PR 5334 compatibility and regression follow-up on a fork branch",
+  "type": "assignment"
+}
