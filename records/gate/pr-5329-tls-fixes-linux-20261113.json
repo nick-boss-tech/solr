@@ -1,0 +1,18 @@
+{
+  "environment": "Linux, JDK 21; clean checkout; no changes to security settings",
+  "head": "7dedae124c252574caaff93cf4bcf2bc1d240fc9",
+  "id": "pr-5329-tls-fixes-linux-20261113",
+  "job": "pr-5329-tls-fixes-linux-20261113",
+  "phase": "implementation proof, round 1",
+  "requirements": [
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.cloud.SolrZkServerTlsTest -Dtests.seed=5329ABCD and retain fresh JUnit XML and log.",
+    "Run ./gradlew :solr:packaging:integrationTests --tests test_secure_example.bats and retain fresh BATS output and XML.",
+    "Run ./gradlew tidy and verify the tree remains unchanged; if formatting changes the source, stop and return the diff for a new exact-head gate.",
+    "Run ./gradlew check -x test and capture the log; verify the prior SolrZkServer validateLogCalls failure is resolved.",
+    "Fail-before proof: apply only the new SolrZkServerTlsTest.java to contributor head 6f3e51a51dd93587ae727d3d1771614aa04d7cf7 and run the same test with the same seed. Record an assertion failure due to the retained plaintext address, not a compilation or setup failure.",
+    "On Linux exercise startup with an existing clientPort, verify only the secure port listens, and check TLS password file permissions from creation with umask 022; retain commands and output without exposing passwords.",
+    "Investigate any failures and distinguish setup from patch failures. Record exact commands, exit codes, test counts and evidence locations in the named receipt."
+  ],
+  "type": "gate",
+  "unresolved": "Configuration rotation and inherited TLS options for external ZooKeeper are outside this partial fix and remain blockers."
+}
