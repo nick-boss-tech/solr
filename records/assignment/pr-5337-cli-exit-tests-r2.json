@@ -1,0 +1,14 @@
+{
+  "deliverables": "Independently asserted parent help and failure cases, Windows launcher check, pushed head and superseding proof gate",
+  "id": "pr-5337-cli-exit-tests-r2",
+  "intended_host": "Windows implementation; Linux gate separately",
+  "job": "pr-5337-cli-exit-tests-r2",
+  "source": {
+    "branch": "pr-5337-cli-exit-fixes",
+    "head": "ee35178851befab053e7f6ac4d20c866eed7a293",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5337-cli-exit-fixes",
+  "summary": "Strengthen launcher regression coverage after review",
+  "type": "assignment"
+}
