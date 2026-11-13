@@ -1,0 +1,7 @@
+{
+  "id": "pr-5339-migration-review-20261113",
+  "job": "pr-5339-migration-review-20261113",
+  "owner": "codex-windows",
+  "scope": "Source and test review, inspect Linux gate; no public writes",
+  "type": "claim"
+}
