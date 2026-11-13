@@ -1,0 +1,20 @@
+{
+  "branch": "pr-5330-test-fix-20261113",
+  "contributor_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+  "environment": "Linux, JDK 21, clean isolated checkout; record host, toolchain and clean source status",
+  "head": "c5d4ca375396006460a72e97aa99d34337780580",
+  "id": "pr-5330-stall-safety-r3-linux-20261113",
+  "job": "pr-5330-stall-safety-r3-linux-20261113",
+  "phase": "round 3",
+  "repository": "nick-boss-tech/solr",
+  "requirements": [
+    "Verify exact fork head and ancestry; capture commands, exit codes, fresh logs and JUnit XML with counts, failures and skips.",
+    "Run ./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.update.SolrCmdDistributorTest with recorded seed, then repeat testStallKeepsErrorsFromOtherNodes under multiple seeds. Require bounded execution, actual retry, both expected errors, and commit and delete-by-query refusing the stalled flush. Run ./gradlew tidy and ./gradlew check -x test. A tracked formatting change invalidates proof; require committed successor and new gate.",
+    "Fail-before: in a disposable checkout at this head retain the test and revert only round-3 production changes to contributor production; confirm the ordering boundary assertion fails at runtime. Separately restore baseline production before PR 5330 while retaining the executable test and demonstrate lost-error regression or document accurately if a separate minimal test overlay is needed. Capture overlays, commands, logs and XML; compilation, setup, timeout and skip are not behavioral proof.",
+    "Review and test retries after a stall, multiple stalled clients, suppression, finish error retention, pending asynchronous work, and whether a late runner callback can change replication accounting after the stall. Add a bounded diagnostic as needed; if an actual safety concern is unresolved, do not mark clean. Record how queued work and shared-executor shutdown behave; the patch fences later DBQ/commit but does not cancel an active runner.",
+    "Do not change or push source from the gate. Any failures or fixes require a separate scoped implementation and a superseding exact-head gate. No public post."
+  ],
+  "supersedes": "records/gate/pr-5330-regression-r2-linux-20261113.json",
+  "type": "gate",
+  "verdict_policy": "Pass only if named tests, root checks and meaningful fail-before legs succeed and no material correctness concern remains. Distinguish late-callback limitations from the protected ordered-operation boundary."
+}
