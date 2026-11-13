@@ -1,0 +1,12 @@
+{
+  "actor": "vm6",
+  "evidence": "records/receipt/pr5320-v2-contract-linux-gate-r7-20261113-receipt.json",
+  "executor_stop_evidence": "No root-check clone or gradle runner was started for this successor; the partial clone /workspace/rootcheck-r7 was removed and no git clone/index-pack process remains (verified pgrep 2026-11-13T21:47Z). The r7 head runner and fail-before chains already exited per the r7 release executor_stop_evidence.",
+  "id": "pr5320-v2-contract-r7-rootcheck-20261113",
+  "job": "pr5320-v2-contract-r7-rootcheck-20261113",
+  "reason": "Released as redundant under owner policy (Nick, 2026-11-13): Antora / Solr ref-guide is not enforced for gate runs, so the r7 receipt's excluded root check at head b4bb017d is valid and the successor's requirement to run an unexcluded check is withdrawn. Claim pr5320-v2-contract-r7-rootcheck-20261113 (vm6) released without a check run.",
+  "receipt": "records/report/pr5320-v2-contract-r7-rootcheck-20261113-report.json",
+  "released": "2026-11-13T21:54:38Z",
+  "released_by": "vm6",
+  "type": "release"
+}
