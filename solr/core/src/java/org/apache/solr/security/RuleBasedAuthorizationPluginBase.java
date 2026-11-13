@@ -439,8 +439,14 @@ public abstract class RuleBasedAuthorizationPluginBase
         .put(
             "delete-permission",
             Map.of(
-                "type", List.of("integer", "object"),
-                "description", "An index, or an object containing the permission id."));
+                "anyOf",
+                List.of(
+                    Map.of("type", "integer"),
+                    Map.of(
+                        "type", "object",
+                        "properties", Map.of("id", Map.of("type", "string")),
+                        "required", List.of("id"),
+                        "additionalProperties", false))));
     return spec;
   }
 }

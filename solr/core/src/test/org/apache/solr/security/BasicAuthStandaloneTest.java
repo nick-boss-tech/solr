@@ -32,6 +32,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.client.solrj.request.beans.SetRuleBasedAuthPermissionPayload;
 import org.apache.solr.common.params.MapSolrParams;
 import org.apache.solr.common.util.ExecutorUtil;
 import org.apache.solr.common.util.SolrNamedThreadFactory;
@@ -130,6 +131,78 @@ public class BasicAuthStandaloneTest extends SolrTestCaseJ4 {
       verifySecurityStatus(
           httpClient, baseUrl + authzPrefix, "authorization/permissions[2]/role", "solr", 20);
     }
+  }
+
+  @Test
+  public void testV2PermissionIds() throws Exception {
+    HttpClient httpClient = jetty.getSolrClient().getHttpClient();
+    String url = buildUrl(jetty.getLocalPort()) + "/____v2/cluster/security/authorization";
+    securityConfHandler.persistConf(
+        new SecurityConfHandler.SecurityConfig()
+            .setData(Utils.fromJSONString(STD_CONF.replace("'", "\""))));
+    securityConfHandler.securityConfEdited();
+    verifySecurityStatus(httpClient, url, "authorization.enabled", "true", 20);
+    var authzApi =
+        securityConfHandler.getApis().stream()
+            .filter(
+                api -> {
+                  var commands = api.getSpec().getMap("commands");
+                  return commands != null && commands.containsKey("delete-permission");
+                })
+            .findFirst()
+            .orElseThrow();
+    var deleteSchema = authzApi.getSpec().getMap("commands").getMap("delete-permission");
+    assertNotNull(deleteSchema.get("anyOf"));
+
+    doHttpPost(
+        httpClient, url, "{'set-permission': {'name':'read','role':'reader'}}", "solr", "SolrRocks");
+    Map<?, ?> authz =
+        (Map<?, ?>) securityConfHandler.getSecurityConfig(false).getData().get("authorization");
+    List<?> permissions = (List<?>) authz.get("permissions");
+    Map<?, ?> read = (Map<?, ?>) permissions.get(1);
+    String id = (String) read.get("id");
+    assertNotNull(id);
+    var response =
+        httpClient
+            .newRequest(url)
+            .headers(
+                h -> h.add("Authorization", encodeBasicAuthHeaderIfNotNull("solr", "SolrRocks")))
+            .send();
+    assertEquals(200, response.getStatus());
+    assertEquals(
+        id,
+        Utils.getObjectByPath(
+            Utils.fromJSONString(response.getContentAsString()),
+            false,
+            "authorization/permissions[1]/id"));
+
+    SetRuleBasedAuthPermissionPayload payload = new SetRuleBasedAuthPermissionPayload();
+    payload.name = "read";
+    payload.role = List.of("reader2");
+    payload.index = 2;
+    payload.id = id;
+    String serialized = Utils.toJSONString(Map.of("set-permission", payload));
+    assertEquals(
+        id, Utils.getObjectByPath(Utils.fromJSONString(serialized), false, "set-permission/id"));
+    doHttpPost(httpClient, url, serialized, "solr", "SolrRocks");
+    authz = (Map<?, ?>) securityConfHandler.getSecurityConfig(false).getData().get("authorization");
+    read = (Map<?, ?>) ((List<?>) authz.get("permissions")).get(1);
+    assertEquals(id, read.get("id"));
+    assertEquals(List.of("reader2"), read.get("role"));
+
+    doHttpPost(
+        httpClient,
+        url,
+        Utils.toJSONString(Map.of("delete-permission", Map.of("id", id))),
+        "solr",
+        "SolrRocks");
+    authz = (Map<?, ?>) securityConfHandler.getSecurityConfig(false).getData().get("authorization");
+    assertEquals(1, ((List<?>) authz.get("permissions")).size());
+    doHttpPost(
+        httpClient, url, "{'set-permission': {'name':'read','role':'reader'}}", "solr", "SolrRocks");
+    doHttpPost(httpClient, url, "{'delete-permission': 2}", "solr", "SolrRocks");
+    authz = (Map<?, ?>) securityConfHandler.getSecurityConfig(false).getData().get("authorization");
+    assertEquals(1, ((List<?>) authz.get("permissions")).size());
   }
 
   @Test

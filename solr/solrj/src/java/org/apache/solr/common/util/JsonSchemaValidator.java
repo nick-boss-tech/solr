@@ -71,6 +71,7 @@ public class JsonSchemaValidator {
   private static void loadValidators() {
     VALIDATORS.put("items", pair -> new ItemsValidator(pair.first(), (Map<?, ?>) pair.second()));
     VALIDATORS.put("enum", pair -> new EnumValidator(pair.first(), (List<String>) pair.second()));
+    VALIDATORS.put("anyOf", pair -> new AnyOfValidator((List<Map<?, ?>>) pair.second()));
     VALIDATORS.put(
         "properties",
         pair -> new PropertiesValidator(pair.first(), (Map<String, Map<?, ?>>) pair.second()));
@@ -94,6 +95,24 @@ public class JsonSchemaValidator {
       }
     }
     return true;
+  }
+}
+
+class AnyOfValidator extends Validator<List<Map<?, ?>>> {
+  private final List<JsonSchemaValidator> alternatives;
+
+  AnyOfValidator(List<Map<?, ?>> schemas) {
+    super(Map.of(), schemas);
+    alternatives = schemas.stream().map(JsonSchemaValidator::new).toList();
+  }
+
+  @Override
+  boolean validate(Object o, List<String> errs) {
+    for (JsonSchemaValidator alternative : alternatives) {
+      if (alternative.validateJson(o) == null) return true;
+    }
+    errs.add("Value does not match any allowed schema");
+    return false;
   }
 }
 

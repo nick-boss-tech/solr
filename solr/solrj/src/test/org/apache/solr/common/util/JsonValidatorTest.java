@@ -17,9 +17,30 @@
 package org.apache.solr.common.util;
 
 import java.util.List;
+import java.util.Map;
 import org.apache.solr.SolrTestCaseJ4;
 
 public class JsonValidatorTest extends SolrTestCaseJ4 {
+
+  public void testAnyOfAlternatives() {
+    JsonSchemaValidator validator =
+        new JsonSchemaValidator(
+            Map.of(
+                "anyOf",
+                List.of(
+                    Map.of("type", "integer"),
+                    Map.of(
+                        "type", "object",
+                        "properties", Map.of("id", Map.of("type", "string")),
+                        "required", List.of("id"),
+                        "additionalProperties", false))));
+    assertNull(validator.validateJson(2));
+    assertNull(validator.validateJson(Map.of("id", "abc")));
+    assertNotNull(validator.validateJson(Map.of()));
+    assertNotNull(validator.validateJson(Map.of("id", 2)));
+    assertNotNull(validator.validateJson(List.of(2)));
+    assertNotNull(validator.validateJson(Map.of("id", "abc", "other", true)));
+  }
 
   public void testSchemaValidation() {
     final JsonSchemaValidator personSchemaValidator =

@@ -818,13 +818,16 @@ public class BaseTestRuleBasedAuthorizationPlugin extends SolrTestCaseJ4 {
     assertNull(validator.validateJson(1));
     assertNull(validator.validateJson(Map.of("id", "permission-id")));
     assertNotNull(validator.validateJson(List.of("permission-id")));
+    assertNotNull(validator.validateJson(Map.of()));
+    assertNotNull(validator.validateJson(Map.of("id", 1)));
+    assertNotNull(validator.validateJson(Map.of("id", "permission-id", "extra", true)));
   }
 
   public void testSetPermissionIdApiSchema() {
     var commands = new RuleBasedAuthorizationPlugin().getSpec().getMap("commands");
-    assertEquals(
-        "string",
-        commands.getMap("set-permission").getMap("properties").getMap("id").get("type"));
+    var id = commands.getMap("set-permission").getMap("properties").getMap("id");
+    assertNotNull(id);
+    assertEquals("string", id.get("type"));
   }
 
   public void testDeleteByIdTwiceRemovesOnlyThatPermission() throws IOException {
