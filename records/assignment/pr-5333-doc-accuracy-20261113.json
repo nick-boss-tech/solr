@@ -1,0 +1,13 @@
+{
+  "id": "pr-5333-doc-accuracy-20261113",
+  "intended_host": "Windows documentation implementation; Linux gate for proof",
+  "job": "pr-5333-doc-accuracy-20261113",
+  "scope": "Clarify the actual literal startup argument used by the current Unix shutdown script and correct the typo. Do not claim to fix alternate configuration shutdown ordering.",
+  "source": {
+    "head": "5cb56171eff9e85b1238583ecea448af1c3aa7a7",
+    "pull_request": 5333,
+    "repository": "apache/solr"
+  },
+  "summary": "Correct the documented scope of embedded ZooKeeper shutdown ordering on PR 5333",
+  "type": "assignment"
+}
