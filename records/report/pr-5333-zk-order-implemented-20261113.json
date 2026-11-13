@@ -1,0 +1,13 @@
+{
+  "contributor_head": "65c2d85f77017a951f20dc110d71bf14786c6694",
+  "id": "pr-5333-zk-order-implemented-20261113",
+  "job": "pr-5333-zk-order-implementation-20261113",
+  "source": {
+    "branch": "pr-5333-shutdown-doc",
+    "head": "748e63e4281cd4d343e125e1b913805d20c5c6a2",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Implemented process-bound ZooKeeper state markers and added two deterministic shutdown integration cases. No runtime tests were executed on Windows. Proof pending on the named Linux gate. The prior investigation-only assignment is obsolete; no Linux implementation is requested.",
+  "test_only_head": "ccce0532606b28dd7430e120de86d6662dec6124",
+  "type": "report"
+}
