@@ -1,0 +1,15 @@
+{
+  "coordination": "At board 8b3d6957daed4bb3a70f30d83008e51a131f0b4d older r2 Linux gate was claimed at dfe745bf1b8439f85300db3755c9b1ec7d2a87a6 without release or receipt; r5 gate unclaimed. Do not assume the older worker stopped.",
+  "findings": [
+    "onSuccess holds callbackLock while Req.trackRequestResult parses the response InputStream. If headers arrive but the response body stalls while updates remain queued, reportStall detects the stall but blocks on that lock until the body read or transport timeout completes. Move blocking parsing outside the lock, then recheck stalled state at the accounting boundary; also examine shouldRetry's possible ZooKeeper call under the lock. Add a controlled bounded headers-then-stalled-body regression.",
+    "The monitor regression uses null body and direct synthetic callbacks; it does not expose this scenario or prove actual runner/flush behavior. Atomic drain has no permanent controlled interleaving regression and retry is asserted by checkRetry counts rather than observed sends.",
+    "The prior same-client-monitor deadlock and finish-first test sequencing are addressed by inspection only. Queued writes remain active after fence and recovery safety remains unverified."
+  ],
+  "head": "1712a7dcbdd25cd24d1ec12336019c94cbdfedbf",
+  "id": "pr-5330-r5-review-windows-20261113-report",
+  "job": "pr-5330-r5-review-windows-20261113",
+  "local_review": "research/branch-reviews/2026-11-13-pr-batch/PR-5330-r5-review.md",
+  "summary": "Needs work: stall-reporting lock can be held across blocking response-body parsing",
+  "type": "report",
+  "verification": "Source inspection only; no Gradle or runtime tests on Windows."
+}
