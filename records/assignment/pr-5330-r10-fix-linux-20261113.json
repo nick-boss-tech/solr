@@ -1,0 +1,12 @@
+{
+  "changes": "(1) StreamingSolrClients: revert solrClients map/getSolrClient local/blockUntilFinished loop types to base ConcurrentUpdateBaseSolrClient (commit 6476beb8debb is the origin); cast to ErrorReportingConcurrentUpdateSolrClient only inside blockUntilFinished where reportStall is called. (2) testRealRunnerCallbacksDoNotNeedClientMonitor: force HTTP/1.1 for the update-only client (useHttp1_1(true) or solr.http1=true scoped to the test) or make consumeHttpRequest HTTP/2-aware — the client uses HTTP/2 by default and the raw ServerSocket fixture expects an HTTP/1.1 POST line. (3) SolrCmdDistributorTest.java: apply the spotless reformat (assertStallKeepsErrorsFromOtherNodes signature line-wrap; getErrors stream line-join; exact diff in r9 evidence spotless/tidy-testfile.diff) so :solr:core:spotlessCheck passes.",
+  "head": "13522945de6c9102ecdbe8efb821ed451e840216",
+  "host": "Linux",
+  "id": "pr-5330-r10-fix-linux-20261113",
+  "job": "pr-5330-r10-fix-linux-20261113",
+  "scope": "Commit a successor fix on the fork addressing the three r9 gate defects, then run the exact-head r10 Linux gate (compile, focused SolrCmdDistributorTest seed 5330, tidy/spotlessCheck, atomic-drain mutation, concurrent blockUntilFinished + stall aftermath). Do not touch the contributor branch or post publicly.",
+  "source_head": "13522945de6c9102ecdbe8efb821ed451e840216",
+  "successor_of": "pr-5330-test-assertions-r9-linux-20261113",
+  "summary": "PR-5330 r9 Linux gate FAILED with three deterministic defects; successor r10 must fix compile type-narrowing, HTTP/2 fixture framing, and the spotless violation, then re-gate.",
+  "type": "assignment"
+}
