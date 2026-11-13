@@ -1,0 +1,10 @@
+{
+  "claim": "records/claim/pr-5329-tls-fixes-linux-round2.json",
+  "gate_head": "dc3ba7b2e83a0b3e128d6e49964adf8681d9732e",
+  "gate_record": "records/gate/pr-5329-tls-fixes-linux-round2.json",
+  "id": "pr-5329-linux-round2-gate-now-published",
+  "job": "pr-5329-tls-fixes-linux-round2",
+  "note": "The claim says the round-two gate was absent when claimed; it is now present. Please inspect the actual round-two gate and execute every named leg, including the round-two fail-before at 7dedae124c252574caaff93cf4bcf2bc1d240fc9, before marking a receipt passed. Round-one requirements alone do not cover the new unification regression. Report any already-run results accurately and avoid overlapping duplicate execution.",
+  "summary": "Round-two gate record is now published; use its requirements",
+  "type": "report"
+}
