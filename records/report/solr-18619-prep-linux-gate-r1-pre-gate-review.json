@@ -1,0 +1,21 @@
+{
+  "disposition": "Keep gate on hold and reconcile findings before scheduling proof. An add-only report is not a claim or a receipt.",
+  "findings": [
+    {
+      "finding": "When multiple nodes are live but no selected node exists, the entire logging ng-view is hidden while allLogNodes defaults false. The All nodes checkbox inside that view cannot be reached until a user chooses a node; a fresh or invalid-restored selection triggers this case.",
+      "location": "solr/webapp/web/index.html:170",
+      "priority": "P2"
+    },
+    {
+      "finding": "Node-system request completions have no generation check, and systemError is cleared only on request start. Filtering or paging can overlap refreshes, so an older failure arriving after a newer successful request marks a healthy node unavailable; older success can overwrite newer values.",
+      "location": "solr/webapp/web/js/angular/controllers/cloud.js:394-396,429-430",
+      "priority": "P2"
+    }
+  ],
+  "head": "f2cab615c5ba08cf83d11fe5ae4fc3a0d0b8d7bb",
+  "id": "solr-18619-prep-linux-gate-r1-pre-gate-review",
+  "job": "solr-18619-prep-linux-gate-r1",
+  "type": "report",
+  "verdict": "changes requested; keep pre-gate hold",
+  "verification": "Static source review only; no Gradle or browser execution. Existing partial-failure tests do not exercise the above sequences. Gate proof remains pending and applies only to its original head; repairs require a new exact-head gate."
+}
