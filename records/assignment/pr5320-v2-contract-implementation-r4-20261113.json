@@ -1,0 +1,14 @@
+{
+  "id": "pr5320-v2-contract-implementation-r4-20261113",
+  "intended_host": "Windows",
+  "job": "pr5320-v2-contract-implementation-r4-20261113",
+  "source": {
+    "branch": "pr-5320-v2-contract",
+    "head": "95aa5cbd0a26501ab583e63c3b472613f6a774a1",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr5320-v2-contract-implementation-r3-20261113",
+  "summary": "Add regression and correction for null enum-only anyOf alternatives",
+  "supersedes_gate": "records/gate/pr5320-v2-contract-linux-gate-r3-20261113.json",
+  "type": "assignment"
+}
