@@ -1,0 +1,18 @@
+{
+  "claim_path": "records/claim/solr-18606-pr5314-review-round2-linux-20261113.json",
+  "gate_id": "solr-18606-pr5314-review-round2-linux-20261113",
+  "gate_record": "records/gate/solr-18606-pr5314-review-round2-linux-20261113.json",
+  "id": "solr-18606-pr5314-review-round2-linux-20261113",
+  "intended_host": "Linux",
+  "job": "solr-18606-pr5314-review-round2-linux-20261113",
+  "phase": "PR review round 2",
+  "receipt_path": "records/receipt/solr-18606-pr5314-review-round2-linux-20261113-receipt.json",
+  "source": {
+    "branch": "solr-18606-pr5314-review-round2",
+    "head": "a20facda3ee83d307dbc26a33a229c7b082c62bb",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify SolrTestCase change for the alias read regression on a separate review branch.",
+  "supersedes_gate": "records/gate/solr-18606-pr5314-alias-signal-linux-gate-2dbfc9f32aa-r2.json",
+  "type": "assignment"
+}
