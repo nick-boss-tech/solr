@@ -35,6 +35,7 @@ import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.common.params.MapSolrParams;
 import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.common.util.CommandOperation;
+import org.apache.solr.common.util.JsonSchemaValidator;
 import org.apache.solr.common.util.SuppressForbidden;
 import org.apache.solr.common.util.Utils;
 import org.apache.solr.handler.DumpRequestHandler;
@@ -808,6 +809,22 @@ public class BaseTestRuleBasedAuthorizationPlugin extends SolrTestCaseJ4 {
     assertTrue(captureErrors(perms.parsedCommands).isEmpty());
     permList = (List<Map<String, Object>>) perms.getVal("permissions");
     assertEquals(0, permList.size());
+  }
+
+  public void testDeletePermissionApiSchema() {
+    var commands = new RuleBasedAuthorizationPlugin().getSpec().getMap("commands");
+    var deleteSchema = commands.getMap("delete-permission");
+    var validator = new JsonSchemaValidator(deleteSchema);
+    assertNull(validator.validateJson(1));
+    assertNull(validator.validateJson(Map.of("id", "permission-id")));
+    assertNotNull(validator.validateJson(List.of("permission-id")));
+  }
+
+  public void testSetPermissionIdApiSchema() {
+    var commands = new RuleBasedAuthorizationPlugin().getSpec().getMap("commands");
+    assertEquals(
+        "string",
+        commands.getMap("set-permission").getMap("properties").getMap("id").get("type"));
   }
 
   public void testDeleteByIdTwiceRemovesOnlyThatPermission() throws IOException {

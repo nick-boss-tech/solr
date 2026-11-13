@@ -34,6 +34,8 @@ public class SetRuleBasedAuthPermissionPayload implements ReflectMapWriter {
 
   @JsonProperty public Integer index;
 
+  @JsonProperty public String id;
+
   @JsonProperty public Integer before;
 
   @JsonProperty public Map<String, Object> params;

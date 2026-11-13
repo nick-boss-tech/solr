@@ -433,6 +433,14 @@ public abstract class RuleBasedAuthorizationPluginBase
   @Override
   public ValidatingJsonMap getSpec() {
     final List<Api> apis = AnnotatedApi.getApis(new ModifyRuleBasedAuthConfigAPI());
-    return apis.get(0).getSpec();
+    ValidatingJsonMap spec = apis.get(0).getSpec();
+    // The schema generator cannot infer the two supported delete payload shapes.
+    spec.getMap("commands")
+        .put(
+            "delete-permission",
+            Map.of(
+                "type", List.of("integer", "object"),
+                "description", "An index, or an object containing the permission id."));
+    return spec;
   }
 }
