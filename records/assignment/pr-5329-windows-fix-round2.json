@@ -1,0 +1,10 @@
+{
+  "id": "pr-5329-windows-fix-round2",
+  "intended_host": "Windows implementation; Linux proof required",
+  "job": "pr-5329-windows-fix-round2",
+  "prior_release": "records/release/pr-5329-windows-fix-20261113.json",
+  "source_head": "7dedae124c252574caaff93cf4bcf2bc1d240fc9",
+  "successor_of": "pr-5329-windows-fix-20261113",
+  "summary": "Improve PR 5329 TLS fix and coverage after review",
+  "type": "assignment"
+}
