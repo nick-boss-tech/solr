@@ -1,0 +1,23 @@
+{
+  "environment": "Linux Solr gate host, supported JDK, isolated clean checkout",
+  "head": "95aa5cbd0a26501ab583e63c3b472613f6a774a1",
+  "id": "pr5320-v2-contract-linux-gate-r3-20261113",
+  "job": "pr5320-v2-contract-linux-gate-r3-20261113",
+  "phase": "round 3 follow-up proof",
+  "requirements": [
+    "Verify remote head and contributor ancestry; all earlier gates cover different heads and are superseded.",
+    "Run ./gradlew :solr:solrj:test --tests org.apache.solr.common.util.JsonValidatorTest, ./gradlew :solr:core:test --tests org.apache.solr.security.BaseTestRuleBasedAuthorizationPlugin, ./gradlew :solr:core:test --tests org.apache.solr.security.TestExternalRoleRuleBasedAuthorizationPlugin, and ./gradlew :solr:core:test --tests org.apache.solr.security.BasicAuthStandaloneTest.testV2PermissionIds. Capture fresh XML/logs, counts, seeds and exit codes and confirm named tests ran.",
+    "Run ./gradlew tidy and ./gradlew check -x test. Record exit codes and environment conditions. If tidy changes tracked files, report the diff and require a newly pushed head and superseding gate.",
+    "Fail-before on isolated round 2 parent f1a840767476b1bf234d0870ccb7661f9e4e2520: apply the new testAnyOfRejectsSilentFailureAndNullId method and imports unchanged and run it, confirming the forced LinkedHashMap ordering fails at the array-rejection assertion. In a separate isolated test probe assert rejection of an object whose id key has null; run on parent and offered head, record the source of the probe and actual failure/pass. Compilation, missing tests or harness failures are not behavioral proof.",
+    "Repeat the round 2 gate's negative proof against d85ce12ebeba577d71c3316d55c8ea1043adb734 for permissive object schema and unsupported anyOf, and against contributor parent 5fa5513038a7cf9318ed800423d8a44064d4c0e3 for the missing set-id schema; see records/gate/pr5320-v2-contract-linux-gate-r2-20261113.json. Preserve executable baselines and record each proof leg independently.",
+    "Review and record null semantics: explicit nullable and nested item cases inside anyOf, prior null behavior outside anyOf, and errors isolated between alternatives. The standalone test checks the handler spec in-process and an authenticated HTTP read/set/delete flow plus persisted state; it does not cover HTTP introspection or controlled concurrent edits.",
+    "Publish receipt records/receipt/pr5320-v2-contract-linux-gate-r3-20261113-receipt.json with all legs, commands, results, evidence locations and execution conditions."
+  ],
+  "source": {
+    "branch": "pr-5320-v2-contract",
+    "contributor_parent": "5fa5513038a7cf9318ed800423d8a44064d4c0e3",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes_gate": "records/gate/pr5320-v2-contract-linux-gate-r2-20261113.json",
+  "type": "gate"
+}
