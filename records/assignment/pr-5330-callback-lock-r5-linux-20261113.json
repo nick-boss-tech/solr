@@ -1,0 +1,25 @@
+{
+  "claim_path": "records/claim/pr-5330-callback-lock-r5-linux-20261113.json",
+  "contributor_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+  "coordination": "Older round-2 Linux gate claimed at dfe745bf1b8439f85300db3755c9b1ec7d2a87a6; reconcile its execution and receipt; do not assume worker stopped or duplicate an active execution.",
+  "gate_id": "pr-5330-callback-lock-r5-linux-20261113",
+  "gate_record": "records/gate/pr-5330-callback-lock-r5-linux-20261113.json",
+  "host_requirements": [
+    "linux",
+    "jdk21",
+    "Solr Gradle"
+  ],
+  "id": "pr-5330-callback-lock-r5-linux-20261113",
+  "implementation_job": "pr-5330-callback-lock-r5-windows-20261113",
+  "job": "pr-5330-callback-lock-r5-linux-20261113",
+  "phase": "round 5",
+  "receipt_path": "records/receipt/pr-5330-callback-lock-r5-linux-20261113-receipt.json",
+  "source": {
+    "branch": "pr-5330-test-fix-20261113",
+    "head": "1712a7dcbdd25cd24d1ec12336019c94cbdfedbf",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify PR 5330 callback-lock deadlock repair and full stall handling",
+  "supersedes": "records/gate/pr-5330-callback-r4-linux-20261113.json",
+  "type": "assignment"
+}
