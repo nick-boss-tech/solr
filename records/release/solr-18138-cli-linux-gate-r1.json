@@ -1,0 +1,9 @@
+{
+  "actor": "vm2",
+  "evidence": "records/receipt/solr-18138-cli-linux-gate-r1-receipt.json; records/evidence/solr-18138-cli-linux-gate-r1-evidence.tar.gz (SHA-256 d59b8b96273572cc6dda5677ea58998ceb59ee9bce462656a14e9c19892d1a4f)",
+  "id": "solr-18138-cli-linux-gate-r1",
+  "job": "solr-18138-cli-linux-gate-r1",
+  "reason": "Linux gate solr-18138-cli-linux-gate-r1 completed and the receipt is filed: verdict passed at head 45956fbe7f. All legs green (changelog YAML, focused ToolBaseZkTimeoutTest 1/1, BATS test_zk.bats 12/12 incl. the new timeout test, CLI exercise non-verbose+verbose, tidy zero changes, root check rc 0 with the ref-guide toggle for the worktree env), fail-before is behavioral on base 0ea013e782f, and the evidence archive is on the board. Receipt: records/receipt/solr-18138-cli-linux-gate-r1-receipt.json (aec8e615a28). Executor stop: daemons stopped, worktrees gate-18138 and gate-18138-failbefore clean.",
+  "recorded": "2026-11-13",
+  "type": "release"
+}
