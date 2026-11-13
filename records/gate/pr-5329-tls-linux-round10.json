@@ -1,0 +1,19 @@
+{
+  "environment": "Linux JDK 21, disposable clean checkout and installations; run permission tests unprivileged",
+  "head": "4b4f23abefb65718f64d468aa9489ca6dd27f595",
+  "id": "pr-5329-tls-linux-round10",
+  "job": "pr-5329-tls-linux-round10",
+  "phase": "round 10 partial symlink and write-conflict fixes",
+  "requirements": [
+    "Confirm remote source head and verify prior round-nine gate has not been claimed or any worker and executor stopped before execution. Capture commands, exit codes, fresh logs and XML.",
+    "Run ./gradlew :solr:packaging:integrationTests --tests test_secure_example.bats as an unprivileged user. Require all ten tests to execute without skips. Verify linked include and zoo.cfg survive partial writes and conflicts, temporary files are removed, and later retries reach their intended behavior. Confirm the secure client and plaintext listener assertions run.",
+    "For both generated configuration paths demonstrate fail-before or mutation of conflict detection, link handling and partial write protection; isolate failures at the relevant assertions. Validate absolute and relative symlinks, chained and dangling links, cycles, permissions, ownership, and existing user-managed secure configuration. No real deployments or secrets.",
+    "Investigate compare-then-rename race with a deterministic edit after comparison and before rename; record whether external edits are lost. A lock or compare is not proof against a noncooperating writer. This known issue makes the receipt incomplete.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.cloud.SolrZkServerTlsTest -Dtests.seed=5329ABCD and the ZookeeperStatusHandlerTest and ZookeeperStatusHandlerFailureTest classes; report fresh counts and skips.",
+    "Run ./gradlew tidy with clean tree afterward and ./gradlew check -x test. Record all failures, exclusions and limits. If formatting changes, a new pushed head and gate are required.",
+    "Reconcile prior fail-before confirmation, ensemble, unification and password umask mutation proof against changed code and setup; rerun affected legs as needed. Record status-handler negative TLS coverage gaps.",
+    "External plaintext ensemble TLS inheritance and stale ports/store paths on rotation remain unresolved. No public PR offer; gate must remain incomplete even if focused checks pass."
+  ],
+  "supersedes": "records/gate/pr-5329-tls-linux-round9.json",
+  "type": "gate"
+}
