@@ -1,0 +1,19 @@
+{
+  "claim_path": "records/claim/pr-5339-signature-migration-linux-gate-r1.json",
+  "contributor_parent": "1bb663935e1464da39d780cecbbd9b2de8d08d44",
+  "gate_id": "pr-5339-signature-migration-linux-gate-r1",
+  "gate_record": "records/gate/pr-5339-signature-migration-linux-gate-r1.json",
+  "id": "pr-5339-signature-migration-linux-gate-r1",
+  "intended_host": "Linux gate host",
+  "job": "pr-5339-signature-migration-linux-gate-r1",
+  "phase": "documentation follow-up r1",
+  "receipt_path": "records/receipt/pr-5339-signature-migration-linux-gate-r1-receipt.json",
+  "source": {
+    "branch": "pr-5339-signature-migration",
+    "head": "6d886caf1b2915c9318b1419386e5181dd154ad0",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Linux verification of PR 5339 signature migration follow-up",
+  "supersedes": null,
+  "type": "assignment"
+}
