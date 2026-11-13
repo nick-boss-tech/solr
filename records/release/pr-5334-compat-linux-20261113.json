@@ -1,0 +1,9 @@
+{
+ "executor_stop_evidence": "All gate chains have exited (the last at 2026-11-13T15:38:56-07:00); no Gradle build is running at release time. All three checkouts are at rest and clean at their recorded heads; the contributor checkout's test overlay was reverted and the head checkout's tidy reformat was reverted after its diff was captured into evidence.",
+ "id": "pr-5334-compat-linux-20261113",
+ "job": "pr-5334-compat-linux-20261113",
+ "receipt": "records/receipt/pr-5334-compat-linux-20261113-receipt.json",
+ "released": "2026-11-13T15:42:00-07:00",
+ "released_by": "phone-agent",
+ "type": "release"
+}

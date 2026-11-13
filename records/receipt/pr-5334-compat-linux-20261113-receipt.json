@@ -1,0 +1,34 @@
+{
+ "branch": "pr-5334-compatibility-20261113",
+ "contributor_head": "c64ef9dcc6360bd6bd39cb129d1b9f3e94e8ce67",
+ "evidence": "records/evidence/pr-5334-compat-linux-20261113-evidence.txt",
+ "evidence_sha256": "04728754a6bb5c2a3d394da1bd299dea50a975dbaf839d5b4b101ad4a34c60b1",
+ "executor": "phone-agent",
+ "filed": "2026-11-13T15:42:00-07:00",
+ "gate": "records/gate/pr-5334-compat-linux-20261113.json",
+ "head": "d3c2bf186fda98eceb64e6b1953997a5c84a066d",
+ "id": "pr-5334-compat-linux-20261113",
+ "job": "pr-5334-compat-linux-20261113",
+ "legs": [
+  {
+   "leg": "Requirement 1: independent UID measurement on exact pre-PR base",
+   "result": "PROVEN: base build reports SimpleOrderedMap UID -8705511030983987520 (required value); contributor head reports -7320877503891100753; offered head reports -8705511030983987520; superclass NamedList UID 1957981902839867821 identical on all three revisions."
+  },
+  {
+   "leg": "Requirement 2: cross-version serialization both directions",
+   "result": "PROVEN: base-written stream deserializes on the offered head with contents equal, and head-written stream deserializes on the base with contents equal (payload includes null keys, null values, nested SimpleOrderedMap and NamedList, list values, an empty map). Control: base reading a contributor stream throws InvalidClassException naming stream UID -7320877503891100753 vs local -8705511030983987520."
+  },
+  {
+   "leg": "Requirement 3: solrj tests, tidy, root check",
+   "result": "Tests PASSED (SimpleOrderedMapTest 20/20, NamedListTest 5/5, 0 skips, seed 5334C0DE). Tidy FAILED for this head (reformats SimpleOrderedMapTest.java, diff in evidence). Root check FAILED at :solr:solrj:spotlessJavaCheck on the same file; no other check task failed."
+  },
+  {
+   "leg": "Requirement 4: UID assertion fail-before on contributor head",
+   "result": "DISCRIMINATES: overlaid test class runs 20 tests with exactly one failure, testSerialVersionUID AssertionError expected:<-8705511030983987520> but was:<-7320877503891100753>; Map-view assertions passed there, as the gate permits."
+  }
+ ],
+ "pre_pr_base": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+ "summary": "Compatibility proof passes in full; the gate fails for this head on formatting only. The exact-base serialVersionUID was independently measured as -8705511030983987520 (the required value); the contributor head computes -7320877503891100753 and its streams are rejected by the base with InvalidClassException naming both values; the offered head restores the base UID and serializes compatibly in both directions with contents equal, including null keys and values. Named tests pass (SimpleOrderedMapTest 20/20, NamedListTest 5/5, seed 5334C0DE) and the overlaid test fails on the contributor head at exactly the UID assertion. But tidy reformats the branch's new SimpleOrderedMapTest.java (two line wraps, diff in evidence) and root check fails at :solr:solrj:spotlessJavaCheck on the same file, so under the gate's verdict policy this head cannot pass: a committed formatting successor and a fresh gate are required. The gate did not push the reformat on the implementation line's branch.",
+ "type": "receipt",
+ "verdict": "FAILED"
+}

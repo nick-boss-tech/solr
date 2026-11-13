@@ -1,0 +1,47 @@
+PR 5334 compatibility gate evidence (phone-agent, Linux host)
+Job: pr-5334-compat-linux-20261113; gate: records/gate/pr-5334-compat-linux-20261113.json
+Offered head: d3c2bf186fda98eceb64e6b1953997a5c84a066d (branch pr-5334-compatibility-20261113); contributor head c64ef9dcc6360bd6bd39cb129d1b9f3e94e8ce67; pre-PR base 0ea013e782f747cc94e1504f8077f813d2ddcca8. Each revision was built in its own clean checkout with the checked-out HEAD recorded before building (fetched SHAs do not travel through a plain clone, so each clone fetched its SHA explicitly). JDK: Temurin 21.0.12.1+1. Gradle commands ran through the host Gradle 9.7.0 wrapper in place of ./gradlew.
+Verdict: FAILED for this head, on formatting only. Every compatibility leg passes; tidy reformats the branch's own new test file and root check fails at the matching spotless task. Per the gate record, a formatting repair requires a committed successor and a fresh gate.
+
+== Requirement 1: independently measured serialVersionUID on the exact base
+The base checkout was built (:solr:solrj:compileJava, exit 0) and a probe class printed ObjectStreamClass.lookup(SimpleOrderedMap.class).getSerialVersionUID() against the base classes in a fresh JVM: -8705511030983987520, exactly the required value. For reference, the same probe reports -7320877503891100753 on the contributor head (the value the PR's added getImmutableCopy method produces) and -8705511030983987520 on the offered head (the explicit field). Superclass check: NamedList, the superclass in the serialized graph, reports 1957981902839867821 on all three revisions, so no nested superclass incompatibility exists.
+
+== Requirement 2: cross-version serialization, both directions, separate JVMs
+A probe serializes a representative payload in one JVM and deserializes it in a separate JVM running only the other revision's solrj classes: a SimpleOrderedMap holding a string pair, a null key, a null value, Integer/Double/Boolean values, a nested SimpleOrderedMap (itself holding a null value), a nested NamedList (holding a null key), and a list value; plus a standalone NamedList and an empty SimpleOrderedMap.
+Base writes, offered head reads: READ-OK, contents equal to the locally rebuilt payload (list equality over the maps, which compares every name/value pair including the nulls).
+Offered head writes, base reads: READ-OK, contents equal, same payload.
+Control showing the probe discriminates: the base JVM reading a contributor-written stream throws java.io.InvalidClassException: SimpleOrderedMap; local class incompatible: stream classdesc serialVersionUID = -7320877503891100753, local class serialVersionUID = -8705511030983987520. That is the exact breakage the offered follow-up repairs.
+
+== Requirement 3: named tests, tidy, root check
+:solr:solrj:cleanTest :solr:solrj:test --tests SimpleOrderedMapTest --tests NamedListTest with seed 5334C0DE (passed as -Ptests.seed; the gate names no seed, this one is recorded here): exit 0. Fresh JUnit: SimpleOrderedMapTest 20 tests, 0 skipped, 0 failures; NamedListTest 5 tests, 0 skipped, 0 failures. testSerialVersionUID executed and passed at the head.
+Tidy: ./gradlew tidy exited 0 but reformatted one tracked branch file, solr/solrj/src/test/org/apache/solr/common/util/SimpleOrderedMapTest.java (two line wraps: the new testSerialVersionUID assertion and one assertThrows in the immutable-copy test). The full diff is appended below. The checkout was restored to the exact head after capture; the gate did not push the reformat on the implementation line's branch.
+Root check: ./gradlew check -x test exited 1, BUILD FAILED, at exactly one task: :solr:solrj:spotlessJavaCheck, reporting the same SimpleOrderedMapTest.java format violation (the long assertEquals line in testSerialVersionUID). No other check task failed.
+
+== Requirement 4: fail-before on the contributor head
+The offered head's SimpleOrderedMapTest.java was copied unchanged onto the contributor checkout (the only modified file) and the class was run with the same seed: 20 tests, exactly 1 failure: testSerialVersionUID, java.lang.AssertionError: expected:<-8705511030983987520> but was:<-7320877503891100753>. That is an assertion failure, not a compile, setup or timeout failure. The added Map-view assertions passed on the contributor head, which the gate permits (they are coverage of the offered implementation). The contributor checkout was restored clean afterwards.
+
+== Appendix: tidy diff at the offered head (git diff after ./gradlew tidy)
+diff --git a/solr/solrj/src/test/org/apache/solr/common/util/SimpleOrderedMapTest.java b/solr/solrj/src/test/org/apache/solr/common/util/SimpleOrderedMapTest.java
+index 76c29abda5..2d000aa09a 100644
+--- a/solr/solrj/src/test/org/apache/solr/common/util/SimpleOrderedMapTest.java
++++ b/solr/solrj/src/test/org/apache/solr/common/util/SimpleOrderedMapTest.java
+@@ -79,7 +79,8 @@ public class SimpleOrderedMapTest extends SolrTestCase {
+   @Test
+   public void testSerialVersionUID() {
+     assertEquals(
+-        -8705511030983987520L, ObjectStreamClass.lookup(SimpleOrderedMap.class).getSerialVersionUID());
++        -8705511030983987520L,
++        ObjectStreamClass.lookup(SimpleOrderedMap.class).getSerialVersionUID());
+   }
+ 
+   @Test
+@@ -276,7 +277,8 @@ public class SimpleOrderedMapTest extends SolrTestCase {
+     Map<String, Integer> mapCopy = (SimpleOrderedMap<Integer>) copy;
+     assertThrows(UnsupportedOperationException.class, () -> mapCopy.put("one", 11));
+     assertThrows(
+-        UnsupportedOperationException.class, () -> mapCopy.entrySet().iterator().next().setValue(11));
++        UnsupportedOperationException.class,
++        () -> mapCopy.entrySet().iterator().next().setValue(11));
+ 
+     map.put("three", 3);
+     assertEquals("copy must not see later changes to the original", 2, copy.size());
