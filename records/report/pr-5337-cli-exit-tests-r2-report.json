@@ -1,0 +1,14 @@
+{
+  "id": "pr-5337-cli-exit-tests-r2-report",
+  "job": "pr-5337-cli-exit-tests-r2",
+  "results": "Separate Bats parent cases assert usage and both help spellings. Added real-distribution Windows launcher test. The PowerShell harness passed with a synthetic launcher only; this is not product proof. git diff --check passed; no Gradle or real distribution test ran on Windows.",
+  "source": {
+    "branch": "pr-5337-cli-exit-fixes",
+    "contributor_parent": "944f3ec319caee19a8061feb227ee20b4cd8dcbe",
+    "head": "21379130f426433f163fcd61f0731b8ad51d1412",
+    "prior_head": "ee35178851befab053e7f6ac4d20c866eed7a293",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Pushed stronger launcher tests; proof pending",
+  "type": "report"
+}
