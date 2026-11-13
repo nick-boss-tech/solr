@@ -1,0 +1,10 @@
+{
+  "claimed": "2026-11-13T20:45:00Z",
+  "head": "13522945de6c9102ecdbe8efb821ed451e840216",
+  "host": "linux",
+  "id": "pr-5330-test-assertions-r9-linux-20261113",
+  "job": "pr-5330-test-assertions-r9-linux-20261113",
+  "note": "Live fork branch pr-5330-test-fix-20261113 verified at the gate head by git ls-remote at claim time. Contributor parent eedcb534 is an ancestor (9 commits). No conflicting r9 claim exists. Reconcile note: the older claimed round-2 Linux job (pr-5330-regression-r2-linux-20261113, phone-agent, head dfe745bf1b) has no release, receipt, evidence or report; its head is an ancestor of this r9 head; superseded by r8/r9 gates; no overlapping active work observed. Claim proceeds per gate requirement 1.",
+  "owner": "vm2",
+  "type": "claim"
+}
