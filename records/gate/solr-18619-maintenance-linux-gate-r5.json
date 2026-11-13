@@ -1,0 +1,22 @@
+{
+  "environment": "Linux JDK 21, Chrome, ChromeDriver, Selenium; full checkout and host build lock; ability to run all named checks",
+  "head": "855eccb3e7642cc25ce021d64639c5ce82bd3f12",
+  "id": "solr-18619-maintenance-linux-gate-r5",
+  "job": "solr-18619-maintenance-linux-gate-r5",
+  "phase": "pre-submission round 5 after maintenance repair",
+  "receipt_path": "records/receipt/solr-18619-maintenance-linux-gate-r5.json",
+  "requirements": [
+    "Run all positive, fail-before and mutation legs of https://github.com/nick-boss-tech/solr/blob/e92b9e651cc15a9888782664d2ab51504856018c/records/gate/solr-18619-real-logs-linux-gate-r4.json and its referenced earlier gates at this exact head; include all 10 specified negative or mutation legs, selected webapp and proxy/auth tests, Selenium seed 18619C0DE, real node event rendering, tidy, root check -x test, changelog and reference-guide checks. Prior receipt ran zero behavioral tests and cannot supply a passing leg.",
+    "First rerun updateLicenses and resolveAndLockAll --write-locks against the repaired lockfile; both must succeed and leave the tracked checkout clean. Run tidy and verify no tracked formatting changes. If any maintenance task changes tracked files, stop, preserve the exact diff and report incomplete; a changed patch needs a separately pushed head and superseding gate. Investigate failures before retrying.",
+    "Require actual zero-skip positive counts and all intended assertion failures on the prescribed isolated mutations; compile, setup, timeout, missing watcher or skipped tests are not behavioral proof. Preserve fresh XML/logs and exact mutation diffs. The new real-event case seeds real watchers directly; do not claim Log4j appender-delivery verification.",
+    "Use a host capable of the named checks. Do not treat omitted Docker, reference-guide/Antora or link-check requirements as passed; explicitly record any host-policy exclusion and leave those required legs incomplete until run.",
+    "Record exact commands, seed, Java/Chrome/driver and NODE_ENV, times, statuses, counts, fresh evidence, live remote head and final tracked tree. No Gradle or Selenium was run on the Windows repair host."
+  ],
+  "source": {
+    "baseline": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+    "branch": "solr-18619-targeting-prep",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes": "records/gate/solr-18619-real-logs-linux-gate-r4.json and records/receipt/solr-18619-real-logs-linux-gate-r4.json",
+  "type": "gate"
+}
