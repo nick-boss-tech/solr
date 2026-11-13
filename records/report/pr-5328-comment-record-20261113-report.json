@@ -1,0 +1,12 @@
+{
+  "comment": "https://github.com/apache/solr/pull/5328#issuecomment-6860703032",
+  "contributor_head": "c295e8c855d35c9edcf0fcf75de04d2f24803db6",
+  "id": "pr-5328-comment-record-20261113-report",
+  "job": "pr-5328-comment-record-20261113",
+  "offered_head": "fc65261419c7a4890510e50d9b93163268d1d853",
+  "posted_at": "2026-11-13T17:53:16Z",
+  "posted_by": "nick-boss-tech",
+  "proof": "records/receipt/pr-5328-copy-vector-gate-r2-receipt.json",
+  "status": "Comment verified live; contributor head not yet updated, no replies at readback. The posted comment omits the longer test results paragraph from the earlier local draft.",
+  "type": "report"
+}
