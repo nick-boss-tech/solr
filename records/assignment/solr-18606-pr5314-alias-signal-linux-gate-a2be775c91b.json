@@ -1,0 +1,28 @@
+{
+  "claim_path": "records/claim/solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b.json",
+  "gate_id": "solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b-r1",
+  "gate_record": "records/gate/solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b-r1.json",
+  "id": "solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b",
+  "intended_host": "Linux",
+  "job": "solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b",
+  "receipt_path": "records/receipt/solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b-r1-receipt.json",
+  "references": [
+    "records/assignment/solr-18606-pr5314-alias-signal-linux-20261113.json",
+    "records/claim/solr-18606-pr5314-alias-signal-linux-20261113.json"
+  ],
+  "requirements": [
+    "Run the focused ZkClientClusterStateProviderTest.testKnownAliasDoesNotReadAliasCollectionState on the exact head with seed 18606CAFE; verify its direct failed-read positive control observes the exact alias collection-state path.",
+    "Run the renamed CloudHttp2SolrClientTest.testZkAliasRequestsResolveAndQuery on the exact head with seed 18606CAFE.",
+    "Apply only the known-alias guard-removal mutation; the new path-specific test must fail by recording NoNodeException for /collections/<alias>/state.json, while the original global-metrics test must be shown to pass under that mutation as the limitation reproduction.",
+    "Run the non-test root check with -x test -x :solr:docker:check -x :solr:solr-ref-guide:check; verify these exclusions remove Docker check/build tasks and the Antora/site-link chain. Do not use Docker.",
+    "Record exact commands, results, source head, and any skipped or excluded proof. Do not alter public PR text or comments."
+  ],
+  "source": {
+    "base_head": "33e3f8b8599ea12fad0456ce0444d3a24a4affe6",
+    "branch": "solr-18606-submit",
+    "head": "a2be775c91b4279a9ac4f5c80e3219afbaac2bc2",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Exact-head Linux gates for the client- and path-specific alias failed-read regression on solr-18606-submit.",
+  "type": "assignment"
+}
