@@ -1,0 +1,19 @@
+{
+  "claim_path": "records/claim/solr-18619-maintenance-linux-gate-r5.json",
+  "gate_id": "solr-18619-maintenance-linux-gate-r5",
+  "gate_record": "records/gate/solr-18619-maintenance-linux-gate-r5.json",
+  "id": "solr-18619-maintenance-linux-gate-r5",
+  "intended_host": "Linux with JDK 21, Chrome, ChromeDriver, Selenium and capacity for the required checks",
+  "job": "solr-18619-maintenance-linux-gate-r5",
+  "phase": "pre-submission round 5 after maintenance repair",
+  "receipt_path": "records/receipt/solr-18619-maintenance-linux-gate-r5.json",
+  "source": {
+    "baseline": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+    "branch": "solr-18619-targeting-prep",
+    "head": "855eccb3e7642cc25ce021d64639c5ce82bd3f12",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Run complete SOLR-18619 exact-head Linux proof after applying the round 4 tidy and lockfile repairs",
+  "supersedes": "records/gate/solr-18619-real-logs-linux-gate-r4.json and its incomplete receipt records/receipt/solr-18619-real-logs-linux-gate-r4.json at 848885b4cda2c3312576c810aeb4a46afb50419e",
+  "type": "assignment"
+}
