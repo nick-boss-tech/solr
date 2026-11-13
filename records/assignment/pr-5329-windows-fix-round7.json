@@ -1,0 +1,11 @@
+{
+  "contributor_head": "e851dd0259b533ee7ec794c2ae664abc77cfe8f8",
+  "id": "pr-5329-windows-fix-round7",
+  "intended_host": "Windows implementation; Linux proof required",
+  "job": "pr-5329-windows-fix-round7",
+  "note": "Round-two Linux proof is claimed; preserve in-flight work and avoid duplicate execution.",
+  "source_head": "de6c192d045c9c0e182b9e3d060d412d450df3aa",
+  "successor_of": "pr-5329-windows-fix-round6",
+  "summary": "Resolve remaining confirmation and ZooKeeper TLS lifecycle problems",
+  "type": "assignment"
+}
