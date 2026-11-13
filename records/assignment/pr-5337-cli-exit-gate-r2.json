@@ -1,0 +1,19 @@
+{
+  "claim_path": "records/claim/pr-5337-cli-exit-gate-r2.json",
+  "gate_id": "pr-5337-cli-exit-gate-r2",
+  "gate_record": "records/gate/pr-5337-cli-exit-gate-r2.json",
+  "id": "pr-5337-cli-exit-gate-r2",
+  "intended_host": "Linux gate host",
+  "job": "pr-5337-cli-exit-gate-r2",
+  "phase": "round 2",
+  "receipt_path": "records/receipt/pr-5337-cli-exit-gate-r2.json",
+  "source": {
+    "branch": "pr-5337-cli-exit-fixes",
+    "contributor_parent": "944f3ec319caee19a8061feb227ee20b4cd8dcbe",
+    "head": "21379130f426433f163fcd61f0731b8ad51d1412",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Linux proof for strengthened PR 5337 CLI follow-up",
+  "supersedes": "records/gate/pr-5337-cli-exit-gate-r1.json",
+  "type": "assignment"
+}
