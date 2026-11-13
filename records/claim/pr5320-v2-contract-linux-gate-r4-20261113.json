@@ -1,0 +1,10 @@
+{
+ "claimed": "2026-11-13T10:59:00-07:00",
+ "claimer": "phone-agent",
+ "head": "63188a804067b87ed16d6d205d11824532d2d086",
+ "host": "linux",
+ "id": "pr5320-v2-contract-linux-gate-r4-20261113",
+ "job": "pr5320-v2-contract-linux-gate-r4-20261113",
+ "note": "Live fork branch pr-5320-v2-contract verified at the r4 gate head 63188a80 by git ls-remote at claim time. The r1, r2 and r3 gates are superseded in chain and unclaimed; the r4 implementation job is reported and released. No conflicting claim exists. Taken at Nick's direction in chat 2026-11-13.",
+ "type": "claim"
+}
