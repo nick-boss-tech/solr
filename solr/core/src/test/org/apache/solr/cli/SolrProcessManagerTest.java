@@ -154,20 +154,36 @@ public class SolrProcessManagerTest extends SolrTestCase {
     assertEquals(2, processes.size());
   }
 
+  @SuppressWarnings("SystemGetProperty")
   public void testFilteredScanPreservesOtherLiveNodes() throws IOException {
     Path dir = createTempDir("filtered-pids");
-    Path pidFile = dir.resolve("solr-" + processHttp.getKey() + ".pid");
-    Path portFile = dir.resolve("solr-" + processHttps.getKey() + ".port");
-    Files.writeString(pidFile, Long.toString(processHttp.getValue().pid()));
-    Files.writeString(portFile, Integer.toString(processHttps.getKey()));
+    Path otherPid = dir.resolve("solr-" + processHttp.getKey() + ".pid");
+    Path otherPort = dir.resolve("solr-" + processHttp.getKey() + ".port");
+    Path matchedPid = dir.resolve("solr-" + processHttps.getKey() + ".pid");
+    Path matchedPort = dir.resolve("solr-" + processHttps.getKey() + ".port");
+    Path stale = dir.resolve("solr-99999.pid");
+    Files.writeString(otherPid, Long.toString(processHttp.getValue().pid()));
+    Files.writeString(otherPort, Integer.toString(processHttp.getKey()));
+    Files.writeString(matchedPid, Long.toString(processHttps.getValue().pid()));
+    Files.writeString(matchedPort, Integer.toString(processHttps.getKey()));
+    Files.writeString(stale, "99999");
     String originalDir = System.getProperty("solr.pid.dir");
     String originalMarker = System.getProperty(SolrProcessManager.PROCESS_SCAN_MARKER);
     try {
       System.setProperty("solr.pid.dir", dir.toString());
-      System.setProperty(SolrProcessManager.PROCESS_SCAN_MARKER, "nonexistent-test-marker");
-      assertTrue(new SolrProcessManager().scanSolrPidFiles().isEmpty());
-      assertTrue(Files.exists(pidFile));
-      assertTrue(Files.exists(portFile));
+      System.setProperty(SolrProcessManager.PROCESS_SCAN_MARKER, "-DisHttps=true");
+      Collection<SolrProcess> filtered = new SolrProcessManager().scanSolrPidFiles();
+      assertEquals(2, filtered.size());
+      assertTrue(filtered.stream().allMatch(p -> p.pid() == processHttps.getValue().pid()));
+      assertTrue(Files.exists(otherPid));
+      assertTrue(Files.exists(otherPort));
+      assertTrue(Files.exists(matchedPid));
+      assertTrue(Files.exists(matchedPort));
+      assertTrue(Files.exists(stale));
+
+      System.clearProperty(SolrProcessManager.PROCESS_SCAN_MARKER);
+      assertEquals(4, new SolrProcessManager().scanSolrPidFiles().size());
+      assertFalse(Files.exists(stale));
     } finally {
       System.setProperty("solr.pid.dir", originalDir);
       if (originalMarker == null) {

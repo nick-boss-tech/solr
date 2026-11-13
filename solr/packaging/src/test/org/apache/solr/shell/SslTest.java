@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
+import java.util.regex.Pattern;
 import org.apache.lucene.util.IOUtils;
 import org.apache.solr.shell.exec.Shell;
 import org.junit.Before;
@@ -55,6 +56,10 @@ import org.junit.Test;
 public class SslTest extends SolrShellTestCase {
 
   private static final String SECRET = "secret";
+  private static final String HOSTNAME_REJECTION =
+      "(No subject alternative DNS name matching localhost found|No name matching localhost found)";
+  private static final String MISSING_CLIENT_CERTIFICATE = "(bad_certificate|certificate_required)";
+  private static final String CLIENT_CERTIFICATE_REJECTED = "certificate_unknown";
 
   /** The JDK's keytool, which both platforms have, by absolute path rather than via PATH. */
   private static final String KEYTOOL =
@@ -65,6 +70,36 @@ public class SslTest extends SolrShellTestCase {
     // BATS' common_setup: every test in this file starts its own Solr, from a clean SOLR_HOME.
     IOUtils.rm(harnessEnv.solrHome());
     Files.createDirectories(harnessEnv.logsDir());
+  }
+
+  @Test
+  public void tlsDiagnosticsDistinguishRejectionFromOtherFailures() {
+    assertDiagnostic(
+        HOSTNAME_REJECTION, "No subject alternative DNS name matching localhost found");
+    assertDiagnostic(HOSTNAME_REJECTION, "No name matching localhost found");
+    assertDiagnostic(MISSING_CLIENT_CERTIFICATE, "Received fatal alert: bad_certificate");
+    assertDiagnostic(MISSING_CLIENT_CERTIFICATE, "Received fatal alert: certificate_required");
+    assertDiagnostic(CLIENT_CERTIFICATE_REJECTED, "Received fatal alert: certificate_unknown");
+    for (String unrelated :
+        new String[] {
+          "Server refused connection",
+          "java.nio.channels.ClosedChannelException",
+          "SSLHandshakeException: unable to find valid certification path",
+          "SSLHandshakeException: protocol_version",
+          "HTTP 200 OK"
+        }) {
+      assertFalse(Pattern.compile(HOSTNAME_REJECTION).matcher(unrelated).find());
+      assertFalse(Pattern.compile(MISSING_CLIENT_CERTIFICATE).matcher(unrelated).find());
+      assertFalse(Pattern.compile(CLIENT_CERTIFICATE_REJECTED).matcher(unrelated).find());
+    }
+    assertFalse(Pattern.compile(HOSTNAME_REJECTION).matcher("bad_certificate").find());
+    assertFalse(
+        Pattern.compile(CLIENT_CERTIFICATE_REJECTED).matcher("certificate_required").find());
+  }
+
+  private static void assertDiagnostic(String regex, String output) {
+    assertTrue(
+        "Diagnostic not recognized: " + output, Pattern.compile(regex).matcher(output).find());
   }
 
   @Test
@@ -133,7 +168,7 @@ public class SslTest extends SolrShellTestCase {
         .trustStore(keystore, SECRET)
         .get()
         .assertConnectionFailed()
-        .assertContains("No subject alternative DNS name matching localhost found");
+        .assertMatches(HOSTNAME_REJECTION);
 
     // The original's 'curl -k'. java.net.http has no per-request way to turn hostname
     // verification off, so the request addresses the node by the IP address the certificate
@@ -150,7 +185,7 @@ public class SslTest extends SolrShellTestCase {
     // This should fail the peername check
     runFail(
             "solr api --verbose --solr-url \"https://localhost:${SOLR_PORT}/solr/test/select?q=*:*\"")
-        .assertMatches("No subject alternative DNS name matching localhost found");
+        .assertMatches(HOSTNAME_REJECTION);
 
     // Restart the server enabling the SNI hostcheck
     env("SOLR_SSL_CHECK_PEER_NAME", "false");
@@ -402,7 +437,7 @@ public class SslTest extends SolrShellTestCase {
     runFail(
             "solr api --verbose --solr-url"
                 + " \"https://localhost:${SOLR_PORT}/solr/test/select?q=*:*&rows=0\"")
-        .assertContains("bad_certificate");
+        .assertMatches(MISSING_CLIENT_CERTIFICATE);
 
     // The original's subshells end here, restoring the four server variables and the client
     // keystore for what follows.
@@ -434,7 +469,7 @@ public class SslTest extends SolrShellTestCase {
     runFail(
             "solr api --verbose --solr-url"
                 + " \"https://localhost:${SOLR3_PORT}/solr/test/select?q=*:*&rows=0\"")
-        .assertContains("certificate_unknown");
+        .assertMatches(CLIENT_CERTIFICATE_REJECTED);
   }
 
   @Test
