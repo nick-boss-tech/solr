@@ -1,0 +1,11 @@
+{
+ "claimed": "2026-11-13T14:51:00-07:00",
+ "claimed_by": "phone-agent",
+ "gate": "records/gate/pr-5337-cli-exit-gate-r2.json",
+ "head": "21379130f426433f163fcd61f0731b8ad51d1412",
+ "host": "Linux (this VM)",
+ "id": "pr-5337-cli-exit-gate-r2",
+ "job": "pr-5337-cli-exit-gate-r2",
+ "note": "Claimed at Nick's direction in chat 2026-11-13 ('5337 try this one'). BATS legs run on this host; Solr-starting cases, if any, run as the non-root solrtest user per the host's root restriction.",
+ "type": "claim"
+}
