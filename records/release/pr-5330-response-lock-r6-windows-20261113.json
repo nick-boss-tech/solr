@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr-5330-r6",
+  "evidence": "Fork head 6ad35b2d9be19334e7df512d7a071e5fb237b12a pushed and verified; implementation stopped and no local test executor started. Report records/report/pr-5330-response-lock-r6-windows-20261113-report.json.",
+  "id": "pr-5330-response-lock-r6-windows-20261113",
+  "job": "pr-5330-response-lock-r6-windows-20261113",
+  "reason": "Fork implementation pushed and Linux proof handoff prepared",
+  "type": "release"
+}
