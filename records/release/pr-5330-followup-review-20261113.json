@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr-5330-review",
+  "evidence": "Review report records/report/pr-5330-followup-review-20261113-report.json; reviewer has stopped, no test executor started.",
+  "id": "pr-5330-followup-review-20261113",
+  "job": "pr-5330-followup-review-20261113",
+  "reason": "Read-only review complete",
+  "type": "release"
+}
