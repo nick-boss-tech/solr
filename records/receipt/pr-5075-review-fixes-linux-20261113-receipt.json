@@ -1,0 +1,42 @@
+{
+ "evidence": "records/evidence/pr-5075-review-fixes-linux-20261113-evidence.tar.gz (SHA-256 f29c2e9f90f88a6e1fe49d86a7106578822c68994d56334d2cbf45ff041b064e): setup log, per-leg logs including the standalone forbiddenApis rerun, fresh JUnit XML for all runs including the fail-before XML, and the gate scripts.",
+ "gate": "pr-5075-review-fixes-linux-20261113-gate",
+ "head": "dc825f9af929a7ad8d08f8eb51e969e72582acb2",
+ "id": "pr-5075-review-fixes-linux-20261113-receipt",
+ "job": "pr-5075-review-fixes-linux-20261113",
+ "legs": [
+  {
+   "leg": "head and diff scope",
+   "result": "Clean clone at dc825f9af929a7ad8d08f8eb51e969e72582acb2 (0 tracked modifications), one review-fix commit on prior head f8d4bdbea518901e255ae119f3e5c43e7804a9bf. Diff vs prior: changelog, SolrCmdDistributor.java, StreamingSolrClients.java, TolerantUpdateProcessor.java, ConcurrentUpdateBaseSolrClient.java, and +23 lines in StreamingSolrClientsErrorAttributionTest.java. The remote branch tip was re-verified unchanged at filing. Commands ran through the host's solr-gradle.sh wrapper (Gradle 9.7.0, vendored JDK 21) with the gate's test selections and seed (passed as -Ptests.seed=5075C0DE)."
+  },
+  {
+   "leg": "core suites",
+   "result": ":solr:core:test --tests StreamingSolrClientsErrorAttributionTest --tests SolrCmdDistributorTest, seed 5075C0DE, rc=0. Fresh XML: StreamingSolrClientsErrorAttributionTest 2/2 with both testMergedStreamErrorIsAttributedToEveryRequestInTheStream and testDeleteByQueryRetryRuleIsJudgedOnItsOwnRequest executed; SolrCmdDistributorTest 1/1 (the fresh XML records one executed test). Zero failures, errors and skips."
+  },
+  {
+   "leg": "solrj-jetty suites",
+   "result": ":solr:solrj-jetty:test --tests ConcurrentUpdateJettySolrClientTest --tests ConcurrentUpdateJettySolrClientBadInputTest, seed 5075C0DE, rc=0. Fresh XML: 11/11 and 1/1, zero skips."
+  },
+  {
+   "leg": "tidy",
+   "result": "Root tidy rc=0 with zero tracked changes at the exact head."
+  },
+  {
+   "leg": "root check (FAILING LEG)",
+   "result": "Root check -x test failed (BUILD FAILED in 3m 46s) at :solr:core:forbiddenApisTest, and a standalone rerun of that task reproduced it (rc=1). Seven forbidden class/interface uses, all in org.apache.solr.update.StreamingSolrClientsErrorAttributionTest at lines 159, 160, 163, 164 and 171: org.apache.logging.log4j.core.LogEvent and org.apache.logging.log4j.message.Message, each flagged 'Use slf4j classes instead'. Mechanism: the review-fix commit added a log-assertion block that drains LogListener queues; the queue element type is log4j's LogEvent, so the test class's calls to getMessage() and getThrown() reference the banned types. The prior head's test file contains no log-capture block (verified by direct comparison), so the violation is introduced by the gated commit itself, in test code only; no production class is flagged. The UI wasm artifact for the check was seeded by curl with its SHA-256 matching the build pin (654494303e4af3b8bfb26a83d250603f19033820295591d88db0597991ce8ad2), the established remedy for this host's egress relay corrupting that download; the check failure is unrelated to it."
+  },
+  {
+   "leg": "fail-before (prior head plus test overlay)",
+   "result": "Separate clean checkout of prior head f8d4bdbea518901e255ae119f3e5c43e7804a9bf with only the gated head's StreamingSolrClientsErrorAttributionTest.java overlaid (working tree shows exactly that one file modified, 174 lines). The single-method run of testDeleteByQueryRetryRuleIsJudgedOnItsOwnRequest at seed 5075C0DE failed on a behavioral logging assertion: AssertionError at line 164 (assertNull on the per-request error event's thrown) with 'expected null, but was: SolrServerException: Error from server ... Connection refused', meaning the prior head's per-request error log events still carry the stream's exception where the fixed behavior carries none. Not a compilation, setup or unrelated failure. Disclosure: the first overlay attempt wrote an empty file because a tilde in a git --git-dir argument was not expanded and its run failed at compilation; that attempt was discarded and the leg was rerun with the corrected path, which is the run reported here."
+  },
+  {
+   "leg": "limits",
+   "result": "Verdict rests on the legs above at the exact head. The forbidden-API finding is in the new test code; whether the branch owner reroutes the log capture through an slf4j-typed helper or adds a scoped suppression is their call, and any such change produces a new head requiring a new gate for the check leg."
+  }
+ ],
+ "owner": "phone-agent",
+ "recorded": "2026-11-12T18:41:59-07:00",
+ "summary": "One leg fails on the gated head's own new test code; every other leg passes, and the fail-before proof discriminates. At the exact head, the core suites pass (StreamingSolrClientsErrorAttributionTest 2/2 with both attribution methods executed, SolrCmdDistributorTest 1/1), the solrj-jetty suites pass (ConcurrentUpdateJettySolrClientTest 11/11, ConcurrentUpdateJettySolrClientBadInputTest 1/1), and root tidy leaves zero tracked changes. Root check -x test fails at :solr:core:forbiddenApisTest: the review-fix commit's new log-assertion block in StreamingSolrClientsErrorAttributionTest references log4j-core types (LogEvent and Message) through LogListener's queue, which the forbidden-API rules ban in favor of slf4j; 7 violations at lines 159-171, reproduced in a standalone rerun. The prior head's version of the test has no such block, so the violation arrives with this commit. The fail-before leg confirms the new retry test fails on the prior head on a behavioral logging assertion, as required. No repair was made or pushed; the fix belongs to the branch owner (the log assertions need a capture path that does not surface log4j types, or a targeted suppression consistent with project practice).",
+ "type": "receipt",
+ "verdict": "failed"
+}

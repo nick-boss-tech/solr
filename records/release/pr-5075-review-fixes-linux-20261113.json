@@ -1,0 +1,10 @@
+{
+ "actor": "phone-agent",
+ "evidence": "records/receipt/pr-5075-review-fixes-linux-20261113-receipt.json; records/evidence/pr-5075-review-fixes-linux-20261113-evidence.tar.gz (SHA-256 f29c2e9f90f88a6e1fe49d86a7106578822c68994d56334d2cbf45ff041b064e).",
+ "executor_stop": "Verified at filing: no Gradle daemon or runner processes, the test-queue lock is free, the main clone is at dc825f9af929a7ad8d08f8eb51e969e72582acb2 with zero tracked modifications, the fail-before clone is at the prior head with exactly the one overlaid test file modified, and no Solr process is running. The pushed fork head was re-verified unchanged (dc825f9a).",
+ "id": "pr-5075-review-fixes-linux-20261113",
+ "job": "pr-5075-review-fixes-linux-20261113",
+ "reason": "Gate completed and filed failed; receipt published before this release. All test legs and tidy pass at the exact head and the fail-before proof discriminates on a behavioral logging assertion, but root check fails at :solr:core:forbiddenApisTest on log4j type references in the review-fix commit's new test code (7 violations, lines 159-171 of StreamingSolrClientsErrorAttributionTest). No repair was made or pushed; the correction belongs to the branch owner and will need a successor head and gate.",
+ "recorded": "2026-11-12",
+ "type": "release"
+}
