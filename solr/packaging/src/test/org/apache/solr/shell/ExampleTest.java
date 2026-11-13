@@ -74,4 +74,18 @@ public class ExampleTest extends SolrShellTestCase {
     http("/solr/admin/info/properties").assertContains("helloworld");
     http(ports().solr2(), "/solr/admin/info/properties").assertContains("helloworld");
   }
+
+  @Test
+  public void examplesSuppressResourceLimitWarnings() {
+    env("SOLR_INCLUDE", "/dev/null");
+    env("SOLR_ULIMIT_CHECKS", "true");
+    env("SOLR_RECOMMENDED_OPEN_FILES", "2147483647");
+    String server = " --server-dir \"" + workDir().resolve("missing-server") + "\"";
+    runFail("solr start" + server)
+        .assertContains("Your open file limit")
+        .assertContains("not found");
+    runFail("solr start -e films" + server)
+        .assertContains("not found")
+        .assertNotContains("set SOLR_ULIMIT_CHECKS to false");
+  }
 }

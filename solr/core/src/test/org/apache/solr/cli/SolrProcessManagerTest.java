@@ -154,6 +154,30 @@ public class SolrProcessManagerTest extends SolrTestCase {
     assertEquals(2, processes.size());
   }
 
+  public void testFilteredScanPreservesOtherLiveNodes() throws IOException {
+    Path dir = createTempDir("filtered-pids");
+    Path pidFile = dir.resolve("solr-" + processHttp.getKey() + ".pid");
+    Path portFile = dir.resolve("solr-" + processHttps.getKey() + ".port");
+    Files.writeString(pidFile, Long.toString(processHttp.getValue().pid()));
+    Files.writeString(portFile, Integer.toString(processHttps.getKey()));
+    String originalDir = System.getProperty("solr.pid.dir");
+    String originalMarker = System.getProperty(SolrProcessManager.PROCESS_SCAN_MARKER);
+    try {
+      System.setProperty("solr.pid.dir", dir.toString());
+      System.setProperty(SolrProcessManager.PROCESS_SCAN_MARKER, "nonexistent-test-marker");
+      assertTrue(new SolrProcessManager().scanSolrPidFiles().isEmpty());
+      assertTrue(Files.exists(pidFile));
+      assertTrue(Files.exists(portFile));
+    } finally {
+      System.setProperty("solr.pid.dir", originalDir);
+      if (originalMarker == null) {
+        System.clearProperty(SolrProcessManager.PROCESS_SCAN_MARKER);
+      } else {
+        System.setProperty(SolrProcessManager.PROCESS_SCAN_MARKER, originalMarker);
+      }
+    }
+  }
+
   public void testGetAllRunning() {
     Collection<SolrProcess> processes = solrProcessManager.getAllRunning();
     assertEquals(2, processes.size());

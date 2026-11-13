@@ -95,7 +95,10 @@ public class SslTest extends SolrShellTestCase {
         .assertContains("\"numFound\":0");
 
     // The certificate is self-signed, so a client that does not trust it cannot connect.
-    https("/solr/test/select?q=*:*").get().assertConnectionFailed();
+    https("/solr/test/select?q=*:*")
+        .get()
+        .assertConnectionFailed()
+        .assertContains("unable to find valid certification path");
   }
 
   @Test
@@ -147,8 +150,7 @@ public class SslTest extends SolrShellTestCase {
     // This should fail the peername check
     runFail(
             "solr api --verbose --solr-url \"https://localhost:${SOLR_PORT}/solr/test/select?q=*:*\"")
-        .assertMatches(
-            "(No subject alternative DNS name matching localhost found|Server refused connection)");
+        .assertMatches("No subject alternative DNS name matching localhost found");
 
     // Restart the server enabling the SNI hostcheck
     env("SOLR_SSL_CHECK_PEER_NAME", "false");
@@ -400,16 +402,7 @@ public class SslTest extends SolrShellTestCase {
     runFail(
             "solr api --verbose --solr-url"
                 + " \"https://localhost:${SOLR_PORT}/solr/test/select?q=*:*&rows=0\"")
-        .assertMatches(
-            "(bad_certificate|java.nio.channels.ClosedChannelException"
-                + "|Server refused connection)");
-
-    // That wording is also what a node being down produces, and it differs between platforms, so
-    // it cannot be tightened. Prove in-JVM that the rejection really was the handshake.
-    https("/solr/test/select?q=*:*&rows=0")
-        .get()
-        .assertConnectionFailed()
-        .assertMatches("(?s).*(SSLHandshakeException|SSLException|fatal alert).*");
+        .assertContains("bad_certificate");
 
     // The original's subshells end here, restoring the four server variables and the client
     // keystore for what follows.
@@ -441,15 +434,7 @@ public class SslTest extends SolrShellTestCase {
     runFail(
             "solr api --verbose --solr-url"
                 + " \"https://localhost:${SOLR3_PORT}/solr/test/select?q=*:*&rows=0\"")
-        .assertMatches(
-            "(certificate_unknown|java.nio.channels.ClosedChannelException"
-                + "|Server refused connection)");
-
-    // As above: the CLI cannot distinguish a TLS rejection from an unreachable node.
-    https(ports().solr3(), "/solr/test/select?q=*:*&rows=0")
-        .get()
-        .assertConnectionFailed()
-        .assertMatches("(?s).*(SSLHandshakeException|SSLException|fatal alert).*");
+        .assertContains("certificate_unknown");
   }
 
   @Test
@@ -524,15 +509,13 @@ public class SslTest extends SolrShellTestCase {
     runFail(
             "solr api --verbose --solr-url"
                 + " \"https://localhost:${SOLR_PORT}/solr/test/select?q=*:*&rows=0\"")
-        .assertMatches(
-            "(unable to find valid certification path to requested target"
-                + "|Server refused connection)");
+        .assertContains("unable to find valid certification path to requested target");
 
     // As above: without a truststore this is a certification-path failure, not an absent node.
     https("/solr/test/select?q=*:*&rows=0")
         .get()
         .assertConnectionFailed()
-        .assertMatches("(?s).*(SSLHandshakeException|SSLException|fatal alert).*");
+        .assertContains("unable to find valid certification path");
   }
 
   private static final String RELOAD_JVM_OPTS =
@@ -599,11 +582,23 @@ public class SslTest extends SolrShellTestCase {
             + " \"https://localhost:${SOLR2_PORT}/solr/test-single-shard/select?q=*:*\"")
         .assertContains("\"numFound\":0");
 
-    https("/solr/test/select?q=*:*").get().assertConnectionFailed();
-    https(ports().solr2(), "/solr/test/select?q=*:*").get().assertConnectionFailed();
+    https("/solr/test/select?q=*:*")
+        .get()
+        .assertConnectionFailed()
+        .assertContains("unable to find valid certification path");
+    https(ports().solr2(), "/solr/test/select?q=*:*")
+        .get()
+        .assertConnectionFailed()
+        .assertContains("unable to find valid certification path");
 
-    https("/solr/test-single-shard/select?q=*:*").get().assertConnectionFailed();
-    https(ports().solr2(), "/solr/test-single-shard/select?q=*:*").get().assertConnectionFailed();
+    https("/solr/test-single-shard/select?q=*:*")
+        .get()
+        .assertConnectionFailed()
+        .assertContains("unable to find valid certification path");
+    https(ports().solr2(), "/solr/test-single-shard/select?q=*:*")
+        .get()
+        .assertConnectionFailed()
+        .assertContains("unable to find valid certification path");
 
     env("SOLR_SSL_KEY_STORE", cert2.toString());
     env("SOLR_SSL_KEY_STORE_PASSWORD", SECRET);

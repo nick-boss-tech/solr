@@ -122,11 +122,18 @@ public class BasicAuthTest extends SolrShellTestCase {
             + " http://localhost:${SOLR_PORT} --name COLL_NAME"
             + " \"${SOLR_TIP}/example/exampledocs/monitor.xml\"")
         .assertContains("1 files indexed.");
+    http("/solr/COLL_NAME/select?q=*:*&rows=0", "name", "password")
+        .assertStatus(200)
+        .assertMatches("\\\"numFound\\\"\\s*:\\s*1\\s*[,}]");
 
     // Test postlogs
     run("solr postlogs -u name:password --solr-url http://localhost:${SOLR_PORT}"
             + " --name COLL_NAME --rootdir \"${SOLR_LOGS_DIR}/solr.log\"")
-        .assertContains("Committed");
+        .assertContains("Committed")
+        .assertNotContains("Batch sending failed:");
+    http("/solr/COLL_NAME/select?q=file_s:*&rows=0", "name", "password")
+        .assertStatus(200)
+        .assertMatches("\\\"numFound\\\"\\s*:\\s*[1-9][0-9]*\\s*[,}]");
 
     // Test export (commented out in the original too)
     // run("solr export -u name:password --solr-url http://localhost:${SOLR_PORT}"

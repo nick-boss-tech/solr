@@ -9,12 +9,13 @@ on:
       - '*'
     paths:
       - '.github/workflows/cats-test.yml'
-      - 'solr/bin/solr*'
-      - 'solr/packaging/src/**'
-      - 'solr/packaging/build.gradle'
+      - 'solr/bin/**'
+      - 'solr/packaging/**'
       - 'solr/core/src/java/org/apache/solr/cli/**'
       - 'solr/test-framework/src/java/org/apache/solr/shell/**'
       - 'solr/test-framework/src/test/org/apache/solr/shell/**'
+      - 'solr/test-framework/build.gradle'
+      - 'gradle/testing/**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -87,4 +88,36 @@ jobs:
         path: |
           solr/packaging/build/cats-test-output
           solr/packaging/build/cats-test-output-picocli
+          solr/packaging/build/cats-test-output-commons-cli
           solr/test-framework/build/test-results/catsTests
+
+  rolling-upgrade:
+    name: CATS rolling upgrade
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+    - uses: ./.github/actions/prepare-for-build
+    - name: Build candidate image and test rolling upgrade
+      run: ./gradlew -p solr/packaging catsTestsDockerBuild --rerun-tasks
+    - name: Verify the upgrade test ran
+      run: |
+        python3 - <<'PY'
+        from pathlib import Path
+        import xml.etree.ElementTree as ET
+
+        reports = list(Path('solr/packaging/build/test-results/catsTestsDockerBuild').glob('TEST-*.xml'))
+        cases = [case for report in reports for case in ET.parse(report).iter('testcase')
+                 if case.get('classname') == 'org.apache.solr.shell.RollingUpgradeTest'
+                 and case.get('name', '').startswith('dockerSolrCloudRollingUpgrade')]
+        if len(cases) != 1 or any(cases[0].find(tag) is not None for tag in ('skipped', 'failure', 'error')):
+            raise SystemExit('RollingUpgradeTest did not execute successfully')
+        PY
+    - name: Archive rolling upgrade diagnostics
+      if: ${{ failure() }}
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      with:
+        name: cats-rolling-upgrade-logs
+        path: |
+          solr/packaging/build/cats-test-output-docker-build
+          solr/packaging/build/test-results/catsTestsDockerBuild

@@ -50,6 +50,7 @@ public class SolrProcessManager {
   private final Map<Long, SolrProcess> pidProcessMap;
   private final Map<Integer, SolrProcess> portProcessMap;
   private final Path pidDir;
+  private final String scanMarker;
   private static final Pattern pidFilePattern = Pattern.compile("^solr-([0-9]+)\\.(pid|port)$");
   // Set this to true during testing to allow the SolrProcessManager to find only mock Solr
   // processes
@@ -65,8 +66,7 @@ public class SolrProcessManager {
    * machine. A harness sets this to a value unique to itself and starts its nodes carrying the same
    * marker, via {@code SOLR_OPTS_INTERNAL}.
    *
-   * <p>While it is set, a PID file belonging to a node without the marker counts as stale and is
-   * removed by {@link #scanSolrPidFiles()}.
+   * <p>When set, PID files for nodes outside the filter are left untouched.
    */
   public static final String PROCESS_SCAN_MARKER = "solr.process.scan.marker";
 
@@ -77,7 +77,7 @@ public class SolrProcessManager {
       pidToWindowsCommandLineMap.putAll(commandLinesWindows());
     }
 
-    String scanMarker = EnvUtils.getProperty(PROCESS_SCAN_MARKER);
+    scanMarker = EnvUtils.getProperty(PROCESS_SCAN_MARKER);
     pidProcessMap =
         ProcessHandle.allProcesses()
             .filter(p -> p.info().command().orElse("").contains("java"))
@@ -124,7 +124,8 @@ public class SolrProcessManager {
 
   /**
    * Scans the PID directory for Solr PID files and returns a list of SolrProcesses for each running
-   * Solr instance. If a PID file is found but no process is running, the PID file is deleted. On
+   * Solr instance. If discovery is unfiltered, a PID file with no running process is deleted. A
+   * filtered scan leaves unmatched files in place because they may belong to other live nodes. On
    * Windows, the file is a 'PORT' file containing the port number.
    *
    * @return a list of SolrProcesses for each running Solr instance
@@ -150,7 +151,7 @@ public class SolrProcessManager {
         }
         if (process.isPresent()) {
           processes.add(process.get());
-        } else {
+        } else if (scanMarker == null) {
           log.warn("PID file {} found, but no process running. Deleting PID file", p.getFileName());
           Files.deleteIfExists(p);
         }
