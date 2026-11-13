@@ -1,0 +1,50 @@
+PR 5320 v2-contract Linux gate r7 evidence (vm6 host)
+Job: pr5320-v2-contract-linux-gate-r7-20261113
+Head: b4bb017d22c036df50bebfffecf26c0e8a0b0b57 (fork branch pr-5320-v2-contract, verified by ls-remote at claim; isolated clean worktree, rev-parse verified, zero modifications at setup and after tidy)
+Ancestry: contributor parent 5fa5513038a7cf9318ed800423d8a44064d4c0e3, prior r5 head 678f805a2a0d2212427d0cfadb11e87c24d122ef, and r6 parent e47c4b50d2cb09d8cf5d43175a6b5d5d380aa9cc are all ancestors of this head (git merge-base --is-ancestor).
+Seed: 5320CAFE for every test leg (passed as -Ptests.seed; the gate's ./gradlew commands run through the host JDK 21 wrapper, GRADLE_USER_HOME=/workspace/gradle-home)
+Verdict: PASSED
+
+== Production change under test (r6 parent e47c4b50 -> r7 head b4bb017d)
+The single production change is in solr/solrj/src/java/org/apache/solr/common/util/JsonSchemaValidator.java. In the ItemsValidator, RequiredValidator and PropertiesValidator classes the flag formerly named strictNull is now anyOfAlternative, and each validator returns true for a non-matching type when it is part of an anyOf alternative:
+- ItemsValidator.validate: non-List returns anyOfAlternative (was false).
+- RequiredValidator.validate: non-Map returns anyOfAlternative (was false); the former o==null&&strictNull shortcut becomes !(o instanceof Map)&&anyOfAlternative.
+- PropertiesValidator.validate: non-Map returns anyOfAlternative (was false); the former o==null&&strictNull shortcut becomes !(o instanceof Map)&&anyOfAlternative.
+No other production file differs between e47c4b50 and b4bb017d. This is the behavior the three new r7 tests and the two carried r6 tests discriminate.
+
+== Head comparison (requirement 1)
+Isolated clean worktree at b4bb017d, rev-parse HEAD equals the offered head, zero modifications at setup. After tidy (leg 05) tracked files are still unchanged (git status --porcelain empty).
+
+== Positive test legs at the offered head (all passed, fresh XML)
+JsonValidatorTest (solrj): 10 tests, 0 failures, 0 errors, exit 0 (leg 01, 4m 01s). All ten methods executed: testAnyOfAlternatives, testAnyOfRejectsSilentFailureAndNullId, testAnyOfEnumNull, testAnyOfNullableObjectWithProperties, testAnyOfNullableObjectRequiredFirst, testAnyOfItemsIgnoreOtherAllowedTypes, testAnyOfPropertiesIgnoreOtherAllowedTypes, testAnyOfRequiredIgnoresOtherAllowedTypes, testLegacyKeywordApplicabilityOutsideAnyOf, testSchemaValidation. Seed [5320CAFE] present in the suite log.
+BaseTestRuleBasedAuthorizationPlugin (core): 19 tests, 0 failures, exit 0 (leg 02, 2m 42s; :solr:core:test (SUCCESS): 19 test(s), slowest suite BaseTestRuleBasedAuthorizationPlugin 2.76s).
+TestExternalRoleRuleBasedAuthorizationPlugin (core): 19 tests, 0 failures, exit 0 (leg 03, 1m 23s; :solr:core:test (SUCCESS): 19 test(s), slowest suite TestExternalRoleRuleBasedAuthorizationPlugin 1.77s).
+BasicAuthStandaloneTest.testV2PermissionIds (core): 1 test, 0 failures, exit 0 (leg 04, 1m 36s; TEST-...BasicAuthStandaloneTest.xml tests="1" failures="0" errors="0").
+
+== Tidy leg
+./gradlew tidy exited 0 (leg 05, 1m 36s) and left tracked files unchanged (TIDY_CLEAN, git status --porcelain empty), as this gate requires. A formatting change would have required a new pushed head and superseding gate; none occurred.
+
+== Check leg
+./gradlew check -x test -Prefguide.include=false exited 0, BUILD SUCCESSFUL in 10m 07s (leg 06, 10m 08s), 515 actionable tasks (488 executed, 27 up-to-date). Includes :solr:solrj:forbiddenApisTest. The ref-guide tasks (collectJarInfos, validateJarChecksums, validateJarLicenses, licenses) ran without the broken worktree Antora site build, using the documented -Prefguide.include=false toggle.
+
+== Fresh fail-before on isolated r6 parent e47c4b50 (requirement 4)
+Each of the three new r7 methods was transplanted unchanged onto isolated baseline e47c4b50 (worktree gate-5320-r7-baseA, single file modified) and run independently. All three FAILED as required, each at its first permitted nonmatching-type assertion (AssertionError: expected null, but was:<[Value does not match any allowed schema]>, 1 test, 1 failure, 0 errors; no compile or setup failure):
+- testAnyOfItemsIgnoreOtherAllowedTypes (fb-A-items): AssertionError at JsonValidatorTest.java:120, assertNull(validator.validateJson(null)).
+- testAnyOfPropertiesIgnoreOtherAllowedTypes (fb-A-properties): AssertionError at JsonValidatorTest.java:132, assertNull(validator.validateJson("text")).
+- testAnyOfRequiredIgnoresOtherAllowedTypes (fb-A-required): AssertionError at JsonValidatorTest.java:143, assertNull(validator.validateJson("text")).
+Fresh XML and logs recorded for each. The r6 gate was unclaimed and unexecuted, so these are the first executions of these three methods.
+
+== Fresh fail-before on isolated r5 head 678f805a (requirement 5)
+The r6 gate being unexecuted, the two r6 nullable-object methods were transplanted unchanged onto isolated r5 head 678f805a (worktree gate-5320-r7-baseB, single file modified) and run independently. Both FAILED as required, each at its null-acceptance assertion (AssertionError: expected null, but was:<[Value does not match any allowed schema]>, 1 test, 1 failure, 0 errors):
+- testAnyOfNullableObjectWithProperties (fb-B-nullableprops): AssertionError at JsonValidatorTest.java:96, assertNull(validator.validateJson(null)).
+- testAnyOfNullableObjectRequiredFirst (fb-B-nullablereqfirst): AssertionError at JsonValidatorTest.java:111, assertNull(validator.validateJson(null)).
+Fresh XML and logs recorded. Both methods pass at the offered head (see the JsonValidatorTest leg).
+
+== Prior r5 evidence and historical carry-forward (requirement 6)
+Source of record: records/receipt/pr5320-v2-contract-linux-gate-r5-20261113-receipt.json and records/evidence/pr5320-v2-contract-linux-gate-r5-20261113-evidence.txt. Because production JsonSchemaValidator changed between r5 and r7, no old-head positive runs are presented as proof for this head; all positive tests were rerun at r7. The prior r5/r6 baseline fail-before evidence (enum-null, null-id probe, delete-schema, anyOf, set-id, singletonList-rejection) is not claimed as runs at this head. The r5 fail-before for testAnyOfRejectsSilentFailureAndNullId at r2 head f1a84076 remains on file; that method's token content is unchanged at r7 (still the array-rejection construction), and its behavior is re-confirmed by the r7 positive JsonValidatorTest leg. Historical evidence is cited only with its original heads and the comparison above, per the gate's requirement 6.
+
+== Limits
+The standalone endpoint test checks the handler spec in-process and authenticated HTTP read/set/delete plus persisted state; it does not cover HTTP introspection or controlled concurrent edits.
+
+== Execution conditions
+Isolated clean worktrees for the offered head and both fail-before baselines; each fail-before worktree carried only the stated single-file overlay and was restored (git checkout --) and verified clean at its pinned head afterwards. Gradle runs were serialized through the vm6 build lock (/workspace/tools/.gradle-vm6.lock); the fail-before chain ran first, the head runner queued behind it. JDK 21.0.12.1+1, GRADLE_USER_HOME=/workspace/gradle-home. Host free space and inodes were above the standing thresholds at each heartbeat.
