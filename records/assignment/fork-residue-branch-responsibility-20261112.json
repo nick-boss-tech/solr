@@ -1,0 +1,12 @@
+{
+ "claim_path": "records/claim/fork-residue-branch-responsibility-20261112.json",
+ "id": "fork-residue-branch-responsibility-20261112",
+ "intended_host": "phone-agent (Linux)",
+ "job": "fork-residue-branch-responsibility-20261112",
+ "source": {
+  "repository": "nick-boss-tech/solr",
+  "scope": "23 branches with no ticket in the name, no GitHub PR, and no prior board or memory record"
+ },
+ "summary": "Take responsibility for the 23 uncategorized fork branches found by the 2026-11-12 fork census: inventory and classify each, record a disposition, and hold them accounted for until Nick directs ticketing, further work, or retirement labeling. No branch is deleted and no code is changed under this job.",
+ "type": "assignment"
+}

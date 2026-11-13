@@ -1,0 +1,228 @@
+{
+ "branches": [
+  {
+   "branch": "code-review",
+   "classification": "process note",
+   "disposition": "Retired in place: an October inventory note, kept for the record.",
+   "head": "ab68884357be5ee6563d2b5c03c317c02e2d609b",
+   "responsible": "phone-agent",
+   "tip_date": "2026-10-08",
+   "tip_subject": "inventory: branch focus inventory 2026-10-08"
+  },
+  {
+   "branch": "gradle-queue",
+   "classification": "process note",
+   "disposition": "Retired in place: an October gate-lane status note.",
+   "head": "88b6cb5091f346b902dd9e8022e7adadc1a9351a",
+   "responsible": "phone-agent",
+   "tip_date": "2026-10-08",
+   "tip_subject": "gate lane: final sweep status note"
+  },
+  {
+   "branch": "review-18119-jvm",
+   "classification": "ticketed in substance",
+   "disposition": "Review follow-up branch for SOLR-18119, whose PRs merged 2026-10-27; held as historical record.",
+   "head": "017df87593927d94a6d0a8f360bb48aa54075d0e",
+   "responsible": "phone-agent",
+   "ticket": "SOLR-18119",
+   "tip_date": "2026-10-08",
+   "tip_subject": "Follow up solr-18119-jvm review with the added tests"
+  },
+  {
+   "branch": "review-18523-pr",
+   "classification": "ticketed in substance",
+   "disposition": "Review branch for PR #5062; held as historical record.",
+   "head": "e55d6205dc02cd0857769586062b8148aa6d271a",
+   "responsible": "phone-agent",
+   "ticket": "SOLR-18523",
+   "tip_date": "2026-10-08",
+   "tip_subject": "Review PR #5062 (SOLR-18523): needs work"
+  },
+  {
+   "branch": "pr-prepare",
+   "classification": "ticketed in substance",
+   "disposition": "PR preparation branch for SOLR-9124; held pending any future work on that ticket.",
+   "head": "7dda001b86045828f74e21cdd57ec5e43f7a2ecc",
+   "responsible": "phone-agent",
+   "ticket": "SOLR-9124",
+   "tip_date": "2026-10-17",
+   "tip_subject": "SOLR-9124: refresh PR draft at 3dd985b93a with round 2 re-review results"
+  },
+  {
+   "branch": "solr-ioctx-audit",
+   "classification": "ticketed in substance",
+   "disposition": "Changelog branch for the SOLR-18554 audit; held as record.",
+   "head": "efb1bc3d9aa93c2ccdef7739f33399e08020404b",
+   "responsible": "phone-agent",
+   "ticket": "SOLR-18554",
+   "tip_date": "2026-10-17",
+   "tip_subject": "SOLR-18554: add changelog entry for READONCE audit"
+  },
+  {
+   "branch": "solr-slice-order",
+   "classification": "unticketed test work",
+   "disposition": "Tip commit is explicitly marked SOLR-TBD; held for Nick's call on whether the replica-order test claim deserves a ticket.",
+   "head": "a9a85c20ebc98791a22f622eadd0f37b0356f99e",
+   "responsible": "phone-agent",
+   "tip_date": "2026-10-18",
+   "tip_subject": "SOLR-TBD: test that merged order across shards ignores the replica list order"
+  },
+  {
+   "branch": "test-sleep-audit-batch-1",
+   "classification": "unticketed test work",
+   "disposition": "Sleep-audit batch branch; held as record of the audit line.",
+   "head": "006832b6b1da5b3419eb92d8a0c7a07169c05bd4",
+   "responsible": "phone-agent",
+   "tip_date": "2026-10-18",
+   "tip_subject": "Remove sleep before awaiting repair in CollectionsRepairEventListenerTest"
+  },
+  {
+   "branch": "consistency-v2-list-backups-permission",
+   "classification": "unticketed substantive fix",
+   "disposition": "A real permission-consistency fix with no ticket; held for Nick's call on ticketing or parking.",
+   "head": "e3f35fe42c408b4faad4579dee72c4e6eadeb7eb",
+   "responsible": "phone-agent",
+   "tip_date": "2026-10-19",
+   "tip_subject": "V2 list collection backups declares COLL_READ_PERM, matching the snapshots listing and V1 LISTBACKUP"
+  },
+  {
+   "branch": "docs-streaming-allowlist-note",
+   "classification": "unticketed documentation note",
+   "disposition": "Documentation finding branch; held as record.",
+   "head": "4b185504ef7dd5e4530664995719a0e743564382",
+   "responsible": "phone-agent",
+   "tip_date": "2026-10-19",
+   "tip_subject": "Docs: the URL allow-list does not cover stream source targets"
+  },
+  {
+   "branch": "consistency-v1-core-backup-permission",
+   "classification": "unticketed test cleanup",
+   "disposition": "Consistency round test cleanup; held as record.",
+   "head": "0c37fbd580522cf5b9926e6c3bfb072745f3c05c",
+   "responsible": "phone-agent",
+   "tip_date": "2026-10-19",
+   "tip_subject": "consistency-docs-round-1: CoreReplicationAPITest reads stubbed paths instead of mock calls; tidy drops unused oshai-logging version"
+  },
+  {
+   "branch": "hardening-configset-delete-containment",
+   "classification": "unticketed substantive fix",
+   "disposition": "A path-containment fix with security relevance and no ticket; held for Nick's call on ticketing or parking.",
+   "head": "3905ad78e89223540bcbef50f1ade888d21f8c06",
+   "responsible": "phone-agent",
+   "tip_date": "2026-10-19",
+   "tip_subject": "Configset file delete rejects names that resolve outside the configset directory"
+  },
+  {
+   "branch": "fix-interrupted-http-client-close",
+   "classification": "unticketed substantive fix",
+   "disposition": "A client lifecycle fix with no ticket; pairs thematically with solr-teardown-interrupt-close-fix; held for Nick's call.",
+   "head": "f0adb05094c6ae1412af75a95d301c0934be5304",
+   "responsible": "phone-agent",
+   "tip_date": "2026-10-23",
+   "tip_subject": "HttpJettySolrClient.close: release the client even when stopping its HTTP client fails"
+  },
+  {
+   "branch": "ui-integration-check-vm4",
+   "classification": "ticketed in substance",
+   "disposition": "vm4 integration-check branch for the SOLR-17849 UI work; held as record.",
+   "head": "ec6601afb62a5d130beacfd7d2e92b514dcdb0a0",
+   "responsible": "phone-agent",
+   "ticket": "SOLR-17849",
+   "tip_date": "2026-10-24",
+   "tip_subject": "Merge remote-tracking branch 'origin/solr-17849-index-query-screen' into ui-integration-check-vm4"
+  },
+  {
+   "branch": "solr-tidy-license-headers",
+   "classification": "unticketed build tooling",
+   "disposition": "Build tooling branch; held as record.",
+   "head": "fcb9c84f541849ba0faf4aff3c24c24c98bc3168",
+   "responsible": "phone-agent",
+   "tip_date": "2026-10-25",
+   "tip_subject": "Add addLicenseHeaders task to tidy for Java sources without license text"
+  },
+  {
+   "branch": "solr-dev-docs-no-license-headers",
+   "classification": "unticketed build tooling",
+   "disposition": "Precommit tooling branch, companion to the tidy license-headers work; held as record.",
+   "head": "445938b919e0d89afc9ec821eb893cf9a81d6a58",
+   "responsible": "phone-agent",
+   "tip_date": "2026-10-25",
+   "tip_subject": "Fail precommit if dev-docs files carry license headers"
+  },
+  {
+   "branch": "solr-gradle-help-ship-in-tarball",
+   "classification": "unticketed build fix",
+   "disposition": "Packaging fix branch; held as record.",
+   "head": "d2923cb65b380efecb29ea6d3a2827dd3eb20414",
+   "responsible": "phone-agent",
+   "tip_date": "2026-10-25",
+   "tip_subject": "Ship dev-docs/gradle-help in the source tarball so check passes from an archive"
+  },
+  {
+   "branch": "rc3-fixset-candidate",
+   "classification": "ticketed in substance",
+   "disposition": "Candidate fixset for SOLR-18587; the gated vehicle for that ticket is solr-18587-coreadmin-unload-failed-reload, so this branch is held as an alternate record.",
+   "head": "8b8c45ca0a78db2ee71204824851a8edd7b0ad7b",
+   "responsible": "phone-agent",
+   "ticket": "SOLR-18587",
+   "tip_date": "2026-10-25",
+   "tip_subject": "SOLR-18587: Use an FS-based directory factory in the unload-after-failed-reload test"
+  },
+  {
+   "branch": "solr-teardown-interrupt-close-fix",
+   "classification": "unticketed test work",
+   "disposition": "Test companion to the interrupt-close line; held for Nick's call together with fix-interrupted-http-client-close.",
+   "head": "5ec461c4012036faf3fd14363202e82c4686fb07",
+   "responsible": "phone-agent",
+   "tip_date": "2026-10-26",
+   "tip_subject": "Import HttpClient in the new interrupt-close tests"
+  },
+  {
+   "branch": "solrcloud-shardsplit-integration-proof-20261028",
+   "classification": "unticketed integration proof",
+   "disposition": "Standalone integration proof with no ticket; held for Nick's call on whether it supports existing split work or parks.",
+   "head": "5449b63d5b46eb6048900b9810acd565e3e74b23",
+   "responsible": "phone-agent",
+   "tip_date": "2026-10-29",
+   "tip_subject": "Add deterministic SolrCloud split-delete integration proof"
+  },
+  {
+   "branch": "factory-solr-skills-round-1",
+   "classification": "factory infrastructure content",
+   "disposition": "Agent skills and PR index content living on a fork branch; held as record.",
+   "head": "b30a0a77df5f3ae10191c814256245319f56cdd7",
+   "responsible": "phone-agent",
+   "tip_date": "2026-11-05",
+   "tip_subject": "Add the first Solr agent skills and captured monthly PR index"
+  },
+  {
+   "branch": "security/posttool-dom-entity-regression-2026-11-12",
+   "classification": "fresh work, owner unidentified",
+   "disposition": "Pushed 2026-11-12; hands off. Tracked under this responsibility record only so it is accounted for; no action until its owner is identified.",
+   "head": "57f607c6aed6044515b14de431c854e11befbf99",
+   "responsible": "phone-agent",
+   "tip_date": "2026-11-12",
+   "tip_subject": "Add PostTool DOM external entity regression test"
+  },
+  {
+   "branch": "security/posttool-dom-entity-hardening-2026-11-12",
+   "classification": "fresh work, owner unidentified",
+   "disposition": "Pushed 2026-11-12; hands off, same terms as its regression-test companion.",
+   "head": "feba1036d70846afa437e62c16405a3328e494a6",
+   "responsible": "phone-agent",
+   "tip_date": "2026-11-12",
+   "tip_subject": "Harden PostTool DOM parsing against external entities"
+  }
+ ],
+ "calls_for_owner": [
+  "Ticket or park: hardening-configset-delete-containment (path-containment fix), fix-interrupted-http-client-close with solr-teardown-interrupt-close-fix (client close lifecycle), consistency-v2-list-backups-permission (V2 LISTBACKUP permission).",
+  "Ticket or park: solr-slice-order, whose tip is explicitly marked SOLR-TBD, and solrcloud-shardsplit-integration-proof-20261028.",
+  "Identify the owner of the two security/posttool-dom-entity branches pushed 2026-11-12 before any action on them."
+ ],
+ "id": "fork-residue-branch-responsibility-20261112-report",
+ "job": "fork-residue-branch-responsibility-20261112",
+ "owner": "phone-agent",
+ "recorded": "2026-11-12T21:11:33-07:00",
+ "result": "All 23 uncategorized fork branches from the 2026-11-12 census are now inventoried with verified heads, tip dates and subjects, a classification, and a disposition, and are held under phone-agent responsibility. Census context: 1,829 fork branches total; 1,378 ticket-named, 374 ci/ failure-pool, 41 PR-keyed or PR-carrying, 13 board infra, assignment, and record-named; these 23 were the residue. Six are ticketed in substance (their tip commits name SOLR-18119, SOLR-18523, SOLR-9124, SOLR-18554, SOLR-17849, SOLR-18587). Seventeen carry no ticket anywhere. No branch was deleted, pushed to, or otherwise modified by this job; per the owner's standing rule, retirement means a label in the records with the branch left in place. Items needing Nick's call are listed in calls_for_owner.",
+ "type": "report"
+}
