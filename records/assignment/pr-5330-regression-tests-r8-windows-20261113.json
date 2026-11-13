@@ -1,0 +1,10 @@
+{
+  "host": "Windows implementation; Linux proof separately",
+  "id": "pr-5330-regression-tests-r8-windows-20261113",
+  "job": "pr-5330-regression-tests-r8-windows-20261113",
+  "scope": "Add focused meaningful tests for observable retry, callback/flush concurrency and atomic error drain, reusing existing fixtures. Do not touch contributor fork. Older r2 Linux gate remains claimed; do not assume worker stopped or run duplicate gate work.",
+  "source_head": "f7e638b2d6b57fcbdde3122120eedac2694ed40c",
+  "successor_of": "pr-5330-retry-serial-r7-windows-20261113",
+  "summary": "Strengthen PR 5330 permanent tests before Linux proof",
+  "type": "assignment"
+}
