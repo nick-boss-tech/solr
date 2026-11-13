@@ -1,0 +1,16 @@
+{
+  "environment": "Linux gate host; clean isolated checkout",
+  "head": "ee35178851befab053e7f6ac4d20c866eed7a293",
+  "id": "pr-5337-cli-exit-gate-r1",
+  "job": "pr-5337-cli-exit-gate-r1",
+  "phase": "round 1",
+  "receipt_path": "records/receipt/pr-5337-cli-exit-gate-r1.json",
+  "requirements": [
+    "Run ./gradlew :solr:packaging:integrationTests --tests test_help.bats and ./gradlew :solr:packaging:integrationTestsPicocli --tests test_help.bats. Capture fresh Bats JUnit and logs; verify both parser modes execute root help, missing root and each parent, explicit parent help and forced JVM failure.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.cli.SolrCLIPicocliTest -Dtests.seed=5337C0DE and capture fresh XML and logs.",
+    "Run ./gradlew tidy and ./gradlew check -x test. If tidy changes files, do not claim proof for this head; report diff for a new committed head and gate.",
+    "Fail-before: on contributor parent 944f3ec319caee19a8061feb227ee20b4cd8dcbe apply only the test_help.bats diff from the offered commit; run both packaging tasks and record actual assertion failures, especially help JVM failure and commons package/snapshot. Compilation, setup or download failures are not behavioral proof.",
+    "Record commands, exit codes, logs and XML locations in records/receipt/pr-5337-cli-exit-gate-r1.json. Windows solr.cmd process status requires a separate Windows runtime check and is not proved by this Linux gate."
+  ],
+  "type": "gate"
+}
