@@ -1,0 +1,12 @@
+{
+  "branch": "pr-5334-compatibility-20261113",
+  "gate": "records/gate/pr-5334-compat-linux-r2-20261113.json",
+  "head": "c9896f0e5b026545ebefcb6f225da67550acdd21",
+  "id": "pr-5334-format-windows-20261113-report",
+  "job": "pr-5334-format-windows-20261113",
+  "old_head": "d3c2bf186fda98eceb64e6b1953997a5c84a066d",
+  "prior_receipt": "records/receipt/pr-5334-compat-linux-20261113-receipt.json",
+  "summary": "Applied Linux tidy diff and pushed formatting-only successor; new Linux proof pending",
+  "type": "report",
+  "verification": "Diff matches receipt's exact two line wraps; git diff --check passed. No Gradle on Windows. Remote head verified."
+}
