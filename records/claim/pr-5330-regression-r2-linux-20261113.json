@@ -1,0 +1,10 @@
+{
+ "claimed": "2026-11-13T09:57:40-07:00",
+ "claimer": "phone-agent",
+ "head": "dfe745bf1b8439f85300db3755c9b1ec7d2a87a6",
+ "host": "linux",
+ "id": "pr-5330-regression-r2-linux-20261113",
+ "job": "pr-5330-regression-r2-linux-20261113",
+ "note": "Live fork branch pr-5330-test-fix-20261113 verified at the gate head dfe745bf by git ls-remote at claim time. The round-1 test-fix gate is superseded by this r2 gate per its assignment. No conflicting claim exists.",
+ "type": "claim"
+}

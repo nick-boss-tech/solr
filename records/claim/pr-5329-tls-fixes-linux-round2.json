@@ -1,0 +1,10 @@
+{
+ "claimed": "2026-11-13T09:57:40-07:00",
+ "claimer": "phone-agent",
+ "head": "dc3ba7b2e83a0b3e128d6e49964adf8681d9732e",
+ "host": "linux",
+ "id": "pr-5329-tls-fixes-linux-round2",
+ "job": "pr-5329-tls-fixes-linux-round2",
+ "note": "Live fork branch pr-5329-tls-fixes verified at the gate head dc3ba7b2 by git ls-remote at claim time. Note: the assignment names gate record records/gate/pr-5329-tls-fixes-linux-round2.json, which does not exist on the board; the gate will run against the requirements of the round-1 gate record it supersedes (same test class, seed, BATS leg, and fail-before contributor head 6f3e51a5, which the round-2 assignment also names), and the receipt will record this. No conflicting claim exists.",
+ "type": "claim"
+}

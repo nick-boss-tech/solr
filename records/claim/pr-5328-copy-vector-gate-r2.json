@@ -1,0 +1,10 @@
+{
+ "claimed": "2026-11-13T09:57:40-07:00",
+ "claimer": "phone-agent",
+ "head": "fc65261419c7a4890510e50d9b93163268d1d853",
+ "host": "linux",
+ "id": "pr-5328-copy-vector-gate-r2",
+ "job": "pr-5328-copy-vector-gate-r2",
+ "note": "Live fork branch pr-5328-raw-copy-target verified at the gate head fc652614 by git ls-remote at claim time. The round-1 gate is superseded by this r2 gate per its assignment. No conflicting claim exists.",
+ "type": "claim"
+}
