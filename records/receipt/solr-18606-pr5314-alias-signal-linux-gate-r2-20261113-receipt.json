@@ -1,0 +1,79 @@
+{
+  "environment": "Linux sandbox; OpenJDK 21.0.12; Gradle 9.7.0; no Docker.",
+  "evidence": {
+    "archive_sha256": "f4751a53293995a9f0a58761275b0147d3fc4c392c89aca12c9b74ca9e755869",
+    "pointer": "records/evidence/solr-18606-pr5314-alias-signal-linux-gate-r2-20261113-evidence.json",
+    "remote_download_checksum_verified": true,
+    "signed_url_expires_at": "2027-11-13T18:58:17Z"
+  },
+  "exclusions_and_limits": [
+    "The root check uses -x test, so all test tasks are excluded from that leg. The two named baseline tests and the two mutation legs were run separately; other test tasks were not run.",
+    "Docker check was excluded and no Docker was installed or used. Docker-dependent tests remain unrun.",
+    "The solr-ref-guide check was excluded; the dry run confirms no active Antora/site/link tasks. Those documentation checks remain unrun."
+  ],
+  "gate": "solr-18606-pr5314-alias-signal-linux-gate-2dbfc9f32aa-r2",
+  "head": "2dbfc9f32aa34cef586f32c7b473a5cd689e8705",
+  "id": "solr-18606-pr5314-alias-signal-linux-gate-r2-20261113-receipt",
+  "job": "solr-18606-pr5314-alias-signal-linux-gate-r2-20261113",
+  "legs": [
+    {
+      "command": "./gradlew --no-daemon -Dtests.seed=18606CAFE :solr:solrj-zookeeper:test --tests org.apache.solr.client.solrj.impl.ZkClientClusterStateProviderTest.testKnownAliasDoesNotReadAliasCollectionState",
+      "exit_code": 0,
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 1
+      },
+      "name": "Path-specific failed-read baseline",
+      "result": "PASS. The same-client positive control records the exact missing alias collection-state path with NoNodeException; the guarded known-alias call records no read of that path."
+    },
+    {
+      "command": "./gradlew --no-daemon -Dtests.seed=18606CAFE :solr:solrj:test --tests org.apache.solr.client.solrj.impl.CloudHttp2SolrClientTest.testZkAliasRequestsResolveAndQuery",
+      "exit_code": 0,
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 1
+      },
+      "name": "Alias HTTP integration baseline",
+      "result": "PASS. Alias resolution and repeated query coverage remain."
+    },
+    {
+      "name": "Known-alias guard-removal mutation",
+      "result": "Expected detection observed. Removing only the known-alias guard makes the path-specific test fail with NoNodeException at /collections/target_testKnownAliasDoesNotReadAliasCollectionState_alias/state.json. The original global-metrics test, restored from the parent only for this mutation leg, passes 1/1 under the same mutation (exit 0), demonstrating its false-negative limitation. Exact committed source was restored; worktree clean."
+    },
+    {
+      "command": "./gradlew --no-daemon check -x test -x :solr:docker:check -x :solr:solr-ref-guide:check --dry-run",
+      "name": "Excluded-task dry run",
+      "result": "PASS; 5 actionable tasks in the dry run; zero active Docker check/build tasks and zero active Antora/site/link tasks."
+    },
+    {
+      "command": "./gradlew --no-daemon check -x test -x :solr:docker:check -x :solr:solr-ref-guide:check",
+      "exit_code": 0,
+      "name": "Non-test root check",
+      "result": "BUILD SUCCESSFUL in 2m 25s; 515 actionable tasks (376 executed, 139 up-to-date). Spotless checks passed at this exact head."
+    }
+  ],
+  "notes": [
+    "The test logs include non-fatal Java security-policy/CLDR warnings; both baseline commands exited 0 and their JUnit XMLs report 1/1 with zero failures.",
+    "The source branch was fast-forwarded to the exact head; no public PR description or comments were changed."
+  ],
+  "owner": "phone-agent-2",
+  "preparation": [
+    "The round-1 root check failed only on two Spotless violations. Top-level tidy succeeded and changed only the new test formatting; the formatted source tree was committed as this exact head."
+  ],
+  "recorded": "2026-11-13T12:02:00-07:00",
+  "source": {
+    "base_head": "33e3f8b8599ea12fad0456ce0444d3a24a4affe6",
+    "branch": "solr-18606-submit",
+    "head": "2dbfc9f32aa34cef586f32c7b473a5cd689e8705",
+    "remote_head_verified": true,
+    "repository": "nick-boss-tech/solr",
+    "worktree_clean": true
+  },
+  "summary": "All named round-2 exact-head proof legs passed. The expected guard-removal mutation was detected by the path/client-specific observer, while the legacy global-metrics test passed under the same mutation. The non-test root check passed with the declared exclusions.",
+  "type": "receipt",
+  "verdict": "passed"
+}
