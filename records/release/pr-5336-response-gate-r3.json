@@ -1,0 +1,8 @@
+{
+  "actor": "vm6",
+  "evidence": "records/receipt/pr-5336-response-gate-r3-receipt.json",
+  "id": "pr-5336-response-gate-r3",
+  "job": "pr-5336-response-gate-r3",
+  "reason": "Round-3 gate for PR 5336 completed at head 59c259bcb2 with verdict PASSED: focused tests 10/10, tidy TIDY_CLEAN, check -x test BUILD SUCCESSFUL, and all 8 NamedList-constructor mutations fail behaviorally on the matching JSON-format test. Full evidence in records/evidence/evidence-pr-5336-response-gate-r3-20261113.txt and the receipt.",
+  "type": "release"
+}
