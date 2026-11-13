@@ -1,0 +1,21 @@
+{
+  "changes": [
+    "Expose the logging page and All nodes choice when selection is missing, while retaining the selection prompt and other node-scoped page guards.",
+    "Invalidate older system-info response callbacks on a newer Nodes refresh and on controller destruction.",
+    "Add browser cases for all-node logging without a selected node and out-of-order system-info failures and successes."
+  ],
+  "gate": "records/gate/solr-18619-review-fixes-linux-gate-r3.json",
+  "gate_assignment": "records/assignment/solr-18619-review-fixes-linux-gate-r3.json",
+  "id": "solr-18619-review-fixes-20261113-report",
+  "job": "solr-18619-review-fixes-20261113",
+  "source": {
+    "branch": "solr-18619-targeting-prep",
+    "head": "cf35bd49fab19751af9afb728ef83076ae521f09",
+    "old_head": "f2cab615c5ba08cf83d11fe5ae4fc3a0d0b8d7bb",
+    "repository": "nick-boss-tech/solr"
+  },
+  "status": "implemented, proof pending",
+  "summary": "Both pre-gate review findings addressed in source, Linux proof pending",
+  "type": "report",
+  "verification": "Source diff reviewed; git diff --check and node --check for cloud.js passed. Windows performed no Gradle, Selenium or Java compilation. Remote fork head was independently read back. Prior gate is stale and held; new exact-head gate requested."
+}
