@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "records/receipt/solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b-r1-receipt.json and records/evidence/solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b-evidence.json (archive SHA-256 0f00b12447ed98d06c0bbd40fa3e33660b7cf6bafb8f962f4c80caed73223b05). Mutation executor job_7NInuQVI completed exit 0; root-check executor job_uG054S8n terminated with exit 1 and its failure is recorded. Final process check found no Gradle/Java process and no shared Gradle lock. Older malformed wrapper job_Lta8j1ho remains a stale control-plane card only: its terminal is closed, no process or lock exists, and it produced no test result; it was superseded by job_7NInuQVI.",
+  "id": "solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b",
+  "job": "solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b",
+  "reason": "Round-1 exact-head gate is closed with a failed receipt: the non-test root check found only two Spotless formatting violations. A formatter-clean successor gate will use a new job and exact head.",
+  "type": "release"
+}
