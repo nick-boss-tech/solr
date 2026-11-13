@@ -1,0 +1,58 @@
+{
+  "branch": "pr-5320-v2-contract",
+  "evidence": "records/evidence/pr5320-v2-contract-linux-gate-r7-20261113-evidence.txt",
+  "evidence_sha256": "6c7aa55b6138eadbdc964a44199715ce9f70c766b517fc0cf7ab08add9e38901",
+  "executor": "vm6",
+  "filed": "2026-11-13T21:16:00Z",
+  "gate": "pr5320-v2-contract-linux-gate-r7-20261113",
+  "head": "b4bb017d22c036df50bebfffecf26c0e8a0b0b57",
+  "id": "pr5320-v2-contract-linux-gate-r7-20261113-receipt",
+  "job": "pr5320-v2-contract-linux-gate-r7-20261113",
+  "legs": [
+    {
+      "leg": "Head, ancestry and clean checkout verification",
+      "result": "PASSED: ls-remote and rev-parse agree on b4bb017d; contributor parent 5fa55130, r5 head 678f805a, and r6 parent e47c4b50 are all ancestors; worktree clean at setup and after tidy."
+    },
+    {
+      "leg": "JsonValidatorTest at head (solrj, seed 5320CAFE)",
+      "result": "PASSED: 10 tests, 0 failures, 0 errors, exit 0. All ten methods executed including the three new r7 and two carried r6 methods."
+    },
+    {
+      "leg": "BaseTestRuleBasedAuthorizationPlugin at head (core)",
+      "result": "PASSED: 19 tests, 0 failures, exit 0 (:solr:core:test SUCCESS 19 test(s))."
+    },
+    {
+      "leg": "TestExternalRoleRuleBasedAuthorizationPlugin at head (core)",
+      "result": "PASSED: 19 tests, 0 failures, exit 0 (:solr:core:test SUCCESS 19 test(s))."
+    },
+    {
+      "leg": "BasicAuthStandaloneTest.testV2PermissionIds at head (core)",
+      "result": "PASSED: 1 test, 0 failures, exit 0."
+    },
+    {
+      "leg": "tidy at head",
+      "result": "PASSED: exit 0, zero tracked changes (TIDY_CLEAN, git status --porcelain empty)."
+    },
+    {
+      "leg": "check -x test at head",
+      "result": "PASSED: exit 0, BUILD SUCCESSFUL in 10m 07s (515 tasks: 488 executed, 27 up-to-date), including :solr:solrj:forbiddenApisTest, with -Prefguide.include=false."
+    },
+    {
+      "leg": "Fail-before A: three new r7 anyOf methods on r6 parent e47c4b50",
+      "result": "FAILED as required, 3/3: testAnyOfItemsIgnoreOtherAllowedTypes at JSVT:120, testAnyOfPropertiesIgnoreOtherAllowedTypes at JSVT:132, testAnyOfRequiredIgnoresOtherAllowedTypes at JSVT:143. Each AssertionError 'expected null, but was:<[Value does not match any allowed schema]>', 1 test/1 failure/0 errors, fresh XML. No compile or setup failure."
+    },
+    {
+      "leg": "Fail-before B: two r6 nullable-object methods on r5 head 678f805a",
+      "result": "FAILED as required, 2/2: testAnyOfNullableObjectWithProperties at JSVT:96, testAnyOfNullableObjectRequiredFirst at JSVT:111. Each AssertionError 'expected null, but was:<[Value does not match any allowed schema]>', 1 test/1 failure/0 errors, fresh XML. No compile or setup failure."
+    },
+    {
+      "leg": "Prior r5 evidence and historical carry-forward",
+      "result": "CITED with explicit limits: production JsonSchemaValidator changed, so no old-head positive runs are presented as proof for this head; all positives reran at r7. r5 fail-before evidence (enum-null, null-id probe, delete-schema, anyOf, set-id, singletonList-rejection) cited only with original heads; testAnyOfRejectsSilentFailureAndNullId token-unchanged at r7 and re-confirmed by the positive leg."
+    }
+  ],
+  "limits": "The endpoint test checks the handler spec in-process and authenticated HTTP read/set/delete plus persisted state; it does not cover HTTP introspection or controlled concurrent edits.",
+  "prior_receipt": "records/receipt/pr5320-v2-contract-linux-gate-r5-20261113-receipt.json",
+  "summary": "Round 7 gate PASSED at b4bb017d. The r7 head applies one production change to JsonSchemaValidator: ItemsValidator, RequiredValidator and PropertiesValidator each return true for a non-matching type when part of an anyOf alternative (the flag renamed strictNull -> anyOfAlternative), so the three new r7 tests and the two carried r6 nullable-object tests now pass. All four named suites pass at head (10, 19, 19, 1 tests), tidy leaves tracked files unchanged, and root check is BUILD SUCCESSFUL including :solr:solrj:forbiddenApisTest. Both fail-before chains prove the change is load-bearing: the three new r7 methods fail at their first permitted nonmatching-type assertion on isolated r6 parent e47c4b50, and the two r6 nullable-object methods fail at their null-acceptance assertion on isolated r5 head 678f805a, each a behavioral AssertionError with fresh XML and no compile/setup failure. Prior r5 evidence is cited only with original heads and explicit limits.",
+  "type": "receipt",
+  "verdict": "passed"
+}
