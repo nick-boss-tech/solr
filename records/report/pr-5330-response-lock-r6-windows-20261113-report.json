@@ -1,0 +1,16 @@
+{
+  "changes": "Parse RF before taking callbackLock for accounting, with stall checks before and after parsing. Move retry classification outside callbackLock. Test blocks response stream, requires stall report before release and checks no late RF credit.",
+  "coordination": "Older Linux r2 claim remains without observed release; do not assume its executor stopped.",
+  "gate": "records/gate/pr-5330-response-lock-r6-linux-20261113.json",
+  "head": "6ad35b2d9be19334e7df512d7a071e5fb237b12a",
+  "id": "pr-5330-response-lock-r6-windows-20261113-report",
+  "job": "pr-5330-response-lock-r6-windows-20261113",
+  "source": {
+    "branch": "pr-5330-test-fix-20261113",
+    "head": "6ad35b2d9be19334e7df512d7a071e5fb237b12a",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Pushed blocked-response callback-lock repair and controlled regression",
+  "type": "report",
+  "verification": "Whitespace diff and fork SHA checked. No Gradle or runtime tests on Windows. Linux gate requires fail-before and normal RF accounting checks, plus review of retry classification ordering and active runner behavior."
+}
