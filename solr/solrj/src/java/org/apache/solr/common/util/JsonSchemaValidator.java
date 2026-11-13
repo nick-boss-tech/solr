@@ -245,6 +245,7 @@ class TypeValidator extends Validator<Object> {
 
 class ItemsValidator extends Validator<Map<?, ?>> {
   private JsonSchemaValidator validator;
+  private final boolean anyOfAlternative;
 
   ItemsValidator(Map<?, ?> schema, Map<?, ?> properties) {
     this(schema, properties, false);
@@ -252,6 +253,7 @@ class ItemsValidator extends Validator<Map<?, ?>> {
 
   ItemsValidator(Map<?, ?> schema, Map<?, ?> properties, boolean strictNull) {
     super(schema, properties);
+    anyOfAlternative = strictNull;
     validator = new JsonSchemaValidator(properties, strictNull);
   }
 
@@ -266,7 +268,7 @@ class ItemsValidator extends Validator<Map<?, ?>> {
       }
       return true;
     }
-    return false;
+    return anyOfAlternative;
   }
 }
 
@@ -296,7 +298,7 @@ class EnumValidator extends Validator<List<String>> {
 class RequiredValidator extends Validator<List<String>> {
 
   private Set<String> requiredProps;
-  private final boolean strictNull;
+  private final boolean anyOfAlternative;
 
   RequiredValidator(Map<?, ?> schema, List<String> requiredProps) {
     this(schema, requiredProps, false);
@@ -305,12 +307,12 @@ class RequiredValidator extends Validator<List<String>> {
   RequiredValidator(Map<?, ?> schema, List<String> requiredProps, boolean strictNull) {
     super(schema, requiredProps);
     this.requiredProps = new HashSet<>(requiredProps);
-    this.strictNull = strictNull;
+    this.anyOfAlternative = strictNull;
   }
 
   @Override
   boolean validate(Object o, List<String> errs) {
-    if (o == null && strictNull) return true;
+    if (!(o instanceof Map) && anyOfAlternative) return true;
     return validate(o, errs, requiredProps);
   }
 
@@ -350,7 +352,7 @@ class RequiredValidator extends Validator<List<String>> {
 class PropertiesValidator extends Validator<Map<String, Map<?, ?>>> {
   private Map<String, JsonSchemaValidator> jsonSchemas;
   private boolean additionalProperties;
-  private final boolean strictNull;
+  private final boolean anyOfAlternative;
 
   PropertiesValidator(Map<?, ?> schema, Map<String, Map<?, ?>> properties) {
     this(schema, properties, false);
@@ -358,7 +360,7 @@ class PropertiesValidator extends Validator<Map<String, Map<?, ?>>> {
 
   PropertiesValidator(Map<?, ?> schema, Map<String, Map<?, ?>> properties, boolean strictNull) {
     super(schema, properties);
-    this.strictNull = strictNull;
+    this.anyOfAlternative = strictNull;
     jsonSchemas = new HashMap<>();
     Object additionalProperties =
         schema.get("additionalProperties"); // If not set, will return null
@@ -371,7 +373,7 @@ class PropertiesValidator extends Validator<Map<String, Map<?, ?>>> {
 
   @Override
   boolean validate(Object o, List<String> errs) {
-    if (o == null && strictNull) return true;
+    if (!(o instanceof Map) && anyOfAlternative) return true;
     if (o instanceof Map) {
       Map<?, ?> map = (Map) o;
       for (Map.Entry<?, ?> entry : map.entrySet()) {

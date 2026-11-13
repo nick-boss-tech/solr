@@ -16,6 +16,7 @@
  */
 package org.apache.solr.common.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -110,6 +111,49 @@ public class JsonValidatorTest extends SolrTestCaseJ4 {
     JsonSchemaValidator validator = new JsonSchemaValidator(Map.of("anyOf", List.of(objectSchema)));
     assertNull(validator.validateJson(null));
     assertNotNull(validator.validateJson(Map.of()));
+  }
+
+  public void testAnyOfItemsIgnoreOtherAllowedTypes() {
+    Map<String, Object> schema = new LinkedHashMap<>();
+    schema.put("items", Map.of("type", "string"));
+    schema.put("type", List.of("array", "null", "string"));
+    JsonSchemaValidator validator = new JsonSchemaValidator(Map.of("anyOf", List.of(schema)));
+    assertNull(validator.validateJson(null));
+    assertNull(validator.validateJson("text"));
+    assertNull(validator.validateJson(List.of("text")));
+    assertNotNull(validator.validateJson(List.of(1)));
+    assertNotNull(validator.validateJson(Map.of()));
+  }
+
+  public void testAnyOfPropertiesIgnoreOtherAllowedTypes() {
+    Map<String, Object> schema = new LinkedHashMap<>();
+    schema.put("properties", Map.of("id", Map.of("type", "string")));
+    schema.put("type", List.of("object", "string"));
+    JsonSchemaValidator validator = new JsonSchemaValidator(Map.of("anyOf", List.of(schema)));
+    assertNull(validator.validateJson("text"));
+    assertNull(validator.validateJson(Map.of("id", "text")));
+    assertNotNull(validator.validateJson(Map.of("id", 1)));
+    assertNotNull(validator.validateJson(List.of("text")));
+  }
+
+  public void testAnyOfRequiredIgnoresOtherAllowedTypes() {
+    Map<String, Object> schema = new LinkedHashMap<>();
+    schema.put("required", List.of("id"));
+    schema.put("type", List.of("object", "string"));
+    JsonSchemaValidator validator = new JsonSchemaValidator(Map.of("anyOf", List.of(schema)));
+    assertNull(validator.validateJson("text"));
+    assertNull(validator.validateJson(Map.of("id", "text")));
+    assertNotNull(validator.validateJson(Map.of()));
+    assertNotNull(validator.validateJson(List.of("text")));
+  }
+
+  public void testLegacyKeywordApplicabilityOutsideAnyOf() {
+    var properties = new JsonSchemaValidator(Map.of("properties", Map.of()));
+    var required = new JsonSchemaValidator(Map.of("required", List.of("id")));
+    var items = new JsonSchemaValidator(Map.of("items", Map.of("type", "string")));
+    assertFalse(properties.validate("text", new ArrayList<>()));
+    assertFalse(required.validate("text", new ArrayList<>()));
+    assertFalse(items.validate("text", new ArrayList<>()));
   }
 
   public void testSchemaValidation() {
