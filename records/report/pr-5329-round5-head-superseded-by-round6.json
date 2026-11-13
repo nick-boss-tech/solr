@@ -1,0 +1,11 @@
+{
+  "id": "pr-5329-round5-head-superseded-by-round6",
+  "job": "pr-5329-tls-fixes-linux-round5",
+  "new_head": "de6c192d045c9c0e182b9e3d060d412d450df3aa",
+  "note": "Check previously claimed round-two and any later executor state before claiming replacement; old-head proof does not cover the new head.",
+  "old_head": "37710039195736636bc3971cbf200cc940d53248",
+  "replacement_assignment": "records/assignment/pr-5329-tls-fixes-linux-round6.json",
+  "replacement_gate": "records/gate/pr-5329-tls-fixes-linux-round6.json",
+  "summary": "Round-five gate superseded by confirmation-response fix",
+  "type": "report"
+}
