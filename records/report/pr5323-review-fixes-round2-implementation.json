@@ -1,0 +1,12 @@
+{
+  "gate_job": "pr5323-review-fixes-round2-linux",
+  "head": "3a2ff894cd86f08f4df8e416ab1df6ce1d103c73",
+  "id": "pr5323-review-fixes-round2-implementation",
+  "job": "pr5323-review-fixes-round2-windows",
+  "source": {
+    "branch": "pr-5323-review-fixes",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Updated mixed-node PID and port regression including matched discovery and unfiltered stale cleanup, plus executable TLS diagnostic fixtures and hostname/alert alternatives. Pushed exact head. diff --check passed; no Gradle, Docker or real TLS run on Windows. AwaitsFix live cases and Windows exact-head execution remain proof pending; synthetic diagnostics do not establish a TLS handshake.",
+  "type": "report"
+}
