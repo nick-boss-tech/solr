@@ -1,0 +1,14 @@
+{
+  "id": "solr-18606-pr5314-review-round2-windows-20261113-report",
+  "job": "solr-18606-pr5314-review-round2-windows-20261113",
+  "limitations": "Existing path-specific recorder observes one SolrZkClient and is not an end-to-end read counter. Global metrics missed failed NoNode reads in the prior mutation. Sync is separately split; durable diagnostic tests remain separate. PR body is stale and requires separate authorization to edit.",
+  "source": {
+    "base_head": "2dbfc9f32aa34cef586f32c7b473a5cd689e8705",
+    "branch": "solr-18606-pr5314-review-round2",
+    "head": "a20facda3ee83d307dbc26a33a229c7b082c62bb",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "On a separate fork branch changed the new provider regression test from SolrTestCaseJ4 to SolrTestCase as requested; replaced getSaferTestName with a fixed name inside the isolated ZkTestServer fixture. No production changes. Reviewed outstanding comments and recorded response facts in local research scratch notes. No public comments or PR body edits.",
+  "type": "report",
+  "verification": "Remote branch head verified; git diff --check passed. No Windows Gradle or tests. Linux proof pending at records/gate/solr-18606-pr5314-review-round2-linux-20261113.json. PR 5314 head was independently verified unchanged at 2dbfc9f32aa34cef586f32c7b473a5cd689e8705."
+}
