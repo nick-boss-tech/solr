@@ -132,6 +132,8 @@ public class SolrZkServer {
         // Automatic TLS must not leave an existing plaintext listener enabled.
         props.remove("clientPort");
         props.remove("clientPortAddress");
+        // ZooKeeper otherwise accepts plaintext on the secure port when unification is enabled.
+        props.setProperty("client.portUnification", "false");
       }
       // This is the address that the embedded Zookeeper will bind to. Like Solr, it defaults to
       // "127.0.0.1".

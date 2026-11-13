@@ -161,3 +161,55 @@ teardown() {
   assert_failure
   assert_output --partial 'requires its own embedded ZooKeeper'
 }
+
+@test "automatic embedded ZooKeeper TLS disables existing plaintext ports and port unification" {
+  local store="$BATS_TEST_TMPDIR/zk-test.p12"
+  run keytool -genkeypair -alias solr-ssl -keyalg RSA -keysize 2048 \
+    -storepass secret -keypass secret -validity 30 -keystore "$store" -storetype PKCS12 \
+    -ext SAN=DNS:localhost,IP:127.0.0.1 -dname 'CN=localhost'
+  assert_success
+
+  export SOLR_SSL_ENABLED=true SOLR_SSL_KEY_STORE="$store" SOLR_SSL_TRUST_STORE="$store"
+  export SOLR_SSL_KEY_STORE_PASSWORD=secret SOLR_SSL_TRUST_STORE_PASSWORD=secret
+  export SOLR_SSL_KEY_STORE_TYPE=PKCS12 SOLR_SSL_TRUST_STORE_TYPE=PKCS12
+  export SOLR_HOST_ADVERTISE=localhost
+  cp "$SOLR_TIP/server/solr/solr.xml" "$SOLR_HOME/solr.xml"
+  cp "$SOLR_TIP/server/solr/zoo.cfg" "$SOLR_HOME/zoo.cfg"
+  cat >> "$SOLR_HOME/zoo.cfg" <<EOF
+clientPort=$((ZK_PORT + 1))
+secureClientPort=$ZK_PORT
+serverCnxnFactory=org.apache.zookeeper.server.NettyServerCnxnFactory
+ssl.keyStore.location=$store
+ssl.keyStore.type=PKCS12
+ssl.keyStore.passwordPath=$SOLR_HOME/.zk-tls-keystore-password
+ssl.trustStore.location=$store
+ssl.trustStore.type=PKCS12
+ssl.trustStore.passwordPath=$SOLR_HOME/.zk-tls-truststore-password
+ssl.clientAuth=none
+client.portUnification=true
+EOF
+
+  # An unusable password path must abort before launching Solr.
+  mkdir "$SOLR_HOME/.zk-tls-keystore-password"
+  run solr start -c -p "$SOLR_PORT" --solr-home "$SOLR_HOME"
+  assert_failure
+  assert_output --partial 'Unable to write embedded ZooKeeper TLS password files'
+  rmdir "$SOLR_HOME/.zk-tls-keystore-password"
+
+  run bash -c 'umask 022; exec solr start -c -p "$SOLR_PORT" --solr-home "$SOLR_HOME"'
+  assert_success
+  for password_file in "$SOLR_HOME/.zk-tls-keystore-password" "$SOLR_HOME/.zk-tls-truststore-password"; do
+    run ls -ld "$password_file"
+    assert_success
+    assert_output --regexp '^-rw------- '
+  done
+
+  run solr zk ls / --zk-host "localhost:$ZK_PORT"
+  assert_success
+  run env SOLR_INCLUDE=/dev/null SOLR_ZK_CREDS_AND_ACLS= SOLR_ZK_TLS_OPTS= \
+    solr zk ls / --zk-host "localhost:$ZK_PORT"
+  assert_failure
+  assert_output --partial 'Timeout while waiting for Zookeeper Client to connect'
+  run bash -c 'exec 3<>"/dev/tcp/127.0.0.1/$((ZK_PORT + 1))"'
+  assert_failure
+}

@@ -19,11 +19,14 @@ package org.apache.solr.cloud;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.apache.solr.SolrTestCaseJ4;
+import org.apache.solr.common.SolrException;
 
 public class SolrZkServerTlsTest extends SolrTestCaseJ4 {
   public void testAutomaticTlsSuppressesExistingPlaintextPort() throws Exception {
     Path home = createTempDir();
-    Files.writeString(home.resolve("zoo.cfg"), "clientPort=2181\nsecureClientPort=2182\n");
+    Files.writeString(
+        home.resolve("zoo.cfg"),
+        "clientPort=2181\nsecureClientPort=2182\nclient.portUnification=true\n");
     String property = "solr.zookeeper.embedded.tlsOnly";
     String previous = System.getProperty(property);
     try {
@@ -33,6 +36,7 @@ public class SolrZkServerTlsTest extends SolrTestCaseJ4 {
       assertNull(server.zkProps.getClientPortAddress());
       assertEquals(2182, server.zkProps.getSecureClientPortAddress().getPort());
       assertTrue(server.getClientString().endsWith(":2182"));
+      assertEquals("false", System.getProperty("zookeeper.client.portUnification"));
     } finally {
       if (previous == null) {
         System.clearProperty(property);
@@ -40,5 +44,24 @@ public class SolrZkServerTlsTest extends SolrTestCaseJ4 {
         System.setProperty(property, previous);
       }
     }
+  }
+
+  public void testPlaintextPortRemainsWhenAutomaticTlsIsDisabled() throws Exception {
+    Path home = createTempDir();
+    Files.writeString(home.resolve("zoo.cfg"), "clientPort=2181\n");
+    System.setProperty("solr.zookeeper.embedded.tlsOnly", "false");
+    SolrZkServer server = new SolrZkServer(true, null, home, home.toString(), 8983);
+    server.parseConfig();
+    assertEquals(2181, server.zkProps.getClientPortAddress().getPort());
+    assertNull(server.zkProps.getSecureClientPortAddress());
+  }
+
+  public void testAutomaticTlsRequiresSecurePort() throws Exception {
+    Path home = createTempDir();
+    Files.writeString(home.resolve("zoo.cfg"), "clientPort=2181\n");
+    System.setProperty("solr.zookeeper.embedded.tlsOnly", "true");
+    SolrZkServer server = new SolrZkServer(true, null, home, home.toString(), 8983);
+    SolrException error = expectThrows(SolrException.class, server::parseConfig);
+    assertTrue(error.getMessage().contains("requires secureClientPort"));
   }
 }
