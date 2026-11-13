@@ -1,0 +1,8 @@
+{
+  "actor": "vm2",
+  "evidence": "records/receipt/solr-18138-cli-linux-gate-r2-receipt.json + records/evidence/solr-18138-cli-linux-gate-r2-evidence.tar.gz (SHA-256 4c4dc26f3b0e44542345a33d8f74f286c890605b9953f865cd9ffafeae9ac452)",
+  "id": "solr-18138-cli-linux-gate-r2",
+  "job": "solr-18138-cli-linux-gate-r2",
+  "reason": "r2 gate passed: integrationTests test_zk.bats at exact head 45956fbe7f with Gradle exit 0, 12/12 tests pass, teardown clean (run under child subreaper to reap orphaned Solr JVMs; root cause documented in ROOT-CAUSE.md). Gradle daemon stopped; worktree clean.",
+  "type": "release"
+}
