@@ -1,0 +1,17 @@
+{
+  "environment": "Linux gate host, clean exact-head checkout",
+  "head": "eb5557d14fa6de411e35e5ff22d30a0cd8f7589d",
+  "id": "pr-5336-response-gate-r2",
+  "job": "pr-5336-response-gate-r2",
+  "phase": "round 2",
+  "receipt_path": "records/receipt/pr-5336-response-gate-r2.json",
+  "requirements": [
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.cloud.OverseerStatusTest --tests org.apache.solr.core.snapshots.TestSolrCloudSnapshotInactiveShard --tests org.apache.solr.cloud.api.collections.DeleteBackupCmdTest --tests org.apache.solr.handler.TestReplicationHandlerBackup -Ptests.seed=5336C0DE. Record exit code, fresh logs and JUnit XML; verify overseer mode and all new methods execute.",
+    "Run ./gradlew tidy and ./gradlew check -x test; record fresh logs, exit codes and clean-tree state. If tidy changes tracked files, stop and require a new pushed head and superseding gate.",
+    "Coverage-only follow-up: the original and added tests can both pass. Keep tests unchanged and use isolated compiling mutations, restoring one original NamedList constructor at a time: overseer_operations; collection_operations; LISTSNAPSHOTS snapshots container; CollectionSnapshotMetaData snapshot object; replicas container; CoreSnapshotMetaData replica object; DeleteBackupCmd purge details; SnapShooter delete details. Run the matching focused method after each mutation and record the exact mutation diff, assertion failure and fresh log/XML. Do not treat compile, setup, skipped tests or unrelated failures as behavioral proof. Identify any assertions not individually demonstrated as coverage pins.",
+    "The install-shard partial-failure response requires a distributed restore with one leader-eligible replica failing and recovering. It remains untested by this patch; do not claim coverage for it.",
+    "Investigate each failure before retrying; receipt must identify commands, test results, environment and each actual proof leg."
+  ],
+  "supersedes": "records/gate/pr-5336-response-gate-r1.json",
+  "type": "gate"
+}
