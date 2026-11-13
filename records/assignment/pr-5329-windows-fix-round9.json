@@ -1,0 +1,14 @@
+{
+  "id": "pr-5329-windows-fix-round9",
+  "intended_host": "Windows implementation; Linux proof required",
+  "job": "pr-5329-windows-fix-round9",
+  "source": {
+    "branch": "pr-5329-tls-fixes",
+    "head": "69cd26432aaaf9a60e36eb888d9dd684a9eb8825",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5329-windows-fix-round8",
+  "summary": "Repair partial configuration writes and make permission test execution visible; preserve unresolved lifecycle findings",
+  "supersedes_gate": "records/gate/pr-5329-tls-linux-round8.json",
+  "type": "assignment"
+}
