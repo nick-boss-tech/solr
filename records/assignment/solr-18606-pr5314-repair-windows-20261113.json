@@ -1,0 +1,12 @@
+{
+  "id": "solr-18606-pr5314-repair-windows-20261113",
+  "intended_host": "Windows",
+  "job": "solr-18606-pr5314-repair-windows-20261113",
+  "sources": [
+    "records/receipt/solr-18606-pr5314-split-refresh-linux-20261111-receipt.json",
+    "records/receipt/solr-18606-pr5314-split-sync-linux-r2-20261112-receipt.json"
+  ],
+  "successor_of": "solr-18606-pr5314-split-windows-20261111",
+  "summary": "Repair alias regression observation and assess durable sync split tests; push changes and hand off Linux proof.",
+  "type": "assignment"
+}
