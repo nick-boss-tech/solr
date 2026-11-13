@@ -1,0 +1,12 @@
+{
+  "id": "pr-5328-copy-vector-test-followup-report",
+  "job": "pr-5328-copy-vector-test-followup",
+  "source": {
+    "branch": "pr-5328-raw-copy-target",
+    "head": "fc65261419c7a4890510e50d9b93163268d1d853",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Separated float and byte RTG copy target tests and varied indexed/stored settings. Diff check passed; tests pending Linux.",
+  "supersedes_gate": "records/gate/pr-5328-copy-vector-gate.json",
+  "type": "report"
+}
