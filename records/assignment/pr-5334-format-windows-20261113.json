@@ -1,0 +1,11 @@
+{
+  "evidence": "records/receipt/pr-5334-compat-linux-20261113-receipt.json and records/evidence/pr-5334-compat-linux-20261113-evidence.txt",
+  "host": "Windows implementation",
+  "id": "pr-5334-format-windows-20261113",
+  "job": "pr-5334-format-windows-20261113",
+  "scope": "Apply only two formatting wraps, push fork branch, create fresh Linux gate; no public comment.",
+  "source_head": "d3c2bf186fda98eceb64e6b1953997a5c84a066d",
+  "successor_of": "pr-5334-fix-windows-20261113",
+  "summary": "Apply Linux gate formatting diff and publish exact-head successor gate",
+  "type": "assignment"
+}
