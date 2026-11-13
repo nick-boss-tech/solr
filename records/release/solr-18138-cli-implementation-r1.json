@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-solr-18138",
+  "evidence": "records/report/solr-18138-cli-implementation-r1-report.json records pushed head and confirms implementation worker and related executor stopped; no executor was started.",
+  "id": "solr-18138-cli-implementation-r1",
+  "job": "solr-18138-cli-implementation-r1",
+  "reason": "Implementation complete and handed to separate Linux gate",
+  "type": "release"
+}
