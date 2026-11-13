@@ -1,0 +1,21 @@
+{
+  "claim_path": "records/claim/pr-5329-tls-fixes-linux-round4.json",
+  "contributor_head": "2587d6a6eaf54796bd34a724f12209873e9f1b3d",
+  "execution_dependency": "The round-two gate was claimed. Verify its worker and executor have stopped before claiming or running this gate; do not duplicate in-flight execution.",
+  "gate_id": "pr-5329-tls-fixes-linux-round4",
+  "gate_record": "records/gate/pr-5329-tls-fixes-linux-round4.json",
+  "id": "pr-5329-tls-fixes-linux-round4",
+  "intended_host": "Linux",
+  "job": "pr-5329-tls-fixes-linux-round4",
+  "limitations": "Partial fix: persisted TLS settings after rotation and for later external ZooKeeper connections remain unresolved. Do not post a public offer based on this gate.",
+  "phase": "implementation proof round 4",
+  "receipt_path": "records/receipt/pr-5329-tls-fixes-linux-round4.json",
+  "source": {
+    "branch": "pr-5329-tls-fixes",
+    "head": "ca3e9817719472ec03199da53b58372214722fd4",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Linux proof for contributor-head merge and valid ensemble coverage",
+  "supersedes": "records/gate/pr-5329-tls-fixes-linux-round3.json",
+  "type": "assignment"
+}
