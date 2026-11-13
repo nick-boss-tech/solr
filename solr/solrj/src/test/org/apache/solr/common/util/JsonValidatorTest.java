@@ -17,7 +17,6 @@
 package org.apache.solr.common.util;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,10 +32,14 @@ public class JsonValidatorTest extends SolrTestCaseJ4 {
                 List.of(
                     Map.of("type", "integer"),
                     Map.of(
-                        "type", "object",
-                        "properties", Map.of("id", Map.of("type", "string")),
-                        "required", List.of("id"),
-                        "additionalProperties", false))));
+                        "type",
+                        "object",
+                        "properties",
+                        Map.of("id", Map.of("type", "string")),
+                        "required",
+                        List.of("id"),
+                        "additionalProperties",
+                        false))));
     assertNull(validator.validateJson(2));
     assertNull(validator.validateJson(Map.of("id", "abc")));
     assertNotNull(validator.validateJson(Map.of()));
@@ -51,8 +54,7 @@ public class JsonValidatorTest extends SolrTestCaseJ4 {
     objectSchema.put("properties", Map.of("id", Map.of("type", "string")));
     objectSchema.put("type", "object");
     JsonSchemaValidator validator =
-        new JsonSchemaValidator(
-            Map.of("anyOf", List.of(Map.of("type", "integer"), objectSchema)));
+        new JsonSchemaValidator(Map.of("anyOf", List.of(Map.of("type", "integer"), objectSchema)));
     assertNotNull(validator.validateJson(List.of(2)));
     Map<String, Object> nullId = new LinkedHashMap<>();
     nullId.put("id", null);
@@ -65,10 +67,8 @@ public class JsonValidatorTest extends SolrTestCaseJ4 {
     assertNull(nullable.validateJson(null));
     JsonSchemaValidator array =
         new JsonSchemaValidator(
-            Map.of(
-                "anyOf",
-                List.of(Map.of("type", "array", "items", Map.of("type", "string")))));
-    assertNotNull(array.validateJson(Collections.singletonList(null)));
+            Map.of("anyOf", List.of(Map.of("type", "array", "items", Map.of("type", "string")))));
+    assertNotNull(array.validateJson(Arrays.asList((String) null)));
     assertNull(new JsonSchemaValidator(Map.of("type", "string")).validateJson(null));
   }
 

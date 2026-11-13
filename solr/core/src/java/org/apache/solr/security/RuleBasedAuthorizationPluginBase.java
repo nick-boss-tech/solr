@@ -443,10 +443,14 @@ public abstract class RuleBasedAuthorizationPluginBase
                 List.of(
                     Map.of("type", "integer"),
                     Map.of(
-                        "type", "object",
-                        "properties", Map.of("id", Map.of("type", "string")),
-                        "required", List.of("id"),
-                        "additionalProperties", false))));
+                        "type",
+                        "object",
+                        "properties",
+                        Map.of("id", Map.of("type", "string")),
+                        "required",
+                        List.of("id"),
+                        "additionalProperties",
+                        false))));
     return spec;
   }
 }

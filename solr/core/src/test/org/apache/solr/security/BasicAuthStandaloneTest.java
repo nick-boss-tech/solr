@@ -155,7 +155,11 @@ public class BasicAuthStandaloneTest extends SolrTestCaseJ4 {
     assertNotNull(deleteSchema.get("anyOf"));
 
     doHttpPost(
-        httpClient, url, "{'set-permission': {'name':'read','role':'reader'}}", "solr", "SolrRocks");
+        httpClient,
+        url,
+        "{'set-permission': {'name':'read','role':'reader'}}",
+        "solr",
+        "SolrRocks");
     Map<?, ?> authz =
         (Map<?, ?>) securityConfHandler.getSecurityConfig(false).getData().get("authorization");
     List<?> permissions = (List<?>) authz.get("permissions");
@@ -199,7 +203,11 @@ public class BasicAuthStandaloneTest extends SolrTestCaseJ4 {
     authz = (Map<?, ?>) securityConfHandler.getSecurityConfig(false).getData().get("authorization");
     assertEquals(1, ((List<?>) authz.get("permissions")).size());
     doHttpPost(
-        httpClient, url, "{'set-permission': {'name':'read','role':'reader'}}", "solr", "SolrRocks");
+        httpClient,
+        url,
+        "{'set-permission': {'name':'read','role':'reader'}}",
+        "solr",
+        "SolrRocks");
     doHttpPost(httpClient, url, "{'delete-permission': 2}", "solr", "SolrRocks");
     authz = (Map<?, ?>) securityConfHandler.getSecurityConfig(false).getData().get("authorization");
     assertEquals(1, ((List<?>) authz.get("permissions")).size());
