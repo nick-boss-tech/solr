@@ -1,0 +1,10 @@
+{
+  "claimed": "2026-11-13T22:32:00Z",
+  "head": "83b2df0977499337bc88daaba8eb872a3835f31b",
+  "host": "linux",
+  "id": "pr-5339-signature-coverage-linux-gate-r2",
+  "job": "pr-5339-signature-coverage-linux-gate-r2",
+  "note": "Live fork branch pr-5339-signature-migration verified at gate head 83b2df09 by git ls-remote. r1 gate released (records/release/pr-5339-signature-migration-linux-gate-r1.json) with executor-stop evidence (no Gradle/ChromeDriver process, host locks free). No claim exists for pr-5339-signature-coverage-linux-gate-r2; claimed by vm2.",
+  "owner": "vm2",
+  "type": "claim"
+}
