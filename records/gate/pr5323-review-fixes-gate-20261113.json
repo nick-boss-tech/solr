@@ -1,0 +1,16 @@
+{
+  "environment": "Linux, clean checkout, JDK supported by Solr; record JDK, Docker, seed, environment and exact commands",
+  "head": "8d656408d24c53ee40510a52d01d3b516927416e",
+  "id": "pr5323-review-fixes-gate-20261113",
+  "job": "pr5323-review-fixes-linux-20261113",
+  "phase": "initial proof",
+  "receipt_path": "records/receipt/pr5323-review-fixes-linux-20261113.json",
+  "requirements": [
+    "Run :solr:core:test --tests org.apache.solr.cli.SolrProcessManagerTest with fixed seed 5323C0DE; verify fresh XML and zero failures/skips. Demonstrate testFilteredScanPreservesOtherLiveNodes fails on the contributor production code with the new test unchanged, then passes at the offered head.",
+    "Run :solr:test-framework:catsTests and :solr:packaging:catsTests --tests org.apache.solr.shell.BasicAuthTest --tests org.apache.solr.shell.ExampleTest --tests org.apache.solr.shell.SslTest with fixed seed 5323C0DE. Record fresh per-case XML, counts, skipped tests and logs; do not count AwaitsFix skips as proof.",
+    "For coverage-only assertions, use isolated compiling mutations on offered head with tests unchanged: suppress authenticated monitor upload, suppress or corrupt log upload while allowing commit, and replace the untrusted TLS endpoint with a refused connection. Record mutation diffs and show the intended new assertions fail at runtime; startup or compile failures do not count. Also confirm the example-warning regression assertion by an isolated behavior mutation when practical.",
+    "Run :solr:packaging:catsTestsDockerBuild --rerun-tasks on a Docker-capable host with network access; verify exactly the rolling-upgrade case executes and passes in fresh XML, not skipped. Verify the new CI XML guard rejects absent and skipped result files and accepts the actual fresh passing result. Record candidate image id and prove it is built from this checkout.",
+    "Run tidy and root check -x test. Any formatting modification requires commit, push and new gate; do not report the prior head green. Report execution conditions, logs/XML locations, all failures and unexplained errors in the named receipt. No skipped leg is a pass."
+  ],
+  "type": "gate"
+}
