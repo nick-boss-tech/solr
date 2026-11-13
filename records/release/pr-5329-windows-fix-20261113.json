@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "records/report/pr-5329-windows-fix-20261113-report.json; source worktree clean at 7dedae124c252574caaff93cf4bcf2bc1d240fc9; no build or test executor was started on this host.",
+  "id": "pr-5329-windows-fix-20261113",
+  "job": "pr-5329-windows-fix-20261113",
+  "reason": "Implementation stopped after pushing partial fix and requesting Linux proof",
+  "type": "release"
+}
