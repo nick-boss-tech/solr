@@ -1,0 +1,22 @@
+{
+  "environment": "Linux, clean standalone clone at exact head; serialize Gradle with host lock; no source changes",
+  "head": "6d886caf1b2915c9318b1419386e5181dd154ad0",
+  "id": "pr-5339-signature-migration-linux-gate-r1",
+  "job": "pr-5339-signature-migration-linux-gate-r1",
+  "phase": "documentation follow-up r1",
+  "receipt_path": "records/receipt/pr-5339-signature-migration-linux-gate-r1-receipt.json",
+  "requirements": [
+    "Verify remote branch and clean exact head, contributor ancestry and documentation-only follow-up.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.update.processor.TextProfileSignatureTest -Ptests.seed=5339 and retain fresh test XML and logs.",
+    "Run ./gradlew tidy and verify no tracked changes.",
+    "Run ./gradlew buildLocalSite from a standalone clone (not a Git worktree), verify the upgrade page renders; retain logs.",
+    "Run ./gradlew check -x test with no exclusions; record environment and exit status.",
+    "No fail-before requirement for this documentation-only follow-up; contributor regression has not been established on baseline by this gate. Record all proof legs independently, log paths, exit codes and evidence; any formatting change requires a new head and gate."
+  ],
+  "source": {
+    "branch": "pr-5339-signature-migration",
+    "head": "6d886caf1b2915c9318b1419386e5181dd154ad0",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "gate"
+}
