@@ -1,0 +1,23 @@
+{
+  "environment": "Linux, clean checkout of the exact fork head; record JDK, toolchain and environment.",
+  "expected_receipt": "records/receipt/pr-5075-review-fixes-linux-20261113-receipt.json",
+  "head": "dc825f9af929a7ad8d08f8eb51e969e72582acb2",
+  "id": "pr-5075-review-fixes-linux-20261113-gate",
+  "job": "pr-5075-review-fixes-linux-20261113",
+  "phase": "review feedback round 1",
+  "prior_receipt": "https://github.com/nick-boss-tech/solr/blob/coordination-ui/receipts/SOLR-5939.md",
+  "requirements": [
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.update.StreamingSolrClientsErrorAttributionTest --tests org.apache.solr.update.SolrCmdDistributorTest -Dtests.seed=5075C0DE and retain fresh logs and JUnit XML. Confirm both attribution methods execute, including the new stream and retry logging assertions.",
+    "Run ./gradlew :solr:solrj-jetty:test --tests org.apache.solr.client.solrj.jetty.ConcurrentUpdateJettySolrClientTest --tests org.apache.solr.client.solrj.jetty.ConcurrentUpdateJettySolrClientBadInputTest -Dtests.seed=5075C0DE and retain fresh logs and XML.",
+    "Run ./gradlew tidy and verify it makes no tracked changes; any formatting changes require a new pushed head and gate.",
+    "Run ./gradlew check -x test and record exit status and complete logs, including any environment conditions.",
+    "Fail-before: in a separate clean checkout of f8d4bdbea518901e255ae119f3e5c43e7804a9bf, overlay only the new StreamingSolrClientsErrorAttributionTest.java from the gated head; run ./gradlew :solr:core:test --tests org.apache.solr.update.StreamingSolrClientsErrorAttributionTest.testDeleteByQueryRetryRuleIsJudgedOnItsOwnRequest -Dtests.seed=5075C0DE. Confirm a behavioral logging assertion fails, rather than compilation, setup, or an unrelated assertion. Record output and XML.",
+    "Confirm the pushed head remains unchanged; report each leg separately, actual test counts, commands, exit codes and durable evidence locations. A setup failure, skipped test or missing leg is not a pass."
+  ],
+  "source": {
+    "branch": "solr-5939-submit",
+    "head": "dc825f9af929a7ad8d08f8eb51e969e72582acb2",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "gate"
+}
