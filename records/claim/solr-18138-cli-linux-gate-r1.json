@@ -1,0 +1,10 @@
+{
+  "claimed": "2026-11-13T16:40:00Z",
+  "head": "45956fbe7f530d77702c586d62de2a5609ab20af",
+  "host": "linux",
+  "id": "solr-18138-cli-linux-gate-r1",
+  "job": "solr-18138-cli-linux-gate-r1",
+  "note": "Live fork branch solr-18138-submit verified at the gate head 45956fbe7f5 by git ls-remote at claim time. No conflicting claim exists for this Linux gate job on coordination-v2.",
+  "owner": "vm2",
+  "type": "claim"
+}
