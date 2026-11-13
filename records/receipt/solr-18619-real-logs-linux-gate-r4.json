@@ -1,0 +1,89 @@
+{
+  "commands": [
+    {
+      "command": "./gradlew --no-daemon tidy",
+      "diff": "tidy.diff",
+      "diff_sha256": "29f32920259da2d46c6c455fc484f3d0e061b8fd132cfbf7f3f0b4e6c4bd65ab",
+      "effect": "Formatting-only changes to AdminUiLoggingScreenTest.java and AdminUiNodeScreensTest.java; clean tracked tree requirement failed.",
+      "ended_utc": "2026-11-13T20:52:52Z",
+      "exit_code": 0,
+      "started_utc": "2026-11-13T20:51:27Z"
+    },
+    {
+      "command": "./gradlew --no-daemon updateLicenses",
+      "effect": "Failed at :solr:webapp:collectJarInfos because seven resolved artifacts were absent from dependency lock state, including Log4j API/core 2.26.1 and OSGi/Bnd dependencies. No tracked changes.",
+      "ended_utc": "2026-11-13T20:55:02Z",
+      "exit_code": 1,
+      "rerun": "Not rerun after resolveAndLockAll changed a tracked file.",
+      "started_utc": "2026-11-13T20:53:52Z"
+    },
+    {
+      "command": "./gradlew --no-daemon resolveAndLockAll --write-locks",
+      "diff": "dependency-locks.diff",
+      "diff_sha256": "074e9dc5c36811cd6f2141772beee5563187e0b87d6a9ba235be05a01814d4dc",
+      "effect": "Updated solr/webapp/gradle.lockfile with seven added dependency entries and two Log4j configuration-scope changes; tracked-tree stop condition confirmed.",
+      "ended_utc": "2026-11-13T20:56:01Z",
+      "exit_code": 0,
+      "started_utc": "2026-11-13T20:55:31Z"
+    }
+  ],
+  "environment": {
+    "NODE_ENV": "unset",
+    "chrome": "Google Chrome 155.0.8059.39",
+    "chromedriver": "ChromeDriver 155.0.8059.39",
+    "gradle_user_home": "/workspace/gradle-home",
+    "gradle_wrapper": "9.7.0",
+    "host_id": "phone-agent-2",
+    "java": "OpenJDK 21.0.12.1",
+    "node": "v24.22.1",
+    "npm": "11.19.1",
+    "os": "Linux Ubuntu 24.04.4"
+  },
+  "evidence_record": "records/evidence/solr-18619-real-logs-linux-gate-r4-evidence.json",
+  "evidence_sha256": "a86309f8fd613dea3064c38d04aede4c8330741a492ff719a3568cf90ecbb44b",
+  "evidence_url": "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519664052758700/TnWwnBDkjImwhTRM.gz?Expires=1826139584&Signature=WZgK71~ZmIaKcwCdjioaHC2Hf0OouPCViixVoKs2V4rbAxe49tjsMzykpGbwraHLURVnVUEeB7ur~eYmErlpAMrxz4mPqbV6iHtKLeC4gkCEEKyxxcVPsTaxhhgsGT9OdsBaw4g1gjR3q5kKF1tgNz61pr-hbPPm~LaqRg2l~Dcl~BXU-VIE1h3a5Bvxf1aFQmOl6rzblfVAUAmYgA4x-2mlzjx7i3JRtU4haPQEOk9zE4Tk-9ZDObthXaWl~DfMtTRsmYrAR7YZai2htExVlkUwt9xAk4pGsMdK2D--ZP3izhbTotgFxRLSX0nTa37gGDIbkys~t52o6HcE-ikLVg__&Key-Pair-Id=K10M74EMLURLMC",
+  "exclusions": [
+    "Docker-dependent checks were not run; Docker was not installed or used.",
+    "Antora site-build and dependent link-check tasks were excluded by host policy and not run."
+  ],
+  "final_tree": {
+    "both_required_gradle_locks_released": true,
+    "head": "848885b4cda2c3312576c810aeb4a46afb50419e",
+    "no_gradle_or_chromedriver_test_process_running": true,
+    "source_branch_changed": false,
+    "tracked_worktree_clean": true
+  },
+  "gate": "solr-18619-real-logs-linux-gate-r4",
+  "head": "848885b4cda2c3312576c810aeb4a46afb50419e",
+  "id": "solr-18619-real-logs-linux-gate-r4",
+  "job": "solr-18619-real-logs-linux-gate-r4",
+  "limits": [
+    "No HTTP introspection or concurrent-edit proof was run.",
+    "The static review's logger-to-watcher appender-delivery assumption remains unvalidated.",
+    "No passing behavioral result is implied by the maintenance tasks."
+  ],
+  "seed": "18619C0DE (not exercised)",
+  "source": {
+    "branch": "solr-18619-targeting-prep",
+    "head": "848885b4cda2c3312576c810aeb4a46afb50419e",
+    "live_ref_final_check": "848885b4cda2c3312576c810aeb4a46afb50419e",
+    "parent": "cf35bd49fab19751af9afb728ef83076ae521f09",
+    "repository": "nick-boss-tech/solr",
+    "tree": "b0c3c162e67cd207029b13a7c81f41e678571837"
+  },
+  "summary": "Exact-head behavioral proof stopped after tidy reformatted tracked tests. updateLicenses failed because seven dependencies were not locked; resolveAndLockAll --write-locks succeeded but changed the tracked webapp lockfile. Both diffs were preserved and the disposable checkout restored clean. No source branch change, test execution, or mutation proof was made.",
+  "tests": {
+    "changelog_validation": "not run",
+    "junit_xml_generated": false,
+    "mutation_legs_executed": 0,
+    "mutation_legs_required": 10,
+    "positive_legs": "not run",
+    "reference_guide_checks": "not run",
+    "root_check_x_test": "not run",
+    "selected_tests_executed": 0,
+    "thread_leaks": "not assessed",
+    "xml_counts": null
+  },
+  "type": "receipt",
+  "verdict": "incomplete"
+}
