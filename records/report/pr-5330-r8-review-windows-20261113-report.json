@@ -1,0 +1,16 @@
+{
+  "coordination": "At board 6ec3d30cfc131f759331ad596a245130c8e7ee73 no r8 gate claim or receipt was observed. Older r2 gate remains claimed without observed release; do not assume worker stopped.",
+  "findings": [
+    "Retry delivery test verifies the document reaches the real Solr test server after an injected failure, but only checks that an error names the stalled node. Require the stall IOException/message to distinguish a transport failure; its first failure is synchronously injected, so it is not proof of an async failing-stream callback.",
+    "Real socket error callback test checks only a nonempty error list despite sending 503. Assert target node and expected status or cause so a connection or request-stream failure cannot satisfy the assertion. The raw socket does not consume the request; verify stability.",
+    "Concurrent drain test does not force an insertion between old snapshot and clear, so passing does not establish race discrimination. The existing gate requires a controlled interleaving; a permanent deterministic test would need a suitable seam or infrastructure.",
+    "JavaBin test checks valid RF and rollup. Real socket test exercises a real runner while holding the client monitor but does not invoke blockUntilFinished concurrently. Queued-write/recovery safety remains unproven."
+  ],
+  "head": "04c5746d1775f26bbba983249c1a473cdf4bd8ec",
+  "id": "pr-5330-r8-review-windows-20261113-report",
+  "job": "pr-5330-r8-review-windows-20261113",
+  "local_review": "research/branch-reviews/2026-11-13-pr-batch/PR-5330-r8-review.md",
+  "summary": "Test coverage improved; two assertions permit unrelated error paths and drain race remains nondeterministic",
+  "type": "report",
+  "verification": "Source review only; no Gradle, compile or runtime tests on Windows."
+}
