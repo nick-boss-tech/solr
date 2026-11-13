@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "Implementation report and gate record; no local implementation executor remains active.",
+  "id": "pr-5339-signature-migration-20261113",
+  "job": "pr-5339-signature-migration-20261113",
+  "reason": "Implementation pushed and Linux gate handed off",
+  "type": "release"
+}
