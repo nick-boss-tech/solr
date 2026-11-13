@@ -25,6 +25,24 @@ This page highlights the most important changes including new features and chang
 Before starting an upgrade to this version of Solr, please be sure to review all information about changes from the version you are currently on up to this one, to include the minor version number changes as well.
 For example, if you are currently using Solr 10.1, you should review changes made in all subsequent 10.x releases in addition to the 11.0-specific changes on this page.
 
+== Indexing
+
+=== TextProfileSignature values change
+
+`TextProfileSignature` now orders tokens with equal frequencies by their text before calculating the signature.
+For some documents, this produces a different signature from earlier Solr versions, even when the input has not changed.
+Existing indexed signatures are not updated automatically, so new documents may no longer match old signatures for de-duplication or field collapsing.
+During an upgrade, nodes running different versions can also generate different signatures for the same input.
+
+If you use this signature, plan to rebuild the affected index from the original source documents using the upgraded version and the same signature configuration.
+Do not reuse previously generated signature values as input; allow the update processor to calculate them again.
+To avoid mixing old and new signatures, pause updates while upgrading and rebuilding, or build a separate index on the upgraded version and synchronize all updates and deletes before switching traffic.
+Resume writes only when the nodes processing updates and the index use the new version of the signature.
+
+If the signature is the unique key, rebuilding can change document IDs and SolrCloud routing.
+Update any external references and delete or update requests that depend on the old IDs; reindexing in place may leave documents under their old IDs.
+With `overwriteDupes=true`, documents that now have matching signatures can overwrite one another during the rebuild.
+
 == Removed Features
 
 === Overseer Roles API
