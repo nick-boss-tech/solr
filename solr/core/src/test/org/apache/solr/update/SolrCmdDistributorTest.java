@@ -634,12 +634,19 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
               "collection1",
               "shard1",
               0);
+      AtomicInteger retryChecks = new AtomicInteger();
       Node failingNode =
           new StdNode(
               coreNodeProps("http://" + DEAD_HOST_1 + "/solr", solrclient),
               "collection1",
               "shard1",
-              0);
+              1) {
+            @Override
+            public boolean checkRetry(SolrError error) {
+              retryChecks.incrementAndGet();
+              return super.checkRetry(error);
+            }
+          };
 
       StreamingSolrClients streamingClients = new StreamingSolrClients(updateShardHandler);
       try (SolrCmdDistributor cmdDistrib = new SolrCmdDistributor(streamingClients, 0)) {
@@ -672,10 +679,27 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
             params.set("stream", i);
             cmdDistrib.distribAdd(cmd, List.of(stalledNode), params);
           }
+          IOException commitFailure =
+              expectThrows(
+                  IOException.class,
+                  () ->
+                      cmdDistrib.distribCommit(
+                          new CommitUpdateCommand(null, false),
+                          List.of(stalledNode),
+                          new ModifiableSolrParams()));
+          assertTrue(commitFailure.getMessage().contains("Request processing has stalled"));
+          DeleteUpdateCommand deleteByQuery = new DeleteUpdateCommand(null);
+          deleteByQuery.query = "*:*";
+          expectThrows(
+              IOException.class,
+              () ->
+                  cmdDistrib.distribDelete(
+                      deleteByQuery, List.of(stalledNode), new ModifiableSolrParams()));
           cmdDistrib.finish();
           List<SolrError> errors = cmdDistrib.getErrors();
           assertTrue(
               errors.toString(), errors.stream().anyMatch(e -> failingNode.equals(e.req.node)));
+          assertTrue("Expected the failing request to be retried", retryChecks.get() >= 3);
           assertTrue(
               errors.toString(),
               errors.stream()
