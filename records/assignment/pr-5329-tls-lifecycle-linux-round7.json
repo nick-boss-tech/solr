@@ -1,0 +1,21 @@
+{
+  "claim_path": "records/claim/pr-5329-tls-lifecycle-linux-round7.json",
+  "contributor_head": "e851dd0259b533ee7ec794c2ae664abc77cfe8f8",
+  "execution_dependency": "The round-two Linux gate is claimed. Before claiming or executing, verify that worker and executor and any later executor have stopped; do not duplicate in-flight work.",
+  "gate_id": "pr-5329-tls-lifecycle-linux-round7",
+  "gate_record": "records/gate/pr-5329-tls-lifecycle-linux-round7.json",
+  "id": "pr-5329-tls-lifecycle-linux-round7",
+  "intended_host": "Linux",
+  "job": "pr-5329-tls-lifecycle-linux-round7",
+  "outcome": "Reproduce and characterize the remaining lifecycle problems, identify smallest safe design and hand back evidence; the patch is not ready merely because a probe confirms a defect.",
+  "phase": "round 7 lifecycle investigation and current-head proof",
+  "receipt_path": "records/receipt/pr-5329-tls-lifecycle-linux-round7.json",
+  "source": {
+    "branch": "pr-5329-tls-fixes",
+    "head": "78f2fd781d83a54e2f31b45d90bec4f372450b36",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Reproduce embedded ZooKeeper TLS lifecycle defects and validate current changes",
+  "supersedes": "records/gate/pr-5329-tls-fixes-linux-round6.json",
+  "type": "assignment"
+}
