@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr-5330-r5-review",
+  "evidence": "Report records/report/pr-5330-r5-review-windows-20261113-report.json; reviewer stopped, no executor started.",
+  "id": "pr-5330-r5-review-windows-20261113",
+  "job": "pr-5330-r5-review-windows-20261113",
+  "reason": "Read-only review complete",
+  "type": "release"
+}
