@@ -1,0 +1,37 @@
+{
+  "branch": "pr-5336-response-followup",
+  "evidence": "records/evidence/evidence-pr-5336-response-gate-r3-20261113.txt",
+  "evidence_sha256": "111753699164104dc637cfdfbbacc8133a732d6ce0e0d83de7b7fab71e3a1849",
+  "executor": "vm6",
+  "filed": "2026-11-13T23:10:00Z",
+  "gate": "pr-5336-response-gate-r3",
+  "head": "59c259bcb28bac589b0617f72b52d23701442100",
+  "id": "pr-5336-response-gate-r3-receipt",
+  "job": "pr-5336-response-gate-r3",
+  "legs": [
+    {
+      "leg": "Head, ancestry and clean checkout verification",
+      "result": "PASSED: git ls-remote at claim confirmed the fork branch pr-5336-response-followup at 59c259bcb2; isolated clean worktrees gate-5336-r3-head and gate-5336-mut rev-parse equal the offered head with zero modifications at setup. Repair commit 59c259bcb2 (SOLR-18612: gate repair: apply tidy output to OverseerStatusTest) has parent eb5557d1, the round-2 head; contributor parent 96df2d21 per assignment."
+    },
+    {
+      "leg": "Focused core tests at head (gate requirement 1)",
+      "result": "PASSED: ./gradlew :solr:core:test --tests OverseerStatusTest --tests TestSolrCloudSnapshotInactiveShard --tests DeleteBackupCmdTest --tests TestReplicationHandlerBackup -Ptests.seed=5336C0DE exited 0 (BUILD SUCCESSFUL in 6m 33s). 10 tests, 0 failures, 0 errors, 0 skipped. Per-class: OverseerStatusTest 1 (test); TestSolrCloudSnapshotInactiveShard 2 (testListSnapshotJsonFormat, testSnapshotFailsWhenShardHasNoActiveReplica); DeleteBackupCmdTest 4 (testPurgeSummaryJsonFormat, testDeleteBackupIdsIgnoresMissingZkStateDir, testDeleteBackupIdsPropagatesUnexpectedDeleteErrors, testDeleteBackupIdsRemovesExistingZkStateDir); TestReplicationHandlerBackup 3 (testBackupOnCommit, doTestBackup, testDeleteBackupJsonFormat). The three JSON-format discriminators testListSnapshotJsonFormat, testPurgeSummaryJsonFormat and testDeleteBackupJsonFormat all executed."
+    },
+    {
+      "leg": "tidy at head (gate requirement 2)",
+      "result": "PASSED: ./gradlew tidy exited 0 and left tracked files unchanged (TIDY_CLEAN, git status --porcelain empty). The r2 tidy fold-in at this head is complete; the round-2 tidy-dirty finding is resolved."
+    },
+    {
+      "leg": "check -x test at head (gate requirement 2 second part)",
+      "result": "PASSED: ./gradlew check -x test -Prefguide.include=false exited 0 (BUILD SUCCESSFUL in 9m 31s). The ref-guide tasks are excluded per the standing owner policy (AGENTS.md: Antora / ref-guide is NOT enforced for gate runs)."
+    },
+    {
+      "leg": "Mutation proofs (gate requirement 3)",
+      "result": "PASSED, 8/8 behavioral FAILED-OK. Each mutation reverts one NamedList constructor from SimpleOrderedMap to NamedList at an exact line, compiles :solr:core:compileJava (exit 0 each), and runs the matching focused test class with seed 5336C0DE; each fails with java.lang.AssertionError at the matching JSON instanceof-Map assertion. Exact source restored after each (worktree clean at the end). Details: overseer_operations (OverseerStatusCmd.java:135 -> OverseerStatusTest.test); collection_operations (OverseerStatusCmd.java:136 -> OverseerStatusTest.test); snapshots_container (CollectionsHandler.java:969 -> testListSnapshotJsonFormat:69); snapshot_object (CollectionSnapshotMetaData.java:241 -> testListSnapshotJsonFormat:71); replicas_container (CollectionSnapshotMetaData.java:246 -> testListSnapshotJsonFormat:74); replica_object (CollectionSnapshotMetaData.java:105 -> testListSnapshotJsonFormat:78); deletebackup_details (DeleteBackupCmd.java:135 -> testPurgeSummaryJsonFormat:60); snapshooter_details (SnapShooter.java:401 -> testDeleteBackupJsonFormat:133). All eight NamedList-constructor sites converted by the patch are individually load-bearing for the JSON-format assertions. No compile/setup/skip counted as proof."
+    }
+  ],
+  "limits": "The install-shard partial-failure response requires a distributed restore with one leader-eligible replica failing and recovering; it remains untested by this patch and is not claimed as covered (gate requirement 4). The first mutation pass ran 5 of 8 legs before the background command reached its 30-minute limit; the remaining 3 (replica_object, deletebackup_details, snapshooter_details) ran in a continuation from the same clean restored worktree.",
+  "summary": "Round 3 gate PASSED at 59c259bcb2. The round-2 tidy-dirty finding is resolved by one gate-repair commit (SOLR-18612: gate repair: apply tidy output to OverseerStatusTest) pushed fast-forward; at this head tidy leaves tracked files unchanged. All 10 focused core tests pass (0 failures/errors/skips), including the three JSON-format discriminators. Root check -x test is BUILD SUCCESSFUL with the ref-guide excluded per standing owner policy. All 8 isolated NamedList-constructor mutations fail behaviorally on the matching focused test (AssertionError at the JSON instanceof-Map assertion), proving each SimpleOrderedMap conversion is load-bearing for the response-format coverage.",
+  "type": "receipt",
+  "verdict": "passed"
+}
