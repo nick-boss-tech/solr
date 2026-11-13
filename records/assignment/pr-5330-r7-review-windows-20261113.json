@@ -1,0 +1,8 @@
+{
+  "head": "f7e638b2d6b57fcbdde3122120eedac2694ed40c",
+  "host": "Windows read-only review",
+  "id": "pr-5330-r7-review-windows-20261113",
+  "job": "pr-5330-r7-review-windows-20261113",
+  "summary": "Review complete PR 5330 retry-serial revision and tests",
+  "type": "assignment"
+}
