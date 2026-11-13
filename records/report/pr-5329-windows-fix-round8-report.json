@@ -1,0 +1,14 @@
+{
+  "gate": "records/gate/pr-5329-tls-linux-round8.json",
+  "id": "pr-5329-windows-fix-round8-report",
+  "job": "pr-5329-windows-fix-round8",
+  "limitations": "Partial: external plaintext ZooKeeper inherits automatic TLS settings and rotated server/client settings remain stale. The truststore, include failure path and all other behavior require Linux proof; do not offer this patch as complete.",
+  "receipt": "records/receipt/pr-5329-tls-linux-round8.json",
+  "source": {
+    "branch": "pr-5329-tls-fixes",
+    "head": "69cd26432aaaf9a60e36eb888d9dd684a9eb8825",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Merged contributor head 6b938f43ba7b80ca8ed4221bb88b0698b0f9fa54; fixed the BATS truststore by importing the generated certificate, and fail startup when the include write fails. Added an unprivileged read-only include assertion. Bash syntax and git diff --check passed; no Gradle or tests were run on Windows.",
+  "type": "report"
+}
