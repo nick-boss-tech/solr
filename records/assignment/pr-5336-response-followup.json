@@ -1,0 +1,11 @@
+{
+  "id": "pr-5336-response-followup",
+  "intended_host": "Windows implementation; Linux proof",
+  "job": "pr-5336-response-followup",
+  "source": {
+    "head": "96df2d214560949cb8984b16aad1a2b7f47ca7d7",
+    "repository": "apache/solr"
+  },
+  "summary": "Implement response JSON coverage and compatibility wording for PR 5336",
+  "type": "assignment"
+}
