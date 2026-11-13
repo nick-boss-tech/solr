@@ -1,0 +1,10 @@
+{
+  "gate": "records/gate/pr-5075-review-fixes-linux-20261113-gate.json",
+  "gate_assignment": "records/assignment/pr-5075-review-fixes-linux-20261113.json",
+  "head": "dc825f9af929a7ad8d08f8eb51e969e72582acb2",
+  "id": "pr-5075-review-fixes-windows-20261113-report",
+  "job": "pr-5075-review-fixes-windows-20261113",
+  "prior_head": "f8d4bdbea518901e255ae119f3e5c43e7804a9bf",
+  "result": "Pushed review fixes to nick-boss-tech/solr branch solr-5939-submit. Logs one throwable per failed stream, removes repeated throwables from per-request and retry logs, adds log assertions, clarifies the retry risk, trims comments and corrects error-handler Javadoc. Diff whitespace check passed; no Gradle or tests run on Windows. Linux proof pending.",
+  "type": "report"
+}
