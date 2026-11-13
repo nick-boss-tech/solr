@@ -18,6 +18,7 @@ package org.apache.solr.update;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
@@ -25,6 +26,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -681,7 +683,12 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
           cmdDistrib.finish();
           assertTrue(
               cmdDistrib.getErrors().toString(),
-              cmdDistrib.getErrors().stream().anyMatch(e -> stalledNode.equals(e.req.node)));
+              cmdDistrib.getErrors().stream()
+                  .anyMatch(
+                      e ->
+                          stalledNode.equals(e.req.node)
+                              && e.e instanceof IOException
+                              && e.e.getMessage().contains("Request processing has stalled")));
         }
         solrclient.commit();
         assertEquals(1, solrclient.query(new SolrQuery("id:" + id)).getResults().getNumFound());
@@ -804,6 +811,8 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
                 (ErrorReportingConcurrentUpdateSolrClient) streamingClients.getSolrClient(req);
             client.request(update);
             try (Socket accepted = server.accept()) {
+              accepted.setSoTimeout(10000);
+              consumeHttpRequest(accepted.getInputStream());
               byte[] body = new byte[0];
               if (success) {
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -828,10 +837,16 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
                       "Success callback was blocked", successReported.await(5, TimeUnit.SECONDS));
                 } else {
                   long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
-                  while (streamingClients.getErrors().isEmpty() && System.nanoTime() < deadline) {
-                    Thread.sleep(10);
+                  boolean expectedError = false;
+                  while (!expectedError && System.nanoTime() < deadline) {
+                    synchronized (streamingClients.getErrors()) {
+                      expectedError =
+                          streamingClients.getErrors().stream()
+                              .anyMatch(e -> node.equals(e.req.node) && e.statusCode == 503);
+                    }
+                    if (!expectedError) Thread.sleep(10);
                   }
-                  assertFalse("Error callback was blocked", streamingClients.getErrors().isEmpty());
+                  assertTrue("Expected HTTP 503 callback was not recorded", expectedError);
                 }
               }
             }
@@ -880,30 +895,90 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
   @Test
   @ShardsFixed(num = 1)
   public void testConcurrentErrorDrainRetainsEveryError() throws Exception {
-    StreamingSolrClients streamingClients = new StreamingSolrClients(updateShardHandler);
+    CountDownLatch clearReached = new CountDownLatch(1);
+    CountDownLatch allowClear = new CountDownLatch(1);
+    AtomicBoolean pauseClear = new AtomicBoolean(true);
+    List<SolrError> errors =
+        new AbstractList<>() {
+          private final List<SolrError> delegate = new ArrayList<>();
+
+          @Override
+          public synchronized SolrError get(int index) {
+            return delegate.get(index);
+          }
+
+          @Override
+          public synchronized int size() {
+            return delegate.size();
+          }
+
+          @Override
+          public synchronized boolean add(SolrError error) {
+            return delegate.add(error);
+          }
+
+          @Override
+          public synchronized Object[] toArray() {
+            return delegate.toArray();
+          }
+
+          @Override
+          public void clear() {
+            if (pauseClear.compareAndSet(true, false)) {
+              clearReached.countDown();
+              try {
+                if (!allowClear.await(5, TimeUnit.SECONDS)) {
+                  throw new AssertionError("Timed out waiting to clear errors");
+                }
+              } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                throw new AssertionError(e);
+              }
+            }
+            synchronized (this) {
+              delegate.clear();
+            }
+          }
+        };
+    StreamingSolrClients streamingClients = new StreamingSolrClients(updateShardHandler, errors);
     ExecutorService executor = Executors.newSingleThreadExecutor();
+    SolrError before = new SolrError();
+    SolrError concurrent = new SolrError();
+    CountDownLatch writerStarted = new CountDownLatch(1);
+    CountDownLatch writerDone = new CountDownLatch(1);
+    Thread writer =
+        new Thread(
+            () -> {
+              writerStarted.countDown();
+              errors.add(concurrent);
+              writerDone.countDown();
+            });
+    writer.setDaemon(true);
     try {
-      for (int i = 0; i < 100; i++) {
-        SolrError before = new SolrError();
-        SolrError concurrent = new SolrError();
-        streamingClients.getErrors().add(before);
-        CountDownLatch start = new CountDownLatch(1);
-        var writer =
-            executor.submit(
-                () -> {
-                  start.await();
-                  streamingClients.getErrors().add(concurrent);
-                  return null;
-                });
-        start.countDown();
-        List<SolrError> collected = streamingClients.drainErrors();
-        writer.get(5, TimeUnit.SECONDS);
-        collected.addAll(streamingClients.drainErrors());
-        assertEquals(2, collected.size());
-        assertTrue(collected.contains(before));
-        assertTrue(collected.contains(concurrent));
+      errors.add(before);
+      var drained = executor.submit(streamingClients::drainErrors);
+      assertTrue("Drain did not reach clear", clearReached.await(5, TimeUnit.SECONDS));
+      writer.start();
+      assertTrue("Writer did not start", writerStarted.await(5, TimeUnit.SECONDS));
+      long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
+      while (writerDone.getCount() != 0
+          && writer.getState() != Thread.State.BLOCKED
+          && System.nanoTime() < deadline) {
+        Thread.yield();
       }
+      assertTrue(
+          "Writer neither completed nor blocked on the error list",
+          writerDone.getCount() == 0 || writer.getState() == Thread.State.BLOCKED);
+      allowClear.countDown();
+      List<SolrError> collected = drained.get(5, TimeUnit.SECONDS);
+      assertTrue("Writer did not finish", writerDone.await(5, TimeUnit.SECONDS));
+      collected.addAll(streamingClients.drainErrors());
+      assertEquals(2, collected.size());
+      assertTrue(collected.contains(before));
+      assertTrue(collected.contains(concurrent));
     } finally {
+      allowClear.countDown();
+      writer.interrupt();
       executor.shutdownNow();
       streamingClients.shutdown();
     }
@@ -1068,6 +1143,56 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
     } else {
       System.setProperty(name, value);
     }
+  }
+
+  private static void consumeHttpRequest(InputStream input) throws IOException {
+    String requestLine = readHttpLine(input);
+    if (!requestLine.startsWith("POST ")) {
+      throw new IOException("Unexpected request: " + requestLine);
+    }
+    boolean chunked = false;
+    int contentLength = -1;
+    String line;
+    while (!(line = readHttpLine(input)).isEmpty()) {
+      if (line.regionMatches(true, 0, "Transfer-Encoding:", 0, 18)) {
+        chunked = line.substring(18).trim().equalsIgnoreCase("chunked");
+      } else if (line.regionMatches(true, 0, "Content-Length:", 0, 15)) {
+        contentLength = Integer.parseInt(line.substring(15).trim());
+      }
+    }
+    if (chunked) {
+      while (true) {
+        String chunkHeader = readHttpLine(input).split(";", 2)[0].trim();
+        int length = Integer.parseInt(chunkHeader, 16);
+        if (length == 0) {
+          while (!readHttpLine(input).isEmpty()) {
+            // Consume trailers, if any.
+          }
+          break;
+        }
+        if (input.readNBytes(length).length != length) throw new EOFException("Truncated chunk");
+        if (!readHttpLine(input).isEmpty()) throw new IOException("Invalid chunk terminator");
+      }
+    } else if (contentLength >= 0) {
+      if (input.readNBytes(contentLength).length != contentLength) {
+        throw new EOFException("Truncated request body");
+      }
+    } else {
+      throw new IOException("Request has no supported body framing");
+    }
+  }
+
+  private static String readHttpLine(InputStream input) throws IOException {
+    ByteArrayOutputStream line = new ByteArrayOutputStream();
+    int b;
+    while ((b = input.read()) != -1) {
+      if (b == '\n') {
+        String value = line.toString(StandardCharsets.US_ASCII);
+        return value.endsWith("\r") ? value.substring(0, value.length() - 1) : value;
+      }
+      line.write(b);
+    }
+    throw new EOFException("Truncated HTTP line");
   }
 
   private static ZkCoreNodeProps coreNodeProps(String baseUrl, HttpSolrClient client) {

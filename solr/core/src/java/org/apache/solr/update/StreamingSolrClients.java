@@ -47,11 +47,17 @@ public class StreamingSolrClients {
   private HttpJettySolrClient httpClient;
 
   private Map<String, ErrorReportingConcurrentUpdateSolrClient> solrClients = new HashMap<>();
-  private List<SolrError> errors = Collections.synchronizedList(new ArrayList<>());
+  private final List<SolrError> errors;
 
   private ExecutorService updateExecutor;
 
   public StreamingSolrClients(UpdateShardHandler updateShardHandler) {
+    this(updateShardHandler, Collections.synchronizedList(new ArrayList<>()));
+  }
+
+  // Test-only injection for controlling the error-collector interleaving.
+  StreamingSolrClients(UpdateShardHandler updateShardHandler, List<SolrError> errors) {
+    this.errors = errors;
     this.updateExecutor = updateShardHandler.getUpdateExecutor();
     this.httpClient = updateShardHandler.getUpdateOnlyHttpClient();
   }
