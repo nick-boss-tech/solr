@@ -1,0 +1,16 @@
+{
+  "changes": "Use a separate callbackLock to serialize the stalled state and callbacks without acquiring the client monitor used by blockUntilFinished. Extend callback test to hold client monitor while invoking callbacks on a worker with bounded waits.",
+  "coordination": "Older Linux r2 remains claimed at a different head with no observed release. Do not infer worker stopped.",
+  "gate": "records/gate/pr-5330-callback-lock-r5-linux-20261113.json",
+  "head": "1712a7dcbdd25cd24d1ec12336019c94cbdfedbf",
+  "id": "pr-5330-callback-lock-r5-windows-20261113-report",
+  "job": "pr-5330-callback-lock-r5-windows-20261113",
+  "source": {
+    "branch": "pr-5330-test-fix-20261113",
+    "head": "1712a7dcbdd25cd24d1ec12336019c94cbdfedbf",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Pushed dedicated callback lock and bounded monitor-contention regression",
+  "type": "report",
+  "verification": "Whitespace diff and remote SHA checked; no Gradle or runtime tests on Windows. The monitor test is not a real runner/flush integration test; Linux gate includes both that integration and old-code fail-before. The stalled runner is fenced but not cancelled."
+}
