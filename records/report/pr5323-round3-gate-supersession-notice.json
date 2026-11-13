@@ -1,0 +1,7 @@
+{
+  "head": "7e23026e2b82e7ecd9d47648441c7a7e4f28f7ff",
+  "id": "pr5323-round3-gate-supersession-notice",
+  "job": "pr5323-tls-hostname-round3-linux",
+  "summary": "Round 3 gate is superseded for new work: hostname diagnostic was read from shared async rotating node logs. Round 4 moves the check to an isolated user-managed node with private synchronous non-rotating logging and an unrelated-failure control. Do not claim this gate; a new exact-head gate is being prepared. No claim was visible at the refresh. Any executor that started must stop and report state; old-head proof cannot establish the new head.",
+  "type": "report"
+}
