@@ -1,0 +1,22 @@
+{
+  "environment": "Linux JDK 21, clean disposable checkout and test installations, preserve security settings",
+  "execution_dependency": "Confirm the previously claimed round-two worker and executor and any later gate executors have stopped before claiming or running.",
+  "head": "78f2fd781d83a54e2f31b45d90bec4f372450b36",
+  "id": "pr-5329-tls-lifecycle-linux-round7",
+  "job": "pr-5329-tls-lifecycle-linux-round7",
+  "phase": "round 7 investigation and current-head proof",
+  "requirements": [
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.cloud.SolrZkServerTlsTest -Dtests.seed=5329ABCD; retain fresh XML, counts and log including both three-member ensemble cases.",
+    "Run ./gradlew :solr:packaging:integrationTests --tests test_secure_example.bats; retain fresh output/XML and identify EOF, no, whitespace, quoted-empty, Enter and --no-prompt behavior, listener paths and password creation checks.",
+    "Run ./gradlew tidy with clean tree afterward, and ./gradlew check -x test; report any formatting change for a new exact-head gate.",
+    "Fail-before raw confirmation: on a disposable worktree at de6c192d045c9c0e182b9e3d060d412d450df3aa apply only the updated decline test and run it against a fresh distribution; show whitespace or quoted-empty input deletes the disposable marker or otherwise causes the specific assertion failure. Do not use real data.",
+    "Fail-before ensemble: apply only the updated SolrZkServerTlsTest.java to fork head dc3ba7b2e83a0b3e128d6e49964adf8681d9732e and run testAutomaticTlsRejectsEnsemblePlaintextClientAddress with seed 5329ABCD; require missing-exception assertion failure, not setup/compile failure.",
+    "Fail-before unification: apply the updated test class to fork head 7dedae124c252574caaff93cf4bcf2bc1d240fc9 and run testAutomaticTlsSuppressesExistingPlaintextPort with the same seed; require the unification assertion failure.",
+    "On a disposable worktree mutate only password creation umask 077 to 022 and require the BATS creation interception to fail; retain fresh output. Interceptor is specific to touch-based creation.",
+    "Lifecycle probes on isolated disposable installations: start TLS-enabled embedded ZooKeeper with a shared include, demonstrate a co-located node and CLI client connect, then use the same include with a different plaintext external ensemble. Capture actual connection result and effective nonsecret JVM properties. Also rotate keystore/truststore locations and port and restart; record which zoo.cfg and include values remain stale and whether server and clients connect. Include existing user-managed secureClientPort/zoo.cfg and non-writable include cases. Do not expose passwords or modify real deployments.",
+    "Record commands, setup, exact heads, return codes, counts, fresh evidence and recommended smallest safe implementation boundary. Label the gate incomplete while lifecycle defects remain unresolved; do not post publicly."
+  ],
+  "supersedes": "records/gate/pr-5329-tls-fixes-linux-round6.json",
+  "type": "gate",
+  "unresolved": "TLS option persistence after rotation and inheritance for external ZooKeeper remain unresolved. Investigation or a passed focused leg does not make this patch ready."
+}
