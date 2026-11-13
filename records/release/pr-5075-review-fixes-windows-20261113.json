@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr5075",
+  "evidence": "records/report/pr-5075-review-fixes-windows-20261113-report.json; source head dc825f9af929a7ad8d08f8eb51e969e72582acb2; no local executor was started.",
+  "id": "pr-5075-review-fixes-windows-20261113",
+  "job": "pr-5075-review-fixes-windows-20261113",
+  "reason": "Implementation completed and handed off to Linux gate; implementation worker is stopping.",
+  "type": "release"
+}
