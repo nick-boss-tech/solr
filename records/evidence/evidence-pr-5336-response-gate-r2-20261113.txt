@@ -1,0 +1,62 @@
+PR 5336 response-format gate r2 evidence (vm6 host)
+Job: pr-5336-response-gate-r2
+Head: eb5557d14fa6de411e35e5ff22d30a0cd8f7589d (fork branch pr-5336-response-followup, verified by git ls-remote at claim; isolated clean worktree gate-5336-head, rev-parse verified, zero modifications at setup)
+Contributor parent: 96df2d214560949cb8984b16aad1a2b7f47ca7d7 (per assignment record)
+Seed: 5336C0DE for every test leg (passed as -Ptests.seed; the gate's ./gradlew commands run through the host JDK 21 wrapper, GRADLE_USER_HOME=/workspace/gradle-home)
+Verdict: FAILED
+
+== Summary
+Gate requirement 2 is not met: ./gradlew tidy changes a tracked file at this exact head. The changed file is solr/core/src/test/org/apache/solr/cloud/OverseerStatusTest.java (Spotless reformatting). Per the gate record's requirement 2, "If tidy changes tracked files, stop and require a new pushed head and superseding gate." The gate is therefore FAILED at eb5557d1. The positive test legs all passed; the failure is a formatting/clean-tree failure, not a behavioral test failure.
+
+== Leg 1: focused core tests (gate requirement 1)
+Command: ./gradlew :solr:core:test --tests org.apache.solr.cloud.OverseerStatusTest --tests org.apache.solr.core.snapshots.TestSolrCloudSnapshotInactiveShard --tests org.apache.solr.cloud.api.collections.DeleteBackupCmdTest --tests org.apache.solr.handler.TestReplicationHandlerBackup -Ptests.seed=5336C0DE
+Exit code: 0 (BUILD SUCCESSFUL in 6m 44s)
+Fresh JUnit XML per class (all under solr/core/build/test-results/test/):
+- org.apache.solr.cloud.OverseerStatusTest: tests=1, failures=0, errors=0, skipped=0 (method: test)
+- org.apache.solr.core.snapshots.TestSolrCloudSnapshotInactiveShard: tests=2, failures=0, errors=0, skipped=0 (methods: testListSnapshotJsonFormat, testSnapshotFailsWhenShardHasNoActiveReplica)
+- org.apache.solr.cloud.api.collections.DeleteBackupCmdTest: tests=4, failures=0, errors=0, skipped=0 (methods: testPurgeSummaryJsonFormat, testDeleteBackupIdsIgnoresMissingZkStateDir, testDeleteBackupIdsPropagatesUnexpectedDeleteErrors, testDeleteBackupIdsRemovesExistingZkStateDir)
+- org.apache.solr.handler.TestReplicationHandlerBackup: tests=3, failures=0, errors=0, skipped=0 (methods: testBackupOnCommit, doTestBackup, testDeleteBackupJsonFormat)
+Total: 10 tests, 0 failures, 0 errors, 0 skipped. The three JSON-format discriminator methods testListSnapshotJsonFormat, testPurgeSummaryJsonFormat and testDeleteBackupJsonFormat all executed.
+
+== Leg 2: tidy (gate requirement 2) -- FAILED
+Command: ./gradlew tidy
+Exit code: 0 (tidy itself succeeds)
+But after tidy, git status --porcelain is not empty:
+  M solr/core/src/test/org/apache/solr/cloud/OverseerStatusTest.java
+The change was re-confirmed deterministically by re-running ./gradlew tidy on a restored clean tree (04-tidy-reconfirm.log: BUILD SUCCESSFUL in 1m 36s, 62 actionable tasks) and capturing the exact Spotless diff (04-tidy-reconfirm.diff, sha256 586327dc03fdef0270786cd08fd97e6274fdc73a4523e2fb02976728a6368f9e):
+
+  diff --git a/solr/core/src/test/org/apache/solr/cloud/OverseerStatusTest.java b/solr/core/src/test/org/apache/solr/cloud/OverseerStatusTest.java
+  @@ -30,7 +30,10 @@
+   @BeforeClass
+   public static void setupCluster() throws Exception {
+  -  configureCluster(2).withOverseer(true).addConfig("conf", configset("cloud-minimal")).configure();
+  +  configureCluster(2)
+  +      .withOverseer(true)
+  +      .addConfig("conf", configset("cloud-minimal"))
+  +      .configure();
+   }
+  @@ -52,8 +55,7 @@
+   for (String jsonNl : new String[] {"", "&json.nl=arrarr"}) {
+     var jetty = cluster.getRandomJetty(random());
+  -  String url =
+  -      jetty.getBaseUrl() + "/admin/collections?action=OVERSEERSTATUS&wt=json" + jsonNl;
+  +  String url = jetty.getBaseUrl() + "/admin/collections?action=OVERSEERSTATUS&wt=json" + jsonNl;
+     var response = jetty.getSolrClient().getHttpClient().GET(url);
+
+This is Spotless (Google Java Format) re-wrapping of a chained configureCluster call and a String concatenation line. The head is NOT tidy-clean. Requirement 2 therefore stops this gate and requires a new pushed head (folding in these formatting changes) and a superseding gate.
+
+== Leg 3: root check -x test (gate requirement 2 second part) -- NOT RUN
+Per requirement 2, the tidy-dirty finding stops the gate before the check leg. The check leg was not completed. (An aborted start of ./gradlew check -x test -Prefguide.include=false did not produce a leg result; the runner was stopped after the decisive tidy finding.) The ref-guide is excluded per the standing owner policy (AGENTS.md: Antora / ref-guide is NOT enforced for gate runs; -Prefguide.include=false).
+
+== Mutation legs (gate requirement 3) -- NOT RUN
+The requirement-3 isolated mutation proofs are moot because the head cannot pass requirement 2 (tidy-dirty). Reverting one NamedList constructor at a time on a dirty-formatting head would prove behavior the head cannot ship. The 8 planned mutation sites (overseer_operations, collection_operations, snapshots_container, snapshot_object, replicas_container, replica_object, deletebackup_details, snapshooter_details) remain for the superseding gate on the formatted head.
+
+== Known untested limit (gate requirement 4)
+The install-shard partial-failure response requires a distributed restore with one leader-eligible replica failing and recovering; it remains untested by this patch and is not claimed as covered.
+
+== Execution conditions
+Isolated clean worktree at eb5557d1 (gate-5336-head), rev-parse verified at setup and restored clean after evidence capture. Gradle runs serialized through the vm6 build lock (/workspace/tools/.gradle-vm6.lock). JDK 21.0.12.1+1, GRADLE_USER_HOME=/workspace/gradle-home. Host free space and inodes above the standing thresholds at each heartbeat.
+
+== Artifact references
+- Fresh leg logs and JUnit XML: /workspace/logs/vm6/pr5336-response-gate/ (01-core-focus.log, 02-tidy.log, 02-tidy.dirty, 03-check-nox.log, 04-tidy-reconfirm.log, 04-tidy-reconfirm.diff)
+- The exact tidy diff sha256 is recorded above.
