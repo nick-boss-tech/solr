@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr-5330-r7",
+  "evidence": "Fork head f7e638b2d6b57fcbdde3122120eedac2694ed40c pushed and verified; Windows implementation worker stopped, no local test executor started. Report records/report/pr-5330-retry-serial-r7-windows-20261113-report.json.",
+  "id": "pr-5330-retry-serial-r7-windows-20261113",
+  "job": "pr-5330-retry-serial-r7-windows-20261113",
+  "reason": "Fork implementation pushed and exact-head Linux gate handed off",
+  "type": "release"
+}
