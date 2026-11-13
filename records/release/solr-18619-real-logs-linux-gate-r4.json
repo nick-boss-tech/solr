@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "records/report/solr-18619-real-logs-linux-gate-r4-execution-report.json; records/evidence/solr-18619-real-logs-linux-gate-r4-evidence.json (archive SHA-256 a86309f8fd613dea3064c38d04aede4c8330741a492ff719a3568cf90ecbb44b); records/receipt/solr-18619-real-logs-linux-gate-r4.json. Final monitor/status check recorded no Gradle or ChromeDriver gate process and both host locks released.",
+  "id": "solr-18619-real-logs-linux-gate-r4",
+  "job": "solr-18619-real-logs-linux-gate-r4",
+  "reason": "Executor stopped exact-head proof after tidy reformatted tracked tests and dependency-lock generation changed the tracked webapp lockfile. The disposable checkout was restored clean to 848885b4cda2c3312576c810aeb4a46afb50419e; all behavioral tests and mutations remain unrun. No source branch changes were committed or pushed.",
+  "type": "release"
+}
