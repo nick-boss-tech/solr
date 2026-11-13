@@ -1,0 +1,19 @@
+{
+  "claim_path": "records/claim/solr-18619-real-logs-linux-gate-r4.json",
+  "gate_id": "solr-18619-real-logs-linux-gate-r4",
+  "gate_record": "records/gate/solr-18619-real-logs-linux-gate-r4.json",
+  "id": "solr-18619-real-logs-linux-gate-r4",
+  "intended_host": "Linux with JDK 21, Chrome, ChromeDriver and Selenium",
+  "job": "solr-18619-real-logs-linux-gate-r4",
+  "phase": "pre-submission round 4, real aggregate logging coverage",
+  "receipt_path": "records/receipt/solr-18619-real-logs-linux-gate-r4.json",
+  "source": {
+    "baseline": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+    "branch": "solr-18619-targeting-prep",
+    "head": "848885b4cda2c3312576c810aeb4a46afb50419e",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify SOLR-18619 including the real per-node aggregate logging browser test",
+  "supersedes": "records/gate/solr-18619-review-fixes-linux-gate-r3.json at cf35bd49fab19751af9afb728ef83076ae521f09; round 3 was held for the test gap and cannot prove this head",
+  "type": "assignment"
+}
