@@ -1,0 +1,13 @@
+{
+  "contributor_head": "c295e8c855d35c9edcf0fcf75de04d2f24803db6",
+  "id": "pr-5328-copy-vector-impl-report",
+  "job": "pr-5328-copy-vector-impl",
+  "source": {
+    "branch": "pr-5328-raw-copy-target",
+    "head": "fd0a39959f0c4032a1d8bb58d000d5608801cae0",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Implemented RTG copy-target filtering; corrects review direction: existing RTG deliberately filters targets; indexed raw retrieval bypassed filter.",
+  "type": "report",
+  "verification": "diff --check passed; Windows prohibits Gradle. Linux proof pending."
+}
