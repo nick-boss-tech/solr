@@ -23,6 +23,10 @@ For selective carryover, first inspect the current legacy assignment, claims, re
 
 Create a separate gate assignment. The execution host claims that job before running it. The gate record names the exact source head, environment, acceptance criteria, commands and any fail-before or mutation legs. The executor records actual results and links fresh evidence in a receipt. A receipt's head must match its gate and the offered source head; passing one leg does not imply all legs passed. A changed patch or formatting head needs a superseding exact-head gate. Never present a compile error, setup failure, skip or non-reproduction as a passing behavioral proof.
 
+## Antora / ref-guide is not enforced for gate runs
+
+Standing owner rule (Nick, confirmed 2026-11-13): the Solr ref-guide and its Antora site are **not** enforced for gate runs. The ref-guide (`checkSiteLinks`, `checkCliDocsUpToDate`, `buildLocalAntoraSite`, the Antora site build) must never hold up or fail a gate. Root `check -x test` runs with `-Prefguide.include=false` by default on gate hosts, and a gate record or reviewer demand that requires the guide is superseded by this rule unless Nick explicitly overrides it for that gate. A gate receipt may state the excluded check with this policy as the authorization; it is not a gap or a weakening requiring a successor. Do not create successor gates whose only purpose is to run the ref-guide.
+
 ## Find and hand off a gate
 
 A gate assignment and its gate record have independently chosen IDs. The gate ID

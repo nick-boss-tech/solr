@@ -254,17 +254,22 @@ don't re-discover them the slow way.
   `BUILD FAILED` / rc 1; under the subreaper it is `BUILD SUCCESSFUL` / rc 0
   with all 12 tests ok and clean teardown. Full diagnosis in
   `/workspace/logs/vm2/gate-18138-r2/ROOT-CAUSE.md`.
-- **Git worktrees break the ref-guide Antora site.** `./gradlew check -x test`
-  on a worktree fails at `:solr:solr-ref-guide:buildLocalAntoraSite` with
-  `Local content source must be a git repository`, because in a worktree
-  `.git` is a *file*, not a directory. The ref-guide is unrelated to most
-  patches. Use the project's documented toggle
-  `-Prefguide.include=false` (or `SOLR_REF_GUIDE_INCLUDE=false`; see
-  `solr/solr-ref-guide/README.adoc`, SOLR-15670) to run root `check -x test`.
-  Prior vm2 gates ran the check leg module-scoped (`:solr:core:check -x test`)
-  instead. State whatever you did in the receipt — the gate record says "do
-  not add exclusions without authorization", so make the environmental reason
-  explicit.
+- **The ref-guide / Antora is not enforced for gate runs (owner policy).**
+  Nick confirmed 2026-11-13 that the Solr ref-guide and its Antora site are
+  not enforced for gates and must never hold one up. Root `check -x test`
+  runs with `-Prefguide.include=false` (or `SOLR_REF_GUIDE_INCLUDE=false`;
+  see `solr/solr-ref-guide/README.adoc`, SOLR-15670) by default — no
+  authorization is needed, and any gate-record phrase about "not adding
+  exclusions without authorization" is superseded for the ref-guide by this
+  standing owner rule. State the excluded check and cite the policy in the
+  receipt. Do not create a successor gate whose only purpose is to run the
+  guide.
+- **Git worktrees also break the Antora site build.** Even with the guide
+  included, `./gradlew check -x test` on a worktree fails at
+  `:solr:solr-ref-guide:buildLocalAntoraSite` with `Local content source must
+  be a git repository`, because in a worktree `.git` is a *file*, not a
+  directory. The ref-guide is unrelated to most patches; the excluded-check
+  toggle above is the standard fix and needs no further authorization.
 - **The build lock `flock` syntax.** Use the in-script form, not the
   `flock 9 <file> -c '...'` one-liner:
   ```bash
