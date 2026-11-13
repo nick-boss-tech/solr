@@ -1,0 +1,13 @@
+{
+  "contributor_head": "5cb56171eff9e85b1238583ecea448af1c3aa7a7",
+  "details": "Qualifies shutdown ordering and fixes a typo. Does not fix alternate configuration ordering. Windows script changes were removed upstream. Diff whitespace check passed; no build or runtime tests on Windows. Linux proof pending.",
+  "id": "pr-5333-doc-accuracy-report-20261113",
+  "job": "pr-5333-doc-accuracy-20261113",
+  "source": {
+    "branch": "pr-5333-shutdown-doc",
+    "head": "e357862c6ebd23ac3b4cf5e9fa635f94391bad52",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Documentation-only fork follow-up implemented, proof pending",
+  "type": "report"
+}
