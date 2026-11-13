@@ -1,0 +1,16 @@
+{
+  "changes": "Require stall IOException/message and target-node 503; consume HTTP request framing before replying; replace probabilistic drain test with controlled clear-boundary interleaving using a package-private test-only error-list constructor.",
+  "coordination": "Older r2 Linux job remains claimed without observed release; do not assume its worker stopped.",
+  "gate": "records/gate/pr-5330-test-assertions-r9-linux-20261113.json",
+  "head": "13522945de6c9102ecdbe8efb821ed451e840216",
+  "id": "pr-5330-test-assertions-r9-windows-20261113-report",
+  "job": "pr-5330-test-assertions-r9-windows-20261113",
+  "source": {
+    "branch": "pr-5330-test-fix-20261113",
+    "head": "13522945de6c9102ecdbe8efb821ed451e840216",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Tightened stall and 503 checks and made drain interleaving controllable",
+  "type": "report",
+  "verification": "Whitespace diff and remote SHA checked. No Gradle, compilation or runtime tests on Windows. Linux must validate fixture framing and deterministic mutant failure."
+}
