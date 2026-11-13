@@ -1,0 +1,10 @@
+{
+  "claimed": "2026-11-13T20:25:00Z",
+  "head": "b4bb017d22c036df50bebfffecf26c0e8a0b0b57",
+  "host": "linux",
+  "id": "pr5320-v2-contract-linux-gate-r7-20261113",
+  "job": "pr5320-v2-contract-linux-gate-r7-20261113",
+  "note": "Live fork branch pr-5320-v2-contract verified at the r7 gate head b4bb017d by git ls-remote at claim time. The r6 gate was unclaimed and has no receipt; the r7 gate supersedes it and is the current exact-head gate for this head. The r7 implementation job is reported and released. No conflicting claim exists for this Linux gate job on coordination-v2. Taken on vm6 at Nick's direction in chat 2026-11-13.",
+  "owner": "vm6",
+  "type": "claim"
+}
