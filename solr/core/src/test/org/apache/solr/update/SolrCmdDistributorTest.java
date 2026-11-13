@@ -17,11 +17,13 @@
 package org.apache.solr.update;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,7 @@ import org.apache.solr.common.cloud.ZkNodeProps;
 import org.apache.solr.common.cloud.ZkStateReader;
 import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.params.UpdateParams;
+import org.apache.solr.common.util.JavaBinCodec;
 import org.apache.solr.common.util.NamedList;
 import org.apache.solr.core.CoreContainer;
 import org.apache.solr.core.SolrCore;
@@ -635,6 +638,62 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
 
   @Test
   @ShardsFixed(num = 1)
+  @SuppressWarnings("try")
+  public void testRetryReachesServerWhileAnotherClientStalls() throws Exception {
+    final var solrclient = clients.getFirst();
+    String previousPollQueueTime = System.getProperty("solr.cloud.client.pollQueueTime");
+    String previousStallTime = System.getProperty("solr.cloud.client.stallTime");
+    System.setProperty("solr.cloud.client.pollQueueTime", "100");
+    System.setProperty("solr.cloud.client.stallTime", "1000");
+    try (ServerSocket silent = new ServerSocket(0)) {
+      silent.setSoTimeout(10000);
+      Node retryNode =
+          new StdNode(
+              coreNodeProps(solrclient.getBaseURL(), solrclient), "collection1", "shard1", 1);
+      Node stalledNode =
+          new StdNode(
+              coreNodeProps("http://127.0.0.1:" + silent.getLocalPort() + "/solr", solrclient),
+              "collection1",
+              "shard1",
+              0);
+      MockStreamingSolrClients streamingClients = new MockStreamingSolrClients(updateShardHandler);
+      try (SolrCmdDistributor cmdDistrib = new SolrCmdDistributor(streamingClients, 0)) {
+        String id = String.valueOf(uniqueId.incrementAndGet());
+        AddUpdateCommand retry = new AddUpdateCommand(null);
+        retry.solrDoc = sdoc("id", id);
+        streamingClients.setExp(Exp.SOCKET_EXCEPTION);
+        cmdDistrib.distribAdd(retry, List.of(retryNode), new ModifiableSolrParams());
+        streamingClients.setExp(null);
+
+        AddUpdateCommand first = new AddUpdateCommand(null);
+        first.solrDoc = sdoc("id", uniqueId.incrementAndGet());
+        ModifiableSolrParams firstParams = new ModifiableSolrParams();
+        firstParams.set("stream", 0);
+        cmdDistrib.distribAdd(first, List.of(stalledNode), firstParams);
+        try (Socket accepted = silent.accept()) {
+          for (int i = 1; i < 3; i++) {
+            AddUpdateCommand queued = new AddUpdateCommand(null);
+            queued.solrDoc = sdoc("id", uniqueId.incrementAndGet());
+            ModifiableSolrParams params = new ModifiableSolrParams();
+            params.set("stream", i);
+            cmdDistrib.distribAdd(queued, List.of(stalledNode), params);
+          }
+          cmdDistrib.finish();
+          assertTrue(
+              cmdDistrib.getErrors().toString(),
+              cmdDistrib.getErrors().stream().anyMatch(e -> stalledNode.equals(e.req.node)));
+        }
+        solrclient.commit();
+        assertEquals(1, solrclient.query(new SolrQuery("id:" + id)).getResults().getNumFound());
+      }
+    } finally {
+      restoreProperty("solr.cloud.client.pollQueueTime", previousPollQueueTime);
+      restoreProperty("solr.cloud.client.stallTime", previousStallTime);
+    }
+  }
+
+  @Test
+  @ShardsFixed(num = 1)
   public void testStalledClientIgnoresLateCallbacks() throws Exception {
     var solrclient = clients.getFirst();
     Node node =
@@ -676,6 +735,119 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
 
   @Test
   @ShardsFixed(num = 1)
+  public void testSuccessfulResponseKeepsReplicationFactorAccounting() throws Exception {
+    var solrclient = clients.getFirst();
+    Node node =
+        new StdNode(
+            coreNodeProps("http://127.0.0.1:4/solr", solrclient), "collection1", "shard1", 0);
+    LeaderRequestReplicationTracker leader = new LeaderRequestReplicationTracker("shard1");
+    RollupRequestReplicationTracker rollup = new RollupRequestReplicationTracker();
+    AddUpdateCommand command = new AddUpdateCommand(null);
+    command.solrDoc = sdoc("id", uniqueId.incrementAndGet());
+    SolrCmdDistributor.Req req =
+        new SolrCmdDistributor.Req(command, node, new UpdateRequest(), false, rollup, leader);
+    NamedList<Object> header = new NamedList<>();
+    header.add(UpdateRequest.REPFACT, 2);
+    NamedList<Object> response = new NamedList<>();
+    response.add("responseHeader", header);
+    ByteArrayOutputStream body = new ByteArrayOutputStream();
+    try (JavaBinCodec codec = new JavaBinCodec()) {
+      codec.marshal(response, body);
+    }
+    StreamingSolrClients streamingClients = new StreamingSolrClients(updateShardHandler);
+    try {
+      ErrorReportingConcurrentUpdateSolrClient client =
+          (ErrorReportingConcurrentUpdateSolrClient) streamingClients.getSolrClient(req);
+      client.onSuccess(null, new ByteArrayInputStream(body.toByteArray()));
+      assertEquals(2, rollup.getAchievedRf());
+      assertEquals(1, leader.getAchievedRf());
+    } finally {
+      streamingClients.shutdown();
+    }
+  }
+
+  @Test
+  @ShardsFixed(num = 1)
+  public void testRealRunnerCallbacksDoNotNeedClientMonitor() throws Exception {
+    String previousPollQueueTime = System.getProperty("solr.cloud.client.pollQueueTime");
+    System.setProperty("solr.cloud.client.pollQueueTime", "100");
+    try {
+      for (boolean success : List.of(true, false)) {
+        try (ServerSocket server = new ServerSocket(0)) {
+          server.setSoTimeout(10000);
+          Node node =
+              new StdNode(
+                  coreNodeProps(
+                      "http://127.0.0.1:" + server.getLocalPort() + "/solr", clients.getFirst()),
+                  "collection1",
+                  "shard1",
+                  0);
+          CountDownLatch successReported = new CountDownLatch(1);
+          LeaderRequestReplicationTracker tracker =
+              new LeaderRequestReplicationTracker("shard1") {
+                @Override
+                public void trackRequestResult(Node resultNode, boolean result) {
+                  super.trackRequestResult(resultNode, result);
+                  if (result) successReported.countDown();
+                }
+              };
+          AddUpdateCommand command = new AddUpdateCommand(null);
+          command.solrDoc = sdoc("id", uniqueId.incrementAndGet());
+          UpdateRequest update = new UpdateRequest();
+          update.setParams(new ModifiableSolrParams());
+          update.add(command.solrDoc);
+          SolrCmdDistributor.Req req =
+              new SolrCmdDistributor.Req(command, node, update, false, null, tracker);
+          StreamingSolrClients streamingClients = new StreamingSolrClients(updateShardHandler);
+          try {
+            ErrorReportingConcurrentUpdateSolrClient client =
+                (ErrorReportingConcurrentUpdateSolrClient) streamingClients.getSolrClient(req);
+            client.request(update);
+            try (Socket accepted = server.accept()) {
+              byte[] body = new byte[0];
+              if (success) {
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                try (JavaBinCodec codec = new JavaBinCodec()) {
+                  codec.marshal(new NamedList<>(), bytes);
+                }
+                body = bytes.toByteArray();
+              }
+              synchronized (client) {
+                String status = success ? "200 OK" : "503 Service Unavailable";
+                String headers =
+                    "HTTP/1.1 "
+                        + status
+                        + "\r\nContent-Type: application/octet-stream\r\nContent-Length: "
+                        + body.length
+                        + "\r\nConnection: close\r\n\r\n";
+                accepted.getOutputStream().write(headers.getBytes(StandardCharsets.US_ASCII));
+                accepted.getOutputStream().write(body);
+                accepted.getOutputStream().flush();
+                if (success) {
+                  assertTrue(
+                      "Success callback was blocked", successReported.await(5, TimeUnit.SECONDS));
+                } else {
+                  long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
+                  while (streamingClients.getErrors().isEmpty() && System.nanoTime() < deadline) {
+                    Thread.sleep(10);
+                  }
+                  assertFalse("Error callback was blocked", streamingClients.getErrors().isEmpty());
+                }
+              }
+            }
+            client.blockUntilFinished();
+          } finally {
+            streamingClients.shutdown();
+          }
+        }
+      }
+    } finally {
+      restoreProperty("solr.cloud.client.pollQueueTime", previousPollQueueTime);
+    }
+  }
+
+  @Test
+  @ShardsFixed(num = 1)
   public void testErrorCallbacksDoNotClassifyRetries() throws Exception {
     var solrclient = clients.getFirst();
     AtomicInteger retryChecks = new AtomicInteger();
@@ -701,6 +873,38 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
       assertEquals("Callbacks must leave retry decisions to the distributor", 0, retryChecks.get());
       assertEquals(2, streamingClients.drainErrors().size());
     } finally {
+      streamingClients.shutdown();
+    }
+  }
+
+  @Test
+  @ShardsFixed(num = 1)
+  public void testConcurrentErrorDrainRetainsEveryError() throws Exception {
+    StreamingSolrClients streamingClients = new StreamingSolrClients(updateShardHandler);
+    ExecutorService executor = Executors.newSingleThreadExecutor();
+    try {
+      for (int i = 0; i < 100; i++) {
+        SolrError before = new SolrError();
+        SolrError concurrent = new SolrError();
+        streamingClients.getErrors().add(before);
+        CountDownLatch start = new CountDownLatch(1);
+        var writer =
+            executor.submit(
+                () -> {
+                  start.await();
+                  streamingClients.getErrors().add(concurrent);
+                  return null;
+                });
+        start.countDown();
+        List<SolrError> collected = streamingClients.drainErrors();
+        writer.get(5, TimeUnit.SECONDS);
+        collected.addAll(streamingClients.drainErrors());
+        assertEquals(2, collected.size());
+        assertTrue(collected.contains(before));
+        assertTrue(collected.contains(concurrent));
+      }
+    } finally {
+      executor.shutdownNow();
       streamingClients.shutdown();
     }
   }
