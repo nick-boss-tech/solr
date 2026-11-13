@@ -1,0 +1,20 @@
+{
+  "claim_path": "records/claim/pr-5339-signature-coverage-linux-gate-r2.json",
+  "contributor_parent": "1bb663935e1464da39d780cecbbd9b2de8d08d44",
+  "gate_id": "pr-5339-signature-coverage-linux-gate-r2",
+  "gate_record": "records/gate/pr-5339-signature-coverage-linux-gate-r2.json",
+  "id": "pr-5339-signature-coverage-linux-gate-r2",
+  "intended_host": "Linux gate host",
+  "job": "pr-5339-signature-coverage-linux-gate-r2",
+  "phase": "coverage r2",
+  "prior_gate_state": "At board snapshot 0a5fa6f96fa5b1ca2670ac6a57686d60ca769aeb, r1 is claimed by phone-agent-2, no receipt/release observed. Its head is stale; coordinate with its owner and establish executor has stopped before running overlapping proof. Do not assume release alone proves stopped.",
+  "receipt_path": "records/receipt/pr-5339-signature-coverage-linux-gate-r2-receipt.json",
+  "source": {
+    "branch": "pr-5339-signature-migration",
+    "head": "83b2df0977499337bc88daaba8eb872a3835f31b",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Linux verification of PR 5339 signature coverage and migration guidance",
+  "supersedes": "records/gate/pr-5339-signature-migration-linux-gate-r1.json",
+  "type": "assignment"
+}
