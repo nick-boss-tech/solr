@@ -1,0 +1,7 @@
+{
+  "id": "solr-18138-review-followup-r2",
+  "job": "solr-18138-review-followup-r2",
+  "note": "Prior implementation released; review feedback follow-up on current PR head.",
+  "owner": "codex-windows-solr-18138",
+  "type": "claim"
+}
