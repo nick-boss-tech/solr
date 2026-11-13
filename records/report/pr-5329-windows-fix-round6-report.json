@@ -1,0 +1,14 @@
+{
+  "id": "pr-5329-windows-fix-round6-report",
+  "job": "pr-5329-windows-fix-round6",
+  "limitations": "TLS options are persisted globally for both co-located embedded clients and external ensembles; simply removing them breaks supported co-located/CLI usage, so a safe design for rotation and external connections remains unresolved. Prior Linux executor stop must be reconciled.",
+  "results": "Nonempty response now cancels the secure-example reset, and BATS cases cover no and Enter alongside existing EOF and --no-prompt cases. git diff --check passed; no Windows builds or tests run.",
+  "source": {
+    "branch": "pr-5329-tls-fixes",
+    "head": "de6c192d045c9c0e182b9e3d060d412d450df3aa",
+    "previous": "37710039195736636bc3971cbf200cc940d53248",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Pushed declined-reset handling and interactive coverage",
+  "type": "report"
+}
