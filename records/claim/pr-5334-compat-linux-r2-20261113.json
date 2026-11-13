@@ -1,0 +1,11 @@
+{
+ "claimed": "2026-11-13T16:45:00-07:00",
+ "claimed_by": "phone-agent",
+ "gate": "records/gate/pr-5334-compat-linux-r2-20261113.json",
+ "head": "c9896f0e5b026545ebefcb6f225da67550acdd21",
+ "host": "Linux (this VM)",
+ "id": "pr-5334-compat-linux-r2-20261113",
+ "job": "pr-5334-compat-linux-r2-20261113",
+ "note": "Round 2 successor to the phone-agent round-1 gate (FAILED on formatting only); claimed under Nick's standing direction to take gate tasks. No conflicting claim exists.",
+ "type": "claim"
+}
