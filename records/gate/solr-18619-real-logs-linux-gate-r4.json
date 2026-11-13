@@ -1,0 +1,22 @@
+{
+  "environment": "Linux JDK 21, Chrome, ChromeDriver, Selenium; full checkout and host build lock",
+  "head": "848885b4cda2c3312576c810aeb4a46afb50419e",
+  "id": "solr-18619-real-logs-linux-gate-r4",
+  "job": "solr-18619-real-logs-linux-gate-r4",
+  "phase": "pre-submission round 4, real aggregate logging coverage",
+  "receipt_path": "records/receipt/solr-18619-real-logs-linux-gate-r4.json",
+  "requirements": [
+    "Run all positive and negative proof legs specified in https://github.com/nick-boss-tech/solr/blob/3c2248ea06499e458f7d6c358679889dccbbd6a1/records/gate/solr-18619-review-fixes-linux-gate-r3.json and its pinned prior gate, at this exact head. Use seed 18619C0DE and report actual XML counts; no skipped selected tests, errors, failures or thread leaks.",
+    "Add positive org.apache.solr.webapp.AdminUiLoggingScreenTest.testAllNodeLogsRenderRealNodeEvents with the same Selenium and JVM flags as the other browser tests. This seeds each real node watcher separately to work around the in-JVM shared Log4j appender, then uses real per-node HTTP, proxy and browser rendering. Require both distinct event messages to appear with their originating node labels and both node requests to succeed; do not count a skip or setup failure as success.",
+    "In an isolated candidate checkout, retain the executable feature scaffold and new test but remove the X-Solr-targetNode assignment only from NodeRequests.get. Run the new real-node test and require a failure at the explicit expected real event with its node label assertion, demonstrating the rendered aggregation detects routing loss. A startup, compile, missing watcher, no-events timeout or other setup failure is not the intended negative proof. Capture exact mutation and fresh XML/log.",
+    "The webapp test configuration adds existing Log4j API/core dependencies. On Linux run the repository-required updateLicenses and resolveAndLockAll --write-locks, report their exact effects, and require a clean tracked tree. If those tasks or formatting alter tracked files, do not treat the changed tree as proof: commit and push a scoped repair and obtain a superseding exact-head gate. Also run tidy, root check -x test, changelog and reference-guide checks, preserving the complete earlier gate legs.",
+    "Record actual commands, seed, Java/Chrome/driver, NODE_ENV, times, statuses, counts, mutation diffs, fresh logs and XML, remote fork head and clean tree. Investigate failures before rerun; no Gradle or Selenium was run on the Windows authoring host."
+  ],
+  "source": {
+    "baseline": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+    "branch": "solr-18619-targeting-prep",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes": "records/gate/solr-18619-review-fixes-linux-gate-r3.json",
+  "type": "gate"
+}
