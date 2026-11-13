@@ -1,0 +1,21 @@
+{
+  "branch": "pr-5334-compatibility-20261113",
+  "contributor_head": "c64ef9dcc6360bd6bd39cb129d1b9f3e94e8ce67",
+  "environment": "Linux isolated clean checkouts; record JDK, host, seed, source heads and status",
+  "head": "c9896f0e5b026545ebefcb6f225da67550acdd21",
+  "id": "pr-5334-compat-linux-r2-20261113",
+  "job": "pr-5334-compat-linux-r2-20261113",
+  "phase": "round 2",
+  "pre_pr_base": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+  "prior_receipt": "records/receipt/pr-5334-compat-linux-20261113-receipt.json",
+  "repository": "nick-boss-tech/solr",
+  "requirements": [
+    "Verify fork head and ancestry; confirm diff from d3c2bf186fda98eceb64e6b1953997a5c84a066d exactly matches the two test formatting wraps in prior evidence.",
+    "Recheck exact-base SimpleOrderedMap and NamedList UIDs and prove base-to-head and head-to-base Java serialization with representative null keys and values and nested SimpleOrderedMap/NamedList, using separate classpaths or JVMs; assert contents. Include contributor-head control reproducing InvalidClassException. Record commands and evidence.",
+    "Run ./gradlew :solr:solrj:cleanTest :solr:solrj:test --tests org.apache.solr.common.util.SimpleOrderedMapTest --tests org.apache.solr.common.util.NamedListTest with a recorded seed; capture logs and XML, counts, failures and skips. Run ./gradlew tidy and ./gradlew check -x test. Any tracked formatting changes require a committed successor and fresh gate.",
+    "Overlay the offered test unchanged on contributor head and demonstrate testSerialVersionUID fails by assertion, not compilation, startup, timeout or skip; capture diff, logs and XML. Map-view assertions may pass there."
+  ],
+  "supersedes": "records/gate/pr-5334-compat-linux-20261113.json",
+  "type": "gate",
+  "verdict_policy": "Pass requires all named legs, exact head, no formatting diff, successful root check, bidirectional compatibility and assertion fail-before. Report exact Gradle invocation and any host wrapper substitution. Do not post a public comment."
+}
