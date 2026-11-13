@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr-5330",
+  "evidence": "Fork commit 0c5457bde3e6bb684a91e1af12d160ebb37a7ec6 pushed and verified; implementation worker and local commands have stopped. Report records/report/pr-5330-fix-windows-20261113-report.json.",
+  "id": "pr-5330-fix-windows-20261113",
+  "job": "pr-5330-fix-windows-20261113",
+  "reason": "Implementation complete and Linux gate handed off",
+  "type": "release"
+}
