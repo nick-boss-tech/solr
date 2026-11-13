@@ -1,0 +1,13 @@
+{
+  "id": "pr5323-review-fixes-round2-windows",
+  "intended_host": "Windows implementation; Linux and Windows CI proof",
+  "job": "pr5323-review-fixes-round2-windows",
+  "source": {
+    "branch": "pr-5323-review-fixes",
+    "head": "8d656408d24c53ee40510a52d01d3b516927416e",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr5323-review-fixes-windows-20261113",
+  "summary": "Address review of PR 5323 follow-up: mixed-node regression, testable TLS diagnostics, and cross-platform proof handoff",
+  "type": "assignment"
+}
