@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "Fork head ee35178851befab053e7f6ac4d20c866eed7a293 pushed and verified; implementation process and executor have stopped. See records/report/pr-5337-cli-exit-fixes-report.json.",
+  "id": "pr-5337-cli-exit-fixes",
+  "job": "pr-5337-cli-exit-fixes",
+  "reason": "Implementation complete and handed to a separate gate",
+  "type": "release"
+}
