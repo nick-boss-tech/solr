@@ -87,6 +87,31 @@ public class JsonValidatorTest extends SolrTestCaseJ4 {
     assertNull(new JsonSchemaValidator(Map.of("enum", List.of("allowed"))).validateJson(null));
   }
 
+  public void testAnyOfNullableObjectWithProperties() {
+    Map<String, Object> objectSchema = new LinkedHashMap<>();
+    objectSchema.put("properties", Map.of("id", Map.of("type", "string")));
+    objectSchema.put("required", List.of("id"));
+    objectSchema.put("type", List.of("object", "null"));
+    JsonSchemaValidator validator = new JsonSchemaValidator(Map.of("anyOf", List.of(objectSchema)));
+    assertNull(validator.validateJson(null));
+    assertNull(validator.validateJson(Map.of("id", "allowed")));
+    assertNotNull(validator.validateJson(Map.of()));
+    Map<String, Object> nullId = new LinkedHashMap<>();
+    nullId.put("id", null);
+    assertNotNull(validator.validateJson(nullId));
+    assertNotNull(validator.validateJson(List.of("not an object")));
+  }
+
+  public void testAnyOfNullableObjectRequiredFirst() {
+    Map<String, Object> objectSchema = new LinkedHashMap<>();
+    objectSchema.put("required", List.of("id"));
+    objectSchema.put("properties", Map.of("id", Map.of("type", "string")));
+    objectSchema.put("type", List.of("object", "null"));
+    JsonSchemaValidator validator = new JsonSchemaValidator(Map.of("anyOf", List.of(objectSchema)));
+    assertNull(validator.validateJson(null));
+    assertNotNull(validator.validateJson(Map.of()));
+  }
+
   public void testSchemaValidation() {
     final JsonSchemaValidator personSchemaValidator =
         new JsonSchemaValidator(
