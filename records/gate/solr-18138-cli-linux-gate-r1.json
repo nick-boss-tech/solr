@@ -1,0 +1,23 @@
+{
+  "acceptance": "All named proof legs pass at the exact head, fail-before is behavioral, and evidence includes fresh XML/logs, environment, commands, exit codes, and any material conditions. Investigate failures; do not silently retry or weaken scope.",
+  "environment": "Clean Linux checkout; document JDK, environment and commands. Verify 127.0.0.1:1 is not listening before the integration test; do not treat a listening port as a patch failure.",
+  "head": "45956fbe7f530d77702c586d62de2a5609ab20af",
+  "id": "solr-18138-cli-linux-gate-r1",
+  "job": "solr-18138-cli-linux-gate-r1",
+  "phase": "implementation proof round 1",
+  "receipt_path": "records/receipt/solr-18138-cli-linux-gate-r1.json",
+  "requirements": [
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.cli.ToolBaseZkTimeoutTest -Ptests.seed=18138 and retain fresh XML and full logs.",
+    "Run ./gradlew iTest --tests test_zk.bats -Ptests.seed=18138; retain fresh results and logs. The new test must fail the old code and pass this head; successful existing ZooKeeper operations must remain green.",
+    "Demonstrate fail-before using base 0ea013e782f with only the new BATS regression applied, and show its assertion fails for the old output rather than due to setup, compilation, or port availability. Retain commands and evidence.",
+    "Exercise bin/solr zk ls / -z 127.0.0.1:1 --verbose on the built exact head: nonzero exit, improved message and diagnostic stack trace. Non-verbose test must show no per-tool error stack. Capture output and exit status.",
+    "Run ./gradlew tidy and require no resulting tracked changes; if it changes files, report and return for a new pushed head and gate.",
+    "Run ./gradlew check -x test and retain full log and exit status; do not add exclusions without authorization."
+  ],
+  "source": {
+    "base": "0ea013e782f",
+    "branch": "solr-18138-submit",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "gate"
+}
