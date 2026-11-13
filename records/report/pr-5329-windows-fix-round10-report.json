@@ -1,0 +1,13 @@
+{
+  "gate": "records/gate/pr-5329-tls-linux-round10.json",
+  "id": "pr-5329-windows-fix-round10-report",
+  "job": "pr-5329-windows-fix-round10",
+  "limitations": "Partial: comparison and rename are not atomic against unrelated writers, so lost updates remain possible. External ZooKeeper TLS inheritance, rotation and negative status-handler TLS tests remain unresolved. Linux proof pending.",
+  "source": {
+    "branch": "pr-5329-tls-fixes",
+    "head": "4b4f23abefb65718f64d468aa9489ca6dd27f595",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Resolve configuration symlinks before staged replacement; detect changes visible before rename; add injected partial-write, symlink and conflicting-edit cases. Bash syntax and git diff --check passed. No Gradle or integration tests ran on Windows.",
+  "type": "report"
+}
