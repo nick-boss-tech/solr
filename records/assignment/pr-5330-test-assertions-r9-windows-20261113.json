@@ -1,0 +1,10 @@
+{
+  "coordination": "Older round-2 Linux gate remains claimed at a different head; leave its executor and records alone and do not assume it stopped.",
+  "host": "Windows implementation; Linux proof separately",
+  "id": "pr-5330-test-assertions-r9-windows-20261113",
+  "job": "pr-5330-test-assertions-r9-windows-20261113",
+  "source_head": "04c5746d1775f26bbba983249c1a473cdf4bd8ec",
+  "successor_of": "pr-5330-regression-tests-r8-windows-20261113",
+  "summary": "Tighten PR 5330 regression assertions and make error-drain interleaving deterministic",
+  "type": "assignment"
+}
