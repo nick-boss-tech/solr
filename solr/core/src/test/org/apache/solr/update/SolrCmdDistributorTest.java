@@ -18,6 +18,7 @@ package org.apache.solr.update;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
@@ -669,6 +670,57 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
       assertEquals(1, streamingClients.drainErrors().size());
       assertTrue(streamingClients.drainErrors().isEmpty());
     } finally {
+      streamingClients.shutdown();
+    }
+  }
+
+  @Test
+  @ShardsFixed(num = 1)
+  public void testStallReportedWhileResponseBodyIsBlocked() throws Exception {
+    var solrclient = clients.getFirst();
+    Node node =
+        new StdNode(
+            coreNodeProps("http://127.0.0.1:4/solr", solrclient), "collection1", "shard1", 0);
+    LeaderRequestReplicationTracker tracker = new LeaderRequestReplicationTracker("shard1");
+    AddUpdateCommand command = new AddUpdateCommand(null);
+    command.solrDoc = sdoc("id", uniqueId.incrementAndGet());
+    SolrCmdDistributor.Req req =
+        new SolrCmdDistributor.Req(command, node, new UpdateRequest(), false, null, tracker);
+    StreamingSolrClients streamingClients = new StreamingSolrClients(updateShardHandler);
+    CountDownLatch reading = new CountDownLatch(1);
+    CountDownLatch release = new CountDownLatch(1);
+    ExecutorService executor = Executors.newFixedThreadPool(2);
+    try {
+      ErrorReportingConcurrentUpdateSolrClient client =
+          (ErrorReportingConcurrentUpdateSolrClient) streamingClients.getSolrClient(req);
+      InputStream body =
+          new InputStream() {
+            @Override
+            public int read() throws IOException {
+              reading.countDown();
+              try {
+                if (!release.await(10, TimeUnit.SECONDS)) {
+                  throw new IOException("Timed out waiting to release response body");
+                }
+              } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                throw new IOException(e);
+              }
+              return -1;
+            }
+          };
+      var success = executor.submit(() -> client.onSuccess(null, body));
+      assertTrue("Response body was not read", reading.await(5, TimeUnit.SECONDS));
+      executor
+          .submit(() -> client.reportStall(new IOException("stalled")))
+          .get(5, TimeUnit.SECONDS);
+      assertEquals(1, streamingClients.getErrors().size());
+      release.countDown();
+      success.get(5, TimeUnit.SECONDS);
+      assertEquals(1, tracker.getAchievedRf());
+    } finally {
+      release.countDown();
+      executor.shutdownNow();
       streamingClients.shutdown();
     }
   }

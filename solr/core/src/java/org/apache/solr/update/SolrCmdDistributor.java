@@ -445,11 +445,12 @@ public class SolrCmdDistributor implements Closeable {
     // aggregator node.
     public void trackRequestResult(
         org.eclipse.jetty.client.Response resp, InputStream respBody, boolean success) {
+      trackRequestResult(getRfFromResponse(respBody), success);
+    }
 
+    void trackRequestResult(int rfFromResp, boolean success) {
       // Returning Integer.MAX_VALUE here means there was no "rf" on the response, therefore we just
       // need to increment our achieved rf if we are a leader, i.e. have a leaderTracker.
-      int rfFromResp = getRfFromResponse(respBody);
-
       if (leaderTracker != null && rfFromResp == Integer.MAX_VALUE) {
         leaderTracker.trackRequestResult(node, success);
       }
@@ -459,7 +460,7 @@ public class SolrCmdDistributor implements Closeable {
       }
     }
 
-    private int getRfFromResponse(InputStream inputStream) {
+    int getRfFromResponse(InputStream inputStream) {
       if (inputStream != null) {
         try {
           JavaBinResponseParser brp = new JavaBinResponseParser();

@@ -33,7 +33,6 @@ import org.apache.solr.client.solrj.jetty.HttpJettySolrClient;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.util.StrUtils;
 import org.apache.solr.update.SolrCmdDistributor.SolrError;
-import org.eclipse.jetty.client.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -159,21 +158,25 @@ class ErrorReportingConcurrentUpdateSolrClient extends ConcurrentUpdateJettySolr
 
   @Override
   public void handleError(Throwable ex) {
+    SolrError error;
     synchronized (callbackLock) {
       if (stalled) return;
-      recordError(ex);
+      error = recordError(ex);
     }
+    trackError(error);
   }
 
   void reportStall(IOException ex) {
+    SolrError error;
     synchronized (callbackLock) {
       if (stalled) return;
       stalled = true;
-      recordError(ex);
+      error = recordError(ex);
     }
+    trackError(error);
   }
 
-  private void recordError(Throwable ex) {
+  private SolrError recordError(Throwable ex) {
     log.error("Error when calling {} to {}", req, req.node.getUrl(), ex);
     SolrError error = new SolrError();
     error.e = (Exception) ex;
@@ -182,6 +185,10 @@ class ErrorReportingConcurrentUpdateSolrClient extends ConcurrentUpdateJettySolr
     }
     error.req = req;
     errors.add(error);
+    return error;
+  }
+
+  private void trackError(SolrError error) {
     if (!req.shouldRetry(error)) {
       // only track the error if we are not retrying the request
       req.trackRequestResult(null, null, false);
@@ -192,8 +199,11 @@ class ErrorReportingConcurrentUpdateSolrClient extends ConcurrentUpdateJettySolr
   public void onSuccess(Object responseMetadata, InputStream respBody) {
     synchronized (callbackLock) {
       if (stalled) return;
-      Response jettyResponse = (Response) responseMetadata;
-      req.trackRequestResult(jettyResponse, respBody, true);
+    }
+    int rfFromResp = req.getRfFromResponse(respBody);
+    synchronized (callbackLock) {
+      if (stalled) return;
+      req.trackRequestResult(rfFromResp, true);
     }
   }
 
