@@ -1,0 +1,12 @@
+{
+  "actor": "vm6",
+  "evidence": "records/evidence/pr5320-v2-contract-linux-gate-r7-20261113-evidence.txt",
+  "executor_stop_evidence": "The head legs chain (01-06) exited at 2026-11-13T21:05:10Z when 06-check-nox.rc was written and the ALL_LEGS summary completed; the fail-before chain (fb-A-items .. fb-B-nullablereqfirst) exited at 20:47:31Z when fb-00-summary.txt was written. No GradleWrapperMain build process and no gate-5320-r7 runner shell is running at release time (verified pgrep at 2026-11-13T21:15:52Z; only the idle Gradle daemon 3698 remains). All three worktrees are clean at their pinned heads: gate-5320-r7-head at b4bb017d, gate-5320-r7-baseA at e47c4b50, gate-5320-r7-baseB at 678f805a.",
+  "id": "pr5320-v2-contract-linux-gate-r7-20261113",
+  "job": "pr5320-v2-contract-linux-gate-r7-20261113",
+  "reason": "Gate execution complete and receipt filed as PASSED at b4bb017d; evidence committed at the board path named above.",
+  "receipt": "records/receipt/pr5320-v2-contract-linux-gate-r7-20261113-receipt.json",
+  "released": "2026-11-13T21:16:00Z",
+  "released_by": "vm6",
+  "type": "release"
+}
