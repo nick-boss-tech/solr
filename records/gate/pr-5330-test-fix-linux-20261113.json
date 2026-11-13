@@ -1,0 +1,19 @@
+{
+  "branch": "pr-5330-test-fix-20261113",
+  "contributor_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+  "environment": "Linux, JDK 21, isolated clean checkout; record host, toolchain, source ref and clean status",
+  "head": "0c5457bde3e6bb684a91e1af12d160ebb37a7ec6",
+  "id": "pr-5330-test-fix-linux-20261113",
+  "job": "pr-5330-test-fix-linux-20261113",
+  "phase": "round 1",
+  "repository": "nick-boss-tech/solr",
+  "requirements": [
+    "Verify exact fork head and contributor ancestry; capture commands, exit codes, fresh logs and JUnit XML with test counts, failures and skips.",
+    "Run ./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.update.SolrCmdDistributorTest with a recorded seed; require testStallKeepsErrorsFromOtherNodes and class to execute and pass. Run ./gradlew tidy and ./gradlew check -x test. Any tracked formatting change invalidates proof and requires a committed successor and new gate.",
+    "Show fail-before behavior using the repaired test unchanged with PR 5330 production change reverted in a disposable checkout; require a runtime assertion failure rather than compilation, startup, timeout or skip. Capture exact overlay or revert diff, logs and XML; do not push the probe.",
+    "Investigate separately whether a stalled client continues processing queued updates or calls back after blockUntilFinished catches the stall and whether a following delete-by-query or commit can overtake those updates. Use controlled synchronization or a bounded diagnostic probe at this exact head, record observable order and callback timing, commands, source diff and logs. Distinguish a demonstrated regression from a hypothesis and any pre-existing behavior. Do not silently repair or push the probe.",
+    "Check whether the test reliably creates a nonempty stalled queue and the refused-node error before finish, including repeated runs if needed; record timeouts, seeds and environmental failure separately. Note that the repair does not address PR 5075 per-request attribution."
+  ],
+  "type": "gate",
+  "verdict_policy": "Pass requires all named positive checks and runtime fail-before proof; report the ordering investigation separately. A demonstrated ordering regression or unresolved material safety concern prevents characterizing the PR as clean even if the test repair passes. Do not post a public comment."
+}
