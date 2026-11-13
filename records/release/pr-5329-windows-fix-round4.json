@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "records/report/pr-5329-windows-fix-round4-report.json; pushed head ca3e9817719472ec03199da53b58372214722fd4; no local build or test executor started.",
+  "id": "pr-5329-windows-fix-round4",
+  "job": "pr-5329-windows-fix-round4",
+  "reason": "Implementation stopped after fork push and Linux gate handoff",
+  "type": "release"
+}
