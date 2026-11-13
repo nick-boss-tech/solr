@@ -1,0 +1,200 @@
+{
+  "id": "pr-5329-tls-lifecycle-linux-round7",
+  "type": "receipt",
+  "job": "pr-5329-tls-lifecycle-linux-round7",
+  "gate": "pr-5329-tls-lifecycle-linux-round7",
+  "assignment": "records/assignment/pr-5329-tls-lifecycle-linux-round7.json",
+  "claim": "records/claim/pr-5329-tls-lifecycle-linux-round7.json",
+  "owner": "phone-agent-2",
+  "verdict": "incomplete",
+  "source": {
+    "repository": "nick-boss-tech/solr",
+    "branch": "pr-5329-tls-fixes",
+    "head": "78f2fd781d83a54e2f31b45d90bec4f372450b36"
+  },
+  "execution": {
+    "host_os": "Linux",
+    "hostname": "0609f7968656",
+    "jdk": "OpenJDK 21.0.12.1",
+    "gradle_wrapper": "9.7.0",
+    "gradle_user_home": "/workspace/gradle-home",
+    "source_checkout": "Detached disposable worktree at the exact assigned head; clean after tidy and root check.",
+    "prior_round_two_worker_stop": "Owner confirmation received before execution; no matching worker/test process was running at preflight.",
+    "gradle_locks": [
+      "/workspace/tools/.gradle-phone-agent-2.lock",
+      "/workspace/tools/.gradle-0609f7968656.lock"
+    ],
+    "locks_free_at_final_check": true,
+    "workspace_free_inodes_percent_at_final_check": 52,
+    "docker_used_or_installed_by_task": false
+  },
+  "summary": "Round-seven evidence confirms lifecycle defects in external-ZooKeeper TLS inheritance and TLS option persistence after rotation. The gate is incomplete and this patch is not ready. No Solr source branch, PR description, or public comment was changed.",
+  "current_head_legs": {
+    "seeded_core_test": {
+      "command": "./gradlew :solr:core:test --tests org.apache.solr.cloud.SolrZkServerTlsTest -Dtests.seed=5329ABCD",
+      "exit_code": 0,
+      "tests": 5,
+      "failures": 0,
+      "skipped": 0,
+      "notable_cases": [
+        "testAutomaticTlsAcceptsEnsembleWithoutPlaintextClientAddress",
+        "testAutomaticTlsRejectsEnsemblePlaintextClientAddress"
+      ],
+      "evidence": [
+        "core/gradle.log",
+        "core/TEST-org.apache.solr.cloud.SolrZkServerTlsTest.xml"
+      ]
+    },
+    "secure_example_bats": {
+      "command": "./gradlew :solr:packaging:integrationTests --tests test_secure_example.bats",
+      "exit_code": 1,
+      "tests": 6,
+      "passed": 5,
+      "failed": 1,
+      "failure": "Test 6 fails at test_secure_example.bats:252 on the first solr zk ls against the configured secure port: ZooKeeper reports 'the trustAnchors parameter must be non-empty'. The PKCS12 fixture is also used as its truststore but contains no trusted certificate entry. Password-file assertions earlier in test 6 pass; the test's later listener assertions are not reached.",
+      "behavior_observations": [
+        "EOF on the existing-home prompt fails closed and preserves the marker (test 2).",
+        "The exact responses 'no', whitespace, and literal quoted-empty (\"\") are declined and preserve the marker on this head (test 3).",
+        "Enter confirms reset and removes the marker (test 4).",
+        "The --no-prompt two-node secure example starts successfully (test 1).",
+        "An unusable password-file path aborts before launch and is cleaned up; the touch interceptor under caller umask 022 observes both password files at mode 0600 at creation, and post-creation mode checks pass before test 6's trust-anchor failure."
+      ],
+      "evidence": [
+        "bats/gradle.log",
+        "bats/report-sanitized.xml",
+        "bats/test-output/report.xml",
+        "bats/test-output/test-output.txt"
+      ]
+    },
+    "tidy": {
+      "command": "./gradlew tidy",
+      "exit_code": 0,
+      "tracked_formatting_changes": false,
+      "source_tree_clean_afterward": true,
+      "evidence": "tidy/gradle.log"
+    },
+    "root_check": {
+      "command": "./gradlew check -x test -x :solr:solr-ref-guide:buildLocalAntoraSite -x :solr:solr-ref-guide:buildLocalSite -x :solr:solr-ref-guide:checkSiteLinks",
+      "exit_code": 0,
+      "source_tree_clean_afterward": true,
+      "exclusions": [
+        "All test tasks via -x test; Docker-dependent tests are unrun.",
+        "Antora local site build and its dependent site/link-check tasks via the three explicit task exclusions."
+      ],
+      "note": "Static :solr:docker:check validations ran as part of Gradle check; no Docker command or Docker-dependent test was run.",
+      "evidence": "check/gradle.log"
+    }
+  },
+  "fail_before_legs": {
+    "raw_confirmation": {
+      "base_head": "de6c192d045c9c0e182b9e3d060d412d450df3aa",
+      "overlay": "Only the updated decline test in solr/packaging/test/test_secure_example.bats.",
+      "command": "./gradlew :solr:packaging:integrationTests --tests test_secure_example.bats",
+      "exit_code": 1,
+      "result": "In test 3, exact 'no' passes; the whitespace iteration enters reset instead of cancelling and fails the specific cancellation-output assertion. The marker assertion follows that failed assertion; the reset flow is visible in the captured output. The quoted-empty iteration is not reached on this old head. A separate unrelated test-6 trust-anchor failure also occurs.",
+      "evidence": [
+        "fail-before/raw/gradle.log",
+        "fail-before/raw/report-sanitized.xml"
+      ]
+    },
+    "ensemble_plaintext_client_address": {
+      "base_head": "dc3ba7b2e83a0b3e128d6e49964adf8681d9732e",
+      "overlay": "Only the updated SolrZkServerTlsTest.java.",
+      "command": "./gradlew :solr:core:test --tests org.apache.solr.cloud.SolrZkServerTlsTest.testAutomaticTlsRejectsEnsemblePlaintextClientAddress -Dtests.seed=5329ABCD",
+      "exit_code": 1,
+      "result": "Expected-exception assertion failure (no exception thrown), not a setup or compilation failure.",
+      "evidence": "fail-before/java/ensemble-dc3.log"
+    },
+    "existing_plaintext_port_unification": {
+      "base_head": "7dedae124c252574caaff93cf4bcf2bc1d240fc9",
+      "overlay": "Only the updated SolrZkServerTlsTest.java.",
+      "command": "./gradlew :solr:core:test --tests org.apache.solr.cloud.SolrZkServerTlsTest.testAutomaticTlsSuppressesExistingPlaintextPort -Dtests.seed=5329ABCD",
+      "exit_code": 1,
+      "result": "The TLS-unification assertion fails (expected false but was true), not a setup or compilation failure.",
+      "evidence": "fail-before/java/unification-7deda.log"
+    },
+    "password_file_umask": {
+      "base_head": "78f2fd781d83a54e2f31b45d90bec4f372450b36",
+      "overlay": "In a separate disposable worktree, only solr/bin/solr changed: umask 077 to umask 022.",
+      "command": "./gradlew :solr:packaging:integrationTests --tests test_secure_example.bats",
+      "exit_code": 1,
+      "tests": 6,
+      "passed": 5,
+      "failed": 1,
+      "result": "BATS test 6 fails at assert_success (test_secure_example.bats:243); the touch interception rejects non-private creation and Solr reports 'Unable to write embedded ZooKeeper TLS password files'. The other five tests pass.",
+      "evidence": [
+        "fail-before/umask/gradle.log",
+        "fail-before/umask/report-sanitized.xml"
+      ]
+    }
+  },
+  "lifecycle_probes": {
+    "setup": "Fresh packaged Solr distribution and isolated disposable SOLR_HOME installations on JDK 21. Test-only PKCS12 key/trust stores were generated inside permitted disposable homes; security settings were not disabled and no real deployment was touched.",
+    "automatic_embedded_tls": {
+      "start_exit_code": 0,
+      "tls_cli_to_secure_port_33000_exit_code": 0,
+      "tls_listener": "Connected on secureClientPort 33000; configured plaintext clientPort 33001 refused connections.",
+      "colocated_node": "Second co-located node started; HTTPS health check succeeded.",
+      "effective_options": "Embedded node's include supplies secure ZooKeeper client options and truststore properties."
+    },
+    "external_plaintext_zookeeper_with_shared_include": {
+      "plain_ensemble_baseline_cli_exit_code": 0,
+      "same_shared_tls_include_cli_exit_code": 1,
+      "result": "The same plaintext ensemble on port 34000 is reachable without the embedded-TLS include; with that include, the client attempts TLS and times out.",
+      "effective_jvm_properties": [
+        "-Dzookeeper.client.secure=true",
+        "-Dzookeeper.clientCnxnSocket=org.apache.zookeeper.ClientCnxnSocketNetty",
+        "-Dzookeeper.ssl.trustStore.location=<test truststore>"
+      ]
+    },
+    "tls_rotation": {
+      "initial": "Solr 32111 starts; secure ZooKeeper 33111 and CLI connect; TLS handshake presents CN=localhost-one.",
+      "after_restart_with_new_solr_port_and_stores": "Solr 32113 start returns 0; old secure port 33111 remains open, expected new port 33113 is closed; zoo.cfg and shared include remain byte-for-byte unchanged with old port, keystore/truststore paths, and old truststore option.",
+      "clients": "Stale-option CLI still connects (exit 0); a client using the new truststore fails (exit 1), and the listener still presents the old self-signed certificate.",
+      "evidence": "probes/rotation_allowed_summary.json"
+    },
+    "user_managed_secure_client_port_and_zoo_cfg": {
+      "start_exit_code": 0,
+      "tls_cli_exit_code": 0,
+      "secure_port_33020": "Connected",
+      "configured_plaintext_port_33021": "Refused",
+      "zoo_cfg": "Byte-identical before and after start; operator-managed file was not rewritten."
+    },
+    "non_writable_include": {
+      "include_mode": "0400",
+      "start_exit_code": 0,
+      "result": "Launcher emits a permission-denied write error but still reports that TLS options were added; the include remains unchanged with no TLS options, and the subsequent CLI fails with a timeout (exit 1)."
+    },
+    "password_creation": "Current-head BATS verifies invalid destination failure before launch and 0600 creation under umask 022; the isolated 077-to-022 mutation makes the touch interceptor fail as required."
+  },
+  "recommended_smallest_safe_boundary": "Keep the repair within the automatic embedded-ZooKeeper TLS lifecycle in solr/bin/solr and the SolrZkServer configuration boundary: derive client options for the selected ZooKeeper target instead of persisting embedded TLS options globally in a shared include; refresh only explicitly auto-managed zoo.cfg/include TLS fields atomically on restart while preserving user-owned files; and fail clearly rather than claiming success when a required write is denied. Add regression coverage for external plaintext ZK, repeated start/rotation, and user-managed secureClientPort/zoo.cfg.",
+  "unresolved": [
+    "TLS option and store-path persistence after rotation.",
+    "TLS option inheritance from an embedded-ZK shared include into an external plaintext ZooKeeper client."
+  ],
+  "coverage_limits": [
+    "Current-head BATS test 6 fails at its trust-anchor setup/client connection before its listener assertions; the separate valid-store lifecycle probes provide the recorded listener results.",
+    "Docker-dependent tests were unrun; no Docker installation or use occurred.",
+    "Antora site build and dependent link-check tasks were intentionally excluded."
+  ],
+  "evidence": {
+    "local_directory": "/workspace/evidence/pr-5329-tls-lifecycle-linux-round7",
+    "manifest": "evidence-manifest.json",
+    "manifest_sha256": "a63ed22efe56bc69866d08f1a081d2602264288b2a92a8150ea1fc14609dec7b",
+    "critical_artifacts": [
+      "core/gradle.log",
+      "core/TEST-org.apache.solr.cloud.SolrZkServerTlsTest.xml",
+      "bats/gradle.log",
+      "bats/report-sanitized.xml",
+      "fail-before/raw/gradle.log",
+      "fail-before/java/ensemble-dc3.log",
+      "fail-before/java/unification-7deda.log",
+      "fail-before/umask/gradle.log",
+      "tidy/gradle.log",
+      "check/gradle.log",
+      "probes/summary.json",
+      "probes/rotation_allowed_summary.json"
+    ],
+    "note": "The local manifest provides hashes for retained artifacts; this board receipt publishes summaries only, not raw logs, temporary test credentials, or keystore material."
+  }
+}
