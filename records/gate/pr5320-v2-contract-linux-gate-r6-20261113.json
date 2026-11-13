@@ -1,0 +1,24 @@
+{
+  "environment": "Linux Solr gate host, supported JDK, isolated clean checkout",
+  "head": "e47c4b50d2cb09d8cf5d43175a6b5d5d380aa9cc",
+  "id": "pr5320-v2-contract-linux-gate-r6-20261113",
+  "job": "pr5320-v2-contract-linux-gate-r6-20261113",
+  "phase": "round 6 follow-up proof",
+  "prior_receipt": "records/receipt/pr5320-v2-contract-linux-gate-r5-20261113-receipt.json",
+  "requirements": [
+    "Verify exact remote head and contributor ancestry. Previous green receipt covers 678f805a2a0d2212427d0cfadb11e87c24d122ef only.",
+    "Run ./gradlew :solr:solrj:test --tests org.apache.solr.common.util.JsonValidatorTest, ./gradlew :solr:core:test --tests org.apache.solr.security.BaseTestRuleBasedAuthorizationPlugin, ./gradlew :solr:core:test --tests org.apache.solr.security.TestExternalRoleRuleBasedAuthorizationPlugin, and ./gradlew :solr:core:test --tests org.apache.solr.security.BasicAuthStandaloneTest.testV2PermissionIds. Capture fresh XML/logs, counts, seeds and exit codes, confirming both new test methods executed.",
+    "Run ./gradlew tidy and ./gradlew check -x test. Require tidy to leave tracked files unchanged and the full root check to pass. Document commands, exit codes and environment conditions; if tidy changes tracked files, require a new commit and gate.",
+    "On isolated previous head 678f805a2a0d2212427d0cfadb11e87c24d122ef transplant each new test method testAnyOfNullableObjectWithProperties and testAnyOfNullableObjectRequiredFirst unchanged, separately run each and confirm each fails at its null-acceptance assertion. Record both behavioral failures with fresh XML and logs; compile/setup failures are not proof.",
+    "Inspect the prior r5 receipt and its historical fail-before evidence. Since production JsonSchemaValidator changed, do not present old-head test results as proof for this head; rerun all current positive tests. Carry prior baseline failure evidence only with the original heads and explicit comparison, and state whether the previous failure assertions and exercised behaviors remain applicable.",
+    "The standalone endpoint test checks the handler spec in-process and authenticated HTTP read/set/delete with persisted state; it does not cover HTTP introspection or controlled concurrent edits. Report those limits.",
+    "Publish receipt records/receipt/pr5320-v2-contract-linux-gate-r6-20261113-receipt.json with every required leg, results, evidence locations, exit codes and environment conditions."
+  ],
+  "source": {
+    "branch": "pr-5320-v2-contract",
+    "contributor_parent": "5fa5513038a7cf9318ed800423d8a44064d4c0e3",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes_gate": "records/gate/pr5320-v2-contract-linux-gate-r5-20261113.json",
+  "type": "gate"
+}
