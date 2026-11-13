@@ -1,0 +1,11 @@
+{
+  "id": "pr5323-review-fixes-windows-20261113",
+  "intended_host": "Windows implementation; Linux proof",
+  "job": "pr5323-review-fixes-windows-20261113",
+  "source": {
+    "head": "73aed042f6e2c46dfddad0f086234136d5daa299",
+    "repository": "apache/solr"
+  },
+  "summary": "Implement review findings on contributor PR 5323 head, preserving ancestry; publish fork patch and exact-head Linux gate",
+  "type": "assignment"
+}
