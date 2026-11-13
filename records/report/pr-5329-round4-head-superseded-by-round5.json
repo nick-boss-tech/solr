@@ -1,0 +1,11 @@
+{
+  "id": "pr-5329-round4-head-superseded-by-round5",
+  "job": "pr-5329-tls-fixes-linux-round4",
+  "new_head": "37710039195736636bc3971cbf200cc940d53248",
+  "note": "Check round-two and any round-four worker/executor state before claiming the replacement. Prior results do not prove the new head.",
+  "old_head": "ca3e9817719472ec03199da53b58372214722fd4",
+  "replacement_assignment": "records/assignment/pr-5329-tls-fixes-linux-round5.json",
+  "replacement_gate": "records/gate/pr-5329-tls-fixes-linux-round5.json",
+  "summary": "Round-four gate superseded by deletion and password-test correction",
+  "type": "report"
+}
