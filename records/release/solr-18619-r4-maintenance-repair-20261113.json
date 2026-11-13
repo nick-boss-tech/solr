@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-r4-repair-20261113",
+  "evidence": "records/report/solr-18619-r4-maintenance-repair-20261113-report.json; fork head 855eccb3e7642cc25ce021d64639c5ce82bd3f12; no local executor started.",
+  "id": "solr-18619-r4-maintenance-repair-20261113",
+  "job": "solr-18619-r4-maintenance-repair-20261113",
+  "reason": "Scoped maintenance repair was pushed; stopping source work and handing exact-head proof to a separate Linux gate.",
+  "type": "release"
+}
