@@ -1,0 +1,7 @@
+{
+  "id": "pr-5339-signature-migration-20261113",
+  "job": "pr-5339-signature-migration-20261113",
+  "owner": "codex-windows",
+  "scope": "Prepare and push a scoped migration follow-up; request Linux gate",
+  "type": "claim"
+}
