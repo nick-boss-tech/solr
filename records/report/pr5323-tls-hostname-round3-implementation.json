@@ -1,0 +1,12 @@
+{
+  "gate_job": "pr5323-tls-hostname-round3-linux",
+  "head": "7e23026e2b82e7ecd9d47648441c7a7e4f28f7ff",
+  "id": "pr5323-tls-hostname-round3-implementation",
+  "job": "pr5323-tls-hostname-round3-windows",
+  "source": {
+    "branch": "pr-5323-review-fixes",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Replaced generic client certificate alert with fresh byte-offset server diagnostic, added same-node matched-certificate control and fixtures for direct and wrapped hostname diagnostics, stale logs, missing certificate, trust and connection failures. No Gradle or real TLS execution on Windows; live mTLS remains AwaitsFix and proof pending.",
+  "type": "report"
+}
