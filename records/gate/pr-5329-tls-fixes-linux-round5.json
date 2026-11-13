@@ -1,0 +1,22 @@
+{
+  "environment": "Linux JDK 21, clean checkout, preserve security settings",
+  "execution_dependency": "Verify the previously claimed round-two worker and executor and any later gate executor have stopped before claiming or running.",
+  "head": "37710039195736636bc3971cbf200cc940d53248",
+  "id": "pr-5329-tls-fixes-linux-round5",
+  "job": "pr-5329-tls-fixes-linux-round5",
+  "phase": "implementation proof round 5",
+  "requirements": [
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.cloud.SolrZkServerTlsTest -Dtests.seed=5329ABCD. Capture fresh XML, counts and logs, including negative and positive three-member ensemble cases.",
+    "Run ./gradlew :solr:packaging:integrationTests --tests test_secure_example.bats. Capture fresh BATS output/XML. Confirm the interactive EOF test preserves the marker, --no-prompt example resets the preexisting fixture, and the fresh-file interception executes for both password paths along with listener and failure cases.",
+    "Run ./gradlew tidy; the tree must remain unchanged, otherwise return the formatting diff for a new gate.",
+    "Run ./gradlew check -x test and retain output including validateLogCalls.",
+    "Fail-before deletion safety: on a disposable worktree at preceding head ca3e9817719472ec03199da53b58372214722fd4, apply only the new interactive EOF BATS case and run it against a freshly built distribution; verify it fails because no confirmation is presented and the disposable marker is removed. Do not run this probe against real user data. Setup failures are not proof.",
+    "Fail-before ensemble: apply only the updated SolrZkServerTlsTest.java to fork head dc3ba7b2e83a0b3e128d6e49964adf8681d9732e and run testAutomaticTlsRejectsEnsemblePlaintextClientAddress with seed 5329ABCD; require the expected missing-exception assertion failure.",
+    "Fail-before unification: apply updated test class to fork head 7dedae124c252574caaff93cf4bcf2bc1d240fc9 and run testAutomaticTlsSuppressesExistingPlaintextPort with the same seed; require its unification assertion failure.",
+    "Mutation proof of current file creation: on a disposable worktree change only creation umask 077 to 022 and run the BATS case; require the intercepted creation check to fail. Capture fresh logs. The touch interceptor is implementation-specific. Restore clean source before other proof.",
+    "Record exact commands, exit codes, counts, fresh XML/log locations, and all setup failures or limitations in the named receipt."
+  ],
+  "supersedes": "records/gate/pr-5329-tls-fixes-linux-round4.json",
+  "type": "gate",
+  "unresolved": "TLS configuration persistence after rotation and inherited settings for external ZooKeeper remain unresolved. A passing gate alone does not authorize a public offer."
+}
