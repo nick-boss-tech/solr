@@ -19,11 +19,13 @@ package org.apache.solr.update;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.SocketException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.solr.BaseDistributedSearchTestCase;
@@ -625,6 +627,7 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
     System.setProperty("solr.cloud.client.pollQueueTime", "100");
     System.setProperty("solr.cloud.client.stallTime", "1000");
     try (ServerSocket silent = new ServerSocket(0)) {
+      silent.setSoTimeout(10000);
       Node stalledNode =
           new StdNode(
               coreNodeProps("http://127.0.0.1:" + silent.getLocalPort() + "/solr", solrclient),
@@ -636,24 +639,52 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
               coreNodeProps("http://" + DEAD_HOST_1 + "/solr", solrclient),
               "collection1",
               "shard1",
-              1);
+              0);
 
-      try (SolrCmdDistributor cmdDistrib = new SolrCmdDistributor(updateShardHandler)) {
+      StreamingSolrClients streamingClients = new StreamingSolrClients(updateShardHandler);
+      try (SolrCmdDistributor cmdDistrib = new SolrCmdDistributor(streamingClients, 0)) {
         AddUpdateCommand failing = new AddUpdateCommand(null);
         failing.solrDoc = sdoc("id", uniqueId.incrementAndGet());
         cmdDistrib.distribAdd(failing, List.of(failingNode), new ModifiableSolrParams());
-        for (int i = 0; i < 3; i++) {
-          AddUpdateCommand cmd = new AddUpdateCommand(null);
-          cmd.solrDoc = sdoc("id", uniqueId.incrementAndGet());
-          ModifiableSolrParams params = new ModifiableSolrParams();
-          // distinct params keep each doc out of the in-flight stream, so the queue stays non-empty
-          params.set("stream", i);
-          cmdDistrib.distribAdd(cmd, List.of(stalledNode), params);
+        long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(10);
+        boolean failureRecorded = false;
+        while (!failureRecorded && System.nanoTime() < deadline) {
+          synchronized (streamingClients.getErrors()) {
+            failureRecorded =
+                streamingClients.getErrors().stream()
+                    .anyMatch(e -> failingNode.equals(e.req.node));
+          }
+          if (!failureRecorded) Thread.sleep(10);
         }
-        cmdDistrib.finish();
-        List<SolrError> errors = cmdDistrib.getErrors();
-        assertTrue(errors.toString(), errors.stream().anyMatch(e -> failingNode.equals(e.req.node)));
-        assertTrue(errors.toString(), errors.stream().anyMatch(e -> stalledNode.equals(e.req.node)));
+        assertTrue("Other node's error was not recorded", failureRecorded);
+
+        AddUpdateCommand first = new AddUpdateCommand(null);
+        first.solrDoc = sdoc("id", uniqueId.incrementAndGet());
+        ModifiableSolrParams firstParams = new ModifiableSolrParams();
+        firstParams.set("stream", 0);
+        cmdDistrib.distribAdd(first, List.of(stalledNode), firstParams);
+        try (Socket accepted = silent.accept()) {
+          for (int i = 1; i < 3; i++) {
+            AddUpdateCommand cmd = new AddUpdateCommand(null);
+            cmd.solrDoc = sdoc("id", uniqueId.incrementAndGet());
+            ModifiableSolrParams params = new ModifiableSolrParams();
+            // Different params keep these updates out of the in-flight stream.
+            params.set("stream", i);
+            cmdDistrib.distribAdd(cmd, List.of(stalledNode), params);
+          }
+          cmdDistrib.finish();
+          List<SolrError> errors = cmdDistrib.getErrors();
+          assertTrue(
+              errors.toString(), errors.stream().anyMatch(e -> failingNode.equals(e.req.node)));
+          assertTrue(
+              errors.toString(),
+              errors.stream()
+                  .anyMatch(
+                      e ->
+                          stalledNode.equals(e.req.node)
+                              && e.e instanceof IOException
+                              && e.e.getMessage().contains("Request processing has stalled")));
+        }
       }
     } finally {
       restoreProperty("solr.cloud.client.pollQueueTime", previousPollQueueTime);
