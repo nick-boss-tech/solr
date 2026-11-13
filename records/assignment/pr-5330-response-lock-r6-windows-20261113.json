@@ -1,0 +1,10 @@
+{
+  "coordination": "Older round-2 Linux gate is claimed at a different head; leave its records and executor alone and do not assume it stopped.",
+  "host": "Windows implementation; Linux proof separately",
+  "id": "pr-5330-response-lock-r6-windows-20261113",
+  "job": "pr-5330-response-lock-r6-windows-20261113",
+  "source_head": "1712a7dcbdd25cd24d1ec12336019c94cbdfedbf",
+  "successor_of": "pr-5330-callback-lock-r5-windows-20261113",
+  "summary": "Move blocking response parsing outside stalled-client callback lock",
+  "type": "assignment"
+}
