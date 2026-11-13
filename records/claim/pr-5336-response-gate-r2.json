@@ -1,0 +1,10 @@
+{
+  "claimed": "2026-11-13T22:12:00Z",
+  "head": "eb5557d14fa6de411e35e5ff22d30a0cd8f7589d",
+  "host": "linux",
+  "id": "pr-5336-response-gate-r2",
+  "job": "pr-5336-response-gate-r2",
+  "note": "Live fork branch pr-5336-response-followup verified at the gate head eb5557d1 by git ls-remote at claim time; contributor parent 96df2d21 confirmed. No conflicting claim exists for this Linux gate job on coordination-v2. The r1 gate for this topic has no receipt; r2 supersedes it and is the current exact-head gate. Taken on vm6 at Nick's direction in chat 2026-11-13.",
+  "owner": "vm6",
+  "type": "claim"
+}
