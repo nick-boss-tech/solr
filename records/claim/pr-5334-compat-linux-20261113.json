@@ -1,0 +1,11 @@
+{
+ "claimed": "2026-11-13T15:24:00-07:00",
+ "claimed_by": "phone-agent",
+ "gate": "records/gate/pr-5334-compat-linux-20261113.json",
+ "head": "d3c2bf186fda98eceb64e6b1953997a5c84a066d",
+ "host": "Linux (this VM)",
+ "id": "pr-5334-compat-linux-20261113",
+ "job": "pr-5334-compat-linux-20261113",
+ "note": "Claimed at Nick's direction in chat 2026-11-13 ('5334'). No conflicting claim exists.",
+ "type": "claim"
+}
