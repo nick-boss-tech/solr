@@ -148,6 +148,17 @@ public class SslTest extends SolrShellTestCase {
     }
   }
 
+  private static boolean freshLogContains(Path log, int offset, String expected) {
+    try {
+      byte[] bytes = Files.readAllBytes(log);
+      return offset <= bytes.length
+          && new String(bytes, offset, bytes.length - offset, StandardCharsets.UTF_8)
+              .contains(expected);
+    } catch (IOException e) {
+      throw new UncheckedIOException(e);
+    }
+  }
+
   private static void assertDiagnostic(String regex, String output) {
     assertTrue(
         "Diagnostic not recognized: " + output, Pattern.compile(regex).matcher(output).find());
@@ -501,39 +512,64 @@ public class SslTest extends SolrShellTestCase {
     env("SOLR_SSL_TRUST_STORE", path("ssl/server/solr-server.truststore.p12").toString());
     env("SOLR_SSL_TRUST_STORE_PASSWORD", "server-trust");
 
-    // Turn on client hostname verification, and start a new Solr node since the property is a
-    // server setting. Test that it fails because the client cert does not use "localhost"
+    // A standalone node has no cluster traffic that could generate unrelated TLS diagnostics.
+    Path hostnameHome = mkdirs("hostname-node-home");
+    Files.copy(
+        harnessEnv.solrTip().resolve("server/solr/solr.xml"), hostnameHome.resolve("solr.xml"));
+    Path hostnameLogs = mkdirs("hostname-node-logs");
+    Path logConfig =
+        write(
+            "hostname-log4j2.xml",
+            """
+            <Configuration>
+              <Appenders>
+                <File name="main" fileName="${sys:solr.logs.dir}/solr.log" immediateFlush="true">
+                  <PatternLayout pattern="%m%n%ex"/>
+                </File>
+              </Appenders>
+              <Loggers><Root level="debug"><AppenderRef ref="main"/></Root></Loggers>
+            </Configuration>
+            """);
+    env("SOLR_HOME", hostnameHome.toString());
+    env("SOLR_LOGS_DIR", hostnameLogs.toString());
+    env("LOG4J_PROPS", logConfig.toString());
+    env("LOG4J_CONFIG", logConfig.toString());
+    env("SOLR_HOST_BIND", "127.0.0.1");
+    env("SOLR_HOST_ADVERTISE", "127.0.0.1");
     env("SOLR_SSL_CLIENT_HOSTNAME_VERIFICATION", "true");
-    run("solr start -z localhost:${ZK_PORT} -p ${SOLR3_PORT}");
-
-    // The original slept here, because it cannot connect to the node to check it is up. Its
-    // registration in ZooKeeper is visible from a node we can talk to, so that is what we wait
-    // for instead.
-    awaitOrFail(
-        "the third node to register in ZooKeeper",
-        Duration.ofMinutes(1),
-        Duration.ofSeconds(2),
-        () ->
-            run("solr api --solr-url \"https://localhost:${SOLR_PORT}"
-                    + "/solr/admin/collections?action=CLUSTERSTATUS\"")
-                .output()
-                .contains("localhost:" + ports().solr3() + "_solr"));
-
-    // The same node and CA must accept a client with the loopback identity.
     env(
         "SOLR_SSL_CLIENT_KEY_STORE",
         path("ssl/client-match/solr-client-match.keystore.p12").toString());
     env("SOLR_SSL_CLIENT_KEY_STORE_PASSWORD", "client-match-key");
-    run("solr api --solr-url \"https://localhost:${SOLR3_PORT}/solr/test/select?q=*:*&rows=0\"")
-        .assertContains("\"numFound\":0");
+    run("solr start --user-managed -p ${SOLR3_PORT}");
+    run("solr api --solr-url \"https://127.0.0.1:${SOLR3_PORT}/solr/admin/info/system\"")
+        .assertContains("\"status\":0");
+
+    // The startup and matching request completed with synchronous, private, non-rotating logging.
+    // First demonstrate that a missing client certificate does not satisfy the hostname check.
+    Path serverLog = hostnameLogs.resolve("solr.log");
+    int unrelatedOffset = Math.toIntExact(Files.size(serverLog));
+    env("SOLR_SSL_CLIENT_KEY_STORE", "");
+    env("SOLR_SSL_CLIENT_KEY_STORE_PASSWORD", "");
+    env("SOLR_SSL_KEY_STORE", "");
+    env("SOLR_SSL_KEY_STORE_PASSWORD", "");
+    runFail("solr api --verbose --solr-url"
+            + " \"https://127.0.0.1:${SOLR3_PORT}/solr/admin/info/system\"")
+        .assertNotContains("Server refused connection")
+        .assertNotContains("java.net.ConnectException");
+    awaitOrFail(
+        "a fresh missing-client-certificate rejection in the server log",
+        Duration.ofSeconds(10),
+        Duration.ofSeconds(1),
+        () -> freshLogContains(serverLog, unrelatedOffset, "Empty client certificate chain"));
+    assertFalse(hasFreshClientHostnameDiagnostic(serverLog, unrelatedOffset));
 
     env("SOLR_SSL_CLIENT_KEY_STORE", path("ssl/client/solr-client.keystore.p12").toString());
     env("SOLR_SSL_CLIENT_KEY_STORE_PASSWORD", "client-key");
-    Path serverLog = harnessEnv.logsDir().resolve("solr.log");
     int logOffset = Math.toIntExact(Files.size(serverLog));
     runFail(
             "solr api --verbose --solr-url"
-                + " \"https://localhost:${SOLR3_PORT}/solr/test/select?q=*:*&rows=0\"")
+                + " \"https://127.0.0.1:${SOLR3_PORT}/solr/admin/info/system\"")
         .assertNotContains("Server refused connection")
         .assertNotContains("java.net.ConnectException");
     awaitOrFail(
