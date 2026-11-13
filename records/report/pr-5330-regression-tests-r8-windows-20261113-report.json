@@ -1,0 +1,16 @@
+{
+  "changes": "Reuse failure-injection client to force an initial retryable failure and verify retried document on a real Solr test server during another client stall; exercise a valid JavaBin RF response; exercise success and failure callbacks via real sockets while client monitor is held; exercise concurrent error production and draining.",
+  "coordination": "Older Linux r2 gate remains claimed without observed release. Do not assume worker stopped.",
+  "gate": "records/gate/pr-5330-regression-tests-r8-linux-20261113.json",
+  "head": "04c5746d1775f26bbba983249c1a473cdf4bd8ec",
+  "id": "pr-5330-regression-tests-r8-windows-20261113-report",
+  "job": "pr-5330-regression-tests-r8-windows-20261113",
+  "source": {
+    "branch": "pr-5330-test-fix-20261113",
+    "head": "04c5746d1775f26bbba983249c1a473cdf4bd8ec",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Pushed permanent retry delivery, RF, real callback and concurrent drain tests",
+  "type": "report",
+  "verification": "Whitespace diff and remote SHA checked. No Gradle, compilation or runtime tests on Windows. Concurrent drain test is not a deterministic old snapshot/clear failure; actual concurrent blockUntilFinished and recovery behavior remain separate gate legs."
+}
