@@ -1,0 +1,6 @@
+{
+  "id": "pr-formula-ste80-20261113-report",
+  "job": "pr-formula-ste80-20261113",
+  "result": "Published docs/pr-formula-ste80.md and linked it from START-HERE.md at board commit 3210a585a174d6c9d483be14e4b79305274662a4. The supplement integrates the STE80 method, prohibits we in PR descriptions, preserves proof and disclosure, and adds multi-part related-work comparison guidance. Documentation only; no build run.",
+  "type": "report"
+}
