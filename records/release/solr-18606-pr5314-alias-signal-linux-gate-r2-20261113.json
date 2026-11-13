@@ -1,0 +1,9 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "records/receipt/solr-18606-pr5314-alias-signal-linux-gate-r2-20261113-receipt.json; records/report/solr-18606-pr5314-alias-signal-linux-gate-r2-20261113-report.json; records/evidence/solr-18606-pr5314-alias-signal-linux-gate-r2-20261113-evidence.json. At final pre-release check, the source worktree was clean at 2dbfc9f32aa34cef586f32c7b473a5cd689e8705, remote branch head matched, no Gradle/Java process existed, and the shared Gradle lock was free.",
+  "id": "solr-18606-pr5314-alias-signal-linux-gate-r2-20261113",
+  "job": "solr-18606-pr5314-alias-signal-linux-gate-r2-20261113",
+  "reason": "Round-2 exact-head gate completed with a passed receipt and published evidence/report. No further work remains under this gate claim; any additional gate work requires a new successor assignment.",
+  "recorded": "2026-11-13T12:02:00-07:00",
+  "type": "release"
+}
