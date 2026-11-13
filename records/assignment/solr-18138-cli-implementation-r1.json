@@ -1,0 +1,8 @@
+{
+  "context": "Jira maintainer requested option 1 on 2026-11-13; prior code-read claim completed on coordination-ui in claims/solr-18138-cli-zk-unreachable-vm6.md and reports/solr-18138-cli-zk-unreachable-round-1.md. Server-side errors are separate.",
+  "id": "solr-18138-cli-implementation-r1",
+  "intended_host": "Windows implementation; Linux proof separately",
+  "job": "solr-18138-cli-implementation-r1",
+  "summary": "Implement the requested CLI ZooKeeper connect-timeout message for SOLR-18138",
+  "type": "assignment"
+}
