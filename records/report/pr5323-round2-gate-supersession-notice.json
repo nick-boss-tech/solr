@@ -1,0 +1,7 @@
+{
+  "head": "3a2ff894cd86f08f4df8e416ab1df6ce1d103c73",
+  "id": "pr5323-round2-gate-supersession-notice",
+  "job": "pr5323-review-fixes-round2-linux",
+  "summary": "Round 2 gate is superseded for new work: the client-hostname review found that certificate_unknown alone is not cause-specific. Round 3 is adding a matched client and fresh server diagnostic. Do not claim this gate; a new exact-head gate is being prepared. No claim was visible at the refresh. Any executor that has started must stop and report its state; old-head results cannot prove the new head.",
+  "type": "report"
+}
