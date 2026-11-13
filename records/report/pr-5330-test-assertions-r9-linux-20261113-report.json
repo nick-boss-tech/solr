@@ -1,0 +1,16 @@
+{
+  "changes": "Required successor (r10) changes: (1) revert the type narrowing in StreamingSolrClients to base ConcurrentUpdateBaseSolrClient (map, getSolrClient local, blockUntilFinished loop), matching upstream main; cast to ErrorReportingConcurrentUpdateSolrClient only inside blockUntilFinished where reportStall is called. Commit 6476beb8debb is the origin. (2) force HTTP/1.1 for the real-client fixture (useHttp1_1(true) on the update client or solr.http1=true scoped to testRealRunnerCallbacksDoNotNeedClientMonitor), or make consumeHttpRequest HTTP/2-aware; the update-only client uses HTTP/2 by default (HttpSolrClient.Builder.defaultUseHttp1_1=false unless solr.http1=true). (3) apply the spotless reformat to SolrCmdDistributorTest.java (assertStallKeepsErrorsFromOtherNodes signature line-wrap, getErrors stream line-join) so :solr:core:spotlessCheck passes; the exact diff is in the evidence (spotless/tidy-testfile.diff).",
+  "coordination": "Older r2 Linux job (pr-5330-regression-r2-linux-20261113) remains claimed without release/receipt/evidence; reconciled as ancestor-superseded. No overlapping active work.",
+  "gate": "records/gate/pr-5330-test-assertions-r9-linux-20261113.json",
+  "head": "13522945de6c9102ecdbe8efb821ed451e840216",
+  "id": "pr-5330-test-assertions-r9-linux-20261113-report",
+  "job": "pr-5330-test-assertions-r9-linux-20261113",
+  "source": {
+    "branch": "pr-5330-test-fix-20261113",
+    "head": "13522945de6c9102ecdbe8efb821ed451e840216",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "PR-5330 r9 Linux gate: the exact head does not compile on Linux JDK 21. The branch first compiles on Linux at this gate (the r9 Windows report deferred compilation to Linux), and commit 6476beb8debb introduced a deterministic javac error by narrowing StreamingSolrClients' solrClients map/local/loop types to ErrorReportingConcurrentUpdateSolrClient while the non-generic base Builder.build() returns ConcurrentUpdateBaseSolrClient. Two clean runs reproduce the identical error. A disposable 4-line successor-style fix (restore base types, cast where reportStall is needed) compiles; the focused test, the tidy leg, and the atomic-drain mutation were run under it to preserve discriminating evidence, exposing TWO additional head defects that were invisible behind the compile failure: (2) testRealRunnerCallbacksDoNotNeedClientMonitor fails on the HTTP/2 preface (raw-socket fixture expects HTTP/1.1), and (3) the head test file is not spotless-clean (spotlessApply reformats 2 hunks in SolrCmdDistributorTest.java, so :solr:core:spotlessCheck fails on the head-identical test). The contributor branch needs a committed successor (r10) fixing all three; no public comments.",
+  "type": "report",
+  "verdict": "failed"
+}
