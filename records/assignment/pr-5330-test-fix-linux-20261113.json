@@ -1,0 +1,24 @@
+{
+  "claim_path": "records/claim/pr-5330-test-fix-linux-20261113.json",
+  "contributor_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+  "gate_id": "pr-5330-test-fix-linux-20261113",
+  "gate_record": "records/gate/pr-5330-test-fix-linux-20261113.json",
+  "host_requirements": [
+    "linux",
+    "jdk21",
+    "Solr Gradle"
+  ],
+  "id": "pr-5330-test-fix-linux-20261113",
+  "implementation_job": "pr-5330-fix-windows-20261113",
+  "job": "pr-5330-test-fix-linux-20261113",
+  "phase": "round 1",
+  "receipt_path": "records/receipt/pr-5330-test-fix-linux-20261113-receipt.json",
+  "source": {
+    "branch": "pr-5330-test-fix-20261113",
+    "head": "0c5457bde3e6bb684a91e1af12d160ebb37a7ec6",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify PR 5330 test repair and investigate stalled runner ordering",
+  "supersedes": null,
+  "type": "assignment"
+}
