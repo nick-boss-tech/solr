@@ -1,0 +1,15 @@
+{
+  "details": "anyOf now checks each alternative's boolean result with isolated errors. Explicit types inside alternatives validate null, including nested properties and array items; schemas outside anyOf retain prior null handling. Tests force required-before-type ordering and exercise null id, null root, nullable alternatives, nested items, and legacy null behavior. Windows ran git diff --check only.",
+  "gate_job": "pr5320-v2-contract-linux-gate-r3-20261113",
+  "id": "pr5320-v2-contract-implementation-r3-20261113-report",
+  "job": "pr5320-v2-contract-implementation-r3-20261113",
+  "source": {
+    "branch": "pr-5320-v2-contract",
+    "contributor_parent": "5fa5513038a7cf9318ed800423d8a44064d4c0e3",
+    "head": "95aa5cbd0a26501ab583e63c3b472613f6a774a1",
+    "previous_head": "f1a840767476b1bf234d0870ccb7661f9e4e2520",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Pushed anyOf failure propagation and strict typed-null handling for alternatives; Linux proof pending.",
+  "type": "report"
+}
