@@ -1,0 +1,16 @@
+{
+  "changes": "Atomically copy and clear each error collector; synchronize stall reporting and callbacks, suppress later callbacks after a stall; retain the public clearErrors method. Split finish-first test, test late callbacks and timeout-property isolation, suppress unused socket try warning.",
+  "coordination": "Round-2 Linux gate was claimed on older head, no release seen. Do not infer worker stopped.",
+  "gate": "records/gate/pr-5330-callback-r4-linux-20261113.json",
+  "head": "6476beb8debb78d6f1504144fef292ca06583c94",
+  "id": "pr-5330-r4-callback-fix-windows-20261113-report",
+  "job": "pr-5330-r4-callback-fix-windows-20261113",
+  "source": {
+    "branch": "pr-5330-test-fix-20261113",
+    "head": "6476beb8debb78d6f1504144fef292ca06583c94",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Pushed atomic error drains, stalled-client callback fence, and independent finish and callback tests",
+  "type": "report",
+  "verification": "Whitespace diff check and exact remote SHA verified. No Gradle or runtime tests on Windows. Controlled drain race and fail-before proof are required on Linux. Callback fence does not cancel the active runner."
+}
