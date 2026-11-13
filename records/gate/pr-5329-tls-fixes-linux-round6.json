@@ -1,0 +1,22 @@
+{
+  "environment": "Linux JDK 21, clean checkout, preserve security settings",
+  "execution_dependency": "Verify previously claimed round-two worker and executor and any later gate executors have stopped before claiming or running.",
+  "head": "de6c192d045c9c0e182b9e3d060d412d450df3aa",
+  "id": "pr-5329-tls-fixes-linux-round6",
+  "job": "pr-5329-tls-fixes-linux-round6",
+  "phase": "implementation proof round 6",
+  "requirements": [
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.cloud.SolrZkServerTlsTest -Dtests.seed=5329ABCD; retain fresh XML, counts and logs including both three-member ensemble cases.",
+    "Run ./gradlew :solr:packaging:integrationTests --tests test_secure_example.bats; retain fresh XML and logs. Verify EOF, no response, Enter confirmation, and --no-prompt behaviors execute, plus fresh password-file modes, listener and failure cases.",
+    "Run ./gradlew tidy with a clean tree afterward; report any formatting change for a new exact-head gate.",
+    "Run ./gradlew check -x test and retain output including validateLogCalls.",
+    "Fail-before negative-response proof: on a disposable worktree at 37710039195736636bc3971cbf200cc940d53248, apply only the new decline BATS case and run against a newly built distribution; verify failure because the marker is deleted, not a setup/compile failure. Never use real data.",
+    "Fail-before EOF proof: on a disposable worktree at ca3e9817719472ec03199da53b58372214722fd4, apply only the EOF BATS case; verify failure because the confirmation is absent and the disposable marker is deleted.",
+    "Fail-before ensemble and unification: apply the updated SolrZkServerTlsTest.java to dc3ba7b2e83a0b3e128d6e49964adf8681d9732e and 7dedae124c252574caaff93cf4bcf2bc1d240fc9 respectively and run the corresponding single test using seed 5329ABCD. Require the specified missing-exception and unification assertion failures, not setup failures.",
+    "On a disposable worktree mutate only password creation umask 077 to 022 and require the BATS creation interception to fail; retain logs. This interception is specific to current touch-based creation.",
+    "Record exact commands, exit codes, counts, fresh evidence and limitations in the named receipt."
+  ],
+  "supersedes": "records/gate/pr-5329-tls-fixes-linux-round5.json",
+  "type": "gate",
+  "unresolved": "TLS option persistence after rotation and external ZooKeeper inheritance remain unresolved. Passing this gate does not authorize a public offer."
+}
