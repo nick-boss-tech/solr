@@ -1,0 +1,12 @@
+{
+ "claim_path": "records/claim/fork-organization-plan-20261112.json",
+ "id": "fork-organization-plan-20261112",
+ "intended_host": "phone-agent (Linux)",
+ "job": "fork-organization-plan-20261112",
+ "source": {
+  "repository": "nick-boss-tech/solr",
+  "scope": "1,829 branches at the 2026-11-12 census"
+ },
+ "summary": "Organize the fork as the program's codebase: make the branch census repeatable, review the organizational skills, and write the staged organization plan (generated ledger for the branch mass, lifecycle labels in approved batches, work queue for the adopted residue). Plan document: goal files fork-organization-plan-2026-11-12.md.",
+ "type": "assignment"
+}

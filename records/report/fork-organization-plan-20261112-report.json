@@ -1,0 +1,14 @@
+{
+ "calls_for_owner": [
+  "Approve the Phase 2 ledger build, or fold it into a later session.",
+  "Phase 3 label batches will be presented batch by batch; none applied yet.",
+  "Any scheduled census automation needs a design approval; the plan recommends on-demand only."
+ ],
+ "id": "fork-organization-plan-20261112-report",
+ "job": "fork-organization-plan-20261112",
+ "owner": "phone-agent",
+ "plan_document": "workspace/goals/apache-solr-contribution-submission/files/fork-organization-plan-2026-11-12.md",
+ "recorded": "2026-11-12T21:39:16-07:00",
+ "result": "Plan written to the Solr goal files as fork-organization-plan-2026-11-12.md. Phase 1 is already executed: the census is scripted (~/workspace/tools/fork-census/census.py, about a minute per run) and codified as the custom skill local_fork_census; a post-adoption rerun reads RESIDUE 0 out of 1,829 branches. Diagnosis in the plan: lifecycle exists only for the curated few; curated memory drifts (a stale branches.md entry calling PR 5192 open was caught by live check during this work and corrected: the PR merged 2026-11-02); work could appear on the fork with no record; and the gate-watch hook's silent fetch failure since 2026-11-11 shows unmonitored automation rots silently. Remaining phases: a generated branch ledger for the ticket-named and ci/ mass (Phase 2), lifecycle labels in owner-approved batches with branches left in place (Phase 3), still-applies checks ahead of the five ticket-or-park calls on the adopted residue (Phase 4), and on-demand census reruns with drift repair as standing practice (Phase 5). Skills review verdicts are in the plan: pool status census kept and paired with the new fork census skill; the six task-quality skills kept unchanged; the board operative docs govern records well but never assigned fork-level hygiene, which this plan assigns to the phone agent without reviving stopped pool automation.",
+ "type": "report"
+}
