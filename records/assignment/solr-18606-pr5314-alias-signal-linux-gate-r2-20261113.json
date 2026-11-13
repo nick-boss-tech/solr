@@ -1,0 +1,37 @@
+{
+  "claim_path": "records/claim/solr-18606-pr5314-alias-signal-linux-gate-r2-20261113.json",
+  "evidence_path": "records/evidence/solr-18606-pr5314-alias-signal-linux-gate-r2-20261113-evidence.json",
+  "gate_id": "solr-18606-pr5314-alias-signal-linux-gate-2dbfc9f32aa-r2",
+  "gate_record": "records/gate/solr-18606-pr5314-alias-signal-linux-gate-2dbfc9f32aa-r2.json",
+  "id": "solr-18606-pr5314-alias-signal-linux-gate-r2-20261113",
+  "intended_host": "Linux",
+  "job": "solr-18606-pr5314-alias-signal-linux-gate-r2-20261113",
+  "phase": "round-2",
+  "receipt_path": "records/receipt/solr-18606-pr5314-alias-signal-linux-gate-r2-20261113-receipt.json",
+  "references": [
+    "records/assignment/solr-18606-pr5314-alias-signal-linux-20261113.json",
+    "records/claim/solr-18606-pr5314-alias-signal-linux-20261113.json",
+    "records/assignment/solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b.json",
+    "records/claim/solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b.json",
+    "records/gate/solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b-r1.json",
+    "records/receipt/solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b-r1-receipt.json",
+    "records/evidence/solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b-evidence.json",
+    "records/release/solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b.json"
+  ],
+  "requirements": [
+    "Run the path-specific ZkClientClusterStateProviderTest.testKnownAliasDoesNotReadAliasCollectionState on this exact head with seed 18606CAFE and verify its failed-read positive control observes the exact alias collection-state path.",
+    "Run the renamed CloudHttp2SolrClientTest.testZkAliasRequestsResolveAndQuery on this exact head with seed 18606CAFE; retain alias resolution and repeated-query coverage.",
+    "Repeat the known-alias guard-removal mutation: the path-specific test must detect NoNodeException for /collections/<alias>/state.json; the original global-metrics assertion must still pass under that same mutation as the limitation reproduction; restore the source and verify a clean tree.",
+    "Run the non-test root check ./gradlew --no-daemon check -x test -x :solr:docker:check -x :solr:solr-ref-guide:check. Use a dry-run to verify Docker/build and Antora/site-link tasks are excluded. Do not use Docker.",
+    "Record exact commands, seeds, exit codes, test counts, source head, skipped/unrun tests, and the exclusions. The round-1 Spotless-only failure and its receipt/evidence are linked above."
+  ],
+  "source": {
+    "base_head": "33e3f8b8599ea12fad0456ce0444d3a24a4affe6",
+    "branch": "solr-18606-submit",
+    "head": "2dbfc9f32aa34cef586f32c7b473a5cd689e8705",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b",
+  "summary": "Formatter-clean successor exact-head Linux gate for the path-specific alias failed-read regression.",
+  "type": "assignment"
+}
