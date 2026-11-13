@@ -1,0 +1,9 @@
+{
+  "head": "848885b4cda2c3312576c810aeb4a46afb50419e",
+  "id": "solr-18619-real-logs-linux-gate-r4-static-test-review",
+  "job": "solr-18619-real-logs-linux-gate-r4",
+  "limits": "Windows static review only; no Java compilation, browser, Gradle or mutation execution. Do not infer a green result or receipt from this review.",
+  "review": "The new no-skip browser test seeds distinct events into the two real watcher histories, then verifies real API/proxy results render the event with its originating node. The prior tests cover outgoing headers, controlled error recovery, standalone, empty selection and response ordering. The gate requires the new positive test plus header-removal mutation, earlier proof legs, dependency maintenance and formatting. Direct history insertion does not cover logger-to-watcher appender delivery; the Log4j assumption remains to be validated by execution.",
+  "type": "report",
+  "verdict": "no actionable static finding; exact-head proof pending"
+}
