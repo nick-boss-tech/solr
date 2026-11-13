@@ -1,0 +1,15 @@
+{
+  "id": "solr-18619-review-fixes-20261113",
+  "intended_host": "Windows source implementation; Linux gate for proof",
+  "job": "solr-18619-review-fixes-20261113",
+  "prior_gate": "records/gate/solr-18619-prep-linux-gate-r1.json",
+  "review": "records/report/solr-18619-prep-linux-gate-r1-pre-gate-review.json",
+  "source": {
+    "branch": "solr-18619-targeting-prep",
+    "head": "f2cab615c5ba08cf83d11fe5ae4fc3a0d0b8d7bb",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "solr-18619-submission-prep-20261113",
+  "summary": "Fix the two pre-gate SOLR-18619 UI review findings with focused tests, push and request a superseding exact-head Linux gate",
+  "type": "assignment"
+}
