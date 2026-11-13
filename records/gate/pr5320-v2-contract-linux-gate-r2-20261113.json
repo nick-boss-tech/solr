@@ -1,0 +1,23 @@
+{
+  "environment": "Linux Solr gate host, supported JDK, isolated clean checkout",
+  "head": "f1a840767476b1bf234d0870ccb7661f9e4e2520",
+  "id": "pr5320-v2-contract-linux-gate-r2-20261113",
+  "job": "pr5320-v2-contract-linux-gate-r2-20261113",
+  "phase": "round 2 follow-up proof",
+  "requirements": [
+    "Confirm remote head and contributor ancestry. Prior gate for d85ce12ebeba577d71c3316d55c8ea1043adb734 is superseded and cannot prove this head.",
+    "Run ./gradlew :solr:solrj:test --tests org.apache.solr.common.util.JsonValidatorTest, ./gradlew :solr:core:test --tests org.apache.solr.security.BaseTestRuleBasedAuthorizationPlugin, ./gradlew :solr:core:test --tests org.apache.solr.security.TestExternalRoleRuleBasedAuthorizationPlugin, and ./gradlew :solr:core:test --tests org.apache.solr.security.BasicAuthStandaloneTest.testV2PermissionIds. Capture fresh XML/logs, counts, seeds and actual exit codes. Confirm the named new tests were discovered and executed.",
+    "Run ./gradlew tidy and ./gradlew check -x test. Record exit codes and environment conditions. A tracked formatting change requires a newly pushed head and superseding gate; do not count this head green.",
+    "Negative proof on isolated baseline d85ce12ebeba577d71c3316d55c8ea1043adb734: apply only the revised testDeletePermissionApiSchema method and run it. It should fail when the old permissive object schema accepts a missing id. Also apply testAnyOfAlternatives only to the baseline's existing JsonValidatorTest and confirm the old validator rejects the unsupported anyOf keyword at runtime. Record actual failure locations and fresh XML/logs; compile errors and setup failures are not proof.",
+    "Negative proof for the original set-id schema: on isolated contributor parent 5fa5513038a7cf9318ed800423d8a44064d4c0e3 apply only testSetPermissionIdApiSchema and confirm its explicit missing-id assertion fails. Do not apply the endpoint test to that parent as it depends on a new payload field.",
+    "Check the v2 handler spec and actual authenticated endpoint sequence, including integer deletion, ID deletion, SolrJ serialization and persisted state, as covered by the named standalone test. The test does not cover HTTP introspection or controlled concurrent edits; report those limits. Investigate any failures before attributing them to the patch or environment.",
+    "Publish receipt records/receipt/pr5320-v2-contract-linux-gate-r2-20261113-receipt.json with all proof legs, commands, actual results and evidence locations."
+  ],
+  "source": {
+    "branch": "pr-5320-v2-contract",
+    "contributor_parent": "5fa5513038a7cf9318ed800423d8a44064d4c0e3",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes_gate": "records/gate/pr5320-v2-contract-linux-gate-20261113.json",
+  "type": "gate"
+}
