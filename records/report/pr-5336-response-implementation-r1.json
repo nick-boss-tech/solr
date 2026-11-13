@@ -1,0 +1,6 @@
+{
+  "id": "pr-5336-response-implementation-r1",
+  "job": "pr-5336-response-followup",
+  "summary": "Implemented response format assertions and qualified SolrJ compatibility wording. Pushed fork branch pr-5336-response-followup at 347bac0a36b71a838e101cc937ce91b850745557, parent 96df2d214560949cb8984b16aad1a2b7f47ca7d7. Diff whitespace check passed; Windows host ran no Gradle. Linux proof pending in records/assignment/pr-5336-response-gate-r1.json and records/gate/pr-5336-response-gate-r1.json. No public comment posted.",
+  "type": "report"
+}
