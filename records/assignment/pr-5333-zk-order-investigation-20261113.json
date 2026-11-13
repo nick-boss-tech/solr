@@ -1,0 +1,22 @@
+{
+  "claim_path": "records/claim/pr-5333-zk-order-investigation-20261113.json",
+  "contributor_head": "65c2d85f77017a951f20dc110d71bf14786c6694",
+  "deliverables": [
+    "Reconcile live PR and fork heads, ownership and discussion before claiming; do not duplicate work.",
+    "Reproduce or disprove the proposed case with an actual embedded ZooKeeper host configured through a supported nonliteral setting, another local node, controlled PID-file ordering, and fresh logs showing command lines, role and stop sequence. Diagnose startup failures rather than treating them as proof.",
+    "Investigate whether portable Unix/macOS detection can reflect actual effective state including environment, deprecated property aliases, overrides, unavailable process inspection, PID reuse and permissions, without adding a risky runtime dependency or relying on unauthenticated endpoints.",
+    "Report precise setup, evidence, result and minimal implementation options. If a fix is established, prepare and push a scoped contributor-ancestry branch and request a separate exact-head Linux gate with fail-before and pass-after proof. Do not post a public comment without authorization."
+  ],
+  "id": "pr-5333-zk-order-investigation-20261113",
+  "intended_host": "Linux",
+  "job": "pr-5333-zk-order-investigation-20261113",
+  "phase": "reproduction and design, not a passing gate",
+  "report_path": "records/report/pr-5333-zk-order-investigation-20261113.json",
+  "source": {
+    "branch": "pr-5333-shutdown-doc",
+    "head": "56694443bf5bc250d15ba570fde91cdf77a5eaa7",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Reproduce alternate embedded ZooKeeper shutdown ordering and investigate safe fix",
+  "type": "assignment"
+}
