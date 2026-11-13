@@ -1,0 +1,14 @@
+{
+  "evidence": "records/receipt/pr5320-v2-contract-linux-gate-r4-20261113-receipt.json and records/evidence/pr5320-v2-contract-linux-gate-r4-20261113-interim-evidence.txt; executor continues carried proof legs on the old head",
+  "id": "pr5320-v2-contract-implementation-r5-20261113",
+  "intended_host": "Windows",
+  "job": "pr5320-v2-contract-implementation-r5-20261113",
+  "source": {
+    "branch": "pr-5320-v2-contract",
+    "head": "63188a804067b87ed16d6d205d11824532d2d086",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr5320-v2-contract-implementation-r4-20261113",
+  "summary": "Apply Linux gate tidy output and replace forbidden singletonList in the test",
+  "type": "assignment"
+}
