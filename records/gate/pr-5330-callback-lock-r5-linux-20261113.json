@@ -1,0 +1,22 @@
+{
+  "branch": "pr-5330-test-fix-20261113",
+  "contributor_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+  "environment": "Linux JDK 21 clean isolated checkout; record host, toolchain and source status",
+  "head": "1712a7dcbdd25cd24d1ec12336019c94cbdfedbf",
+  "id": "pr-5330-callback-lock-r5-linux-20261113",
+  "job": "pr-5330-callback-lock-r5-linux-20261113",
+  "phase": "round 5",
+  "repository": "nick-boss-tech/solr",
+  "requirements": [
+    "Reconcile previously claimed round-2 gate and executor before overlapping work. Confirm exact remote head and contributor ancestry; retain fresh logs, commands, exits and JUnit XML with counts and skips.",
+    "Run ./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.update.SolrCmdDistributorTest with a recorded seed; repeat the focused stall methods under multiple seeds. Require the independent finish, ordered-operation, retry and late-callback tests to execute. Run ./gradlew tidy and ./gradlew check -x test; tracked formatting changes require committed successor and new gate.",
+    "Run testStalledClientIgnoresLateCallbacks with the immediately preceding production implementation overlaid while preserving the test. Require bounded TimeoutException or assertion showing the callback could not acquire the client monitor; a compilation or setup error is not proof. Restore exact head and show success. Separately exercise real successful and failed network runner callbacks while a concurrent blockUntilFinished is waiting; use bounded controlled synchronization and collect evidence that both runner and flush complete. The permanent monitor-level test is not itself an end-to-end runner test.",
+    "Retain relevant tests in executable disposable overlays to demonstrate original finish lost-error bug and round-3 ordered-operation regression on old production. Report exact failing assertions and limitations; timeouts, compile failures and skips do not prove behavior.",
+    "Validate atomic drain under a controlled interleaving and compare old snapshot-and-clear implementation; demonstrate that an error added between old snapshot and clear is preserved by the new implementation. Check real retries and ensure no commit or DBQ is submitted after an incomplete flush.",
+    "Review and test callbackLock ordering and synchronization, concurrent success and stall, duplicate errors, multiple stalled clients and late callbacks; assess the consequences of queued writes still running when a replica enters recovery. If any concern remains, do not mark clean. The callback lock repair does not cancel running work.",
+    "No source changes or pushes during gate; report failures for a successor implementation. No public comment."
+  ],
+  "supersedes": "records/gate/pr-5330-callback-r4-linux-20261113.json",
+  "type": "gate",
+  "verdict_policy": "Pass requires all named positive checks and discriminating proofs, no skips or unresolved correctness concern. Do not present the synthetic monitor test alone as full network or lifecycle proof."
+}
