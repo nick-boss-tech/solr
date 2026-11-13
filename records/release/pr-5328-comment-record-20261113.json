@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "Comment URL and exact heads recorded in report; no executor started.",
+  "id": "pr-5328-comment-record-20261113",
+  "job": "pr-5328-comment-record-20261113",
+  "reason": "Comment readback recorded",
+  "type": "release"
+}
