@@ -1,0 +1,10 @@
+{
+ "claimed": "2026-11-12T19:10:06-07:00",
+ "claimer": "phone-agent",
+ "head": "5b3693c44ca057dc42addb43af97c168634d6301",
+ "host": "linux",
+ "id": "pr-5075-forbidden-api-regate-linux-20261113",
+ "job": "pr-5075-forbidden-api-regate-linux-20261113",
+ "note": "Live fork branch solr-5939-submit verified at the gate head 5b3693c4 by git ls-remote at claim time. The Windows forbidden-API repair job is already reported and released; no conflicting claim exists for this Linux regate.",
+ "type": "claim"
+}
