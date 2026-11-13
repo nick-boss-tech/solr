@@ -1,0 +1,23 @@
+{
+  "environment": "Linux JDK 21, Chrome, ChromeDriver, Selenium; full checkout and host build lock",
+  "head": "cf35bd49fab19751af9afb728ef83076ae521f09",
+  "id": "solr-18619-review-fixes-linux-gate-r3",
+  "job": "solr-18619-review-fixes-linux-gate-r3",
+  "phase": "pre-submission round 3 after test readiness repair",
+  "receipt_path": "records/receipt/solr-18619-review-fixes-linux-gate-r3.json",
+  "requirements": [
+    "Run every positive command and six mutation proof legs from https://github.com/nick-boss-tech/solr/blob/95e2574f5091fbf1425fd9bfc4cef98c746b42f6/gates/solr-18619-request-targeting-round-2.md at this head with seed 18619C0DE, including webapp node screens, named logging methods, standalone, picker and auth neighbors, proxy/auth core neighbors, tidy and root check -x test. Use actual XML counts rather than historical totals. Run reference-guide checks and changelog validation.",
+    "Add positive run of org.apache.solr.webapp.AdminUiLoggingScreenTest.testAllNodeLogsWithoutNodeSelection with the same Selenium JVM flags and seed. AdminUiNodeScreensTest whole-class run includes testCloudNodesIgnoreOutOfOrderSystemInfo. Require all selected tests to execute with no skips, errors, failures or thread leaks.",
+    "For fail-before use isolated checkouts at this candidate head and retain its new tests. Restore only solr/webapp/web/index.html from f2cab615c5ba08cf83d11fe5ae4fc3a0d0b8d7bb, run testAllNodeLogsWithoutNodeSelection, and require failure at the explicit All nodes must be available visibility assertion. Separately restore only solr/webapp/web/js/angular/controllers/cloud.js from f2cab615c5ba08cf83d11fe5ae4fc3a0d0b8d7bb, run testCloudNodesIgnoreOutOfOrderSystemInfo, and require its explicit assertion rejecting a stale 503 to fail. A timeout, compile error, skip, setup failure or missing UI does not count as intended fail-before proof.",
+    "In an additional isolated mutation keep the candidate guard for the failure callback but remove only the success callback generation guard. Run testCloudNodesIgnoreOutOfOrderSystemInfo and require its new-versus-old response assertion to fail, proving the second ordering case independently.",
+    "Record exact commands, revisions, browser/toolchain and NODE_ENV, times, exits, fresh logs/XML, precise mutation diffs and assertion failures, remote head and final clean tree. Investigate failures before rerun. Any source or formatting change requires a new committed and pushed head and superseding gate."
+  ],
+  "source": {
+    "baseline": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+    "branch": "solr-18619-targeting-prep",
+    "repository": "nick-boss-tech/solr",
+    "review_fix_base": "f2cab615c5ba08cf83d11fe5ae4fc3a0d0b8d7bb"
+  },
+  "supersedes": "records/assignment/solr-18619-review-fixes-linux-gate-r2.json and records/gate/solr-18619-prep-linux-gate-r1.json",
+  "type": "gate"
+}
