@@ -1,0 +1,19 @@
+{
+  "claim_path": "records/claim/solr-18619-review-fixes-linux-gate-r2.json",
+  "gate_id": "solr-18619-review-fixes-linux-gate-r2",
+  "gate_record": "records/gate/solr-18619-review-fixes-linux-gate-r2.json",
+  "id": "solr-18619-review-fixes-linux-gate-r2",
+  "intended_host": "Linux with JDK 21, Chrome, ChromeDriver and Selenium",
+  "job": "solr-18619-review-fixes-linux-gate-r2",
+  "phase": "pre-submission round 2 after review fixes",
+  "receipt_path": "records/receipt/solr-18619-review-fixes-linux-gate-r2.json",
+  "source": {
+    "baseline": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+    "branch": "solr-18619-targeting-prep",
+    "head": "244b2d7754f47bb8835dd38fe560cb405db9a288",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify the SOLR-18619 migration and both pre-gate review fixes on the pushed head",
+  "supersedes": "records/gate/solr-18619-prep-linux-gate-r1.json at f2cab615c5ba08cf83d11fe5ae4fc3a0d0b8d7bb; that job remains held and is not evidence for the new head",
+  "type": "assignment"
+}
