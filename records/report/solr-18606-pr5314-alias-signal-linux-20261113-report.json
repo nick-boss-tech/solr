@@ -1,0 +1,71 @@
+{
+  "alias_gate": {
+    "round1": {
+      "reason": "The non-test root check found only two Spotless formatting violations; the focused tests and mutation leg had passed. This failed receipt was retained and not rewritten as green.",
+      "receipt": "records/receipt/solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b-r1-receipt.json",
+      "verdict": "failed"
+    },
+    "round2": {
+      "assignment": "records/assignment/solr-18606-pr5314-alias-signal-linux-gate-r2-20261113.json",
+      "baseline_results": "Seed 18606CAFE: the path-specific test passed 1/1 and the alias HTTP test passed 1/1, both with zero failures/errors/skips.",
+      "claim": "records/claim/solr-18606-pr5314-alias-signal-linux-gate-r2-20261113.json",
+      "coverage_limits": "The root check excludes all test tasks; the two targeted tests and mutation legs are separate proof. Other tests were not run. Docker-dependent tests were unrun, and no Docker was installed or used. Antora/site/link tasks were excluded and remain unrun.",
+      "evidence": "records/evidence/solr-18606-pr5314-alias-signal-linux-gate-r2-20261113-evidence.json",
+      "evidence_sha256": "f4751a53293995a9f0a58761275b0147d3fc4c392c89aca12c9b74ca9e755869",
+      "evidence_url_expiration": "2027-11-13T18:58:17Z",
+      "gate": "records/gate/solr-18606-pr5314-alias-signal-linux-gate-2dbfc9f32aa-r2.json",
+      "mutation_results": "Expected failure on the precise missing alias state path; the legacy global-metrics assertion passed 1/1 under the same mutation; source was restored cleanly.",
+      "receipt": "records/receipt/solr-18606-pr5314-alias-signal-linux-gate-r2-20261113-receipt.json",
+      "root_check": "./gradlew --no-daemon check -x test -x :solr:docker:check -x :solr:solr-ref-guide:check passed at the exact head (515 actionable tasks: 376 executed, 139 up-to-date). Dry run reported 5 tasks, zero active Docker check/build tasks, and zero active Antora/site/link tasks.",
+      "verdict": "passed"
+    }
+  },
+  "alias_signal_findings": {
+    "behavioral_limit": "The fixture uses a single local ZkTestServer. It verifies the client/provider read behavior and exact failure observation, not multi-node ZooKeeper ensemble or follower-lag behavior.",
+    "client_session_scope": "This observes calls made through one SolrZkClient instance only. It is not a process-wide, session-wide, or cluster-wide signal and does not capture other clients or raw ZooKeeper access that bypasses this instance.",
+    "false_positive_scope": "The recorder is instance-scoped and the assertion is exact-path scoped, so unrelated clients and unrelated ZK paths cannot trigger it. A different operation on the same client that reads the same alias state path during the observation window could still be recorded; the test clears attempts immediately before the provider call and uses a unique test alias to limit that risk.",
+    "maintenance_cost": "Low and test-local: a small SolrZkClient subclass, a ReadAttempt record, a thread-safe CopyOnWriteArrayList, one ZkTestServer fixture, and an explicit positive control. No production metric or logging changes are introduced.",
+    "mutation_evidence": "The new observer reports NoNodeException at /collections/target_testKnownAliasDoesNotReadAliasCollectionState_alias/state.json when the guard is removed; the same test's positive control records the same exact logical path and failure type.",
+    "old_metric_limitation": "Under a mutation that removes only the known-alias guard, the original global-metrics test passes 1/1 while the new path-specific test fails. The global metric can be affected by unrelated client reads and therefore is not sufficient evidence that this exact alias-state path was not read.",
+    "stability": "The signal observes the SolrZkClient getData API directly and does not parse ZooKeeper debug-log text or depend on log formatting. It is stable for the current call path, but the test should be updated if the provider moves to another getData overload or bypasses SolrZkClient."
+  },
+  "id": "solr-18606-pr5314-alias-signal-linux-20261113-report",
+  "implementation": {
+    "changed_files": [
+      "solr/solrj-zookeeper/src/test/org/apache/solr/client/solrj/impl/ZkClientClusterStateProviderTest.java",
+      "solr/solrj/src/test/org/apache/solr/client/solrj/impl/CloudHttp2SolrClientTest.java"
+    ],
+    "description": "The new ZkClientClusterStateProviderTest uses a RecordingSolrZkClient that overrides getData(String, Watcher, Stat), records path plus success/failure, and attaches to the single SolrZkClient instance used by the reader/provider. A direct missing-path positive control observes NoNodeException for the exact alias collection-state path; after clearing records, probing a known alias must not read that path. The HTTP integration test still resolves the alias and repeats queries, but no longer relies on a JVM-wide metric delta.",
+    "published": "Fast-forwarded the fork branch from 33e3f8b8599ea12fad0456ce0444d3a24a4affe6 to 2dbfc9f32aa34cef586f32c7b473a5cd689e8705; the live remote head was verified. No PR description or comments were changed.",
+    "scope": "Test-only; no production code or instrumentation changed."
+  },
+  "job": "solr-18606-pr5314-alias-signal-linux-20261113",
+  "overall_limits_and_next_step": [
+    "The alias proof is a deterministic single-client/single-server read-path test, not a production metric and not a multi-node ensemble proof.",
+    "The gate is green only for the exact named proof legs and explicitly excluded non-test root check; the full test suite, Docker-dependent tests, and Antora/site-link checks were not run.",
+    "If the owner wants the diagnostic sync behaviors made durable, create a separate scoped assignment and exact-head gate for the two recommended test groups."
+  ],
+  "ownership_and_refs": {
+    "alias_branch": "nick-boss-tech/solr:solr-18606-submit",
+    "alias_source_base_head": "33e3f8b8599ea12fad0456ce0444d3a24a4affe6",
+    "alias_source_final_head": "2dbfc9f32aa34cef586f32c7b473a5cd689e8705",
+    "original_assignment": "records/assignment/solr-18606-pr5314-alias-signal-linux-20261113.json",
+    "original_claim": "records/claim/solr-18606-pr5314-alias-signal-linux-20261113.json",
+    "original_owner": "phone-agent-2",
+    "sync_source_head_reviewed": "d17427ca2cf164f75d3072b8a07767e1e38f5cc4"
+  },
+  "recorded": "2026-11-13T12:02:00-07:00",
+  "status": "completed",
+  "summary": "Added and gated a test-only, path- and client-specific regression for the known-alias failed-read bug. The old global-metrics assertion was reproduced as a false negative under guard removal. The requested sync diagnostic was reviewed: its four behavioral checks pass on one local ZkTestServer, but do not establish ensemble-lag behavior; promotion to durable tests is a separate follow-up.",
+  "sync_coverage_assessment": {
+    "disposable_probe": "The archived disposable SyncSplitDiagnosticProbeTest passed 4/4 at seed 18606CAFE. It tested: (1) a withheld Curator sync callback keeps sync blocked past 200 ms and a CONNECTIONLOSS callback maps to KeeperException.ConnectionLossException; (2) interrupting a callback-waiting thread returns InterruptedException promptly (within 10 s, with a longer client timeout); (3) forceUpdateCollection calls sync(COLLECTIONS_ZKNODE) before reading the collection state, verified with Mockito InOrder against one live ZkTestServer; and (4) while sync is blocked, another thread acquires getUpdateLock within 5 s, and a CONNECTIONLOSS callback surfaces before any state read.",
+    "durable_test_recommendation": "For a minimal maintained follow-up, add callback-controlled tests beside SolrZkClientTest for waiting, callback error mapping and interruption, plus a focused ZkStateReader/forceUpdateCollection test for sync-before-state-read ordering and not holding getUpdateLock across the wait. Use latches/controlled callbacks to avoid timing-only assertions where possible. Keep the alias regression patch separate.",
+    "ensemble_limit": "The diagnostic probe and existing smoke test use one local ZkTestServer; they do not prove follower lag, multi-node ensemble behavior, or that sync repairs a stale follower view. A multi-server ensemble test is needed only if those distributed semantics are the target. No such claim is made here.",
+    "existing_tests": "The prior exact-head gate reports SolrZkClientTest 8/8 (including testSync), ZkStateReaderTest 16/16, and TestInPlaceUpdatesDistrib 1/1, with zero failures/errors/skips. The existing branch testSync is a single-server smoke test.",
+    "implementation_status": "No sync source or durable sync test change was made on this assignment; findings are a separate follow-up recommendation.",
+    "prior_evidence_archive_sha256": "aff95f32da514e191823d74a2ebebf5e81e1969523c8e3e9e5081157dfc808a4",
+    "prior_receipt": "records/receipt/solr-18606-pr5314-split-sync-linux-r2-20261112-receipt.json",
+    "prior_source_head": "d17427ca2cf164f75d3072b8a07767e1e38f5cc4"
+  },
+  "type": "report"
+}
