@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "Implementation committed and pushed; no test executor was started on Windows. Report records source head and gate handoff.",
+  "id": "pr-5328-copy-vector-impl",
+  "job": "pr-5328-copy-vector-impl",
+  "reason": "Implementation complete; Linux gate handoff",
+  "type": "release"
+}
