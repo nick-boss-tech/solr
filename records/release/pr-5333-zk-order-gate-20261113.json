@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "records/report/pr-5333-zk-order-gate-20261113-report.json; records/receipt/pr-5333-zk-order-gate-20261113.json; records/evidence/pr-5333-zk-order-gate-20261113-evidence.json (bundle SHA-256 2ff07a95b7014bea33eff4db4fb143df3038b4269a0d928deb7fa683011ead1d). The owner stop record captures termination at 2026-11-13T16:48:04-07:00 and final verification at 2026-11-13T16:48:53-07:00: no Gradle/Bats/Solr/ZooKeeper test processes or listeners remained, both required Gradle locks were free, and 55.03% of inodes were free.",
+  "id": "pr-5333-zk-order-gate-20261113",
+  "job": "pr-5333-zk-order-gate-20261113",
+  "reason": "Owner-directed stop of the test-only baseline after Bats case 3 remained blocked waiting for the local node-role endpoint. The required shutdown-order assertion was never reached, so this is not valid fail-before proof. No fixed-head suites, tidy, or root check were run after the owner stop. Release the phone-agent-2 claim with gate status incomplete; no pass is claimed.",
+  "type": "release"
+}
