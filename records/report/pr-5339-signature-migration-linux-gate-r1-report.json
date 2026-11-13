@@ -1,0 +1,60 @@
+{
+  "evidence_pointer": "records/evidence/pr-5339-signature-migration-linux-gate-r1-evidence.json",
+  "executor_stop": {
+    "both_host_locks_free": true,
+    "free_inode_percent": 44,
+    "gradle_or_chromedriver_process_remaining": false,
+    "state": "stopped"
+  },
+  "gate": "pr-5339-signature-migration-linux-gate-r1",
+  "head": "6d886caf1b2915c9318b1419386e5181dd154ad0",
+  "id": "pr-5339-signature-migration-linux-gate-r1-report",
+  "job": "pr-5339-signature-migration-linux-gate-r1",
+  "limits": [
+    "No source commit or push was made.",
+    "No fail-before proof was required by this documentation-only gate.",
+    "No tests were run on the newer branch child 83b2df0977499337bc88daaba8eb872a3835f31b."
+  ],
+  "results": [
+    {
+      "command": "./gradlew :solr:core:test --tests org.apache.solr.update.processor.TextProfileSignatureTest -Ptests.seed=5339",
+      "errors": 0,
+      "evidence": "focused-test.log and focused-test.xml in the evidence archive",
+      "exit_code": 0,
+      "failures": 0,
+      "leg": "focused test",
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "command": "./gradlew tidy",
+      "exit_code": 0,
+      "leg": "tidy",
+      "result": "No tracked or non-ignored changes."
+    },
+    {
+      "command": "./gradlew check -x test --dry-run --no-daemon --console=plain",
+      "exit_code": 0,
+      "leg": "root check task graph only",
+      "result": "Dry-run task graph only; the actual root check was not executed."
+    },
+    {
+      "leg": "buildLocalSite",
+      "reason": "Antora site-build excluded under the owner's standing Solr gate instruction.",
+      "result": "Not run"
+    },
+    {
+      "leg": "actual root check -x test",
+      "reason": "Owner requested stopping the gate before it was executed.",
+      "result": "Not run"
+    }
+  ],
+  "source_state": {
+    "assigned_head": "6d886caf1b2915c9318b1419386e5181dd154ad0",
+    "branch_at_final_check": "83b2df0977499337bc88daaba8eb872a3835f31b",
+    "note": "The branch advanced to a child commit during the run. All recorded test evidence is for the assigned SHA only; the child was not tested."
+  },
+  "summary": "The owner stopped the gate while the root check task graph was being inspected. Only the assigned-head focused test, tidy, and a check dry-run completed; the actual root check and site build were not run.",
+  "type": "report",
+  "verdict": "incomplete"
+}
