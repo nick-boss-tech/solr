@@ -1,0 +1,21 @@
+{
+  "branch": "pr-5330-test-fix-20261113",
+  "contributor_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+  "environment": "Linux JDK 21 clean isolated checkout; record host, JDK, source status",
+  "head": "f7e638b2d6b57fcbdde3122120eedac2694ed40c",
+  "id": "pr-5330-retry-serial-r7-linux-20261113",
+  "job": "pr-5330-retry-serial-r7-linux-20261113",
+  "phase": "round 7",
+  "repository": "nick-boss-tech/solr",
+  "requirements": [
+    "Reconcile previously claimed r2 Linux executor and receipt before overlapping work. Confirm exact remote head and ancestry. Capture commands, exit codes, fresh logs, JUnit XML, counts and skips.",
+    "Run ./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.update.SolrCmdDistributorTest with recorded seed; require testErrorCallbacksDoNotClassifyRetries, testStallReportedWhileResponseBodyIsBlocked, testStalledClientIgnoresLateCallbacks, testFinishKeepsErrorsAfterStall and testStallKeepsErrorsFromOtherNodes to execute. Repeat network stall cases with multiple seeds. Run ./gradlew tidy and ./gradlew check -x test; tracked formatting change needs committed successor and new gate.",
+    "Retain new tests unchanged in executable disposable overlays at preceding production head 6ad35b2d9be19334e7df512d7a071e5fb237b12a; require the callback-classification assertion to fail at runtime and pass at this head. Explicitly check that actual failing requests are resent, leader destination decisions occur in one path, and normal leader and rollup RF outcomes remain correct when callback failure no longer calls trackRequestResult(false). Save commands, diffs, XML and logs.",
+    "Prove blocked-body and client-monitor fixes against appropriate previous production with unchanged bounded tests; establish actual successful and failed network runner callbacks complete while a concurrent flush waits. Distinguish expected bounded assertion/timeout from unrelated harness timeout and compile failure.",
+    "Demonstrate original finish lost-error and ordered-operation regressions using executable old-production overlays; confirm no commit or DBQ request is sent across incomplete flush. Prove the atomic error drain with a controlled append at the old snapshot/clear boundary.",
+    "Review multiple stalled clients, suppressed callbacks, RF and error attribution, queued writes after stall and replica recovery. Active runners are fenced, not cancelled; no clean verdict with unresolved material safety concern. No source edits or public comments; repair failures via separate exact-head successor."
+  ],
+  "supersedes": "records/gate/pr-5330-response-lock-r6-linux-20261113.json",
+  "type": "gate",
+  "verdict_policy": "Pass requires every positive check and discriminating fail-before leg, no skips and no unresolved material correctness concern."
+}
