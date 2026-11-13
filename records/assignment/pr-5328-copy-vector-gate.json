@@ -1,0 +1,18 @@
+{
+  "claim_path": "records/claim/pr-5328-copy-vector-gate.json",
+  "contributor_head": "c295e8c855d35c9edcf0fcf75de04d2f24803db6",
+  "gate_id": "pr-5328-copy-vector-gate",
+  "gate_record": "records/gate/pr-5328-copy-vector-gate.json",
+  "id": "pr-5328-copy-vector-gate",
+  "intended_host": "Linux",
+  "job": "pr-5328-copy-vector-gate",
+  "phase": "implementation verification",
+  "receipt_path": "records/receipt/pr-5328-copy-vector-gate-receipt.json",
+  "source": {
+    "branch": "pr-5328-raw-copy-target",
+    "head": "fd0a39959f0c4032a1d8bb58d000d5608801cae0",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Linux proof for PR 5328 raw vector copy target filtering",
+  "type": "assignment"
+}
