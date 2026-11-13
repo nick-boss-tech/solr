@@ -1,0 +1,18 @@
+{
+  "claim_path": "records/claim/pr-5337-cli-exit-gate-r1.json",
+  "gate_id": "pr-5337-cli-exit-gate-r1",
+  "gate_record": "records/gate/pr-5337-cli-exit-gate-r1.json",
+  "id": "pr-5337-cli-exit-gate-r1",
+  "intended_host": "Linux gate host",
+  "job": "pr-5337-cli-exit-gate-r1",
+  "phase": "round 1",
+  "receipt_path": "records/receipt/pr-5337-cli-exit-gate-r1.json",
+  "source": {
+    "branch": "pr-5337-cli-exit-fixes",
+    "contributor_parent": "944f3ec319caee19a8061feb227ee20b4cd8dcbe",
+    "head": "ee35178851befab053e7f6ac4d20c866eed7a293",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Linux proof for PR 5337 CLI exit follow-up",
+  "type": "assignment"
+}
