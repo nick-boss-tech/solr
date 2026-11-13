@@ -1,0 +1,15 @@
+{
+  "id": "solr-18619-real-logs-test-20261113",
+  "intended_host": "Windows test implementation; Linux gate for browser and build proof",
+  "job": "solr-18619-real-logs-test-20261113",
+  "prior_gate": "records/gate/solr-18619-review-fixes-linux-gate-r3.json",
+  "review": "records/report/solr-18619-review-fixes-linux-gate-r3-second-review.json",
+  "source": {
+    "branch": "solr-18619-targeting-prep",
+    "head": "cf35bd49fab19751af9afb728ef83076ae521f09",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "solr-18619-review-fixes-20261113",
+  "summary": "Add deterministic real-response aggregate log browser coverage for SOLR-18619, push and request exact-head Linux proof",
+  "type": "assignment"
+}
