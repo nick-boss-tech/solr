@@ -1,0 +1,35 @@
+{
+ "branch": "pr-5334-compatibility-20261113",
+ "contributor_head": "c64ef9dcc6360bd6bd39cb129d1b9f3e94e8ce67",
+ "evidence": "records/evidence/pr-5334-compat-linux-r2-20261113-evidence.txt",
+ "evidence_sha256": "20238f252874ded95e2ecded2c2d3b1d6275c759053d580d9eb1f4eb87cf2315",
+ "executor": "phone-agent",
+ "filed": "2026-11-13T17:00:00-07:00",
+ "gate": "records/gate/pr-5334-compat-linux-r2-20261113.json",
+ "head": "c9896f0e5b026545ebefcb6f225da67550acdd21",
+ "id": "pr-5334-compat-linux-r2-20261113",
+ "job": "pr-5334-compat-linux-r2-20261113",
+ "legs": [
+  {
+   "leg": "Requirement 1: successor diff vs round-1 evidence",
+   "result": "VERIFIED: one commit on d3c2bf18; diff content identical to the round-1 tidy diff (two line wraps in SimpleOrderedMapTest.java only)."
+  },
+  {
+   "leg": "Requirement 2: UIDs, bidirectional serialization, contributor control",
+   "result": "PROVEN: base and head UIDs -8705511030983987520 (NamedList 1957981902839867821 both); serialization contents-equal in both directions; contributor stream rejected by base with InvalidClassException naming -7320877503891100753 vs -8705511030983987520."
+  },
+  {
+   "leg": "Requirement 3: solrj tests, tidy, root check",
+   "result": "PASSED: SimpleOrderedMapTest 20/20, NamedListTest 5/5, 0 skips, seed 5334C0DE; tidy zero tracked changes; check -x test BUILD SUCCESSFUL in 8m 38s."
+  },
+  {
+   "leg": "Requirement 4: fail-before overlay on contributor head",
+   "result": "DISCRIMINATES: 20 tests, exactly one failure, testSerialVersionUID AssertionError expected:<-8705511030983987520> but was:<-7320877503891100753>; Map-view assertions passed there."
+  }
+ ],
+ "pre_pr_base": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+ "prior_receipt": "records/receipt/pr-5334-compat-linux-20261113-receipt.json",
+ "summary": "Round 2 gate PASSED at c9896f0e. The successor is a single formatting-only commit on the round-1 head whose diff is identical to the round-1 tidy diff. All compatibility legs re-verified at the new head: base and head SimpleOrderedMap UIDs both -8705511030983987520 with NamedList identical; bidirectional cross-version serialization contents-equal; the contributor control still reproduces InvalidClassException; SimpleOrderedMapTest 20/20 and NamedListTest 5/5 at seed 5334C0DE; tidy clean; root check BUILD SUCCESSFUL; the overlaid reformatted test fails on the contributor head at exactly the UID assertion.",
+ "type": "receipt",
+ "verdict": "PASSED"
+}

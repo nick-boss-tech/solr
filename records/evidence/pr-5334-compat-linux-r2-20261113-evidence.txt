@@ -1,0 +1,18 @@
+PR 5334 compatibility gate round 2 evidence (phone-agent, Linux host)
+Job: pr-5334-compat-linux-r2-20261113; gate: records/gate/pr-5334-compat-linux-r2-20261113.json; prior receipt: records/receipt/pr-5334-compat-linux-20261113-receipt.json
+Offered head: c9896f0e5b026545ebefcb6f225da67550acdd21 (branch pr-5334-compatibility-20261113); contributor head c64ef9dcc6360bd6bd39cb129d1b9f3e94e8ce67; pre-PR base 0ea013e782f747cc94e1504f8077f813d2ddcca8. JDK Temurin 21.0.12.1+1; Gradle commands ran through the host Gradle 9.7.0 wrapper in place of ./gradlew; seed 5334C0DE where a seed applies. Verdict: PASSED.
+
+== Requirement 1: successor diff and ancestry
+The r2 head is a single commit whose parent is the round-1 head d3c2bf186fda98eceb64e6b1953997a5c84a066d. Its diff against that head touches only solr/solrj/src/test/org/apache/solr/common/util/SimpleOrderedMapTest.java and its content lines are identical to the tidy diff filed in the round-1 evidence: the testSerialVersionUID assertEquals wrap and the assertThrows wrap in the immutable-copy test (blob transition 76c29abda5 to 2d000aa09a in both). No production code changed between the rounds.
+
+== Requirement 2: UIDs and bidirectional serialization, with contributor control
+Measured fresh at this gate on rebuilt classes: exact base SimpleOrderedMap UID -8705511030983987520 and NamedList UID 1957981902839867821; offered head SimpleOrderedMap UID -8705511030983987520 and NamedList UID 1957981902839867821. Same probe, values, and method as round 1.
+Cross-version serialization in separate JVMs with separate classpaths, same representative payload as round 1 (null keys, null values, nested SimpleOrderedMap and NamedList, list values, empty map): base writes and the offered head reads with contents equal; the offered head writes and the base reads with contents equal.
+Contributor control: the base JVM reading the contributor-written stream from round 1 again throws java.io.InvalidClassException: SimpleOrderedMap; local class incompatible: stream classdesc serialVersionUID = -7320877503891100753, local class serialVersionUID = -8705511030983987520.
+
+== Requirement 3: named tests, tidy, root check
+:solr:solrj:cleanTest :solr:solrj:test --tests SimpleOrderedMapTest --tests NamedListTest with -Ptests.seed=5334C0DE exited 0. Fresh JUnit: SimpleOrderedMapTest 20 tests, 0 skipped, 0 failures; NamedListTest 5 tests, 0 skipped, 0 failures.
+Tidy exited 0 with zero tracked changes at this head. Root check (check -x test) exited 0, BUILD SUCCESSFUL in 8m 38s; the round-1 spotless failure is gone.
+
+== Requirement 4: fail-before on the contributor head
+The offered head's reformatted SimpleOrderedMapTest.java was copied unchanged onto the contributor checkout (only modified file) and run with the same seed: 20 tests, exactly 1 failure: testSerialVersionUID, java.lang.AssertionError: expected:<-8705511030983987520> but was:<-7320877503891100753>. An assertion failure, not compilation, startup, timeout or skip. The Map-view assertions passed there, as the gate permits. The contributor checkout was restored clean afterwards.
