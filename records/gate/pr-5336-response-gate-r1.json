@@ -1,0 +1,15 @@
+{
+  "environment": "Linux gate host, clean checkout; do not change the source head",
+  "head": "347bac0a36b71a838e101cc937ce91b850745557",
+  "id": "pr-5336-response-gate-r1",
+  "job": "pr-5336-response-gate-r1",
+  "phase": "round 1",
+  "receipt_path": "records/receipt/pr-5336-response-gate-r1.json",
+  "requirements": [
+    "Run org.apache.solr.cloud.OverseerStatusTest and org.apache.solr.core.snapshots.TestSolrCloudSnapshots with fixed seed 5336C0DE; enable nightly tests for the latter and force overseer-based collection API execution so the new overseer assertions execute. Record exact commands, properties, fresh logs and JUnit XML, including proof the assertions ran.",
+    "Run ./gradlew tidy and ./gradlew check -x test. Record commands, exit codes and clean-tree status. If tidy modifies tracked files, stop: changed source requires a new pushed head and superseding gate.",
+    "Coverage-only follow-up: original and added tests can both pass on the contributor head. For fail-before proof, keep the tests unchanged and run executable isolated mutations restoring the original NamedList constructors separately for OverseerStatusCmd and the LISTSNAPSHOTS/CollectionSnapshotMetaData nesting; confirm each relevant JSON assertion fails, with fresh logs/XML and mutation diffs. Do not count compile errors, skips, setup failures or distributed-overseer early return as behavioral failure.",
+    "Investigate any failure before retrying and distinguish setup failures from assertions. Receipt must identify each actual proof leg, source and mutation, and link fresh evidence."
+  ],
+  "type": "gate"
+}
