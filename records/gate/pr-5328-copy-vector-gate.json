@@ -1,0 +1,21 @@
+{
+  "environment": "Linux gate host, clean checkout",
+  "head": "fd0a39959f0c4032a1d8bb58d000d5608801cae0",
+  "id": "pr-5328-copy-vector-gate",
+  "job": "pr-5328-copy-vector-gate",
+  "phase": "implementation verification",
+  "receipt_path": "records/receipt/pr-5328-copy-vector-gate-receipt.json",
+  "requirements": [
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.schema.DenseVectorRetrievalTest -Ptests.seed=5328A11 with fresh logs and XML, including all parameter cases and the new rawVectorCopyTargetsAreFilteredFromRealTimeGet method.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.schema.DenseVectorFieldTest -Ptests.seed=5328A11 with fresh logs and XML.",
+    "Run ./gradlew tidy and ./gradlew check -x test; report formatting changes, do not treat modified tree as proof for this head.",
+    "Fail-before: apply only the new test and schema fixture from the fix onto contributor parent c295e8c855d35c9edcf0fcf75de04d2f24803db6; run the new method with same seed and record assertion failure for indexed copy target, not compile/setup failure.",
+    "Record exact commands, exit codes, test counts, fresh logs/XML and any environment or warning overrides in receipt. No Gradle on Windows."
+  ],
+  "source": {
+    "branch": "pr-5328-raw-copy-target",
+    "head": "fd0a39959f0c4032a1d8bb58d000d5608801cae0",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "gate"
+}
