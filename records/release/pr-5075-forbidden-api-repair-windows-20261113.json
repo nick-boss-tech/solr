@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr5075",
+  "evidence": "records/report/pr-5075-forbidden-api-repair-windows-20261113-report.json; source head 5b3693c44ca057dc42addb43af97c168634d6301; no local test executor was started.",
+  "id": "pr-5075-forbidden-api-repair-windows-20261113",
+  "job": "pr-5075-forbidden-api-repair-windows-20261113",
+  "reason": "Implementation completed and handed off to the Linux gate; implementation worker is stopping.",
+  "type": "release"
+}
