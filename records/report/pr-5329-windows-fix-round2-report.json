@@ -1,0 +1,14 @@
+{
+  "id": "pr-5329-windows-fix-round2-report",
+  "job": "pr-5329-windows-fix-round2",
+  "limitations": "Partial fix: TLS settings persist across configuration rotation and external ZooKeeper connections. Do not publish an offer. Linux proof pending.",
+  "results": "Automatic TLS disables port unification; adds configuration tests and a real startup BATS regression for existing plaintext port, unification, password-file failure, permissions, and secure/plaintext clients. Git diff --check and bash syntax check passed on Windows; no Gradle or tests run.",
+  "source": {
+    "branch": "pr-5329-tls-fixes",
+    "head": "dc3ba7b2e83a0b3e128d6e49964adf8681d9732e",
+    "previous": "7dedae124c252574caaff93cf4bcf2bc1d240fc9",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Pushed TLS listener and coverage improvements",
+  "type": "report"
+}
