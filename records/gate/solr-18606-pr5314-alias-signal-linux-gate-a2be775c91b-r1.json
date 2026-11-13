@@ -1,0 +1,14 @@
+{
+  "environment": "Linux sandbox; OpenJDK 21.0.12; Gradle 9.7.0; no Docker.",
+  "head": "a2be775c91b4279a9ac4f5c80e3219afbaac2bc2",
+  "id": "solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b-r1",
+  "job": "solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b",
+  "phase": "round-1",
+  "requirements": [
+    "Focused path/client-specific alias test with failed-read positive control.",
+    "Guard-removal mutation: new test detects exactly the failed alias collection-state read; legacy metrics assertion remains a demonstrated non-detection.",
+    "Renamed alias integration test retains alias resolution and repeated query coverage.",
+    "Non-test root checks; exclude :solr:docker:check and :solr:solr-ref-guide:check, which remove Docker checks and Antora/site-link tasks."
+  ],
+  "type": "gate"
+}
