@@ -1,0 +1,9 @@
+{
+  "id": "pr-5328-copy-vector-test-followup",
+  "intended_host": "Windows implementation",
+  "job": "pr-5328-copy-vector-test-followup",
+  "source_head": "fd0a39959f0c4032a1d8bb58d000d5608801cae0",
+  "successor_of": "pr-5328-copy-vector-impl",
+  "summary": "Expand raw vector copy-target regression coverage",
+  "type": "assignment"
+}
