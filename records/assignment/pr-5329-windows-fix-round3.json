@@ -1,0 +1,11 @@
+{
+  "existing_gate": "records/gate/pr-5329-tls-fixes-linux-round2.json",
+  "id": "pr-5329-windows-fix-round3",
+  "intended_host": "Windows implementation; Linux proof required",
+  "job": "pr-5329-windows-fix-round3",
+  "note": "Round-two Linux worker may be running proof on the prior immutable head; do not duplicate its execution or treat its result as covering the new head.",
+  "source_head": "dc3ba7b2e83a0b3e128d6e49964adf8681d9732e",
+  "successor_of": "pr-5329-windows-fix-round2",
+  "summary": "Correct post-parse ensemble TLS handling and creation-time password proof",
+  "type": "assignment"
+}
