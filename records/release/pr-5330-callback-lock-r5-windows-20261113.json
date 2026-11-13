@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr-5330-r5",
+  "evidence": "Fork head 1712a7dcbdd25cd24d1ec12336019c94cbdfedbf pushed and verified; Windows implementation stopped, no local test executor started. Report records/report/pr-5330-callback-lock-r5-windows-20261113-report.json.",
+  "id": "pr-5330-callback-lock-r5-windows-20261113",
+  "job": "pr-5330-callback-lock-r5-windows-20261113",
+  "reason": "Fork implementation and gate handoff complete",
+  "type": "release"
+}
