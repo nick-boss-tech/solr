@@ -1,0 +1,13 @@
+{
+  "deliverables": [
+    "fork branch and implementation report",
+    "separate exact-head Linux gate"
+  ],
+  "id": "pr5320-v2-contract-implementation-20261113",
+  "intended_host": "Windows",
+  "job": "pr5320-v2-contract-implementation-20261113",
+  "source_parent": "5fa5513038a7cf9318ed800423d8a44064d4c0e3",
+  "source_pr": "https://github.com/apache/solr/pull/5320",
+  "summary": "Implement a focused v2 authorization API contract follow-up for PR 5320 and request Linux proof",
+  "type": "assignment"
+}
