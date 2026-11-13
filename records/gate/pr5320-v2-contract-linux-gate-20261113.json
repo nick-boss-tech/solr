@@ -1,0 +1,22 @@
+{
+  "environment": "Linux Solr gate host, supported JDK; isolated clean checkout",
+  "head": "d85ce12ebeba577d71c3316d55c8ea1043adb734",
+  "id": "pr5320-v2-contract-linux-gate-20261113",
+  "job": "pr5320-v2-contract-linux-gate-20261113",
+  "phase": "initial follow-up proof",
+  "requirements": [
+    "Confirm fork head and contributor ancestry before execution; do not modify the offered head.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.security.BaseTestRuleBasedAuthorizationPlugin and :solr:core:test --tests org.apache.solr.security.TestExternalRoleRuleBasedAuthorizationPlugin, recording actual counts and fresh test XML/logs.",
+    "Run ./gradlew tidy and ./gradlew check -x test, recording exit status and any environment conditions. If tidy changes tracked files, do not treat this head as passed; report the diff for a new commit and gate.",
+    "Negative proof: on an isolated checkout of contributor parent 5fa5513038a7cf9318ed800423d8a44064d4c0e3, apply only the two new test methods and the JsonSchemaValidator import from the offered commit. Run each method separately. Both should compile and fail on the old schema: object delete rejected and set id absent (the latter may throw a null dereference at the missing id schema). Record the actual failures and fresh XML/logs; a compilation or setup failure is not behavioral proof.",
+    "Inspect the exposed plugin spec and confirm integer and object deletion are accepted by its validator, and the set-permission id is described. The delete schema describes the object id in prose because this validator cannot conditionally apply properties to only the object branch; it does not validate the id property shape. Do not claim a public endpoint or concurrency test was run unless separately executed.",
+    "Publish exact-head receipt at records/receipt/pr5320-v2-contract-linux-gate-20261113-receipt.json with each command, result, evidence locations, failures, limits and host conditions."
+  ],
+  "source": {
+    "branch": "pr-5320-v2-contract",
+    "contributor_parent": "5fa5513038a7cf9318ed800423d8a44064d4c0e3",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes": null,
+  "type": "gate"
+}
