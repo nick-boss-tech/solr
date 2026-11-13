@@ -1,0 +1,24 @@
+{
+  "claim_path": "records/claim/pr-5330-stall-safety-r3-linux-20261113.json",
+  "contributor_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+  "gate_id": "pr-5330-stall-safety-r3-linux-20261113",
+  "gate_record": "records/gate/pr-5330-stall-safety-r3-linux-20261113.json",
+  "host_requirements": [
+    "linux",
+    "jdk21",
+    "Solr Gradle"
+  ],
+  "id": "pr-5330-stall-safety-r3-linux-20261113",
+  "implementation_job": "pr-5330-stall-safety-windows-20261113",
+  "job": "pr-5330-stall-safety-r3-linux-20261113",
+  "phase": "round 3",
+  "receipt_path": "records/receipt/pr-5330-stall-safety-r3-linux-20261113-receipt.json",
+  "source": {
+    "branch": "pr-5330-test-fix-20261113",
+    "head": "c5d4ca375396006460a72e97aa99d34337780580",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify concrete stalled-flush fix and regression coverage for PR 5330",
+  "supersedes": "records/gate/pr-5330-regression-r2-linux-20261113.json",
+  "type": "assignment"
+}
