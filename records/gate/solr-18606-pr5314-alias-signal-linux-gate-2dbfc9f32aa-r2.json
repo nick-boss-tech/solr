@@ -1,0 +1,34 @@
+{
+  "commands": [
+    "./gradlew --no-daemon -Dtests.seed=18606CAFE :solr:solrj-zookeeper:test --tests org.apache.solr.client.solrj.impl.ZkClientClusterStateProviderTest.testKnownAliasDoesNotReadAliasCollectionState",
+    "./gradlew --no-daemon -Dtests.seed=18606CAFE :solr:solrj:test --tests org.apache.solr.client.solrj.impl.CloudHttp2SolrClientTest.testZkAliasRequestsResolveAndQuery",
+    "Guard-removal mutation: remove only the known-alias guard; run the path-specific test; temporarily restore the original metrics-bearing integration test and run it under the same mutation; restore exact committed sources.",
+    "./gradlew --no-daemon check -x test -x :solr:docker:check -x :solr:solr-ref-guide:check",
+    "./gradlew --no-daemon check -x test -x :solr:docker:check -x :solr:solr-ref-guide:check --dry-run"
+  ],
+  "environment": "Linux sandbox; OpenJDK 21.0.12; Gradle 9.7.0; no Docker.",
+  "head": "2dbfc9f32aa34cef586f32c7b473a5cd689e8705",
+  "id": "solr-18606-pr5314-alias-signal-linux-gate-2dbfc9f32aa-r2",
+  "job": "solr-18606-pr5314-alias-signal-linux-gate-r2-20261113",
+  "phase": "round-2",
+  "requirements": [
+    "Focused path-specific baseline passes and its direct failed-read positive control records the exact missing alias-state path with NoNodeException.",
+    "Renamed alias HTTP integration baseline passes and retains alias resolution plus repeated queries.",
+    "Guard-removal mutation is detected only by the path/client-specific observer; the legacy global-metrics check is shown to pass under the same mutation.",
+    "Non-test root check passes at this exact head. Report that -x test excludes all other test tasks; targeted tests are separate proof legs. Never use Docker; explicitly report Docker-dependent tests as unrun and name the Docker and ref-guide exclusions.",
+    "Dry-run confirms the exclusions remove Docker check/build tasks and the Antora/site-link chain. Preserve the exact source head and final worktree cleanliness in the receipt."
+  ],
+  "source": {
+    "base_head": "33e3f8b8599ea12fad0456ce0444d3a24a4affe6",
+    "branch": "solr-18606-submit",
+    "head": "2dbfc9f32aa34cef586f32c7b473a5cd689e8705",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes": {
+    "gate": "solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b-r1",
+    "job": "solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b",
+    "reason": "The round-1 non-test root check stopped on two Spotless formatting violations; top-level tidy applied only formatting changes and the amended source tree is the exact head above.",
+    "receipt": "records/receipt/solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b-r1-receipt.json"
+  },
+  "type": "gate"
+}
