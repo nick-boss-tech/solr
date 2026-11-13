@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-shaninna",
+  "evidence": "records/report/pr5320-v2-contract-implementation-r5-20261113-report.json and records/gate/pr5320-v2-contract-linux-gate-r5-20261113.json; source head 678f805a2a0d2212427d0cfadb11e87c24d122ef",
+  "id": "pr5320-v2-contract-implementation-r5-20261113",
+  "job": "pr5320-v2-contract-implementation-r5-20261113",
+  "reason": "Round 5 formatting and forbidden-API repair completed and handed to a separate Linux gate; implementation worker has stopped.",
+  "type": "release"
+}
