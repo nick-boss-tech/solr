@@ -1,0 +1,12 @@
+{
+  "head": "21379130f426433f163fcd61f0731b8ad51d1412",
+  "id": "pr-5337-windows-proof-r2-result",
+  "job": "pr-5337-windows-proof-r2",
+  "results": "With the owner's explicit Windows Gradle authorization, :solr:packaging:installFullDist completed successfully in 43m 53s using Temurin 21.0.11. The committed test_help_windows.ps1 ran against the resulting solr-11.0.0-SNAPSHOT distribution and exited 0: 26 invocations covering both parser modes, bare and explicit help, both help spellings, the three parent commands and a forced JVM startup failure. Packaged and worktree solr.cmd SHA-256 matched: 9e96992ee4d65e4493b9cd2868e693d865d7b12d0bd67956ebdf758862c5363d. Worktree was clean and fork head unchanged. Earlier unquoted PowerShell dotted property caused a task-selection failure; quoted retry passed. Gradle emitted Windows performance-counter and npm warnings. Local detail: research/pr-5337-windows-proof-r2.md. Linux round 2 receipt at records/receipt/pr-5337-cli-exit-gate-r2.json independently covers Linux legs at this head. Existing Linux hold is not a claim and remains in place pending owner direction.",
+  "source": {
+    "branch": "pr-5337-cli-exit-fixes",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Windows launcher test passed at exact fork head",
+  "type": "report"
+}
