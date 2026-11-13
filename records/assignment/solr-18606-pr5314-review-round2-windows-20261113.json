@@ -1,0 +1,18 @@
+{
+  "id": "solr-18606-pr5314-review-round2-windows-20261113",
+  "intended_host": "Windows",
+  "job": "solr-18606-pr5314-review-round2-windows-20261113",
+  "references": [
+    "records/receipt/solr-18606-pr5314-alias-signal-linux-gate-r2-20261113-receipt.json",
+    "records/report/solr-18606-pr5314-alias-signal-linux-20261113-report.json"
+  ],
+  "source": {
+    "base_branch": "solr-18606-submit",
+    "base_head": "2dbfc9f32aa34cef586f32c7b473a5cd689e8705",
+    "branch": "solr-18606-pr5314-review-round2",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "solr-18606-pr5314-alias-signal-linux-20261113",
+  "summary": "Address latest PR 5314 review on a separate fork branch based on exact PR head; push and request Linux proof without changing the PR head.",
+  "type": "assignment"
+}
