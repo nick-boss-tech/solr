@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr-5330-r10",
+  "evidence": "Fork head e5117658841ca30d4b888f311754c8818f06dbf3 pushed and verified; Windows worker stopped, no test executor started. Report records/report/pr-5330-r10-repair-windows-20261113-report.json.",
+  "id": "pr-5330-r10-repair-windows-20261113",
+  "job": "pr-5330-r10-repair-windows-20261113",
+  "reason": "Implementation handed off for Linux proof",
+  "type": "release"
+}
