@@ -1,0 +1,26 @@
+PR 5337 CLI exit gate round 2 evidence (phone-agent, Linux host)
+Job: pr-5337-cli-exit-gate-r2; gate: records/gate/pr-5337-cli-exit-gate-r2.json
+Head: 21379130f426433f163fcd61f0731b8ad51d1412 (fork branch pr-5337-cli-exit-fixes); contributor parent 944f3ec319caee19a8061feb227ee20b4cd8dcbe verified an ancestor of the head and fetched explicitly into both check clones (a plain clone of the local repository does not carry unreferenced fetched objects; each clone's checked-out HEAD was recorded before building).
+Branch diff vs parent (5 files): solr/bin/solr, solr/bin/solr.cmd, SolrCLI.java, solr/packaging/test/test_help.bats, solr/packaging/test/test_help_windows.ps1 (new).
+Commands ran through the host Gradle 9.7.0 wrapper in place of ./gradlew; everything else as written in the gate. Verdict: PASSED.
+
+== Requirement 1: BATS test_help.bats, both variants, at the head
+:solr:packaging:integrationTests --tests test_help.bats exited 0; Bats JUnit at solr/packaging/build/test-output/report.xml in the gate clone: 18 cases, all ok. The cases include the separate parent cases for zk, snapshot and package (each asserts exit 2 with no subcommand, usage with both --help and -h, and separate commons-cli vs picocli snapshot markers through assert_output_for_cli) and the JVM failure case 'help propagates a JVM startup failure' (SOLR_TOOL_OPTS=-XX:SolrInvalidOptionForTest; expects exit 1 and 'Unrecognized VM option').
+:solr:packaging:integrationTestsPicocli --tests test_help.bats exited 0; JUnit at solr/packaging/build/test-output-picocli/report.xml: the same 18 cases, all ok, asserting the picocli marker side.
+Host note: the packaging downloadBats task cannot fetch through this VM's egress (PKIX), so the four Bats tarballs were seeded into solr/packaging/build/bats-downloads/ under their expected names in both clones, per the standing local workaround; the task then extracted them with skipexisting. The test file only exercises help, usage and JVM-startup paths; no Solr server is started, so the runs were not affected by this VM's root restriction.
+
+== Requirement 2: SolrCLIPicocliTest
+:solr:core:test --tests org.apache.solr.cli.SolrCLIPicocliTest -Dtests.seed=5337C0DE (passed as -Ptests.seed=5337C0DE) exited 0. Fresh JUnit TEST-org.apache.solr.cli.SolrCLIPicocliTest.xml: 8 tests, 0 skipped, 0 failures, 0 errors.
+
+== Requirement 3: tidy and root check
+./gradlew tidy exited 0 and left zero tracked changes at the head. ./gradlew check -x test exited 0, BUILD SUCCESSFUL in 9m 56s.
+
+== Requirement 4: fail-before on the contributor parent
+Only the test_help.bats diff from the offered head (56-line patch) was applied to parent 944f3ec3; git status showed exactly one modified file. Both packaging tasks exited 1 with behavioral assertion failures, recorded separately as the gate asks:
+Commons variant (report: test-output/report.xml from the parent clone): 18 cases, 3 failed: 'snapshot requires a subcommand', 'package requires a subcommand', and 'help propagates a JVM startup failure'. The zk parent case already passed on the parent.
+Picocli variant: 18 cases, 1 failed: 'help propagates a JVM startup failure'. The picocli parent cases already exit 2 with usage on the parent, so they do not discriminate there; the JVM exit propagation discriminates in both variants.
+No compilation, setup or download failures occurred in either fail-before run; the parent clone was restored to a clean parent checkout afterwards.
+
+== Requirement 5: preserved distribution for the Windows execution
+The distribution assembled by the integrationTests runs at the exact head is preserved in two places on this host: the gate clone (~/workspace/solr-clones/5337-r2/solr/packaging/build/solr-11.0.0-SNAPSHOT) and a gate-owned copy at ~/workspace/tools/5337-r2/dist-preserved/solr-11.0.0-SNAPSHOT (1,859 files, 311M). Verification against the head's sources: the distribution's bin/solr is byte-identical to solr/bin/solr at 21379130 (SHA-256 prefix b51d90870e90f76f445d on both), and its bin/solr.cmd equals the head's solr/bin/solr.cmd with LF converted to CRLF (SHA-256 prefix 9e96992ee4d65e4493b9 on both after conversion), which is the packaging step's own transformation. The copy step reported ownership-preservation warnings on some directories; file contents and counts are unaffected (verified by the counts and hashes above).
+Linux proof does not establish the Windows launcher: solr/packaging/test/test_help_windows.ps1 from this head still needs its separate Windows execution against this distribution, which is outside this gate.

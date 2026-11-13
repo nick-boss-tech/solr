@@ -1,0 +1,9 @@
+{
+ "executor_stop_evidence": "All gate chains have exited (the last, tidy/check, at 2026-11-13T15:16:13-07:00); no Gradle build is running at release time. The head clone is clean at 21379130 and the fail-before clone was restored to a clean checkout of the contributor parent after its runs. The preserved distribution copy is at rest under ~/workspace/tools/5337-r2/dist-preserved/.",
+ "id": "pr-5337-cli-exit-gate-r2",
+ "job": "pr-5337-cli-exit-gate-r2",
+ "receipt": "records/receipt/pr-5337-cli-exit-gate-r2.json",
+ "released": "2026-11-13T15:20:00-07:00",
+ "released_by": "phone-agent",
+ "type": "release"
+}

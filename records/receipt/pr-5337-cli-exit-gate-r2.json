@@ -1,0 +1,37 @@
+{
+ "branch": "pr-5337-cli-exit-fixes",
+ "contributor_parent": "944f3ec319caee19a8061feb227ee20b4cd8dcbe",
+ "evidence": "records/evidence/pr-5337-cli-exit-gate-r2-evidence.txt",
+ "evidence_sha256": "96c86d3f0a99f675c52abc70d1fd1413f45de917b466ce3a1d68afc6ad96650d",
+ "executor": "phone-agent",
+ "filed": "2026-11-13T15:20:00-07:00",
+ "gate": "records/gate/pr-5337-cli-exit-gate-r2.json",
+ "head": "21379130f426433f163fcd61f0731b8ad51d1412",
+ "id": "pr-5337-cli-exit-gate-r2",
+ "job": "pr-5337-cli-exit-gate-r2",
+ "legs": [
+  {
+   "leg": "Requirement 1: integrationTests + integrationTestsPicocli --tests test_help.bats at the head",
+   "result": "PASSED: both tasks exited 0; Bats JUnit (test-output/report.xml and test-output-picocli/report.xml) shows 18/18 cases ok in each variant, including separate parent usage, both help spellings and the JVM failure case."
+  },
+  {
+   "leg": "Requirement 2: :solr:core:test SolrCLIPicocliTest seed 5337C0DE",
+   "result": "PASSED: 8 tests, 0 skipped, 0 failures (fresh JUnit)."
+  },
+  {
+   "leg": "Requirement 3: tidy and check -x test",
+   "result": "PASSED: tidy zero tracked changes; check BUILD SUCCESSFUL in 9m 56s."
+  },
+  {
+   "leg": "Requirement 4: fail-before, parent + test_help.bats diff only",
+   "result": "DISCRIMINATES: commons variant 3 failures (snapshot requires a subcommand; package requires a subcommand; help propagates a JVM startup failure); picocli variant 1 failure (JVM startup failure). No compilation, setup or download failures."
+  },
+  {
+   "leg": "Requirement 5: preserved assembled distribution",
+   "result": "PRESERVED at ~/workspace/tools/5337-r2/dist-preserved/solr-11.0.0-SNAPSHOT (also in the gate clone's packaging build dir), 1,859 files, 311M; bin/solr byte-identical to the head source, bin/solr.cmd identical modulo the packaging CRLF conversion. Windows launcher execution remains a separate step outside this gate."
+  }
+ ],
+ "summary": "Round 2 gate PASSED at 21379130. Both BATS variants of test_help.bats pass all 18 cases at the head, including the separate commons and picocli parent-usage cases for zk, snapshot and package and the JVM startup failure exit case. SolrCLIPicocliTest passes 8/8 at seed 5337C0DE. Tidy leaves zero changes and root check is BUILD SUCCESSFUL. Fail-before on the contributor parent with only the test_help.bats diff: the commons variant fails 3 cases (snapshot parent, package parent, JVM failure) and the picocli variant fails 1 (JVM failure), all behavioral assertion failures. A verified assembled distribution of the exact head is preserved for the separate Windows launcher execution, which this Linux proof does not establish.",
+ "type": "receipt",
+ "verdict": "PASSED"
+}
