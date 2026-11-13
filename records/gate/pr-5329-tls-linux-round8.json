@@ -1,0 +1,20 @@
+{
+  "environment": "Linux JDK 21, isolated disposable checkout and installations, preserve security settings; execute permission test as an unprivileged user",
+  "head": "69cd26432aaaf9a60e36eb888d9dd684a9eb8825",
+  "id": "pr-5329-tls-linux-round8",
+  "job": "pr-5329-tls-linux-round8",
+  "phase": "round 8 exact-head partial-patch verification",
+  "requirements": [
+    "Verify remote source head and prior release/worker stop before claiming; do not run concurrently with another executor on this branch. Record exact source and contributor heads and all commands, exit codes, fresh XML and logs.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.cloud.SolrZkServerTlsTest -Dtests.seed=5329ABCD and retain fresh XML, counts and log.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.handler.admin.ZookeeperStatusHandlerTest --tests org.apache.solr.handler.admin.ZookeeperStatusHandlerFailureTest -Dtests.seed=5329ABCD; report counts, skips and results. The contributor changed the status handler after the last gate.",
+    "Run ./gradlew :solr:packaging:integrationTests --tests test_secure_example.bats. Require all six cases to pass; identify EOF, no, whitespace, quoted-empty, Enter, --no-prompt, password creation, secure CLI and plaintext listener assertions. Confirm the generated truststore has a trusted certificate entry and that the previously unreached listener assertions run.",
+    "As a non-root user verify the test's read-only include branch executes: startup fails with the specific include-write error and does not claim options were added. In an isolated worktree revert only the include-write error handling and show this specific assertion fails; report the exact result, not a setup error or skipped branch.",
+    "Run ./gradlew tidy and verify a clean tracked tree. Run ./gradlew check -x test; record exact command, failures or exclusions, including documentation-site and Docker limitations. Any formatting change requires a newly pushed head and gate.",
+    "Prior receipt records fail-before for confirmation, ensemble validation and port unification and a password-umask mutation on the ancestor head. Confirm tests and relevant production code still match those proof legs after the contributor merge; otherwise rerun the affected legs, explaining the comparison.",
+    "Review the contributor's newly merged status-handler changes and documentation for behavior and test coverage, including TLS client context lifecycle. Record any substantive issue and do not treat existing unrelated tests as proof of missing TLS cases.",
+    "Record the unresolved external plaintext ensemble TLS inheritance and stale configuration on port/store rotation from the prior receipt. This gate must be incomplete while those defects remain, even if all focused checks pass. Do not post a public PR offer."
+  ],
+  "supersedes": "records/gate/pr-5329-tls-lifecycle-linux-round7.json",
+  "type": "gate"
+}
