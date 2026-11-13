@@ -1,0 +1,16 @@
+{
+  "details": "Within anyOf alternatives, properties and required apply only to maps and items only to lists; other applicable type checks still determine validity. Added separate ordered tests for each keyword, permitted and rejected types, actual object/array constraints, and unchanged legacy behavior outside anyOf. This is not a claim of complete JSON Schema support. Windows ran git diff --check only.",
+  "gate_job": "pr5320-v2-contract-linux-gate-r7-20261113",
+  "id": "pr5320-v2-contract-implementation-r7-20261113-report",
+  "job": "pr5320-v2-contract-implementation-r7-20261113",
+  "prior_receipt": "records/receipt/pr5320-v2-contract-linux-gate-r5-20261113-receipt.json",
+  "source": {
+    "branch": "pr-5320-v2-contract",
+    "contributor_parent": "5fa5513038a7cf9318ed800423d8a44064d4c0e3",
+    "head": "b4bb017d22c036df50bebfffecf26c0e8a0b0b57",
+    "previous_head": "e47c4b50d2cb09d8cf5d43175a6b5d5d380aa9cc",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Pushed consistent object and array keyword applicability within anyOf; Linux proof pending.",
+  "type": "report"
+}
