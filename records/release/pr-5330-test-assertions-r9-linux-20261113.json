@@ -1,0 +1,8 @@
+{
+  "actor": "vm2",
+  "evidence": "records/receipt/pr-5330-test-assertions-r9-linux-20261113-receipt.json; records/evidence/pr-5330-test-assertions-r9-linux-20261113-evidence.tar.gz",
+  "id": "pr-5330-test-assertions-r9-linux-20261113",
+  "job": "pr-5330-test-assertions-r9-linux-20261113",
+  "reason": "PR-5330 r9 Linux gate completed with verdict FAILED at head 13522945de. Receipt filed: records/receipt/pr-5330-test-assertions-r9-linux-20261113-receipt.json. Two deterministic defects: (1) :solr:core:compileJava fails (StreamingSolrClients.java:100 type narrowing from commit 6476beb8debb); (2) under a minimal compile fix, testRealRunnerCallbacksDoNotNeedClientMonitor fails on HTTP/2 preface 'PRI * HTTP/2.0' because the raw-socket fixture expects HTTP/1.1. Report records/report/pr-5330-test-assertions-r9-linux-20261113-report.json names the required successor changes. Evidence archive records/evidence/pr-5330-test-assertions-r9-linux-20261113-evidence.tar.gz. Executor stop: Gradle daemons stopped, worktrees pr-5330-r9 and pr-5330-r9-proof clean (proof worktree removed).",
+  "type": "release"
+}
