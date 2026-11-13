@@ -621,6 +621,48 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
   @Test
   @ShardsFixed(num = 1)
   public void testStallKeepsErrorsFromOtherNodes() throws Exception {
+    assertStallKeepsErrorsFromOtherNodes(true);
+  }
+
+  @Test
+  @ShardsFixed(num = 1)
+  public void testFinishKeepsErrorsAfterStall() throws Exception {
+    assertStallKeepsErrorsFromOtherNodes(false);
+  }
+
+  @Test
+  @ShardsFixed(num = 1)
+  public void testStalledClientIgnoresLateCallbacks() throws Exception {
+    var solrclient = clients.getFirst();
+    Node node =
+        new StdNode(
+            coreNodeProps("http://127.0.0.1:4/solr", solrclient), "collection1", "shard1", 0);
+    LeaderRequestReplicationTracker tracker = new LeaderRequestReplicationTracker("shard1");
+    AddUpdateCommand command = new AddUpdateCommand(null);
+    command.solrDoc = sdoc("id", uniqueId.incrementAndGet());
+    SolrCmdDistributor.Req req =
+        new SolrCmdDistributor.Req(command, node, new UpdateRequest(), false, null, tracker);
+    StreamingSolrClients streamingClients = new StreamingSolrClients(updateShardHandler);
+    try {
+      ErrorReportingConcurrentUpdateSolrClient client =
+          (ErrorReportingConcurrentUpdateSolrClient) streamingClients.getSolrClient(req);
+      client.onSuccess(null, null);
+      assertEquals(2, tracker.getAchievedRf());
+      client.reportStall(new IOException("stalled"));
+      assertEquals(1, streamingClients.getErrors().size());
+      client.onSuccess(null, null);
+      client.handleError(new IOException("late error"));
+      assertEquals(2, tracker.getAchievedRf());
+      assertEquals(1, streamingClients.getErrors().size());
+      assertEquals(1, streamingClients.drainErrors().size());
+      assertTrue(streamingClients.drainErrors().isEmpty());
+    } finally {
+      streamingClients.shutdown();
+    }
+  }
+
+  @SuppressWarnings("try")
+  private void assertStallKeepsErrorsFromOtherNodes(boolean testOrderedOperations) throws Exception {
     final var solrclient = clients.getFirst();
     String previousPollQueueTime = System.getProperty("solr.cloud.client.pollQueueTime");
     String previousStallTime = System.getProperty("solr.cloud.client.stallTime");
@@ -679,22 +721,24 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
             params.set("stream", i);
             cmdDistrib.distribAdd(cmd, List.of(stalledNode), params);
           }
-          IOException commitFailure =
-              expectThrows(
-                  IOException.class,
-                  () ->
-                      cmdDistrib.distribCommit(
-                          new CommitUpdateCommand(null, false),
-                          List.of(stalledNode),
-                          new ModifiableSolrParams()));
-          assertTrue(commitFailure.getMessage().contains("Request processing has stalled"));
-          DeleteUpdateCommand deleteByQuery = new DeleteUpdateCommand(null);
-          deleteByQuery.query = "*:*";
-          expectThrows(
-              IOException.class,
-              () ->
-                  cmdDistrib.distribDelete(
-                      deleteByQuery, List.of(stalledNode), new ModifiableSolrParams()));
+          if (testOrderedOperations) {
+            IOException commitFailure =
+                expectThrows(
+                    IOException.class,
+                    () ->
+                        cmdDistrib.distribCommit(
+                            new CommitUpdateCommand(null, false),
+                            List.of(stalledNode),
+                            new ModifiableSolrParams()));
+            assertTrue(commitFailure.getMessage().contains("Request processing has stalled"));
+            DeleteUpdateCommand deleteByQuery = new DeleteUpdateCommand(null);
+            deleteByQuery.query = "*:*";
+            expectThrows(
+                IOException.class,
+                () ->
+                    cmdDistrib.distribDelete(
+                        deleteByQuery, List.of(stalledNode), new ModifiableSolrParams()));
+          }
           cmdDistrib.finish();
           List<SolrError> errors = cmdDistrib.getErrors();
           assertTrue(

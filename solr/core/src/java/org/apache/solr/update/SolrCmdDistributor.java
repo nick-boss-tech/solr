@@ -103,8 +103,12 @@ public class SolrCmdDistributor implements Closeable {
   private void doRetriesIfNeeded() throws IOException {
     // NOTE: retries will be forwards to a single url
 
-    List<SolrError> errors = new ArrayList<>(this.errors);
-    errors.addAll(clients.getErrors());
+    List<SolrError> errors;
+    synchronized (this.errors) {
+      errors = new ArrayList<>(this.errors);
+      this.errors.clear();
+    }
+    errors.addAll(clients.drainErrors());
     List<SolrError> resubmitList = new ArrayList<>();
 
     if (log.isInfoEnabled() && errors.size() > 0) {
@@ -164,8 +168,6 @@ public class SolrCmdDistributor implements Closeable {
       }
     }
 
-    clients.clearErrors();
-    this.errors.clear();
     for (SolrError err : resubmitList) {
       if (err.req.node instanceof ForwardNode) {
         SolrCmdDistributor.log.error(

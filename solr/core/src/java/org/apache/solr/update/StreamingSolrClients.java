@@ -47,7 +47,7 @@ public class StreamingSolrClients {
 
   private HttpJettySolrClient httpClient;
 
-  private Map<String, ConcurrentUpdateBaseSolrClient> solrClients = new HashMap<>();
+  private Map<String, ErrorReportingConcurrentUpdateSolrClient> solrClients = new HashMap<>();
   private List<SolrError> errors = Collections.synchronizedList(new ArrayList<>());
 
   private ExecutorService updateExecutor;
@@ -61,13 +61,21 @@ public class StreamingSolrClients {
     return errors;
   }
 
+  public List<SolrError> drainErrors() {
+    synchronized (errors) {
+      List<SolrError> result = new ArrayList<>(errors);
+      errors.clear();
+      return result;
+    }
+  }
+
   public void clearErrors() {
     errors.clear();
   }
 
   public synchronized SolrClient getSolrClient(final SolrCmdDistributor.Req req) {
     String url = getFullUrl(req.node.getUrl());
-    ConcurrentUpdateBaseSolrClient client = solrClients.get(url);
+    ErrorReportingConcurrentUpdateSolrClient client = solrClients.get(url);
     if (client == null) {
       // NOTE: increasing to more than 1 threadCount for the client could cause updates to be
       // reordered on a greater scale since the current behavior is to only increase the number of
@@ -94,11 +102,11 @@ public class StreamingSolrClients {
 
   public synchronized void blockUntilFinished() throws IOException {
     IOException failure = null;
-    for (ConcurrentUpdateBaseSolrClient client : solrClients.values()) {
+    for (ErrorReportingConcurrentUpdateSolrClient client : solrClients.values()) {
       try {
         client.blockUntilFinished();
       } catch (IOException e) {
-        client.handleError(e);
+        client.reportStall(e);
         if (failure == null) {
           failure = e;
         } else {
@@ -140,6 +148,7 @@ class ErrorReportingConcurrentUpdateSolrClient extends ConcurrentUpdateJettySolr
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
   private final SolrCmdDistributor.Req req;
   private final List<SolrError> errors;
+  private boolean stalled;
 
   public ErrorReportingConcurrentUpdateSolrClient(Builder builder) {
     super(builder);
@@ -148,7 +157,18 @@ class ErrorReportingConcurrentUpdateSolrClient extends ConcurrentUpdateJettySolr
   }
 
   @Override
-  public void handleError(Throwable ex) {
+  public synchronized void handleError(Throwable ex) {
+    if (stalled) return;
+    recordError(ex);
+  }
+
+  synchronized void reportStall(IOException ex) {
+    if (stalled) return;
+    stalled = true;
+    recordError(ex);
+  }
+
+  private void recordError(Throwable ex) {
     log.error("Error when calling {} to {}", req, req.node.getUrl(), ex);
     SolrError error = new SolrError();
     error.e = (Exception) ex;
@@ -164,7 +184,8 @@ class ErrorReportingConcurrentUpdateSolrClient extends ConcurrentUpdateJettySolr
   }
 
   @Override
-  public void onSuccess(Object responseMetadata, InputStream respBody) {
+  public synchronized void onSuccess(Object responseMetadata, InputStream respBody) {
+    if (stalled) return;
     Response jettyResponse = (Response) responseMetadata;
     req.trackRequestResult(jettyResponse, respBody, true);
   }
