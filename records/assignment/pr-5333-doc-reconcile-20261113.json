@@ -1,0 +1,15 @@
+{
+  "contributor_head": "65c2d85f77017a951f20dc110d71bf14786c6694",
+  "id": "pr-5333-doc-reconcile-20261113",
+  "intended_host": "Windows",
+  "job": "pr-5333-doc-reconcile-20261113",
+  "scope": "Merge contributor head into fork branch without rewriting history, push and verify; prior documentation gate was missing and is superseded by the changed head.",
+  "source": {
+    "branch": "pr-5333-shutdown-doc",
+    "head": "e357862c6ebd23ac3b4cf5e9fa635f94391bad52",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5333-doc-accuracy-20261113",
+  "summary": "Reconcile fork documentation branch with current contributor head",
+  "type": "assignment"
+}
