@@ -1,0 +1,14 @@
+{
+  "gate": "records/gate/pr-5334-compat-linux-20261113.json",
+  "id": "pr-5334-fix-windows-20261113-report",
+  "job": "pr-5334-fix-windows-20261113",
+  "limitations": "UID inferred by serialver using older compiled SimpleOrderedMap patched to match final class modifier; exact base UID must be independently established by Linux gate. No Gradle run on Windows. Diff check clean. No public comment.",
+  "source": {
+    "branch": "pr-5334-compatibility-20261113",
+    "contributor_head": "c64ef9dcc6360bd6bd39cb129d1b9f3e94e8ce67",
+    "head": "d3c2bf186fda98eceb64e6b1953997a5c84a066d",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Pushed focused serialization compatibility and Map-view coverage follow-up; Linux proof pending",
+  "type": "report"
+}
