@@ -1,0 +1,9 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "records/report/solr-18606-pr5314-alias-signal-linux-20261113-report.json; records/receipt/solr-18606-pr5314-alias-signal-linux-gate-r2-20261113-receipt.json; records/release/solr-18606-pr5314-alias-signal-linux-gate-r2-20261113.json; records/evidence/solr-18606-pr5314-alias-signal-linux-gate-r2-20261113-evidence.json. The fork branch solr-18606-submit is verified at 2dbfc9f32aa34cef586f32c7b473a5cd689e8705, and the source worktree is clean. Final process checks found no Gradle/Java process and no occupied shared Gradle lock. The earlier malformed wrapper job_Lta8j1ho remains only a stale control-plane card: its terminal was closed, it produced no test result, and no process or lock remained; it was superseded by the completed mutation run job_7NInuQVI. The prior R1 failed formatting receipt/release remains unchanged and linked in the report.",
+  "id": "solr-18606-pr5314-alias-signal-linux-20261113",
+  "job": "solr-18606-pr5314-alias-signal-linux-20261113",
+  "reason": "Completed the assigned alias signal investigation, scoped test-only regression, exact-head round-2 gate, and sync coverage assessment. The durable sync-test recommendations are documented as a separate follow-up; no sync source changes were made. No further work remains under this claim.",
+  "recorded": "2026-11-13T12:04:00-07:00",
+  "type": "release"
+}
