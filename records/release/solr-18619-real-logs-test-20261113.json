@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-real-logs-test-20261113",
+  "evidence": "records/report/solr-18619-real-logs-test-20261113-report.json; fork head 848885b4cda2c3312576c810aeb4a46afb50419e; no local executor was started.",
+  "id": "solr-18619-real-logs-test-20261113",
+  "job": "solr-18619-real-logs-test-20261113",
+  "reason": "Test implementation pushed and source work stopped; Linux proof is a separate gate job.",
+  "type": "release"
+}
