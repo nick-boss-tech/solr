@@ -1,0 +1,16 @@
+{
+  "details": "Inside anyOf alternatives only, object properties and required do not reject a null instance; the type and enum checks still decide whether null is permitted. Tests place properties first and required first independently, and check null, valid objects, missing and null IDs, and a non-object. Legacy validator behavior outside anyOf is retained. Windows ran git diff --check only.",
+  "gate_job": "pr5320-v2-contract-linux-gate-r6-20261113",
+  "id": "pr5320-v2-contract-implementation-r6-20261113-report",
+  "job": "pr5320-v2-contract-implementation-r6-20261113",
+  "prior_receipt": "records/receipt/pr5320-v2-contract-linux-gate-r5-20261113-receipt.json",
+  "source": {
+    "branch": "pr-5320-v2-contract",
+    "contributor_parent": "5fa5513038a7cf9318ed800423d8a44064d4c0e3",
+    "head": "e47c4b50d2cb09d8cf5d43175a6b5d5d380aa9cc",
+    "previous_head": "678f805a2a0d2212427d0cfadb11e87c24d122ef",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Pushed nullable object anyOf correction and ordered regression tests; Linux proof pending.",
+  "type": "report"
+}
