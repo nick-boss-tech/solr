@@ -1,0 +1,14 @@
+{
+  "findings": [
+    "Final node-only assertions do not prove stall IOException or that the other error was collected before stall; socket fixture lacks controlled synchronization and bounded observation of prerequisites.",
+    "The test does not exercise retries, following DBQ/commit or late callbacks; HashMap traversal order is uncontrolled. The existing Linux gate requests runtime fail-before and a separate ordering probe, but a probe is not a permanent regression if a defect is established.",
+    "Value equality and property restoration in the fork follow-up are sound by inspection. No Gradle runs on Windows; no behavioral proof claimed."
+  ],
+  "gate": "records/gate/pr-5330-test-fix-linux-20261113.json",
+  "head": "0c5457bde3e6bb684a91e1af12d160ebb37a7ec6",
+  "id": "pr-5330-followup-review-20261113-report",
+  "job": "pr-5330-followup-review-20261113",
+  "local_review": "research/branch-reviews/2026-11-13-pr-batch/PR-5330-followup-review.md",
+  "summary": "Needs work / proof pending: test does not establish intended stall or failure ordering; active runner lifecycle risk remains unproven",
+  "type": "report"
+}
