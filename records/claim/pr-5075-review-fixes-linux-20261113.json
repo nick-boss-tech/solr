@@ -1,0 +1,10 @@
+{
+ "claimed_at": "2026-11-12T18:20:00-07:00",
+ "claimer": "phone-agent",
+ "head": "dc825f9af929a7ad8d08f8eb51e969e72582acb2",
+ "host": "linux",
+ "id": "pr-5075-review-fixes-linux-20261113",
+ "job": "pr-5075-review-fixes-linux-20261113",
+ "pre_claim_verification": "Live fork branch solr-5939-submit verified at the gate head by ls-remote. The Windows implementation job (pr-5075-review-fixes-windows-20261113) is already claimed, reported and released on the board. No conflicting claim exists for the Linux job. Queue lock and executor state to be verified at run start.",
+ "type": "claim"
+}
