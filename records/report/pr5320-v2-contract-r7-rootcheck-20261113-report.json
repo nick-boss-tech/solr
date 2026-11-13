@@ -1,0 +1,7 @@
+{
+  "head": "b4bb017d22c036df50bebfffecf26c0e8a0b0b57",
+  "id": "pr5320-v2-contract-r7-rootcheck-20261113-report",
+  "job": "pr5320-v2-contract-r7-rootcheck-20261113",
+  "summary": "Released as redundant per owner policy. The owner (Nick) directed on 2026-11-13 that Antora / the Solr ref-guide is not enforced for gate runs and must not hold up gates. The successor's premise - that the r7 receipt's -Prefguide.include=false check was unauthorized because it omitted checkSiteLinks and checkCliDocsUpToDate - therefore dissolves: under the owner policy the excluded root check already filed in records/receipt/pr5320-v2-contract-linux-gate-r7-20261113-receipt.json is valid and complete for this head b4bb017d. No additional check was run. The r7 receipt's focused tests, tidy and fail-before legs stand as filed. The standing policy is being recorded in AGENTS.md and the coordination-v2 board docs.",
+  "type": "report"
+}
