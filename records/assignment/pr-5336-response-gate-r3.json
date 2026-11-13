@@ -1,0 +1,19 @@
+{
+  "claim_path": "records/claim/pr-5336-response-gate-r3.json",
+  "gate_id": "pr-5336-response-gate-r3",
+  "gate_record": "records/gate/pr-5336-response-gate-r3.json",
+  "id": "pr-5336-response-gate-r3",
+  "intended_host": "Linux",
+  "job": "pr-5336-response-gate-r3",
+  "phase": "round 3",
+  "receipt_path": "records/receipt/pr-5336-response-gate-r3-receipt.json",
+  "source": {
+    "branch": "pr-5336-response-followup",
+    "contributor_parent": "96df2d214560949cb8984b16aad1a2b7f47ca7d7",
+    "head": "59c259bcb28bac589b0617f72b52d23701442100",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Linux proof for PR 5336 response-format coverage at the tidy-repaired head 59c259bcb2. Round 2 failed on tidy-dirty (Spotless reformats OverseerStatusTest.java); the gate host applied the tidy fold-in as one repair commit and pushed it. This round gates the repaired head.",
+  "supersedes": "records/gate/pr-5336-response-gate-r2.json",
+  "type": "assignment"
+}
