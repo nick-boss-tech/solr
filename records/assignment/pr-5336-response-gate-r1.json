@@ -1,0 +1,18 @@
+{
+  "claim_path": "records/claim/pr-5336-response-gate-r1.json",
+  "gate_id": "pr-5336-response-gate-r1",
+  "gate_record": "records/gate/pr-5336-response-gate-r1.json",
+  "id": "pr-5336-response-gate-r1",
+  "intended_host": "Linux",
+  "job": "pr-5336-response-gate-r1",
+  "phase": "round 1",
+  "receipt_path": "records/receipt/pr-5336-response-gate-r1.json",
+  "source": {
+    "branch": "pr-5336-response-followup",
+    "contributor_parent": "96df2d214560949cb8984b16aad1a2b7f47ca7d7",
+    "head": "347bac0a36b71a838e101cc937ce91b850745557",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Linux proof for PR 5336 response coverage follow-up",
+  "type": "assignment"
+}
