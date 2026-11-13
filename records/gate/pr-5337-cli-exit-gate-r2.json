@@ -1,0 +1,17 @@
+{
+  "environment": "Linux gate host; clean isolated checkout",
+  "head": "21379130f426433f163fcd61f0731b8ad51d1412",
+  "id": "pr-5337-cli-exit-gate-r2",
+  "job": "pr-5337-cli-exit-gate-r2",
+  "phase": "round 2",
+  "receipt_path": "records/receipt/pr-5337-cli-exit-gate-r2.json",
+  "requirements": [
+    "Run ./gradlew :solr:packaging:integrationTests --tests test_help.bats and ./gradlew :solr:packaging:integrationTestsPicocli --tests test_help.bats. Capture fresh Bats JUnit and logs, including separate parent usage, both help spellings and JVM failure cases.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.cli.SolrCLIPicocliTest -Dtests.seed=5337C0DE and capture fresh XML and logs.",
+    "Run ./gradlew tidy and ./gradlew check -x test. If tidy changes files, report diff and do not claim proof for this head; a new committed head needs a new gate.",
+    "Fail-before: on contributor parent 944f3ec319caee19a8061feb227ee20b4cd8dcbe apply only the test_help.bats diff from offered head 21379130f426433f163fcd61f0731b8ad51d1412; run both packaging tasks. Record separate commons snapshot, package and JVM-failure assertion results. Compilation, setup or download failures are not behavioral proof.",
+    "Record commands, exit codes, logs and XML locations in records/receipt/pr-5337-cli-exit-gate-r2.json. Preserve a verified assembled distribution for a separate Windows execution of solr/packaging/test/test_help_windows.ps1 against the exact source head. Linux proof does not establish the Windows launcher."
+  ],
+  "supersedes": "records/gate/pr-5337-cli-exit-gate-r1.json",
+  "type": "gate"
+}
