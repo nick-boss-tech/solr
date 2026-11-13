@@ -1,0 +1,12 @@
+{
+  "id": "pr5320-tested-offer-record-20261113",
+  "intended_host": "Windows",
+  "job": "pr5320-tested-offer-record-20261113",
+  "source": {
+    "branch": "pr-5320-v2-contract",
+    "head": "b4bb017d22c036df50bebfffecf26c0e8a0b0b57",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Record clean-gate PR 5320 contributor follow-up and exact proof",
+  "type": "assignment"
+}
