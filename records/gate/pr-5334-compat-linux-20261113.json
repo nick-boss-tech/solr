@@ -1,0 +1,19 @@
+{
+  "branch": "pr-5334-compatibility-20261113",
+  "contributor_head": "c64ef9dcc6360bd6bd39cb129d1b9f3e94e8ce67",
+  "environment": "Linux isolated clean checkouts; record JDK, host, seed, source heads and status",
+  "head": "d3c2bf186fda98eceb64e6b1953997a5c84a066d",
+  "id": "pr-5334-compat-linux-20261113",
+  "job": "pr-5334-compat-linux-20261113",
+  "phase": "round 1",
+  "pre_pr_base": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+  "repository": "nick-boss-tech/solr",
+  "requirements": [
+    "Build the exact pre-PR base in a clean checkout and independently determine ObjectStreamClass.lookup(SimpleOrderedMap.class).getSerialVersionUID(); require -8705511030983987520. Windows inferred this value from an older compiled class with its class access flag adjusted; it is not proof of the exact base. Stop and report if different.",
+    "Prove Java serialization compatibility across the exact pre-PR base and offered head, in both directions with separate classpaths or JVMs. Serialize representative SimpleOrderedMap instances (including null keys/values), deserialize on the other revision and assert contents; record commands and evidence. Check relevant nested superclass compatibility and report any failure without treating it as a pass.",
+    "Run ./gradlew :solr:solrj:cleanTest :solr:solrj:test --tests org.apache.solr.common.util.SimpleOrderedMapTest --tests org.apache.solr.common.util.NamedListTest and record seed, logs, XML, counts, failures and skips. Run ./gradlew tidy and ./gradlew check -x test; any tracked formatting changes require a committed successor and fresh gate.",
+    "Run the new serialVersionUID assertion against the contributor head with the test overlaid unchanged; require an assertion failure rather than compile, setup or timeout failure. Record overlay, logs and XML. The Map-view assertions are coverage of the offered implementation and need not fail on the contributor head."
+  ],
+  "type": "gate",
+  "verdict_policy": "Pass requires the independently measured exact-base UID, both cross-version serialization directions, all named test and check legs, clean formatting and the specified assertion fail-before. Do not publish a PR comment."
+}
