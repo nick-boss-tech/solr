@@ -72,10 +72,29 @@ public class SolrZkServerTlsTest extends SolrTestCaseJ4 {
         home.resolve("zoo.cfg"),
         "secureClientPort=2182\n"
             + "initLimit=10\nsyncLimit=5\n"
-            + "server.1=127.0.0.1:2888:3888;127.0.0.1:2181\n");
+            + "server.1=127.0.0.1:2888:3888;127.0.0.1:2181\n"
+            + "server.2=127.0.0.1:2889:3889\n"
+            + "server.3=127.0.0.1:2890:3890\n");
     System.setProperty("solr.zookeeper.embedded.tlsOnly", "true");
     SolrZkServer server = new SolrZkServer(true, null, home, home.toString(), 8983);
     SolrException error = expectThrows(SolrException.class, server::parseConfig);
     assertTrue(error.getMessage().contains("plaintext client address"));
+  }
+
+  public void testAutomaticTlsAcceptsEnsembleWithoutPlaintextClientAddress() throws Exception {
+    Path home = createTempDir();
+    Files.writeString(home.resolve("myid"), "1\n");
+    Files.writeString(
+        home.resolve("zoo.cfg"),
+        "secureClientPort=2182\n"
+            + "initLimit=10\nsyncLimit=5\n"
+            + "server.1=127.0.0.1:2888:3888\n"
+            + "server.2=127.0.0.1:2889:3889\n"
+            + "server.3=127.0.0.1:2890:3890\n");
+    System.setProperty("solr.zookeeper.embedded.tlsOnly", "true");
+    SolrZkServer server = new SolrZkServer(true, null, home, home.toString(), 8983);
+    server.parseConfig();
+    assertNull(server.zkProps.getClientPortAddress());
+    assertEquals(2182, server.zkProps.getSecureClientPortAddress().getPort());
   }
 }
