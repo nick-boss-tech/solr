@@ -1,0 +1,13 @@
+{
+  "id": "pr-5330-r10-repair-windows-20261113",
+  "intended_host": "windows",
+  "job": "pr-5330-r10-repair-windows-20261113",
+  "receipt": "records/receipt/pr-5330-test-assertions-r9-linux-20261113-receipt.json",
+  "source": {
+    "branch": "pr-5330-test-fix-20261113",
+    "head": "13522945de6c9102ecdbe8efb821ed451e840216",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Repair compile, HTTP fixture and formatting failures from PR 5330 r9 gate",
+  "type": "assignment"
+}
