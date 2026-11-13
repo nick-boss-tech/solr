@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-review-fixes-20261113",
+  "evidence": "records/report/solr-18619-review-fixes-20261113-report.json; pushed head cf35bd49fab19751af9afb728ef83076ae521f09; no local executor started.",
+  "id": "solr-18619-review-fixes-20261113",
+  "job": "solr-18619-review-fixes-20261113",
+  "reason": "Implementation and fork push complete; stopping source work and handing exact-head proof to the separate Linux gate.",
+  "type": "release"
+}
