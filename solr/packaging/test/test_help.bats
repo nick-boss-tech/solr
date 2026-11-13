@@ -22,14 +22,28 @@ setup() {
 }
 
 @test "solr help flag prints help" {
-  run -1 solr --help
+  run -0 solr --help
   assert_output_for_cli 'Usage: solr COMMAND OPTIONS' 'usage: bin/solr'
   refute_output --partial 'ERROR'
 }
 @test "solr with no flags prints help" {
-  run -1 solr
+  run -2 solr
   assert_output_for_cli 'Usage: solr COMMAND OPTIONS' 'usage: bin/solr'
   refute_output --partial 'ERROR'
+}
+
+@test "parent commands require a subcommand" {
+  for parent in zk snapshot package; do
+    run -2 solr "$parent"
+    refute_output --partial 'ERROR'
+    run -0 solr "$parent" --help
+    refute_output --partial 'ERROR'
+  done
+}
+
+@test "help propagates a JVM startup failure" {
+  run -1 env SOLR_TOOL_OPTS=-XX:SolrInvalidOptionForTest solr --help
+  assert_output --partial 'Unrecognized VM option'
 }
 
 @test "start help flag prints help" {
