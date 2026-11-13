@@ -1,0 +1,15 @@
+{
+  "id": "pr-5329-windows-fix-round8",
+  "intended_host": "Windows implementation; Linux proof required",
+  "job": "pr-5329-windows-fix-round8",
+  "prior_receipt": "records/receipt/pr-5329-tls-lifecycle-linux-round7.json",
+  "prior_release": "records/release/pr-5329-tls-lifecycle-linux-round7.json",
+  "source": {
+    "branch": "pr-5329-tls-fixes",
+    "head": "78f2fd781d83a54e2f31b45d90bec4f372450b36",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5329-windows-fix-round7",
+  "summary": "Reconcile the Linux receipt and upstream changes, repair established defects, and request exact-head Linux proof",
+  "type": "assignment"
+}
