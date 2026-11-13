@@ -1,0 +1,19 @@
+{
+  "claim_path": "records/claim/pr-5334-compat-linux-r2-20261113.json",
+  "gate_id": "pr-5334-compat-linux-r2-20261113",
+  "gate_record": "records/gate/pr-5334-compat-linux-r2-20261113.json",
+  "id": "pr-5334-compat-linux-r2-20261113",
+  "intended_host": "Linux",
+  "job": "pr-5334-compat-linux-r2-20261113",
+  "phase": "round 2",
+  "prior_receipt": "records/receipt/pr-5334-compat-linux-20261113-receipt.json",
+  "receipt_path": "records/receipt/pr-5334-compat-linux-r2-20261113-receipt.json",
+  "source": {
+    "branch": "pr-5334-compatibility-20261113",
+    "head": "c9896f0e5b026545ebefcb6f225da67550acdd21",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify formatted PR 5334 compatibility successor on Linux",
+  "supersedes": "records/gate/pr-5334-compat-linux-20261113.json",
+  "type": "assignment"
+}
