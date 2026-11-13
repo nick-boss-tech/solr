@@ -1,0 +1,14 @@
+{
+  "id": "pr5320-v2-contract-implementation-r7-20261113",
+  "intended_host": "Windows",
+  "job": "pr5320-v2-contract-implementation-r7-20261113",
+  "source": {
+    "branch": "pr-5320-v2-contract",
+    "head": "e47c4b50d2cb09d8cf5d43175a6b5d5d380aa9cc",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr5320-v2-contract-implementation-r6-20261113",
+  "summary": "Make object and array keyword applicability consistent inside anyOf alternatives",
+  "supersedes_gate": "records/gate/pr5320-v2-contract-linux-gate-r6-20261113.json",
+  "type": "assignment"
+}
