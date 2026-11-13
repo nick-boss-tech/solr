@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr-5330-r2",
+  "evidence": "Fork head dfe745bf1b8439f85300db3755c9b1ec7d2a87a6 pushed and remote verified. No Windows executor remains. Report records/report/pr-5330-regression-repair-windows-20261113-report.json.",
+  "id": "pr-5330-regression-repair-windows-20261113",
+  "job": "pr-5330-regression-repair-windows-20261113",
+  "reason": "Windows implementation slice complete; Linux lifecycle investigation and proof required",
+  "type": "release"
+}
