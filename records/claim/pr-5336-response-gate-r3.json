@@ -1,0 +1,10 @@
+{
+  "claimed": "2026-11-13T22:48:00Z",
+  "head": "59c259bcb28bac589b0617f72b52d23701442100",
+  "host": "linux",
+  "id": "pr-5336-response-gate-r3",
+  "job": "pr-5336-response-gate-r3",
+  "note": "Round 3 after round 2 failed on tidy-dirty at eb5557d1 (recorded in pr-5336-response-gate-r2-receipt, verdict failed). The Linux gate host repaired under WORKFLOW.md Gate repairs (tidy fold-in is in scope and pre-authorized): one commit SOLR-18612: gate repair: apply tidy output to OverseerStatusTest (59c259bcb2), pushed fast-forward to pr-5336-response-followup from eb5557d1. Repaired head verified tidy-clean by ./gradlew tidy before filing this claim. Live fork branch head 59c259bcb2 confirmed by git ls-remote at claim time; contributor parent 96df2d21. No conflicting claim exists for this Linux gate job on coordination-v2.",
+  "owner": "vm6",
+  "type": "claim"
+}
