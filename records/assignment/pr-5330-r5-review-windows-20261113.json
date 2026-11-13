@@ -1,0 +1,8 @@
+{
+  "head": "1712a7dcbdd25cd24d1ec12336019c94cbdfedbf",
+  "host": "Windows read-only review",
+  "id": "pr-5330-r5-review-windows-20261113",
+  "job": "pr-5330-r5-review-windows-20261113",
+  "summary": "Review PR 5330 callback-lock revision and tests",
+  "type": "assignment"
+}
