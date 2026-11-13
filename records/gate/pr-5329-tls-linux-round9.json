@@ -1,0 +1,20 @@
+{
+  "environment": "Linux JDK 21, isolated disposable checkout and installations, preserve security settings; execute permission tests as an unprivileged user",
+  "head": "ce7545ed7a98a5a145c8b2832620a6e5b736731e",
+  "id": "pr-5329-tls-linux-round9",
+  "job": "pr-5329-tls-linux-round9",
+  "phase": "round 9 partial configuration-write fixes",
+  "requirements": [
+    "Confirm the remote source head and check that round-eight has not been claimed or that any worker/executor has stopped with evidence. Do not execute concurrently. Capture exact commands, source heads, exit codes, fresh logs and test XML.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.cloud.SolrZkServerTlsTest -Dtests.seed=5329ABCD and both org.apache.solr.handler.admin.ZookeeperStatusHandlerTest and org.apache.solr.handler.admin.ZookeeperStatusHandlerFailureTest; report counts and skips.",
+    "Run ./gradlew :solr:packaging:integrationTests --tests test_secure_example.bats as an unprivileged user. Require all nine cases to execute without skips; retain XML and logs. Confirm the trusted certificate fixture reaches the secure CLI and plaintext listener assertions; separately report confirmation, password creation and permission cases.",
+    "Demonstrate the partial zoo.cfg write interceptor fails at the intended write, preserves the original file byte-for-byte, and the retry creates complete configuration. Demonstrate failed include replacement preserves the include and a later retry reaches a successful TLS listener. Mutate or revert the staged-write protection separately for each path and show the relevant assertion fails, not merely a setup failure.",
+    "Exercise denied zoo.cfg and include writes, existing operator-managed secureClientPort configuration, missing config, file mode and ownership preservation, symbolic links and a destination directory that is not writable. Record actual behavior, cleanup and compatibility limitations. Confirm failed staging never leaves a misleading success message or a partially written destination.",
+    "Run ./gradlew tidy and confirm no tracked formatting changes; run ./gradlew check -x test, record exact exclusions and failures including documentation-site and Docker limitations. Changes to formatting require a new pushed head and gate.",
+    "Compare current tests and production code to prior receipt fail-before confirmation, ensemble and unification and password umask mutation legs; rerun any leg whose relevant code or setup changed. Never count a compilation or setup failure as behavioral proof.",
+    "Assess status-handler TLS negative coverage: wrong truststore, hostname mismatch, client certificate requirements and cached context lifecycle. Existing mock-based tests and one happy-path BATS request do not prove these scenarios; record gaps explicitly.",
+    "External plaintext ensemble TLS inheritance and stale ports/store paths on rotation remain unresolved. Mark receipt incomplete even if focused tests pass; do not post a public offer."
+  ],
+  "supersedes": "records/gate/pr-5329-tls-linux-round8.json",
+  "type": "gate"
+}
