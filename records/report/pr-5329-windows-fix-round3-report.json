@@ -1,0 +1,14 @@
+{
+  "id": "pr-5329-windows-fix-round3-report",
+  "job": "pr-5329-windows-fix-round3",
+  "limitations": "The claimed round-two gate is on the preceding head; reconcile worker stop before a new execution. Rotation and external ensemble inherited options remain unresolved.",
+  "results": "Reject a plaintext client address restored by ZooKeeper after configuration parsing; add an ensemble-shaped negative test and BATS interception of password file modes immediately after creation before writes. git diff --check passed; no Windows builds or tests were run.",
+  "source": {
+    "branch": "pr-5329-tls-fixes",
+    "head": "0d7b07837fb32cdfc94e2f763e60d94bf3c1e840",
+    "previous": "dc3ba7b2e83a0b3e128d6e49964adf8681d9732e",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Pushed fail-closed ensemble check and password creation-time regression proof",
+  "type": "report"
+}
