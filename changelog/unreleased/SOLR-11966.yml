@@ -1,5 +1,5 @@
 title: >
-  On Unix/macOS, bin/solr stop --all stops nodes started with the embedded ZooKeeper JVM flag last.
+  On Unix/macOS, bin/solr stop --all stops nodes hosting embedded ZooKeeper last.
   Embedded ZooKeeper hosts now report the zookeeper:on node role.
 type: changed
 authors:

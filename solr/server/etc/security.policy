@@ -203,6 +203,7 @@ grant {
 
   permission java.io.FilePermission "${solr.logs.dir}", "read,write,delete,readlink";
   permission java.io.FilePermission "${solr.logs.dir}${/}-", "read,write,delete,readlink";
+  permission java.io.FilePermission "${solr.pid.dir}${/}-", "read,write,delete";
 
   permission java.io.FilePermission "${solr.security.allow.paths}", "read,write,delete,readlink";
   permission java.io.FilePermission "${solr.security.allow.paths}${/}-", "read,write,delete,readlink";

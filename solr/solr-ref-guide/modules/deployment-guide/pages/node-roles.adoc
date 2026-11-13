@@ -78,9 +78,9 @@ The `zookeeper:on` role identifies a Solr node that hosts an embedded ZooKeeper 
 Solr derives this role from `solr.zookeeper.server.enabled`, preserving the node's other roles.
 If no roles were configured, the node retains the defaults `data:on,overseer:allowed` alongside `zookeeper:on`.
 
-On Unix/macOS only, `bin/solr stop --all` stops processes whose command line contains `-Dsolr.zookeeper.server.enabled=true` after other local nodes.
-The script normally supplies this argument when it starts embedded ZooKeeper.
-Other ways of enabling embedded ZooKeeper are not detected for shutdown ordering.
+On Unix/macOS, `bin/solr stop --all` stops nodes with embedded ZooKeeper after other local nodes.
+Nodes started by the script record the embedded server's running state in the PID directory.
+For older nodes without a marker, the script also checks for the embedded ZooKeeper JVM argument.
 
 The role is `on` when embedded ZooKeeper is enabled and `off` otherwise.
 It cannot be set through `solr.node.roles`; instead configure embedded ZooKeeper using `solr.zookeeper.server.enabled`.
