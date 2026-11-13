@@ -1,0 +1,27 @@
+{
+  "commands": [
+    "git fetch origin pr-5333-shutdown-doc",
+    "git switch --detach ccce0532606b28dd7430e120de86d6662dec6124",
+    "./gradlew :solr:packaging:integrationTests --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks",
+    "git switch --detach 748e63e4281cd4d343e125e1b913805d20c5c6a2",
+    "./gradlew :solr:packaging:integrationTests --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks",
+    "./gradlew :solr:packaging:integrationTestsPicocli --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks",
+    "./gradlew tidy",
+    "./gradlew check -x test"
+  ],
+  "environment": "Linux, clean isolated checkout, JDK 21, normal Solr security manager enabled; record host and tool versions",
+  "expected_receipt": "records/receipt/pr-5333-zk-order-gate-20261113.json",
+  "head": "748e63e4281cd4d343e125e1b913805d20c5c6a2",
+  "id": "pr-5333-zk-order-gate-20261113",
+  "job": "pr-5333-zk-order-gate-20261113",
+  "phase": "implementation proof",
+  "requirements": [
+    "Verify remote head and ancestry before checkout; use isolated clean checkout and unoccupied port 18983 (or document a different fixed port consistently). Do not edit implementation or tests.",
+    "On test-only head both new Bats cases must execute and fail at the shutdown-order assertion with a running embedded ZooKeeper host and worker, not at setup, marker lookup, compilation, startup or timeout. Record fresh complete logs and JUnit XML; retain baseline evidence before switching.",
+    "At exact fixed head both packaging test suites must pass, including both new cases and existing test_start_solr.bats cases, with fresh logs and XML. The environment case must establish no literal enable flag in the host process. The override case exercises true then false. Record failures, skips and cleanup separately.",
+    "Run tidy and root check on the exact head; tidy must leave the tree unchanged. A formatting repair requires a new commit and superseding gate. Do not alter security-manager settings.",
+    "No macOS execution is claimed. A failed or non-reproduced baseline, setup failure, skipped case, or changed checkout is not passing negative proof. No implementation, code review, public comment or branch write is assigned to the gate worker."
+  ],
+  "test_only_head": "ccce0532606b28dd7430e120de86d6662dec6124",
+  "type": "gate"
+}
