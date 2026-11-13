@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-shaninna",
+  "evidence": "records/report/pr5320-v2-contract-implementation-20261113-report.json and records/gate/pr5320-v2-contract-linux-gate-20261113.json; source head d85ce12ebeba577d71c3316d55c8ea1043adb734",
+  "id": "pr5320-v2-contract-implementation-20261113",
+  "job": "pr5320-v2-contract-implementation-20261113",
+  "reason": "Implementation completed and handed to a separate Linux gate; implementation worker has stopped.",
+  "type": "release"
+}
