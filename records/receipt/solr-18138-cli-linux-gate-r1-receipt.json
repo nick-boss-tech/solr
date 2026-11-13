@@ -1,0 +1,22 @@
+{
+  "evidence": "records/evidence/solr-18138-cli-linux-gate-r1-evidence.tar.gz (SHA-256 d59b8b96273572cc6dda5677ea58998ceb59ee9bce462656a14e9c19892d1a4f)",
+  "gate": "solr-18138-cli-linux-gate-r1",
+  "head": "45956fbe7f530d77702c586d62de2a5609ab20af",
+  "host": "linux",
+  "id": "solr-18138-cli-linux-gate-r1-receipt",
+  "job": "solr-18138-cli-linux-gate-r1",
+  "legs": {
+    "bats": ":solr:packaging:integrationTests --tests test_zk.bats -Ptests.seed=18138: 12/12 behavioral tests passed incl. new test 5 'unreachable ZooKeeper reports a connection timeout' (16453 ms); Gradle exit 1 solely due to teardown_file 'solr stop --all' failing because lsof is absent on this host (environmental; identical on base; not a patch regression)",
+    "check": "root check -x test rc 0 (BUILD SUCCESSFUL in 2m37s) with -Prefguide.include=false; in a gate worktree .git is a file so Antora buildLocalAntoraSite cannot resolve a local git repo (environmental, ref-guide unrelated to this patch); documented toggle SOLR_REF_GUIDE_INCLUDE (SOLR-15670). Full log retained.",
+    "cli_exercise": "non-verbose: rc 1, improved message 'ZooKeeper did not respond within the connection timeout. Check that ZooKeeper is running and reachable; if it is embedded in Solr, check that the Solr node hosting it is running.', no per-tool error stack; verbose: rc 1, same improved message + SolrException diagnostic stack trace + per-tool ERROR as intended",
+    "core_test": ":solr:core:test --tests org.apache.solr.cli.ToolBaseZkTimeoutTest -Ptests.seed=18138, passed 1/1, exit 0, fresh XML at 45956fbe7f-xml-focused/",
+    "fail_before": "base 0ea013e782f + only new BATS regression overlaid: new test 'unreachable ZooKeeper reports a connection timeout' fails behaviorally (not ok 5, 16800 ms): assert_output --partial 'ZooKeeper did not respond within the connection timeout' fails; old output shows old message and still logs 'Could not complete ls operation' with stack. All existing tests 6-12 pass on base.",
+    "tidy": "root tidy rc 0, zero tracked changes (tidy_status_lines=0)",
+    "yaml": "changelog/unreleased/SOLR-18138-cli-zookeeper-timeout.yml parses (pyyaml), rc 0"
+  },
+  "owner": "vm2",
+  "recorded": "2026-11-13",
+  "summary": "SOLR-18138 CLI ZooKeeper connection-timeout message: full Linux gate on vm2 at head 45956fbe7f. Changelog YAML parses (pyyaml, rc 0). Focused unit test :solr:core:test --tests org.apache.solr.cli.ToolBaseZkTimeoutTest passed 1/1 (seed 18138, fresh XML). Packaging integrationTests test_zk.bats: all 12 behavioral tests passed including the new test 5 'unreachable ZooKeeper reports a connection timeout' (16.4s); the Gradle build exits 1 only because BATS teardown_file 'solr stop --all' fails on this host, where lsof is not installed, so the stop script cannot confirm port shutdown and force-kills the Jetty process after the 180s grace (environmental, identical on base; not a patch regression). CLI exercise on the built distribution: non-verbose 'bin/solr zk ls / -z 127.0.0.1:1' exits 1 with the improved message and no per-tool error stack; --verbose exits 1 with the improved message, the diagnostic stack trace, and the per-tool error as intended. tidy leaves zero tracked changes (tidy_status_lines=0). Root check -x test passes rc 0 with -Prefguide.include=false: in a gate worktree .git is a file, so Antora's buildLocalAntoraSite (ref-guide, unrelated to this patch) cannot resolve a local git repo; the ref-guide module is excluded via the project's documented toggle (SOLR_REF_GUIDE_INCLUDE, SOLR-15670). Fail-before proof on base 0ea013e782f with only the new BATS regression overlaid: the new test fails behaviorally on old output (assert_output --partial 'ZooKeeper did not respond within the connection timeout' at test_zk.bats:72 fails; old output still shows 'ERROR - ...ZkLsTool; Could not complete ls operation for reason:' with the full stack), not due to setup/compile/port; all existing tests 6-12 still pass on base. Gate record listed task 'iTest'; at this head the actual task is :solr:packaging:integrationTests.",
+  "type": "receipt",
+  "verdict": "passed"
+}
