@@ -619,10 +619,11 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
   @Test
   @ShardsFixed(num = 1)
   public void testStallKeepsErrorsFromOtherNodes() throws Exception {
+    final var solrclient = clients.getFirst();
+    String previousPollQueueTime = System.getProperty("solr.cloud.client.pollQueueTime");
+    String previousStallTime = System.getProperty("solr.cloud.client.stallTime");
     System.setProperty("solr.cloud.client.pollQueueTime", "100");
     System.setProperty("solr.cloud.client.stallTime", "1000");
-    final var solrclient = clients.getFirst();
-
     try (ServerSocket silent = new ServerSocket(0)) {
       Node stalledNode =
           new StdNode(
@@ -651,9 +652,20 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
         }
         cmdDistrib.finish();
         List<SolrError> errors = cmdDistrib.getErrors();
-        assertTrue(errors.toString(), errors.stream().anyMatch(e -> e.req.node == failingNode));
-        assertTrue(errors.toString(), errors.stream().anyMatch(e -> e.req.node == stalledNode));
+        assertTrue(errors.toString(), errors.stream().anyMatch(e -> failingNode.equals(e.req.node)));
+        assertTrue(errors.toString(), errors.stream().anyMatch(e -> stalledNode.equals(e.req.node)));
       }
+    } finally {
+      restoreProperty("solr.cloud.client.pollQueueTime", previousPollQueueTime);
+      restoreProperty("solr.cloud.client.stallTime", previousStallTime);
+    }
+  }
+
+  private static void restoreProperty(String name, String value) {
+    if (value == null) {
+      System.clearProperty(name);
+    } else {
+      System.setProperty(name, value);
     }
   }
 
