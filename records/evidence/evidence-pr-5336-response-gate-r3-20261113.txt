@@ -1,0 +1,55 @@
+PR 5336 response-format gate r3 evidence (vm6 host)
+Job: pr-5336-response-gate-r3
+Head: 59c259bcb28bac589b0617f72b52d23701442100 (fork branch pr-5336-response-followup, verified by git ls-remote at claim; isolated clean worktrees gate-5336-r3-head and gate-5336-mut, rev-parse verified, zero modifications at setup)
+Contributor parent: 96df2d214560949cb8984b16aad1a2b7f47ca7d7 (per assignment record)
+Repair commit on this head: 59c259bcb2 "SOLR-18612: gate repair: apply tidy output to OverseerStatusTest", parent eb5557d14fa6de411e35e5ff22d30a0cd8f7589d (the round-2 head)
+Seed: 5336C0DE for every test leg (passed as -Ptests.seed; the gate's ./gradlew commands run through the host JDK 21 wrapper, GRADLE_USER_HOME=/workspace/gradle-home)
+Verdict: PASSED
+
+== Round 2 -> round 3 repair
+Round 2 failed on tidy-dirty at eb5557d1: ./gradlew tidy reformatted solr/core/src/test/org/apache/solr/cloud/OverseerStatusTest.java (Spotless), recorded in records/receipt/pr-5336-response-gate-r2-receipt.json (verdict failed). The Linux gate host repaired under WORKFLOW.md "Gate repairs" (tidy changes are in scope and pre-authorized): one commit SOLR-18612: gate repair: apply tidy output to OverseerStatusTest, pushed fast-forward to pr-5336-response-followup. The repaired head 59c259bcb2 is verified tidy-clean (leg 02 below).
+
+== Head verification (gate requirement 1 setup)
+Isolated clean worktree at 59c259bcb2, rev-parse HEAD equals the offered head, zero modifications at setup. After all legs (including tidy and check) tracked files are unchanged (git status --porcelain empty).
+
+== Leg 1: focused core tests (gate requirement 1)
+Command: ./gradlew :solr:core:test --tests org.apache.solr.cloud.OverseerStatusTest --tests org.apache.solr.core.snapshots.TestSolrCloudSnapshotInactiveShard --tests org.apache.solr.cloud.api.collections.DeleteBackupCmdTest --tests org.apache.solr.handler.TestReplicationHandlerBackup -Ptests.seed=5336C0DE
+Exit code: 0 (BUILD SUCCESSFUL in 6m 33s)
+Fresh JUnit XML per class (all under solr/core/build/test-results/test/):
+- org.apache.solr.cloud.OverseerStatusTest: tests=1, failures=0, errors=0, skipped=0 (method: test)
+- org.apache.solr.core.snapshots.TestSolrCloudSnapshotInactiveShard: tests=2, failures=0, errors=0, skipped=0 (methods: testListSnapshotJsonFormat, testSnapshotFailsWhenShardHasNoActiveReplica)
+- org.apache.solr.cloud.api.collections.DeleteBackupCmdTest: tests=4, failures=0, errors=0, skipped=0 (methods: testPurgeSummaryJsonFormat, testDeleteBackupIdsIgnoresMissingZkStateDir, testDeleteBackupIdsPropagatesUnexpectedDeleteErrors, testDeleteBackupIdsRemovesExistingZkStateDir)
+- org.apache.solr.handler.TestReplicationHandlerBackup: tests=3, failures=0, errors=0, skipped=0 (methods: testBackupOnCommit, doTestBackup, testDeleteBackupJsonFormat)
+Total: 10 tests, 0 failures, 0 errors, 0 skipped. The three JSON-format discriminator methods testListSnapshotJsonFormat, testPurgeSummaryJsonFormat and testDeleteBackupJsonFormat all executed.
+
+== Leg 2: tidy (gate requirement 2)
+Command: ./gradlew tidy
+Exit code: 0. TIDY_CLEAN: git status --porcelain empty after tidy. The r2 tidy fold-in at this head is complete.
+
+== Leg 3: check -x test (gate requirement 2 second part)
+Command: ./gradlew check -x test -Prefguide.include=false
+Exit code: 0 (BUILD SUCCESSFUL in 9m 31s). The ref-guide tasks are excluded per the standing owner policy (AGENTS.md: Antora / ref-guide is NOT enforced for gate runs).
+
+== Mutation legs (gate requirement 3) -- 8/8 behavioral FAILED-OK
+Each mutation reverts exactly one NamedList constructor from SimpleOrderedMap to NamedList at an exact line, compiles :solr:core:compileJava (exit 0 every time), then runs the matching focused test class with seed 5336C0DE. Every mutation failed behaviorally (java.lang.AssertionError in the matching focused test), and the exact source was restored after each (worktree clean at the repaired head at the end). No compile, setup or skipped-test failures counted as proof.
+
+1. overseer_operations: solr/core/src/java/org/apache/solr/cloud/api/collections/OverseerStatusCmd.java:135 overseerStats -> new NamedList<>(); OverseerStatusTest.test FAILED (AssertionError). diff sha256 99175d71b974f5e5500a2470cc4b0ef512873eb15d3d6f14b172b10b5e687d8e
+2. collection_operations: OverseerStatusCmd.java:136 collectionStats -> new NamedList<>(); OverseerStatusTest.test FAILED (AssertionError). diff sha256 a4f34bf7ab2bfa490af107871e9225ea4131cb7a02c5c0bc38231d01a4577ed5
+3. snapshots_container: solr/core/src/java/org/apache/solr/handler/admin/CollectionsHandler.java:969 snapshots -> new NamedList<>(); TestSolrCloudSnapshotInactiveShard.testListSnapshotJsonFormat FAILED at :69 (AssertionError). diff sha256 0cc0c7124d249b48ad9ce58d7dded70ce05bb58d48dcaafc397bf802686b1bf0
+4. snapshot_object: solr/core/src/java/org/apache/solr/core/snapshots/CollectionSnapshotMetaData.java:241 result -> new NamedList<>(); testListSnapshotJsonFormat FAILED at :71 (AssertionError). diff sha256 b169b6e6904c644923c4da5ad22938576081488aeb3ad48225bd082b52d8de4b
+5. replicas_container: CollectionSnapshotMetaData.java:246 replicas -> new NamedList<>(); testListSnapshotJsonFormat FAILED at :74 (AssertionError). diff sha256 88271d385df6b4e9041bfd2d94b99808eaed3a881147e022339e16d99d91e819
+6. replica_object: CollectionSnapshotMetaData.java:105 result -> new NamedList<>(); testListSnapshotJsonFormat FAILED at :78 (AssertionError). diff sha256 e6f3b584c1adf04ed6651b886fad19f9ebd53f04dc9e7bba05f00bddb622ca57
+7. deletebackup_details: solr/core/src/java/org/apache/solr/cloud/api/collections/DeleteBackupCmd.java:135 details -> new NamedList<>(); DeleteBackupCmdTest.testPurgeSummaryJsonFormat FAILED at :60 (AssertionError). diff sha256 51ca7ff9be3571392da38771acd2c3458fe907afe744ba14b12ac841695221e1
+8. snapshooter_details: solr/core/src/java/org/apache/solr/handler/SnapShooter.java:401 details -> new NamedList<>(); TestReplicationHandlerBackup.testDeleteBackupJsonFormat FAILED at :133 (AssertionError). diff sha256 7f67094879fbc3eac57b287b9e48d808d7df64232bc6d24388b3753ace22cccb
+
+Each of the eight NamedList-constructor sites that the patch converts to SimpleOrderedMap is individually load-bearing for the JSON-format assertions: reverting any one of them makes the matching test fail with an AssertionError at the instanceof Map assertion. No assertions remain unproven by an isolated mutation (the three JSON-format discriminator methods each have at least one directly discriminating mutation, and the two overseer/backup structural mutations likewise).
+
+== Known untested limit (gate requirement 4)
+The install-shard partial-failure response requires a distributed restore with one leader-eligible replica failing and recovering; it remains untested by this patch and is not claimed as covered.
+
+== Execution conditions
+Isolated clean worktrees at 59c259bcb2 (gate-5336-r3-head for the positive/tidy/check legs; gate-5336-mut for the mutation legs), both rev-parse verified clean at setup and restored clean afterwards. The first mutation pass ran 5 of 8 legs before the background command reached its time limit; the remaining 3 (replica_object, deletebackup_details, snapshooter_details) ran in a continuation from the same clean restored worktree (leftover mutation from the killed run was restored first). Gradle runs serialized through the vm6 build lock (/workspace/tools/.gradle-vm6.lock). JDK 21.0.12.1+1, GRADLE_USER_HOME=/workspace/gradle-home. Host free space and inodes above the standing thresholds at each heartbeat.
+
+== Artifact references
+- Fresh leg logs and JUnit XML: /workspace/logs/vm6/pr5336-response-gate-r3/ (01-core-focus.log, 02-tidy.log, 03-check-nox.log, mut-*.log, mut-*.diff, mut-*.rc)
+- The eight mutation diff sha256s are recorded above.
