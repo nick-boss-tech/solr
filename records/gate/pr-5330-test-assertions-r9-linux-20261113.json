@@ -1,0 +1,21 @@
+{
+  "branch": "pr-5330-test-fix-20261113",
+  "contributor_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+  "environment": "Linux JDK 21 clean isolated checkout; record host, toolchain and source status",
+  "head": "13522945de6c9102ecdbe8efb821ed451e840216",
+  "id": "pr-5330-test-assertions-r9-linux-20261113",
+  "job": "pr-5330-test-assertions-r9-linux-20261113",
+  "phase": "round 9",
+  "repository": "nick-boss-tech/solr",
+  "requirements": [
+    "Reconcile the claimed round-2 Linux job and executor before overlapping work. Verify exact fork head and contributor ancestry; retain commands, exits, fresh logs and JUnit XML including counts and skips.",
+    "Run ./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.update.SolrCmdDistributorTest with recorded seed. Require testRetryReachesServerWhileAnotherClientStalls, testConcurrentErrorDrainRetainsEveryError, testSuccessfulResponseKeepsReplicationFactorAccounting, testRealRunnerCallbacksDoNotNeedClientMonitor, testErrorCallbacksDoNotClassifyRetries, testStallReportedWhileResponseBodyIsBlocked, testStalledClientIgnoresLateCallbacks, testFinishKeepsErrorsAfterStall and testStallKeepsErrorsFromOtherNodes to execute. Repeat network and concurrency cases with multiple seeds; run ./gradlew tidy and ./gradlew check -x test. Formatting changes require a committed successor and new gate.",
+    "Verify exact stall IOException and intended-node HTTP 503 assertions execute. Confirm raw socket consumes the complete HTTP request with actual Jetty framing and remains stable across seeds. Check observed retry delivery and valid JavaBin RF/rollup accounting.",
+    "Fail-before for atomic drain: in a disposable checkout retain the package-private injection constructor and test unchanged, remove only the outer synchronized block in drainErrors to recreate individually synchronized snapshot-then-clear operations, and show the deterministic test loses the concurrent error at its assertion. Record exact mutation diff, latches/observed state, logs and XML. Restore exact head and pass. Timeout, compilation, skip or unrelated setup failure is not race proof.",
+    "Retain unchanged tests in executable prior-production overlays and demonstrate meaningful failures for callback retry classification, blocked-body fence, client-monitor callback, original finish lost-error and ordered-operation regressions. For deadlock tests require intended bounded assertion or timeout after documented preconditions, not unrelated harness timeout or compilation failure.",
+    "Separately verify actual concurrent blockUntilFinished with real successful and failed network runner callbacks under bounded control. Assess multiple stalled clients, late callbacks, RF and error attribution, queued writes after stall and replica recovery; active runners are fenced but not cancelled. No clean verdict with unresolved material concern. No source edits or public comments; fixes require successor gate."
+  ],
+  "supersedes": "records/gate/pr-5330-regression-tests-r8-linux-20261113.json",
+  "type": "gate",
+  "verdict_policy": "Pass requires all named positive checks and discriminating fail-before legs, no skips and no unresolved material correctness concern."
+}
