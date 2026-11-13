@@ -1,0 +1,7 @@
+{
+  "id": "pr-5337-cli-exit-gate-r1-superseded",
+  "job": "pr-5337-cli-exit-gate-r1",
+  "reason": "Fork branch advanced from ee35178851befab053e7f6ac4d20c866eed7a293 to 21379130f426433f163fcd61f0731b8ad51d1412 to strengthen tests. See records/assignment/pr-5337-cli-exit-gate-r2.json and records/gate/pr-5337-cli-exit-gate-r2.json when published. Any round 1 result applies only to the old head.",
+  "summary": "Superseded by round 2; do not start this gate",
+  "type": "report"
+}
