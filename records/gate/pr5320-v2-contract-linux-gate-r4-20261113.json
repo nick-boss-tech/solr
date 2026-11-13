@@ -1,0 +1,23 @@
+{
+  "environment": "Linux Solr gate host, supported JDK, isolated clean checkout",
+  "head": "63188a804067b87ed16d6d205d11824532d2d086",
+  "id": "pr5320-v2-contract-linux-gate-r4-20261113",
+  "job": "pr5320-v2-contract-linux-gate-r4-20261113",
+  "phase": "round 4 follow-up proof",
+  "requirements": [
+    "Verify fork head and contributor ancestry; earlier gates cover different heads and are superseded.",
+    "Run ./gradlew :solr:solrj:test --tests org.apache.solr.common.util.JsonValidatorTest, ./gradlew :solr:core:test --tests org.apache.solr.security.BaseTestRuleBasedAuthorizationPlugin, ./gradlew :solr:core:test --tests org.apache.solr.security.TestExternalRoleRuleBasedAuthorizationPlugin, and ./gradlew :solr:core:test --tests org.apache.solr.security.BasicAuthStandaloneTest.testV2PermissionIds. Capture fresh XML/logs, counts, seeds and exit codes; confirm named regressions executed.",
+    "Run ./gradlew tidy and ./gradlew check -x test. Record exit codes and environment conditions. A tracked formatting change requires a new pushed head and superseding gate.",
+    "On isolated previous head 95aa5cbd0a26501ab583e63c3b472613f6a774a1 apply only testAnyOfEnumNull and its Arrays import unchanged; run that test and confirm the excluded-null assertion fails because null is accepted. Run it on offered head and confirm all assertions pass, including an enum explicitly containing null and legacy null behavior outside anyOf. Capture test XML and logs; compilation and setup failures are not behavioral proof.",
+    "Carry forward all round 3 fail-before and compatibility proof legs from records/gate/pr5320-v2-contract-linux-gate-r3-20261113.json, including its referenced round 2 and contributor-parent legs. No previous receipt exists; execute these separately and record actual results.",
+    "The endpoint test checks the handler spec in-process and authenticated HTTP read/set/delete plus persisted state; it does not cover HTTP introspection or controlled concurrent edits. Report these limits.",
+    "Publish receipt records/receipt/pr5320-v2-contract-linux-gate-r4-20261113-receipt.json with each leg, command, exit code, evidence location and execution conditions."
+  ],
+  "source": {
+    "branch": "pr-5320-v2-contract",
+    "contributor_parent": "5fa5513038a7cf9318ed800423d8a44064d4c0e3",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes_gate": "records/gate/pr5320-v2-contract-linux-gate-r3-20261113.json",
+  "type": "gate"
+}
