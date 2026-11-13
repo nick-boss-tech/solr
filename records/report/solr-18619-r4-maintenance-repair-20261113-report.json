@@ -1,0 +1,17 @@
+{
+  "changes": "Applied the preserved exact Linux tidy diff to two Java test files and the generated webapp dependency lock diff. Verified the evidence archive and each diff against receipt SHA-256 values, inspected outbound changes, and passed git diff --check. Plain-pushed and separately verified the full fork SHA.",
+  "gate": "records/gate/solr-18619-maintenance-linux-gate-r5.json",
+  "gate_assignment": "records/assignment/solr-18619-maintenance-linux-gate-r5.json",
+  "id": "solr-18619-r4-maintenance-repair-20261113-report",
+  "job": "solr-18619-r4-maintenance-repair-20261113",
+  "limits": "The old gate is incomplete. Tidy exited 0 but changed tracked files; updateLicenses failed because dependencies were absent from the lock; resolveAndLockAll succeeded but changed the lockfile. Zero tests or mutations ran and root, changelog and guide checks were not run. Windows did not run Gradle, compile or Selenium. Fresh Linux proof must rerun all required legs at the new head.",
+  "prior_receipt": "records/receipt/solr-18619-real-logs-linux-gate-r4.json",
+  "source": {
+    "branch": "solr-18619-targeting-prep",
+    "head": "855eccb3e7642cc25ce021d64639c5ce82bd3f12",
+    "old_head": "848885b4cda2c3312576c810aeb4a46afb50419e",
+    "repository": "nick-boss-tech/solr"
+  },
+  "status": "implemented, proof pending",
+  "type": "report"
+}
