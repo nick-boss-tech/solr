@@ -1,0 +1,6 @@
+{
+  "id": "pr-5336-response-implementation-r2",
+  "job": "pr-5336-response-followup-r2",
+  "summary": "Made OverseerStatusTest use overseer execution deterministically; moved snapshot JSON coverage to a non-nightly existing cloud fixture; added purge JSON serialization and replication deletion HTTP assertions. Pushed fork branch pr-5336-response-followup at eb5557d14fa6de411e35e5ff22d30a0cd8f7589d. Diff whitespace check passed; no Gradle on Windows. Partial install-recovery response remains untested. Linux proof pending at records/assignment/pr-5336-response-gate-r2.json and records/gate/pr-5336-response-gate-r2.json; supersedes round 1.",
+  "type": "report"
+}
