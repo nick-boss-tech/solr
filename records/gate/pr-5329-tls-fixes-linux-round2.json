@@ -1,0 +1,19 @@
+{
+  "environment": "Linux, JDK 21, clean checkout, preserve security settings",
+  "head": "dc3ba7b2e83a0b3e128d6e49964adf8681d9732e",
+  "id": "pr-5329-tls-fixes-linux-round2",
+  "job": "pr-5329-tls-fixes-linux-round2",
+  "phase": "implementation proof, round 2",
+  "requirements": [
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.cloud.SolrZkServerTlsTest -Dtests.seed=5329ABCD; capture fresh XML, counts, log and return code.",
+    "Run ./gradlew :solr:packaging:integrationTests --tests test_secure_example.bats and retain fresh BATS output and XML. Verify the new existing-port/unification integration case actually executes, including password-path failure, TLS success, plaintext rejection and file modes.",
+    "Run ./gradlew tidy; require no source changes. If formatting alters files, stop and return the diff for a new exact-head gate.",
+    "Run ./gradlew check -x test; retain log and verify the earlier SolrZkServer validateLogCalls failure is resolved.",
+    "Fail-before: apply only the updated test class to preceding fork head 7dedae124c252574caaff93cf4bcf2bc1d240fc9, run testAutomaticTlsSuppressesExistingPlaintextPort with the same seed, and record the expected port-unification assertion failure; setup or compilation failures do not count.",
+    "Independently assess password-file security at creation under umask 022 and error handling without exposing passwords; post-start file mode alone does not prove the creation race is absent.",
+    "Investigate failures; report exact commands, exit codes, counts, and fresh evidence in the named receipt."
+  ],
+  "supersedes": "records/gate/pr-5329-tls-fixes-linux-20261113.json",
+  "type": "gate",
+  "unresolved": "Persisted options and server configuration do not reconcile TLS rotation or later external ZooKeeper connections. Do not offer the patch publicly on this gate alone."
+}
