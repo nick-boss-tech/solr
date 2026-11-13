@@ -1,0 +1,19 @@
+{
+  "claim_path": "records/claim/pr-5336-response-gate-r2.json",
+  "gate_id": "pr-5336-response-gate-r2",
+  "gate_record": "records/gate/pr-5336-response-gate-r2.json",
+  "id": "pr-5336-response-gate-r2",
+  "intended_host": "Linux",
+  "job": "pr-5336-response-gate-r2",
+  "phase": "round 2",
+  "receipt_path": "records/receipt/pr-5336-response-gate-r2.json",
+  "source": {
+    "branch": "pr-5336-response-followup",
+    "contributor_parent": "96df2d214560949cb8984b16aad1a2b7f47ca7d7",
+    "head": "eb5557d14fa6de411e35e5ff22d30a0cd8f7589d",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Linux proof for deterministic PR 5336 response-format coverage",
+  "supersedes": "records/gate/pr-5336-response-gate-r1.json",
+  "type": "assignment"
+}
