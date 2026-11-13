@@ -1,0 +1,25 @@
+{
+  "claim_path": "records/claim/pr5320-v2-contract-linux-gate-r2-20261113.json",
+  "gate_id": "pr5320-v2-contract-linux-gate-r2-20261113",
+  "gate_record": "records/gate/pr5320-v2-contract-linux-gate-r2-20261113.json",
+  "id": "pr5320-v2-contract-linux-gate-r2-20261113",
+  "intended_host": "Linux",
+  "job": "pr5320-v2-contract-linux-gate-r2-20261113",
+  "phase": "round 2 follow-up proof",
+  "receipt_path": "records/receipt/pr5320-v2-contract-linux-gate-r2-20261113-receipt.json",
+  "source": {
+    "branch": "pr-5320-v2-contract",
+    "contributor_parent": "5fa5513038a7cf9318ed800423d8a44064d4c0e3",
+    "head": "f1a840767476b1bf234d0870ccb7661f9e4e2520",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Run revised exact-head Linux proof for PR 5320 authorization API schema and endpoint follow-up",
+  "supersedes_gate": "records/gate/pr5320-v2-contract-linux-gate-20261113.json",
+  "tags": [
+    "linux",
+    "gate",
+    "solr",
+    "pr-review"
+  ],
+  "type": "assignment"
+}
