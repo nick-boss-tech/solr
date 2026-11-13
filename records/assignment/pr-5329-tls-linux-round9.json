@@ -1,0 +1,21 @@
+{
+  "claim_path": "records/claim/pr-5329-tls-linux-round9.json",
+  "contributor_head": "6b938f43ba7b80ca8ed4221bb88b0698b0f9fa54",
+  "gate_id": "pr-5329-tls-linux-round9",
+  "gate_record": "records/gate/pr-5329-tls-linux-round9.json",
+  "id": "pr-5329-tls-linux-round9",
+  "intended_host": "Linux JDK 21",
+  "job": "pr-5329-tls-linux-round9",
+  "outcome": "Partial patch proof only. External ensemble TLS inheritance, stale rotation settings and durable negative TLS status-handler coverage remain unresolved. Verdict must be incomplete until addressed.",
+  "phase": "round 9 partial configuration-write fixes",
+  "prior_receipt": "records/receipt/pr-5329-tls-lifecycle-linux-round7.json",
+  "receipt_path": "records/receipt/pr-5329-tls-linux-round9.json",
+  "source": {
+    "branch": "pr-5329-tls-fixes",
+    "head": "ce7545ed7a98a5a145c8b2832620a6e5b736731e",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify staged ZooKeeper configuration writes and inherited exact-head regression coverage",
+  "supersedes": "records/gate/pr-5329-tls-linux-round8.json",
+  "type": "assignment"
+}
