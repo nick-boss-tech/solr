@@ -1,0 +1,7 @@
+{
+  "id": "pr-5339-coverage-review-20261113",
+  "job": "pr-5339-coverage-review-20261113",
+  "owner": "codex-windows",
+  "scope": "Review branch, tests and gate receipts; no public write",
+  "type": "claim"
+}
