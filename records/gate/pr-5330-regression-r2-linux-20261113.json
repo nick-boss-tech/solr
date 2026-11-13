@@ -1,0 +1,20 @@
+{
+  "branch": "pr-5330-test-fix-20261113",
+  "contributor_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+  "environment": "Linux, JDK 21, clean isolated checkout; record host, toolchain and source status",
+  "head": "dfe745bf1b8439f85300db3755c9b1ec7d2a87a6",
+  "id": "pr-5330-regression-r2-linux-20261113",
+  "job": "pr-5330-regression-r2-linux-20261113",
+  "phase": "round 2",
+  "repository": "nick-boss-tech/solr",
+  "requirements": [
+    "Verify fork head and contributor ancestry. Capture commands, exit codes, fresh logs and JUnit XML with test counts, failures and skips.",
+    "Run ./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.update.SolrCmdDistributorTest, with a recorded seed; repeat the focused stall method under multiple seeds. Run ./gradlew tidy and ./gradlew check -x test. A tracked formatting change needs a committed successor and new exact-head gate.",
+    "In a disposable checkout at this head, revert only the production change in StreamingSolrClients while leaving the test unchanged; show the focused test fails at the intended assertion after its preconditions execute. Capture source diff, logs and XML. Compile/setup failure, timeout or skip is not fail-before proof.",
+    "Resolve the active stalled-runner risk before a clean verdict. With controlled synchronization, establish whether after a stall is reported queued updates and callbacks can continue and whether a subsequent delete-by-query or commit can overtake them. Compare with the contributor parent and baseline as appropriate, record exact source changes, observations and evidence. If a correctness defect is confirmed, do not mark this head clean: hand back for a scoped implementation, permanent regression and superseding gate. If not reproduced, explain exactly what was established and remaining limits; non-reproduction alone is not proof of safety.",
+    "The test uses a non-retrying failing node to establish error retention. Existing retry tests do not establish retry while another client stalls. Explicitly assess that path and report any gap; do not claim it was proven without a test."
+  ],
+  "supersedes": "records/gate/pr-5330-test-fix-linux-20261113.json",
+  "type": "gate",
+  "verdict_policy": "Positive checks and valid fail-before are required. An unresolved material stalled-runner safety concern prevents a clean PR verdict. This head contains no production lifecycle repair. Do not post publicly."
+}
