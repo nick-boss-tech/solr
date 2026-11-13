@@ -1,0 +1,23 @@
+{
+  "claim_path": "records/claim/pr-5329-tls-linux-round8.json",
+  "contributor_head": "6b938f43ba7b80ca8ed4221bb88b0698b0f9fa54",
+  "gate_id": "pr-5329-tls-linux-round8",
+  "gate_record": "records/gate/pr-5329-tls-linux-round8.json",
+  "id": "pr-5329-tls-linux-round8",
+  "intended_host": "Linux JDK 21",
+  "job": "pr-5329-tls-linux-round8",
+  "outcome": "Proof of targeted changes only. The external-ensemble TLS inheritance and configuration rotation defects remain unresolved; never mark this patch ready or offer it publicly on the basis of this gate.",
+  "phase": "round 8 exact-head partial-patch verification",
+  "prior_receipt": "records/receipt/pr-5329-tls-lifecycle-linux-round7.json",
+  "prior_release": "records/release/pr-5329-tls-lifecycle-linux-round7.json",
+  "receipt_path": "records/receipt/pr-5329-tls-linux-round8.json",
+  "source": {
+    "branch": "pr-5329-tls-fixes",
+    "head": "69cd26432aaaf9a60e36eb888d9dd684a9eb8825",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5329-tls-lifecycle-linux-round7",
+  "summary": "Verify the reconciled PR 5329 fork and the receipt-driven fixture and include-write fixes",
+  "supersedes": "records/gate/pr-5329-tls-lifecycle-linux-round7.json",
+  "type": "assignment"
+}
