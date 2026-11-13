@@ -1,0 +1,13 @@
+{
+  "gate": "records/gate/pr-5329-tls-linux-round9.json",
+  "id": "pr-5329-windows-fix-round9-report",
+  "job": "pr-5329-windows-fix-round9",
+  "limitations": "Partial; Linux proof pending. External ZooKeeper TLS inheritance, TLS rotation, and status-handler negative TLS tests remain unresolved. Existing symlinked files requiring generated updates are rejected and need compatibility review.",
+  "source": {
+    "branch": "pr-5329-tls-fixes",
+    "head": "ce7545ed7a98a5a145c8b2832620a6e5b736731e",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Staged generated zoo.cfg and include changes in same-directory temporary files and added visible permission cases and injected failed-write/retry coverage. Bash syntax and git diff --check passed; no Gradle or Linux tests were run.",
+  "type": "report"
+}
