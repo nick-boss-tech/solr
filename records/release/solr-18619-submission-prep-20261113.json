@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-20261113",
+  "evidence": "records/report/solr-18619-submission-prep-20261113-report.json; source fork head f2cab615c5ba08cf83d11fe5ae4fc3a0d0b8d7bb; no related local executor started.",
+  "id": "solr-18619-submission-prep-20261113",
+  "job": "solr-18619-submission-prep-20261113",
+  "reason": "Scoped preparation is complete and execution is handed to the separate Linux gate; this worker is stopping without further source changes.",
+  "type": "release"
+}
