@@ -1,0 +1,11 @@
+{
+  "head": "1bb663935e1464da39d780cecbbd9b2de8d08d44",
+  "id": "pr-5339-review-20261113-report",
+  "job": "pr-5339-review-20261113",
+  "public_comment": "none",
+  "review": "research/branch-reviews/2026-11-13-pr-batch/PR-5339-review.md",
+  "source": "https://github.com/apache/solr/pull/5339",
+  "summary": "Tie-break addresses ordering defect; persisted signatures change across upgrade and need migration guidance and compatibility decision. No tests run on Windows; only labeler green.",
+  "type": "report",
+  "verdict": "changes requested"
+}
