@@ -39,6 +39,20 @@ historical or unrun checks prove the current integration. Explain a test design
 tradeoff only when it helps the reviewer; the internal checklist stays out of
 the public description.
 
+## Decide whether a finding warrants action
+
+Before asking an author to change something or raising a follow-up question,
+identify the behavior, affected caller or realistic use case, and practical
+impact. Check the documented contract and the existing discussion, including
+trade-offs the author has already considered. Separate demonstrated problems
+from hypothetical differences, and state the limits of the evidence. If a
+theoretical edge case or wording preference has no meaningful impact or new
+evidence, conclude that no action is warranted rather than generating a nit.
+
+An existing affected caller is not a prerequisite for raising a credible
+security, data-loss, compatibility, or other consequential risk. Explain the
+plausible impact and uncertainty in those cases.
+
 ## Example: PR 5310
 
 The release smoketester already detected the missing slim example data. A
