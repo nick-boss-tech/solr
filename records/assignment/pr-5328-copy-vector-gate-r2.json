@@ -1,0 +1,19 @@
+{
+  "claim_path": "records/claim/pr-5328-copy-vector-gate-r2.json",
+  "contributor_head": "c295e8c855d35c9edcf0fcf75de04d2f24803db6",
+  "gate_id": "pr-5328-copy-vector-gate-r2",
+  "gate_record": "records/gate/pr-5328-copy-vector-gate-r2.json",
+  "id": "pr-5328-copy-vector-gate-r2",
+  "intended_host": "Linux",
+  "job": "pr-5328-copy-vector-gate-r2",
+  "phase": "round 2 implementation verification",
+  "receipt_path": "records/receipt/pr-5328-copy-vector-gate-r2-receipt.json",
+  "source": {
+    "branch": "pr-5328-raw-copy-target",
+    "head": "fc65261419c7a4890510e50d9b93163268d1d853",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Linux verification for PR 5328 copy vector regression round 2",
+  "supersedes_gate": "records/gate/pr-5328-copy-vector-gate.json",
+  "type": "assignment"
+}
