@@ -1,0 +1,16 @@
+{
+  "details": "Applied the exact tidy changes from the final gate evidence and replaced Collections.singletonList(null) with Arrays.asList((String) null), retaining a one-element list with null. No Gradle run on Windows; git diff --check passed. The final old-head receipt records 4, 19, 19 and 1 focused tests passing and the carried fail-before legs, but the gate failed for tidy changes and forbiddenApisTest.",
+  "gate_job": "pr5320-v2-contract-linux-gate-r5-20261113",
+  "id": "pr5320-v2-contract-implementation-r5-20261113-report",
+  "job": "pr5320-v2-contract-implementation-r5-20261113",
+  "prior_receipt": "records/receipt/pr5320-v2-contract-linux-gate-r4-20261113-receipt.json",
+  "source": {
+    "branch": "pr-5320-v2-contract",
+    "contributor_parent": "5fa5513038a7cf9318ed800423d8a44064d4c0e3",
+    "head": "678f805a2a0d2212427d0cfadb11e87c24d122ef",
+    "previous_head": "63188a804067b87ed16d6d205d11824532d2d086",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Applied Linux tidy diff and replaced forbidden singletonList(null); new head requires Linux gate.",
+  "type": "report"
+}
