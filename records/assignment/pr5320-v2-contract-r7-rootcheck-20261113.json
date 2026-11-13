@@ -1,0 +1,27 @@
+{
+  "claim_path": "records/claim/pr5320-v2-contract-r7-rootcheck-20261113.json",
+  "gate_id": "pr5320-v2-contract-r7-rootcheck-20261113",
+  "gate_record": "records/gate/pr5320-v2-contract-r7-rootcheck-20261113.json",
+  "id": "pr5320-v2-contract-r7-rootcheck-20261113",
+  "intended_host": "Linux",
+  "job": "pr5320-v2-contract-r7-rootcheck-20261113",
+  "phase": "round 7 root-check completion",
+  "prior_receipt": "records/receipt/pr5320-v2-contract-linux-gate-r7-20261113-receipt.json",
+  "receipt_path": "records/receipt/pr5320-v2-contract-r7-rootcheck-20261113-receipt.json",
+  "source": {
+    "branch": "pr-5320-v2-contract",
+    "contributor_parent": "5fa5513038a7cf9318ed800423d8a44064d4c0e3",
+    "head": "b4bb017d22c036df50bebfffecf26c0e8a0b0b57",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr5320-v2-contract-linux-gate-r7-20261113",
+  "summary": "Complete the unexcluded root check omitted from the round 7 receipt",
+  "supersedes_gate": "records/gate/pr5320-v2-contract-linux-gate-r7-20261113.json",
+  "tags": [
+    "linux",
+    "gate",
+    "solr",
+    "pr-review"
+  ],
+  "type": "assignment"
+}
