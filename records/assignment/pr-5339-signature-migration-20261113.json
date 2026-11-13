@@ -1,0 +1,12 @@
+{
+  "id": "pr-5339-signature-migration-20261113",
+  "intended_host": "Windows implementation, Linux proof",
+  "job": "pr-5339-signature-migration-20261113",
+  "review": "records/report/pr-5339-review-20261113-report.json",
+  "source": {
+    "head": "1bb663935e1464da39d780cecbbd9b2de8d08d44",
+    "repository": "iprithv/solr"
+  },
+  "summary": "Prepare PR 5339 signature migration follow-up on a fork branch",
+  "type": "assignment"
+}
