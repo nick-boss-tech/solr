@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr-5330-r4",
+  "evidence": "Fork head 6476beb8debb78d6f1504144fef292ca06583c94 pushed and verified; local implementation worker stopped, no local test executor started. Report records/report/pr-5330-r4-callback-fix-windows-20261113-report.json.",
+  "id": "pr-5330-r4-callback-fix-windows-20261113",
+  "job": "pr-5330-r4-callback-fix-windows-20261113",
+  "reason": "Fork implementation complete and proof handed to Linux",
+  "type": "release"
+}
