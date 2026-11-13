@@ -682,14 +682,11 @@ public class RunExampleTool extends ToolBase {
             + password
             + " (used for the keystore and all basic-auth/ZooKeeper demonstration accounts below).");
     if (!params.noPrompt()) {
-      String response =
-          prompt(
-              userInputScanner(),
-              "Press Enter to delete and recreate "
-                  + secureExampleDisplayArgument(home.toString())
-                  + ", or enter any text to cancel: ",
-              "");
-      if (!response.isEmpty()) {
+      echo(
+          "Press Enter to delete and recreate "
+              + secureExampleDisplayArgument(home.toString())
+              + ", or enter any text to cancel: ");
+      if (!userInputScanner().nextLine().isEmpty()) {
         echo("Secure example reset cancelled.");
         return;
       }

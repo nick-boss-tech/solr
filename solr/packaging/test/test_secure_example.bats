@@ -163,10 +163,12 @@ teardown() {
 
 @test "secure example preserves existing home when reset is declined" {
   printf 'preserve me\n' > "$SOLR_HOME/existing-file"
-  run bash -c 'printf "no\n" | solr start -e secure --solr-home "$SOLR_HOME" -p "$SOLR_PORT"'
-  assert_success
-  assert_output --partial 'Secure example reset cancelled.'
-  [ "$(cat "$SOLR_HOME/existing-file")" = 'preserve me' ]
+  for response in 'no' '  ' '""'; do
+    run bash -c 'printf "%s\n" "$1" | solr start -e secure --solr-home "$SOLR_HOME" -p "$SOLR_PORT"' _ "$response"
+    assert_success
+    assert_output --partial 'Secure example reset cancelled.'
+    [ "$(cat "$SOLR_HOME/existing-file")" = 'preserve me' ]
+  done
 }
 
 @test "secure example resets existing home when Enter confirms" {
