@@ -1,0 +1,19 @@
+{
+  "claim_path": "records/claim/solr-18138-cli-linux-gate-r1.json",
+  "gate_id": "solr-18138-cli-linux-gate-r1",
+  "gate_record": "records/gate/solr-18138-cli-linux-gate-r1.json",
+  "id": "solr-18138-cli-linux-gate-r1",
+  "intended_host": "Linux gate host",
+  "job": "solr-18138-cli-linux-gate-r1",
+  "phase": "implementation proof round 1",
+  "receipt_path": "records/receipt/solr-18138-cli-linux-gate-r1.json",
+  "source": {
+    "base": "0ea013e782f",
+    "branch": "solr-18138-submit",
+    "head": "45956fbe7f530d77702c586d62de2a5609ab20af",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Linux proof for SOLR-18138 CLI ZooKeeper timeout message",
+  "supersedes": null,
+  "type": "assignment"
+}
