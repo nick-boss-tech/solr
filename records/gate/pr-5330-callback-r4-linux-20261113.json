@@ -1,0 +1,21 @@
+{
+  "branch": "pr-5330-test-fix-20261113",
+  "contributor_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+  "environment": "Linux JDK 21, isolated clean checkout; record host, JDK, source and status",
+  "head": "6476beb8debb78d6f1504144fef292ca06583c94",
+  "id": "pr-5330-callback-r4-linux-20261113",
+  "job": "pr-5330-callback-r4-linux-20261113",
+  "phase": "round 4",
+  "repository": "nick-boss-tech/solr",
+  "requirements": [
+    "First reconcile the claimed round-2 Linux job at dfe745bf1b8439f85300db3755c9b1ec7d2a87a6 and its executor. Do not duplicate an active execution or treat its older-head receipt as proof for this head.",
+    "Verify remote head and ancestry. Run ./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.update.SolrCmdDistributorTest with recorded seed; require testFinishKeepsErrorsAfterStall, testStallKeepsErrorsFromOtherNodes and testStalledClientIgnoresLateCallbacks to execute. Repeat network stall tests with multiple seeds. Run ./gradlew tidy and ./gradlew check -x test. Record commands, exit codes, JUnit XML, counts, skips and fresh logs. A formatting change requires committed successor and new gate.",
+    "Fail-before: retain tests unchanged on executable appropriate overlays and prove the finish-first case detects original PR 5330 lost error, ordered-operation case detects round-3 production omission, and late-callback case detects missing callback fence. Capture overlay diffs, logs and XML; compile, timeout, skip and setup failures do not prove behavior.",
+    "Prove atomic drain with a controlled interleaving: arrange an error arriving between the old snapshot and clear, require it be retained for the current or next drain, compare an executable old implementation with the fixed head, and capture exact probe source and logs. Also verify no unfenced callback from an uncompleted client can add an error after the final drain; a late callback from a reported stalled client must not credit success or duplicate errors.",
+    "Exercise actual retry and verify no commit or delete-by-query request is sent across a stalled flush. Assess multiple stalled clients, exception suppression, callback synchronization, reentrant callbacks, concurrent success versus stall, error attribution and replica recovery. The fenced runner is not cancelled: assess the consequence of continuing queued writes and any impact on replication accounting and recovery. Report all limits and concerns.",
+    "A failure requires handback for a scoped implementation and a superseding gate. Do not silently edit or push source. No public post."
+  ],
+  "supersedes": "records/gate/pr-5330-stall-safety-r3-linux-20261113.json",
+  "type": "gate",
+  "verdict_policy": "Pass only when required checks, discriminating fail-before and controlled drain proof pass and no material correctness concern remains. A non-reproduction or compilation failure is not proof."
+}
