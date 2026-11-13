@@ -1,0 +1,14 @@
+{
+  "id": "pr5320-v2-contract-implementation-r2-20261113",
+  "intended_host": "Windows",
+  "job": "pr5320-v2-contract-implementation-r2-20261113",
+  "source": {
+    "branch": "pr-5320-v2-contract",
+    "head": "d85ce12ebeba577d71c3316d55c8ea1043adb734",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr5320-v2-contract-implementation-20261113",
+  "summary": "Address follow-up review findings on the permission API schema and boundary tests",
+  "supersedes_gate": "records/gate/pr5320-v2-contract-linux-gate-20261113.json",
+  "type": "assignment"
+}
