@@ -1,0 +1,14 @@
+{
+  "id": "pr5320-v2-contract-implementation-r3-20261113",
+  "intended_host": "Windows",
+  "job": "pr5320-v2-contract-implementation-r3-20261113",
+  "source": {
+    "branch": "pr-5320-v2-contract",
+    "head": "f1a840767476b1bf234d0870ccb7661f9e4e2520",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr5320-v2-contract-implementation-r2-20261113",
+  "summary": "Correct anyOf failure propagation and null ID handling after round 2 review",
+  "supersedes_gate": "records/gate/pr5320-v2-contract-linux-gate-r2-20261113.json",
+  "type": "assignment"
+}
