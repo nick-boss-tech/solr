@@ -1,0 +1,10 @@
+{
+  "coordination": "Older round-2 Linux gate remains claimed at a different head; leave its executor and records untouched and do not assume it stopped.",
+  "host": "Windows implementation; Linux proof separately",
+  "id": "pr-5330-retry-serial-r7-windows-20261113",
+  "job": "pr-5330-retry-serial-r7-windows-20261113",
+  "source_head": "6ad35b2d9be19334e7df512d7a071e5fb237b12a",
+  "successor_of": "pr-5330-response-lock-r6-windows-20261113",
+  "summary": "Remove concurrent retry classification from PR 5330 callbacks",
+  "type": "assignment"
+}
