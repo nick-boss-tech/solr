@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "Implementation commit e357862c6ebd23ac3b4cf5e9fa635f94391bad52 was pushed and read back; the implementation worker and checkout operation have completed. Gate publication failed; pr-5333-doc-proof-20261113 must not be treated as a complete handoff.",
+  "id": "pr-5333-doc-accuracy-20261113",
+  "job": "pr-5333-doc-accuracy-20261113",
+  "reason": "Documentation implementation stopped; gate record remains missing",
+  "type": "release"
+}
