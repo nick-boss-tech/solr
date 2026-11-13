@@ -1,0 +1,39 @@
+{
+  "evidence": "records/evidence/pr-5339-signature-migration-linux-gate-r1-evidence.json",
+  "gate": "pr-5339-signature-migration-linux-gate-r1",
+  "head": "6d886caf1b2915c9318b1419386e5181dd154ad0",
+  "id": "pr-5339-signature-migration-linux-gate-r1-receipt",
+  "job": "pr-5339-signature-migration-linux-gate-r1",
+  "results": {
+    "actual_root_check": {
+      "reason": "Owner stop request.",
+      "result": "not run"
+    },
+    "buildLocalSite": {
+      "reason": "Antora site-build excluded by standing owner instruction.",
+      "result": "not run"
+    },
+    "focused_test": {
+      "command": "./gradlew :solr:core:test --tests org.apache.solr.update.processor.TextProfileSignatureTest -Ptests.seed=5339",
+      "errors": 0,
+      "exit_code": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 3
+    },
+    "root_check_dry_run_only": {
+      "actual_check_executed": false,
+      "command": "./gradlew check -x test --dry-run --no-daemon --console=plain",
+      "exit_code": 0
+    },
+    "tidy": {
+      "command": "./gradlew tidy",
+      "exit_code": 0,
+      "tracked_or_nonignored_changes": false
+    }
+  },
+  "source_branch_at_final_check": "83b2df0977499337bc88daaba8eb872a3835f31b",
+  "source_branch_note": "Assigned head 6d886caf1b2915c9318b1419386e5181dd154ad0 was tested; newer child commit was not tested.",
+  "type": "receipt",
+  "verdict": "incomplete"
+}
