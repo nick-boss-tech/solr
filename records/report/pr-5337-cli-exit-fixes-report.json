@@ -1,0 +1,13 @@
+{
+  "id": "pr-5337-cli-exit-fixes-report",
+  "job": "pr-5337-cli-exit-fixes",
+  "results": "Propagate launcher status, handle commons-cli package and snapshot parent help, and extend existing packaging help tests. Windows host ran bash syntax and git diff --check only. Linux and Windows process-level proof pending.",
+  "source": {
+    "branch": "pr-5337-cli-exit-fixes",
+    "contributor_parent": "944f3ec319caee19a8061feb227ee20b4cd8dcbe",
+    "head": "ee35178851befab053e7f6ac4d20c866eed7a293",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Implemented, proof pending",
+  "type": "report"
+}
