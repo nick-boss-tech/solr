@@ -1,0 +1,9 @@
+{
+  "head": "6d886caf1b2915c9318b1419386e5181dd154ad0",
+  "id": "pr-5339-signature-coverage-20261113",
+  "intended_host": "Windows implementation; Linux proof",
+  "job": "pr-5339-signature-coverage-20261113",
+  "review": "records/report/pr-5339-migration-review-20261113-report.json",
+  "summary": "Strengthen signature regression tests on fork PR 5339 follow-up",
+  "type": "assignment"
+}
