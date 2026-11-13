@@ -1,0 +1,20 @@
+{
+  "branch": "pr-5330-test-fix-20261113",
+  "contributor_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+  "environment": "Linux JDK 21, isolated clean checkout; record host, JDK and source status",
+  "head": "04c5746d1775f26bbba983249c1a473cdf4bd8ec",
+  "id": "pr-5330-regression-tests-r8-linux-20261113",
+  "job": "pr-5330-regression-tests-r8-linux-20261113",
+  "phase": "round 8",
+  "repository": "nick-boss-tech/solr",
+  "requirements": [
+    "Reconcile older claimed round-2 Linux executor and receipt before overlapping work. Verify exact fork head and contributor ancestry; retain commands, exits, logs and JUnit XML including counts and skips.",
+    "Run ./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.update.SolrCmdDistributorTest with recorded seed. Require testRetryReachesServerWhileAnotherClientStalls, testConcurrentErrorDrainRetainsEveryError, testSuccessfulResponseKeepsReplicationFactorAccounting, testRealRunnerCallbacksDoNotNeedClientMonitor, testErrorCallbacksDoNotClassifyRetries, testStallReportedWhileResponseBodyIsBlocked, testStalledClientIgnoresLateCallbacks, testFinishKeepsErrorsAfterStall and testStallKeepsErrorsFromOtherNodes to execute. Repeat network and concurrent cases with multiple seeds; run ./gradlew tidy and ./gradlew check -x test. Formatting changes require a committed successor and new gate.",
+    "Retain unchanged tests in executable old-production overlays and establish meaningful failures for callback retry classification, blocked-body fence, client-monitor callback, original finish lost-error and ordered-operation regressions. For bounded deadlock tests, require the intended bounded assertion or timeout after documented preconditions, not an unrelated harness timeout, compile failure or skip. Capture overlays and XML/logs.",
+    "Validate observable retry delivery, valid JavaBin RF/rollup, real network callbacks while the client monitor is held and concurrent drain test outcomes. The runner-monitor test simulates the monitor held by flush; separately verify an actual concurrent blockUntilFinished and real successful and failed network callbacks complete with bounded controlled synchronization. Prove atomic drain with a controlled append at the old snapshot/clear boundary; the repeated concurrent test alone is not deterministic fail-before proof.",
+    "Assess multiple stalled clients, late callbacks, RF and error attribution, queued writes after stall and replica recovery. Active runners are fenced, not cancelled; no clean verdict with unresolved material safety concern. Any repair or formatting changes require a new implementation and exact-head successor gate. No public comments."
+  ],
+  "supersedes": "records/gate/pr-5330-retry-serial-r7-linux-20261113.json",
+  "type": "gate",
+  "verdict_policy": "Pass requires every positive check and discriminating fail-before leg, no skips and no unresolved material correctness concern. Distinguish helper coverage from real integration."
+}
