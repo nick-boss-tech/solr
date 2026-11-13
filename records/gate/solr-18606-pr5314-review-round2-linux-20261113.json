@@ -1,0 +1,21 @@
+{
+  "environment": "Linux, JDK 21, clean clone, fixed seed 18606CAFE; no Gradle on Windows",
+  "head": "a20facda3ee83d307dbc26a33a229c7b082c62bb",
+  "id": "solr-18606-pr5314-review-round2-linux-20261113",
+  "job": "solr-18606-pr5314-review-round2-linux-20261113",
+  "phase": "PR review round 2",
+  "receipt_path": "records/receipt/solr-18606-pr5314-review-round2-linux-20261113-receipt.json",
+  "requirements": [
+    "Run :solr:solrj-zookeeper:test for org.apache.solr.client.solrj.impl.ZkClientClusterStateProviderTest.testKnownAliasDoesNotReadAliasCollectionState, confirming direct failed-read positive control and zero skips; run :solr:solrj:test for org.apache.solr.client.solrj.impl.CloudHttp2SolrClientTest.testZkAliasRequestsResolveAndQuery and the ClusterStateProviderTest, CloudSolrClientCacheTest, and CloudSolrClientRoutingTest suites; run :solr:core:test for org.apache.solr.cloud.overseer.ZkStateReaderTest and org.apache.solr.cloud.AliasIntegrationTest and :solr:solrj-zookeeper:test for org.apache.solr.common.cloud.SolrZkClientTest. Verify exact test class paths and report commands, counts, fresh logs and XML, failures and skips.",
+    "In a disposable clone remove only the known-alias guard and rerun the path-specific test; require failure caused by the recorded alias state-path read, not compile or setup failure. Restore the source and report evidence.",
+    "Run root tidy and root check -x test with default checks, no exclusions unless separately authorized; formatting changes invalidate the head. Record any environmental condition or incomplete proof without presenting it as pass.",
+    "Record PR and branch heads, exact source head, all execution results and limitations, including single-client/single-server scope. Do not publish PR comments or edit the PR body."
+  ],
+  "source": {
+    "base_head": "2dbfc9f32aa34cef586f32c7b473a5cd689e8705",
+    "branch": "solr-18606-pr5314-review-round2",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes": "records/gate/solr-18606-pr5314-alias-signal-linux-gate-2dbfc9f32aa-r2.json",
+  "type": "gate"
+}
