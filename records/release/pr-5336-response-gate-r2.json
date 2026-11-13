@@ -1,0 +1,8 @@
+{
+  "actor": "vm6",
+  "evidence": "records/receipt/pr-5336-response-gate-r2-receipt.json",
+  "id": "pr-5336-response-gate-r2",
+  "job": "pr-5336-response-gate-r2",
+  "reason": "Round-2 gate for PR 5336 completed at head eb5557d1 with verdict FAILED: the positive focused-test leg passed (10 tests, 0 failures) but ./gradlew tidy deterministically reformats solr/core/src/test/org/apache/solr/cloud/OverseerStatusTest.java (Spotless), so the head is not tidy-clean and per gate requirement 2 a new pushed head with the formatting fold-in plus a superseding gate is required. Full evidence in records/evidence/evidence-pr-5336-response-gate-r2-20261113.txt and the receipt.",
+  "type": "release"
+}
