@@ -1,0 +1,61 @@
+{
+  "assignment": "records/assignment/pr-5333-zk-order-gate-20261113.json",
+  "board_base": "8dfa9c772632d2a62f31a9fbf1cca915bd4492ac",
+  "evidence": "records/evidence/pr-5333-zk-order-gate-20261113-evidence.json",
+  "gate": "records/gate/pr-5333-zk-order-gate-20261113.json",
+  "id": "pr-5333-zk-order-gate-20261113-report",
+  "job": "pr-5333-zk-order-gate-20261113",
+  "recorded": "2026-11-13T16:50:20-07:00",
+  "source": {
+    "branch": "pr-5333-shutdown-doc",
+    "repository": "nick-boss-tech/solr",
+    "head": "748e63e4281cd4d343e125e1b913805d20c5c6a2",
+    "test_only_head": "ccce0532606b28dd7430e120de86d6662dec6124",
+    "ancestry": "test_only_head is the direct parent of source head; source branch remote head was verified unchanged at 748e63e4281cd4d343e125e1b913805d20c5c6a2"
+  },
+  "environment": {
+    "host": "Linux x86_64",
+    "java": "OpenJDK 21.0.12.1",
+    "gradle": "9.7.0",
+    "bats": "1.10.0",
+    "base_port": 18983,
+    "security_manager": "Normal project setting retained; Solr startup logs confirm the Security Manager was enabled."
+  },
+  "status": "incomplete",
+  "summary": "The owner stopped the test-only baseline after it stalled in Bats case 3. The required shutdown-order assertion was never reached, so this is not valid fail-before proof. No further test leg was run after the owner stop.",
+  "baseline": {
+    "command": "./gradlew :solr:packaging:integrationTests --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks",
+    "planned_bats_cases": 13,
+    "passed_before_stop": [
+      "SOLR-11740 check 'solr stop' connection",
+      "SOLR-11966 stop ZooKeeper hosts after other SolrCloud nodes"
+    ],
+    "case_in_progress": "stop orders an embedded ZooKeeper enabled through the environment last",
+    "observation": "Case 3 remained in curl -fsS http://localhost:18983/api/cluster/node-roles/node/localhost:18983_solr?indent=false for about 1 hour 19 minutes. Solr processes on 18983 and 18984 were live, but neither 18983's node-role endpoint nor the test advanced. Both Solr logs repeatedly reported connection refused to localhost:19983; no listener on 19983 was present at stop time.",
+    "shutdown_order_assertion_reached": false,
+    "override_case_reached": false,
+    "exit_code": 143,
+    "exit_reason": "Owner-requested SIGTERM; not a test assertion failure.",
+    "junit_xml": "Not produced; the Bats process did not complete the suite."
+  },
+  "remaining_legs": {
+    "fixed_head_integrationTests": "Not run after owner stop.",
+    "fixed_head_integrationTestsPicocli": "Not run after owner stop.",
+    "tidy": "Not run after owner stop.",
+    "check_x_test": "Not run after owner stop.",
+    "antora_site_build_and_dependent_link_checks": "Excluded per standing Solr instruction; not run.",
+    "docker": "Never installed or invoked."
+  },
+  "cleanup": {
+    "gradle_bats_solr_zookeeper_processes": "None remained after stop.",
+    "ports_18983_18984_19983": "No listeners remained.",
+    "gradle_locks": "Both required locks were free at final verification.",
+    "free_inodes": "55.03% at final verification.",
+    "source_edits_or_pr_jira_actions": "None."
+  },
+  "risks": [
+    "This execution does not satisfy the baseline gate: it did not reproduce a shutdown-order assertion failure with a running embedded ZooKeeper host and worker.",
+    "No passing fixed-head proof, tidy result, or root check result is claimed."
+  ],
+  "type": "report"
+}

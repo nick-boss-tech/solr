@@ -1,0 +1,12 @@
+{
+  "bytes": 42946,
+  "contents": "Evidence bundle includes the Linux/JDK/Gradle/Bats environment, full partial Gradle console log, Bats temporary TAP/output files, captured Solr node logs, owner-stop status, final process/lock/inode verification, and verified assignment/source snapshot. The test-only Bats suite did not finish; case 3 was blocked at the local node-role endpoint, so no valid fail-before proof or JUnit XML exists.",
+  "head": "ccce0532606b28dd7430e120de86d6662dec6124",
+  "id": "pr-5333-zk-order-gate-20261113-evidence",
+  "job": "pr-5333-zk-order-gate-20261113",
+  "location": "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519664052758700/NbdzxcWlEBOwvXGa.gz?Expires=1826149791&Signature=jjQ-eSggAmQZai4SQSAD6IKyMqtUMjpOtTZO354u2lqxuXh9ufeq11jlvzkdXYPbknRRoMX1V89KTxaM5NcelMLp816TU49ZlB9164i0zbIUtXXmiDHP50qJm3D4qqsZqEsWHyn9a5iy3aVfFPCEWYdjML~4YdN2q9PGUjLa7Tkqj4a3iHHnqh8c51el8rgrLoo7THIuIQn-f-Mvf-D2-SxrKv8Urg3j7f~epczbs9xGk2GTTWzXlXLFJRG1Qq5gfl2kje9WA58EEd5PLD3Y2oeow9UnFDaA0m0k~bOb2S8FuWQUanunJN5AgqI9hHwi3MONWN7Uz-3Q7d-ghY4tKQ__&Key-Pair-Id=K10M74EMLURLMC",
+  "sha256": "2ff07a95b7014bea33eff4db4fb143df3038b4269a0d928deb7fa683011ead1d",
+  "source_head": "748e63e4281cd4d343e125e1b913805d20c5c6a2",
+  "status": "incomplete",
+  "type": "evidence"
+}

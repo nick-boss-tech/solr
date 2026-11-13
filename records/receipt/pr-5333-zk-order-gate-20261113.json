@@ -1,0 +1,42 @@
+{
+  "evidence": "records/evidence/pr-5333-zk-order-gate-20261113-evidence.json (SHA-256 2ff07a95b7014bea33eff4db4fb143df3038b4269a0d928deb7fa683011ead1d): partial Gradle log, Bats temp output, Solr logs, stop status, environment and final process/lock/inode snapshot; no JUnit XML was generated.",
+  "gate": "pr-5333-zk-order-gate-20261113",
+  "head": "748e63e4281cd4d343e125e1b913805d20c5c6a2",
+  "id": "pr-5333-zk-order-gate-20261113-receipt",
+  "job": "pr-5333-zk-order-gate-20261113",
+  "legs": [
+    {
+      "leg": "live assignment, claim and source verification",
+      "result": "Active assignment and phone-agent-2 claim re-read from coordination-v2; source branch remained at 748e63e4281cd4d343e125e1b913805d20c5c6a2. Test-only head ccce0532606b28dd7430e120de86d6662dec6124 is its direct parent. The two older assignments remain superseded."
+    },
+    {
+      "leg": "test-only baseline Bats run",
+      "result": "Incomplete and owner-stopped (exit 143). Bats announced 13 cases; cases 1-2 passed. Case 3, 'stop orders an embedded ZooKeeper enabled through the environment last', remained blocked in curl to the local node-role endpoint on port 18983. Solr logs showed repeated connection refused to localhost:19983. The required shutdown-order assertion was never reached; this is not valid fail-before proof. No JUnit XML was produced."
+    },
+    {
+      "leg": "fixed-head packaging integrationTests",
+      "result": "Not run after owner stop."
+    },
+    {
+      "leg": "fixed-head integrationTestsPicocli",
+      "result": "Not run after owner stop."
+    },
+    {
+      "leg": "tidy and root check -x test",
+      "result": "Not run after owner stop; no result is claimed."
+    },
+    {
+      "leg": "Antora and Docker exclusions",
+      "result": "Antora site-build and dependent link-check tasks excluded per standing instruction. Docker was never installed or invoked."
+    },
+    {
+      "leg": "stop and cleanup",
+      "result": "After owner-requested SIGTERM, no Gradle/Bats/Solr/ZooKeeper test processes or listeners on 18983/18984/19983 remained. Both required locks were free; 55.03% of inodes were free."
+    }
+  ],
+  "owner": "phone-agent-2",
+  "recorded": "2026-11-13T16:50:20-07:00",
+  "summary": "Closeout is incomplete. The test-only baseline did not reach the required shutdown-order assertion and therefore provides no negative proof; no fixed-head or later gate legs were run.",
+  "type": "receipt",
+  "verdict": "incomplete"
+}
