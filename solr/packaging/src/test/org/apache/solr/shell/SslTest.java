@@ -18,6 +18,8 @@
 package org.apache.solr.shell;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
@@ -59,7 +61,11 @@ public class SslTest extends SolrShellTestCase {
   private static final String HOSTNAME_REJECTION =
       "(No subject alternative DNS name matching localhost found|No name matching localhost found)";
   private static final String MISSING_CLIENT_CERTIFICATE = "(bad_certificate|certificate_required)";
-  private static final String CLIENT_CERTIFICATE_REJECTED = "certificate_unknown";
+  private static final Pattern CLIENT_HOSTNAME_LOG =
+      Pattern.compile(
+          "javax\\.net\\.ssl\\.SSLHandshakeException: (\\(certificate_unknown\\) )?"
+              + "(No subject alternative (DNS name matching \\S+|names matching IP address \\S+) found"
+              + "|Endpoint Identification Algorithm HTTPS is not supported on the server side)");
 
   /** The JDK's keytool, which both platforms have, by absolute path rather than via PATH. */
   private static final String KEYTOOL =
@@ -79,7 +85,6 @@ public class SslTest extends SolrShellTestCase {
     assertDiagnostic(HOSTNAME_REJECTION, "No name matching localhost found");
     assertDiagnostic(MISSING_CLIENT_CERTIFICATE, "Received fatal alert: bad_certificate");
     assertDiagnostic(MISSING_CLIENT_CERTIFICATE, "Received fatal alert: certificate_required");
-    assertDiagnostic(CLIENT_CERTIFICATE_REJECTED, "Received fatal alert: certificate_unknown");
     for (String unrelated :
         new String[] {
           "Server refused connection",
@@ -90,11 +95,57 @@ public class SslTest extends SolrShellTestCase {
         }) {
       assertFalse(Pattern.compile(HOSTNAME_REJECTION).matcher(unrelated).find());
       assertFalse(Pattern.compile(MISSING_CLIENT_CERTIFICATE).matcher(unrelated).find());
-      assertFalse(Pattern.compile(CLIENT_CERTIFICATE_REJECTED).matcher(unrelated).find());
     }
     assertFalse(Pattern.compile(HOSTNAME_REJECTION).matcher("bad_certificate").find());
-    assertFalse(
-        Pattern.compile(CLIENT_CERTIFICATE_REJECTED).matcher("certificate_required").find());
+  }
+
+  @Test
+  public void clientHostnameDiagnosticMustBeFreshAndSpecific() {
+    String old =
+        "earlier: café\n"
+            + "javax.net.ssl.SSLHandshakeException: No subject alternative DNS name matching client found\n";
+    String[] accepted = {
+      "javax.net.ssl.SSLHandshakeException: No subject alternative DNS name matching client found",
+      "javax.net.ssl.SSLHandshakeException: (certificate_unknown) No subject alternative names"
+          + " matching IP address 127.0.0.1 found",
+      "javax.net.ssl.SSLHandshakeException: Endpoint Identification Algorithm HTTPS is not"
+          + " supported on the server side"
+    };
+    int offset = old.getBytes(StandardCharsets.UTF_8).length;
+    for (String diagnostic : accepted) {
+      assertTrue(
+          hasFreshClientHostnameDiagnostic((old + diagnostic).getBytes(StandardCharsets.UTF_8), offset));
+    }
+    for (String unrelated :
+        new String[] {
+          "javax.net.ssl.SSLHandshakeException: (certificate_unknown) bad certificate",
+          "javax.net.ssl.SSLHandshakeException: (certificate_required) Empty client certificate"
+              + " chain",
+          "javax.net.ssl.SSLHandshakeException: PKIX path building failed",
+          "java.net.ConnectException: Connection refused",
+          "java.nio.channels.ClosedChannelException"
+        }) {
+      assertFalse(
+          hasFreshClientHostnameDiagnostic((old + unrelated).getBytes(StandardCharsets.UTF_8), offset));
+    }
+    assertFalse(hasFreshClientHostnameDiagnostic(old.getBytes(StandardCharsets.UTF_8), offset));
+    assertFalse(hasFreshClientHostnameDiagnostic(new byte[0], offset));
+  }
+
+  private static boolean hasFreshClientHostnameDiagnostic(byte[] log, int offset) {
+    return offset >= 0
+        && offset <= log.length
+        && CLIENT_HOSTNAME_LOG
+            .matcher(new String(log, offset, log.length - offset, StandardCharsets.UTF_8))
+            .find();
+  }
+
+  private static boolean hasFreshClientHostnameDiagnostic(Path log, int offset) {
+    try {
+      return hasFreshClientHostnameDiagnostic(Files.readAllBytes(log), offset);
+    } catch (IOException e) {
+      throw new UncheckedIOException(e);
+    }
   }
 
   private static void assertDiagnostic(String regex, String output) {
@@ -384,6 +435,8 @@ public class SslTest extends SolrShellTestCase {
     // clientHostnameVerification to fail
     createSignedStores(
         "client", "test.solr.apache.org", "DNS:test.solr.apache.org,IP:127.0.0.2", "clientAuth");
+    createSignedStores(
+        "client-match", "test.solr.apache.org", "DNS:localhost,IP:127.0.0.1", "clientAuth");
 
     // Set ENV_VARs so that Solr uses this keystore
     env("SOLR_SSL_ENABLED", "true");
@@ -466,10 +519,28 @@ public class SslTest extends SolrShellTestCase {
                 .output()
                 .contains("localhost:" + ports().solr3() + "_solr"));
 
+    // The same node and CA must accept a client with the loopback identity.
+    env(
+        "SOLR_SSL_CLIENT_KEY_STORE",
+        path("ssl/client-match/solr-client-match.keystore.p12").toString());
+    env("SOLR_SSL_CLIENT_KEY_STORE_PASSWORD", "client-match-key");
+    run("solr api --solr-url \"https://localhost:${SOLR3_PORT}/solr/test/select?q=*:*&rows=0\"")
+        .assertContains("\"numFound\":0");
+
+    env("SOLR_SSL_CLIENT_KEY_STORE", path("ssl/client/solr-client.keystore.p12").toString());
+    env("SOLR_SSL_CLIENT_KEY_STORE_PASSWORD", "client-key");
+    Path serverLog = harnessEnv.logsDir().resolve("solr.log");
+    int logOffset = Math.toIntExact(Files.size(serverLog));
     runFail(
             "solr api --verbose --solr-url"
                 + " \"https://localhost:${SOLR3_PORT}/solr/test/select?q=*:*&rows=0\"")
-        .assertMatches(CLIENT_CERTIFICATE_REJECTED);
+        .assertNotContains("Server refused connection")
+        .assertNotContains("java.net.ConnectException");
+    awaitOrFail(
+        "a fresh client hostname rejection in the server log",
+        Duration.ofSeconds(10),
+        Duration.ofSeconds(1),
+        () -> hasFreshClientHostnameDiagnostic(serverLog, logOffset));
   }
 
   @Test
