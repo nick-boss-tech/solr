@@ -1,0 +1,99 @@
+{
+  "commands": [
+    {
+      "change_summary": "Formatting-only line wrapping in a wait condition and a stream assertion.",
+      "changed_files": [
+        "solr/webapp/src/test/org/apache/solr/webapp/AdminUiLoggingScreenTest.java",
+        "solr/webapp/src/test/org/apache/solr/webapp/AdminUiNodeScreensTest.java"
+      ],
+      "command": "./gradlew --no-daemon tidy",
+      "diff_file": "tidy.diff",
+      "diff_sha256": "29f32920259da2d46c6c455fc484f3d0e061b8fd132cfbf7f3f0b4e6c4bd65ab",
+      "ended_utc": "2026-11-13T20:52:52Z",
+      "exit_code": 0,
+      "result": "Task succeeded, but the tracked tree was not clean afterward.",
+      "started_utc": "2026-11-13T20:51:27Z"
+    },
+    {
+      "command": "./gradlew --no-daemon updateLicenses",
+      "ended_utc": "2026-11-13T20:55:02Z",
+      "exit_code": 1,
+      "failure": "Task :solr:webapp:collectJarInfos failed because seven resolved artifacts were not in dependency lock state: org.osgi:org.osgi.service.serviceloader:1.0.0; org.apache.logging.log4j:log4j-api:2.26.1; org.osgi:org.osgi.annotation.bundle:2.0.0; org.osgi:org.osgi.resource:1.0.0; org.apache.logging.log4j:log4j-core:2.26.1; org.osgi:org.osgi.annotation.versioning:1.1.2; biz.aQute.bnd:biz.aQute.bnd.annotation:7.1.0.",
+      "rerun": "Not rerun after dependency lock generation changed a tracked file.",
+      "started_utc": "2026-11-13T20:53:52Z",
+      "tracked_changes": []
+    },
+    {
+      "change_summary": "Added seven dependency entries and changed two Log4j configuration scopes.",
+      "command": "./gradlew --no-daemon resolveAndLockAll --write-locks",
+      "diff_file": "dependency-locks.diff",
+      "diff_sha256": "074e9dc5c36811cd6f2141772beee5563187e0b87d6a9ba235be05a01814d4dc",
+      "ended_utc": "2026-11-13T20:56:01Z",
+      "exit_code": 0,
+      "result": "Lock state persisted. This changed solr/webapp/gradle.lockfile, so the tracked-tree stop condition remained active.",
+      "started_utc": "2026-11-13T20:55:31Z"
+    }
+  ],
+  "evidence_record": "records/evidence/solr-18619-real-logs-linux-gate-r4-evidence.json",
+  "evidence_sha256": "a86309f8fd613dea3064c38d04aede4c8330741a492ff719a3568cf90ecbb44b",
+  "evidence_url": "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519664052758700/TnWwnBDkjImwhTRM.gz?Expires=1826139584&Signature=WZgK71~ZmIaKcwCdjioaHC2Hf0OouPCViixVoKs2V4rbAxe49tjsMzykpGbwraHLURVnVUEeB7ur~eYmErlpAMrxz4mPqbV6iHtKLeC4gkCEEKyxxcVPsTaxhhgsGT9OdsBaw4g1gjR3q5kKF1tgNz61pr-hbPPm~LaqRg2l~Dcl~BXU-VIE1h3a5Bvxf1aFQmOl6rzblfVAUAmYgA4x-2mlzjx7i3JRtU4haPQEOk9zE4Tk-9ZDObthXaWl~DfMtTRsmYrAR7YZai2htExVlkUwt9xAk4pGsMdK2D--ZP3izhbTotgFxRLSX0nTa37gGDIbkys~t52o6HcE-ikLVg__&Key-Pair-Id=K10M74EMLURLMC",
+  "exclusions": [
+    "Docker was not installed or used; Docker-dependent checks are unrun and incomplete.",
+    "Antora site-build and dependent link-check tasks were excluded by host policy and not run."
+  ],
+  "final_state": {
+    "ambient_browser_terminated": false,
+    "both_host_gradle_locks_released": true,
+    "local_checkout_head": "848885b4cda2c3312576c810aeb4a46afb50419e",
+    "local_tracked_tree_clean": true,
+    "no_gradle_or_chromedriver_test_process_running": true,
+    "source_branch_unchanged": true,
+    "source_commit_or_push_created": false
+  },
+  "head": "848885b4cda2c3312576c810aeb4a46afb50419e",
+  "id": "solr-18619-real-logs-linux-gate-r4-execution-report",
+  "job": "solr-18619-real-logs-linux-gate-r4",
+  "limits": [
+    "No HTTP introspection or concurrent-edit coverage was executed.",
+    "The round-four static review notes that seeding distinct per-node watcher histories does not validate logger-to-watcher appender delivery; the runtime assumption remains unverified.",
+    "No tests were started, so no test pass, failure, skip, error, or XML count is claimed. The required seed 18619C0DE was not exercised."
+  ],
+  "proof_status": {
+    "changelog_validation": "not run",
+    "junit_xml_generated": false,
+    "mutation_legs_executed": 0,
+    "reference_guide_checks": "not run",
+    "root_check_x_test": "not run",
+    "round_four_X-Solr-targetNode-removal_mutation": "not run",
+    "round_four_real_node_rendering_positive": "not run",
+    "round_three_new_positive_and_three_fail-before-or-mutation-legs": "not run",
+    "round_two_positive_legs": "not run",
+    "round_two_six_mutations": "not run",
+    "selected_tests_executed": 0,
+    "selenium_browser_tests": "not run",
+    "thread_leak_status": "not assessed because no test ran",
+    "xml_counts": null
+  },
+  "records": {
+    "assignment": "https://github.com/nick-boss-tech/solr/blob/coordination-v2/records/assignment/solr-18619-real-logs-linux-gate-r4.json",
+    "gate": "https://github.com/nick-boss-tech/solr/blob/coordination-v2/records/gate/solr-18619-real-logs-linux-gate-r4.json",
+    "pinned_round_two_spec": "https://github.com/nick-boss-tech/solr/blob/95e2574f5091fbf1425fd9bfc4cef98c746b42f6/gates/solr-18619-request-targeting-round-2.md",
+    "prior_round_three_gate": "https://github.com/nick-boss-tech/solr/blob/3c2248ea06499e458f7d6c358679889dccbbd6a1/records/gate/solr-18619-review-fixes-linux-gate-r3.json"
+  },
+  "source": {
+    "branch": "solr-18619-targeting-prep",
+    "fork_ref_at_start_and_final_check": "848885b4cda2c3312576c810aeb4a46afb50419e",
+    "head": "848885b4cda2c3312576c810aeb4a46afb50419e",
+    "parent": "cf35bd49fab19751af9afb728ef83076ae521f09",
+    "repository": "nick-boss-tech/solr",
+    "tree": "b0c3c162e67cd207029b13a7c81f41e678571837"
+  },
+  "summary": "The round-four gate did not reach behavioral proof. `./gradlew tidy` exited 0 but reformatted two tracked test files, violating the exact-head clean-tree prerequisite. On the restored pinned checkout, `updateLicenses` exited 1 because seven resolved dependencies were absent from the lock state; `resolveAndLockAll --write-locks` then exited 0 but changed the tracked webapp lockfile. The diffs were preserved and the disposable checkout restored clean to the assigned head. No source branch commit or push was made.",
+  "type": "report",
+  "unrun_coverage": [
+    "The positive AdminUiNodeScreens, AdminUiLoggingScreen, AdminUiLoggingStandalone, AdminUiNodePicker, AdminUiSecurityAuth, NodeTargetProxyFilter and NodeTargetProxyFilterAuth selections, including both named all-node browser tests.",
+    "All six round-two mutations, the three round-three fail-before/mutation legs, and the added round-four removal of the NodeRequests target header.",
+    "Root check -x test, changelog validation and reference-guide checks."
+  ],
+  "verdict": "incomplete"
+}
