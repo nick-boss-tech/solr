@@ -46,7 +46,7 @@ public class StreamingSolrClients {
 
   private HttpJettySolrClient httpClient;
 
-  private Map<String, ErrorReportingConcurrentUpdateSolrClient> solrClients = new HashMap<>();
+  private Map<String, ConcurrentUpdateBaseSolrClient> solrClients = new HashMap<>();
   private final List<SolrError> errors;
 
   private ExecutorService updateExecutor;
@@ -80,7 +80,7 @@ public class StreamingSolrClients {
 
   public synchronized SolrClient getSolrClient(final SolrCmdDistributor.Req req) {
     String url = getFullUrl(req.node.getUrl());
-    ErrorReportingConcurrentUpdateSolrClient client = solrClients.get(url);
+    ConcurrentUpdateBaseSolrClient client = solrClients.get(url);
     if (client == null) {
       // NOTE: increasing to more than 1 threadCount for the client could cause updates to be
       // reordered on a greater scale since the current behavior is to only increase the number of
@@ -107,11 +107,11 @@ public class StreamingSolrClients {
 
   public synchronized void blockUntilFinished() throws IOException {
     IOException failure = null;
-    for (ErrorReportingConcurrentUpdateSolrClient client : solrClients.values()) {
+    for (ConcurrentUpdateBaseSolrClient client : solrClients.values()) {
       try {
         client.blockUntilFinished();
       } catch (IOException e) {
-        client.reportStall(e);
+        ((ErrorReportingConcurrentUpdateSolrClient) client).reportStall(e);
         if (failure == null) {
           failure = e;
         } else {

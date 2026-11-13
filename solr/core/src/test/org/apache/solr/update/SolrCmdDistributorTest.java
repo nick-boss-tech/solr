@@ -778,7 +778,7 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
   public void testRealRunnerCallbacksDoNotNeedClientMonitor() throws Exception {
     String previousPollQueueTime = System.getProperty("solr.cloud.client.pollQueueTime");
     System.setProperty("solr.cloud.client.pollQueueTime", "100");
-    try {
+    try (UpdateShardHandler http1Handler = newHttp1UpdateShardHandler()) {
       for (boolean success : List.of(true, false)) {
         try (ServerSocket server = new ServerSocket(0)) {
           server.setSoTimeout(10000);
@@ -805,7 +805,7 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
           update.add(command.solrDoc);
           SolrCmdDistributor.Req req =
               new SolrCmdDistributor.Req(command, node, update, false, null, tracker);
-          StreamingSolrClients streamingClients = new StreamingSolrClients(updateShardHandler);
+          StreamingSolrClients streamingClients = new StreamingSolrClients(http1Handler);
           try {
             ErrorReportingConcurrentUpdateSolrClient client =
                 (ErrorReportingConcurrentUpdateSolrClient) streamingClients.getSolrClient(req);
@@ -1036,7 +1036,8 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
   }
 
   @SuppressWarnings("try")
-  private void assertStallKeepsErrorsFromOtherNodes(boolean testOrderedOperations) throws Exception {
+  private void assertStallKeepsErrorsFromOtherNodes(boolean testOrderedOperations)
+      throws Exception {
     final var solrclient = clients.getFirst();
     String previousPollQueueTime = System.getProperty("solr.cloud.client.pollQueueTime");
     String previousStallTime = System.getProperty("solr.cloud.client.stallTime");
@@ -1074,8 +1075,7 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
         while (!failureRecorded && System.nanoTime() < deadline) {
           synchronized (streamingClients.getErrors()) {
             failureRecorded =
-                streamingClients.getErrors().stream()
-                    .anyMatch(e -> failingNode.equals(e.req.node));
+                streamingClients.getErrors().stream().anyMatch(e -> failingNode.equals(e.req.node));
           }
           if (!failureRecorded) Thread.sleep(10);
         }
@@ -1134,6 +1134,16 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
     } finally {
       restoreProperty("solr.cloud.client.pollQueueTime", previousPollQueueTime);
       restoreProperty("solr.cloud.client.stallTime", previousStallTime);
+    }
+  }
+
+  private static UpdateShardHandler newHttp1UpdateShardHandler() {
+    String previousHttp1 = System.getProperty("solr.http1");
+    System.setProperty("solr.http1", "true");
+    try {
+      return new UpdateShardHandler(UpdateShardHandlerConfig.DEFAULT);
+    } finally {
+      restoreProperty("solr.http1", previousHttp1);
     }
   }
 
