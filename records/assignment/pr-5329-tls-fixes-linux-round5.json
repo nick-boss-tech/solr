@@ -1,0 +1,21 @@
+{
+  "claim_path": "records/claim/pr-5329-tls-fixes-linux-round5.json",
+  "contributor_head": "2587d6a6eaf54796bd34a724f12209873e9f1b3d",
+  "execution_dependency": "Round-two gate was claimed. Before claiming or executing, verify that worker and executor and any later gate executor have stopped. Do not duplicate in-flight work.",
+  "gate_id": "pr-5329-tls-fixes-linux-round5",
+  "gate_record": "records/gate/pr-5329-tls-fixes-linux-round5.json",
+  "id": "pr-5329-tls-fixes-linux-round5",
+  "intended_host": "Linux",
+  "job": "pr-5329-tls-fixes-linux-round5",
+  "limitations": "Partial fix: stale persisted TLS settings on rotation and external ZooKeeper remain unresolved. Do not publish an offer based on this gate.",
+  "phase": "implementation proof round 5",
+  "receipt_path": "records/receipt/pr-5329-tls-fixes-linux-round5.json",
+  "source": {
+    "branch": "pr-5329-tls-fixes",
+    "head": "37710039195736636bc3971cbf200cc940d53248",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Linux proof for secure-example reset and fresh password-file checks",
+  "supersedes": "records/gate/pr-5329-tls-fixes-linux-round4.json",
+  "type": "assignment"
+}
