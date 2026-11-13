@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "records/report/pr-formula-ste80-20261113-report.json",
+  "id": "pr-formula-ste80-20261113",
+  "job": "pr-formula-ste80-20261113",
+  "reason": "Documentation update complete; worker stopped.",
+  "type": "release"
+}
