@@ -22,9 +22,11 @@ setup() {
 }
 
 @test "solr help flag prints help" {
-  run -0 solr --help
-  assert_output_for_cli 'Usage: solr COMMAND OPTIONS' 'usage: bin/solr'
-  refute_output --partial 'ERROR'
+  for flag in --help -h; do
+    run -0 solr "$flag"
+    assert_output_for_cli 'Usage: solr COMMAND OPTIONS' 'usage: bin/solr'
+    refute_output --partial 'ERROR'
+  done
 }
 @test "solr with no flags prints help" {
   run -2 solr
@@ -32,13 +34,28 @@ setup() {
   refute_output --partial 'ERROR'
 }
 
-@test "parent commands require a subcommand" {
-  for parent in zk snapshot package; do
-    run -2 solr "$parent"
-    refute_output --partial 'ERROR'
-    run -0 solr "$parent" --help
+check_parent_help() {
+  local parent=$1 commons_marker=$2 picocli_marker=$3
+  run -2 solr "$parent"
+  assert_output_for_cli "$commons_marker" "$picocli_marker"
+  refute_output --partial 'ERROR'
+  for flag in --help -h; do
+    run -0 solr "$parent" "$flag"
+    assert_output_for_cli "$commons_marker" "$picocli_marker"
     refute_output --partial 'ERROR'
   done
+}
+
+@test "zk requires a subcommand" {
+  check_parent_help zk 'bin/solr zk ls' 'usage: bin/solr zk'
+}
+
+@test "snapshot requires a subcommand" {
+  check_parent_help snapshot 'snapshot-create' 'usage: bin/solr snapshot'
+}
+
+@test "package requires a subcommand" {
+  check_parent_help package 'Package Manager' 'usage: bin/solr package'
 }
 
 @test "help propagates a JVM startup failure" {
