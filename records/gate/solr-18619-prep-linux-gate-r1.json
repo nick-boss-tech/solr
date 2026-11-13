@@ -1,0 +1,22 @@
+{
+  "environment": "Linux JDK 21, Chrome/ChromeDriver, Selenium, full checkout, serial execution under host build lock",
+  "head": "f2cab615c5ba08cf83d11fe5ae4fc3a0d0b8d7bb",
+  "id": "solr-18619-prep-linux-gate-r1",
+  "job": "solr-18619-prep-linux-gate-r1",
+  "phase": "submission preparation round 1",
+  "prior_gate": "https://github.com/nick-boss-tech/solr/blob/95e2574f5091fbf1425fd9bfc4cef98c746b42f6/gates/solr-18619-request-targeting-round-2.md",
+  "receipt_path": "records/receipt/solr-18619-prep-linux-gate-r1.json",
+  "requirements": [
+    "Run all positive commands and six isolated mutation legs specified in the pinned prior gate, at this new head, using seed 18619C0DE; use current-head test inventory and report actual XML counts rather than assuming old totals.",
+    "Require root tidy with clean tracked tree, webapp browser selections, node proxy and auth neighbors, root check -x test, changelog validation and reference-guide checks; no failures, errors, skips or thread leaks.",
+    "Record exact commands, environment, times, exits, fresh logs and XML, mutation diffs and the intended assertion failures. A missing API, compile error, setup failure, timeout or skip is not negative behavioral proof.",
+    "Confirm selected-local and remote header routing, independent all-node requests, per-node errors, successful sibling retention, standalone untargeted behavior, log level neighbors and auth; record physical-node and load-balancer limits.",
+    "Investigate failures before rerunning; any source, test or formatting changes require a new committed and pushed head and superseding gate. Verify fork head before and after runs."
+  ],
+  "source": {
+    "baseline": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+    "branch": "solr-18619-targeting-prep",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "gate"
+}
