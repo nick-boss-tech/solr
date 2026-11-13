@@ -1,0 +1,13 @@
+{
+  "details": "Jira reporter requested the shared-handler option. Both CLI parser paths recognize the SolrZkClient initial connection timeout, preserve duration and suggest checking ZooKeeper and its embedded host. Seven tools suppress their pre-handler ERROR trace only for this timeout unless verbose. Added unit and BATS regression, changelog. Server-side ConnectionLoss remains outside this CLI slice. Git diff --check passed; no Gradle or tests run on Windows. Gate: records/gate/solr-18138-cli-linux-gate-r1.json. Implementation work stopped after push; no executor started.",
+  "id": "solr-18138-cli-implementation-r1-report",
+  "job": "solr-18138-cli-implementation-r1",
+  "source": {
+    "base": "0ea013e782f",
+    "branch": "solr-18138-submit",
+    "head": "45956fbe7f530d77702c586d62de2a5609ab20af",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Implemented and pushed CLI connection-timeout handling; Linux proof pending",
+  "type": "report"
+}
