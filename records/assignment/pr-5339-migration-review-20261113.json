@@ -1,0 +1,12 @@
+{
+  "id": "pr-5339-migration-review-20261113",
+  "intended_host": "Windows source review",
+  "job": "pr-5339-migration-review-20261113",
+  "source": {
+    "branch": "pr-5339-signature-migration",
+    "head": "6d886caf1b2915c9318b1419386e5181dd154ad0",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Review PR 5339 follow-up and tests at exact fork head",
+  "type": "assignment"
+}
