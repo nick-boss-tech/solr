@@ -1,0 +1,19 @@
+{
+  "evidence": "records/evidence/solr-18138-cli-linux-gate-r2-evidence.tar.gz (SHA-256 4c4dc26f3b0e44542345a33d8f74f286c890605b9953f865cd9ffafeae9ac452)",
+  "gate": "solr-18138-cli-linux-gate-r2",
+  "head": "45956fbe7f530d77702c586d62de2a5609ab20af",
+  "host": "linux",
+  "id": "solr-18138-cli-linux-gate-r2-receipt",
+  "job": "solr-18138-cli-linux-gate-r2",
+  "legs": {
+    "environment": "Linux host vm2 (claude uid 1000). JAVA_HOME=/workspace/jdk/jdk-21.0.12.1+1. GRADLE_USER_HOME=/workspace/gradle-home. lsof 4.99.0 built from source at /workspace/tools/lsof-prefix/bin/lsof and on PATH. 127.0.0.1:1 verified not listening before test. Clean worktree at exact head 45956fbe7f; git status empty before and after (post_test_tracked_changes=0).",
+    "integrationTests_test_zk_bats": ":solr:packaging:integrationTests --tests test_zk.bats -Ptests.seed=18138 at exact head: BUILD SUCCESSFUL in 2m41s, Gradle exit 0. Fresh BATS report.xml: tests=12 failures=0 errors=0 skipped=0, time 41.851s. All 12 tests ok incl. new test 5 'unreachable ZooKeeper reports a connection timeout' (16260 ms). teardown_file 'solr stop --all' completes normally (no 'not ok 13'). Run under child subreaper to reap orphaned Solr JVMs (host fix; see summary and ROOT-CAUSE.md in evidence)."
+  },
+  "owner": "vm2",
+  "phase": "targeted integration proof round 2",
+  "prior_receipt": "records/receipt/solr-18138-cli-linux-gate-r1-receipt.json",
+  "recorded": "2026-11-13",
+  "summary": "r2 rerun of the SOLR-18138 ZooKeeper CLI integration test with a working teardown. The r1 teardown failure was NOT caused by lsof absence (coordinator hypothesis disproven): lsof 4.99.0 was built from source into /workspace/tools/lsof-prefix/bin and put on PATH, and the start path then succeeded, but teardown still failed. Root cause is the host container: PID 1 is python3 /supervisor.py, which never reaps orphaned children, so the Solr JVM started by BATS setup_file became an unreaped zombie after the (clean, fast) graceful stop, and bin/solr stop's final zombie check exited 1. Fixed at the host level by running the integration test under a child subreaper (/workspace/tools/subreaper.py, prctl PR_SET_CHILD_SUBREAPER + waitpid loop) that reaps the orphaned JVMs; no patch change and no test weakening. Result: ./gradlew :solr:packaging:integrationTests --tests test_zk.bats -Ptests.seed=18138 BUILD SUCCESSFUL in 2m41s, Gradle exit 0, all 12 behavioral tests pass (12/12, 0 failures, 0 errors) including the new test 5, and teardown completes normally. Port 127.0.0.1:1 verified not listening before the test.",
+  "type": "receipt",
+  "verdict": "passed"
+}
