@@ -1,0 +1,10 @@
+{
+  "host": "Windows implementation; Linux proof separately",
+  "id": "pr-5330-regression-repair-windows-20261113",
+  "job": "pr-5330-regression-repair-windows-20261113",
+  "scope": "Improve controlled regression and inspect feasible lifecycle repair; push a focused follow-up and superseding exact-head gate. Do not touch contributor branch or post publicly.",
+  "source_head": "0c5457bde3e6bb684a91e1af12d160ebb37a7ec6",
+  "successor_of": "pr-5330-fix-windows-20261113",
+  "summary": "Strengthen PR 5330 regression and reassess stall lifecycle before a final-result Linux gate",
+  "type": "assignment"
+}
