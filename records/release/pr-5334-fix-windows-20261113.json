@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr-5334",
+  "evidence": "Source work and push completed at d3c2bf186fda98eceb64e6b1953997a5c84a066d; report records/report/pr-5334-fix-windows-20261113-report.json; no executor running.",
+  "id": "pr-5334-fix-windows-20261113",
+  "job": "pr-5334-fix-windows-20261113",
+  "reason": "Implementation complete; Linux proof handed off",
+  "type": "release"
+}
