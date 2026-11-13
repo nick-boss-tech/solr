@@ -1,0 +1,8 @@
+{
+  "head": "0c5457bde3e6bb684a91e1af12d160ebb37a7ec6",
+  "host": "Windows read-only review",
+  "id": "pr-5330-followup-review-20261113",
+  "job": "pr-5330-followup-review-20261113",
+  "summary": "Review PR 5330 fork follow-up and Linux gate for test adequacy",
+  "type": "assignment"
+}
