@@ -1,0 +1,20 @@
+{
+  "claim_path": "records/claim/pr-5333-zk-order-gate-20261113.json",
+  "contributor_head": "65c2d85f77017a951f20dc110d71bf14786c6694",
+  "gate_id": "pr-5333-zk-order-gate-20261113",
+  "gate_record": "records/gate/pr-5333-zk-order-gate-20261113.json",
+  "id": "pr-5333-zk-order-gate-20261113",
+  "intended_host": "Linux",
+  "job": "pr-5333-zk-order-gate-20261113",
+  "phase": "implementation proof",
+  "receipt_path": "records/receipt/pr-5333-zk-order-gate-20261113.json",
+  "source": {
+    "branch": "pr-5333-shutdown-doc",
+    "head": "748e63e4281cd4d343e125e1b913805d20c5c6a2",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Run fail-before and exact-head proof for embedded ZooKeeper shutdown ordering",
+  "supersedes": "records/assignment/pr-5333-doc-proof-20261113.json and records/assignment/pr-5333-zk-order-investigation-20261113.json",
+  "test_only_head": "ccce0532606b28dd7430e120de86d6662dec6124",
+  "type": "assignment"
+}
