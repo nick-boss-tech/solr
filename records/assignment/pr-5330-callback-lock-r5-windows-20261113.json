@@ -1,0 +1,10 @@
+{
+  "coordination": "Older Linux round-2 job is claimed at a different head; leave its executor and records alone and do not assume it stopped.",
+  "host": "Windows implementation; Linux proof separately",
+  "id": "pr-5330-callback-lock-r5-windows-20261113",
+  "job": "pr-5330-callback-lock-r5-windows-20261113",
+  "source_head": "6476beb8debb78d6f1504144fef292ca06583c94",
+  "successor_of": "pr-5330-r4-callback-fix-windows-20261113",
+  "summary": "Fix callback monitor deadlock and strengthen PR 5330 concurrency coverage",
+  "type": "assignment"
+}
