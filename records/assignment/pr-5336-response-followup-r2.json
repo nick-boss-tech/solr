@@ -1,0 +1,14 @@
+{
+  "id": "pr-5336-response-followup-r2",
+  "intended_host": "Windows implementation; Linux proof",
+  "job": "pr-5336-response-followup-r2",
+  "source": {
+    "branch": "pr-5336-response-followup",
+    "head": "347bac0a36b71a838e101cc937ce91b850745557",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5336-response-followup",
+  "summary": "Address follow-up test review findings for PR 5336",
+  "supersedes_gate": "records/gate/pr-5336-response-gate-r1.json",
+  "type": "assignment"
+}
