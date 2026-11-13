@@ -15,6 +15,6 @@ For a gate handoff, link the assignment and the exact gate record. Give the job 
 
 For the vm2 gate host, the operator handoff lives at [docs/vm2-gate-handoff.md](docs/vm2-gate-handoff.md): how to find and claim work on this board, run a Linux gate end to end (with a full worked example), and file the receipt, plus the environmental quirks that cost the most time.
 
-For PR implementation, review and descriptions, apply the [test adequacy and minimalism supplement](docs/pr-test-adequacy.md) alongside the historical PR formula and current workspace instructions.
+For PR implementation, review and descriptions, apply the [test adequacy and minimalism supplement](docs/pr-test-adequacy.md) and [plain-English and related-work supplement](docs/pr-formula-ste80.md) alongside the historical PR formula and current workspace instructions.
 
 Use the [coordination skill](.agents/skills/solr-coordination/SKILL.md) when available. It does not install itself or replace the project's review, proof or contribution workflows. A generated index is a navigation aid, not proof of ownership, liveness or completion.
