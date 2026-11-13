@@ -1,0 +1,14 @@
+{
+  "id": "pr-5329-windows-fix-round10",
+  "intended_host": "Windows implementation; Linux proof required",
+  "job": "pr-5329-windows-fix-round10",
+  "source": {
+    "branch": "pr-5329-tls-fixes",
+    "head": "ce7545ed7a98a5a145c8b2832620a6e5b736731e",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5329-windows-fix-round9",
+  "summary": "Address review of concurrent edits, symlinked configuration and incomplete-write tests",
+  "supersedes_gate": "records/gate/pr-5329-tls-linux-round9.json",
+  "type": "assignment"
+}
