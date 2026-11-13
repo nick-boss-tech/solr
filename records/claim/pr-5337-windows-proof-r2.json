@@ -1,0 +1,7 @@
+{
+  "id": "pr-5337-windows-proof-r2",
+  "job": "pr-5337-windows-proof-r2",
+  "owner": "codex-windows",
+  "scope": "Run user-authorized Windows distribution build and launcher verification",
+  "type": "claim"
+}
