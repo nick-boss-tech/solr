@@ -1,0 +1,11 @@
+{
+  "contributor_head": "2587d6a6eaf54796bd34a724f12209873e9f1b3d",
+  "id": "pr-5329-windows-fix-round4",
+  "intended_host": "Windows implementation; Linux proof required",
+  "job": "pr-5329-windows-fix-round4",
+  "note": "Round-two Linux gate is claimed; preserve in-flight proof and do not treat it as evidence of the new source head.",
+  "source_head": "0d7b07837fb32cdfc94e2f763e60d94bf3c1e840",
+  "successor_of": "pr-5329-windows-fix-round3",
+  "summary": "Improve ensemble fixture and reconcile contributor head",
+  "type": "assignment"
+}
