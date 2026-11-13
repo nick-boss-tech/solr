@@ -1,0 +1,10 @@
+{
+ "actor": "phone-agent",
+ "evidence": "records/report/fork-residue-branch-responsibility-20261112-report.json (23 branch entries with full heads); census listing retained locally at ~/workspace/tools/fork-census/branches-2026-11-12.txt (1,829 branches).",
+ "executor_stop": "Verified at filing: the census and record-writing commands have exited, no Gradle or Solr process is running, and no fork branch was pushed to or deleted under this job; the only writes are the board records in this release's commits and the local memory files.",
+ "id": "fork-residue-branch-responsibility-20261112",
+ "job": "fork-residue-branch-responsibility-20261112",
+ "reason": "Responsibility taken and inventory filed; report published before this release. All 23 uncategorized fork branches from the 2026-11-12 census now carry a verified head, classification, and disposition under phone-agent responsibility, mirrored in ~/memory/branches.md. No branch was deleted or modified. Standing follow-ups are the owner calls listed in the report: ticket-or-park decisions on five substantive unticketed items, and identification of the owner of the two fresh security/posttool branches before any action on them.",
+ "recorded": "2026-11-12",
+ "type": "release"
+}
