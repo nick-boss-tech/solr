@@ -1,0 +1,12 @@
+{
+  "id": "pr-5339-review-20261113",
+  "intended_host": "Windows source review; Linux for any build proof",
+  "job": "pr-5339-review-20261113",
+  "source": {
+    "branch": "SOLR-18200-text-profile-signature-stable",
+    "head": "1bb663935e1464da39d780cecbbd9b2de8d08d44",
+    "repository": "iprithv/solr"
+  },
+  "summary": "Review Apache Solr PR 5339 at its live head",
+  "type": "assignment"
+}
