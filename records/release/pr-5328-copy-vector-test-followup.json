@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "Implementation report records pushed head; no Windows test executor started.",
+  "id": "pr-5328-copy-vector-test-followup",
+  "job": "pr-5328-copy-vector-test-followup",
+  "reason": "Test follow-up pushed and handed to Linux gate",
+  "type": "release"
+}
