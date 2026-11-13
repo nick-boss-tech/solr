@@ -1,0 +1,22 @@
+{
+  "branch": "pr-5330-test-fix-20261113",
+  "contributor_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+  "environment": "Linux JDK 21 clean isolated checkout; record host, toolchain and source status",
+  "head": "6ad35b2d9be19334e7df512d7a071e5fb237b12a",
+  "id": "pr-5330-response-lock-r6-linux-20261113",
+  "job": "pr-5330-response-lock-r6-linux-20261113",
+  "phase": "round 6",
+  "repository": "nick-boss-tech/solr",
+  "requirements": [
+    "Reconcile older claimed round-2 gate and executor before overlapping work. Verify exact remote head and ancestry; capture commands, exit codes, fresh logs and JUnit XML with counts and skips.",
+    "Run ./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.update.SolrCmdDistributorTest with a recorded seed; require testStallReportedWhileResponseBodyIsBlocked, testStalledClientIgnoresLateCallbacks, testFinishKeepsErrorsAfterStall and testStallKeepsErrorsFromOtherNodes to execute. Repeat network stall cases with multiple seeds; run ./gradlew tidy and ./gradlew check -x test. A tracked formatting change requires a committed successor and new gate.",
+    "Keep the blocked-body test unchanged while overlaying immediately preceding production at 1712a7dcbdd25cd24d1ec12336019c94cbdfedbf. Require its bounded reportStall future to time out while the read is held, then restore this head and require completion and no late RF credit. A build/setup failure, skipped test or unrelated harness timeout is not fail-before proof. Capture exact overlay and XML/logs.",
+    "Verify ordinary valid response body replication-factor parsing and leader/rollup accounting remain unchanged, including success before stall and success completing after stall. Test concurrent error retry classification and stall reporting with a deliberately blocked retry check, and analyze resulting ordering and side effects now that classification is outside callbackLock. Record precise tests or probes and results.",
+    "Demonstrate old client-monitor deadlock with bounded unchanged test against pre-lock production and success at this head; exercise real successful and failed network callbacks with a concurrent flush, both completing under controlled bounded synchronization.",
+    "Use executable overlays to prove original finish lost-error and ordered-operation regressions; demonstrate actual retry and no commit or DBQ submission after incomplete flush. Prove atomic error drain with a controlled append at old snapshot/clear boundary. Capture exact diffs, commands, XML and logs.",
+    "Assess callback synchronization, multiple stalled clients, error attribution, already queued writes and replica recovery. A stalled runner is fenced but not cancelled. A material unresolved concern prevents a clean verdict. Do not silently edit or push source; fixes need a separate implementation and exact-head successor gate. No public comment."
+  ],
+  "supersedes": "records/gate/pr-5330-callback-lock-r5-linux-20261113.json",
+  "type": "gate",
+  "verdict_policy": "Pass requires all named checks and discriminating proof legs; skips, non-reproduction and unrelated timeout do not establish behavior."
+}
