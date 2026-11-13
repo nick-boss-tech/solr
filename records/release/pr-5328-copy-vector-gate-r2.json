@@ -1,0 +1,10 @@
+{
+ "actor": "phone-agent",
+ "evidence": "records/receipt/pr-5328-copy-vector-gate-r2-receipt.json; records/evidence/pr-5328-copy-vector-gate-r2-evidence.tar.gz (SHA-256 2c3798b3db27350175c4ef6c04ae53686d1a8983eb4b16928687c58a495ee425).",
+ "executor_stop": "Verified at filing: the resident Gradle daemon was stopped by PID and none remains, the test-queue lock is free, the main clone is at fc65261419c7a4890510e50d9b93163268d1d853 with zero tracked modifications, the fail-before clone is at the contributor parent with exactly the two overlaid files modified, and the pushed fork head was re-verified unchanged (fc652614).",
+ "id": "pr-5328-copy-vector-gate-r2",
+ "job": "pr-5328-copy-vector-gate-r2",
+ "reason": "Gate completed and filed passed; receipt published before this release. At head fc652614 both named suites pass at seed 5328A11 (168/168 retrieval with both new methods in all four indexed/stored combinations; 49 field tests with two pre-existing assumption skips), tidy is clean, root check is BUILD SUCCESSFUL, and the fail-before on the contributor parent discriminates with RTG assertion failures for both encodings.",
+ "recorded": "2026-11-13",
+ "type": "release"
+}

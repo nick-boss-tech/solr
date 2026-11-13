@@ -1,0 +1,34 @@
+{
+ "evidence": "records/evidence/pr-5328-copy-vector-gate-r2-evidence.tar.gz (SHA-256 2c3798b3db27350175c4ef6c04ae53686d1a8983eb4b16928687c58a495ee425): setup log, per-leg logs, fresh JUnit XML for both suites and the fail-before (plus the discarded first overlay attempt, labeled invalid), and the gate scripts.",
+ "gate": "pr-5328-copy-vector-gate-r2",
+ "head": "fc65261419c7a4890510e50d9b93163268d1d853",
+ "id": "pr-5328-copy-vector-gate-r2-receipt",
+ "job": "pr-5328-copy-vector-gate-r2",
+ "legs": [
+  {
+   "leg": "head and diff scope",
+   "result": "Clean clone at fc65261419c7a4890510e50d9b93163268d1d853, zero tracked modifications. Diff vs contributor parent c295e8c85: RealTimeGetComponent.java (production, 7 lines), DenseVectorRetrievalTest.java (+32), schema-densevector-raw-rtg.xml (+7). Commands ran through the host's solr-gradle.sh wrapper (Gradle 9.7.0, vendored JDK 21) with the gate's selections and seed (-Ptests.seed=5328A11). Execution note: the run was paused by the owner mid-check and resumed at his direction; the legs reported here are the completed runs at the exact head, and the partial pre-pause check attempt is not cited."
+  },
+  {
+   "leg": "DenseVectorRetrievalTest",
+   "result": ":solr:core:test --tests org.apache.solr.schema.DenseVectorRetrievalTest, seed 5328A11, rc=0. Fresh XML: 168 tests, 0 failures, 0 errors, 0 skipped. The XML testcase names confirm both new methods executed under all four parameter combinations ([indexed=false stored=true], [indexed=false stored=false], [indexed=true stored=false], [indexed=true stored=true]) for both the float and byte encodings."
+  },
+  {
+   "leg": "DenseVectorFieldTest",
+   "result": ":solr:core:test --tests org.apache.solr.schema.DenseVectorFieldTest, seed 5328A11, rc=0. Fresh XML: 49 tests, 0 failures, 0 errors, 2 skipped. Both skips are AssumptionViolatedException ('update log must be enabled for atomic update') on denseVectorField_shouldBePresentAfterAtomicUpdate and denseVectorFieldOnAtomicUpdate_shouldBeUpdatedCorrectly; they are configuration assumptions in the test class, not failures and not related to this branch's change."
+  },
+  {
+   "leg": "tidy and root check",
+   "result": "Root tidy rc=0 with zero tracked changes. Root check -x test BUILD SUCCESSFUL in 6m 57s at the exact head in a normal clone. The UI wasm artifact was seeded by curl with SHA-256 matching the build pin (654494303e4af3b8bfb26a83d250603f19033820295591d88db0597991ce8ad2), the established remedy for this host's egress relay corrupting that download."
+  },
+  {
+   "leg": "fail-before (contributor parent plus test and schema overlay)",
+   "result": "Separate clean checkout of contributor parent c295e8c855d35c9edcf0fcf75de04d2f24803db6 with exactly two files overlaid from the gated head: DenseVectorRetrievalTest.java and schema-densevector-raw-rtg.xml (the branch's test and schema changes; RealTimeGetComponent left at the parent version). Running only the two new methods at seed 5328A11 failed all 8 parameterized cases with AssertionError 'expected null, but was:<[1.25, 2.5, 3.75, 4.0]>' for float and 'expected null, but was:<[-128, -1, 0, 127]>' for byte: at the parent, real-time get returns the raw copy-target vector that the fix filters out. Assertion failures at RTG for each encoding, as the gate requires; not compilation or setup failures. Disclosure: the first overlay attempt wrote the schema file to a wrong path (src/test/resources instead of src/test-files) and its run failed on unknown-field setup errors; that attempt was discarded, is retained in the evidence under a name marking it invalid, and the run reported here is the corrected overlay."
+  }
+ ],
+ "owner": "phone-agent",
+ "recorded": "2026-11-13T10:33:14-07:00",
+ "summary": "PR 5328 round 2 verifies at the exact head. The branch is two commits over contributor parent c295e8c855d35c9edcf0fcf75de04d2f24803db6: the RealTimeGetComponent production change and the broadened tests plus schema. DenseVectorRetrievalTest passes 168/168 at seed 5328A11 with both new methods (rawFloatVectorCopyTargetIsFilteredFromRealTimeGet and rawByteVectorCopyTargetIsFilteredFromRealTimeGet) executed in all four indexed/stored combinations; DenseVectorFieldTest passes 49 tests with zero failures and two pre-existing assumption skips; tidy leaves zero tracked changes; root check completes BUILD SUCCESSFUL. The fail-before is discriminating: on the contributor parent with only the branch's test and schema files overlaid, all eight parameterized cases fail with AssertionError 'expected null, but was' carrying the raw vector values, for both encodings. The remote branch tip was re-verified unchanged at filing.",
+ "type": "receipt",
+ "verdict": "passed"
+}
