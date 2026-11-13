@@ -1,0 +1,10 @@
+{
+ "claimed": "2026-11-13T11:46:30-07:00",
+ "claimer": "phone-agent",
+ "head": "678f805a2a0d2212427d0cfadb11e87c24d122ef",
+ "host": "linux",
+ "id": "pr5320-v2-contract-linux-gate-r5-20261113",
+ "job": "pr5320-v2-contract-linux-gate-r5-20261113",
+ "note": "Live fork branch pr-5320-v2-contract verified at the r5 gate head 678f805a by git ls-remote at claim time. The r5 gate supersedes the r4 gate, whose FAILED receipt is filed; the r5 implementation job is reported and released. No conflicting claim exists. Taken at Nick's direction in chat 2026-11-13.",
+ "type": "claim"
+}
