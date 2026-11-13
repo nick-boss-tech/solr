@@ -1,0 +1,13 @@
+{
+  "id": "solr-18619-submission-prep-20261113",
+  "intended_host": "Windows implementation and review; Linux for proof",
+  "job": "solr-18619-submission-prep-20261113",
+  "prior_records": [
+    "https://github.com/nick-boss-tech/solr/blob/coordination-ui/reports/solr-12613-pr-jira-packages-round-1.md",
+    "https://github.com/nick-boss-tech/solr/blob/coordination-ui/reports/solr-18619-request-targeting-round-2.md",
+    "https://github.com/nick-boss-tech/solr/blob/coordination-ui/gates/solr-18619-request-targeting-round-2.md"
+  ],
+  "scope": "Preserve selected-node default and All nodes alternative for maintainer review; no upstream public write. Reconcile duplicate and existing work first.",
+  "summary": "Reconcile the existing SOLR-18619 request-targeting follow-up with merged picker and current main, prepare a scoped fork branch and draft, and request exact-head Linux proof",
+  "type": "assignment"
+}
