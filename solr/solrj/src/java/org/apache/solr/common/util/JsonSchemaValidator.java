@@ -56,7 +56,8 @@ public class JsonSchemaValidator {
     // Preserve legacy null handling outside anyOf while checking types in its alternatives.
     this.strictNull = strictNull || jsonSchema.containsKey("anyOf");
     this.validateNull =
-        jsonSchema.containsKey("anyOf") || (strictNull && jsonSchema.containsKey("type"));
+        jsonSchema.containsKey("anyOf")
+            || (strictNull && (jsonSchema.containsKey("type") || jsonSchema.containsKey("enum")));
     this.validators = new ArrayList<>();
     for (Map.Entry<?, ?> entry : jsonSchema.entrySet()) {
       Object fname = entry.getKey();
@@ -275,6 +276,7 @@ class EnumValidator extends Validator<List<String>> {
 
   @Override
   boolean validate(Object o, List<String> errs) {
+    if (o == null) return enumVals.contains(null);
     if (o instanceof String) {
       if (!enumVals.contains(o)) {
         errs.add("Value of enum must be one of " + enumVals);

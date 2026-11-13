@@ -16,6 +16,7 @@
  */
 package org.apache.solr.common.util;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -69,6 +70,21 @@ public class JsonValidatorTest extends SolrTestCaseJ4 {
                 List.of(Map.of("type", "array", "items", Map.of("type", "string")))));
     assertNotNull(array.validateJson(Collections.singletonList(null)));
     assertNull(new JsonSchemaValidator(Map.of("type", "string")).validateJson(null));
+  }
+
+  public void testAnyOfEnumNull() {
+    JsonSchemaValidator excludesNull =
+        new JsonSchemaValidator(Map.of("anyOf", List.of(Map.of("enum", List.of("allowed")))));
+    assertNotNull(excludesNull.validateJson(null));
+    assertNull(excludesNull.validateJson("allowed"));
+    assertNotNull(excludesNull.validateJson("other"));
+
+    JsonSchemaValidator includesNull =
+        new JsonSchemaValidator(
+            Map.of("anyOf", List.of(Map.of("enum", Arrays.asList("allowed", null)))));
+    assertNull(includesNull.validateJson(null));
+    assertNull(includesNull.validateJson("allowed"));
+    assertNull(new JsonSchemaValidator(Map.of("enum", List.of("allowed"))).validateJson(null));
   }
 
   public void testSchemaValidation() {
