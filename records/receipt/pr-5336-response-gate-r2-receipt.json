@@ -1,0 +1,37 @@
+{
+  "branch": "pr-5336-response-followup",
+  "evidence": "records/evidence/evidence-pr-5336-response-gate-r2-20261113.txt",
+  "evidence_sha256": "10db95b36a3bc54f911516b48c940938c412fce20fecd645a145b0817e0ef4ff",
+  "executor": "vm6",
+  "filed": "2026-11-13T22:40:00Z",
+  "gate": "pr-5336-response-gate-r2",
+  "head": "eb5557d14fa6de411e35e5ff22d30a0cd8f7589d",
+  "id": "pr-5336-response-gate-r2-receipt",
+  "job": "pr-5336-response-gate-r2",
+  "legs": [
+    {
+      "leg": "Head, ancestry and clean checkout verification",
+      "result": "PASSED: git ls-remote at claim confirmed the fork branch pr-5336-response-followup at eb5557d1; isolated clean worktree gate-5336-head rev-parse equals the offered head with zero modifications at setup. Contributor parent 96df2d21 per assignment."
+    },
+    {
+      "leg": "Focused core tests at head (gate requirement 1)",
+      "result": "PASSED: ./gradlew :solr:core:test --tests OverseerStatusTest --tests TestSolrCloudSnapshotInactiveShard --tests DeleteBackupCmdTest --tests TestReplicationHandlerBackup -Ptests.seed=5336C0DE exited 0 (BUILD SUCCESSFUL in 6m 44s). 10 tests, 0 failures, 0 errors, 0 skipped. Per-class: OverseerStatusTest 1 (method test); TestSolrCloudSnapshotInactiveShard 2 (testListSnapshotJsonFormat, testSnapshotFailsWhenShardHasNoActiveReplica); DeleteBackupCmdTest 4 (testPurgeSummaryJsonFormat, testDeleteBackupIdsIgnoresMissingZkStateDir, testDeleteBackupIdsPropagatesUnexpectedDeleteErrors, testDeleteBackupIdsRemovesExistingZkStateDir); TestReplicationHandlerBackup 3 (testBackupOnCommit, doTestBackup, testDeleteBackupJsonFormat). The JSON-format discriminators testListSnapshotJsonFormat, testPurgeSummaryJsonFormat and testDeleteBackupJsonFormat all executed."
+    },
+    {
+      "leg": "tidy at head (gate requirement 2)",
+      "result": "FAILED: ./gradlew tidy exited 0 but left a tracked file modified: solr/core/src/test/org/apache/solr/cloud/OverseerStatusTest.java. Re-run on a restored clean tree produced the identical Spotless diff deterministically (04-tidy-reconfirm.diff, sha256 586327dc03fdef0270786cd08fd97e6274fdc73a4523e2fb02976728a6368f9e): Google Java Format re-wraps configureCluster(2).withOverseer(true).addConfig(...).configure() onto 4 lines and re-wraps the url String concatenation onto 1 line. The head is NOT tidy-clean. Per the gate record's requirement 2, this stops the gate and requires a new pushed head and superseding gate."
+    },
+    {
+      "leg": "check -x test at head (gate requirement 2 second part)",
+      "result": "NOT RUN: the decisive tidy-dirty finding stopped the runner before this leg completed, per requirement 2. The ref-guide tasks are excluded with -Prefguide.include=false per the standing owner policy (AGENTS.md: Antora / ref-guide is NOT enforced for gate runs)."
+    },
+    {
+      "leg": "Mutation proofs (gate requirement 3)",
+      "result": "NOT RUN: the 8 isolated compiling mutations (overseer_operations, collection_operations, snapshots_container, snapshot_object, replicas_container, replica_object, deletebackup_details, snapshooter_details) are moot because the head cannot pass requirement 2. They are queued for the superseding gate on the formatted head."
+    }
+  ],
+  "limits": "The install-shard partial-failure response requires a distributed restore with one leader-eligible replica failing and recovering; it remains untested by this patch and is not claimed as covered (gate requirement 4).",
+  "summary": "Round 2 gate FAILED at eb5557d1. All 10 focused core tests pass at head (0 failures/errors/skips, including the three JSON-format discriminator methods), but ./gradlew tidy deterministically reformats solr/core/src/test/org/apache/solr/cloud/OverseerStatusTest.java (Spotless), so the head is not tidy-clean. Per the gate's requirement 2 this requires a new pushed head folding in the formatting change and a superseding gate; the check leg and the 8 mutation proofs were not run because the tidy-dirty finding is decisive.",
+  "type": "receipt",
+  "verdict": "failed"
+}
