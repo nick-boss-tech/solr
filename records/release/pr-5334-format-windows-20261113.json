@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr-5334",
+  "evidence": "Work completed and no executor remains running. Report records/report/pr-5334-format-windows-20261113-report.json; pushed head c9896f0e5b026545ebefcb6f225da67550acdd21.",
+  "id": "pr-5334-format-windows-20261113",
+  "job": "pr-5334-format-windows-20261113",
+  "reason": "Formatting follow-up pushed and Linux proof handed off",
+  "type": "release"
+}
