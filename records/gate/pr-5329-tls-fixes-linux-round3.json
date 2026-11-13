@@ -1,0 +1,21 @@
+{
+  "environment": "Linux JDK 21, clean checkout, preserve security settings",
+  "execution_dependency": "Verify the claimed round-two worker and executor have stopped before claiming or starting this gate.",
+  "head": "0d7b07837fb32cdfc94e2f763e60d94bf3c1e840",
+  "id": "pr-5329-tls-fixes-linux-round3",
+  "job": "pr-5329-tls-fixes-linux-round3",
+  "phase": "implementation proof round 3",
+  "requirements": [
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.cloud.SolrZkServerTlsTest -Dtests.seed=5329ABCD; capture fresh XML, counts, logs and exit code, including the ensemble-shaped negative case.",
+    "Run ./gradlew :solr:packaging:integrationTests --tests test_secure_example.bats; retain fresh output and XML. Verify the existing-port and port-unification case executes, including the intercepted creation-time mode check, failure to prepare a password file, secure/plaintext probes and final file modes.",
+    "Run ./gradlew tidy and require an unchanged source tree; return any formatting changes for a new exact-head gate.",
+    "Run ./gradlew check -x test and retain output including validateLogCalls.",
+    "Fail-before ensemble proof: apply only the updated SolrZkServerTlsTest.java to preceding fork head dc3ba7b2e83a0b3e128d6e49964adf8681d9732e, then run testAutomaticTlsRejectsEnsemblePlaintextClientAddress with seed 5329ABCD. Record assertion failure caused by missing expected exception; setup or compile failures do not count.",
+    "Fail-before unification proof: apply the updated test class to 7dedae124c252574caaff93cf4bcf2bc1d240fc9, then run testAutomaticTlsSuppressesExistingPlaintextPort using the same seed; record the expected unification assertion failure.",
+    "Mutation proof for creation-time permission check: on a disposable worktree at the gate head, change only the password-file creation umask from 077 to 022; run the BATS case and require the intercepted creation check to fail, with fresh logs. Restore the pristine exact-head tree before any other proof.",
+    "Record exact commands, return codes, counts, fresh log and XML locations, and any setup failure or limitation in the named receipt."
+  ],
+  "supersedes": "records/gate/pr-5329-tls-fixes-linux-round2.json",
+  "type": "gate",
+  "unresolved": "TLS configuration rotation and inherited TLS options for later external ZooKeeper connections remain unresolved. Passing this gate does not authorize a public offer."
+}
