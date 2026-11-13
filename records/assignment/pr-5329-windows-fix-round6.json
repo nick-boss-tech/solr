@@ -1,0 +1,10 @@
+{
+  "id": "pr-5329-windows-fix-round6",
+  "intended_host": "Windows implementation; Linux proof required",
+  "job": "pr-5329-windows-fix-round6",
+  "note": "Round-two Linux gate is claimed; do not duplicate in-flight proof.",
+  "source_head": "37710039195736636bc3971cbf200cc940d53248",
+  "successor_of": "pr-5329-windows-fix-round5",
+  "summary": "Correct secure example confirmation and investigate TLS option persistence",
+  "type": "assignment"
+}
