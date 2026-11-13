@@ -1,0 +1,7 @@
+{
+  "id": "solr-18619-review-fixes-linux-gate-r2-superseded",
+  "job": "solr-18619-review-fixes-linux-gate-r2",
+  "reason": "The fork head moved from 244b2d7754f47bb8835dd38fe560cb405db9a288 to cf35bd49fab19751af9afb728ef83076ae521f09 to make the visibility regression wait for the selection state. No gate record or execution was created for round 2. Use records/assignment/solr-18619-review-fixes-linux-gate-r3.json and its named gate.",
+  "status": "superseded; do not claim or execute",
+  "type": "report"
+}
