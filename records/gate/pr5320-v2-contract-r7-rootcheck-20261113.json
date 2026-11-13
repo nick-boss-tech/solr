@@ -1,0 +1,22 @@
+{
+  "environment": "Linux gate host, supported JDK, clean clone or working checkout with valid .git",
+  "head": "b4bb017d22c036df50bebfffecf26c0e8a0b0b57",
+  "id": "pr5320-v2-contract-r7-rootcheck-20261113",
+  "job": "pr5320-v2-contract-r7-rootcheck-20261113",
+  "phase": "round 7 root-check completion",
+  "prior_receipt": "records/receipt/pr5320-v2-contract-linux-gate-r7-20261113-receipt.json",
+  "requirements": [
+    "Confirm the remote branch and clean checkout are at this exact head and that the contributor parent is an ancestor. Review the released r7 receipt and evidence: its focused tests, tidy and fail-before legs passed at this head, but its root command set -Prefguide.include=false, which omitted checkSiteLinks and checkCliDocsUpToDate and was not authorized by the r7 gate.",
+    "Run ./gradlew check -x test with the Ref Guide included, without -Prefguide.include=false, SOLR_REF_GUIDE_INCLUDE=false, task exclusions, or other weakening. Use a normal clean checkout with a valid .git, unset any environment setting that disables the guide, and verify that :solr:solr-ref-guide:checkSiteLinks and :solr:solr-ref-guide:checkCliDocsUpToDate are included and complete successfully. Capture command, full log, task outcomes, exit code, JDK and any material environment setup.",
+    "If the worktree Antora issue prevents the check, diagnose and repair the host setup or use a clean normal clone at the same head. Document any failed attempts and fixes; do not silently omit the guide or report a partial run as passing. If source changes or formatting are needed, stop and report for a new source head and gate.",
+    "Carry the focused tests, clean tidy and five negative proof legs from the r7 receipt as exact-head evidence. Name which legs are carried, their source receipt, and the original baseline heads; do not call them newly rerun. A passing completion requires both these carried legs and the unexcluded root check.",
+    "Publish receipt records/receipt/pr5320-v2-contract-r7-rootcheck-20261113-receipt.json with actual command, task outcomes, exit code, evidence location, environment conditions, and the retained limitations on HTTP introspection and controlled concurrent edits."
+  ],
+  "source": {
+    "branch": "pr-5320-v2-contract",
+    "contributor_parent": "5fa5513038a7cf9318ed800423d8a44064d4c0e3",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes_gate": "records/gate/pr5320-v2-contract-linux-gate-r7-20261113.json",
+  "type": "gate"
+}
