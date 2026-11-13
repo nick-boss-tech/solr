@@ -1,0 +1,24 @@
+{
+  "claim_path": "records/claim/pr-5330-r10-repair-linux-20261113.json",
+  "coordination": "Reconcile older claimed round-2 job and executor before overlapping work; absence of observed work is not evidence that the worker stopped. Round-9 executor reported stopped in its release.",
+  "gate_id": "pr-5330-r10-repair-linux-20261113",
+  "gate_record": "records/gate/pr-5330-r10-repair-linux-20261113.json",
+  "host_requirements": [
+    "linux",
+    "jdk21",
+    "Solr Gradle"
+  ],
+  "id": "pr-5330-r10-repair-linux-20261113",
+  "job": "pr-5330-r10-repair-linux-20261113",
+  "phase": "round 10",
+  "prior_receipt": "records/receipt/pr-5330-test-assertions-r9-linux-20261113-receipt.json",
+  "receipt_path": "records/receipt/pr-5330-r10-repair-linux-20261113-receipt.json",
+  "source": {
+    "branch": "pr-5330-test-fix-20261113",
+    "head": "e5117658841ca30d4b888f311754c8818f06dbf3",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify repairs for the failed PR 5330 r9 gate and complete remaining proof",
+  "supersedes": "records/gate/pr-5330-test-assertions-r9-linux-20261113.json",
+  "type": "assignment"
+}
