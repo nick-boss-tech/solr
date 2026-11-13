@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "The merge operation completed and verified remote head is 56694443bf5bc250d15ba570fde91cdf77a5eaa7; the Windows implementation worker has stopped.",
+  "id": "pr-5333-doc-reconcile-20261113",
+  "job": "pr-5333-doc-reconcile-20261113",
+  "reason": "Reconciliation completed; Linux investigation is separate",
+  "type": "release"
+}
