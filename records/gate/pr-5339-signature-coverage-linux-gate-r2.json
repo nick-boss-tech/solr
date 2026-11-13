@@ -1,0 +1,26 @@
+{
+  "environment": "Linux, clean standalone clone at exact head, serialize Gradle using host lock; no source branch edits",
+  "head": "83b2df0977499337bc88daaba8eb872a3835f31b",
+  "id": "pr-5339-signature-coverage-linux-gate-r2",
+  "job": "pr-5339-signature-coverage-linux-gate-r2",
+  "phase": "coverage r2",
+  "receipt_path": "records/receipt/pr-5339-signature-coverage-linux-gate-r2-receipt.json",
+  "requirements": [
+    "Prior r1 gate was claimed by phone-agent-2 at board snapshot 0a5fa6f96fa5b1ca2670ac6a57686d60ca769aeb, with no receipt or release observed. Reconcile its execution with owner and establish the executor has stopped before overlapping proof. Its old-head receipt cannot prove this head.",
+    "Verify remote branch and exact clean head; preserve logs, exit codes, fresh JUnit XML and environment details for every leg.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.update.processor.TextProfileSignatureTest -Ptests.seed=5339; all tests must pass.",
+    "Run ./gradlew tidy and verify no tracked changes.",
+    "Run ./gradlew buildLocalSite from a standalone clone, verify the Solr 11 upgrade page renders.",
+    "Run ./gradlew check -x test with no exclusions.",
+    "Fail-before: in an isolated checkout at 1bb663935e1464da39d780cecbbd9b2de8d08d44 restore the original pre-PR comparator only, keeping contributor resize test intact; run testSignatureStableAcrossHashMapResize with seed 5339 and report behavioral assertion result (not compilation or setup failure). The new known-output test is coverage-only; do not represent a baseline pass as a defect.",
+    "Mutation proof for new known-output test: in separate clean exact-head workspaces with tests unchanged, individually mutate comparator to sort frequency ascending, ignore frequency and compare only strings, and reverse string tie-break; require testProfileOrdersQuantizedCountsAndTies to fail via assertion in each case. Retain mutation diffs and fresh XML/logs; do not treat compile/setup failures as proof.",
+    "Any formatting or source repair needs a new pushed head and superseding gate."
+  ],
+  "source": {
+    "branch": "pr-5339-signature-migration",
+    "head": "83b2df0977499337bc88daaba8eb872a3835f31b",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes": "records/gate/pr-5339-signature-migration-linux-gate-r1.json",
+  "type": "gate"
+}
