@@ -50,5 +50,12 @@
   <field name="vector_single_value_float_1d" type="raw_float_1d" indexed="${tests.rawvectors.indexed:true}" stored="${tests.rawvectors.stored:false}"/>
   <field name="vector_single_value_byte_1d" type="raw_byte_1d" indexed="${tests.rawvectors.indexed:true}" stored="${tests.rawvectors.stored:false}"/>
 
+  <field name="copy_source_float" type="raw_float" indexed="true" stored="false"/>
+  <field name="copy_source_byte" type="raw_byte" indexed="true" stored="false"/>
+  <field name="copy_target_float" type="raw_float" indexed="true" stored="false"/>
+  <field name="copy_target_byte" type="raw_byte" indexed="true" stored="false"/>
+  <copyField source="copy_source_float" dest="copy_target_float"/>
+  <copyField source="copy_source_byte" dest="copy_target_byte"/>
+
   <uniqueKey>id</uniqueKey>
 </schema>

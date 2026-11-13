@@ -358,8 +358,11 @@ public class RealTimeGetComponent extends SearchComponent {
         docFetcher.decorateDocValueFields(
             doc, docid, docFetcher.getNonStoredDVsUsedAsStored(), reuseDvIters);
 
-        docFetcher.decorateWithRawVectorFields(
-            doc, docid, docFetcher.calcRawVectorFieldsForReturn(rsp.getReturnFields()));
+        Set<String> rawVectorFields =
+            new HashSet<>(docFetcher.calcRawVectorFieldsForReturn(rsp.getReturnFields()));
+        IndexSchema schema = searcherInfo.getSearcher().getSchema();
+        rawVectorFields.removeIf(name -> schema.isCopyFieldTarget(schema.getField(name)));
+        docFetcher.decorateWithRawVectorFields(doc, docid, rawVectorFields);
 
         if (null != transformer) {
           if (null == resultContext) {

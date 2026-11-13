@@ -123,6 +123,40 @@ public class DenseVectorRetrievalTest extends SolrTestCase {
   }
 
   @Test
+  public void rawVectorCopyTargetsAreFilteredFromRealTimeGet() throws Exception {
+    var input = new SolrInputDocument();
+    input.setField(CommonParams.ID, "copy-test");
+    input.setField("copy_source_float", A_FLOAT_VECTOR);
+    input.setField("copy_source_byte", A_BYTE_VECTOR);
+    client.add(input);
+
+    var fields =
+        Set.of(
+            CommonParams.ID,
+            "copy_source_float",
+            "copy_source_byte",
+            "copy_target_float",
+            "copy_target_byte");
+    var fromLog = realTimeGet("copy-test", of(fields));
+    assertEquals(A_FLOAT_VECTOR, fromLog.getFieldValue("copy_source_float"));
+    assertEquals(A_BYTE_VECTOR, fromLog.getFieldValue("copy_source_byte"));
+    assertNull(fromLog.getFieldValue("copy_target_float"));
+    assertNull(fromLog.getFieldValue("copy_target_byte"));
+
+    client.commit();
+    var fromIndex = realTimeGet("copy-test", of(fields));
+    assertEquals(A_FLOAT_VECTOR, fromIndex.getFieldValue("copy_source_float"));
+    assertEquals(A_BYTE_VECTOR, fromIndex.getFieldValue("copy_source_byte"));
+    assertNull(fromIndex.getFieldValue("copy_target_float"));
+    assertNull(fromIndex.getFieldValue("copy_target_byte"));
+
+    var query = new SolrQuery("id:copy-test").setFields("copy_target_float", "copy_target_byte");
+    var result = new QueryRequest("/select", query).process(client).getResults().getFirst();
+    assertEquals(A_FLOAT_VECTOR, result.getFieldValue("copy_target_float"));
+    assertEquals(A_BYTE_VECTOR, result.getFieldValue("copy_target_byte"));
+  }
+
+  @Test
   public void fieldTypeDefinition_useRawVectorsAsStored_shouldReturnVectorsInRealTimeGet()
       throws Exception {
     var fieldList =
