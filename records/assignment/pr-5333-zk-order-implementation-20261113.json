@@ -1,0 +1,14 @@
+{
+  "contributor_head": "65c2d85f77017a951f20dc110d71bf14786c6694",
+  "id": "pr-5333-zk-order-implementation-20261113",
+  "intended_host": "Windows implementation; Linux gate for execution",
+  "job": "pr-5333-zk-order-implementation-20261113",
+  "scope": "Implement effective embedded ZooKeeper detection and regression coverage, push and post an exact-head Linux execution gate. The earlier Linux investigation assignment is superseded for implementation; check claims before starting.",
+  "source": {
+    "branch": "pr-5333-shutdown-doc",
+    "head": "56694443bf5bc250d15ba570fde91cdf77a5eaa7",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Implement embedded ZooKeeper shutdown ordering follow-up with regression tests",
+  "type": "assignment"
+}
