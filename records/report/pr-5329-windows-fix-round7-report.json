@@ -1,0 +1,15 @@
+{
+  "id": "pr-5329-windows-fix-round7-report",
+  "job": "pr-5329-windows-fix-round7",
+  "limitations": "Persistent server/client TLS lifecycle is unresolved; Linux reproduction and design evidence requested. Do not offer publicly. Earlier Linux executor stop must be verified.",
+  "results": "Raw interactive input distinguishes empty Enter from whitespace and quoted-empty input; expanded BATS decline case. Merged current contributor head without rewriting history. git diff --check passed; no Windows builds or tests run.",
+  "source": {
+    "branch": "pr-5329-tls-fixes",
+    "contributor_head": "e851dd0259b533ee7ec794c2ae664abc77cfe8f8",
+    "head": "78f2fd781d83a54e2f31b45d90bec4f372450b36",
+    "previous": "de6c192d045c9c0e182b9e3d060d412d450df3aa",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Pushed raw confirmation fix and reconciled current contributor head",
+  "type": "report"
+}
