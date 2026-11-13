@@ -1,0 +1,18 @@
+{
+  "draft": "SOLR-18619: use request-specific node targets in the Admin UI. The Admin UI still uses older node/nodes parameters for per-node Metrics, Nodes and log-message reads. Use per-request target headers, retain healthy node results with visible errors, and pin selected-local generated reads after cloud identity is known. Standalone remains local. Log messages follow the selected node by default; All nodes combines messages and labels origins and failures. Log-level changes retain broadcast behavior. Choice for maintainers: the ticket describes collecting all live-node messages; the picker gives an explicit node context. Does the selected-node default with an explicit All nodes option fit the intended navigation, or should cloud logs aggregate by default? Verification is pending at the exact head. Legacy parameter deprecation and log-level migration are separate. AI-assisted text prepared for Nick's review.",
+  "evidence": "SOLR-18619 is open with no comments; GitHub ticket-key PR search returned no matches. PR 5110 merged on 2026-11-06. Reapplied all three original migration commits, including selected-local pinning, on upstream main without conflicts. The diff is 12 intended files, 545 additions and 97 deletions; diff --check passed. Fork API returned the exact head. No Windows Gradle or browser execution was performed.",
+  "gate": "records/gate/solr-18619-prep-linux-gate-r1.json",
+  "gate_assignment": "records/assignment/solr-18619-prep-linux-gate-r1.json",
+  "id": "solr-18619-submission-prep-20261113-report",
+  "job": "solr-18619-submission-prep-20261113",
+  "limits": "No PR created or public write made. Historical gate and synthetic baseline results do not prove this candidate. Review test adequacy and the product choice after the exact-head Linux receipt; confirm current upstream state before opening.",
+  "prior_source": "https://github.com/nick-boss-tech/solr/compare/4e8aa913fce4a40b529fe89d8b5dd7930c29a86e...be369c41c633d639ad66a7291a4d82891ea9836c",
+  "source": {
+    "baseline": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+    "branch": "solr-18619-targeting-prep",
+    "head": "f2cab615c5ba08cf83d11fe5ae4fc3a0d0b8d7bb",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Scoped candidate prepared and pushed; exact-head Linux proof pending",
+  "type": "report"
+}
