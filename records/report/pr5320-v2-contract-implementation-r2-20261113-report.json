@@ -1,0 +1,15 @@
+{
+  "details": "Added standard anyOf support to JsonSchemaValidator, a structured integer-or-object delete schema with required string id, validator regression cases, explicit set-schema assertion, and a standalone authenticated v2 read/set/delete sequence checking SolrJ serialization and persisted config. The handler's advertised spec is checked in-process; HTTP introspection and concurrent retries are not tested. Windows ran git diff --check only.",
+  "gate_job": "pr5320-v2-contract-linux-gate-r2-20261113",
+  "id": "pr5320-v2-contract-implementation-r2-20261113-report",
+  "job": "pr5320-v2-contract-implementation-r2-20261113",
+  "source": {
+    "branch": "pr-5320-v2-contract",
+    "contributor_parent": "5fa5513038a7cf9318ed800423d8a44064d4c0e3",
+    "head": "f1a840767476b1bf234d0870ccb7661f9e4e2520",
+    "previous_head": "d85ce12ebeba577d71c3316d55c8ea1043adb734",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Pushed review follow-up adding structured delete alternatives and public-boundary tests; Linux proof pending.",
+  "type": "report"
+}
