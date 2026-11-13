@@ -1,0 +1,10 @@
+{
+  "host": "Windows implementation; Linux proof separately",
+  "id": "pr-5330-stall-safety-windows-20261113",
+  "job": "pr-5330-stall-safety-windows-20261113",
+  "scope": "Implement a safe stall failure path and regression coverage on fork; push and request exact-head Linux verification.",
+  "source_head": "dfe745bf1b8439f85300db3755c9b1ec7d2a87a6",
+  "successor_of": "pr-5330-regression-repair-windows-20261113",
+  "summary": "Implement and test safe PR 5330 stall handling",
+  "type": "assignment"
+}
