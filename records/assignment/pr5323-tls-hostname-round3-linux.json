@@ -1,0 +1,19 @@
+{
+  "claim_path": "records/claim/pr5323-tls-hostname-round3-linux.json",
+  "gate_id": "pr5323-tls-hostname-round3-gate",
+  "gate_record": "records/gate/pr5323-tls-hostname-round3-gate.json",
+  "id": "pr5323-tls-hostname-round3-linux",
+  "intended_host": "Linux gate host; Windows CI or separate capable Windows host for cross-platform leg",
+  "job": "pr5323-tls-hostname-round3-linux",
+  "phase": "round 3 proof",
+  "receipt_path": "records/receipt/pr5323-tls-hostname-round3-linux.json",
+  "source": {
+    "branch": "pr-5323-review-fixes",
+    "contributor_parent": "73aed042f6e2c46dfddad0f086234136d5daa299",
+    "head": "7e23026e2b82e7ecd9d47648441c7a7e4f28f7ff",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify round 2 fixes on Linux and obtain matching-head Windows CI evidence",
+  "supersedes": "records/gate/pr5323-review-fixes-round2-gate.json",
+  "type": "assignment"
+}
