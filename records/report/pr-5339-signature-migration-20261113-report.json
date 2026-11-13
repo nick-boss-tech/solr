@@ -1,0 +1,13 @@
+{
+  "gate": "records/gate/pr-5339-signature-migration-linux-gate-r1.json",
+  "head": "6d886caf1b2915c9318b1419386e5181dd154ad0",
+  "id": "pr-5339-signature-migration-20261113-report",
+  "job": "pr-5339-signature-migration-20261113",
+  "source": {
+    "branch": "pr-5339-signature-migration",
+    "parent": "1bb663935e1464da39d780cecbbd9b2de8d08d44",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Added Solr 11 upgrade guidance for changed TextProfileSignature values, rebuild, mixed versions and signature IDs. Documentation does not preserve compatibility automatically. Diff check passed; Linux proof pending.",
+  "type": "report"
+}
