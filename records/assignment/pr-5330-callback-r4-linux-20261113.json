@@ -1,0 +1,25 @@
+{
+  "claim_path": "records/claim/pr-5330-callback-r4-linux-20261113.json",
+  "contributor_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+  "coordination": "Older round-2 gate is claimed at dfe745bf1b8439f85300db3755c9b1ec7d2a87a6; reconcile its receipt and execution state. Do not assume the worker stopped or run conflicting work.",
+  "gate_id": "pr-5330-callback-r4-linux-20261113",
+  "gate_record": "records/gate/pr-5330-callback-r4-linux-20261113.json",
+  "host_requirements": [
+    "linux",
+    "jdk21",
+    "Solr Gradle"
+  ],
+  "id": "pr-5330-callback-r4-linux-20261113",
+  "implementation_job": "pr-5330-r4-callback-fix-windows-20261113",
+  "job": "pr-5330-callback-r4-linux-20261113",
+  "phase": "round 4",
+  "receipt_path": "records/receipt/pr-5330-callback-r4-linux-20261113-receipt.json",
+  "source": {
+    "branch": "pr-5330-test-fix-20261113",
+    "head": "6476beb8debb78d6f1504144fef292ca06583c94",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify PR 5330 atomic error drain and stalled-client callback fence",
+  "supersedes": "records/gate/pr-5330-stall-safety-r3-linux-20261113.json",
+  "type": "assignment"
+}
