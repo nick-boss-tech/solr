@@ -1,0 +1,42 @@
+{
+ "evidence": "records/evidence/pr-5075-forbidden-api-regate-linux-20261113-evidence.tar.gz (SHA-256 c3a63e4bee1b244f86fbcce2ae36b2622eda6640c8255623782b43c9d21dd803): the complete diff against dc825f9a, per-leg logs including both check attempts, fresh JUnit XML for the four suites, and the gate scripts.",
+ "gate": "pr-5075-forbidden-api-regate-linux-20261113-gate",
+ "head": "5b3693c44ca057dc42addb43af97c168634d6301",
+ "id": "pr-5075-forbidden-api-regate-linux-20261113-receipt",
+ "job": "pr-5075-forbidden-api-regate-linux-20261113",
+ "legs": [
+  {
+   "leg": "diff scope",
+   "result": "Full diff of 5b3693c4 against dc825f9af929a7ad8d08f8eb51e969e72582acb2 is one file, +2 lines: import org.apache.solr.common.util.SuppressForbidden and the method-scoped @SuppressForbidden annotation on testDeleteByQueryRetryRuleIsJudgedOnItsOwnRequest (the only method whose log assertions reference log4j event types; the merged-stream method needed no suppression and has none). The complete diff is in the evidence archive (diff.txt). No behavioral test assertion was removed or changed, which is the condition the gate set for relying on the prior fail-before."
+  },
+  {
+   "leg": "forbiddenApisTest",
+   "result": ":solr:core:forbiddenApisTest rc=0 at the exact head. The seven violations recorded in the prior receipt (LogEvent and Message references at lines 159-171 of the attribution test) no longer appear; the task's log in the evidence archive shows the check completing clean."
+  },
+  {
+   "leg": "core suites",
+   "result": ":solr:core:test --tests StreamingSolrClientsErrorAttributionTest --tests SolrCmdDistributorTest, seed 5075C0DE (passed as -Ptests.seed through the host's solr-gradle.sh wrapper, Gradle 9.7.0, vendored JDK 21), rc=0. Fresh XML: attribution 2/2 with both methods executed, SolrCmdDistributorTest 1/1, zero failures, errors and skips; identical counts to the prior round."
+  },
+  {
+   "leg": "solrj-jetty suites",
+   "result": ":solr:solrj-jetty:test --tests ConcurrentUpdateJettySolrClientTest --tests ConcurrentUpdateJettySolrClientBadInputTest, seed 5075C0DE, rc=0. Fresh XML: 11/11 and 1/1, zero skips."
+  },
+  {
+   "leg": "tidy",
+   "result": "Root tidy rc=0 with zero tracked changes at the exact head."
+  },
+  {
+   "leg": "root check",
+   "result": "Root check -x test BUILD SUCCESSFUL in 10m 7s, rc=0, at the exact head in a normal clone. Disclosure: the first check attempt was cut short mid-run by a host runtime restart (its partial log is in the evidence as check.log); the leg was rerun once from the same clean checkout and completed, which is the run reported here (check-rerun.log). The UI wasm artifact was seeded by curl before the first attempt with its SHA-256 matching the build pin (654494303e4af3b8bfb26a83d250603f19033820295591d88db0597991ce8ad2), the same handling documented in the prior receipt."
+  },
+  {
+   "leg": "fail-before reliance",
+   "result": "Per the gate, the prior receipt's fail-before at f8d4bdbea518901e255ae119f3e5c43e7804a9bf (behavioral logging assertion failure at line 164 of the overlaid test) is relied on as historical evidence: the diff leg above verifies the assertions it exercised are byte-identical at this head, the only changes being the import and the annotation."
+  }
+ ],
+ "owner": "phone-agent",
+ "recorded": "2026-11-12T19:32:48-07:00",
+ "summary": "The forbidden-API repair verifies cleanly at the exact head and the full review gate now passes. The diff against the prior gated head dc825f9a is exactly two added lines in StreamingSolrClientsErrorAttributionTest.java: the SuppressForbidden import and a method-scoped @SuppressForbidden(reason = \"LogListener exposes log4j events for assertions\") on testDeleteByQueryRetryRuleIsJudgedOnItsOwnRequest; no assertion was added, removed or altered, so the prior receipt's fail-before proof stands for the unchanged assertions. :solr:core:forbiddenApisTest passes (the seven violations from the prior round are resolved), the four named suites pass at seed 5075C0DE with the same counts as the prior round, root tidy leaves zero tracked changes, and root check -x test completes BUILD SUCCESSFUL. The remote branch tip was re-verified unchanged at filing.",
+ "type": "receipt",
+ "verdict": "passed"
+}
