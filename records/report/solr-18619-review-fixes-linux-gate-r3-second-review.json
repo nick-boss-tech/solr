@@ -1,0 +1,10 @@
+{
+  "disposition": "Review and reconcile this test gap before executing round 3. If code or tests change, push and use a superseding exact-head gate. This report is not an execution claim or receipt.",
+  "finding": "P2 test adequacy: the named all-node browser tests check real outgoing XHR target headers without waiting for responses or rendered events, while rendered aggregation and failure recovery use fabricated NodeRequests responses. Existing testEventsViewerShowsWarnings may skip due to shared JVM watcher state, is not a named gate leg and covers selected-node viewing. A broken endpoint, payload shape or real response-to-render path can escape the current all-node selection. Add a deterministic non-skipping end-to-end check of real per-node responses and rendered aggregation, with watcher constraints made explicit.",
+  "head": "cf35bd49fab19751af9afb728ef83076ae521f09",
+  "id": "solr-18619-review-fixes-linux-gate-r3-second-review",
+  "job": "solr-18619-review-fixes-linux-gate-r3",
+  "prior_fixes": "Static review found the new no-selection and out-of-order system response tests exercise the intended boundaries. The gate includes positives, pre-fix restoration and separate success mutation. No runtime pass claimed.",
+  "status": "review finding; reconcile before execution",
+  "type": "report"
+}
