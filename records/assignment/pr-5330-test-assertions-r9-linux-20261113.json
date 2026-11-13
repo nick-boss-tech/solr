@@ -1,0 +1,25 @@
+{
+  "claim_path": "records/claim/pr-5330-test-assertions-r9-linux-20261113.json",
+  "contributor_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+  "coordination": "Older round-2 Linux gate claimed at dfe745bf1b8439f85300db3755c9b1ec7d2a87a6; reconcile execution and receipt. Do not assume worker stopped or duplicate active work.",
+  "gate_id": "pr-5330-test-assertions-r9-linux-20261113",
+  "gate_record": "records/gate/pr-5330-test-assertions-r9-linux-20261113.json",
+  "host_requirements": [
+    "linux",
+    "jdk21",
+    "Solr Gradle"
+  ],
+  "id": "pr-5330-test-assertions-r9-linux-20261113",
+  "implementation_job": "pr-5330-test-assertions-r9-windows-20261113",
+  "job": "pr-5330-test-assertions-r9-linux-20261113",
+  "phase": "round 9",
+  "receipt_path": "records/receipt/pr-5330-test-assertions-r9-linux-20261113-receipt.json",
+  "source": {
+    "branch": "pr-5330-test-fix-20261113",
+    "head": "13522945de6c9102ecdbe8efb821ed451e840216",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify discriminating stall, 503 and error-drain tests for PR 5330",
+  "supersedes": "records/gate/pr-5330-regression-tests-r8-linux-20261113.json",
+  "type": "assignment"
+}
