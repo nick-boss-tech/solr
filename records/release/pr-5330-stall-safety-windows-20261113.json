@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr-5330-r3",
+  "evidence": "Remote fork head c5d4ca375396006460a72e97aa99d34337780580 verified; implementation worker and commands have stopped. Report records/report/pr-5330-stall-safety-windows-20261113-report.json.",
+  "id": "pr-5330-stall-safety-windows-20261113",
+  "job": "pr-5330-stall-safety-windows-20261113",
+  "reason": "Fork implementation pushed and handed to exact-head Linux gate",
+  "type": "release"
+}
