@@ -1,0 +1,11 @@
+{
+  "id": "pr-5329-round3-head-superseded-by-round4",
+  "job": "pr-5329-tls-fixes-linux-round3",
+  "new_head": "ca3e9817719472ec03199da53b58372214722fd4",
+  "note": "Round-four work requires checking that the earlier claimed round-two executor has stopped; no result from a prior head proves this one.",
+  "old_head": "0d7b07837fb32cdfc94e2f763e60d94bf3c1e840",
+  "replacement_assignment": "records/assignment/pr-5329-tls-fixes-linux-round4.json",
+  "replacement_gate": "records/gate/pr-5329-tls-fixes-linux-round4.json",
+  "summary": "Round-three gate superseded after three-server fixture and contributor merge",
+  "type": "report"
+}
