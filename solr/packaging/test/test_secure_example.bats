@@ -188,6 +188,76 @@ teardown() {
   assert_output --partial 'requires its own embedded ZooKeeper'
 }
 
+@test "automatic embedded ZooKeeper TLS reports an unwritable include" {
+  chmod 400 "$SOLR_INCLUDE"
+  [ ! -w "$SOLR_INCLUDE" ] || skip 'This test requires an unprivileged user'
+  export SOLR_SSL_ENABLED=true SOLR_SSL_KEY_STORE=unused SOLR_SSL_TRUST_STORE=unused
+  export SOLR_SSL_KEY_STORE_PASSWORD=secret SOLR_SSL_TRUST_STORE_PASSWORD=secret
+  export SOLR_SSL_KEY_STORE_TYPE=PKCS12 SOLR_SSL_TRUST_STORE_TYPE=PKCS12
+  cp "$SOLR_TIP/server/solr/zoo.cfg" "$SOLR_HOME/zoo.cfg"
+  printf '\nsecureClientPort=%s\n' "$ZK_PORT" >> "$SOLR_HOME/zoo.cfg"
+  run solr start -c -p "$SOLR_PORT" --solr-home "$SOLR_HOME"
+  assert_failure
+  assert_output --partial 'Unable to write embedded ZooKeeper TLS options'
+  refute_output --partial 'added SOLR_ZK_TLS_OPTS'
+}
+
+@test "automatic embedded ZooKeeper TLS reports an unwritable zoo.cfg" {
+  export SOLR_SSL_ENABLED=true SOLR_SSL_KEY_STORE=unused SOLR_SSL_TRUST_STORE=unused
+  export SOLR_SSL_KEY_STORE_PASSWORD=secret SOLR_SSL_TRUST_STORE_PASSWORD=secret
+  export SOLR_SSL_KEY_STORE_TYPE=PKCS12 SOLR_SSL_TRUST_STORE_TYPE=PKCS12
+  cp "$SOLR_TIP/server/solr/zoo.cfg" "$SOLR_HOME/zoo.cfg"
+  chmod 400 "$SOLR_HOME/zoo.cfg"
+  [ ! -w "$SOLR_HOME/zoo.cfg" ] || skip 'This test requires an unprivileged user'
+  cp "$SOLR_HOME/zoo.cfg" "$BATS_TEST_TMPDIR/original-zoo.cfg"
+  run solr start -c -p "$SOLR_PORT" --solr-home "$SOLR_HOME"
+  assert_failure
+  assert_output --partial 'Unable to update embedded ZooKeeper configuration'
+  run cmp "$BATS_TEST_TMPDIR/original-zoo.cfg" "$SOLR_HOME/zoo.cfg"
+  assert_success
+}
+
+@test "automatic embedded ZooKeeper TLS preserves zoo.cfg on a partial write" {
+  export SOLR_SSL_ENABLED=true SOLR_SSL_KEY_STORE=unused SOLR_SSL_TRUST_STORE=unused
+  export SOLR_SSL_KEY_STORE_PASSWORD=secret SOLR_SSL_TRUST_STORE_PASSWORD=secret
+  export SOLR_SSL_KEY_STORE_TYPE=PKCS12 SOLR_SSL_TRUST_STORE_TYPE=PKCS12
+  cp "$SOLR_TIP/server/solr/zoo.cfg" "$SOLR_HOME/zoo.cfg"
+  cp "$SOLR_HOME/zoo.cfg" "$BATS_TEST_TMPDIR/original-zoo.cfg"
+  local intercept_dir="$BATS_TEST_TMPDIR/cat-intercept"
+  mkdir "$intercept_dir"
+  cat > "$intercept_dir/cat" <<'EOF'
+#!/usr/bin/env bash
+if [ "$#" -eq 0 ]; then
+  printf 'partial configuration\n'
+  exit 1
+fi
+exec /bin/cat "$@"
+EOF
+  chmod +x "$intercept_dir/cat"
+  run env PATH="$intercept_dir:$PATH" solr start -c -p "$SOLR_PORT" --solr-home "$SOLR_HOME"
+  assert_failure
+  assert_output --partial 'Unable to update embedded ZooKeeper configuration'
+  run cmp "$BATS_TEST_TMPDIR/original-zoo.cfg" "$SOLR_HOME/zoo.cfg"
+  assert_success
+
+  # Allow the retry to publish zoo.cfg, then stop before launching a server.
+  local move_intercept="$BATS_TEST_TMPDIR/zoo-retry-intercept"
+  mkdir "$move_intercept"
+  cat > "$move_intercept/mv" <<'EOF'
+#!/usr/bin/env bash
+if [ "$3" = "$SOLR_INCLUDE" ]; then
+  exit 1
+fi
+exec /bin/mv "$@"
+EOF
+  chmod +x "$move_intercept/mv"
+  run env PATH="$move_intercept:$PATH" solr start -c -p "$SOLR_PORT" --solr-home "$SOLR_HOME"
+  assert_failure
+  assert_output --partial 'Unable to write embedded ZooKeeper TLS options'
+  run grep "^secureClientPort=$((SOLR_PORT + 1000))$" "$SOLR_HOME/zoo.cfg"
+  assert_success
+}
+
 @test "automatic embedded ZooKeeper TLS disables existing plaintext ports and port unification" {
   local store="$BATS_TEST_TMPDIR/zk-test.p12"
   run keytool -genkeypair -alias solr-ssl -keyalg RSA -keysize 2048 \
@@ -222,15 +292,23 @@ ssl.clientAuth=none
 client.portUnification=true
 EOF
 
-  # A failed include update must not be reported as a successful TLS setup.
-  chmod 400 "$SOLR_INCLUDE"
-  if [ ! -w "$SOLR_INCLUDE" ]; then
-    run solr start -c -p "$SOLR_PORT" --solr-home "$SOLR_HOME"
-    assert_failure
-    assert_output --partial 'Unable to write embedded ZooKeeper TLS options'
-    refute_output --partial 'added SOLR_ZK_TLS_OPTS'
-  fi
-  chmod 600 "$SOLR_INCLUDE"
+  # A failed replacement must preserve the include and allow a later retry.
+  local move_intercept="$BATS_TEST_TMPDIR/move-intercept"
+  mkdir "$move_intercept"
+  cat > "$move_intercept/mv" <<'EOF'
+#!/usr/bin/env bash
+if [ "$3" = "$SOLR_INCLUDE" ]; then
+  exit 1
+fi
+exec /bin/mv "$@"
+EOF
+  chmod +x "$move_intercept/mv"
+  cp "$SOLR_INCLUDE" "$BATS_TEST_TMPDIR/original-include"
+  run env PATH="$move_intercept:$PATH" solr start -c -p "$SOLR_PORT" --solr-home "$SOLR_HOME"
+  assert_failure
+  assert_output --partial 'Unable to write embedded ZooKeeper TLS options'
+  run cmp "$BATS_TEST_TMPDIR/original-include" "$SOLR_INCLUDE"
+  assert_success
   rm -f "$SOLR_HOME/.zk-tls-keystore-password" "$SOLR_HOME/.zk-tls-truststore-password"
 
   # An unusable password path must abort before launching Solr.

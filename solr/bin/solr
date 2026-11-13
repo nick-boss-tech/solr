@@ -1143,9 +1143,6 @@ if [ "${SOLR_MODE:-}" == 'solrcloud' ]; then
       # know whether an external ensemble uses TLS, so nothing is assumed there.
       ZK_SECURE_PORT=$((SOLR_PORT_LISTEN + 1000))
       ZK_ZOO_CFG="$SOLR_HOME/zoo.cfg"
-      if [ ! -e "$ZK_ZOO_CFG" ]; then
-        cp "$DEFAULT_SERVER_DIR/solr/zoo.cfg" "$ZK_ZOO_CFG"
-      fi
       # Passwords go in files, never inline in zoo.cfg or on the command line: unlike
       # Solr's own SSLConfigurations/EnvSSLCredentialProvider, ZooKeeper has no env-var
       # password source, and a -D flag would be visible in `ps`.
@@ -1162,7 +1159,23 @@ if [ "${SOLR_MODE:-}" == 'solrcloud' ]; then
         exit 1
       fi
       if ! grep -q '^secureClientPort=' "$ZK_ZOO_CFG" 2>/dev/null; then
-        cat >> "$ZK_ZOO_CFG" <<EOF
+        ZK_CFG_SOURCE="$ZK_ZOO_CFG"
+        if [ ! -e "$ZK_CFG_SOURCE" ] && [ ! -L "$ZK_CFG_SOURCE" ]; then
+          ZK_CFG_SOURCE="$DEFAULT_SERVER_DIR/solr/zoo.cfg"
+        elif [ -L "$ZK_CFG_SOURCE" ] || [ ! -f "$ZK_CFG_SOURCE" ] || [ ! -w "$ZK_CFG_SOURCE" ]; then
+          echo >&2 "Unable to update embedded ZooKeeper configuration $ZK_ZOO_CFG."
+          exit 1
+        fi
+        ZK_CFG_TMP=$(mktemp "${ZK_ZOO_CFG}.XXXXXX") || {
+          echo >&2 "Unable to update embedded ZooKeeper configuration $ZK_ZOO_CFG."
+          exit 1
+        }
+        if ! cp -p "$ZK_CFG_SOURCE" "$ZK_CFG_TMP"; then
+          rm -f "$ZK_CFG_TMP"
+          echo >&2 "Unable to update embedded ZooKeeper configuration $ZK_ZOO_CFG."
+          exit 1
+        fi
+        if ! cat >> "$ZK_CFG_TMP" <<EOF
 
 secureClientPort=$ZK_SECURE_PORT
 serverCnxnFactory=org.apache.zookeeper.server.NettyServerCnxnFactory
@@ -1175,6 +1188,16 @@ ssl.trustStore.passwordPath=$ZK_TRUSTSTORE_PASSWORD_FILE
 ssl.clientAuth=none
 client.portUnification=false
 EOF
+        then
+          rm -f "$ZK_CFG_TMP"
+          echo >&2 "Unable to update embedded ZooKeeper configuration $ZK_ZOO_CFG."
+          exit 1
+        fi
+        if ! mv -f "$ZK_CFG_TMP" "$ZK_ZOO_CFG"; then
+          rm -f "$ZK_CFG_TMP"
+          echo >&2 "Unable to update embedded ZooKeeper configuration $ZK_ZOO_CFG."
+          exit 1
+        fi
       fi
       ZK_SSL_OPTS="-Dzookeeper.client.secure=true -Dzookeeper.clientCnxnSocket=org.apache.zookeeper.ClientCnxnSocketNetty -Dzookeeper.ssl.trustStore.location=$SOLR_SSL_TRUST_STORE -Dzookeeper.ssl.trustStore.type=$SOLR_SSL_TRUST_STORE_TYPE -Dzookeeper.ssl.trustStore.passwordPath=$ZK_TRUSTSTORE_PASSWORD_FILE -Dzookeeper.ssl.hostnameVerification=true"
       # shellcheck disable=SC2206
@@ -1185,11 +1208,25 @@ EOF
       # this one) so co-located nodes and bin/solr zk/auth calls that source this same
       # file inherit TLS too, without any of them special-casing it.
       if [ -f "${SOLR_INCLUDE:-}" ] && ! grep -q 'SOLR_ZK_TLS_OPTS=' "$SOLR_INCLUDE" 2>/dev/null; then
+        if [ -L "$SOLR_INCLUDE" ] || [ ! -w "$SOLR_INCLUDE" ]; then
+          echo >&2 "Unable to write embedded ZooKeeper TLS options to $SOLR_INCLUDE."
+          exit 1
+        fi
+        ZK_INCLUDE_TMP=$(mktemp "${SOLR_INCLUDE}.XXXXXX") || {
+          echo >&2 "Unable to write embedded ZooKeeper TLS options to $SOLR_INCLUDE."
+          exit 1
+        }
+        if ! cp -p "$SOLR_INCLUDE" "$ZK_INCLUDE_TMP"; then
+          rm -f "$ZK_INCLUDE_TMP"
+          echo >&2 "Unable to write embedded ZooKeeper TLS options to $SOLR_INCLUDE."
+          exit 1
+        fi
         if ! {
           printf '\n' &&
           echo "SOLR_ZK_TLS_OPTS=\"$ZK_SSL_OPTS\"" &&
           echo 'SOLR_OPTS="$SOLR_OPTS $SOLR_ZK_TLS_OPTS"'
-        } >> "$SOLR_INCLUDE"; then
+        } >> "$ZK_INCLUDE_TMP" || ! mv -f "$ZK_INCLUDE_TMP" "$SOLR_INCLUDE"; then
+          rm -f "$ZK_INCLUDE_TMP"
           echo >&2 "Unable to write embedded ZooKeeper TLS options to $SOLR_INCLUDE."
           exit 1
         fi
