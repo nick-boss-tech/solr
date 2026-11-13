@@ -1,0 +1,11 @@
+{
+  "id": "pr-5329-round6-head-superseded-by-round7",
+  "job": "pr-5329-tls-fixes-linux-round6",
+  "new_head": "78f2fd781d83a54e2f31b45d90bec4f372450b36",
+  "note": "Reconcile the claimed round-two executor and any later executor before claiming the replacement. Earlier results cannot prove the new head.",
+  "old_head": "de6c192d045c9c0e182b9e3d060d412d450df3aa",
+  "replacement_assignment": "records/assignment/pr-5329-tls-lifecycle-linux-round7.json",
+  "replacement_gate": "records/gate/pr-5329-tls-lifecycle-linux-round7.json",
+  "summary": "Round-six source head superseded by raw confirmation and contributor merge",
+  "type": "report"
+}
