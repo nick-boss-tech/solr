@@ -1,0 +1,11 @@
+{
+ "claimed": "2026-11-13T12:15:00-07:00",
+ "claimer": "phone-agent",
+ "gate": "records/gate/pr5323-tls-isolation-round4-gate.json",
+ "head": "e92e417843e24dac8a54bd1c3c61d43e7b420cf4",
+ "host": "linux",
+ "id": "pr5323-tls-isolation-round4-linux",
+ "job": "pr5323-tls-isolation-round4-linux",
+ "note": "Live fork branch pr-5323-review-fixes verified at the gate head e92e4178 by git ls-remote at claim time. This supersedes the round 3 gate; no Linux claim exists for any 5323 round. Host facts at claim: no Docker on this host, so the catsTestsDockerBuild leg cannot run here; no Windows host is available to this agent, so the Windows leg follows the gate's own instruction to be marked incomplete if unavailable. JDK 21 and JDK 25 are both installed. Taken at Nick's direction in chat 2026-11-13.",
+ "type": "claim"
+}
