@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "records/receipt/pr-5329-tls-lifecycle-linux-round7.json; exact source head 78f2fd781d83a54e2f31b45d90bec4f372450b36; no Gradle/test executor remains, both host locks free.",
+  "id": "pr-5329-tls-lifecycle-linux-round7",
+  "job": "pr-5329-tls-lifecycle-linux-round7",
+  "reason": "Round-seven Linux investigation is complete and its incomplete receipt is published; the executor and tests have stopped, releasing the phone-agent-2 claim.",
+  "type": "release"
+}
