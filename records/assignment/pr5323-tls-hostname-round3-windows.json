@@ -1,0 +1,13 @@
+{
+  "id": "pr5323-tls-hostname-round3-windows",
+  "intended_host": "Windows implementation; Linux and CI proof",
+  "job": "pr5323-tls-hostname-round3-windows",
+  "source": {
+    "branch": "pr-5323-review-fixes",
+    "head": "3a2ff894cd86f08f4df8e416ab1df6ce1d103c73",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr5323-review-fixes-round2-windows",
+  "summary": "Address client hostname TLS false-pass with fresh diagnostic and paired client control",
+  "type": "assignment"
+}
