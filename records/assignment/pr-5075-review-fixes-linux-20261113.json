@@ -1,0 +1,21 @@
+{
+  "claim_path": "records/claim/pr-5075-review-fixes-linux-20261113.json",
+  "gate_id": "pr-5075-review-fixes-linux-20261113-gate",
+  "gate_record": "records/gate/pr-5075-review-fixes-linux-20261113-gate.json",
+  "id": "pr-5075-review-fixes-linux-20261113",
+  "implementation_job": "pr-5075-review-fixes-windows-20261113",
+  "intended_host": "Linux gate host",
+  "job": "pr-5075-review-fixes-linux-20261113",
+  "phase": "review feedback round 1",
+  "prior_head": "f8d4bdbea518901e255ae119f3e5c43e7804a9bf",
+  "prior_receipt": "https://github.com/nick-boss-tech/solr/blob/coordination-ui/receipts/SOLR-5939.md",
+  "receipt_path": "records/receipt/pr-5075-review-fixes-linux-20261113-receipt.json",
+  "source": {
+    "branch": "solr-5939-submit",
+    "head": "dc825f9af929a7ad8d08f8eb51e969e72582acb2",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Linux exact-head proof for PR 5075 review fixes, including failed-stream logging and retry regression.",
+  "supersession": "New review-fix gate; historical combined receipt is not proof for this head.",
+  "type": "assignment"
+}
