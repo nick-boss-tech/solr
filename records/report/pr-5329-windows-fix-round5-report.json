@@ -1,0 +1,14 @@
+{
+  "id": "pr-5329-windows-fix-round5-report",
+  "job": "pr-5329-windows-fix-round5",
+  "limitations": "Partial: stale TLS options and external ensemble inheritance unresolved. Existing claimed Linux executor state must be reconciled before new execution.",
+  "results": "Restore Enter confirmation before deleting secure example home unless --no-prompt; add EOF preservation BATS case. Remove both password test paths before intercepted file creation. git diff --check passed; no build or tests run on Windows.",
+  "source": {
+    "branch": "pr-5329-tls-fixes",
+    "head": "37710039195736636bc3971cbf200cc940d53248",
+    "previous": "ca3e9817719472ec03199da53b58372214722fd4",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Restored interactive reset safeguard and fixed creation-time test setup",
+  "type": "report"
+}
