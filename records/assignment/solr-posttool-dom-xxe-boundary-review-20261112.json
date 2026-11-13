@@ -1,0 +1,49 @@
+{
+  "acceptance_criteria": [
+    "Trace and cite the exact source path from recursive page fetch through /extract?extractOnly=true, TikaServer parsing/serialization, Solr's response handling, and PostTool.makeDom/getXP.",
+    "Independently assess whether a normal attacker-controlled text/html page can cause the actual configured Tika Server to emit XML that reaches makeDom with a DOCTYPE or external-entity reference; distinguish observed behavior from source-based inference.",
+    "If feasible without Docker, provide a repeatable local test using only a temporary harmless marker and loopback-only services. Do not substitute a mock for Tika Server or call a partial replay a full crawler reproduction.",
+    "If the full boundary cannot be exercised without Docker, explain the precise missing integration leg and leave exploitability unconfirmed rather than claiming either a confirmed exploit or a definitive non-exploitability result.",
+    "Explain the difference between the confirmed unsafe parser sink and an exploitable attacker-controlled input path; identify any separate trust assumptions such as control of the Tika Server response.",
+    "Do not modify production code, the existing regression/fix branches, public PRs, or Jira as part of this research assignment."
+  ],
+  "base_head": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+  "context": [
+    "PostTool.makeDom was confirmed as an unsafe sink for raw XML containing an external entity: before the fix, the focused regression expanded a unique marker from a temporary file. The isolated fix rejects DOCTYPE declarations and disables external entity, DTD, schema, and XInclude access; focused tests passed on the fix branch.",
+    "The recursive crawler posts fetched page bytes to /extract?extractOnly=true, receives a serialized response, then parses the returned XML string with PostTool.makeDom/getXP. Solr's extraction path delegates HTML parsing to Tika Server through ExtractingDocumentLoader, ExtractingRequestHandler, and TikaServerExtractionBackend.",
+    "A controlled check against the official Apache Tika Server 3.2.3 standard distribution, bound only to 127.0.0.1, sent text/html with a file entity targeting a test-created marker and a separate entity targeting a loopback listener. Tika returned HTTP 200 XHTML without a DOCTYPE; the entity reference was escaped literally; the marker was not reflected; the loopback listener received zero requests. Captured responses replayed through Solr's TikaServerParser/ToXMLContentHandler and PostTool.makeDom/getXP stages contained no DOCTYPE or marker, and the local link remained discoverable.",
+    "The Tika distribution tested was the standard 3.2.3 server, in the same release family as Solr's apache/tika:3.2.3.0-full test image, not that full container image. No Solr HTTP server was started. File reads were not instrumented, so a read followed by suppression cannot be ruled out solely from the missing response marker. The actual Testcontainers integration suite was not run because Docker is unavailable and must not be installed or used.",
+    "The direct makeDom input path is now hardened on the referenced fix branch. The suspected ordinary webpage-to-XXE path has not been demonstrated end-to-end. A malicious or misconfigured Tika Server response would be a distinct trust-boundary scenario. Cross-host recursive fetching/SSRF is separate and out of scope for this assignment."
+  ],
+  "fix_branch": "security/posttool-dom-entity-hardening-2026-11-12",
+  "fix_head": "feba1036d70846afa437e62c16405a3328e494a6",
+  "id": "solr-posttool-dom-xxe-boundary-review-20261112",
+  "job": "solr-posttool-dom-xxe-boundary-review-20261112",
+  "phase": "security reachability assessment",
+  "references": [
+    "https://github.com/nick-boss-tech/solr/tree/security/posttool-dom-entity-hardening-2026-11-12",
+    "https://github.com/nick-boss-tech/solr/commit/feba1036d70846afa437e62c16405a3328e494a6",
+    "https://github.com/nick-boss-tech/solr/commit/57f607c6aed6044515b14de431c854e11befbf99",
+    "solr/core/src/java/org/apache/solr/cli/PostTool.java",
+    "solr/modules/extraction/src/java/org/apache/solr/handler/extraction/ExtractingDocumentLoader.java",
+    "solr/modules/extraction/src/java/org/apache/solr/handler/extraction/ExtractingRequestHandler.java",
+    "solr/modules/extraction/src/java/org/apache/solr/handler/extraction/TikaServerExtractionBackend.java"
+  ],
+  "regression_branch": "security/posttool-dom-entity-regression-2026-11-12",
+  "regression_head": "57f607c6aed6044515b14de431c854e11befbf99",
+  "safety_constraints": [
+    "Use only test-created temporary files containing unique harmless markers and loopback-only endpoints.",
+    "Do not read system files, send requests to public hosts, or probe internal services.",
+    "Do not install or use Docker/Podman; report Docker-dependent tests as unrun.",
+    "Do not conflate this direct XML parser issue with CVE-2025-66516, which concerns Tika PDF/XFA parsing through SolrCell, or with the separate recursive cross-host SSRF concern."
+  ],
+  "source_repository": "nick-boss-tech/solr",
+  "summary": "Determine whether attacker-controlled ordinary HTML can exploit the PostTool DOM parser through Solr's recursive bin/solr post extraction path, and document the trust boundaries and remaining uncertainty.",
+  "tags": [
+    "security-review",
+    "xxe",
+    "posttool",
+    "tika-boundary"
+  ],
+  "type": "assignment"
+}
