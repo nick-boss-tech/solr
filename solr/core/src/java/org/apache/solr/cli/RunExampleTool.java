@@ -681,7 +681,14 @@ public class RunExampleTool extends ToolBase {
         "Generated password: "
             + password
             + " (used for the keystore and all basic-auth/ZooKeeper demonstration accounts below).");
-
+    if (!params.noPrompt()) {
+      prompt(
+          userInputScanner(),
+          "Press Enter to delete and recreate "
+              + secureExampleDisplayArgument(home.toString())
+              + ", or Ctrl-C to cancel: ",
+          "");
+    }
     resetSecureExampleHome(home, environment);
     Files.setPosixFilePermissions(home, PosixFilePermissions.fromString("rwx------"));
     Files.createDirectories(tls);

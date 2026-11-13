@@ -153,6 +153,14 @@ teardown() {
   assert_output --partial 'NoAuth'
 }
 
+@test "secure example preserves existing home when interactive input ends" {
+  printf 'preserve me\n' > "$SOLR_HOME/existing-file"
+  run bash -c 'exec solr start -e secure --solr-home "$SOLR_HOME" -p "$SOLR_PORT" </dev/null'
+  assert_failure
+  assert_output --partial 'Press Enter to delete and recreate'
+  [ "$(cat "$SOLR_HOME/existing-file")" = 'preserve me' ]
+}
+
 @test "secure example rejects unsupported options" {
   run solr start -e secure --no-prompt --solr-home "$SOLR_HOME" --host other-host
   assert_failure
@@ -195,6 +203,9 @@ EOF
   assert_failure
   assert_output --partial 'Unable to write embedded ZooKeeper TLS password files'
   rmdir "$SOLR_HOME/.zk-tls-keystore-password"
+  rm -f "$SOLR_HOME/.zk-tls-truststore-password"
+  [ ! -e "$SOLR_HOME/.zk-tls-keystore-password" ]
+  [ ! -e "$SOLR_HOME/.zk-tls-truststore-password" ]
 
   # Inspect the file immediately after creation, before the script can chmod or write it.
   local intercept_dir="$BATS_TEST_TMPDIR/touch-intercept"
