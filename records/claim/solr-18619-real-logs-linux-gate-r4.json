@@ -1,0 +1,6 @@
+{
+  "id": "solr-18619-real-logs-linux-gate-r4",
+  "job": "solr-18619-real-logs-linux-gate-r4",
+  "owner": "phone-agent-2",
+  "type": "claim"
+}
