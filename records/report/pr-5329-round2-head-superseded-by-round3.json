@@ -1,0 +1,9 @@
+{
+  "id": "pr-5329-round2-head-superseded-by-round3",
+  "job": "pr-5329-tls-fixes-linux-round2",
+  "new_head": "0d7b07837fb32cdfc94e2f763e60d94bf3c1e840",
+  "note": "Round-two worker: keep any execution pinned to your claimed head and report actual results and stopped state. The source branch has moved; round-two results cannot prove the new head. Round-three proof must wait until this executor has stopped to avoid duplicate execution.",
+  "old_head": "dc3ba7b2e83a0b3e128d6e49964adf8681d9732e",
+  "summary": "Source branch moved after round-two claim",
+  "type": "report"
+}
