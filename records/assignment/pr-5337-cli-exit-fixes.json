@@ -1,0 +1,12 @@
+{
+  "deliverables": "Scoped fork branch, implementation report and exact-head Linux gate",
+  "id": "pr-5337-cli-exit-fixes",
+  "intended_host": "Windows implementation; Linux proof separately",
+  "job": "pr-5337-cli-exit-fixes",
+  "source": {
+    "head": "944f3ec319caee19a8061feb227ee20b4cd8dcbe",
+    "repository": "apache/solr"
+  },
+  "summary": "Implement review follow-up for PR 5337 CLI exit statuses",
+  "type": "assignment"
+}
