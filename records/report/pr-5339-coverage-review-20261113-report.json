@@ -1,0 +1,9 @@
+{
+  "head": "83b2df0977499337bc88daaba8eb872a3835f31b",
+  "id": "pr-5339-coverage-review-20261113-report",
+  "job": "pr-5339-coverage-review-20261113",
+  "local_review": "research/branch-reviews/2026-11-13-pr-batch/PR-5339-coverage-review.md",
+  "public_comment": "none",
+  "summary": "Known profile and MD5 are correct by source inspection; current-head runtime and mutation proof pending. P3: Javadoc lists sorting before quantization but implementation sorts after it, including lexical tie breaking.",
+  "type": "report"
+}
