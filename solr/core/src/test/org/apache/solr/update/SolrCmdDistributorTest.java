@@ -25,6 +25,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -646,12 +648,22 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
     try {
       ErrorReportingConcurrentUpdateSolrClient client =
           (ErrorReportingConcurrentUpdateSolrClient) streamingClients.getSolrClient(req);
-      client.onSuccess(null, null);
-      assertEquals(2, tracker.getAchievedRf());
-      client.reportStall(new IOException("stalled"));
-      assertEquals(1, streamingClients.getErrors().size());
-      client.onSuccess(null, null);
-      client.handleError(new IOException("late error"));
+      ExecutorService callbackExecutor = Executors.newSingleThreadExecutor();
+      try {
+        // blockUntilFinished holds this monitor while waiting for runner callbacks.
+        synchronized (client) {
+          callbackExecutor.submit(() -> client.onSuccess(null, null)).get(5, TimeUnit.SECONDS);
+          assertEquals(2, tracker.getAchievedRf());
+          client.reportStall(new IOException("stalled"));
+          assertEquals(1, streamingClients.getErrors().size());
+          callbackExecutor.submit(() -> client.onSuccess(null, null)).get(5, TimeUnit.SECONDS);
+          callbackExecutor
+              .submit(() -> client.handleError(new IOException("late error")))
+              .get(5, TimeUnit.SECONDS);
+        }
+      } finally {
+        callbackExecutor.shutdownNow();
+      }
       assertEquals(2, tracker.getAchievedRf());
       assertEquals(1, streamingClients.getErrors().size());
       assertEquals(1, streamingClients.drainErrors().size());

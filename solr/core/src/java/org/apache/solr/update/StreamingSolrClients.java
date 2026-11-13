@@ -148,6 +148,7 @@ class ErrorReportingConcurrentUpdateSolrClient extends ConcurrentUpdateJettySolr
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
   private final SolrCmdDistributor.Req req;
   private final List<SolrError> errors;
+  private final Object callbackLock = new Object();
   private boolean stalled;
 
   public ErrorReportingConcurrentUpdateSolrClient(Builder builder) {
@@ -157,15 +158,19 @@ class ErrorReportingConcurrentUpdateSolrClient extends ConcurrentUpdateJettySolr
   }
 
   @Override
-  public synchronized void handleError(Throwable ex) {
-    if (stalled) return;
-    recordError(ex);
+  public void handleError(Throwable ex) {
+    synchronized (callbackLock) {
+      if (stalled) return;
+      recordError(ex);
+    }
   }
 
-  synchronized void reportStall(IOException ex) {
-    if (stalled) return;
-    stalled = true;
-    recordError(ex);
+  void reportStall(IOException ex) {
+    synchronized (callbackLock) {
+      if (stalled) return;
+      stalled = true;
+      recordError(ex);
+    }
   }
 
   private void recordError(Throwable ex) {
@@ -184,10 +189,12 @@ class ErrorReportingConcurrentUpdateSolrClient extends ConcurrentUpdateJettySolr
   }
 
   @Override
-  public synchronized void onSuccess(Object responseMetadata, InputStream respBody) {
-    if (stalled) return;
-    Response jettyResponse = (Response) responseMetadata;
-    req.trackRequestResult(jettyResponse, respBody, true);
+  public void onSuccess(Object responseMetadata, InputStream respBody) {
+    synchronized (callbackLock) {
+      if (stalled) return;
+      Response jettyResponse = (Response) responseMetadata;
+      req.trackRequestResult(jettyResponse, respBody, true);
+    }
   }
 
   static class Builder extends ConcurrentUpdateJettySolrClient.Builder {
