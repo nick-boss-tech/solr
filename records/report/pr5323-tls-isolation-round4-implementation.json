@@ -1,0 +1,12 @@
+{
+  "gate_job": "pr5323-tls-isolation-round4-linux",
+  "head": "e92e417843e24dac8a54bd1c3c61d43e7b420cf4",
+  "id": "pr5323-tls-isolation-round4-implementation",
+  "job": "pr5323-tls-isolation-round4-windows",
+  "source": {
+    "branch": "pr-5323-review-fixes",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Moved hostname test to separate loopback user-managed node with private synchronous non-rotating log; added real missing-client-certificate negative control. Diff check passed. No Gradle, Docker or live TLS execution on this Windows host; original AwaitsFix and all exact-head proof remain pending.",
+  "type": "report"
+}
