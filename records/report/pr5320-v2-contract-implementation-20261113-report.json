@@ -1,0 +1,14 @@
+{
+  "details": "The exposed plugin spec declares integer or object delete and describes the id form; the set payload exposes id. The schema validator cannot apply object properties conditionally to an integer union, so the object field shape is documented rather than validated by this schema. Two focused schema tests were added. Windows ran git diff --check only; no Gradle or runtime tests.",
+  "gate_job": "pr5320-v2-contract-linux-gate-20261113",
+  "id": "pr5320-v2-contract-implementation-20261113-report",
+  "job": "pr5320-v2-contract-implementation-20261113",
+  "source": {
+    "branch": "pr-5320-v2-contract",
+    "contributor_parent": "5fa5513038a7cf9318ed800423d8a44064d4c0e3",
+    "head": "d85ce12ebeba577d71c3316d55c8ea1043adb734",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Implemented and pushed the authorization v2 schema follow-up; Linux proof pending.",
+  "type": "report"
+}
