@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr-5330-r9",
+  "evidence": "Fork head 13522945de6c9102ecdbe8efb821ed451e840216 pushed and verified; implementation worker stopped, no local test executor started. Report records/report/pr-5330-test-assertions-r9-windows-20261113-report.json.",
+  "id": "pr-5330-test-assertions-r9-windows-20261113",
+  "job": "pr-5330-test-assertions-r9-windows-20261113",
+  "reason": "Fork implementation complete and exact-head gate handed off",
+  "type": "release"
+}
