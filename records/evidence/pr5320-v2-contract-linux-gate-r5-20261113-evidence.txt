@@ -1,0 +1,42 @@
+PR 5320 v2-contract Linux gate r5 evidence (phone-agent, Linux host)
+Job: pr5320-v2-contract-linux-gate-r5-20261113
+Head: 678f805a2a0d2212427d0cfadb11e87c24d122ef (fork branch pr-5320-v2-contract, verified by ls-remote at claim; isolated clean clone, rev-parse verified, zero modifications at setup)
+Ancestry: contributor parent 5fa5513038a7cf9318ed800423d8a44064d4c0e3 and prior head 63188a804067b87ed16d6d205d11824532d2d086 are both ancestors of this head.
+Seed: 5320CAFE for every test leg (passed as -Ptests.seed; the gate's ./gradlew commands run through the host Gradle 9.7.0 + JDK 21 wrapper)
+Verdict: PASSED
+
+== Head comparison against the r4 head (requirement 1)
+The r4..r5 diff touches exactly the three files the r4 tidy leg reformatted: RuleBasedAuthorizationPluginBase.java, BasicAuthStandaloneTest.java, JsonValidatorTest.java. A token-stream comparison (all whitespace removed) shows:
+- RuleBasedAuthorizationPluginBase.java and BasicAuthStandaloneTest.java differ only in whitespace; they are the tidy output recorded in the r4 evidence.
+- JsonValidatorTest.java differs only in whitespace plus two linked changes inside testAnyOfRejectsSilentFailureAndNullId: Collections.singletonList(null) became Arrays.asList((String) null), and the now-unused java.util.Collections import was removed.
+- BaseTestRuleBasedAuthorizationPlugin.java and JsonSchemaValidator.java are byte-identical between the two heads.
+
+== Test legs at the offered head (all passed, fresh XML)
+JsonValidatorTest (solrj): 4 tests, 0 failures, 0 errors, exit 0. All four methods executed.
+BaseTestRuleBasedAuthorizationPlugin (core): 19 tests, 0 failures, exit 0.
+TestExternalRoleRuleBasedAuthorizationPlugin (core): 19 tests, 0 failures, exit 0.
+BasicAuthStandaloneTest.testV2PermissionIds (core): 1 test, 0 failures, exit 0.
+
+== Tidy leg
+./gradlew tidy exited 0 and left tracked files unchanged (0 modified), as this gate requires.
+
+== Check leg
+./gradlew check -x test exited 0, BUILD SUCCESSFUL in 10m 36s, including :solr:solrj:forbiddenApisTest on the new Arrays.asList construction. The verifyUiWasm input was seeded from the Apache nightlies archive for the pinned UI commit 473a55ef64a9a1605e00eb6c1c386887d4cb7dac; its sha256 654494303e4af3b8bfb26a83d250603f19033820295591d88db0597991ce8ad2 matches the clone's gradle.properties pin.
+
+== Fresh fail-before with the changed test (requirement 4)
+The current (r5) testAnyOfRejectsSilentFailureAndNullId and its imports (java.util.Arrays, java.util.LinkedHashMap added to the baseline's List/Map) were transplanted unchanged onto isolated r2 head f1a840767476b1bf234d0870ccb7661f9e4e2520, single file modified. The method FAILED as required: 1 test, 1 failure, AssertionError at overlay JsonValidatorTest.java:215, the array-rejection assertion assertNotNull(validator.validateJson(List.of(2))), the first assertion of the method. The same method passes at the offered head (see the JsonValidatorTest leg). This carries the changed test through fail-before with its new null-list construction in place.
+
+== Carried r4 proof legs (requirement 5): historical evidence, not runs at this head
+Source of record: records/receipt/pr5320-v2-contract-linux-gate-r4-20261113-receipt.json and records/evidence/pr5320-v2-contract-linux-gate-r4-20261113-evidence.txt, executed at offered head 63188a80 against baselines 95aa5cbd (r3), f1a84076 (r2), d85ce12e (r1) and 5fa55130 (contributor parent). Whether the r5 changes affect each leg, verified by the token comparison above:
+- Enum-null leg (testAnyOfEnumNull): the method's tokens are unchanged between the r4 and r5 heads, and JsonSchemaValidator is byte-identical, so neither the test nor the code it discriminates changed. Carries.
+- Null-id probe leg: the probe is gate-owned and unchanged; the validator it exercises is byte-identical. Carries.
+- Delete-schema leg (testDeletePermissionApiSchema): its source file BaseTestRuleBasedAuthorizationPlugin.java is byte-identical between the heads; the production spec file RuleBasedAuthorizationPluginBase.java changed only in formatting. Carries.
+- AnyOf leg (testAnyOfAlternatives): the method's tokens are unchanged; the validator is byte-identical. Carries.
+- Set-id leg (testSetPermissionIdApiSchema): same position as the delete-schema leg; BaseTest byte-identical, production file formatting only. Carries.
+The one test the r5 head actually changed, testAnyOfRejectsSilentFailureAndNullId, was not carried; it was rerun through fail-before above, per this gate's requirement 4.
+
+== Limits
+The endpoint test checks the handler spec in-process and authenticated HTTP read/set/delete plus persisted state; it does not cover HTTP introspection or controlled concurrent edits.
+
+== Execution conditions
+Isolated clean clone for the offered head; the r2 baseline clone carried only the stated single-file overlay. Gradle runs were serialized through the host test queue with stale daemons cleared before the chains.

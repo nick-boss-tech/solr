@@ -1,0 +1,9 @@
+{
+ "executor_stop_evidence": "The main-legs chain exited at 2026-11-13T12:04:07-07:00 and the fail-before chain exited at 12:05:16-07:00; no Gradle build is running at release time. Both gate clones are idle at rest, the offered-head clone clean at 678f805a and the r2 clone holding only its stated overlay.",
+ "id": "pr5320-v2-contract-linux-gate-r5-20261113",
+ "job": "pr5320-v2-contract-linux-gate-r5-20261113",
+ "receipt": "records/receipt/pr5320-v2-contract-linux-gate-r5-20261113-receipt.json",
+ "released": "2026-11-13T12:07:00-07:00",
+ "released_by": "phone-agent",
+ "type": "release"
+}

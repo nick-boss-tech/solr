@@ -1,0 +1,54 @@
+{
+ "branch": "pr-5320-v2-contract",
+ "evidence": "records/evidence/pr5320-v2-contract-linux-gate-r5-20261113-evidence.txt",
+ "evidence_sha256": "342b41e761745a455a9554794cf2af28e767fbe1473133649e8f583363c914e8",
+ "executor": "phone-agent",
+ "filed": "2026-11-13T12:07:00-07:00",
+ "gate": "records/gate/pr5320-v2-contract-linux-gate-r5-20261113.json",
+ "head": "678f805a2a0d2212427d0cfadb11e87c24d122ef",
+ "id": "pr5320-v2-contract-linux-gate-r5-20261113-receipt",
+ "job": "pr5320-v2-contract-linux-gate-r5-20261113",
+ "legs": [
+  {
+   "leg": "Head and ancestry verification",
+   "result": "PASSED: ls-remote and rev-parse agree on 678f805a; contributor parent and the r4 head are ancestors; token comparison confirms the change set is the tidy reformat plus the singletonList replacement only."
+  },
+  {
+   "leg": "JsonValidatorTest at head (solrj, seed 5320CAFE)",
+   "result": "PASSED: 4 tests, 0 failures; all four methods executed."
+  },
+  {
+   "leg": "BaseTestRuleBasedAuthorizationPlugin at head (core)",
+   "result": "PASSED: 19 tests, 0 failures."
+  },
+  {
+   "leg": "TestExternalRoleRuleBasedAuthorizationPlugin at head (core)",
+   "result": "PASSED: 19 tests, 0 failures."
+  },
+  {
+   "leg": "BasicAuthStandaloneTest.testV2PermissionIds at head (core)",
+   "result": "PASSED: 1 test, 0 failures."
+  },
+  {
+   "leg": "tidy at head",
+   "result": "PASSED: exit 0, zero tracked changes."
+  },
+  {
+   "leg": "check -x test at head",
+   "result": "PASSED: exit 0, BUILD SUCCESSFUL in 10m 36s, including :solr:solrj:forbiddenApisTest."
+  },
+  {
+   "leg": "Fail-before: current testAnyOfRejectsSilentFailureAndNullId on r2 head f1a84076",
+   "result": "FAILED as required: AssertionError at the array-rejection assertion (overlay JsonValidatorTest.java:215), with the new Arrays.asList null-list construction in place."
+  },
+  {
+   "leg": "Carried r4 legs (enum-null, null-id probe, delete-schema, anyOf, set-id)",
+   "result": "Cited as historical evidence from the r4 receipt at their original heads. Verified unaffected by the r5 changes: the relevant test sources are byte-identical or token-identical between heads, JsonSchemaValidator is byte-identical, and the production plugin file changed only in formatting. Not claimed as runs at this head."
+  }
+ ],
+ "limits": "The endpoint test checks the handler spec in-process and authenticated HTTP read/set/delete plus persisted state; it does not cover HTTP introspection or controlled concurrent edits.",
+ "prior_receipt": "records/receipt/pr5320-v2-contract-linux-gate-r4-20261113-receipt.json",
+ "summary": "Round 5 gate PASSED at 678f805a. The head applies exactly the r4 tidy reformat plus the forbidden-API fix: token comparison against the r4 head shows the only semantic change is Collections.singletonList(null) becoming Arrays.asList((String) null) in testAnyOfRejectsSilentFailureAndNullId, with the unused Collections import removed; the other two changed files are formatting only, and BaseTestRuleBasedAuthorizationPlugin and JsonSchemaValidator are byte-identical. All four named suites pass (4, 19, 19, 1 tests), tidy leaves tracked files unchanged, and root check finishes BUILD SUCCESSFUL including :solr:solrj:forbiddenApisTest. The changed test was carried through a fresh fail-before on the r2 head and fails at the array-rejection assertion; the remaining r4 proof legs are unaffected by the r5 changes and are cited as historical evidence at their original heads, not as runs at this head.",
+ "type": "receipt",
+ "verdict": "PASSED"
+}
