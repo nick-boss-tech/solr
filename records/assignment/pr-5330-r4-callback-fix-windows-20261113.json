@@ -1,0 +1,10 @@
+{
+  "host": "Windows implementation; Linux proof separately",
+  "id": "pr-5330-r4-callback-fix-windows-20261113",
+  "job": "pr-5330-r4-callback-fix-windows-20261113",
+  "scope": "Implement the reviewed error-drain and late-callback corrections with regression tests on the fork. The claimed round-2 Linux gate remains owned by its worker at older head; do not alter its files or assume it stopped.",
+  "source_head": "c5d4ca375396006460a72e97aa99d34337780580",
+  "successor_of": "pr-5330-stall-safety-windows-20261113",
+  "summary": "Repair stalled-client error collection and callback handling for PR 5330",
+  "type": "assignment"
+}
