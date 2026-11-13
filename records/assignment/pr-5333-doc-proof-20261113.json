@@ -1,0 +1,18 @@
+{
+  "claim_path": "records/claim/pr-5333-doc-proof-20261113.json",
+  "contributor_head": "5cb56171eff9e85b1238583ecea448af1c3aa7a7",
+  "gate_id": "pr-5333-doc-proof-20261113",
+  "gate_record": "records/gate/pr-5333-doc-proof-20261113.json",
+  "id": "pr-5333-doc-proof-20261113",
+  "intended_host": "Linux",
+  "job": "pr-5333-doc-proof-20261113",
+  "phase": "documentation follow-up",
+  "receipt_path": "records/receipt/pr-5333-doc-proof-20261113.json",
+  "source": {
+    "branch": "pr-5333-shutdown-doc",
+    "head": "e357862c6ebd23ac3b4cf5e9fa635f94391bad52",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Linux verification of PR 5333 documentation follow-up",
+  "type": "assignment"
+}
