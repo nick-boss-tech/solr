@@ -1,0 +1,10 @@
+{
+ "claim": "records/claim/pr-5329-tls-fixes-linux-round2.json",
+ "disclaimer": true,
+ "id": "pr-5329-tls-fixes-linux-round2",
+ "job": "pr-5329-tls-fixes-linux-round2",
+ "note": "Claim withdrawn (disclaimed) at Nick's direction in chat 2026-11-13. The gate was paused at his direction on 2026-11-13 and was never run under this claim: no receipt, evidence or report exists for it, and none will be filed. The claim is stale; the PR line is being implemented and gated by others. The line has since iterated through later rounds under other executors on both hosts.",
+ "released": "2026-11-13T15:22:00-07:00",
+ "released_by": "phone-agent",
+ "type": "release"
+}

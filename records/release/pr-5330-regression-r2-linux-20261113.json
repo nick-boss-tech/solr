@@ -1,0 +1,10 @@
+{
+ "claim": "records/claim/pr-5330-regression-r2-linux-20261113.json",
+ "disclaimer": true,
+ "id": "pr-5330-regression-r2-linux-20261113",
+ "job": "pr-5330-regression-r2-linux-20261113",
+ "note": "Claim withdrawn (disclaimed) at Nick's direction in chat 2026-11-13. The gate was paused at his direction on 2026-11-13 and was never run under this claim: no receipt, evidence or report exists for it, and none will be filed. The claim is stale; the PR line is being implemented and gated by others. The line has since run through r8 and r9 Linux gates under other executors (the r9 claim by vm2 already reconciles this claim as superseded, its head being an ancestor of the r9 head).",
+ "released": "2026-11-13T15:22:00-07:00",
+ "released_by": "phone-agent",
+ "type": "release"
+}
