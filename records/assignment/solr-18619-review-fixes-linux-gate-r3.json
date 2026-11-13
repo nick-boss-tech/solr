@@ -1,0 +1,19 @@
+{
+  "claim_path": "records/claim/solr-18619-review-fixes-linux-gate-r3.json",
+  "gate_id": "solr-18619-review-fixes-linux-gate-r3",
+  "gate_record": "records/gate/solr-18619-review-fixes-linux-gate-r3.json",
+  "id": "solr-18619-review-fixes-linux-gate-r3",
+  "intended_host": "Linux with JDK 21, Chrome, ChromeDriver and Selenium",
+  "job": "solr-18619-review-fixes-linux-gate-r3",
+  "phase": "pre-submission round 3 after test readiness repair",
+  "receipt_path": "records/receipt/solr-18619-review-fixes-linux-gate-r3.json",
+  "source": {
+    "baseline": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+    "branch": "solr-18619-targeting-prep",
+    "head": "cf35bd49fab19751af9afb728ef83076ae521f09",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify the SOLR-18619 migration and both pre-gate review fixes on the pushed head",
+  "supersedes": "Unclaimed round 2 assignment records/assignment/solr-18619-review-fixes-linux-gate-r2.json had no gate record and named the superseded 244b2d7754f47bb8835dd38fe560cb405db9a288 head. The earlier held round 1 gate is also superseded.",
+  "type": "assignment"
+}
