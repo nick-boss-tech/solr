@@ -1,0 +1,10 @@
+{
+  "claimed": "2026-11-13T21:30:00Z",
+  "head": "b4bb017d22c036df50bebfffecf26c0e8a0b0b57",
+  "host": "linux",
+  "id": "pr5320-v2-contract-r7-rootcheck-20261113",
+  "job": "pr5320-v2-contract-r7-rootcheck-20261113",
+  "note": "Live fork branch pr-5320-v2-contract verified at the r7-rootcheck gate head b4bb017d by git ls-remote at claim time; contributor parent 5fa55130 confirmed an ancestor. No conflicting claim exists for this Linux gate job on coordination-v2. This successor completes the unexcluded root check omitted from the released r7 receipt (which ran -Prefguide.include=false). Taken on vm6 at Nick's direction in chat 2026-11-13.",
+  "owner": "vm6",
+  "type": "claim"
+}
