@@ -821,6 +821,9 @@ public class BaseTestRuleBasedAuthorizationPlugin extends SolrTestCaseJ4 {
     assertNotNull(validator.validateJson(Map.of()));
     assertNotNull(validator.validateJson(Map.of("id", 1)));
     assertNotNull(validator.validateJson(Map.of("id", "permission-id", "extra", true)));
+    Map<String, Object> nullId = new HashMap<>();
+    nullId.put("id", null);
+    assertNotNull(validator.validateJson(nullId));
   }
 
   public void testSetPermissionIdApiSchema() {

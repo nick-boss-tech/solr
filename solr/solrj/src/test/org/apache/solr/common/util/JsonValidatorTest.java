@@ -16,6 +16,8 @@
  */
 package org.apache.solr.common.util;
 
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.solr.SolrTestCaseJ4;
@@ -40,6 +42,33 @@ public class JsonValidatorTest extends SolrTestCaseJ4 {
     assertNotNull(validator.validateJson(Map.of("id", 2)));
     assertNotNull(validator.validateJson(List.of(2)));
     assertNotNull(validator.validateJson(Map.of("id", "abc", "other", true)));
+  }
+
+  public void testAnyOfRejectsSilentFailureAndNullId() {
+    Map<String, Object> objectSchema = new LinkedHashMap<>();
+    objectSchema.put("required", List.of("id"));
+    objectSchema.put("properties", Map.of("id", Map.of("type", "string")));
+    objectSchema.put("type", "object");
+    JsonSchemaValidator validator =
+        new JsonSchemaValidator(
+            Map.of("anyOf", List.of(Map.of("type", "integer"), objectSchema)));
+    assertNotNull(validator.validateJson(List.of(2)));
+    Map<String, Object> nullId = new LinkedHashMap<>();
+    nullId.put("id", null);
+    assertNotNull(validator.validateJson(nullId));
+    assertNotNull(validator.validateJson(null));
+    assertNull(validator.validateJson(Map.of("id", "abc")));
+
+    JsonSchemaValidator nullable =
+        new JsonSchemaValidator(Map.of("anyOf", List.of(Map.of("type", "null"))));
+    assertNull(nullable.validateJson(null));
+    JsonSchemaValidator array =
+        new JsonSchemaValidator(
+            Map.of(
+                "anyOf",
+                List.of(Map.of("type", "array", "items", Map.of("type", "string")))));
+    assertNotNull(array.validateJson(Collections.singletonList(null)));
+    assertNull(new JsonSchemaValidator(Map.of("type", "string")).validateJson(null));
   }
 
   public void testSchemaValidation() {

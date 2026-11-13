@@ -37,6 +37,8 @@ import java.util.function.Function;
 public class JsonSchemaValidator {
 
   private List<Validator<?>> validators;
+  private final boolean strictNull;
+  private final boolean validateNull;
   private static Set<String> KNOWN_FNAMES =
       new HashSet<>(
           Arrays.asList("description", "documentation", "default", "additionalProperties"));
@@ -46,10 +48,29 @@ public class JsonSchemaValidator {
   }
 
   public JsonSchemaValidator(Map<?, ?> jsonSchema) {
+    this(jsonSchema, false);
+  }
+
+  @SuppressWarnings("unchecked")
+  JsonSchemaValidator(Map<?, ?> jsonSchema, boolean strictNull) {
+    // Preserve legacy null handling outside anyOf while checking types in its alternatives.
+    this.strictNull = strictNull || jsonSchema.containsKey("anyOf");
+    this.validateNull =
+        jsonSchema.containsKey("anyOf") || (strictNull && jsonSchema.containsKey("type"));
     this.validators = new ArrayList<>();
     for (Map.Entry<?, ?> entry : jsonSchema.entrySet()) {
       Object fname = entry.getKey();
       if (KNOWN_FNAMES.contains(fname.toString())) continue;
+
+      if (this.strictNull && "properties".equals(fname)) {
+        this.validators.add(
+            new PropertiesValidator(jsonSchema, (Map<String, Map<?, ?>>) entry.getValue(), true));
+        continue;
+      }
+      if (this.strictNull && "items".equals(fname)) {
+        this.validators.add(new ItemsValidator(jsonSchema, (Map<?, ?>) entry.getValue(), true));
+        continue;
+      }
 
       Function<Pair<Map<?, ?>, ?>, Validator<?>> initializeFunction =
           VALIDATORS.get(fname.toString());
@@ -88,7 +109,7 @@ public class JsonSchemaValidator {
   }
 
   boolean validate(Object data, List<String> errs) {
-    if (data == null) return true;
+    if (data == null && !validateNull) return true;
     for (Validator<?> validator : validators) {
       if (!validator.validate(data, errs)) {
         return false;
@@ -103,13 +124,13 @@ class AnyOfValidator extends Validator<List<Map<?, ?>>> {
 
   AnyOfValidator(List<Map<?, ?>> schemas) {
     super(Map.of(), schemas);
-    alternatives = schemas.stream().map(JsonSchemaValidator::new).toList();
+    alternatives = schemas.stream().map(schema -> new JsonSchemaValidator(schema, true)).toList();
   }
 
   @Override
   boolean validate(Object o, List<String> errs) {
     for (JsonSchemaValidator alternative : alternatives) {
-      if (alternative.validateJson(o) == null) return true;
+      if (alternative.validate(o, new ArrayList<>())) return true;
     }
     errs.add("Value does not match any allowed schema");
     return false;
@@ -211,7 +232,7 @@ class TypeValidator extends Validator<Object> {
         "Value is not valid, expected one of: "
             + types
             + ", found: "
-            + o.getClass().getSimpleName());
+            + (o == null ? "null" : o.getClass().getSimpleName()));
     return false;
   }
 }
@@ -220,8 +241,12 @@ class ItemsValidator extends Validator<Map<?, ?>> {
   private JsonSchemaValidator validator;
 
   ItemsValidator(Map<?, ?> schema, Map<?, ?> properties) {
+    this(schema, properties, false);
+  }
+
+  ItemsValidator(Map<?, ?> schema, Map<?, ?> properties, boolean strictNull) {
     super(schema, properties);
-    validator = new JsonSchemaValidator(properties);
+    validator = new JsonSchemaValidator(properties, strictNull);
   }
 
   @Override
@@ -313,6 +338,10 @@ class PropertiesValidator extends Validator<Map<String, Map<?, ?>>> {
   private boolean additionalProperties;
 
   PropertiesValidator(Map<?, ?> schema, Map<String, Map<?, ?>> properties) {
+    this(schema, properties, false);
+  }
+
+  PropertiesValidator(Map<?, ?> schema, Map<String, Map<?, ?>> properties, boolean strictNull) {
     super(schema, properties);
     jsonSchemas = new HashMap<>();
     Object additionalProperties =
@@ -320,7 +349,7 @@ class PropertiesValidator extends Validator<Map<String, Map<?, ?>>> {
     this.additionalProperties =
         Boolean.TRUE.equals(additionalProperties) ? true : false; // Implicit null -> false
     for (Map.Entry<String, Map<?, ?>> entry : properties.entrySet()) {
-      jsonSchemas.put(entry.getKey(), new JsonSchemaValidator(entry.getValue()));
+      jsonSchemas.put(entry.getKey(), new JsonSchemaValidator(entry.getValue(), strictNull));
     }
   }
 
