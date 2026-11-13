@@ -1,0 +1,15 @@
+{
+  "coordination": "At board 6c335cb92ffc8eed245204b0c952bae422e4bd6b round-2 Linux gate remained claimed on older head dfe745bf1b8439f85300db3755c9b1ec7d2a87a6 with no receipt or release. Round-4 had no claim. Do not assume worker stopped or duplicate work.",
+  "findings": [
+    "Inherited synchronized blockUntilFinished holds the client monitor while awaiting runners; synchronized onSuccess and handleError require that same monitor. If flush starts first a runner cannot finish, and with an empty queue stall detection cannot rescue it. Use a distinct callback-state lock and test real successful and failed runner callbacks concurrently with a flush.",
+    "The new late-callback test invokes callbacks sequentially on the test thread and cannot detect this deadlock. Its drain assertions do not exercise an interleaved writer. Add controlled concurrent regression tests with runtime fail-before proof.",
+    "Finish-first test now independently reaches finish before draining errors, but no runtime proof exists. Active stalled runner is fenced, not cancelled; queued writes and replica recovery remain to be evaluated."
+  ],
+  "head": "6476beb8debb78d6f1504144fef292ca06583c94",
+  "id": "pr-5330-r4-review-windows-20261113-report",
+  "job": "pr-5330-r4-review-windows-20261113",
+  "local_review": "research/branch-reviews/2026-11-13-pr-batch/PR-5330-r4-review.md",
+  "summary": "Not ready: client monitor deadlock introduced in callback fence",
+  "type": "report",
+  "verification": "Source inspection only. Windows ran no Gradle or tests."
+}
