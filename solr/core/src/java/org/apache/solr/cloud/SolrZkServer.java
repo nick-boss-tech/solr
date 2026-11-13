@@ -123,6 +123,16 @@ public class SolrZkServer {
     try {
       props = SolrZkServerProps.getProperties(zooCfgPath);
       SolrZkServerProps.injectServers(props, zkRun, zkHost);
+      if (zkRun && EnvUtils.getPropertyAsBool("solr.zookeeper.embedded.tlsOnly", false)) {
+        if (props.getProperty("secureClientPort") == null) {
+          throw new SolrException(
+              SolrException.ErrorCode.SERVER_ERROR,
+              "Embedded ZooKeeper TLS requires secureClientPort in " + zooCfgPath);
+        }
+        // Automatic TLS must not leave an existing plaintext listener enabled.
+        props.remove("clientPort");
+        props.remove("clientPortAddress");
+      }
       // This is the address that the embedded Zookeeper will bind to. Like Solr, it defaults to
       // "127.0.0.1".
       String bindHost = EnvUtils.getProperty("solr.zookeeper.embedded.host", "127.0.0.1");
@@ -177,12 +187,11 @@ public class SolrZkServer {
             },
             "embeddedZkServer");
 
+    InetSocketAddress clientAddress = getClientAddress();
+    String clientHost = clientAddress.getAddress().getHostAddress();
+    int clientPort = clientAddress.getPort();
     if (log.isInfoEnabled()) {
-      InetSocketAddress clientAddress = getClientAddress();
-      log.info(
-          "STARTING EMBEDDED ENSEMBLE ZOOKEEPER SERVER at {}:{}",
-          clientAddress.getAddress().getHostAddress(),
-          clientAddress.getPort());
+      log.info("STARTING EMBEDDED ENSEMBLE ZOOKEEPER SERVER at {}:{}", clientHost, clientPort);
     }
 
     zkThread.setDaemon(true);

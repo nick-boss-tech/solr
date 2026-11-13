@@ -1151,9 +1151,16 @@ if [ "${SOLR_MODE:-}" == 'solrcloud' ]; then
       # password source, and a -D flag would be visible in `ps`.
       ZK_KEYSTORE_PASSWORD_FILE="$SOLR_HOME/.zk-tls-keystore-password"
       ZK_TRUSTSTORE_PASSWORD_FILE="$SOLR_HOME/.zk-tls-truststore-password"
-      printf '%s' "$SOLR_SSL_KEY_STORE_PASSWORD" > "$ZK_KEYSTORE_PASSWORD_FILE"
-      printf '%s' "$SOLR_SSL_TRUST_STORE_PASSWORD" > "$ZK_TRUSTSTORE_PASSWORD_FILE"
-      chmod 600 "$ZK_KEYSTORE_PASSWORD_FILE" "$ZK_TRUSTSTORE_PASSWORD_FILE"
+      if ! (
+        umask 077
+        touch "$ZK_KEYSTORE_PASSWORD_FILE" "$ZK_TRUSTSTORE_PASSWORD_FILE" &&
+          chmod 600 "$ZK_KEYSTORE_PASSWORD_FILE" "$ZK_TRUSTSTORE_PASSWORD_FILE" &&
+          printf '%s' "$SOLR_SSL_KEY_STORE_PASSWORD" > "$ZK_KEYSTORE_PASSWORD_FILE" &&
+          printf '%s' "$SOLR_SSL_TRUST_STORE_PASSWORD" > "$ZK_TRUSTSTORE_PASSWORD_FILE"
+      ); then
+        echo >&2 "Unable to write embedded ZooKeeper TLS password files."
+        exit 1
+      fi
       if ! grep -q '^secureClientPort=' "$ZK_ZOO_CFG" 2>/dev/null; then
         cat >> "$ZK_ZOO_CFG" <<EOF
 
@@ -1172,6 +1179,7 @@ EOF
       ZK_SSL_OPTS="-Dzookeeper.client.secure=true -Dzookeeper.clientCnxnSocket=org.apache.zookeeper.ClientCnxnSocketNetty -Dzookeeper.ssl.trustStore.location=$SOLR_SSL_TRUST_STORE -Dzookeeper.ssl.trustStore.type=$SOLR_SSL_TRUST_STORE_TYPE -Dzookeeper.ssl.trustStore.passwordPath=$ZK_TRUSTSTORE_PASSWORD_FILE -Dzookeeper.ssl.hostnameVerification=true"
       # shellcheck disable=SC2206
       CLOUD_MODE_OPTS+=($ZK_SSL_OPTS)
+      CLOUD_MODE_OPTS+=('-Dsolr.zookeeper.embedded.tlsOnly=true')
       # Persist the same flags into the include file (a distinct var from
       # SOLR_ZK_CREDS_AND_ACLS, so a later digest-credentials block there can't clobber
       # this one) so co-located nodes and bin/solr zk/auth calls that source this same
