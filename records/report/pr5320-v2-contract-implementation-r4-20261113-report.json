@@ -1,0 +1,15 @@
+{
+  "details": "Check null against enum-only schemas in anyOf alternatives; allow null when explicitly listed, and preserve prior null handling outside anyOf. Added regression for excluded and included null, valid and invalid strings, and legacy null behavior. Windows ran git diff --check only.",
+  "gate_job": "pr5320-v2-contract-linux-gate-r4-20261113",
+  "id": "pr5320-v2-contract-implementation-r4-20261113-report",
+  "job": "pr5320-v2-contract-implementation-r4-20261113",
+  "source": {
+    "branch": "pr-5320-v2-contract",
+    "contributor_parent": "5fa5513038a7cf9318ed800423d8a44064d4c0e3",
+    "head": "63188a804067b87ed16d6d205d11824532d2d086",
+    "previous_head": "95aa5cbd0a26501ab583e63c3b472613f6a774a1",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Pushed enum-only anyOf null regression and correction; Linux proof pending.",
+  "type": "report"
+}
