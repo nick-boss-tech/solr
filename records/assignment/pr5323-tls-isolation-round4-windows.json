@@ -1,0 +1,13 @@
+{
+  "id": "pr5323-tls-isolation-round4-windows",
+  "intended_host": "Windows implementation; Linux gate and Windows CI proof",
+  "job": "pr5323-tls-isolation-round4-windows",
+  "source": {
+    "branch": "pr-5323-review-fixes",
+    "head": "7e23026e2b82e7ecd9d47648441c7a7e4f28f7ff",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr5323-tls-hostname-round3-windows",
+  "summary": "Isolate TLS hostname rejection test from shared cluster logging and unrelated client traffic",
+  "type": "assignment"
+}
