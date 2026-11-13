@@ -1,0 +1,11 @@
+{
+  "contributor_head": "2587d6a6eaf54796bd34a724f12209873e9f1b3d",
+  "id": "pr-5329-windows-fix-round5",
+  "intended_host": "Windows implementation; Linux proof required",
+  "job": "pr-5329-windows-fix-round5",
+  "note": "Round-two Linux gate remains claimed; preserve in-flight proof and do not rely on it for the new head.",
+  "source_head": "ca3e9817719472ec03199da53b58372214722fd4",
+  "successor_of": "pr-5329-windows-fix-round4",
+  "summary": "Restore secure example deletion safeguard and fix password creation test setup",
+  "type": "assignment"
+}
