@@ -1,0 +1,11 @@
+{
+  "id": "pr-5329-tls-fixes-linux-round1-superseded",
+  "job": "pr-5329-tls-fixes-linux-20261113",
+  "new_head": "dc3ba7b2e83a0b3e128d6e49964adf8681d9732e",
+  "note": "Do not start the older gate; inspect its claim and any execution state if a worker has already started. Round 1 had no claim at board snapshot 476c8c53595b0217eed76da52216d1ba359fc7dc.",
+  "old_head": "7dedae124c252574caaff93cf4bcf2bc1d240fc9",
+  "replacement_assignment": "records/assignment/pr-5329-tls-fixes-linux-round2.json",
+  "replacement_gate": "records/gate/pr-5329-tls-fixes-linux-round2.json",
+  "summary": "Round 1 head superseded by revised patch",
+  "type": "report"
+}
