@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "Remote source head 748e63e4281cd4d343e125e1b913805d20c5c6a2 was verified after push; implementation commands completed and worker stopped. Exact-head proof is a separate job pr-5333-zk-order-gate-20261113.",
+  "id": "pr-5333-zk-order-implementation-20261113",
+  "job": "pr-5333-zk-order-implementation-20261113",
+  "reason": "Implementation pushed and handed off for Linux execution",
+  "type": "release"
+}
