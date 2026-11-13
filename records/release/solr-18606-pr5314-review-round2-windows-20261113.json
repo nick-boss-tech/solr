@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-nick-shanin",
+  "evidence": "records/report/solr-18606-pr5314-review-round2-windows-20261113-report.json; source head pushed and verified; this worker started no Linux executor and stopped work.",
+  "id": "solr-18606-pr5314-review-round2-windows-20261113",
+  "job": "solr-18606-pr5314-review-round2-windows-20261113",
+  "reason": "Source patch pushed and Linux verification handed off.",
+  "type": "release"
+}
