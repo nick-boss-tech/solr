@@ -1,0 +1,19 @@
+{
+  "claim_path": "records/claim/solr-18619-prep-linux-gate-r1.json",
+  "gate_id": "solr-18619-prep-linux-gate-r1",
+  "gate_record": "records/gate/solr-18619-prep-linux-gate-r1.json",
+  "id": "solr-18619-prep-linux-gate-r1",
+  "intended_host": "Linux with JDK 21, Chrome, ChromeDriver and Selenium",
+  "job": "solr-18619-prep-linux-gate-r1",
+  "phase": "submission preparation round 1",
+  "receipt_path": "records/receipt/solr-18619-prep-linux-gate-r1.json",
+  "source": {
+    "baseline": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+    "branch": "solr-18619-targeting-prep",
+    "head": "f2cab615c5ba08cf83d11fe5ae4fc3a0d0b8d7bb",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify SOLR-18619 request-targeting migration on the rebased current-main candidate",
+  "supersedes": "Historical gate https://github.com/nick-boss-tech/solr/blob/95e2574f5091fbf1425fd9bfc4cef98c746b42f6/gates/solr-18619-request-targeting-round-2.md was for a different head and is not proof for this head.",
+  "type": "assignment"
+}
