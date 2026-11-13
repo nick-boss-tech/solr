@@ -1,0 +1,59 @@
+{
+ "branch": "pr-5320-v2-contract",
+ "evidence": "records/evidence/pr5320-v2-contract-linux-gate-r4-20261113-interim-evidence.txt",
+ "evidence_sha256": "af8fa3e095302e3290c7c7748af34fc6fe832e5a5633ce2220dc3076472f694c",
+ "executor": "phone-agent",
+ "fix_guidance": "Commit the tidy reformat of the three listed files and replace the Collections.singletonList(null) call in JsonValidatorTest with a forbidden-API-clean construction, then push a new head for a superseding gate.",
+ "gate": "records/gate/pr5320-v2-contract-linux-gate-r4-20261113.json",
+ "head": "63188a804067b87ed16d6d205d11824532d2d086",
+ "id": "pr5320-v2-contract-linux-gate-r4-20261113-receipt",
+ "interim": true,
+ "interim_filed": "2026-11-13T11:21:00-07:00",
+ "job": "pr5320-v2-contract-linux-gate-r4-20261113",
+ "legs": [
+  {
+   "leg": "JsonValidatorTest at head (solrj, seed 5320CAFE)",
+   "result": "PASSED: 4 tests, 0 failures; all four methods executed including testAnyOfEnumNull"
+  },
+  {
+   "leg": "BaseTestRuleBasedAuthorizationPlugin at head (core)",
+   "result": "PASSED: 19 tests, 0 failures"
+  },
+  {
+   "leg": "TestExternalRoleRuleBasedAuthorizationPlugin at head (core)",
+   "result": "PASSED: 19 tests, 0 failures"
+  },
+  {
+   "leg": "BasicAuthStandaloneTest.testV2PermissionIds at head (core)",
+   "result": "PASSED: 1 test, 0 failures"
+  },
+  {
+   "leg": "tidy at head",
+   "result": "FAILED for this head: tidy exited 0 but reformatted 3 tracked branch files (RuleBasedAuthorizationPluginBase.java, BasicAuthStandaloneTest.java, JsonValidatorTest.java); full diff in evidence. A new pushed head and superseding gate are required."
+  },
+  {
+   "leg": "check -x test at head",
+   "result": "FAILED: :solr:solrj:forbiddenApisTest rejects Collections.singletonList in JsonValidatorTest (committed line 71, inside testAnyOfRejectsSilentFailureAndNullId). List.of cannot hold the null element this call passes, so the fix needs a different construction. Remaining check tasks did not run after the failure."
+  },
+  {
+   "leg": "B fail-before: testAnyOfEnumNull on r3 head 95aa5cbd",
+   "result": "FAILED as required: AssertionError at the excluded-null assertion (JsonValidatorTest.java:239 in the overlay); null is accepted by the r3 validator"
+  },
+  {
+   "leg": "C1 fail-before: testAnyOfRejectsSilentFailureAndNullId on r2 head f1a84076",
+   "result": "FAILED as required: AssertionError at the array-rejection assertion (JsonValidatorTest.java:216 in the overlay)"
+  },
+  {
+   "leg": "C2 null-id probe on r2 head and offered head",
+   "result": "On f1a84076 FAILED as required (AssertionError at NullIdProbeTest.java:26; null id accepted). On 63188a80 PASSED (null id rejected). Probe source is preserved with the gate evidence."
+  },
+  {
+   "leg": "D1, D2, D3 carried proof legs (r1 head delete-schema and anyOf; contributor-parent set-id)",
+   "result": "RUNNING at interim filing; results land in the final receipt."
+  }
+ ],
+ "limits": "The endpoint test checks the handler spec in-process and authenticated HTTP read/set/delete plus persisted state; it does not cover HTTP introspection or controlled concurrent edits.",
+ "summary": "Interim receipt filed at Nick's direction so the implementation side can start fixes. All four named test suites pass at the offered head, and the carried enum-null, silent-failure and null-id proof legs completed so far behave as required. The head fails the gate on two branch-code legs: tidy reformats three tracked branch files, and root check fails at :solr:solrj:forbiddenApisTest on a Collections.singletonList call in the branch's own JsonValidatorTest. Three carried proof legs were still running at filing; the final receipt supersedes this interim and records them.",
+ "type": "receipt",
+ "verdict": "FAILED"
+}

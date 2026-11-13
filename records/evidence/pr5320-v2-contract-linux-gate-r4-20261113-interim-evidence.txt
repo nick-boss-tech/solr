@@ -1,0 +1,138 @@
+PR 5320 v2-contract Linux gate r4 INTERIM evidence (phone-agent, Linux host)
+Job: pr5320-v2-contract-linux-gate-r4-20261113
+Head: 63188a804067b87ed16d6d205d11824532d2d086 (fork branch pr-5320-v2-contract, verified by ls-remote)
+Seed: 5320CAFE (passed as -Ptests.seed; ./gradlew invocations run through the host Gradle wrapper)
+Interim filed: 2026-11-13T11:20:48-07:00
+
+== Test legs at the offered head (all passed)
+JsonValidatorTest (solrj): 4 tests, 0 failures; testAnyOfAlternatives, testAnyOfRejectsSilentFailureAndNullId, testAnyOfEnumNull, testSchemaValidation all executed
+BaseTestRuleBasedAuthorizationPlugin (core): 19 tests, 0 failures
+TestExternalRoleRuleBasedAuthorizationPlugin (core): 19 tests, 0 failures
+BasicAuthStandaloneTest.testV2PermissionIds (core): 1 test, 0 failures
+
+== Tidy leg: FAILED for this head
+./gradlew tidy exited 0 but reformatted 3 tracked branch files, so this head cannot be counted green:
+  solr/core/src/java/org/apache/solr/security/RuleBasedAuthorizationPluginBase.java
+  solr/core/src/test/org/apache/solr/security/BasicAuthStandaloneTest.java
+  solr/solrj/src/test/org/apache/solr/common/util/JsonValidatorTest.java
+Full tidy diff at the end of this file. The gate checkout was restored to the exact head after capture.
+
+== Check leg: FAILED on branch test code
+./gradlew check -x test exited 1 at :solr:solrj:forbiddenApisTest:
+  Forbidden method invocation: java.util.Collections#singletonList(**) [Use List.of()]
+  in org.apache.solr.common.util.JsonValidatorTest (JsonValidatorTest.java:72 in the check run; the call is at line 71 of the committed file)
+The call is Collections.singletonList(null) inside testAnyOfRejectsSilentFailureAndNullId. Note List.of cannot
+hold a null element, so the replacement needs a different construction for the one-element null list.
+Check ran in the same checkout after tidy had reformatted the tree; the forbidden-API violation is in the
+committed test source and is independent of formatting. Remaining check tasks did not run after the failure.
+
+== Carried fail-before proof legs completed at interim filing
+B (r4): testAnyOfEnumNull + Arrays import transplanted onto r3 head 95aa5cbd: FAILED as required,
+  AssertionError at JsonValidatorTest.java:239 (first assertion: the enum excluding null accepted null).
+C1 (r3): testAnyOfRejectsSilentFailureAndNullId transplanted onto r2 head f1a84076: FAILED as required,
+  AssertionError at JsonValidatorTest.java:216 (the array-rejection assertion, first in the method).
+C2 probe (r3): NullIdProbeTest asserts an object whose id key is null is rejected by the anyOf schema
+  (integer, or object with required string id). On r2 head f1a84076: FAILED as required, AssertionError at
+  NullIdProbeTest.java:26 (null id accepted). On offered head 63188a80: PASSED (null id rejected).
+Still running at interim filing: D1 revised testDeletePermissionApiSchema on r1 head d85ce12e,
+  D2 testAnyOfAlternatives on r1 head d85ce12e, D3 testSetPermissionIdApiSchema on contributor parent
+  5fa55130. The final receipt records those legs; this interim is filed so the fixes above can start.
+
+== Tidy diff (git diff after ./gradlew tidy at the offered head)
+diff --git a/solr/core/src/java/org/apache/solr/security/RuleBasedAuthorizationPluginBase.java b/solr/core/src/java/org/apache/solr/security/RuleBasedAuthorizationPluginBase.java
+index 6e924c4..feb2dab 100644
+--- a/solr/core/src/java/org/apache/solr/security/RuleBasedAuthorizationPluginBase.java
++++ b/solr/core/src/java/org/apache/solr/security/RuleBasedAuthorizationPluginBase.java
+@@ -443,10 +443,14 @@ public abstract class RuleBasedAuthorizationPluginBase
+                 List.of(
+                     Map.of("type", "integer"),
+                     Map.of(
+-                        "type", "object",
+-                        "properties", Map.of("id", Map.of("type", "string")),
+-                        "required", List.of("id"),
+-                        "additionalProperties", false))));
++                        "type",
++                        "object",
++                        "properties",
++                        Map.of("id", Map.of("type", "string")),
++                        "required",
++                        List.of("id"),
++                        "additionalProperties",
++                        false))));
+     return spec;
+   }
+ }
+diff --git a/solr/core/src/test/org/apache/solr/security/BasicAuthStandaloneTest.java b/solr/core/src/test/org/apache/solr/security/BasicAuthStandaloneTest.java
+index 33ceaaa..7c58a71 100644
+--- a/solr/core/src/test/org/apache/solr/security/BasicAuthStandaloneTest.java
++++ b/solr/core/src/test/org/apache/solr/security/BasicAuthStandaloneTest.java
+@@ -155,7 +155,11 @@ public class BasicAuthStandaloneTest extends SolrTestCaseJ4 {
+     assertNotNull(deleteSchema.get("anyOf"));
+ 
+     doHttpPost(
+-        httpClient, url, "{'set-permission': {'name':'read','role':'reader'}}", "solr", "SolrRocks");
++        httpClient,
++        url,
++        "{'set-permission': {'name':'read','role':'reader'}}",
++        "solr",
++        "SolrRocks");
+     Map<?, ?> authz =
+         (Map<?, ?>) securityConfHandler.getSecurityConfig(false).getData().get("authorization");
+     List<?> permissions = (List<?>) authz.get("permissions");
+@@ -199,7 +203,11 @@ public class BasicAuthStandaloneTest extends SolrTestCaseJ4 {
+     authz = (Map<?, ?>) securityConfHandler.getSecurityConfig(false).getData().get("authorization");
+     assertEquals(1, ((List<?>) authz.get("permissions")).size());
+     doHttpPost(
+-        httpClient, url, "{'set-permission': {'name':'read','role':'reader'}}", "solr", "SolrRocks");
++        httpClient,
++        url,
++        "{'set-permission': {'name':'read','role':'reader'}}",
++        "solr",
++        "SolrRocks");
+     doHttpPost(httpClient, url, "{'delete-permission': 2}", "solr", "SolrRocks");
+     authz = (Map<?, ?>) securityConfHandler.getSecurityConfig(false).getData().get("authorization");
+     assertEquals(1, ((List<?>) authz.get("permissions")).size());
+diff --git a/solr/solrj/src/test/org/apache/solr/common/util/JsonValidatorTest.java b/solr/solrj/src/test/org/apache/solr/common/util/JsonValidatorTest.java
+index 593d0f2..c519f14 100644
+--- a/solr/solrj/src/test/org/apache/solr/common/util/JsonValidatorTest.java
++++ b/solr/solrj/src/test/org/apache/solr/common/util/JsonValidatorTest.java
+@@ -33,10 +33,14 @@ public class JsonValidatorTest extends SolrTestCaseJ4 {
+                 List.of(
+                     Map.of("type", "integer"),
+                     Map.of(
+-                        "type", "object",
+-                        "properties", Map.of("id", Map.of("type", "string")),
+-                        "required", List.of("id"),
+-                        "additionalProperties", false))));
++                        "type",
++                        "object",
++                        "properties",
++                        Map.of("id", Map.of("type", "string")),
++                        "required",
++                        List.of("id"),
++                        "additionalProperties",
++                        false))));
+     assertNull(validator.validateJson(2));
+     assertNull(validator.validateJson(Map.of("id", "abc")));
+     assertNotNull(validator.validateJson(Map.of()));
+@@ -51,8 +55,7 @@ public class JsonValidatorTest extends SolrTestCaseJ4 {
+     objectSchema.put("properties", Map.of("id", Map.of("type", "string")));
+     objectSchema.put("type", "object");
+     JsonSchemaValidator validator =
+-        new JsonSchemaValidator(
+-            Map.of("anyOf", List.of(Map.of("type", "integer"), objectSchema)));
++        new JsonSchemaValidator(Map.of("anyOf", List.of(Map.of("type", "integer"), objectSchema)));
+     assertNotNull(validator.validateJson(List.of(2)));
+     Map<String, Object> nullId = new LinkedHashMap<>();
+     nullId.put("id", null);
+@@ -65,9 +68,7 @@ public class JsonValidatorTest extends SolrTestCaseJ4 {
+     assertNull(nullable.validateJson(null));
+     JsonSchemaValidator array =
+         new JsonSchemaValidator(
+-            Map.of(
+-                "anyOf",
+-                List.of(Map.of("type", "array", "items", Map.of("type", "string")))));
++            Map.of("anyOf", List.of(Map.of("type", "array", "items", Map.of("type", "string")))));
+     assertNotNull(array.validateJson(Collections.singletonList(null)));
+     assertNull(new JsonSchemaValidator(Map.of("type", "string")).validateJson(null));
+   }
