@@ -1,0 +1,34 @@
+{
+  "evidence": "records/evidence/solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b-evidence.json; uploaded archive SHA-256 0f00b12447ed98d06c0bbd40fa3e33660b7cf6bafb8f962f4c80caed73223b05. The verified CDN download URL expires 2027-11-13T18:41:50Z.",
+  "gate": "solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b-r1",
+  "head": "a2be775c91b4279a9ac4f5c80e3219afbaac2bc2",
+  "id": "solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b-r1-receipt",
+  "job": "solr-18606-pr5314-alias-signal-linux-gate-a2be775c91b",
+  "legs": [
+    {
+      "leg": "path-specific observer baseline and failed-read positive control",
+      "result": "PASS at seed 18606CAFE: ZkClientClusterStateProviderTest.testKnownAliasDoesNotReadAliasCollectionState completed 1/1. Its direct missing-state positive control records the exact /collections/<alias>/state.json path with NoNodeException."
+    },
+    {
+      "leg": "alias HTTP integration baseline",
+      "result": "PASS at seed 18606CAFE: CloudHttp2SolrClientTest.testZkAliasRequestsResolveAndQuery completed 1/1 and retained repeated alias-resolution/query coverage."
+    },
+    {
+      "leg": "guard-removal mutation and legacy-metrics limitation",
+      "result": "Expected detection: after temporarily removing only the known-alias clause from the guard, the new observer failed with a recorded read of /collections/target_testKnownAliasDoesNotReadAliasCollectionState_alias/state.json and failure=NoNodeException (signal_rc=1). Under the same mutation, the legacy global-metrics test passed 1/1 (metric_rc=0), reproducing its non-detection. The source guard was restored and the worktree is clean."
+    },
+    {
+      "leg": "non-test root check",
+      "result": "FAIL, exit_code=1: ./gradlew --no-daemon check -x test -x :solr:docker:check -x :solr:solr-ref-guide:check. The failure is only :solr:solrj-zookeeper:spotlessJavaCheck, which reports two formatting differences in ZkClientClusterStateProviderTest.java; no semantic test failure is reported. The root check did not run tests. The dry-run confirms no Docker check/build or Antora/site-link task; no Docker was installed or used. Docker-dependent tests remain unrun; -x test excluded all test execution."
+    },
+    {
+      "leg": "source publication and PR scope",
+      "result": "Head a2be775c91b4279a9ac4f5c80e3219afbaac2bc2 is local-only and unpushed; the fork branch remains at base 33e3f8b8599ea12fad0456ce0444d3a24a4affe6. No public PR body or comment was changed."
+    }
+  ],
+  "owner": "phone-agent-2",
+  "recorded": "2026-11-13T11:42:46-07:00",
+  "summary": "Round-1 exact-head gate: focused alias tests and guard-removal detection passed, but the non-test root check failed at Spotless formatting in the new test. This is not a green gate; the formatting head will be superseded after this failure is recorded.",
+  "type": "receipt",
+  "verdict": "failed"
+}
