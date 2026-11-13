@@ -64,4 +64,18 @@ public class SolrZkServerTlsTest extends SolrTestCaseJ4 {
     SolrException error = expectThrows(SolrException.class, server::parseConfig);
     assertTrue(error.getMessage().contains("requires secureClientPort"));
   }
+
+  public void testAutomaticTlsRejectsEnsemblePlaintextClientAddress() throws Exception {
+    Path home = createTempDir();
+    Files.writeString(home.resolve("myid"), "1\n");
+    Files.writeString(
+        home.resolve("zoo.cfg"),
+        "secureClientPort=2182\n"
+            + "initLimit=10\nsyncLimit=5\n"
+            + "server.1=127.0.0.1:2888:3888;127.0.0.1:2181\n");
+    System.setProperty("solr.zookeeper.embedded.tlsOnly", "true");
+    SolrZkServer server = new SolrZkServer(true, null, home, home.toString(), 8983);
+    SolrException error = expectThrows(SolrException.class, server::parseConfig);
+    assertTrue(error.getMessage().contains("plaintext client address"));
+  }
 }

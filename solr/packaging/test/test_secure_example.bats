@@ -196,8 +196,23 @@ EOF
   assert_output --partial 'Unable to write embedded ZooKeeper TLS password files'
   rmdir "$SOLR_HOME/.zk-tls-keystore-password"
 
-  run bash -c 'umask 022; exec solr start -c -p "$SOLR_PORT" --solr-home "$SOLR_HOME"'
+  # Inspect the file immediately after creation, before the script can chmod or write it.
+  local intercept_dir="$BATS_TEST_TMPDIR/touch-intercept"
+  mkdir "$intercept_dir"
+  cat > "$intercept_dir/touch" <<'EOF'
+#!/usr/bin/env bash
+command -p touch "$@" || exit $?
+if [[ "$1" == */.zk-tls-keystore-password ]]; then
+  [[ $(ls -ld "$1") == "-rw------- "* ]] || exit 1
+  [[ $(ls -ld "$2") == "-rw------- "* ]] || exit 1
+  printf 'private at creation\n' > "$ZK_TOUCH_PROOF"
+fi
+EOF
+  chmod +x "$intercept_dir/touch"
+  run env PATH="$intercept_dir:$PATH" ZK_TOUCH_PROOF="$BATS_TEST_TMPDIR/touch-proof" \
+    bash -c 'umask 022; exec solr start -c -p "$SOLR_PORT" --solr-home "$SOLR_HOME"'
   assert_success
+  [ -f "$BATS_TEST_TMPDIR/touch-proof" ]
   for password_file in "$SOLR_HOME/.zk-tls-keystore-password" "$SOLR_HOME/.zk-tls-truststore-password"; do
     run ls -ld "$password_file"
     assert_success

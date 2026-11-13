@@ -147,6 +147,13 @@ public class SolrZkServer {
       if (hasClientPort) props.setProperty("clientPortAddress", bindHost);
       if (hasSecureClientPort) props.setProperty("secureClientPortAddress", bindHost);
       zkProps.parseProperties(props);
+      if (zkRun
+          && EnvUtils.getPropertyAsBool("solr.zookeeper.embedded.tlsOnly", false)
+          && zkProps.getClientPortAddress() != null) {
+        throw new SolrException(
+            SolrException.ErrorCode.SERVER_ERROR,
+            "Embedded ZooKeeper TLS cannot start with a plaintext client address in " + zooCfgPath);
+      }
     } catch (QuorumPeerConfig.ConfigException | IOException e) {
       if (zkRun) {
         throw new SolrException(SolrException.ErrorCode.SERVER_ERROR, e);
