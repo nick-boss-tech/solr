@@ -1,0 +1,25 @@
+{
+  "claim_path": "records/claim/solr-18606-pr5314-alias-signal-linux-20261113.json",
+  "id": "solr-18606-pr5314-alias-signal-linux-20261113",
+  "intended_host": "Linux",
+  "job": "solr-18606-pr5314-alias-signal-linux-20261113",
+  "references": [
+    "records/receipt/solr-18606-pr5314-split-refresh-linux-20261111-receipt.json",
+    "records/receipt/solr-18606-pr5314-split-sync-linux-r2-20261112-receipt.json",
+    "records/report/solr-18606-pr5314-repair-windows-20261113-report.json"
+  ],
+  "requirements": [
+    "Reconcile live refs and ownership before work. Reproduce the previously documented failed-read metrics limitation and investigate a path- and client-specific observable signal that does not depend on ZooKeeper debug log formatting, with a failed-read positive control and known-alias guard removal mutation. Report false positives, client/session scope, stability, maintenance cost, and exact evidence. Do not represent non-reproduction as a pass.",
+    "Assess minimal durable tests for sync callback waiting, errors, interruption and lock ordering against the existing disposable diagnostic in the prior receipt; distinguish behavioral coverage from real ensemble proof.",
+    "If a well-supported separable implementation is established and host authorization permits, coordinate a scoped implementation and exact-head gates. Otherwise report findings and hand back; do not change public PR body or post comments."
+  ],
+  "source": {
+    "refresh_branch": "solr-18606-submit",
+    "refresh_head": "33e3f8b8599ea12fad0456ce0444d3a24a4affe6",
+    "repository": "nick-boss-tech/solr",
+    "sync_branch": "solr-18606-sync-split",
+    "sync_head": "d17427ca2cf164f75d3072b8a07767e1e38f5cc4"
+  },
+  "summary": "Investigate a maintainable real-ZooKeeper signal for failed alias collection-state reads and evaluate durable sync coverage; propose the smallest viable repairs without changing public PR state.",
+  "type": "assignment"
+}
