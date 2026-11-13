@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "records/report/pr-5339-signature-migration-linux-gate-r1-report.json; records/receipt/pr-5339-signature-migration-linux-gate-r1-receipt.json; runner stopped, no Gradle or ChromeDriver process remained, both host locks were free at the final check.",
+  "id": "pr-5339-signature-migration-linux-gate-r1",
+  "job": "pr-5339-signature-migration-linux-gate-r1",
+  "reason": "Owner asked to stop the running gate; no further proof will be performed under this claim.",
+  "type": "release"
+}
