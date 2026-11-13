@@ -1,0 +1,24 @@
+{
+  "environment": "Linux clean checkout, exact source head; document toolchain and execution conditions.",
+  "expected_receipt": "records/receipt/pr-5075-forbidden-api-regate-linux-20261113-receipt.json",
+  "head": "5b3693c44ca057dc42addb43af97c168634d6301",
+  "id": "pr-5075-forbidden-api-regate-linux-20261113-gate",
+  "job": "pr-5075-forbidden-api-regate-linux-20261113",
+  "phase": "review feedback round 2",
+  "prior_receipt": "records/receipt/pr-5075-review-fixes-linux-20261113-receipt.json",
+  "requirements": [
+    "Verify only the method-scoped SuppressForbidden annotation and import differ from dc825f9af929a7ad8d08f8eb51e969e72582acb2, and that no behavioral test assertions were removed.",
+    "Run :solr:core:forbiddenApisTest and record exit code and log; verify the seven previously reported violations are resolved.",
+    "Run :solr:core:test for org.apache.solr.update.StreamingSolrClientsErrorAttributionTest and org.apache.solr.update.SolrCmdDistributorTest, and :solr:solrj-jetty:test for org.apache.solr.client.solrj.jetty.ConcurrentUpdateJettySolrClientTest and ConcurrentUpdateJettySolrClientBadInputTest, using fixed seed 5075C0DE. Record fresh XML, counts, failures and skips.",
+    "Run root tidy and confirm no tracked changes. If it modifies files, stop and request a new pushed head and gate.",
+    "Run root check -x test and retain complete logs and exit status; disclose any setup condition including the UI artifact handling documented in the prior receipt.",
+    "The prior receipt's behavioral fail-before at f8d4bdbea518901e255ae119f3e5c43e7804a9bf is historical evidence for the unchanged assertions; verify the test-only diff before relying on it. Record each leg, commands, evidence locations and current remote head. A failure, setup error, skipped test or missing leg is not a pass."
+  ],
+  "source": {
+    "branch": "solr-5939-submit",
+    "head": "5b3693c44ca057dc42addb43af97c168634d6301",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes_gate": "records/gate/pr-5075-review-fixes-linux-20261113-gate.json",
+  "type": "gate"
+}
