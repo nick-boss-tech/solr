@@ -1,0 +1,16 @@
+{
+  "changes": "Remove duplicate callback-side shouldRetry, leaving classification to the distributor. The prior failure-only accounting with null body does not increase leader RF and sets rollup to min(current, MAX), so is a no-op by source inspection. Add callback decision test and check retried Req count in the stall test.",
+  "coordination": "Older Linux r2 claim remains without observed release; do not assume its worker stopped.",
+  "gate": "records/gate/pr-5330-retry-serial-r7-linux-20261113.json",
+  "head": "f7e638b2d6b57fcbdde3122120eedac2694ed40c",
+  "id": "pr-5330-retry-serial-r7-windows-20261113-report",
+  "job": "pr-5330-retry-serial-r7-windows-20261113",
+  "source": {
+    "branch": "pr-5330-test-fix-20261113",
+    "head": "f7e638b2d6b57fcbdde3122120eedac2694ed40c",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Pushed single-path retry classification and callback regression",
+  "type": "report",
+  "verification": "Whitespace diff and remote SHA checked. No Gradle or runtime tests on Windows. Actual resend, tracker invariants, fail-before and remaining lifecycle issues need Linux proof."
+}
