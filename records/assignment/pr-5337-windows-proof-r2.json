@@ -1,0 +1,13 @@
+{
+  "deliverables": "Exact-head Windows launcher results and local test evidence; do not claim the separate Linux gate",
+  "id": "pr-5337-windows-proof-r2",
+  "intended_host": "Windows; user explicitly authorized Gradle for the Windows test",
+  "job": "pr-5337-windows-proof-r2",
+  "source": {
+    "branch": "pr-5337-cli-exit-fixes",
+    "head": "21379130f426433f163fcd61f0731b8ad51d1412",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Run Windows launcher proof before Linux handoff",
+  "type": "assignment"
+}
