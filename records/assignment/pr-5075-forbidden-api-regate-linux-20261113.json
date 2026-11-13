@@ -1,0 +1,20 @@
+{
+  "claim_path": "records/claim/pr-5075-forbidden-api-regate-linux-20261113.json",
+  "gate_id": "pr-5075-forbidden-api-regate-linux-20261113-gate",
+  "gate_record": "records/gate/pr-5075-forbidden-api-regate-linux-20261113-gate.json",
+  "id": "pr-5075-forbidden-api-regate-linux-20261113",
+  "intended_host": "Linux gate host",
+  "job": "pr-5075-forbidden-api-regate-linux-20261113",
+  "phase": "review feedback round 2",
+  "prior_head": "dc825f9af929a7ad8d08f8eb51e969e72582acb2",
+  "receipt_path": "records/receipt/pr-5075-forbidden-api-regate-linux-20261113-receipt.json",
+  "source": {
+    "branch": "solr-5939-submit",
+    "head": "5b3693c44ca057dc42addb43af97c168634d6301",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify PR 5075 test-only forbidden API repair and rerun the exact-head review gate.",
+  "supersedes_gate": "records/gate/pr-5075-review-fixes-linux-20261113-gate.json",
+  "supersedes_receipt": "records/receipt/pr-5075-review-fixes-linux-20261113-receipt.json",
+  "type": "assignment"
+}
