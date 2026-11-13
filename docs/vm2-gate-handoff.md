@@ -234,7 +234,26 @@ don't re-discover them the slow way.
   `not ok <n> teardown_file failed` **even when every behavioral test passed.**
   This is environmental, identical on base and head. Judge the leg by the
   `ok <n>`/`not ok <n>` lines, not by the Gradle exit code; document the
-  teardown cause in the receipt.
+  teardown cause in the receipt. Fix: build lsof 4.99.0 from source into
+  `/workspace/tools/lsof-prefix/bin` (gcc is present; `Configure linux` then
+  `make`, copy the binary). **But lsof alone is NOT sufficient** — see the
+  subreaper quirk below.
+- **PID 1 never reaps orphaned Solr JVMs (the real teardown killer).** Even
+  with lsof present, `solr stop --all` in `teardown_file` fails: the graceful
+  Jetty stop works (solr.log shows `Performing 'stop' command` → clean
+  `Exiting JVM`), but the JVM becomes a **zombie under PID 1** (`python3
+  /supervisor.py`), which never reaps it. `bin/solr stop`'s final zombie check
+  (`ps -o stat` == `Z`) then exits 1 → `not ok teardown_file failed` → Gradle
+  exit 1. This is the container's missing init (`--init` docker flag issue the
+  solr script warns about). **Host fix without touching the patch:** run the
+  whole integration test under a child subreaper —
+  `/workspace/tools/subreaper.py` (prctl PR_SET_CHILD_SUBREAPER + waitpid
+  loop) wraps the `./gradlew :solr:packaging:integrationTests ...` command so
+  orphaned JVMs reparent to it and are reaped; `solr stop` then sees the
+  process gone and exits 0. Verified: without subreaper the same leg is
+  `BUILD FAILED` / rc 1; under the subreaper it is `BUILD SUCCESSFUL` / rc 0
+  with all 12 tests ok and clean teardown. Full diagnosis in
+  `/workspace/logs/vm2/gate-18138-r2/ROOT-CAUSE.md`.
 - **Git worktrees break the ref-guide Antora site.** `./gradlew check -x test`
   on a worktree fails at `:solr:solr-ref-guide:buildLocalAntoraSite` with
   `Local content source must be a git repository`, because in a worktree
