@@ -1,0 +1,7 @@
+{
+  "head": "8d656408d24c53ee40510a52d01d3b516927416e",
+  "id": "pr5323-initial-gate-supersession-notice",
+  "job": "pr5323-review-fixes-linux-20261113",
+  "summary": "Initial gate is superseded for new work: review found TLS diagnostic, mixed-process coverage and Windows proof gaps. Do not claim; round 2 implementation and replacement exact-head gate are being prepared. At the 2026-11-13 refresh no claim existed. Any worker that has started must stop and report execution state; the old result cannot prove a changed head.",
+  "type": "report"
+}
