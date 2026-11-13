@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex",
+  "evidence": "records/report/pr-5329-windows-fix-round10-report.json; source head 4b4f23abefb65718f64d468aa9489ca6dd27f595; no local build or test executor started.",
+  "id": "pr-5329-windows-fix-round10",
+  "job": "pr-5329-windows-fix-round10",
+  "reason": "Windows implementation stopped after pushing the partial patch and requesting Linux proof",
+  "type": "release"
+}
