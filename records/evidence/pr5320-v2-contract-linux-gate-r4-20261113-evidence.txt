@@ -1,0 +1,68 @@
+PR 5320 v2-contract Linux gate r4 FINAL evidence (phone-agent, Linux host)
+Job: pr5320-v2-contract-linux-gate-r4-20261113
+Head: 63188a804067b87ed16d6d205d11824532d2d086 (fork branch pr-5320-v2-contract, verified by ls-remote at claim and setup; contributor parent 5fa5513038a7cf9318ed800423d8a44064d4c0e3 verified an ancestor of the head)
+Seed: 5320CAFE for every test leg (passed as -Ptests.seed; the gate's ./gradlew commands run through the host Gradle 9.7.0 + JDK 21 wrapper)
+Verdict: FAILED at this head on the tidy and check legs. All named test suites pass and every carried fail-before proof leg behaves as its gate round requires.
+Interim receipt was filed 2026-11-13T11:21-07:00 (evidence records/evidence/pr5320-v2-contract-linux-gate-r4-20261113-interim-evidence.txt) so the fixes could start; this file is the final evidence.
+
+== Test legs at the offered head
+JsonValidatorTest (solrj): 4 tests, 0 failures, 0 errors. testAnyOfAlternatives, testAnyOfRejectsSilentFailureAndNullId, testAnyOfEnumNull and testSchemaValidation all executed; the round 4 enum-null assertions pass here, including an enum explicitly containing null and legacy null acceptance outside anyOf.
+BaseTestRuleBasedAuthorizationPlugin (core): 19 tests, 0 failures.
+TestExternalRoleRuleBasedAuthorizationPlugin (core): 19 tests, 0 failures.
+BasicAuthStandaloneTest.testV2PermissionIds (core): 1 test, 0 failures. The test reads the handler spec in-process and runs an authenticated HTTP read/set/delete sequence with persisted state.
+
+== Tidy leg: FAILED for this head
+./gradlew tidy exited 0 but reformatted three tracked branch files (RuleBasedAuthorizationPluginBase.java 12 lines, BasicAuthStandaloneTest.java 12 lines, JsonValidatorTest.java 19 lines); the full diff is in the interim evidence file. The gate checkout was restored to the exact head after capture. Per the gate record this head cannot be counted green; a new pushed head and a superseding gate are required.
+
+== Check leg: FAILED on branch test code
+./gradlew check -x test exited 1, failing at :solr:solrj:forbiddenApisTest: Forbidden method invocation java.util.Collections#singletonList [Use List.of()] in org.apache.solr.common.util.JsonValidatorTest, committed line 71, inside testAnyOfRejectsSilentFailureAndNullId (Collections.singletonList(null)). List.of cannot hold a null element, so the fix needs a different construction. Check ran in the same checkout after tidy had reformatted the tree in place; the violation is in the committed source and is independent of formatting. Remaining check tasks did not run after this failure.
+
+== Round 4 fail-before (enum null)
+On isolated r3 head 95aa5cbd, only testAnyOfEnumNull and its java.util.Arrays import were transplanted from the offered head (single file modified). The method FAILED as required: AssertionError at the first assertion (overlay JsonValidatorTest.java:239); the r3 validator accepts null against an anyOf enum that excludes null. At the offered head the same method passes.
+
+== Round 3 carried legs
+C1: testAnyOfRejectsSilentFailureAndNullId and its Collections/LinkedHashMap imports transplanted onto r2 head f1a84076 (single file modified). FAILED as required: AssertionError at overlay JsonValidatorTest.java:216, the array-rejection assertion (first assertion of the method; the forced LinkedHashMap ordering case).
+C2: separate probe NullIdProbeTest asserts rejection of an object whose id key is null under the anyOf schema (integer, or object with required string id), mirroring the branch test's schema construction. On f1a84076 it FAILED as required (AssertionError at NullIdProbeTest.java:26; null id accepted). On the offered head it PASSED (null id rejected). Probe source (also preserved with this gate's working files):
+  package org.apache.solr.common.util;
+  
+  import java.util.LinkedHashMap;
+  import java.util.List;
+  import java.util.Map;
+  import org.apache.solr.SolrTestCaseJ4;
+  
+  /**
+   * Disposable gate probe for the PR 5320 round 4 gate: asserts that an object whose id key is null
+   * is rejected by the delete-permission anyOf schema shape (an integer, or an object with a
+   * required string id). The schema construction mirrors JsonValidatorTest in this branch. This
+   * file is gate evidence only and is not part of the branch.
+   */
+  public class NullIdProbeTest extends SolrTestCaseJ4 {
+  
+    public void testNullIdRejected() {
+      Map<String, Object> objectSchema = new LinkedHashMap<>();
+      objectSchema.put("required", List.of("id"));
+      objectSchema.put("properties", Map.of("id", Map.of("type", "string")));
+      objectSchema.put("type", "object");
+      JsonSchemaValidator validator =
+          new JsonSchemaValidator(
+              Map.of("anyOf", List.of(Map.of("type", "integer"), objectSchema)));
+      Map<String, Object> nullId = new LinkedHashMap<>();
+      nullId.put("id", null);
+      assertNotNull(validator.validateJson(nullId));
+    }
+  }
+
+== Round 2 carried legs
+D1: on isolated r1 head d85ce12e, only the revised testDeletePermissionApiSchema (from the r2 head's BaseTest file) replaced the baseline method. FAILED as required: AssertionError at overlay BaseTestRuleBasedAuthorizationPlugin.java:821, assertNotNull(validator.validateJson(Map.of())), because the old permissive object schema accepts a missing id.
+D2: on the same r1 head, only testAnyOfAlternatives was added to the baseline JsonValidatorTest. FAILED as required: the old validator rejects the unsupported anyOf keyword at runtime, RuntimeException: Unknown key : anyOf from the JsonSchemaValidator constructor (test line 189 in the overlay). Disclosure: the first attempt at this leg failed to compile because the transplant omitted the java.util.Map import the r1-era file lacks; that attempt is not proof and was discarded. The import was added to the overlay only and the leg rerun once, producing the result above.
+D3: on isolated contributor parent 5fa55130, only testSetPermissionIdApiSchema was inserted into BaseTest (the JsonSchemaValidator import was ensured, matching the round 1 overlay prescription). FAILED as required: AssertionError at overlay BaseTestRuleBasedAuthorizationPlugin.java:1067, assertNotNull(id), the explicit missing-id assertion. The endpoint test was not applied to the parent, per the round 2 gate.
+Mapping note: the round 1 gate's contributor-parent leg (two methods plus import, run separately) is covered by D3 for the set-id method and by D1's delete-schema shape on the r1 head for the object-delete method; the round 2 and round 3 records restated those legs with named methods and this gate executed the restated forms.
+
+== Null semantics review (round 3 requirement, recorded from the production diff and the head tests)
+The branch adds an AnyOfValidator and a strictNull mode to JsonSchemaValidator: a schema containing anyOf, and each anyOf alternative, validates null instead of auto-accepting it. Inside anyOf: an enum matches null only when the enum list literally contains null (explicit nullable case, covered by testAnyOfEnumNull); a {type: null} alternative accepts null (covered by testAnyOfRejectsSilentFailureAndNullId); nested items inherit strictNull, so a null element inside an array alternative is rejected (same test). Errors are isolated between alternatives: each alternative validates against a scratch error list and only a generic no-match error is reported. Outside anyOf the legacy behavior is preserved: validate() returns true for null when the schema has neither anyOf nor (under strict) a type or enum, and a plain {type: string} schema still accepts null (asserted at the end of testAnyOfRejectsSilentFailureAndNullId).
+
+== Limits
+The endpoint test checks the handler spec in-process and authenticated HTTP read/set/delete plus persisted state; it does not cover HTTP introspection or controlled concurrent edits.
+
+== Execution conditions
+Isolated clean clone per head (offered, r3, r2, r1, contributor parent), each verified by rev-parse and left with only the stated overlay modifications. Gradle runs serialized through the host test queue; stale daemons cleared before the main and rerun chains. The 5320 main checkout was restored to the exact offered head after the tidy capture, and the disposable probe file was removed from it after its run.

@@ -1,0 +1,9 @@
+{
+ "executor_stop_evidence": "The fail-before chain process exited at 2026-11-13T11:24:16-07:00 and the single-leg anyOf rerun exited at 11:25:37-07:00; no Gradle daemon processes remain on the host at release time (verified by process listing). All five gate clones are idle at rest with only their stated overlay modifications.",
+ "id": "pr5320-v2-contract-linux-gate-r4-20261113",
+ "job": "pr5320-v2-contract-linux-gate-r4-20261113",
+ "receipt": "records/receipt/pr5320-v2-contract-linux-gate-r4-20261113-receipt.json",
+ "released": "2026-11-13T11:27:00-07:00",
+ "released_by": "phone-agent",
+ "type": "release"
+}
