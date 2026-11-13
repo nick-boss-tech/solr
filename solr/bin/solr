@@ -1185,11 +1185,14 @@ EOF
       # this one) so co-located nodes and bin/solr zk/auth calls that source this same
       # file inherit TLS too, without any of them special-casing it.
       if [ -f "${SOLR_INCLUDE:-}" ] && ! grep -q 'SOLR_ZK_TLS_OPTS=' "$SOLR_INCLUDE" 2>/dev/null; then
-        {
-          printf '\n'
-          echo "SOLR_ZK_TLS_OPTS=\"$ZK_SSL_OPTS\""
+        if ! {
+          printf '\n' &&
+          echo "SOLR_ZK_TLS_OPTS=\"$ZK_SSL_OPTS\"" &&
           echo 'SOLR_OPTS="$SOLR_OPTS $SOLR_ZK_TLS_OPTS"'
-        } >> "$SOLR_INCLUDE"
+        } >> "$SOLR_INCLUDE"; then
+          echo >&2 "Unable to write embedded ZooKeeper TLS options to $SOLR_INCLUDE."
+          exit 1
+        fi
         echo "Embedded ZooKeeper's transport is now TLS-only (reusing the SSL keystore/truststore); added SOLR_ZK_TLS_OPTS to $SOLR_INCLUDE."
       fi
     fi

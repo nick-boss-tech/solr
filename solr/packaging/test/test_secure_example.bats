@@ -194,8 +194,15 @@ teardown() {
     -storepass secret -keypass secret -validity 30 -keystore "$store" -storetype PKCS12 \
     -ext SAN=DNS:localhost,IP:127.0.0.1 -dname 'CN=localhost'
   assert_success
+  local certificate="$BATS_TEST_TMPDIR/zk-test.cer"
+  local truststore="$BATS_TEST_TMPDIR/zk-trust.p12"
+  run keytool -exportcert -alias solr-ssl -keystore "$store" -storepass secret -file "$certificate"
+  assert_success
+  run keytool -importcert -noprompt -alias solr-ssl -file "$certificate" \
+    -keystore "$truststore" -storetype PKCS12 -storepass secret
+  assert_success
 
-  export SOLR_SSL_ENABLED=true SOLR_SSL_KEY_STORE="$store" SOLR_SSL_TRUST_STORE="$store"
+  export SOLR_SSL_ENABLED=true SOLR_SSL_KEY_STORE="$store" SOLR_SSL_TRUST_STORE="$truststore"
   export SOLR_SSL_KEY_STORE_PASSWORD=secret SOLR_SSL_TRUST_STORE_PASSWORD=secret
   export SOLR_SSL_KEY_STORE_TYPE=PKCS12 SOLR_SSL_TRUST_STORE_TYPE=PKCS12
   export SOLR_HOST_ADVERTISE=localhost
@@ -208,12 +215,23 @@ serverCnxnFactory=org.apache.zookeeper.server.NettyServerCnxnFactory
 ssl.keyStore.location=$store
 ssl.keyStore.type=PKCS12
 ssl.keyStore.passwordPath=$SOLR_HOME/.zk-tls-keystore-password
-ssl.trustStore.location=$store
+ssl.trustStore.location=$truststore
 ssl.trustStore.type=PKCS12
 ssl.trustStore.passwordPath=$SOLR_HOME/.zk-tls-truststore-password
 ssl.clientAuth=none
 client.portUnification=true
 EOF
+
+  # A failed include update must not be reported as a successful TLS setup.
+  chmod 400 "$SOLR_INCLUDE"
+  if [ ! -w "$SOLR_INCLUDE" ]; then
+    run solr start -c -p "$SOLR_PORT" --solr-home "$SOLR_HOME"
+    assert_failure
+    assert_output --partial 'Unable to write embedded ZooKeeper TLS options'
+    refute_output --partial 'added SOLR_ZK_TLS_OPTS'
+  fi
+  chmod 600 "$SOLR_INCLUDE"
+  rm -f "$SOLR_HOME/.zk-tls-keystore-password" "$SOLR_HOME/.zk-tls-truststore-password"
 
   # An unusable password path must abort before launching Solr.
   mkdir "$SOLR_HOME/.zk-tls-keystore-password"
