@@ -1,0 +1,12 @@
+{
+  "contributor_head": "65c2d85f77017a951f20dc110d71bf14786c6694",
+  "id": "pr-5333-doc-reconciled-20261113",
+  "job": "pr-5333-doc-reconcile-20261113",
+  "source": {
+    "branch": "pr-5333-shutdown-doc",
+    "head": "56694443bf5bc250d15ba570fde91cdf77a5eaa7",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Merged contributor head into documentation branch with a normal merge and verified fork head; prior proof assignment names old head and is superseded. Diff check passed; no build or runtime tests executed on Windows.",
+  "type": "report"
+}
