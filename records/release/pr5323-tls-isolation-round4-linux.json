@@ -1,0 +1,9 @@
+{
+ "executor_stop_evidence": "All gate chains have exited (the last, tidy/check, at 2026-11-13T14:19:19-07:00); no Gradle build is running at release time. All gate clones are at rest: root clones clean at e92e4178, the mutation clones restored to zero tracked changes after each mutation, and the solrtest checkout restored to zero tracked changes after the requirement 5 chain.",
+ "id": "pr5323-tls-isolation-round4-linux",
+ "job": "pr5323-tls-isolation-round4-linux",
+ "receipt": "records/receipt/pr5323-tls-isolation-round4-linux.json",
+ "released": "2026-11-13T14:24:00-07:00",
+ "released_by": "phone-agent",
+ "type": "release"
+}

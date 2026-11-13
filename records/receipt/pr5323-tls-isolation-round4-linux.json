@@ -1,0 +1,52 @@
+{
+ "branch": "pr-5323-review-fixes",
+ "evidence": "records/evidence/pr5323-tls-isolation-round4-linux-evidence.txt",
+ "evidence_sha256": "e4c3e7fd3ebb0b97a5b2d4627c90702abf2f293bda23e7b2c074a78a6cdc1ede",
+ "executor": "phone-agent",
+ "filed": "2026-11-13T14:24:00-07:00",
+ "gate": "records/gate/pr5323-tls-isolation-round4-gate.json",
+ "head": "e92e417843e24dac8a54bd1c3c61d43e7b420cf4",
+ "id": "pr5323-tls-isolation-round4-linux",
+ "job": "pr5323-tls-isolation-round4-linux",
+ "legs": [
+  {
+   "leg": "Requirement 1: SolrProcessManagerTest + deletion regression + empty-result mutation (seed 5323C0DE)",
+   "result": "PROVEN: head 9/9 pass incl. testFilteredScanPreservesOtherLiveNodes; contributor production code fails at line 178 (foreign PID preservation); empty-result mutation fails at line 176 (size assertion)."
+  },
+  {
+   "leg": "Requirement 2: packaging catsTests (BasicAuthTest, ExampleTest, SslTest) on JDK 21 and 25",
+   "result": "PROVEN: BasicAuth 4/4 and Example 3/3 on both JDKs; SslTest 6 pass + 3 AwaitsFix skips in normal runs on both JDKs; both fixtures execute unskipped and pass; accept-refusal and reject-accepted pattern mutations fail the tlsDiagnostics fixture as required. test-framework catsTests has none of the named classes (Gradle: No tests found for the given filters, both JDKs), recorded as a selection fact."
+  },
+  {
+   "leg": "Requirement 3: Windows leg",
+   "result": "INCOMPLETE: no Windows host or CI available to this agent; not attempted."
+  },
+  {
+   "leg": "Requirement 4: AwaitsFix cases run explicitly (awaitsfix enabled, both JDKs)",
+   "result": "EXECUTED: useDifferentHostnameWhenNotCheckingPeerName PASSES and startSolrWithMtlsWanted PASSES on both JDKs; startSolrWithMtlsNeeded FAILS on both JDKs at the missing-client-certificate diagnostic assertion (output carried ClosedChannelException, not (bad_certificate|certificate_required)): the SOLR-18646 defect, with all sibling TLS cases passing in the same runs."
+  },
+  {
+   "leg": "Requirement 5: coverage mutations",
+   "result": "PROVEN for three: PostTool commit suppression fails the new monitor numFound assertion; PostLogsTool file_s corruption fails the new postlogs numFound assertion while commit succeeds; bin/solr example-mode ulimit suppression removal fails the new ExampleTest assertNotContains. The untrusted-endpoint-to-refusal mutation was not constructed: no production seam exists without editing the tests; the fixture-pattern equivalent is proven under requirements 2 and 8."
+  },
+  {
+   "leg": "Requirement 6: catsTestsDockerBuild",
+   "result": "INCOMPLETE: no Docker on this host; not attempted."
+  },
+  {
+   "leg": "Requirement 7: tidy and root check",
+   "result": "Check PASSED (BUILD SUCCESSFUL). Tidy FAILED for this head: SslTest.java is reformatted (3 hunks, diff in evidence); a new pushed head and superseding gate are required. The gate did not push the reformat on the implementation line's branch."
+  },
+  {
+   "leg": "Requirement 8: clientHostnameDiagnosticMustBeFreshAndSpecific + mutations",
+   "result": "PROVEN as a fixture: executes unskipped and passes on both JDKs; stale-offset mutation and generic certificate_unknown mutation each fail it at the intended assertions. First certificate_unknown construction was structurally inert and was discarded and rerun corrected; disclosed in evidence. Live part: see requirement 9."
+  },
+  {
+   "leg": "Requirement 9: isolated user-managed TLS node live proof",
+   "result": "INCOMPLETE: the startSolrWithMtlsNeeded case (the isolated-node proof as written) executed on both JDKs but stops at the missing-client-certificate diagnostic assertion (SOLR-18646), so the full fresh-diagnostic control sequence cannot be carried through; Windows CI part unavailable. Kept incomplete per the gate's instruction."
+  }
+ ],
+ "summary": "Round 4 gate INCOMPLETE at e92e4178. Executed and proven: the process-manager regression pair (head pass; contributor-code fail at the foreign-PID preservation assertion; empty-result mutation fail at the size assertion); the packaging CATS suites on JDK 21 and 25 (BasicAuth 4/4, Example 3/3, SslTest live cases pass, both TLS fixtures execute unskipped and pass, and the pattern mutations fail as required); the AwaitsFix cases run explicitly on both JDKs, with the hostname case and wanted-mTLS passing and needed-mTLS failing at the missing-client-certificate diagnostic (ClosedChannelException instead of the TLS alert text, SOLR-18646); three of the four coverage mutations failing at their intended new assertions; root check BUILD SUCCESSFUL. Incomplete or failed legs: the Windows leg (no host available), the Docker leg (no Docker on this host), the requirement 9 live isolated-node proof (blocked by the SOLR-18646 defect at the diagnostic assertion), one coverage mutation not constructed (no production seam, reason recorded), and tidy reformats SslTest.java at this head, which by the gate's terms requires a new pushed head and superseding gate. Host note: Solr-starting legs ran as a dedicated non-root user created on this VM after the root attempts failed at bin/solr's root refusal, and CATS curl legs needed the sandbox proxy variables stripped; both conditions are documented in the evidence.",
+ "type": "receipt",
+ "verdict": "INCOMPLETE"
+}

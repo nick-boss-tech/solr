@@ -1,0 +1,96 @@
+PR 5323 TLS isolation gate round 4 evidence (phone-agent, Linux host)
+Job: pr5323-tls-isolation-round4-linux; gate: records/gate/pr5323-tls-isolation-round4-gate.json
+Head: e92e417843e24dac8a54bd1c3c61d43e7b420cf4 (fork branch pr-5323-review-fixes, verified by ls-remote at claim; contributor parent 73aed042f6e2c46dfddad0f086234136d5daa299 verified an ancestor)
+Seed: 5323C0DE for every test leg (passed as -Ptests.seed; ./gradlew commands run through the host Gradle 9.7.0 wrapper)
+JDKs: Temurin 21.0.12.1+1 (vendored) and Temurin 25.0.5+8, per leg below.
+Verdict: INCOMPLETE. The Windows leg (requirement 3) and the Docker leg (requirement 6) cannot run on this host, and the live isolated-node mTLS proof (requirement 9) is blocked by the known SOLR-18646 defect. Everything else was executed; requirement 7's tidy leg also fails at this head.
+
+== Execution conditions that matter
+This VM's agent runs as root, and bin/solr refuses to start as root: the first full-class CATS attempts failed every live case at server start with the root warning, and two fixture cases were skipped as a side effect. Those attempts are superseded. A dedicated non-root user (solrtest) was created on this VM with its own checkout of the same head, its own Gradle cache copy, and JDKs under /opt/gate-tools; every Solr-starting leg below ran as that user in that checkout. Root-run legs (core unit tests, fixture-only CATS runs, mutations of fixture constants, tidy, check) ran in root-owned clones of the same head.
+The shell tests' curl initially inherited the sandbox egress proxy variables: useDifferentHostnameWithCurlResolve stalled 120 s on JDK 21 and failed with curl (56) Proxy CONNECT aborted on JDK 25, because curl tunnels through the proxy despite --resolve pinning 127.0.0.1. With http_proxy/https_proxy stripped and no_proxy set, the case passes on both JDKs. The proxy-stripped runs are the recorded ones.
+
+== Requirement 1: SolrProcessManagerTest and the deletion regression
+At the head (JDK 21): 9 tests, 0 failures; the new testFilteredScanPreservesOtherLiveNodes executed. Its assertions cover the matching process being returned, foreign PID and port records retained under a filtered scan, and stale cleanup under an unfiltered scan.
+Fail-before: the same test, unchanged, on isolated contributor production code (only SolrProcessManager.java reverted to the parent) FAILED at SolrProcessManagerTest.java:178, assertTrue(Files.exists(otherPid)): the old code deletes the foreign node's PID file during a filtered scan. The size assertion at line 176 passed first, so this is the deletion regression discriminating, not a setup failure.
+Empty-result mutation: with scanSolrPidFiles forced to return an empty list (single-line gate mutation, tests unchanged) the test FAILED at line 176, assertEquals(2, filtered.size()), the intended assertion.
+
+== Requirement 2: CATS suites on Linux, JDK 21 and 25
+:solr:packaging:catsTests selecting BasicAuthTest, ExampleTest and SslTest (as solrtest, proxy-stripped):
+JDK 21: BasicAuthTest 4/4 pass; ExampleTest 3/3 pass (including examplesSuppressResourceLimitWarnings); SslTest 10 tests: 6 pass, 3 skipped (the AwaitsFix cases, group not enabled), 1 failure in the pre-correction environment only (the proxy artifact above; the case passes in the corrected rerun). Both fixture tests, tlsDiagnosticsDistinguishRejectionFromOtherFailures and clientHostnameDiagnosticMustBeFreshAndSpecific, executed unskipped and passed; they also passed in isolated filtered runs.
+JDK 25: identical shape: BasicAuthTest 4/4, ExampleTest 3/3, SslTest 6 pass, 3 AwaitsFix skips, and the same single proxy-artifact failure superseded by the corrected rerun.
+Corrected reruns: useDifferentHostnameWithCurlResolve passes standalone on JDK 21 and on JDK 25 (1 test, 0 failures each).
+:solr:test-framework:catsTests with the same class selection: the named classes do not exist in that module (its only shell test is CliSessionTest); Gradle failed with 'No tests found for the given filters' on both JDKs. Recorded as a selection fact, not a pass.
+Fixture mutations (tests' assertions unchanged; only the pattern constants/helpers in SslTest were mutated in a disposable clone):
+- Accept refusal: widening HOSTNAME_REJECTION to also match 'Server refused connection' FAILED the fixture (AssertionError in the assertFalse loop), as required.
+- Reject an accepted diagnostic: narrowing HOSTNAME_REJECTION so 'No name matching localhost found' no longer matches FAILED the fixture with 'Diagnostic not recognized: No name matching localhost found', as required.
+
+== Requirement 3: Windows leg
+INCOMPLETE: no Windows host or Windows CI is available to this agent. Not attempted; the Windows implementation workspace was not used.
+
+== Requirement 4: AwaitsFix hostname and mTLS cases, run explicitly
+SslTest was run with the awaitsfix group enabled (-Ptests.awaitsfix=true) as solrtest, proxy-stripped, on both JDKs. All 10 cases executed (0 skipped) on each JDK, with identical outcomes:
+- useDifferentHostnameWhenNotCheckingPeerName (SOLR-18336): PASSES on both JDKs.
+- startSolrWithMtlsWanted (SOLR-18646): PASSES on both JDKs.
+- startSolrWithMtlsNeeded (SOLR-18646): FAILS on both JDKs. The case builds its certificates and isolated node and runs its control sequence, then fails at the assertion expecting the missing-client-certificate diagnostic: the CLI output did not match (bad_certificate|certificate_required); the client request instead surfaced RequestNotSentException caused by java.nio.channels.ClosedChannelException from the Jetty HTTP/2 session. That is the known underlying defect this case awaits a fix for, not a setup failure: the same run's other TLS cases all pass.
+The live hostname proof and the wanted-mTLS proof are therefore verified; the needed-mTLS diagnostic proof is not (see requirement 9).
+
+== Requirement 5: coverage mutations for the new BasicAuth/Example assertions
+Each mutation is an isolated compiling production change in the solrtest checkout with tests unchanged, run as the full class on JDK 21; the class passes unmutated (requirement 2), and each mutation failed at exactly the intended new assertion:
+- Suppress the monitor upload's effect: forcing PostTool to skip its commit after posting (commit = false in postDocuments) made postPostlogsAndExportWithBasicAuth fail at the new authenticated verification: body did not match numFound:1 for the posted monitor document. The post itself still reported 1 files indexed.
+- Corrupt the log upload while allowing commit: renaming the field PostLogsTool sets (file_s to file_gate_mutated_s) made the same test fail at the new postlogs verification: body did not match numFound [1-9] for the file_s:* query. The commit still succeeded and no batch failure was reported; the uploaded docs are simply not findable under file_s.
+- Untrusted TLS endpoint replaced with refusal: not separately constructed. The branch's untrusted-endpoint assertions are the SslTest fixture patterns (mutated under requirements 2 and 8, including the accept-refusal direction) and the AwaitsFix mTLS controls (requirement 4); there is no production seam that swaps a live TLS endpoint for a connection refusal without editing the tests themselves. Recorded as not constructed, with this reason, rather than claimed.
+- Example-warning regression: removing the example-mode SOLR_ULIMIT_CHECKS=false export from solr/bin/solr made ExampleTest.examplesSuppressResourceLimitWarnings fail at assertNotContains: output contained 'set SOLR_ULIMIT_CHECKS to false', as intended.
+
+== Requirement 6: catsTestsDockerBuild
+INCOMPLETE: this host has no Docker (no docker binary, no daemon), so the Docker build and rolling-upgrade case cannot run here. Not attempted.
+
+== Requirement 7: tidy and root check
+Root check: ./gradlew check -x test exited 0, BUILD SUCCESSFUL in 9m 56s (JDK 21, root clone).
+Tidy: ./gradlew tidy exited 0 but reformatted one tracked branch file, solr/packaging/src/test/org/apache/solr/shell/SslTest.java (3 hunks, 7 insertions, 4 deletions: two line-wrap reflows in clientHostnameDiagnosticMustBeFreshAndSpecific and one in startSolrWithMtlsNeeded). The full diff follows this evidence's sections in the gate working files and is summarized here; per the gate record this head cannot be counted tidy-clean and a formatting change requires a new pushed head and superseding gate. The branch belongs to the implementation line, so the gate did not push the reformat; the checkout was restored to the exact head after capture.
+
+== Requirement 8: clientHostnameDiagnosticMustBeFreshAndSpecific
+The fixture executed unskipped and passed on both JDKs (in the full-class runs and in isolated filtered runs).
+- Stale-offset mutation: making hasFreshClientHostnameDiagnostic ignore the freshness offset (read from byte 0) FAILED the fixture (AssertionError), as required.
+- Generic certificate_unknown mutation: widening CLIENT_HOSTNAME_LOG with a 'bad certificate' alternative so a generic (certificate_unknown) bad certificate diagnostic is accepted FAILED the fixture (AssertionError in the unrelated-diagnostics loop), as required. Disclosure: the first construction of this mutation appended the alternative where the regex prefix made it unreachable, the fixture passed, and that attempt was discarded as not a mutation of behavior; the corrected alternative produced the recorded failure.
+The live part of this requirement is the startSolrWithMtlsNeeded case; see requirements 4 and 9 for its actual outcome.
+
+== Requirement 9: isolated user-managed TLS node proof
+INCOMPLETE. The startSolrWithMtlsNeeded case is the isolated-node proof as written: it runs a standalone node with its own Solr home and private log on loopback, with matching-client success and mismatching/missing-client controls. It was executed on both JDKs (requirement 4). It fails at the missing-client-certificate diagnostic assertion because the client surfaces a ClosedChannelException instead of the (bad_certificate|certificate_required) alert text, so the fresh producer-side diagnostic sequence the requirement asks to verify (matching success, then a missing-certificate failure with fresh diagnostic and no hostname match, then a mismatching failure with a fresh hostname diagnostic, plus shared-log injection and stale/truncated rejection against that node) cannot be carried through: the case stops at the failed assertion. The synthetic fixture equivalents of the freshness and specificity checks are proven under requirement 8. The Windows CI part of this requirement is also unavailable (requirement 3). Kept incomplete per the gate's own instruction for a known defect preventing the runtime proofs.
+
+== Appendix: tidy diff at the offered head (git diff after ./gradlew tidy)
+diff --git a/solr/packaging/src/test/org/apache/solr/shell/SslTest.java b/solr/packaging/src/test/org/apache/solr/shell/SslTest.java
+index 6788aec..78411d4 100644
+--- a/solr/packaging/src/test/org/apache/solr/shell/SslTest.java
++++ b/solr/packaging/src/test/org/apache/solr/shell/SslTest.java
+@@ -114,7 +114,8 @@ public class SslTest extends SolrShellTestCase {
+     int offset = old.getBytes(StandardCharsets.UTF_8).length;
+     for (String diagnostic : accepted) {
+       assertTrue(
+-          hasFreshClientHostnameDiagnostic((old + diagnostic).getBytes(StandardCharsets.UTF_8), offset));
++          hasFreshClientHostnameDiagnostic(
++              (old + diagnostic).getBytes(StandardCharsets.UTF_8), offset));
+     }
+     for (String unrelated :
+         new String[] {
+@@ -126,7 +127,8 @@ public class SslTest extends SolrShellTestCase {
+           "java.nio.channels.ClosedChannelException"
+         }) {
+       assertFalse(
+-          hasFreshClientHostnameDiagnostic((old + unrelated).getBytes(StandardCharsets.UTF_8), offset));
++          hasFreshClientHostnameDiagnostic(
++              (old + unrelated).getBytes(StandardCharsets.UTF_8), offset));
+     }
+     assertFalse(hasFreshClientHostnameDiagnostic(old.getBytes(StandardCharsets.UTF_8), offset));
+     assertFalse(hasFreshClientHostnameDiagnostic(new byte[0], offset));
+@@ -553,8 +555,9 @@ public class SslTest extends SolrShellTestCase {
+     env("SOLR_SSL_CLIENT_KEY_STORE_PASSWORD", "");
+     env("SOLR_SSL_KEY_STORE", "");
+     env("SOLR_SSL_KEY_STORE_PASSWORD", "");
+-    runFail("solr api --verbose --solr-url"
+-            + " \"https://127.0.0.1:${SOLR3_PORT}/solr/admin/info/system\"")
++    runFail(
++            "solr api --verbose --solr-url"
++                + " \"https://127.0.0.1:${SOLR3_PORT}/solr/admin/info/system\"")
+         .assertNotContains("Server refused connection")
+         .assertNotContains("java.net.ConnectException");
+     awaitOrFail(
