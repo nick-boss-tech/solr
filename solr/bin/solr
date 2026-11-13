@@ -499,6 +499,22 @@ function solr_port_listen() {
   echo "$solr_port"
 } # end solr_port_listen func
 
+# Resolve a configuration symlink without replacing the link itself.
+function resolve_config_target() {
+  local target="$1" next count=0
+  while [ -L "$target" ]; do
+    count=$((count + 1))
+    [ "$count" -le 40 ] || return 1
+    next=$(readlink "$target") || return 1
+    if [[ "$next" == /* ]]; then
+      target="$next"
+    else
+      target="$(dirname "$target")/$next"
+    fi
+  done
+  printf '%s\n' "$target"
+}
+
 # run a Solr command-line tool using the SolrCLI class;
 # useful for doing cross-platform work from the command-line using Java
 function run_tool() {
@@ -1142,7 +1158,10 @@ if [ "${SOLR_MODE:-}" == 'solrcloud' ]; then
       # an external ensemble (-z/--zk-host) is never touched by this: Solr has no way to
       # know whether an external ensemble uses TLS, so nothing is assumed there.
       ZK_SECURE_PORT=$((SOLR_PORT_LISTEN + 1000))
-      ZK_ZOO_CFG="$SOLR_HOME/zoo.cfg"
+      ZK_ZOO_CFG=$(resolve_config_target "$SOLR_HOME/zoo.cfg") || {
+        echo >&2 "Unable to resolve embedded ZooKeeper configuration $SOLR_HOME/zoo.cfg."
+        exit 1
+      }
       # Passwords go in files, never inline in zoo.cfg or on the command line: unlike
       # Solr's own SSLConfigurations/EnvSSLCredentialProvider, ZooKeeper has no env-var
       # password source, and a -D flag would be visible in `ps`.
@@ -1160,9 +1179,11 @@ if [ "${SOLR_MODE:-}" == 'solrcloud' ]; then
       fi
       if ! grep -q '^secureClientPort=' "$ZK_ZOO_CFG" 2>/dev/null; then
         ZK_CFG_SOURCE="$ZK_ZOO_CFG"
-        if [ ! -e "$ZK_CFG_SOURCE" ] && [ ! -L "$ZK_CFG_SOURCE" ]; then
+        ZK_CFG_EXISTED=true
+        if [ ! -e "$ZK_CFG_SOURCE" ]; then
+          ZK_CFG_EXISTED=false
           ZK_CFG_SOURCE="$DEFAULT_SERVER_DIR/solr/zoo.cfg"
-        elif [ -L "$ZK_CFG_SOURCE" ] || [ ! -f "$ZK_CFG_SOURCE" ] || [ ! -w "$ZK_CFG_SOURCE" ]; then
+        elif [ ! -f "$ZK_CFG_SOURCE" ] || [ ! -w "$ZK_CFG_SOURCE" ]; then
           echo >&2 "Unable to update embedded ZooKeeper configuration $ZK_ZOO_CFG."
           exit 1
         fi
@@ -1172,6 +1193,16 @@ if [ "${SOLR_MODE:-}" == 'solrcloud' ]; then
         }
         if ! cp -p "$ZK_CFG_SOURCE" "$ZK_CFG_TMP"; then
           rm -f "$ZK_CFG_TMP"
+          echo >&2 "Unable to update embedded ZooKeeper configuration $ZK_ZOO_CFG."
+          exit 1
+        fi
+        ZK_CFG_SNAPSHOT=$(mktemp "${ZK_ZOO_CFG}.XXXXXX") || {
+          rm -f "$ZK_CFG_TMP"
+          echo >&2 "Unable to update embedded ZooKeeper configuration $ZK_ZOO_CFG."
+          exit 1
+        }
+        if ! cp -p "$ZK_CFG_TMP" "$ZK_CFG_SNAPSHOT"; then
+          rm -f "$ZK_CFG_TMP" "$ZK_CFG_SNAPSHOT"
           echo >&2 "Unable to update embedded ZooKeeper configuration $ZK_ZOO_CFG."
           exit 1
         fi
@@ -1189,10 +1220,17 @@ ssl.clientAuth=none
 client.portUnification=false
 EOF
         then
-          rm -f "$ZK_CFG_TMP"
+          rm -f "$ZK_CFG_TMP" "$ZK_CFG_SNAPSHOT"
           echo >&2 "Unable to update embedded ZooKeeper configuration $ZK_ZOO_CFG."
           exit 1
         fi
+        if { [ "$ZK_CFG_EXISTED" = true ] && ! cmp -s "$ZK_CFG_SNAPSHOT" "$ZK_ZOO_CFG"; } ||
+          { [ "$ZK_CFG_EXISTED" = false ] && [ -e "$ZK_ZOO_CFG" ]; }; then
+          rm -f "$ZK_CFG_TMP" "$ZK_CFG_SNAPSHOT"
+          echo >&2 "Embedded ZooKeeper configuration changed during update: $ZK_ZOO_CFG."
+          exit 1
+        fi
+        rm -f "$ZK_CFG_SNAPSHOT"
         if ! mv -f "$ZK_CFG_TMP" "$ZK_ZOO_CFG"; then
           rm -f "$ZK_CFG_TMP"
           echo >&2 "Unable to update embedded ZooKeeper configuration $ZK_ZOO_CFG."
@@ -1208,24 +1246,50 @@ EOF
       # this one) so co-located nodes and bin/solr zk/auth calls that source this same
       # file inherit TLS too, without any of them special-casing it.
       if [ -f "${SOLR_INCLUDE:-}" ] && ! grep -q 'SOLR_ZK_TLS_OPTS=' "$SOLR_INCLUDE" 2>/dev/null; then
-        if [ -L "$SOLR_INCLUDE" ] || [ ! -w "$SOLR_INCLUDE" ]; then
+        ZK_INCLUDE_TARGET=$(resolve_config_target "$SOLR_INCLUDE") || {
+          echo >&2 "Unable to resolve embedded ZooKeeper TLS include $SOLR_INCLUDE."
+          exit 1
+        }
+        if [ ! -w "$ZK_INCLUDE_TARGET" ]; then
           echo >&2 "Unable to write embedded ZooKeeper TLS options to $SOLR_INCLUDE."
           exit 1
         fi
-        ZK_INCLUDE_TMP=$(mktemp "${SOLR_INCLUDE}.XXXXXX") || {
+        ZK_INCLUDE_TMP=$(mktemp "${ZK_INCLUDE_TARGET}.XXXXXX") || {
           echo >&2 "Unable to write embedded ZooKeeper TLS options to $SOLR_INCLUDE."
           exit 1
         }
-        if ! cp -p "$SOLR_INCLUDE" "$ZK_INCLUDE_TMP"; then
+        if ! cp -p "$ZK_INCLUDE_TARGET" "$ZK_INCLUDE_TMP"; then
           rm -f "$ZK_INCLUDE_TMP"
           echo >&2 "Unable to write embedded ZooKeeper TLS options to $SOLR_INCLUDE."
           exit 1
         fi
-        if ! {
-          printf '\n' &&
-          echo "SOLR_ZK_TLS_OPTS=\"$ZK_SSL_OPTS\"" &&
-          echo 'SOLR_OPTS="$SOLR_OPTS $SOLR_ZK_TLS_OPTS"'
-        } >> "$ZK_INCLUDE_TMP" || ! mv -f "$ZK_INCLUDE_TMP" "$SOLR_INCLUDE"; then
+        ZK_INCLUDE_SNAPSHOT=$(mktemp "${ZK_INCLUDE_TARGET}.XXXXXX") || {
+          rm -f "$ZK_INCLUDE_TMP"
+          echo >&2 "Unable to write embedded ZooKeeper TLS options to $SOLR_INCLUDE."
+          exit 1
+        }
+        if ! cp -p "$ZK_INCLUDE_TMP" "$ZK_INCLUDE_SNAPSHOT"; then
+          rm -f "$ZK_INCLUDE_TMP" "$ZK_INCLUDE_SNAPSHOT"
+          echo >&2 "Unable to write embedded ZooKeeper TLS options to $SOLR_INCLUDE."
+          exit 1
+        fi
+        if ! cat >> "$ZK_INCLUDE_TMP" <<EOF
+
+SOLR_ZK_TLS_OPTS="$ZK_SSL_OPTS"
+SOLR_OPTS="\$SOLR_OPTS \$SOLR_ZK_TLS_OPTS"
+EOF
+        then
+          rm -f "$ZK_INCLUDE_TMP" "$ZK_INCLUDE_SNAPSHOT"
+          echo >&2 "Unable to write embedded ZooKeeper TLS options to $SOLR_INCLUDE."
+          exit 1
+        fi
+        if ! cmp -s "$ZK_INCLUDE_SNAPSHOT" "$ZK_INCLUDE_TARGET"; then
+          rm -f "$ZK_INCLUDE_TMP" "$ZK_INCLUDE_SNAPSHOT"
+          echo >&2 "Embedded ZooKeeper TLS include changed during update: $SOLR_INCLUDE."
+          exit 1
+        fi
+        rm -f "$ZK_INCLUDE_SNAPSHOT"
+        if ! mv -f "$ZK_INCLUDE_TMP" "$ZK_INCLUDE_TARGET"; then
           rm -f "$ZK_INCLUDE_TMP"
           echo >&2 "Unable to write embedded ZooKeeper TLS options to $SOLR_INCLUDE."
           exit 1

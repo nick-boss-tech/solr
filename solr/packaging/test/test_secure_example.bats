@@ -222,6 +222,8 @@ teardown() {
   export SOLR_SSL_KEY_STORE_PASSWORD=secret SOLR_SSL_TRUST_STORE_PASSWORD=secret
   export SOLR_SSL_KEY_STORE_TYPE=PKCS12 SOLR_SSL_TRUST_STORE_TYPE=PKCS12
   cp "$SOLR_TIP/server/solr/zoo.cfg" "$SOLR_HOME/zoo.cfg"
+  mv "$SOLR_HOME/zoo.cfg" "$SOLR_HOME/zoo-target.cfg"
+  ln -s zoo-target.cfg "$SOLR_HOME/zoo.cfg"
   cp "$SOLR_HOME/zoo.cfg" "$BATS_TEST_TMPDIR/original-zoo.cfg"
   local intercept_dir="$BATS_TEST_TMPDIR/cat-intercept"
   mkdir "$intercept_dir"
@@ -239,6 +241,23 @@ EOF
   assert_output --partial 'Unable to update embedded ZooKeeper configuration'
   run cmp "$BATS_TEST_TMPDIR/original-zoo.cfg" "$SOLR_HOME/zoo.cfg"
   assert_success
+  [ -L "$SOLR_HOME/zoo.cfg" ]
+
+  cat > "$intercept_dir/cat" <<'EOF'
+#!/usr/bin/env bash
+if [ "$#" -eq 0 ]; then
+  printf '\n# concurrent edit\n' >> "$SOLR_HOME/zoo.cfg"
+fi
+exec /bin/cat "$@"
+EOF
+  chmod +x "$intercept_dir/cat"
+  run env PATH="$intercept_dir:$PATH" solr start -c -p "$SOLR_PORT" --solr-home "$SOLR_HOME"
+  assert_failure
+  assert_output --partial 'configuration changed during update'
+  run grep '^# concurrent edit$' "$SOLR_HOME/zoo.cfg"
+  assert_success
+  [ -L "$SOLR_HOME/zoo.cfg" ]
+  cp "$BATS_TEST_TMPDIR/original-zoo.cfg" "$SOLR_HOME/zoo.cfg"
 
   # Allow the retry to publish zoo.cfg, then stop before launching a server.
   local move_intercept="$BATS_TEST_TMPDIR/zoo-retry-intercept"
@@ -256,6 +275,52 @@ EOF
   assert_output --partial 'Unable to write embedded ZooKeeper TLS options'
   run grep "^secureClientPort=$((SOLR_PORT + 1000))$" "$SOLR_HOME/zoo.cfg"
   assert_success
+  [ -L "$SOLR_HOME/zoo.cfg" ]
+}
+
+@test "automatic embedded ZooKeeper TLS preserves a linked include on write failure and conflict" {
+  export SOLR_SSL_ENABLED=true SOLR_SSL_KEY_STORE=unused SOLR_SSL_TRUST_STORE=unused
+  export SOLR_SSL_KEY_STORE_PASSWORD=secret SOLR_SSL_TRUST_STORE_PASSWORD=secret
+  export SOLR_SSL_KEY_STORE_TYPE=PKCS12 SOLR_SSL_TRUST_STORE_TYPE=PKCS12
+  cp "$SOLR_TIP/server/solr/zoo.cfg" "$SOLR_HOME/zoo.cfg"
+  printf '\nsecureClientPort=%s\n' "$ZK_PORT" >> "$SOLR_HOME/zoo.cfg"
+  mv "$SOLR_INCLUDE" "$BATS_TEST_TMPDIR/include-target"
+  ln -s include-target "$SOLR_INCLUDE"
+  cp "$SOLR_INCLUDE" "$BATS_TEST_TMPDIR/original-include"
+  local intercept_dir="$BATS_TEST_TMPDIR/include-cat-intercept"
+  mkdir "$intercept_dir"
+  cat > "$intercept_dir/cat" <<'EOF'
+#!/usr/bin/env bash
+if [ "$#" -eq 0 ]; then
+  printf 'partial include\n'
+  exit 1
+fi
+exec /bin/cat "$@"
+EOF
+  chmod +x "$intercept_dir/cat"
+  run env PATH="$intercept_dir:$PATH" solr start -c -p "$SOLR_PORT" --solr-home "$SOLR_HOME"
+  assert_failure
+  assert_output --partial 'Unable to write embedded ZooKeeper TLS options'
+  [ -L "$SOLR_INCLUDE" ]
+  run cmp "$BATS_TEST_TMPDIR/original-include" "$SOLR_INCLUDE"
+  assert_success
+  ! compgen -G "$BATS_TEST_TMPDIR/include-target.??????" >/dev/null
+
+  cat > "$intercept_dir/cat" <<'EOF'
+#!/usr/bin/env bash
+if [ "$#" -eq 0 ]; then
+  printf '# concurrent edit\n' >> "$SOLR_INCLUDE"
+fi
+exec /bin/cat "$@"
+EOF
+  chmod +x "$intercept_dir/cat"
+  run env PATH="$intercept_dir:$PATH" solr start -c -p "$SOLR_PORT" --solr-home "$SOLR_HOME"
+  assert_failure
+  assert_output --partial 'include changed during update'
+  [ -L "$SOLR_INCLUDE" ]
+  run cat "$SOLR_INCLUDE"
+  assert_output '# concurrent edit'
+  ! compgen -G "$BATS_TEST_TMPDIR/include-target.??????" >/dev/null
 }
 
 @test "automatic embedded ZooKeeper TLS disables existing plaintext ports and port unification" {
