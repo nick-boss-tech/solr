@@ -1,0 +1,16 @@
+{
+  "evidence": "records/evidence/solr-18619-real-logs-linux-gate-r4-evidence.json",
+  "id": "solr-18619-r4-maintenance-repair-20261113",
+  "intended_host": "Windows source repair; Linux for dependency maintenance and proof",
+  "job": "solr-18619-r4-maintenance-repair-20261113",
+  "prior_gate": "records/gate/solr-18619-real-logs-linux-gate-r4.json",
+  "prior_receipt": "records/receipt/solr-18619-real-logs-linux-gate-r4.json",
+  "source": {
+    "branch": "solr-18619-targeting-prep",
+    "head": "848885b4cda2c3312576c810aeb4a46afb50419e",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "solr-18619-real-logs-test-20261113",
+  "summary": "Apply and review the exact Linux tidy and dependency-lock diffs from incomplete round 4, push a scoped repair and hand off fresh exact-head proof",
+  "type": "assignment"
+}
