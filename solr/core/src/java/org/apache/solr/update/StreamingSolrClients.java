@@ -158,25 +158,21 @@ class ErrorReportingConcurrentUpdateSolrClient extends ConcurrentUpdateJettySolr
 
   @Override
   public void handleError(Throwable ex) {
-    SolrError error;
     synchronized (callbackLock) {
       if (stalled) return;
-      error = recordError(ex);
+      recordError(ex);
     }
-    trackError(error);
   }
 
   void reportStall(IOException ex) {
-    SolrError error;
     synchronized (callbackLock) {
       if (stalled) return;
       stalled = true;
-      error = recordError(ex);
+      recordError(ex);
     }
-    trackError(error);
   }
 
-  private SolrError recordError(Throwable ex) {
+  private void recordError(Throwable ex) {
     log.error("Error when calling {} to {}", req, req.node.getUrl(), ex);
     SolrError error = new SolrError();
     error.e = (Exception) ex;
@@ -185,14 +181,6 @@ class ErrorReportingConcurrentUpdateSolrClient extends ConcurrentUpdateJettySolr
     }
     error.req = req;
     errors.add(error);
-    return error;
-  }
-
-  private void trackError(SolrError error) {
-    if (!req.shouldRetry(error)) {
-      // only track the error if we are not retrying the request
-      req.trackRequestResult(null, null, false);
-    }
   }
 
   @Override

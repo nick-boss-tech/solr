@@ -676,6 +676,37 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
 
   @Test
   @ShardsFixed(num = 1)
+  public void testErrorCallbacksDoNotClassifyRetries() throws Exception {
+    var solrclient = clients.getFirst();
+    AtomicInteger retryChecks = new AtomicInteger();
+    Node node =
+        new StdNode(
+            coreNodeProps("http://127.0.0.1:4/solr", solrclient), "collection1", "shard1", 1) {
+          @Override
+          public boolean checkRetry(SolrError error) {
+            retryChecks.incrementAndGet();
+            return super.checkRetry(error);
+          }
+        };
+    AddUpdateCommand command = new AddUpdateCommand(null);
+    command.solrDoc = sdoc("id", uniqueId.incrementAndGet());
+    SolrCmdDistributor.Req req =
+        new SolrCmdDistributor.Req(command, node, new UpdateRequest(), false);
+    StreamingSolrClients streamingClients = new StreamingSolrClients(updateShardHandler);
+    try {
+      ErrorReportingConcurrentUpdateSolrClient client =
+          (ErrorReportingConcurrentUpdateSolrClient) streamingClients.getSolrClient(req);
+      client.handleError(new SocketException("connection failed"));
+      client.reportStall(new IOException("stalled"));
+      assertEquals("Callbacks must leave retry decisions to the distributor", 0, retryChecks.get());
+      assertEquals(2, streamingClients.drainErrors().size());
+    } finally {
+      streamingClients.shutdown();
+    }
+  }
+
+  @Test
+  @ShardsFixed(num = 1)
   public void testStallReportedWhileResponseBodyIsBlocked() throws Exception {
     var solrclient = clients.getFirst();
     Node node =
@@ -807,7 +838,10 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
           List<SolrError> errors = cmdDistrib.getErrors();
           assertTrue(
               errors.toString(), errors.stream().anyMatch(e -> failingNode.equals(e.req.node)));
-          assertTrue("Expected the failing request to be retried", retryChecks.get() >= 3);
+          assertTrue("Expected retry decisions for both attempts", retryChecks.get() >= 2);
+          assertTrue(
+              "Expected the failing request to have been retried",
+              errors.stream().anyMatch(e -> failingNode.equals(e.req.node) && e.req.retries == 1));
           assertTrue(
               errors.toString(),
               errors.stream()
