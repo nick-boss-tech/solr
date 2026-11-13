@@ -1,0 +1,16 @@
+{
+  "changes": "Added a no-skip browser case that seeds unique events into each real node's watcher and checks real per-node API/proxy responses render the right event and node labels. Added explicit test-scope declarations for existing Log4j API and core artifacts; no production logic changes.",
+  "gate": "records/gate/solr-18619-real-logs-linux-gate-r4.json",
+  "gate_assignment": "records/assignment/solr-18619-real-logs-linux-gate-r4.json",
+  "id": "solr-18619-real-logs-test-20261113-report",
+  "job": "solr-18619-real-logs-test-20261113",
+  "limits": "Direct watcher seeding avoids the shared-JVM Log4j appender problem; it does not test delivery from the logging framework to those watchers. The browser, server endpoints, node proxy, payload and rendered rows are real. No Windows Gradle, Java compile or browser execution; git diff --check passed and locally cached Log4j builder methods were inspected with javap. Linux must run required dependency-maintenance commands and the exact-head gate.",
+  "source": {
+    "branch": "solr-18619-targeting-prep",
+    "head": "848885b4cda2c3312576c810aeb4a46afb50419e",
+    "old_head": "cf35bd49fab19751af9afb728ef83076ae521f09",
+    "repository": "nick-boss-tech/solr"
+  },
+  "status": "implemented, proof pending",
+  "type": "report"
+}
