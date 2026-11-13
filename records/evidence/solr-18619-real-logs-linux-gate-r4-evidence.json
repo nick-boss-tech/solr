@@ -1,0 +1,10 @@
+{
+  "bytes": 8939,
+  "contents": "Fresh driver and inode-monitor logs for tidy/updateLicenses/resolveAndLockAll, the exact tidy formatting diff, the exact dependency-lock diff, runner, environment and stop-condition snapshot. No test XML was generated because selected tests were not run.",
+  "head": "848885b4cda2c3312576c810aeb4a46afb50419e",
+  "id": "solr-18619-real-logs-linux-gate-r4-evidence",
+  "job": "solr-18619-real-logs-linux-gate-r4",
+  "location": "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519664052758700/TnWwnBDkjImwhTRM.gz?Expires=1826139584&Signature=WZgK71~ZmIaKcwCdjioaHC2Hf0OouPCViixVoKs2V4rbAxe49tjsMzykpGbwraHLURVnVUEeB7ur~eYmErlpAMrxz4mPqbV6iHtKLeC4gkCEEKyxxcVPsTaxhhgsGT9OdsBaw4g1gjR3q5kKF1tgNz61pr-hbPPm~LaqRg2l~Dcl~BXU-VIE1h3a5Bvxf1aFQmOl6rzblfVAUAmYgA4x-2mlzjx7i3JRtU4haPQEOk9zE4Tk-9ZDObthXaWl~DfMtTRsmYrAR7YZai2htExVlkUwt9xAk4pGsMdK2D--ZP3izhbTotgFxRLSX0nTa37gGDIbkys~t52o6HcE-ikLVg__&Key-Pair-Id=K10M74EMLURLMC",
+  "sha256": "a86309f8fd613dea3064c38d04aede4c8330741a492ff719a3568cf90ecbb44b",
+  "type": "evidence"
+}
