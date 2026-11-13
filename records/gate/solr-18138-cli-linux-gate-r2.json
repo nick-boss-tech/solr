@@ -1,0 +1,21 @@
+{
+  "acceptance": "A clean integration command exit and passing test behaviors at the exact head closes the remaining integration proof. The other exact-head results in the prior receipt carry forward; Nick accepts its root check with Antora excluded.",
+  "environment": "Linux clean checkout at exact head; document host, JDK, environment, lsof availability and commands. Verify 127.0.0.1:1 is not listening before the test. Resolve the missing lsof setup or use a capable host before running.",
+  "head": "45956fbe7f530d77702c586d62de2a5609ab20af",
+  "id": "solr-18138-cli-linux-gate-r2",
+  "job": "solr-18138-cli-linux-gate-r2",
+  "phase": "targeted integration proof round 2",
+  "prior_receipt": "records/receipt/solr-18138-cli-linux-gate-r1-receipt.json",
+  "receipt_path": "records/receipt/solr-18138-cli-linux-gate-r2.json",
+  "requirements": [
+    "Run ./gradlew :solr:packaging:integrationTests --tests test_zk.bats -Ptests.seed=18138 at the exact head. Retain fresh test results and full logs, including teardown and command exit status.",
+    "Require all existing and new test_zk.bats behavioral tests and teardown to pass, with Gradle exit 0. Investigate and report any failure; do not weaken the test or silently retry.",
+    "Record evidence location, commands, environment, test counts, exit status, and source head in the receipt. Report any changes to source or tracked files; do not change or push the patch under this gate."
+  ],
+  "source": {
+    "branch": "solr-18138-submit",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes": "records/gate/solr-18138-cli-linux-gate-r1.json for integration command exit only",
+  "type": "gate"
+}
