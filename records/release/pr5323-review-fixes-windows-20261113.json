@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "Implementation report and fork branch head 8d656408d24c53ee40510a52d01d3b516927416e; no implementation executor remains running.",
+  "id": "pr5323-review-fixes-windows-20261113",
+  "job": "pr5323-review-fixes-windows-20261113",
+  "reason": "implementation complete; Linux proof handed off",
+  "type": "release"
+}
