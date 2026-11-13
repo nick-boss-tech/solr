@@ -1,0 +1,8 @@
+{
+  "head": "f2cab615c5ba08cf83d11fe5ae4fc3a0d0b8d7bb",
+  "id": "solr-18619-prep-linux-gate-r1-review-hold",
+  "job": "solr-18619-prep-linux-gate-r1",
+  "reason": "Nick requested a review before this candidate goes to the gate. Do not start this gate until the review findings are reconciled and the handoff owner publishes a follow-up disposition. This is not an execution claim or a receipt.",
+  "status": "hold for pre-gate review",
+  "type": "report"
+}
