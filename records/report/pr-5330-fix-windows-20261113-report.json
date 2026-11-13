@@ -1,0 +1,16 @@
+{
+  "changes": "Replace reference comparisons with StdNode value equality and restore prior timeout properties after the test.",
+  "contributor_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+  "gate": "records/gate/pr-5330-test-fix-linux-20261113.json",
+  "id": "pr-5330-fix-windows-20261113-report",
+  "job": "pr-5330-fix-windows-20261113",
+  "limitations": "This does not repair or establish safety of the active stalled runner or PR 5075 request attribution. Gate includes controlled ordering investigation.",
+  "source": {
+    "branch": "pr-5330-test-fix-20261113",
+    "head": "0c5457bde3e6bb684a91e1af12d160ebb37a7ec6",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Pushed focused test compilation and isolation repair; production ordering remains an investigation",
+  "type": "report",
+  "verification": "Remote fork SHA matches local commit; source diff and whitespace reviewed. Windows host ran no Gradle. Linux proof pending."
+}
