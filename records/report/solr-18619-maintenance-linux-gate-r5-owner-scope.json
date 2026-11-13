@@ -1,0 +1,11 @@
+{
+  "amendment": "For round 5, remove Docker-dependent work and Antora site generation and dependent site link checks from the gate acceptance criteria, including contrary inherited r4/r3/earlier wording and the r5 statement that omission keeps those legs incomplete. These are out of scope, not passing results. Do not run Docker or Antora. A required root check may exclude the Antora-dependent :solr:solr-ref-guide:checkSiteLinks task and any Docker-dependent tasks; record exact commands and exclusions. Other lightweight reference-guide checks that do not require Antora may run if already part of the check.",
+  "head": "855eccb3e7642cc25ce021d64639c5ce82bd3f12",
+  "id": "solr-18619-maintenance-linux-gate-r5-owner-scope",
+  "job": "solr-18619-maintenance-linux-gate-r5",
+  "owner_direction": "Nick directed on 2026-11-13 that Docker and Antora are too heavy for this gate and will not be run.",
+  "prior_gate": "records/gate/solr-18619-maintenance-linux-gate-r5.json",
+  "status": "owner-directed scope amendment",
+  "type": "report",
+  "unchanged": "The exact head, dependency maintenance, tidy, focused browser and proxy/auth tests, root check with the stated exclusions, changelog validation, and named fail-before/mutation proof remain required. Report the actual results and exclusions; do not imply unrun Docker or Antora checks passed. If all remaining required legs pass, these owner-directed exclusions alone do not make the receipt incomplete."
+}
