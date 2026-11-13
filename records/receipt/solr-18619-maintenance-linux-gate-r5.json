@@ -1,0 +1,16 @@
+{
+  "gate": "solr-18619-maintenance-linux-gate-r5",
+  "head": "855eccb3e7642cc25ce021d64639c5ce82bd3f12",
+  "id": "solr-18619-maintenance-linux-gate-r5",
+  "job": "solr-18619-maintenance-linux-gate-r5",
+  "phase": "pre-submission round 5 after maintenance repair (closed as won't-do)",
+  "reason": "Owner decision (Nick, 2026-11-13): the r5 gate is too heavy for the busy gate hosts (Chrome/Selenium, Docker, Antora) and the proof will be run by CI instead. Closed as won't-do. No gate-host execution was performed and none will be under this job.",
+  "recorded": "2026-11-13",
+  "results": {
+    "claim_state": "No claim was created for solr-18619-maintenance-linux-gate-r5. No host should claim or run this gate; the live proof target is CI.",
+    "executor_stop": "No gate-host executor was ever started for r5: no claim existed, no Gradle/Selenium runner was launched.",
+    "no_legs_run": "None. Gate withdrawn under owner policy; CI covers the proof. Execution history remains records/receipt/solr-18619-real-logs-linux-gate-r4.json (verdict incomplete) and the owner-scope amendment records/report/solr-18619-maintenance-linux-gate-r5-owner-scope.json."
+  },
+  "type": "receipt",
+  "verdict": "incomplete"
+}
