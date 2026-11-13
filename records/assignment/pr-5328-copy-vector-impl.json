@@ -1,0 +1,8 @@
+{
+  "id": "pr-5328-copy-vector-impl",
+  "intended_host": "Windows implementation",
+  "job": "pr-5328-copy-vector-impl",
+  "source_head": "c295e8c855d35c9edcf0fcf75de04d2f24803db6",
+  "summary": "Fix raw vector copy target real-time retrieval on contributor PR 5328",
+  "type": "assignment"
+}
