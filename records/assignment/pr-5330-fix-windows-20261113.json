@@ -1,0 +1,9 @@
+{
+  "host": "Windows implementation; Linux proof separately",
+  "id": "pr-5330-fix-windows-20261113",
+  "job": "pr-5330-fix-windows-20261113",
+  "scope": "Fix test compilation and property isolation; investigate stall ordering and prepare exact-head Linux gate. Do not modify contributor branch or post publicly.",
+  "source_head": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+  "summary": "Implement PR 5330 review follow-up on a fork branch",
+  "type": "assignment"
+}
