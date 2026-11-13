@@ -1,0 +1,14 @@
+{
+  "coordination": "No claim was created for this job. The r4 incomplete receipt and owner-scope amendment stand as the prior state. The r5 gate record's receipt_path is honored by this receipt so the queue is not left open.",
+  "head": "855eccb3e7642cc25ce021d64639c5ce82bd3f12",
+  "id": "solr-18619-maintenance-linux-gate-r5-wont-do",
+  "job": "solr-18619-maintenance-linux-gate-r5",
+  "source": {
+    "branch": "solr-18619-targeting-prep",
+    "head": "855eccb3e7642cc25ce021d64639c5ce82bd3f12",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Owner closed solr-18619-maintenance-linux-gate-r5 as won't-do on 2026-11-13: the gate is too heavy for the busy gate hosts (Chrome/Selenium, Docker, Antora) and CI will run the proof. No gate-host execution occurred and none will under this job. Receipt filed at records/receipt/solr-18619-maintenance-linux-gate-r5.json.",
+  "type": "report",
+  "verdict": "incomplete"
+}
