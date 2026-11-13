@@ -1,0 +1,15 @@
+{
+  "changes": "After recording stall errors and waiting for other clients, propagate the failure. Distributor processes collected errors and retries before propagating, preventing commits and delete-by-query from passing an incomplete flush. Regression asserts both ordered boundaries, error retention and retry checks.",
+  "gate": "records/gate/pr-5330-stall-safety-r3-linux-20261113.json",
+  "head": "c5d4ca375396006460a72e97aa99d34337780580",
+  "id": "pr-5330-stall-safety-windows-20261113-report",
+  "job": "pr-5330-stall-safety-windows-20261113",
+  "source": {
+    "branch": "pr-5330-test-fix-20261113",
+    "head": "c5d4ca375396006460a72e97aa99d34337780580",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Pushed a concrete stalled-flush safety change and regression coverage",
+  "type": "report",
+  "verification": "Diff checked for whitespace; remote SHA verified. No Gradle or tests run on Windows. Active runner cancellation and late callbacks remain a named gate concern; no claim of clean proof."
+}
