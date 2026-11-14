@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "Fork head 773528a6973c8a880d0c9bcce766d682d1fc9937 was pushed and verified. Local class-overlay probe completed, no executor remains. See records/report/pr-5337-package-exit-doc-r3-report.json.",
+  "id": "pr-5337-package-exit-doc-r3",
+  "job": "pr-5337-package-exit-doc-r3",
+  "reason": "Implementation complete; separate exact-head Linux proof requested",
+  "type": "release"
+}
