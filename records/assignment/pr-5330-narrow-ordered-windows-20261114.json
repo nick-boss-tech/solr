@@ -1,0 +1,17 @@
+{
+  "evidence": "records/receipt/pr-5330-premise-linux-20261114-receipt.json",
+  "id": "pr-5330-narrow-ordered-windows-20261114",
+  "intended_host": "windows",
+  "job": "pr-5330-narrow-ordered-windows-20261114",
+  "scope": "Avoid unrelated callback fences, retry rewrites and synthetic collector machinery; exact-head Linux proof required.",
+  "source": {
+    "head": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+    "repository": "apache/solr"
+  },
+  "summary": "Prepare a narrow contributor-based fix for the observed ordered-flush behavior and CI assertions",
+  "target": {
+    "branch": "pr-5330-ordered-flush-20261114",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "assignment"
+}
