@@ -1,0 +1,19 @@
+{
+  "cleanup": "All test processes and listeners stopped; required locks free; the clean exact-head gate worktree was removed after its logs were archived.",
+  "details": [
+    "Fail-before mutated only solr/bin/solr to the contributor-head blob; test_start_solr.bats:101 failed as expected because the baseline stopped 18983 before 18984.",
+    "Both positive Bats variants exited 1 with 10 passes, 1 failure, and 1 skip. Their ordering assertion passed; test_start_solr.bats:102 failed on 'forcefully killing' after SOLR_STOP_WAIT=30.",
+    "The single skip is caused by test_start_solr.bats:142 invoking the installed timeout utility with no operands and then taking its skip branch.",
+    "Tidy exited 0 with no tracked changes. Root check exited 0 with tests, the Antora site-build and site-link validation branch, associated setup/download tasks, and site-Javadoc rendering tasks excluded."
+  ],
+  "evidence_record": "records/evidence/pr-5333-simple-order-gate-20261113.json",
+  "evidence_sha256": "efddab7d437ca0a398567b60de34f8168bb28ed82320ac18689ab2049a18aa70",
+  "follow_up": "No source or test changes are proposed in this gate report; the owner can decide whether the 30-second graceful-stop failure needs a separate investigation and exact-head gate.",
+  "gate": "pr-5333-simple-order-gate-20261113",
+  "head": "4ed727d4f737e0a4f0b5743b60d7e80e5e05bf2c",
+  "id": "pr-5333-simple-order-gate-20261113",
+  "job": "pr-5333-simple-order-gate-20261113",
+  "summary": "The synthetic fail-before case produced the required behavioral marker-order failure on two running nodes. After restoring the exact assigned source, both common-CLI and Picocli packaging variants passed the marker-order assertion but failed the following no-force-kill assertion because a node exceeded the 30-second graceful-stop wait. Tidy and root check passed.",
+  "type": "report",
+  "verdict": "failed"
+}
