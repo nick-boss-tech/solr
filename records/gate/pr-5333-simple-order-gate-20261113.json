@@ -1,0 +1,27 @@
+{
+  "commands": [
+    "git fetch origin pr-5333-shutdown-doc",
+    "git switch --detach 4ed727d4f737e0a4f0b5743b60d7e80e5e05bf2c",
+    "git show 65c2d85f77017a951f20dc110d71bf14786c6694:solr/bin/solr > solr/bin/solr",
+    "./gradlew :solr:packaging:integrationTests --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks",
+    "git restore -- solr/bin/solr",
+    "./gradlew :solr:packaging:integrationTests --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks",
+    "./gradlew :solr:packaging:integrationTestsPicocli --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks",
+    "./gradlew tidy",
+    "./gradlew check -x test"
+  ],
+  "environment": "Linux clean isolated checkout, JDK 21, normal security manager; use gate host bounded execution wrapper",
+  "expected_receipt": "records/receipt/pr-5333-simple-order-gate-20261113.json",
+  "head": "4ed727d4f737e0a4f0b5743b60d7e80e5e05bf2c",
+  "id": "pr-5333-simple-order-gate-20261113",
+  "job": "pr-5333-simple-order-gate-20261113",
+  "phase": "simplified implementation proof",
+  "requirements": [
+    "Verify source head and ownership. Use an isolated clean checkout, unoccupied fixed ports, the host's bounded runtime wrapper and periodic heartbeat. Use a different fixed port consistently if required.",
+    "For fail-before, replace only solr/bin/solr with the exact contributor head version, keeping the new test and JVM marker code intact. This is a synthetic shell-only mutation, not an entirely unmodified contributor build. The focused marker ordering assertion must fail with two running nodes; startup, compilation, timeout or skipped tests are not valid negative proof. Retain logs and XML.",
+    "Restore the exact source head before positive runs. Run both packaging test variants, tidy and root check with the normal security manager. Record fresh logs/XML and actual commands, exit codes, skips and timeouts. Tidy must leave no changes; a repair requires a new source head and gate.",
+    "The test masks the JVM flag from the classification command and forces PID discovery order while using real Solr processes; it does not prove environment-only startup or every alternate configuration. No macOS result is claimed. No code or test authoring is assigned to the gate worker.",
+    "The older failed Linux run was owner-stopped after a hung HTTP call; ensure cleanup of all spawned processes and apply the host time limit. Do not repeat an unbounded test."
+  ],
+  "type": "gate"
+}
