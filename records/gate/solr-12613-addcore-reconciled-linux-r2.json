@@ -1,0 +1,20 @@
+{
+ "head": "d176c23630a462f43be93d594a4a4200244948f1",
+ "id": "solr-12613-addcore-reconciled-linux-r2",
+ "job": "solr-12613-addcore-reconciled-linux-r2",
+ "phase": "reconciled source round 2 (spotless successor)",
+ "receipt_path": "records/receipt/solr-12613-addcore-reconciled-linux-r2.json",
+ "requirements": [
+  "Verify exact fork head and clean checkout, JDK 21, Chrome and driver; serialize against other builds.",
+  "Run tidy (must leave zero tracked changes at this head) and focused AdminUiCoreAdminStandaloneTest browser suite with tests.selenium=true, plus AdminUiNodePickerTest as neighbor; record actual counts, skips, seed and failures from preserved JUnit XML.",
+  "Restore baseline cores.js alone and run the new open-form and closed-form cases; require the open-form regression to fail at its intended assertion and the closed-form control to pass. Restore source and record results.",
+  "Run applicable root check -x test with -Prefguide.include=false and changelog validation where applicable; Docker and Antora are not required.",
+  "Record source head, commands, outputs and limits. A passing deterministic case does not establish the precise event order of the historical timeout."
+ ],
+ "source": {
+  "baseline": "69627e3c58be1daaa6d8485b0c483e0e1442ec50",
+  "branch": "solr-12613-addcore-reconciled",
+  "repository": "nick-boss-tech/solr"
+ },
+ "type": "gate"
+}

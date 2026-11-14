@@ -1,0 +1,10 @@
+{
+ "claimed": "2026-11-13T18:40:00-07:00",
+ "executor": "phone-agent",
+ "host": "Linux (this VM), JDK 21, Chrome for Testing 154",
+ "id": "solr-12613-addcore-reconciled-linux-r2",
+ "job": "solr-12613-addcore-reconciled-linux-r2",
+ "note": "Successor gate for the round-1 formatting failure; successor head pushed by phone-agent under the standing tidy rule (Nick's direction pattern from PR 5339 earlier today).",
+ "owner": "phone-agent",
+ "type": "claim"
+}
