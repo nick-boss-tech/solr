@@ -277,7 +277,13 @@ public class SolrCmdDistributor implements Closeable {
   }
 
   public void blockAndDoRetries() throws IOException {
-    clients.blockUntilFinished();
+    IOException failure = null;
+    try {
+      clients.blockUntilFinished();
+    } catch (IOException e) {
+      // Process collected errors before stopping an operation that requires a complete flush.
+      failure = e;
+    }
 
     // wait for any async commits to complete
     while (pending != null && pending.size() > 0) {
@@ -292,6 +298,9 @@ public class SolrCmdDistributor implements Closeable {
       pending.remove(future);
     }
     doRetriesIfNeeded();
+    if (failure != null) {
+      throw failure;
+    }
   }
 
   void addCommit(UpdateRequest ureq, CommitUpdateCommand cmd) {

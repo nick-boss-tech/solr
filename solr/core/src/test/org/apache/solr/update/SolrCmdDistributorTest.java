@@ -19,6 +19,7 @@ package org.apache.solr.update;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.SocketException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -619,6 +620,8 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
   @Test
   @ShardsFixed(num = 1)
   public void testStallKeepsErrorsFromOtherNodes() throws Exception {
+    String oldPoll = System.getProperty("solr.cloud.client.pollQueueTime");
+    String oldStall = System.getProperty("solr.cloud.client.stallTime");
     System.setProperty("solr.cloud.client.pollQueueTime", "100");
     System.setProperty("solr.cloud.client.stallTime", "1000");
     final var solrclient = clients.getFirst();
@@ -651,9 +654,92 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
         }
         cmdDistrib.finish();
         List<SolrError> errors = cmdDistrib.getErrors();
-        assertTrue(errors.toString(), errors.stream().anyMatch(e -> e.req.node == failingNode));
-        assertTrue(errors.toString(), errors.stream().anyMatch(e -> e.req.node == stalledNode));
+        assertTrue(errors.toString(), errors.stream().anyMatch(e -> failingNode.equals(e.req.node)));
+        assertTrue(errors.toString(), errors.stream().anyMatch(e -> stalledNode.equals(e.req.node)));
       }
+    } finally {
+      restoreProperty("solr.cloud.client.pollQueueTime", oldPoll);
+      restoreProperty("solr.cloud.client.stallTime", oldStall);
+    }
+  }
+
+  @Test
+  @ShardsFixed(num = 1)
+  public void testCommitDoesNotCrossStalledFlush() throws Exception {
+    assertOrderedOperationStopsAtStall(true);
+  }
+
+  @Test
+  @ShardsFixed(num = 1)
+  public void testDeleteByQueryDoesNotCrossStalledFlush() throws Exception {
+    assertOrderedOperationStopsAtStall(false);
+  }
+
+  @SuppressWarnings("try")
+  private void assertOrderedOperationStopsAtStall(boolean commit) throws Exception {
+    String oldPoll = System.getProperty("solr.cloud.client.pollQueueTime");
+    String oldStall = System.getProperty("solr.cloud.client.stallTime");
+    System.setProperty("solr.cloud.client.pollQueueTime", "100");
+    System.setProperty("solr.cloud.client.stallTime", "1000");
+    try (ServerSocket silent = new ServerSocket(0)) {
+      silent.setSoTimeout(10000);
+      Node node =
+          new StdNode(
+              coreNodeProps(
+                  "http://127.0.0.1:" + silent.getLocalPort() + "/solr", clients.getFirst()),
+              "collection1",
+              "shard1",
+              0);
+      try (SolrCmdDistributor distributor = new SolrCmdDistributor(updateShardHandler)) {
+        AddUpdateCommand first = new AddUpdateCommand(null);
+        first.solrDoc = sdoc("id", uniqueId.incrementAndGet());
+        ModifiableSolrParams params = new ModifiableSolrParams();
+        params.set("stream", 0);
+        distributor.distribAdd(first, List.of(node), params);
+        try (Socket accepted = silent.accept()) {
+          for (int i = 1; i <= 2; i++) {
+            AddUpdateCommand queued = new AddUpdateCommand(null);
+            queued.solrDoc = sdoc("id", uniqueId.incrementAndGet());
+            ModifiableSolrParams queuedParams = new ModifiableSolrParams();
+            queuedParams.set("stream", i);
+            distributor.distribAdd(queued, List.of(node), queuedParams);
+          }
+          IOException failure =
+              expectThrows(
+                  IOException.class,
+                  () -> {
+                    if (commit) {
+                      distributor.distribCommit(
+                          new CommitUpdateCommand(null, false),
+                          List.of(node),
+                          new ModifiableSolrParams());
+                    } else {
+                      DeleteUpdateCommand dbq = new DeleteUpdateCommand(null);
+                      dbq.query = "*:*";
+                      distributor.distribDelete(dbq, List.of(node), new ModifiableSolrParams());
+                    }
+                  });
+          assertTrue(failure.getMessage().contains("Request processing has stalled"));
+          assertTrue(
+              distributor.getErrors().stream()
+                  .anyMatch(
+                      e ->
+                          node.equals(e.req.node)
+                              && e.e instanceof IOException
+                              && e.e.getMessage().contains("Request processing has stalled")));
+        }
+      }
+    } finally {
+      restoreProperty("solr.cloud.client.pollQueueTime", oldPoll);
+      restoreProperty("solr.cloud.client.stallTime", oldStall);
+    }
+  }
+
+  private static void restoreProperty(String name, String value) {
+    if (value == null) {
+      System.clearProperty(name);
+    } else {
+      System.setProperty(name, value);
     }
   }
 
