@@ -72,6 +72,13 @@ node_has_zookeeper_role() {
   solr start
   solr start -p "${SOLR2_PORT}" -z "localhost:${ZK_PORT}"
 
+  run wait_for 30 1 node_has_zookeeper_role \
+    "http://localhost:${SOLR_PORT}/api/cluster/node-roles/node/localhost:${SOLR_PORT}_solr?indent=false" on
+  assert_success
+  run wait_for 30 1 node_has_zookeeper_role \
+    "http://localhost:${SOLR2_PORT}/api/cluster/node-roles/node/localhost:${SOLR2_PORT}_solr?indent=false" off
+  assert_success
+
   # Force the embedded host to be listed first and hide its JVM flag from the
   # classification call. All other process inspection uses the real commands.
   local shim_dir="${BATS_TEST_TMPDIR}/bin"
