@@ -1,0 +1,21 @@
+{
+  "claim_path": "records/claim/pr-5333-ready-order-gate-20261113.json",
+  "contributor_head": "65c2d85f77017a951f20dc110d71bf14786c6694",
+  "gate_id": "pr-5333-ready-order-gate-20261113",
+  "gate_record": "records/gate/pr-5333-ready-order-gate-20261113.json",
+  "id": "pr-5333-ready-order-gate-20261113",
+  "intended_host": "Linux",
+  "job": "pr-5333-ready-order-gate-20261113",
+  "phase": "readiness fix proof",
+  "receipt_path": "records/receipt/pr-5333-ready-order-gate-20261113.json",
+  "related_diagnostic": "records/receipt/pr-5333-ready-stop-probe-20261113-receipt.json",
+  "source": {
+    "branch": "pr-5333-shutdown-doc",
+    "head": "395f4d94d7fc5462655d8ecdc22b30268286862a",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5333-simple-order-gate-20261113",
+  "summary": "Run full exact-head proof for readiness-gated shutdown test",
+  "supersedes": "records/gate/pr-5333-simple-order-gate-20261113.json and failed receipt records/receipt/pr-5333-simple-order-gate-20261113.json",
+  "type": "assignment"
+}
