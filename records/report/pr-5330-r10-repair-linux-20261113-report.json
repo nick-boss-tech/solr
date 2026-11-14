@@ -1,0 +1,16 @@
+{
+  "changes": "Required successor (r11) changes: (1) replace the three forbidden executor calls in SolrCmdDistributorTest.java with named-thread executors: line 718 Executors.newSingleThreadExecutor() and line 944 Executors.newSingleThreadExecutor() (use e.g. a single-thread executor built with SolrNamedThreadFactory / Lucene NamedThreadFactory, or the test framework's own executor helper), and line 1002 Executors.newFixedThreadPool(2) (use a fixed pool with a named thread factory). Commit origins: 1712a7dcbdd, 04c5746d177, 6ad35b2d9be (Nick Shanin 2026-11-13, all ancestors of the r9 and r10 heads). :solr:core:forbiddenApisTest must pass at the successor head. No source edits or public comments were made by the gate host.",
+  "coordination": "Round-2 Linux job pr-5330-regression-r2-linux-20261113 remains disclaimed (records/release/pr-5330-regression-r2-linux-20261113.json) with no receipt/evidence/report; superseded by r8/r9/r10 gates. No overlapping active work. Windows r10 (pr-5330-r10-repair-windows-20261113) released the implementation for Linux proof; Linux now files the receipt.",
+  "gate": "records/gate/pr-5330-r10-repair-linux-20261113.json",
+  "head": "e5117658841ca30d4b888f311754c8818f06dbf3",
+  "id": "pr-5330-r10-repair-linux-20261113-report",
+  "job": "pr-5330-r10-repair-linux-20261113",
+  "source": {
+    "branch": "pr-5330-test-fix-20261113",
+    "head": "e5117658841ca30d4b888f311754c8818f06dbf3",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "PR-5330 r10-repair Linux gate: the repair commit fixes all three r9 defects (compile type-narrowing, HTTP/2 vs HTTP/1.1 fixture, spotless), the focused suite passes 10/10 at two seeds with the HTTP/1.1 fixture reaching both 200 and 503 callbacks, tidy is clean (0 tracked changes), and all five carried-forward fail-before mutations fail behaviorally on the exact head. The single remaining material concern is root check -x test: :solr:core:forbiddenApisTest fails with 3 forbidden executor API invocations in the fork's SolrCmdDistributorTest.java (lines 718, 944, 1002), introduced by Nick's fork commits and absent from upstream main. The r9 gate could not reach this check because compilation failed first; this is the first clean root check of the branch. A successor (r11) must replace the three Executors.* calls with named-thread executors and re-gate.",
+  "type": "report",
+  "verdict": "failed"
+}
