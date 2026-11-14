@@ -1,0 +1,15 @@
+{
+  "evidence": "records/receipt/pr-5333-ready-stop-probe-20261113-receipt.json and records/receipt/pr-5333-simple-order-gate-20261113.json",
+  "id": "pr-5333-test-readiness-fix-20261113",
+  "intended_host": "Windows implementation; Linux proof",
+  "job": "pr-5333-test-readiness-fix-20261113",
+  "scope": "Add the two existing bounded role readiness checks to the focused test. Preserve negative ordering assertion and no-force-kill check. Push and hand off exact-head proof.",
+  "source": {
+    "branch": "pr-5333-shutdown-doc",
+    "head": "4ed727d4f737e0a4f0b5743b60d7e80e5e05bf2c",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5333-simplify-test-20261113",
+  "summary": "Add bounded node-role readiness before shutdown regression test",
+  "type": "assignment"
+}
