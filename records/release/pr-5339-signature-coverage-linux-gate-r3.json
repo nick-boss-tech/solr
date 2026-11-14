@@ -1,0 +1,9 @@
+{
+ "executor_stop_evidence": "All gate chains have exited (the last at 2026-11-13T17:22:19-07:00); no Gradle build is running at release time. The gate checkout is clean at 47e891ce with all mutation and fail-before edits reverted.",
+ "id": "pr-5339-signature-coverage-linux-gate-r3",
+ "job": "pr-5339-signature-coverage-linux-gate-r3",
+ "receipt": "records/receipt/pr-5339-signature-coverage-linux-gate-r3-receipt.json",
+ "released": "2026-11-13T17:26:00-07:00",
+ "released_by": "phone-agent",
+ "type": "release"
+}

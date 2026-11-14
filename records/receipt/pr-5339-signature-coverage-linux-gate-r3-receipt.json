@@ -1,0 +1,39 @@
+{
+ "branch": "pr-5339-signature-migration",
+ "contributor_pr_head": "1bb663935e1464da39d780cecbbd9b2de8d08d44",
+ "evidence": "records/evidence/pr-5339-signature-coverage-linux-gate-r3-evidence.txt",
+ "evidence_sha256": "7f5437de3b02583a4c91065c038e2430974e45e2b2ea048fec3ea2be0e9f3cd8",
+ "executor": "phone-agent",
+ "filed": "2026-11-13T17:26:00-07:00",
+ "gate": "records/gate/pr-5339-signature-coverage-linux-gate-r3.json",
+ "head": "47e891cea3ec5bc01b8ca7a5dd3a182be8706112",
+ "id": "pr-5339-signature-coverage-linux-gate-r3",
+ "job": "pr-5339-signature-coverage-linux-gate-r3",
+ "legs": [
+  {
+   "leg": "Requirement 1: successor diff vs round-2 evidence",
+   "result": "VERIFIED: one commit on 83b2df09; test file only; content identical to tidy-testfile.diff from the round-2 evidence."
+  },
+  {
+   "leg": "Requirement 2: focused TextProfileSignatureTest seed 5339",
+   "result": "PASSED: 4 tests, 0 skipped, 0 failures."
+  },
+  {
+   "leg": "Requirement 3: fail-before (pre-PR comparator)",
+   "result": "DISCRIMINATES: testSignatureStableAcrossHashMapResize failed with the 'signature changed after adding 7 filler(s)' assertion (ArrayComparisonFailure)."
+  },
+  {
+   "leg": "Requirement 4: three comparator mutations",
+   "result": "DISCRIMINATE: each failed testProfileOrdersQuantizedCountsAndTies with ComparisonFailure expected 900382f1... (was 018ad905... for ascending and strings-only; 7bcec294... for reversed tie-break), matching round 2 exactly."
+  },
+  {
+   "leg": "Requirement 5: tidy and check",
+   "result": "PASSED: tidy zero tracked changes; check -x test -Prefguide.include=false BUILD SUCCESSFUL in 6m 14s including :solr:core:spotlessJavaCheck. buildLocalSite excluded under the round-2 owner Antora policy."
+  }
+ ],
+ "prior_head": "83b2df0977499337bc88daaba8eb872a3835f31b",
+ "prior_receipt": "records/receipt/pr-5339-signature-coverage-linux-gate-r2-receipt.json",
+ "summary": "Round 3 gate PASSED at 47e891ce. The successor is a single formatting-only commit (pushed by the phone agent at the owner's direction) whose diff is identical to the round-2 tidy diff and touches only TextProfileSignatureTest.java. At the new head: focused TextProfileSignatureTest 4/4 at seed 5339; the comparator fail-before fails testSignatureStableAcrossHashMapResize on its signature-changed assertion; all three comparator mutations fail testProfileOrdersQuantizedCountsAndTies on the known MD5 with round-2's exact was-values; tidy leaves zero tracked changes; check -x test (ref-guide excluded per the owner policy recorded in round 2) is BUILD SUCCESSFUL including spotlessJavaCheck.",
+ "type": "receipt",
+ "verdict": "PASSED"
+}

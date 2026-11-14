@@ -1,0 +1,20 @@
+PR 5339 signature coverage gate round 3 evidence (phone-agent, Linux host)
+Job: pr-5339-signature-coverage-linux-gate-r3; gate: records/gate/pr-5339-signature-coverage-linux-gate-r3.json; prior receipt: records/receipt/pr-5339-signature-coverage-linux-gate-r2-receipt.json (vm2, verdict failed on formatting only)
+Head: 47e891cea3ec5bc01b8ca7a5dd3a182be8706112 (branch pr-5339-signature-migration on nick-boss-tech/solr, verified against the fork remote before and after the successor push); prior head 83b2df0977499337bc88daaba8eb872a3835f31b; contributor PR head 1bb663935e1464da39d780cecbbd9b2de8d08d44. JDK Temurin 21.0.12.1+1; Gradle commands ran through the host Gradle 9.7.0 wrapper in place of ./gradlew; seed 5339 passed as -Ptests.seed=5339, as in round 2. Verdict: PASSED.
+
+== Requirement 1: successor diff
+The successor is one commit on the round-2 head, pushed by the phone agent at the owner's direction after the round-2 gate failed on formatting only. Its diff touches only solr/core/src/test/org/apache/solr/update/processor/TextProfileSignatureTest.java, and its content lines are identical to the tidy diff in the round-2 evidence (tidy-testfile.diff): two hunks joining the split string literals in testProfileOrdersQuantizedCountsAndTies. The successor was produced by running ./gradlew tidy at the round-2 head and committing its output unchanged. No production code changed.
+
+== Requirement 2: focused test at the exact head
+:solr:core:test --tests org.apache.solr.update.processor.TextProfileSignatureTest exited 0. Fresh JUnit: 4 tests, 0 skipped, 0 failures, 0 errors, including testProfileOrdersQuantizedCountsAndTies and testSignatureStableAcrossHashMapResize.
+
+== Requirement 3: fail-before
+The branch's production file is byte-identical to the contributor PR head's, so the round-2 construction was applied at the gate checkout: the round-2 evidence failbefore.diff (TokenComparator reverted to return t2.cnt - t1.cnt;) with the offered test unchanged. testSignatureStableAcrossHashMapResize: 1 test, 1 failure, an ArrayComparisonFailure carrying the test's own 'signature changed after adding 7 filler(s)' assertion. Not a compilation, setup or timeout failure. Production file restored afterwards.
+
+== Requirement 4: comparator mutations
+Each round-2 evidence mutation diff was applied in turn at the gate head and testProfileOrdersQuantizedCountsAndTies run alone: ascending frequency (mut1) failed with ComparisonFailure expected 900382f1e7634a592906927510a4ab3c but was 018ad9055f79...; strings only (mut2) failed with the same pair; reversed string tie-break (mut3) failed with expected 900382f1... but was 7bcec294.... The was-values match the round-2 records exactly. Production file restored after each.
+
+== Requirement 5: tidy and check
+./gradlew tidy exited 0 with zero tracked changes at this head (the round-2 defect is repaired). ./gradlew check -x test -Prefguide.include=false exited 0, BUILD SUCCESSFUL in 6m 14s, including :solr:core:spotlessJavaCheck. The ref-guide exclusion follows the owner policy recorded in round 2; buildLocalSite likewise stayed excluded under that policy, as the gate record states.
+
+Final state: gate checkout clean at 47e891ce; no public comment was posted.
