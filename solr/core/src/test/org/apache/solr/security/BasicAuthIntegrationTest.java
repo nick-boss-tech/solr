@@ -21,6 +21,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -78,6 +79,63 @@ public class BasicAuthIntegrationTest extends SolrCloudAuthTestCase {
   @After
   public void tearDownCluster() throws Exception {
     shutdownCluster();
+  }
+
+  @Test
+  @SuppressWarnings("unchecked")
+  public void testRepeatedV2PermissionDeleteById() throws Exception {
+    JettySolrRunner node = cluster.getRandomJetty(random());
+    HttpClient client = node.getSolrClient().getHttpClient();
+    String url = node.getBaseUrl() + "/____v2/cluster/security/authorization";
+    zkClient().setData("/security.json", STD_CONF.replace("'", "\"").getBytes(UTF_8));
+    verifySecurityStatus(client, url, "authorization.enabled", "true", 20);
+
+    executeCommand(
+        client, url, "{'set-permission': {'name':'read','role':'admin'}}", "solr", "SolrRocks");
+    executeCommand(
+        client, url, "{'set-permission': {'name':'update','role':'admin'}}", "solr", "SolrRocks");
+
+    var read =
+        client
+            .newRequest(url)
+            .headers(h -> h.add("Authorization", makeBasicAuthHeader("solr", "SolrRocks")))
+            .send();
+    assertEquals(200, read.getStatus());
+    Map<String, Object> response =
+        (Map<String, Object>) Utils.fromJSONString(read.getContentAsString());
+    List<Map<String, Object>> permissions =
+        (List<Map<String, Object>>)
+            Utils.getObjectByPath(response, false, "authorization/permissions");
+    assertEquals(3, permissions.size());
+    assertEquals("read", permissions.get(1).get("name"));
+    assertEquals("update", permissions.get(2).get("name"));
+    String deletedId = (String) permissions.get(1).get("id");
+    String survivorId = (String) permissions.get(2).get("id");
+    assertNotNull(deletedId);
+    assertNotNull(survivorId);
+    assertNotEquals(deletedId, survivorId);
+
+    String delete = Utils.toJSONString(Map.of("delete-permission", Map.of("id", deletedId)));
+    executeCommand(client, url, delete, "solr", "SolrRocks");
+    var repeated =
+        client
+            .POST(url)
+            .headers(h -> h.add("Authorization", makeBasicAuthHeader("solr", "SolrRocks")))
+            .body(new StringRequestContent("application/json", delete, UTF_8))
+            .send();
+    assertEquals(400, repeated.getStatus());
+    assertTrue(repeated.getContentAsString().contains("No such permission id: " + deletedId));
+
+    Map<String, Object> persisted =
+        (Map<String, Object>) Utils.fromJSON(zkClient().getData("/security.json", null, null));
+    List<Map<String, Object>> remaining =
+        (List<Map<String, Object>>)
+            Utils.getObjectByPath(persisted, false, "authorization/permissions");
+    assertEquals(2, remaining.size());
+    assertEquals("security-edit", remaining.get(0).get("name"));
+    assertEquals("update", remaining.get(1).get("name"));
+    assertEquals(survivorId, remaining.get(1).get("id"));
+    assertEquals(2, remaining.get(1).get("index"));
   }
 
   @Test
