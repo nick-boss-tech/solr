@@ -1,0 +1,13 @@
+{
+  "assignment": "records/assignment/pr-5339-r3-fix-linux-20261114.json",
+  "head": "47e891cea3ec5bc01b8ca7a5dd3a182be8706112",
+  "id": "pr-5339-r3-fix-linux-20261114-report",
+  "job": "pr-5339-r3-fix-linux-20261114",
+  "reconciled_with": {
+    "claim": "records/claim/pr-5339-signature-coverage-linux-gate-r3.json",
+    "gate": "records/gate/pr-5339-signature-coverage-linux-gate-r3.json",
+    "owner": "phone-agent"
+  },
+  "summary": "Reconciliation: this fix assignment is absorbed by the board's successor gate pr-5339-signature-coverage-linux-gate-r3. The formatting-only successor head 47e891cea3ec (test file blob bf2a297654a4c359c6ded8664ae2e375ddf44dae, exactly the round-2 tidy diff) was pushed by phone-agent at Nick's direction and the r3 gate is claimed by the same executor at that head. vm2's independently prepared identical fix commit (2d2c6806d6b4, same blob) was verified content-identical and NOT pushed, to avoid a duplicate. No further executor action is required under this assignment; the r3 gate record carries the verification requirements.",
+  "type": "report"
+}
