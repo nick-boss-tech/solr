@@ -1,0 +1,9 @@
+{
+  "gate_record": "records/gate/pr5320-api-regression-linux-gate-r2-20261113.json",
+  "head": "fb576e87cccf63f8f2a1bbd3bee30533ee0290d8",
+  "id": "pr5320-api-regression-implementation-r2-20261113-report",
+  "job": "pr5320-api-regression-implementation-r2-20261113",
+  "prior_receipt": "records/receipt/pr5320-api-regression-linux-gate-20261113-receipt.json",
+  "summary": "Corrected the two test defects in the failed prior receipt: wait for initialized authentication and authorization plugins on all nodes before the first request, and compare the persisted index as a Number. Fork branch pushed and head verified. No Windows Gradle; successor gate must establish proof.",
+  "type": "report"
+}
