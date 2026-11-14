@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "records/report/solr-12613-followups-reconcile-windows-20261113-report.json",
+  "id": "solr-12613-followups-reconcile-windows-20261113",
+  "job": "solr-12613-followups-reconcile-windows-20261113",
+  "reason": "Scoped branch reconciliation complete; worker and related executors stopped.",
+  "type": "release"
+}
