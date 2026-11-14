@@ -1,0 +1,8 @@
+{
+  "id": "solr-12613-followups-reconcile-windows-20261113",
+  "intended_host": "Windows implementation; no Gradle or Selenium",
+  "job": "solr-12613-followups-reconcile-windows-20261113",
+  "prior": "https://github.com/nick-boss-tech/solr/blob/coordination-ui/reports/solr-12613-pr-jira-packages-round-1.md",
+  "summary": "Reconcile picker lifecycle and proxy follow-up candidates with merged main and each other; prepare scoped fork branches and document proof limits",
+  "type": "assignment"
+}
