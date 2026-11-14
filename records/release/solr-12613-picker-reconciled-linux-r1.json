@@ -1,0 +1,9 @@
+{
+ "executor_stop_evidence": "All builds ran inside one flock-serialized chain in the disposable clone ~/workspace/solr-clones/12613-picker-r1 and have exited; no gate process remains running for this job (an idle Gradle daemon may remain resident, which is normal).",
+ "id": "solr-12613-picker-reconciled-linux-r1",
+ "job": "solr-12613-picker-reconciled-linux-r1",
+ "receipt": "records/receipt/solr-12613-picker-reconciled-linux-r1.json",
+ "released": "2026-11-13T19:08:00-07:00",
+ "released_by": "phone-agent",
+ "type": "release"
+}

@@ -1,0 +1,22 @@
+{
+ "branch": "solr-12613-picker-lifecycle-reconciled",
+ "evidence": "records/evidence/solr-12613-picker-reconciled-linux-r1-evidence.txt",
+ "evidence_sha256": "0f7f8c9f5da34d1b37a89e22a5bd89084fb44941fe5d6476f776d469bec43ba2",
+ "executor": "phone-agent",
+ "filed": "2026-11-13T19:08:00-07:00",
+ "head": "6a256c56cf613154b477a1a4679f7ad7e3558198",
+ "id": "solr-12613-picker-reconciled-linux-r1",
+ "job": "solr-12613-picker-reconciled-linux-r1",
+ "legs": {
+  "environment": "Exact fork head verified; clean checkout; JDK 21; builds serialized; Chrome for Testing 154 as the Selenium binary; seed 12613B02.",
+  "fail_before": "Baseline app.js restored alone: all four added lifecycle cases FAILED at their intended assertions (late-response menu replacement x2, system-info failure refresh, restored-selection targeting). Source restored, tree clean.",
+  "focused_suite": "AdminUiNodePickerTest: 8 tests, 0 failures, 0 errors, 0 skipped (JUnit preserved).",
+  "limits": "No old receipt is claimed as proof for this head; all legs ran at 6a256c56.",
+  "neighbor_suite": "AdminUiCoreAdminStandaloneTest: 5 tests, 0 failures, 0 errors, 0 skipped (JUnit preserved).",
+  "root_check": "check -x test -Prefguide.include=false BUILD SUCCESSFUL.",
+  "tidy": "rc=0, zero tracked changes."
+ },
+ "summary": "PASSED at 6a256c56. Tidy clean, both browser suites green with no skips, all four new lifecycle cases detect the pre-fix app.js at their intended assertions, and root check succeeds. No successor needed.",
+ "type": "receipt",
+ "verdict": "passed"
+}

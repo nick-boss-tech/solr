@@ -1,0 +1,13 @@
+SOLR-12613 picker lifecycle reconciled Linux gate round 1 (phone agent, 2026-11-13)
+Gate head: 6a256c56cf613154b477a1a4679f7ad7e3558198 (branch solr-12613-picker-lifecycle-reconciled on the fork, verified via the fork remote and as the clean checkout HEAD). Baseline: 69627e3c58be1daaa6d8485b0c483e0e1442ec50. Branch delta vs baseline: AdminUiNodePickerTest.java +247 (four new lifecycle cases plus helpers) and app.js +29/-14 (core-status generation guard, clearNodeTarget, resetMenu ordering).
+Verdict: PASSED. All legs green at the exact head, tidy clean, no successor needed.
+
+Environment (requirement 1): JDK 21 via the host gate toolchain; builds serialized under the local build lock; browser is Chrome for Testing 154.0.8037.92 passed as -Dtests.selenium.chrome.binary (the app browser binary /opt/meta-chromium/chrome exits on launch and cannot serve Selenium; see the addcore round-1 evidence). Seed -Ptests.seed=12613B02; Gradle via the host wrapper solr-gradle.sh.
+
+Requirement 2: tidy rc=0 with zero tracked changes. Focused AdminUiNodePickerTest: 8 tests, 0 failures, 0 errors, 0 skipped (JUnit XML preserved). Neighbor AdminUiCoreAdminStandaloneTest: 5 tests, 0 failures, 0 errors, 0 skipped (JUnit XML preserved).
+
+Requirement 3: baseline app.js restored alone; all four added lifecycle cases FAILED, each at its intended assertion: testCoreMenuKeepsNewestRefreshForSameNode and testCoreMenuIgnoresLateResponseFromPreviousNode (ComparisonFailure: 'A late response must not replace the current core menu expected:<[new]_core> but was:<[old]_core>'); testSystemInfoFailureStillRefreshesLocalCoreMenu ('Failure to discover system info must not prevent a local core refresh'); testRestoredSelectionTargetsInitialCoreMenuRequest ('Every initial core-menu request must target the restored node'). Run totals: 4 tests, 4 failures, 0 skipped. app.js then restored; tree verified clean.
+
+Requirement 4: root check -x test -Prefguide.include=false BUILD SUCCESSFUL; no failures. Docker and Antora excluded per the gate.
+
+Requirement 5 limits: no old receipt is claimed as proof for this head; every leg above ran at 6a256c56. The four fail-before failures are assertion failures against the restored pre-fix app.js, which is the detection the gate requires.
