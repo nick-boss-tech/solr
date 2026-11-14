@@ -1,0 +1,25 @@
+{
+  "evidence": "records/evidence/pr-5339-signature-coverage-linux-gate-r2-evidence.tar.gz (SHA-256 afd129d1542f507e3044865f11549010843b3b6b9bee513eb38ee48e2be8b4b9) + records/report/pr-5339-signature-coverage-linux-gate-r2-report.json",
+  "gate": "pr-5339-signature-coverage-linux-gate-r2",
+  "head": "83b2df0977499337bc88daaba8eb872a3835f31b",
+  "host": "linux",
+  "id": "pr-5339-signature-coverage-linux-gate-r2-receipt",
+  "job": "pr-5339-signature-coverage-linux-gate-r2",
+  "legs": {
+    "buildLocalSite": "excluded under owner policy: Antora/ref-guide not enforced for gate runs (board 44ec1b29; r1 also excluded)",
+    "check": "FAILED: ./gradlew check -x test -Prefguide.include=false (owner policy: Antora/ref-guide excluded); BUILD FAILED in 6m59s; check_rc=1; :solr:core:spotlessJavaCheck FAILED naming src/test/org/apache/solr/update/processor/TextProfileSignatureTest.java — the same 2-hunk spotless violation as the tidy leg. All non-spotless check tasks passed; the defect blocks the check leg.",
+    "fail_before": "PASSED (discriminating): at base 1bb66393, comparator muted to pre-PR form (return t2.cnt - t1.cnt), resize test intact; testSignatureStableAcrossHashMapResize FAILED behaviorally: AssertionError expected:<69> but was:<-102> 'signature changed after adding 7 filler(s)'. tests=1 failures=1 errors=0. Fresh log + XML + diff retained.",
+    "focused_test": "PASSED: :solr:core:test --tests org.apache.solr.update.processor.TextProfileSignatureTest -Ptests.seed=5339; BUILD SUCCESSFUL in 6m18s; tests=4 skipped=0 failures=0 errors=0 (all four tests pass, including testProfileOrdersQuantizedCountsAndTies and testSignatureStableAcrossHashMapResize). XML evidence retained.",
+    "mut1_ascending": "PASSED (discriminating): comparator changed to ascending frequency Integer.compare(t1.cnt,t2.cnt); testProfileOrdersQuantizedCountsAndTies FAILED: ComparisonFailure expected:<900382f1...> but was:<018ad905...>. tests=1 failures=1 errors=0. Diff + XML retained.",
+    "mut2_strings_only": "PASSED (discriminating): comparator changed to compare strings only; testProfileOrdersQuantizedCountsAndTies FAILED: ComparisonFailure expected:<900382f1...> but was:<018ad905...>. tests=1 failures=1 errors=0. Diff + XML retained.",
+    "mut3_reverse_tiebreak": "PASSED (discriminating): comparator tie-break reversed to t2.val.compareTo(t1.val); testProfileOrdersQuantizedCountsAndTies FAILED: ComparisonFailure expected:<900382f1...> but was:<7bcec294...>. tests=1 failures=1 errors=0. Diff + XML retained.",
+    "spotless_fail_before": "CONFIRMED (material defect): fail-before :solr:core:spotlessCheck on the head-identical test file (reverted to f0fa101a) rc=1 BUILD FAILED in 1m27s; :solr:core:spotlessJavaCheck FAILED naming src/test/org/apache/solr/update/processor/TextProfileSignatureTest.java with the same 2 hunks (string-line-joins). The head test file is deterministically NOT spotless-clean.",
+    "tidy": "FAILED requirement (material defect): ./gradlew tidy rc=0 BUILD SUCCESSFUL in 1m38s, but post_tidy_tracked_changes=1 — spotlessApply reformatted solr/core/src/test/org/apache/solr/update/processor/TextProfileSignatureTest.java (2 hunks: string-line-joins in testProfileOrdersQuantizedCountsAndTies). The head test file is NOT spotless-clean. tidy-fixed copy + diff retained; test reverted to head bytes (f0fa101a) for fail-before spotlessCheck. Per gate, a formatting repair requires a new pushed head and superseding gate."
+  },
+  "owner": "vm2",
+  "phase": "coverage r2",
+  "recorded": "2026-11-13",
+  "summary": "PR-5339 r2 coverage Linux gate on vm2 at exact head 83b2df09 FAILS on a single material defect: the head test file solr/core/src/test/org/apache/solr/update/processor/TextProfileSignatureTest.java is NOT spotless-clean. ./gradlew tidy exits 0 but leaves 1 tracked change (spotlessApply reformats 2 hunks — the string-line-joins in testProfileOrdersQuantizedCountsAndTies), so :solr:core:spotlessCheck fails on the head-identical file (fail-before rc=1, same 2 hunks) and the root check -x test leg is blocked by the same :solr:core:spotlessJavaCheck failure (check_rc=1). All behavioral proof legs are discriminating and PASSED: the focused TextProfileSignatureTest seed 5339 passes 4/4; the fail-before (pre-PR comparator `return t2.cnt - t1.cnt;` restored at base 1bb66393) makes testSignatureStableAcrossHashMapResize fail via AssertionError expected:<69> but was:<-102>; all three comparator mutations (ascending frequency, strings-only, reversed string tie-break) make testProfileOrdersQuantizedCountsAndTies fail via ComparisonFailure on the known MD5 900382f1... . buildLocalSite is excluded under the standing owner Antora policy. Per the gate requirement, the formatting repair needs a new pushed head and a superseding gate.",
+  "type": "receipt",
+  "verdict": "failed"
+}
