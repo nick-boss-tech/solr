@@ -1,0 +1,13 @@
+{
+  "id": "stall-recovery-coverage-windows-20261114",
+  "intended_host": "windows",
+  "job": "stall-recovery-coverage-windows-20261114",
+  "scope": "Create a separately named fork branch; leave the existing narrow branch unchanged. Implement a deterministic real SolrCloud stall and recovery test if feasible, push, and hand off exact-head Linux verification. No public comment.",
+  "source": {
+    "branch": "pr-5330-ordered-flush-20261114",
+    "head": "6bf469128d2dd570336ff634e41c07012d918d31",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Prepare separate SolrCloud stalled-stream recovery test based on the narrow ordered-flush head",
+  "type": "assignment"
+}
