@@ -1,0 +1,10 @@
+{
+  "claimed": "2026-11-14T03:03:13Z",
+  "head": "fb576e87cccf63f8f2a1bbd3bee30533ee0290d8",
+  "host": "linux",
+  "id": "pr5320-api-regression-linux-gate-r2-20261113",
+  "job": "pr5320-api-regression-linux-gate-r2-20261113",
+  "note": "Live fork branch pr-5320-api-regression verified at gate head fb576e87 by git ls-remote; contributor parent 5fa55130. Successor head fixes both defects from the prior Linux receipt: adds a 30s readiness wait for BasicAuthPlugin/RuleBasedAuthorizationPlugin on every node before the first executeCommand, and changes the index assertion to assertEquals(2L, ((Number)...).longValue()). Only BasicAuthIntegrationTest.java changed (12 insertions, 1 deletion), no production change. Gate requires the recorded-seed run plus two independent-seed runs. No conflicting claim exists; claimed by vm2.",
+  "owner": "vm2",
+  "type": "claim"
+}
