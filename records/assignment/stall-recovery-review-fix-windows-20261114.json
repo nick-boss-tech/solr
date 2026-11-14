@@ -1,0 +1,13 @@
+{
+  "id": "stall-recovery-review-fix-windows-20261114",
+  "intended_host": "windows",
+  "job": "stall-recovery-review-fix-windows-20261114",
+  "scope": "Apply Nick-approved review fixes; push non-force and issue a new exact-head Linux gate.",
+  "source": {
+    "branch": "stalled-stream-recovery-coverage",
+    "head": "b7c0f0abdf4f313b8eae6672d27602b9fe771027",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Fix local replica reads and recovery-state synchronization in candidate test",
+  "type": "assignment"
+}
