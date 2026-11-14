@@ -1,0 +1,22 @@
+{
+  "evidence": "records/evidence/pr5320-api-regression-linux-gate-20261113-evidence.tar.gz (SHA-256 3da53ecff112b39aace0fb2360d8728190eb4c59ee1c521be87bb89f766b4f86)",
+  "gate": "records/gate/pr5320-api-regression-linux-gate-20261113.json",
+  "head": "db4483f0294bfc4fe8dae73a16ad3e526db8ef1f",
+  "host": "linux",
+  "id": "pr5320-api-regression-linux-gate-20261113-receipt",
+  "job": "pr5320-api-regression-linux-gate-20261113",
+  "legs": {
+    "diff_verification": "PASSED: live fork branch pr-5320-api-regression at head db4483f0; contributor parent 5fa55130. Only change vs parent is one commit adding testRepeatedV2PermissionDeleteById to solr/core/src/test/org/apache/solr/security/BasicAuthIntegrationTest.java (58 insertions, no schema/validator/production change).",
+    "focused_test_run1": "FAILED: ./gradlew :solr:core:test --tests org.apache.solr.security.BasicAuthIntegrationTest.testRepeatedV2PermissionDeleteById; BUILD FAILED in 6m57s; tests=1 failures=1. java.util.concurrent.ExecutionException: org.eclipse.jetty.client.HttpResponseException: HTTP protocol violation: Authentication challenge without WWW-Authenticate header at executeCommand(BasicAuthIntegrationTest.java:508) called from testRepeatedV2PermissionDeleteById(BasicAuthIntegrationTest.java:93) — the FIRST set-permission command. Seed 5AB93CB9D28584E8. Sequence in log: security.json set, RuleBasedAuthorizationPlugin + BasicAuthPlugin initialize ~20.6-20.9s after node start, then the POST at line 93 hits a node mid-plugin-reload and receives a 401 challenge without WWW-Authenticate, which the Jetty client rejects as a protocol violation. The covered delete-by-id logic is never reached.",
+    "focused_test_run2_seed": "FAILED (deterministic assertion defect): same command with -Ptests.seed=5AB93CB9D28584E8; BUILD FAILED in 1m47s; tests=1 failures=1. This run PASSED the auth setup (line 93 and all delete-by-id behavior assertions through line 137: repeated delete returns 400, body contains 'No such permission id', persisted remaining size 2, names and survivor id correct) then FAILED at BasicAuthIntegrationTest.java:138 assertEquals(2, remaining.get(1).get('index')) — AssertionError: expected: java.lang.Integer<2> but was: java.lang.Long<2>. The persisted 'index' is deserialized by Utils.fromJSON as Long (JSONParser default), and assertEquals(int, Object) boxes 2 to Integer, so Integer.equals(Long) is false. Deterministic boxing bug in the new test; the covered production fix is proven by the preceding passing assertions.",
+    "tidy": "PASSED: ./gradlew tidy exit=0 BUILD SUCCESSFUL in 1m15s; post-tidy tracked changes=0. Head db4483f0 is format-clean.",
+    "check": "PASSED: ./gradlew check -x test -Prefguide.include=false; BUILD SUCCESSFUL in 8m41s (CHECK_RC=0, 515 actionable tasks, 489 executed). Root check green including spotlessJavaCheck; buildLocalSite excluded per owner policy.",
+    "buildLocalSite": "excluded under standing owner Antora/ref-guide policy (not enforced for gate runs; -Prefguide.include=false used for check)"
+  },
+  "owner": "vm2",
+  "phase": "test-only API regression proof",
+  "recorded": "2026-11-14",
+  "summary": "PR-5320 api-regression Linux gate on vm2 at exact head db4483f0 FAILS. The new coverage test testRepeatedV2PermissionDeleteById is not green at head: two distinct defects. (1) Flaky startup race: the first executeCommand (set-permission read) can POST before all three nodes finish reloading security plugins, and a node returns a 401 challenge without a WWW-Authenticate header, which the Jetty client surfaces as HttpResponseException 'HTTP protocol violation: Authentication challenge without WWW-Authenticate header' (focused run 1, seed 5AB93CB9D28584E8). (2) Deterministic assertion defect at BasicAuthIntegrationTest.java:138: assertEquals(2, remaining.get(1).get('index')) fails because Utils.fromJSON returns Long for the persisted index while assertEquals boxes the expected 2 as Integer — expected: java.lang.Integer<2> but was: java.lang.Long<2> (focused run 2, same seed; the delete-by-id behavior assertions before line 138 all passed, confirming the covered fix works). tidy leaves zero tracked changes. The new test must be fixed (type-safe index assertion and startup race handling) before this coverage leg can pass; per the gate, a test change requires a new committed head and superseding gate.",
+  "type": "receipt",
+  "verdict": "failed"
+}
