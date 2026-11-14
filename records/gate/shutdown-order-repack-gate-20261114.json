@@ -1,0 +1,27 @@
+{
+  "commands": [
+    "git fetch origin embedded-zookeeper-shutdown-order",
+    "git switch --detach a9e8ce1db89b0094fb16b90d41bce7402ed4407d",
+    "git show 65c2d85f77017a951f20dc110d71bf14786c6694:solr/bin/solr > solr/bin/solr",
+    "./gradlew :solr:packaging:integrationTests --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks",
+    "git restore -- solr/bin/solr",
+    "./gradlew :solr:packaging:integrationTests --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks",
+    "./gradlew :solr:packaging:integrationTestsPicocli --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks",
+    "./gradlew tidy",
+    "./gradlew check -x test -Prefguide.include=false"
+  ],
+  "environment": "Linux clean isolated checkout, JDK 21, normal security manager; bounded execution wrapper and heartbeat",
+  "expected_receipt": "records/receipt/shutdown-order-repack-gate-20261114.json",
+  "head": "a9e8ce1db89b0094fb16b90d41bce7402ed4407d",
+  "id": "shutdown-order-repack-gate-20261114",
+  "job": "shutdown-order-repack-gate-20261114",
+  "phase": "repackaged exact-head proof",
+  "requirements": [
+    "Verify live fork and contributor PR heads, ancestry and identical tree to prior tested head 395f4d94d7fc5462655d8ecdc22b30268286862a. If a head moved, stop and report. Use clean isolated checkout, free fixed ports, bounded host wrapper, heartbeat and cleanup checks.",
+    "Negative proof is a synthetic shell-only mutation: retain exact-head test and JVM marker scaffold but replace only solr/bin/solr with the contributor version. After both roles are ready the ordering assertion must fail because the ZooKeeper host was stopped first. Startup, compilation, readiness, timeout or skipped tests do not satisfy it. Retain fresh TAP logs and XML; report malformed XML if encountered.",
+    "Restore exact head and run both packaging variants, tidy and root check with normal security manager. Require order assertion, no forced kill, and both processes stopped. Capture fresh logs and XML, exits and skips. Tidy must leave tree unchanged; repairs require a new pushed head and superseding gate.",
+    "Disclose the known unrelated timeout-utility test skip if present. The role helper has bounded curl timeouts; an overall host watchdog remains required.",
+    "The test masks the enable flag from classification while using real nodes. It does not prove every real alternative configuration or macOS. No source authoring or public comments are assigned."
+  ],
+  "type": "gate"
+}
