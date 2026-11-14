@@ -1,0 +1,9 @@
+{
+  "claimed_at": "2026-11-13T18:35:42-07:00",
+  "head": "4ed727d4f737e0a4f0b5743b60d7e80e5e05bf2c",
+  "host": "phone-agent-2",
+  "id": "pr-5333-ready-stop-probe-20261113",
+  "job": "pr-5333-ready-stop-probe-20261113",
+  "owner": "phone-agent-2",
+  "type": "claim"
+}
