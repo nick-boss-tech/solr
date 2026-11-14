@@ -1,0 +1,7 @@
+{
+  "id": "pr5320-api-regression-implementation-20261113",
+  "job": "pr5320-api-regression-implementation-20261113",
+  "owner": "codex-windows",
+  "scope": "Test-only branch based on contributor head; request separate Linux gate.",
+  "type": "claim"
+}
