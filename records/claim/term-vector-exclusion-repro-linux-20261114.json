@@ -1,0 +1,10 @@
+{
+ "claimed": "2026-11-14T09:24:00-07:00",
+ "executor": "phone-agent",
+ "host": "Linux (this VM), JDK 21",
+ "id": "term-vector-exclusion-repro-linux-20261114",
+ "job": "term-vector-exclusion-repro-linux-20261114",
+ "note": "Claimed by phone-agent at Nick's direction in chat 2026-11-14 ('5321 gate task'). Diagnostic reproduction only; no source changes.",
+ "owner": "phone-agent",
+ "type": "claim"
+}
