@@ -1,0 +1,71 @@
+{
+ "cleanup": {
+  "check_clone": "clean at 395f4d94",
+  "ports_listening_after": false,
+  "solr_bats_processes_remaining": false,
+  "solrtest_checkout": "clean at 395f4d94 after the runs"
+ },
+ "commands": {
+  "negative": "./gradlew :solr:packaging:integrationTests --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks (after replacing only solr/bin/solr with the contributor blob)",
+  "positive_common": "./gradlew :solr:packaging:integrationTests --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks",
+  "positive_picocli": "./gradlew :solr:packaging:integrationTestsPicocli --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks",
+  "root_check": "./gradlew check -x test with the standing Antora/ref-guide and site-javadoc exclusions (17 tasks, same set as the simple-order receipt)",
+  "tidy": "./gradlew tidy"
+ },
+ "contributor_head": "65c2d85f77017a951f20dc110d71bf14786c6694",
+ "environment": "Linux x86_64, OpenJDK 21.0.12.1, clean isolated checkouts, normal security manager, fixed BATS port 18983. BATS legs ran as the non-root solrtest user (bin/solr refuses root); the host VM had been replaced earlier that evening and the solrtest setup (user, /opt/gate-tools JDK 21 + Gradle 9.7.0, private Gradle home copied from the root cache, BATS tarballs seeded because downloadBats fails with a PKIX error on this host) was rebuilt before the run. BATS environment: proxy variables retained for the build's npm steps (a first chain with them stripped failed at :solr:webapp:js-client:downloadBrowserify before any test ran; no results from that chain are used) and no_proxy=localhost,127.0.0.1,test.solr.apache.org so test curls reach the local nodes directly. Root check ran as root in a normal clone at the same head. Each BATS leg bounded by a 3600-second timeout; none hit it.",
+ "executor": "phone-agent",
+ "head": "395f4d94d7fc5462655d8ecdc22b30268286862a",
+ "id": "pr-5333-ready-order-gate-20261113-evidence",
+ "job": "pr-5333-ready-order-gate-20261113",
+ "limits": [
+  "The test masks the enable flag from classification while using real nodes; it does not prove every real alternative configuration.",
+  "No macOS or Docker result is claimed.",
+  "No source authoring or public comments were made."
+ ],
+ "results": {
+  "negative": {
+   "cases": 12,
+   "exit_code": 1,
+   "failed": 2,
+   "mutation": "solr/bin/solr replaced with contributor blob 59aecb926a00a1522461357dc133bda1a1414aef (from 65c2d85f); exact-head test scaffold and JVM marker retained; head bin/solr blob is b00e374fd78ecd7f9e0bd96158c855c237880771. The mutation blob is byte-identical to the one the simple-order round used.",
+   "ordering_assertion": "FAILED as required at test_start_solr.bats:108 (case 3, 'stop uses the ZooKeeper marker when the JVM flag is not visible'): expected stop order port 18984 then port 18983, but the contributor script sent the stop to 18983 first. Both nodes had started and were ready (ports 18983 and 18984 up), so the failure is the behavioral ordering defect, not a startup, compilation, readiness, timeout or skip artifact.",
+   "passed": 9,
+   "side_effect_failure": "Case 8 ('deprecated system properties converted to modern properties') also failed under the mutation (the deprecation line never reached solr.log); it passes in both positive runs at the exact head, so the failure is attributable to the substituted script, not the head.",
+   "skipped": 1,
+   "xml_note": "The negative run's report.xml is not well-formed (raw terminal spinner text embedded at line 10 by the BATS JUnit writer); the Gradle log's TAP output is the retained record for this leg. The positive runs' report.xml files parse cleanly."
+  },
+  "positive_common": {
+   "cases": 12,
+   "exit_code": 0,
+   "failed": 0,
+   "force_kill": "none; the readiness fix at this head resolves the stop-wait failure that failed the simple-order round",
+   "ordering_assertion": "passed",
+   "passed": 11,
+   "skipped": 1
+  },
+  "positive_picocli": {
+   "cases": 12,
+   "exit_code": 0,
+   "failed": 0,
+   "force_kill": "none",
+   "ordering_assertion": "passed",
+   "passed": 11,
+   "skipped": 1
+  },
+  "root_check": {
+   "exit_code": 0,
+   "result": "BUILD SUCCESSFUL in 8m 51s; excluded tasks did not execute"
+  },
+  "tidy": {
+   "exit_code": 0,
+   "tracked_changes": false
+  }
+ },
+ "skip": {
+  "finding": "/usr/bin/timeout is installed; test_start_solr.bats invokes timeout with no operands in 'check stop command doesn't hang' and the case skips on the usage exit, reported as 'timeout utility is not available'. Same test-source skip as the simple-order round; disclosed per requirement 4.",
+  "runs": "skipped in all three BATS runs",
+  "test": "check stop command doesn't hang"
+ },
+ "type": "evidence"
+}

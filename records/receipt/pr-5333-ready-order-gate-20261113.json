@@ -1,0 +1,48 @@
+{
+ "evidence_record": "records/evidence/pr-5333-ready-order-gate-20261113.json",
+ "evidence_sha256": "581cb3585522fcc68a23b28d1ac0bdac51784859ba6e421be528be3a11737226",
+ "executor": "phone-agent",
+ "filed": "2026-11-13T20:57:00-07:00",
+ "gate": "pr-5333-ready-order-gate-20261113",
+ "head": "395f4d94d7fc5462655d8ecdc22b30268286862a",
+ "id": "pr-5333-ready-order-gate-20261113",
+ "job": "pr-5333-ready-order-gate-20261113",
+ "legs": [
+  {
+   "leg": "pre-claim verification",
+   "result": "Fork branch pr-5333-shutdown-doc at the gate head; upstream PR head at the contributor commit; gate head is one readiness commit (+7 lines in test_start_solr.bats) atop the simple-order head; the related ready-stop-probe diagnostic is released with a passed receipt."
+  },
+  {
+   "leg": "negative proof (contributor bin/solr)",
+   "result": "integrationTests exit 1; 12 cases, 9 passed, 2 failed, 1 skipped. The ordering case failed at test_start_solr.bats:108 because the ZooKeeper host was stopped first, with both nodes started and ready. A second failure (deprecated-property conversion case) is a mutation side effect; it passes at the exact head."
+  },
+  {
+   "leg": "positive commons-cli",
+   "result": "integrationTests exit 0; 12 cases, 11 passed, 0 failed, 1 skipped (known timeout-utility skip). Ordering assertion passed; no force kill; both processes stopped."
+  },
+  {
+   "leg": "positive picocli",
+   "result": "integrationTestsPicocli exit 0; 12 cases, 11 passed, 0 failed, 1 skipped. Ordering assertion passed; no force kill."
+  },
+  {
+   "leg": "tidy",
+   "result": "exit 0, no tracked changes."
+  },
+  {
+   "leg": "root check",
+   "result": "check -x test with the standing Antora/ref-guide exclusions: BUILD SUCCESSFUL."
+  },
+  {
+   "leg": "cleanup",
+   "result": "No listeners on 18983/18984/19983 and no Solr or BATS processes remain; both checkouts clean at the gate head."
+  }
+ ],
+ "limits": [
+  "The test masks the enable flag from classification while using real nodes; not every real alternative configuration is proven.",
+  "No macOS or Docker result is claimed.",
+  "The negative run's report.xml is not well-formed (spinner text embedded by the BATS JUnit writer); its TAP log is the retained record."
+ ],
+ "summary": "PASSED at 395f4d94. Negative proof satisfied: with only solr/bin/solr replaced by the contributor blob, the marker-ordering case failed at its assertion with both nodes ready (contributor script stopped the ZooKeeper host first). At the exact head both packaging variants pass 11 of 12 cases with no failures and no force kill (the readiness fix resolves the simple-order round's stop-wait failure); the one skip is the known timeout-utility test-source skip, disclosed. Tidy leaves no changes and root check succeeds with the standing Antora exclusions.",
+ "type": "receipt",
+ "verdict": "passed"
+}
