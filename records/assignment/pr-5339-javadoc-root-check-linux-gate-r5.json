@@ -1,0 +1,20 @@
+{
+  "claim_path": "records/claim/pr-5339-javadoc-root-check-linux-gate-r5.json",
+  "gate_id": "pr-5339-javadoc-root-check-linux-gate-r5",
+  "gate_record": "records/gate/pr-5339-javadoc-root-check-linux-gate-r5.json",
+  "id": "pr-5339-javadoc-root-check-linux-gate-r5",
+  "intended_host": "Linux",
+  "job": "pr-5339-javadoc-root-check-linux-gate-r5",
+  "phase": "Javadoc root check r5",
+  "prior_gate": "records/gate/pr-5339-javadoc-order-linux-gate-r4.json",
+  "prior_receipt": "records/receipt/pr-5339-javadoc-order-linux-gate-r4-receipt.json",
+  "reason": "r4 receipt records focused tests and tidy at head but omits the required exact-head root check; prior-head check is not the requested leg.",
+  "receipt_path": "records/receipt/pr-5339-javadoc-root-check-linux-gate-r5-receipt.json",
+  "source": {
+    "branch": "pr-5339-signature-migration",
+    "head": "c8ad8f01f5c1d0495b047a74f609207fbfdf81ee",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Complete omitted exact-head root check for PR 5339 Javadoc gate",
+  "type": "assignment"
+}
