@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "Administrative claim only; no executor or build was started. See records/report/pr-5339-javadoc-root-check-linux-gate-r5-cancelled.json.",
+  "id": "pr-5339-javadoc-root-check-linux-gate-r5",
+  "job": "pr-5339-javadoc-root-check-linux-gate-r5",
+  "reason": "Cancelled at owner request; no root-check run required.",
+  "type": "release"
+}
