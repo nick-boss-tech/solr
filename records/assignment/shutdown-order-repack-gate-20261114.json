@@ -1,0 +1,21 @@
+{
+  "claim_path": "records/claim/shutdown-order-repack-gate-20261114.json",
+  "contributor_head": "65c2d85f77017a951f20dc110d71bf14786c6694",
+  "gate_id": "shutdown-order-repack-gate-20261114",
+  "gate_record": "records/gate/shutdown-order-repack-gate-20261114.json",
+  "id": "shutdown-order-repack-gate-20261114",
+  "intended_host": "Linux",
+  "job": "shutdown-order-repack-gate-20261114",
+  "notes": "Repackaged as one safe-message commit directly atop contributor head; tree is identical to prior tested head. Verify before execution. No public comment is authorized by this gate.",
+  "phase": "repackaged exact-head proof",
+  "receipt_path": "records/receipt/shutdown-order-repack-gate-20261114.json",
+  "source": {
+    "branch": "embedded-zookeeper-shutdown-order",
+    "head": "a9e8ce1db89b0094fb16b90d41bce7402ed4407d",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5333-ready-order-gate-20261113",
+  "summary": "Verify the repackaged embedded ZooKeeper shutdown follow-up",
+  "supersedes": "records/gate/pr-5333-ready-order-gate-20261113.json; prior passing receipt covers old head 395f4d94d7fc5462655d8ecdc22b30268286862a only",
+  "type": "assignment"
+}
