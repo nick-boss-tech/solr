@@ -1,0 +1,13 @@
+{
+  "id": "pr-5337-package-exit-doc-r3-report",
+  "job": "pr-5337-package-exit-doc-r3",
+  "results": "Added exit code 2 description to PackageTool picocli help and matching generated reference entry. git diff --check passed. On Windows javac compiled modified PackageTool against the previously assembled distribution, then direct Java runs with the changed class overlaid confirmed package returns 2 and package --help returns 0; both printed the new status description. This is a targeted class-overlay check, not a full build or script integration test of the new head. Exact-head Linux gate pending.",
+  "source": {
+    "branch": "pr-5337-cli-exit-fixes",
+    "head": "773528a6973c8a880d0c9bcce766d682d1fc9937",
+    "previous_head": "21379130f426433f163fcd61f0731b8ad51d1412",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Package help exit code documented; Linux proof pending",
+  "type": "report"
+}
