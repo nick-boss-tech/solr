@@ -1,0 +1,97 @@
+{
+  "cleanup": {
+    "assigned_worktree_head": "4ed727d4f737e0a4f0b5743b60d7e80e5e05bf2c",
+    "fixed_test_ports_listening": false,
+    "free_inodes_percent_before_worktree_removal": 54.03,
+    "gate_worktree_removed": true,
+    "gradle_daemon_stopped": true,
+    "required_gradle_locks_free": true,
+    "solr_bats_gradle_processes_remaining": false,
+    "worktree_clean_before_removal": true
+  },
+  "commands": {
+    "fail_before": "./gradlew :solr:packaging:integrationTests --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks (after replacing only solr/bin/solr with contributor-head blob 59aecb926a00a1522461357dc133bda1a1414aef from 65c2d85f77017a951f20dc110d71bf14786c6694)",
+    "positive_common": "./gradlew :solr:packaging:integrationTests --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks",
+    "positive_picocli": "./gradlew :solr:packaging:integrationTestsPicocli --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks",
+    "root_check": "./gradlew check -x test",
+    "tidy": "./gradlew tidy"
+  },
+  "environment": "Linux x86_64, OpenJDK 21.0.12.1, clean isolated worktree, normal security manager.",
+  "evidence_record": "records/evidence/pr-5333-simple-order-gate-20261113.json",
+  "evidence_sha256": "efddab7d437ca0a398567b60de34f8168bb28ed82320ac18689ab2049a18aa70",
+  "gate": "pr-5333-simple-order-gate-20261113",
+  "head": "4ed727d4f737e0a4f0b5743b60d7e80e5e05bf2c",
+  "id": "pr-5333-simple-order-gate-20261113",
+  "job": "pr-5333-simple-order-gate-20261113",
+  "limits": [
+    "No Docker installed or used.",
+    "No macOS result is claimed.",
+    "No source/test authoring, public PR changes, or Jira changes were made."
+  ],
+  "results": {
+    "fail_before": {
+      "assertion": "test_start_solr.bats:101 failed behaviorally with two running nodes: expected stop port 18984 before 18983, but the baseline script stopped 18983 first.",
+      "exit_code": 1,
+      "mutated_blob": "59aecb926a00a1522461357dc133bda1a1414aef",
+      "mutation_file": "solr/bin/solr",
+      "negative_proof": "satisfied",
+      "restored_source_head": "4ed727d4f737e0a4f0b5743b60d7e80e5e05bf2c",
+      "retained_test_blob": "0ac4585b758b66bcb82e1f4120021257b2ae69f0"
+    },
+    "positive_common": {
+      "bats_cases": 12,
+      "exit_code": 1,
+      "failed": 1,
+      "failure": "test_start_solr.bats:102 rejected 'forcefully killing' after a Solr node exceeded SOLR_STOP_WAIT=30 seconds.",
+      "ordering_assertion": "passed at test_start_solr.bats:101",
+      "passed": 10,
+      "skipped": 1
+    },
+    "positive_picocli": {
+      "bats_cases": 12,
+      "exit_code": 1,
+      "failed": 1,
+      "failure": "test_start_solr.bats:102 rejected 'forcefully killing' after a Solr node exceeded SOLR_STOP_WAIT=30 seconds.",
+      "ordering_assertion": "passed at test_start_solr.bats:101",
+      "passed": 10,
+      "skipped": 1
+    },
+    "root_check": {
+      "actual_base_command": "./gradlew check -x test",
+      "additional_exclusions": [
+        ":solr:solr-ref-guide:downloadAntoraCli",
+        ":solr:solr-ref-guide:downloadAntoraLunrExtension",
+        ":solr:solr-ref-guide:downloadAntoraSiteGenerator",
+        ":solr:solr-ref-guide:downloadAntora",
+        ":solr:solr-ref-guide:downloadAsciidoctorMathjaxExtension",
+        ":solr:solr-ref-guide:downloadAsciidoctorTabsExtension",
+        ":solr:solr-ref-guide:nodeSetup",
+        ":solr:solr-ref-guide:npmSetup",
+        ":solr:solr-ref-guide:buildLocalAntoraPlaybookYaml",
+        ":solr:solr-ref-guide:buildLocalAntoraYaml",
+        ":solr:solr-ref-guide:setupLocalSiteStagingDir",
+        ":solr:solr-ref-guide:buildLocalAntoraSite",
+        ":solr:solr-ref-guide:buildLocalSite",
+        ":solr:solr-ref-guide:downloadLinkValidator",
+        ":solr:solr-ref-guide:checkSiteLinks",
+        ":solr:core:renderSiteJavadoc",
+        ":solr:test-framework:renderSiteJavadoc"
+      ],
+      "excluded_tasks_executed": false,
+      "exit_code": 0
+    },
+    "tidy": {
+      "exit_code": 0,
+      "tracked_changes": false
+    }
+  },
+  "skip": {
+    "finding": "/usr/bin/timeout is installed; test_start_solr.bats:142 invokes timeout with no operands and skips on usage exit 125. This is a test-source skip, not a missing host dependency.",
+    "reported_reason": "timeout utility is not available",
+    "source_changed": false,
+    "test": "check stop command doesn't hang"
+  },
+  "type": "receipt",
+  "verdict": "failed",
+  "watchdog": "All Gradle legs used solr-live-build.py under both required locks with a 3600-second default limit and heartbeat; no timeout exit occurred."
+}
