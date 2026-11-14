@@ -1,0 +1,7 @@
+{
+  "id": "phone-agent-2-gate-runner-guard-20261113",
+  "job": "phone-agent-2-gate-runner-guard-20261113",
+  "scope": "Local /workspace/AGENTS.md and gate wrapper safeguards, plus a recommendation for phone-agent-2 gate execution only. Do not change PR #5333 source, gate, report, receipt, release records, or unrelated board policy.",
+  "summary": "Harden only the local phone-agent-2 Solr gate-running process with a finite wall-clock limit and logged heartbeat; record a narrow board suggestion, not a board-wide incident claim.",
+  "type": "assignment"
+}
