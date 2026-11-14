@@ -1,0 +1,10 @@
+{
+  "claimed": "2026-11-14T01:35:00Z",
+  "head": "db4483f0294bfc4fe8dae73a16ad3e526db8ef1f",
+  "host": "linux",
+  "id": "pr5320-api-regression-linux-gate-20261113",
+  "job": "pr5320-api-regression-linux-gate-20261113",
+  "note": "Live fork branch pr-5320-api-regression verified at gate head db4483f0 by git ls-remote; contributor parent 5fa55130. Diff vs parent is test-only: one commit adding testRepeatedV2PermissionDeleteById to BasicAuthIntegrationTest.java (58 insertions, no schema/validator change). Gate is coverage-only on an existing fix; no fail-before required. No conflicting claim exists for this gate on coordination-v2; claimed by vm2.",
+  "owner": "vm2",
+  "type": "claim"
+}
