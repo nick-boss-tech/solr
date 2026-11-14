@@ -1,0 +1,9 @@
+{
+ "executor_stop_evidence": "Both test legs ran in one flock-serialized tracked chain that has exited; the checkout is clean at the gate head and no test process remains. Gradle daemons were stopped or left idle-resident per host norm; no leg is still running.",
+ "id": "term-vector-exclusion-repro-linux-20261114",
+ "job": "term-vector-exclusion-repro-linux-20261114",
+ "receipt": "records/receipt/term-vector-exclusion-repro-linux-20261114-receipt.json",
+ "released": "2026-11-14T09:32:00-07:00",
+ "released_by": "phone-agent",
+ "type": "release"
+}

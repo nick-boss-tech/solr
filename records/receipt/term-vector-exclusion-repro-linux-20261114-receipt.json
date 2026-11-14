@@ -1,0 +1,31 @@
+{
+ "evidence_record": "records/evidence/term-vector-exclusion-repro-linux-20261114.json",
+ "evidence_sha256": "521e32ead31613524f81201da8730a6ae47a5ef186a0834118dbe22e4a54f24d",
+ "executor": "phone-agent",
+ "filed": "2026-11-14T09:32:00-07:00",
+ "gate": "term-vector-exclusion-repro-linux-20261114",
+ "head": "5b7441b491dcd75b75d558219f359df4a8b5c3e4",
+ "id": "term-vector-exclusion-repro-linux-20261114-receipt",
+ "job": "term-vector-exclusion-repro-linux-20261114",
+ "legs": [
+  {
+   "leg": "verification",
+   "result": "Fork branch at the gate head; PR 5321 live head 35db4554 is a direct ancestor; branch diff is one test-only commit (+52 lines in TermVectorComponentTest.java). Clean checkout, JDK 21 recorded."
+  },
+  {
+   "leg": "controls",
+   "result": "testExclusionVectorControls PASSED at seed 5321CAFE: 1 test, 0 failures, 0 skipped. Both the wildcard control and the explicit tv.fl control returned both vectors."
+  },
+  {
+   "leg": "diagnostic",
+   "result": "testExclusionRetainsOtherTermVectors FAILED at seed 5321CAFE with 'Path not found: /termVectors/5321/test_basictv/alpha/tf'. Actual response termVectors: {\"5321\": {\"uniqueKey\": \"5321\"}}; only uniqueKey remains."
+  },
+  {
+   "leg": "scope",
+   "result": "No source modified or pushed; no tidy or root check required for this diagnostic gate; no broader PR correctness or distributed behavior is claimed."
+  }
+ ],
+ "summary": "PASSED (reproduction confirmed) at 5b7441b4. Controls passed with zero skips: wildcard fl returns both field vectors, and explicit tv.fl returns both even under an fl exclusion. The diagnostic then failed exactly as specified: with fl=*,-test_offtv and no tv.fl, the retained field test_basictv's vector is absent; the full termVectors response for the document contains only uniqueKey. This is a diagnostic reproduction of the behavior at the named head, not a passing production fix.",
+ "type": "receipt",
+ "verdict": "passed"
+}

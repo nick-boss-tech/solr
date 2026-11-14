@@ -1,0 +1,28 @@
+{
+ "cleanup": "Checkout left clean at the gate head in ~/workspace/solr-clones/tv-repro; logs and JUnit XML retained under ~/workspace/tools/tv-repro/.",
+ "contributor_head": "35db4554284ca0d2ca37eb78ed4c7c7dee599db2",
+ "controls": {
+  "command": ":solr:core:test --tests org.apache.solr.handler.component.TermVectorComponentTest.testExclusionVectorControls -Ptests.seed=5321CAFE",
+  "detail": "Wildcard control (fl=*, tv=true): both test_basictv/alpha and test_offtv/beta vectors present with tf==1. Explicit tv.fl control (fl=*,-test_offtv, tv.fl=test_basictv,test_offtv): both vectors still present; explicit tv.fl remains distinct from fl and overrides the exclusion.",
+  "result": "PASSED (exit 0). JUnit: 1 test, 0 failures, 0 errors, 0 skipped."
+ },
+ "diagnostic": {
+  "actual_termVectors_response": {
+   "5321": {
+    "uniqueKey": "5321"
+   }
+  },
+  "command": ":solr:core:test --tests org.apache.solr.handler.component.TermVectorComponentTest.testExclusionRetainsOtherTermVectors -Ptests.seed=5321CAFE",
+  "observation": "With fl=*,-test_offtv and no explicit tv.fl, the termVectors section for the document contains only uniqueKey. The excluded field's vector (test_offtv) is absent, and the retained field's vector (test_basictv) is absent as well. Whether the excluded field's vector should appear is not asserted here; the recorded defect is the loss of the retained field's vector. With explicit tv.fl (controls leg), both vectors appear.",
+  "request": "json.nl=map&q=id:5321&fl=*,-test_offtv&tv=true&tv.tf=true",
+  "result": "FAILED as the reproduction requires (exit 1). JUnit: 1 test, 1 failure, 0 errors, 0 skipped. Failure: java.lang.RuntimeException: Path not found: /termVectors/5321/test_basictv/alpha/tf (assertJQ at TermVectorComponentTest.java:91). The test compiled and executed; the failure is the missing retained vector, not a setup, fixture or harness error."
+ },
+ "environment": "Linux x86_64, OpenJDK 21.0.12.1, clean isolated checkout at the exact head (status clean apart from the host's copied gradle.properties), Gradle via the host's solr-gradle.sh (Gradle 9.7.0); the gate's ./gradlew form maps to the same tasks. Seed 5321CAFE for both legs; each leg ran :solr:core:cleanTest first and its JUnit XML was preserved immediately.",
+ "executor": "phone-agent",
+ "formatting": "No tidy or root check is required by this diagnostic gate and none was run; the tested head was not modified. No formatting issue was observed in the test-only diff.",
+ "head": "5b7441b491dcd75b75d558219f359df4a8b5c3e4",
+ "id": "term-vector-exclusion-repro-linux-20261114-evidence",
+ "job": "term-vector-exclusion-repro-linux-20261114",
+ "type": "evidence",
+ "verification": "Fork branch term-vector-exclusion-repro-20261114 verified at 5b7441b4; upstream PR 5321 head verified live at 35db4554 and is a direct ancestor of the branch head. The branch diff from the contributor head is one test-only commit (+52 lines, TermVectorComponentTest.java only): a shared fixture (doc id 5321 with test_basictv=alpha and test_offtv=beta) plus the two gate methods. No production files."
+}
