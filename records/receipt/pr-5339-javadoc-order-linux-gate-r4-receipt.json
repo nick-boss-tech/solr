@@ -1,0 +1,21 @@
+{
+  "evidence": "records/evidence/pr-5339-javadoc-order-linux-gate-r4-evidence.tar.gz (SHA-256 6fec792514be15f8db59bef82740b0c9540eff63b41aa104eb6296315193bb3b)",
+  "gate": "records/gate/pr-5339-javadoc-order-linux-gate-r4.json",
+  "head": "c8ad8f01f5c1d0495b047a74f609207fbfdf81ee",
+  "host": "linux",
+  "id": "pr-5339-javadoc-order-linux-gate-r4-receipt",
+  "job": "pr-5339-javadoc-order-linux-gate-r4",
+  "legs": {
+    "diff_verification": "PASSED: live fork branch pr-5339-signature-migration at head c8ad8f01; only changed file vs prior head 47e891ce is solr/core/src/java/org/apache/solr/update/processor/TextProfileSignature.java (1 insertion, 1 deletion) — a single Javadoc list-item move: 'sort the list of tokens by decreasing frequency (ties broken by token string)' moved to after the quantization bullet, matching the actual algorithm order. No executable code or test change.",
+    "focused_test": "PASSED: ./gradlew :solr:core:test --tests org.apache.solr.update.processor.TextProfileSignatureTest -Ptests.seed=5339; BUILD SUCCESSFUL in 5m47s; tests=4 skipped=0 failures=0 errors=0 (all four tests pass at head c8ad8f01, including testProfileOrdersQuantizedCountsAndTies and testSignatureStableAcrossHashMapResize). XML evidence retained.",
+    "tidy": "PASSED: ./gradlew tidy exit=0 BUILD SUCCESSFUL in 1m9s; post-tidy tracked changes=0. Head c8ad8f01 is spotless-clean (no formatting repair needed).",
+    "prior_head_evidence": "CITED from records/receipt/pr-5339-signature-coverage-linux-gate-r3-receipt.json (prior head 47e891ce): fail-before at base 1bb66393 with pre-PR comparator discriminates via testSignatureStableAcrossHashMapResize; three comparator mutations (ascending frequency, strings-only, reversed tie-break) each fail testProfileOrdersQuantizedCountsAndTies on known MD5 900382f1...; check -x test -Prefguide.include=false BUILD SUCCESSFUL including :solr:core:spotlessJavaCheck. Executable code and tests are byte-identical between 47e891ce and c8ad8f01 (only the Javadoc bullet moved), so these proofs carry to the r4 head. No fresh fail-before or mutation leg required for a Javadoc-only change.",
+    "buildLocalSite": "excluded under standing owner Antora/ref-guide policy (not enforced for gate runs)"
+  },
+  "owner": "vm2",
+  "phase": "Javadoc r4",
+  "recorded": "2026-11-14",
+  "summary": "PR-5339 Javadoc-order r4 Linux gate on vm2 at exact head c8ad8f01 PASSES. The r4 head differs from the r3-passed head 47e891ce by exactly one line: the Javadoc list item 'sort the list of tokens by decreasing frequency (ties broken by token string)' moved after the quantization bullet in TextProfileSignature.java, so the algorithm description matches the actual execution order. No executable code or test change. Focused TextProfileSignatureTest seed 5339 passes 4/4 (0 failures, 0 errors) in 5m47s; tidy exit=0 with zero tracked changes (head is spotless-clean). The r3 receipt's fail-before and three comparator-mutation proofs are cited as prior-head evidence since the executable code and tests are byte-identical between 47e891ce and c8ad8f01. buildLocalSite excluded under the standing owner Antora policy.",
+  "type": "receipt",
+  "verdict": "passed"
+}
