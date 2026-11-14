@@ -1,0 +1,16 @@
+{
+  "changes": "Required successor (r3) change: apply the spotless reformat to solr/core/src/test/org/apache/solr/update/processor/TextProfileSignatureTest.java so :solr:core:spotlessCheck passes. The exact diff is in the evidence (tidy-testfile.diff / tidy-fixed-test.java): 2 hunks joining the adjacent string literals in testProfileOrdersQuantizedCountsAndTies (e.g. \"bravo bravo bravo bravo apple apple apple apple apple \" + \"zulu zulu zulu zulu zulu zulu\" on one line). No behavioral code change is required — all four focused tests pass at the exact head and all discriminating proof legs pass.",
+  "coordination": "r1 gate (pr-5339-signature-migration-linux-gate-r1) was released with an incomplete receipt (owner stop; antora excluded; 3 tests at an older head 6d886caf). This r2 gate ran the full coverage proof at the exact head 83b2df09. No overlapping active work observed; the r2 claim (vm2) is the only claim for this gate.",
+  "gate": "records/gate/pr-5339-signature-coverage-linux-gate-r2.json",
+  "head": "83b2df0977499337bc88daaba8eb872a3835f31b",
+  "id": "pr-5339-signature-coverage-linux-gate-r2-report",
+  "job": "pr-5339-signature-coverage-linux-gate-r2",
+  "source": {
+    "branch": "pr-5339-signature-migration",
+    "head": "83b2df0977499337bc88daaba8eb872a3835f31b",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "PR-5339 r2 coverage Linux gate FAILED on the exact head 83b2df09 with one material defect: the head test file TextProfileSignatureTest.java is not spotless-clean. ./gradlew tidy exits 0 but leaves 1 tracked change (spotlessApply reformats 2 hunks — the string-line-joins in testProfileOrdersQuantizedCountsAndTies), and fail-before :solr:core:spotlessCheck on the head-identical file deterministically returns rc=1 naming the same 2 hunks. The root check -x test leg (owner policy: Antora/ref-guide excluded via -Prefguide.include=false) is blocked by the same :solr:core:spotlessJavaCheck failure. All behavioral proof is discriminating and green: the focused TextProfileSignatureTest seed 5339 passes 4/4; fail-before at base 1bb66393 with the pre-PR comparator (return t2.cnt - t1.cnt;) restored makes testSignatureStableAcrossHashMapResize fail via AssertionError expected:<69> but was:<-102>; and each comparator mutation (ascending frequency, strings-only, reversed string tie-break) makes testProfileOrdersQuantizedCountsAndTies fail via ComparisonFailure on the known MD5 900382f1... . buildLocalSite excluded under the standing Antora owner policy. Verdict: failed — the formatting violation breaks the tidy/check leg and per the gate a formatting repair needs a new pushed head and a superseding gate. No public comments.",
+  "type": "report",
+  "verdict": "failed"
+}
