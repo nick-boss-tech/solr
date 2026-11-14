@@ -22,6 +22,8 @@ import static org.apache.solr.common.cloud.ZkStateReader.HTTPS_PORT_PROP;
 import io.opentelemetry.api.common.Attributes;
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
+import java.lang.management.ManagementFactory;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeoutException;
@@ -64,6 +66,7 @@ public class ZkContainer {
 
   protected ZkController zkController;
   private SolrZkServer zkServer;
+  private Path zkMarker;
 
   private ExecutorService coreZkRegister =
       ExecutorUtil.newMDCAwareCachedThreadPool(new SolrNamedThreadFactory("coreZkRegister"));
@@ -74,6 +77,20 @@ public class ZkContainer {
 
   public void initZooKeeper(final CoreContainer cc, CloudConfig config) {
     boolean zkRun = EnvUtils.getPropertyAsBool(ZK_SERVER_ENABLED_PROP, false);
+
+    String pidDir = EnvUtils.getProperty("solr.pid.dir");
+    String port = EnvUtils.getProperty("solr.port.listen");
+    if (pidDir != null && port != null) {
+      zkMarker = Path.of(pidDir, "solr-" + port + ".zookeeper");
+      try {
+        Files.deleteIfExists(zkMarker);
+      } catch (IOException | SecurityException e) {
+        log.warn("Could not remove stale embedded ZooKeeper marker {}", zkMarker, e);
+      }
+    }
+    if (!zkRun) {
+      writeZooKeeperMarker(false);
+    }
 
     if (zkRun && config == null)
       throw new SolrException(
@@ -105,6 +122,7 @@ public class ZkContainer {
               config.getSolrHostPort());
       zkServer.parseConfig();
       zkServer.start();
+      writeZooKeeperMarker(true);
 
       // set client from server config if not already set
       if (zookeeperHost == null) {
@@ -236,6 +254,16 @@ public class ZkContainer {
     }
   }
 
+  private void writeZooKeeperMarker(boolean enabled) {
+    if (zkMarker == null) return;
+    try {
+      Files.writeString(
+          zkMarker, ManagementFactory.getRuntimeMXBean().getPid() + (enabled ? ":on" : ":off"));
+    } catch (IOException | SecurityException e) {
+      log.warn("Could not write embedded ZooKeeper marker {}", zkMarker, e);
+    }
+  }
+
   private String stripChroot(String zkRun) {
     if (zkRun == null || zkRun.trim().isEmpty() || zkRun.lastIndexOf('/') < 0) return zkRun;
     return zkRun.substring(0, zkRun.lastIndexOf('/'));
@@ -310,6 +338,13 @@ public class ZkContainer {
       } finally {
         if (zkServer != null) {
           zkServer.stop();
+        }
+        if (zkMarker != null) {
+          try {
+            Files.deleteIfExists(zkMarker);
+          } catch (IOException | SecurityException e) {
+            log.warn("Could not remove embedded ZooKeeper marker {}", zkMarker, e);
+          }
         }
       }
       IOUtils.closeQuietly(metricProducer);

@@ -65,7 +65,50 @@ teardown() {
 }
 
 node_has_zookeeper_role() {
-  curl -fsS "$1" | grep -F "\"zookeeper\":\"$2\""
+  curl --connect-timeout 2 --max-time 5 -fsS "$1" | grep -F "\"zookeeper\":\"$2\""
+}
+
+@test "stop uses the ZooKeeper marker when the JVM flag is not visible" {
+  solr start
+  solr start -p "${SOLR2_PORT}" -z "localhost:${ZK_PORT}"
+
+  run wait_for 30 1 node_has_zookeeper_role \
+    "http://localhost:${SOLR_PORT}/api/cluster/node-roles/node/localhost:${SOLR_PORT}_solr?indent=false" on
+  assert_success
+  run wait_for 30 1 node_has_zookeeper_role \
+    "http://localhost:${SOLR2_PORT}/api/cluster/node-roles/node/localhost:${SOLR2_PORT}_solr?indent=false" off
+  assert_success
+
+  # Force the embedded host to be listed first and hide its JVM flag from the
+  # classification call. All other process inspection uses the real commands.
+  local shim_dir="${BATS_TEST_TMPDIR}/bin"
+  mkdir -p "$shim_dir"
+  export REAL_FIND REAL_PS
+  REAL_FIND=$(command -v find)
+  REAL_PS=$(command -v ps)
+  cat > "${shim_dir}/find" <<'EOF'
+#!/usr/bin/env bash
+if [[ "$1" == "$SOLR_PID_DIR" && "$2" == "-name" && "$3" == "solr-*.pid" ]]; then
+  printf '%s\n' "$SOLR_PID_DIR/solr-$SOLR_PORT.pid" "$SOLR_PID_DIR/solr-$SOLR2_PORT.pid"
+else
+  exec "$REAL_FIND" "$@"
+fi
+EOF
+  cat > "${shim_dir}/ps" <<'EOF'
+#!/usr/bin/env bash
+if [[ "$1" == "-ww" && "$2" == "-o" && "$3" == "args=" && "$4" == "-p" ]]; then
+  "$REAL_PS" "$@" | sed 's/-Dsolr\.zookeeper\.server\.enabled=true//g'
+else
+  exec "$REAL_PS" "$@"
+fi
+EOF
+  chmod +x "${shim_dir}/find" "${shim_dir}/ps"
+  run env PATH="${shim_dir}:${PATH}" SOLR_STOP_WAIT=30 solr stop --all
+  assert_success
+  assert_output --regexp "Sending stop command.*port ${SOLR2_PORT} .*Sending stop command.*port ${SOLR_PORT} "
+  refute_output --partial 'forcefully killing'
+  solr assert --not-started "http://localhost:${SOLR_PORT}" --timeout 5000
+  solr assert --not-started "http://localhost:${SOLR2_PORT}" --timeout 5000
 }
 
 @test "embedded ZooKeeper preserves custom node roles" {
