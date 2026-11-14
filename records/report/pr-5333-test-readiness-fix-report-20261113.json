@@ -1,0 +1,12 @@
+{
+  "evidence": "records/receipt/pr-5333-ready-stop-probe-20261113-receipt.json; records/receipt/pr-5333-simple-order-gate-20261113.json",
+  "id": "pr-5333-test-readiness-fix-report-20261113",
+  "job": "pr-5333-test-readiness-fix-20261113",
+  "source": {
+    "branch": "pr-5333-shutdown-doc",
+    "head": "395f4d94d7fc5462655d8ecdc22b30268286862a",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Added bounded readiness polling for zookeeper:on and zookeeper:off to focused shutdown test, retaining order and no-force-kill assertions. The temporary Linux diagnostic at prior head passed each CLI once after the same checks; it is not exact-head proof. Windows diff check passed; no runtime tests run here.",
+  "type": "report"
+}
