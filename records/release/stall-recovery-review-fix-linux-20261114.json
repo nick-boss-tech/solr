@@ -1,0 +1,9 @@
+{
+ "executor": "phone-agent",
+ "id": "stall-recovery-review-fix-linux-20261114",
+ "job": "stall-recovery-review-fix-linux-20261114",
+ "note": "Gate complete; verdict failed on the tidy leg only (see receipt and evidence). All gate chains have exited and no gate process remains running; one idle Gradle daemon process is resident, the normal post-build state on this host. The gate clone is clean at the exact head; nothing was pushed to the tested branch.",
+ "receipt": "records/receipt/stall-recovery-review-fix-linux-20261114-receipt.json",
+ "released": "2026-11-14T15:42:00-07:00",
+ "type": "release"
+}
