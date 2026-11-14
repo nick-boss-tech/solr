@@ -1,0 +1,17 @@
+{
+  "environment": "Clean isolated Linux worktrees, JDK 21; capture exact revisions, overlays, commands, fresh logs and JUnit XML",
+  "head": "e5117658841ca30d4b888f311754c8818f06dbf3",
+  "id": "pr-5330-premise-linux-20261114",
+  "job": "pr-5330-premise-linux-20261114",
+  "phase": "premise audit; comparative investigation, not a production patch gate",
+  "requirements": [
+    "Reconcile previous executor ownership and exact remote fork and contributor heads; report drift instead of treating old evidence as current. Keep production of base 0ea013e782f747cc94e1504f8077f813d2ddcca8 and contributor eedcb534aca361be5bad5c56f1b2d3002eea855f unchanged.",
+    "In disposable worktrees compare original finish-first lost-other-replica-errors scenario on base and contributor head. Apply identical executable test overlays and only necessary reference-equality compile correction, recorded as exact diffs. Require bounded controlled preconditions, node-specific actual stall, failing node error and observed resulting errors/retry; record seed, command, XML, outcome and limitations. If comparison cannot be mounted, explain rather than claim proof.",
+    "Compare commit and delete-by-query behavior after a controlled stalled stream with pending queued updates on base and contributor production using the same unchanged test/probe. Observe whether each later request actually reaches its relevant endpoint, error/result handling and available recovery boundaries. The contributor explicitly chose to record an error rather than fail the entire request. Distinguish changed control flow, reproduced harmful externally visible behavior and unresolved design choice. Do not assume throwing is the sole safe behavior.",
+    "Investigate whether a real asynchronous stalled-runner callback reaches snapshot/clear window or arrives after final collection, and whether late success changes externally reported replication factor or replica recovery. Compare the same reproducible interleaving on base and contributor code where executable. Clearly separate reachability, observed loss and hypothetical or pre-existing behavior. Do not claim a synthetic injected-list mutation proves a real contributor-head regression.",
+    "Assess prior r10 receipt: two focused seeds and five mutations verify fork behavior; forbidden API check failed; the cited real runner callback test invokes blockUntilFinished after callbacks, so it does not establish concurrent real flush. Assess missing actual concurrency and queued-write/recovery requirements without converting missing evidence into a pass.",
+    "Deliver an evidence-based recommendation sorting minimal CI fix, changes shown necessary for PR 5330, independent pre-existing issues, and fork changes/test fixtures whose benefit is not demonstrated. Fork head is an optional third comparison only after establishing an issue. Record exact evidence and explicitly state non-reproductions, untested hypotheses, and any remaining maintainer decision. No public writes or production branch modifications."
+  ],
+  "type": "gate",
+  "verdict_policy": "Report passed only when the comparisons and required observations are actually completed; use incomplete for blocked, non-reproduced or missing evidence as appropriate. A successful diagnostic receipt is not a clean release gate."
+}
