@@ -1,0 +1,18 @@
+{
+  "branch": "term-vector-exclusion-repro-20261114",
+  "environment": "Linux JDK 21, clean isolated checkout",
+  "head": "5b7441b491dcd75b75d558219f359df4a8b5c3e4",
+  "id": "term-vector-exclusion-repro-linux-20261114",
+  "job": "term-vector-exclusion-repro-linux-20261114",
+  "phase": "diagnostic reproduction",
+  "repository": "nick-boss-tech/solr",
+  "requirements": [
+    "Verify exact remote head and ancestry from contributor head 35db4554284ca0d2ca37eb78ed4c7c7dee599db2; inspect test-only diff and record clean status and toolchain.",
+    "Run ./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.handler.component.TermVectorComponentTest.testExclusionVectorControls -Ptests.seed=5321CAFE. Require execution and pass of both wildcard and explicit tv.fl controls with zero skips. Preserve fresh log and XML.",
+    "Separately run ./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.handler.component.TermVectorComponentTest.testExclusionRetainsOtherTermVectors -Ptests.seed=5321CAFE. Capture fresh log, XML and actual response. Reproduction requires the test to compile and execute and fail specifically because retained test_basictv vector is absent; capture the full termVectors response and verify whether only uniqueKey remains. Setup, compile, harness, missing fixture, unexpected assertion or skip is not reproduction. If it passes, report non-reproduced and actual response.",
+    "Record whether excluded field vector appears as observed, without assuming its desired semantics; explicit tv.fl control must remain distinct. Do not modify or push source. This diagnostic branch intentionally has an expected failing assertion; do not classify that failure as a passing production fix.",
+    "Record any formatting issues, but do not change the tested head. No root check or tidy is required for this diagnostic-only reproduction; no broader PR correctness or distributed behavior is claimed."
+  ],
+  "type": "gate",
+  "verdict_policy": "passed means controls passed and the precise missing-retained-vector behavior was reproduced at the named head; non-reproduced means the diagnostic assertion passes with valid controls; otherwise incomplete. Report actual outcomes and evidence."
+}
