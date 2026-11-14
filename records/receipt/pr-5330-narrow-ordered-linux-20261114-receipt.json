@@ -1,0 +1,200 @@
+{
+  "checks": {
+    "full_check": {
+      "actionable_tasks": 516,
+      "antora_link_exclusions": [
+        ":solr:solr-ref-guide:checkSiteLinks",
+        ":solr:solr-ref-guide:downloadLinkValidator",
+        ":solr:solr-ref-guide:buildLocalSite",
+        ":solr:solr-ref-guide:buildLocalAntoraSite",
+        ":solr:solr-ref-guide:downloadAntora"
+      ],
+      "checkCliDocsUpToDate": "ran",
+      "command": "./gradlew check -x test -x :solr:solr-ref-guide:checkSiteLinks -x :solr:solr-ref-guide:downloadLinkValidator -x :solr:solr-ref-guide:buildLocalSite -x :solr:solr-ref-guide:buildLocalAntoraSite -x :solr:solr-ref-guide:downloadAntora --continue",
+      "docker_runtime_or_docker_dependent_tests": "not invoked; unit tests excluded; Docker CLI absent",
+      "executed": 489,
+      "failed_tasks": [
+        ":solr:core:spotlessJavaCheck"
+      ],
+      "forbiddenApisTest": "All applicable tasks completed without a reported failure; :solr:server:forbiddenApisTest was NO-SOURCE.",
+      "runner_exit": 1,
+      "static_solr_docker_project_tasks": [
+        "collectJarInfos",
+        "validateJarChecksums",
+        "rat",
+        "validateSourcePatterns",
+        "validateJarLicenses",
+        "licenses",
+        "check"
+      ],
+      "unit_tests": "excluded with -x test; unrun",
+      "up_to_date": 27
+    },
+    "task_graph_dry_run": {
+      "antora_site_or_link_tasks_scheduled": false,
+      "forbiddenApisTest_scheduled": true,
+      "runner_exit": 0,
+      "static_solr_docker_project_checks_scheduled": true,
+      "unit_tests_scheduled": false
+    },
+    "tidy": {
+      "acceptance": "failed: changed two long assertions in SolrCmdDistributorTest.java (4 insertions, 2 deletions)",
+      "actionable_tasks": 62,
+      "command": "./gradlew tidy",
+      "diff": "pr-5330-narrow-ordered-linux-20261114/tidy-exact-head.diff",
+      "runner_exit": 0
+    }
+  },
+  "commands_file_in_archive": "pr-5330-narrow-ordered-linux-20261114/commands.txt",
+  "environment": {
+    "gradle_user_home": "/workspace/gradle-home",
+    "heartbeat_seconds": 30,
+    "host": "Linux",
+    "initial_headroom": "56% free inodes; 44 GiB disk",
+    "java": "21",
+    "locks": [
+      "/workspace/tools/.gradle-phone-agent-2.lock",
+      "/workspace/tools/.gradle-0609f7968656.lock"
+    ],
+    "resource_sampling_seconds": 5,
+    "resource_stop_threshold": "15% free inodes or less than 2 GiB free disk",
+    "runner": "/workspace/tools/solr-live-build.py via run_gate.sh",
+    "runner_timeout_seconds": 3600
+  },
+  "evidence_record": "records/evidence/pr-5330-narrow-ordered-linux-20261114-evidence.json",
+  "evidence_sha256": "1318b0906b8a4f775620643768ae256b5576c25aa92edba5f2978b57857b4724",
+  "evidence_url_expires_at": "2027-11-14T04:21:00Z",
+  "gate": "pr-5330-narrow-ordered-linux-20261114",
+  "head": "be866aac94f7c05e262654fdfc7118e68eef5263",
+  "id": "pr-5330-narrow-ordered-linux-20261114-receipt",
+  "job": "pr-5330-narrow-ordered-linux-20261114",
+  "limits_and_exclusions": [
+    "Endpoint order is observed with a local HTTP fixture; it does not apply documents or exercise SolrCloud replica recovery.",
+    "Contributor commit marker absence is bounded non-observation, not general proof.",
+    "The possible callback race across separate synchronized-list snapshot and clear was not reproduced.",
+    "Unit tests, including any Docker-dependent tests, were not run in the full check because of -x test.",
+    "No Docker was installed or invoked; static checks in the :solr:docker Gradle project did run.",
+    "Antora/site-build and dependent link-check tasks were explicitly excluded; CLI documentation freshness check was retained."
+  ],
+  "proof_legs": {
+    "base_and_contributor_fail_before": "Base reproduced lost other-node errors. Contributor retained errors but its DBQ endpoint marker crossed the older queued stream=2; the commit marker was not observed in the bounded fixture window.",
+    "exact_ordering_and_error_retention": "Both exact seeds observed pendingQueue=2 and stall; commit and DBQ calls threw the stall IOException; after release only queued streams 1 and 2 were received, and stalled-node plus other-node errors were retained.",
+    "healthy_retry": "A local endpoint received the actual retry after a 503 and responded 200 to it.",
+    "late_callbacks": "Exact HTTP fixture observed a late 503 error and a late 200 success after stall handling; the test RF tracker updated from 1 to 2 and later 4. No callback was forced inside snapshot/clear and no SolrCloud recovery was exercised.",
+    "property_restoration": "The test code restores modified properties in finally and retains the Solr test restoration rule; no cross-seed contamination was observed."
+  },
+  "report_record": "records/report/pr-5330-narrow-ordered-linux-20261114-report.json",
+  "report_sha256": "fa140677fba34eca33afc80d2a11c7682abde4704ee6d2fb0b9ee2746f58039c",
+  "report_url_expires_at": "2027-11-14T04:22:19Z",
+  "run_results": [
+    {
+      "errors": 0,
+      "failures": 0,
+      "head": "be866aac94f7c05e262654fdfc7118e68eef5263",
+      "junit_xml": "pr-5330-narrow-ordered-linux-20261114/results/exact-healthy-retry-s5330/junit/TEST-org.apache.solr.update.SolrCmdDistributorTest.xml",
+      "result": "Actual retry delivered to same healthy local HTTP endpoint; response sequence 503, 200.",
+      "run": "exact-healthy-retry-s5330",
+      "runner_exit": 0,
+      "seed": "5330",
+      "skipped": 0,
+      "tests": 1
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "head": "be866aac94f7c05e262654fdfc7118e68eef5263",
+      "junit_xml": "pr-5330-narrow-ordered-linux-20261114/results/exact-suite-s5330/junit/TEST-org.apache.solr.update.SolrCmdDistributorTest.xml",
+      "required_tests_without_skip": [
+        "testStallKeepsErrorsFromOtherNodes",
+        "testCommitDoesNotCrossStalledFlush",
+        "testDeleteByQueryDoesNotCrossStalledFlush"
+      ],
+      "run": "exact-suite-s5330",
+      "runner_exit": 0,
+      "seed": "5330",
+      "skipped": 0,
+      "suite_time_seconds": 150.881,
+      "tests": 9
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "head": "be866aac94f7c05e262654fdfc7118e68eef5263",
+      "junit_xml": "pr-5330-narrow-ordered-linux-20261114/results/exact-suite-s5330c0de/junit/TEST-org.apache.solr.update.SolrCmdDistributorTest.xml",
+      "required_tests_without_skip": [
+        "testStallKeepsErrorsFromOtherNodes",
+        "testCommitDoesNotCrossStalledFlush",
+        "testDeleteByQueryDoesNotCrossStalledFlush"
+      ],
+      "run": "exact-suite-s5330c0de",
+      "runner_exit": 0,
+      "seed": "5330C0DE",
+      "skipped": 0,
+      "suite_time_seconds": 146.983,
+      "tests": 9
+    },
+    {
+      "endpoint_observation": "DBQ appeared between stream=1 and the older queued stream=2. Commit marker absence is bounded to the fixture window.",
+      "errors": 0,
+      "expected_failures": [
+        "testCommitDoesNotCrossStalledFlush: Expected exception IOException but no exception was thrown",
+        "testDeleteByQueryDoesNotCrossStalledFlush: Expected exception IOException but no exception was thrown"
+      ],
+      "failures": 2,
+      "head": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+      "junit_xml": "pr-5330-narrow-ordered-linux-20261114/results/contributor-fail-before-s5330/junit/TEST-org.apache.solr.update.SolrCmdDistributorTest.xml",
+      "preconditions": "The controlled endpoint accepted the request, two earlier updates were queued, and the stall was observed before assertions.",
+      "run": "contributor-fail-before-s5330",
+      "runner_exit": 1,
+      "seed": "5330",
+      "skipped": 0,
+      "tests": 5
+    },
+    {
+      "errors": 0,
+      "failures": 2,
+      "head": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+      "interpretation": "Expected controlled reproduction: failing-node connection refusal was known, but distributor resultErrors were empty after the stalled flush.",
+      "junit_xml": "pr-5330-narrow-ordered-linux-20261114/results/base-lost-error-s5330/junit/TEST-org.apache.solr.update.SolrCmdDistributorTest.xml",
+      "run": "base-lost-error-s5330",
+      "runner_exit": 1,
+      "seed": "5330",
+      "skipped": 0,
+      "tests": 2
+    }
+  ],
+  "slow_or_flaky_behavior": "testFinishPremiseWithControlledStall took 64.774 to 67.538 seconds across completed runs. A bounded executor shutdown wait was seen in the base thread dump; no runner timeout occurred.",
+  "source_reconciliation": {
+    "board_tip_before_publication": "73e7ebfbcc80dc2d6b2bf120074e64ff3dedb28f",
+    "claim_owner": "phone-agent-2",
+    "fork_branch": "nick-boss-tech/solr:pr-5330-ordered-flush-20261114",
+    "fork_head": "be866aac94f7c05e262654fdfc7118e68eef5263",
+    "fork_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+    "live_pr_5330_head": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+    "pinned_base": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+    "prior_premise_receipt": "incomplete; preserved unchanged",
+    "prior_premise_receipt_blob": "21b64e3f4bd0eca17238abc7fdf7d1459942143f",
+    "prior_premise_release_blob": "86cfc15f94ed01e01dac485e6a276773376d1b16"
+  },
+  "stop_state": {
+    "disposable_worktrees": "all three verified clean at assigned heads, then removed",
+    "gradle_daemons_stopped": 2,
+    "gradlew_stop_runner_exit": 0,
+    "inodes": "1,044,611 free of 1,868,096; df reports 45% used",
+    "related_process_scan": "none",
+    "required_locks": "both free",
+    "root_disk": "45 GiB available",
+    "source_clone": "removed",
+    "stop_evidence_file": "pr-5330-narrow-ordered-linux-20261114/release-stop-evidence.txt",
+    "stop_evidence_sha256": "60135e2d93f1636f867422a6d313af420e577129fe24a9642b30e700cec33772",
+    "temporary_runner_logs": "removed after copying evidence"
+  },
+  "tests": [
+    "testStallKeepsErrorsFromOtherNodes",
+    "testCommitDoesNotCrossStalledFlush",
+    "testDeleteByQueryDoesNotCrossStalledFlush"
+  ],
+  "type": "receipt",
+  "verdict": "failed",
+  "verdict_reason": "All requested behavioral proof legs completed and exact-head focused tests passed at both seeds, with zero skips. The mandatory tidy no-change criterion failed, and the full check exited 1 solely because :solr:core:spotlessJavaCheck found the same two assertion wraps that tidy generated. Do not mark green; a formatting correction needs a successor head and new gate."
+}
