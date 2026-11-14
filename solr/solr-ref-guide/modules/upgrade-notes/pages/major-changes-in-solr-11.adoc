@@ -29,19 +29,13 @@ For example, if you are currently using Solr 10.1, you should review changes mad
 
 === TextProfileSignature values change
 
-`TextProfileSignature` now orders tokens with equal frequencies by their text before calculating the signature.
-For some documents, this produces a different signature from earlier Solr versions, even when the input has not changed.
-Existing indexed signatures are not updated automatically, so new documents may no longer match old signatures for de-duplication or field collapsing.
-During an upgrade, nodes running different versions can also generate different signatures for the same input.
+If you use `TextProfileSignature`, Solr can generate a different signature for a document after this upgrade.
+Existing signatures in the index do not change automatically.
+As a result, a new document may not match an older document with the same text.
 
-If you use this signature, plan to rebuild the affected index from the original source documents using the upgraded version and the same signature configuration.
-Do not reuse previously generated signature values as input; allow the update processor to calculate them again.
-To avoid mixing old and new signatures, pause updates while upgrading and rebuilding, or build a separate index on the upgraded version and synchronize all updates and deletes before switching traffic.
-Resume writes only when the nodes processing updates and the index use the new version of the signature.
-
-If the signature is the unique key, rebuilding can change document IDs and SolrCloud routing.
-Update any external references and delete or update requests that depend on the old IDs; reindexing in place may leave documents under their old IDs.
-With `overwriteDupes=true`, documents that now have matching signatures can overwrite one another during the rebuild.
+If you need old and new signatures to match, rebuild the index from the original documents with the upgraded Solr version.
+If the signature is the unique key, the rebuild can change document IDs.
+Update any external references and delete or update requests that use the old IDs.
 
 == Removed Features
 
