@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "The authorized comment is stored at https://github.com/apache/solr/pull/5337#issuecomment-6868871342; records/report/pr-5337-comment-record-20261113-report.json records the read-back and heads. No executor remains active.",
+  "id": "pr-5337-comment-record-20261113",
+  "job": "pr-5337-comment-record-20261113",
+  "reason": "Public comment and read-back recorded",
+  "type": "release"
+}
