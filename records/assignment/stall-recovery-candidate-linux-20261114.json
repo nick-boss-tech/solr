@@ -1,0 +1,20 @@
+{
+  "claim_path": "records/claim/stall-recovery-candidate-linux-20261114.json",
+  "gate_id": "stall-recovery-candidate-linux-20261114",
+  "gate_record": "records/gate/stall-recovery-candidate-linux-20261114.json",
+  "id": "stall-recovery-candidate-linux-20261114",
+  "implementation_job": "stall-recovery-test-windows-r2-20261114",
+  "intended_host": "linux",
+  "job": "stall-recovery-candidate-linux-20261114",
+  "note": "Earlier exploratory probe was unclaimed at snapshot acfbd1f6b5292b683a3ca178517a1985c746f1fd. Reconcile live claims before starting. No duplicate runs.",
+  "phase": "candidate recovery test exact-head verification",
+  "receipt_path": "records/receipt/stall-recovery-candidate-linux-20261114-receipt.json",
+  "source": {
+    "branch": "stalled-stream-recovery-coverage",
+    "head": "b7c0f0abdf4f313b8eae6672d27602b9fe771027",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify candidate SolrCloud stalled update recovery test at the pushed source head",
+  "supersedes": "records/gate/stall-recovery-probe-linux-20261114.json",
+  "type": "assignment"
+}
