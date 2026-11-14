@@ -1,0 +1,23 @@
+{
+  "claim_path": "records/claim/term-vector-exclusion-repro-linux-20261114.json",
+  "contributor_head": "35db4554284ca0d2ca37eb78ed4c7c7dee599db2",
+  "gate_id": "term-vector-exclusion-repro-linux-20261114",
+  "gate_record": "records/gate/term-vector-exclusion-repro-linux-20261114.json",
+  "host_requirements": [
+    "linux",
+    "jdk21",
+    "Solr Gradle"
+  ],
+  "id": "term-vector-exclusion-repro-linux-20261114",
+  "job": "term-vector-exclusion-repro-linux-20261114",
+  "phase": "diagnostic reproduction",
+  "receipt_path": "records/receipt/term-vector-exclusion-repro-linux-20261114-receipt.json",
+  "related_pr": "https://github.com/apache/solr/pull/5321",
+  "source": {
+    "branch": "term-vector-exclusion-repro-20261114",
+    "head": "5b7441b491dcd75b75d558219f359df4a8b5c3e4",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Reproduce term-vector selection with field exclusions",
+  "type": "assignment"
+}
