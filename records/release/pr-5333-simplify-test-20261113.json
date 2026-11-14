@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "Commit 4ed727d4f737e0a4f0b5743b60d7e80e5e05bf2c pushed and verified at fork head; implementation worker has completed. Linux proof job is pr-5333-simple-order-gate-20261113.",
+  "id": "pr-5333-simplify-test-20261113",
+  "job": "pr-5333-simplify-test-20261113",
+  "reason": "Focused test committed and handed to separate Linux gate",
+  "type": "release"
+}
