@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "records/report/pr5320-api-regression-implementation-20261113-report.json; implementation processes finished, branch pushed and remote head verified. Linux gate is a separate job.",
+  "id": "pr5320-api-regression-implementation-20261113",
+  "job": "pr5320-api-regression-implementation-20261113",
+  "reason": "Implementation completed and handed to separate Linux gate",
+  "type": "release"
+}
