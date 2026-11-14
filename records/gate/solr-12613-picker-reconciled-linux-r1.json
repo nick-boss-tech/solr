@@ -1,0 +1,20 @@
+{
+  "head": "6a256c56cf613154b477a1a4679f7ad7e3558198",
+  "id": "solr-12613-picker-reconciled-linux-r1",
+  "job": "solr-12613-picker-reconciled-linux-r1",
+  "phase": "reconciled source round 1",
+  "receipt_path": "records/receipt/solr-12613-picker-reconciled-linux-r1.json",
+  "requirements": [
+    "Verify exact fork head and clean checkout, JDK 21, Chrome and driver; serialize against other builds.",
+    "Run tidy and focused AdminUiNodePickerTest browser suite with tests.selenium=true, plus AdminUiCoreAdminStandaloneTest as neighbor; record actual counts, skips, seed and failures.",
+    "Check that four added lifecycle cases detect restored pre-fix app.js, using the historical combined proof method where applicable; record actual assertion failures and restore the clean source.",
+    "Run applicable root check -x test with -Prefguide.include=false and changelog validation where applicable; Docker and Antora are not required.",
+    "Record source head, commands, outputs and limits; do not claim old receipt proves this head. A formatting change requires a new head and proof."
+  ],
+  "source": {
+    "baseline": "69627e3c58be1daaa6d8485b0c483e0e1442ec50",
+    "branch": "solr-12613-picker-lifecycle-reconciled",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "gate"
+}
