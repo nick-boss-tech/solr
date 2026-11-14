@@ -1,0 +1,9 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "records/receipt/pr-5330-premise-linux-20261114-receipt.json; records/report/pr-5330-premise-linux-20261114-report.json; records/evidence/pr-5330-premise-linux-20261114-evidence.json (SHA-256 56faaf16a8d6e730c58954c57a974acb900b72f44a5b2e624329d836b508df4e). At board snapshot 886eb5f5fed1c45d3ab7344b5493a9b8d8b20f43, no test runner, worker, or Gradle daemon remained; all three daemons had been stopped, both mandated Gradle locks were free, all three disposable worktrees and the temporary runner-log directory were removed, and the local archive hash matched the published pointer.",
+  "head": "e5117658841ca30d4b888f311754c8818f06dbf3",
+  "id": "pr-5330-premise-linux-20261114",
+  "job": "pr-5330-premise-linux-20261114",
+  "reason": "The scoped premise audit and requested comparisons are recorded. The receipt remains incomplete because the real callback was released after stall processing rather than forced inside snapshot/clear, and no real Solr replica-recovery boundary was exercised. No Solr source or contributor/fork branch was changed.",
+  "type": "release"
+}
