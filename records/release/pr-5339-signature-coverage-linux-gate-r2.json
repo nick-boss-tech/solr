@@ -1,0 +1,8 @@
+{
+  "actor": "vm2",
+  "evidence": "records/receipt/pr-5339-signature-coverage-linux-gate-r2-receipt.json; records/report/pr-5339-signature-coverage-linux-gate-r2-report.json; records/evidence/pr-5339-signature-coverage-linux-gate-r2-evidence.tar.gz",
+  "id": "pr-5339-signature-coverage-linux-gate-r2",
+  "job": "pr-5339-signature-coverage-linux-gate-r2",
+  "reason": "PR-5339 r2 coverage Linux gate completed with verdict FAILED at head 83b2df09. Receipt filed: records/receipt/pr-5339-signature-coverage-linux-gate-r2-receipt.json. One material defect: the head test file TextProfileSignatureTest.java is not spotless-clean — ./gradlew tidy leaves 1 tracked change (2 hunks in testProfileOrdersQuantizedCountsAndTies), fail-before :solr:core:spotlessCheck on the head-identical file returns rc=1, and the root check -x test leg is blocked by the same :solr:core:spotlessJavaCheck failure (check_rc=1). All behavioral proof legs are green and discriminating: focused TextProfileSignatureTest seed 5339 passes 4/4; fail-before at base 1bb66393 (pre-PR comparator restored) fails testSignatureStableAcrossHashMapResize via AssertionError; all three comparator mutations fail testProfileOrdersQuantizedCountsAndTies via ComparisonFailure. buildLocalSite excluded under standing Antora owner policy. Report records/report/pr-5339-signature-coverage-linux-gate-r2-report.json names the required successor change (apply the exact spotless reformat; no behavioral change needed). Evidence archive records/evidence/pr-5339-signature-coverage-linux-gate-r2-evidence.tar.gz. Executor stop: Gradle daemons stopped, 5339-r2 worktrees to be cleaned after release.",
+  "type": "release"
+}
