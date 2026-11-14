@@ -1,0 +1,105 @@
+{
+  "board_snapshot_before_publish": "c82801ee5a3cac2ad1e8e2f6c86f17ce283575a9",
+  "commands_file_in_archive": "pr-5330-premise-linux-20261114/command-plan.txt",
+  "environment": {
+    "gradle": "9.7.0",
+    "gradle_user_home": "/workspace/gradle-home",
+    "host": "Linux",
+    "java": "21",
+    "locks": [
+      "/workspace/tools/.gradle-phone-agent-2.lock",
+      "/workspace/tools/.gradle-0609f7968656.lock"
+    ],
+    "resource_status": "At final checks, 52% free inodes and 44 GiB free root disk; no resource stop was approached.",
+    "runner": "/workspace/tools/solr-live-build.py",
+    "seed": "5330"
+  },
+  "evidence_record": "records/evidence/pr-5330-premise-linux-20261114-evidence.json",
+  "evidence_sha256": "56faaf16a8d6e730c58954c57a974acb900b72f44a5b2e624329d836b508df4e",
+  "gate": "pr-5330-premise-linux-20261114",
+  "head": "e5117658841ca30d4b888f311754c8818f06dbf3",
+  "id": "pr-5330-premise-linux-20261114-receipt",
+  "job": "pr-5330-premise-linux-20261114",
+  "limits_and_exclusions": [
+    "HTTP/1.1 fixture drives real asynchronous update-runner callbacks and records real endpoint request order, but it does not apply documents or exercise a Solr cluster.",
+    "Commit non-observation on contributor is limited to the bounded fixture window; it is not proof of general commit behavior.",
+    "No full root gate, Docker tests, Antora site build, or dependent link check was run; this is not a clean release gate.",
+    "Maintainer decision remains on ordered-operation semantics after a stalled flush and whether a stalled client freezes RF accounting."
+  ],
+  "overlay": {
+    "diff_check": "clean on all three worktrees",
+    "manifest": "pr-5330-premise-linux-20261114/surgical-overlay-manifest-final.json",
+    "modified_file_only": "solr/core/src/test/org/apache/solr/update/SolrCmdDistributorTest.java in disposable worktrees",
+    "production_files_modified": false
+  },
+  "proof_legs": {
+    "commit_and_dbq_after_stall": "Completed with two pending queued updates on base and contributor, plus focused fork. Base commit and DBQ calls threw the stall IOException and neither operation marker reached the endpoint. Contributor commit returned without an exception but no commit request was observed in the bounded window; contributor DBQ returned without an exception and reached the endpoint between stream=1 and stream=2. Fork commit and DBQ threw before submission; only the queued streams were seen after response release.",
+    "optional_fork_comparison": "Corrected exact fork-head run passed all 5 selected tests, 0 skipped, 0 failures/errors. The first fork overlay attempt failed compilation due to three duplicated helper definitions; no tests ran then. The corrected overlay reused the fork's existing helpers; only the corrected run is behavioral evidence.",
+    "original_lost_other_replica_error": "Completed on detached base and contributor worktrees using the same controlled probe and test overlay; the base copied the original scenario with only the two Node == to .equals comparison corrections. Base: 5 tests, 0 skipped, 2 expected lost-error assertion failures. Contributor: 5 tests, 0 skipped, 0 failures; failing-node error and stall errors were returned.",
+    "prior_r10_review": "Reviewed the released r10 receipt/report. Focused suite passed 10/10 at seeds 5330 and 5330C0DE; five fail-before mutations behaved as expected. Its real callback tests did not overlap blockUntilFinished with callback delivery, and the synthetic list/producer mutation is not proof of a real race. Root :solr:core:forbiddenApisTest failed on three Executors.* calls in fork test code; independent cleanup remains.",
+    "real_async_callbacks": "Completed for real delayed 200/503 callbacks after stall processing on base and contributor. Both recorded late success on the shared test RF tracker (1 to 2 after the first response, then 4 after queued responses); base surfaced late 503 after the next finish, contributor retained it with the stall error. Fork callback fence suppressed delayed 200/503 callbacks; its tracker remained 1 even after queued 200 responses. The response was deliberately released after stall processing, not concurrently inside snapshot/clear; this does not prove a true lost-callback race. No replica recovery was tested."
+  },
+  "report_file_in_archive": "pr-5330-premise-linux-20261114/report.md",
+  "report_record": "records/report/pr-5330-premise-linux-20261114-report.json",
+  "run_results": [
+    {
+      "errors": 0,
+      "failures": 2,
+      "head": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+      "interpretation": "Expected base lost-error reproduction; not a clean build.",
+      "run": "base-final-s5330",
+      "runner_exit": 1,
+      "skipped": 0,
+      "tests": 5
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "head": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+      "interpretation": "Contributor lost-error premise fixed; DBQ order side effect observed.",
+      "run": "contributor-final-s5330",
+      "runner_exit": 0,
+      "skipped": 0,
+      "tests": 5
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "head": "e5117658841ca30d4b888f311754c8818f06dbf3",
+      "interpretation": "Focused optional comparison; stall preserved before later operation submission; callback fence observed.",
+      "run": "fork-final-r2-s5330",
+      "runner_exit": 0,
+      "skipped": 0,
+      "tests": 5
+    }
+  ],
+  "source_reconciliation": {
+    "assignment_base": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+    "assignment_contributor": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+    "assignment_fork": "e5117658841ca30d4b888f311754c8818f06dbf3",
+    "base_selection": "Used the assignment-pinned base, not the later upstream main tip.",
+    "board_claim": "phone-agent-2; matched the live claim.",
+    "live_contributor_pr_ref": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+    "live_fork_ref": "e5117658841ca30d4b888f311754c8818f06dbf3",
+    "upstream_main_tip_at_check": "69627e3c58be1daaa6d8485b0c483e0e1442ec50"
+  },
+  "stop_state": {
+    "disposable_worktrees": "all three removed after evidence capture",
+    "gradle_daemons": "3 stopped with ./gradlew --stop",
+    "gradle_workers": "none",
+    "locks": "both mandated Gradle locks free",
+    "source_or_pr_branches_modified": false,
+    "temporary_runner_logs": "removed after final logs and JUnit were copied into evidence",
+    "test_runner_processes": "none"
+  },
+  "tests": [
+    "testStallKeepsErrorsFromOtherNodes",
+    "testFinishPremiseWithControlledStall",
+    "testCommitAndDbqAfterControlledStall",
+    "testRealLateSuccessCallbackAfterControlledStall",
+    "testRealLateErrorCallbackAfterControlledStall"
+  ],
+  "type": "receipt",
+  "verdict": "incomplete",
+  "verdict_reason": "All pinned-head comparisons ran and their observed outcomes are recorded, but the real callback was not forced to execute inside the snapshot/clear window and no real Solr replica-recovery boundary was exercised. Do not claim a concurrent lost-callback race or recovery proof."
+}
