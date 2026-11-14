@@ -1,0 +1,63 @@
+{
+ "case8_nondeterminism": "Case 8 ('deprecated system properties converted to modern properties') asserts that solr.log contains the disable.config.edit conversion line immediately after start. At this byte-identical tree it passed in both positive variants of the prior gate (2026-11-13 evening) and failed in both positive variants today (two clean runs), as well as in the prior gate's mutated run. The failure snapshot shows the conversion line absent from solr.log at assertion time while conversions of other legacy properties were logged. The case is unrelated to the shutdown-order change (the repack tree is identical to the previously gated tree) and its outcome varies run to run on this host; it is disclosed here rather than counted against the gate's stated requirements (order assertion, no forced kill, both processes stopped), which were met in every clean run.",
+ "cleanup": "After the positive reruns: no listeners on 18983/18984 and no Solr or BATS processes remained; the solrtest checkout was clean at the head with bin/solr restored before the VM replacement destroyed it. The root check clone is clean at a9e8ce1d.",
+ "contributor_head": "65c2d85f77017a951f20dc110d71bf14786c6694",
+ "environment_incidents": [
+  "The host VM was replaced three times in 24 hours; the non-root solrtest setup was rebuilt after each loss.",
+  "The first BATS chain's positive legs were invalidated by a host out-of-memory kill (a stale 2.1G root Gradle daemon was resident); those legs were rerun in a freed memory state and the rerun results are the ones reported.",
+  "One further commons attempt died with 'No space left on device': the 7.5G root overlay hosting /home/solrtest filled (solrtest Gradle home has since been kept thin). A final additional attempt was interrupted by a VM replacement and was not repeated; two clean full runs per variant were already in hand.",
+  "The negative run's report.xml is not well-formed (raw terminal spinner text embedded by the BATS JUnit writer); its TAP log is the retained record, as in prior rounds."
+ ],
+ "executor": "phone-agent",
+ "head": "a9e8ce1db89b0094fb16b90d41bce7402ed4407d",
+ "id": "shutdown-order-repack-gate-20261114-evidence",
+ "job": "shutdown-order-repack-gate-20261114",
+ "limits": [
+  "The test masks the enable flag from classification while using real nodes; it does not prove every real alternative configuration or macOS.",
+  "No source authoring or public comments were made."
+ ],
+ "prior_tested_head": "395f4d94d7fc5462655d8ecdc22b30268286862a",
+ "results": {
+  "negative": {
+   "cases": 12,
+   "detail": "With only solr/bin/solr replaced by the contributor blob 59aecb926a00a1522461357dc133bda1a1414aef, the sole failing case was case 3, 'stop uses the ZooKeeper marker when the JVM flag is not visible': the ordering assertion failed because the ZooKeeper host was stopped first, with both nodes started and ready. bin/solr was restored afterward (blob b00e374fd78ecd7f9e0bd96158c855c237880771).",
+   "exit_code": 1,
+   "failed": 1,
+   "passed": 10,
+   "skipped": 1
+  },
+  "positive_common": {
+   "cases": 12,
+   "exit_code": 1,
+   "failed": 1,
+   "force_kill": "none",
+   "ordering_assertion": "passed",
+   "passed": 10,
+   "processes_stopped": true,
+   "skipped": 1,
+   "sole_failure": "case 8, deprecated system properties conversion (see nondeterminism note)"
+  },
+  "positive_picocli": {
+   "cases": 12,
+   "exit_code": 1,
+   "failed": 1,
+   "force_kill": "none",
+   "ordering_assertion": "passed",
+   "passed": 10,
+   "processes_stopped": true,
+   "skipped": 1,
+   "sole_failure": "case 8, deprecated system properties conversion (see nondeterminism note)"
+  },
+  "root_check": {
+   "exit_code": 0,
+   "result": "BUILD SUCCESSFUL in 6m 48s; check -x test with the standing Antora/ref-guide exclusion set (17 tasks), run as root in a normal clone at the exact head."
+  },
+  "tidy": {
+   "exit_code": 0,
+   "tracked_changes": false
+  }
+ },
+ "skip": "Case 6, 'check stop command doesn't hang', skips in every run (timeout invoked with no operands; test-source skip, same as prior rounds).",
+ "type": "evidence",
+ "verification": "Fork branch embedded-zookeeper-shutdown-order verified at a9e8ce1d; it is a single commit ('Track embedded ZooKeeper state for shutdown ordering') directly atop the contributor head 65c2d85f, which is also the live PR 5333 head. Tree hash of a9e8ce1d is aa1b1e5ee297cc6e8aa7ff7dfccc8de4a1fb1ede, identical to the tree of prior tested head 395f4d94 (git diff empty). BATS legs ran as the non-root solrtest user on JDK 21 with fixed port 18983, proxy env retained for build npm steps and no_proxy=localhost,127.0.0.1,test.solr.apache.org for test curls; each leg bounded by a 3600-second timeout."
+}

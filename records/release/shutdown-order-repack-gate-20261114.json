@@ -1,0 +1,9 @@
+{
+ "executor_stop_evidence": "All legs ran in bounded tracked chains that have exited. Final state: root check chain completed, no listeners on the gate ports, no Solr or BATS processes remain; the solrtest checkout was verified clean at the head before the host VM replacement destroyed it. Gradle daemons were stopped or left idle-resident per host norm; no leg is still running.",
+ "id": "shutdown-order-repack-gate-20261114",
+ "job": "shutdown-order-repack-gate-20261114",
+ "receipt": "records/receipt/shutdown-order-repack-gate-20261114.json",
+ "released": "2026-11-14T11:00:00-07:00",
+ "released_by": "phone-agent",
+ "type": "release"
+}

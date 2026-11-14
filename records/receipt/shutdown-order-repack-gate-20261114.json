@@ -1,0 +1,43 @@
+{
+ "evidence_record": "records/evidence/shutdown-order-repack-gate-20261114.json",
+ "evidence_sha256": "98a60719485f667bedcc8017f1f5d19a3236c3c260fb0d3c0c47ce4d1832803c",
+ "executor": "phone-agent",
+ "filed": "2026-11-14T11:00:00-07:00",
+ "gate": "shutdown-order-repack-gate-20261114",
+ "head": "a9e8ce1db89b0094fb16b90d41bce7402ed4407d",
+ "id": "shutdown-order-repack-gate-20261114",
+ "job": "shutdown-order-repack-gate-20261114",
+ "legs": [
+  {
+   "leg": "verification",
+   "result": "Fork branch at a9e8ce1d; single commit atop live PR head 65c2d85f; tree hash identical to prior tested head 395f4d94."
+  },
+  {
+   "leg": "negative proof",
+   "result": "Contributor bin/solr substituted: 12 cases, sole failure is the ordering case (ZooKeeper host stopped first, both nodes ready). bin/solr restored."
+  },
+  {
+   "leg": "positive commons-cli",
+   "result": "Ordering assertion passed, no force kill, both processes stopped. 10 passed, 1 skipped (known), 1 failed: the unrelated deprecated-properties case, disclosed in the evidence."
+  },
+  {
+   "leg": "positive picocli",
+   "result": "Same outcome as commons: ordering passed, no force kill; sole failure is the same disclosed case."
+  },
+  {
+   "leg": "tidy",
+   "result": "exit 0, no tracked changes."
+  },
+  {
+   "leg": "root check",
+   "result": "check -x test BUILD SUCCESSFUL with the standing Antora exclusions."
+  },
+  {
+   "leg": "environment",
+   "result": "First positive attempts were invalidated by a host OOM kill and rerun clean; later attempts were lost to a full root overlay and a VM replacement. Full incident record in the evidence."
+  }
+ ],
+ "summary": "PASSED at a9e8ce1d against the gate's stated requirements. The repack is one commit atop the contributor head with a tree identical to the previously gated 395f4d94. Negative proof satisfied (contributor bin/solr fails the marker-ordering case with both nodes ready). At the exact head, both packaging variants pass the ordering assertion with no force kill and both processes stopped; tidy is clean; root check succeeds. One unrelated case (deprecated system property conversion) failed in today's runs at this byte-identical tree after passing in the prior gate's runs; it is nondeterministic on this host and is disclosed in full in the evidence rather than counted against the gate's requirements. The known timeout-utility skip is present in all runs.",
+ "type": "receipt",
+ "verdict": "passed"
+}
