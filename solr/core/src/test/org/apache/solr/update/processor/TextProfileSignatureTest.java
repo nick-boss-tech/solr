@@ -51,14 +51,12 @@ public class TextProfileSignatureTest extends SolrTestCase {
   public void testProfileOrdersQuantizedCountsAndTies() {
     // Quantization rounds apple's five occurrences down to four, tying bravo.
     String content =
-        "bravo bravo bravo bravo apple apple apple apple apple "
-            + "zulu zulu zulu zulu zulu zulu";
+        "bravo bravo bravo bravo apple apple apple apple apple " + "zulu zulu zulu zulu zulu zulu";
     // The profile is "zulu 6\napple 4\nbravo 4", encoded as UTF-8.
     assertEquals("900382f1e7634a592906927510a4ab3c", hex(signatureOf(content)));
 
     String differentProfile =
-        "bravo bravo bravo bravo apple apple apple apple apple "
-            + "zulu zulu zulu zulu zulu";
+        "bravo bravo bravo bravo apple apple apple apple apple " + "zulu zulu zulu zulu zulu";
     assertNotEquals(hex(signatureOf(content)), hex(signatureOf(differentProfile)));
   }
 
