@@ -1,0 +1,10 @@
+{
+  "claimed_at": "2026-11-13T20:42:43-07:00",
+  "head": "be866aac94f7c05e262654fdfc7118e68eef5263",
+  "host": "phone-agent-2",
+  "id": "pr-5330-narrow-ordered-linux-20261114",
+  "job": "pr-5330-narrow-ordered-linux-20261114",
+  "note": "Current ordered-flush assignment and gate verified. Fork branch matches assigned head be866aac; contributor PR head remains eedcb534; prior premise audit is released and no active phone-agent-2 claim exists.",
+  "owner": "phone-agent-2",
+  "type": "claim"
+}
