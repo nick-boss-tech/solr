@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "records/report/pr5320-api-regression-implementation-r2-20261113-report.json; implementation processes exited and remote head verified; no local test executor was started.",
+  "id": "pr5320-api-regression-implementation-r2-20261113",
+  "job": "pr5320-api-regression-implementation-r2-20261113",
+  "reason": "Test correction pushed and handed to a separate Linux gate",
+  "type": "release"
+}
