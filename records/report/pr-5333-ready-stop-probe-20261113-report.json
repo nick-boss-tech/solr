@@ -1,0 +1,113 @@
+{
+  "assignment": "records/assignment/pr-5333-ready-stop-probe-20261113.json",
+  "board_base": "ccdb5bf82f2916d8ef03ea1ee64a18ef9a010134",
+  "evidence": "records/evidence/pr-5333-ready-stop-probe-20261113-evidence.json",
+  "gate": "records/gate/pr-5333-ready-stop-probe-20261113.json",
+  "id": "pr-5333-ready-stop-probe-20261113-report",
+  "job": "pr-5333-ready-stop-probe-20261113",
+  "recorded": "2026-11-13T18:49:06-07:00",
+  "source": {
+    "branch": "pr-5333-shutdown-doc",
+    "repository": "nick-boss-tech/solr",
+    "head": "4ed727d4f737e0a4f0b5743b60d7e80e5e05bf2c"
+  },
+  "environment": {
+    "host": "Linux x86_64",
+    "java": "OpenJDK 21.0.12.1",
+    "gradle": "9.7.0",
+    "base_port": 18983,
+    "second_node_port": 18984,
+    "embedded_zookeeper_port": 19983
+  },
+  "status": "completed",
+  "verdict": "passed",
+  "summary": "Positive readiness-gated diagnostic: after both expected node-role endpoints reported zookeeper=on for the embedded host and zookeeper=off for the second node, both CLI variants stopped in the expected order, completed in under five seconds, and emitted no force-kill marker. This supports the startup-race hypothesis but does not establish a general shutdown guarantee.",
+  "results": {
+    "common_cli": {
+      "command": "./gradlew :solr:packaging:integrationTests --tests test_start_solr_ready_stop_probe.bats -Pbats.port=18983 --rerun-tasks",
+      "variant": "commons-cli",
+      "runner_exit_code": 0,
+      "bats_cases": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "junit_tests": 1,
+      "junit_failures": 0,
+      "junit_errors": 0,
+      "junit_skipped": 0,
+      "embedded_host_zookeeper": "on",
+      "second_node_zookeeper": "off",
+      "both_ready_before_stop": true,
+      "readiness_elapsed_ms": {
+        "embedded_host": 1152,
+        "second_node": 3036
+      },
+      "marker_order": "passed: port 18984 (non-ZooKeeper node) before port 18983 (embedded ZooKeeper host)",
+      "stop_exit_code": 0,
+      "stop_command_elapsed_ms": 4790,
+      "force_kill_marker": "absent",
+      "post_stop_processes": {
+        "embedded_host": "not-running",
+        "second_node": "not-running"
+      },
+      "bats_duration_ms": 17547,
+      "fresh_evidence": {
+        "tap": "evidence/common/test-output.txt",
+        "junit": "evidence/common/report.xml",
+        "readiness": "evidence/common/readiness-probe.log",
+        "stop_output": "evidence/common/stop-output.txt"
+      }
+    },
+    "picocli": {
+      "command": "./gradlew :solr:packaging:integrationTestsPicocli --tests test_start_solr_ready_stop_probe.bats -Pbats.port=18983 --rerun-tasks",
+      "variant": "picocli",
+      "runner_exit_code": 0,
+      "bats_cases": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "junit_tests": 1,
+      "junit_failures": 0,
+      "junit_errors": 0,
+      "junit_skipped": 0,
+      "embedded_host_zookeeper": "on",
+      "second_node_zookeeper": "off",
+      "both_ready_before_stop": true,
+      "readiness_elapsed_ms": {
+        "embedded_host": 1322,
+        "second_node": 8942
+      },
+      "readiness_note": "The second-node poll emitted one curl timeout diagnostic (5.002 s, 0 bytes) during retries; it subsequently returned the expected zookeeper=off JSON before stop.",
+      "marker_order": "passed: port 18984 (non-ZooKeeper node) before port 18983 (embedded ZooKeeper host)",
+      "stop_exit_code": 0,
+      "stop_command_elapsed_ms": 4862,
+      "force_kill_marker": "absent",
+      "post_stop_processes": {
+        "embedded_host": "not-running",
+        "second_node": "not-running"
+      },
+      "bats_duration_ms": 24333,
+      "fresh_evidence": {
+        "tap": "evidence/picocli/test-output.txt",
+        "junit": "evidence/picocli/report.xml",
+        "readiness": "evidence/picocli/readiness-probe.log",
+        "stop_output": "evidence/picocli/stop-output.txt"
+      }
+    }
+  },
+  "details": [
+    "The temporary focused test waited for both expected node-role endpoint states before invoking solr stop --all; the original process-order shim and SOLR_STOP_WAIT=30 no-force-kill assertion were retained.",
+    "Both variants passed one Bats case with fresh TAP and JUnit: 1 test, 0 failures, 0 errors, 0 skips. The stop output showed port 18984 before port 18983 in each run; both recorded child PIDs were no longer running afterward.",
+    "The second-node Picocli readiness poll logged a transient curl timeout during retries and then returned the expected zookeeper=off state before stopping.",
+    "A direct runner invocation first returned 126 because the wrapper file is not executable; this occurred before any test ran. The actual common and Picocli legs each ran once through the same bounded wrapper via python3 and exited 0.",
+    "The Gradle daemon was stopped; the disposable exact-head worktree and temporary untracked Bats file were removed. No source, public PR, or Jira changes were made."
+  ],
+  "prior_gate": "pr-5333-simple-order-gate-20261113 (failed and released; immutable records preserved)",
+  "limitations": [
+    "Diagnostic only: one focused Bats case per CLI variant on the exact assigned source head; this is not a general shutdown guarantee.",
+    "Linux x86_64 and OpenJDK 21.0.12.1 only; no other operating system or configuration is claimed.",
+    "The full packaging suite, unrelated suites, root check, Antora site build and dependent site-link checks were not run for this diagnostic.",
+    "Docker was never installed or used."
+  ],
+  "type": "report"
+}

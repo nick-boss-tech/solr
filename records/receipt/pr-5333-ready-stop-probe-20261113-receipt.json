@@ -1,0 +1,41 @@
+{
+  "gate": "records/gate/pr-5333-ready-stop-probe-20261113.json",
+  "head": "4ed727d4f737e0a4f0b5743b60d7e80e5e05bf2c",
+  "id": "pr-5333-ready-stop-probe-20261113-receipt",
+  "job": "pr-5333-ready-stop-probe-20261113",
+  "owner": "phone-agent-2",
+  "recorded": "2026-11-13T18:49:06-07:00",
+  "evidence": "records/evidence/pr-5333-ready-stop-probe-20261113-evidence.json (SHA-256 a3e4ee3f0d9c48fa7ade5549307cbf2519d77c1654327037e59308701b1af00e); complete TAP/JUnit/readiness/stop/process/Gradle runner/Solr logs and cleanup snapshot",
+  "verdict": "passed",
+  "summary": "The focused readiness-gated stop probe passed once for common CLI and once for Picocli at the assigned head. Both role endpoints were ready before stop, marker order was correct, the stop commands returned in 4.790 s and 4.862 s, respectively, and neither run force-killed a process. This is diagnostic evidence, not a broad guarantee.",
+  "commands": {
+    "common_cli": "./gradlew :solr:packaging:integrationTests --tests test_start_solr_ready_stop_probe.bats -Pbats.port=18983 --rerun-tasks",
+    "picocli": "./gradlew :solr:packaging:integrationTestsPicocli --tests test_start_solr_ready_stop_probe.bats -Pbats.port=18983 --rerun-tasks",
+    "gradle_daemon_stop": "./gradlew --stop"
+  },
+  "legs": [
+    {
+      "leg": "common CLI readiness-gated Bats probe",
+      "result": "Runner exit 0; one test passed, none failed or skipped; both expected node roles confirmed before stop; marker order passed; stop exit 0 in 4790 ms; force-kill marker absent; both child processes not running afterward. See evidence/common/."
+    },
+    {
+      "leg": "Picocli readiness-gated Bats probe",
+      "result": "Runner exit 0; one test passed, none failed or skipped; both expected node roles confirmed before stop; one transient curl timeout appeared during second-node readiness polling, then zookeeper=off was observed; marker order passed; stop exit 0 in 4862 ms; force-kill marker absent; both child processes not running afterward. See evidence/picocli/."
+    },
+    {
+      "leg": "cleanup and source integrity",
+      "result": "Gradle --stop returned 0 and stopped one daemon. The disposable worktree was removed with only the permitted untracked temporary test present; tracked diff was empty and the public source ref remained at the assigned head. No test/Gradle process or listener on 18983 remained; both required locks were free; 56.67% of inodes and about 44.7 GiB of root disk were free at final local closeout."
+    },
+    {
+      "leg": "scope exclusions",
+      "result": "No full packaging suite, unrelated suites, root check, Antora site build or dependent site-link checks were run. Docker was never installed or used; no non-Linux result is claimed."
+    }
+  ],
+  "limits": [
+    "Diagnostic only: one focused Bats case per CLI variant on the exact assigned source head; this is not a general shutdown guarantee.",
+    "Linux x86_64 and OpenJDK 21.0.12.1 only; no other operating system or configuration is claimed.",
+    "The full packaging suite, unrelated suites, root check, Antora site build and dependent site-link checks were not run for this diagnostic.",
+    "Docker was never installed or used."
+  ],
+  "type": "receipt"
+}
