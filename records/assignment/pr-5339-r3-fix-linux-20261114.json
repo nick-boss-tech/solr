@@ -1,0 +1,12 @@
+{
+  "changes": "Apply the spotless reformat to solr/core/src/test/org/apache/solr/update/processor/TextProfileSignatureTest.java so :solr:core:spotlessCheck passes: 2 hunks joining the adjacent string literals in testProfileOrdersQuantizedCountsAndTies (\"bravo bravo bravo bravo apple apple apple apple apple \" + \"zulu zulu zulu zulu zulu zulu\" and the differentProfile variant onto single lines). The exact diff is in the r2 evidence (records/evidence/pr-5339-signature-coverage-linux-gate-r2-evidence.tar.gz, tidy-testfile.diff / tidy-fixed-test.java). No behavioral code change is required — the focused test passes 4/4 and all discriminating proof legs pass at the exact r2 head.",
+  "head": "83b2df0977499337bc88daaba8eb872a3835f31b",
+  "host": "Linux",
+  "id": "pr-5339-r3-fix-linux-20261114",
+  "job": "pr-5339-r3-fix-linux-20261114",
+  "scope": "Commit a successor fix on the fork applying the exact spotless reformat named above, push a new head on the fork branch pr-5339-signature-migration, then run the exact-head r3 Linux gate (focused TextProfileSignatureTest seed 5339, tidy with no tracked changes, fail-before spotlessCheck/spotlessApply clean, root check -x test). Do not touch the contributor branch or post publicly.",
+  "source_head": "83b2df0977499337bc88daaba8eb872a3835f31b",
+  "successor_of": "pr-5339-signature-coverage-linux-gate-r2",
+  "summary": "PR-5339 r2 coverage Linux gate FAILED on the exact head 83b2df09 with one material defect: the head test file TextProfileSignatureTest.java is not spotless-clean (tidy leaves 1 tracked change; fail-before spotlessCheck rc=1; check -x test blocked by the same :solr:core:spotlessJavaCheck failure). Successor r3 must apply the formatting repair, push a new head, and re-gate.",
+  "type": "assignment"
+}
