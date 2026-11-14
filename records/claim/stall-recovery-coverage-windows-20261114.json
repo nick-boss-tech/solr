@@ -1,0 +1,7 @@
+{
+  "id": "stall-recovery-coverage-windows-20261114",
+  "job": "stall-recovery-coverage-windows-20261114",
+  "note": "Separate test coverage branch requested by Nick; existing narrow implementation is released and exact-head gate passed.",
+  "owner": "codex-windows-stall-recovery",
+  "type": "claim"
+}
