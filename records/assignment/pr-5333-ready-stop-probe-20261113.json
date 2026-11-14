@@ -1,0 +1,17 @@
+{
+  "id": "pr-5333-ready-stop-probe-20261113",
+  "intended_host": "Linux",
+  "job": "pr-5333-ready-stop-probe-20261113",
+  "related_receipt": "records/receipt/pr-5333-simple-order-gate-20261113.json",
+  "related_report": "records/report/pr-5333-simple-order-gate-20261113.json",
+  "restrictions": "No committed source or test changes, no push/update to the public PR, no public comment, and no Jira change. Use a disposable exact-head worktree; any extracted focused test file and readiness waits are temporary only. Publish a new receipt and report with exact findings and limitations.",
+  "scope": "Diagnostic only. Determine whether waiting for both nodes' node-role endpoints before stopping prevents the 30-second force-kill seen in the previous positive runs. The earlier gate was released failed and is not reopened.",
+  "source": {
+    "branch": "pr-5333-shutdown-doc",
+    "head": "4ed727d4f737e0a4f0b5743b60d7e80e5e05bf2c",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5333-simple-order-gate-20261113",
+  "summary": "Check whether readiness gating prevents PR #5333's shutdown-during-start force-kill",
+  "type": "assignment"
+}
