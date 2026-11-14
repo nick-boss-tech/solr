@@ -1,0 +1,16 @@
+{
+  "id": "pr5320-api-regression-linux-gate-r2-20261113-report",
+  "job": "pr5320-api-regression-linux-gate-r2-20261113",
+  "type": "report",
+  "owner": "vm2",
+  "recorded": "2026-11-14",
+  "head": "fb576e87cccf63f8f2a1bbd3bee30533ee0290d8",
+  "successor_of": "pr5320-api-regression-linux-gate-20261113",
+  "gate": "records/gate/pr5320-api-regression-linux-gate-r2-20261113.json",
+  "summary": "Successor gate r2 at head fb576e87 closes PR-5320 api-regression. The prior r1 receipt (verdict failed) found two defects in the new coverage test testRepeatedV2PermissionDeleteById: (1) a startup auth race where the first executeCommand POSTs before all 3 nodes reload security plugins, surfacing as 'HTTP protocol violation: Authentication challenge without WWW-Authenticate header'; (2) a deterministic boxing failure assertEquals(2, ...) at old line 138 where Utils.fromJSON returns Long but the int literal boxes to Integer. The successor commit fixes both: a 30s TimeOut.waitFor polls every node's CoreContainer until BasicAuthPlugin and RuleBasedAuthorizationPlugin are loaded before the first command, and the assertion is now assertEquals(2L, ((Number) ...).longValue()). No production change. All legs pass: recorded-seed run 5AB93CB9D28584E8 (1 test, 0 failures, 6m51s), two independent-seed runs 780F6F4 and 32924594 (each 1 test, 0 failures), tidy leaves zero tracked changes, check -x test -Prefguide.include=false BUILD SUCCESSFUL. Gate verdict: passed.",
+  "action": "Gate closed passed. No further action needed for coverage proof; monitor PR for upstream review.",
+  "actions": [
+    "successor head fb576e87 published; both r1 defects fixed in test only",
+    "receipt verdict passed recorded; gate closed"
+  ]
+}
