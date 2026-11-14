@@ -1,0 +1,17 @@
+{
+ "claim_path": "records/claim/pr-5339-signature-coverage-linux-gate-r3.json",
+ "gate_record": "records/gate/pr-5339-signature-coverage-linux-gate-r3.json",
+ "id": "pr-5339-signature-coverage-linux-gate-r3",
+ "intended_host": "Linux",
+ "job": "pr-5339-signature-coverage-linux-gate-r3",
+ "phase": "coverage r3",
+ "receipt_path": "records/receipt/pr-5339-signature-coverage-linux-gate-r3-receipt.json",
+ "source": {
+  "branch": "pr-5339-signature-migration",
+  "head": "47e891cea3ec5bc01b8ca7a5dd3a182be8706112",
+  "repository": "nick-boss-tech/solr"
+ },
+ "summary": "Verify the spotless-formatted PR 5339 signature coverage successor (r3) on Linux; successor pushed by phone-agent at Nick's direction after the vm2 r2 gate failed on formatting only",
+ "supersedes": "records/gate/pr-5339-signature-coverage-linux-gate-r2.json",
+ "type": "assignment"
+}

@@ -1,0 +1,11 @@
+{
+ "claimed": "2026-11-13T17:11:00-07:00",
+ "claimed_by": "phone-agent",
+ "gate": "records/gate/pr-5339-signature-coverage-linux-gate-r3.json",
+ "head": "47e891cea3ec5bc01b8ca7a5dd3a182be8706112",
+ "host": "Linux (this VM)",
+ "id": "pr-5339-signature-coverage-linux-gate-r3",
+ "job": "pr-5339-signature-coverage-linux-gate-r3",
+ "note": "Successor head pushed by phone-agent (formatting-only commit applying the round-2 tidy diff) at Nick's direction in chat 2026-11-13 ('5339'). Gate claimed by the same executor. No conflicting claim exists.",
+ "type": "claim"
+}

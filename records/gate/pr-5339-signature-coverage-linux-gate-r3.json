@@ -1,0 +1,24 @@
+{
+ "branch": "pr-5339-signature-migration",
+ "contributor_pr_head": "1bb663935e1464da39d780cecbbd9b2de8d08d44",
+ "environment": "Linux isolated clean checkout; record JDK, host, seed, source heads and status",
+ "head": "47e891cea3ec5bc01b8ca7a5dd3a182be8706112",
+ "id": "pr-5339-signature-coverage-linux-gate-r3",
+ "job": "pr-5339-signature-coverage-linux-gate-r3",
+ "phase": "coverage r3",
+ "prior_head": "83b2df0977499337bc88daaba8eb872a3835f31b",
+ "prior_receipt": "records/receipt/pr-5339-signature-coverage-linux-gate-r2-receipt.json",
+ "receipt_path": "records/receipt/pr-5339-signature-coverage-linux-gate-r3-receipt.json",
+ "repository": "nick-boss-tech/solr",
+ "requirements": [
+  "Verify the fork branch head and confirm the diff from 83b2df0977499337bc88daaba8eb872a3835f31b is exactly the spotless reformat of solr/core/src/test/org/apache/solr/update/processor/TextProfileSignatureTest.java filed in the round-2 evidence (tidy-testfile.diff): test file only, no production change.",
+  "Run ./gradlew :solr:core:test --tests org.apache.solr.update.processor.TextProfileSignatureTest -Ptests.seed=5339; all tests must pass with fresh JUnit XML.",
+  "Fail-before: with the TokenComparator reverted to the pre-PR form (return t2.cnt - t1.cnt;) and the offered test unchanged, testSignatureStableAcrossHashMapResize must fail by assertion. The round-2 construction is in the round-2 evidence (failbefore.diff).",
+  "Re-run the three comparator mutations from the round-2 evidence (ascending frequency; strings only; reversed string tie-break): each must make testProfileOrdersQuantizedCountsAndTies fail by comparison failure.",
+  "Run ./gradlew tidy and verify no tracked changes. Run ./gradlew check -x test -Prefguide.include=false (the ref-guide exclusion follows the owner policy recorded in round 2); the check must pass, including :solr:core:spotlessJavaCheck.",
+  "buildLocalSite stays excluded under the same owner Antora policy recorded in round 2. Do not post a public comment."
+ ],
+ "supersedes": "records/gate/pr-5339-signature-coverage-linux-gate-r2.json",
+ "type": "gate",
+ "verdict_policy": "Pass requires the exact successor diff, the focused test green, the assertion fail-before, all three mutations discriminating, tidy clean and the check leg green at the exact head."
+}
