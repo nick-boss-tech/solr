@@ -1,0 +1,11 @@
+{
+  "id": "pr-5333-simplified-test-report-20261113",
+  "job": "pr-5333-simplify-test-20261113",
+  "source": {
+    "branch": "pr-5333-shutdown-doc",
+    "head": "4ed727d4f737e0a4f0b5743b60d7e80e5e05bf2c",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Replaced two complicated Bats cases with one deterministic focused ordering test using standard two-node startup and synthetic find and ps shims; bounded node-role curl. The test exercises real shutdown and marker classification but does not establish alternative environment-variable startup. Windows diff check passed; no Linux runtime proof yet.",
+  "type": "report"
+}
