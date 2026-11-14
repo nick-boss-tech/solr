@@ -1,0 +1,6 @@
+{
+  "id": "stall-recovery-probe-superseded-20261114",
+  "job": "stall-recovery-probe-linux-20261114",
+  "summary": "Superseded for new work by candidate exact-head assignment records/assignment/stall-recovery-candidate-linux-20261114.json and gate records/gate/stall-recovery-candidate-linux-20261114.json at source head b7c0f0abdf4f313b8eae6672d27602b9fe771027. Do not claim this older probe. It was unclaimed at snapshot acfbd1f6b5292b683a3ca178517a1985c746f1fd; this notice is not a release or evidence a worker stopped.",
+  "type": "report"
+}
