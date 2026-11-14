@@ -1,0 +1,7 @@
+{
+  "id": "pr5320-api-regression-linux-gate-20261113-report",
+  "job": "pr5320-api-regression-linux-gate-20261113",
+  "receipt": "records/receipt/pr5320-api-regression-linux-gate-20261113-receipt.json",
+  "summary": "PR-5320 api-regression Linux gate on vm2 FAILED at head db4483f0. The new coverage test testRepeatedV2PermissionDeleteById is not green: (1) run 1 failed on a flaky startup race — the first executeCommand hit a node before all three servers finished reloading the BasicAuth/RuleBasedAuthz plugins and got a 401 challenge without a WWW-Authenticate header, surfaced by the Jetty client as 'HTTP protocol violation: Authentication challenge without WWW-Authenticate header' (seed 5AB93CB9D28584E8); (2) run 2 with the same seed got past setup and all delete-by-id behavior assertions (400 repeated-delete, 'No such permission id', persisted size 2, names, survivor id) then failed deterministically at BasicAuthIntegrationTest.java:138 assertEquals(2, remaining.get(1).get('index')) with expected: java.lang.Integer<2> but was: java.lang.Long<2> — Utils.fromJSON returns Long for the persisted index, assertEquals(int, Object) boxes 2 as Integer, Integer.equals(Long) is false. tidy zero tracked changes; check -x test -Prefguide.include=false BUILD SUCCESSFUL in 8m41s. Successor action: fix the new test (type-safe index assertion plus startup-race handling or an auth-ready wait), push a new head, and re-gate; the covered production fix itself is not implicated by these failures.",
+  "type": "report"
+}
