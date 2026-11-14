@@ -1,0 +1,12 @@
+{
+  "id": "pr-5336-comment-record-20261113",
+  "intended_host": "Windows",
+  "job": "pr-5336-comment-record-20261113",
+  "source": {
+    "branch": "pr-5336-response-followup",
+    "head": "59c259bcb28bac589b0617f72b52d23701442100",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Record authorized PR 5336 follow-up comment and read-back",
+  "type": "assignment"
+}
