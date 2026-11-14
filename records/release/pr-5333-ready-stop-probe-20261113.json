@@ -1,0 +1,23 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "records/report/pr-5333-ready-stop-probe-20261113-report.json; records/receipt/pr-5333-ready-stop-probe-20261113-receipt.json; records/evidence/pr-5333-ready-stop-probe-20261113-evidence.json (bundle SHA-256 a3e4ee3f0d9c48fa7ade5549307cbf2519d77c1654327037e59308701b1af00e). The pointer, report, and receipt were verified from live coordination-v2 at 7fabc54017210f1628d49dd97a85b5bf7ec870c7.",
+  "head": "4ed727d4f737e0a4f0b5743b60d7e80e5e05bf2c",
+  "id": "pr-5333-ready-stop-probe-20261113",
+  "job": "pr-5333-ready-stop-probe-20261113",
+  "released_at": "2026-11-14T01:51:48+00:00",
+  "reason": "Close the claimed readiness-gated shutdown diagnostic. With both node-role endpoints at their expected states before stop, the common CLI and Picocli focused tests each passed the shutdown-order and 30-second no-force-kill assertions; graceful stop durations were 4.790 s and 4.862 s. This supports the startup-race hypothesis only and is not a general shutdown guarantee. The original failed gate report, receipt, and release remain unchanged. No Solr source/test commit, public PR edit/comment, or Jira change was made.",
+  "final_state": {
+    "board_tip_before_release": "7fabc54017210f1628d49dd97a85b5bf7ec870c7",
+    "live_readback": "evidence pointer, report, and receipt identical to committed records",
+    "source_branch_head": "4ed727d4f737e0a4f0b5743b60d7e80e5e05bf2c",
+    "solr_test_worktree": "removed",
+    "solr_test_gradle_bats_processes": "none",
+    "listeners_18983_18984_19983": "none",
+    "gradle_lock_phone_agent_2": "free",
+    "gradle_lock_0609f7968656": "free",
+    "free_inodes": "1056824/1868096 (56.57%)",
+    "root_disk_free_bytes": 47993647104,
+    "prior_failed_gate_records": "unchanged"
+  },
+  "type": "release"
+}
