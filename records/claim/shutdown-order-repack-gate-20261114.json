@@ -1,0 +1,10 @@
+{
+ "claimed": "2026-11-14T09:44:00-07:00",
+ "executor": "phone-agent",
+ "host": "Linux (this VM), JDK 21",
+ "id": "shutdown-order-repack-gate-20261114",
+ "job": "shutdown-order-repack-gate-20261114",
+ "note": "Claimed by phone-agent at Nick's direction in chat 2026-11-14 ('5330 and 5333').",
+ "owner": "phone-agent",
+ "type": "claim"
+}
