@@ -1,0 +1,20 @@
+{
+  "environment": "Linux Solr gate host, supported JDK, isolated clean checkout",
+  "head": "db4483f0294bfc4fe8dae73a16ad3e526db8ef1f",
+  "id": "pr5320-api-regression-linux-gate-20261113",
+  "job": "pr5320-api-regression-linux-gate-20261113",
+  "phase": "test-only API regression proof",
+  "requirements": [
+    "Verify the fork branch head, contributor ancestry and clean checkout. Confirm the only follow-up change is the new test in BasicAuthIntegrationTest, with no previous schema or validator changes.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.security.BasicAuthIntegrationTest.testRepeatedV2PermissionDeleteById. Capture fresh logs, test XML, count, seed and exit code, and verify the method actually executes. Report failure including compile, setup, timeout or assertion errors accurately; none is a pass.",
+    "Run ./gradlew tidy and ./gradlew check -x test -Prefguide.include=false. Record actual commands, exits and tracked changes. A formatting change requires a new committed head and successor gate.",
+    "This is coverage-only on an existing fix. Do not describe it as proof that the contributor head has a bug or that an optimistic concurrency retry occurred. No fail-before leg is required.",
+    "Publish records/receipt/pr5320-api-regression-linux-gate-20261113-receipt.json with commands, results, evidence, test counts, seed and any limitations."
+  ],
+  "source": {
+    "branch": "pr-5320-api-regression",
+    "contributor_parent": "5fa5513038a7cf9318ed800423d8a44064d4c0e3",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "gate"
+}
