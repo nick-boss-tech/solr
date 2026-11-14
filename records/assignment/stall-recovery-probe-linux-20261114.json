@@ -1,0 +1,19 @@
+{
+  "claim_path": "records/claim/stall-recovery-probe-linux-20261114.json",
+  "gate_id": "stall-recovery-probe-linux-20261114",
+  "gate_record": "records/gate/stall-recovery-probe-linux-20261114.json",
+  "id": "stall-recovery-probe-linux-20261114",
+  "intended_host": "linux",
+  "job": "stall-recovery-probe-linux-20261114",
+  "phase": "recovery premise and test feasibility",
+  "prior_receipt": "records/receipt/pr-5330-narrow-format-r2-linux-20261114-receipt.json",
+  "receipt_path": "records/receipt/stall-recovery-probe-linux-20261114-receipt.json",
+  "scope": "Run Linux reproduction and test-only probes. If a deterministic permanent test is feasible, prepare a separate descriptively named fork branch based on this head, commit and push the test and request a successor exact-head gate. Do not change the existing narrow branch or post publicly.",
+  "source": {
+    "branch": "pr-5330-ordered-flush-20261114",
+    "head": "6bf469128d2dd570336ff634e41c07012d918d31",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Reproduce a queued update-stream stall and recovery in SolrCloud and prepare durable coverage",
+  "type": "assignment"
+}
