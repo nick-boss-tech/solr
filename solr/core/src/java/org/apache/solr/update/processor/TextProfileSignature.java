@@ -35,13 +35,13 @@ import org.apache.solr.common.params.SolrParams;
  *   <li>remove all characters except letters and digits, and bring all characters to lower case,
  *   <li>split the text into tokens (all consecutive non-whitespace characters),
  *   <li>discard tokens equal or shorter than MIN_TOKEN_LEN (default 2 characters),
- *   <li>sort the list of tokens by decreasing frequency (ties broken by token string),
  *   <li>round down the counts of tokens to the nearest multiple of QUANT (<code>
  *       QUANT = QUANT_RATE * maxFreq</code>, where <code>QUANT_RATE</code> is 0.01f by default, and
  *       <code>maxFreq</code> is the maximum token frequency). If <code>maxFreq</code> is higher
  *       than 1, then QUANT is always higher than 2 (which means that tokens with frequency 1 are
  *       always discarded).
  *   <li>tokens, which frequency after quantization falls below QUANT, are discarded.
+ *   <li>sort the list of tokens by decreasing frequency (ties broken by token string),
  *   <li>create a list of tokens and their quantized frequency, separated by spaces, in the order of
  *       decreasing frequency.
  * </ul>
