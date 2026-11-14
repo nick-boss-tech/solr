@@ -1,0 +1,23 @@
+{
+  "evidence": "records/evidence/pr5320-api-regression-linux-gate-r2-20261113-evidence.tar.gz (SHA-256 cd2cebdfb734b84e2e5d153f52cd04e6a0665df7bef4d6f16e7f5b05d809008e)",
+  "gate": "records/gate/pr5320-api-regression-linux-gate-r2-20261113.json",
+  "head": "fb576e87cccf63f8f2a1bbd3bee30533ee0290d8",
+  "host": "linux",
+  "id": "pr5320-api-regression-linux-gate-r2-20261113-receipt",
+  "job": "pr5320-api-regression-linux-gate-r2-20261113",
+  "legs": {
+    "diff_verification": "PASSED: live fork branch pr-5320-api-regression at head fb576e87; contributor parent 5fa55130. Only change vs prior head db4483f0 is one commit 'Fix security test readiness and numeric assertion' touching BasicAuthIntegrationTest.java (12 insertions, 1 deletion): adds a 30s TimeOut.waitFor polling every node's CoreContainer until BasicAuthPlugin + RuleBasedAuthorizationPlugin are loaded before the first executeCommand (fixes the prior startup auth race), and changes the persisted-index assertion to assertEquals(2L, ((Number) remaining.get(1).get(\"index\")).longValue()) (fixes the prior Integer-vs-Long boxing failure). No production change.",
+    "focused_test_recorded_seed": "PASSED: ./gradlew :solr:core:test --tests org.apache.solr.security.BasicAuthIntegrationTest.testRepeatedV2PermissionDeleteById -Ptests.seed=5AB93CB9D28584E8; BUILD SUCCESSFUL in 6m51s; tests=1 skipped=0 failures=0 errors=0 (time 21.1s). The prior startup race is gone: the readiness wait lets security plugins initialize on all 3 nodes before the first command, and the full delete-by-id behavior passes.",
+    "focused_test_independent_seed_1": "PASSED: same command -Ptests.seed=780F6F4 (independent random seed) in a fresh Gradle invocation; BUILD SUCCESSFUL in 1m40s; tests=1 skipped=0 failures=0 errors=0 (time 12.3s).",
+    "focused_test_independent_seed_2": "PASSED: same command -Ptests.seed=32924594 (independent random seed) in a fresh Gradle invocation; BUILD SUCCESSFUL in 1m35s; tests=1 skipped=0 failures=0 errors=0 (time 9.7s).",
+    "tidy": "PASSED: ./gradlew tidy exit=0 BUILD SUCCESSFUL in 1m17s; post-tidy tracked changes=0. Head fb576e87 is format-clean.",
+    "check": "PASSED: ./gradlew check -x test -Prefguide.include=false; BUILD SUCCESSFUL in 8m21s (CHECK_RC=0, 515 actionable tasks, 489 executed). Root check green including spotlessJavaCheck; buildLocalSite excluded per owner policy.",
+    "limitations": "Coverage-only test; these three runs probe but cannot prove absence of all startup races, as the gate notes. No fail-before leg required (coverage-only on an existing fix)."
+  },
+  "owner": "vm2",
+  "phase": "test-only API regression proof round 2",
+  "recorded": "2026-11-14",
+  "summary": "PR-5320 api-regression Linux gate r2 on vm2 at exact head fb576e87 PASSES. The successor head fixes both defects found in the prior Linux receipt: a 30s readiness wait (BasicAuthPlugin + RuleBasedAuthorizationPlugin loaded on every node) removes the startup auth race that failed run 1 at the first executeCommand, and the persisted-index assertion is now type-safe (assertEquals(2L, ((Number)...).longValue())) removing the Integer-vs-Long boxing failure at the old line 138. Focused testRepeatedV2PermissionDeleteById passes at the recorded seed 5AB93CB9D28584E8 (6m51s) and at two independent seeds 780F6F4 (1m40s) and 32924594 (1m35s) — each 1 test, 0 failures, 0 errors, fresh Gradle invocation per the gate. tidy leaves zero tracked changes; check -x test -Prefguide.include=false BUILD SUCCESSFUL in 8m21s. Coverage-only, no fail-before leg required; three runs probe but cannot prove absence of all startup races.",
+  "type": "receipt",
+  "verdict": "passed"
+}
