@@ -1,0 +1,22 @@
+{
+ "branch": "solr-12613-addcore-reconciled",
+ "evidence": "records/evidence/solr-12613-addcore-reconciled-linux-r2-evidence.txt",
+ "evidence_sha256": "29bee3685429a12cfaa5cee5adbf4885176f42c6adabcda6bf711202d61709ff",
+ "executor": "phone-agent",
+ "filed": "2026-11-13T18:55:00-07:00",
+ "head": "d176c23630a462f43be93d594a4a4200244948f1",
+ "id": "solr-12613-addcore-reconciled-linux-r2",
+ "job": "solr-12613-addcore-reconciled-linux-r2",
+ "legs": {
+  "environment": "Exact fork head verified; clean checkout; JDK 21; builds serialized; Chrome for Testing 154 as the Selenium binary; seed 12613A01.",
+  "fail_before": "Baseline cores.js restored alone: open-form case FAILED at its intended assertion (expected:</~cores[]> but was:</~cores[/swapa]>); closed-form control PASSED; source restored, tree clean.",
+  "focused_suite": "AdminUiCoreAdminStandaloneTest: 7 tests, 0 failures, 0 errors, 0 skipped (JUnit preserved).",
+  "limits": "A passing deterministic case does not establish the precise event order of the historical timeout.",
+  "neighbor_suite": "AdminUiNodePickerTest: 4 tests, 0 failures, 0 errors, 0 skipped (JUnit preserved).",
+  "root_check": "check -x test -Prefguide.include=false BUILD SUCCESSFUL.",
+  "tidy": "rc=0, zero tracked changes at this head."
+ },
+ "summary": "PASSED at d176c236. The spotless successor head is fully green: tidy clean, both browser suites pass with no skips, the baseline cores.js fail-before discriminates at the intended assertion with the control passing, and root check succeeds.",
+ "type": "receipt",
+ "verdict": "passed"
+}
