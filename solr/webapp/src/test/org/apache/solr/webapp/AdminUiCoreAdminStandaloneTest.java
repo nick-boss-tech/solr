@@ -177,8 +177,7 @@ public class AdminUiCoreAdminStandaloneTest extends AdminUiStandaloneTestBase {
           Boolean.FALSE,
           js.executeScript("return window.initialCoreStatus.failed;"));
       String firstCore =
-          (String)
-              js.executeScript("return Object.keys(window.initialCoreStatus.data.status)[0];");
+          (String) js.executeScript("return Object.keys(window.initialCoreStatus.data.status)[0];");
       assertNotNull("The standalone fixture must have a default core", firstCore);
       if (openAddForm) {
         click(By.cssSelector("#content #cores #add"));
