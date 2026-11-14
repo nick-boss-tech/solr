@@ -1,0 +1,7 @@
+{
+  "id": "pr-5337-package-exit-gate-r3",
+  "job": "pr-5337-package-exit-gate-r3",
+  "owner": "codex-windows-administrative-closure",
+  "scope": "Owner-directed cancellation of the unclaimed gate only; no Linux execution or proof is claimed",
+  "type": "claim"
+}
