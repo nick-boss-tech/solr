@@ -1,0 +1,13 @@
+{
+  "gate": "records/gate/pr-5330-narrow-ordered-linux-20261114.json",
+  "id": "pr-5330-narrow-ordered-windows-20261114-report",
+  "job": "pr-5330-narrow-ordered-windows-20261114",
+  "prior_receipt": "records/receipt/pr-5330-premise-linux-20261114-receipt.json",
+  "source": {
+    "branch": "pr-5330-ordered-flush-20261114",
+    "head": "be866aac94f7c05e262654fdfc7118e68eef5263",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Based new branch directly on contributor eedcb534. Preserved per-client stall errors, defer and rethrow failure after retry/error processing, and add separate stalled commit and delete-by-query tests plus CI equality and property restoration fixes. Omitted the previous callback fence, retry-classification changes, collector injection and large test fixtures. Diff check passed; Windows ran no Gradle or tests. Fork head be866aac94f7c05e262654fdfc7118e68eef5263 pushed and verified. Linux proof pending; late-callback and recovery risks remain to be assessed.",
+  "type": "report"
+}
