@@ -1,0 +1,23 @@
+{
+  "commands": [
+    "git fetch origin pr-5333-shutdown-doc",
+    "git switch --detach 4ed727d4f737e0a4f0b5743b60d7e80e5e05bf2c",
+    "In a disposable copy of the focused Bats case, wait for the embedded host to report node role zookeeper=on and the second node to report zookeeper=off before invoking solr stop --all; retain the order shim and 30-second no-force-kill assertion.",
+    "./gradlew :solr:packaging:integrationTests --tests <temporary focused test file> -Pbats.port=18983 --rerun-tasks",
+    "./gradlew :solr:packaging:integrationTestsPicocli --tests <temporary focused test file> -Pbats.port=18983 --rerun-tasks"
+  ],
+  "environment": "Linux clean isolated checkout, JDK 21, normal Solr security manager; run every Gradle command through the local bounded live-build wrapper under both required host locks.",
+  "head": "4ed727d4f737e0a4f0b5743b60d7e80e5e05bf2c",
+  "id": "pr-5333-ready-stop-probe-20261113",
+  "job": "pr-5333-ready-stop-probe-20261113",
+  "phase": "readiness-gated shutdown diagnostic",
+  "requirements": [
+    "Before claiming and running, verify the prior simple-order gate release, this successor assignment, exact fork head and absence of a competing claim; check both Gradle locks, process state, available fixed port and inode headroom.",
+    "The only test change permitted is a temporary, uncommitted focused test file that waits for both expected node-role endpoints before stopping. Preserve the existing order shim and force-kill assertion. Do not modify or commit source, tests or the public PR branch.",
+    "Run the focused test for common CLI and Picocli at the exact assigned source head in an isolated worktree. Record whether readiness is established before stop, whether ordering passes, the full failure/success message, graceful-stop duration, child process exit state, fresh Bats/JUnit output and both variant exit codes.",
+    "A pass supports the stop-during-start timing hypothesis but does not prove every shutdown configuration. A repeat force-kill after confirmed readiness indicates a distinct shutdown issue. Do not infer a general shutdown guarantee from one probe.",
+    "Use the new local bounded runner: 3600-second default per command, heartbeat every 30 seconds, process-group termination on timeout with exit 124 classified incomplete. Monitor process and output every few minutes. Never duplicate a live command; diagnose a sustained service wait promptly and stop it if no valid proof is progressing.",
+    "Serialize all Gradle commands under /workspace/tools/.gradle-phone-agent-2.lock and /workspace/tools/.gradle-0609f7968656.lock. Stop at <=15% free inodes. Never install or use Docker. Do not run root check or unrelated suites for this diagnostic. No Docker, macOS or other-platform result is claimed."
+  ],
+  "type": "gate"
+}
