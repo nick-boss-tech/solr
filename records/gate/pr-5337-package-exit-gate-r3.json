@@ -1,0 +1,17 @@
+{
+  "environment": "Linux gate host; clean isolated checkout",
+  "head": "773528a6973c8a880d0c9bcce766d682d1fc9937",
+  "id": "pr-5337-package-exit-gate-r3",
+  "job": "pr-5337-package-exit-gate-r3",
+  "phase": "round 3",
+  "receipt_path": "records/receipt/pr-5337-package-exit-gate-r3.json",
+  "requirements": [
+    "Run ./gradlew :solr:packaging:integrationTests --tests test_help.bats and ./gradlew :solr:packaging:integrationTestsPicocli --tests test_help.bats. Record fresh Bats JUnit and logs.",
+    "Using the built distribution with picocli, run bin/solr package and bin/solr package --help; confirm statuses 2 and 0 respectively and that each help output contains 'Invalid or incomplete command.' next to status 2. Capture output and status.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.cli.SolrCLIPicocliTest -Ptests.seed=5337C0DE, ./gradlew tidy, and ./gradlew check -x test -Prefguide.include=false. Record fresh logs and XML. If tidy changes tracked files, report the diff rather than passing this head.",
+    "The ref-guide and Antora are excluded under the standing owner policy. Inspect the changed generated reference entry against the annotation; do not require or run ref-guide tasks for this gate.",
+    "The round 2 fail-before results and Windows 26-invocation test belong to 21379130f426433f163fcd61f0731b8ad51d1412, not this head. Round 3 changes help and generated documentation only; report the exact delta and preserve the prior evidence without claiming it ran at this head."
+  ],
+  "supersedes": "records/gate/pr-5337-cli-exit-gate-r2.json",
+  "type": "gate"
+}
