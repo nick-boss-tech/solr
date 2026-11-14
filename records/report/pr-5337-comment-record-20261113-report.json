@@ -1,0 +1,13 @@
+{
+  "comment": "https://github.com/apache/solr/pull/5337#issuecomment-6868871342",
+  "created_at_utc": "2026-11-14T00:54:28Z",
+  "evidence": "records/receipt/pr-5337-cli-exit-gate-r2.json and records/report/pr-5337-windows-proof-r2-result.json",
+  "id": "pr-5337-comment-record-20261113-report",
+  "job": "pr-5337-comment-record-20261113",
+  "offered_head": "21379130f426433f163fcd61f0731b8ad51d1412",
+  "pr_head": "944f3ec319caee19a8061feb227ee20b4cd8dcbe",
+  "readback": "Stored comment matched the approved local draft, with line endings normalized; PR head unchanged and no additional review or discussion observed.",
+  "remaining_observations": "Windows smoke test is a standalone manual test and not wired into checked CI; package help's exit-code list omits status 2. Neither has been raised in an additional public comment.",
+  "summary": "Authorized PR follow-up posted and verified",
+  "type": "report"
+}
