@@ -1,0 +1,8 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "records/evidence/pr-5333-simple-order-gate-20261113.json (bundle SHA-256 efddab7d437ca0a398567b60de34f8168bb28ed82320ac18689ab2049a18aa70); all Solr, Bats, Gradle, and gate-wrapper processes and fixed-port listeners were verified absent; both required Gradle locks were free; the clean dedicated gate worktree was removed after evidence archival. See cleanup/worktree-removal.txt in the local evidence directory.",
+  "id": "pr-5333-simple-order-gate-20261113",
+  "job": "pr-5333-simple-order-gate-20261113",
+  "reason": "The exact-head gate is complete with a failed verdict; releasing the claim for owner/coordinator review. No source, PR, or Jira changes were made.",
+  "type": "release"
+}
