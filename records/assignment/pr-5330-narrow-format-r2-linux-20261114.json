@@ -1,0 +1,26 @@
+{
+  "claim_path": "records/claim/pr-5330-narrow-format-r2-linux-20261114.json",
+  "contributor_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+  "coordination": "Prior Linux job released with stop evidence. Reconcile live heads and prior evidence before claiming; do not change contributor branch or post public comments.",
+  "gate_id": "pr-5330-narrow-format-r2-linux-20261114",
+  "gate_record": "records/gate/pr-5330-narrow-format-r2-linux-20261114.json",
+  "host_requirements": [
+    "linux",
+    "jdk21",
+    "Solr Gradle"
+  ],
+  "id": "pr-5330-narrow-format-r2-linux-20261114",
+  "job": "pr-5330-narrow-format-r2-linux-20261114",
+  "phase": "narrow ordered-flush formatting successor",
+  "prior_receipt": "records/receipt/pr-5330-narrow-ordered-linux-20261114-receipt.json",
+  "receipt_path": "records/receipt/pr-5330-narrow-format-r2-linux-20261114-receipt.json",
+  "source": {
+    "branch": "pr-5330-ordered-flush-20261114",
+    "head": "6bf469128d2dd570336ff634e41c07012d918d31",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5330-narrow-ordered-linux-20261114",
+  "summary": "Verify the formatting-only successor to the narrow stalled-flush fix",
+  "supersedes": "records/gate/pr-5330-narrow-ordered-linux-20261114.json",
+  "type": "assignment"
+}
