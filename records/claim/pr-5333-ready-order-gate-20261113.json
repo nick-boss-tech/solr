@@ -1,0 +1,11 @@
+{
+ "claimed": "2026-11-13T20:05:00-07:00",
+ "executor": "phone-agent",
+ "host": "Linux (this VM), JDK 21; BATS legs run as the non-root solrtest user (bin/solr refuses root), check leg as root in a normal clone",
+ "id": "pr-5333-ready-order-gate-20261113",
+ "job": "pr-5333-ready-order-gate-20261113",
+ "note": "Claimed by phone-agent at Nick's direction in chat 2026-11-13 ('5333 gate').",
+ "owner": "phone-agent",
+ "pre_claim_verification": "Fork branch pr-5333-shutdown-doc at gate head 395f4d94d7fc5462655d8ecdc22b30268286862a; upstream PR 5333 head at contributor 65c2d85f77017a951f20dc110d71bf14786c6694; gate head is one readiness commit (+7 lines in test_start_solr.bats) atop the simple-order head 4ed727d4; the related ready-stop-probe diagnostic is released with a passed receipt.",
+ "type": "claim"
+}
