@@ -1,0 +1,38 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "records/receipt/pr-5330-narrow-ordered-linux-20261114-receipt.json; records/report/pr-5330-narrow-ordered-linux-20261114-report.json; records/evidence/pr-5330-narrow-ordered-linux-20261114-evidence.json (archive SHA-256 1318b0906b8a4f775620643768ae256b5576c25aa92edba5f2978b57857b4724). Exact stop evidence: pr-5330-narrow-ordered-linux-20261114/release-stop-evidence.txt (SHA-256 60135e2d93f1636f867422a6d313af420e577129fe24a9642b30e700cec33772), captured 2026-11-13T21:20:32-07:00 after /workspace/tools/solr-live-build.py ran ./gradlew --stop under both required locks; runner exit 0 and two daemons stopped. Final post-publication pre-release check at 2026-11-13T21:26:45-07:00 confirmed no related process, both locks free, 1,044,586 of 1,868,096 inodes free (df reports 45% used), 45 GiB disk available, and no source clone, worktrees or temporary runner logs. Fork branch and PR 5330 still resolved to the assigned head and contributor parent. All finite gate/background jobs were complete at 2026-11-13T21:26:54-07:00. Docker CLI absent; no Docker runtime or Docker-dependent tests were used.",
+  "final_pre_release_check": {
+    "board_tip_before_release": "62cb8ae345cfac77167d01ae9e22471ded16cc09",
+    "captured_at": "2026-11-13T21:26:45-07:00",
+    "fork_head": "be866aac94f7c05e262654fdfc7118e68eef5263",
+    "free_inodes": 1044586,
+    "inodes_used_percent": 45,
+    "locks_free": [
+      "/workspace/tools/.gradle-phone-agent-2.lock",
+      "/workspace/tools/.gradle-0609f7968656.lock"
+    ],
+    "pr_5330_head": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+    "related_processes": "none",
+    "release_not_yet_published_at_check": true,
+    "root_disk_available": "45 GiB",
+    "total_inodes": 1868096
+  },
+  "head": "be866aac94f7c05e262654fdfc7118e68eef5263",
+  "id": "pr-5330-narrow-ordered-linux-20261114",
+  "job": "pr-5330-narrow-ordered-linux-20261114",
+  "reason": "The exact-head ordered-flush gate is complete. Behavioral proof and fail-before outcomes are recorded; the gate verdict is failed because tidy changed the test file and the full check's sole failure was the matching Spotless validation. No source correction or public PR/Jira action was made.",
+  "stop_evidence_captured_at": "2026-11-13T21:20:32-07:00",
+  "stop_state": {
+    "disposable_worktrees_removed": true,
+    "gradle_daemons_stopped": 2,
+    "inodes_at_initial_stop": "1,044,611 free of 1,868,096; 45% used",
+    "locks_free_at_initial_stop": true,
+    "related_processes_at_initial_stop": "none",
+    "root_disk_available_at_initial_stop": "45 GiB",
+    "source_clone_removed": true,
+    "stop_evidence_file": "pr-5330-narrow-ordered-linux-20261114/release-stop-evidence.txt",
+    "stop_evidence_sha256": "60135e2d93f1636f867422a6d313af420e577129fe24a9642b30e700cec33772",
+    "temporary_runner_logs_removed": true
+  },
+  "type": "release"
+}
