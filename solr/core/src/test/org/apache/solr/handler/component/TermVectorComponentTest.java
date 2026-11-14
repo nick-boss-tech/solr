@@ -52,6 +52,58 @@ public class TermVectorComponentTest extends SolrTestCaseJ4 {
 
   static String tv = "/tvrh";
 
+  private void indexExclusionFixture() {
+    clearIndex();
+    assertU(adoc("id", "5321", "test_basictv", "alpha", "test_offtv", "beta"));
+    assertU(commit());
+  }
+
+  @Test
+  public void testExclusionVectorControls() throws Exception {
+    indexExclusionFixture();
+    assertJQ(
+        reqWithPath(
+            tv, "json.nl", "map", "q", "id:5321", "fl", "*", "tv", "true", "tv.tf", "true"),
+        "/termVectors/5321/test_basictv/alpha/tf==1",
+        "/termVectors/5321/test_offtv/beta/tf==1");
+    assertJQ(
+        reqWithPath(
+            tv,
+            "json.nl",
+            "map",
+            "q",
+            "id:5321",
+            "fl",
+            "*,-test_offtv",
+            "tv.fl",
+            "test_basictv,test_offtv",
+            "tv",
+            "true",
+            "tv.tf",
+            "true"),
+        "/termVectors/5321/test_basictv/alpha/tf==1",
+        "/termVectors/5321/test_offtv/beta/tf==1");
+  }
+
+  @Test
+  public void testExclusionRetainsOtherTermVectors() throws Exception {
+    indexExclusionFixture();
+    assertJQ(
+        reqWithPath(
+            tv,
+            "json.nl",
+            "map",
+            "q",
+            "id:5321",
+            "fl",
+            "*,-test_offtv",
+            "tv",
+            "true",
+            "tv.tf",
+            "true"),
+        "/termVectors/5321/test_basictv/alpha/tf==1");
+  }
+
   @Test
   public void testCanned() throws Exception {
 
