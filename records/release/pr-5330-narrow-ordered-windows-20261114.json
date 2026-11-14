@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-pr-5330-narrow",
+  "evidence": "Fork head be866aac94f7c05e262654fdfc7118e68eef5263 pushed and remote verified. Implementation stopped, no Windows test executor started. Report records/report/pr-5330-narrow-ordered-windows-20261114-report.json.",
+  "id": "pr-5330-narrow-ordered-windows-20261114",
+  "job": "pr-5330-narrow-ordered-windows-20261114",
+  "reason": "Implementation complete; Linux proof handed off",
+  "type": "release"
+}
