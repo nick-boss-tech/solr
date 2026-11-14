@@ -1,0 +1,21 @@
+{
+  "branch": "stalled-stream-recovery-coverage",
+  "environment": "Linux JDK 21, isolated clean checkout and host locks; retain commands, logs, fresh XML, seeds, timings and stop evidence.",
+  "head": "90d8c0dfa27a07d44b122f390fa91d0f77af305d",
+  "id": "stall-recovery-review-fix-linux-20261114",
+  "job": "stall-recovery-review-fix-linux-20261114",
+  "phase": "recovery test review fixes",
+  "repository": "nick-boss-tech/solr",
+  "requirements": [
+    "Reconcile earlier candidate and exploratory claims, execution, live fork head and contributor ancestry; do not overlap active work.",
+    "Run :solr:core:cleanTest :solr:core:test --tests org.apache.solr.cloud.StalledUpdateRecoveryTest at seeds 5330 and 5330C0DE sequentially. Require testStalledReplicaRecoversAcknowledgedUpdates to execute unskipped both times. Record runtime, resource usage, XML and exceptions; a build or fixture failure is not proof.",
+    "Confirm the targeted replica FROMLEADER request reaches the filter and the real stall detector reports a nonempty queue; the error hook must observe it before update completion. Observe the target replica ineligible, then RECOVERING with the recovery pause, then release the pause and observe it ACTIVE and eligible. Verify the RTG reads are distrib=false on the specific leader and target replica and compare every acknowledged document version. Record all preconditions and timings.",
+    "Assess whether the recovery-pause injection and backpressure reliably produce these preconditions without masking errors, interfering with cluster recovery or allowing the stalled request timeout to stand in for the intended stall. Classify non-reproduction or flakiness explicitly.",
+    "Run org.apache.solr.update.SolrCmdDistributorTest at seed 5330, tidy requiring no tracked changes, and ./gradlew check -x test -Prefguide.include=false including forbiddenApisTest. Report failures and formatting; do not modify the tested head.",
+    "Where feasible compare an executable test-only overlay on pinned base 0ea013e782f747cc94e1504f8077f813d2ddcca8 to show whether the new assertions detect the original lost-error behavior. Do not count compilation, setup, timeout or a non-reproduction as fail-before evidence.",
+    "File receipt, evidence and release including precise commands, results, XML counts and skips, source heads, observed transitions, cleanup and stop evidence. Any test or formatting repair requires a pushed successor head and fresh gate; no public comment."
+  ],
+  "supersedes": "records/gate/stall-recovery-candidate-linux-20261114.json",
+  "type": "gate",
+  "verdict_policy": "Pass requires all named exact-head runs, unskipped test, real queued stall and observed error, actual target recovery transition and eligibility, local replica document/version assertions, clean tidy and root check. Report fixture failure, non-reproduction or flakiness rather than inferring a pass."
+}
