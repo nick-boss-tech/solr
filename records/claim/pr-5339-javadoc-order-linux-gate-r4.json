@@ -1,0 +1,10 @@
+{
+  "claimed": "2026-11-14T00:51:41Z",
+  "head": "c8ad8f01f5c1d0495b047a74f609207fbfdf81ee",
+  "host": "linux",
+  "id": "pr-5339-javadoc-order-linux-gate-r4",
+  "job": "pr-5339-javadoc-order-linux-gate-r4",
+  "note": "Live fork branch pr-5339-signature-migration verified at gate head c8ad8f01 by git ls-remote. r3 gate passed (records/receipt/pr-5339-signature-coverage-linux-gate-r3-receipt.json) at prior head 47e891ce; this r4 head differs only by the Javadoc list-item move in TextProfileSignature.java (no executable code/test change). Per owner direction, close r4 with tidy + focused TextProfileSignatureTest seed 5339; r3 fail-before/mutation proofs cited as prior-head evidence. No conflicting claim exists.",
+  "owner": "vm2",
+  "type": "claim"
+}
