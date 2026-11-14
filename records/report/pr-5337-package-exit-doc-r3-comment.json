@@ -1,0 +1,12 @@
+{
+  "comment": "https://github.com/apache/solr/pull/5337#issuecomment-6868871342",
+  "id": "pr-5337-package-exit-doc-r3-comment",
+  "job": "pr-5337-package-exit-doc-r3",
+  "offered_head": "773528a6973c8a880d0c9bcce766d682d1fc9937",
+  "pr_head": "944f3ec319caee19a8061feb227ee20b4cd8dcbe",
+  "previous_proof_head": "21379130f426433f163fcd61f0731b8ad51d1412",
+  "readback": "Stored comment matched local draft with line endings normalized, PR head unchanged. Previous full Linux and Windows runs remain attributed to 21379130; the direct class-overlay Windows help check is attributed to 773528a and full checks at that head are marked pending.",
+  "summary": "Updated authorized PR comment with new head and proof limits",
+  "type": "report",
+  "updated_at_utc": "2026-11-14T01:23:21Z"
+}
