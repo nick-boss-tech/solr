@@ -1,0 +1,9 @@
+{
+ "executor_stop_evidence": "All gate builds ran inside one flock-serialized chain in a disposable clone (~/workspace/solr-clones/12613-addcore-r1) that has exited; the successor commit was made in the same clone and pushed. No gate process remains running for this job (an idle Gradle daemon may remain resident, which is normal).",
+ "id": "solr-12613-addcore-reconciled-linux-r1",
+ "job": "solr-12613-addcore-reconciled-linux-r1",
+ "receipt": "records/receipt/solr-12613-addcore-reconciled-linux-r1.json",
+ "released": "2026-11-13T18:52:00-07:00",
+ "released_by": "phone-agent",
+ "type": "release"
+}

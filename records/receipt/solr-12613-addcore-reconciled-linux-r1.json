@@ -1,0 +1,24 @@
+{
+ "branch": "solr-12613-addcore-reconciled",
+ "evidence": "records/evidence/solr-12613-addcore-reconciled-linux-r1-evidence.txt",
+ "evidence_sha256": "6db3b9c94147c1dafdbe0fba12dcc176a2493aebbcfe7f814118807077e430e9",
+ "executor": "phone-agent",
+ "filed": "2026-11-13T18:52:00-07:00",
+ "head": "76f4fc6faab8736a017e3f46cec2f7c8e09ab297",
+ "id": "solr-12613-addcore-reconciled-linux-r1",
+ "job": "solr-12613-addcore-reconciled-linux-r1",
+ "legs": {
+  "environment": "Exact fork head verified; clean checkout; JDK 21; builds serialized. Browser is Chrome for Testing 154 (the app browser binary /opt/meta-chromium/chrome exits on launch and cannot serve Selenium; recorded in evidence).",
+  "fail_before": "Baseline cores.js restored alone: testInitialCoreStatusKeepsAddCoreFormOpen FAILED at its intended assertion (expected:</~cores[]> but was:</~cores[/swapa]>); testInitialCoreStatusStillSelectsDefaultCore PASSED. Source restored, tree clean.",
+  "focused_suite": "AdminUiCoreAdminStandaloneTest BUILD SUCCESSFUL at seed 12613A01 with tests.selenium=true (7 test methods, no failures).",
+  "limits": "Per-run JUnit XML for the two green suites was replaced by the later fail-before run (Gradle behavior); their results are recorded from the Gradle logs, and round 2 preserves per-step XML for the same classes. A passing deterministic case does not establish the precise event order of the historical timeout.",
+  "neighbor_suite": "AdminUiNodePickerTest BUILD SUCCESSFUL at seed 12613A01 (4 test methods, no failures).",
+  "root_check": "check -x test -Prefguide.include=false: BUILD FAILED on exactly one task, :solr:webapp:spotlessJavaCheck (the same formatting defect); no other failures.",
+  "tidy": "rc=0 but one tracked change: AdminUiCoreAdminStandaloneTest.java, one hunk joining a wrapped cast line. Formatting defect at this head."
+ },
+ "successor_head": "d176c23630a462f43be93d594a4a4200244948f1",
+ "successor_job": "solr-12613-addcore-reconciled-linux-r2",
+ "summary": "FAILED on formatting only at 76f4fc6f. The Add Core fix and its two new browser cases behave exactly as required (open-form case fails on baseline cores.js at its intended assertion; closed-form control passes; both suites green at head), but tidy reformats the new test file and check fails at spotlessJavaCheck. Successor d176c236 (exact tidy output) pushed; round 2 gates it.",
+ "type": "receipt",
+ "verdict": "failed"
+}
