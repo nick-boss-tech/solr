@@ -1,0 +1,9 @@
+{
+  "executor_stop_evidence": "All gate legs exited (focused run 1 at 01:52Z, focused run 2 seed at 01:56Z, tidy at 01:59Z, check at 02:08Z). No Gradle build is running at release time; gate worktree /workspace/gates/5320-api-regression is clean at db4483f0.",
+  "id": "pr5320-api-regression-linux-gate-20261113",
+  "job": "pr5320-api-regression-linux-gate-20261113",
+  "receipt": "records/receipt/pr5320-api-regression-linux-gate-20261113-receipt.json",
+  "released": "2026-11-14T02:10:00Z",
+  "released_by": "vm2",
+  "type": "release"
+}
