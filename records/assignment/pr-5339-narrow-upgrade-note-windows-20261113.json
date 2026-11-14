@@ -1,0 +1,12 @@
+{
+  "id": "pr-5339-narrow-upgrade-note-windows-20261113",
+  "intended_host": "Windows documentation",
+  "job": "pr-5339-narrow-upgrade-note-windows-20261113",
+  "source": {
+    "branch": "pr-5339-signature-migration",
+    "head": "c8ad8f01f5c1d0495b047a74f609207fbfdf81ee",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Narrow PR 5339 upgrade note and revise held comment",
+  "type": "assignment"
+}
