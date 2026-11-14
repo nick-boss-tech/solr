@@ -1,0 +1,9 @@
+{
+  "executor_stop_evidence": "Both gate legs exited (focused test at 01:02Z, tidy at 01:03Z). No Gradle build is running at release time; gate worktree /workspace/gates/5339-r4-javadoc is clean at c8ad8f01 with zero tracked changes.",
+  "id": "pr-5339-javadoc-order-linux-gate-r4",
+  "job": "pr-5339-javadoc-order-linux-gate-r4",
+  "receipt": "records/receipt/pr-5339-javadoc-order-linux-gate-r4-receipt.json",
+  "released": "2026-11-14T01:04:00Z",
+  "released_by": "vm2",
+  "type": "release"
+}
