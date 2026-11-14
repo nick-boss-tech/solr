@@ -1,0 +1,22 @@
+{
+  "environment": "Linux Solr gate host, supported JDK, isolated clean checkout",
+  "head": "fb576e87cccf63f8f2a1bbd3bee30533ee0290d8",
+  "id": "pr5320-api-regression-linux-gate-r2-20261113",
+  "job": "pr5320-api-regression-linux-gate-r2-20261113",
+  "phase": "test-only API regression proof round 2",
+  "prior_receipt": "records/receipt/pr5320-api-regression-linux-gate-20261113-receipt.json",
+  "requirements": [
+    "Verify the exact remote head, contributor ancestry, clean checkout and test-only changes. Review the prior receipt: first focused run failed during security startup and the second failed comparing Integer to Long; prior tidy and check passed only at old head.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.security.BasicAuthIntegrationTest.testRepeatedV2PermissionDeleteById -Ptests.seed=5AB93CB9D28584E8 and then run the same test twice more with independent random seeds in fresh separate Gradle invocations. Record actual commands, seeds, fresh XML/logs, counts and exit codes, and verify each executes. Report failures, setup and compile errors accurately; these runs probe but cannot prove absence of all startup races.",
+    "Run ./gradlew tidy and ./gradlew check -x test -Prefguide.include=false. Record commands, exits and tracked changes. Formatting changes require a new committed head and successor gate.",
+    "Coverage-only test: it does not force a version-conflict retry or prove a defect in the contributor branch. No fail-before leg is required.",
+    "Publish records/receipt/pr5320-api-regression-linux-gate-r2-20261113-receipt.json with each result and evidence."
+  ],
+  "source": {
+    "branch": "pr-5320-api-regression",
+    "contributor_parent": "5fa5513038a7cf9318ed800423d8a44064d4c0e3",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes_gate": "records/gate/pr5320-api-regression-linux-gate-20261113.json",
+  "type": "gate"
+}
