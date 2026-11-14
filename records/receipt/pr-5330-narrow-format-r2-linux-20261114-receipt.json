@@ -1,0 +1,39 @@
+{
+ "evidence_record": "records/evidence/pr-5330-narrow-format-r2-linux-20261114.json",
+ "evidence_sha256": "b60ba117eabaecbe913cf8892a15d7690d443621db05de153fee55d86fd2483e",
+ "executor": "phone-agent",
+ "filed": "2026-11-14T10:00:00-07:00",
+ "gate": "pr-5330-narrow-format-r2-linux-20261114",
+ "head": "6bf469128d2dd570336ff634e41c07012d918d31",
+ "id": "pr-5330-narrow-format-r2-linux-20261114-receipt",
+ "job": "pr-5330-narrow-format-r2-linux-20261114",
+ "legs": [
+  {
+   "leg": "reconciliation",
+   "result": "Prior release and stop evidence confirmed; live fork head and PR head verified; contributor parent is an ancestor; diff vs be866aac is only the two assertion formatting changes."
+  },
+  {
+   "leg": "suite seed 5330",
+   "result": "exit 0; 4 tests, 0 failures, 0 skipped; the three required methods executed and passed."
+  },
+  {
+   "leg": "suite seed 5330C0DE",
+   "result": "exit 0; 4 tests, 0 failures, 0 skipped; the three required methods executed and passed."
+  },
+  {
+   "leg": "tidy",
+   "result": "exit 0, no tracked changes."
+  },
+  {
+   "leg": "root check",
+   "result": "check -x test BUILD SUCCESSFUL with the standing Antora exclusions; forbiddenApisTest included."
+  },
+  {
+   "leg": "prior proof review",
+   "result": "Prior fail-before, ordering and healthy-retry evidence remains applicable (formatting-only diff); limits carried in the evidence record."
+  }
+ ],
+ "summary": "PASSED at 6bf46912. The successor is exactly the prior round's tidy output (two wrapped assertions, nothing else). SolrCmdDistributorTest passes at seeds 5330 and 5330C0DE with all three required methods executed and unskipped; tidy is clean; root check succeeds with the standing Antora exclusions. The prior round's behavioral proof (fail-before, ordering, retry) remains applicable to this formatting-only diff and is re-confirmed by the fresh suite runs. No material ordering or error-loss regression demonstrated.",
+ "type": "receipt",
+ "verdict": "passed"
+}

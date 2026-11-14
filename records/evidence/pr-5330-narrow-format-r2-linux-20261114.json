@@ -1,0 +1,52 @@
+{
+ "contributor_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+ "environment": "Linux x86_64, OpenJDK 21.0.12.1, clean isolated checkout at the exact head, Gradle via the host's solr-gradle.sh (Gradle 9.7.0); each test leg ran :solr:core:cleanTest first and its JUnit XML was preserved immediately.",
+ "executor": "phone-agent",
+ "head": "6bf469128d2dd570336ff634e41c07012d918d31",
+ "id": "pr-5330-narrow-format-r2-linux-20261114-evidence",
+ "job": "pr-5330-narrow-format-r2-linux-20261114",
+ "limits": [
+  "Contributor commit marker absence is bounded non-observation in a local fixture, not general proof.",
+  "Local fixture only; no SolrCloud recovery was exercised.",
+  "The snapshot/clear callback race was not forced.",
+  "No source was modified during this gate."
+ ],
+ "prior_gated_head": "be866aac94f7c05e262654fdfc7118e68eef5263",
+ "prior_proof_applicability": "The prior receipt's behavioral evidence (controlled base and contributor fail-before, endpoint ordering and error retention at both seeds, healthy retry against a local endpoint, late callbacks) remains applicable: the successor diff changes only line wrapping in two assertions of the same test class, no production code and no assertion semantics. The fresh exact-head suite runs at both seeds in this gate re-confirm the behavior at 6bf46912, so no separate repetition of the fail-before legs was needed.",
+ "reconciliation": "Prior job pr-5330-narrow-ordered-linux-20261114 is released with stop evidence; its receipt verdict was failed only on tidy and :solr:core:spotlessJavaCheck, both from the same two over-long assertion lines. Live fork branch pr-5330-ordered-flush-20261114 verified at 6bf46912; live PR 5330 head verified at the contributor parent eedcb534, which is an ancestor of the gate head. Diff from be866aac to 6bf46912 is exactly the two assertion formatting changes in SolrCmdDistributorTest.java (two assertTrue calls wrapped, +4/-2, same expressions, same file, nothing else). No discrepancy.",
+ "results": {
+  "root_check": {
+   "exit_code": 0,
+   "result": "BUILD SUCCESSFUL; check -x test with the standing Antora/ref-guide exclusion set (17 tasks); forbiddenApisTest tasks were in the graph and passed as part of the check."
+  },
+  "suite_seed_5330": {
+   "errors": 0,
+   "exit_code": 0,
+   "failures": 0,
+   "required_methods": {
+    "testCommitDoesNotCrossStalledFlush": "executed, passed",
+    "testDeleteByQueryDoesNotCrossStalledFlush": "executed, passed",
+    "testStallKeepsErrorsFromOtherNodes": "executed, passed"
+   },
+   "skipped": 0,
+   "tests": 4
+  },
+  "suite_seed_5330C0DE": {
+   "errors": 0,
+   "exit_code": 0,
+   "failures": 0,
+   "required_methods": {
+    "testCommitDoesNotCrossStalledFlush": "executed, passed",
+    "testDeleteByQueryDoesNotCrossStalledFlush": "executed, passed",
+    "testStallKeepsErrorsFromOtherNodes": "executed, passed"
+   },
+   "skipped": 0,
+   "tests": 4
+  },
+  "tidy": {
+   "exit_code": 0,
+   "tracked_changes": false
+  }
+ },
+ "type": "evidence"
+}

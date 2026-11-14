@@ -1,0 +1,9 @@
+{
+ "executor_stop_evidence": "All four legs ran in one flock-serialized tracked chain that has exited; the checkout is clean at the gate head. Gradle daemons were stopped or left idle-resident per host norm; no leg is still running.",
+ "id": "pr-5330-narrow-format-r2-linux-20261114",
+ "job": "pr-5330-narrow-format-r2-linux-20261114",
+ "receipt": "records/receipt/pr-5330-narrow-format-r2-linux-20261114-receipt.json",
+ "released": "2026-11-14T10:00:00-07:00",
+ "released_by": "phone-agent",
+ "type": "release"
+}
