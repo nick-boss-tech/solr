@@ -1,0 +1,12 @@
+{
+  "comment_url": "https://github.com/apache/solr/pull/5334#issuecomment-6868285577",
+  "contributor_head": "c64ef9dcc6360bd6bd39cb129d1b9f3e94e8ce67",
+  "id": "pr-5334-comment-record-20261113-report",
+  "job": "pr-5334-comment-record-20261113",
+  "offered_head": "c9896f0e5b026545ebefcb6f225da67550acdd21",
+  "posted_at_utc": "2026-11-14T00:15:30Z",
+  "proof": "25 focused and neighboring tests passed, clean tidy and root check, bidirectional serialization against immediate pre-PR base, fail-before UID assertion; host Gradle 9.7.0 wrapper used. Earlier-release compatibility unproven.",
+  "receipt": "records/receipt/pr-5334-compat-linux-r2-20261113-receipt.json",
+  "summary": "Nick approved and posted the reviewed compatibility follow-up; stored text matched the approved draft on read-back.",
+  "type": "report"
+}
