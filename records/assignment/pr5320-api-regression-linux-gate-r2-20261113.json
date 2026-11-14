@@ -1,0 +1,20 @@
+{
+  "claim_path": "records/claim/pr5320-api-regression-linux-gate-r2-20261113.json",
+  "gate_id": "pr5320-api-regression-linux-gate-r2-20261113",
+  "gate_record": "records/gate/pr5320-api-regression-linux-gate-r2-20261113.json",
+  "id": "pr5320-api-regression-linux-gate-r2-20261113",
+  "intended_host": "Linux Solr gate host",
+  "job": "pr5320-api-regression-linux-gate-r2-20261113",
+  "phase": "test-only API regression proof round 2",
+  "prior_receipt": "records/receipt/pr5320-api-regression-linux-gate-20261113-receipt.json",
+  "receipt_path": "records/receipt/pr5320-api-regression-linux-gate-r2-20261113-receipt.json",
+  "source": {
+    "branch": "pr-5320-api-regression",
+    "head": "fb576e87cccf63f8f2a1bbd3bee30533ee0290d8",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr5320-api-regression-linux-gate-20261113",
+  "summary": "Verify corrected SolrCloud API test after failed gate",
+  "supersedes_gate": "records/gate/pr5320-api-regression-linux-gate-20261113.json",
+  "type": "assignment"
+}
