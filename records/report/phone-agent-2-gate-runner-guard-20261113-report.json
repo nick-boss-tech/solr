@@ -1,0 +1,28 @@
+{
+  "id": "phone-agent-2-gate-runner-guard-20261113-report",
+  "job": "phone-agent-2-gate-runner-guard-20261113",
+  "local_changes": [
+    "/workspace/AGENTS.md",
+    "/workspace/tools/solr-live-build.py",
+    "/workspace/tools/inode-watch-run.py"
+  ],
+  "local_policy": {
+    "default_heartbeat_seconds": 30,
+    "default_timeout_seconds": 3600,
+    "override": "SOLR_GATE_TIMEOUT_SECONDS must be set to a finite positive integer for an intentionally longer command, with rationale in the gate command plan; SOLR_GATE_HEARTBEAT_SECONDS may set a positive heartbeat interval.",
+    "timeout_result": "Terminate the child process group (SIGTERM, then SIGKILL after the grace period) and return 124; record as incomplete, never as a pass. Existing resource floors remain in force."
+  },
+  "scope": "Local phone-agent-2 execution only. The recommendation is not a claim that other board tasks are stuck or that the board has a broad liveness problem.",
+  "suggestion": "For the local phone-agent-2 Solr gate-running process, require guarded commands to have a finite wall-clock ceiling, periodic runner heartbeat logs, process-group termination on timeout, and an incomplete/124 result. Record any longer-than-default timeout rationale in that gate plan. Keep this recommendation host-local; do not generalize it to other board tasks.",
+  "summary": "Added finite runtime and heartbeat safeguards to phone-agent-2 local gate runners and documented their use.",
+  "trigger": "The owner reported that PR #5333 baseline Bats case 3 waited about 79 minutes on curl to the local node-role endpoint and was stopped incomplete. That report motivates a local runner safeguard only; no #5333 source, gate, report, receipt, or release record was changed.",
+  "type": "report",
+  "validation": [
+    "Both runner sources passed Python compile() syntax validation.",
+    "solr-live-build.py: synthetic child success returned 0; child exit 7 propagated; a 2-second deadline returned 124 with heartbeat and timeout log markers; a spawned descendant was no longer live after timeout.",
+    "inode-watch-run.py: synthetic child success returned 0; a 2-second deadline returned 124 with heartbeat and timeout markers; a spawned descendant was no longer live after timeout.",
+    "solr-live-build.py emitted a 1-second heartbeat even with a 5-second resource-sampling interval.",
+    "A nonpositive timeout was rejected before launch by both runners.",
+    "No Solr build, Bats suite, or PR #5333 gate was run as part of this wrapper-hardening task."
+  ]
+}
