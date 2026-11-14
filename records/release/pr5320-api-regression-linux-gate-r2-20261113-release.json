@@ -1,0 +1,12 @@
+{
+  "id": "pr5320-api-regression-linux-gate-r2-20261113-release",
+  "job": "pr5320-api-regression-linux-gate-r2-20261113",
+  "type": "release",
+  "owner": "vm2",
+  "recorded": "2026-11-14",
+  "head": "fb576e87cccf63f8f2a1bbd3bee30533ee0290d8",
+  "gate": "records/gate/pr5320-api-regression-linux-gate-r2-20261113.json",
+  "receipt": "records/receipt/pr5320-api-regression-linux-gate-r2-20261113-receipt.json",
+  "summary": "PR-5320 api-regression Linux gate r2 released to passed at head fb576e87 on 2026-11-14. Focused testRepeatedV2PermissionDeleteById green at recorded seed 5AB93CB9D28584E8 and independent seeds 780F6F4, 32924594; tidy clean; root check green.",
+  "verdict": "passed"
+}
