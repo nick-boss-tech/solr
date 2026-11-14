@@ -1,0 +1,10 @@
+{
+ "claimed": "2026-11-13T18:00:00-07:00",
+ "executor": "phone-agent",
+ "host": "Linux (this VM), JDK 21, Chrome for Testing",
+ "id": "solr-12613-addcore-reconciled-linux-r1",
+ "job": "solr-12613-addcore-reconciled-linux-r1",
+ "note": "Claimed by phone-agent at Nick's direction in chat 2026-11-13. Will run serially under the local build lock, addcore first.",
+ "owner": "phone-agent",
+ "type": "claim"
+}
