@@ -1,0 +1,14 @@
+{
+  "id": "pr5320-api-regression-implementation-r2-20261113",
+  "intended_host": "Windows implementation; Linux proof separately",
+  "job": "pr5320-api-regression-implementation-r2-20261113",
+  "prior_receipt": "records/receipt/pr5320-api-regression-linux-gate-20261113-receipt.json",
+  "source": {
+    "branch": "pr-5320-api-regression",
+    "head": "db4483f0294bfc4fe8dae73a16ad3e526db8ef1f",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr5320-api-regression-implementation-20261113",
+  "summary": "Fix failed test startup readiness and numeric assertion from Linux receipt",
+  "type": "assignment"
+}
