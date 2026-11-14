@@ -1,0 +1,13 @@
+{
+  "id": "stall-recovery-test-windows-r2-20261114-report",
+  "job": "stall-recovery-test-windows-r2-20261114",
+  "source": {
+    "base": "6bf469128d2dd570336ff634e41c07012d918d31",
+    "branch": "stalled-stream-recovery-coverage",
+    "head": "b7c0f0abdf4f313b8eae6672d27602b9fe771027",
+    "repository": "nick-boss-tech/solr"
+  },
+  "source_file": "solr/core/src/test/org/apache/solr/cloud/StalledUpdateRecoveryTest.java",
+  "summary": "Prepared and pushed a candidate real SolrCloud recovery test. It holds replica update requests with a targeted Jetty filter; uses a batch of large valid string fields to try to create backpressure; checks the actual stall IOException via the existing error hook, term eligibility, successful update response, recovery and each document version on leader and replica. Source review and staged diff --check only; not compiled or run on Windows. Backpressure, filter matching, stall timing, term and recovery assumptions are unverified. Linux must prove each and distinguish fixture failure from production behavior.",
+  "type": "report"
+}
