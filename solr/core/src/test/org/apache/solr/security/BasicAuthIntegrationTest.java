@@ -88,6 +88,17 @@ public class BasicAuthIntegrationTest extends SolrCloudAuthTestCase {
     HttpClient client = node.getSolrClient().getHttpClient();
     String url = node.getBaseUrl() + "/____v2/cluster/security/authorization";
     zkClient().setData("/security.json", STD_CONF.replace("'", "\"").getBytes(UTF_8));
+    new TimeOut(30, TimeUnit.SECONDS, TimeSource.NANO_TIME)
+        .waitFor(
+            "security plugins did not initialize on every node",
+            () ->
+                cluster.getJettySolrRunners().stream()
+                    .allMatch(
+                        jetty ->
+                            jetty.getCoreContainer().getAuthenticationPlugin()
+                                    instanceof BasicAuthPlugin
+                                && jetty.getCoreContainer().getAuthorizationPlugin()
+                                    instanceof RuleBasedAuthorizationPlugin));
     verifySecurityStatus(client, url, "authorization.enabled", "true", 20);
 
     executeCommand(
@@ -135,7 +146,7 @@ public class BasicAuthIntegrationTest extends SolrCloudAuthTestCase {
     assertEquals("security-edit", remaining.get(0).get("name"));
     assertEquals("update", remaining.get(1).get("name"));
     assertEquals(survivorId, remaining.get(1).get("id"));
-    assertEquals(2, remaining.get(1).get("index"));
+    assertEquals(2L, ((Number) remaining.get(1).get("index")).longValue());
   }
 
   @Test
