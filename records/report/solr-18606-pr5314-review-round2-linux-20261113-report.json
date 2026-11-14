@@ -1,0 +1,27 @@
+{
+  "coverage_limits": [
+    "Only the five named positive suites and the mutation leg were run as focused tests; the root check excludes all test tasks.",
+    "The solr-ref-guide/Antora checks are not enforced for gate runs per the standing owner rule (Nick 2026-11-13); the root check used -Prefguide.include=false.",
+    "No Chrome, bats, or Docker dependencies were required by this gate; Docker-dependent and browser tests were unrun.",
+    "Scope is single-client/single-server; the HTTP alias leg covers testZkAliasRequestsResolveAndQuery at one client."
+  ],
+  "evidence": "records/evidence/solr-18606-pr5314-review-round2-linux-20261113-evidence.tar.gz",
+  "evidence_sha256": "2a3feda4fd8e238cae082ac87e4b83b8851fcf36d2337241bfb6294ee591c78f",
+  "gate": "records/gate/solr-18606-pr5314-review-round2-linux-20261113.json",
+  "id": "solr-18606-pr5314-review-round2-linux-20261113-report",
+  "job": "solr-18606-pr5314-review-round2-linux-20261113",
+  "public_pr_state": "The fork branch is fast-forwarded to the gate head a20facda3ee; the PR body and comments were not modified.",
+  "receipt": "records/receipt/solr-18606-pr5314-review-round2-linux-20261113-receipt.json",
+  "recorded": "2026-11-14",
+  "source": {
+    "branch": "solr-18606-pr5314-review-round2",
+    "head": "a20facda3ee83d307dbc26a33a229c7b082c62bb",
+    "remote_head_verified": true,
+    "repository": "nick-boss-tech/solr",
+    "worktree_clean": true
+  },
+  "status": "completed",
+  "summary": "SOLR-18606 PR 5314 review-round2 Linux gate PASSED at a20facda3ee83d307dbc26a33a229c7b082c62bb. All five positive suites pass (65 tests, 0 failures/errors/skips at seed 18606CAFE), tidy is clean (0 tracked changes), and the non-test root check (check -x test -Prefguide.include=false) passes in 8m32s with forbiddenApis green. The known-alias guard-removal mutation is caught behaviorally: the path-specific observer records the alias state-path read (NoNodeException at /collections/target_alias/state.json), demonstrating the guard prevents the read. This gate supersedes the alias-signal r2 gate which passed at 2dbfc9f3.",
+  "type": "report",
+  "verdict": "passed"
+}
