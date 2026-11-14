@@ -1,0 +1,20 @@
+{
+  "claim_path": "records/claim/pr-5333-simple-order-gate-20261113.json",
+  "contributor_head": "65c2d85f77017a951f20dc110d71bf14786c6694",
+  "gate_id": "pr-5333-simple-order-gate-20261113",
+  "gate_record": "records/gate/pr-5333-simple-order-gate-20261113.json",
+  "id": "pr-5333-simple-order-gate-20261113",
+  "intended_host": "Linux",
+  "job": "pr-5333-simple-order-gate-20261113",
+  "phase": "simplified implementation proof",
+  "receipt_path": "records/receipt/pr-5333-simple-order-gate-20261113.json",
+  "source": {
+    "branch": "pr-5333-shutdown-doc",
+    "head": "4ed727d4f737e0a4f0b5743b60d7e80e5e05bf2c",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5333-zk-order-gate-20261113",
+  "summary": "Run focused synthetic shutdown ordering check and exact-head checks",
+  "supersedes": "records/gate/pr-5333-zk-order-gate-20261113.json and incomplete receipt records/receipt/pr-5333-zk-order-gate-20261113.json",
+  "type": "assignment"
+}
