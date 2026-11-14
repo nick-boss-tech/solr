@@ -1,0 +1,28 @@
+{
+  "commands": [
+    "git fetch origin pr-5333-shutdown-doc",
+    "git switch --detach 395f4d94d7fc5462655d8ecdc22b30268286862a",
+    "git show 65c2d85f77017a951f20dc110d71bf14786c6694:solr/bin/solr > solr/bin/solr",
+    "./gradlew :solr:packaging:integrationTests --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks",
+    "git restore -- solr/bin/solr",
+    "./gradlew :solr:packaging:integrationTests --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks",
+    "./gradlew :solr:packaging:integrationTestsPicocli --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks",
+    "./gradlew tidy",
+    "./gradlew check -x test"
+  ],
+  "environment": "Linux clean isolated checkout, JDK 21, normal security manager; use gate host bounded execution wrapper and heartbeat",
+  "expected_receipt": "records/receipt/pr-5333-ready-order-gate-20261113.json",
+  "head": "395f4d94d7fc5462655d8ecdc22b30268286862a",
+  "id": "pr-5333-ready-order-gate-20261113",
+  "job": "pr-5333-ready-order-gate-20261113",
+  "phase": "readiness fix proof",
+  "requirements": [
+    "Verify branch and PR heads, source ancestry, assignment, ownership and released diagnostic before claiming. Use clean isolated checkout and free fixed ports; use bounded host wrapper, heartbeat and cleanup checks.",
+    "Negative proof is a synthetic shell-only mutation: retain exact-head test and JVM marker scaffold but replace only solr/bin/solr with contributor version. After both roles are ready, the focused ordering assertion must fail because the ZooKeeper host was stopped first. Startup, compilation, readiness, timeout or skipped tests do not satisfy it. Retain logs and XML.",
+    "Restore exact head and run both packaging variants, tidy and root check with normal security manager. Require order assertion, no force kill, and both processes stopped. Capture fresh logs and XML, exits and skips. Tidy must leave tree unchanged; repairs require a new pushed head and superseding gate.",
+    "An existing unrelated timeout-utility test skips because it invokes timeout without operands; disclose any skip. The role helper has connect and total curl timeouts. An overall host watchdog remains required.",
+    "The test masks the enable flag from classification while using real nodes. It does not prove every real alternative configuration or macOS. Diagnostic probe at prior head passed once per CLI after temporary readiness waits; do not substitute it for these exact-head results.",
+    "Ref-guide/Antora exclusions follow the standing board rule. No source authoring or public comments are assigned."
+  ],
+  "type": "gate"
+}
