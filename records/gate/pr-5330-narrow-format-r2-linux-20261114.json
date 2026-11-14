@@ -1,0 +1,21 @@
+{
+  "branch": "pr-5330-ordered-flush-20261114",
+  "contributor_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+  "environment": "Linux, JDK 21, isolated clean checkout; retain commands, exits, logs and fresh JUnit XML with counts and skips.",
+  "head": "6bf469128d2dd570336ff634e41c07012d918d31",
+  "id": "pr-5330-narrow-format-r2-linux-20261114",
+  "job": "pr-5330-narrow-format-r2-linux-20261114",
+  "phase": "narrow ordered-flush formatting successor",
+  "prior_receipt": "records/receipt/pr-5330-narrow-ordered-linux-20261114-receipt.json",
+  "repository": "nick-boss-tech/solr",
+  "requirements": [
+    "Reconcile the prior release and stop evidence, live fork and contributor PR heads, and contributor ancestry before claim. Verify the sole difference from be866aac94f7c05e262654fdfc7118e68eef5263 is the two assertion formatting changes; report any discrepancy.",
+    "Run :solr:core:cleanTest :solr:core:test --tests org.apache.solr.update.SolrCmdDistributorTest at seeds 5330 and 5330C0DE. Require testStallKeepsErrorsFromOtherNodes, testCommitDoesNotCrossStalledFlush and testDeleteByQueryDoesNotCrossStalledFlush to execute without skips. Record fresh XML and counts.",
+    "Run tidy and require no tracked changes. Run ./gradlew check -x test -Prefguide.include=false, including forbiddenApisTest; report commands, exclusions and failures. Ref-guide exclusion follows the standing board rule.",
+    "Review the prior receipt's controlled base and contributor fail-before, endpoint ordering and healthy retry evidence against the formatting-only diff. Explicitly state whether it remains applicable; repeat any affected behavioral proof. Record the limits: bounded commit non-observation, local fixture, no SolrCloud recovery, and unforced snapshot/clear callback race.",
+    "Report any demonstrated material ordering or error-loss regression, unresolved concern or unexpected formatting change. Do not modify source during this gate; source changes need a new pushed head and successor gate. File receipt, evidence and release with stop evidence."
+  ],
+  "supersedes": "records/gate/pr-5330-narrow-ordered-linux-20261114.json",
+  "type": "gate",
+  "verdict_policy": "Pass requires all fresh exact-head checks, required tests with no skips, clean tidy, successful root check, applicable prior behavioral proof and no demonstrated material unresolved regression."
+}
