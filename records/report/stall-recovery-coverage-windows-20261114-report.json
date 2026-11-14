@@ -1,0 +1,7 @@
+{
+  "id": "stall-recovery-coverage-windows-20261114-report",
+  "job": "stall-recovery-coverage-windows-20261114",
+  "source_head": "6bf469128d2dd570336ff634e41c07012d918d31",
+  "summary": "Existing HttpPartitionTest covers a partition and recovery but not a queued streaming-client stall. TlogLeaderElectionFrozenLeaderTest demonstrates a controllable Jetty filter, but targets replication downloads, not leader-to-replica updates. A deterministic real stall requires Linux reproduction and queue-precondition validation before a permanent test can be specified safely; route to a capable Linux host. No source was edited or executor started on Windows.",
+  "type": "report"
+}
