@@ -1,0 +1,6 @@
+{
+  "id": "stall-recovery-probe-windows-implementation-notice-20261114",
+  "job": "stall-recovery-probe-linux-20261114",
+  "summary": "Nick directed Windows to develop the candidate test locally; a separate Windows implementation job stall-recovery-test-windows-r2-20261114 is being claimed. This probe was unclaimed at board snapshot 5fa5e5a68afce84e05060ddba91e4e7417a90b07. Avoid duplicate permanent test implementation; coordinate with the Windows job, and verify the candidate head via its successor gate when posted. This report is not a release or an execution claim.",
+  "type": "report"
+}
