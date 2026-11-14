@@ -1,0 +1,25 @@
+{
+  "environment": "Linux clean checkout, host build locks; no source branch modifications",
+  "head": "c8ad8f01f5c1d0495b047a74f609207fbfdf81ee",
+  "id": "pr-5339-javadoc-order-linux-gate-r4",
+  "job": "pr-5339-javadoc-order-linux-gate-r4",
+  "phase": "Javadoc r4",
+  "prior_head": "47e891cea3ec5bc01b8ca7a5dd3a182be8706112",
+  "prior_receipt": "records/receipt/pr-5339-signature-coverage-linux-gate-r3-receipt.json",
+  "receipt_path": "records/receipt/pr-5339-javadoc-order-linux-gate-r4-receipt.json",
+  "requirements": [
+    "Verify remote head and clean checkout; compare against prior head and confirm only the Javadoc list item moved, no executable code/test changes.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.update.processor.TextProfileSignatureTest -Ptests.seed=5339; retain fresh XML/log and counts.",
+    "Run ./gradlew tidy and confirm no tracked changes.",
+    "Run ./gradlew check -x test -Prefguide.include=false under standing owner ref-guide policy, record exit and logs.",
+    "The r3 receipt records fail-before and three mutation proofs on the same executable code and tests; verify exact diff before citing them as prior-head evidence, not as newly executed at this head. No fresh fail-before or mutation leg required for Javadoc-only change.",
+    "Record commands, results, counts, environment and evidence. Any formatting or source change requires a new pushed head and gate."
+  ],
+  "source": {
+    "branch": "pr-5339-signature-migration",
+    "head": "c8ad8f01f5c1d0495b047a74f609207fbfdf81ee",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes": "records/gate/pr-5339-signature-coverage-linux-gate-r3.json",
+  "type": "gate"
+}
