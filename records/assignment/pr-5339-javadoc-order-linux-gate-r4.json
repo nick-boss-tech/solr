@@ -1,0 +1,19 @@
+{
+  "claim_path": "records/claim/pr-5339-javadoc-order-linux-gate-r4.json",
+  "gate_id": "pr-5339-javadoc-order-linux-gate-r4",
+  "gate_record": "records/gate/pr-5339-javadoc-order-linux-gate-r4.json",
+  "id": "pr-5339-javadoc-order-linux-gate-r4",
+  "intended_host": "Linux gate host",
+  "job": "pr-5339-javadoc-order-linux-gate-r4",
+  "phase": "Javadoc r4",
+  "prior_gate": "records/gate/pr-5339-signature-coverage-linux-gate-r3.json",
+  "prior_receipt": "records/receipt/pr-5339-signature-coverage-linux-gate-r3-receipt.json",
+  "receipt_path": "records/receipt/pr-5339-javadoc-order-linux-gate-r4-receipt.json",
+  "source": {
+    "branch": "pr-5339-signature-migration",
+    "head": "c8ad8f01f5c1d0495b047a74f609207fbfdf81ee",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify PR 5339 Javadoc correction on final branch head",
+  "type": "assignment"
+}
