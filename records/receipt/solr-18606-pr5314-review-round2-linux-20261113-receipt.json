@@ -1,0 +1,120 @@
+{
+  "environment": "Linux, JDK 21, Gradle, fixed seed 18606CAFE, no Chrome/bats/Docker.",
+  "evidence": {
+    "archive_sha256": "2a3feda4fd8e238cae082ac87e4b83b8851fcf36d2337241bfb6294ee591c78f",
+    "location": "https://raw.githubusercontent.com/nick-boss-tech/solr/coordination-v2/records/evidence/solr-18606-pr5314-review-round2-linux-20261113-evidence.tar.gz"
+  },
+  "exclusions_and_limits": [
+    "The root check uses -x test -Prefguide.include=false; all test tasks are excluded from that leg. The five named positive suites and the mutation leg were run separately; other test tasks were not run.",
+    "The solr-ref-guide/Antora checks are not enforced for gate runs per the standing owner rule (Nick 2026-11-13); -Prefguide.include=false keeps them out of the root check. No Docker, bats, or Chrome dependencies were required by this gate.",
+    "Scope is single-client/single-server; the HTTP alias leg covers ZkAliasRequestsResolveAndQuery at one client."
+  ],
+  "gate": "solr-18606-pr5314-review-round2-linux-20261113",
+  "head": "a20facda3ee83d307dbc26a33a229c7b082c62bb",
+  "id": "solr-18606-pr5314-review-round2-linux-20261113-receipt",
+  "job": "solr-18606-pr5314-review-round2-linux-20261113",
+  "legs": [
+    {
+      "command": ":solr:solrj-zookeeper:test --tests org.apache.solr.client.solrj.impl.ZkClientClusterStateProviderTest.testKnownAliasDoesNotReadAliasCollectionState -Dtests.seed=18606CAFE",
+      "exit_code": 0,
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 1
+      },
+      "name": "Path-specific known-alias baseline",
+      "result": "PASS. The same-client positive control records the exact missing alias collection-state path /collections/target_alias/state.json with NoNodeException; the guarded known-alias call records no read of that path."
+    },
+    {
+      "command": ":solr:solrj:test --tests org.apache.solr.client.solrj.impl.CloudHttp2SolrClientTest.testZkAliasRequestsResolveAndQuery -Dtests.seed=18606CAFE",
+      "exit_code": 0,
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 1
+      },
+      "name": "Alias HTTP integration baseline",
+      "result": "PASS. Alias resolution and repeated query coverage remain at the round2 head."
+    },
+    {
+      "command": ":solr:solrj:test --tests org.apache.solr.client.solrj.impl.ClusterStateProviderTest --tests org.apache.solr.client.solrj.impl.CloudSolrClientCacheTest --tests org.apache.solr.client.solrj.impl.CloudSolrClientRoutingTest -Dtests.seed=18606CAFE",
+      "exit_code": 0,
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 31
+      },
+      "name": "SolrJ client suites",
+      "result": "PASS. 7+2+22 = 31 tests, zero failures/errors/skips."
+    },
+    {
+      "command": ":solr:core:test --tests org.apache.solr.cloud.overseer.ZkStateReaderTest --tests org.apache.solr.cloud.AliasIntegrationTest -Dtests.seed=18606CAFE",
+      "exit_code": 0,
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 25
+      },
+      "name": "Core ZkStateReader + alias integration",
+      "result": "PASS. 9+16 = 25 tests, zero failures/errors/skips."
+    },
+    {
+      "command": ":solr:solrj-zookeeper:test --tests org.apache.solr.common.cloud.SolrZkClientTest -Dtests.seed=18606CAFE",
+      "exit_code": 0,
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 7
+      },
+      "name": "SolrZkClient suite",
+      "result": "PASS. 7 tests, zero failures/errors/skips. Total positive: 65 tests, 0 failures, 0 errors, 0 skipped."
+    },
+    {
+      "command": "tidy",
+      "exit_code": 0,
+      "name": "Tidy / spotless",
+      "result": "PASS. BUILD SUCCESSFUL in 1m 11s; post-tidy tracked changes 0 (head is spotless-clean)."
+    },
+    {
+      "command": "check -x test -Prefguide.include=false",
+      "exit_code": 0,
+      "name": "Non-test root check",
+      "result": "PASS. BUILD SUCCESSFUL in 8m 32s; 515 actionable tasks. forbiddenApis and all other non-test checks passed. Antora/solr-ref-guide excluded per standing rule."
+    },
+    {
+      "command": ":solr:solrj-zookeeper:test --tests org.apache.solr.client.solrj.impl.ZkClientClusterStateProviderTest.testKnownAliasDoesNotReadAliasCollectionState -Dtests.seed=18606CAFE",
+      "exit_code": 1,
+      "junit": {
+        "errors": 0,
+        "failures": 1,
+        "skipped": 0,
+        "tests": 1
+      },
+      "name": "Known-alias guard-removal mutation",
+      "result": "Expected detection observed. Removing only the known-alias guard (if (ref != null || reader.getAliases().hasAlias(collection)) -> if (ref != null), diff SHA-256 bc96b4760086e154c8ae342309a0f4b841568c92560882c124a6ff241946d7a9) makes the path-specific test FAIL behaviorally: AssertionError 'Known alias triggered a read of /collections/target_alias/state.json: [ReadAttempt[path=/collections/target_alias/state.json, failure=NoNodeException]]'. Compile rc=0; failure is behavioral, not compile/setup/skip. Exact committed source restored; worktree clean."
+    }
+  ],
+  "notes": [
+    "The test logs include non-fatal Java security-policy/CLDR warnings; all positive legs exited 0 and their JUnit XMLs report zero failures/errors/skips.",
+    "The head a20facda3ee switches ZkClientClusterStateProviderTest from SolrTestCaseJ4 to SolrTestCase and renames the collection to 'target'. Gate supersedes records/gate/solr-18606-pr5314-alias-signal-linux-gate-2dbfc9f32aa-r2.json.",
+    "No source edits, PR comments, or public posts were made by this host; the fork branch is fast-forwarded to the gate head."
+  ],
+  "owner": "vm6",
+  "phase": "PR review round 2",
+  "recorded": "2026-11-14",
+  "source": {
+    "branch": "solr-18606-pr5314-review-round2",
+    "head": "a20facda3ee83d307dbc26a33a229c7b082c62bb",
+    "remote_head_verified": true,
+    "repository": "nick-boss-tech/solr",
+    "worktree_clean": true
+  },
+  "summary": "All named round2 exact-head proof legs passed. The known-alias guard-removal mutation is detected behaviorally by the path-specific observer (alias state-path read recorded with NoNodeException). Tidy is clean and the non-test root check (check -x test -Prefguide.include=false) passes. No unresolved material concern.",
+  "type": "receipt",
+  "verdict": "passed"
+}
