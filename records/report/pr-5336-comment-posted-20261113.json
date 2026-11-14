@@ -1,0 +1,6 @@
+{
+  "id": "pr-5336-comment-posted-20261113",
+  "job": "pr-5336-comment-record-20261113",
+  "summary": "Nick approved the draft. Posted https://github.com/apache/solr/pull/5336#issuecomment-6868408020 at 2026-11-14T00:23:25Z; separate API read-back matches the approved draft. PR head 96df2d214560949cb8984b16aad1a2b7f47ca7d7; offered fork head 59c259bcb28bac589b0617f72b52d23701442100. Proof: records/receipt/pr-5336-response-gate-r3-receipt.json, 10 focused tests, clean tidy, root check with ref-guide excluded under board policy, eight isolated behavioral mutations. Install-shard partial-failure remains untested.",
+  "type": "report"
+}
