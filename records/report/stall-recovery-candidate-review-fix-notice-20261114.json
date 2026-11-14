@@ -1,0 +1,6 @@
+{
+  "id": "stall-recovery-candidate-review-fix-notice-20261114",
+  "job": "stall-recovery-candidate-linux-20261114",
+  "summary": "Nick authorized corrections for distributed RTG reads and recovery synchronization. The candidate gate was unclaimed at snapshot ccf106614096039a106883dc5978fbf74621a5ca; do not claim the old head while Windows job stall-recovery-review-fix-windows-20261114 prepares a successor. If a worker has since claimed, reconcile execution before running conflicting work. This notice is not proof that any worker stopped.",
+  "type": "report"
+}
