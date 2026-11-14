@@ -1,0 +1,8 @@
+{
+  "actor": "windows-codex-nick-shanin",
+  "evidence": "Remote branch term-vector-exclusion-repro-20261114 verified at 5b7441b491dcd75b75d558219f359df4a8b5c3e4; report term-vector-exclusion-repro-windows-20261114-report. No Windows test or build executor started.",
+  "id": "term-vector-exclusion-repro-windows-20261114",
+  "job": "term-vector-exclusion-repro-windows-20261114",
+  "reason": "Test-only branch pushed; handoff for Linux reproduction.",
+  "type": "release"
+}
