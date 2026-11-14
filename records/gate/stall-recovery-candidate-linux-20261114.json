@@ -1,0 +1,20 @@
+{
+  "branch": "stalled-stream-recovery-coverage",
+  "environment": "Linux, JDK 21, isolated clean checkout and host resource locks; no Windows Gradle. Retain commands, logs, fresh JUnit XML, seeds, counts, skips, timing and cleanup evidence.",
+  "head": "b7c0f0abdf4f313b8eae6672d27602b9fe771027",
+  "id": "stall-recovery-candidate-linux-20261114",
+  "job": "stall-recovery-candidate-linux-20261114",
+  "phase": "candidate recovery test exact-head verification",
+  "repository": "nick-boss-tech/solr",
+  "requirements": [
+    "Before claim, verify live source head, contributor head and ancestry; reconcile prior exploratory gate claim and execution state. Stop rather than overlap an active worker.",
+    "Run :solr:core:cleanTest :solr:core:test --tests org.apache.solr.cloud.StalledUpdateRecoveryTest at seeds 5330 and 5330C0DE sequentially. Require testStalledReplicaRecoversAcknowledgedUpdates to execute without skips both times. Record actual fixture behavior, runtime and resource usage. This test is uncompiled and unrun on Windows; do not treat compilation, setup, timeout or non-reproduction as passing.",
+    "Verify from logs or instrumentation that the intended replica FROMLEADER update reached the filter, the real stall exception reported a nonempty queue, and the error hook saw it before update completion. Confirm the stalled replica becomes ineligible before the fault is released; then returns ACTIVE and eligible and each acknowledged document exists at the same version on leader and replica. Capture relevant terms, HTTP response and errors; do not infer recovery from ACTIVE alone.",
+    "Run the checked-in org.apache.solr.update.SolrCmdDistributorTest at seed 5330, tidy with no tracked changes, and ./gradlew check -x test -Prefguide.include=false including forbiddenApisTest. Report all failures and any formatting changes; do not modify the tested head.",
+    "Assess the backpressure fixture for repeatability and whether its payload and timing are appropriate for a maintained test. Compare with executable pinned base 0ea013e782f747cc94e1504f8077f813d2ddcca8 using a test-only overlay if feasible; demonstrate expected missing stall error or terms handling, not an unrelated harness or compile failure. A non-reproduction is not fail-before proof.",
+    "Record fail-before outcome, limits, late callback and replica recovery observations, commands, exits, fresh XML, source heads and evidence, including all cleanup and process-stop details. If candidate fails, describe the defect and recommended repair; any code or formatting change requires a separately pushed head and successor gate."
+  ],
+  "supersedes": "records/gate/stall-recovery-probe-linux-20261114.json",
+  "type": "gate",
+  "verdict_policy": "Passed requires all required exact-head runs and checks, real queued stall, error processing, observed eligibility transition and recovered document versions, no skipped required tests, and valid discriminating proof when feasible. Fixture flakiness or unproven preconditions is incomplete or failed, not passing."
+}
