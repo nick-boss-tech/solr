@@ -1,0 +1,24 @@
+{
+  "board_snapshot_before_publish": "c82801ee5a3cac2ad1e8e2f6c86f17ce283575a9",
+  "evidence_record": "records/evidence/pr-5330-premise-linux-20261114-evidence.json",
+  "evidence_sha256": "56faaf16a8d6e730c58954c57a974acb900b72f44a5b2e624329d836b508df4e",
+  "gate": "pr-5330-premise-linux-20261114",
+  "head": "e5117658841ca30d4b888f311754c8818f06dbf3",
+  "id": "pr-5330-premise-linux-20261114-report",
+  "job": "pr-5330-premise-linux-20261114",
+  "maintainer_decision": "Decide the expected commit/DBQ semantics after an incomplete flush, and whether a stalled client should freeze RF accounting for later successful responses. The real callback was released after stall processing; the exact snapshot/clear race and cluster recovery remain unproven.",
+  "prior_r10_assessment": "r10's focused suite passed 10/10 at seeds 5330 and 5330C0DE and its five fail-before mutations behaved as expected. Its real 200/503 callback test ran blockUntilFinished after callbacks, and the synthetic error-drain interleaving did not prove a real concurrent callback race. Its root forbiddenApisTest failed on three Executors.* test calls, an independent CI cleanup item.",
+  "recommendation": "Keep the minimal error-collection fix, but define and test the ordered-flush behavior when a stream stalls. Preserve a guard that prevents later ordered operations crossing an incomplete flush while still retaining errors; drain-and-rethrow is one observed policy, not the only possible safe design. Review the fork callback fence separately because it suppresses later successful callbacks and changes the shared test RF tracker.",
+  "report_file_in_archive": "pr-5330-premise-linux-20261114/report.md",
+  "source_refs": {
+    "assigned_base_used": true,
+    "base": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+    "contributor": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+    "fork": "e5117658841ca30d4b888f311754c8818f06dbf3",
+    "upstream_main_at_ref_check": "69627e3c58be1daaa6d8485b0c483e0e1442ec50"
+  },
+  "summary": "The original lost-other-replica-error premise reproduces on pinned base 0ea013e and passes on contributor head eedcb534. The contributor DBQ probe then submitted a DBQ between two queued older updates. The optional fork comparison retained errors and rethrew before commit/DBQ submission, preserving order in the fixture.",
+  "title": "PR 5330 premise audit: error recovery and ordered updates",
+  "type": "report",
+  "verdict": "incomplete"
+}
