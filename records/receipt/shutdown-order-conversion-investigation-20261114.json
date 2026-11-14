@@ -1,0 +1,41 @@
+{
+ "branch": "embedded-zookeeper-shutdown-order",
+ "contributor_head": "65c2d85f77017a951f20dc110d71bf14786c6694",
+ "evidence_record": "records/evidence/shutdown-order-conversion-investigation-20261114.json",
+ "evidence_sha256": "f9a32daba084230e087464756d989a8c364d4eb112193df9f206621b2b42b50a",
+ "executor": "phone-agent",
+ "filed": "2026-11-14T16:37:00-07:00",
+ "gate": "shutdown-order-conversion-investigation-20261114",
+ "head": "a9e8ce1db89b0094fb16b90d41bce7402ed4407d",
+ "id": "shutdown-order-conversion-investigation-20261114",
+ "job": "shutdown-order-conversion-investigation-20261114",
+ "legs": [
+  {
+   "leg": "pre-claim verification",
+   "result": "Live fork branch at a9e8ce1d and live PR 5333 head at 65c2d85f, both unchanged; prior repack receipt, evidence and release reviewed."
+  },
+  {
+   "leg": "contributor head commons comparison",
+   "result": "exit 1: the deprecated-properties case fails on the unmodified contributor head too (12 cases, 1 failure, 1 known skip)."
+  },
+  {
+   "leg": "exact-head commons (prescribed)",
+   "result": "exit 1: sole failure is the same case; ordering case passed, no forced kill, both processes stopped. One earlier attempt was invalidated by a host daemon disappearance and rerun."
+  },
+  {
+   "leg": "exact-head picocli (prescribed)",
+   "result": "exit 1: 12 tests, 1 failure (the same case), 1 known skip; ordering case passed."
+  },
+  {
+   "leg": "pid.dir diagnostic mutation",
+   "result": "Offered head with the added -Dsolr.pid.dir start argument removed: full suite exit 0 and the conversion case passed. Recorded as one observation; the contributor failure without the argument rules it out as sole cause. Mutation restored."
+  },
+  {
+   "leg": "timing diagnostic",
+   "result": "EnvUtils writes the conversion warning to solr.log during startup about 1.4s after the first log line, at essentially the moment bin/solr start returns; the test asserts immediately with no wait."
+  }
+ ],
+ "summary": "FAILED: both prescribed exact-head packaging commands exit 1 on the deprecated-properties case, so the gate cannot pass. The investigation resolves the failure's relation to the patch with evidence: it is not a branch effect. The case fails identically on the unmodified contributor head, it passed at this byte-identical tree on 2026-11-13 and failed on 2026-11-14, and the startup diagnostic shows the conversion warning lands in solr.log at about the moment start returns while the test asserts immediately. It is a pre-existing timing-sensitive test on this host. Ordering proof stayed intact in every valid run. No source was changed; the next step sits with the implementation owner.",
+ "type": "receipt",
+ "verdict": "failed"
+}

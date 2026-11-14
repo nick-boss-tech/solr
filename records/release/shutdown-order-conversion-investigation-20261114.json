@@ -1,0 +1,9 @@
+{
+ "executor": "phone-agent",
+ "id": "shutdown-order-conversion-investigation-20261114",
+ "job": "shutdown-order-conversion-investigation-20261114",
+ "note": "Investigation complete; verdict failed because both prescribed exact-head runs exit 1, with the failure resolved as a pre-existing host timing race in the test, not a branch effect (see receipt and evidence). All chains have exited, the diagnostic server was stopped, no Solr process remains running, and the solrtest checkout is clean at the offered head with the diagnostic mutation restored.",
+ "receipt": "records/receipt/shutdown-order-conversion-investigation-20261114.json",
+ "released": "2026-11-14T16:37:00-07:00",
+ "type": "release"
+}
