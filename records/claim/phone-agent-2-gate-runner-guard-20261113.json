@@ -1,0 +1,8 @@
+{
+  "host_id": "phone-agent-2",
+  "id": "phone-agent-2-gate-runner-guard-20261113",
+  "job": "phone-agent-2-gate-runner-guard-20261113",
+  "owner": "phone-agent-2",
+  "scope": "Add bounded wall-clock timeout and periodic heartbeat to local Solr gate wrappers, document local invocation policy, validate with short synthetic child processes, then publish a host-local suggestion only. No source, PR, Jira, or immutable #5333 record changes.",
+  "type": "claim"
+}
