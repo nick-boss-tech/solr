@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "records/report/pr-5336-comment-posted-20261113.json; public comment https://github.com/apache/solr/pull/5336#issuecomment-6868408020. Worker is finished.",
+  "id": "pr-5336-comment-record-20261113",
+  "job": "pr-5336-comment-record-20261113",
+  "reason": "Comment and read-back recorded",
+  "type": "release"
+}
