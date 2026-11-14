@@ -1,0 +1,7 @@
+{
+  "id": "pr-5339-javadoc-root-check-linux-gate-r5",
+  "job": "pr-5339-javadoc-root-check-linux-gate-r5",
+  "owner": "codex-windows",
+  "scope": "Administrative cancellation only at owner request; no Linux execution started.",
+  "type": "claim"
+}
