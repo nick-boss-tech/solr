@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "Source commit 395f4d94d7fc5462655d8ecdc22b30268286862a was pushed and remote ref verified; the Windows implementation worker completed. Proof is the separate pr-5333-ready-order-gate-20261113 job.",
+  "id": "pr-5333-test-readiness-fix-20261113",
+  "job": "pr-5333-test-readiness-fix-20261113",
+  "reason": "Readiness test change pushed and handed to Linux gate",
+  "type": "release"
+}
