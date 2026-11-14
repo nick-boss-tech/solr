@@ -1,0 +1,8 @@
+{
+  "actor": "vm6",
+  "evidence": "records/receipt/pr-5330-r10-repair-linux-20261113-receipt.json; records/report/pr-5330-r10-repair-linux-20261113-report.json; records/evidence/pr-5330-r10-repair-linux-20261113-evidence.tar.gz",
+  "id": "pr-5330-r10-repair-linux-20261113",
+  "job": "pr-5330-r10-repair-linux-20261113",
+  "reason": "PR-5330 r10-repair Linux gate completed with verdict FAILED at head e5117658. Receipt filed: records/receipt/pr-5330-r10-repair-linux-20261113-receipt.json. The repair fixes all three r9 defects (compile, HTTP/1.1 fixture, spotless/tidy) and all five carried-forward fail-before mutations fail behaviorally at the exact head; the focused suite passes 10/10 at two seeds. The single unresolved material concern: root check -x test fails on :solr:core:forbiddenApisTest - 3 forbidden executor API invocations in SolrCmdDistributorTest.java (lines 718, 944, 1002) from Nick's fork commits, absent from upstream main. Report records/report/pr-5330-r10-repair-linux-20261113-report.json names the required successor (r11) changes. Evidence archive records/evidence/pr-5330-r10-repair-linux-20261113-evidence.tar.gz (SHA-256 aa31772924a09f212e6dc010d3332099700b360a54c7f8980f15cd57b3db914f). Executor stop: Gradle daemons stopped; gate-5330-r10-head and gate-5330-r10-mut worktrees restored clean.",
+  "type": "release"
+}
