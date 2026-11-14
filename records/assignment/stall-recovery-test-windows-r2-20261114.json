@@ -1,0 +1,14 @@
+{
+  "id": "stall-recovery-test-windows-r2-20261114",
+  "intended_host": "windows",
+  "job": "stall-recovery-test-windows-r2-20261114",
+  "scope": "Nick directed local implementation as far as possible; no builds on Windows. Push candidate and request exact-head Linux verification. Preserve the narrow branch.",
+  "source": {
+    "branch": "pr-5330-ordered-flush-20261114",
+    "head": "6bf469128d2dd570336ff634e41c07012d918d31",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "stall-recovery-coverage-windows-20261114",
+  "summary": "Implement candidate SolrCloud stalled-update recovery test on a separate fork branch",
+  "type": "assignment"
+}
