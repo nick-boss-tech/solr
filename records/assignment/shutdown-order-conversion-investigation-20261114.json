@@ -1,0 +1,21 @@
+{
+  "claim_path": "records/claim/shutdown-order-conversion-investigation-20261114.json",
+  "contributor_head": "65c2d85f77017a951f20dc110d71bf14786c6694",
+  "gate_id": "shutdown-order-conversion-investigation-20261114",
+  "gate_record": "records/gate/shutdown-order-conversion-investigation-20261114.json",
+  "id": "shutdown-order-conversion-investigation-20261114",
+  "intended_host": "Linux",
+  "job": "shutdown-order-conversion-investigation-20261114",
+  "notes": "Windows code reading completed; Linux runs only. No source authoring or public comment. Prior job is released; inspect its receipt, evidence and release before claiming. The prior receipt says passed, but both positive packaging tasks exited 1. Do not characterize either as passing.",
+  "phase": "conversion failure investigation and exact-head verification",
+  "receipt_path": "records/receipt/shutdown-order-conversion-investigation-20261114.json",
+  "source": {
+    "branch": "embedded-zookeeper-shutdown-order",
+    "head": "a9e8ce1db89b0094fb16b90d41bce7402ed4407d",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "shutdown-order-repack-gate-20261114",
+  "summary": "Investigate the deprecated-property test failure and verify shutdown follow-up",
+  "supersedes": "records/gate/shutdown-order-repack-gate-20261114.json for positive packaging proof; retain its negative proof, tidy and root check at the same head",
+  "type": "assignment"
+}
