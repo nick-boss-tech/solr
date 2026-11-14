@@ -1,0 +1,12 @@
+{
+  "id": "pr-5337-comment-record-20261113",
+  "intended_host": "Windows",
+  "job": "pr-5337-comment-record-20261113",
+  "source": {
+    "branch": "pr-5337-cli-exit-fixes",
+    "head": "21379130f426433f163fcd61f0731b8ad51d1412",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Record authorized PR 5337 follow-up comment and read-back",
+  "type": "assignment"
+}
