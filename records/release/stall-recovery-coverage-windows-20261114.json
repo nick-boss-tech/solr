@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-stall-recovery",
+  "evidence": "Review only; no source edits, builds, tests or background executor. See records/report/stall-recovery-coverage-windows-20261114-report.json.",
+  "id": "stall-recovery-coverage-windows-20261114",
+  "job": "stall-recovery-coverage-windows-20261114",
+  "reason": "Linux reproduction and probes required before a reliable implementation",
+  "type": "release"
+}
