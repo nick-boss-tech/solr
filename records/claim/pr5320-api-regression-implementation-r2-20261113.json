@@ -1,0 +1,7 @@
+{
+  "id": "pr5320-api-regression-implementation-r2-20261113",
+  "job": "pr5320-api-regression-implementation-r2-20261113",
+  "owner": "codex-windows",
+  "scope": "Correct test defects from Linux receipt and post successor gate.",
+  "type": "claim"
+}
