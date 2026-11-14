@@ -1,0 +1,8 @@
+{
+  "host": "Windows",
+  "id": "term-vector-exclusion-repro-windows-20261114",
+  "job": "term-vector-exclusion-repro-windows-20261114",
+  "scope": "Build and push a diagnostic test branch based on contributor head 35db4554284ca0d2ca37eb78ed4c7c7dee599db2, then request Linux reproduction. No production fix or public comment.",
+  "summary": "Prepare a test-only term-vector exclusion reproduction",
+  "type": "assignment"
+}
