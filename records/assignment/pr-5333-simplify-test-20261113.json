@@ -1,0 +1,14 @@
+{
+  "id": "pr-5333-simplify-test-20261113",
+  "intended_host": "Windows implementation, Linux proof",
+  "job": "pr-5333-simplify-test-20261113",
+  "scope": "Replace two failing setup cases with one deterministic synthetic process-argument case using a real embedded server; bound HTTP readiness. Push and hand off exact-head Linux proof. Original gate ended incomplete and was released.",
+  "source": {
+    "branch": "pr-5333-shutdown-doc",
+    "head": "748e63e4281cd4d343e125e1b913805d20c5c6a2",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "pr-5333-zk-order-implementation-20261113",
+  "summary": "Replace stalled ZooKeeper shutdown tests with a single focused process-boundary check",
+  "type": "assignment"
+}
