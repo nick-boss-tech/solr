@@ -1,0 +1,7 @@
+{
+  "id": "pr-5337-package-exit-doc-r3",
+  "job": "pr-5337-package-exit-doc-r3",
+  "owner": "codex-windows",
+  "scope": "Update package exit help and generated documentation on fork branch",
+  "type": "claim"
+}
