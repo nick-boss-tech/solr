@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows-stall-recovery-r2",
+  "evidence": "Fork head b7c0f0abdf4f313b8eae6672d27602b9fe771027 verified remotely; no Windows build, test or background executor. See records/report/stall-recovery-test-windows-r2-20261114-report.json.",
+  "id": "stall-recovery-test-windows-r2-20261114",
+  "job": "stall-recovery-test-windows-r2-20261114",
+  "reason": "candidate pushed and handed to Linux verification",
+  "type": "release"
+}
