@@ -1,0 +1,10 @@
+{
+ "evidence": "records/evidence/board-records-audit-20261113-evidence.txt",
+ "evidence_sha256": "cf6f7c07fd28f700a85f108b135b6d16f339175df668e93918f8c4bd7dfc7cbe",
+ "executor": "phone-agent",
+ "filed": "2026-11-13T17:44:00-07:00",
+ "id": "board-records-audit-20261113",
+ "job": "board-records-audit-20261113",
+ "summary": "Full-board lifecycle audit at the owner's direction: 340 jobs censused. Bookkeeping is sound (no gate/receipt head mismatches; 186 of 187 releasess without receipts are normal report completions and the one exception is an explained disclaimer; receipt verdicts 48 passed, 21 failed, 22 incomplete, 3 invalid). Findings: one unreleased incomplete receipt (solr-18619 maintenance r5); three live open claims; five cp1252-encoded records from 2026-11-10 that strict JSON readers reject; supersedes typed inconsistently (string, list, dict). Residue is 54 unclaimed job ids: exactly two actionable and unowned (the PR 5333 simple-order and doc-proof gates), two live on owned lines (PR 5329 round-10 gate, PR 5330 r10 fix, the latter overlapping vm6's claimed r10 repair), one duplicate assignment (PR 5339 r3-fix) reconciled by a release filed with this audit, and the remainder superseded rounds or stale one-offs from closed lines.",
+ "type": "report"
+}

@@ -1,0 +1,8 @@
+{
+ "id": "pr-5339-r3-fix-linux-20261114",
+ "job": "pr-5339-r3-fix-linux-20261114",
+ "note": "Reconciliation release: the work this assignment prescribes was completed under job pr-5339-signature-coverage-linux-gate-r3 before this assignment was observed. The spotless reformat was applied and pushed as successor head 47e891cea3ec5bc01b8ca7a5dd3a182be8706112 on pr-5339-signature-migration, and the exact-head r3 gate passed (records/receipt/pr-5339-signature-coverage-linux-gate-r3-receipt.json): focused test 4/4 at seed 5339, tidy zero tracked changes, check green including spotlessJavaCheck, fail-before and mutations discriminating. Two scope deltas against this assignment's text: the r3 check leg ran with -Prefguide.include=false under the owner Antora policy recorded in round 2, and no separate fail-before spotlessCheck leg was run in r3 (the round-2 fail-before spotless result stands, and the r3 tidy-clean plus spotlessJavaCheck pass establishes the repaired state). No further work is needed under this assignment.",
+ "released": "2026-11-13T17:40:00-07:00",
+ "released_by": "phone-agent",
+ "type": "release"
+}

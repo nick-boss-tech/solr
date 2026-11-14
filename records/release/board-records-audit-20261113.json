@@ -1,0 +1,9 @@
+{
+ "executor_stop_evidence": "Read-only audit; the only writes are this report, its evidence, and the pr-5339-r3-fix reconciliation release filed in the same commit. No builds were run and no other record was modified.",
+ "id": "board-records-audit-20261113",
+ "job": "board-records-audit-20261113",
+ "released": "2026-11-13T17:44:00-07:00",
+ "released_by": "phone-agent",
+ "report": "records/report/board-records-audit-20261113-report.json",
+ "type": "release"
+}
