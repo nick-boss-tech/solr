@@ -1,0 +1,13 @@
+{
+  "head": "43d481367a5ecbf6bc48302e051b8cd87a6313cd",
+  "id": "pr-5339-narrow-upgrade-note-windows-20261113-report",
+  "job": "pr-5339-narrow-upgrade-note-windows-20261113",
+  "prior_receipt": "records/receipt/pr-5339-javadoc-order-linux-gate-r4-receipt.json",
+  "source": {
+    "branch": "pr-5339-signature-migration",
+    "parent": "c8ad8f01f5c1d0495b047a74f609207fbfdf81ee",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Narrowed upgrade note to opt-in TextProfileSignature compatibility and conditional reindex; simplified held comment and included option to omit note. Diff check passed. No tests run for docs-only change. Prior receipt covers parent; owner accepted prior proof and cancelled redundant check. No public comment posted.",
+  "type": "report"
+}
