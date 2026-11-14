@@ -1,0 +1,7 @@
+{
+  "head": "c8ad8f01f5c1d0495b047a74f609207fbfdf81ee",
+  "id": "pr-5339-javadoc-root-check-linux-gate-r5-cancelled",
+  "job": "pr-5339-javadoc-root-check-linux-gate-r5",
+  "summary": "Cancelled at Nick’s direction: previous root check at parent head plus final-head focused test and tidy provide sufficient practical evidence. No execution was started under this job.",
+  "type": "report"
+}
