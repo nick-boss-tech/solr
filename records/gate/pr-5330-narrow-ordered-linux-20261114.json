@@ -1,0 +1,21 @@
+{
+  "branch": "pr-5330-ordered-flush-20261114",
+  "contributor_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+  "environment": "Linux JDK 21 isolated clean checkout; retain exact commands, exits, logs, fresh JUnit XML, counts and skips",
+  "head": "be866aac94f7c05e262654fdfc7118e68eef5263",
+  "id": "pr-5330-narrow-ordered-linux-20261114",
+  "job": "pr-5330-narrow-ordered-linux-20261114",
+  "phase": "narrow ordered-flush gate",
+  "repository": "nick-boss-tech/solr",
+  "requirements": [
+    "Reconcile previous worker execution and remote source/PR heads; verify contributor ancestry. No changes to contributor branch or public comments.",
+    "Run :solr:core:cleanTest :solr:core:test --tests org.apache.solr.update.SolrCmdDistributorTest with recorded seed; require testStallKeepsErrorsFromOtherNodes, testCommitDoesNotCrossStalledFlush and testDeleteByQueryDoesNotCrossStalledFlush to run without skips. Repeat the three stall cases at multiple seeds. Run tidy with no changes and full ./gradlew check -x test including forbiddenApisTest; record any explicit setup or excluded components.",
+    "On the contributor head with executable test-only overlays and unchanged production, demonstrate the two ordered-operation tests fail for the intended missing stall exception after their controlled stall preconditions, then show they pass on the exact narrow head. Reproduce the original lost-error behavior on pinned base and the fix on contributor and narrow head, using the prior premise audit's controlled probe where appropriate. Do not count compile, harness, timeout or missing-method failures as behavioral proof.",
+    "Reuse the prior premise audit's actual endpoint request-order probe as a diagnostic overlay: demonstrate contributor DBQ crossing queued older writes and verify the narrow head rejects DBQ and commit before submission while retaining node-specific stall and other-node errors, including an actually delivered retry to a healthy node. Record endpoint request markers and distinguish bounded non-observation from general proof.",
+    "Review the narrow change for continued late callbacks, non-atomic snapshot/clear, replication factor, queued updates and replica recovery. These existing or potentially exacerbated concerns are not claimed fixed. Report concrete observed regressions and material unresolved risks separately from hypotheses and maintainer design choices; do not mark green with a demonstrated material ordering/error-loss regression.",
+    "Check property restoration and real test preconditions; report slow or flaky fixture behavior and any formatting change. Any source/formatting edits require a successor head and gate."
+  ],
+  "supersedes": "records/gate/pr-5330-r10-repair-linux-20261113.json",
+  "type": "gate",
+  "verdict_policy": "Pass requires all checks and named behavior proof at exact head, no skips, and no demonstrated unresolved material regression."
+}
