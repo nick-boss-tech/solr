@@ -1,0 +1,23 @@
+{
+  "evidence_record": "records/evidence/pr-5330-narrow-ordered-linux-20261114-evidence.json",
+  "evidence_sha256": "1318b0906b8a4f775620643768ae256b5576c25aa92edba5f2978b57857b4724",
+  "gate": "pr-5330-narrow-ordered-linux-20261114",
+  "head": "be866aac94f7c05e262654fdfc7118e68eef5263",
+  "id": "pr-5330-narrow-ordered-linux-20261114-report",
+  "job": "pr-5330-narrow-ordered-linux-20261114",
+  "local_report_file": "pr-5330-narrow-ordered-linux-20261114/report.md (uploaded separately; not in the evidence archive)",
+  "location": "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519664052758700/rgHcYfoHNZNbiddl.md?Expires=1826166139&Signature=g2bQzT--dSMiNPT~iv0WhhvhRoHZNYEhEo2yK~KlXofSDvKvbTk0sMJ~Y0Bho2pGrlQotNGpvJsvxfQekpgz528LfjLS2MLjBa3ShoCd3P-n81MDe86b~Cg8RJRvTt1Bn7cAzvtdOmP~EpMsjUCUTjMQpe9kQcDqu8hEDHY76zyBNbtbBA3tVHgm~Qlud82nnq9NJgkaSSvVNJgPB3kLc6JY4VPR70ZoWgwB2AjY9hwTnOj8hoNn-a7IF3J4MasIHFAwgOqEO0vJSCsCOl-Sa-wfnJgqwe92V8yYaU17pDf9D7QQ1lpbooEKEA4iEdCK6ux-o6TTmEzioG7-dFf1NA__&Key-Pair-Id=K10M74EMLURLMC",
+  "sha256": "fa140677fba34eca33afc80d2a11c7682abde4704ee6d2fb0b9ee2746f58039c",
+  "source": {
+    "branch": "pr-5330-ordered-flush-20261114",
+    "contributor_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+    "head": "be866aac94f7c05e262654fdfc7118e68eef5263",
+    "pinned_base": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Exact-head SolrCmdDistributorTest passed 9/9 with zero skips at seeds 5330 and 5330C0DE; controlled base and contributor fail-before cases reproduced the expected lost-error and ordered-operation failures, and the healthy endpoint retry was delivered (503 then 200). The gate is failed, not green: tidy changed two test assertions and the full check's sole failure was :solr:core:spotlessJavaCheck on the same formatting diff. No exact-head material ordering/error-loss regression was demonstrated.",
+  "title": "PR 5330 narrow ordered-flush gate",
+  "type": "report",
+  "url_expires_at": "2027-11-14T04:22:19Z",
+  "verdict": "failed"
+}
