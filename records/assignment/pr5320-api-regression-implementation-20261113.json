@@ -1,0 +1,12 @@
+{
+  "id": "pr5320-api-regression-implementation-20261113",
+  "intended_host": "Windows implementation; Linux proof separately",
+  "job": "pr5320-api-regression-implementation-20261113",
+  "source": {
+    "base": "5fa5513038a7cf9318ed800423d8a44064d4c0e3",
+    "branch": "pr-5320-api-regression",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Prepare a focused real API duplicate-delete regression on contributor head, without schema follow-up",
+  "type": "assignment"
+}
