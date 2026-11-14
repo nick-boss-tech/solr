@@ -1,0 +1,10 @@
+{
+  "claimed_at": "2026-11-14T09:20:00Z",
+  "head": "a20facda3ee83d307dbc26a33a229c7b082c62bb",
+  "id": "solr-18606-pr5314-review-round2-linux-20261113",
+  "job": "solr-18606-pr5314-review-round2-linux-20261113",
+  "note": "Claimed per capability-fit routing (Linux, JDK 21, Solr Gradle; no Chrome/bats/Docker required). Remote fork head solr-18606-pr5314-review-round2 verified == a20facda3 via git ls-remote; board tip 3f182e268e has the gate, no prior claim or release. Gate supersedes alias-signal r2 (receipt passed at 2dbfc9f3).",
+  "owner": "vm6",
+  "phase": "PR review round 2",
+  "type": "claim"
+}
