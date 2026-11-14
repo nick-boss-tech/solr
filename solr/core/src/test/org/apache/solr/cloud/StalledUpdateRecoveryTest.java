@@ -39,10 +39,14 @@ import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.cloud.Replica;
 import org.apache.solr.common.cloud.Slice;
+import org.apache.solr.common.params.ModifiableSolrParams;
 import org.apache.solr.common.util.ExecutorUtil;
 import org.apache.solr.common.util.SuppressForbidden;
+import org.apache.solr.common.util.TimeSource;
 import org.apache.solr.embedded.JettySolrRunner;
 import org.apache.solr.update.SolrCmdDistributor;
+import org.apache.solr.util.TestInjection;
+import org.apache.solr.util.TimeOut;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -68,6 +72,8 @@ public class StalledUpdateRecoveryTest extends SolrCloudTestCase {
     StallControl control = StallReplicaUpdateFilter.CONTROL.getAndSet(null);
     if (control != null) control.release.complete(null);
     SolrCmdDistributor.testing_errorHook = null;
+    TestInjection.prepRecoveryOpPauseForever = null;
+    TestInjection.notifyPauseForeverDone();
     shutdownCluster();
   }
 
@@ -86,6 +92,7 @@ public class StalledUpdateRecoveryTest extends SolrCloudTestCase {
 
     StallControl control = new StallControl(replica.getCoreName());
     assertTrue(StallReplicaUpdateFilter.CONTROL.compareAndSet(null, control));
+    TestInjection.prepRecoveryOpPauseForever = "true:100";
     CountDownLatch detected = new CountDownLatch(1);
     AtomicReference<String> stallMessage = new AtomicReference<>();
     SolrCmdDistributor.testing_errorHook =
@@ -131,16 +138,32 @@ public class StalledUpdateRecoveryTest extends SolrCloudTestCase {
       // Release only after the leader has processed the error and changed the terms.
       control.release.complete(null);
       StallReplicaUpdateFilter.CONTROL.compareAndSet(control, null);
-      cluster.waitForActiveCollection(COLLECTION, 90, TimeUnit.SECONDS, 1, 2);
-      terms.refreshTerms();
-      assertTrue(
-          "replica did not regain leader eligibility",
-          terms.getShardTerms().canBecomeLeader(replica.getName()));
+      waitForState(
+          "stalled replica did not enter recovery",
+          COLLECTION,
+          90,
+          TimeUnit.SECONDS,
+          state ->
+              state.getSlice(SHARD).getReplica(replica.getName()).getState()
+                  == Replica.State.RECOVERING);
+      TestInjection.prepRecoveryOpPauseForever = null;
+      TestInjection.notifyPauseForeverDone();
+      new TimeOut(90, TimeUnit.SECONDS, TimeSource.NANO_TIME)
+          .waitFor(
+              "replica did not become active and regain leader eligibility",
+              () -> {
+                terms.refreshTerms();
+                Replica current =
+                    getCollectionState(COLLECTION).getSlice(SHARD).getReplica(replica.getName());
+                return current.isActive(cluster.getZkStateReader().getClusterState().getLiveNodes())
+                    && terms.getShardTerms().canBecomeLeader(replica.getName());
+              });
       SolrClient replicaClient = cluster.getSolrClient(replica);
+      ModifiableSolrParams localOnly = new ModifiableSolrParams().set("distrib", false);
       for (int i = 0; i < DOC_COUNT; i++) {
         String id = "doc-" + i;
-        SolrDocument leaderDoc = leaderClient.getById(id);
-        SolrDocument replicaDoc = replicaClient.getById(id);
+        SolrDocument leaderDoc = leaderClient.getById(id, localOnly);
+        SolrDocument replicaDoc = replicaClient.getById(id, localOnly);
         assertNotNull("leader missing " + id, leaderDoc);
         assertNotNull("replica missing " + id, replicaDoc);
         assertNotNull("leader version missing for " + id, leaderDoc.getFieldValue("_version_"));
@@ -152,6 +175,8 @@ public class StalledUpdateRecoveryTest extends SolrCloudTestCase {
     } finally {
       control.release.complete(null);
       StallReplicaUpdateFilter.CONTROL.compareAndSet(control, null);
+      TestInjection.prepRecoveryOpPauseForever = null;
+      TestInjection.notifyPauseForeverDone();
       ExecutorUtil.shutdownAndAwaitTermination(executor);
     }
   }
