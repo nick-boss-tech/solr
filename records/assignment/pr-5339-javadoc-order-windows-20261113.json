@@ -1,0 +1,13 @@
+{
+  "id": "pr-5339-javadoc-order-windows-20261113",
+  "intended_host": "Windows implementation; Linux proof",
+  "job": "pr-5339-javadoc-order-windows-20261113",
+  "prior_receipt": "records/receipt/pr-5339-signature-coverage-linux-gate-r3-receipt.json",
+  "source": {
+    "branch": "pr-5339-signature-migration",
+    "head": "47e891cea3ec5bc01b8ca7a5dd3a182be8706112",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Correct TextProfileSignature Javadoc ordering after green coverage gate",
+  "type": "assignment"
+}
