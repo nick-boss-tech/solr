@@ -1,0 +1,20 @@
+{
+  "branch": "pr-5330-ordered-flush-20261114",
+  "environment": "Linux, JDK 21, isolated checkout, named host locks; preserve commands, fresh logs and JUnit XML; no Windows Gradle",
+  "head": "6bf469128d2dd570336ff634e41c07012d918d31",
+  "id": "stall-recovery-probe-linux-20261114",
+  "job": "stall-recovery-probe-linux-20261114",
+  "phase": "recovery premise and test feasibility",
+  "repository": "nick-boss-tech/solr",
+  "requirements": [
+    "Reconcile live fork and contributor heads, existing claims, prior narrow gate receipt and release before claim. Do not overlap another recovery worker.",
+    "Build a controlled test-only SolrCloud probe on the exact production head with a real leader and NRT replica. Existing HttpPartitionTest is a reference for terms and recovery, not proof of a queued stall; TlogLeaderElectionFrozenLeaderTest shows a controlled Jetty filter. Identify exact overlay files and keep production unchanged for comparison.",
+    "Demonstrate the leader-to-replica update request is blocked and at least one older update remains queued when the real stall detector raises its IOException. Capture direct evidence of those preconditions and the node-specific error; a socket timeout, ordinary partition, empty queue or merely stalled servlet is not sufficient.",
+    "Observe the update request outcome and actual shard terms or leadership eligibility before recovery, then release the fault and verify recovery to ACTIVE and document IDs/versions on leader and replica. Keep fault control bounded and always release it in cleanup. Record any unsuccessful reproduction or unexpected effects without implying recovery succeeded.",
+    "Where feasible compare a test-only equivalent on pinned contributor head eedcb534aca361be5bad5c56f1b2d3002eea855f and base 0ea013e782f747cc94e1504f8077f813d2ddcca8; distinguish the original error-loss premise from the separate ordering fix. A non-reproduction or harness failure is not fail-before proof.",
+    "If this becomes a deterministic maintainable permanent test, commit it on a new descriptive branch of the fork based on 6bf469128d2dd570336ff634e41c07012d918d31, without PR identifiers in branch or commit messages, push without force, verify the remote head, and publish a successor gate requiring repeated focused real-cluster execution, no skipped tests, tidy and root check -x test -Prefguide.include=false. Preserve the existing narrow branch. Do not report the overlay probe as proof of a newly committed head.",
+    "File receipt and evidence with precise commands, assertions, observed preconditions, test counts, skips, failure and timing details, source heads, cleanup and stop evidence; release. No public comments."
+  ],
+  "type": "gate",
+  "verdict_policy": "Pass for this investigative gate requires demonstrated actual queued stall and observed error propagation, term or leadership eligibility change, successful recovery and document-state assertions. Otherwise report incomplete, failed or non-reproduced as appropriate; do not claim production recovery proof."
+}
