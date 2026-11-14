@@ -1,0 +1,9 @@
+{
+  "actor": "vm6",
+  "evidence": "records/receipt/solr-18606-pr5314-review-round2-linux-20261113-receipt.json; records/report/solr-18606-pr5314-review-round2-linux-20261113-report.json; records/evidence/solr-18606-pr5314-review-round2-linux-20261113-evidence.tar.gz (SHA-256 2a3feda4fd8e238cae082ac87e4b83b8851fcf36d2337241bfb6294ee591c78f). At final pre-release check: source worktree clean at a20facda3ee83d307dbc26a33a229c7b082c62bb, remote fork branch head matched, no live Gradle/Java process existed, and the shared Gradle lock was free.",
+  "id": "solr-18606-pr5314-review-round2-linux-20261113",
+  "job": "solr-18606-pr5314-review-round2-linux-20261113",
+  "reason": "SOLR-18606 PR 5314 review-round2 Linux gate completed with a passed receipt at head a20facda3ee and published evidence/report. All positive legs (65 tests, 0 failures/errors/skips at seed 18606CAFE), tidy clean, and the non-test root check (check -x test -Prefguide.include=false) pass; the known-alias guard-removal mutation is caught behaviorally. No further work remains under this gate claim; any additional gate work requires a new successor assignment.",
+  "recorded": "2026-11-14",
+  "type": "release"
+}
