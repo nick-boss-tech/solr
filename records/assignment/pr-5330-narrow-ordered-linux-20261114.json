@@ -1,0 +1,26 @@
+{
+  "base_head": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+  "claim_path": "records/claim/pr-5330-narrow-ordered-linux-20261114.json",
+  "contributor_parent": "eedcb534aca361be5bad5c56f1b2d3002eea855f",
+  "coordination": "New contributor-based narrow branch. Earlier large fork retained as experiment. Reconcile prior workers and verify the live source heads before claim.",
+  "gate_id": "pr-5330-narrow-ordered-linux-20261114",
+  "gate_record": "records/gate/pr-5330-narrow-ordered-linux-20261114.json",
+  "host_requirements": [
+    "linux",
+    "jdk21",
+    "Solr Gradle"
+  ],
+  "id": "pr-5330-narrow-ordered-linux-20261114",
+  "job": "pr-5330-narrow-ordered-linux-20261114",
+  "phase": "narrow ordered-flush gate",
+  "prior_receipt": "records/receipt/pr-5330-premise-linux-20261114-receipt.json",
+  "receipt_path": "records/receipt/pr-5330-narrow-ordered-linux-20261114-receipt.json",
+  "source": {
+    "branch": "pr-5330-ordered-flush-20261114",
+    "head": "be866aac94f7c05e262654fdfc7118e68eef5263",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify contributor-based narrow stalled-flush ordering fix",
+  "supersedes": "records/gate/pr-5330-r10-repair-linux-20261113.json",
+  "type": "assignment"
+}
