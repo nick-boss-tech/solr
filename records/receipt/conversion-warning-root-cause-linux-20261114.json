@@ -1,0 +1,58 @@
+{
+  "evidence_record": "records/evidence/conversion-warning-root-cause-linux-20261114-evidence.json",
+  "evidence_sha256": "5384a56c01c943ca2d12a80521e82cfcead0552fc1466ed0bd36ea77a0f52aaa",
+  "executor": "phone-agent-2",
+  "filed": "2026-11-15T04:38:35Z",
+  "gate": "conversion-warning-root-cause-linux-20261114",
+  "head": "faf1bae5f6eeb0917f27e142f1cb528268629280",
+  "id": "conversion-warning-root-cause-linux-20261114",
+  "job": "conversion-warning-root-cause-linux-20261114",
+  "legs": [
+    {
+      "leg": "Pinned heads and source comparison",
+      "result": "Current refs remained unchanged: PR base 0ea013e782f747cc94e1504f8077f813d2ddcca8; upstream main faf1bae5f6eeb0917f27e142f1cb528268629280; contributor 65c2d85f77017a951f20dc110d71bf14786c6694; offered a9e8ce1db89b0094fb16b90d41bce7402ed4407d. EnvUtils warning source, exact target BATS test block, and lsof readiness block are hash-identical across the four heads."
+    },
+    {
+      "leg": "Full packaging test file",
+      "result": "Ran ./gradlew :solr:packaging:integrationTests --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks once per head on the same Linux/JDK 21 host. Base and main: 8 passed, 1 known timeout skip each; contributor: 10 passed, 1 skip; offered: 11 passed, 1 skip. Zero failures."
+    },
+    {
+      "leg": "Focused natural comparison",
+      "result": "Three serial isolated warning-assertion samples per head all passed. Together with one assertion in each full file, 16/16 unmodified target assertions passed; no original intermittent failure was reproduced."
+    },
+    {
+      "leg": "Lifecycle and logs",
+      "result": "Verified lsof TCP LISTEN readiness does not await the warning. Across natural samples the listener preceded the warning by 0.259-0.430 s; the warning preceded start return by 0.312-0.892 s; assertion followed return by 0.079-0.120 s. Full actual SOLR_LOGS_DIR/solr.log and console snapshots were preserved before/after assertion and teardown."
+    },
+    {
+      "leg": "Controlled causal perturbation",
+      "result": "On disposable exact PR-base checkout, a property-guarded 3 s delay made the original immediate assertion fail; an 8 s exact-warning poll passed; a negative missing-warning case still failed after its 4 s bound. This proves a possible baseline race under perturbation only, not the original intermittent cause."
+    },
+    {
+      "leg": "Alternatives and candidate",
+      "result": "Natural runs showed the warning in the expected fresh test log and console; no wrong destination/reset/truncation was observed. A failure-specific log issue remains unexcluded because no natural failure log was available. Candidate is a test-only bounded poll retaining the exact assertion; no source patch or PR is claimed ready."
+    },
+    {
+      "leg": "Skip and exclusions",
+      "result": "One unrelated skip per full file: bare /usr/bin/timeout invocation exits 125 and the test reports utility unavailable. No Docker installation or invocation; Antora site build and dependent link checks were excluded."
+    },
+    {
+      "leg": "Cleanup and publication scope",
+      "result": "Four Gradle daemons stopped under both locks; no Solr/test listeners or processes remained; base/main/perturbation worktrees removed; predecessor worktrees remain clean at assigned heads and predecessor evidence/receipt/release were unchanged. No source push, PR modification, or public comment."
+    },
+    {
+      "leg": "Verdict",
+      "result": "INCOMPLETE under the gate policy: non-reproduction and a forced race alone do not prove the cause of the prior failure."
+    }
+  ],
+  "report_record": "records/report/conversion-warning-root-cause-linux-20261114-report.json",
+  "source_heads": {
+    "base": "0ea013e782f747cc94e1504f8077f813d2ddcca8",
+    "contributor": "65c2d85f77017a951f20dc110d71bf14786c6694",
+    "main": "faf1bae5f6eeb0917f27e142f1cb528268629280",
+    "offered": "a9e8ce1db89b0094fb16b90d41bce7402ed4407d"
+  },
+  "summary": "INCOMPLETE: the original unmodified intermittent warning assertion failure was not reproduced. All 16 natural target assertions passed across the PR base, pinned main, contributor and offered heads. A reversible three-second delay on the PR base demonstrated that the immediate assertion can fail before the warning; a bounded exact-warning poll passed, and a missing-warning control still failed. This forced race does not establish the prior failure cause.",
+  "type": "receipt",
+  "verdict": "incomplete"
+}
