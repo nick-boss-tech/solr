@@ -1,0 +1,10 @@
+{
+  "claimed_at": "2026-11-14T19:12:08-07:00",
+  "head": "a9e8ce1db89b0094fb16b90d41bce7402ed4407d",
+  "host": "phone-agent-2",
+  "id": "shutdown-conversion-diagnostic-linux-20261114",
+  "job": "shutdown-conversion-diagnostic-linux-20261114",
+  "note": "Current unclaimed Linux diagnostic assignment. Fork head exactly matches assignment and is directly based on live PR 5333 head 65c2d85f77017a951f20dc110d71bf14786c6694; prior investigation is released.",
+  "owner": "phone-agent-2",
+  "type": "claim"
+}
