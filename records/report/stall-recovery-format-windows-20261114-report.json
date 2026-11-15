@@ -1,0 +1,11 @@
+{
+  "id": "stall-recovery-format-windows-20261114-report",
+  "job": "stall-recovery-format-windows-20261114",
+  "source": {
+    "branch": "stalled-stream-recovery-coverage",
+    "head": "878864f56d7ec7b18415a9f5ab1731c13edd5910",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Applied the one blank line recorded by Linux tidy after DOC_COUNT, reviewed the one-line diff and diff --check, committed and verified the fork head. No Gradle run on Windows. Fresh exact-head Linux proof is pending.",
+  "type": "report"
+}
