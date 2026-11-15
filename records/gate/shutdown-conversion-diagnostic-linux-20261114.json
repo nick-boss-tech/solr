@@ -1,0 +1,18 @@
+{
+  "branch": "embedded-zookeeper-shutdown-order",
+  "environment": "Linux JDK 21, isolated checkout, controlled equivalent host settings, bounded runs with cleanup",
+  "head": "a9e8ce1db89b0094fb16b90d41bce7402ed4407d",
+  "id": "shutdown-conversion-diagnostic-linux-20261114",
+  "job": "shutdown-conversion-diagnostic-linux-20261114",
+  "phase": "conversion failure mechanism and exact-head verification",
+  "repository": "nick-boss-tech/solr",
+  "requirements": [
+    "Check live fork and PR heads and ancestry and prior receipt, evidence and release before claim. Stop if heads changed. The prior comparison demonstrates failure on contributor head too, but one observation per cell and a separate startup log do not prove the offered patch cannot affect frequency or establish the failing run's mechanism.",
+    "Using bounded controlled same-host comparisons of contributor head 65c2d85f77017a951f20dc110d71bf14786c6694 and offered head, preserve the actual failing case's startup console and complete solr.log before cleanup or reset. Record whether the warning appears later, and timestamps of start return, assertion, and warning. If using instrumentation or a temporary wait or diagnostic mutation, label it, retain the unmodified baseline and restore it. Do not infer a race solely from separate log timestamps. Report sample sizes and any unresolved patch relationship.",
+    "Run both full exact-head packaging variants named in the prior gate, with fresh TAP/XML and logs, no exclusions and disclose every attempt. Require exit 0, no failures, ordering assertion passed, no forced kill and both processes stopped for green; disclose the known timeout skip. Retain prior negative ordering, clean tidy and root check at the identical head. If failure recurs or mechanism remains unresolved, report failed or incomplete with a concrete handback; do not retry until green.",
+    "File evidence, receipt and release with cleanup and stop evidence. No public comment or source push is authorized."
+  ],
+  "supersedes": "records/gate/shutdown-order-conversion-investigation-20261114.json",
+  "type": "gate",
+  "verdict_policy": "Both full exact-head packaging commands must pass and the prior failures need an evidence-based resolution without an unresolved patch concern."
+}
