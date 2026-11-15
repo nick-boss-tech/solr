@@ -1,0 +1,6 @@
+{
+  "id": "stall-recovery-format-linux-20261114-superseded",
+  "job": "stall-recovery-format-linux-20261114",
+  "summary": "Owner directed reuse of the earlier behavioral proof for the sole blank-line tidy repair. This unclaimed gate is superseded; do not claim or run it. Use records/assignment/stall-recovery-format-check-linux-20261114.json and its linked gate for tidy and root check. The complete source diff was reviewed on Windows and contains only that blank line.",
+  "type": "report"
+}
