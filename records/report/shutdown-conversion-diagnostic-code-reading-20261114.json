@@ -1,0 +1,6 @@
+{
+  "id": "shutdown-conversion-diagnostic-code-reading-20261114",
+  "job": "shutdown-conversion-diagnostic-linux-20261114",
+  "summary": "Windows source review: test_start_solr.bats starts Solr with -Ddisable.config.edit=true and immediately asserts the warning in solr.log; EnvUtils initializes mappings on first class access and logs the warning as it applies the deprecated-property mapping. Existing bats_helper.bash wait_for accepts timeout, interval and a command. A candidate diagnostic is run wait_for 10 1 grep -F -- 'Deprecated system property disable.config.edit has been replaced by solr.api.config.edit.enabled' \"${SOLR_LOGS_DIR}/solr.log\" followed by assert_success. It preserves the intended assertion and bounds the wait, but test this only as a labeled temporary overlay after capturing unmodified failure logs, not as proof that a missing warning is merely late. Record whether the warning appears after assertion; compare contributor and offered head under equivalent conditions. If the diagnostic passes, report it as evidence, not a clean exact-head packaging result. Run both prescribed unmodified full variants and retain every outcome. Do not push a source change; return evidence to implementation owner. Where practical batch with stall-recovery-format-check-linux-20261114 in isolated checkouts and serialized builds.",
+  "type": "report"
+}
