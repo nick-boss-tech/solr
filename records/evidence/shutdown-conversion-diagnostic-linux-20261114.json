@@ -1,0 +1,76 @@
+{
+  "artifact": {
+    "format": "tar.gz",
+    "sha256": "f6c8b1d3944ba31b9c480c222bbdc6123534fbc9829368416252a7dc20935ecc",
+    "size_bytes": 832701,
+    "url": "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519664052758700/NuJFTyAcinxxQPtS.gz?Expires=1826246938&Signature=AQWvM~B7rUv6g216uMPJEOpQIxXXKRVzy4zde6JQadN2gwP2RQxGkl4t19t1fIMdniBGV~HCEZa6tyB8tw795ehITTU8Pd5TdcrW93EKpAnF1d-idvSU36Q78QqscUASvkj3XxqdpVdCw~VMR74kfu7Tz8imRdBZN-p9102G2r~9G44QUatTaNMZAcT3kroT9gixTY3ryl10F7nEJOMRLCCbUE2yXl4HWp0SBJcD9TzaNRL48LzUVwWuaJVEFfDgTbB~jNct4D9WfqdQvlnZ6WdiX6SqFboHRYLiRkymlDZ9O1k8EDv6FZtkWPxIDQd45~Ajc9jGiXfipXrJiil8EA__&Key-Pair-Id=K10M74EMLURLMC"
+  },
+  "attempts": {
+    "invalid_infrastructure": {
+      "count": 1,
+      "result": "Runner launch failed with permission denied (exit 69); no Gradle, BATS, or Solr process started."
+    },
+    "invalid_harness": {
+      "count": 1,
+      "runner_exit": 1,
+      "result": "BATS executed 0/1 cases because the diagnostic capture path was not exported to Gradle; no test assertion or Solr start ran. Excluded from sample counts."
+    },
+    "valid_focused": 6,
+    "valid_full": 2,
+    "full_retries": 0
+  },
+  "branch": "embedded-zookeeper-shutdown-order",
+  "board_base_commit": "ad911f12a9d63ac978b1277468d3621280973ab3",
+  "contributor_head": "65c2d85f77017a951f20dc110d71bf14786c6694",
+  "environment": "Linux, JDK 21, host 0609f7968656; two detached isolated source worktrees; fixed port 18983; bounded runner with 3600-second limit and 30-second heartbeat; both required Gradle locks held.",
+  "executor": "phone-agent-2",
+  "filed": "2026-11-14T19:50:25-07:00",
+  "focused_comparison": {
+    "assertion": "Existing conversion-warning file assertion immediately after solr start; temporary BATS copy added timestamps and pre/post-stop startup-log and console snapshots.",
+    "contributor": {
+      "head": "65c2d85f77017a951f20dc110d71bf14786c6694",
+      "samples": 3,
+      "passed": 3,
+      "warning_before_start_return_seconds": [0.740885, 0.515078, 0.501593],
+      "start_return_to_assertion_milliseconds": [3.484, 3.188, 3.901]
+    },
+    "offered": {
+      "head": "a9e8ce1db89b0094fb16b90d41bce7402ed4407d",
+      "samples": 3,
+      "passed": 3,
+      "warning_before_start_return_seconds": [0.659559, 0.806384, 0.882550],
+      "start_return_to_assertion_milliseconds": [3.088, 2.905, 3.007]
+    },
+    "observation": "In all six valid samples the warning appeared in solr.log before solr start returned, and the assertion passed about 3 ms later. No focused failure was reproduced."
+  },
+  "full_variants": [
+    {
+      "command": "./gradlew :solr:packaging:integrationTests --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks",
+      "exit": 0,
+      "report": "full/full-offered-commons-r1/task-output/report.xml",
+      "tap": "full/full-offered-commons-r1/task-output/test-output.txt",
+      "result": "12 tests, 0 failures, 0 errors, 1 known timeout-utility skip; conversion assertion and shutdown-order assertions passed."
+    },
+    {
+      "command": "./gradlew :solr:packaging:integrationTestsPicocli --tests test_start_solr.bats -Pbats.port=18983 --rerun-tasks",
+      "exit": 0,
+      "report": "full/full-offered-picocli-r1/task-output/report.xml",
+      "tap": "full/full-offered-picocli-r1/task-output/test-output.txt",
+      "result": "12 tests, 0 failures, 0 errors, 1 known timeout-utility skip; conversion assertion and shutdown-order assertions passed."
+    }
+  ],
+  "gate": "shutdown-conversion-diagnostic-linux-20261114",
+  "head": "a9e8ce1db89b0094fb16b90d41bce7402ed4407d",
+  "id": "shutdown-conversion-diagnostic-linux-20261114",
+  "job": "shutdown-conversion-diagnostic-linux-20261114",
+  "limits": [
+    "The earlier intermittent full-run failure was not reproduced; no new failing-case SOLR_HOME snapshot exists. The BATS teardown is configured to preserve the entire SOLR_HOME before stop if a case fails.",
+    "Three focused samples per head are not enough to rule out a rare timing failure or an effect of the added -Dsolr.pid.dir argument on failure frequency. The contributor-head failure in predecessor evidence shows the argument is not the sole cause, but does not fully resolve the relationship.",
+    "One Linux/JDK 21 host only; no macOS proof. The known timeout-utility skip remains.",
+    "The build emitted its default non-CI errorproneSkipped notice; no task was manually excluded. No Docker was installed or invoked; Antora/site-build and dependent link-check tasks were not in the prescribed commands."
+  ],
+  "prior_state": "Prior exact-head negative ordering proof, clean tidy, and root-check result are retained in records/receipt/shutdown-order-repack-gate-20261114.json and its evidence; not repeated because the head is unchanged. Predecessor conversion-investigation evidence, receipt, and release were reviewed and copied into the archive unchanged.",
+  "summary": "Both required exact-offered-head full packaging variants pass. Six focused one-case comparisons also pass, but the prior intermittent failure was not reproduced and its failure-time mechanism and relationship to the offered patch remain unconfirmed. Verdict is incomplete under the gate's evidence-based-resolution policy; concrete test-owner handback is in the receipt and summary.",
+  "type": "evidence",
+  "verdict": "incomplete"
+}

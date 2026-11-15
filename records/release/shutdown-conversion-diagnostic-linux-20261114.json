@@ -1,0 +1,9 @@
+{
+  "executor": "phone-agent-2",
+  "id": "shutdown-conversion-diagnostic-linux-20261114",
+  "job": "shutdown-conversion-diagnostic-linux-20261114",
+  "note": "Released with verdict incomplete. Both required full packaging variants passed with one known timeout-utility skip each, but the prior intermittent conversion-case failure was not reproduced and its failure-time mechanism/patch relationship remains unresolved. Six focused samples passed (three per head); no new failing-case SOLR_HOME snapshot exists. All test processes, listeners, and Gradle daemons are stopped; both source worktrees are clean at the assigned heads. No source change, source push, or public comment was made.",
+  "receipt": "records/receipt/shutdown-conversion-diagnostic-linux-20261114.json",
+  "released": "2026-11-14T19:51:25-07:00",
+  "type": "release"
+}

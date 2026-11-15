@@ -1,0 +1,51 @@
+{
+  "evidence_record": "records/evidence/shutdown-conversion-diagnostic-linux-20261114.json",
+  "evidence_sha256": "1671e80cc1953c1036500af8cabd0144a58ea903d3d1acb2fe90c9c912a059c7",
+  "executor": "phone-agent-2",
+  "filed": "2026-11-14T19:51:13-07:00",
+  "gate": "shutdown-conversion-diagnostic-linux-20261114",
+  "head": "a9e8ce1db89b0094fb16b90d41bce7402ed4407d",
+  "id": "shutdown-conversion-diagnostic-linux-20261114",
+  "job": "shutdown-conversion-diagnostic-linux-20261114",
+  "legs": [
+    {
+      "leg": "source and assignment verification",
+      "result": "Live fork branch remained at a9e8ce1db89b0094fb16b90d41bce7402ed4407d; live Apache PR #5333 head remained 65c2d85f77017a951f20dc110d71bf14786c6694, the offered head's parent. Assignment, gate, and phone-agent-2 claim were rechecked before each run."
+    },
+    {
+      "leg": "prior gate evidence",
+      "result": "Predecessor gate, evidence, receipt, and release were reviewed. The prior repack receipt at the unchanged offered head retains the negative ordering proof, clean tidy, and successful root check; those checks were not repeated."
+    },
+    {
+      "leg": "invalid infrastructure attempt",
+      "result": "One initial runner launch exited 69 because the script was invoked directly without execute permission. No Gradle or test process started; not a test result."
+    },
+    {
+      "leg": "invalid harness attempt",
+      "result": "One bounded packaging run exited 1 with BATS executing 0/1 cases: the diagnostic capture path was assigned but not exported to Gradle, so the test exited before Solr start. The variable was exported in all subsequent focused samples; this attempt is excluded from sample counts."
+    },
+    {
+      "leg": "controlled focused comparisons",
+      "result": "Three valid samples per head, all 6 passed. In every sample the conversion warning was present in solr.log before solr start returned; the immediate assertion followed return by 2.905-3.901 ms. No failure was reproduced. The focused evidence does not establish the cause of the earlier failures or rule out a rare failure-frequency effect from the patch."
+    },
+    {
+      "leg": "full commons-cli packaging",
+      "result": "Exact prescribed command at the offered head exited 0. Fresh TAP/XML: 12 tests, 0 failures, 0 errors, 1 known skip (timeout utility unavailable). Conversion assertion and shutdown-order assertions passed; no forceful kill was reported, and no Solr listener/process remained after the run."
+    },
+    {
+      "leg": "full Picocli packaging",
+      "result": "Exact prescribed command at the offered head exited 0. Fresh TAP/XML: 12 tests, 0 failures, 0 errors, 1 known skip (timeout utility unavailable). Conversion assertion and shutdown-order assertions passed; no forceful kill was reported, and no Solr listener/process remained after the run."
+    },
+    {
+      "leg": "cleanup and source state",
+      "result": "Temporary diagnostic test was removed from both worktrees; both source worktrees are clean at their assigned heads. Final verification found no Solr/BATS process, no Gradle daemon, and no listeners on ports 18983, 18984, or 19983. No Docker was installed or invoked. No source change, source push, or public comment was made."
+    },
+    {
+      "leg": "verdict and handback",
+      "result": "INCOMPLETE under the gate policy: both full commands passed, but the prior intermittent failure was not reproduced, no new failing-case log snapshot exists, and its failure-time mechanism and relationship to the offered -Dsolr.pid.dir argument remain unconfirmed. Hand back to the implementation/test owner to preserve the BATS failure snapshot if the case fails again and assess a bounded readiness/log wait; a source change requires a new gate. No retries were made after the two full runs passed."
+    }
+  ],
+  "summary": "INCOMPLETE: both exact offered-head packaging variants passed with the known timeout-utility skip, and all six focused comparisons passed. The earlier intermittent conversion-case failure was not reproduced; the evidence supports but does not prove a startup-timing explanation or resolve whether the offered patch changes failure frequency.",
+  "type": "receipt",
+  "verdict": "incomplete"
+}
