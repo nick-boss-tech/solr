@@ -56,6 +56,7 @@ public class StalledUpdateRecoveryTest extends SolrCloudTestCase {
   private static final String COLLECTION = "stalled_update_recovery";
   private static final String SHARD = "shard1";
   private static final int DOC_COUNT = 64;
+
   @Before
   public void setupCluster() throws Exception {
     System.setProperty("solr.cloud.client.pollQueueTime", "100");
