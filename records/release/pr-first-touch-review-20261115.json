@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "records/report/pr-first-touch-review-20261115-report.json",
+  "id": "pr-first-touch-review-20261115",
+  "job": "pr-first-touch-review-20261115",
+  "reason": "Documentation work completed; the temporary private test PR was closed, its inline comment and remote branch were removed, and no test process remains.",
+  "type": "release"
+}
