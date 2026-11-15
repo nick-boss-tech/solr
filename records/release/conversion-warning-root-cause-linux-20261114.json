@@ -1,0 +1,11 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "records/receipt/conversion-warning-root-cause-linux-20261114.json; records/report/conversion-warning-root-cause-linux-20261114-report.json; records/evidence/conversion-warning-root-cause-linux-20261114-evidence.json (includes analysis/cleanup-state.json: four Gradle daemons stopped, no listeners/processes, task worktrees removed, predecessor worktrees clean).",
+  "id": "conversion-warning-root-cause-linux-20261114",
+  "job": "conversion-warning-root-cause-linux-20261114",
+  "reason": "Diagnosis and cleanup are complete; the gate verdict is incomplete because the original unmodified failure was not reproduced. No further work is running or scheduled under this claim.",
+  "receipt": "records/receipt/conversion-warning-root-cause-linux-20261114.json",
+  "released": "2026-11-15T04:40:17Z",
+  "report": "records/report/conversion-warning-root-cause-linux-20261114-report.json",
+  "type": "release"
+}
