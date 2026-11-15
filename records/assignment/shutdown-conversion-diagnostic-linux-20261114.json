@@ -1,0 +1,19 @@
+{
+  "claim_path": "records/claim/shutdown-conversion-diagnostic-linux-20261114.json",
+  "gate_id": "shutdown-conversion-diagnostic-linux-20261114",
+  "gate_record": "records/gate/shutdown-conversion-diagnostic-linux-20261114.json",
+  "id": "shutdown-conversion-diagnostic-linux-20261114",
+  "intended_host": "Linux",
+  "job": "shutdown-conversion-diagnostic-linux-20261114",
+  "phase": "conversion failure mechanism and exact-head verification",
+  "receipt_path": "records/receipt/shutdown-conversion-diagnostic-linux-20261114.json",
+  "source": {
+    "branch": "embedded-zookeeper-shutdown-order",
+    "head": "a9e8ce1db89b0094fb16b90d41bce7402ed4407d",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "shutdown-order-conversion-investigation-20261114",
+  "summary": "Preserve failing conversion logs and test the suspected startup log race",
+  "supersedes": "records/gate/shutdown-order-conversion-investigation-20261114.json",
+  "type": "assignment"
+}
