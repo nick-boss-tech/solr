@@ -1,0 +1,18 @@
+{
+  "claim_path": "records/claim/stall-recovery-format-check-linux-20261114.json",
+  "gate_id": "stall-recovery-format-check-linux-20261114",
+  "gate_record": "records/gate/stall-recovery-format-check-linux-20261114.json",
+  "id": "stall-recovery-format-check-linux-20261114",
+  "intended_host": "Linux",
+  "job": "stall-recovery-format-check-linux-20261114",
+  "phase": "whitespace-only formatting and root check",
+  "receipt_path": "records/receipt/stall-recovery-format-check-linux-20261114.json",
+  "source": {
+    "branch": "stalled-stream-recovery-coverage",
+    "head": "878864f56d7ec7b18415a9f5ab1731c13edd5910",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify formatting and root check after one-line tidy repair; carry forward behavioral evidence",
+  "supersedes": "records/gate/stall-recovery-format-linux-20261114.json",
+  "type": "assignment"
+}
