@@ -1,0 +1,8 @@
+{
+  "head": "3ebf38f49856b20519ab8f888ff4de15b4a7cee8",
+  "id": "pr-first-touch-review-20261115-report",
+  "job": "pr-first-touch-review-20261115",
+  "result": "Updated docs/pr-formula-ste80.md with diagnosis-first inline review guidance and a tested GitHub REST API note. Published on coordination-v2.",
+  "type": "report",
+  "verification": "Read the published file back at 3ebf38f49856b20519ab8f888ff4de15b4a7cee8. GitHub accepted and read back a line comment created with commit_id, path, line and side; subject_type was line. The temporary private test comment was deleted, the test PR was closed, and its branch was deleted. git diff --check passed. Documentation only; no build or Solr tests were run."
+}
