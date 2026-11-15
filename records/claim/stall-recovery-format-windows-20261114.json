@@ -1,0 +1,8 @@
+{
+  "host": "Windows",
+  "id": "stall-recovery-format-windows-20261114",
+  "job": "stall-recovery-format-windows-20261114",
+  "note": "Apply the one-line tidy diff from the released Linux gate; do not run Gradle on Windows.",
+  "owner": "codex-windows",
+  "type": "claim"
+}
