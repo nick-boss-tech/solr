@@ -1,0 +1,18 @@
+{
+  "id": "pr-first-touch-review-20261115",
+  "intended_host": "Windows documentation",
+  "job": "pr-first-touch-review-20261115",
+  "references": [
+    "https://github.com/apache/solr/pull/5337#issuecomment-6900650135",
+    "https://github.com/apache/solr/pull/5279#issuecomment-6677557125",
+    "https://github.com/nick-boss-tech/solr/blob/95e2574f5091fbf1425fd9bfc4cef98c746b42f6/pr-formula.md"
+  ],
+  "scope": "Update docs/pr-formula-ste80.md on coordination-v2. Separate first-touch inline findings from later patch handoffs; preserve exact-head proof and disclosure requirements for author-requested follow-ups.",
+  "source": {
+    "branch": "coordination-v2",
+    "head": "0e0359278fba9773ef595e989a3efb302912ba25",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Add diagnosis-first guidance for first-touch review comments on other contributors' PRs",
+  "type": "assignment"
+}
