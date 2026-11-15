@@ -1,0 +1,18 @@
+{
+  "branch": "stalled-stream-recovery-coverage",
+  "environment": "Linux JDK 21, isolated clean checkout, serialized builds and fresh logs/XML",
+  "head": "878864f56d7ec7b18415a9f5ab1731c13edd5910",
+  "id": "stall-recovery-format-linux-20261114",
+  "job": "stall-recovery-format-linux-20261114",
+  "phase": "format repair exact-head verification",
+  "repository": "nick-boss-tech/solr",
+  "requirements": [
+    "Verify live fork head and contributor PR head and ancestry; reconcile prior receipt, evidence and release. Confirm the only change from 90d8c0dfa27a07d44b122f390fa91d0f77af305d is the recorded blank line.",
+    "Run :solr:core:cleanTest :solr:core:test --tests org.apache.solr.cloud.StalledUpdateRecoveryTest at seeds 5330 and 5330C0DE sequentially. Require unskipped real queued stall, error hook, target ineligibility and RECOVERING then ACTIVE and eligible, and local distrib=false document version comparisons.",
+    "Run :solr:core:cleanTest :solr:core:test --tests org.apache.solr.update.SolrCmdDistributorTest at seed 5330, tidy with no tracked changes, and check -x test -Prefguide.include=false including forbiddenApisTest. Preserve commands, exit codes, fresh XML, skips and execution conditions.",
+    "Retain the prior test-only fail-before overlay evidence at base 0ea013e782f747cc94e1504f8077f813d2ddcca8 if the only change is whitespace; otherwise stop and reassess. Report non-reproduction, fixture failures, and setup issues accurately. File evidence, receipt and release with stop evidence. No public comment."
+  ],
+  "supersedes": "records/gate/stall-recovery-review-fix-linux-20261114.json",
+  "type": "gate",
+  "verdict_policy": "Pass requires all named exact-head behavioral tests, clean tidy and root check; prior fail-before evidence applies only after confirming whitespace-only change."
+}
