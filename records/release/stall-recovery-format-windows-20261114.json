@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "records/report/stall-recovery-format-windows-20261114-report.json; local edit and push completed; no build or executor was started.",
+  "id": "stall-recovery-format-windows-20261114",
+  "job": "stall-recovery-format-windows-20261114",
+  "reason": "Implementation complete and handed to Linux gate",
+  "type": "release"
+}
