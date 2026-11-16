@@ -1,0 +1,7 @@
+{
+  "id": "solr-12532-15611-main-refresh-20261115",
+  "job": "solr-12532-15611-main-refresh-20261115",
+  "owner": "windows",
+  "summary": "Refreshing the proven phrase-slop implementation on current main while retaining merged eDisMax empty-clause fixes",
+  "type": "claim"
+}
