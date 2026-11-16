@@ -1,0 +1,8 @@
+{
+  "actor": "windows",
+  "evidence": "records/report/solr-12532-15611-main-refresh-implementation-20261115.json records the clean worktree, remote head, diff check, scope, and pending exact-head Linux gate handoff.",
+  "id": "solr-12532-15611-main-refresh-20261115",
+  "job": "solr-12532-15611-main-refresh-20261115",
+  "reason": "Implementation is complete and the exact head is pushed to the fork; remaining proof is assigned to the separate Linux gate job.",
+  "type": "release"
+}
