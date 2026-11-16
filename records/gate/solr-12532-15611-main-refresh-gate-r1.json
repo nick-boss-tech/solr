@@ -1,0 +1,37 @@
+{
+  "environment": "Linux vm2; JDK 21; Gradle 9.7.0; one build at a time under the host lock and inode guard. Apply current coordination-v2 ref-guide policy: exclude the reference guide from root check with -Prefguide.include=false.",
+  "evidence_path": "records/evidence/solr-12532-15611-main-refresh-linux-gate-r1-evidence.tar.gz",
+  "head": "8a6c07054ce01491eb22d95608349877fcafe475",
+  "id": "solr-12532-15611-main-refresh-gate-r1",
+  "job": "solr-12532-15611-main-refresh-linux-gate-r1",
+  "new_methods": [
+    "org.apache.solr.search.TestMultiWordSynonyms.testExplicitSlopWithMultiWordSynonymsLucene",
+    "org.apache.solr.search.TestMultiWordSynonyms.testExplicitSlopWithMultiWordSynonymsEdismax",
+    "org.apache.solr.search.TestMultiWordSynonyms.testExplicitSlopOverridesQsWithMultiWordSynonyms",
+    "org.apache.solr.search.TestMultiWordSynonyms.testPhraseSlopAfterSubQuery",
+    "org.apache.solr.search.TestMultiWordSynonyms.testNestedParserKeepsItsOwnPhraseSlop"
+  ],
+  "phase": "round-1",
+  "receipt_path": "records/receipt/solr-12532-15611-main-refresh-linux-gate-r1-receipt.json",
+  "requirements": [
+    "Before claiming, refresh the live board, read this assignment and gate, confirm no claim or release exists, and verify the fork branch resolves to the exact head above.",
+    "Use a clean full Linux checkout. Record the host, JDK, Gradle version, UTC times, seed, commands, exit codes, fresh JUnit XML, logs, and final remote read-back. Do not run concurrent Gradle builds.",
+    "Validate changelog/unreleased/SOLR-12532-15611-explicit-phrase-slop.yml, run ./gradlew tidy, run git diff --check, and require a clean tree.",
+    "Run ./gradlew :solr:core:compileJava :solr:core:compileTestJava -Pvalidation.errorprone=true.",
+    "At the exact head, run ./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.search.TestMultiWordSynonyms --tests org.apache.solr.search.TestExtendedDismaxParser --tests org.apache.solr.search.TestSolrQueryParser --tests org.apache.solr.parser.SolrQueryParserBaseTest -Ptests.seed=1253215611 --rerun-tasks. Require all selected tests and all five added methods to execute with zero failures, errors, or skips.",
+    "At the exact head, run ./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.search.TestMultiWordSynonyms.testPf -Ptests.seed=B3B4534A1A4D09F4 --rerun-tasks. Require one executed test with zero failures, errors, or skips; this is compatibility coverage, not reproduction of the historical flake.",
+    "Fail-before in a disposable checkout at this head: keep test and changelog blobs byte-identical; restore only SolrQueryParserBase.java and ExtendedDismaxQParser.java from base 63b6dcc287f452c48b95ac4c2de45299fb1af7e3. Run the five new methods with seed 1253215611. Expect the four explicit-slop behavior methods to fail at the intended assertions and the nested-parser ownership control to pass. Confirm the ordinary phrase control passes before the following-phrase assertion fails. Compile/startup errors and skips are not negative proof.",
+    "Run two isolated compiling mutations from the clean exact head with tests unchanged: omit only the base parser phraseSlop restoration, then reset and omit only the ExtendedSolrQueryParser phraseSlop restoration. Run the corresponding Lucene and eDisMax methods and require the compound-query restoration assertion to fail. Preserve mutation diffs, logs, and fresh XML; reset to the offered head after each mutation.",
+    "Restore the clean exact head and run ./gradlew check -x test -Prefguide.include=false. Record the ref-guide exclusion under current policy; do not run ref-guide tasks.",
+    "The Linux receipt covers only head 8a6c07054ce01491eb22d95608349877fcafe475. If source or formatting changes, stop and request a superseding gate for the new pushed head."
+  ],
+  "source": {
+    "base_branch": "main",
+    "base_head": "63b6dcc287f452c48b95ac4c2de45299fb1af7e3",
+    "base_repository": "apache/solr",
+    "branch": "solr-12532-15611-phrase-slop-refresh",
+    "head": "8a6c07054ce01491eb22d95608349877fcafe475",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "gate"
+}
