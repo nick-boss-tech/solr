@@ -1,0 +1,11 @@
+{
+  "base": "63b6dcc287f452c48b95ac4c2de45299fb1af7e3",
+  "branch": "solr-12532-15611-phrase-slop-refresh",
+  "details": "Applied the previously reviewed phrase-slop change on current upstream/main. The refreshed branch preserves the existing eDisMax empty-clause safeguards and adds coverage for graph phrases, explicit zero slop overriding qs, phrase parsing after _query_, and nested parser slop ownership. The outbound diff is limited to the two parser classes, TestMultiWordSynonyms, and the SOLR-12532/15611 changelog fragment. git diff --check passed and the worktree is clean. Windows Gradle and tests were not run. The exact pushed head is assigned to Linux gate job solr-12532-15611-main-refresh-linux-gate-r1 at records/assignment/solr-12532-15611-main-refresh-linux-gate-r1.json, with gate record records/gate/solr-12532-15611-main-refresh-gate-r1.json and expected receipt records/receipt/solr-12532-15611-main-refresh-linux-gate-r1-receipt.json. At coordination-v2 snapshot 4114b3b9a046bd81c6465c433951858e29a564c8, that gate had not been claimed. No public PR was created; submission should follow exact-head Linux proof.",
+  "head": "8a6c07054ce01491eb22d95608349877fcafe475",
+  "id": "solr-12532-15611-main-refresh-implementation-20261115",
+  "job": "solr-12532-15611-main-refresh-20261115",
+  "repository": "nick-boss-tech/solr",
+  "summary": "Refreshed the explicit phrase slop fix onto current Solr main and pushed the implementation branch",
+  "type": "report"
+}
