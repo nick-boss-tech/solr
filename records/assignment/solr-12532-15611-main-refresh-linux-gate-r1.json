@@ -1,0 +1,31 @@
+{
+  "claim_path": "records/claim/solr-12532-15611-main-refresh-linux-gate-r1.json",
+  "expected_evidence": "records/evidence/solr-12532-15611-main-refresh-linux-gate-r1-evidence.tar.gz",
+  "gate_id": "solr-12532-15611-main-refresh-gate-r1",
+  "gate_record": "records/gate/solr-12532-15611-main-refresh-gate-r1.json",
+  "id": "solr-12532-15611-main-refresh-linux-gate-r1",
+  "implementation_job": "solr-12532-15611-main-refresh-20261115",
+  "intended_host": "Linux vm2",
+  "job": "solr-12532-15611-main-refresh-linux-gate-r1",
+  "phase": "round-1",
+  "receipt_path": "records/receipt/solr-12532-15611-main-refresh-linux-gate-r1-receipt.json",
+  "source": {
+    "base_branch": "main",
+    "base_head": "63b6dcc287f452c48b95ac4c2de45299fb1af7e3",
+    "base_repository": "apache/solr",
+    "branch": "solr-12532-15611-phrase-slop-refresh",
+    "head": "8a6c07054ce01491eb22d95608349877fcafe475",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Run fresh Linux exact-head proof for the current-main phrase-slop implementation",
+  "supersedes": {
+    "legacy_gate": "coordination-ui:gates/solr-12532-15611-phrase-slop-round-1.md",
+    "legacy_head": "44849d2c4ca0cae283c26bc45048f824ea0d53c4"
+  },
+  "tags": [
+    "gate",
+    "linux",
+    "records"
+  ],
+  "type": "assignment"
+}
