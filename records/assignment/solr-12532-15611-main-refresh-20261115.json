@@ -1,0 +1,34 @@
+{
+  "claim_path": "records/claim/solr-12532-15611-main-refresh-20261115.json",
+  "id": "solr-12532-15611-main-refresh-20261115",
+  "intended_host": "Windows",
+  "job": "solr-12532-15611-main-refresh-20261115",
+  "prior_work": {
+    "branch": "solr-12532-15611-phrase-slop",
+    "head": "44849d2c4ca0cae283c26bc45048f824ea0d53c4",
+    "receipt": "https://github.com/nick-boss-tech/solr/blob/coordination-ui/receipts/SOLR-12532-15611-phrase-slop-round-1.md"
+  },
+  "requirements": [
+    "Preserve the explicit graph phrase-slop and nested-query regressions from the prior candidate.",
+    "Preserve current-main eDisMax empty-phrase and empty-bq guards from merged PR 5303.",
+    "Keep SOLR-12260 synonym-ranking semantics out of scope.",
+    "Review the final diff, commit, and push to the fork branch.",
+    "Obtain a new exact-head Linux gate; Windows must not run Gradle, compilers, or tests."
+  ],
+  "source": {
+    "branch": "main",
+    "head": "63b6dcc287f452c48b95ac4c2de45299fb1af7e3",
+    "repository": "apache/solr"
+  },
+  "summary": "Refresh the combined explicit graph-slop and post-subquery phrase-slop implementation on current Apache Solr main",
+  "tags": [
+    "implementation",
+    "review",
+    "records"
+  ],
+  "target": {
+    "branch": "solr-12532-15611-phrase-slop-refresh",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "assignment"
+}
