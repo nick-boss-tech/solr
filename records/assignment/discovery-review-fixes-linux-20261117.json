@@ -1,0 +1,18 @@
+{
+  "claim_path": "records/claim/discovery-review-fixes-linux-20261117.json",
+  "gate_id": "discovery-review-fixes-linux-20261117",
+  "gate_record": "records/gate/discovery-review-fixes-linux-20261117.json",
+  "id": "discovery-review-fixes-linux-20261117",
+  "intended_host": "Linux gate host vm2",
+  "job": "discovery-review-fixes-linux-20261117",
+  "phase": "compile-format",
+  "receipt_path": "records/receipt/discovery-review-fixes-linux-20261117.json",
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "6333f09b2e35f9000cd1d927133eab308194b2a4",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Compile and format discovery review fixes",
+  "supersedes_gate": "records/gate/discovery-fields-count-availability-linux-20261117.json",
+  "type": "assignment"
+}
