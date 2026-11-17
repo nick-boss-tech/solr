@@ -32,9 +32,14 @@ collections and other configsets must register it explicitly in `solrconfig.xml`
 ```
 
 Check whether the handler is enabled rather than assuming it is available from
-the Solr version. Requests must include a `timeAllowed` value from 1 to 5000
-milliseconds. The prototype rejects requests when another discovery request is
-running in the same JVM or when the core has more than 256 discoverable fields.
+the Solr version. The optional `fieldGlob` parameter selects field names using
+case-sensitive Solr glob matching: `*` matches any sequence and `?` matches one
+character. It defaults to `*` and is limited to 256 characters. The pattern is
+matched against the whole field
+name, including reconstructed rank-field names, before counting. Requests must
+include a `timeAllowed` value from 1 to 5000 milliseconds. The prototype rejects
+requests when another discovery request is
+running in the same JVM or when more than 256 discoverable fields match the glob.
 Limits can result in a partial response; callers must check the response header.
 These limits reduce workload but do not guarantee a particular cluster load.
 

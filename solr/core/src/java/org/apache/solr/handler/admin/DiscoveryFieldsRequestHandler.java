@@ -56,6 +56,7 @@ import org.apache.solr.security.PermissionNameProvider.Name;
 public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
 
   private static final int MAX_FIELDS = 256;
+  private static final int MAX_GLOB_LENGTH = 256;
   private static final long MAX_TIME_ALLOWED_MS = 5000;
   private static final Semaphore DISCOVERY_PERMIT = new Semaphore(1);
 
@@ -91,6 +92,12 @@ public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
   private void discover(SolrQueryRequest req, SolrQueryResponse rsp) throws Exception {
     SolrIndexSearcher searcher = req.getSearcher();
     IndexSchema schema = searcher.getSchema();
+    String fieldGlob = req.getParams().get("fieldGlob", "*");
+    if (fieldGlob.length() > MAX_GLOB_LENGTH) {
+      throw new SolrException(
+          SolrException.ErrorCode.BAD_REQUEST,
+          "fieldGlob is limited to " + MAX_GLOB_LENGTH + " characters.");
+    }
 
     List<Query> domainQueries = new ArrayList<>();
     String queryString = req.getParams().get(CommonParams.Q, "*:*").trim();
@@ -100,7 +107,9 @@ public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
 
     TreeSet<String> fieldNames = new TreeSet<>();
     for (FieldInfo fieldInfo : searcher.getFieldInfos()) {
-      if (!RankField.INTERNAL_RANK_FIELD_NAME.equals(fieldInfo.name)) {
+      checkLimits();
+      if (!RankField.INTERNAL_RANK_FIELD_NAME.equals(fieldInfo.name)
+          && matchesFieldGlob(fieldGlob, fieldInfo.name)) {
         fieldNames.add(fieldInfo.name);
       }
       checkFieldLimit(fieldNames);
@@ -113,7 +122,9 @@ public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
         checkLimits();
         String fieldName = term.utf8ToString();
         SchemaField field = schema.getFieldOrNull(fieldName);
-        if (field != null && field.getType() instanceof RankField) {
+        if (field != null
+            && field.getType() instanceof RankField
+            && matchesFieldGlob(fieldGlob, fieldName)) {
           fieldNames.add(fieldName);
           checkFieldLimit(fieldNames);
         }
@@ -160,6 +171,31 @@ public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
           SolrException.ErrorCode.BAD_REQUEST,
           "Discovery is limited to " + MAX_FIELDS + " fields per core.");
     }
+  }
+
+  // Avoid backtracking on request-supplied patterns; match the same * and ? glob syntax.
+  private static boolean matchesFieldGlob(String pattern, String name)
+      throws QueryLimitsExceededException {
+    boolean[] previous = new boolean[pattern.length() + 1];
+    previous[0] = true;
+    for (int j = 1; j <= pattern.length(); j++) {
+      previous[j] = previous[j - 1] && pattern.charAt(j - 1) == '*';
+    }
+    for (int i = 0; i < name.length(); i++) {
+      if ((i & 127) == 0) {
+        checkLimits();
+      }
+      boolean[] current = new boolean[pattern.length() + 1];
+      for (int j = 1; j <= pattern.length(); j++) {
+        char token = pattern.charAt(j - 1);
+        current[j] =
+            token == '*'
+                ? current[j - 1] || previous[j]
+                : previous[j - 1] && (token == '?' || token == name.charAt(i));
+      }
+      previous = current;
+    }
+    return previous[pattern.length()];
   }
 
   private static void checkLimits() throws QueryLimitsExceededException {
