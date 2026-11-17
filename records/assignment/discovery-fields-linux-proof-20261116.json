@@ -1,0 +1,18 @@
+{
+  "claim_path": "records/claim/discovery-fields-linux-proof-20261116.json",
+  "gate_id": "discovery-fields-linux-proof-20261116",
+  "gate_record": "records/gate/discovery-fields-linux-proof-20261116.json",
+  "id": "discovery-fields-linux-proof-20261116",
+  "intended_host": "Linux gate host vm2",
+  "job": "discovery-fields-linux-proof-20261116",
+  "phase": "compile-format",
+  "receipt_path": "records/receipt/discovery-fields-linux-proof-20261116.json",
+  "scope": "Exact-head Linux formatting and core compilation checks only. This branch has no focused automated test for the new endpoint, so this phase is not behavioral proof.",
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "374619c6ebfdb3f5535ba293b983937499032bfe",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Run Linux compile and formatting proof for the local discovery fields prototype",
+  "type": "assignment"
+}
