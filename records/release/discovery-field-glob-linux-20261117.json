@@ -1,0 +1,16 @@
+{
+  "type": "release",
+  "id": "discovery-field-glob-linux-20261117",
+  "job": "discovery-field-glob-linux-20261117",
+  "executor": "phone-agent-2",
+  "released": "2026-11-17T00:24:54-07:00",
+  "status": "released",
+  "verdict": "failed",
+  "completion_status": "incomplete",
+  "supersedes_gate": "records/gate/discovery-review-fixes-linux-20261117.json",
+  "receipt": "records/receipt/discovery-field-glob-linux-20261117.json",
+  "report": "records/report/discovery-field-glob-linux-20261117.json",
+  "evidence": "records/evidence/discovery-field-glob-linux-20261117.json; records/evidence/discovery-field-glob-linux-20261117-evidence.tar.gz (sha256 f7380df0abc14ce9cba76cb2c37889d51ba5309f60b224419b479dd148167a4d)",
+  "receipt_report_evidence_commit": "1d5d3011379ecc4e8df4cc2eb7faf5f43fdd2103",
+  "note": "Gate attempt ended with a failed/incomplete result, not a pass: the focused test failed before execution during dependency-lock resolution; tidy reformatted tracked Java source, triggering the required stop before :solr:core:check -x test. Generated formatting edits were restored and the exact-head checkout was clean. No source branch, public PR, or Jira state was changed."
+}
