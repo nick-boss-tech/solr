@@ -1,0 +1,31 @@
+{
+  "changes": [
+    "Removed the full stored-field scan fallback, including its per-document visitor and counting map.",
+    "Stored-only and term-vector-only fields remain listed with their resolved type, but return docCount null, countAccuracy unavailable, and countSource no-supported-index-presence-data.",
+    "Preserved existing exact counts for field-type queries, FieldExistsQuery, term-range queries, and point-value scans, along with local-core and live q+fq semantics."
+  ],
+  "id": "discovery-fields-count-availability-20261117-report",
+  "job": "discovery-fields-count-availability-20261117",
+  "linux_gate": {
+    "assignment_path": "records/assignment/discovery-fields-count-availability-linux-20261117.json",
+    "board_snapshot": "1a596321536b9091b280650ffe8ee6da977eab83",
+    "claim_observed_at_snapshot": false,
+    "claim_path": "records/claim/discovery-fields-count-availability-linux-20261117.json",
+    "gate_path": "records/gate/discovery-fields-count-availability-linux-20261117.json",
+    "job": "discovery-fields-count-availability-linux-20261117",
+    "receipt_path": "records/receipt/discovery-fields-count-availability-linux-20261117.json",
+    "status": "compile-format proof pending; this gate does not validate endpoint behavior"
+  },
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "ee564187eaa67c72c8f9c4eab610433aefe56c3a",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Removed stored-field counting and report unavailable counts when the index has no supported presence data.",
+  "type": "report",
+  "verification": {
+    "fork_push": "verified; remote discovery-fields-prototype ref equals ee564187eaa67c72c8f9c4eab610433aefe56c3a",
+    "git_diff_check": "passed",
+    "windows_build_or_tests": "not run; Windows host restrictions apply and no tests were added"
+  }
+}
