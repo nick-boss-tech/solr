@@ -1,0 +1,14 @@
+{
+  "id": "discovery-fields-count-availability-20261117",
+  "intended_host": "Windows implementation; Linux proof pending",
+  "job": "discovery-fields-count-availability-20261117",
+  "scope": "Remove stored-field scanning for stored-only and term-vector-only fields. Continue listing actual index field names and their resolved types, but return docCount=null, countAccuracy=unavailable, and a clear countSource when no supported indexed presence structure can provide a safe count. Preserve exact query counts for supported indexed, DocValues, vector, and point fields, the live q+fq domain, and local-core scope. Do not add field statistics, facets, pivots, a JIRA issue, or a public PR. Windows must not run Gradle or tests; push the branch and prepare exact-head Linux proof.",
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "ecc023548021083bf43cc993dce47dd72cc24fbd",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "discovery-fields-response-semantics-20261117",
+  "summary": "Avoid scans for fields without an indexed presence structure",
+  "type": "assignment"
+}
