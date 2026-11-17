@@ -1,0 +1,10 @@
+{
+  "claimed": "2026-11-17T03:12:26Z",
+  "head": "af098c6c4223c5f58f9a73c36ffe968417a5ea05",
+  "host": "windows",
+  "id": "discovery-fields-response-semantics-20261117",
+  "job": "discovery-fields-response-semantics-20261117",
+  "note": "Successor to the released implementation job; clarify response accuracy and live q+fq semantics on the existing fork branch.",
+  "owner": "codex-windows",
+  "type": "claim"
+}
