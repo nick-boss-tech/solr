@@ -1,0 +1,10 @@
+{
+  "claimed": "2026-11-17T03:35:29Z",
+  "head": "ecc023548021083bf43cc993dce47dd72cc24fbd",
+  "host": "windows",
+  "id": "discovery-fields-count-availability-20261117",
+  "job": "discovery-fields-count-availability-20261117",
+  "note": "Successor to the response-semantics update; remove stored-field scans and report unavailable counts for stored-only or term-vector-only fields.",
+  "owner": "codex-windows",
+  "type": "claim"
+}
