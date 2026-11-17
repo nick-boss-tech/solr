@@ -1,0 +1,15 @@
+{
+  "claim_path": "records/claim/discovery-fields-prototype-20261116.json",
+  "id": "discovery-fields-prototype-20261116",
+  "intended_host": "Windows implementation; Linux proof pending",
+  "job": "discovery-fields-prototype-20261116",
+  "scope": "Create a reviewable source branch without a JIRA issue. Prototype a local-core /discovery/fields endpoint that enumerates actual index field names, resolves explicit and dynamic field types, and reports exact per-field document counts for the live q+fq domain. Use field-type existence queries where supported and stored-field scanning for stored-only fields. Do not return field values or documents. The response must identify its local-core scope; collection-wide distributed aggregation, statistics, facets, pivots, and production safety guarantees are out of scope for this first step. Keep work in an isolated worktree based on upstream/main at 064d7ef8d7a7a4f4e7998aea14b3a6db49f865d1. Do not create a JIRA issue or public PR. Windows must not run Gradle or tests; push the branch and prepare exact-head Linux proof handoff.",
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "064d7ef8d7a7a4f4e7998aea14b3a6db49f865d1",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "discovery-coverage-linux-20261111",
+  "summary": "Prototype the first populated-field discovery endpoint",
+  "type": "assignment"
+}
