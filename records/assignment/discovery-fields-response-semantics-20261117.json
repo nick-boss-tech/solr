@@ -1,0 +1,14 @@
+{
+  "id": "discovery-fields-response-semantics-20261117",
+  "intended_host": "Windows implementation; Linux proof pending",
+  "job": "discovery-fields-response-semantics-20261117",
+  "scope": "Add response metadata that states counts are exact for live documents in the q+fq domain. Preserve per-field countSource and the current counting algorithms. Keep the response local-core only; do not add field statistics, values, documents, distributed aggregation, a JIRA issue, or a public PR. Windows must not run Gradle or tests; push the branch and prepare exact-head Linux proof.",
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "af098c6c4223c5f58f9a73c36ffe968417a5ea05",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "discovery-fields-prototype-20261116",
+  "summary": "Make populated-field count meaning explicit for agent consumers",
+  "type": "assignment"
+}
