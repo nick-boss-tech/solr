@@ -1,0 +1,20 @@
+{
+  "claim_path": "records/claim/discovery-fields-count-availability-linux-20261117.json",
+  "gate_id": "discovery-fields-count-availability-linux-20261117",
+  "gate_record": "records/gate/discovery-fields-count-availability-linux-20261117.json",
+  "id": "discovery-fields-count-availability-linux-20261117",
+  "intended_host": "Linux gate host vm2",
+  "job": "discovery-fields-count-availability-linux-20261117",
+  "phase": "compile-format",
+  "prior_gate_state": "The previous compile-format gate had no claim at board snapshot 2f5c2b151ce72fcb6163a9380863a2c071e19605; its source head predates this update.",
+  "receipt_path": "records/receipt/discovery-fields-count-availability-linux-20261117.json",
+  "scope": "Verify formatting and core compilation for the exact source head. No focused automated endpoint test exists in this branch; this phase is compile-format proof only and does not validate endpoint behavior.",
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "ee564187eaa67c72c8f9c4eab610433aefe56c3a",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Run compile and formatting proof for unavailable field counts",
+  "supersedes_gate": "records/gate/discovery-fields-response-linux-proof-20261117.json",
+  "type": "assignment"
+}
