@@ -1,0 +1,28 @@
+{
+  "acceptance_criteria": [
+    "Focused test and both checks pass at the exact head, with fresh evidence and no tracked formatting changes.",
+    "Receipt gives commands, seed, counts, failures, skips, evidence paths and remaining limitations."
+  ],
+  "claim_path": "records/claim/discovery-field-glob-linux-20261117.json",
+  "environment": "Linux gate host vm2, JDK 21; record actual toolchain and conditions",
+  "head": "9db4daca489dcca3a8441268316462111752bd35",
+  "id": "discovery-field-glob-linux-20261117",
+  "job": "discovery-field-glob-linux-20261117",
+  "phase": "glob-behavior-compile-format",
+  "receipt_path": "records/receipt/discovery-field-glob-linux-20261117.json",
+  "requirements": [
+    "Verify remote branch and clean checkout both equal the exact head.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.handler.admin.DiscoveryFieldsRequestHandlerTest -Dtests.seed=F13D610B and capture exit status, fresh JUnit XML, counts and logs.",
+    "Run ./gradlew :solr:core:tidy and record exit status and tracked changes; stop if formatting changes source.",
+    "Run ./gradlew :solr:core:check -x test and capture exit status and logs.",
+    "Review bounded glob matching and test results, including default selection, wildcards, no match, filtered counts, long-pattern rejection and selection before the 256-field limit; report any failure or timeout rather than weakening checks.",
+    "State that rank-field, SolrCloud, unavailable-count and full endpoint behavior are not established by this focused test."
+  ],
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "9db4daca489dcca3a8441268316462111752bd35",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes_gate": "records/gate/discovery-review-fixes-linux-20261117.json",
+  "type": "gate"
+}
