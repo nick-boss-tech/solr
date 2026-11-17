@@ -1,0 +1,9 @@
+{
+  "actor": "codex-windows",
+  "evidence": "Implementation report: records/report/discovery-fields-response-semantics-20261117-report.json. Source branch discovery-fields-prototype is pushed at ecc023548021083bf43cc993dce47dd72cc24fbd. Linux gate assignment and gate: records/assignment/discovery-fields-response-linux-proof-20261117.json and records/gate/discovery-fields-response-linux-proof-20261117.json. No build or test executor is running on the Windows host.",
+  "id": "discovery-fields-response-semantics-20261117",
+  "job": "discovery-fields-response-semantics-20261117",
+  "reason": "Response semantics update is complete; the exact source head has been handed to the separate Linux compile-format gate.",
+  "recorded": "2026-11-17",
+  "type": "release"
+}
