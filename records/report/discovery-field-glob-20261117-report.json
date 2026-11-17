@@ -1,0 +1,28 @@
+{
+  "changes": [
+    "Add optional fieldGlob with case-sensitive whole-name * and ? matching, default *, and a 256-character limit.",
+    "Use bounded non-backtracking matching with periodic time checks; filter before the 256-field cap and counts, including reconstructed rank names.",
+    "Add endpoint tests and document the parameter."
+  ],
+  "id": "discovery-field-glob-20261117-report",
+  "job": "discovery-field-glob-20261117",
+  "limitations": "Endpoint and added tests remain unverified. Collection-wide aggregation and solr-mcp integration remain out of scope.",
+  "linux_gate": {
+    "assignment_path": "records/assignment/discovery-field-glob-linux-20261117.json",
+    "claim_path": "records/claim/discovery-field-glob-linux-20261117.json",
+    "gate_path": "records/gate/discovery-field-glob-linux-20261117.json",
+    "receipt_path": "records/receipt/discovery-field-glob-linux-20261117.json"
+  },
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "9db4daca489dcca3a8441268316462111752bd35",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Add bounded glob selection to the discovery prototype",
+  "type": "report",
+  "verification": {
+    "git_diff_check": "passed",
+    "linux_tests_and_checks": "pending; not run on Windows",
+    "remote_head": "confirmed at source head"
+  }
+}
