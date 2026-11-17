@@ -1,0 +1,38 @@
+{
+  "changes": [
+    "Added DiscoveryFieldsRequestHandler and registered /discovery/fields in the default configset.",
+    "Kept counts local to one core and identified the response scope as local-core.",
+    "Committed the implementation and schema-snapshot alignment change; both commits are on the fork branch."
+  ],
+  "handoff": {
+    "assignment": "records/assignment/discovery-fields-linux-proof-20261116-r2.json",
+    "board_snapshot": "7420526403568d643e4aff18c44b570c174d56b2",
+    "claim_path": "records/claim/discovery-fields-linux-proof-20261116-r2.json",
+    "claim_status": "No claim existed at the handoff snapshot.",
+    "gate": "records/gate/discovery-fields-linux-proof-20261116-r2.json",
+    "job": "discovery-fields-linux-proof-20261116-r2",
+    "source_head": "af098c6c4223c5f58f9a73c36ffe968417a5ea05"
+  },
+  "id": "discovery-fields-prototype-20261116-report",
+  "job": "discovery-fields-prototype-20261116",
+  "limitations": [
+    "No focused automated test for DiscoveryFieldsRequestHandler is present in this branch.",
+    "The endpoint is a first-step local-core prototype; it does not provide distributed aggregation, statistics, facets, pivots, or production safety guarantees.",
+    "Linux compile and formatting proof is pending; the exact-head gate is records/gate/discovery-fields-linux-proof-20261116-r2.json."
+  ],
+  "owner": "codex-windows",
+  "recorded": "2026-11-16",
+  "source": {
+    "base": "064d7ef8d7a7a4f4e7998aea14b3a6db49f865d1",
+    "branch": "discovery-fields-prototype",
+    "head": "af098c6c4223c5f58f9a73c36ffe968417a5ea05",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Implemented and pushed the first local-core populated-fields endpoint. The response reports actual indexed field names, resolved explicit or dynamic schema types, matching-document counts for q plus fq, and count source. It returns no field values or documents.",
+  "type": "report",
+  "verification": {
+    "branch": "The local worktree is clean and the remote branch ref matches the recorded head.",
+    "diff_check": "git diff --check passed.",
+    "windows_builds_and_tests": "Not run under the Windows host rules."
+  }
+}
