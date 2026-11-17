@@ -1,0 +1,39 @@
+{
+  "changes": [
+    "Added countAccuracy to each field result without changing the counting algorithms.",
+    "Added countDomain, countsUseLiveDocuments, and numFoundAccuracy response metadata.",
+    "Kept the response local-core only and returned no field values or documents."
+  ],
+  "handoff": {
+    "assignment": "records/assignment/discovery-fields-response-linux-proof-20261117.json",
+    "board_snapshot": "8472507fbe007bc6164758dd3ee661b020aa0b17",
+    "claim_path": "records/claim/discovery-fields-response-linux-proof-20261117.json",
+    "claim_status": "No claim existed at the handoff snapshot.",
+    "gate": "records/gate/discovery-fields-response-linux-proof-20261117.json",
+    "job": "discovery-fields-response-linux-proof-20261117",
+    "receipt_path": "records/receipt/discovery-fields-response-linux-proof-20261117.json",
+    "source_head": "ecc023548021083bf43cc993dce47dd72cc24fbd"
+  },
+  "id": "discovery-fields-response-semantics-20261117-report",
+  "job": "discovery-fields-response-semantics-20261117",
+  "limitations": [
+    "No focused automated test for DiscoveryFieldsRequestHandler is present in this branch.",
+    "The endpoint remains a first-step local-core prototype; it does not provide distributed aggregation, field statistics, facets, pivots, or production safety guarantees.",
+    "Linux compile and formatting proof is pending; this gate does not validate endpoint behavior."
+  ],
+  "owner": "codex-windows",
+  "recorded": "2026-11-17",
+  "source": {
+    "base": "af098c6c4223c5f58f9a73c36ffe968417a5ea05",
+    "branch": "discovery-fields-prototype",
+    "head": "ecc023548021083bf43cc993dce47dd72cc24fbd",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Made the populated-field response explicit for agent consumers. Each field reports countAccuracy=exact and retains countSource; the top level identifies countDomain=q+fq and countsUseLiveDocuments=true. numFound is also labeled exact.",
+  "type": "report",
+  "verification": {
+    "branch": "The local worktree is clean and the remote branch ref matches the recorded head.",
+    "diff_check": "git diff --check passed.",
+    "windows_builds_and_tests": "Not run under the Windows host rules."
+  }
+}
