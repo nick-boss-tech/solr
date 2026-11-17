@@ -1,0 +1,20 @@
+{
+  "claim_path": "records/claim/discovery-fields-response-linux-proof-20261117.json",
+  "gate_id": "discovery-fields-response-linux-proof-20261117",
+  "gate_record": "records/gate/discovery-fields-response-linux-proof-20261117.json",
+  "id": "discovery-fields-response-linux-proof-20261117",
+  "intended_host": "Linux gate host vm2",
+  "job": "discovery-fields-response-linux-proof-20261117",
+  "phase": "compile-format",
+  "prior_gate_state": "The prior gate had no claim at board snapshot 9ec985342970a226c9c3f8f663b7e0202ba4c8e4.",
+  "receipt_path": "records/receipt/discovery-fields-response-linux-proof-20261117.json",
+  "scope": "Exact-head Linux formatting and core compilation checks only. The branch still has no focused automated endpoint test, so this phase is not behavioral proof.",
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "ecc023548021083bf43cc993dce47dd72cc24fbd",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Run Linux compile and formatting proof for explicit field count metadata",
+  "supersedes_gate": "records/gate/discovery-fields-linux-proof-20261116-r2.json",
+  "type": "assignment"
+}
