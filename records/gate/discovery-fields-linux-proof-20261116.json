@@ -1,0 +1,26 @@
+{
+  "acceptance_criteria": [
+    "The remote branch and checked-out HEAD both equal the recorded source head before the gate starts.",
+    "The tidy and core check commands exit successfully without modifying the source head.",
+    "The receipt describes this as compile-format proof only and does not claim behavioral validation."
+  ],
+  "claim_path": "records/claim/discovery-fields-linux-proof-20261116.json",
+  "environment": "Linux gate host vm2; run in the checked-out Solr source worktree after confirming its HEAD and the fork branch ref match the recorded head.",
+  "head": "374619c6ebfdb3f5535ba293b983937499032bfe",
+  "id": "discovery-fields-linux-proof-20261116",
+  "job": "discovery-fields-linux-proof-20261116",
+  "phase": "compile-format",
+  "receipt_path": "records/receipt/discovery-fields-linux-proof-20261116.json",
+  "receipt_verdict_note": "A successful receipt closes only the compile-format phase. Focused endpoint behavior proof remains pending.",
+  "requirements": [
+    "Run ./gradlew :solr:core:tidy from the Solr repository root. Record the exit code and whether it changed tracked files; if it changes files, stop and do not treat this head as formatted.",
+    "Run ./gradlew :solr:core:check -x test from the Solr repository root and record the exit code and relevant log evidence.",
+    "Record explicitly that no DiscoveryFieldsRequestHandler-focused automated test exists in this branch. Passing this compile-format phase does not validate endpoint behavior or production readiness."
+  ],
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "374619c6ebfdb3f5535ba293b983937499032bfe",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "gate"
+}
