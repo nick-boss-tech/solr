@@ -19,21 +19,13 @@ package org.apache.solr.handler.admin;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.TreeSet;
 import org.apache.lucene.index.DocValuesType;
 import org.apache.lucene.index.FieldInfo;
-import org.apache.lucene.index.IndexOptions;
 import org.apache.lucene.index.LeafReaderContext;
 import org.apache.lucene.index.PointValues;
-import org.apache.lucene.index.StoredFieldVisitor;
-import org.apache.lucene.index.StoredFields;
 import org.apache.lucene.index.Terms;
-import org.apache.lucene.search.DocIdSetIterator;
 import org.apache.lucene.search.FieldExistsQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TermRangeQuery;
@@ -51,10 +43,10 @@ import org.apache.solr.search.SolrIndexSearcher;
 import org.apache.solr.security.AuthorizationContext;
 import org.apache.solr.security.PermissionNameProvider.Name;
 
-/** Reports populated fields and their document counts for one core's live index. */
+/** Reports field names and available document counts for one core's live index. */
 public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
 
-  private record FieldCount(int count, String source) {}
+  private record FieldCount(Integer count, String accuracy, String source) {}
 
   @Override
   public void handleRequestBody(SolrQueryRequest req, SolrQueryResponse rsp) throws Exception {
@@ -72,24 +64,11 @@ public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
       fieldNames.add(fieldInfo.name);
     }
 
-    boolean needsStoredFieldScan = false;
-    for (String fieldName : fieldNames) {
-      FieldInfo fieldInfo = searcher.getFieldInfos().fieldInfo(fieldName);
-      SchemaField schemaField = schema.getFieldOrNull(fieldName);
-      if (!hasQueryableRepresentation(fieldInfo, schemaField, searcher)) {
-        needsStoredFieldScan = true;
-        break;
-      }
-    }
-    Map<String, Integer> storedFieldCounts =
-        needsStoredFieldScan ? countStoredFields(domain, searcher) : Map.of();
-
     SimpleOrderedMap<Object> fields = new SimpleOrderedMap<>();
     QParser existenceParser = QParser.getParser("*:*", req);
     for (String fieldName : fieldNames) {
       SchemaField schemaField = schema.getFieldOrNull(fieldName);
-      FieldCount fieldCount =
-          countField(fieldName, schemaField, domain, storedFieldCounts, searcher, existenceParser);
+      FieldCount fieldCount = countField(fieldName, schemaField, domain, searcher, existenceParser);
 
       SimpleOrderedMap<Object> field = new SimpleOrderedMap<>();
       field.add("type", schemaField == null ? null : schemaField.getType().getTypeName());
@@ -99,7 +78,7 @@ public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
         field.add("dynamicBase", schema.getDynamicPattern(fieldName));
       }
       field.add("docCount", fieldCount.count());
-      field.add("countAccuracy", "exact");
+      field.add("countAccuracy", fieldCount.accuracy());
       field.add("countSource", fieldCount.source());
       fields.add(fieldName, field);
     }
@@ -113,33 +92,17 @@ public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
     rsp.setHttpCaching(false);
   }
 
-  private static boolean hasQueryableRepresentation(
-      FieldInfo fieldInfo, SchemaField schemaField, SolrIndexSearcher searcher) throws IOException {
-    if (schemaField != null && (schemaField.indexed() || schemaField.hasDocValues())) {
-      return true;
-    }
-    if (fieldInfo.getDocValuesType() != DocValuesType.NONE
-        || fieldInfo.hasNorms()
-        || fieldInfo.getVectorDimension() > 0
-        || fieldInfo.getIndexOptions() != IndexOptions.NONE
-        || fieldInfo.getPointDimensionCount() > 0) {
-      return true;
-    }
-    return searcher.getSlowAtomicReader().terms(fieldInfo.name) != null;
-  }
-
   private static FieldCount countField(
       String fieldName,
       SchemaField schemaField,
       DocSet domain,
-      Map<String, Integer> storedFieldCounts,
       SolrIndexSearcher searcher,
       QParser existenceParser)
       throws IOException {
     if (schemaField != null && (schemaField.indexed() || schemaField.hasDocValues())) {
       Query existsQuery = schemaField.getType().getExistenceQuery(existenceParser, schemaField);
       return new FieldCount(
-          domain.intersectionSize(searcher.getDocSet(existsQuery)), "field-type-query");
+          domain.intersectionSize(searcher.getDocSet(existsQuery)), "exact", "field-type-query");
     }
 
     FieldInfo fieldInfo = searcher.getFieldInfos().fieldInfo(fieldName);
@@ -148,22 +111,22 @@ public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
         || fieldInfo.getVectorDimension() > 0) {
       Query existsQuery = new FieldExistsQuery(fieldName);
       return new FieldCount(
-          domain.intersectionSize(searcher.getDocSet(existsQuery)), "field-exists-query");
+          domain.intersectionSize(searcher.getDocSet(existsQuery)), "exact", "field-exists-query");
     }
 
     Terms terms = searcher.getSlowAtomicReader().terms(fieldName);
     if (terms != null) {
       Query existsQuery = TermRangeQuery.newStringRange(fieldName, null, null, true, true);
       return new FieldCount(
-          domain.intersectionSize(searcher.getDocSet(existsQuery)), "term-range-query");
+          domain.intersectionSize(searcher.getDocSet(existsQuery)), "exact", "term-range-query");
     }
 
     if (fieldInfo.getPointDimensionCount() > 0) {
       return new FieldCount(
-          countPointFieldDocuments(fieldName, domain, searcher), "point-values-scan");
+          countPointFieldDocuments(fieldName, domain, searcher), "exact", "point-values-scan");
     }
 
-    return new FieldCount(storedFieldCounts.getOrDefault(fieldName, 0), "stored-field-scan");
+    return new FieldCount(null, "unavailable", "no-supported-index-presence-data");
   }
 
   private static int countPointFieldDocuments(
@@ -206,39 +169,9 @@ public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
     return count;
   }
 
-  private static Map<String, Integer> countStoredFields(DocSet domain, SolrIndexSearcher searcher)
-      throws IOException {
-    Map<String, Integer> counts = new HashMap<>();
-    for (LeafReaderContext context : searcher.getIndexReader().leaves()) {
-      DocIdSetIterator matchingDocs = domain.iterator(context);
-      if (matchingDocs == null) {
-        continue;
-      }
-      StoredFields storedFields = context.reader().storedFields();
-      for (int docID = matchingDocs.nextDoc();
-          docID != DocIdSetIterator.NO_MORE_DOCS;
-          docID = matchingDocs.nextDoc()) {
-        Set<String> namesInDocument = new HashSet<>();
-        storedFields.document(
-            docID,
-            new StoredFieldVisitor() {
-              @Override
-              public Status needsField(FieldInfo fieldInfo) {
-                namesInDocument.add(fieldInfo.name);
-                return Status.YES;
-              }
-            });
-        for (String fieldName : namesInDocument) {
-          counts.merge(fieldName, 1, Integer::sum);
-        }
-      }
-    }
-    return counts;
-  }
-
   @Override
   public String getDescription() {
-    return "Populated field names and counts for the local core.";
+    return "Field names and available document counts for the local core.";
   }
 
   @Override
