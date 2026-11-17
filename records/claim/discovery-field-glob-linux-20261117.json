@@ -1,0 +1,14 @@
+{
+  "claimed": "2026-11-17T07:15:14Z",
+  "host": "phone-agent-2 Linux sandbox (0609f7968656)",
+  "id": "discovery-field-glob-linux-20261117",
+  "job": "discovery-field-glob-linux-20261117",
+  "note": "Owner explicitly directed phone-agent-2 to execute this gate despite assignment intended_host Linux gate host vm2.",
+  "owner": "phone-agent-2",
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "9db4daca489dcca3a8441268316462111752bd35",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "claim"
+}
