@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "records/report/discovery-field-glob-20261117-report.json records the pushed head and limitations. No local build or test executor was started. Linux proof is a separate job records/assignment/discovery-field-glob-linux-20261117.json.",
+  "id": "discovery-field-glob-20261117",
+  "job": "discovery-field-glob-20261117",
+  "reason": "Implementation pushed and Linux proof handed off.",
+  "type": "release"
+}
