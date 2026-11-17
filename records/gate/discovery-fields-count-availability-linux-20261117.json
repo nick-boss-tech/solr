@@ -1,0 +1,29 @@
+{
+  "acceptance_criteria": [
+    "The remote branch and checked-out HEAD both equal the recorded source head before the gate starts.",
+    "The tidy and core check commands exit successfully without modifying the source head.",
+    "The receipt describes this as compile-format proof only and does not claim behavioral validation."
+  ],
+  "claim_path": "records/claim/discovery-fields-count-availability-linux-20261117.json",
+  "environment": "Linux gate host vm2; run in the checked-out Solr source worktree after confirming its HEAD and the fork branch ref match the recorded head.",
+  "head": "ee564187eaa67c72c8f9c4eab610433aefe56c3a",
+  "id": "discovery-fields-count-availability-linux-20261117",
+  "job": "discovery-fields-count-availability-linux-20261117",
+  "phase": "compile-format",
+  "previous_gate_snapshot": "2f5c2b151ce72fcb6163a9380863a2c071e19605",
+  "receipt_path": "records/receipt/discovery-fields-count-availability-linux-20261117.json",
+  "receipt_verdict_note": "A successful receipt closes only the compile-format phase. Focused endpoint behavior proof remains pending.",
+  "requirements": [
+    "Before running commands, confirm the checked-out HEAD and nick-boss-tech/solr discovery-fields-prototype ref both equal the recorded source head.",
+    "Run ./gradlew :solr:core:tidy from the Solr repository root. Record the exit code and whether it changed tracked files; if it changes files, stop and do not treat this head as formatted.",
+    "Run ./gradlew :solr:core:check -x test from the Solr repository root and record the exit code and relevant log evidence.",
+    "Record explicitly that no DiscoveryFieldsRequestHandler-focused automated test exists in this branch. This compile-format phase does not prove endpoint behavior."
+  ],
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "ee564187eaa67c72c8f9c4eab610433aefe56c3a",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes_gate": "records/gate/discovery-fields-response-linux-proof-20261117.json",
+  "type": "gate"
+}
