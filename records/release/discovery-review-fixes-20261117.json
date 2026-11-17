@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "Implementation report records/report/discovery-review-fixes-20261117-report.json records the verified fork head and limitations. No local build or test executor was started. Linux gate records/assignment/discovery-review-fixes-linux-20261117.json and records/gate/discovery-review-fixes-linux-20261117.json cover the new head.",
+  "id": "discovery-review-fixes-20261117",
+  "job": "discovery-review-fixes-20261117",
+  "reason": "Implementation is pushed and handed to a separate Linux gate.",
+  "type": "release"
+}
