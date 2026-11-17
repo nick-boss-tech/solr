@@ -1,0 +1,9 @@
+{
+  "actor": "codex-windows",
+  "evidence": "Implementation report: records/report/discovery-fields-prototype-20261116-report.json. Source branch discovery-fields-prototype is pushed at af098c6c4223c5f58f9a73c36ffe968417a5ea05. Linux gate assignment and gate: records/assignment/discovery-fields-linux-proof-20261116-r2.json and records/gate/discovery-fields-linux-proof-20261116-r2.json. No build or test executor is running on the Windows host.",
+  "id": "discovery-fields-prototype-20261116",
+  "job": "discovery-fields-prototype-20261116",
+  "reason": "Windows implementation is complete; the exact source head has been handed to the separate Linux compile-format gate.",
+  "recorded": "2026-11-16",
+  "type": "release"
+}
