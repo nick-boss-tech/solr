@@ -1,0 +1,14 @@
+{
+  "id": "discovery-field-glob-20261117",
+  "intended_host": "Windows implementation; Linux proof pending",
+  "job": "discovery-field-glob-20261117",
+  "scope": "Add optional glob selection using Solr glob semantics before per-field counting, document and add focused endpoint tests; push fork branch and publish exact-head Linux proof. No Windows Gradle or retired queue.",
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "6333f09b2e35f9000cd1d927133eab308194b2a4",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "discovery-review-fixes-20261117",
+  "summary": "Add field-name glob selection to discovery prototype",
+  "type": "assignment"
+}
