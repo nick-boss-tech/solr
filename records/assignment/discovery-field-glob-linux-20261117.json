@@ -1,0 +1,18 @@
+{
+  "claim_path": "records/claim/discovery-field-glob-linux-20261117.json",
+  "gate_id": "discovery-field-glob-linux-20261117",
+  "gate_record": "records/gate/discovery-field-glob-linux-20261117.json",
+  "id": "discovery-field-glob-linux-20261117",
+  "intended_host": "Linux gate host vm2",
+  "job": "discovery-field-glob-linux-20261117",
+  "phase": "glob-behavior-compile-format",
+  "receipt_path": "records/receipt/discovery-field-glob-linux-20261117.json",
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "9db4daca489dcca3a8441268316462111752bd35",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify discovery field glob endpoint behavior, formatting and core checks",
+  "supersedes_gate": "records/gate/discovery-review-fixes-linux-20261117.json",
+  "type": "assignment"
+}
