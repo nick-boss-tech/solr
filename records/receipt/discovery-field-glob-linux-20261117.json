@@ -1,0 +1,109 @@
+{
+  "type": "receipt",
+  "id": "discovery-field-glob-linux-20261117",
+  "job": "discovery-field-glob-linux-20261117",
+  "gate": "discovery-field-glob-linux-20261117",
+  "head": "9db4daca489dcca3a8441268316462111752bd35",
+  "source": {
+    "repository": "nick-boss-tech/solr",
+    "branch": "discovery-fields-prototype",
+    "assigned_head": "9db4daca489dcca3a8441268316462111752bd35",
+    "live_head_before_run": "9db4daca489dcca3a8441268316462111752bd35",
+    "live_head_before_publication": "9db4daca489dcca3a8441268316462111752bd35",
+    "checkout_clean_before_run": true,
+    "checkout_clean_after_cleanup": true
+  },
+  "verdict": "failed",
+  "completion_status": "incomplete; required core check was not run because tidy changed tracked source formatting",
+  "environment": "Linux sandbox phone-agent-2; OpenJDK 21.0.12.1; JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64; GRADLE_USER_HOME=/workspace/gradle-home; shallow clean checkout at exact assigned head.",
+  "watchdog": "Every Gradle command used /workspace/tools/solr-live-build.py via run_gate.sh, under both required locks (/workspace/tools/.gradle-phone-agent-2.lock and /workspace/tools/.gradle-0609f7968656.lock), with the default finite 3600-second timeout, 30-second heartbeat, 5-second resource sampling, and stop floors of <=15% free inodes or <2 GiB free disk. No timeout or resource stop occurred.",
+  "commands": {
+    "focused_test": "./gradlew :solr:core:test --tests org.apache.solr.handler.admin.DiscoveryFieldsRequestHandlerTest -Dtests.seed=F13D610B",
+    "tidy": "./gradlew :solr:core:tidy",
+    "core_check": "./gradlew :solr:core:check -x test",
+    "runner": "/workspace/tools/solr-live-build.py via /workspace/evidence/discovery-field-glob-linux-20261117/run_gate.sh"
+  },
+  "results": {
+    "focused_test": {
+      "exit_code": 1,
+      "seed": "F13D610B",
+      "status": "failed before test execution during testRuntimeClasspath dependency resolution",
+      "tests_executed": 0,
+      "junit_xml": null,
+      "junit_counts": null,
+      "failure": "Gradle rejected seven resolved dependencies because they were not part of the dependency lock state: com.github.docker-java:docker-java-api:3.7.1; org.rnorth.duct-tape:duct-tape:1.0.8; com.github.docker-java:docker-java-transport-zerodep:3.7.1; com.github.docker-java:docker-java-transport:3.7.1; org.jetbrains:annotations:26.1.0; org.apache.commons:commons-compress:1.28.0; org.testcontainers:testcontainers:2.0.5.",
+      "logs": [
+        "results/focused-test.command.txt",
+        "results/focused-test.driver.log",
+        "results/focused-test.monitor.log",
+        "results/focused-test.exit.txt",
+        "results/focused-test-junit-inventory.txt"
+      ]
+    },
+    "tidy": {
+      "exit_code": 0,
+      "tracked_changes": true,
+      "changed_paths": [
+        "solr/core/src/java/org/apache/solr/handler/admin/DiscoveryFieldsRequestHandler.java",
+        "solr/core/src/test/org/apache/solr/handler/admin/DiscoveryFieldsRequestHandlerTest.java"
+      ],
+      "diff_stat": "2 files changed, 3 insertions(+), 6 deletions(-)",
+      "change_summary": "Spotless collapsed two wrapped FieldCount return expressions in the handler and one wrapped expectThrows invocation in the test.",
+      "full_diff": "results/tidy-diff/tracked-formatting.patch",
+      "action": "Stopped the remaining gate checks as required; saved the exact formatter diff, then restored only those generated edits. The checkout was clean again at the assigned SHA.",
+      "logs": [
+        "results/tidy.command.txt",
+        "results/tidy.driver.log",
+        "results/tidy.monitor.log",
+        "results/tidy.exit.txt",
+        "results/tidy-tracked-changes.txt",
+        "results/post-tidy-restore.txt"
+      ]
+    },
+    "core_check": {
+      "exit_code": null,
+      "status": "not_run",
+      "reason": "The gate instructed stopping if tidy changed source formatting. This check is not a pass.",
+      "evidence": "results/check-not-run.txt"
+    },
+    "daemon_stop_cleanup": {
+      "command": "./gradlew --stop",
+      "exit_code": 0,
+      "result": "1 idle Gradle daemon stopped; cleanup only, no further gate check was run."
+    }
+  },
+  "source_test_review": {
+    "bounded_glob": "The implementation rejects patterns over 256 characters, matches * and ? with iterative dynamic programming rather than a backtracking regex, and checks query limits during field-name matching and metadata traversal.",
+    "cases_present_in_focused_test": [
+      "default fieldGlob=* selection",
+      "? and * wildcard matching",
+      "no-match response",
+      "fq-filtered field document counts",
+      "257-character pattern rejection",
+      "257 candidate fields followed by a narrow fieldGlob selection yielding one field before the 256-selected-field limit"
+    ],
+    "behavioral_status": "These cases were reviewed in source, but not behaviorally established because the focused test failed before execution."
+  },
+  "skips_and_exclusions": {
+    "docker": "Not used.",
+    "antora_site_build_and_link_check": "Not invoked or separately skipped; the prescribed commands were scoped to :solr:core.",
+    "other_checks": "No weakening or other exclusions. The explicitly required core check was not run only because the tidy stop condition fired."
+  },
+  "remaining_limitations": [
+    "Rank-field behavior is not established by this focused test.",
+    "SolrCloud behavior is not established by this focused test.",
+    "Unavailable-count behavior is not established by this focused test.",
+    "Full endpoint behavior is not established by this focused test.",
+    "No focused JUnit assertions executed; there is no fresh JUnit XML or assertion count.",
+    "The required :solr:core:check -x test command remains unrun."
+  ],
+  "cleanup": {
+    "source_checkout_restored_clean": true,
+    "gradle_daemon_stopped": true,
+    "required_locks_free_at_prepublication": true,
+    "no_source_push_or_public_pr_jira_changes": true
+  },
+  "evidence_record": "records/evidence/discovery-field-glob-linux-20261117.json",
+  "evidence_archive": "records/evidence/discovery-field-glob-linux-20261117-evidence.tar.gz",
+  "evidence_sha256": "f7380df0abc14ce9cba76cb2c37889d51ba5309f60b224419b479dd148167a4d"
+}

@@ -1,0 +1,25 @@
+{
+  "type": "evidence",
+  "id": "discovery-field-glob-linux-20261117",
+  "job": "discovery-field-glob-linux-20261117",
+  "gate": "discovery-field-glob-linux-20261117",
+  "head": "9db4daca489dcca3a8441268316462111752bd35",
+  "branch": "discovery-fields-prototype",
+  "environment": "Linux sandbox phone-agent-2, OpenJDK 21.0.12.1",
+  "verdict": "failed",
+  "archive": "records/evidence/discovery-field-glob-linux-20261117-evidence.tar.gz",
+  "archive_sha256": "f7380df0abc14ce9cba76cb2c37889d51ba5309f60b224419b479dd148167a4d",
+  "archive_bytes": 7891,
+  "manifest": "discovery-field-glob-linux-20261117/manifest.sha256",
+  "contents": [
+    "exact command plan and bounded runner",
+    "live source and host preflight evidence",
+    "focused-test command, driver and monitor logs, exit code, and JUnit XML absence inventory",
+    "tidy command, driver and monitor logs, exit code, tracked-change report, and formatter diff",
+    "record that :solr:core:check -x test was not run after the tidy stop condition",
+    "source-review notes for glob matching and focused test cases",
+    "post-tidy source restoration evidence",
+    "idle Gradle daemon stop cleanup evidence"
+  ],
+  "type_note": "This pointer describes the accompanying evidence archive; see the gate receipt and report for outcomes and limitations."
+}

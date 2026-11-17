@@ -1,0 +1,21 @@
+{
+  "type": "report",
+  "id": "discovery-field-glob-linux-20261117",
+  "job": "discovery-field-glob-linux-20261117",
+  "gate": "discovery-field-glob-linux-20261117",
+  "head": "9db4daca489dcca3a8441268316462111752bd35",
+  "verdict": "failed",
+  "completion_status": "incomplete",
+  "summary": "The focused test command exited 1 during testRuntimeClasspath dependency resolution, before any test ran. Tidy exited 0 but reformatted two tracked Java files, which triggered the assignment's stop condition; the generated edits were captured and restored. The required :solr:core:check -x test command was therefore not run.",
+  "details": [
+    "Focused command used seed F13D610B. Gradle reported seven dependencies not present in the dependency lock state. No fresh JUnit XML was produced; 0 tests executed, and XML counts are unavailable.",
+    "Tidy ran :solr:core:spotlessJavaApply and :solr:core:tidy successfully, but changed two tracked files: DiscoveryFieldsRequestHandler.java (two wrapped expressions) and DiscoveryFieldsRequestHandlerTest.java (one wrapped expectThrows invocation). The exact diff is archived; both files were restored to the assigned head.",
+    "The core check was not run. This is not a pass; tidy's source change required stopping before the remaining check.",
+    "Source inspection found bounded iterative * and ? glob matching, a 256-character pattern limit, and focused test cases for default selection, wildcards, no match, filtered counts, long-pattern rejection, and narrowing to one matching field among 257 candidates. Those behaviors were not tested at runtime because dependency resolution failed.",
+    "Rank-field, SolrCloud, unavailable-count, and full endpoint behavior remain unestablished. Docker was not used; Antora/site-build/link-check tasks were not invoked by these core-scoped commands."
+  ],
+  "cleanup": "The source checkout was restored clean at the exact assigned SHA, the idle Gradle daemon was stopped, and both required locks were free at the prepublication check. No source branch, public PR, or Jira state was changed.",
+  "evidence_record": "records/evidence/discovery-field-glob-linux-20261117.json",
+  "evidence_sha256": "f7380df0abc14ce9cba76cb2c37889d51ba5309f60b224419b479dd148167a4d",
+  "follow_up": "A successor clean head or a resolved dependency-lock state is needed for the focused test and remaining check to provide the requested proof; do not treat this gate as passing."
+}
