@@ -59,7 +59,7 @@ public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
   @Override
   public void handleRequestBody(SolrQueryRequest req, SolrQueryResponse rsp) throws Exception {
     SolrIndexSearcher searcher = req.getSearcher();
-    IndexSchema schema = req.getSchema();
+    IndexSchema schema = searcher.getSchema();
 
     List<Query> domainQueries = new ArrayList<>();
     String queryString = req.getParams().get(CommonParams.Q, "*:*").trim();
