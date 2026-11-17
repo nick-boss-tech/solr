@@ -608,8 +608,13 @@
     </lst>
   </requestHandler>
 
+  <!-- Reports populated field counts for the local core only. -->
+  <requestHandler
+      name="/discovery/fields"
+      class="org.apache.solr.handler.admin.DiscoveryFieldsRequestHandler" />
+
   <!-- Shared parameters for multiple Request Handlers -->
-  <initParams path="/update/**,/query,/select,/spell">
+  <initParams path="/update/**,/query,/select,/spell,/discovery/fields">
     <lst name="defaults">
       <str name="df">_text_</str>
     </lst>
