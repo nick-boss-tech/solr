@@ -1,0 +1,14 @@
+{
+  "id": "discovery-review-fixes-20261117",
+  "intended_host": "Windows implementation; Linux proof pending",
+  "job": "discovery-review-fixes-20261117",
+  "scope": "Address collection scope, workload safety, availability, physical field names, and populated-field semantics. Preserve unavailable counts for unsupported fields. Push the fork branch and publish exact-head Linux proof requirements. Do not run Gradle on Windows.",
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "ee564187eaa67c72c8f9c4eab610433aefe56c3a",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "discovery-fields-count-availability-20261117",
+  "summary": "Address discovery prototype review findings",
+  "type": "assignment"
+}
