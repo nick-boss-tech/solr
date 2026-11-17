@@ -442,17 +442,14 @@ public abstract class OrderedNodePlacementPlugin implements PlacementPlugin {
       if (node == null) {
         entry
             .getValue()
-            .forEach(
-                replica ->
-                    placementModificationException.addRejectedModification(
-                        replica.toString(),
-                        "could not load information for node: " + entry.getKey().getName()));
+            .forEach(replica ->
+                placementModificationException.addRejectedModification(
+                    replica.toString(),
+                    "could not load information for node: " + entry.getKey().getName()));
       } else {
         node.canRemoveReplicas(entry.getValue())
-            .forEach(
-                (replica, reason) ->
-                    placementModificationException.addRejectedModification(
-                        replica.toString(), reason));
+            .forEach((replica, reason) ->
+                placementModificationException.addRejectedModification(replica.toString(), reason));
       }
     }
     if (!placementModificationException.getRejectedModifications().isEmpty()) {
@@ -806,15 +803,14 @@ public abstract class OrderedNodePlacementPlugin implements PlacementPlugin {
      */
     private void recheckLowestWeights() {
       if (currentLowestList != null) {
-        currentLowestList.removeIf(
-            node -> {
-              if (weightFunc.apply(node) != currentLowestWeight) {
-                log.debug("Node's sort is out-of-date, re-sorting: {}", node);
-                add(node);
-                return true;
-              }
-              return false;
-            });
+        currentLowestList.removeIf(node -> {
+          if (weightFunc.apply(node) != currentLowestWeight) {
+            log.debug("Node's sort is out-of-date, re-sorting: {}", node);
+            add(node);
+            return true;
+          }
+          return false;
+        });
       }
     }
 
@@ -885,11 +881,10 @@ public abstract class OrderedNodePlacementPlugin implements PlacementPlugin {
         int count = request.getCountReplicasToCreate(type);
         if (count > 0) {
           totalShardReplicas += count;
-          shards.forEach(
-              s ->
-                  replicasToPlaceForShards
-                      .computeIfAbsent(s, sh -> CollectionUtil.newHashMap(3))
-                      .put(type, count));
+          shards.forEach(s ->
+              replicasToPlaceForShards
+                  .computeIfAbsent(s, sh -> CollectionUtil.newHashMap(3))
+                  .put(type, count));
         }
       }
       computedPlacements = CollectionUtil.newHashSet(totalShardReplicas * shards.size());

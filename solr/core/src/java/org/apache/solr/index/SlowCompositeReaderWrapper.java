@@ -225,7 +225,7 @@ public final class SlowCompositeReaderWrapper extends LeafReader {
     CacheHelper cacheHelper = getReaderCacheHelper();
 
     Function<? super String, ? extends OrdinalMap> producer =
-        (notUsed) -> {
+        notUsed -> {
           try {
             OrdinalMap mapping =
                 OrdinalMap.build(
@@ -297,7 +297,7 @@ public final class SlowCompositeReaderWrapper extends LeafReader {
     CacheHelper cacheHelper = getReaderCacheHelper();
 
     Function<? super String, ? extends OrdinalMap> producer =
-        (notUsed) -> {
+        notUsed -> {
           try {
             OrdinalMap mapping =
                 OrdinalMap.build(

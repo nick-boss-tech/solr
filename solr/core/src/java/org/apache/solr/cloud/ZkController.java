@@ -541,18 +541,17 @@ public class ZkController implements Closeable {
       for (OnReconnect listener : clonedListeners) {
         try {
           if (executorService != null) {
-            executorService.execute(
-                () -> {
-                  try {
-                    listener.onReconnect();
-                  } catch (Throwable exc) {
-                    // not much we can do here other than warn in the log
-                    log.warn(
-                        "Error when notifying OnReconnect listener {} after session re-connected.",
-                        listener,
-                        exc);
-                  }
-                });
+            executorService.execute(() -> {
+              try {
+                listener.onReconnect();
+              } catch (Throwable exc) {
+                // not much we can do here other than warn in the log
+                log.warn(
+                    "Error when notifying OnReconnect listener {} after session re-connected.",
+                    listener,
+                    exc);
+              }
+            });
           } else {
             listener.onReconnect();
           }
@@ -862,9 +861,8 @@ public class ZkController implements Closeable {
 
       replicateFromLeaders
           .values()
-          .forEach(
-              replicateFromLeader ->
-                  customThreadPool.execute(replicateFromLeader::stopReplication));
+          .forEach(replicateFromLeader ->
+              customThreadPool.execute(replicateFromLeader::stopReplication));
     } finally {
       ExecutorUtil.shutdownAndAwaitTermination(customThreadPool);
     }
@@ -883,13 +881,12 @@ public class ZkController implements Closeable {
     customThreadPool.execute(() -> IOUtils.closeQuietly(overseer));
 
     try {
-      customThreadPool.execute(
-          () -> {
-            Collection<ElectionContext> values = electionContexts.values();
-            synchronized (electionContexts) {
-              values.forEach(IOUtils::closeQuietly);
-            }
-          });
+      customThreadPool.execute(() -> {
+        Collection<ElectionContext> values = electionContexts.values();
+        synchronized (electionContexts) {
+          values.forEach(IOUtils::closeQuietly);
+        }
+      });
 
     } finally {
 
@@ -946,11 +943,10 @@ public class ZkController implements Closeable {
     Set<String> liveNodes = getClusterState().getLiveNodes();
     int numActiveReplicas =
         shard
-            .getReplicas(
-                rep ->
-                    rep.getState() == Replica.State.ACTIVE
-                        && rep.getType().leaderEligible
-                        && liveNodes.contains(rep.getNodeName()))
+            .getReplicas(rep ->
+                rep.getState() == Replica.State.ACTIVE
+                    && rep.getType().leaderEligible
+                    && liveNodes.contains(rep.getNodeName()))
             .size();
 
     // at least the leader still be able to search, we should give up leadership if other replicas
@@ -1280,7 +1276,7 @@ public class ZkController implements Closeable {
     for (String collectionWithLocalReplica : collectionsWithLocalReplica) {
       zkStateReader.registerDocCollectionWatcher(
           collectionWithLocalReplica,
-          (collectionState) -> {
+          collectionState -> {
             if (collectionState == null) return false;
             boolean allStatesCorrect =
                 collectionState.getReplicasOnNode(nodeName).stream()
@@ -1348,13 +1344,11 @@ public class ZkController implements Closeable {
         op -> op.create().withMode(CreateMode.EPHEMERAL).forPath(nodePath, buildLiveNodeData()));
 
     // Create the roles nodes as well
-    roles.forEach(
-        (role, mode) ->
-            ops.add(
-                op ->
-                    op.create()
-                        .withMode(CreateMode.EPHEMERAL)
-                        .forPath(NodeRoles.getZNodeForRoleMode(role, mode) + "/" + nodeName)));
+    roles.forEach((role, mode) ->
+        ops.add(op ->
+            op.create()
+                .withMode(CreateMode.EPHEMERAL)
+                .forPath(NodeRoles.getZNodeForRoleMode(role, mode) + "/" + nodeName)));
 
     zkClient.multi(ops);
   }
@@ -1381,16 +1375,15 @@ public class ZkController implements Closeable {
     }
     cc.nodeRoles
         .getRoles()
-        .forEach(
-            (role, mode) -> {
-              try {
-                zkClient.delete(NodeRoles.getZNodeForRoleMode(role, mode) + "/" + nodeName, -1);
-              } catch (KeeperException e) {
+        .forEach((role, mode) -> {
+          try {
+            zkClient.delete(NodeRoles.getZNodeForRoleMode(role, mode) + "/" + nodeName, -1);
+          } catch (KeeperException e) {
 
-              } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-              }
-            });
+          } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+          }
+        });
   }
 
   /**
@@ -1443,8 +1436,7 @@ public class ZkController implements Closeable {
             collection,
             100,
             TimeUnit.MILLISECONDS,
-            (collectionState) ->
-                getReplicaOrNull(collectionState, shardId, coreZkNodeName) != null);
+            collectionState -> getReplicaOrNull(collectionState, shardId, coreZkNodeName) != null);
       } catch (TimeoutException e) {
         throw new SolrException(
             ErrorCode.SERVER_ERROR,
@@ -2278,7 +2270,7 @@ public class ZkController implements Closeable {
           cd.getCollectionName(),
           10,
           TimeUnit.SECONDS,
-          (c) -> {
+          c -> {
             if (c == null) return false;
             Slice slice = c.getSlice(cloudDesc.getShardId());
             if (slice == null) {
@@ -2328,17 +2320,16 @@ public class ZkController implements Closeable {
     }
     Collection<ElectionContext> values = electionContexts.values();
     synchronized (electionContexts) {
-      values.forEach(
-          context -> {
-            try {
-              context.cancelElection();
-              context.close();
-            } catch (InterruptedException e) {
-              Thread.currentThread().interrupt();
-            } catch (KeeperException e) {
-              log.warn("Error on cancelling elections of {}", context.leaderPath, e);
-            }
-          });
+      values.forEach(context -> {
+        try {
+          context.cancelElection();
+          context.close();
+        } catch (InterruptedException e) {
+          Thread.currentThread().interrupt();
+        } catch (KeeperException e) {
+          log.warn("Error on cancelling elections of {}", context.leaderPath, e);
+        }
+      });
     }
   }
 
@@ -3080,13 +3071,12 @@ public class ZkController implements Closeable {
     Map<String, List<Replica>> replicasPerCollectionOnNode = new HashMap<>();
     clusterState
         .collectionStream()
-        .forEach(
-            col -> {
-              List<Replica> replicas = col.getReplicasOnNode(nodeName);
-              if (!replicas.isEmpty()) {
-                replicasPerCollectionOnNode.put(col.getName(), replicas);
-              }
-            });
+        .forEach(col -> {
+          List<Replica> replicas = col.getReplicasOnNode(nodeName);
+          if (!replicas.isEmpty()) {
+            replicasPerCollectionOnNode.put(col.getName(), replicas);
+          }
+        });
 
     if (distributedClusterStateUpdater.isDistributedStateUpdate()) {
       // Note that with the current implementation, when distributed cluster state updates are
@@ -3117,10 +3107,9 @@ public class ZkController implements Closeable {
         // anything for PRS collections
         overseer
             .getStateUpdateQueue()
-            .offer(
-                m ->
-                    m.put(Overseer.QUEUE_OPERATION, OverseerAction.DOWNNODE.toLower())
-                        .put(ZkStateReader.NODE_NAME_PROP, nodeName));
+            .offer(m ->
+                m.put(Overseer.QUEUE_OPERATION, OverseerAction.DOWNNODE.toLower())
+                    .put(ZkStateReader.NODE_NAME_PROP, nodeName));
       } catch (IllegalStateException e) {
         log.info(
             "Not publishing node as DOWN because a resource required to do so is already closed.");

@@ -437,10 +437,9 @@ public class TimeRoutedAlias extends RoutedAlias {
       // get rejected. A time dimension of a dimensional routed alias has no alias name of its own
       // (see DimensionalRoutedAlias), so its start can't be fixed here.
       if (!aliasName.isEmpty()) {
-        core.runAsync(
-            () ->
-                zkStateReader.aliasesManager.applyModificationAndExportToZk(
-                    a -> fixStart(a, aliasName, dateMathStart, fixedStart)));
+        core.runAsync(() ->
+            zkStateReader.aliasesManager.applyModificationAndExportToZk(
+                a -> fixStart(a, aliasName, dateMathStart, fixedStart)));
       }
     }
     if (docTimestamp.isBefore(startTime)) {

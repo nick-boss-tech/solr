@@ -348,12 +348,11 @@ public class DeleteBackupCmd implements CollApiCmds.CollectionApiCommand {
     }
 
     private <T> void addDeleteNodesToQueue(Map<T, Node> tNodeMap, List<T> deleteQueue) {
-      tNodeMap.forEach(
-          (key, value) -> {
-            if (value.delete) {
-              deleteQueue.add(key);
-            }
-          });
+      tNodeMap.forEach((key, value) -> {
+        if (value.delete) {
+          deleteQueue.add(key);
+        }
+      });
     }
 
     Node getBackupIdNode(String backupPropsName) {

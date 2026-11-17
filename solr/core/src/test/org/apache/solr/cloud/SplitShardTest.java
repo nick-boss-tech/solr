@@ -263,33 +263,32 @@ public class SplitShardTest extends SolrCloudTestCase {
         int threadIndex = i;
         threadLatches.add(new CountDownLatch(10));
         indexThreads[i] =
-            new Thread(
-                () -> {
-                  while (doIndex.get()) {
-                    try {
-                      // Thread.sleep(10);  // cap indexing rate at 100 docs per second, per thread
-                      int currDoc = docsIndexed.incrementAndGet();
-                      String docId = "doc_" + currDoc;
+            new Thread(() -> {
+              while (doIndex.get()) {
+                try {
+                  // Thread.sleep(10);  // cap indexing rate at 100 docs per second, per thread
+                  int currDoc = docsIndexed.incrementAndGet();
+                  String docId = "doc_" + currDoc;
 
-                      // Try all docs in the same update request
-                      UpdateRequest updateReq = new UpdateRequest();
-                      updateReq.add(sdoc("id", docId));
-                      // UpdateResponse ursp = updateReq.commit(client, collectionName);
-                      // uncomment this if you want a commit each time
-                      UpdateResponse ursp = updateReq.process(client, collectionName);
-                      assertEquals(0, ursp.getStatus()); // for now, don't accept any failures
-                      if (ursp.getStatus() == 0) {
-                        // in the future, keep track of a version per document and reuse ids to keep
-                        // index from growing too large
-                        model.put(docId, 1L);
-                      }
-                    } catch (Exception e) {
-                      fail(e.getMessage());
-                      break;
-                    }
-                    threadLatches.get(threadIndex).countDown();
+                  // Try all docs in the same update request
+                  UpdateRequest updateReq = new UpdateRequest();
+                  updateReq.add(sdoc("id", docId));
+                  // UpdateResponse ursp = updateReq.commit(client, collectionName);
+                  // uncomment this if you want a commit each time
+                  UpdateResponse ursp = updateReq.process(client, collectionName);
+                  assertEquals(0, ursp.getStatus()); // for now, don't accept any failures
+                  if (ursp.getStatus() == 0) {
+                    // in the future, keep track of a version per document and reuse ids to keep
+                    // index from growing too large
+                    model.put(docId, 1L);
                   }
-                });
+                } catch (Exception e) {
+                  fail(e.getMessage());
+                  break;
+                }
+                threadLatches.get(threadIndex).countDown();
+              }
+            });
       }
 
       for (Thread thread : indexThreads) {
@@ -392,15 +391,14 @@ public class SplitShardTest extends SolrCloudTestCase {
   private boolean testColl(
       JettySolrRunner jetty, DocCollection collectionState, Collection<String> sh) {
     Collection<String> set = new HashSet<>(sh);
-    collectionState.forEachReplica(
-        (s, replica) -> {
-          if (replica.getNodeName().equals(jetty.getNodeName())
-              && !replica.isLeader()
-              && replica.getState().equals(Replica.State.ACTIVE)
-              && set.contains(replica.shard)) {
-            set.remove(replica.shard);
-          }
-        });
+    collectionState.forEachReplica((s, replica) -> {
+      if (replica.getNodeName().equals(jetty.getNodeName())
+          && !replica.isLeader()
+          && replica.getState().equals(Replica.State.ACTIVE)
+          && set.contains(replica.shard)) {
+        set.remove(replica.shard);
+      }
+    });
 
     return set.isEmpty();
   }

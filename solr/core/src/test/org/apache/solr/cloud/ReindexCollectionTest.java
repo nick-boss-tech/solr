@@ -368,15 +368,14 @@ public class ReindexCollectionTest extends SolrCloudTestCase {
     cloudManager
         .getClusterState()
         .collectionStream()
-        .forEach(
-            coll -> {
-              assertFalse(
-                  coll.getName() + " still exists",
-                  coll.getName().startsWith(ReindexCollectionCmd.TARGET_COL_PREFIX));
-              assertFalse(
-                  coll.getName() + " still exists",
-                  coll.getName().startsWith(ReindexCollectionCmd.CHK_COL_PREFIX));
-            });
+        .forEach(coll -> {
+          assertFalse(
+              coll.getName() + " still exists",
+              coll.getName().startsWith(ReindexCollectionCmd.TARGET_COL_PREFIX));
+          assertFalse(
+              coll.getName() + " still exists",
+              coll.getName().startsWith(ReindexCollectionCmd.CHK_COL_PREFIX));
+        });
     // verify that the source collection is read-write and has no reindexing flags
     waitForState(
         "collection state is incorrect",

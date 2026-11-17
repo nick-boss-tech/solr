@@ -169,7 +169,7 @@ public class ErrorReportingTestListener implements TestOutputListener, TestListe
     if (!descriptor.isComposite()) {
       descriptor = descriptor.getParent();
     }
-    return outputHandlers.computeIfAbsent(TestKey.of(descriptor), (key) -> new OutputHandler());
+    return outputHandlers.computeIfAbsent(TestKey.of(descriptor), key -> new OutputHandler());
   }
 
   public static class TestKey {
@@ -223,14 +223,13 @@ public class ErrorReportingTestListener implements TestOutputListener, TestListe
 
     public OutputHandler() {
       buffer =
-          new SpillWriter(
-              () -> {
-                try {
-                  return Files.createTempFile(spillDir, "spill-", ".tmp");
-                } catch (IOException e) {
-                  throw new UncheckedIOException(e);
-                }
-              });
+          new SpillWriter(() -> {
+            try {
+              return Files.createTempFile(spillDir, "spill-", ".tmp");
+            } catch (IOException e) {
+              throw new UncheckedIOException(e);
+            }
+          });
 
       Writer sink = buffer;
       if (verboseMode) {

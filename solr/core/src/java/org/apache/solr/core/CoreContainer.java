@@ -297,7 +297,7 @@ public class CoreContainer {
               getZkController() != null
                   && getZkController().getOverseer() != null
                   && !getZkController().getOverseer().isClosed(),
-          (r) -> this.runAsync(r));
+          r -> this.runAsync(r));
 
   private volatile ClusterEventProducer clusterEventProducer;
   private DelegatingPlacementPluginFactory placementPluginFactory;
@@ -976,38 +976,37 @@ public class CoreContainer {
           solrCores.markCoreAsLoading(cd);
         }
         if (cd.isLoadOnStartup()) {
-          coreLoadExecutor.execute(
-              () -> {
-                SolrCore core;
-                boolean pendingCoreOpAdded = false;
-                try {
-                  if (zkSys.getZkController() != null) {
-                    zkSys.getZkController().throwErrorIfReplicaReplaced(cd);
-                  }
-                  MDCLoggingContext.setCoreDescriptor(this, cd);
-                  solrCores.waitAddPendingCoreOps(cd.getName());
-                  pendingCoreOpAdded = true;
-                  core = createFromDescriptor(cd, false, false);
-                } catch (Exception e) {
-                  log.error("SolrCore failed to load on startup", e);
-                  MDCLoggingContext.clear();
-                  return;
-                } finally {
-                  if (pendingCoreOpAdded) {
-                    solrCores.removeFromPendingOps(cd.getName());
-                  }
-                  if (asyncSolrCoreLoad) {
-                    solrCores.markCoreAsNotLoading(cd);
-                  }
-                }
-                try {
-                  zkSys.registerInZk(core, true, false);
-                } catch (RuntimeException e) {
-                  log.error("Error registering SolrCore", e);
-                } finally {
-                  MDCLoggingContext.clear();
-                }
-              });
+          coreLoadExecutor.execute(() -> {
+            SolrCore core;
+            boolean pendingCoreOpAdded = false;
+            try {
+              if (zkSys.getZkController() != null) {
+                zkSys.getZkController().throwErrorIfReplicaReplaced(cd);
+              }
+              MDCLoggingContext.setCoreDescriptor(this, cd);
+              solrCores.waitAddPendingCoreOps(cd.getName());
+              pendingCoreOpAdded = true;
+              core = createFromDescriptor(cd, false, false);
+            } catch (Exception e) {
+              log.error("SolrCore failed to load on startup", e);
+              MDCLoggingContext.clear();
+              return;
+            } finally {
+              if (pendingCoreOpAdded) {
+                solrCores.removeFromPendingOps(cd.getName());
+              }
+              if (asyncSolrCoreLoad) {
+                solrCores.markCoreAsNotLoading(cd);
+              }
+            }
+            try {
+              zkSys.registerInZk(core, true, false);
+            } catch (RuntimeException e) {
+              log.error("Error registering SolrCore", e);
+            } finally {
+              MDCLoggingContext.clear();
+            }
+          });
         }
       }
 
@@ -1036,13 +1035,12 @@ public class CoreContainer {
       // register the handlers that are also ClusterSingleton
       containerHandlers
           .keySet()
-          .forEach(
-              handlerName -> {
-                SolrRequestHandler handler = containerHandlers.get(handlerName);
-                if (handler instanceof ClusterSingleton singleton) {
-                  clusterSingletons.getSingletons().put(singleton.getName(), singleton);
-                }
-              });
+          .forEach(handlerName -> {
+            SolrRequestHandler handler = containerHandlers.get(handlerName);
+            if (handler instanceof ClusterSingleton singleton) {
+              clusterSingletons.getSingletons().put(singleton.getName(), singleton);
+            }
+          });
     }
 
     final CoreContainer thisCCRef = this;
@@ -1396,14 +1394,13 @@ public class CoreContainer {
   }
 
   public void cancelCoreRecoveries() {
-    forEachLoadedCore(
-        core -> {
-          try {
-            core.getSolrCoreState().cancelRecovery();
-          } catch (Exception e) {
-            log.error("Error canceling recovery for core", e);
-          }
-        });
+    forEachLoadedCore(core -> {
+      try {
+        core.getSolrCoreState().cancelRecovery();
+      } catch (Exception e) {
+        log.error("Error canceling recovery for core", e);
+      }
+    });
   }
 
   /**
@@ -1419,26 +1416,25 @@ public class CoreContainer {
    */
   private void pauseUpdatesAndAwaitInflightRequests() {
     solrCores.getLoadedCoreNames().parallelStream()
-        .forEach(
-            coreName -> {
-              // see cancelCoreRecoveries: reserve without loading, we are shutting down
-              try (SolrCore solrCore = solrCores.getCoreFromAnyList(coreName, true)) {
-                if (solrCore == null) return; // unloaded since getLoadedCoreNames
-                SolrCoreState solrCoreState = solrCore.getSolrCoreState();
-                try {
-                  solrCoreState.pauseUpdatesAndAwaitInflightRequests();
-                } catch (TimeoutException e) {
-                  log.warn(
-                      "Timed out waiting for in-flight update requests to complete for core: {}",
-                      solrCore.getName());
-                } catch (InterruptedException e) {
-                  log.warn(
-                      "Interrupted while waiting for in-flight update requests to complete for core: {}",
-                      solrCore.getName());
-                  Thread.currentThread().interrupt();
-                }
-              }
-            });
+        .forEach(coreName -> {
+          // see cancelCoreRecoveries: reserve without loading, we are shutting down
+          try (SolrCore solrCore = solrCores.getCoreFromAnyList(coreName, true)) {
+            if (solrCore == null) return; // unloaded since getLoadedCoreNames
+            SolrCoreState solrCoreState = solrCore.getSolrCoreState();
+            try {
+              solrCoreState.pauseUpdatesAndAwaitInflightRequests();
+            } catch (TimeoutException e) {
+              log.warn(
+                  "Timed out waiting for in-flight update requests to complete for core: {}",
+                  solrCore.getName());
+            } catch (InterruptedException e) {
+              log.warn(
+                  "Interrupted while waiting for in-flight update requests to complete for core: {}",
+                  solrCore.getName());
+              Thread.currentThread().interrupt();
+            }
+          }
+        });
   }
 
   public CoresLocator getCoresLocator() {

@@ -153,13 +153,12 @@ public class DeleteCollectionCmd implements CollApiCmds.CollectionApiCommand {
       if (!aliasReferences.isEmpty()) {
         ccc.getZkStateReader()
             .aliasesManager
-            .applyModificationAndExportToZk(
-                a -> {
-                  for (String alias : aliasReferences) {
-                    a = a.cloneWithCollectionAlias(alias, null);
-                  }
-                  return a;
-                });
+            .applyModificationAndExportToZk(a -> {
+              for (String alias : aliasReferences) {
+                a = a.cloneWithCollectionAlias(alias, null);
+              }
+              return a;
+            });
       }
 
       // delete related config set iff: it is auto generated AND not related to any other collection

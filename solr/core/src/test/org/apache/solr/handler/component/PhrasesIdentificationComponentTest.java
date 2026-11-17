@@ -293,10 +293,9 @@ public class PhrasesIdentificationComponentTest extends SolrTestCaseJ4 {
             + maxIndexedPositionLength
             + ")",
         phrases.stream()
-            .filter(
-                p ->
-                    (Math.max(1, 1 + last.getPositionLength() - maxIndexedPositionLength)
-                        != last.getLargestIndexedSubPhrases().size())));
+            .filter(p ->
+                (Math.max(1, 1 + last.getPositionLength() - maxIndexedPositionLength)
+                    != last.getLargestIndexedSubPhrases().size())));
     // NOTE: indexed super phrases can be of various lengths, and differing quantities near
     // begining/end of input so don't worry about an exact count, just check their properties
     // (below)
@@ -316,10 +315,9 @@ public class PhrasesIdentificationComponentTest extends SolrTestCaseJ4 {
               + maxIndexedPositionLength
               + ")",
           phrase.getLargestIndexedSubPhrases().stream()
-              .filter(
-                  inner ->
-                      (Math.min(phrase.getPositionLength(), maxIndexedPositionLength)
-                          < inner.getPositionLength())));
+              .filter(inner ->
+                  (Math.min(phrase.getPositionLength(), maxIndexedPositionLength)
+                      < inner.getPositionLength())));
 
       assertEmptyStream(
           debug
@@ -327,10 +325,9 @@ public class PhrasesIdentificationComponentTest extends SolrTestCaseJ4 {
               + maxIndexedPositionLength
               + " < super.len",
           phrase.getIndexedSuperPhrases().stream()
-              .filter(
-                  outer ->
-                      (outer.getPositionLength() <= phrase.getPositionLength()
-                          || maxIndexedPositionLength < outer.getPositionLength())));
+              .filter(outer ->
+                  (outer.getPositionLength() <= phrase.getPositionLength()
+                      || maxIndexedPositionLength < outer.getPositionLength())));
     }
   }
 

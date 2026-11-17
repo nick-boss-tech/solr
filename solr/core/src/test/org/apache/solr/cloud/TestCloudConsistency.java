@@ -188,7 +188,7 @@ public class TestCloudConsistency extends SolrCloudTestCase {
                     collection,
                     10,
                     TimeUnit.SECONDS,
-                    (state) -> {
+                    state -> {
                       Replica newLeader = state.getSlice("shard1").getLeader();
                       if (newLeader != null
                           && !newLeader.getName().equals(leader.getName())
@@ -254,7 +254,7 @@ public class TestCloudConsistency extends SolrCloudTestCase {
                   collection,
                   10,
                   TimeUnit.SECONDS,
-                  (state) -> {
+                  state -> {
                     Replica newLeader = state.getSlice("shard1").getLeader();
                     if (newLeader != null
                         && !newLeader.getName().equals(leader.getName())

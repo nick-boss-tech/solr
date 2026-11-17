@@ -1203,15 +1203,14 @@ public class CloudHttp2SolrClientTest extends SolrCloudTestCase {
 
     final List<String> preferredTypes = Arrays.asList(preferReplicaTypes.split("\\|"));
     StringBuilder rule = new StringBuilder();
-    preferredTypes.forEach(
-        type -> {
-          if (rule.length() != 0) {
-            rule.append(',');
-          }
-          rule.append(ShardParams.SHARDS_PREFERENCE_REPLICA_TYPE);
-          rule.append(':');
-          rule.append(type);
-        });
+    preferredTypes.forEach(type -> {
+      if (rule.length() != 0) {
+        rule.append(',');
+      }
+      rule.append(ShardParams.SHARDS_PREFERENCE_REPLICA_TYPE);
+      rule.append(':');
+      rule.append(type);
+    });
 
     qParams.add(ShardParams.SHARDS_PREFERENCE, rule.toString());
     qParams.add(ShardParams.SHARDS_INFO, "true");

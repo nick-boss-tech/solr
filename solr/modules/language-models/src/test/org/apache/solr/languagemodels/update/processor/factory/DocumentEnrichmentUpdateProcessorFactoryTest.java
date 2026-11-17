@@ -352,17 +352,16 @@ public class DocumentEnrichmentUpdateProcessorFactoryTest extends TestLanguageMo
             "output_nest_path", "NestPathField",
             "vector", "DenseVectorField");
     var schema = collection1.getLatestSchema();
-    cases.forEach(
-        (fieldName, expectedTypeName) -> {
-          var schemaField = schema.getField(fieldName);
-          SolrException e =
-              assertThrows(
-                  SolrException.class,
-                  () -> DocumentEnrichmentUpdateProcessorFactory.getJsonSchema(schemaField));
-          assertEquals(
-              "field type is not supported by Document Enrichment: " + expectedTypeName,
-              e.getMessage());
-        });
+    cases.forEach((fieldName, expectedTypeName) -> {
+      var schemaField = schema.getField(fieldName);
+      SolrException e =
+          assertThrows(
+              SolrException.class,
+              () -> DocumentEnrichmentUpdateProcessorFactory.getJsonSchema(schemaField));
+      assertEquals(
+          "field type is not supported by Document Enrichment: " + expectedTypeName,
+          e.getMessage());
+    });
   }
 
   @Test

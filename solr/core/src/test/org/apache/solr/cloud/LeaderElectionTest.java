@@ -161,13 +161,12 @@ public class LeaderElectionTest extends SolrTestCaseJ4 {
       this.es = es;
       if (this.es == null) {
         this.es =
-            new ElectorSetup(
-                () -> {
-                  try {
-                    setupOnConnect();
-                  } catch (Throwable t) {
-                  }
-                });
+            new ElectorSetup(() -> {
+              try {
+                setupOnConnect();
+              } catch (Throwable t) {
+              }
+            });
       }
     }
 
@@ -529,33 +528,32 @@ public class LeaderElectionTest extends SolrTestCaseJ4 {
         };
 
     Thread connLossThread =
-        new Thread(
-            () -> {
-              while (!stopStress) {
-                try {
-                  Thread.sleep(50);
-                  int j;
-                  j = random().nextInt(threads.size());
-                  try {
-                    if (random().nextBoolean()) {
-                      KillSession.kill(
-                          threads
-                              .get(j)
-                              .es
-                              .zkClient
-                              .getCuratorFramework()
-                              .getZookeeperClient()
-                              .getZooKeeper());
-                    }
-                  } catch (Exception e) {
-                    log.error("error expiring session", e);
-                  }
-                  Thread.sleep(500);
-                } catch (Exception e) {
-                  log.error("error expiring session", e);
+        new Thread(() -> {
+          while (!stopStress) {
+            try {
+              Thread.sleep(50);
+              int j;
+              j = random().nextInt(threads.size());
+              try {
+                if (random().nextBoolean()) {
+                  KillSession.kill(
+                      threads
+                          .get(j)
+                          .es
+                          .zkClient
+                          .getCuratorFramework()
+                          .getZookeeperClient()
+                          .getZooKeeper());
                 }
+              } catch (Exception e) {
+                log.error("error expiring session", e);
               }
-            });
+              Thread.sleep(500);
+            } catch (Exception e) {
+              log.error("error expiring session", e);
+            }
+          }
+        });
 
     try {
       scheduleThread.start();

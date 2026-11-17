@@ -331,12 +331,11 @@ public class FeaturesSelectionStream extends TupleStream implements Expressible 
 
           numDocs += (Integer) resp.get("numDocs");
 
-          shardTopTerms.forEach(
-              (term, score) -> {
-                int docFreq = shardDocFreqs.get(term);
-                termScores.merge(term, score, Double::sum);
-                docFreqs.merge(term, (long) docFreq, Long::sum);
-              });
+          shardTopTerms.forEach((term, score) -> {
+            int docFreq = shardDocFreqs.get(term);
+            termScores.merge(term, score, Double::sum);
+            docFreqs.merge(term, (long) docFreq, Long::sum);
+          });
         }
         final long numDocsF = numDocs; // make final
 
@@ -348,20 +347,19 @@ public class FeaturesSelectionStream extends TupleStream implements Expressible 
                     Comparator.<Map.Entry<String, Double>>comparingDouble(Entry::getValue)
                         .reversed())
                 .limit(numTerms)
-                .map(
-                    (termScore) -> {
-                      int index = idGen.getAndIncrement();
-                      Tuple tuple = new Tuple();
-                      tuple.put(ID, featureSet + "_" + index);
-                      tuple.put("index_i", index);
-                      tuple.put("term_s", termScore.getKey());
-                      tuple.put("score_f", termScore.getValue());
-                      tuple.put("featureSet_s", featureSet);
-                      long docFreq = docFreqs.get(termScore.getKey());
-                      double d = Math.log(((double) numDocsF / (double) (docFreq + 1)));
-                      tuple.put("idf_d", d);
-                      return tuple;
-                    })
+                .map(termScore -> {
+                  int index = idGen.getAndIncrement();
+                  Tuple tuple = new Tuple();
+                  tuple.put(ID, featureSet + "_" + index);
+                  tuple.put("index_i", index);
+                  tuple.put("term_s", termScore.getKey());
+                  tuple.put("score_f", termScore.getValue());
+                  tuple.put("featureSet_s", featureSet);
+                  long docFreq = docFreqs.get(termScore.getKey());
+                  double d = Math.log(((double) numDocsF / (double) (docFreq + 1)));
+                  tuple.put("idf_d", d);
+                  return tuple;
+                })
                 .iterator();
       }
       if (tupleIterator.hasNext()) {

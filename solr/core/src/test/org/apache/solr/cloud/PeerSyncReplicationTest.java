@@ -180,10 +180,8 @@ public class PeerSyncReplicationTest extends AbstractFullDistribZkTestBase {
         cc.getAllCoreNames().stream()
             .filter(n -> n.contains(DEFAULT_TEST_COLLECTION_NAME))
             .findFirst()
-            .orElseThrow(
-                () ->
-                    new IllegalStateException(
-                        "Couldn't find core for " + nodePeerSynced.coreNodeName));
+            .orElseThrow(() ->
+                new IllegalStateException("Couldn't find core for " + nodePeerSynced.coreNodeName));
     try (SolrCore core = cc.getCore(coreName)) {
       assertTrue(
           SolrMetricTestUtils.getHistogramDatapoint(

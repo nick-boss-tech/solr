@@ -138,15 +138,14 @@ public class RestoreCmd implements CollApiCmds.CollectionApiCommand {
         replica =
             slice.getReplicas().stream()
                 .findFirst()
-                .orElseThrow(
-                    () ->
-                        new SolrException(
-                            ErrorCode.INVALID_STATE,
-                            String.format(
-                                Locale.ROOT,
-                                "No replicas for shard %s in collection %s. Cannot restore to a shard with no replicas",
-                                slice.getName(),
-                                slice.getCollection())));
+                .orElseThrow(() ->
+                    new SolrException(
+                        ErrorCode.INVALID_STATE,
+                        String.format(
+                            Locale.ROOT,
+                            "No replicas for shard %s in collection %s. Cannot restore to a shard with no replicas",
+                            slice.getName(),
+                            slice.getCollection())));
       }
       shardRequestTracker.sendShardRequest(replica, params, shardHandler);
     }

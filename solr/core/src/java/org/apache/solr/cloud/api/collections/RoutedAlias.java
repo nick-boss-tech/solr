@@ -189,10 +189,9 @@ public abstract class RoutedAlias {
   private static Map<String, String> selectForIndex(int i, Map<String, String> original) {
     return original.entrySet().stream()
         .filter(e -> e.getKey().matches("(((?!^router\\.).)*$|(^router\\." + i + ".*$))"))
-        .map(
-            e ->
-                new SimpleEntry<>(
-                    e.getKey().replaceAll("(.*\\.)" + i + "\\.(.*)", "$1$2"), e.getValue()))
+        .map(e ->
+            new SimpleEntry<>(
+                e.getKey().replaceAll("(.*\\.)" + i + "\\.(.*)", "$1$2"), e.getValue()))
         .collect(Collectors.toMap(SimpleEntry::getKey, SimpleEntry::getValue));
   }
 

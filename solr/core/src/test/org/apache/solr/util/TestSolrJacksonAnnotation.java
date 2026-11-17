@@ -74,7 +74,7 @@ public class TestSolrJacksonAnnotation extends SolrTestCase {
   }
 
   public static class TestObj {
-    @JsonProperty() public String field;
+    @JsonProperty public String field;
 
     @JsonProperty(value = "friendlyName", required = true)
     public String f2;

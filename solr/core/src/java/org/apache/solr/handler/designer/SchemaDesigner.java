@@ -378,11 +378,10 @@ public class SchemaDesigner extends JerseyResource
       // no doc ID from client ... find the first doc with a non-empty string value for fieldName
       Optional<SolrInputDocument> doc =
           docs.stream()
-              .filter(
-                  d ->
-                      d.getField(fieldName) != null
-                          && d.getField(fieldName).getFirstValue() != null
-                          && !d.getField(fieldName).getFirstValue().toString().isEmpty())
+              .filter(d ->
+                  d.getField(fieldName) != null
+                      && d.getField(fieldName).getFirstValue() != null
+                      && !d.getField(fieldName).getFirstValue().toString().isEmpty())
               .findFirst();
       if (doc.isPresent()) {
         docId = doc.get().getFieldValue(idField).toString();
@@ -899,21 +898,20 @@ public class SchemaDesigner extends JerseyResource
     QueryResponse qr = cloudClient().query(mutableId, solrQueryRequest.getParams());
     Map<String, Object> responseMap = new HashMap<>();
     qr.getResponse()
-        .forEach(
-            (name, val) -> {
-              if ("response".equals(name) && val instanceof SolrDocumentList) {
-                // SolrDocumentList extends ArrayList, so Jackson would serialize it as a plain
-                // array, losing numFound/start metadata that the UI expects at data.response.docs
-                SolrDocumentList docList = (SolrDocumentList) val;
-                Map<String, Object> responseObj = new HashMap<>();
-                responseObj.put("numFound", docList.getNumFound());
-                responseObj.put("start", docList.getStart());
-                responseObj.put("docs", new ArrayList<>(docList));
-                responseMap.put(name, responseObj);
-              } else {
-                responseMap.put(name, val);
-              }
-            });
+        .forEach((name, val) -> {
+          if ("response".equals(name) && val instanceof SolrDocumentList) {
+            // SolrDocumentList extends ArrayList, so Jackson would serialize it as a plain
+            // array, losing numFound/start metadata that the UI expects at data.response.docs
+            SolrDocumentList docList = (SolrDocumentList) val;
+            Map<String, Object> responseObj = new HashMap<>();
+            responseObj.put("numFound", docList.getNumFound());
+            responseObj.put("start", docList.getStart());
+            responseObj.put("docs", new ArrayList<>(docList));
+            responseMap.put(name, responseObj);
+          } else {
+            responseMap.put(name, val);
+          }
+        });
     return buildFlexibleResponse(responseMap);
   }
 

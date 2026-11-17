@@ -244,19 +244,17 @@ public class ManagedSchemaDiff {
     List<SimpleOrderedMap<Object>> newList =
         new ArrayList<>(); // ordered map changed in list2 compared to list1
 
-    list1.forEach(
-        som -> {
-          if (!list2.contains(som)) {
-            oldList.add(som);
-          }
-        });
+    list1.forEach(som -> {
+      if (!list2.contains(som)) {
+        oldList.add(som);
+      }
+    });
 
-    list2.forEach(
-        som -> {
-          if (!list1.contains(som)) {
-            newList.add(som);
-          }
-        });
+    list2.forEach(som -> {
+      if (!list1.contains(som)) {
+        newList.add(som);
+      }
+    });
 
     Map<String, Object> mapDiff = new HashMap<>();
     if (!oldList.isEmpty()) {
@@ -285,10 +283,8 @@ public class ManagedSchemaDiff {
   protected static Map<String, SimpleOrderedMap<Object>> mapDynamicFieldToPropValues(
       IndexSchema.DynamicField[] dynamicFields) {
     return Stream.of(dynamicFields)
-        .map(
-            df ->
-                Map.entry(
-                    df.getPrototype().getName(), df.getPrototype().getNamedPropertyValues(true)))
+        .map(df ->
+            Map.entry(df.getPrototype().getName(), df.getPrototype().getNamedPropertyValues(true)))
         .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
   }
 

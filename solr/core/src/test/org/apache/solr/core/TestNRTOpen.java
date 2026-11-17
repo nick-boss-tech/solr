@@ -107,27 +107,25 @@ public class TestNRTOpen extends SolrTestCaseJ4 {
 
   static void assertNRT(int maxDoc) throws IOException {
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              DirectoryReader ir = searcher.getRawReader();
-              assertEquals(maxDoc, ir.maxDoc());
-              assertTrue("expected NRT reader, got: " + ir, ir.toString().contains(":nrt"));
-              return null;
-            });
+        .withSearcher(searcher -> {
+          DirectoryReader ir = searcher.getRawReader();
+          assertEquals(maxDoc, ir.maxDoc());
+          assertTrue("expected NRT reader, got: " + ir, ir.toString().contains(":nrt"));
+          return null;
+        });
   }
 
   private Set<Object> getCoreCacheKeys() {
     try {
       return h.getCore()
-          .withSearcher(
-              searcher -> {
-                Set<Object> set = Collections.newSetFromMap(new IdentityHashMap<>());
-                DirectoryReader ir = searcher.getRawReader();
-                for (LeafReaderContext context : ir.leaves()) {
-                  set.add(context.reader().getCoreCacheHelper().getKey());
-                }
-                return set;
-              });
+          .withSearcher(searcher -> {
+            Set<Object> set = Collections.newSetFromMap(new IdentityHashMap<>());
+            DirectoryReader ir = searcher.getRawReader();
+            for (LeafReaderContext context : ir.leaves()) {
+              set.add(context.reader().getCoreCacheHelper().getKey());
+            }
+            return set;
+          });
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

@@ -489,16 +489,15 @@ public class TestSnapshotCoreBackup extends SolrTestCaseJ4 {
     // sanity check what the searcher/reader of this empty index report about current commit
     final IndexCommit empty =
         h.getCore()
-            .withSearcher(
-                s -> {
-                  // sanity check we are empty...
-                  assertEquals(0L, (long) s.getIndexReader().numDocs());
+            .withSearcher(s -> {
+              // sanity check we are empty...
+              assertEquals(0L, (long) s.getIndexReader().numDocs());
 
-                  // check this is the initial commit...
-                  final IndexCommit commit = s.getIndexReader().getIndexCommit();
-                  assertEquals(EXPECTED_GEN_OF_EMPTY_INDEX, commit.getGeneration());
-                  return commit;
-                });
+              // check this is the initial commit...
+              final IndexCommit commit = s.getIndexReader().getIndexCommit();
+              assertEquals(EXPECTED_GEN_OF_EMPTY_INDEX, commit.getGeneration());
+              return commit;
+            });
 
     // now let's add & soft commit 1 doc...
     assertU(adoc("id", "42"));
@@ -510,19 +509,18 @@ public class TestSnapshotCoreBackup extends SolrTestCaseJ4 {
     // sanity check what the searcher/reader of this empty index report about current commit
     IndexCommit oneDoc =
         h.getCore()
-            .withSearcher(
-                s -> {
-                  // sanity check this really is the searcher/reader that has the new doc...
-                  assertEquals(1L, (long) s.getIndexReader().numDocs());
+            .withSearcher(s -> {
+              // sanity check this really is the searcher/reader that has the new doc...
+              assertEquals(1L, (long) s.getIndexReader().numDocs());
 
-                  final IndexCommit commit = s.getIndexReader().getIndexCommit();
-                  // WTF: how/why does this reader still have the same commit generation as before?
-                  assertEquals(
-                      "WTF: This Reader (claims) the same generation as our previous pre-softCommit (empty) reader",
-                      EXPECTED_GEN_OF_EMPTY_INDEX,
-                      commit.getGeneration());
-                  return commit;
-                });
+              final IndexCommit commit = s.getIndexReader().getIndexCommit();
+              // WTF: how/why does this reader still have the same commit generation as before?
+              assertEquals(
+                  "WTF: This Reader (claims) the same generation as our previous pre-softCommit (empty) reader",
+                  EXPECTED_GEN_OF_EMPTY_INDEX,
+                  commit.getGeneration());
+              return commit;
+            });
 
     assertEquals(
         "WTF: Our two IndexCommits, which we know have different docs, claim to be equals",

@@ -339,42 +339,39 @@ public class OverseerCollectionConfigSetProcessorTest extends SolrTestCaseJ4 {
       throws Exception {
     when(shardHandlerFactoryMock.getShardHandler()).thenReturn(shardHandlerMock);
     when(workQueueMock.peekTopN(anyInt(), any(), anyLong()))
-        .thenAnswer(
-            invocation -> {
-              int n = invocation.getArgument(0);
+        .thenAnswer(invocation -> {
+          int n = invocation.getArgument(0);
 
-              int retries = 0;
-              while (retries < 2) {
-                List<Object> results = queue.stream().limit(n).collect(Collectors.toList());
-                if (!results.isEmpty()) {
-                  return results;
-                }
-                Thread.sleep(1000);
-                retries++;
-              }
-              return List.of();
-            });
+          int retries = 0;
+          while (retries < 2) {
+            List<Object> results = queue.stream().limit(n).collect(Collectors.toList());
+            if (!results.isEmpty()) {
+              return results;
+            }
+            Thread.sleep(1000);
+            retries++;
+          }
+          return List.of();
+        });
 
     when(workQueueMock.getTailId())
-        .thenAnswer(
-            invocation -> {
-              QueueEvent result = null;
-              Iterator<QueueEvent> iter = queue.iterator();
-              while (iter.hasNext()) {
-                result = iter.next();
-              }
-              return result == null ? null : result.getId();
-            });
+        .thenAnswer(invocation -> {
+          QueueEvent result = null;
+          Iterator<QueueEvent> iter = queue.iterator();
+          while (iter.hasNext()) {
+            result = iter.next();
+          }
+          return result == null ? null : result.getId();
+        });
 
     when(workQueueMock.peek(true))
-        .thenAnswer(
-            invocation -> {
-              Object result;
-              while ((result = queue.peek()) == null) {
-                Thread.sleep(1000);
-              }
-              return result;
-            });
+        .thenAnswer(invocation -> {
+          Object result;
+          while ((result = queue.peek()) == null) {
+            Thread.sleep(1000);
+          }
+          return result;
+        });
 
     doAnswer(
             invocation -> {
@@ -385,11 +382,10 @@ public class OverseerCollectionConfigSetProcessorTest extends SolrTestCaseJ4 {
         .remove(any(QueueEvent.class), anyBoolean());
 
     when(workQueueMock.poll())
-        .thenAnswer(
-            invocation -> {
-              queue.poll();
-              return null;
-            });
+        .thenAnswer(invocation -> {
+          queue.poll();
+          return null;
+        });
 
     when(zkStateReaderMock.getZkClient()).thenReturn(solrZkClientMock);
     when(zkStateReaderMock.getClusterState()).thenReturn(clusterStateMock);
@@ -405,35 +401,34 @@ public class OverseerCollectionConfigSetProcessorTest extends SolrTestCaseJ4 {
 
     when(clusterStateMock.getCollection(anyString())).thenCallRealMethod();
     when(clusterStateMock.getCollectionOrNull(anyString()))
-        .thenAnswer(
-            invocation -> {
-              String key = invocation.getArgument(0);
-              if (!collectionsSet.containsKey(key)) return null;
-              DocCollection docCollection = collectionsSet.get(key).get();
-              Map<String, Map<String, Replica>> slices = new HashMap<>();
-              for (ZkNodeProps replica : replicas) {
-                if (!key.equals(replica.getStr(ZkStateReader.COLLECTION_PROP))) continue;
+        .thenAnswer(invocation -> {
+          String key = invocation.getArgument(0);
+          if (!collectionsSet.containsKey(key)) return null;
+          DocCollection docCollection = collectionsSet.get(key).get();
+          Map<String, Map<String, Replica>> slices = new HashMap<>();
+          for (ZkNodeProps replica : replicas) {
+            if (!key.equals(replica.getStr(ZkStateReader.COLLECTION_PROP))) continue;
 
-                String slice = replica.getStr(ZkStateReader.SHARD_ID_PROP);
-                if (!slices.containsKey(slice)) slices.put(slice, new HashMap<>());
-                String replicaName = replica.getStr(ZkStateReader.CORE_NAME_PROP);
-                slices
-                    .get(slice)
-                    .put(
-                        replicaName,
-                        new Replica(
-                            replicaName, replica.getProperties(), docCollection.getName(), slice));
-              }
+            String slice = replica.getStr(ZkStateReader.SHARD_ID_PROP);
+            if (!slices.containsKey(slice)) slices.put(slice, new HashMap<>());
+            String replicaName = replica.getStr(ZkStateReader.CORE_NAME_PROP);
+            slices
+                .get(slice)
+                .put(
+                    replicaName,
+                    new Replica(
+                        replicaName, replica.getProperties(), docCollection.getName(), slice));
+          }
 
-              Map<String, Slice> slicesMap = new HashMap<>();
-              for (Map.Entry<String, Map<String, Replica>> entry : slices.entrySet()) {
-                slicesMap.put(
-                    entry.getKey(),
-                    new Slice(entry.getKey(), entry.getValue(), null, docCollection.getName()));
-              }
+          Map<String, Slice> slicesMap = new HashMap<>();
+          for (Map.Entry<String, Map<String, Replica>> entry : slices.entrySet()) {
+            slicesMap.put(
+                entry.getKey(),
+                new Slice(entry.getKey(), entry.getValue(), null, docCollection.getName()));
+          }
 
-              return docCollection.copyWithSlices(slicesMap);
-            });
+          return docCollection.copyWithSlices(slicesMap);
+        });
     final Set<String> liveNodes = new HashSet<>();
     for (int i = 0; i < liveNodesCount; i++) {
       final String address = "localhost:" + (8963 + i) + "_solr";
@@ -446,50 +441,45 @@ public class OverseerCollectionConfigSetProcessorTest extends SolrTestCaseJ4 {
     when(solrZkClientMock.getZkClientTimeout()).thenReturn(30000);
 
     when(clusterStateMock.hasCollection(anyString()))
-        .thenAnswer(
-            invocation -> {
-              String key = invocation.getArgument(0);
-              return collectionsSet.containsKey(key);
-            });
+        .thenAnswer(invocation -> {
+          String key = invocation.getArgument(0);
+          return collectionsSet.containsKey(key);
+        });
 
     when(clusterStateMock.getLiveNodes()).thenReturn(liveNodes);
 
     when(solrZkClientMock.setData(anyString(), any(), anyInt()))
-        .then(
-            invocation -> {
-              System.out.println(
-                  "set data: " + invocation.getArgument(0) + " " + invocation.getArgument(1));
-              if (invocation.getArgument(1) == null) {
-                zkClientData.put(invocation.getArgument(0), new byte[0]);
-              } else {
-                zkClientData.put(invocation.getArgument(0), invocation.getArgument(1));
-              }
-              return null;
-            });
+        .then(invocation -> {
+          System.out.println(
+              "set data: " + invocation.getArgument(0) + " " + invocation.getArgument(1));
+          if (invocation.getArgument(1) == null) {
+            zkClientData.put(invocation.getArgument(0), new byte[0]);
+          } else {
+            zkClientData.put(invocation.getArgument(0), invocation.getArgument(1));
+          }
+          return null;
+        });
 
     when(solrZkClientMock.getData(anyString(), any(), any()))
-        .thenAnswer(
-            invocation -> {
-              byte[] data = zkClientData.get(invocation.getArgument(0));
-              if (data == null || data.length == 0) {
-                return null;
-              }
-              return data;
-            });
+        .thenAnswer(invocation -> {
+          byte[] data = zkClientData.get(invocation.getArgument(0));
+          if (data == null || data.length == 0) {
+            return null;
+          }
+          return data;
+        });
 
     when(solrZkClientMock.create(any(), any(), any()))
-        .thenAnswer(
-            invocation -> {
-              zkClientData.put(invocation.getArgument(0), invocation.getArgument(1));
-              return invocation.getArgument(0);
-            });
+        .thenAnswer(invocation -> {
+          zkClientData.put(invocation.getArgument(0), invocation.getArgument(1));
+          return invocation.getArgument(0);
+        });
 
     when(solrZkClientMock.exists(any(String.class)))
-        .thenAnswer(
-            invocation -> {
-              String key = invocation.getArgument(0);
-              return zkClientData.containsKey(key);
-            });
+        .thenAnswer(invocation -> {
+          String key = invocation.getArgument(0);
+          return zkClientData.containsKey(key);
+        });
 
     when(overseerMock.getZkController()).thenReturn(zkControllerMock);
     when(overseerMock.getSolrCloudManager()).thenReturn(cloudDataProviderMock);
@@ -530,33 +520,30 @@ public class OverseerCollectionConfigSetProcessorTest extends SolrTestCaseJ4 {
         .setData(anyString(), any(), anyInt());
 
     when(distribStateManagerMock.getData(anyString(), any()))
-        .thenAnswer(
-            invocation -> {
-              byte[] data = zkClientData.get(invocation.getArgument(0));
-              if (data == null || data.length == 0) {
-                return null;
-              }
-              return new VersionedData(-1, data, CreateMode.PERSISTENT, "");
-            });
+        .thenAnswer(invocation -> {
+          byte[] data = zkClientData.get(invocation.getArgument(0));
+          if (data == null || data.length == 0) {
+            return null;
+          }
+          return new VersionedData(-1, data, CreateMode.PERSISTENT, "");
+        });
 
     when(distribStateManagerMock.createData(any(), any(), any()))
-        .thenAnswer(
-            invocation -> {
-              System.out.println(
-                  "set data: " + invocation.getArgument(0) + " " + invocation.getArgument(1));
-              if (invocation.getArgument(1) == null) {
-                zkClientData.put(invocation.getArgument(0), new byte[0]);
-              } else {
-                zkClientData.put(invocation.getArgument(0), invocation.getArgument(1));
-              }
-              return null;
-            });
+        .thenAnswer(invocation -> {
+          System.out.println(
+              "set data: " + invocation.getArgument(0) + " " + invocation.getArgument(1));
+          if (invocation.getArgument(1) == null) {
+            zkClientData.put(invocation.getArgument(0), new byte[0]);
+          } else {
+            zkClientData.put(invocation.getArgument(0), invocation.getArgument(1));
+          }
+          return null;
+        });
 
     when(distribStateManagerMock.hasData(anyString()))
-        .then(
-            invocation ->
-                zkClientData.containsKey(invocation.getArgument(0))
-                    && zkClientData.get(invocation.getArgument(0)).length > 0);
+        .then(invocation ->
+            zkClientData.containsKey(invocation.getArgument(0))
+                && zkClientData.get(invocation.getArgument(0)).length > 0);
 
     Mockito.doAnswer(
             new Answer<Void>() {
@@ -572,15 +559,14 @@ public class OverseerCollectionConfigSetProcessorTest extends SolrTestCaseJ4 {
         .makePath(anyString());
 
     when(solrZkClientMock.exists(any(String.class), isNull()))
-        .thenAnswer(
-            invocation -> {
-              String key = invocation.getArgument(0);
-              if (zkClientData.containsKey(key)) {
-                return new Stat();
-              } else {
-                return null;
-              }
-            });
+        .thenAnswer(invocation -> {
+          String key = invocation.getArgument(0);
+          if (zkClientData.containsKey(key)) {
+            return new Stat();
+          } else {
+            return null;
+          }
+        });
 
     when(cloudManagerMock.getClusterStateProvider()).thenReturn(clusterStateProviderMock);
     when(cloudManagerMock.getTimeSource()).thenReturn(new TimeSource.NanoTimeSource());
@@ -665,33 +651,30 @@ public class OverseerCollectionConfigSetProcessorTest extends SolrTestCaseJ4 {
         .setData(anyString(), any(), anyInt());
 
     when(distribStateManagerMock.getData(anyString(), any()))
-        .thenAnswer(
-            invocation -> {
-              byte[] data = zkClientData.get(invocation.getArgument(0));
-              if (data == null || data.length == 0) {
-                return null;
-              }
-              return new VersionedData(-1, data, CreateMode.PERSISTENT, "");
-            });
+        .thenAnswer(invocation -> {
+          byte[] data = zkClientData.get(invocation.getArgument(0));
+          if (data == null || data.length == 0) {
+            return null;
+          }
+          return new VersionedData(-1, data, CreateMode.PERSISTENT, "");
+        });
 
     when(distribStateManagerMock.createData(any(), any(), any()))
-        .thenAnswer(
-            invocation -> {
-              System.out.println(
-                  "set data: " + invocation.getArgument(0) + " " + invocation.getArgument(1));
-              if (invocation.getArgument(1) == null) {
-                zkClientData.put(invocation.getArgument(0), new byte[0]);
-              } else {
-                zkClientData.put(invocation.getArgument(0), invocation.getArgument(1));
-              }
-              return null;
-            });
+        .thenAnswer(invocation -> {
+          System.out.println(
+              "set data: " + invocation.getArgument(0) + " " + invocation.getArgument(1));
+          if (invocation.getArgument(1) == null) {
+            zkClientData.put(invocation.getArgument(0), new byte[0]);
+          } else {
+            zkClientData.put(invocation.getArgument(0), invocation.getArgument(1));
+          }
+          return null;
+        });
 
     when(distribStateManagerMock.hasData(anyString()))
-        .then(
-            invocation ->
-                zkClientData.containsKey(invocation.getArgument(0))
-                    && zkClientData.get(invocation.getArgument(0)).length > 0);
+        .then(invocation ->
+            zkClientData.containsKey(invocation.getArgument(0))
+                && zkClientData.get(invocation.getArgument(0)).length > 0);
 
     Mockito.doAnswer(
             new Answer<Void>() {

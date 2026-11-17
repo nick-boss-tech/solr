@@ -144,12 +144,11 @@ public class GpuMetricsService implements GpuMetricsProvider {
 
   private void startBackgroundService() {
     scheduler =
-        Executors.newSingleThreadScheduledExecutor(
-            r -> {
-              Thread t = new Thread(r, "gpu-metrics-collector");
-              t.setDaemon(true);
-              return t;
-            });
+        Executors.newSingleThreadScheduledExecutor(r -> {
+          Thread t = new Thread(r, "gpu-metrics-collector");
+          t.setDaemon(true);
+          return t;
+        });
 
     running.set(true);
     scheduler.scheduleWithFixedDelay(this::updateGpuMetrics, 0, 5, TimeUnit.SECONDS);

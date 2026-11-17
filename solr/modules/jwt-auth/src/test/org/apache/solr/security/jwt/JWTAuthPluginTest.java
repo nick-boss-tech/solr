@@ -702,10 +702,10 @@ public class JWTAuthPluginTest extends SolrTestCaseJ4 {
             CryptoKeys.parseX509Certs(
                 new ByteArrayInputStream(
                     ("""
-                        -----BEGIN CERTIFICATE-----
-                        foo
-                        -----END CERTIFICATE-----
-                        """)
+                    -----BEGIN CERTIFICATE-----
+                    foo
+                    -----END CERTIFICATE-----
+                    """)
                         .getBytes(StandardCharsets.UTF_8))));
   }
 

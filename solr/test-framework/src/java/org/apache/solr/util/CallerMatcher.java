@@ -140,66 +140,64 @@ public class CallerMatcher {
    * #getTrippedBy()}.
    */
   public Optional<String> checkCaller() {
-    return stackWalker.walk(
-        s ->
-            s.filter(
-                    frame -> {
-                      // handle exclusions first
-                      if (isExcluded(frame)) {
-                        return false;
-                      }
+    return stackWalker.walk(s ->
+        s.filter(
+                frame -> {
+                  // handle exclusions first
+                  if (isExcluded(frame)) {
+                    return false;
+                  }
 
-                      String className = frame.getDeclaringClass().getSimpleName();
-                      String method = frame.getMethodName();
-                      // now handle the matching expressions
+                  String className = frame.getDeclaringClass().getSimpleName();
+                  String method = frame.getMethodName();
+                  // now handle the matching expressions
 
-                      if (processAnyMatching(className, method)) {
-                        return true;
-                      }
+                  if (processAnyMatching(className, method)) {
+                    return true;
+                  }
 
-                      Set<String> methods = exactCallers.get(className);
-                      boolean wildcardMatch = false;
-                      if (methods == null) {
-                        // check for wildcard
-                        methods = exactCallers.get(WILDCARD);
-                        if (methods == null) {
-                          // no class and no methods specified for this class, so skip
-                          return false;
-                        } else {
-                          wildcardMatch = true;
-                        }
-                      }
-                      // MATCH. Class name was specified, possibly with methods.
-                      // If methods is empty then all methods match, otherwise only the
-                      // specified methods match.
-                      if (methods.isEmpty() || methods.contains(method)) {
-                        String expr = wildcardMatch ? WILDCARD : className;
-                        if (methods.contains(method)) {
-                          expr = expr + "." + method;
-                        } else {
-                          // even though we don't match/enforce at the method level, still
-                          // record the method counts to give better insight into the callers
-                          callCounts
-                              .computeIfAbsent(className + "." + method, k -> new AtomicInteger(0))
-                              .incrementAndGet();
-                        }
-                        int currentCount =
-                            callCounts
-                                .computeIfAbsent(expr, k -> new AtomicInteger(0))
-                                .incrementAndGet();
-                        return processMatchWithLimit(expr, currentCount);
-                      } else {
-                        return false;
-                      }
-                    })
-                .map(
-                    frame ->
-                        (frame.getDeclaringClass().getSimpleName().isBlank()
-                                ? frame.getClassName()
-                                : frame.getDeclaringClass().getSimpleName())
-                            + "."
-                            + frame.getMethodName())
-                .findFirst());
+                  Set<String> methods = exactCallers.get(className);
+                  boolean wildcardMatch = false;
+                  if (methods == null) {
+                    // check for wildcard
+                    methods = exactCallers.get(WILDCARD);
+                    if (methods == null) {
+                      // no class and no methods specified for this class, so skip
+                      return false;
+                    } else {
+                      wildcardMatch = true;
+                    }
+                  }
+                  // MATCH. Class name was specified, possibly with methods.
+                  // If methods is empty then all methods match, otherwise only the
+                  // specified methods match.
+                  if (methods.isEmpty() || methods.contains(method)) {
+                    String expr = wildcardMatch ? WILDCARD : className;
+                    if (methods.contains(method)) {
+                      expr = expr + "." + method;
+                    } else {
+                      // even though we don't match/enforce at the method level, still
+                      // record the method counts to give better insight into the callers
+                      callCounts
+                          .computeIfAbsent(className + "." + method, k -> new AtomicInteger(0))
+                          .incrementAndGet();
+                    }
+                    int currentCount =
+                        callCounts
+                            .computeIfAbsent(expr, k -> new AtomicInteger(0))
+                            .incrementAndGet();
+                    return processMatchWithLimit(expr, currentCount);
+                  } else {
+                    return false;
+                  }
+                })
+            .map(frame ->
+                (frame.getDeclaringClass().getSimpleName().isBlank()
+                        ? frame.getClassName()
+                        : frame.getDeclaringClass().getSimpleName())
+                    + "."
+                    + frame.getMethodName())
+            .findFirst());
   }
 
   private boolean isExcluded(StackWalker.StackFrame frame) {

@@ -866,7 +866,7 @@ public class TestRandomFlRTGCloud extends SolrCloudTestCase {
     private static String convertRawContent(String raw) throws XMLStreamException {
       return XMLResponseParser.convertRawContent(
           raw,
-          (parser) -> {
+          parser -> {
             try {
               return consumeRawContent0(parser);
             } catch (XMLStreamException ex) {

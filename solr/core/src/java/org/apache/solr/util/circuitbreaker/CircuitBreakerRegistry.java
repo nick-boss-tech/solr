@@ -91,38 +91,37 @@ public class CircuitBreakerRegistry implements Closeable {
         .filter(Matcher::matches) // 0=solr.circuitbreaker.(update|query).(cpu|mem|loadavg),
         // 1=update|query, 2=cpu|mem|loadavg
         .collect(Collectors.groupingBy(m -> buildCircuitBreakerKey(m.group(2), m.group(0))))
-        .forEach(
-            (breakerAndValue, breakers) -> {
-              CircuitBreaker breaker;
-              // See 'buildCircuitBreakerKey' for format
-              // 0=metric name (e.g. loadavg), 1=threshold value (e.g. 70), 2=warnOnly flag (e.g.
-              // "false")
-              String[] breakerAndValueArr = breakerAndValue.split(":");
-              switch (breakerAndValueArr[0]) {
-                case "cpu":
-                  breaker =
-                      new CPUCircuitBreaker(coreContainer)
-                          .setThreshold(Double.parseDouble(breakerAndValueArr[1]));
-                  break;
-                case "mem":
-                  breaker =
-                      new MemoryCircuitBreaker()
-                          .setThreshold(Double.parseDouble(breakerAndValueArr[1]));
-                  break;
-                case "loadavg":
-                  breaker =
-                      new LoadAverageCircuitBreaker()
-                          .setThreshold(Double.parseDouble(breakerAndValueArr[1]));
-                  break;
-                default:
-                  throw new IllegalArgumentException(
-                      "Unknown circuit breaker type: " + breakerAndValueArr[0]);
-              }
-              breaker.setWarnOnly(Boolean.parseBoolean(breakerAndValueArr[2]));
-              breaker.setRequestTypes(
-                  breakers.stream().map(m -> m.group(1)).collect(Collectors.toList()));
-              parsedBreakers.add(breaker);
-            });
+        .forEach((breakerAndValue, breakers) -> {
+          CircuitBreaker breaker;
+          // See 'buildCircuitBreakerKey' for format
+          // 0=metric name (e.g. loadavg), 1=threshold value (e.g. 70), 2=warnOnly flag (e.g.
+          // "false")
+          String[] breakerAndValueArr = breakerAndValue.split(":");
+          switch (breakerAndValueArr[0]) {
+            case "cpu":
+              breaker =
+                  new CPUCircuitBreaker(coreContainer)
+                      .setThreshold(Double.parseDouble(breakerAndValueArr[1]));
+              break;
+            case "mem":
+              breaker =
+                  new MemoryCircuitBreaker()
+                      .setThreshold(Double.parseDouble(breakerAndValueArr[1]));
+              break;
+            case "loadavg":
+              breaker =
+                  new LoadAverageCircuitBreaker()
+                      .setThreshold(Double.parseDouble(breakerAndValueArr[1]));
+              break;
+            default:
+              throw new IllegalArgumentException(
+                  "Unknown circuit breaker type: " + breakerAndValueArr[0]);
+          }
+          breaker.setWarnOnly(Boolean.parseBoolean(breakerAndValueArr[2]));
+          breaker.setRequestTypes(
+              breakers.stream().map(m -> m.group(1)).collect(Collectors.toList()));
+          parsedBreakers.add(breaker);
+        });
     return parsedBreakers;
   }
 
@@ -158,18 +157,17 @@ public class CircuitBreakerRegistry implements Closeable {
     synchronized (circuitBreakerMap) {
       circuitBreaker
           .getRequestTypes()
-          .forEach(
-              r -> {
-                List<CircuitBreaker> list =
-                    circuitBreakerMap.computeIfAbsent(r, k -> new ArrayList<>());
-                list.add(circuitBreaker);
-                if (log.isInfoEnabled()) {
-                  log.info(
-                      "Registered circuit breaker {} for request type(s) {}",
-                      circuitBreaker.getClass().getSimpleName(),
-                      r);
-                }
-              });
+          .forEach(r -> {
+            List<CircuitBreaker> list =
+                circuitBreakerMap.computeIfAbsent(r, k -> new ArrayList<>());
+            list.add(circuitBreaker);
+            if (log.isInfoEnabled()) {
+              log.info(
+                  "Registered circuit breaker {} for request type(s) {}",
+                  circuitBreaker.getClass().getSimpleName(),
+                  r);
+            }
+          });
     }
   }
 
@@ -177,12 +175,11 @@ public class CircuitBreakerRegistry implements Closeable {
   public static void registerGlobal(CircuitBreaker circuitBreaker) {
     circuitBreaker
         .getRequestTypes()
-        .forEach(
-            r -> {
-              List<CircuitBreaker> list =
-                  globalCircuitBreakerMap.computeIfAbsent(r, k -> new CopyOnWriteArrayList<>());
-              list.add(circuitBreaker);
-            });
+        .forEach(r -> {
+          List<CircuitBreaker> list =
+              globalCircuitBreakerMap.computeIfAbsent(r, k -> new CopyOnWriteArrayList<>());
+          list.add(circuitBreaker);
+        });
   }
 
   @VisibleForTesting
@@ -266,29 +263,28 @@ public class CircuitBreakerRegistry implements Closeable {
    */
   private static void closeCircuitBreakers(List<CircuitBreaker> breakers) {
     final AtomicInteger closeFailedCounter = new AtomicInteger(0);
-    breakers.forEach(
-        it -> {
-          try {
-            if (log.isDebugEnabled()) {
-              log.debug(
-                  "Closing circuit breaker {} for request type(s) {}",
+    breakers.forEach(it -> {
+      try {
+        if (log.isDebugEnabled()) {
+          log.debug(
+              "Closing circuit breaker {} for request type(s) {}",
+              it.getClass().getSimpleName(),
+              it.getRequestTypes());
+        }
+        it.close();
+      } catch (IOException e) {
+        if (log.isErrorEnabled()) {
+          log.error(
+              String.format(
+                  Locale.ROOT,
+                  "Failed to close circuit breaker %s for request type(s) %s",
                   it.getClass().getSimpleName(),
-                  it.getRequestTypes());
-            }
-            it.close();
-          } catch (IOException e) {
-            if (log.isErrorEnabled()) {
-              log.error(
-                  String.format(
-                      Locale.ROOT,
-                      "Failed to close circuit breaker %s for request type(s) %s",
-                      it.getClass().getSimpleName(),
-                      it.getRequestTypes()),
-                  e);
-            }
-            closeFailedCounter.incrementAndGet();
-          }
-        });
+                  it.getRequestTypes()),
+              e);
+        }
+        closeFailedCounter.incrementAndGet();
+      }
+    });
     if (closeFailedCounter.get() > 0) {
       throw new SolrException(
           SolrException.ErrorCode.SERVER_ERROR,
@@ -302,17 +298,16 @@ public class CircuitBreakerRegistry implements Closeable {
    */
   private Map<SolrRequestType, List<CircuitBreaker>> getCombinedMap() {
     Map<SolrRequestType, List<CircuitBreaker>> combinedMap = new HashMap<>(circuitBreakerMap);
-    globalCircuitBreakerMap.forEach(
-        (k, v) ->
-            combinedMap.merge(
-                k,
-                v,
-                (v1, v2) -> {
-                  List<CircuitBreaker> newList = new ArrayList<>();
-                  newList.addAll(v1);
-                  newList.addAll(v2);
-                  return newList;
-                }));
+    globalCircuitBreakerMap.forEach((k, v) ->
+        combinedMap.merge(
+            k,
+            v,
+            (v1, v2) -> {
+              List<CircuitBreaker> newList = new ArrayList<>();
+              newList.addAll(v1);
+              newList.addAll(v2);
+              return newList;
+            }));
     return combinedMap;
   }
 }

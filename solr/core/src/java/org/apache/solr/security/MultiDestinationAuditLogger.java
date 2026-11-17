@@ -66,10 +66,9 @@ public class MultiDestinationAuditLogger extends AuditLoggerPlugin implements Re
   public void audit(AuditEvent event) {
     log.debug("Passing auditEvent to plugins {}", pluginNames);
     plugins.parallelStream()
-        .forEach(
-            plugin -> {
-              if (plugin.shouldLog(event.getEventType())) plugin.doAudit(event);
-            });
+        .forEach(plugin -> {
+          if (plugin.shouldLog(event.getEventType())) plugin.doAudit(event);
+        });
   }
 
   /**
@@ -138,13 +137,12 @@ public class MultiDestinationAuditLogger extends AuditLoggerPlugin implements Re
   @Override
   public void close() throws IOException {
     super.close(); // Waiting for queue to drain before shutting down the loggers
-    plugins.forEach(
-        p -> {
-          try {
-            p.close();
-          } catch (IOException e) {
-            log.error("Exception trying to close {}", p.getName());
-          }
-        });
+    plugins.forEach(p -> {
+      try {
+        p.close();
+      } catch (IOException e) {
+        log.error("Exception trying to close {}", p.getName());
+      }
+    });
   }
 }

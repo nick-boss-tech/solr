@@ -238,12 +238,11 @@ public class S3OutputStream extends OutputStream {
       if (log.isDebugEnabled()) {
         log.debug("Completing multi-part upload for key '{}', id '{}'", key, uploadId);
       }
-      s3Client.completeMultipartUpload(
-          b ->
-              b.bucket(bucketName)
-                  .key(key)
-                  .uploadId(uploadId)
-                  .multipartUpload(mub -> mub.parts(completedParts)));
+      s3Client.completeMultipartUpload(b ->
+          b.bucket(bucketName)
+              .key(key)
+              .uploadId(uploadId)
+              .multipartUpload(mub -> mub.parts(completedParts)));
     }
 
     public void abort() {

@@ -110,31 +110,28 @@ public class ClusteringComponent extends SearchComponent implements SolrCoreAwar
 
   private static List<InputDocument> documentsFromNamedList(List<NamedList<Object>> docList) {
     return docList.stream()
-        .map(
-            docProps -> {
-              InputDocument doc =
-                  new InputDocument(docProps.get("id"), (String) docProps.get("language"));
+        .map(docProps -> {
+          InputDocument doc =
+              new InputDocument(docProps.get("id"), (String) docProps.get("language"));
 
-              docProps.forEach(
-                  (fieldName, value) -> {
-                    doc.addClusteredField(fieldName, (String) value);
-                  });
-              doc.visitFields(docProps::add);
-              return doc;
-            })
+          docProps.forEach((fieldName, value) -> {
+            doc.addClusteredField(fieldName, (String) value);
+          });
+          doc.visitFields(docProps::add);
+          return doc;
+        })
         .collect(Collectors.toList());
   }
 
   private static List<NamedList<Object>> documentsToNamedList(List<InputDocument> documents) {
     return documents.stream()
-        .map(
-            doc -> {
-              NamedList<Object> docProps = new SimpleOrderedMap<>();
-              docProps.add("id", doc.getId());
-              docProps.add("language", doc.language());
-              doc.visitFields(docProps::add);
-              return docProps;
-            })
+        .map(doc -> {
+          NamedList<Object> docProps = new SimpleOrderedMap<>();
+          docProps.add("id", doc.getId());
+          docProps.add("language", doc.language());
+          doc.visitFields(docProps::add);
+          return docProps;
+        })
         .collect(Collectors.toList());
   }
 
@@ -234,30 +231,27 @@ public class ClusteringComponent extends SearchComponent implements SolrCoreAwar
 
   @Override
   public void inform(SolrCore core) {
-    declaredEngines.forEach(
-        engineEntry -> {
-          if (!engineEntry.initialize(core)) {
-            if (engineEntry.optional) {
-              if (log.isInfoEnabled()) {
-                log.info("Optional clustering engine is not available: {}", engineEntry.engineName);
-              }
-            } else {
-              throw new SolrException(
-                  ErrorCode.SERVER_ERROR,
-                  "A required clustering engine failed to initialize, check the logs: "
-                      + engineEntry.engineName);
-            }
-          } else {
-            if (engines.put(engineEntry.engineName, engineEntry) != null) {
-              throw new SolrException(
-                  ErrorCode.SERVER_ERROR,
-                  String.format(
-                      Locale.ROOT,
-                      "Duplicate clustering engine named '%s'.",
-                      engineEntry.engineName));
-            }
+    declaredEngines.forEach(engineEntry -> {
+      if (!engineEntry.initialize(core)) {
+        if (engineEntry.optional) {
+          if (log.isInfoEnabled()) {
+            log.info("Optional clustering engine is not available: {}", engineEntry.engineName);
           }
-        });
+        } else {
+          throw new SolrException(
+              ErrorCode.SERVER_ERROR,
+              "A required clustering engine failed to initialize, check the logs: "
+                  + engineEntry.engineName);
+        }
+      } else {
+        if (engines.put(engineEntry.engineName, engineEntry) != null) {
+          throw new SolrException(
+              ErrorCode.SERVER_ERROR,
+              String.format(
+                  Locale.ROOT, "Duplicate clustering engine named '%s'.", engineEntry.engineName));
+        }
+      }
+    });
 
     if (engines.size() > 0) {
       if (log.isInfoEnabled()) {
@@ -333,15 +327,14 @@ public class ClusteringComponent extends SearchComponent implements SolrCoreAwar
           .flatMap(shardRequest -> shardRequest.responses.stream())
           .filter(rsp -> rsp.getException() == null)
           .map(rsp -> rsp.getSolrResponse().getResponse())
-          .forEach(
-              response -> {
-                @SuppressWarnings("unchecked")
-                List<NamedList<Object>> partialInputs =
-                    (List<NamedList<Object>>) response.get(RESPONSE_SECTION_INPUT_DOCUMENTS);
-                if (partialInputs != null) {
-                  inputs.addAll(documentsFromNamedList(partialInputs));
-                }
-              });
+          .forEach(response -> {
+            @SuppressWarnings("unchecked")
+            List<NamedList<Object>> partialInputs =
+                (List<NamedList<Object>>) response.get(RESPONSE_SECTION_INPUT_DOCUMENTS);
+            if (partialInputs != null) {
+              inputs.addAll(documentsFromNamedList(partialInputs));
+            }
+          });
       EngineEntry engine = getEngine(rb);
       EngineParameters parameters = engine.defaults.derivedFrom(rb.req.getParams());
       doCluster(rb, engine, inputs, parameters);
@@ -409,15 +402,15 @@ public class ClusteringComponent extends SearchComponent implements SolrCoreAwar
     Map<String, Function<IndexableField, String>> fieldsToLoad = new LinkedHashMap<>();
     for (String fld : requestParameters.getFieldsToLoad()) {
       FieldType type = schema.getField(fld).getType();
-      fieldsToLoad.put(fld, (fieldValue) -> type.toObject(fieldValue).toString());
+      fieldsToLoad.put(fld, fieldValue -> type.toObject(fieldValue).toString());
     }
 
     Function<Map<String, String>, String> docLanguage;
     String languageField = requestParameters.languageField();
     if (languageField != null) {
-      docLanguage = (doc) -> doc.getOrDefault(languageField, requestParameters.language());
+      docLanguage = doc -> doc.getOrDefault(languageField, requestParameters.language());
     } else {
-      docLanguage = (doc) -> requestParameters.language();
+      docLanguage = doc -> requestParameters.language();
     }
 
     SolrDocumentFetcher docFetcher = indexSearcher.getDocFetcher();
@@ -450,7 +443,7 @@ public class ClusteringComponent extends SearchComponent implements SolrCoreAwar
               docLanguage.apply(docFieldValues));
       result.add(inputDocument);
 
-      Function<String, String> snippetProvider = (field) -> null;
+      Function<String, String> snippetProvider = field -> null;
       if (preferQueryContext) {
         DocList docAsList =
             new DocSlice(
@@ -462,7 +455,7 @@ public class ClusteringComponent extends SearchComponent implements SolrCoreAwar
           @SuppressWarnings("unchecked")
           NamedList<String[]> tmp = (NamedList<String[]>) highlights.getVal(0);
           snippetProvider =
-              (field) -> {
+              field -> {
                 String[] values = tmp.get(field);
                 if (values == null) {
                   return null;

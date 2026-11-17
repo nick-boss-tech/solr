@@ -54,13 +54,12 @@ public class SpellCheckMergeData {
     origVsSuggested.remove(original);
 
     final Iterator<Map.Entry<String, SpellCheckCollation>> iter = collations.entrySet().iterator();
-    iter.forEachRemaining(
-        e -> {
-          final NamedList<String> misspellings = e.getValue().getMisspellingsAndCorrections();
-          if (null != misspellings && null != misspellings.get(original)) {
-            iter.remove();
-          }
-        });
+    iter.forEachRemaining(e -> {
+      final NamedList<String> misspellings = e.getValue().getMisspellingsAndCorrections();
+      if (null != misspellings && null != misspellings.get(original)) {
+        iter.remove();
+      }
+    });
   }
 
   public boolean isOriginalToQuery(String term) {

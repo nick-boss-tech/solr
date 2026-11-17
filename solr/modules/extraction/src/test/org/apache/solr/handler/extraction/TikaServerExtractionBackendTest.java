@@ -216,18 +216,16 @@ public class TikaServerExtractionBackendTest extends SolrTestCaseJ4 {
         TikaServerExtractionBackend last = new TikaServerExtractionBackend(baseUrl);
         CyclicBarrier barrier = new CyclicBarrier(2);
         Future<?> closer =
-            exec.submit(
-                () -> {
-                  barrier.await();
-                  last.close();
-                  return null;
-                });
+            exec.submit(() -> {
+              barrier.await();
+              last.close();
+              return null;
+            });
         Future<TikaServerExtractionBackend> opener =
-            exec.submit(
-                () -> {
-                  barrier.await();
-                  return new TikaServerExtractionBackend(baseUrl);
-                });
+            exec.submit(() -> {
+              barrier.await();
+              return new TikaServerExtractionBackend(baseUrl);
+            });
         closer.get();
         try (TikaServerExtractionBackend fresh = opener.get()) {
           assertExtracts(fresh, "iteration " + i);

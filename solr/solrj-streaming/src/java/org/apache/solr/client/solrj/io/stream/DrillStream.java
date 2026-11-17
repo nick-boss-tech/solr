@@ -266,13 +266,12 @@ public class DrillStream extends CloudSolrStream implements Expressible {
       paramsLoc.set("sort", sort);
       paramsLoc.set("q", q);
       getReplicas(this.solrConnection, this.collection, this.streamContext, paramsLoc)
-          .forEach(
-              r -> {
-                SolrStream solrStream =
-                    new SolrStream(r.getBaseUrl(), r.getCoreName(), "/export", paramsLoc);
-                solrStream.setStreamContext(streamContext);
-                solrStreams.add(solrStream);
-              });
+          .forEach(r -> {
+            SolrStream solrStream =
+                new SolrStream(r.getBaseUrl(), r.getCoreName(), "/export", paramsLoc);
+            solrStream.setStreamContext(streamContext);
+            solrStreams.add(solrStream);
+          });
     } catch (Exception e) {
       Throwable rootCause = SolrException.getRootCause(e);
       if (rootCause instanceof IOException) {

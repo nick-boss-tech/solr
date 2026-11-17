@@ -189,26 +189,21 @@ public class AffinityPlacementFactory implements PlacementPluginFactory<Affinity
       Map<String, Set<String>> collocated = new HashMap<>();
       // reverse both relations: shard-agnostic and shard-wise
       List.of(this.withCollections, this.withCollectionShards)
-          .forEach(
-              direct ->
-                  direct.forEach(
-                      (primary, secondary) ->
-                          collocated
-                              .computeIfAbsent(secondary, s -> new HashSet<>())
-                              .add(primary)));
+          .forEach(direct ->
+              direct.forEach((primary, secondary) ->
+                  collocated.computeIfAbsent(secondary, s -> new HashSet<>()).add(primary)));
       this.collocatedWith = Collections.unmodifiableMap(collocated);
 
       if (collectionNodeTypes.isEmpty()) {
         nodeTypes = Map.of();
       } else {
         nodeTypes = new HashMap<>();
-        collectionNodeTypes.forEach(
-            (coll, typesString) -> {
-              List<String> types = StrUtils.splitSmart(typesString, ',', true);
-              if (!types.isEmpty()) {
-                nodeTypes.put(coll, new HashSet<>(types));
-              }
-            });
+        collectionNodeTypes.forEach((coll, typesString) -> {
+          List<String> types = StrUtils.splitSmart(typesString, ',', true);
+          if (!types.isEmpty()) {
+            nodeTypes.put(coll, new HashSet<>(types));
+          }
+        });
       }
     }
 
@@ -313,19 +308,18 @@ public class AffinityPlacementFactory implements PlacementPluginFactory<Affinity
               .flatMap(s -> Arrays.stream(s.split(",")))
               .map(String::trim)
               .map(s -> s.toUpperCase(Locale.ROOT))
-              .map(
-                  s -> {
-                    try {
-                      return Replica.ReplicaType.valueOf(s);
-                    } catch (IllegalArgumentException e) {
-                      log.warn(
-                          "Node {} has an invalid value for the {} systemProperty: {}",
-                          node.getName(),
-                          AffinityPlacementConfig.REPLICA_TYPE_SYSPROP,
-                          s);
-                      return null;
-                    }
-                  })
+              .map(s -> {
+                try {
+                  return Replica.ReplicaType.valueOf(s);
+                } catch (IllegalArgumentException e) {
+                  log.warn(
+                      "Node {} has an invalid value for the {} systemProperty: {}",
+                      node.getName(),
+                      AffinityPlacementConfig.REPLICA_TYPE_SYSPROP,
+                      s);
+                  return null;
+                }
+              })
               .collect(Collectors.toSet());
       if (supportedReplicaTypes.isEmpty()) {
         // If property not defined or is only whitespace on a node, assuming node can take any
@@ -534,9 +528,8 @@ public class AffinityPlacementFactory implements PlacementPluginFactory<Affinity
                 .orElse(true)
             // Ensure same shard is collocated if required
             && Optional.ofNullable(withCollectionShards.get(collection))
-                .map(
-                    shardWiseOf ->
-                        getShardsOnNode(shardWiseOf).contains(replica.getShard().getShardName()))
+                .map(shardWiseOf ->
+                    getShardsOnNode(shardWiseOf).contains(replica.getShard().getShardName()))
                 .orElse(true)
             // Ensure the disk space will not go below the minimum if the replica is added
             && (minimalFreeDiskGB <= 0

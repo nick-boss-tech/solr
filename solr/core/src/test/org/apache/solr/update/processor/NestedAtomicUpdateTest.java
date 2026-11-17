@@ -259,10 +259,8 @@ public class NestedAtomicUpdateTest extends SolrTestCaseJ4 {
 
     List<SolrInputDocument> docs =
         IntStream.range(10, 20)
-            .mapToObj(
-                x ->
-                    sdoc(
-                        "id", String.valueOf(x), "string_s", "child", "inplace_updatable_int", "0"))
+            .mapToObj(x ->
+                sdoc("id", String.valueOf(x), "string_s", "child", "inplace_updatable_int", "0"))
             .collect(Collectors.toList());
     doc = sdoc("id", "1", "_root_", "1", "children", Map.of("add", docs));
     addAndGetVersion(doc, null);

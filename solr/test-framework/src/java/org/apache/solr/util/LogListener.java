@@ -283,10 +283,9 @@ public final class LogListener implements Closeable, AutoCloseable {
    * <p>At most one filtering method may be used
    */
   public LogListener substring(final String substr) {
-    setPredicate(
-        (str) -> {
-          return str.contains(substr);
-        });
+    setPredicate(str -> {
+      return str.contains(substr);
+    });
     return this;
   }
 
@@ -301,10 +300,9 @@ public final class LogListener implements Closeable, AutoCloseable {
    * <p>At most one filtering method may be used
    */
   public LogListener regex(final Pattern pat) {
-    setPredicate(
-        (str) -> {
-          return pat.matcher(str).find();
-        });
+    setPredicate(str -> {
+      return pat.matcher(str).find();
+    });
     return this;
   }
 

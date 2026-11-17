@@ -161,14 +161,13 @@ public class TestSchemaDesigner extends SolrCloudTestCase implements SchemaDesig
     try (Stream<Path> files = Files.list(docsDir)) {
       toAdd =
           files
-              .filter(
-                  (dir) -> {
-                    String name = dir.getFileName().toString();
-                    return name.endsWith(".xml")
-                        || name.endsWith(".json")
-                        || name.endsWith(".csv")
-                        || name.endsWith(".jsonl");
-                  })
+              .filter(dir -> {
+                String name = dir.getFileName().toString();
+                return name.endsWith(".xml")
+                    || name.endsWith(".json")
+                    || name.endsWith(".csv")
+                    || name.endsWith(".jsonl");
+              })
               .toList();
       assertNotNull("No test data files found in " + docsDir, toAdd);
     }

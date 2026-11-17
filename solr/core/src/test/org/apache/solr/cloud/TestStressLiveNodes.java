@@ -238,7 +238,6 @@ public class TestStressLiveNodes extends SolrCloudTestCase {
     private final SolrZkClient client;
 
     private boolean running = false;
-    ;
     private int numAdded = 0;
 
     /** ID should ideally be unique amongst any other instances */

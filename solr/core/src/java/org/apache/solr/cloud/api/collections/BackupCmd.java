@@ -269,10 +269,8 @@ public class BackupCmd implements CollApiCmds.CollectionApiCommand {
       params.set(CoreAdminParams.BACKUP_INCREMENTAL, true);
       previousProps
           .flatMap(bp -> bp.getShardBackupIdFor(slice.getName()))
-          .ifPresent(
-              prevBackupPoint ->
-                  params.set(
-                      CoreAdminParams.PREV_SHARD_BACKUP_ID, prevBackupPoint.getIdAsString()));
+          .ifPresent(prevBackupPoint ->
+              params.set(CoreAdminParams.PREV_SHARD_BACKUP_ID, prevBackupPoint.getIdAsString()));
 
       ShardBackupId shardBackupId =
           backupProperties.putAndGetShardBackupIdFor(

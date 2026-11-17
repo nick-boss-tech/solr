@@ -168,12 +168,11 @@ public class Assign {
       map.put(shardId, cnt);
     }
 
-    shardIdNames.sort(
-        (String o1, String o2) -> {
-          Integer one = map.get(o1);
-          Integer two = map.get(o2);
-          return one.compareTo(two);
-        });
+    shardIdNames.sort((String o1, String o2) -> {
+      Integer one = map.get(o1);
+      Integer two = map.get(o2);
+      return one.compareTo(two);
+    });
 
     returnShardId = shardIdNames.get(0);
     return returnShardId;

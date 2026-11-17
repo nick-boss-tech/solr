@@ -155,13 +155,12 @@ public class PluginInfo implements MapWriter {
   private List<PluginInfo> loadSubPlugins(ConfigNode node) {
     List<PluginInfo> children = new ArrayList<>();
     // if there is another sub tag with a non namedlist tag that has to be another plugin
-    node.forEachChild(
-        nd -> {
-          if (NL_TAGS.contains(nd.name())) return null;
-          PluginInfo pluginInfo = new PluginInfo(nd, null, false, false);
-          if (pluginInfo.isEnabled()) children.add(pluginInfo);
-          return null;
-        });
+    node.forEachChild(nd -> {
+      if (NL_TAGS.contains(nd.name())) return null;
+      PluginInfo pluginInfo = new PluginInfo(nd, null, false, false);
+      if (pluginInfo.isEnabled()) children.add(pluginInfo);
+      return null;
+    });
     return children.isEmpty() ? List.of() : unmodifiableList(children);
   }
 

@@ -47,9 +47,8 @@ public class PackageInstall extends PackageSubCommand {
   @Override
   public int callTool() throws Exception {
     final boolean[] status = {true};
-    runWithManagers(
-        (packageManager, repositoryManager) ->
-            status[0] = packageTool.install(repositoryManager, packageNameAndVersion));
+    runWithManagers((packageManager, repositoryManager) ->
+        status[0] = packageTool.install(repositoryManager, packageNameAndVersion));
     return status[0] ? 0 : 1;
   }
 

@@ -1254,16 +1254,16 @@ public class RunExampleTool extends ToolBase {
             solrClient,
             "/" + collectionName + "/schema",
             """
-                {
-                        "add-field-type" : {
-                          "name":"knn_vector_10",
-                          "class":"solr.DenseVectorField",
-                          "vectorDimension":10,
-                          "similarityFunction":"cosine",
-                          "knnAlgorithm":"hnsw"
-                        }
-                      }
-                """);
+            {
+                    "add-field-type" : {
+                      "name":"knn_vector_10",
+                      "class":"solr.DenseVectorField",
+                      "vectorDimension":10,
+                      "similarityFunction":"cosine",
+                      "knnAlgorithm":"hnsw"
+                    }
+                  }
+            """);
 
         echo(
             "Adding name, genre, directed_by, initial_release_date, and film_vector fields to films schema");
@@ -1271,49 +1271,50 @@ public class RunExampleTool extends ToolBase {
             solrClient,
             "/" + collectionName + "/schema",
             """
-                {
-                        "add-field" : {
-                          "name":"name",
-                          "type":"text_general",
-                          "multiValued":false,
-                          "stored":true
-                        },
-                        "add-field" : {
-                          "name":"genre",
-                          "type":"text_general",
-                          "multiValued":true,
-                          "stored":true
-                        },
-                        "add-field" : {
-                          "name":"directed_by",
-                          "type":"text_general",
-                          "multiValued":true,
-                          "stored":true
-                        },
-                        "add-field" : {
-                          "name":"initial_release_date",
-                          "type":"pdate",
-                          "stored":true
-                        },
-                        "add-field" : {
-                          "name":"film_vector",
-                          "type":"knn_vector_10",
-                          "indexed":true,
-                          "stored":true
-                        },
-                        "add-copy-field" : {
-                          "source":"genre",
-                          "dest":"_text_"
-                        },
-                        "add-copy-field" : {
-                          "source":"name",
-                          "dest":"_text_"
-                        },
-                        "add-copy-field" : {
-                          "source":"directed_by",
-                          "dest":"_text_"
-                        }
-                      }""");
+            {
+                    "add-field" : {
+                      "name":"name",
+                      "type":"text_general",
+                      "multiValued":false,
+                      "stored":true
+                    },
+                    "add-field" : {
+                      "name":"genre",
+                      "type":"text_general",
+                      "multiValued":true,
+                      "stored":true
+                    },
+                    "add-field" : {
+                      "name":"directed_by",
+                      "type":"text_general",
+                      "multiValued":true,
+                      "stored":true
+                    },
+                    "add-field" : {
+                      "name":"initial_release_date",
+                      "type":"pdate",
+                      "stored":true
+                    },
+                    "add-field" : {
+                      "name":"film_vector",
+                      "type":"knn_vector_10",
+                      "indexed":true,
+                      "stored":true
+                    },
+                    "add-copy-field" : {
+                      "source":"genre",
+                      "dest":"_text_"
+                    },
+                    "add-copy-field" : {
+                      "source":"name",
+                      "dest":"_text_"
+                    },
+                    "add-copy-field" : {
+                      "source":"directed_by",
+                      "dest":"_text_"
+                    }
+                  }\
+            """);
 
         echo(
             "Adding paramsets \"algo\" and \"algo_b\" to films configuration for relevancy tuning");
@@ -1321,22 +1322,22 @@ public class RunExampleTool extends ToolBase {
             solrClient,
             "/" + collectionName + "/config/params",
             """
-                {
-                        "set": {
-                        "algo_a":{
-                               "defType":"dismax",
-                               "qf":"name"
-                             }
-                           },
-                           "set": {
-                             "algo_b":{
-                               "defType":"dismax",
-                               "qf":"name",
-                               "mm":"100%"
-                             }
-                            }
+            {
+                    "set": {
+                    "algo_a":{
+                           "defType":"dismax",
+                           "qf":"name"
+                         }
+                       },
+                       "set": {
+                         "algo_b":{
+                           "defType":"dismax",
+                           "qf":"name",
+                           "mm":"100%"
+                         }
                         }
-                """);
+                    }
+            """);
 
         Path filmsJsonFile = this.exampleDir.resolve("films").resolve("films.json");
         echo("Indexing films example docs from " + filmsJsonFile.toAbsolutePath());

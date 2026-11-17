@@ -108,10 +108,9 @@ public class PackageSchemaReloadTest extends SolrCloudTestCase {
     // make note of the schema instance for one of the cores
     SolrCore.Provider coreProvider =
         cluster.getJettySolrRunners().stream()
-            .flatMap(
-                jetty ->
-                    jetty.getCoreContainer().getAllCoreNames().stream()
-                        .map(name -> new SolrCore.Provider(jetty.getCoreContainer(), name, null)))
+            .flatMap(jetty ->
+                jetty.getCoreContainer().getAllCoreNames().stream()
+                    .map(name -> new SolrCore.Provider(jetty.getCoreContainer(), name, null)))
             .findFirst()
             .orElseThrow();
 

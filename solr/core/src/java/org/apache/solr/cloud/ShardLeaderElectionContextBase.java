@@ -156,10 +156,9 @@ class ShardLeaderElectionContextBase extends ElectionContext {
                       .filter(
                           CuratorTransactionResult.ofTypeAndPath(OperationType.SET_DATA, parent))
                       .findFirst()
-                      .orElseThrow(
-                          () ->
-                              new RuntimeException(
-                                  "Could not set data for parent path in ZK: " + parent))
+                      .orElseThrow(() ->
+                          new RuntimeException(
+                              "Could not set data for parent path in ZK: " + parent))
                       .getResultStat()
                       .getVersion();
             }

@@ -66,7 +66,7 @@ public class SolrCmdDistributorTest extends BaseDistributedSearchTestCase {
   private static enum NodeType {
     FORWARD,
     STANDARD
-  };
+  }
 
   private final AtomicInteger uniqueId = new AtomicInteger();
 

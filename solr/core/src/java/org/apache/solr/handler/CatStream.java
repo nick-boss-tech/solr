@@ -240,14 +240,13 @@ public class CatStream extends TupleStream implements Expressible {
       try (Stream<Path> directoryContents = Files.list(entry)) {
         directoryContents
             .sorted()
-            .forEach(
-                iPath -> {
-                  // should the separator be OS/file-system specific or always "/"?
-                  final String displayPathSeparator = iPath.getFileSystem().getSeparator();
-                  final String itemDisplayPath =
-                      seed.displayPath + displayPathSeparator + iPath.getFileName();
-                  findReadableFiles(new CrawlFile(itemDisplayPath, iPath), foundFiles);
-                });
+            .forEach(iPath -> {
+              // should the separator be OS/file-system specific or always "/"?
+              final String displayPathSeparator = iPath.getFileSystem().getSeparator();
+              final String itemDisplayPath =
+                  seed.displayPath + displayPathSeparator + iPath.getFileName();
+              findReadableFiles(new CrawlFile(itemDisplayPath, iPath), foundFiles);
+            });
       } catch (IOException e) {
         throw new UncheckedIOException(e);
       }

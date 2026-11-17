@@ -157,12 +157,11 @@ public class BasicAuthStandaloneTest extends SolrTestCaseJ4 {
       for (int i = 0; i < numEdits; i++) {
         String command = "{'set-user-role': {'user" + i + "': ['dev']}}";
         futures.add(
-            executor.submit(
-                () -> {
-                  barrier.await(30, TimeUnit.SECONDS);
-                  doHttpPost(httpClient, url, command, "solr", "SolrRocks");
-                  return null;
-                }));
+            executor.submit(() -> {
+              barrier.await(30, TimeUnit.SECONDS);
+              doHttpPost(httpClient, url, command, "solr", "SolrRocks");
+              return null;
+            }));
       }
       for (Future<?> future : futures) {
         future.get();

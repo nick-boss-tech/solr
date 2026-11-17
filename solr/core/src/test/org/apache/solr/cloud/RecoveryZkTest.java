@@ -98,7 +98,7 @@ public class RecoveryZkTest extends SolrCloudTestCase {
       // bring shard replica down
       DocCollection state = getCollectionState(collection);
       Replica leader = state.getLeader("shard1");
-      Replica replica = getRandomReplica(state.getSlice("shard1"), (r) -> !leader.equals(r));
+      Replica replica = getRandomReplica(state.getSlice("shard1"), r -> !leader.equals(r));
 
       JettySolrRunner jetty = cluster.getReplicaJetty(replica);
       jetty.stop();

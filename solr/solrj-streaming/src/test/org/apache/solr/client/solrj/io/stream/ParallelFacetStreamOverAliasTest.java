@@ -111,43 +111,40 @@ public class ParallelFacetStreamOverAliasTest extends SolrCloudTestCase {
     final List<Exception> errors = new ArrayList<>();
     Stream.iterate(1, n -> n + 1)
         .limit(NUM_COLLECTIONS)
-        .forEach(
-            colIdx -> {
-              final String collectionName = "coll" + colIdx;
-              collections.add(collectionName);
-              try {
-                CollectionAdminRequest.createCollection(
-                        collectionName, "conf", NUM_SHARDS_PER_COLLECTION, 1)
-                    .process(cluster.getSolrClient());
-                cluster.waitForActiveCollection(
-                    collectionName, NUM_SHARDS_PER_COLLECTION, NUM_SHARDS_PER_COLLECTION);
+        .forEach(colIdx -> {
+          final String collectionName = "coll" + colIdx;
+          collections.add(collectionName);
+          try {
+            CollectionAdminRequest.createCollection(
+                    collectionName, "conf", NUM_SHARDS_PER_COLLECTION, 1)
+                .process(cluster.getSolrClient());
+            cluster.waitForActiveCollection(
+                collectionName, NUM_SHARDS_PER_COLLECTION, NUM_SHARDS_PER_COLLECTION);
 
-                // want a variable num of docs per collection so that avg of avg does not work ;-)
-                final int numDocsInColl =
-                    colIdx % 2 == 0 ? NUM_DOCS_PER_COLLECTION / 2 : NUM_DOCS_PER_COLLECTION;
-                final int limit =
-                    NUM_COLLECTIONS == 1 ? NUM_DOCS_PER_COLLECTION * 2 : numDocsInColl;
-                UpdateRequest ur = new UpdateRequest();
-                Stream.iterate(0, n -> n + 1)
-                    .limit(limit)
-                    .forEach(
-                        docId ->
-                            ur.add(
-                                id,
-                                UUID.randomUUID().toString(),
-                                "a_s",
-                                "hello" + docId,
-                                "a_i",
-                                String.valueOf(docId % CARDINALITY),
-                                "b_i",
-                                rand.nextBoolean() ? "1" : "0",
-                                "a_d",
-                                String.valueOf(dists[docId % dists.length].sample())));
-                ur.commit(cluster.getSolrClient(), collectionName);
-              } catch (SolrServerException | IOException e) {
-                errors.add(e);
-              }
-            });
+            // want a variable num of docs per collection so that avg of avg does not work ;-)
+            final int numDocsInColl =
+                colIdx % 2 == 0 ? NUM_DOCS_PER_COLLECTION / 2 : NUM_DOCS_PER_COLLECTION;
+            final int limit = NUM_COLLECTIONS == 1 ? NUM_DOCS_PER_COLLECTION * 2 : numDocsInColl;
+            UpdateRequest ur = new UpdateRequest();
+            Stream.iterate(0, n -> n + 1)
+                .limit(limit)
+                .forEach(docId ->
+                    ur.add(
+                        id,
+                        UUID.randomUUID().toString(),
+                        "a_s",
+                        "hello" + docId,
+                        "a_i",
+                        String.valueOf(docId % CARDINALITY),
+                        "b_i",
+                        rand.nextBoolean() ? "1" : "0",
+                        "a_d",
+                        String.valueOf(dists[docId % dists.length].sample())));
+            ur.commit(cluster.getSolrClient(), collectionName);
+          } catch (SolrServerException | IOException e) {
+            errors.add(e);
+          }
+        });
 
     if (!errors.isEmpty()) {
       throw errors.get(0);
@@ -167,14 +164,13 @@ public class ParallelFacetStreamOverAliasTest extends SolrCloudTestCase {
         final List<Exception> errors = new ArrayList<>();
         listOfCollections.stream()
             .map(CollectionAdminRequest::deleteCollection)
-            .forEach(
-                c -> {
-                  try {
-                    c.process(cluster.getSolrClient());
-                  } catch (SolrServerException | IOException e) {
-                    errors.add(e);
-                  }
-                });
+            .forEach(c -> {
+              try {
+                c.process(cluster.getSolrClient());
+              } catch (SolrServerException | IOException e) {
+                errors.add(e);
+              }
+            });
         if (!errors.isEmpty()) {
           throw errors.get(0);
         }

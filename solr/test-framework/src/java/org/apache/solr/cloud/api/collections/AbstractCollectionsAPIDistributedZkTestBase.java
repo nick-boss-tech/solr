@@ -504,24 +504,23 @@ public abstract class AbstractCollectionsAPIDistributedZkTestBase extends SolrCl
 
   private void checkInstanceDirs(JettySolrRunner jetty) {
     CoreContainer cores = jetty.getCoreContainer();
-    cores.forEachLoadedCore(
-        core -> {
-          // look for core props file
-          Path instancedir = core.getInstancePath();
-          assertTrue(
-              "Could not find expected core.properties file",
-              Files.exists(instancedir.resolve("core.properties")));
+    cores.forEachLoadedCore(core -> {
+      // look for core props file
+      Path instancedir = core.getInstancePath();
+      assertTrue(
+          "Could not find expected core.properties file",
+          Files.exists(instancedir.resolve("core.properties")));
 
-          Path expected = Path.of(jetty.getSolrHome()).resolve(core.getName());
+      Path expected = Path.of(jetty.getSolrHome()).resolve(core.getName());
 
-          try {
-            assertTrue(
-                "Expected: " + expected + "\nFrom core stats: " + instancedir,
-                Files.isSameFile(expected, instancedir));
-          } catch (IOException e) {
-            throw new RuntimeException(e);
-          }
-        });
+      try {
+        assertTrue(
+            "Expected: " + expected + "\nFrom core stats: " + instancedir,
+            Files.isSameFile(expected, instancedir));
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    });
   }
 
   private boolean waitForReloads(String collectionName, Map<String, Long> urlToTimeBefore)

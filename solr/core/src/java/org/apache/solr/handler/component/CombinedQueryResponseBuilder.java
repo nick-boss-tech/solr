@@ -40,16 +40,15 @@ class CombinedQueryResponseBuilder extends ResponseBuilder {
    * being set later after the CombinedQueryComponent is prepared.
    */
   final void propagate() {
-    responseBuilders.forEach(
-        thisRb -> {
-          thisRb.setNeedDocSet(isNeedDocSet());
-          thisRb.setNeedDocList(isNeedDocList());
-          thisRb.doFacets = doFacets;
-          thisRb.doHighlights = doHighlights;
-          thisRb.doExpand = doExpand;
-          thisRb.doTerms = doTerms;
-          thisRb.doStats = doStats;
-          thisRb.setDistribStatsDisabled(isDistribStatsDisabled());
-        });
+    responseBuilders.forEach(thisRb -> {
+      thisRb.setNeedDocSet(isNeedDocSet());
+      thisRb.setNeedDocList(isNeedDocList());
+      thisRb.doFacets = doFacets;
+      thisRb.doHighlights = doHighlights;
+      thisRb.doExpand = doExpand;
+      thisRb.doTerms = doTerms;
+      thisRb.doStats = doStats;
+      thisRb.setDistribStatsDisabled(isDistribStatsDisabled());
+    });
   }
 }

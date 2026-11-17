@@ -174,7 +174,7 @@ public class AllowListUrlChecker {
   @VisibleForTesting
   Set<String> buildLiveHostUrls(Set<String> liveNodes) {
     return liveNodes.stream()
-        .map((liveNode) -> liveNode.substring(0, liveNode.indexOf('_')))
+        .map(liveNode -> liveNode.substring(0, liveNode.indexOf('_')))
         .collect(Collectors.toSet());
   }
 

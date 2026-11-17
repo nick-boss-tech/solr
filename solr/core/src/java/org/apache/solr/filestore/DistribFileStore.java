@@ -466,15 +466,14 @@ public class DistribFileStore implements FileStore {
     FileType type = getType(path, false);
     if (type == FileType.DIRECTORY) {
       try (Stream<Path> fileStream = Files.list(file)) {
-        fileStream.forEach(
-            (f) -> {
-              String fileName = f.getFileName().toString();
-              if (predicate == null || predicate.test(fileName)) {
-                if (!isMetaDataFile(fileName)) {
-                  fileDetails.add(new FileInfo(path + "/" + fileName).getDetails());
-                }
-              }
-            });
+        fileStream.forEach(f -> {
+          String fileName = f.getFileName().toString();
+          if (predicate == null || predicate.test(fileName)) {
+            if (!isMetaDataFile(fileName)) {
+              fileDetails.add(new FileInfo(path + "/" + fileName).getDetails());
+            }
+          }
+        });
       } catch (IOException e) {
         throw new SolrException(SERVER_ERROR, "Error listing files from provided path " + path, e);
       }
@@ -631,19 +630,18 @@ public class DistribFileStore implements FileStore {
     Map<String, byte[]> result = new HashMap<>();
     Path keysDir = _getRealPath(ClusterFileStore.KEYS_DIR, solrHome);
     try (Stream<Path> fileStream = Files.list(keysDir)) {
-      fileStream.forEach(
-          (keyFile) -> {
-            if (Files.isRegularFile(keyFile) && !isMetaDataFile(keyFile.getFileName().toString())) {
-              try {
-                result.put(keyFile.getFileName().toString(), Files.readAllBytes(keyFile));
-              } catch (IOException e) {
-                throw new SolrException(
-                    SolrException.ErrorCode.SERVER_ERROR,
-                    "Unable to read all bytes file: " + keyFile.getFileName(),
-                    e);
-              }
-            }
-          });
+      fileStream.forEach(keyFile -> {
+        if (Files.isRegularFile(keyFile) && !isMetaDataFile(keyFile.getFileName().toString())) {
+          try {
+            result.put(keyFile.getFileName().toString(), Files.readAllBytes(keyFile));
+          } catch (IOException e) {
+            throw new SolrException(
+                SolrException.ErrorCode.SERVER_ERROR,
+                "Unable to read all bytes file: " + keyFile.getFileName(),
+                e);
+          }
+        }
+      });
     }
     return result;
   }

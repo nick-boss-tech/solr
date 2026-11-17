@@ -95,34 +95,30 @@ public class ClusterStateMockUtilTest extends SolrTestCaseJ4 {
       assertEquals(
           1,
           slice1
-              .getReplicas(
-                  replica ->
-                      replica.getType() == Replica.Type.NRT
-                          && replica.getState() == Replica.State.ACTIVE)
+              .getReplicas(replica ->
+                  replica.getType() == Replica.Type.NRT
+                      && replica.getState() == Replica.State.ACTIVE)
               .size());
       assertEquals(
           1,
           slice1
-              .getReplicas(
-                  replica ->
-                      replica.getType() == Replica.Type.NRT
-                          && replica.getState() == Replica.State.RECOVERY_FAILED)
+              .getReplicas(replica ->
+                  replica.getType() == Replica.Type.NRT
+                      && replica.getState() == Replica.State.RECOVERY_FAILED)
               .size());
       assertEquals(
           1,
           slice1
-              .getReplicas(
-                  replica ->
-                      replica.getType() == Replica.Type.TLOG
-                          && replica.getState() == Replica.State.RECOVERING)
+              .getReplicas(replica ->
+                  replica.getType() == Replica.Type.TLOG
+                      && replica.getState() == Replica.State.RECOVERING)
               .size());
       assertEquals(
           1,
           slice1
-              .getReplicas(
-                  replica ->
-                      replica.getType() == Replica.Type.PULL
-                          && replica.getState() == Replica.State.DOWN)
+              .getReplicas(replica ->
+                  replica.getType() == Replica.Type.PULL
+                      && replica.getState() == Replica.State.DOWN)
               .size());
     }
   }

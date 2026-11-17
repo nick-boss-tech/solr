@@ -512,21 +512,19 @@ public class TestIntervalFaceting extends SolrTestCaseJ4 {
               + facetIntervals,
           facetQueries.size(),
           getCountDistinctIntervals(facetIntervals));
-      facetIntervals.forEach(
-          (name, val) -> {
-            assertEquals(
-                "Interval did not match: "
-                    + field
-                    + ": "
-                    + name
-                    + "\nResponse: "
-                    + rsp.getValues().get("facet_counts"),
-                facetQueries
-                    .get(
-                        field + ":" + name.replace(",", " TO ").replace('(', '{').replace(')', '}'))
-                    .toString(),
-                val.toString());
-          });
+      facetIntervals.forEach((name, val) -> {
+        assertEquals(
+            "Interval did not match: "
+                + field
+                + ": "
+                + name
+                + "\nResponse: "
+                + rsp.getValues().get("facet_counts"),
+            facetQueries
+                .get(field + ":" + name.replace(",", " TO ").replace('(', '{').replace(')', '}'))
+                .toString(),
+            val.toString());
+      });
     } finally {
       req.close();
     }

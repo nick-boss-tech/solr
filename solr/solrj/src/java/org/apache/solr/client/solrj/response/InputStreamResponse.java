@@ -42,10 +42,9 @@ public class InputStreamResponse extends SimpleSolrResponse {
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
   // True if the HTTP status is '200 OK', false otherwise
-  public static final Function<Integer, Boolean> HTTP_OK_VALIDATOR = (status) -> 200 == status;
+  public static final Function<Integer, Boolean> HTTP_OK_VALIDATOR = status -> 200 == status;
   // True if the HTTP status is neither a 4xx or a 5xx error.
-  public static final Function<Integer, Boolean> NON_ERROR_CODE_VALIDATOR =
-      (status) -> status < 399;
+  public static final Function<Integer, Boolean> NON_ERROR_CODE_VALIDATOR = status -> status < 399;
 
   @Override
   public void setResponse(NamedList<Object> rsp) {

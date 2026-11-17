@@ -171,10 +171,9 @@ public class KnnStream extends TupleStream implements Expressible {
     if (null != props) {
       String expression =
           props.stream()
-              .flatMap(
-                  e ->
-                      Arrays.stream(e.getValue())
-                          .map(v -> String.format(Locale.ROOT, "%s=%s", e.getKey(), v)))
+              .flatMap(e ->
+                  Arrays.stream(e.getValue())
+                      .map(v -> String.format(Locale.ROOT, "%s=%s", e.getKey(), v)))
               .collect(Collectors.joining(","));
       child.setExpression(expression);
     }

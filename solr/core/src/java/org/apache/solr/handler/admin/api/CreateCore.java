@@ -147,11 +147,9 @@ public class CreateCore extends CoreAdminAPIBase implements CoreApis.Create {
     // "Collection"-specific properties are given a "collection." prefix in the flattened map
     if (CollectionUtil.isNotEmpty(createParams.collectionProperties)) {
       createParams.collectionProperties.entrySet().stream()
-          .forEach(
-              entry -> {
-                coreParams.put(
-                    ZkController.COLLECTION_PARAM_PREFIX + entry.getKey(), entry.getValue());
-              });
+          .forEach(entry -> {
+            coreParams.put(ZkController.COLLECTION_PARAM_PREFIX + entry.getKey(), entry.getValue());
+          });
     }
 
     return coreParams;

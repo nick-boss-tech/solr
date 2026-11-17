@@ -465,7 +465,7 @@ class FacetFieldProcessorByHashDV extends FacetFieldProcessor {
    * <p>This avoids a memory allocation for each invocation of collectValFirstPhase.
    */
   private IntFunction<SlotContext> slotContext =
-      (slotNum) -> {
+      slotNum -> {
         long val = table.vals[slotNum];
         @SuppressWarnings({"rawtypes"})
         Comparable value = calc.bitsToValue(val);

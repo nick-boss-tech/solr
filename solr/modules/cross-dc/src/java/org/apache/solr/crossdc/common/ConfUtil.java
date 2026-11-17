@@ -103,17 +103,16 @@ public class ConfUtil {
     // normalize any left aux properties by stripping prefixes
     if (!properties.isEmpty()) {
       Set<String> keys = new HashSet<>(properties.keySet());
-      keys.forEach(
-          key -> {
-            Object value = properties.get(key);
-            if (key.startsWith(KAFKA_ENV_PREFIX)) {
-              properties.remove(key);
-              putIfNonBlankAndMissing(properties, normalizeKafkaEnvKey(key), value);
-            } else if (key.startsWith(KAFKA_PROP_PREFIX)) {
-              properties.remove(key);
-              putIfNonBlankAndMissing(properties, normalizeKafkaSysPropKey(key), value);
-            }
-          });
+      keys.forEach(key -> {
+        Object value = properties.get(key);
+        if (key.startsWith(KAFKA_ENV_PREFIX)) {
+          properties.remove(key);
+          putIfNonBlankAndMissing(properties, normalizeKafkaEnvKey(key), value);
+        } else if (key.startsWith(KAFKA_PROP_PREFIX)) {
+          properties.remove(key);
+          putIfNonBlankAndMissing(properties, normalizeKafkaSysPropKey(key), value);
+        }
+      });
     }
   }
 
@@ -122,37 +121,35 @@ public class ConfUtil {
   static void addAdditionalKafkaProperties(
       Map<String, Object> properties, Map<String, String> env, Properties sysProps) {
     Set<String> envDerivedKeys = new LinkedHashSet<>();
-    env.forEach(
-        (key, val) -> {
-          if (!key.startsWith(KAFKA_ENV_PREFIX)) {
-            return;
-          }
-          String normalized = normalizeKafkaEnvKey(key);
-          if (!isValidAdditionalProperty(normalized, val)) {
-            return;
-          }
-          Object existingValue = properties.get(normalized);
-          if (isBlankValue(existingValue)) {
-            properties.put(normalized, val);
-            envDerivedKeys.add(normalized);
-          }
-        });
+    env.forEach((key, val) -> {
+      if (!key.startsWith(KAFKA_ENV_PREFIX)) {
+        return;
+      }
+      String normalized = normalizeKafkaEnvKey(key);
+      if (!isValidAdditionalProperty(normalized, val)) {
+        return;
+      }
+      Object existingValue = properties.get(normalized);
+      if (isBlankValue(existingValue)) {
+        properties.put(normalized, val);
+        envDerivedKeys.add(normalized);
+      }
+    });
 
-    sysProps.forEach(
-        (key, val) -> {
-          String propKey = key.toString();
-          if (!propKey.startsWith(KAFKA_PROP_PREFIX)) {
-            return;
-          }
-          String normalized = normalizeKafkaSysPropKey(propKey);
-          if (!isValidAdditionalProperty(normalized, val)) {
-            return;
-          }
-          Object existingValue = properties.get(normalized);
-          if (isBlankValue(existingValue) || envDerivedKeys.contains(normalized)) {
-            properties.put(normalized, val.toString());
-          }
-        });
+    sysProps.forEach((key, val) -> {
+      String propKey = key.toString();
+      if (!propKey.startsWith(KAFKA_PROP_PREFIX)) {
+        return;
+      }
+      String normalized = normalizeKafkaSysPropKey(propKey);
+      if (!isValidAdditionalProperty(normalized, val)) {
+        return;
+      }
+      Object existingValue = properties.get(normalized);
+      if (isBlankValue(existingValue) || envDerivedKeys.contains(normalized)) {
+        properties.put(normalized, val.toString());
+      }
+    });
   }
 
   public static String normalizeKafkaEnvKey(String key) {

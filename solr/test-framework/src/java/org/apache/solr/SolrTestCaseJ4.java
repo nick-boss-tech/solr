@@ -145,7 +145,7 @@ import org.xml.sax.SAXException;
  */
 // ExtrasFS might be ok, the failures with e.g. nightly runs might be "normal"
 @SuppressFileSystems("ExtrasFS")
-@RandomizeSSL()
+@RandomizeSSL
 public abstract class SolrTestCaseJ4 extends SolrTestCase {
 
   private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
@@ -1829,14 +1829,13 @@ public abstract class SolrTestCaseJ4 extends SolrTestCase {
 
   public static void assertResponseValues(SolrResponseBase rsp, Object... assertions) {
     Map<String, Object> values = Utils.makeMap(assertions);
-    values.forEach(
-        (s, o) -> {
-          if (o instanceof String) {
-            assertEquals(o, rsp.getResponse()._getStr(s));
-          } else {
-            assertEquals(o, rsp.getResponse()._get(s));
-          }
-        });
+    values.forEach((s, o) -> {
+      if (o instanceof String) {
+        assertEquals(o, rsp.getResponse()._getStr(s));
+      } else {
+        assertEquals(o, rsp.getResponse()._get(s));
+      }
+    });
   }
 
   @SuppressWarnings({"rawtypes"})

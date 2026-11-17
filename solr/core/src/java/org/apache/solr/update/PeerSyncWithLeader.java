@@ -324,25 +324,23 @@ public class PeerSyncWithLeader implements SolrMetricProducer {
     if (leaderFingerprint != null) {
       boolean existDBIOrDBQInTheGap =
           updates.stream()
-              .anyMatch(
-                  e -> {
-                    @SuppressWarnings({"unchecked"})
-                    List<Object> u = (List<Object>) e;
-                    long version = (Long) u.get(1);
-                    int oper = (Integer) u.get(0) & UpdateLog.OPERATION_MASK;
-                    // only DBI or DBQ in the gap (above) will satisfy this predicate
-                    return version > leaderFingerprint.getMaxVersionEncountered()
-                        && (oper == UpdateLog.DELETE || oper == UpdateLog.DELETE_BY_QUERY);
-                  });
+              .anyMatch(e -> {
+                @SuppressWarnings({"unchecked"})
+                List<Object> u = (List<Object>) e;
+                long version = (Long) u.get(1);
+                int oper = (Integer) u.get(0) & UpdateLog.OPERATION_MASK;
+                // only DBI or DBQ in the gap (above) will satisfy this predicate
+                return version > leaderFingerprint.getMaxVersionEncountered()
+                    && (oper == UpdateLog.DELETE || oper == UpdateLog.DELETE_BY_QUERY);
+              });
       if (!existDBIOrDBQInTheGap) {
         // it is safe to use leaderFingerprint.maxVersionEncountered as cut point now.
-        updates.removeIf(
-            e -> {
-              @SuppressWarnings({"unchecked"})
-              List<Object> u = (List<Object>) e;
-              long version = (Long) u.get(1);
-              return version > leaderFingerprint.getMaxVersionEncountered();
-            });
+        updates.removeIf(e -> {
+          @SuppressWarnings({"unchecked"})
+          List<Object> u = (List<Object>) e;
+          long version = (Long) u.get(1);
+          return version > leaderFingerprint.getMaxVersionEncountered();
+        });
       }
     }
 

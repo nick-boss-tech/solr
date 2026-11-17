@@ -111,17 +111,11 @@ public class BufferStoreTest extends SolrTestCase {
 
   private Double getBufferCacheStatsValue(GaugeSnapshot gaugeSnapshot, String type) {
     return gaugeSnapshot.getDataPoints().stream()
-        .filter(
-            (dp) ->
-                dp.getLabels()
-                    .equals(
-                        Labels.of(
-                            "category",
-                            "CACHE",
-                            "otel_scope_name",
-                            "org.apache.solr",
-                            "type",
-                            type)))
+        .filter(dp ->
+            dp.getLabels()
+                .equals(
+                    Labels.of(
+                        "category", "CACHE", "otel_scope_name", "org.apache.solr", "type", type)))
         .findFirst()
         .orElseThrow(() -> new AssertionError("Missing type=" + type + " label on metric"))
         .getValue();

@@ -131,7 +131,7 @@ public class EnvUtils {
   private static String camelCaseToDotSeparated(String key) {
     return camelCaseToDotsMap.computeIfAbsent(
         key,
-        (k) -> String.join(".", k.split("(?=[A-Z])")).replace("..", ".").toLowerCase(Locale.ROOT));
+        k -> String.join(".", k.split("(?=[A-Z])")).replace("..", ".").toLowerCase(Locale.ROOT));
   }
 
   /** Get property as integer */

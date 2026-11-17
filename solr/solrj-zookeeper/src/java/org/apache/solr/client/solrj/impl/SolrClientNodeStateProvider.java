@@ -81,19 +81,16 @@ public class SolrClientNodeStateProvider implements NodeStateProvider, MapWriter
     }
     clusterState
         .collectionStream()
-        .forEach(
-            coll ->
-                coll.forEachReplica(
-                    (shard, replica) -> {
-                      Map<String, Map<String, List<Replica>>> nodeData =
-                          nodeVsCollectionVsShardVsReplicaInfo.computeIfAbsent(
-                              replica.getNodeName(), k -> new HashMap<>());
-                      Map<String, List<Replica>> collData =
-                          nodeData.computeIfAbsent(coll.getName(), k -> new HashMap<>());
-                      List<Replica> replicas =
-                          collData.computeIfAbsent(shard, k -> new ArrayList<>());
-                      replicas.add((Replica) replica.clone());
-                    }));
+        .forEach(coll ->
+            coll.forEachReplica((shard, replica) -> {
+              Map<String, Map<String, List<Replica>>> nodeData =
+                  nodeVsCollectionVsShardVsReplicaInfo.computeIfAbsent(
+                      replica.getNodeName(), k -> new HashMap<>());
+              Map<String, List<Replica>> collData =
+                  nodeData.computeIfAbsent(coll.getName(), k -> new HashMap<>());
+              List<Replica> replicas = collData.computeIfAbsent(shard, k -> new ArrayList<>());
+              replicas.add((Replica) replica.clone());
+            }));
   }
 
   @Override
@@ -123,15 +120,13 @@ public class SolrClientNodeStateProvider implements NodeStateProvider, MapWriter
   public static void forEachReplica(
       Map<String, Map<String, List<Replica>>> collectionVsShardVsReplicas,
       Consumer<Replica> consumer) {
-    collectionVsShardVsReplicas.forEach(
-        (coll, shardVsReplicas) ->
-            shardVsReplicas.forEach(
-                (shard, replicaInfos) -> {
-                  for (int i = 0; i < replicaInfos.size(); i++) {
-                    Replica r = replicaInfos.get(i);
-                    consumer.accept(r);
-                  }
-                }));
+    collectionVsShardVsReplicas.forEach((coll, shardVsReplicas) ->
+        shardVsReplicas.forEach((shard, replicaInfos) -> {
+          for (int i = 0; i < replicaInfos.size(); i++) {
+            Replica r = replicaInfos.get(i);
+            consumer.accept(r);
+          }
+        }));
   }
 
   @Override
@@ -179,7 +174,7 @@ public class SolrClientNodeStateProvider implements NodeStateProvider, MapWriter
         node,
         ctx,
         requestedMetricNames,
-        (line) -> {
+        line -> {
           String prometheusMetricName = NodeValueFetcher.extractMetricNameFromLine(line);
 
           // Extract core name from prometheus line and the core label

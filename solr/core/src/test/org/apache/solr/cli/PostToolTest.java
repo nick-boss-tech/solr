@@ -451,12 +451,12 @@ public class PostToolTest extends SolrCloudTestCase {
       // Simulate a robots.txt file with comments and a few disallows
       String sb =
           """
-              # Comments appear after the "#" symbol at the start of a line, or after a directive
-              User-agent: * # match all bots
-              Disallow:  # This is void
-              Disallow: /disallow # Disallow this path
-              Disallow: /nonexistentpath # Disallow this path
-              """;
+          # Comments appear after the "#" symbol at the start of a line, or after a directive
+          User-agent: * # match all bots
+          Disallow:  # This is void
+          Disallow: /disallow # Disallow this path
+          Disallow: /nonexistentpath # Disallow this path
+          """;
       this.robotsCache.put(
           "[ff01::114]",
           super.parseRobotsTxt(new ByteArrayInputStream(sb.getBytes(StandardCharsets.UTF_8))));

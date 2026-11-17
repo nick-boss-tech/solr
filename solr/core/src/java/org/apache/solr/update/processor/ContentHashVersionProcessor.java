@@ -160,18 +160,17 @@ public class ContentHashVersionProcessor extends UpdateRequestProcessor {
                 SolrInputField
                     ::getName)) // Sort to ensure consistent field order across different doc field
         // orders
-        .forEach(
-            inputField -> {
-              sig.add(inputField.getName());
-              Object o = inputField.getValue();
-              if (o instanceof Collection) {
-                for (Object oo : (Collection<?>) o) {
-                  sig.add(String.valueOf(oo));
-                }
-              } else {
-                sig.add(String.valueOf(o));
-              }
-            });
+        .forEach(inputField -> {
+          sig.add(inputField.getName());
+          Object o = inputField.getValue();
+          if (o instanceof Collection) {
+            for (Object oo : (Collection<?>) o) {
+              sig.add(String.valueOf(oo));
+            }
+          } else {
+            sig.add(String.valueOf(o));
+          }
+        });
 
     return sig.getSignature();
   }

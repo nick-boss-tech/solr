@@ -186,16 +186,15 @@ public class ConfigSetCmds {
     zkStateReader
         .getClusterState()
         .collectionStream()
-        .forEach(
-            state -> {
-              String configName = state.getConfigName();
-              if (configSetName.equals(configName))
-                throw new SolrException(
-                    SolrException.ErrorCode.BAD_REQUEST,
-                    "Can not delete ConfigSet as it is currently being used by collection ["
-                        + state.getName()
-                        + "]");
-            });
+        .forEach(state -> {
+          String configName = state.getConfigName();
+          if (configSetName.equals(configName))
+            throw new SolrException(
+                SolrException.ErrorCode.BAD_REQUEST,
+                "Can not delete ConfigSet as it is currently being used by collection ["
+                    + state.getName()
+                    + "]");
+        });
 
     String propertyPath = ConfigSetProperties.DEFAULT_FILENAME;
     NamedList<Object> properties =

@@ -269,13 +269,12 @@ public class SolrXmlConfig {
 
   private static Properties loadProperties(ConfigNode cfg, Properties substituteProperties) {
     Properties properties = new Properties(substituteProperties);
-    cfg.forEachChild(
-        it -> {
-          if (it.name().equals("property")) {
-            properties.setProperty(it.attr(NAME), it.attr("value"));
-          }
-          return Boolean.TRUE;
-        });
+    cfg.forEachChild(it -> {
+      if (it.name().equals("property")) {
+        properties.setProperty(it.attr(NAME), it.attr("value"));
+      }
+      return Boolean.TRUE;
+    });
 
     return properties;
   }
@@ -617,13 +616,12 @@ public class SolrXmlConfig {
   }
 
   static void forEachNamedListEntry(ConfigNode cfg, Consumer<ConfigNode> fun) {
-    cfg.forEachChild(
-        it -> {
-          if (DOMUtil.NL_TAGS.contains(it.name())) {
-            fun.accept(it);
-          }
-          return Boolean.TRUE;
-        });
+    cfg.forEachChild(it -> {
+      if (DOMUtil.NL_TAGS.contains(it.name())) {
+        fun.accept(it);
+      }
+      return Boolean.TRUE;
+    });
   }
 
   private static PluginInfo[] getBackupRepositoryPluginInfos(List<ConfigNode> cfg) {
@@ -682,10 +680,9 @@ public class SolrXmlConfig {
     }
 
     try {
-      plugins.forEach(
-          p -> {
-            loader.findClass(p.className, ClusterSingleton.class);
-          });
+      plugins.forEach(p -> {
+        loader.findClass(p.className, ClusterSingleton.class);
+      });
     } catch (ClassCastException e) {
       throw new SolrException(
           SolrException.ErrorCode.SERVER_ERROR,

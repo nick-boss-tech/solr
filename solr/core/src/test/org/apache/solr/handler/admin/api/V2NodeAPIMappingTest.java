@@ -115,10 +115,9 @@ public class V2NodeAPIMappingTest extends SolrTestCaseJ4 {
     final HashMap<String, String> parts = new HashMap<>();
     ModifiableSolrParams solrParams = new ModifiableSolrParams();
     inputParams.stream()
-        .forEach(
-            e -> {
-              solrParams.add(e.getKey(), e.getValue());
-            });
+        .forEach(e -> {
+          solrParams.add(e.getKey(), e.getValue());
+        });
     final Api api = apiBag.lookup(path, method, parts);
     final SolrQueryResponse rsp = new SolrQueryResponse();
     final SolrQueryRequestBase req =

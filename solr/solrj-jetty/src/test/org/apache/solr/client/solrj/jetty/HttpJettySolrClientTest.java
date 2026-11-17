@@ -270,7 +270,7 @@ public class HttpJettySolrClientTest extends HttpSolrClientTestBase {
             .withDefaultCollection(DEFAULT_COLLECTION)
             .build()) {
       try {
-        client.requestWithBaseUrl(urlToUse, (c) -> c.query(queryParams));
+        client.requestWithBaseUrl(urlToUse, c -> c.query(queryParams));
       } catch (RemoteSolrException rse) {
       }
 

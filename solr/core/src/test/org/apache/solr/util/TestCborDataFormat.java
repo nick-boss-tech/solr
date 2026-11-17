@@ -220,7 +220,7 @@ public class TestCborDataFormat extends SolrCloudTestCase {
     byte[] bytes = serializeToCbor(b);
     assertEquals(209339, bytes.length);
     LongAdder docsSz = new LongAdder();
-    new CborLoader(null, (document) -> docsSz.increment()).stream(new ByteArrayInputStream(bytes));
+    new CborLoader(null, document -> docsSz.increment()).stream(new ByteArrayInputStream(bytes));
     assertEquals(films.size(), docsSz.intValue());
   }
 

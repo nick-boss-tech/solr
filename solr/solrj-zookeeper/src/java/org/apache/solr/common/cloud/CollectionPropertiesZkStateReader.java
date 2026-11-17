@@ -285,10 +285,9 @@ public class CollectionPropertiesZkStateReader implements Closeable {
   }
 
   protected void refreshCollectionProperties() {
-    collectionPropsObservers.forEach(
-        (k, v) -> {
-          collectionPropsWatchers.computeIfAbsent(k, PropsWatcher::new).refreshAndWatch(true);
-        });
+    collectionPropsObservers.forEach((k, v) -> {
+      collectionPropsWatchers.computeIfAbsent(k, PropsWatcher::new).refreshAndWatch(true);
+    });
   }
 
   public static String getCollectionPropsPath(final String collection) {
@@ -383,10 +382,9 @@ public class CollectionPropertiesZkStateReader implements Closeable {
     public void run() {
       watchedCollectionProps
           .entrySet()
-          .removeIf(
-              entry ->
-                  entry.getValue().cacheUntilNs < System.nanoTime()
-                      && !collectionPropsObservers.containsKey(entry.getKey()));
+          .removeIf(entry ->
+              entry.getValue().cacheUntilNs < System.nanoTime()
+                  && !collectionPropsObservers.containsKey(entry.getKey()));
     }
   }
 

@@ -156,13 +156,12 @@ public class AddReplicaCmd implements CollApiCmds.CollectionApiCommand {
                 numReplicas,
                 ccc.getCoreContainer())
             .stream()
-            .map(
-                replicaPosition ->
-                    assignReplicaDetails(
-                        ccc.getSolrCloudManager(),
-                        adminCmdContext.getClusterState(),
-                        message,
-                        replicaPosition))
+            .map(replicaPosition ->
+                assignReplicaDetails(
+                    ccc.getSolrCloudManager(),
+                    adminCmdContext.getClusterState(),
+                    message,
+                    replicaPosition))
             .collect(Collectors.toList());
 
     ShardHandler shardHandler = ccc.newShardHandler();
@@ -221,13 +220,12 @@ public class AddReplicaCmd implements CollApiCmds.CollectionApiCommand {
     }
 
     return createReplicas.stream()
-        .map(
-            createReplica ->
-                new ZkNodeProps(
-                    ZkStateReader.COLLECTION_PROP, createReplica.collectionName,
-                    ZkStateReader.SHARD_ID_PROP, createReplica.sliceName,
-                    ZkStateReader.CORE_NAME_PROP, createReplica.coreName,
-                    ZkStateReader.NODE_NAME_PROP, createReplica.node))
+        .map(createReplica ->
+            new ZkNodeProps(
+                ZkStateReader.COLLECTION_PROP, createReplica.collectionName,
+                ZkStateReader.SHARD_ID_PROP, createReplica.sliceName,
+                ZkStateReader.CORE_NAME_PROP, createReplica.coreName,
+                ZkStateReader.NODE_NAME_PROP, createReplica.node))
         .collect(Collectors.toList());
   }
 

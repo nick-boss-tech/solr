@@ -87,7 +87,7 @@ public class ThreadCpuTimer {
           threadLocalTimer
               .get()
               .computeIfAbsent(
-                  context, (ctx) -> new AtomicLong(THREAD_MX_BEAN.getCurrentThreadCpuTime()));
+                  context, ctx -> new AtomicLong(THREAD_MX_BEAN.getCurrentThreadCpuTime()));
       long currentThreadCpuTime = THREAD_MX_BEAN.getCurrentThreadCpuTime();
       long result = currentThreadCpuTime - threadCpuTime.get();
       threadCpuTime.set(currentThreadCpuTime);
@@ -104,15 +104,14 @@ public class ThreadCpuTimer {
     if (THREAD_MX_BEAN != null) {
       threadLocalTimer
           .get()
-          .computeIfAbsent(
-              context, (ctx) -> new AtomicLong(THREAD_MX_BEAN.getCurrentThreadCpuTime()))
+          .computeIfAbsent(context, ctx -> new AtomicLong(THREAD_MX_BEAN.getCurrentThreadCpuTime()))
           .set(THREAD_MX_BEAN.getCurrentThreadCpuTime());
     }
   }
 
   public static Optional<Long> readMSandReset(String context) {
     return readNSAndReset(context)
-        .map((cpuTimeNs) -> TimeUnit.MILLISECONDS.convert(cpuTimeNs, TimeUnit.NANOSECONDS));
+        .map(cpuTimeNs -> TimeUnit.MILLISECONDS.convert(cpuTimeNs, TimeUnit.NANOSECONDS));
   }
 
   /**

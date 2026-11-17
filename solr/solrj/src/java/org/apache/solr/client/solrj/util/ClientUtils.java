@@ -152,10 +152,10 @@ public class ClientUtils {
 
     XML.Writable valWriter = null;
     if (v instanceof SolrInputDocument solrDoc) {
-      valWriter = (writer1) -> writeXML(solrDoc, writer1);
+      valWriter = writer1 -> writeXML(solrDoc, writer1);
     } else if (v != null) {
       final Object val = v;
-      valWriter = (writer1) -> XML.escapeCharData(val.toString(), writer1);
+      valWriter = writer1 -> XML.escapeCharData(val.toString(), writer1);
     }
 
     if (update == null) {

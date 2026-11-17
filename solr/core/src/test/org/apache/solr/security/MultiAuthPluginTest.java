@@ -452,12 +452,11 @@ public class MultiAuthPluginTest extends SolrTestCaseJ4 {
     List<Map<String, Object>> schemes = (List<Map<String, Object>>) authentication.get("schemes");
 
     return schemes.stream()
-        .map(
-            schemeMap -> {
-              String scheme = (String) schemeMap.get("scheme");
-              String realm = (String) schemeMap.get("realm");
-              return realm != null ? scheme + " realm=\"" + realm + "\"" : scheme;
-            })
+        .map(schemeMap -> {
+          String scheme = (String) schemeMap.get("scheme");
+          String realm = (String) schemeMap.get("realm");
+          return realm != null ? scheme + " realm=\"" + realm + "\"" : scheme;
+        })
         .collect(Collectors.toList());
   }
 

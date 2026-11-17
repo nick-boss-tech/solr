@@ -51,33 +51,26 @@ public class TestSSLRandomization extends SolrCloudTestCase {
   /** Used by {@link #testSSLRandomizer} */
   @RandomizeSSL(ssl = 0.42, clientAuth = 0.33, reason = "foo")
   public static class FullyAnnotated {}
-  ;
 
   /** Used by {@link #testSSLRandomizer} */
   public static class InheritedFullyAnnotated extends FullyAnnotated {}
-  ;
 
   /** Used by {@link #testSSLRandomizer} */
   public static class NotAnnotated {}
-  ;
 
   /** Used by {@link #testSSLRandomizer} */
   public static class InheritedNotAnnotated extends NotAnnotated {}
-  ;
 
   /** Used by {@link #testSSLRandomizer} */
   @SuppressSSL(bugUrl = "fakeBugUrl")
   public static class Suppressed {}
-  ;
 
   /** Used by {@link #testSSLRandomizer} */
   public static class InheritedSuppressed extends Suppressed {}
-  ;
 
   /** Used by {@link #testSSLRandomizer} */
   @SuppressSSL(bugUrl = "fakeBugUrl")
   public static class InheritedAnnotationButSuppressed extends FullyAnnotated {}
-  ;
 
   /** Used by {@link #testSSLRandomizer} */
   @RandomizeSSL(ssl = 0.42, clientAuth = 0.33, reason = "foo")
@@ -89,63 +82,51 @@ public class TestSSLRandomization extends SolrCloudTestCase {
   }
 
   /** Used by {@link #testSSLRandomizer} */
-  @RandomizeSSL()
+  @RandomizeSSL
   public static class EmptyAnnotated {}
-  ;
 
   /** Used by {@link #testSSLRandomizer} */
   public static class InheritedEmptyAnnotated extends EmptyAnnotated {}
-  ;
 
   /** Used by {@link #testSSLRandomizer} */
   @RandomizeSSL(0.5)
   public static class InheritedEmptyAnnotationWithOverride extends EmptyAnnotated {}
-  ;
 
   /** Used by {@link #testSSLRandomizer} */
   @RandomizeSSL(ssl = 0.42, clientAuth = 0.33, reason = "foo")
   public static class GrandchildInheritedEmptyAnnotationWithOverride
       extends InheritedEmptyAnnotated {}
-  ;
 
   /** Used by {@link #testSSLRandomizer} */
   @RandomizeSSL(0.5)
   public static class SimplyAnnotated {}
-  ;
 
   /** Used by {@link #testSSLRandomizer} */
   @RandomizeSSL(0.0)
   public static class MinAnnotated {}
-  ;
 
   /** Used by {@link #testSSLRandomizer} */
   @RandomizeSSL(1)
   public static class MaxAnnotated {}
-  ;
 
   /** Used by {@link #testSSLRandomizer} */
   @RandomizeSSL(ssl = 0.42)
   public static class SSlButNoClientAuthAnnotated {}
-  ;
 
   /** Used by {@link #testSSLRandomizer} */
   @RandomizeSSL(clientAuth = 0.42)
   public static class ClientAuthButNoSSLAnnotated {}
-  ;
 
   /** Used by {@link #testSSLRandomizer} */
   @RandomizeSSL(ssl = 42.0)
   public static class SSLOutOfRangeAnnotated {}
-  ;
 
   /** Used by {@link #testSSLRandomizer} */
   @RandomizeSSL(clientAuth = 42.0)
   public static class ClientAuthOutOfRangeAnnotated {}
-  ;
 
   /** Used by {@link #testSSLRandomizer} */
   public static class InheritedOutOfRangeAnnotated extends ClientAuthOutOfRangeAnnotated {}
-  ;
 
   public void testSSLRandomizer() {
     SSLRandomizer r;

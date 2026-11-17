@@ -685,12 +685,11 @@ class SolrFilter extends Filter implements SolrRel {
     protected String toOrSetOnSameField(String solrField, RexCall search) {
       String orClause =
           search.getOperands().stream()
-              .map(
-                  n -> {
-                    RexCall next = (RexCall) n;
-                    RexLiteral lit = (RexLiteral) next.getOperands().get(1);
-                    return "\"" + toSolrLiteral(solrField, lit) + "\"";
-                  })
+              .map(n -> {
+                RexCall next = (RexCall) n;
+                RexLiteral lit = (RexLiteral) next.getOperands().get(1);
+                return "\"" + toSolrLiteral(solrField, lit) + "\"";
+              })
               .collect(Collectors.joining(" OR "));
       return "(" + orClause + ")";
     }

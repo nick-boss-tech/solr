@@ -77,7 +77,7 @@ public abstract class SolrRequest<T> implements Serializable {
             "Request contained unexpected HTTP method: " + methodStr);
       }
     }
-  };
+  }
 
   public enum ApiVersion {
     V1("/solr"),
@@ -101,12 +101,12 @@ public abstract class SolrRequest<T> implements Serializable {
     ADMIN,
     STREAMING,
     UNSPECIFIED
-  };
+  }
 
   public enum SolrClientContext {
     CLIENT,
     SERVER
-  };
+  }
 
   public static final Set<String> SUPPORTED_METHODS =
       Set.of(

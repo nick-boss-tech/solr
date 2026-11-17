@@ -89,10 +89,9 @@ public class TestObjectReleaseTracker extends SolrTestCaseJ4 {
     Object trackable = new Object();
 
     Future<?> result =
-        es.submit(
-            () -> {
-              ObjectReleaseTracker.track(trackable);
-            });
+        es.submit(() -> {
+          ObjectReleaseTracker.track(trackable);
+        });
 
     result.get(); // make sure that track has been called
     String message = ObjectReleaseTracker.clearObjectTrackerAndCheckEmpty();
@@ -106,13 +105,11 @@ public class TestObjectReleaseTracker extends SolrTestCaseJ4 {
     // Test the grandparent submitter case
     AtomicReference<Future<?>> indirectResult = new AtomicReference<>();
     result =
-        es.submit(
-            () ->
-                indirectResult.set(
-                    es.submit(
-                        () -> {
-                          ObjectReleaseTracker.track(trackable);
-                        })));
+        es.submit(() ->
+            indirectResult.set(
+                es.submit(() -> {
+                  ObjectReleaseTracker.track(trackable);
+                })));
 
     result.get();
     indirectResult.get().get();
@@ -129,16 +126,13 @@ public class TestObjectReleaseTracker extends SolrTestCaseJ4 {
     // recursively set
     AtomicReference<Future<?>> indirectIndirect = new AtomicReference<>();
     result =
-        es.submit(
-            () ->
-                indirectResult.set(
-                    es.submit(
-                        () ->
-                            indirectIndirect.set(
-                                es.submit(
-                                    () -> {
-                                      ObjectReleaseTracker.track(trackable);
-                                    })))));
+        es.submit(() ->
+            indirectResult.set(
+                es.submit(() ->
+                    indirectIndirect.set(
+                        es.submit(() -> {
+                          ObjectReleaseTracker.track(trackable);
+                        })))));
 
     result.get();
     indirectResult.get().get();

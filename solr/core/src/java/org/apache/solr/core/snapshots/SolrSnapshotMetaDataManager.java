@@ -247,10 +247,9 @@ public class SolrSnapshotMetaDataManager {
   public synchronized boolean isSnapshotted(String indexDirPath, long genNumber) {
     return !nameToDetailsMapping.isEmpty()
         && nameToDetailsMapping.values().stream()
-            .anyMatch(
-                entry ->
-                    entry.getIndexDirPath().equals(indexDirPath)
-                        && entry.getGenerationNumber() == genNumber);
+            .anyMatch(entry ->
+                entry.getIndexDirPath().equals(indexDirPath)
+                    && entry.getGenerationNumber() == genNumber);
   }
 
   /**

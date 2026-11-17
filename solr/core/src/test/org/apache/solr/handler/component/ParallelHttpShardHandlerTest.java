@@ -143,15 +143,14 @@ public class ParallelHttpShardHandlerTest extends SolrTestCaseJ4 {
             1, 1, 0L, TimeUnit.MILLISECONDS, new SynchronousQueue<>()); // default AbortPolicy
     try {
       // Occupy the single worker thread so the next submission has nowhere to go.
-      busyExecutor.execute(
-          () -> {
-            workerStarted.countDown();
-            try {
-              holdWorker.await();
-            } catch (InterruptedException e) {
-              Thread.currentThread().interrupt();
-            }
-          });
+      busyExecutor.execute(() -> {
+        workerStarted.countDown();
+        try {
+          holdWorker.await();
+        } catch (InterruptedException e) {
+          Thread.currentThread().interrupt();
+        }
+      });
       assertTrue("worker did not start within timeout", workerStarted.await(5, TimeUnit.SECONDS));
 
       ParallelHttpShardHandlerFactory factory = new ParallelHttpShardHandlerFactory();
@@ -319,12 +318,11 @@ public class ParallelHttpShardHandlerTest extends SolrTestCaseJ4 {
     //   (b) the inner future completing + its whenComplete adding to responses.
     LBAsyncSolrClient mockLb = Mockito.mock(LBAsyncSolrClient.class);
     Mockito.when(mockLb.requestAsync(Mockito.any(LBSolrClient.Req.class)))
-        .thenAnswer(
-            inv -> {
-              CompletableFuture<LBSolrClient.Rsp> f = new CompletableFuture<>();
-              mockIoThreads.execute(() -> f.complete(new LBSolrClient.Rsp()));
-              return f;
-            });
+        .thenAnswer(inv -> {
+          CompletableFuture<LBSolrClient.Rsp> f = new CompletableFuture<>();
+          mockIoThreads.execute(() -> f.complete(new LBSolrClient.Rsp()));
+          return f;
+        });
     handler.lbClient = mockLb;
 
     // Single-shard submit → take. This is the simplest real workload. Under async inner-future

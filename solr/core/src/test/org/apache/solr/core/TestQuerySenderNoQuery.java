@@ -67,29 +67,28 @@ public class TestQuerySenderNoQuery extends SolrTestCaseJ4 {
     QuerySenderListener qsl = (QuerySenderListener) newSearcherListener;
 
     h.getCore()
-        .withSearcher(
-            currentSearcher -> {
-              SolrIndexSearcher dummy = null;
-              qsl.newSearcher(currentSearcher, dummy); // test first Searcher (since param is null)
-              MockQuerySenderListenerReqHandler mock =
-                  (MockQuerySenderListenerReqHandler) core.getRequestHandler("/mock");
-              assertNotNull("Mock is null", mock);
-              assertNull("Req (firstsearcher) is not null", mock.req);
+        .withSearcher(currentSearcher -> {
+          SolrIndexSearcher dummy = null;
+          qsl.newSearcher(currentSearcher, dummy); // test first Searcher (since param is null)
+          MockQuerySenderListenerReqHandler mock =
+              (MockQuerySenderListenerReqHandler) core.getRequestHandler("/mock");
+          assertNotNull("Mock is null", mock);
+          assertNull("Req (firstsearcher) is not null", mock.req);
 
-              SolrIndexSearcher newSearcher =
-                  new SolrIndexSearcher(
-                      core,
-                      core.getNewIndexDir(),
-                      core.getLatestSchema(),
-                      core.getSolrConfig().indexConfig,
-                      "testQuerySenderNoQuery",
-                      false,
-                      core.getDirectoryFactory());
+          SolrIndexSearcher newSearcher =
+              new SolrIndexSearcher(
+                  core,
+                  core.getNewIndexDir(),
+                  core.getLatestSchema(),
+                  core.getSolrConfig().indexConfig,
+                  "testQuerySenderNoQuery",
+                  false,
+                  core.getDirectoryFactory());
 
-              qsl.newSearcher(newSearcher, currentSearcher); // get newSearcher.
-              assertNull("Req (newsearcher) is not null", mock.req);
-              newSearcher.close();
-              return null;
-            });
+          qsl.newSearcher(newSearcher, currentSearcher); // get newSearcher.
+          assertNull("Req (newsearcher) is not null", mock.req);
+          newSearcher.close();
+          return null;
+        });
   }
 }

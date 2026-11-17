@@ -185,17 +185,16 @@ public class ExportWriter implements SolrCore.RawWriter, Closeable {
 
   protected void writeException(Exception e, PushWriter w, boolean logException)
       throws IOException {
-    w.writeMap(
-        mw -> {
-          mw.put("responseHeader", Map.of("status", 400))
-              .put(
-                  "response",
-                  Map.of(
-                      "numFound",
-                      0,
-                      "docs",
-                      List.of(Map.of("EXCEPTION", String.valueOf(e.getMessage())))));
-        });
+    w.writeMap(mw -> {
+      mw.put("responseHeader", Map.of("status", 400))
+          .put(
+              "response",
+              Map.of(
+                  "numFound",
+                  0,
+                  "docs",
+                  List.of(Map.of("EXCEPTION", String.valueOf(e.getMessage())))));
+    });
     if (logException) {
       log.error("Exception", e);
     }
@@ -347,17 +346,16 @@ public class ExportWriter implements SolrCore.RawWriter, Closeable {
     }
 
     try {
-      writer.writeMap(
-          m -> {
-            m.put("responseHeader", Map.of("status", 0));
-            m.put(
-                "response",
-                (MapWriter)
-                    mw -> {
-                      mw.put("numFound", totalHits);
-                      mw.put("docs", (IteratorWriter) iw -> writeDocs(req, os, iw, sort));
-                    });
-          });
+      writer.writeMap(m -> {
+        m.put("responseHeader", Map.of("status", 0));
+        m.put(
+            "response",
+            (MapWriter)
+                mw -> {
+                  mw.put("numFound", totalHits);
+                  mw.put("docs", (IteratorWriter) iw -> writeDocs(req, os, iw, sort));
+                });
+      });
     } catch (EOFException e) {
       log.info("Caught Eof likely caused by early client disconnect");
     }
@@ -418,69 +416,67 @@ public class ExportWriter implements SolrCore.RawWriter, Closeable {
         buffers.getWriter().add((MapWriter) ew -> Tuple.EXCEPTION(e, true).writeMap(ew));
         return;
       }
-      buffers.run(
-          () -> {
-            for (; ; ) {
-              if (Thread.currentThread().isInterrupted()) {
-                break;
-              }
-              final Tuple t;
-              try {
-                t = tupleStream.read();
-              } catch (final Exception e) {
-                buffers.getWriter().add((MapWriter) ew -> Tuple.EXCEPTION(e, true).writeMap(ew));
-                break;
-              }
-              if (t == null) {
-                break;
-              }
-              if (t.EOF && !t.EXCEPTION) {
-                break;
-              }
-              // use decorated writer to monitor the number of output writes
-              // and flush the output quickly in case of very few (reduced) output items
-              buffers.getWriter().add((MapWriter) ew -> t.writeMap(ew));
-              if (t.EXCEPTION && t.EOF) {
-                break;
-              }
-            }
-            return true;
-          });
+      buffers.run(() -> {
+        for (; ; ) {
+          if (Thread.currentThread().isInterrupted()) {
+            break;
+          }
+          final Tuple t;
+          try {
+            t = tupleStream.read();
+          } catch (final Exception e) {
+            buffers.getWriter().add((MapWriter) ew -> Tuple.EXCEPTION(e, true).writeMap(ew));
+            break;
+          }
+          if (t == null) {
+            break;
+          }
+          if (t.EOF && !t.EXCEPTION) {
+            break;
+          }
+          // use decorated writer to monitor the number of output writes
+          // and flush the output quickly in case of very few (reduced) output items
+          buffers.getWriter().add((MapWriter) ew -> t.writeMap(ew));
+          if (t.EXCEPTION && t.EOF) {
+            break;
+          }
+        }
+        return true;
+      });
       tupleStream.close();
     } else {
-      buffers.run(
-          () -> {
-            // get the initial buffer
-            log.debug("--- writer init exchanging from empty");
-            buffers.exchangeBuffers();
-            ExportBuffers.Buffer buffer = buffers.getOutputBuffer();
-            log.debug("--- writer init got {}", buffer);
-            while (buffer.outDocsIndex != ExportBuffers.Buffer.NO_MORE_DOCS) {
-              if (Thread.currentThread().isInterrupted()) {
-                log.debug("--- writer interrupted");
-                break;
-              }
-              for (int i = 0; i <= buffer.outDocsIndex; ++i) {
-                // we're using the raw writer here because there's no potential
-                // reduction in the number of output items, unlike when using
-                // streaming expressions
-                final SortDoc currentDoc = buffer.outDocs[i];
-                writer.add((MapWriter) ew -> writeDoc(currentDoc, leaves, ew, fieldWriters));
-              }
-              // log.debug("--- writer exchanging from {}", buffer);
-              long startExchangeBuffers = System.nanoTime();
-              buffers.exchangeBuffers();
-              long endExchangeBuffers = System.nanoTime();
-              if (log.isDebugEnabled()) {
-                log.debug(
-                    "Waited for reader thread {}:",
-                    Long.toString(((endExchangeBuffers - startExchangeBuffers) / 1000000)));
-              }
-              buffer = buffers.getOutputBuffer();
-              // log.debug("--- writer got {}", buffer);
-            }
-            return true;
-          });
+      buffers.run(() -> {
+        // get the initial buffer
+        log.debug("--- writer init exchanging from empty");
+        buffers.exchangeBuffers();
+        ExportBuffers.Buffer buffer = buffers.getOutputBuffer();
+        log.debug("--- writer init got {}", buffer);
+        while (buffer.outDocsIndex != ExportBuffers.Buffer.NO_MORE_DOCS) {
+          if (Thread.currentThread().isInterrupted()) {
+            log.debug("--- writer interrupted");
+            break;
+          }
+          for (int i = 0; i <= buffer.outDocsIndex; ++i) {
+            // we're using the raw writer here because there's no potential
+            // reduction in the number of output items, unlike when using
+            // streaming expressions
+            final SortDoc currentDoc = buffer.outDocs[i];
+            writer.add((MapWriter) ew -> writeDoc(currentDoc, leaves, ew, fieldWriters));
+          }
+          // log.debug("--- writer exchanging from {}", buffer);
+          long startExchangeBuffers = System.nanoTime();
+          buffers.exchangeBuffers();
+          long endExchangeBuffers = System.nanoTime();
+          if (log.isDebugEnabled()) {
+            log.debug(
+                "Waited for reader thread {}:",
+                Long.toString(((endExchangeBuffers - startExchangeBuffers) / 1000000)));
+          }
+          buffer = buffers.getOutputBuffer();
+          // log.debug("--- writer got {}", buffer);
+        }
+        return true;
+      });
       if (null != buffers.getError()) {
         throw new IOException(buffers.getError().getMessage(), buffers.getError());
       }

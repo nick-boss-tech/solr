@@ -109,15 +109,15 @@ class MultiFieldWriter extends FieldWriter {
   static LongFunction<Object> bitsToValue(FieldType fieldType) {
     switch (fieldType.getNumberType()) {
       case LONG:
-        return (bits) -> bits;
+        return bits -> bits;
       case DATE:
-        return (bits) -> new Date(bits);
+        return bits -> new Date(bits);
       case INTEGER:
-        return (bits) -> (int) bits;
+        return bits -> (int) bits;
       case FLOAT:
-        return (bits) -> NumericUtils.sortableIntToFloat((int) bits);
+        return bits -> NumericUtils.sortableIntToFloat((int) bits);
       case DOUBLE:
-        return (bits) -> NumericUtils.sortableLongToDouble(bits);
+        return bits -> NumericUtils.sortableLongToDouble(bits);
       default:
         throw new AssertionError("Unsupported NumberType: " + fieldType.getNumberType());
     }

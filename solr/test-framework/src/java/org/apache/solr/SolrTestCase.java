@@ -174,7 +174,7 @@ public class SolrTestCase extends LuceneTestCase {
   private static void injectRandomTraceRecordingFlag() {
     TraceUtils.IS_RECORDING =
         LuceneTestCase.rarely()
-            ? (ignored) -> true
+            ? ignored -> true
             : TraceUtils.DEFAULT_IS_RECORDING; // honors Span::isRecording
   }
 

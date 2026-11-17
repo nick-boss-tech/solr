@@ -69,40 +69,39 @@ public class DirectSolrSpellCheckerTest extends SolrTestCaseJ4 {
     checker.init(spellchecker, core);
 
     h.getCore()
-        .withSearcher(
-            searcher -> {
+        .withSearcher(searcher -> {
 
-              // check that 'fob' is corrected to 'foo'
-              List<SpellCheckToken> tokens = SpellCheckToken.drain(queryConverter.convert("fob"));
-              SpellingOptions spellOpts = new SpellingOptions(tokens, searcher.getIndexReader());
-              SpellingResult result = checker.getSuggestions(spellOpts);
-              assertNotNull("result shouldn't be null", result);
-              Map<String, Integer> suggestions = result.get(spellOpts.tokens.get(0));
-              assertFalse("suggestions shouldn't be empty", suggestions.isEmpty());
-              Map.Entry<String, Integer> entry = suggestions.entrySet().iterator().next();
-              assertEquals("foo", entry.getKey());
-              assertNotEquals(
-                  entry.getValue() + " equals: " + SpellingResult.NO_FREQUENCY_INFO,
-                  SpellingResult.NO_FREQUENCY_INFO,
-                  (int) entry.getValue());
+          // check that 'fob' is corrected to 'foo'
+          List<SpellCheckToken> tokens = SpellCheckToken.drain(queryConverter.convert("fob"));
+          SpellingOptions spellOpts = new SpellingOptions(tokens, searcher.getIndexReader());
+          SpellingResult result = checker.getSuggestions(spellOpts);
+          assertNotNull("result shouldn't be null", result);
+          Map<String, Integer> suggestions = result.get(spellOpts.tokens.get(0));
+          assertFalse("suggestions shouldn't be empty", suggestions.isEmpty());
+          Map.Entry<String, Integer> entry = suggestions.entrySet().iterator().next();
+          assertEquals("foo", entry.getKey());
+          assertNotEquals(
+              entry.getValue() + " equals: " + SpellingResult.NO_FREQUENCY_INFO,
+              SpellingResult.NO_FREQUENCY_INFO,
+              (int) entry.getValue());
 
-              // check that 'super' is *not* corrected
-              spellOpts.tokens = SpellCheckToken.drain(queryConverter.convert("super"));
-              result = checker.getSuggestions(spellOpts);
-              assertNotNull("result shouldn't be null", result);
-              suggestions = result.get(spellOpts.tokens.get(0));
-              assertNotNull("suggestions shouldn't be null", suggestions);
-              assertTrue("suggestions should be empty", suggestions.isEmpty());
+          // check that 'super' is *not* corrected
+          spellOpts.tokens = SpellCheckToken.drain(queryConverter.convert("super"));
+          result = checker.getSuggestions(spellOpts);
+          assertNotNull("result shouldn't be null", result);
+          suggestions = result.get(spellOpts.tokens.get(0));
+          assertNotNull("suggestions shouldn't be null", suggestions);
+          assertTrue("suggestions should be empty", suggestions.isEmpty());
 
-              // Check empty token due to spellcheck.q = ""
-              spellOpts.tokens = SpellCheckToken.drain(singleEmptyTermTokenStream());
-              result = checker.getSuggestions(spellOpts);
-              assertNotNull("result shouldn't be null", result);
-              suggestions = result.get(new SpellCheckToken("", 0, 0));
-              assertNotNull("suggestions shouldn't be null", suggestions);
-              assertTrue("suggestions should be empty", suggestions.isEmpty());
-              return null;
-            });
+          // Check empty token due to spellcheck.q = ""
+          spellOpts.tokens = SpellCheckToken.drain(singleEmptyTermTokenStream());
+          result = checker.getSuggestions(spellOpts);
+          assertNotNull("result shouldn't be null", result);
+          suggestions = result.get(new SpellCheckToken("", 0, 0));
+          assertNotNull("suggestions shouldn't be null", suggestions);
+          assertTrue("suggestions should be empty", suggestions.isEmpty());
+          return null;
+        });
   }
 
   @Test
@@ -147,25 +146,23 @@ public class DirectSolrSpellCheckerTest extends SolrTestCaseJ4 {
     checker.init(spellchecker, core);
 
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              List<SpellCheckToken> tokens =
-                  SpellCheckToken.drain(queryConverter.convert("anothar"));
-              SpellingOptions spellOpts = new SpellingOptions(tokens, searcher.getIndexReader());
-              SpellingResult result = checker.getSuggestions(spellOpts);
-              assertNotNull("result shouldn't be null", result);
-              Map<String, Integer> suggestions = result.get(spellOpts.tokens.get(0));
-              assertNotNull("suggestions shouldn't be null", suggestions);
+        .withSearcher(searcher -> {
+          List<SpellCheckToken> tokens = SpellCheckToken.drain(queryConverter.convert("anothar"));
+          SpellingOptions spellOpts = new SpellingOptions(tokens, searcher.getIndexReader());
+          SpellingResult result = checker.getSuggestions(spellOpts);
+          assertNotNull("result shouldn't be null", result);
+          Map<String, Integer> suggestions = result.get(spellOpts.tokens.get(0));
+          assertNotNull("suggestions shouldn't be null", suggestions);
 
-              if (limitQueryLength) {
-                assertTrue("suggestions should be empty", suggestions.isEmpty());
-              } else {
-                assertFalse("suggestions shouldn't be empty", suggestions.isEmpty());
-                Map.Entry<String, Integer> entry = suggestions.entrySet().iterator().next();
-                assertEquals("another", entry.getKey());
-              }
+          if (limitQueryLength) {
+            assertTrue("suggestions should be empty", suggestions.isEmpty());
+          } else {
+            assertFalse("suggestions shouldn't be empty", suggestions.isEmpty());
+            Map.Entry<String, Integer> entry = suggestions.entrySet().iterator().next();
+            assertEquals("another", entry.getKey());
+          }
 
-              return null;
-            });
+          return null;
+        });
   }
 }

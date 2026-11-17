@@ -104,27 +104,21 @@ public class TestCloudSchemaless extends AbstractFullDistribZkTestBase {
 
     String[] expectedFields = getExpectedFieldResponses(docNumber);
     // Check that all the fields were added
-    forAllRestTestHarnesses(
-        client -> {
-          try {
-            String request = "/schema/fields?wt=xml";
-            String response = client.query(request);
-            String result = BaseTestHarness.validateXPath(response, expectedFields);
-            if (result != null) {
-              String msg =
-                  "QUERY FAILED: xpath="
-                      + result
-                      + "  request="
-                      + request
-                      + "  response="
-                      + response;
-              log.error(msg);
-              fail(msg);
-            }
-          } catch (Exception ex) {
-            fail("Caught exception: " + ex);
-          }
-        });
+    forAllRestTestHarnesses(client -> {
+      try {
+        String request = "/schema/fields?wt=xml";
+        String response = client.query(request);
+        String result = BaseTestHarness.validateXPath(response, expectedFields);
+        if (result != null) {
+          String msg =
+              "QUERY FAILED: xpath=" + result + "  request=" + request + "  response=" + response;
+          log.error(msg);
+          fail(msg);
+        }
+      } catch (Exception ex) {
+        fail("Caught exception: " + ex);
+      }
+    });
 
     // Now, let's ensure that writing the same field with two different types fails
     int failTrials = 50;

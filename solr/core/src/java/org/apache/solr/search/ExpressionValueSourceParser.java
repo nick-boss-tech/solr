@@ -77,10 +77,9 @@ public class ExpressionValueSourceParser extends ValueSourceParser {
   private void initConfiguredExpression(NamedList<?> args) {
     String expressionStr =
         Optional.ofNullable((String) args.remove(EXPRESSION_KEY))
-            .orElseThrow(
-                () ->
-                    new SolrException(
-                        SERVER_ERROR, EXPRESSION_KEY + " must be configured with an expression"));
+            .orElseThrow(() ->
+                new SolrException(
+                    SERVER_ERROR, EXPRESSION_KEY + " must be configured with an expression"));
 
     // Find the highest positional argument in the expression
     Pattern pattern = Pattern.compile("\\$(\\d+)");

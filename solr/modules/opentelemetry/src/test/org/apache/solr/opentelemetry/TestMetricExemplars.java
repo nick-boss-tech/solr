@@ -78,11 +78,10 @@ public class TestMetricExemplars extends SolrCloudTestCase {
       var line =
           output
               .lines()
-              .filter(
-                  l ->
-                      l.startsWith("solr_core_requests_total")
-                          && l.contains("handler=\"/update\"")
-                          && l.contains("collection=\"collection1\""))
+              .filter(l ->
+                  l.startsWith("solr_core_requests_total")
+                      && l.contains("handler=\"/update\"")
+                      && l.contains("collection=\"collection1\""))
               .findFirst()
               .orElseThrow(
                   () -> new AssertionError("Could not find /update solr_core_requests_total"));

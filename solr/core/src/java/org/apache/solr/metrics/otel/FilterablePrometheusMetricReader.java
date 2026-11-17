@@ -107,15 +107,14 @@ public class FilterablePrometheusMetricReader implements MetricReader, MultiColl
     // compare against the Prometheus base name returned by getMetadata().getPrometheusName().
     Set<String> sanitizedNames =
         includedNames.stream()
-            .map(
-                (name) -> {
-                  for (String suffix : PROM_SUFFIXES) {
-                    if (name.endsWith(suffix)) {
-                      return name.substring(0, name.lastIndexOf(suffix));
-                    }
-                  }
-                  return name;
-                })
+            .map(name -> {
+              for (String suffix : PROM_SUFFIXES) {
+                if (name.endsWith(suffix)) {
+                  return name.substring(0, name.lastIndexOf(suffix));
+                }
+              }
+              return name;
+            })
             .collect(Collectors.toSet());
 
     MetricSnapshots snapshotsToFilter;

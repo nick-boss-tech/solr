@@ -435,17 +435,16 @@ public abstract class AbstractInstallShardTest extends SolrCloudTestCase {
     for (int i = 0; i < multiShardUris.length; i++) {
       final String shardName = "shard" + (i + 1);
       final String dataLocation = multiShardUris[i].toString();
-      tasks.add(
-          () -> {
-            try {
-              CollectionAdminRequest.installDataToShard(
-                      collectionName, shardName, dataLocation, BACKUP_REPO_NAME)
-                  .process(solrClient);
-              return null;
-            } catch (Exception e) {
-              return e;
-            }
-          });
+      tasks.add(() -> {
+        try {
+          CollectionAdminRequest.installDataToShard(
+                  collectionName, shardName, dataLocation, BACKUP_REPO_NAME)
+              .process(solrClient);
+          return null;
+        } catch (Exception e) {
+          return e;
+        }
+      });
     }
 
     final ExecutorService executor =
@@ -455,18 +454,17 @@ public abstract class AbstractInstallShardTest extends SolrCloudTestCase {
     final List<Future<Exception>> futures = executor.invokeAll(tasks, 30, TimeUnit.SECONDS);
     try {
       futures.stream()
-          .forEach(
-              future -> {
-                assertTrue("Shard installation exceeded the test timeout", future.isDone());
-                try {
-                  assertFalse(
-                      "Shard installation was cancelled after timing out.", future.isCancelled());
-                  final Exception e = future.get();
-                  assertNull("Shard installation failed with exception " + e, e);
-                } catch (InterruptedException | ExecutionException e) {
-                  throw new RuntimeException(e);
-                }
-              });
+          .forEach(future -> {
+            assertTrue("Shard installation exceeded the test timeout", future.isDone());
+            try {
+              assertFalse(
+                  "Shard installation was cancelled after timing out.", future.isCancelled());
+              final Exception e = future.get();
+              assertNull("Shard installation failed with exception " + e, e);
+            } catch (InterruptedException | ExecutionException e) {
+              throw new RuntimeException(e);
+            }
+          });
 
       executor.shutdown();
       executor.awaitTermination(10, TimeUnit.SECONDS);

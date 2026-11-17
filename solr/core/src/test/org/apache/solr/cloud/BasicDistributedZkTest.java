@@ -1096,20 +1096,19 @@ public class BasicDistributedZkTest extends AbstractFullDistribZkTestBase {
     }
     for (int i = 0; i < numReplicas; i++) {
       final int freezeI = i;
-      executor.execute(
-          () -> {
-            try {
-              assertTrue(
-                  CollectionAdminRequest.addReplicaToShard(
-                          collection, "shard" + ((freezeI % numShards) + 1))
-                      .setCoreName(collection + freezeI)
-                      .setNode(nodeName)
-                      .process(client)
-                      .isSuccess());
-            } catch (SolrServerException | IOException e) {
-              throw new RuntimeException(e);
-            }
-          });
+      executor.execute(() -> {
+        try {
+          assertTrue(
+              CollectionAdminRequest.addReplicaToShard(
+                      collection, "shard" + ((freezeI % numShards) + 1))
+                  .setCoreName(collection + freezeI)
+                  .setNode(nodeName)
+                  .process(client)
+                  .isSuccess());
+        } catch (SolrServerException | IOException e) {
+          throw new RuntimeException(e);
+        }
+      });
     }
   }
 
@@ -1285,11 +1284,10 @@ public class BasicDistributedZkTest extends AbstractFullDistribZkTestBase {
         return (long)
             output
                 .lines()
-                .filter(
-                    l ->
-                        l.startsWith(metricName)
-                            && l.contains("collection=\"" + collection + "\"")
-                            && l.contains("ops=\"commits\""))
+                .filter(l ->
+                    l.startsWith(metricName)
+                        && l.contains("collection=\"" + collection + "\"")
+                        && l.contains("ops=\"commits\""))
                 .mapToDouble(s -> Double.parseDouble(s.substring(s.lastIndexOf(" "))))
                 .sum();
       }

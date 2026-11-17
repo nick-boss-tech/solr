@@ -200,13 +200,12 @@ public class SolrDocument extends SolrDocumentBase<Object, SolrDocument>
   /** Get the value or collection of values for a given field. */
   public Map<String, Object> getSubsetOfFields(Set<String> fieldNames) {
     final HashMap<String, Object> subset = CollectionUtil.newHashMap(fieldNames.size());
-    fieldNames.forEach(
-        f -> {
-          Object v = getFieldValue(f);
-          if (v != null) {
-            subset.put(f, getFieldValue(f));
-          }
-        });
+    fieldNames.forEach(f -> {
+      Object v = getFieldValue(f);
+      if (v != null) {
+        subset.put(f, getFieldValue(f));
+      }
+    });
     return subset;
   }
 

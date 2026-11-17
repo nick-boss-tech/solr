@@ -124,10 +124,9 @@ public class CollectionsRepairEventListener
     // add any new lost nodes (old lost nodes are skipped)
     event
         .getNodeNames()
-        .forEachRemaining(
-            lostNode ->
-                nodeNameVsTimeRemoved.computeIfAbsent(
-                    lostNode, n -> solrCloudManager.getTimeSource().getTimeNs()));
+        .forEachRemaining(lostNode ->
+            nodeNameVsTimeRemoved.computeIfAbsent(
+                lostNode, n -> solrCloudManager.getTimeSource().getTimeNs()));
   }
 
   private void runRepair() {
@@ -139,14 +138,13 @@ public class CollectionsRepairEventListener
       log.debug("-- runRepair for {} lost nodes", nodeNameVsTimeRemoved.size());
     }
     Set<String> reallyLostNodes = new HashSet<>();
-    nodeNameVsTimeRemoved.forEach(
-        (lostNode, timeRemoved) -> {
-          long now = solrCloudManager.getTimeSource().getTimeNs();
-          long te = TimeUnit.SECONDS.convert(now - timeRemoved, TimeUnit.NANOSECONDS);
-          if (te >= waitForSecond) {
-            reallyLostNodes.add(lostNode);
-          }
-        });
+    nodeNameVsTimeRemoved.forEach((lostNode, timeRemoved) -> {
+      long now = solrCloudManager.getTimeSource().getTimeNs();
+      long te = TimeUnit.SECONDS.convert(now - timeRemoved, TimeUnit.NANOSECONDS);
+      if (te >= waitForSecond) {
+        reallyLostNodes.add(lostNode);
+      }
+    });
     if (reallyLostNodes.isEmpty()) {
       if (log.isDebugEnabled()) {
         log.debug(
@@ -168,37 +166,33 @@ public class CollectionsRepairEventListener
       solrCloudManager
           .getClusterState()
           .collectionStream()
-          .forEach(
-              coll -> {
-                // shard / number of replicas per type
-                Map<String, ReplicaCount> lostReplicas = new HashMap<>();
-                coll.forEachReplica(
-                    (shard, replica) -> {
-                      if (reallyLostNodes.contains(replica.getNodeName())) {
-                        lostReplicas
-                            .computeIfAbsent(shard, s -> ReplicaCount.empty())
-                            .increment(replica.type);
-                      }
-                    });
-                Assign.AssignStrategy assignStrategy = Assign.createAssignStrategy(cc);
-                lostReplicas.forEach(
-                    (shard, types) -> {
-                      Assign.AssignRequest assignRequest =
-                          new Assign.AssignRequestBuilder()
-                              .forCollection(coll.getName())
-                              .forShard(List.of(shard))
-                              .assignReplicas(types)
-                              .build();
-                      try {
-                        List<ReplicaPosition> positions =
-                            assignStrategy.assign(solrCloudManager, assignRequest);
-                        newPositions.put(coll.getName(), positions);
-                      } catch (Exception e) {
-                        log.warn(
-                            "Exception computing positions for {}/{}", coll.getName(), shard, e);
-                      }
-                    });
-              });
+          .forEach(coll -> {
+            // shard / number of replicas per type
+            Map<String, ReplicaCount> lostReplicas = new HashMap<>();
+            coll.forEachReplica((shard, replica) -> {
+              if (reallyLostNodes.contains(replica.getNodeName())) {
+                lostReplicas
+                    .computeIfAbsent(shard, s -> ReplicaCount.empty())
+                    .increment(replica.type);
+              }
+            });
+            Assign.AssignStrategy assignStrategy = Assign.createAssignStrategy(cc);
+            lostReplicas.forEach((shard, types) -> {
+              Assign.AssignRequest assignRequest =
+                  new Assign.AssignRequestBuilder()
+                      .forCollection(coll.getName())
+                      .forShard(List.of(shard))
+                      .assignReplicas(types)
+                      .build();
+              try {
+                List<ReplicaPosition> positions =
+                    assignStrategy.assign(solrCloudManager, assignRequest);
+                newPositions.put(coll.getName(), positions);
+              } catch (Exception e) {
+                log.warn("Exception computing positions for {}/{}", coll.getName(), shard, e);
+              }
+            });
+          });
     } catch (IOException e) {
       log.warn("Exception getting cluster state", e);
       return;
@@ -210,25 +204,21 @@ public class CollectionsRepairEventListener
     // send ADDREPLICA admin requests for each lost replica
     // XXX should we use 'async' for that, to avoid blocking here?
     List<CollectionAdminRequest.AddReplica> addReplicas = new ArrayList<>();
-    newPositions.forEach(
-        (collection, positions) ->
-            positions.forEach(
-                position -> {
-                  CollectionAdminRequest.AddReplica addReplica =
-                      CollectionAdminRequest.addReplicaToShard(
-                          collection, position.shard, position.type);
-                  addReplica.setNode(position.node);
-                  addReplica.setAsyncId(ASYNC_ID_PREFIX + counter.incrementAndGet());
-                  addReplicas.add(addReplica);
-                }));
-    addReplicas.forEach(
-        addReplica -> {
-          try {
-            solrClient.request(addReplica);
-          } catch (Exception e) {
-            log.warn("Exception calling ADDREPLICA {}", addReplica.getParams().toQueryString(), e);
-          }
-        });
+    newPositions.forEach((collection, positions) ->
+        positions.forEach(position -> {
+          CollectionAdminRequest.AddReplica addReplica =
+              CollectionAdminRequest.addReplicaToShard(collection, position.shard, position.type);
+          addReplica.setNode(position.node);
+          addReplica.setAsyncId(ASYNC_ID_PREFIX + counter.incrementAndGet());
+          addReplicas.add(addReplica);
+        }));
+    addReplicas.forEach(addReplica -> {
+      try {
+        solrClient.request(addReplica);
+      } catch (Exception e) {
+        log.warn("Exception calling ADDREPLICA {}", addReplica.getParams().toQueryString(), e);
+      }
+    });
   }
 
   @Override

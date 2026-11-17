@@ -39,19 +39,19 @@ public class SchemaChangeOperationSerializationTest extends SolrTestCase {
   public void testAddFieldType() throws Exception {
     final var inputJson =
         """
-            {
-              "operationType": "add-field-type",
-              "name": "my-new-field-type",
-              "class": "org.apache.my.ClassName",
-              "positionIncrementGap": 100,
-              "analyzer" : {
-                "charFilters":[],
-                "tokenizer":{
-                  "name":"whitespace"
-                }
-              }
+        {
+          "operationType": "add-field-type",
+          "name": "my-new-field-type",
+          "class": "org.apache.my.ClassName",
+          "positionIncrementGap": 100,
+          "analyzer" : {
+            "charFilters":[],
+            "tokenizer":{
+              "name":"whitespace"
             }
-            """;
+          }
+        }
+        """;
 
     final var parsedGeneric = OBJECT_MAPPER.readValue(inputJson, SchemaChange.class);
 
@@ -74,13 +74,13 @@ public class SchemaChangeOperationSerializationTest extends SolrTestCase {
   public void testAddCopyField() throws Exception {
     final var inputJson =
         """
-            {
-              "operationType": "add-copy-field",
-              "source": "source1",
-              "destinations": ["dest1", "dest2"],
-              "maxChars": 123
-            }
-            """;
+        {
+          "operationType": "add-copy-field",
+          "source": "source1",
+          "destinations": ["dest1", "dest2"],
+          "maxChars": 123
+        }
+        """;
 
     final var parsedGeneric = OBJECT_MAPPER.readValue(inputJson, SchemaChange.class);
 
@@ -96,13 +96,13 @@ public class SchemaChangeOperationSerializationTest extends SolrTestCase {
   public void testAddCopyFieldAltFieldName() throws Exception {
     final var inputJson =
         """
-                {
-                  "operationType": "add-copy-field",
-                  "source": "source1",
-                  "dest": ["dest1", "dest2"],
-                  "maxChars": 123
-                }
-                """;
+        {
+          "operationType": "add-copy-field",
+          "source": "source1",
+          "dest": ["dest1", "dest2"],
+          "maxChars": 123
+        }
+        """;
 
     final var parsedGeneric = OBJECT_MAPPER.readValue(inputJson, SchemaChange.class);
 
@@ -117,13 +117,13 @@ public class SchemaChangeOperationSerializationTest extends SolrTestCase {
   public void testAddField() throws Exception {
     final var inputJson =
         """
-            {
-              "operationType": "add-field",
-              "name": "my-new-field",
-              "type": "fieldType",
-              "stored": true
-            }
-            """;
+        {
+          "operationType": "add-field",
+          "name": "my-new-field",
+          "type": "fieldType",
+          "stored": true
+        }
+        """;
 
     final var parsedGeneric = OBJECT_MAPPER.readValue(inputJson, SchemaChange.class);
 
@@ -140,13 +140,13 @@ public class SchemaChangeOperationSerializationTest extends SolrTestCase {
   public void testAddDynamicField() throws Exception {
     final var inputJson =
         """
-            {
-              "operationType": "add-dynamic-field",
-              "name": "_abc",
-              "type": "fieldType",
-              "stored": true
-            }
-            """;
+        {
+          "operationType": "add-dynamic-field",
+          "name": "_abc",
+          "type": "fieldType",
+          "stored": true
+        }
+        """;
 
     final var parsedGeneric = OBJECT_MAPPER.readValue(inputJson, SchemaChange.class);
 
@@ -163,11 +163,11 @@ public class SchemaChangeOperationSerializationTest extends SolrTestCase {
   public void testDeleteFieldType() throws Exception {
     final var inputJson =
         """
-            {
-              "operationType": "delete-field-type",
-              "name": "myFieldTypeName"
-            }
-            """;
+        {
+          "operationType": "delete-field-type",
+          "name": "myFieldTypeName"
+        }
+        """;
 
     final var parsedGeneric = OBJECT_MAPPER.readValue(inputJson, SchemaChange.class);
 
@@ -180,12 +180,12 @@ public class SchemaChangeOperationSerializationTest extends SolrTestCase {
   public void testDeleteCopyField() throws Exception {
     final var inputJson =
         """
-                {
-                  "operationType": "delete-copy-field",
-                  "source": "source1",
-                  "destinations": ["dest1", "dest2"]
-                }
-                """;
+        {
+          "operationType": "delete-copy-field",
+          "source": "source1",
+          "destinations": ["dest1", "dest2"]
+        }
+        """;
 
     final var parsedGeneric = OBJECT_MAPPER.readValue(inputJson, SchemaChange.class);
 
@@ -200,12 +200,12 @@ public class SchemaChangeOperationSerializationTest extends SolrTestCase {
   public void testDeleteCopyFieldAltFieldName() throws Exception {
     final var inputJson =
         """
-            {
-              "operationType": "delete-copy-field",
-              "source": "source1",
-              "dest": ["dest1", "dest2"]
-            }
-            """;
+        {
+          "operationType": "delete-copy-field",
+          "source": "source1",
+          "dest": ["dest1", "dest2"]
+        }
+        """;
 
     final var parsedGeneric = OBJECT_MAPPER.readValue(inputJson, SchemaChange.class);
 
@@ -219,11 +219,11 @@ public class SchemaChangeOperationSerializationTest extends SolrTestCase {
   public void testDeleteField() throws Exception {
     final var inputJson =
         """
-            {
-              "operationType": "delete-field",
-              "name": "myFieldName"
-            }
-            """;
+        {
+          "operationType": "delete-field",
+          "name": "myFieldName"
+        }
+        """;
 
     final var parsedGeneric = OBJECT_MAPPER.readValue(inputJson, SchemaChange.class);
 
@@ -236,11 +236,11 @@ public class SchemaChangeOperationSerializationTest extends SolrTestCase {
   public void testDeleteDynamicField() throws Exception {
     final var inputJson =
         """
-            {
-              "operationType": "delete-dynamic-field",
-              "name": "_abc"
-            }
-            """;
+        {
+          "operationType": "delete-dynamic-field",
+          "name": "_abc"
+        }
+        """;
 
     final var parsedGeneric = OBJECT_MAPPER.readValue(inputJson, SchemaChange.class);
 
@@ -253,19 +253,19 @@ public class SchemaChangeOperationSerializationTest extends SolrTestCase {
   public void testReplaceFieldType() throws Exception {
     final var inputJson =
         """
-            {
-              "operationType": "replace-field-type",
-              "name": "my-new-field-type",
-              "class": "org.apache.my.ClassName",
-              "positionIncrementGap": 100,
-              "analyzer" : {
-                "charFilters":[],
-                "tokenizer":{
-                  "name":"whitespace"
-                }
-              }
+        {
+          "operationType": "replace-field-type",
+          "name": "my-new-field-type",
+          "class": "org.apache.my.ClassName",
+          "positionIncrementGap": 100,
+          "analyzer" : {
+            "charFilters":[],
+            "tokenizer":{
+              "name":"whitespace"
             }
-            """;
+          }
+        }
+        """;
 
     final var parsedGeneric = OBJECT_MAPPER.readValue(inputJson, SchemaChange.class);
 
@@ -288,13 +288,13 @@ public class SchemaChangeOperationSerializationTest extends SolrTestCase {
   public void testReplaceField() throws Exception {
     final var inputJson =
         """
-            {
-              "operationType": "replace-field",
-              "name": "my-new-field",
-              "type": "fieldType",
-              "stored": true
-            }
-            """;
+        {
+          "operationType": "replace-field",
+          "name": "my-new-field",
+          "type": "fieldType",
+          "stored": true
+        }
+        """;
 
     final var parsedGeneric = OBJECT_MAPPER.readValue(inputJson, SchemaChange.class);
 
@@ -311,13 +311,13 @@ public class SchemaChangeOperationSerializationTest extends SolrTestCase {
   public void testReplaceDynamicField() throws Exception {
     final var inputJson =
         """
-            {
-              "operationType": "replace-dynamic-field",
-              "name": "_abc",
-              "type": "fieldType",
-              "stored": true
-            }
-            """;
+        {
+          "operationType": "replace-dynamic-field",
+          "name": "_abc",
+          "type": "fieldType",
+          "stored": true
+        }
+        """;
 
     final var parsedGeneric = OBJECT_MAPPER.readValue(inputJson, SchemaChange.class);
 

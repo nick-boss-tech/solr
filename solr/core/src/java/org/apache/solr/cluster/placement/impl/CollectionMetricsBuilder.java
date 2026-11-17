@@ -78,20 +78,19 @@ public class CollectionMetricsBuilder {
 
     public ShardMetrics build() {
       final Map<String, ReplicaMetrics> metricsMap = new HashMap<>();
-      replicaMetricsBuilders.forEach(
-          (name, replicaBuilder) -> {
-            ReplicaMetrics metrics = replicaBuilder.build();
-            metricsMap.put(name, metrics);
-            if (replicaBuilder.leader) {
-              if (leaderMetricsBuilder != null
-                  && !leaderMetricsBuilder.replicaName.equals(replicaBuilder.replicaName)) {
-                log.warn(
-                    "Multiple replicas claim to be shard leader, selecting the latest candidate ({}) for metrics purposes",
-                    replicaBuilder.replicaName);
-              }
-              leaderMetricsBuilder = replicaBuilder;
-            }
-          });
+      replicaMetricsBuilders.forEach((name, replicaBuilder) -> {
+        ReplicaMetrics metrics = replicaBuilder.build();
+        metricsMap.put(name, metrics);
+        if (replicaBuilder.leader) {
+          if (leaderMetricsBuilder != null
+              && !leaderMetricsBuilder.replicaName.equals(replicaBuilder.replicaName)) {
+            log.warn(
+                "Multiple replicas claim to be shard leader, selecting the latest candidate ({}) for metrics purposes",
+                replicaBuilder.replicaName);
+          }
+          leaderMetricsBuilder = replicaBuilder;
+        }
+      });
       final ReplicaMetrics finalLeaderMetrics =
           leaderMetricsBuilder != null ? leaderMetricsBuilder.build() : null;
       return new ShardMetrics() {

@@ -275,34 +275,32 @@ public class SolrAndKafkaMultiCollectionIntegrationTest extends SolrCloudTestCas
         final int docIdForAltCollection = i + updates;
 
         Future<Boolean> futureForCollection =
-            executorService.submit(
-                () -> {
-                  try {
-                    SolrInputDocument doc = new SolrInputDocument();
-                    doc.addField("id", String.valueOf(docIdForCollection));
-                    doc.addField("text", "parallel test for COLLECTION");
-                    client1.add(COLLECTION, doc);
-                    return true;
-                  } catch (Exception e) {
-                    log.error("Exception while adding doc to COLLECTION", e);
-                    return false;
-                  }
-                });
+            executorService.submit(() -> {
+              try {
+                SolrInputDocument doc = new SolrInputDocument();
+                doc.addField("id", String.valueOf(docIdForCollection));
+                doc.addField("text", "parallel test for COLLECTION");
+                client1.add(COLLECTION, doc);
+                return true;
+              } catch (Exception e) {
+                log.error("Exception while adding doc to COLLECTION", e);
+                return false;
+              }
+            });
 
         Future<Boolean> futureForAltCollection =
-            executorService.submit(
-                () -> {
-                  try {
-                    SolrInputDocument doc = new SolrInputDocument();
-                    doc.addField("id", String.valueOf(docIdForAltCollection));
-                    doc.addField("text", "parallel test for ALT_COLLECTION");
-                    client1.add(ALT_COLLECTION, doc);
-                    return true;
-                  } catch (Exception e) {
-                    log.error("Exception while adding doc to ALT_COLLECTION", e);
-                    return false;
-                  }
-                });
+            executorService.submit(() -> {
+              try {
+                SolrInputDocument doc = new SolrInputDocument();
+                doc.addField("id", String.valueOf(docIdForAltCollection));
+                doc.addField("text", "parallel test for ALT_COLLECTION");
+                client1.add(ALT_COLLECTION, doc);
+                return true;
+              } catch (Exception e) {
+                log.error("Exception while adding doc to ALT_COLLECTION", e);
+                return false;
+              }
+            });
 
         futures.add(futureForCollection);
         futures.add(futureForAltCollection);

@@ -89,15 +89,13 @@ public class DistributedCombinedQueryComponentTest extends BaseDistributedSearch
     // cosine distance vector1= 0.997
     docs.get(9).addField(vectorField, Arrays.asList(1.8f, 2.5f, 3.7f, 4.9f));
     del("*:*");
-    clients.sort(
-        (client1, client2) -> {
-          try {
-            return new URI(client1.getBaseURL()).getPort()
-                - new URI(client2.getBaseURL()).getPort();
-          } catch (URISyntaxException e) {
-            throw new RuntimeException("Unable to get URI from SolrClient", e);
-          }
-        });
+    clients.sort((client1, client2) -> {
+      try {
+        return new URI(client1.getBaseURL()).getPort() - new URI(client2.getBaseURL()).getPort();
+      } catch (URISyntaxException e) {
+        throw new RuntimeException("Unable to get URI from SolrClient", e);
+      }
+    });
     for (SolrInputDocument doc : docs) {
       indexDoc(doc);
     }
@@ -139,7 +137,8 @@ public class DistributedCombinedQueryComponentTest extends BaseDistributedSearch
                   "limit": 5,
                   "fields": ["id", "score", "title"],
                   "params": {"combiner": true, "combiner.query": ["lexical1"]}
-                }"""));
+                }\
+                """));
     assertEquals(1, rsp.getResults().size());
     assertFieldValues(rsp.getResults(), id, "2");
 
@@ -158,7 +157,8 @@ public class DistributedCombinedQueryComponentTest extends BaseDistributedSearch
                   "limit": 5,
                   "fields": ["id", "score", "title"],
                   "params": {"combiner": true, "combiner.query": ["lexical1", "lexical2"]}
-                }"""));
+                }\
+                """));
     assertEquals(5, rsp.getResults().size());
     assertFieldValues(rsp.getResults(), id, "5", "7", "2", "6", "3");
 
@@ -178,7 +178,8 @@ public class DistributedCombinedQueryComponentTest extends BaseDistributedSearch
                   "limit": 10,
                   "fields": ["id", "score"],
                   "params": {"combiner": true, "combiner.query": ["lexical1", "lexical2"]}
-                }"""));
+                }\
+                """));
     assertEquals(10, rsp.getResults().getNumFound());
     assertEquals(Boolean.TRUE, rsp.getResults().getNumFoundExact());
 
@@ -199,7 +200,8 @@ public class DistributedCombinedQueryComponentTest extends BaseDistributedSearch
                   "limit": 2,
                   "fields": ["id", "score"],
                   "params": {"combiner": true, "combiner.query": ["lexical1", "lexical2"]}
-                }"""));
+                }\
+                """));
     assertEquals(2, rsp.getResults().size());
     assertEquals(6, rsp.getResults().getNumFound());
     assertEquals(Boolean.FALSE, rsp.getResults().getNumFoundExact());
@@ -220,7 +222,8 @@ public class DistributedCombinedQueryComponentTest extends BaseDistributedSearch
                   "limit": 0,
                   "fields": ["id", "score"],
                   "params": {"combiner": true, "combiner.query": ["lexical1", "lexical2"]}
-                }"""));
+                }\
+                """));
     assertEquals(0, rsp.getResults().size());
     assertEquals(6, rsp.getResults().getNumFound());
     assertEquals(Boolean.FALSE, rsp.getResults().getNumFoundExact());
@@ -241,7 +244,8 @@ public class DistributedCombinedQueryComponentTest extends BaseDistributedSearch
                   "sort": "mod3_idv desc, score desc",
                   "fields": ["id", "score", "title"],
                   "params": {"combiner": true, "combiner.query": ["lexical1", "lexical2"]}
-                }"""));
+                }\
+                """));
     assertEquals(5, rsp.getResults().size());
     assertFieldValues(rsp.getResults(), id, "5", "2", "7", "10", "4");
 
@@ -259,7 +263,8 @@ public class DistributedCombinedQueryComponentTest extends BaseDistributedSearch
                   },
                   "fields": ["id", "score", "title"],
                   "params": {"combiner": true, "combiner.query": ["lexical1", "lexical2"]}
-                }"""));
+                }\
+                """));
     assertFieldValues(rsp.getResults(), id, "5", "7", "2", "6", "3", "10", "4");
 
     // Pagination: limit 1 without shards.rows gives non-ideal ordering
@@ -277,7 +282,8 @@ public class DistributedCombinedQueryComponentTest extends BaseDistributedSearch
                   "limit": 1,
                   "fields": ["id", "score", "title"],
                   "params": {"combiner": true, "combiner.query": ["lexical1", "lexical2"]}
-                }"""));
+                }\
+                """));
     assertFieldValues(rsp.getResults(), id, "7");
 
     // Pagination: limit 1 with shards.rows gives ideal ordering
@@ -295,7 +301,8 @@ public class DistributedCombinedQueryComponentTest extends BaseDistributedSearch
                   "limit": 1,
                   "fields": ["id", "score", "title"],
                   "params": {"combiner": true, "combiner.query": ["lexical1", "lexical2"], "shards.rows": 10}
-                }"""));
+                }\
+                """));
     assertFieldValues(rsp.getResults(), id, "5");
 
     // Pagination: limit 4, offset 3
@@ -314,7 +321,8 @@ public class DistributedCombinedQueryComponentTest extends BaseDistributedSearch
                   "offset": 3,
                   "fields": ["id", "score", "title"],
                   "params": {"combiner": true, "combiner.query": ["lexical1", "lexical2"]}
-                }"""));
+                }\
+                """));
     assertEquals(4, rsp.getResults().size());
     assertFieldValues(rsp.getResults(), id, "6", "3", "10", "4");
 
@@ -339,7 +347,8 @@ public class DistributedCombinedQueryComponentTest extends BaseDistributedSearch
                     "facet.mincount": 1,
                     "combiner.query": ["lexical"]
                   }
-                }"""));
+                }\
+                """));
     assertEquals(3, rsp.getResults().size());
     assertEquals(4, rsp.getResults().getNumFound());
     assertEquals("[0 (2), 2 (2)]", rsp.getFacetFields().getFirst().getValues().toString());
@@ -367,7 +376,8 @@ public class DistributedCombinedQueryComponentTest extends BaseDistributedSearch
                     "hl.fl": "title",
                     "hl.q": "test doc"
                   }
-                }"""));
+                }\
+                """));
     assertEquals(4, rsp.getResults().size());
     assertFieldValues(rsp.getResults(), id, "5", "7", "2", "6");
     assertEquals("mod3_idv", rsp.getFacetFields().getFirst().getName());
@@ -406,7 +416,8 @@ public class DistributedCombinedQueryComponentTest extends BaseDistributedSearch
                     "hl.q": "test doc",
                     "debug": "true"
                   }
-                }"""));
+                }\
+                """));
     assertEquals(4, rsp.getResults().size());
     assertFieldValues(rsp.getResults(), id, "10", "6", "1", "7");
     assertEquals("mod3_idv", rsp.getFacetFields().getFirst().getName());
@@ -500,43 +511,44 @@ public class DistributedCombinedQueryComponentTest extends BaseDistributedSearch
     // simpleCombine() merges by doc ID, so both id=1 and id=4 survive → duplicate on mod3_idv=1.
     String jsonQuery =
         """
-        {
-         "queries": {
-             "q1": {
-                 "lucene": {
-                     "query": "text:alpha OR text:bravo"
-                 }
-             },
-             "q2": {
-                 "lucene": {
-                     "query": "text:charlie OR text:delta"
-                 }
-             }
-         },
-         "limit": 10,
-         "fields": [
-             "id",
-             "score",
-             "mod3_idv"
-         ],
-         "params": {
-             "combiner": true,
-             "combiner.query": [
-                 "q1",
-                 "q2"
-             ],
-             "fq": [
-                 "{!collapse field=mod3_idv sort='mod3_sdv asc, id desc'}"
-             ],
-             "facet": true,
-             "facet.field": "id",
-             "hl": true,
-             "hl.fl": "title",
-             "hl.q": "alpha delta",
-             "expand": true,
-             "expand.q": "text:alpha OR text:bravo OR text:charlie OR text:delta"
-         }
-     }""";
+           {
+            "queries": {
+                "q1": {
+                    "lucene": {
+                        "query": "text:alpha OR text:bravo"
+                    }
+                },
+                "q2": {
+                    "lucene": {
+                        "query": "text:charlie OR text:delta"
+                    }
+                }
+            },
+            "limit": 10,
+            "fields": [
+                "id",
+                "score",
+                "mod3_idv"
+            ],
+            "params": {
+                "combiner": true,
+                "combiner.query": [
+                    "q1",
+                    "q2"
+                ],
+                "fq": [
+                    "{!collapse field=mod3_idv sort='mod3_sdv asc, id desc'}"
+                ],
+                "facet": true,
+                "facet.field": "id",
+                "hl": true,
+                "hl.fl": "title",
+                "hl.q": "alpha delta",
+                "expand": true,
+                "expand.q": "text:alpha OR text:bravo OR text:charlie OR text:delta"
+            }
+        }\
+        """;
 
     handle.put("expanded", UNORDERED);
     QueryResponse rsp;

@@ -62,14 +62,13 @@ class ResourceCheckAlgorithm extends AttrComposite implements ClusteringAlgorith
     LabelFilter labelFilter = languageComponents.get(LabelFilter.class);
     cluster.addLabel(
         Arrays.stream(text.get().trim().split("[\\s]+"))
-            .map(
-                term ->
-                    String.format(
-                        Locale.ROOT,
-                        "%s[%s, %s]",
-                        term,
-                        stopwordFilter.test(term) ? "-" : "ignoredWord",
-                        labelFilter.test(term) ? "-" : "ignoredLabel"))
+            .map(term ->
+                String.format(
+                    Locale.ROOT,
+                    "%s[%s, %s]",
+                    term,
+                    stopwordFilter.test(term) ? "-" : "ignoredWord",
+                    labelFilter.test(term) ? "-" : "ignoredLabel"))
             .collect(Collectors.joining(" ")));
 
     return clusters;

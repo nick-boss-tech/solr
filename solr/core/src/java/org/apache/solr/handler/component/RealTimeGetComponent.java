@@ -501,10 +501,8 @@ public class RealTimeGetComponent extends SearchComponent {
           onlyTheseFields != null
               && onlyTheseFields.stream()
                   .map(schema::getField)
-                  .allMatch(
-                      f ->
-                          null != f
-                              && AtomicUpdateDocumentMerger.isSupportedFieldForInPlaceUpdate(f));
+                  .allMatch(f ->
+                      null != f && AtomicUpdateDocumentMerger.isSupportedFieldForInPlaceUpdate(f));
 
       SolrDocument solrDoc =
           toSolrDoc(partialDoc, schema, forInPlaceUpdate); // filters copy-field targets TODO don't

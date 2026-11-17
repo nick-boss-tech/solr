@@ -75,14 +75,13 @@ public class TestPrometheusResponseWriterCloud extends SolrCloudTestCase {
           "Missing expected Solr cloud mode prometheus metric with cloud labels",
           output
               .lines()
-              .anyMatch(
-                  line ->
-                      line.startsWith("solr_core_requests_total")
-                          && line.contains("handler=\"/select\"")
-                          && line.contains("collection=\"collection1\"")
-                          && line.contains("core=\"collection1_shard1_replica_n1\"")
-                          && line.contains("replica_type=\"NRT\"")
-                          && line.contains("shard=\"shard1\"")));
+              .anyMatch(line ->
+                  line.startsWith("solr_core_requests_total")
+                      && line.contains("handler=\"/select\"")
+                      && line.contains("collection=\"collection1\"")
+                      && line.contains("core=\"collection1_shard1_replica_n1\"")
+                      && line.contains("replica_type=\"NRT\"")
+                      && line.contains("shard=\"shard1\"")));
     }
   }
 

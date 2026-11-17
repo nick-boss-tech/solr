@@ -194,10 +194,9 @@ public class DistributedZkUpdateProcessor extends DistributedUpdateProcessor {
           "Unable to distribute commit operation. No leader replicas available.");
     }
 
-    nodes.removeIf(
-        (node) ->
-            node.getNodeProps().getNodeName().equals(zkController.getNodeName())
-                && node.getNodeProps().getCoreName().equals(req.getCore().getName()));
+    nodes.removeIf(node ->
+        node.getNodeProps().getNodeName().equals(zkController.getNodeName())
+            && node.getNodeProps().getCoreName().equals(req.getCore().getName()));
 
     if (!isLeader && req.getParams().get(COMMIT_END_POINT, "").equals("replicas")) {
       if (replicaType == Replica.Type.PULL) {
@@ -906,7 +905,7 @@ public class DistributedZkUpdateProcessor extends DistributedUpdateProcessor {
             .getCollection(collection)
             .getSlice(shardId)
             .getReplicas(EnumSet.of(Replica.Type.NRT, Replica.Type.TLOG));
-    replicas.removeIf((replica) -> replica.getName().equals(leaderCoreNodeName));
+    replicas.removeIf(replica -> replica.getName().equals(leaderCoreNodeName));
     if (replicas.isEmpty()) {
       return null;
     }

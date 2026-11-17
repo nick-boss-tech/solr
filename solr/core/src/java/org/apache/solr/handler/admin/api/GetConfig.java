@@ -303,13 +303,12 @@ public class GetConfig extends JerseyResource implements ConfigApi.Get {
       for (PackageListeners.Listener listener : listeners) {
         Map<String, PackageStore.PkgVersion> infos = listener.packageDetails();
         if (infos == null || infos.isEmpty()) continue;
-        infos.forEach(
-            (s, mapWriter) -> {
-              Map<String, Object> componentInfo = getComponentInfo(pluginInfo, componentName);
-              if (s.equals(componentInfo.get("class"))) {
-                (componentInfo).put("_packageinfo_", mapWriter);
-              }
-            });
+        infos.forEach((s, mapWriter) -> {
+          Map<String, Object> componentInfo = getComponentInfo(pluginInfo, componentName);
+          if (s.equals(componentInfo.get("class"))) {
+            (componentInfo).put("_packageinfo_", mapWriter);
+          }
+        });
       }
     }
   }

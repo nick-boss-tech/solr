@@ -305,7 +305,6 @@ public class TestIndexSearcher extends SolrTestCaseJ4 {
                 throw new RuntimeException(e);
               }
             }
-            ;
           };
       t.start();
 
@@ -378,7 +377,6 @@ public class TestIndexSearcher extends SolrTestCaseJ4 {
                 throw new RuntimeException(e);
               }
             }
-            ;
           };
       t.start();
 

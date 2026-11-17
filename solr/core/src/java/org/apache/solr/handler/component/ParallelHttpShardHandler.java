@@ -207,35 +207,34 @@ public class ParallelHttpShardHandler extends HttpShardHandler {
       }
       submitFutures.put(srsp, completableFuture);
     }
-    completableFuture.whenComplete(
-        (r, t) -> {
-          try {
-            if (t != null) {
-              Throwable failure = t;
-              if (failure instanceof CompletionException completionException
-                  && completionException.getCause() != null) {
-                failure = completionException.getCause();
-              }
-              if (!(failure instanceof CancellationException)) {
-                recordShardSubmitError(
-                    srsp,
-                    new SolrException(
-                        SolrException.ErrorCode.SERVER_ERROR,
-                        "Exception occurred while trying to send a request to shard: " + shard,
-                        failure));
-              }
-            }
-          } finally {
-            // Remove from submitFutures first (under the shared monitor, so cancelAll always sees a
-            // consistent set), then drop the count. Decrementing last guarantees responsesPending()
-            // — which reads both under that monitor — never sees inFlightSubmits == 0 while this
-            // entry is still in submitFutures.
-            synchronized (cancellationLock()) {
-              submitFutures.remove(srsp);
-            }
-            inFlightSubmits.decrementAndGet();
+    completableFuture.whenComplete((r, t) -> {
+      try {
+        if (t != null) {
+          Throwable failure = t;
+          if (failure instanceof CompletionException completionException
+              && completionException.getCause() != null) {
+            failure = completionException.getCause();
           }
-        });
+          if (!(failure instanceof CancellationException)) {
+            recordShardSubmitError(
+                srsp,
+                new SolrException(
+                    SolrException.ErrorCode.SERVER_ERROR,
+                    "Exception occurred while trying to send a request to shard: " + shard,
+                    failure));
+          }
+        }
+      } finally {
+        // Remove from submitFutures first (under the shared monitor, so cancelAll always sees a
+        // consistent set), then drop the count. Decrementing last guarantees responsesPending()
+        // — which reads both under that monitor — never sees inFlightSubmits == 0 while this
+        // entry is still in submitFutures.
+        synchronized (cancellationLock()) {
+          submitFutures.remove(srsp);
+        }
+        inFlightSubmits.decrementAndGet();
+      }
+    });
   }
 
   @Override
@@ -248,12 +247,11 @@ public class ParallelHttpShardHandler extends HttpShardHandler {
       super.cancelAll();
       submitFutures
           .values()
-          .forEach(
-              future -> {
-                if (!future.isDone()) {
-                  future.cancel(true);
-                }
-              });
+          .forEach(future -> {
+            if (!future.isDone()) {
+              future.cancel(true);
+            }
+          });
       submitFutures.clear();
     }
   }

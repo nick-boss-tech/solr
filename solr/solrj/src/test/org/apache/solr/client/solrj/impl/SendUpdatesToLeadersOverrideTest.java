@@ -123,12 +123,8 @@ public class SendUpdatesToLeadersOverrideTest extends SolrCloudTestCase {
    */
   private static List<String> stopRecording(final String group) {
     return TrackingUpdateProcessorFactory.stopRecording(group).stream()
-        .map(
-            uc ->
-                uc.getReq()
-                    .getContext()
-                    .get(TrackingUpdateProcessorFactory.REQUEST_NODE)
-                    .toString())
+        .map(uc ->
+            uc.getReq().getContext().get(TrackingUpdateProcessorFactory.REQUEST_NODE).toString())
         .collect(Collectors.toUnmodifiableList());
   }
 

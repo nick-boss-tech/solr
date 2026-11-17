@@ -91,10 +91,10 @@ public class TestLoadAverageCircuitBreakerSampling extends SolrTestCase {
   }
 
   /**
-   * Stampede scenario: many concurrent callers find the cache stale at the same instant. Single-
-   * flight refresh must ensure the underlying sampler is invoked at most once across all of them.
-   * Without this guarantee, a burst of concurrent requests would each pin a CPU on the load-
-   * average syscall, which is the bug this breaker exists to prevent — not cause.
+   * Stampede scenario: many concurrent callers find the cache stale at the same instant.
+   * Single-flight refresh must ensure the underlying sampler is invoked at most once across all of
+   * them. Without this guarantee, a burst of concurrent requests would each pin a CPU on the
+   * load-average syscall, which is the bug this breaker exists to prevent — not cause.
    */
   @Test
   public void concurrentStampedeRunsSamplerAtMostOnce() throws Exception {
@@ -138,17 +138,16 @@ public class TestLoadAverageCircuitBreakerSampling extends SolrTestCase {
             threads, new SolrNamedThreadFactory("TestLoadAverageCircuitBreakerSampling"));
     try {
       for (int i = 0; i < threads; i++) {
-        pool.submit(
-            () -> {
-              try {
-                start.await();
-                breaker.isTripped();
-              } catch (InterruptedException ie) {
-                Thread.currentThread().interrupt();
-              } finally {
-                done.countDown();
-              }
-            });
+        pool.submit(() -> {
+          try {
+            start.await();
+            breaker.isTripped();
+          } catch (InterruptedException ie) {
+            Thread.currentThread().interrupt();
+          } finally {
+            done.countDown();
+          }
+        });
       }
       start.countDown();
       assertTrue("all threads completed", done.await(30, TimeUnit.SECONDS));

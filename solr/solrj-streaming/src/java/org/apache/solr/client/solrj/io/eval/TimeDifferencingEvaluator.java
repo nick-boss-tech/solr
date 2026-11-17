@@ -90,10 +90,8 @@ public class TimeDifferencingEvaluator extends RecursiveObjectEvaluator implemen
       }
       final int lag = lagValue.intValue();
       return IntStream.range(lag, timeseriesValues.size())
-          .mapToObj(
-              n ->
-                  (timeseriesValues.get(n).doubleValue()
-                      - timeseriesValues.get(n - lag).doubleValue()))
+          .mapToObj(n ->
+              (timeseriesValues.get(n).doubleValue() - timeseriesValues.get(n - lag).doubleValue()))
           .collect(Collectors.toList());
     } else if (values[0] instanceof Matrix matrix) {
 
@@ -126,10 +124,9 @@ public class TimeDifferencingEvaluator extends RecursiveObjectEvaluator implemen
 
         List<Number> diffedList =
             IntStream.range(lag, timeseriesValues.size())
-                .mapToObj(
-                    n ->
-                        (timeseriesValues.get(n).doubleValue()
-                            - timeseriesValues.get(n - lag).doubleValue()))
+                .mapToObj(n ->
+                    (timeseriesValues.get(n).doubleValue()
+                        - timeseriesValues.get(n - lag).doubleValue()))
                 .collect(Collectors.toList());
         double[] diffedRow = new double[diffedList.size()];
         for (int r = 0; r < diffedList.size(); r++) {

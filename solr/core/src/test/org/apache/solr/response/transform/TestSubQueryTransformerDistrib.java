@@ -54,7 +54,7 @@ import org.apache.solr.security.RuleBasedAuthorizationPlugin;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-@SuppressSSL()
+@SuppressSSL
 public class TestSubQueryTransformerDistrib extends SolrCloudTestCase {
 
   private static final String support = "These guys help customers";

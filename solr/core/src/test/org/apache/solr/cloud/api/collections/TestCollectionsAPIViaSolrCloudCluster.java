@@ -356,7 +356,8 @@ public class TestCollectionsAPIViaSolrCloudCluster extends SolrCloudTestCase {
                   "tlogReplicas": %s,
                   "pullReplicas": %s,
                   "properties": { "my.custom.prop": "test" }
-                }""",
+                }\
+                """,
                 collectionName,
                 confName,
                 2,

@@ -122,91 +122,83 @@ public class IndexBasedSpellCheckerTest extends SolrTestCaseJ4 {
         SolrSpellChecker.DEFAULT_DICTIONARY_NAME,
         dictName);
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              checker.build(core, searcher);
+        .withSearcher(searcher -> {
+          checker.build(core, searcher);
 
-              IndexReader reader = searcher.getIndexReader();
-              List<SpellCheckToken> tokens =
-                  SpellCheckToken.drain(queryConverter.convert("documemt"));
-              SpellingOptions spellOpts = new SpellingOptions(tokens, reader);
-              SpellingResult result = checker.getSuggestions(spellOpts);
-              assertNotNull("result is null and it shouldn't be", result);
-              // should be lowercased, b/c we are using a lowercasing analyzer
-              Map<String, Integer> suggestions = result.get(spellOpts.tokens.get(0));
-              assertNotNull("documemt is null and it shouldn't be", suggestions);
-              assertEquals(
-                  "documemt Size: " + suggestions.size() + " is not: " + 1, 1, suggestions.size());
-              Map.Entry<String, Integer> entry = suggestions.entrySet().iterator().next();
-              assertEquals(
-                  entry.getKey() + " is not equal to " + "document", "document", entry.getKey());
-              assertEquals(
-                  entry.getValue() + " does not equal: " + SpellingResult.NO_FREQUENCY_INFO,
-                  SpellingResult.NO_FREQUENCY_INFO,
-                  (int) entry.getValue());
+          IndexReader reader = searcher.getIndexReader();
+          List<SpellCheckToken> tokens = SpellCheckToken.drain(queryConverter.convert("documemt"));
+          SpellingOptions spellOpts = new SpellingOptions(tokens, reader);
+          SpellingResult result = checker.getSuggestions(spellOpts);
+          assertNotNull("result is null and it shouldn't be", result);
+          // should be lowercased, b/c we are using a lowercasing analyzer
+          Map<String, Integer> suggestions = result.get(spellOpts.tokens.get(0));
+          assertNotNull("documemt is null and it shouldn't be", suggestions);
+          assertEquals(
+              "documemt Size: " + suggestions.size() + " is not: " + 1, 1, suggestions.size());
+          Map.Entry<String, Integer> entry = suggestions.entrySet().iterator().next();
+          assertEquals(
+              entry.getKey() + " is not equal to " + "document", "document", entry.getKey());
+          assertEquals(
+              entry.getValue() + " does not equal: " + SpellingResult.NO_FREQUENCY_INFO,
+              SpellingResult.NO_FREQUENCY_INFO,
+              (int) entry.getValue());
 
-              // test something not in the spell checker
-              spellOpts.tokens = SpellCheckToken.drain(queryConverter.convert("super"));
-              result = checker.getSuggestions(spellOpts);
-              assertNotNull("result is null and it shouldn't be", result);
-              suggestions = result.get(spellOpts.tokens.get(0));
-              assertEquals("suggestions size should be 0", 0, suggestions.size());
+          // test something not in the spell checker
+          spellOpts.tokens = SpellCheckToken.drain(queryConverter.convert("super"));
+          result = checker.getSuggestions(spellOpts);
+          assertNotNull("result is null and it shouldn't be", result);
+          suggestions = result.get(spellOpts.tokens.get(0));
+          assertEquals("suggestions size should be 0", 0, suggestions.size());
 
-              // test something that is spelled correctly
-              spellOpts.tokens = SpellCheckToken.drain(queryConverter.convert("document"));
-              result = checker.getSuggestions(spellOpts);
-              assertNotNull("result is null and it shouldn't be", result);
-              suggestions = result.get(spellOpts.tokens.get(0));
-              assertNull("suggestions is null and it shouldn't be", suggestions);
+          // test something that is spelled correctly
+          spellOpts.tokens = SpellCheckToken.drain(queryConverter.convert("document"));
+          result = checker.getSuggestions(spellOpts);
+          assertNotNull("result is null and it shouldn't be", result);
+          suggestions = result.get(spellOpts.tokens.get(0));
+          assertNull("suggestions is null and it shouldn't be", suggestions);
 
-              // Has multiple possibilities, but the exact exists, so that should be returned
-              spellOpts.tokens = SpellCheckToken.drain(queryConverter.convert("red"));
-              spellOpts.count = 2;
-              result = checker.getSuggestions(spellOpts);
-              assertNotNull(result);
-              suggestions = result.get(spellOpts.tokens.get(0));
-              assertNull("suggestions is not null and it should be", suggestions);
+          // Has multiple possibilities, but the exact exists, so that should be returned
+          spellOpts.tokens = SpellCheckToken.drain(queryConverter.convert("red"));
+          spellOpts.count = 2;
+          result = checker.getSuggestions(spellOpts);
+          assertNotNull(result);
+          suggestions = result.get(spellOpts.tokens.get(0));
+          assertNull("suggestions is not null and it should be", suggestions);
 
-              // Try out something which should have multiple suggestions
-              spellOpts.tokens = SpellCheckToken.drain(queryConverter.convert("bug"));
-              result = checker.getSuggestions(spellOpts);
-              assertNotNull(result);
-              suggestions = result.get(spellOpts.tokens.get(0));
-              assertNotNull(suggestions);
-              assertEquals(
-                  "suggestions Size: " + suggestions.size() + " is not: " + 2,
-                  2,
-                  suggestions.size());
+          // Try out something which should have multiple suggestions
+          spellOpts.tokens = SpellCheckToken.drain(queryConverter.convert("bug"));
+          result = checker.getSuggestions(spellOpts);
+          assertNotNull(result);
+          suggestions = result.get(spellOpts.tokens.get(0));
+          assertNotNull(suggestions);
+          assertEquals(
+              "suggestions Size: " + suggestions.size() + " is not: " + 2, 2, suggestions.size());
 
-              entry = suggestions.entrySet().iterator().next();
-              assertNotEquals(
-                  entry.getKey() + " is equal to " + "bug and it shouldn't be",
-                  "bug",
-                  entry.getKey());
-              assertEquals(
-                  entry.getValue() + " does not equal: " + SpellingResult.NO_FREQUENCY_INFO,
-                  SpellingResult.NO_FREQUENCY_INFO,
-                  (int) entry.getValue());
+          entry = suggestions.entrySet().iterator().next();
+          assertNotEquals(
+              entry.getKey() + " is equal to " + "bug and it shouldn't be", "bug", entry.getKey());
+          assertEquals(
+              entry.getValue() + " does not equal: " + SpellingResult.NO_FREQUENCY_INFO,
+              SpellingResult.NO_FREQUENCY_INFO,
+              (int) entry.getValue());
 
-              entry = suggestions.entrySet().iterator().next();
-              assertNotEquals(
-                  entry.getKey() + " is equal to " + "bug and it shouldn't be",
-                  "bug",
-                  entry.getKey());
-              assertEquals(
-                  entry.getValue() + " does not equal: " + SpellingResult.NO_FREQUENCY_INFO,
-                  SpellingResult.NO_FREQUENCY_INFO,
-                  (int) entry.getValue());
+          entry = suggestions.entrySet().iterator().next();
+          assertNotEquals(
+              entry.getKey() + " is equal to " + "bug and it shouldn't be", "bug", entry.getKey());
+          assertEquals(
+              entry.getValue() + " does not equal: " + SpellingResult.NO_FREQUENCY_INFO,
+              SpellingResult.NO_FREQUENCY_INFO,
+              (int) entry.getValue());
 
-              // Check empty token due to spellcheck.q = ""
-              spellOpts.tokens = SpellCheckToken.drain(singleEmptyTermTokenStream());
-              result = checker.getSuggestions(spellOpts);
-              assertNotNull(result);
-              suggestions = result.get(new SpellCheckToken("", 0, 0));
-              assertNotNull(suggestions);
-              assertTrue("suggestions should be empty", suggestions.isEmpty());
-              return null;
-            });
+          // Check empty token due to spellcheck.q = ""
+          spellOpts.tokens = SpellCheckToken.drain(singleEmptyTermTokenStream());
+          result = checker.getSuggestions(spellOpts);
+          assertNotNull(result);
+          suggestions = result.get(new SpellCheckToken("", 0, 0));
+          assertNotNull(suggestions);
+          assertTrue("suggestions should be empty", suggestions.isEmpty());
+          return null;
+        });
   }
 
   /** A stream that emits exactly one token whose term text is empty. */
@@ -232,42 +224,40 @@ public class IndexBasedSpellCheckerTest extends SolrTestCaseJ4 {
         SolrSpellChecker.DEFAULT_DICTIONARY_NAME,
         dictName);
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              checker.build(core, searcher);
+        .withSearcher(searcher -> {
+          checker.build(core, searcher);
 
-              IndexReader reader = searcher.getIndexReader();
-              List<SpellCheckToken> tokens =
-                  SpellCheckToken.drain(queryConverter.convert("documemt"));
-              SpellingOptions spellOpts =
-                  new SpellingOptions(
-                      tokens, reader, 1, SuggestMode.SUGGEST_WHEN_NOT_IN_INDEX, true, 0.5f, null);
-              SpellingResult result = checker.getSuggestions(spellOpts);
-              assertNotNull("result is null and it shouldn't be", result);
-              // should be lowercased, b/c we are using a lowercasing analyzer
-              Map<String, Integer> suggestions = result.get(spellOpts.tokens.get(0));
-              assertNotNull("documemt is null and it shouldn't be", suggestions);
-              assertEquals(
-                  "documemt Size: " + suggestions.size() + " is not: " + 1, 1, suggestions.size());
-              Map.Entry<String, Integer> entry = suggestions.entrySet().iterator().next();
-              assertEquals(
-                  entry.getKey() + " is not equal to " + "document", "document", entry.getKey());
-              assertEquals(entry.getValue() + " does not equal: " + 2, 2, (int) entry.getValue());
+          IndexReader reader = searcher.getIndexReader();
+          List<SpellCheckToken> tokens = SpellCheckToken.drain(queryConverter.convert("documemt"));
+          SpellingOptions spellOpts =
+              new SpellingOptions(
+                  tokens, reader, 1, SuggestMode.SUGGEST_WHEN_NOT_IN_INDEX, true, 0.5f, null);
+          SpellingResult result = checker.getSuggestions(spellOpts);
+          assertNotNull("result is null and it shouldn't be", result);
+          // should be lowercased, b/c we are using a lowercasing analyzer
+          Map<String, Integer> suggestions = result.get(spellOpts.tokens.get(0));
+          assertNotNull("documemt is null and it shouldn't be", suggestions);
+          assertEquals(
+              "documemt Size: " + suggestions.size() + " is not: " + 1, 1, suggestions.size());
+          Map.Entry<String, Integer> entry = suggestions.entrySet().iterator().next();
+          assertEquals(
+              entry.getKey() + " is not equal to " + "document", "document", entry.getKey());
+          assertEquals(entry.getValue() + " does not equal: " + 2, 2, (int) entry.getValue());
 
-              // test something not in the spell checker
-              spellOpts.tokens = SpellCheckToken.drain(queryConverter.convert("super"));
-              result = checker.getSuggestions(spellOpts);
-              assertNotNull("result is null and it shouldn't be", result);
-              suggestions = result.get(spellOpts.tokens.get(0));
-              assertEquals("suggestions size should be 0", 0, suggestions.size());
+          // test something not in the spell checker
+          spellOpts.tokens = SpellCheckToken.drain(queryConverter.convert("super"));
+          result = checker.getSuggestions(spellOpts);
+          assertNotNull("result is null and it shouldn't be", result);
+          suggestions = result.get(spellOpts.tokens.get(0));
+          assertEquals("suggestions size should be 0", 0, suggestions.size());
 
-              spellOpts.tokens = SpellCheckToken.drain(queryConverter.convert("document"));
-              result = checker.getSuggestions(spellOpts);
-              assertNotNull("result is null and it shouldn't be", result);
-              suggestions = result.get(spellOpts.tokens.get(0));
-              assertNull("suggestions is not null and it should be", suggestions);
-              return null;
-            });
+          spellOpts.tokens = SpellCheckToken.drain(queryConverter.convert("document"));
+          result = checker.getSuggestions(spellOpts);
+          assertNotNull("result is null and it shouldn't be", result);
+          suggestions = result.get(spellOpts.tokens.get(0));
+          assertNull("suggestions is not null and it should be", suggestions);
+          return null;
+        });
   }
 
   private static class TestSpellChecker extends IndexBasedSpellChecker {
@@ -296,18 +286,17 @@ public class IndexBasedSpellCheckerTest extends SolrTestCaseJ4 {
         SolrSpellChecker.DEFAULT_DICTIONARY_NAME,
         dictName);
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              checker.build(core, searcher);
-              SpellChecker sc = checker.getSpellChecker();
-              assertNotNull("sc is null and it shouldn't be", sc);
-              StringDistance sd = sc.getStringDistance();
-              assertNotNull("sd is null and it shouldn't be", sd);
-              assertTrue(
-                  "sd is not an instance of " + JaroWinklerDistance.class.getName(),
-                  sd instanceof JaroWinklerDistance);
-              return null;
-            });
+        .withSearcher(searcher -> {
+          checker.build(core, searcher);
+          SpellChecker sc = checker.getSpellChecker();
+          assertNotNull("sc is null and it shouldn't be", sc);
+          StringDistance sd = sc.getStringDistance();
+          assertNotNull("sd is null and it shouldn't be", sd);
+          assertTrue(
+              "sd is not an instance of " + JaroWinklerDistance.class.getName(),
+              sd instanceof JaroWinklerDistance);
+          return null;
+        });
   }
 
   @Test
@@ -353,39 +342,38 @@ public class IndexBasedSpellCheckerTest extends SolrTestCaseJ4 {
         SolrSpellChecker.DEFAULT_DICTIONARY_NAME,
         dictName);
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              checker.build(core, searcher);
+        .withSearcher(searcher -> {
+          checker.build(core, searcher);
 
-              IndexReader reader = searcher.getIndexReader();
-              List<SpellCheckToken> tokens = SpellCheckToken.drain(queryConverter.convert("flesh"));
-              SpellingOptions spellOpts =
-                  new SpellingOptions(
-                      tokens, reader, 1, SuggestMode.SUGGEST_WHEN_NOT_IN_INDEX, true, 0.5f, null);
-              SpellingResult result = checker.getSuggestions(spellOpts);
-              assertNotNull("result is null and it shouldn't be", result);
-              // should be lowercased, b/c we are using a lowercasing analyzer
-              Map<String, Integer> suggestions = result.get(spellOpts.tokens.get(0));
-              assertNotNull("flesh is null and it shouldn't be", suggestions);
-              assertEquals(
-                  "flesh Size: " + suggestions.size() + " is not: " + 1, 1, suggestions.size());
-              Map.Entry<String, Integer> entry = suggestions.entrySet().iterator().next();
-              assertEquals(entry.getKey() + " is not equal to " + "flash", "flash", entry.getKey());
-              assertEquals(entry.getValue() + " does not equal: " + 1, 1, (int) entry.getValue());
+          IndexReader reader = searcher.getIndexReader();
+          List<SpellCheckToken> tokens = SpellCheckToken.drain(queryConverter.convert("flesh"));
+          SpellingOptions spellOpts =
+              new SpellingOptions(
+                  tokens, reader, 1, SuggestMode.SUGGEST_WHEN_NOT_IN_INDEX, true, 0.5f, null);
+          SpellingResult result = checker.getSuggestions(spellOpts);
+          assertNotNull("result is null and it shouldn't be", result);
+          // should be lowercased, b/c we are using a lowercasing analyzer
+          Map<String, Integer> suggestions = result.get(spellOpts.tokens.get(0));
+          assertNotNull("flesh is null and it shouldn't be", suggestions);
+          assertEquals(
+              "flesh Size: " + suggestions.size() + " is not: " + 1, 1, suggestions.size());
+          Map.Entry<String, Integer> entry = suggestions.entrySet().iterator().next();
+          assertEquals(entry.getKey() + " is not equal to " + "flash", "flash", entry.getKey());
+          assertEquals(entry.getValue() + " does not equal: " + 1, 1, (int) entry.getValue());
 
-              // test something not in the spell checker
-              spellOpts.tokens = SpellCheckToken.drain(queryConverter.convert("super"));
-              result = checker.getSuggestions(spellOpts);
-              assertNotNull("result is null and it shouldn't be", result);
-              suggestions = result.get(spellOpts.tokens.get(0));
-              assertEquals("suggestions size should be 0", 0, suggestions.size());
+          // test something not in the spell checker
+          spellOpts.tokens = SpellCheckToken.drain(queryConverter.convert("super"));
+          result = checker.getSuggestions(spellOpts);
+          assertNotNull("result is null and it shouldn't be", result);
+          suggestions = result.get(spellOpts.tokens.get(0));
+          assertEquals("suggestions size should be 0", 0, suggestions.size());
 
-              spellOpts.tokens = SpellCheckToken.drain(queryConverter.convert("Caroline"));
-              result = checker.getSuggestions(spellOpts);
-              assertNotNull("result is null and it shouldn't be", result);
-              suggestions = result.get(spellOpts.tokens.get(0));
-              assertNull("suggestions is not null and it should be", suggestions);
-              return null;
-            });
+          spellOpts.tokens = SpellCheckToken.drain(queryConverter.convert("Caroline"));
+          result = checker.getSuggestions(spellOpts);
+          assertNotNull("result is null and it shouldn't be", result);
+          suggestions = result.get(spellOpts.tokens.get(0));
+          assertNull("suggestions is not null and it should be", suggestions);
+          return null;
+        });
   }
 }

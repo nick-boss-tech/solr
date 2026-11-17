@@ -907,7 +907,7 @@ public class CursorPagingTest extends SolrTestCaseJ4 {
     assertFullWalkNoDups(
         "/elevate",
         params,
-        (doc) -> {
+        doc -> {
           final int id = Integer.parseInt(doc.get("id").toString());
           final boolean elevated =
               Boolean.parseBoolean(doc.getOrDefault("[elevated]", "false").toString());
@@ -941,7 +941,7 @@ public class CursorPagingTest extends SolrTestCaseJ4 {
     final SentinelIntSet ids = new SentinelIntSet(maxSize, -1);
     assertFullWalkNoDups(
         params,
-        (doc) -> {
+        doc -> {
           int id = Integer.parseInt(doc.get("id").toString());
           assertFalse("walk already seen: " + id, ids.exists(id));
           ids.put(id);

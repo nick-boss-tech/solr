@@ -189,18 +189,16 @@ public class TestCoreAdmin extends AbstractEmbeddedSolrServerTestCase {
     QueryResponse rsp = cli0.query(q);
     SolrDocumentList docs = rsp.getResults();
     assertEquals(2, docs.size());
-    docs.forEach(
-        doc -> {
-          assertTrue(doc.toString(), doc.getFieldValue("id").toString().startsWith("core0-"));
-        });
+    docs.forEach(doc -> {
+      assertTrue(doc.toString(), doc.getFieldValue("id").toString().startsWith("core0-"));
+    });
 
     rsp = cli1.query(q);
     docs = rsp.getResults();
     assertEquals(1, docs.size());
-    docs.forEach(
-        doc -> {
-          assertTrue(doc.toString(), doc.getFieldValue("id").toString().startsWith("core1-"));
-        });
+    docs.forEach(doc -> {
+      assertTrue(doc.toString(), doc.getFieldValue("id").toString().startsWith("core1-"));
+    });
 
     // Check initial request counts
     Double core0InitialRequests =
@@ -227,18 +225,16 @@ public class TestCoreAdmin extends AbstractEmbeddedSolrServerTestCase {
     rsp = cli0.query(q);
     docs = rsp.getResults();
     assertEquals(1, docs.size());
-    docs.forEach(
-        doc -> {
-          assertTrue(doc.toString(), doc.getFieldValue("id").toString().startsWith("core1-"));
-        });
+    docs.forEach(doc -> {
+      assertTrue(doc.toString(), doc.getFieldValue("id").toString().startsWith("core1-"));
+    });
 
     rsp = cli1.query(q);
     docs = rsp.getResults();
     assertEquals(2, docs.size());
-    docs.forEach(
-        doc -> {
-          assertTrue(doc.toString(), doc.getFieldValue("id").toString().startsWith("core0-"));
-        });
+    docs.forEach(doc -> {
+      assertTrue(doc.toString(), doc.getFieldValue("id").toString().startsWith("core0-"));
+    });
 
     Double core0PostSwapRequests =
         getPrometheusMetricValue(

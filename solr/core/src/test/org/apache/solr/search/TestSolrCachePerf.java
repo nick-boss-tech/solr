@@ -71,15 +71,14 @@ public class TestSolrCachePerf extends SolrTestCaseJ4 {
       doTestGetPutCompute(getPutRatio, getPutTime, threads, false);
       doTestGetPutCompute(computeRatio, computeTime, threads, true);
     }
-    computeRatio.forEach(
-        (type, computeStats) -> {
-          SummaryStatistics getPutStats = getPutRatio.get(type);
-          assertGreaterThanOrEqual(
-              "Compute ratio should be higher or equal to get/put ratio",
-              computeStats.getMean(),
-              getPutStats.getMean(),
-              0.0001);
-        });
+    computeRatio.forEach((type, computeStats) -> {
+      SummaryStatistics getPutStats = getPutRatio.get(type);
+      assertGreaterThanOrEqual(
+          "Compute ratio should be higher or equal to get/put ratio",
+          computeStats.getMean(),
+          getPutStats.getMean(),
+          0.0001);
+    });
   }
 
   private void assertGreaterThanOrEqual(
@@ -125,32 +124,31 @@ public class TestSolrCachePerf extends SolrTestCaseJ4 {
       Set<Exception> exceptions = ConcurrentHashMap.newKeySet();
       for (int i = 0; i < numThreads; i++) {
         Thread t =
-            new Thread(
-                () -> {
-                  try {
-                    startLatch.await();
-                    int ik = 0;
-                    while (!stop.get()) {
-                      String key = keys[ik % NUM_KEYS];
-                      ik++;
-                      if (useCompute) {
-                        String value = cache.computeIfAbsent(key, k -> VALUE);
-                        assertNotNull(value);
-                      } else {
-                        String value = cache.get(key);
-                        if (value == null) {
-                          // increase a likelihood of context switch
-                          Thread.yield();
-                          cache.put(key, VALUE);
-                        }
-                      }
+            new Thread(() -> {
+              try {
+                startLatch.await();
+                int ik = 0;
+                while (!stop.get()) {
+                  String key = keys[ik % NUM_KEYS];
+                  ik++;
+                  if (useCompute) {
+                    String value = cache.computeIfAbsent(key, k -> VALUE);
+                    assertNotNull(value);
+                  } else {
+                    String value = cache.get(key);
+                    if (value == null) {
+                      // increase a likelihood of context switch
                       Thread.yield();
-                      stopLatch.countDown(); // Does this need to be in a finally block?
+                      cache.put(key, VALUE);
                     }
-                  } catch (InterruptedException | IOException e) {
-                    exceptions.add(e);
                   }
-                });
+                  Thread.yield();
+                  stopLatch.countDown(); // Does this need to be in a finally block?
+                }
+              } catch (InterruptedException | IOException e) {
+                exceptions.add(e);
+              }
+            });
         t.start();
         runners.add(t);
       }

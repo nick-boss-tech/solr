@@ -74,12 +74,10 @@ import org.apache.lucene.util.NumericUtils;
  * this algorithm was described (referred to as <code>TrieRangeQuery</code>):
  *
  * <blockquote>
- *
  * <strong>Schindler, U, Diepenbroek, M</strong>, 2008. <em>Generic XML-based Framework for Metadata
  * Portals.</em> Computers &amp; Geosciences 34 (12), 1947-1955. <a
  * href="http://dx.doi.org/10.1016/j.cageo.2008.02.023"
  * target="_blank">doi:10.1016/j.cageo.2008.02.023</a>
- *
  * </blockquote>
  *
  * <p><em>A quote from this paper:</em> Because Apache Lucene is a full-text search engine and not a

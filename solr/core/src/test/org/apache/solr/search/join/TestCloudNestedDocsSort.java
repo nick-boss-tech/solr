@@ -82,7 +82,6 @@ public class TestCloudNestedDocsSort extends SolrCloudTestCase {
       int id = 42;
       final List<SolrInputDocument> docs = new ArrayList<>();
       final int parentsNum = atLeast(20);
-      ;
       for (int i = 0; i < parentsNum || (matchingParent == null || matchingChild == null); i++) {
         final String parentTieVal = "" + random().nextInt(5);
         final String parentId = "" + (id++);

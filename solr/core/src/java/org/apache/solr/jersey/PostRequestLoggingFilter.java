@@ -171,16 +171,15 @@ public class PostRequestLoggingFilter implements ContainerResponseFilter {
     var output = new StringJoiner("&");
     unfilteredParams.entrySet().stream()
         .sorted(Map.Entry.comparingByKey())
-        .forEachOrdered(
-            entry -> {
-              final String name = entry.getKey();
-              if (!paramNamesToLog.contains(name)) return;
+        .forEachOrdered(entry -> {
+          final String name = entry.getKey();
+          if (!paramNamesToLog.contains(name)) return;
 
-              for (String val : entry.getValue()) {
-                output.add(
-                    StrUtils.partialURLEncodeVal(name) + "=" + StrUtils.partialURLEncodeVal(val));
-              }
-            });
+          for (String val : entry.getValue()) {
+            output.add(
+                StrUtils.partialURLEncodeVal(name) + "=" + StrUtils.partialURLEncodeVal(val));
+          }
+        });
     return output.toString();
   }
 

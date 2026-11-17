@@ -27,27 +27,23 @@ public class TermsResponse {
   private Map<String, List<Term>> termMap = new HashMap<>();
 
   public TermsResponse(NamedList<NamedList<Object>> termsInfo) {
-    termsInfo.forEach(
-        (fieldName, items) -> {
-          List<Term> itemList = new ArrayList<>();
+    termsInfo.forEach((fieldName, items) -> {
+      List<Term> itemList = new ArrayList<>();
 
-          items.forEach(
-              (term, val) -> {
-                Term t;
-                if (val instanceof NamedList) {
-                  @SuppressWarnings("unchecked")
-                  NamedList<Number> termStats = (NamedList<Number>) val;
-                  t =
-                      new Term(
-                          term, termStats.get("df").longValue(), termStats.get("ttf").longValue());
-                } else {
-                  t = new Term(term, ((Number) val).longValue());
-                }
-                itemList.add(t);
-              });
+      items.forEach((term, val) -> {
+        Term t;
+        if (val instanceof NamedList) {
+          @SuppressWarnings("unchecked")
+          NamedList<Number> termStats = (NamedList<Number>) val;
+          t = new Term(term, termStats.get("df").longValue(), termStats.get("ttf").longValue());
+        } else {
+          t = new Term(term, ((Number) val).longValue());
+        }
+        itemList.add(t);
+      });
 
-          termMap.put(fieldName, itemList);
-        });
+      termMap.put(fieldName, itemList);
+    });
   }
 
   /**

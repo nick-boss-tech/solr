@@ -1072,11 +1072,11 @@ public class TestExportWriter extends SolrTestCaseJ4 {
         doubles.add(random().nextDouble() * 3000 * (random().nextBoolean() ? 1 : -1));
         dates.add(dateFormat.format(new Date(System.currentTimeMillis() + random().nextInt())));
       }
-      ints.stream().forEach((val) -> addInt(doc, val, true));
-      longs.stream().forEach((val) -> addLong(doc, val, true));
-      floats.stream().forEach((val) -> addFloat(doc, val, true));
-      doubles.stream().forEach((val) -> addDouble(doc, val, true));
-      dates.stream().forEach((val) -> addDate(doc, val, true));
+      ints.stream().forEach(val -> addInt(doc, val, true));
+      longs.stream().forEach(val -> addLong(doc, val, true));
+      floats.stream().forEach(val -> addFloat(doc, val, true));
+      doubles.stream().forEach(val -> addDouble(doc, val, true));
+      dates.stream().forEach(val -> addDate(doc, val, true));
 
       assertU(adoc(doc));
       if (random().nextInt(20) == 0) {
@@ -1574,20 +1574,20 @@ public class TestExportWriter extends SolrTestCaseJ4 {
     assertJsonEquals(
         resp,
         """
-            {
-              "responseHeader":{"status":0},
-              "response":{
-                "numFound":1,
-                "docs":[{
-                    "id":"1",
-                    "str_s_stored":"hello",
-                    "num_i_stored":42,
-                    "num_l_stored":1234567890123,
-                    "num_f_stored":3.14,
-                    "num_d_stored":2.71828,
-                    "date_dt_stored":"2024-01-15T10:30:00Z",
-                    "bool_b_stored":true}]}}
-            """);
+        {
+          "responseHeader":{"status":0},
+          "response":{
+            "numFound":1,
+            "docs":[{
+                "id":"1",
+                "str_s_stored":"hello",
+                "num_i_stored":42,
+                "num_l_stored":1234567890123,
+                "num_f_stored":3.14,
+                "num_d_stored":2.71828,
+                "date_dt_stored":"2024-01-15T10:30:00Z",
+                "bool_b_stored":true}]}}
+        """);
   }
 
   @Test
@@ -1652,15 +1652,15 @@ public class TestExportWriter extends SolrTestCaseJ4 {
     assertJsonEquals(
         resp,
         """
-            {
-              "responseHeader":{"status":0},
-              "response":{
-                "numFound":1,
-                "docs":[{
-                    "id":"1",
-                    "intdv":1,
-                    "stringdv":"docvalue_string"}]}}
-            """);
+        {
+          "responseHeader":{"status":0},
+          "response":{
+            "numFound":1,
+            "docs":[{
+                "id":"1",
+                "intdv":1,
+                "stringdv":"docvalue_string"}]}}
+        """);
   }
 
   @Test
@@ -1693,16 +1693,16 @@ public class TestExportWriter extends SolrTestCaseJ4 {
     assertJsonEquals(
         resp,
         """
-            {
-              "responseHeader":{"status":0},
-              "response":{
-                "numFound":1,
-                "docs":[{
-                    "intdv":1,
-                    "stringdv":"docvalue_string",
-                    "id":"1",
-                    "str_s_stored":"stored_string"}]}}
-            """);
+        {
+          "responseHeader":{"status":0},
+          "response":{
+            "numFound":1,
+            "docs":[{
+                "intdv":1,
+                "stringdv":"docvalue_string",
+                "id":"1",
+                "str_s_stored":"stored_string"}]}}
+        """);
   }
 
   @Test
@@ -1738,15 +1738,15 @@ public class TestExportWriter extends SolrTestCaseJ4 {
     assertJsonEquals(
         resp,
         """
-            {
-              "responseHeader":{"status":0},
-              "response":{
-                "numFound":1,
-                "docs":[{
-                    "id":"1",
-                    "strs_ss_stored":["value1","value2","value3"],
-                    "nums_is_stored":[10,20,30]}]}}
-            """);
+        {
+          "responseHeader":{"status":0},
+          "response":{
+            "numFound":1,
+            "docs":[{
+                "id":"1",
+                "strs_ss_stored":["value1","value2","value3"],
+                "nums_is_stored":[10,20,30]}]}}
+        """);
   }
 
   @Test
@@ -1794,29 +1794,29 @@ public class TestExportWriter extends SolrTestCaseJ4 {
     assertJsonEquals(
         resp,
         """
-            {
-              "responseHeader":{"status":0},
-              "response":{
-                "numFound":2,
-                "docs":[{
-                    "id":"1",
-                    "str_s_stored":"test_string",
-                    "num_i_stored":123,
-                    "num_l_stored":9876543210,
-                    "num_f_stored":1.5,
-                    "num_d_stored":2.5,
-                    "date_dt_stored":"2025-12-25T00:00:00Z",
-                    "bool_b_stored":false},
-                  {
-                    "id":"2",
-                    "str_s_stored":"another_string",
-                    "num_i_stored":456,
-                    "num_l_stored":1234567890,
-                    "num_f_stored":2.5,
-                    "num_d_stored":3.5,
-                    "date_dt_stored":"2025-06-15T12:30:00Z",
-                    "bool_b_stored":true}]}}
-            """);
+        {
+          "responseHeader":{"status":0},
+          "response":{
+            "numFound":2,
+            "docs":[{
+                "id":"1",
+                "str_s_stored":"test_string",
+                "num_i_stored":123,
+                "num_l_stored":9876543210,
+                "num_f_stored":1.5,
+                "num_d_stored":2.5,
+                "date_dt_stored":"2025-12-25T00:00:00Z",
+                "bool_b_stored":false},
+              {
+                "id":"2",
+                "str_s_stored":"another_string",
+                "num_i_stored":456,
+                "num_l_stored":1234567890,
+                "num_f_stored":2.5,
+                "num_d_stored":3.5,
+                "date_dt_stored":"2025-06-15T12:30:00Z",
+                "bool_b_stored":true}]}}
+        """);
   }
 
   @Test

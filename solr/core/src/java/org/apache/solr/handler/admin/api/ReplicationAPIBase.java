@@ -369,13 +369,12 @@ public abstract class ReplicationAPIBase extends JerseyResource {
         } catch (InvalidPathException e) {
           throw new SolrException(SolrException.ErrorCode.BAD_REQUEST, "Invalid file name");
         }
-        filePath.forEach(
-            subpath -> {
-              if ("..".equals(subpath.toString())) {
-                throw new SolrException(
-                    SolrException.ErrorCode.FORBIDDEN, "File name cannot contain ..");
-              }
-            });
+        filePath.forEach(subpath -> {
+          if ("..".equals(subpath.toString())) {
+            throw new SolrException(
+                SolrException.ErrorCode.FORBIDDEN, "File name cannot contain ..");
+          }
+        });
         if (filePath.isAbsolute()) {
           throw new SolrException(SolrException.ErrorCode.FORBIDDEN, "File name must be relative");
         }

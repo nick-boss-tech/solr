@@ -77,37 +77,35 @@ public class TestPrometheusResponseWriter extends SolrTestCaseJ4 {
     List<String> filteredResponse =
         output
             .lines()
-            .filter(
-                line -> {
-                  if (!line.startsWith("#")) {
-                    return true;
-                  }
-                  assertTrue(
-                      "Prometheus exposition format cannot have duplicate TYPE information",
-                      seenTypeInfo.add(line));
-                  return false;
-                })
+            .filter(line -> {
+              if (!line.startsWith("#")) {
+                return true;
+              }
+              assertTrue(
+                  "Prometheus exposition format cannot have duplicate TYPE information",
+                  seenTypeInfo.add(line));
+              return false;
+            })
             .toList();
-    filteredResponse.forEach(
-        (actualMetric) -> {
-          String actualValue;
-          if (actualMetric.contains("}")) {
-            actualValue = actualMetric.substring(actualMetric.lastIndexOf("} ") + 1);
-          } else {
-            actualValue = actualMetric.split(" ")[1];
-          }
-          if (actualMetric.startsWith("target_info")) {
-            // Skip standard OTEL metric
-            return;
-          }
-          assertTrue("All metrics should start with 'solr_'", actualMetric.startsWith("solr_"));
-          try {
-            Float.parseFloat(actualValue);
-          } catch (NumberFormatException e) {
-            log.warn("Prometheus value not a parsable float");
-            assertTrue(VALID_PROMETHEUS_VALUES.contains(actualValue));
-          }
-        });
+    filteredResponse.forEach(actualMetric -> {
+      String actualValue;
+      if (actualMetric.contains("}")) {
+        actualValue = actualMetric.substring(actualMetric.lastIndexOf("} ") + 1);
+      } else {
+        actualValue = actualMetric.split(" ")[1];
+      }
+      if (actualMetric.startsWith("target_info")) {
+        // Skip standard OTEL metric
+        return;
+      }
+      assertTrue("All metrics should start with 'solr_'", actualMetric.startsWith("solr_"));
+      try {
+        Float.parseFloat(actualValue);
+      } catch (NumberFormatException e) {
+        log.warn("Prometheus value not a parsable float");
+        assertTrue(VALID_PROMETHEUS_VALUES.contains(actualValue));
+      }
+    });
   }
 
   @Test

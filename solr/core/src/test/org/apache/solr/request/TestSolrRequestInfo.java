@@ -62,13 +62,12 @@ public class TestSolrRequestInfo extends SolrTestCaseJ4 {
         new ExecutorUtil.MDCAwareThreadPoolExecutor(
             1, 1, 1, TimeUnit.SECONDS, new ArrayBlockingQueue<>(1));
     AtomicBoolean run = new AtomicBoolean(false);
-    pool.execute(
-        () -> {
-          final SolrRequestInfo poolInfo = SolrRequestInfo.getRequestInfo();
-          assertSame(info, poolInfo);
-          info.addCloseHook(counter::incrementAndGet);
-          run.set(true);
-        });
+    pool.execute(() -> {
+      final SolrRequestInfo poolInfo = SolrRequestInfo.getRequestInfo();
+      assertSame(info, poolInfo);
+      info.addCloseHook(counter::incrementAndGet);
+      run.set(true);
+    });
     if (random().nextBoolean()) {
       pool.shutdown();
     } else {

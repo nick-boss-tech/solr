@@ -137,14 +137,13 @@ public class ConfigSetsHandler extends RequestHandlerBase implements PermissionN
         requestBody.properties = new HashMap<>();
         req.getParams().stream()
             .filter(entry -> entry.getKey().startsWith(ConfigSetCmds.CONFIG_SET_PROPERTY_PREFIX))
-            .forEach(
-                entry -> {
-                  final String newKey =
-                      entry.getKey().substring(ConfigSetCmds.CONFIG_SET_PROPERTY_PREFIX.length());
-                  final Object value =
-                      (entry.getValue().length == 1) ? entry.getValue()[0] : entry.getValue();
-                  requestBody.properties.put(newKey, value);
-                });
+            .forEach(entry -> {
+              final String newKey =
+                  entry.getKey().substring(ConfigSetCmds.CONFIG_SET_PROPERTY_PREFIX.length());
+              final Object value =
+                  (entry.getValue().length == 1) ? entry.getValue()[0] : entry.getValue();
+              requestBody.properties.put(newKey, value);
+            });
         final CloneConfigSet createConfigSetAPI = new CloneConfigSet(coreContainer, req, rsp);
         final var createResponse = createConfigSetAPI.cloneExistingConfigSet(requestBody);
         V2ApiUtils.squashIntoSolrResponseWithoutHeader(rsp, createResponse);

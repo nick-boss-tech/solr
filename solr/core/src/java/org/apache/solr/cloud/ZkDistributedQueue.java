@@ -322,22 +322,20 @@ public class ZkDistributedQueue implements DistributedQueue {
     res.put("stats", statsMap);
     stats
         .getStats()
-        .forEach(
-            (op, stat) -> {
-              final Map<String, Object> statMap = new HashMap<>();
-              statMap.put("success", stat.success.get());
-              statMap.put("errors", stat.errors.get());
-              final List<Map<String, Object>> failed = new ArrayList<>(stat.failureDetails.size());
-              statMap.put("failureDetails", failed);
-              stat.failureDetails.forEach(
-                  failedOp -> {
-                    Map<String, Object> fo = new HashMap<>();
-                    fo.put("req", failedOp.req);
-                    fo.put("resp", failedOp.resp);
-                    failed.add(fo);
-                  });
-              statsMap.put(op, statMap);
-            });
+        .forEach((op, stat) -> {
+          final Map<String, Object> statMap = new HashMap<>();
+          statMap.put("success", stat.success.get());
+          statMap.put("errors", stat.errors.get());
+          final List<Map<String, Object>> failed = new ArrayList<>(stat.failureDetails.size());
+          statMap.put("failureDetails", failed);
+          stat.failureDetails.forEach(failedOp -> {
+            Map<String, Object> fo = new HashMap<>();
+            fo.put("req", failedOp.req);
+            fo.put("resp", failedOp.resp);
+            failed.add(fo);
+          });
+          statsMap.put(op, statMap);
+        });
     return res;
   }
 

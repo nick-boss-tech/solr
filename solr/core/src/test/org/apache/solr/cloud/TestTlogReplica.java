@@ -722,7 +722,7 @@ public class TestTlogReplica extends SolrCloudTestCase {
   private List<Replica> getNonLeaderReplicas(String collectionName) {
     return getCollectionState(collectionName)
         .replicaStream()
-        .filter((r) -> !r.getBool("leader", false))
+        .filter(r -> !r.getBool("leader", false))
         .collect(Collectors.toList());
   }
 

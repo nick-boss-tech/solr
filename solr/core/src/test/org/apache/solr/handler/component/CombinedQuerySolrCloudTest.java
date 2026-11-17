@@ -135,7 +135,8 @@ public class CombinedQuerySolrCloudTest extends AbstractFullDistribZkTestBase {
           "limit": 5,
           "fields": ["id", "score", "title"],
           "params": {"combiner": true, "combiner.query": ["lexical1"]}
-        }""";
+        }\
+        """;
     QueryResponse rsp = query("/search", params(CommonParams.JSON, jsonQuery));
     assertEquals(1, rsp.getResults().size());
     assertFieldValues(rsp.getResults(), id, "2");
@@ -159,7 +160,8 @@ public class CombinedQuerySolrCloudTest extends AbstractFullDistribZkTestBase {
           "limit": 5,
           "fields": ["id", "score", "title"],
           "params": {"combiner": true, "combiner.query": ["lexical1", "lexical2"]}
-        }""";
+        }\
+        """;
     QueryResponse rsp = query("/search", params(CommonParams.JSON, jsonQuery));
     assertEquals(5, rsp.getResults().size());
     assertFieldValues(rsp.getResults(), id, "5", "7", "2", "6", "3");
@@ -184,7 +186,8 @@ public class CombinedQuerySolrCloudTest extends AbstractFullDistribZkTestBase {
           "sort": "mod3_idv desc, score desc",
           "fields": ["id", "score", "title"],
           "params": {"combiner": true, "combiner.query": ["lexical1", "lexical2"]}
-        }""";
+        }\
+        """;
     QueryResponse rsp = query("/search", params(CommonParams.JSON, jsonQuery));
     assertEquals(5, rsp.getResults().size());
     assertFieldValues(rsp.getResults(), id, "5", "2", "8", "7", "10");
@@ -207,7 +210,8 @@ public class CombinedQuerySolrCloudTest extends AbstractFullDistribZkTestBase {
           },
           "fields": ["id", "score", "title"],
           "params": {"combiner": true, "combiner.query": ["lexical1", "lexical2"]}
-        }""";
+        }\
+        """;
     QueryResponse rsp = query("/search", params(CommonParams.JSON, jsonQueryAll));
     // ideal ordering
     assertFieldValues(rsp.getResults(), id, "5", "7", "2", "6", "3", "10", "8");
@@ -221,7 +225,8 @@ public class CombinedQuerySolrCloudTest extends AbstractFullDistribZkTestBase {
           "limit": 2,
           "fields": ["id", "score", "title"],
           "params": {"combiner": true, "combiner.query": ["lexical1", "lexical2"]}
-        }""";
+        }\
+        """;
     rsp = query("/search", params(CommonParams.JSON, jsonQueryLimit2));
     // assert proper ordering due to presence of shards.rows
     assertFieldValues(rsp.getResults(), id, "7", "2");
@@ -235,7 +240,8 @@ public class CombinedQuerySolrCloudTest extends AbstractFullDistribZkTestBase {
           "limit": 2,
           "fields": ["id", "score", "title"],
           "params": {"combiner": true, "combiner.query": ["lexical1", "lexical2"], "shards.rows": 10}
-        }""";
+        }\
+        """;
     rsp = query("/search", params(CommonParams.JSON, jsonQueryWithShardRows));
     assertFieldValues(rsp.getResults(), id, "5", "7");
     // assert improper ordering due to lack of shards.rows
@@ -250,7 +256,8 @@ public class CombinedQuerySolrCloudTest extends AbstractFullDistribZkTestBase {
           "offset": 3,
           "fields": ["id", "score", "title"],
           "params": {"combiner": true, "combiner.query": ["lexical1", "lexical2"]}
-        }""";
+        }\
+        """;
     rsp = query("/search", params(CommonParams.JSON, jsonQueryPage));
     assertEquals(4, rsp.getResults().size());
     assertFieldValues(rsp.getResults(), id, "6", "3", "10", "8");
@@ -280,7 +287,8 @@ public class CombinedQuerySolrCloudTest extends AbstractFullDistribZkTestBase {
             "facet.mincount": 1,
             "combiner.query": ["lexical"]
           }
-        }""";
+        }\
+        """;
     QueryResponse rsp = query("/search", params(CommonParams.JSON, jsonQuery));
     assertEquals(3, rsp.getResults().size());
     assertEquals(4, rsp.getResults().getNumFound());
@@ -313,7 +321,8 @@ public class CombinedQuerySolrCloudTest extends AbstractFullDistribZkTestBase {
             "hl.fl": "title",
             "hl.q": "test doc"
           }
-        }""";
+        }\
+        """;
     QueryResponse rsp = query("/search", params(CommonParams.JSON, jsonQuery));
     assertEquals(4, rsp.getResults().size());
     assertFieldValues(rsp.getResults(), id, "5", "7", "2", "6");
@@ -355,7 +364,8 @@ public class CombinedQuerySolrCloudTest extends AbstractFullDistribZkTestBase {
             "hl.fl": "title",
             "hl.q": "test doc"
           }
-        }""";
+        }\
+        """;
     QueryResponse rsp = query("/search-elevate", params(CommonParams.JSON, jsonQuery));
     assertEquals(4, rsp.getResults().size());
     assertFieldValues(rsp.getResults(), id, "6", "10", "5", "7");
@@ -417,7 +427,8 @@ public class CombinedQuerySolrCloudTest extends AbstractFullDistribZkTestBase {
                 "hl.fl": "title",
                 "hl.q": "test doc"
             }
-        }""";
+        }\
+        """;
     handle.put("expanded", UNORDERED);
     QueryResponse rsp = query("/search", params(CommonParams.JSON, jsonQuery));
     assertEquals(3, rsp.getResults().size());

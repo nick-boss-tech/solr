@@ -112,20 +112,19 @@ class SolrCores implements SolrInfoBean {
               Integer.MAX_VALUE, new SolrNamedThreadFactory("coreCloseExecutor"));
       try {
         for (SolrCore core : coreList) {
-          coreCloseExecutor.execute(
-              () -> {
-                MDCLoggingContext.setCore(core);
-                try {
-                  core.close();
-                } catch (Throwable e) {
-                  log.error("Error shutting down core", e);
-                  if (e instanceof Error) {
-                    throw (Error) e;
-                  }
-                } finally {
-                  MDCLoggingContext.clear();
-                }
-              });
+          coreCloseExecutor.execute(() -> {
+            MDCLoggingContext.setCore(core);
+            try {
+              core.close();
+            } catch (Throwable e) {
+              log.error("Error shutting down core", e);
+              if (e instanceof Error) {
+                throw (Error) e;
+              }
+            } finally {
+              MDCLoggingContext.clear();
+            }
+          });
         }
       } finally {
         ExecutorUtil.shutdownAndAwaitTermination(coreCloseExecutor);

@@ -154,97 +154,88 @@ public class SolrIndexSearcherTest extends SolrTestCaseJ4 {
 
   public void testLowMinExactCountGeneratesApproximation() throws IOException {
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              QueryCommand cmd = createBasicQueryCommand(NUM_DOCS / 2, 10, "field1_s", "foo");
-              assertMatchesGreaterThan(NUM_DOCS, searcher, cmd);
-              return null;
-            });
+        .withSearcher(searcher -> {
+          QueryCommand cmd = createBasicQueryCommand(NUM_DOCS / 2, 10, "field1_s", "foo");
+          assertMatchesGreaterThan(NUM_DOCS, searcher, cmd);
+          return null;
+        });
 
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              QueryCommand cmd = createBasicQueryCommand(1, 1, "field2_s", "1");
-              assertMatchesGreaterThan(NUM_DOCS / 2, searcher, cmd);
-              return null;
-            });
+        .withSearcher(searcher -> {
+          QueryCommand cmd = createBasicQueryCommand(1, 1, "field2_s", "1");
+          assertMatchesGreaterThan(NUM_DOCS / 2, searcher, cmd);
+          return null;
+        });
   }
 
   public void testHighMinExactCountGeneratesExactCount() throws IOException {
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              QueryCommand cmd = createBasicQueryCommand(NUM_DOCS, 10, "field1_s", "foo");
-              assertMatchesEqual(NUM_DOCS, searcher, cmd);
-              return null;
-            });
+        .withSearcher(searcher -> {
+          QueryCommand cmd = createBasicQueryCommand(NUM_DOCS, 10, "field1_s", "foo");
+          assertMatchesEqual(NUM_DOCS, searcher, cmd);
+          return null;
+        });
 
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              QueryCommand cmd = createBasicQueryCommand(NUM_DOCS, 10, "field2_s", "1");
-              assertMatchesEqual(NUM_DOCS / 2, searcher, cmd);
-              return null;
-            });
+        .withSearcher(searcher -> {
+          QueryCommand cmd = createBasicQueryCommand(NUM_DOCS, 10, "field2_s", "1");
+          assertMatchesEqual(NUM_DOCS / 2, searcher, cmd);
+          return null;
+        });
   }
 
   public void testLowMinExactCountWithQueryResultCache() throws IOException {
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              QueryCommand cmd = createBasicQueryCommand(NUM_DOCS / 2, 10, "field1_s", "foo");
-              cmd.clearFlags(SolrIndexSearcher.NO_CHECK_QCACHE | SolrIndexSearcher.NO_SET_QCACHE);
-              searcher.search(cmd);
-              assertMatchesGreaterThan(NUM_DOCS, searcher, cmd);
-              return null;
-            });
+        .withSearcher(searcher -> {
+          QueryCommand cmd = createBasicQueryCommand(NUM_DOCS / 2, 10, "field1_s", "foo");
+          cmd.clearFlags(SolrIndexSearcher.NO_CHECK_QCACHE | SolrIndexSearcher.NO_SET_QCACHE);
+          searcher.search(cmd);
+          assertMatchesGreaterThan(NUM_DOCS, searcher, cmd);
+          return null;
+        });
   }
 
   public void testHighMinExactCountWithQueryResultCache() throws IOException {
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              QueryCommand cmd = createBasicQueryCommand(NUM_DOCS, 2, "field1_s", "foo");
-              cmd.clearFlags(SolrIndexSearcher.NO_CHECK_QCACHE | SolrIndexSearcher.NO_SET_QCACHE);
-              searcher.search(cmd);
-              assertMatchesEqual(NUM_DOCS, searcher, cmd);
-              return null;
-            });
+        .withSearcher(searcher -> {
+          QueryCommand cmd = createBasicQueryCommand(NUM_DOCS, 2, "field1_s", "foo");
+          cmd.clearFlags(SolrIndexSearcher.NO_CHECK_QCACHE | SolrIndexSearcher.NO_SET_QCACHE);
+          searcher.search(cmd);
+          assertMatchesEqual(NUM_DOCS, searcher, cmd);
+          return null;
+        });
   }
 
   public void testMinExactCountMoreRows() throws IOException {
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              QueryCommand cmd = createBasicQueryCommand(2, NUM_DOCS, "field1_s", "foo");
-              assertMatchesEqual(NUM_DOCS, searcher, cmd);
-              return null;
-            });
+        .withSearcher(searcher -> {
+          QueryCommand cmd = createBasicQueryCommand(2, NUM_DOCS, "field1_s", "foo");
+          assertMatchesEqual(NUM_DOCS, searcher, cmd);
+          return null;
+        });
   }
 
   public void testMinExactCountMatchWithDocSet() throws IOException {
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              QueryCommand cmd = createBasicQueryCommand(2, 2, "field1_s", "foo");
-              assertMatchesGreaterThan(NUM_DOCS, searcher, cmd);
+        .withSearcher(searcher -> {
+          QueryCommand cmd = createBasicQueryCommand(2, 2, "field1_s", "foo");
+          assertMatchesGreaterThan(NUM_DOCS, searcher, cmd);
 
-              cmd.setNeedDocSet(true);
-              assertMatchesEqual(NUM_DOCS, searcher, cmd);
-              return null;
-            });
+          cmd.setNeedDocSet(true);
+          assertMatchesEqual(NUM_DOCS, searcher, cmd);
+          return null;
+        });
   }
 
   public void testMinExactCountWithMaxScoreRequested() throws IOException {
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              QueryCommand cmd = createBasicQueryCommand(2, 2, "field1_s", "foo");
-              cmd.setFlags(SolrIndexSearcher.GET_SCORES);
-              QueryResult qr = assertMatchesGreaterThan(NUM_DOCS, searcher, cmd);
-              assertNotEquals(Float.NaN, qr.getDocList().maxScore());
-              return null;
-            });
+        .withSearcher(searcher -> {
+          QueryCommand cmd = createBasicQueryCommand(2, 2, "field1_s", "foo");
+          cmd.setFlags(SolrIndexSearcher.GET_SCORES);
+          QueryResult qr = assertMatchesGreaterThan(NUM_DOCS, searcher, cmd);
+          assertNotEquals(Float.NaN, qr.getDocList().maxScore());
+          return null;
+        });
   }
 
   /**
@@ -258,52 +249,49 @@ public class SolrIndexSearcherTest extends SolrTestCaseJ4 {
   public void testSearchLeafVsQueryLimits() throws Exception {
     TestInjection.queryTimeout = null;
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              // A mix of plain and MultiTermQuery-derived queries, the latter needing a
-              // rewrite (PrefixQuery/WildcardQuery/FuzzyQuery/TermRangeQuery -> BooleanQuery or
-              // ConstantScoreQuery) before a Weight can be created; the BooleanQuery additionally
-              // nests one such rewritten clause. Query#rewrite() happens on SolrIndexSearcher.this
-              // (via IndexSearcher#createWeight -> searcher.rewrite(query)), well before
-              // searchLeaf ever sees the substitute IndexSearcher, so it must not matter to the
-              // outcome checked here.
-              List<Query> testQueries =
-                  List.of(
-                      new TermQuery(new Term("field4_t", "5")),
-                      new PrefixQuery(new Term("field4_t", "1")),
-                      new WildcardQuery(new Term("field4_t", "2*")),
-                      new FuzzyQuery(new Term("field4_t", "5")),
-                      TermRangeQuery.newStringRange("field4_t", "10", "12", true, true),
-                      // Same shape of query ExpandComponent#getGroupQuery builds to re-expand a
-                      // collapsed group's members: a TermInSetQuery over the collapse field's
-                      // distinct values.
-                      new TermInSetQuery(
-                          "field4_t",
-                          List.of(new BytesRef("5"), new BytesRef("10"), new BytesRef("15"))),
-                      new BooleanQuery.Builder()
-                          .add(new TermQuery(new Term("field1_s", "foo")), BooleanClause.Occur.MUST)
-                          .add(
-                              new PrefixQuery(new Term("field4_t", "1")),
-                              BooleanClause.Occur.SHOULD)
-                          .build(),
-                      // search using ReRankCollector, same as a real {!rerank} query
-                      new FixedScoreReRankQuery(new TermQuery(new Term("field4_t", "5")), 7.5f));
+        .withSearcher(searcher -> {
+          // A mix of plain and MultiTermQuery-derived queries, the latter needing a
+          // rewrite (PrefixQuery/WildcardQuery/FuzzyQuery/TermRangeQuery -> BooleanQuery or
+          // ConstantScoreQuery) before a Weight can be created; the BooleanQuery additionally
+          // nests one such rewritten clause. Query#rewrite() happens on SolrIndexSearcher.this
+          // (via IndexSearcher#createWeight -> searcher.rewrite(query)), well before
+          // searchLeaf ever sees the substitute IndexSearcher, so it must not matter to the
+          // outcome checked here.
+          List<Query> testQueries =
+              List.of(
+                  new TermQuery(new Term("field4_t", "5")),
+                  new PrefixQuery(new Term("field4_t", "1")),
+                  new WildcardQuery(new Term("field4_t", "2*")),
+                  new FuzzyQuery(new Term("field4_t", "5")),
+                  TermRangeQuery.newStringRange("field4_t", "10", "12", true, true),
+                  // Same shape of query ExpandComponent#getGroupQuery builds to re-expand a
+                  // collapsed group's members: a TermInSetQuery over the collapse field's
+                  // distinct values.
+                  new TermInSetQuery(
+                      "field4_t",
+                      List.of(new BytesRef("5"), new BytesRef("10"), new BytesRef("15"))),
+                  new BooleanQuery.Builder()
+                      .add(new TermQuery(new Term("field1_s", "foo")), BooleanClause.Occur.MUST)
+                      .add(new PrefixQuery(new Term("field4_t", "1")), BooleanClause.Occur.SHOULD)
+                      .build(),
+                  // search using ReRankCollector, same as a real {!rerank} query
+                  new FixedScoreReRankQuery(new TermQuery(new Term("field4_t", "5")), 7.5f));
 
-              for (Query q : testQueries) {
-                float scoreWithoutLimits = topScore(searcher, q);
-                float scoreWithLimits = topScoreWithQueryLimitsEnabled(searcher, q);
+          for (Query q : testQueries) {
+            float scoreWithoutLimits = topScore(searcher, q);
+            float scoreWithLimits = topScoreWithQueryLimitsEnabled(searcher, q);
 
-                assertEquals(
-                    "score must be identical whether or not QueryLimits swaps in a substitute "
-                        + "IndexSearcher for searchLeaf: the Weight (and its baked-in Similarity) "
-                        + "predates that substitute and must be reused unchanged, for query: "
-                        + q,
-                    scoreWithoutLimits,
-                    scoreWithLimits,
-                    0.0f);
-              }
-              return null;
-            });
+            assertEquals(
+                "score must be identical whether or not QueryLimits swaps in a substitute "
+                    + "IndexSearcher for searchLeaf: the Weight (and its baked-in Similarity) "
+                    + "predates that substitute and must be reused unchanged, for query: "
+                    + q,
+                scoreWithoutLimits,
+                scoreWithLimits,
+                0.0f);
+          }
+          return null;
+        });
   }
 
   private static float topScoreWithQueryLimitsEnabled(SolrIndexSearcher searcher, Query q)
@@ -358,40 +346,38 @@ public class SolrIndexSearcherTest extends SolrTestCaseJ4 {
   private void implTestReranking(
       boolean doFilter, boolean doSort, int getDocSetFlag, Float fixedScore) throws Exception {
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              final QueryCommand cmd = new QueryCommand();
-              cmd.setFlags(SolrIndexSearcher.GET_SCORES | getDocSetFlag);
+        .withSearcher(searcher -> {
+          final QueryCommand cmd = new QueryCommand();
+          cmd.setFlags(SolrIndexSearcher.GET_SCORES | getDocSetFlag);
 
-              if (doSort) {
-                cmd.setSort(
-                    new Sort(SortField.FIELD_SCORE, new SortField("id", SortField.Type.STRING)));
-              }
+          if (doSort) {
+            cmd.setSort(
+                new Sort(SortField.FIELD_SCORE, new SortField("id", SortField.Type.STRING)));
+          }
 
-              if (doFilter) {
-                cmd.setFilterList(
-                    new TermQuery(new Term("field4_t", Integer.toString(NUM_DOCS - 1))));
-              }
+          if (doFilter) {
+            cmd.setFilterList(new TermQuery(new Term("field4_t", Integer.toString(NUM_DOCS - 1))));
+          }
 
-              cmd.setQuery(new TermQuery(new Term("field1_s", "foo")));
+          cmd.setQuery(new TermQuery(new Term("field1_s", "foo")));
 
-              final float expectedScore;
-              if (fixedScore == null) {
-                expectedScore = 1f;
-              } else {
-                expectedScore = fixedScore;
-                cmd.setQuery(new FixedScoreReRankQuery(cmd.getQuery(), expectedScore));
-              }
+          final float expectedScore;
+          if (fixedScore == null) {
+            expectedScore = 1f;
+          } else {
+            expectedScore = fixedScore;
+            cmd.setQuery(new FixedScoreReRankQuery(cmd.getQuery(), expectedScore));
+          }
 
-              final QueryResult qr = searcher.search(cmd);
+          final QueryResult qr = searcher.search(cmd);
 
-              // check score for the first document
-              final DocIterator iter = qr.getDocList().iterator();
-              iter.next();
-              assertEquals(expectedScore, iter.score(), 0);
+          // check score for the first document
+          final DocIterator iter = qr.getDocList().iterator();
+          iter.next();
+          assertEquals(expectedScore, iter.score(), 0);
 
-              return null;
-            });
+          return null;
+        });
   }
 
   private static final class FixedScoreReRankQuery extends RankQuery {
@@ -471,118 +457,107 @@ public class SolrIndexSearcherTest extends SolrTestCaseJ4 {
   public void testMinExactWithFilters() throws Exception {
 
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              // Sanity Check - No Filter
-              QueryCommand cmd = createBasicQueryCommand(1, 1, "field4_t", "0");
-              assertMatchesGreaterThan(NUM_DOCS, searcher, cmd);
-              return null;
-            });
+        .withSearcher(searcher -> {
+          // Sanity Check - No Filter
+          QueryCommand cmd = createBasicQueryCommand(1, 1, "field4_t", "0");
+          assertMatchesGreaterThan(NUM_DOCS, searcher, cmd);
+          return null;
+        });
 
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              QueryCommand cmd = createBasicQueryCommand(1, 1, "field4_t", "0");
-              Query filterQuery =
-                  new TermQuery(new Term("field4_t", Integer.toString(NUM_DOCS - 1)));
-              cmd.setFilterList(filterQuery);
-              assertNull(searcher.getProcessedFilter(cmd.getFilterList()).postFilter);
-              assertMatchesEqual(1, searcher, cmd);
-              return null;
-            });
+        .withSearcher(searcher -> {
+          QueryCommand cmd = createBasicQueryCommand(1, 1, "field4_t", "0");
+          Query filterQuery = new TermQuery(new Term("field4_t", Integer.toString(NUM_DOCS - 1)));
+          cmd.setFilterList(filterQuery);
+          assertNull(searcher.getProcessedFilter(cmd.getFilterList()).postFilter);
+          assertMatchesEqual(1, searcher, cmd);
+          return null;
+        });
   }
 
   public void testMinExactWithPostFilters() throws Exception {
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              // Sanity Check - No Filter
-              QueryCommand cmd = createBasicQueryCommand(1, 1, "field4_t", "0");
-              assertMatchesGreaterThan(NUM_DOCS, searcher, cmd);
-              return null;
-            });
+        .withSearcher(searcher -> {
+          // Sanity Check - No Filter
+          QueryCommand cmd = createBasicQueryCommand(1, 1, "field4_t", "0");
+          assertMatchesGreaterThan(NUM_DOCS, searcher, cmd);
+          return null;
+        });
 
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              QueryCommand cmd = createBasicQueryCommand(1, 1, "field4_t", "0");
-              MockPostFilter filterQuery = new MockPostFilter(1, 101);
-              cmd.setFilterList(filterQuery);
-              assertNotNull(searcher.getProcessedFilter(cmd.getFilterList()).postFilter);
-              assertMatchesEqual(1, searcher, cmd);
-              return null;
-            });
+        .withSearcher(searcher -> {
+          QueryCommand cmd = createBasicQueryCommand(1, 1, "field4_t", "0");
+          MockPostFilter filterQuery = new MockPostFilter(1, 101);
+          cmd.setFilterList(filterQuery);
+          assertNotNull(searcher.getProcessedFilter(cmd.getFilterList()).postFilter);
+          assertMatchesEqual(1, searcher, cmd);
+          return null;
+        });
 
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              QueryCommand cmd = createBasicQueryCommand(1, 1, "field4_t", "0");
-              MockPostFilter filterQuery = new MockPostFilter(100, 101);
-              cmd.setFilterList(filterQuery);
-              assertNotNull(searcher.getProcessedFilter(cmd.getFilterList()).postFilter);
-              assertMatchesGreaterThan(NUM_DOCS, searcher, cmd);
-              return null;
-            });
+        .withSearcher(searcher -> {
+          QueryCommand cmd = createBasicQueryCommand(1, 1, "field4_t", "0");
+          MockPostFilter filterQuery = new MockPostFilter(100, 101);
+          cmd.setFilterList(filterQuery);
+          assertNotNull(searcher.getProcessedFilter(cmd.getFilterList()).postFilter);
+          assertMatchesGreaterThan(NUM_DOCS, searcher, cmd);
+          return null;
+        });
   }
 
   public void testMinExactWithPostFilterThatChangesScoreMode() throws Exception {
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              QueryCommand cmd = createBasicQueryCommand(1, 1, "field4_t", "0");
-              // Use ScoreMode.COMPLETE for the PostFilter
-              MockPostFilter filterQuery =
-                  new MockPostFilter(NUM_DOCS * 10, 101, ScoreMode.COMPLETE);
-              cmd.setFilterList(filterQuery);
-              assertNotNull(searcher.getProcessedFilter(cmd.getFilterList()).postFilter);
-              assertMatchesEqual(NUM_DOCS, searcher, cmd);
-              return null;
-            });
+        .withSearcher(searcher -> {
+          QueryCommand cmd = createBasicQueryCommand(1, 1, "field4_t", "0");
+          // Use ScoreMode.COMPLETE for the PostFilter
+          MockPostFilter filterQuery = new MockPostFilter(NUM_DOCS * 10, 101, ScoreMode.COMPLETE);
+          cmd.setFilterList(filterQuery);
+          assertNotNull(searcher.getProcessedFilter(cmd.getFilterList()).postFilter);
+          assertMatchesEqual(NUM_DOCS, searcher, cmd);
+          return null;
+        });
   }
 
   public void testMaxHitsAllowed() throws Exception {
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              // No max hits
-              QueryCommand cmd = createBasicQueryCommand(1000, 10, "field1_s", "foo");
-              final QueryResult search = searcher.search(cmd);
-              assertEquals(NUM_DOCS, search.getDocList().matches());
-              assertEquals(10, search.getDocList().size());
-              assertFalse(search.isPartialResults());
-              assertNull(search.getTerminatedEarly());
-              assertNull(search.getMaxHitsTerminatedEarly());
-              return null;
-            });
+        .withSearcher(searcher -> {
+          // No max hits
+          QueryCommand cmd = createBasicQueryCommand(1000, 10, "field1_s", "foo");
+          final QueryResult search = searcher.search(cmd);
+          assertEquals(NUM_DOCS, search.getDocList().matches());
+          assertEquals(10, search.getDocList().size());
+          assertFalse(search.isPartialResults());
+          assertNull(search.getTerminatedEarly());
+          assertNull(search.getMaxHitsTerminatedEarly());
+          return null;
+        });
 
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              // max hits > doc count
-              QueryCommand cmd = createBasicQueryCommand(1000, 10, 1000, "field1_s", "foo");
-              final QueryResult search = searcher.search(cmd);
-              assertEquals(NUM_DOCS, search.getDocList().matches());
-              assertEquals(10, search.getDocList().size());
-              assertFalse(search.isPartialResults());
-              assertNull(search.getTerminatedEarly());
-              assertNull(search.getMaxHitsTerminatedEarly());
-              return null;
-            });
+        .withSearcher(searcher -> {
+          // max hits > doc count
+          QueryCommand cmd = createBasicQueryCommand(1000, 10, 1000, "field1_s", "foo");
+          final QueryResult search = searcher.search(cmd);
+          assertEquals(NUM_DOCS, search.getDocList().matches());
+          assertEquals(10, search.getDocList().size());
+          assertFalse(search.isPartialResults());
+          assertNull(search.getTerminatedEarly());
+          assertNull(search.getMaxHitsTerminatedEarly());
+          return null;
+        });
 
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              // max hits < doc count
-              QueryCommand cmd = createBasicQueryCommand(1000, 10, 20, "field1_s", "foo");
-              final QueryResult search = searcher.search(cmd);
-              // in a single threaded search, the maxHitsAllowed will be exact
-              assertEquals(20, search.getDocList().matches());
-              assertEquals(10, search.getDocList().size());
-              assertTrue(search.isPartialResults());
-              assertNull(search.getTerminatedEarly());
-              assertEquals(Boolean.TRUE, search.getMaxHitsTerminatedEarly());
-              return null;
-            });
+        .withSearcher(searcher -> {
+          // max hits < doc count
+          QueryCommand cmd = createBasicQueryCommand(1000, 10, 20, "field1_s", "foo");
+          final QueryResult search = searcher.search(cmd);
+          // in a single threaded search, the maxHitsAllowed will be exact
+          assertEquals(20, search.getDocList().matches());
+          assertEquals(10, search.getDocList().size());
+          assertTrue(search.isPartialResults());
+          assertNull(search.getTerminatedEarly());
+          assertEquals(Boolean.TRUE, search.getMaxHitsTerminatedEarly());
+          return null;
+        });
   }
 
   private QueryCommand createBasicQueryCommand(

@@ -81,16 +81,9 @@ public class PackageDeploy extends PackageSubCommand {
           "Either specify --cluster to deploy cluster level plugins or --collections <list-of-collections> to deploy collection level plugins");
       return 1;
     }
-    return runWithManagers(
-        (packageManager, repositoryManager) ->
-            packageTool.deploy(
-                packageManager,
-                packageNameAndVersion,
-                cluster,
-                collections,
-                params,
-                update,
-                noPrompt));
+    return runWithManagers((packageManager, repositoryManager) ->
+        packageTool.deploy(
+            packageManager, packageNameAndVersion, cluster, collections, params, update, noPrompt));
   }
 
   @Override

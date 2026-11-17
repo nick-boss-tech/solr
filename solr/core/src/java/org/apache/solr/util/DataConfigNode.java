@@ -49,12 +49,11 @@ public class DataConfigNode implements ConfigNode {
     name = root.name();
     rawAttributes = root.attributes();
     rawTextData = root.txt();
-    root.forEachChild(
-        it -> {
-          List<ConfigNode> nodes = kids.computeIfAbsent(it.name(), k -> new ArrayList<>());
-          nodes.add(new DataConfigNode(it));
-          return Boolean.TRUE;
-        });
+    root.forEachChild(it -> {
+      List<ConfigNode> nodes = kids.computeIfAbsent(it.name(), k -> new ArrayList<>());
+      nodes.add(new DataConfigNode(it));
+      return Boolean.TRUE;
+    });
     for (Map.Entry<String, List<ConfigNode>> e : kids.entrySet()) {
       if (e.getValue() != null) {
         e.setValue(List.copyOf(e.getValue()));
@@ -122,12 +121,11 @@ public class DataConfigNode implements ConfigNode {
     for (String s : names) {
       List<ConfigNode> vals = kids.get(s);
       if (vals != null) {
-        vals.forEach(
-            it -> {
-              if (test == null || test.test(it)) {
-                result.add(it);
-              }
-            });
+        vals.forEach(it -> {
+          if (test == null || test.test(it)) {
+            result.add(it);
+          }
+        });
       }
     }
     return result;
@@ -135,11 +133,10 @@ public class DataConfigNode implements ConfigNode {
 
   @Override
   public void forEachChild(Function<ConfigNode, Boolean> fun) {
-    kids.forEach(
-        (s, configNodes) -> {
-          if (configNodes != null) {
-            configNodes.forEach(fun::apply);
-          }
-        });
+    kids.forEach((s, configNodes) -> {
+      if (configNodes != null) {
+        configNodes.forEach(fun::apply);
+      }
+    });
   }
 }

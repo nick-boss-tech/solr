@@ -116,10 +116,9 @@ public class ForceLeader extends AdminAPIBase implements ForceLeaderApi {
               .collect(Collectors.toList());
       boolean shouldIncreaseReplicaTerms =
           liveReplicas.stream()
-              .noneMatch(
-                  rep ->
-                      zkShardTerms.registered(rep.getName())
-                          && zkShardTerms.canBecomeLeader(rep.getName()));
+              .noneMatch(rep ->
+                  zkShardTerms.registered(rep.getName())
+                      && zkShardTerms.canBecomeLeader(rep.getName()));
       // we won't increase replica's terms if exist a live replica with term equals to leader
       if (shouldIncreaseReplicaTerms) {
         // TODO only increase terms of replicas less out-of-sync

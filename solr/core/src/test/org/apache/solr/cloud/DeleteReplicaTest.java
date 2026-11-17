@@ -88,7 +88,7 @@ public class DeleteReplicaTest extends SolrCloudTestCase {
     // don't choose the leader to shutdown, it just complicates things unnecessarily
     Replica replica =
         getRandomReplica(
-            shard, (r) -> (r.getState() == Replica.State.ACTIVE && !r.equals(shard.getLeader())));
+            shard, r -> (r.getState() == Replica.State.ACTIVE && !r.equals(shard.getLeader())));
 
     final var coreStatus = getCoreStatus(replica);
     Path dataDir = Path.of(coreStatus.dataDir);
@@ -237,7 +237,7 @@ public class DeleteReplicaTest extends SolrCloudTestCase {
     // don't choose the leader to shutdown, it just complicates things unnecessarily
     Replica replica =
         getRandomReplica(
-            shard, (r) -> (r.getState() == Replica.State.ACTIVE && !r.equals(shard.getLeader())));
+            shard, r -> (r.getState() == Replica.State.ACTIVE && !r.equals(shard.getLeader())));
 
     JettySolrRunner replicaJetty = cluster.getReplicaJetty(replica);
     ZkController replicaZkController = replicaJetty.getCoreContainer().getZkController();
@@ -509,19 +509,18 @@ public class DeleteReplicaTest extends SolrCloudTestCase {
     for (int i = 0; i < threads.length; i++) {
       int finalI = i;
       threads[i] =
-          new Thread(
-              () -> {
-                int doc = finalI * 10000;
-                while (!closed.get()) {
-                  try {
-                    cluster
-                        .getSolrClient()
-                        .add(collectionName, new SolrInputDocument("id", String.valueOf(doc++)));
-                  } catch (Exception e) {
-                    log.error("Failed on adding document to {}", collectionName, e);
-                  }
-                }
-              });
+          new Thread(() -> {
+            int doc = finalI * 10000;
+            while (!closed.get()) {
+              try {
+                cluster
+                    .getSolrClient()
+                    .add(collectionName, new SolrInputDocument("id", String.valueOf(doc++)));
+              } catch (Exception e) {
+                log.error("Failed on adding document to {}", collectionName, e);
+              }
+            }
+          });
       threads[i].start();
     }
 

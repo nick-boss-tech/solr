@@ -872,14 +872,13 @@ public class QueryComponent extends SearchComponent {
       final AtomicBoolean hasAdditionalAdded = new AtomicBoolean(additionalAdded);
       fields
           .getScoreDependentReturnFields()
-          .forEach(
-              (name, value) -> {
-                if (value.isEmpty()) {
-                  addFL(additionalFL, name, hasAdditionalAdded.getAndSet(true));
-                } else {
-                  addFL(additionalFL, name + ":" + value, hasAdditionalAdded.getAndSet(true));
-                }
-              });
+          .forEach((name, value) -> {
+            if (value.isEmpty()) {
+              addFL(additionalFL, name, hasAdditionalAdded.getAndSet(true));
+            } else {
+              addFL(additionalFL, name + ":" + value, hasAdditionalAdded.getAndSet(true));
+            }
+          });
       additionalAdded = hasAdditionalAdded.get();
     }
     if ((fields.getExplicitlyRequestedFieldNames() == null
@@ -912,7 +911,6 @@ public class QueryComponent extends SearchComponent {
 
     public abstract Map<Object, ShardDoc> resultIds(int offset);
   }
-  ;
 
   protected ShardDocQueue newShardDocQueue(
       SolrIndexSearcher searcher, SortField[] sortFields, Integer size) {

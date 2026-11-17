@@ -57,15 +57,14 @@ public class ZkDynamicConfig {
     if (StrUtils.isNotNullOrEmpty(lines)) {
       lines
           .lines()
-          .forEach(
-              l -> {
-                if (l.startsWith("version=")) {
-                  zkDynamicConfig.version = l.split("=")[1];
-                }
-                if (l.startsWith("server.")) {
-                  zkDynamicConfig.servers.add(Server.parseLine(l));
-                }
-              });
+          .forEach(l -> {
+            if (l.startsWith("version=")) {
+              zkDynamicConfig.version = l.split("=")[1];
+            }
+            if (l.startsWith("server.")) {
+              zkDynamicConfig.servers.add(Server.parseLine(l));
+            }
+          });
     }
     return zkDynamicConfig;
   }
@@ -81,16 +80,15 @@ public class ZkDynamicConfig {
     ZkDynamicConfig zkDynamicConfig = new ZkDynamicConfig();
     zkDynamicConfig.servers =
         Arrays.stream(zkHost.split("/")[0].split(","))
-            .map(
-                h ->
-                    new ZkDynamicConfig.Server(
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        h.split(":")[0],
-                        h.contains(":") ? Integer.parseInt(h.split(":")[1]) : 2181))
+            .map(h ->
+                new ZkDynamicConfig.Server(
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    h.split(":")[0],
+                    h.contains(":") ? Integer.parseInt(h.split(":")[1]) : 2181))
             .collect(Collectors.toList());
     return zkDynamicConfig;
   }

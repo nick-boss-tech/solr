@@ -141,12 +141,11 @@ public class AttributedInstrumentFactory {
   private Attributes createNodeAttributes(Attributes coreAttributes) {
     var builder = Attributes.builder();
 
-    coreAttributes.forEach(
-        (key, value) -> {
-          if (!FILTER_ATTRS_SET.contains(key)) {
-            builder.put((AttributeKey<Object>) key, value);
-          }
-        });
+    coreAttributes.forEach((key, value) -> {
+      if (!FILTER_ATTRS_SET.contains(key)) {
+        builder.put((AttributeKey<Object>) key, value);
+      }
+    });
 
     return builder.build();
   }

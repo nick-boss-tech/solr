@@ -46,7 +46,7 @@ public class TestSizeLimitedDistributedMap extends TestDistributedMap {
       String path = getAndMakeInitialPath(zkClient);
       DistributedMap map =
           new SizeLimitedDistributedMap(
-              zkClient, path, numResponsesToStore, (element) -> deletedItems.add(element));
+              zkClient, path, numResponsesToStore, element -> deletedItems.add(element));
       for (int i = 0; i < numResponsesToStore; i++) {
         map.put("xyz_" + i, new byte[0]);
         expectedKeys.add("xyz_" + i);
@@ -103,11 +103,10 @@ public class TestSizeLimitedDistributedMap extends TestDistributedMap {
       for (int i = 0; i < THREAD_COUNT; i++) {
         final String key = "xyz_" + (numResponsesToStore + 1);
         expectedKeys.add(key);
-        callables.add(
-            () -> {
-              map.put(key, new byte[0]);
-              return null;
-            });
+        callables.add(() -> {
+          map.put(key, new byte[0]);
+          return null;
+        });
       }
 
       ExecutorService executorService =
@@ -153,7 +152,7 @@ public class TestSizeLimitedDistributedMap extends TestDistributedMap {
       AtomicInteger overFlowCounter = new AtomicInteger();
       DistributedMap map =
           new SizeLimitedDistributedMap(
-              zkClient, path, maxEntries, (element) -> overFlowCounter.incrementAndGet());
+              zkClient, path, maxEntries, element -> overFlowCounter.incrementAndGet());
 
       // Now add regular keys until we reach the size limit of the map.
       // Once we hit the limit, the oldest item (the one we added above with slashes) is deleted,

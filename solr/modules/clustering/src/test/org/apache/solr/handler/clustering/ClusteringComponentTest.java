@@ -144,19 +144,17 @@ public class ClusteringComponentTest extends SolrTestCaseJ4 {
         clusters(
             "echo",
             query,
-            common.andThen(
-                params -> {
-                  params.add(EngineParameters.PARAM_PREFER_QUERY_CONTEXT, "true");
-                }));
+            common.andThen(params -> {
+              params.add(EngineParameters.PARAM_PREFER_QUERY_CONTEXT, "true");
+            }));
 
     List<Cluster<SolrDocument>> full =
         clusters(
             "echo",
             query,
-            common.andThen(
-                params -> {
-                  params.add(EngineParameters.PARAM_PREFER_QUERY_CONTEXT, "false");
-                }));
+            common.andThen(params -> {
+              params.add(EngineParameters.PARAM_PREFER_QUERY_CONTEXT, "false");
+            }));
 
     // Echo clustering algorithm just returns document fields as cluster labels
     // so highlighted snippets should never be longer than full field content.
@@ -193,19 +191,17 @@ public class ClusteringComponentTest extends SolrTestCaseJ4 {
         clusters(
             "echo",
             query,
-            common.andThen(
-                params -> {
-                  params.add(EngineParameters.PARAM_CONTEXT_SIZE, Integer.toString(30));
-                }));
+            common.andThen(params -> {
+              params.add(EngineParameters.PARAM_CONTEXT_SIZE, Integer.toString(30));
+            }));
 
     List<Cluster<SolrDocument>> longSummaries =
         clusters(
             "echo",
             query,
-            common.andThen(
-                params -> {
-                  params.add(EngineParameters.PARAM_CONTEXT_COUNT, Integer.toString(80));
-                }));
+            common.andThen(params -> {
+              params.add(EngineParameters.PARAM_CONTEXT_COUNT, Integer.toString(80));
+            }));
 
     assertEquals(shortSummaries.size(), longSummaries.size());
     for (int i = 0; i < shortSummaries.size(); i++) {
@@ -254,10 +250,9 @@ public class ClusteringComponentTest extends SolrTestCaseJ4 {
               params.set(EngineParameters.PARAM_MAX_LABELS, "3");
             });
 
-    clusters.forEach(
-        c -> {
-          assertThat(c.getLabels(), Matchers.hasSize(3));
-        });
+    clusters.forEach(c -> {
+      assertThat(c.getLabels(), Matchers.hasSize(3));
+    });
   }
 
   @Test
@@ -336,19 +331,18 @@ public class ClusteringComponentTest extends SolrTestCaseJ4 {
 
   private StringBuilder toString(
       List<Cluster<SolrDocument>> clusters, String indent, StringBuilder sb) {
-    clusters.forEach(
-        c -> {
-          sb.append(indent);
-          sb.append("- " + String.join("; ", c.getLabels()));
-          if (!c.getDocuments().isEmpty()) {
-            sb.append(" [" + c.getDocuments().size() + "]");
-          }
-          sb.append("\n");
+    clusters.forEach(c -> {
+      sb.append(indent);
+      sb.append("- " + String.join("; ", c.getLabels()));
+      if (!c.getDocuments().isEmpty()) {
+        sb.append(" [" + c.getDocuments().size() + "]");
+      }
+      sb.append("\n");
 
-          if (!c.getClusters().isEmpty()) {
-            toString(c.getClusters(), indent + "  ", sb);
-          }
-        });
+      if (!c.getClusters().isEmpty()) {
+        toString(c.getClusters(), indent + "  ", sb);
+      }
+    });
     return sb;
   }
 
@@ -406,33 +400,31 @@ public class ClusteringComponentTest extends SolrTestCaseJ4 {
   @SuppressWarnings("unchecked")
   private Cluster<SolrDocument> toCluster(NamedList<Object> v, Map<String, SolrDocument> idToDoc) {
     Cluster<SolrDocument> c = new Cluster<>();
-    v.forEach(
-        (key, value) -> {
-          switch (key) {
-            case ClusteringResponse.DOCS_NODE:
-              ((List<String>) value).forEach(docId -> c.addDocument(idToDoc.get(docId)));
-              break;
-            case ClusteringResponse.LABELS_NODE:
-              ((List<String>) value).forEach(c::addLabel);
-              break;
-            case ClusteringResponse.SCORE_NODE:
-              c.setScore(((Number) value).doubleValue());
-              break;
-            case ClusteringResponse.CLUSTERS_NODE:
-              ((List<NamedList<Object>>) value)
-                  .forEach(
-                      sub -> {
-                        c.addCluster(toCluster(sub, idToDoc));
-                      });
-              break;
-            case ClusteringResponse.IS_OTHER_TOPICS:
-              // Just ignore the attribute.
-              break;
-            default:
-              throw new RuntimeException(
-                  "Unknown output property " + key + " in cluster: " + v.jsonStr());
-          }
-        });
+    v.forEach((key, value) -> {
+      switch (key) {
+        case ClusteringResponse.DOCS_NODE:
+          ((List<String>) value).forEach(docId -> c.addDocument(idToDoc.get(docId)));
+          break;
+        case ClusteringResponse.LABELS_NODE:
+          ((List<String>) value).forEach(c::addLabel);
+          break;
+        case ClusteringResponse.SCORE_NODE:
+          c.setScore(((Number) value).doubleValue());
+          break;
+        case ClusteringResponse.CLUSTERS_NODE:
+          ((List<NamedList<Object>>) value)
+              .forEach(sub -> {
+                c.addCluster(toCluster(sub, idToDoc));
+              });
+          break;
+        case ClusteringResponse.IS_OTHER_TOPICS:
+          // Just ignore the attribute.
+          break;
+        default:
+          throw new RuntimeException(
+              "Unknown output property " + key + " in cluster: " + v.jsonStr());
+      }
+    });
     return c;
   }
 }

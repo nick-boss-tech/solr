@@ -510,36 +510,35 @@ public abstract class AbstractFullDistribZkTestBase extends BaseDistributedSearc
                 Replica.Type.TLOG,
                 ((currentI % sliceCount) + 1)); // nowarn
           }
-          customThreadPool.execute(
-              () -> {
-                try {
-                  JettySolrRunner j =
-                      createJetty(
-                          jettyDir,
-                          useJettyDataDir ? getDataDir(testDir + "/jetty" + cnt) : null,
-                          null,
-                          "solrconfig.xml",
-                          null,
-                          Replica.Type.TLOG);
-                  j.start();
-                  jettys.add(j);
-                  waitForLiveNode(j);
+          customThreadPool.execute(() -> {
+            try {
+              JettySolrRunner j =
+                  createJetty(
+                      jettyDir,
+                      useJettyDataDir ? getDataDir(testDir + "/jetty" + cnt) : null,
+                      null,
+                      "solrconfig.xml",
+                      null,
+                      Replica.Type.TLOG);
+              j.start();
+              jettys.add(j);
+              waitForLiveNode(j);
 
-                  createReplicaRequests.add(
-                      CollectionAdminRequest.addReplicaToShard(
-                              DEFAULT_COLLECTION, "shard" + ((currentI % sliceCount) + 1))
-                          .setNode(j.getNodeName())
-                          .setType(Replica.Type.TLOG));
+              createReplicaRequests.add(
+                  CollectionAdminRequest.addReplicaToShard(
+                          DEFAULT_COLLECTION, "shard" + ((currentI % sliceCount) + 1))
+                      .setNode(j.getNodeName())
+                      .setType(Replica.Type.TLOG));
 
-                  coreClients.add(createNewSolrClient(coreName, j.getLocalPort()));
-                  var client = createNewSolrClient(j.getLocalPort());
-                  clients.add(client);
+              coreClients.add(createNewSolrClient(coreName, j.getLocalPort()));
+              var client = createNewSolrClient(j.getLocalPort());
+              clients.add(client);
 
-                } catch (Exception e) {
-                  log.error("error creating jetty", e);
-                  throw new RuntimeException(e);
-                }
-              });
+            } catch (Exception e) {
+              log.error("error creating jetty", e);
+              throw new RuntimeException(e);
+            }
+          });
 
         } else {
           if (log.isInfoEnabled()) {
@@ -551,32 +550,31 @@ public abstract class AbstractFullDistribZkTestBase extends BaseDistributedSearc
                 ((currentI % sliceCount) + 1)); // nowarn
           }
 
-          customThreadPool.execute(
-              () -> {
-                try {
-                  JettySolrRunner j =
-                      createJetty(
-                          jettyDir,
-                          useJettyDataDir ? getDataDir(testDir + "/jetty" + cnt) : null,
-                          null,
-                          "solrconfig.xml",
-                          null,
-                          null);
-                  j.start();
-                  jettys.add(j);
-                  waitForLiveNode(j);
-                  createReplicaRequests.add(
-                      CollectionAdminRequest.addReplicaToShard(
-                              DEFAULT_COLLECTION, "shard" + ((currentI % sliceCount) + 1))
-                          .setNode(j.getNodeName())
-                          .setType(Replica.Type.NRT));
-                  coreClients.add(createNewSolrClient(coreName, j.getLocalPort()));
-                  clients.add(createNewSolrClient(j.getLocalPort()));
-                } catch (Exception e) {
-                  log.error("error creating jetty", e);
-                  throw new RuntimeException(e);
-                }
-              });
+          customThreadPool.execute(() -> {
+            try {
+              JettySolrRunner j =
+                  createJetty(
+                      jettyDir,
+                      useJettyDataDir ? getDataDir(testDir + "/jetty" + cnt) : null,
+                      null,
+                      "solrconfig.xml",
+                      null,
+                      null);
+              j.start();
+              jettys.add(j);
+              waitForLiveNode(j);
+              createReplicaRequests.add(
+                  CollectionAdminRequest.addReplicaToShard(
+                          DEFAULT_COLLECTION, "shard" + ((currentI % sliceCount) + 1))
+                      .setNode(j.getNodeName())
+                      .setType(Replica.Type.NRT));
+              coreClients.add(createNewSolrClient(coreName, j.getLocalPort()));
+              clients.add(createNewSolrClient(j.getLocalPort()));
+            } catch (Exception e) {
+              log.error("error creating jetty", e);
+              throw new RuntimeException(e);
+            }
+          });
         }
         addedReplicas++;
       } else {
@@ -586,32 +584,31 @@ public abstract class AbstractFullDistribZkTestBase extends BaseDistributedSearc
             jettyDir,
             Replica.Type.PULL,
             ((currentI % sliceCount) + 1)); // nowarn
-        customThreadPool.execute(
-            () -> {
-              try {
-                JettySolrRunner j =
-                    createJetty(
-                        jettyDir,
-                        useJettyDataDir ? getDataDir(testDir + "/jetty" + cnt) : null,
-                        null,
-                        "solrconfig.xml",
-                        null,
-                        Replica.Type.PULL);
-                j.start();
-                jettys.add(j);
-                waitForLiveNode(j);
-                createPullReplicaRequests.add(
-                    CollectionAdminRequest.addReplicaToShard(
-                            DEFAULT_COLLECTION, "shard" + ((currentI % sliceCount) + 1))
-                        .setNode(j.getNodeName())
-                        .setType(Replica.Type.PULL));
-                coreClients.add(createNewSolrClient(coreName, j.getLocalPort()));
-                clients.add(createNewSolrClient(j.getLocalPort()));
-              } catch (Exception e) {
-                log.error("error creating jetty", e);
-                throw new RuntimeException(e);
-              }
-            });
+        customThreadPool.execute(() -> {
+          try {
+            JettySolrRunner j =
+                createJetty(
+                    jettyDir,
+                    useJettyDataDir ? getDataDir(testDir + "/jetty" + cnt) : null,
+                    null,
+                    "solrconfig.xml",
+                    null,
+                    Replica.Type.PULL);
+            j.start();
+            jettys.add(j);
+            waitForLiveNode(j);
+            createPullReplicaRequests.add(
+                CollectionAdminRequest.addReplicaToShard(
+                        DEFAULT_COLLECTION, "shard" + ((currentI % sliceCount) + 1))
+                    .setNode(j.getNodeName())
+                    .setType(Replica.Type.PULL));
+            coreClients.add(createNewSolrClient(coreName, j.getLocalPort()));
+            clients.add(createNewSolrClient(j.getLocalPort()));
+          } catch (Exception e) {
+            log.error("error creating jetty", e);
+            throw new RuntimeException(e);
+          }
+        });
         addedReplicas++;
       }
     }
@@ -623,18 +620,17 @@ public abstract class AbstractFullDistribZkTestBase extends BaseDistributedSearc
             new SolrNamedThreadFactory("createReplicaRequests"));
 
     for (CollectionAdminRequest<CollectionAdminResponse> r : createReplicaRequests) {
-      customThreadPool.execute(
-          () -> {
-            CollectionAdminResponse response;
-            try {
-              response = r.process(cloudClient);
-            } catch (SolrServerException | IOException e) {
-              throw new RuntimeException(e);
-            }
+      customThreadPool.execute(() -> {
+        CollectionAdminResponse response;
+        try {
+          response = r.process(cloudClient);
+        } catch (SolrServerException | IOException e) {
+          throw new RuntimeException(e);
+        }
 
-            assertTrue(response.isSuccess());
-            String coreName = response.getCollectionCoresStatus().keySet().iterator().next();
-          });
+        assertTrue(response.isSuccess());
+        String coreName = response.getCollectionCoresStatus().keySet().iterator().next();
+      });
     }
 
     ExecutorUtil.shutdownAndAwaitTermination(customThreadPool);
@@ -643,18 +639,17 @@ public abstract class AbstractFullDistribZkTestBase extends BaseDistributedSearc
         ExecutorUtil.newMDCAwareCachedThreadPool(
             new SolrNamedThreadFactory("createPullReplicaRequests"));
     for (CollectionAdminRequest<CollectionAdminResponse> r : createPullReplicaRequests) {
-      customThreadPool.execute(
-          () -> {
-            CollectionAdminResponse response;
-            try {
-              response = r.process(cloudClient);
-            } catch (SolrServerException | IOException e) {
-              throw new RuntimeException(e);
-            }
+      customThreadPool.execute(() -> {
+        CollectionAdminResponse response;
+        try {
+          response = r.process(cloudClient);
+        } catch (SolrServerException | IOException e) {
+          throw new RuntimeException(e);
+        }
 
-            assertTrue(response.isSuccess());
-            String coreName = response.getCollectionCoresStatus().keySet().iterator().next();
-          });
+        assertTrue(response.isSuccess());
+        String coreName = response.getCollectionCoresStatus().keySet().iterator().next();
+      });
     }
 
     ExecutorUtil.shutdownAndAwaitTermination(customThreadPool);
@@ -1283,7 +1278,7 @@ public abstract class AbstractFullDistribZkTestBase extends BaseDistributedSearc
         timeoutSeconds);
 
     zkStateReader.waitForState(
-        collection, timeoutSeconds, TimeUnit.SECONDS, (docCollection) -> docCollection == null);
+        collection, timeoutSeconds, TimeUnit.SECONDS, docCollection -> docCollection == null);
     log.info("Collection has disappeared - collection:{}", collection);
   }
 
@@ -1298,7 +1293,7 @@ public abstract class AbstractFullDistribZkTestBase extends BaseDistributedSearc
           "collection1",
           15,
           TimeUnit.SECONDS,
-          (docCollection) -> {
+          docCollection -> {
             if (docCollection == null) return false;
 
             Slice slice = docCollection.getSlice(shardName);
@@ -1337,7 +1332,7 @@ public abstract class AbstractFullDistribZkTestBase extends BaseDistributedSearc
         collection,
         15000,
         TimeUnit.MILLISECONDS,
-        (collectionState) ->
+        collectionState ->
             collectionState != null
                 && collectionState.getSlice(shard) != null
                 && collectionState.getSlice(shard).getReplicasMap().get(coreNodeName) != null
@@ -1869,11 +1864,10 @@ public abstract class AbstractFullDistribZkTestBase extends BaseDistributedSearc
     for (List<CloudJettyRunner> jettyList : shardToJetty.values()) {
       for (CloudJettyRunner jetty : jettyList) {
         CoreContainer cores = jetty.jetty.getCoreContainer();
-        cores.forEachLoadedCore(
-            core ->
-                ((DirectUpdateHandler2) core.getUpdateHandler())
-                    .getSoftCommitTracker()
-                    .setTimeUpperBound(time));
+        cores.forEachLoadedCore(core ->
+            ((DirectUpdateHandler2) core.getUpdateHandler())
+                .getSoftCommitTracker()
+                .setTimeUpperBound(time));
       }
     }
   }

@@ -348,29 +348,27 @@ public class TimeRoutedAliasUpdateProcessorTest extends RoutedAliasUpdateProcess
     boolean[] threadFinished = new boolean[2];
     try {
       CountDownLatch starter = new CountDownLatch(1);
-      executorService.execute(
-          () -> {
-            threadStarted[0] = true;
-            try {
-              starter.await();
-              concurrentUpdates(params, alias);
-            } catch (Exception e) {
-              threadExceptions[0] = e;
-            }
-            threadFinished[0] = true;
-          });
+      executorService.execute(() -> {
+        threadStarted[0] = true;
+        try {
+          starter.await();
+          concurrentUpdates(params, alias);
+        } catch (Exception e) {
+          threadExceptions[0] = e;
+        }
+        threadFinished[0] = true;
+      });
 
-      executorService.execute(
-          () -> {
-            threadStarted[1] = true;
-            try {
-              starter.await();
-              concurrentUpdates(params, alias2);
-            } catch (Exception e) {
-              threadExceptions[1] = e;
-            }
-            threadFinished[1] = true;
-          });
+      executorService.execute(() -> {
+        threadStarted[1] = true;
+        try {
+          starter.await();
+          concurrentUpdates(params, alias2);
+        } catch (Exception e) {
+          threadExceptions[1] = e;
+        }
+        threadFinished[1] = true;
+      });
       starter.countDown();
     } finally {
       ExecutorUtil.shutdownAndAwaitTermination(executorService);

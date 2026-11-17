@@ -60,7 +60,8 @@ public class BasicAuthenticationRefGuideExamplesTest extends SolrCloudAuthTestCa
           ],
           "user-role":{"solr":"admin"}
         }
-      }""";
+      }\
+      """;
 
   @BeforeClass
   public static void setupCluster() throws Exception {

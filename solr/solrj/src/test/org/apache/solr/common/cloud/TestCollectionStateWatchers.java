@@ -69,32 +69,30 @@ public class TestCollectionStateWatchers extends SolrCloudTestCase {
 
   private Future<Boolean> waitInBackground(
       String collection, long timeout, TimeUnit unit, CollectionStatePredicate predicate) {
-    return executor.submit(
-        () -> {
-          try {
-            cluster.getZkStateReader().waitForState(collection, timeout, unit, predicate);
-          } catch (InterruptedException | TimeoutException e) {
-            return Boolean.FALSE;
-          }
-          return Boolean.TRUE;
-        });
+    return executor.submit(() -> {
+      try {
+        cluster.getZkStateReader().waitForState(collection, timeout, unit, predicate);
+      } catch (InterruptedException | TimeoutException e) {
+        return Boolean.FALSE;
+      }
+      return Boolean.TRUE;
+    });
   }
 
   private void waitFor(String message, long timeout, TimeUnit unit, Callable<Boolean> predicate)
       throws InterruptedException, ExecutionException {
 
     Future<Boolean> future =
-        executor.submit(
-            () -> {
-              try {
-                while (true) {
-                  if (predicate.call()) return true;
-                  TimeUnit.MILLISECONDS.sleep(10);
-                }
-              } catch (InterruptedException e) {
-                return false;
-              }
-            });
+        executor.submit(() -> {
+          try {
+            while (true) {
+              if (predicate.call()) return true;
+              TimeUnit.MILLISECONDS.sleep(10);
+            }
+          } catch (InterruptedException e) {
+            return false;
+          }
+        });
     try {
       if (future.get(timeout, unit) == true) {
         return;

@@ -159,10 +159,9 @@ public class CreateShard extends AdminAPIBase implements CreateShardApi {
       requestBody
           .properties
           .entrySet()
-          .forEach(
-              entry -> {
-                remoteMessage.put(PROPERTY_PREFIX + entry.getKey(), entry.getValue());
-              });
+          .forEach(entry -> {
+            remoteMessage.put(PROPERTY_PREFIX + entry.getKey(), entry.getValue());
+          });
     }
 
     return new ZkNodeProps(remoteMessage);

@@ -94,13 +94,12 @@ public abstract class ClusterEventProducerBase implements ClusterEventProducer {
     synchronized (listeners) {
       listeners
           .getOrDefault(event.getType(), Set.of())
-          .forEach(
-              listener -> {
-                if (log.isDebugEnabled()) {
-                  log.debug("--- firing event {} to {}", event, listener);
-                }
-                listener.onEvent(event);
-              });
+          .forEach(listener -> {
+            if (log.isDebugEnabled()) {
+              log.debug("--- firing event {} to {}", event, listener);
+            }
+            listener.onEvent(event);
+          });
     }
   }
 }

@@ -44,7 +44,7 @@ public class MockQuerySenderListenerReqHandler extends RequestHandlerBase {
     solrMetricsContext.observableLongGauge(
         "mock_request",
         "mock",
-        (observableLongMeasurement) -> {
+        observableLongMeasurement -> {
           observableLongMeasurement.record(initCounter.intValue(), attributes);
         });
   }

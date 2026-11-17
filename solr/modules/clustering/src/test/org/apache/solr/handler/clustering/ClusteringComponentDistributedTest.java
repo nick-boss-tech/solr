@@ -114,19 +114,18 @@ public class ClusteringComponentDistributedTest extends BaseDistributedSearchTes
   }
 
   private StringBuilder toString(List<Cluster> clusters, String indent, StringBuilder sb) {
-    clusters.forEach(
-        c -> {
-          sb.append(indent);
-          sb.append("- " + String.join("; ", c.getLabels()));
-          if (!c.getDocs().isEmpty()) {
-            sb.append(" [" + c.getDocs().size() + "]");
-          }
-          sb.append("\n");
+    clusters.forEach(c -> {
+      sb.append(indent);
+      sb.append("- " + String.join("; ", c.getLabels()));
+      if (!c.getDocs().isEmpty()) {
+        sb.append(" [" + c.getDocs().size() + "]");
+      }
+      sb.append("\n");
 
-          if (!c.getClusters().isEmpty()) {
-            toString(c.getClusters(), indent + "  ", sb);
-          }
-        });
+      if (!c.getClusters().isEmpty()) {
+        toString(c.getClusters(), indent + "  ", sb);
+      }
+    });
     return sb;
   }
 }

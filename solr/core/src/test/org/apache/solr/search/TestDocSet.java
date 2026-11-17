@@ -525,10 +525,10 @@ public class TestDocSet extends SolrTestCase {
     final int bitsLength = bits == null ? -1 : bits.length();
     int bitsDoc = -1;
     for (; ; ) {
-      populateDocs(disis, docs, (disi) -> disi.nextDoc());
+      populateDocs(disis, docs, disi -> disi.nextDoc());
       final int expected = docs[0]; // arbitrarily pick the first as "expected"
       assertAll(expected, docs);
-      populateDocs(disis, docs, (disi) -> disi.docID());
+      populateDocs(disis, docs, disi -> disi.docID());
       assertAll(expected, docs);
       while (++bitsDoc < expected && bitsDoc < bitsLength) {
         assertFalse(bits.get(bitsDoc));
@@ -546,18 +546,18 @@ public class TestDocSet extends SolrTestCase {
         final int target;
         if (rand.nextBoolean()) {
           target = doc + 1;
-          populateDocs(disis, docs, (disi) -> disi.nextDoc());
+          populateDocs(disis, docs, disi -> disi.nextDoc());
         } else {
           target =
               doc
                   + rand.nextInt(10)
                   + 1; // keep in mind future edge cases like probing (increase if necessary)
-          populateDocs(disis, docs, (disi) -> disi.advance(target));
+          populateDocs(disis, docs, disi -> disi.advance(target));
         }
 
         final int expected = docs[0]; // arbitrarily pick the first as "expected"
         assertAll(expected, docs);
-        populateDocs(disis, docs, (disi) -> disi.docID());
+        populateDocs(disis, docs, disi -> disi.docID());
         assertAll(expected, docs);
         for (int j = target; j < expected && j < bitsLength; j++) {
           assertFalse(bits.get(j));

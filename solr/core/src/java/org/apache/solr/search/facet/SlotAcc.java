@@ -148,7 +148,6 @@ public abstract class SlotAcc implements Closeable {
 
   /** Typically called from setNextReader to reset docValue iterators */
   protected void resetIterators() throws IOException {}
-  ;
 
   public abstract void resize(Resizer resizer);
 
@@ -845,7 +844,6 @@ public abstract class SlotAcc implements Closeable {
     @Override
     public abstract long getCount(int slot);
   }
-  ;
 
   static class CountSlotArrAcc extends CountSlotAcc {
     long[] result;

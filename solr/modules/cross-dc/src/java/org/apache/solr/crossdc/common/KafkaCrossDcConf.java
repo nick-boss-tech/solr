@@ -226,12 +226,11 @@ public class KafkaCrossDcConf extends CrossDcConf {
 
   public KafkaCrossDcConf(Map<String, Object> properties) {
     List<String> nullValueKeys = new ArrayList<>();
-    properties.forEach(
-        (k, v) -> {
-          if (v == null) {
-            nullValueKeys.add(k);
-          }
-        });
+    properties.forEach((k, v) -> {
+      if (v == null) {
+        nullValueKeys.add(k);
+      }
+    });
     nullValueKeys.forEach(properties::remove);
     this.properties = properties;
   }
@@ -271,15 +270,14 @@ public class KafkaCrossDcConf extends CrossDcConf {
       additional.remove(configProperty.getKey());
     }
     Map<String, Object> integerProperties = new HashMap<>();
-    additional.forEach(
-        (key, v) -> {
-          try {
-            int intVal = Integer.parseInt((String) v);
-            integerProperties.put(key, intVal);
-          } catch (NumberFormatException ignored) {
+    additional.forEach((key, v) -> {
+      try {
+        int intVal = Integer.parseInt((String) v);
+        integerProperties.put(key, intVal);
+      } catch (NumberFormatException ignored) {
 
-          }
-        });
+      }
+    });
     additional.putAll(integerProperties);
     return additional;
   }
@@ -293,21 +291,20 @@ public class KafkaCrossDcConf extends CrossDcConf {
         zkPropsUnprocessed.remove(configKey.getKey());
       }
     }
-    zkPropsUnprocessed.forEach(
-        (key, val) -> {
-          String strKey = (String) key;
-          String targetKey = strKey;
-          if (strKey.startsWith(ConfUtil.KAFKA_ENV_PREFIX)) {
-            targetKey = ConfUtil.normalizeKafkaEnvKey(strKey);
-          } else if (strKey.startsWith(ConfUtil.KAFKA_PROP_PREFIX)) {
-            targetKey = ConfUtil.normalizeKafkaSysPropKey(strKey);
-          }
-          // A JVM system property or env var pass-through override always takes precedence
-          // over the same property coming from ZooKeeper's /crossdc.properties.
-          if (properties.get(targetKey) == null) {
-            properties.put(targetKey, val);
-          }
-        });
+    zkPropsUnprocessed.forEach((key, val) -> {
+      String strKey = (String) key;
+      String targetKey = strKey;
+      if (strKey.startsWith(ConfUtil.KAFKA_ENV_PREFIX)) {
+        targetKey = ConfUtil.normalizeKafkaEnvKey(strKey);
+      } else if (strKey.startsWith(ConfUtil.KAFKA_PROP_PREFIX)) {
+        targetKey = ConfUtil.normalizeKafkaSysPropKey(strKey);
+      }
+      // A JVM system property or env var pass-through override always takes precedence
+      // over the same property coming from ZooKeeper's /crossdc.properties.
+      if (properties.get(targetKey) == null) {
+        properties.put(targetKey, val);
+      }
+    });
   }
 
   @Override

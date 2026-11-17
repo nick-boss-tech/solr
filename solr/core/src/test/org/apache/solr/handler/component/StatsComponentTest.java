@@ -1511,7 +1511,6 @@ public class StatsComponentTest extends SolrTestCaseJ4 {
       for (Stat dep : deps) {
         if (dep.equals(stat)) { // self dependency
           perShardXpaths.add(xpath);
-          ;
         } else {
           ExpectedStat expectedDep = ALL.get(dep);
           assertNotNull("can't find dep in ExpectedStat.ALL", expectedDep);
@@ -2258,13 +2257,12 @@ public class StatsComponentTest extends SolrTestCaseJ4 {
 
       assertEquals(percentilesList.size(), pout.size());
       Iterator<String> percentileIter = percentilesList.iterator();
-      pout.forEach(
-          (pKey, pVal) -> {
-            String p = percentileIter.next();
-            // ensure exact order, but all values should be null (empty result set)
-            assertEquals(p, pKey);
-            assertNull(pVal);
-          });
+      pout.forEach((pKey, pVal) -> {
+        String p = percentileIter.next();
+        // ensure exact order, but all values should be null (empty result set)
+        assertEquals(p, pKey);
+        assertNull(pVal);
+      });
     }
 
     int id = 0;
@@ -2291,12 +2289,11 @@ public class StatsComponentTest extends SolrTestCaseJ4 {
 
       assertEquals(percentilesList.size(), pout.size());
       Iterator<String> percentileIter = percentilesList.iterator();
-      pout.forEach(
-          (pKey, pVal) -> {
-            String p = percentileIter.next();
-            assertEquals(p, pKey);
-            assertEquals(Double.parseDouble(p), pVal, 1.0D);
-          });
+      pout.forEach((pKey, pVal) -> {
+        String p = percentileIter.next();
+        assertEquals(p, pKey);
+        assertEquals(Double.parseDouble(p), pVal, 1.0D);
+      });
     }
 
     // test request for no percentiles

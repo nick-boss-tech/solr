@@ -123,10 +123,9 @@ public class CreateReplica extends AdminAPIBase implements CreateReplicaApi {
       requestBody
           .properties
           .entrySet()
-          .forEach(
-              entry -> {
-                remoteMessage.put(PROPERTY_PREFIX + entry.getKey(), entry.getValue());
-              });
+          .forEach(entry -> {
+            remoteMessage.put(PROPERTY_PREFIX + entry.getKey(), entry.getValue());
+          });
     }
 
     return new ZkNodeProps(remoteMessage);

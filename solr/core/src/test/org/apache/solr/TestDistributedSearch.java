@@ -1938,7 +1938,6 @@ public class TestDistributedSearch extends BaseDistributedSearchTestCase {
     if (stress > 0) {
       log.info("starting stress...");
       Set<Future<Object>> pending = new HashSet<>();
-      ;
       ExecutorCompletionService<Object> cs = new ExecutorCompletionService<>(executor);
       @SuppressWarnings("unchecked")
       Callable<Object>[] threads = (Callable<Object>[]) Array.newInstance(Callable.class, nThreads);

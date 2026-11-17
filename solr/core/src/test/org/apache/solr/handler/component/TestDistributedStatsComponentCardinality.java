@@ -81,26 +81,24 @@ public class TestDistributedStatsComponentCardinality extends BaseDistributedSea
 
     Iterator<SolrInputDocument> docs =
         IntStream.rangeClosed(1, NUM_DOCS)
-            .mapToObj(
-                i -> {
-                  long currentLong = longValue.getAndAccumulate(BIG_PRIME, (x, y) -> x - y);
+            .mapToObj(i -> {
+              long currentLong = longValue.getAndAccumulate(BIG_PRIME, (x, y) -> x - y);
 
-                  final String strValue = "s" + currentLong;
+              final String strValue = "s" + currentLong;
 
-                  // with these values, we know that every doc indexed has a unique value in all
-                  // the fields we will compute cardinality against. which means the number of docs
-                  // matching a query is the true cardinality for each field
-                  return sdoc(
-                      "id", Integer.toString(i),
-                      "int_i", Integer.toString(i),
-                      "int_i_prehashed_l", Long.toString(HASHER.hashInt(i).asLong()),
-                      "long_l", Long.toString(currentLong),
-                      "long_l_prehashed_l", Long.toString(HASHER.hashLong(currentLong).asLong()),
-                      "string_s", strValue,
-                      "string_s_prehashed_l",
-                          Long.toString(
-                              HASHER.hashString(strValue, StandardCharsets.UTF_8).asLong()));
-                })
+              // with these values, we know that every doc indexed has a unique value in all
+              // the fields we will compute cardinality against. which means the number of docs
+              // matching a query is the true cardinality for each field
+              return sdoc(
+                  "id", Integer.toString(i),
+                  "int_i", Integer.toString(i),
+                  "int_i_prehashed_l", Long.toString(HASHER.hashInt(i).asLong()),
+                  "long_l", Long.toString(currentLong),
+                  "long_l_prehashed_l", Long.toString(HASHER.hashLong(currentLong).asLong()),
+                  "string_s", strValue,
+                  "string_s_prehashed_l",
+                      Long.toString(HASHER.hashString(strValue, StandardCharsets.UTF_8).asLong()));
+            })
             .iterator();
     indexDocs(docs);
 

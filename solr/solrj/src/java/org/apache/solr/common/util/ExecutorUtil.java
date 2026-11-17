@@ -383,59 +383,54 @@ public class ExecutorUtil {
           providersCopy.get(i).store(reference);
         }
       }
-      super.execute(
-          () -> {
-            isServerPool.set(Boolean.TRUE);
-            if (ctx != null) {
-              for (int i = 0; i < providersCopy.size(); i++) providersCopy.get(i).set(ctx.get(i));
-            }
-            Map<String, String> threadContext = MDC.getCopyOfContextMap();
-            final Thread currentThread = Thread.currentThread();
-            final String oldName = currentThread.getName();
-            if (submitterContext != null && !submitterContext.isEmpty()) {
-              MDC.setContextMap(submitterContext);
-              currentThread.setName(oldName + "-processing-" + submitterContextStr);
-            } else {
-              MDC.clear();
-            }
-            if (enableSubmitterStackTrace) {
-              submitter.set(submitterStackTrace);
-            }
-            try {
-              command.run();
-            } catch (CancellationException ignored) {
-            } catch (Throwable t) {
-              if (t instanceof OutOfMemoryError) {
-                throw t;
-              }
-              // Flip around the exception cause tree, because it is in reverse order
-              Throwable baseCause = t;
-              Throwable nextCause = submitterStackTrace;
-              while (nextCause != null) {
-                baseCause = new Exception(nextCause.getMessage(), baseCause);
-                baseCause.setStackTrace(nextCause.getStackTrace());
-                nextCause = nextCause.getCause();
-              }
-              log.error(
-                  "Uncaught exception {} thrown by thread: {}",
-                  t,
-                  currentThread.getName(),
-                  baseCause);
-              throw t;
-            } finally {
-              isServerPool.remove();
-              if (threadContext != null && !threadContext.isEmpty()) {
-                MDC.setContextMap(threadContext);
-              } else {
-                MDC.clear();
-              }
-              if (ctx != null) {
-                for (int i = 0; i < providersCopy.size(); i++)
-                  providersCopy.get(i).clean(ctx.get(i));
-              }
-              currentThread.setName(oldName);
-            }
-          });
+      super.execute(() -> {
+        isServerPool.set(Boolean.TRUE);
+        if (ctx != null) {
+          for (int i = 0; i < providersCopy.size(); i++) providersCopy.get(i).set(ctx.get(i));
+        }
+        Map<String, String> threadContext = MDC.getCopyOfContextMap();
+        final Thread currentThread = Thread.currentThread();
+        final String oldName = currentThread.getName();
+        if (submitterContext != null && !submitterContext.isEmpty()) {
+          MDC.setContextMap(submitterContext);
+          currentThread.setName(oldName + "-processing-" + submitterContextStr);
+        } else {
+          MDC.clear();
+        }
+        if (enableSubmitterStackTrace) {
+          submitter.set(submitterStackTrace);
+        }
+        try {
+          command.run();
+        } catch (CancellationException ignored) {
+        } catch (Throwable t) {
+          if (t instanceof OutOfMemoryError) {
+            throw t;
+          }
+          // Flip around the exception cause tree, because it is in reverse order
+          Throwable baseCause = t;
+          Throwable nextCause = submitterStackTrace;
+          while (nextCause != null) {
+            baseCause = new Exception(nextCause.getMessage(), baseCause);
+            baseCause.setStackTrace(nextCause.getStackTrace());
+            nextCause = nextCause.getCause();
+          }
+          log.error(
+              "Uncaught exception {} thrown by thread: {}", t, currentThread.getName(), baseCause);
+          throw t;
+        } finally {
+          isServerPool.remove();
+          if (threadContext != null && !threadContext.isEmpty()) {
+            MDC.setContextMap(threadContext);
+          } else {
+            MDC.clear();
+          }
+          if (ctx != null) {
+            for (int i = 0; i < providersCopy.size(); i++) providersCopy.get(i).clean(ctx.get(i));
+          }
+          currentThread.setName(oldName);
+        }
+      });
     }
   }
 

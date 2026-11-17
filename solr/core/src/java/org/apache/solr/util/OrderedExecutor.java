@@ -62,14 +62,13 @@ public class OrderedExecutor<T> implements Executor {
     try {
       if (ExecutorUtil.isShutdown(delegate)) throw new RejectedExecutionException();
 
-      delegate.execute(
-          () -> {
-            try {
-              command.run();
-            } finally {
-              sparseStripedLock.remove(lockId);
-            }
-          });
+      delegate.execute(() -> {
+        try {
+          command.run();
+        } finally {
+          sparseStripedLock.remove(lockId);
+        }
+      });
     } catch (RejectedExecutionException e) {
       sparseStripedLock.remove(lockId);
       throw e;

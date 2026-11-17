@@ -1123,11 +1123,10 @@ public class SolrCore implements SolrInfoBean, Closeable {
       // cause the executor to stall so firstSearcher events won't fire
       // until after inform() has been called for all components.
       // searchExecutor must be single-threaded for this to work
-      searcherExecutor.submit(
-          () -> {
-            latch.await();
-            return null;
-          });
+      searcherExecutor.submit(() -> {
+        latch.await();
+        return null;
+      });
 
       this.updateHandler = initUpdateHandler(updateHandler);
 
@@ -2620,58 +2619,55 @@ public class SolrCore implements SolrInfoBean, Closeable {
         // should this go before the other event handlers or after?
         if (currSearcher != null) {
           future =
-              searcherExecutor.submit(
-                  () -> {
-                    AttributedLongTimer.MetricTimer warmupContext = newSearcherWarmupTimer.start();
-                    try {
-                      newSearcher.warm(currSearcher);
-                    } catch (Throwable e) {
-                      log.error("Exception warming new searcher", e);
-                      if (e instanceof Error) {
-                        throw (Error) e;
-                      }
-                    } finally {
-                      warmupContext.stop();
-                    }
-                    return null;
-                  });
+              searcherExecutor.submit(() -> {
+                AttributedLongTimer.MetricTimer warmupContext = newSearcherWarmupTimer.start();
+                try {
+                  newSearcher.warm(currSearcher);
+                } catch (Throwable e) {
+                  log.error("Exception warming new searcher", e);
+                  if (e instanceof Error) {
+                    throw (Error) e;
+                  }
+                } finally {
+                  warmupContext.stop();
+                }
+                return null;
+              });
         }
 
         if (currSearcher == null) {
           future =
-              searcherExecutor.submit(
-                  () -> {
-                    newSearcher.bootstrapFirstSearcher();
-                    for (SolrEventListener listener : firstSearcherListeners) {
-                      try {
-                        listener.newSearcher(newSearcher, null);
-                      } catch (Throwable e) {
-                        log.error("Exception firing listener {} for new searcher", listener, e);
-                        if (e instanceof Error) {
-                          throw e;
-                        }
-                      }
+              searcherExecutor.submit(() -> {
+                newSearcher.bootstrapFirstSearcher();
+                for (SolrEventListener listener : firstSearcherListeners) {
+                  try {
+                    listener.newSearcher(newSearcher, null);
+                  } catch (Throwable e) {
+                    log.error("Exception firing listener {} for new searcher", listener, e);
+                    if (e instanceof Error) {
+                      throw e;
                     }
-                    return null;
-                  });
+                  }
+                }
+                return null;
+              });
         }
 
         if (currSearcher != null) {
           future =
-              searcherExecutor.submit(
-                  () -> {
-                    for (SolrEventListener listener : newSearcherListeners) {
-                      try {
-                        listener.newSearcher(newSearcher, currSearcher);
-                      } catch (Throwable e) {
-                        log.error("Exception firing listener {} for new searcher", listener, e);
-                        if (e instanceof Error) {
-                          throw (Error) e;
-                        }
-                      }
+              searcherExecutor.submit(() -> {
+                for (SolrEventListener listener : newSearcherListeners) {
+                  try {
+                    listener.newSearcher(newSearcher, currSearcher);
+                  } catch (Throwable e) {
+                    log.error("Exception firing listener {} for new searcher", listener, e);
+                    if (e instanceof Error) {
+                      throw (Error) e;
                     }
-                    return null;
-                  });
+                  }
+                }
+                return null;
+              });
         }
       }
 
@@ -2680,24 +2676,23 @@ public class SolrCore implements SolrInfoBean, Closeable {
       final RefCounted<SolrIndexSearcher> currSearcherHolderF = currSearcherHolder;
       if (!alreadyRegistered) {
         future =
-            searcherExecutor.submit(
-                () -> {
-                  try {
-                    // registerSearcher will decrement onDeckSearchers and
-                    // do a notify, even if it fails.
-                    registerSearcher(newSearchHolder);
-                  } catch (Throwable e) {
-                    log.error("Exception registering new searcher", e);
-                    if (e instanceof Error) {
-                      throw (Error) e;
-                    }
-                  } finally {
-                    // we are all done with the old searcher we used
-                    // for warming...
-                    if (currSearcherHolderF != null) currSearcherHolderF.decref();
-                  }
-                  return null;
-                });
+            searcherExecutor.submit(() -> {
+              try {
+                // registerSearcher will decrement onDeckSearchers and
+                // do a notify, even if it fails.
+                registerSearcher(newSearchHolder);
+              } catch (Throwable e) {
+                log.error("Exception registering new searcher", e);
+                if (e instanceof Error) {
+                  throw (Error) e;
+                }
+              } finally {
+                // we are all done with the old searcher we used
+                // for warming...
+                if (currSearcherHolderF != null) currSearcherHolderF.decref();
+              }
+              return null;
+            });
       }
 
       if (waitSearcher != null) {

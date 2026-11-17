@@ -182,10 +182,11 @@ public class CreateTool extends ToolBase {
   @Override
   public String getHeader() {
     return """
-        Creates a core or collection depending on whether Solr is running in standalone (core) or SolrCloud mode (collection).
-        If you are using standalone mode you must run this command on the Solr server itself.
+    Creates a core or collection depending on whether Solr is running in standalone (core) or SolrCloud mode (collection).
+    If you are using standalone mode you must run this command on the Solr server itself.
 
-        List of options:""";
+    List of options:\
+    """;
   }
 
   @Override

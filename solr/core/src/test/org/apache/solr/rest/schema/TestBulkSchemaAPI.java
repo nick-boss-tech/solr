@@ -843,12 +843,13 @@ public class TestBulkSchemaAPI extends RestTestBase {
 
     payload =
         """
-            {
-              "add-copy-field": {
-                "source": "bleh_s",
-                "dest": "%s"
-              }
-            }""";
+        {
+          "add-copy-field": {
+            "source": "bleh_s",
+            "dest": "%s"
+          }
+        }\
+        """;
     payload = String.format(Locale.ROOT, payload, newFieldName);
     response = harness.post("/schema", json(payload));
 

@@ -207,18 +207,17 @@ public class InactiveShardRemoverTest extends SolrCloudTestCase {
     DocCollection collection = getCollectionState(collectionName);
     collection.getSlices().stream()
         .filter(s -> s.getState() != Slice.State.INACTIVE)
-        .forEach(
-            s -> {
-              try {
-                ShardTestUtil.setSliceState(
-                    cluster, s.getCollection(), s.getName(), Slice.State.INACTIVE);
-                waitForState(
-                    "Expected shard " + s + " to be in state " + Slice.State.INACTIVE,
-                    collection.getName(),
-                    c -> c.getSlice(s.getName()).getState() == Slice.State.INACTIVE);
-              } catch (Exception e) {
-                throw new RuntimeException(e);
-              }
-            });
+        .forEach(s -> {
+          try {
+            ShardTestUtil.setSliceState(
+                cluster, s.getCollection(), s.getName(), Slice.State.INACTIVE);
+            waitForState(
+                "Expected shard " + s + " to be in state " + Slice.State.INACTIVE,
+                collection.getName(),
+                c -> c.getSlice(s.getName()).getState() == Slice.State.INACTIVE);
+          } catch (Exception e) {
+            throw new RuntimeException(e);
+          }
+        });
   }
 }

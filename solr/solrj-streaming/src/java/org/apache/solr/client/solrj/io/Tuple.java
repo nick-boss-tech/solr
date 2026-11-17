@@ -314,14 +314,13 @@ public class Tuple implements Cloneable, MapWriter {
   @Override
   public void writeMap(EntryWriter ew) throws IOException {
     if (fieldNames == null) {
-      fields.forEach(
-          (k, v) -> {
-            try {
-              ew.put(k, v);
-            } catch (IOException e) {
-              throw new RuntimeException(e);
-            }
-          });
+      fields.forEach((k, v) -> {
+        try {
+          ew.put(k, v);
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+      });
     } else {
       for (String fieldName : fieldNames) {
         String label = fieldLabels.get(fieldName);

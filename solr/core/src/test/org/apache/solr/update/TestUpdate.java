@@ -39,11 +39,10 @@ public class TestUpdate extends SolrTestCaseJ4 {
     doUpdateTest(() -> null);
 
     // do with commit operation
-    doUpdateTest(
-        () -> {
-          assertU(commit("softCommit", "false"));
-          return null;
-        });
+    doUpdateTest(() -> {
+      assertU(commit("softCommit", "false"));
+      return null;
+    });
   }
 
   @SuppressWarnings("try")

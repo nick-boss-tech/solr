@@ -71,7 +71,7 @@ public class NodeValueFetcher {
       public Object extractFromPrometheus(List<String> prometheusLines) {
         return prometheusLines.stream()
             .filter(line -> extractMetricNameFromLine(line).equals(metricName))
-            .mapToInt((value) -> extractPrometheusValue(value).intValue())
+            .mapToInt(value -> extractPrometheusValue(value).intValue())
             .sum();
       }
     },
@@ -101,15 +101,14 @@ public class NodeValueFetcher {
     public Object extractFromPrometheus(List<String> prometheusLines) {
       return prometheusLines.stream()
           .filter(line -> line.startsWith(metricName))
-          .filter(
-              line -> {
-                // If metric with specific labels were requested, filter by those labels
-                if (labelKey != null && labelValue != null) {
-                  String expectedLabel = labelKey + "=\"" + labelValue + "\"";
-                  return line.contains(expectedLabel);
-                }
-                return true;
-              })
+          .filter(line -> {
+            // If metric with specific labels were requested, filter by those labels
+            if (labelKey != null && labelValue != null) {
+              String expectedLabel = labelKey + "=\"" + labelValue + "\"";
+              return line.contains(expectedLabel);
+            }
+            return true;
+          })
           .findFirst()
           .map(Metrics::extractPrometheusValue)
           .orElse(null);
@@ -220,16 +219,15 @@ public class NodeValueFetcher {
       }
 
       // Categorize requested system properties or metrics
-      requestedTags.forEach(
-          tag -> {
-            if (tag.startsWith(SYSPROP_PREFIX)) {
-              requestsProperties.add(tag);
-            } else if (tag.startsWith(METRICS_PREFIX)) {
-              requestedMetrics.add(tag);
-            } else {
-              requestedMetricTags.add(tag);
-            }
-          });
+      requestedTags.forEach(tag -> {
+        if (tag.startsWith(SYSPROP_PREFIX)) {
+          requestsProperties.add(tag);
+        } else if (tag.startsWith(METRICS_PREFIX)) {
+          requestedMetrics.add(tag);
+        } else {
+          requestedMetricTags.add(tag);
+        }
+      });
 
       getRemoteSystemProps(requestsProperties, ctx);
       getRemoteMetrics(requestedMetrics, ctx);
@@ -296,7 +294,7 @@ public class NodeValueFetcher {
         ctx.getNode(),
         ctx,
         requestedMetricNames,
-        (line) -> {
+        line -> {
           String lineMetricName = extractMetricNameFromLine(line);
           Double value = Metrics.extractPrometheusValue(line);
 

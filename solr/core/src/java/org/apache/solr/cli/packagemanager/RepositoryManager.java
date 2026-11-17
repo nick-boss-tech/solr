@@ -210,14 +210,13 @@ public class RepositoryManager {
       addRequest.setVersion(version);
       addRequest.setFiles(
           downloaded.stream()
-              .map(
-                  file ->
-                      String.format(
-                          Locale.ROOT,
-                          "/package/%s/%s/%s",
-                          packageName,
-                          version,
-                          file.getFileName().toString()))
+              .map(file ->
+                  String.format(
+                      Locale.ROOT,
+                      "/package/%s/%s/%s",
+                      packageName,
+                      version,
+                      file.getFileName().toString()))
               .collect(Collectors.toList()));
       addRequest.setManifest("/package/" + packageName + "/" + version + "/manifest.json");
       addRequest.setManifestSHA512(manifestSHA512);
@@ -332,9 +331,8 @@ public class RepositoryManager {
     Map<String, String> collectionsDeployedIn = packageManager.getDeployedCollections(packageName);
     List<String> collectionsPeggedToLatest =
         collectionsDeployedIn.keySet().stream()
-            .filter(
-                collection ->
-                    collectionsDeployedIn.get(collection).equals(SolrPackageLoader.LATEST))
+            .filter(collection ->
+                collectionsDeployedIn.get(collection).equals(SolrPackageLoader.LATEST))
             .collect(Collectors.toList());
     if (!collectionsPeggedToLatest.isEmpty()) {
       runtime.printSuccess(

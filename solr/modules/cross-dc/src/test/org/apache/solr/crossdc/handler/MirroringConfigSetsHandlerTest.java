@@ -145,10 +145,9 @@ public class MirroringConfigSetsHandlerTest extends SolrTestCaseJ4 {
       SolrRequest<?> solrRequest = mirroredSolrRequest.getSolrRequest();
       SolrParams mirroredParams = solrRequest.getParams();
       req.getParams()
-          .forEach(
-              entry -> {
-                assertArrayEquals(entry.getValue(), mirroredParams.getParams(entry.getKey()));
-              });
+          .forEach(entry -> {
+            assertArrayEquals(entry.getValue(), mirroredParams.getParams(entry.getKey()));
+          });
       assertEquals("HTTP method", req.getHttpMethod(), solrRequest.getMethod().toString());
       if (expectStreams) {
         List<ContentStream> sourceStreams = (List<ContentStream>) req.getContentStreams();

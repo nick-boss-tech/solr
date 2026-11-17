@@ -127,26 +127,24 @@ public class TestCodecSupport extends SolrTestCaseJ4 {
   protected void assertCompressionMode(String expectedModeString, SolrCore core)
       throws IOException {
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              SegmentInfos infos =
-                  SegmentInfos.readLatestCommit(searcher.getIndexReader().directory());
-              SegmentInfo info = infos.info(infos.size() - 1).info;
-              assertEquals(
-                  "Expecting compression mode string to be "
-                      + expectedModeString
-                      + " but got: "
-                      + info.getAttribute(MODE_KEY)
-                      + "\n SegmentInfo: "
-                      + info
-                      + "\n SegmentInfos: "
-                      + infos
-                      + "\n Codec: "
-                      + core.getCodec(),
-                  expectedModeString,
-                  info.getAttribute(MODE_KEY));
-              return null;
-            });
+        .withSearcher(searcher -> {
+          SegmentInfos infos = SegmentInfos.readLatestCommit(searcher.getIndexReader().directory());
+          SegmentInfo info = infos.info(infos.size() - 1).info;
+          assertEquals(
+              "Expecting compression mode string to be "
+                  + expectedModeString
+                  + " but got: "
+                  + info.getAttribute(MODE_KEY)
+                  + "\n SegmentInfo: "
+                  + info
+                  + "\n SegmentInfos: "
+                  + infos
+                  + "\n Codec: "
+                  + core.getCodec(),
+              expectedModeString,
+              info.getAttribute(MODE_KEY));
+          return null;
+        });
   }
 
   public void testCompressionMode() throws Exception {

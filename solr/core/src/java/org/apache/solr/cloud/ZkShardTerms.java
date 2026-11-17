@@ -299,12 +299,11 @@ public class ZkShardTerms implements AutoCloseable {
     ShardTerms newTerms;
     String caller =
         StackWalker.getInstance()
-            .walk(
-                s ->
-                    s.skip(1)
-                        .findFirst()
-                        .map(StackWalker.StackFrame::getMethodName)
-                        .orElse("(unknown)"));
+            .walk(s ->
+                s.skip(1)
+                    .findFirst()
+                    .map(StackWalker.StackFrame::getMethodName)
+                    .orElse("(unknown)"));
     while ((newTerms = action.apply(terms.get())) != null) {
       if (forceSaveTerms(newTerms, caller)) break;
     }

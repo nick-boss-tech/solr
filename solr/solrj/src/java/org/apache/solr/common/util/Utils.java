@@ -937,14 +937,13 @@ public class Utils {
           final MethodType catchAllMethodType = MethodType.methodType(Map.class);
           final MethodHandle catchAllHandle =
               lookup.findVirtual(c, CATCH_ALL_PROPERTIES_METHOD_NAME, catchAllMethodType);
-          fieldWriters.add(
-              (ew, inst) -> {
-                final Map<String, Object> unknownProperties =
-                    (Map<String, Object>) catchAllHandle.invoke(inst);
-                for (Map.Entry<String, Object> entry : unknownProperties.entrySet()) {
-                  ew.put(entry.getKey(), entry.getValue());
-                }
-              });
+          fieldWriters.add((ew, inst) -> {
+            final Map<String, Object> unknownProperties =
+                (Map<String, Object>) catchAllHandle.invoke(inst);
+            for (Map.Entry<String, Object> entry : unknownProperties.entrySet()) {
+              ew.put(entry.getKey(), entry.getValue());
+            }
+          });
         }
       } catch (NoSuchMethodException e) {
         // No-op - if the object has no 'unknownProperties' method, then nothing needs to be done.

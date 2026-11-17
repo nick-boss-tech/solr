@@ -106,22 +106,21 @@ public class SolrInfoBeanTest extends SolrTestCaseJ4 {
     for (Path directory : directories) {
       if (Files.exists(directory)) {
         try (Stream<Path> files = Files.list(directory)) {
-          files.forEach(
-              (file) -> {
-                String fileName = file.getFileName().toString();
-                if (fileName.endsWith(".class")) {
-                  String clazzName = fileName.substring(0, fileName.length() - 6);
-                  // exclude Test classes that happen to be in these packages.
-                  // class.ForName'ing some of them can cause trouble.
-                  if (!clazzName.endsWith("Test") && !clazzName.startsWith("Test")) {
-                    try {
-                      classes.add(Class.forName(pckgname + '.' + clazzName));
-                    } catch (ClassNotFoundException e) {
-                      throw new RuntimeException(e);
-                    }
-                  }
+          files.forEach(file -> {
+            String fileName = file.getFileName().toString();
+            if (fileName.endsWith(".class")) {
+              String clazzName = fileName.substring(0, fileName.length() - 6);
+              // exclude Test classes that happen to be in these packages.
+              // class.ForName'ing some of them can cause trouble.
+              if (!clazzName.endsWith("Test") && !clazzName.startsWith("Test")) {
+                try {
+                  classes.add(Class.forName(pckgname + '.' + clazzName));
+                } catch (ClassNotFoundException e) {
+                  throw new RuntimeException(e);
                 }
-              });
+              }
+            }
+          });
         }
       }
     }

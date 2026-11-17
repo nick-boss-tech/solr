@@ -246,9 +246,8 @@ public class ZkStateReader implements SolrCloseable {
      */
     private Set<String> activeCollections() {
       return statefulWatchesByCollectionName.entrySet().stream()
-          .filter(
-              (Entry<String, StatefulCollectionWatch> entry) ->
-                  entry.getValue().currentState != null)
+          .filter((Entry<String, StatefulCollectionWatch> entry) ->
+              entry.getValue().currentState != null)
           .map(Entry::getKey)
           .collect(Collectors.toUnmodifiableSet());
     }
@@ -260,9 +259,8 @@ public class ZkStateReader implements SolrCloseable {
      */
     private long activeCollectionCount() {
       return statefulWatchesByCollectionName.entrySet().stream()
-          .filter(
-              (Entry<String, StatefulCollectionWatch> entry) ->
-                  entry.getValue().currentState != null)
+          .filter((Entry<String, StatefulCollectionWatch> entry) ->
+              entry.getValue().currentState != null)
           .count();
     }
 
@@ -840,12 +838,11 @@ public class ZkStateReader implements SolrCloseable {
       log.debug("Updated live nodes from ZooKeeper... {} -> {}", oldLiveNodes, newLiveNodes);
     }
     if (!oldLiveNodes.equals(newLiveNodes)) { // fire listeners
-      liveNodesListeners.forEach(
-          listener -> {
-            if (listener.onChange(new TreeSet<>(oldLiveNodes), new TreeSet<>(newLiveNodes))) {
-              removeLiveNodesListener(listener);
-            }
-          });
+      liveNodesListeners.forEach(listener -> {
+        if (listener.onChange(new TreeSet<>(oldLiveNodes), new TreeSet<>(newLiveNodes))) {
+          removeLiveNodesListener(listener);
+        }
+      });
     }
   }
 
@@ -938,10 +935,9 @@ public class ZkStateReader implements SolrCloseable {
     notifications.shutdownNow();
 
     waitLatches.parallelStream()
-        .forEach(
-            c -> {
-              c.countDown();
-            });
+        .forEach(c -> {
+          c.countDown();
+        });
 
     ExecutorUtil.shutdownAndAwaitTermination(notifications);
     collectionPropertiesZkStateReader.close();
@@ -1091,7 +1087,7 @@ public class ZkStateReader implements SolrCloseable {
     List<Replica> replicas = new ArrayList<>(shardMap.size());
     for (Entry<String, Replica> entry :
         shardMap.entrySet().stream()
-            .filter((e) -> acceptReplicaType.contains(e.getValue().getType()))
+            .filter(e -> acceptReplicaType.contains(e.getValue().getType()))
             .collect(Collectors.toList())) {
       Replica replica = entry.getValue();
 
@@ -1752,7 +1748,7 @@ public class ZkStateReader implements SolrCloseable {
     waitLatches.add(latch);
     AtomicReference<DocCollection> docCollectionReference = new AtomicReference<>();
     DocCollectionWatcher watcher =
-        (c) -> {
+        c -> {
           docCollectionReference.set(c);
           boolean matches = predicate.test(c);
           if (matches) latch.countDown();

@@ -516,7 +516,7 @@ public class JsonLoaderTest extends SolrTestCaseJ4 {
     loader.load(req, rsp, new ContentStreamBase.StringStream(b.toString()), p);
     for (int i = 1; i <= passes; i++) {
       final int ii = i;
-      UnaryOperator<String> s = (v) -> v.replace("1", "" + ii);
+      UnaryOperator<String> s = v -> v.replace("1", "" + ii);
       final SolrInputDocument parent = p.addCommands.get(i - 1).solrDoc;
       assertOnlyValue(s.apply("1"), parent, "id");
       assertOnlyValue("i am the parent", parent, "name");

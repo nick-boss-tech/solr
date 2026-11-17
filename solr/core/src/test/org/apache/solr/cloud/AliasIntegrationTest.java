@@ -160,10 +160,9 @@ public class AliasIntegrationTest extends SolrCloudTestCase {
         a2 -> a2.cloneWithCollectionAliasProperties("meta1", "foo", null));
 
     // chained invocations
-    aliasesManager.applyModificationAndExportToZk(
-        a1 ->
-            a1.cloneWithCollectionAliasProperties("meta1", "foo2", "bazbam")
-                .cloneWithCollectionAliasProperties("meta1", "foo3", "bazbam2"));
+    aliasesManager.applyModificationAndExportToZk(a1 ->
+        a1.cloneWithCollectionAliasProperties("meta1", "foo2", "bazbam")
+            .cloneWithCollectionAliasProperties("meta1", "foo3", "bazbam2"));
 
     // some other independent update (not overwritten)
     aliasesManager.applyModificationAndExportToZk(

@@ -160,17 +160,16 @@ public class ClusterSingletons {
           if (!runSingletons.get()) {
             return;
           }
-          singletonMap.forEach(
-              (name, singleton) -> {
-                if (!runSingletons.get()) {
-                  return;
-                }
-                try {
-                  singleton.start();
-                } catch (Exception e) {
-                  log.warn("Exception starting ClusterSingleton {}: {}", singleton, e);
-                }
-              });
+          singletonMap.forEach((name, singleton) -> {
+            if (!runSingletons.get()) {
+              return;
+            }
+            try {
+              singleton.start();
+            } catch (Exception e) {
+              log.warn("Exception starting ClusterSingleton {}: {}", singleton, e);
+            }
+          });
         };
     if (!isReady()) {
       // wait until all singleton-s are ready for the first startup
@@ -183,9 +182,8 @@ public class ClusterSingletons {
   /** Stop all registered singletons. */
   public void stopClusterSingletons() {
     readyLatch.countDown();
-    singletonMap.forEach(
-        (name, singleton) -> {
-          singleton.stop();
-        });
+    singletonMap.forEach((name, singleton) -> {
+      singleton.stop();
+    });
   }
 }

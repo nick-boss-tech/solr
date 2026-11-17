@@ -614,28 +614,26 @@ public class SearchHandler extends RequestHandlerBase
 
           boolean anyResponsesPartial =
               srsp.getShardRequest().responses.stream()
-                  .anyMatch(
-                      response -> {
-                        NamedList<Object> resp = response.getSolrResponse().getResponse();
-                        if (resp == null) {
-                          return false;
-                        }
-                        Object recursive =
-                            resp._get(List.of("responseHeader", "partialResults"), null);
-                        if (recursive != null) {
-                          Object message =
-                              "[Shard:"
-                                  + response.getShardAddress()
-                                  + "]"
-                                  + resp._get(
-                                      List.of(
-                                          "responseHeader",
-                                          RESPONSE_HEADER_PARTIAL_RESULTS_DETAILS_KEY),
-                                      null);
-                          detailMesg.compareAndSet(null, message); // first one, ingore rest
-                        }
-                        return recursive != null;
-                      });
+                  .anyMatch(response -> {
+                    NamedList<Object> resp = response.getSolrResponse().getResponse();
+                    if (resp == null) {
+                      return false;
+                    }
+                    Object recursive = resp._get(List.of("responseHeader", "partialResults"), null);
+                    if (recursive != null) {
+                      Object message =
+                          "[Shard:"
+                              + response.getShardAddress()
+                              + "]"
+                              + resp._get(
+                                  List.of(
+                                      "responseHeader",
+                                      RESPONSE_HEADER_PARTIAL_RESULTS_DETAILS_KEY),
+                                  null);
+                      detailMesg.compareAndSet(null, message); // first one, ingore rest
+                    }
+                    return recursive != null;
+                  });
           if (anyResponsesPartial) {
             rb.rsp.addPartialResponseDetail(detailMesg.get());
             rsp.setPartialResults(rb.req);
@@ -802,16 +800,13 @@ public class SearchHandler extends RequestHandlerBase
       List<SearchComponent> components) {
 
     return getQueryLimits(req, resp)
-        .maybeExitWithPartialResults(
-            () ->
-                "["
-                    + when
-                    + "] Limit(s) exceeded prior to "
-                    + c.getName()
-                    + " in "
-                    + components.stream()
-                        .map(SearchComponent::getName)
-                        .collect(Collectors.toList()));
+        .maybeExitWithPartialResults(() ->
+            "["
+                + when
+                + "] Limit(s) exceeded prior to "
+                + c.getName()
+                + " in "
+                + components.stream().map(SearchComponent::getName).collect(Collectors.toList()));
   }
 
   private long computeShardCpuTime(List<ShardResponse> responses) {

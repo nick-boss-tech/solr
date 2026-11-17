@@ -346,36 +346,33 @@ public class SolrCoreTest extends SolrTestCaseJ4 {
     final ExecutorService executor =
         ExecutorUtil.newMDCAwareFixedThreadPool(
             1, new SolrNamedThreadFactory("testCoreInitDeadlockMetrics"));
-    executor.execute(
-        () -> {
-          while (!created.get()) {
-            try {
-              FilterablePrometheusMetricReader reader =
-                  coreContainer
-                      .getMetricManager()
-                      .getPrometheusMetricReader("solr.core." + coreName);
-              if (reader != null) {
-                MetricSnapshots snapshots = reader.collect();
-                for (var snapshot : snapshots) {
-                  if (snapshot instanceof GaugeSnapshot gaugeSnapshot) {
-                    var dataPoints = gaugeSnapshot.getDataPoints();
-                    if (!dataPoints.isEmpty()) {
-                      atLeastOnePoll.compareAndSet(false, true);
-                    }
-                  }
+    executor.execute(() -> {
+      while (!created.get()) {
+        try {
+          FilterablePrometheusMetricReader reader =
+              coreContainer.getMetricManager().getPrometheusMetricReader("solr.core." + coreName);
+          if (reader != null) {
+            MetricSnapshots snapshots = reader.collect();
+            for (var snapshot : snapshots) {
+              if (snapshot instanceof GaugeSnapshot gaugeSnapshot) {
+                var dataPoints = gaugeSnapshot.getDataPoints();
+                if (!dataPoints.isEmpty()) {
+                  atLeastOnePoll.compareAndSet(false, true);
                 }
               }
-            } catch (Exception ignore) {
-              // Ignore in case the core may not be fully initialized
-            }
-
-            try {
-              TimeUnit.MILLISECONDS.sleep(5);
-            } catch (InterruptedException e1) {
-              throw new RuntimeException(e1);
             }
           }
-        });
+        } catch (Exception ignore) {
+          // Ignore in case the core may not be fully initialized
+        }
+
+        try {
+          TimeUnit.MILLISECONDS.sleep(5);
+        } catch (InterruptedException e1) {
+          throw new RuntimeException(e1);
+        }
+      }
+    });
 
     TimeUnit.MILLISECONDS.sleep(25);
     try (var tmpCore = coreContainer.create(coreName, Map.of("configSet", "minimal"))) {

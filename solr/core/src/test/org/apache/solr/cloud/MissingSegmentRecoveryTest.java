@@ -76,7 +76,7 @@ public class MissingSegmentRecoveryTest extends SolrCloudTestCase {
 
     DocCollection state = getCollectionState(collection);
     leader = state.getLeader("shard1");
-    replica = getRandomReplica(state.getSlice("shard1"), (r) -> !leader.equals(r));
+    replica = getRandomReplica(state.getSlice("shard1"), r -> !leader.equals(r));
   }
 
   @After
@@ -133,9 +133,7 @@ public class MissingSegmentRecoveryTest extends SolrCloudTestCase {
         cluster.getReplicaJetty(replica).getCoreContainer().getCore(replica.getCoreName())) {
       Path indexDir = Path.of(core.getDataDir(), "index");
       try (Stream<Path> files = Files.list(indexDir)) {
-        return files
-            .filter((file) -> file.getFileName().toString().startsWith("segments_"))
-            .toList();
+        return files.filter(file -> file.getFileName().toString().startsWith("segments_")).toList();
       }
     }
   }

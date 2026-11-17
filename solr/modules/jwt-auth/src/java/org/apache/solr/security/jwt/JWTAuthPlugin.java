@@ -230,12 +230,11 @@ public class JWTAuthPlugin extends AuthenticationPlugin
 
     // Try to parse an issuer from top level config, and add first (primary issuer)
     Optional<JWTIssuerConfig> topLevelIssuer = parseIssuerFromTopLevelConfig(pluginConfig);
-    topLevelIssuer.ifPresent(
-        ic -> {
-          issuerConfigs.add(ic);
-          log.warn(
-              "JWTAuthPlugin issuer is configured using top-level configuration keys. Please consider using the 'issuers' array instead.");
-        });
+    topLevelIssuer.ifPresent(ic -> {
+      issuerConfigs.add(ic);
+      log.warn(
+          "JWTAuthPlugin issuer is configured using top-level configuration keys. Please consider using the 'issuers' array instead.");
+    });
 
     // Add issuers from 'issuers' key
     issuerConfigs.addAll(parseIssuers(pluginConfig));
@@ -302,15 +301,14 @@ public class JWTAuthPlugin extends AuthenticationPlugin
           SolrException.ErrorCode.SERVER_ERROR, "trustedCertsFile is neither a String or List");
     }
     log.info("Reading trustedCerts from file(s) {}", trustedCertsFileList);
-    trustedCertsFileList.forEach(
-        f -> {
-          try {
-            certs.addAll(parseCertsFromFile(f));
-          } catch (IOException e) {
-            throw new SolrException(
-                SolrException.ErrorCode.SERVER_ERROR, "Failed to read file " + f, e);
-          }
-        });
+    trustedCertsFileList.forEach(f -> {
+      try {
+        certs.addAll(parseCertsFromFile(f));
+      } catch (IOException e) {
+        throw new SolrException(
+            SolrException.ErrorCode.SERVER_ERROR, "Failed to read file " + f, e);
+      }
+    });
     return certs;
   }
 
@@ -387,16 +385,15 @@ public class JWTAuthPlugin extends AuthenticationPlugin
       List<Map<String, Object>> issuers =
           (List<Map<String, Object>>) pluginConfig.get(PARAM_ISSUERS);
       if (issuers != null) {
-        issuers.forEach(
-            issuerConf -> {
-              JWTIssuerConfig ic = new JWTIssuerConfig(issuerConf);
-              ic.setTrustedCerts(trustedSslCerts);
-              ic.init();
-              configs.add(ic);
-              if (log.isDebugEnabled()) {
-                log.debug("Found issuer with name {} and issuerId {}", ic.getName(), ic.getIss());
-              }
-            });
+        issuers.forEach(issuerConf -> {
+          JWTIssuerConfig ic = new JWTIssuerConfig(issuerConf);
+          ic.setTrustedCerts(trustedSslCerts);
+          ic.init();
+          configs.add(ic);
+          if (log.isDebugEnabled()) {
+            log.debug("Found issuer with name {} and issuerId {}", ic.getName(), ic.getIss());
+          }
+        });
       }
       return configs;
     } catch (ClassCastException cce) {
@@ -651,20 +648,19 @@ public class JWTAuthPlugin extends AuthenticationPlugin
                   finalRoles.addAll(Arrays.asList(((String) rolesObj).split("\\s+")));
                 } else if (rolesObj instanceof List) {
                   ((List<?>) rolesObj)
-                      .forEach(
-                          entry -> {
-                            if (entry instanceof String) {
-                              finalRoles.add((String) entry);
-                            } else {
-                              throw new SolrException(
-                                  SolrException.ErrorCode.BAD_REQUEST,
-                                  String.format(
-                                      Locale.ROOT,
-                                      "Could not parse roles from JWT claim %s; expected array of strings, got array with a value of type %s",
-                                      rolesClaim,
-                                      entry.getClass().getSimpleName()));
-                            }
-                          });
+                      .forEach(entry -> {
+                        if (entry instanceof String) {
+                          finalRoles.add((String) entry);
+                        } else {
+                          throw new SolrException(
+                              SolrException.ErrorCode.BAD_REQUEST,
+                              String.format(
+                                  Locale.ROOT,
+                                  "Could not parse roles from JWT claim %s; expected array of strings, got array with a value of type %s",
+                                  rolesClaim,
+                                  entry.getClass().getSimpleName()));
+                        }
+                      });
                 } else {
                   throw new SolrException(
                       SolrException.ErrorCode.BAD_REQUEST,

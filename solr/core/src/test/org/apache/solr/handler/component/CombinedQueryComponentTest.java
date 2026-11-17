@@ -159,7 +159,8 @@ public class CombinedQueryComponentTest extends BaseDistributedSearchTestCase {
                   "limit": 10,
                   "fields": ["id"],
                   "params": {"combiner": true, "combiner.query": ["cats", "dogs"]}
-                }"""));
+                }\
+                """));
     assertEquals(5, rsp.getResults().size());
     assertEquals(5, rsp.getResults().getNumFound());
     assertEquals(Boolean.TRUE, rsp.getResults().getNumFoundExact());
@@ -266,7 +267,8 @@ public class CombinedQueryComponentTest extends BaseDistributedSearchTestCase {
                     "facet.field": "color_sdv",
                     "combiner.query": ["lexical1", "lexical2"]
                   }
-                }"""));
+                }\
+                """));
     assertEquals(4, rsp.getResults().size());
     assertEquals("[blue (2), red (2)]", rsp.getFacetField("color_sdv").getValues().toString());
   }

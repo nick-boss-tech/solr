@@ -138,10 +138,9 @@ public class MirroringCollectionsHandlerTest extends SolrTestCaseJ4 {
       assertEquals(MirroredSolrRequest.Type.ADMIN, mirroredSolrRequest.getType());
       SolrRequest<?> solrRequest = mirroredSolrRequest.getSolrRequest();
       SolrParams mirroredParams = solrRequest.getParams();
-      params.forEach(
-          entry -> {
-            assertArrayEquals(entry.getValue(), mirroredParams.getParams(entry.getKey()));
-          });
+      params.forEach(entry -> {
+        assertArrayEquals(entry.getValue(), mirroredParams.getParams(entry.getKey()));
+      });
     } else {
       assertEquals(initialMirroredCount, captor.getAllValues().size());
     }

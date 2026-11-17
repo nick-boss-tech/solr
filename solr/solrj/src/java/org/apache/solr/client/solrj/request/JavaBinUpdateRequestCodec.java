@@ -267,22 +267,21 @@ public class JavaBinUpdateRequestCodec {
 
     private SolrInputDocument convertMapToSolrInputDoc(Map<?, ?> m) {
       SolrInputDocument result = createSolrInputDocument(m.size());
-      m.forEach(
-          (k, v) -> {
-            if (CHILDDOC.equals(k.toString())) {
-              if (v instanceof List<?> list) {
-                for (Object o : list) {
-                  if (o instanceof Map) {
-                    result.addChildDocument(convertMapToSolrInputDoc((Map<?, ?>) o));
-                  }
-                }
-              } else if (v instanceof Map) {
-                result.addChildDocument(convertMapToSolrInputDoc((Map<?, ?>) v));
+      m.forEach((k, v) -> {
+        if (CHILDDOC.equals(k.toString())) {
+          if (v instanceof List<?> list) {
+            for (Object o : list) {
+              if (o instanceof Map) {
+                result.addChildDocument(convertMapToSolrInputDoc((Map<?, ?>) o));
               }
-            } else {
-              result.addField(k.toString(), v);
             }
-          });
+          } else if (v instanceof Map) {
+            result.addChildDocument(convertMapToSolrInputDoc((Map<?, ?>) v));
+          }
+        } else {
+          result.addField(k.toString(), v);
+        }
+      });
       return result;
     }
   }

@@ -191,9 +191,8 @@ public class LeaderVoteWaitTimeoutTest extends SolrCloudTestCase {
     Replica replica1 =
         getCollectionState(collectionName)
             .getSlice("shard1")
-            .getReplicas(
-                replica ->
-                    replica.getNodeName().equals(cluster.getJettySolrRunner(1).getNodeName()))
+            .getReplicas(replica ->
+                replica.getNodeName().equals(cluster.getJettySolrRunner(1).getNodeName()))
             .get(0);
 
     CollectionAdminRequest.addReplicaToShard(collectionName, "shard1")
@@ -206,9 +205,8 @@ public class LeaderVoteWaitTimeoutTest extends SolrCloudTestCase {
     Replica replica2 =
         getCollectionState(collectionName)
             .getSlice("shard1")
-            .getReplicas(
-                replica ->
-                    replica.getNodeName().equals(cluster.getJettySolrRunner(2).getNodeName()))
+            .getReplicas(replica ->
+                replica.getNodeName().equals(cluster.getJettySolrRunner(2).getNodeName()))
             .get(0);
 
     cluster.getSolrClient().add(collectionName, new SolrInputDocument("id", "1"));
@@ -318,10 +316,9 @@ public class LeaderVoteWaitTimeoutTest extends SolrCloudTestCase {
     return cluster.getJettySolrRunners().stream()
         .filter(j -> j.getNodeName().equals(replica.getNodeName()))
         .findFirst()
-        .orElseThrow(
-            () ->
-                new IllegalArgumentException(
-                    "Cannot find Jetty for replica node: " + replica.getNodeName()));
+        .orElseThrow(() ->
+            new IllegalArgumentException(
+                "Cannot find Jetty for replica node: " + replica.getNodeName()));
   }
 
   private void assertDocExists(SolrClient solr, String collection, String docId) throws Exception {

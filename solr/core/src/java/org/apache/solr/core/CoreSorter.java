@@ -89,16 +89,15 @@ public class CoreSorter {
     if (cc.isZooKeeperAware()) {
       Map<String, CountsForEachShard> shardsVsReplicaCounts = computeShardsVsReplicaCounts(cds);
       return cds.stream()
-          .sorted(
-              (cd1, cd2) -> {
-                String s1 = getShardName(cd1.getCloudDescriptor());
-                String s2 = getShardName(cd2.getCloudDescriptor());
-                if (s1 == null || s2 == null) return cd1.getName().compareTo(cd2.getName());
-                CountsForEachShard c1 = shardsVsReplicaCounts.get(s1);
-                CountsForEachShard c2 = shardsVsReplicaCounts.get(s2);
-                int result = countsComparator.compare(c1, c2);
-                return result == 0 ? s1.compareTo(s2) : result;
-              })
+          .sorted((cd1, cd2) -> {
+            String s1 = getShardName(cd1.getCloudDescriptor());
+            String s2 = getShardName(cd2.getCloudDescriptor());
+            if (s1 == null || s2 == null) return cd1.getName().compareTo(cd2.getName());
+            CountsForEachShard c1 = shardsVsReplicaCounts.get(s1);
+            CountsForEachShard c2 = shardsVsReplicaCounts.get(s2);
+            int result = countsComparator.compare(c1, c2);
+            return result == 0 ? s1.compareTo(s2) : result;
+          })
           .collect(toList()); // new list
     }
     return cds;

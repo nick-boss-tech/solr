@@ -55,13 +55,12 @@ public class AdminUiCollectionsScreenTest extends AdminUiTestBase {
         Map.of(
             "collection header", By.cssSelector("#collection-data h2 .health-dot"),
             "shard header", By.cssSelector("#shard-data h2 .health-dot"));
-    healthDots.forEach(
-        (label, locator) -> {
-          WebElement dot = waitFor(locator);
-          assertTrue(
-              label + " health dot should be GREEN: " + dot.getAttribute("class"),
-              dot.getAttribute("class").contains("health-GREEN"));
-        });
+    healthDots.forEach((label, locator) -> {
+      WebElement dot = waitFor(locator);
+      assertTrue(
+          label + " health dot should be GREEN: " + dot.getAttribute("class"),
+          dot.getAttribute("class").contains("health-GREEN"));
+    });
 
     assertNoSevereConsoleErrors();
   }

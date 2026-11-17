@@ -1531,8 +1531,7 @@ public class SolrIndexSearcher extends IndexSearcher implements Closeable, SolrI
         // defaults to sort-by-score, so can't use filterCache
         return false;
       } else {
-        return Arrays.stream(sort.getSort())
-            .noneMatch((sf) -> sf.getType() == SortField.Type.SCORE);
+        return Arrays.stream(sort.getSort()).noneMatch(sf -> sf.getType() == SortField.Type.SCORE);
       }
     }
   }
@@ -1657,7 +1656,7 @@ public class SolrIndexSearcher extends IndexSearcher implements Closeable, SolrI
         of `score` in the requested sort.
          */
         useFilterCache =
-            Arrays.stream(sort.getSort()).noneMatch((sf) -> sf.getType() == SortField.Type.SCORE);
+            Arrays.stream(sort.getSort()).noneMatch(sf -> sf.getType() == SortField.Type.SCORE);
       }
     } else {
       // for non-constant-score queries, must sort unless no docs requested
@@ -2312,10 +2311,9 @@ public class SolrIndexSearcher extends IndexSearcher implements Closeable, SolrI
     final SolrIndexSearcher searcher = this;
     List<Callable<IndexFingerprint>> tasks =
         searcher.getTopReaderContext().leaves().stream()
-            .map(
-                ctx ->
-                    (Callable<IndexFingerprint>)
-                        () -> searcher.getCore().getIndexFingerprint(searcher, ctx, maxVersion))
+            .map(ctx ->
+                (Callable<IndexFingerprint>)
+                    () -> searcher.getCore().getIndexFingerprint(searcher, ctx, maxVersion))
             .collect(Collectors.toList());
     return ExecutorUtil.submitAllAndAwaitAggregatingExceptions(
             core.getCoreContainer().getIndexFingerprintExecutor(), tasks)

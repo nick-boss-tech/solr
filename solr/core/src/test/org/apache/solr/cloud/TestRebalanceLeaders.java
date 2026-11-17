@@ -91,16 +91,15 @@ public class TestRebalanceLeaders extends SolrCloudTestCase {
     for (Slice slice : docCollection.getSlices()) {
       for (Replica rep : slice.getReplicas()) {
         rep.getProperties()
-            .forEach(
-                (key, value) -> {
-                  if (key.startsWith("property.")) {
-                    try {
-                      delProp(slice, rep, key);
-                    } catch (IOException | SolrServerException e) {
-                      fail("Caught unexpected exception in @Before " + e.getMessage());
-                    }
-                  }
-                });
+            .forEach((key, value) -> {
+              if (key.startsWith("property.")) {
+                try {
+                  delProp(slice, rep, key);
+                } catch (IOException | SolrServerException e) {
+                  fail("Caught unexpected exception in @Before " + e.getMessage());
+                }
+              }
+            });
       }
     }
   }
@@ -243,9 +242,8 @@ public class TestRebalanceLeaders extends SolrCloudTestCase {
                     .getBool("property." + prop.toLowerCase(Locale.ROOT), false);
             long count =
                 modSlice.getReplicas().stream()
-                    .filter(
-                        thisRep ->
-                            thisRep.getBool("property." + prop.toLowerCase(Locale.ROOT), false))
+                    .filter(thisRep ->
+                        thisRep.getBool("property." + prop.toLowerCase(Locale.ROOT), false))
                     .count();
 
             return count == 1 && rightRep;
@@ -288,12 +286,11 @@ public class TestRebalanceLeaders extends SolrCloudTestCase {
       Set<Replica> liveReplicas = new HashSet<>();
       slice
           .getReplicas()
-          .forEach(
-              replica -> {
-                if (replica.isActive(liveNodes)) {
-                  liveReplicas.add(replica);
-                }
-              });
+          .forEach(replica -> {
+            if (replica.isActive(liveNodes)) {
+              liveReplicas.add(replica);
+            }
+          });
       checkOneQueue(docCollection, slice, liveReplicas);
     }
   }
@@ -601,14 +598,13 @@ public class TestRebalanceLeaders extends SolrCloudTestCase {
 
     for (int idx = 0; idx < jettys.size(); ++idx) {
       int finalIdx = idx;
-      executorService.execute(
-          () -> {
-            try {
-              cluster.startJettySolrRunner(jettys.get(finalIdx));
-            } catch (Exception e) {
-              throw new RuntimeException(e);
-            }
-          });
+      executorService.execute(() -> {
+        try {
+          cluster.startJettySolrRunner(jettys.get(finalIdx));
+        } catch (Exception e) {
+          throw new RuntimeException(e);
+        }
+      });
     }
     cluster.waitForAllNodes(60);
     // the nodes are present, but are all replica active?

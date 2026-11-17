@@ -209,19 +209,18 @@ public class GCSBackupRepository extends AbstractBackupRepository {
             Storage.BlobListOption.prefix(pathStr),
             Storage.BlobListOption.fields())
         .iterateAll()
-        .forEach(
-            blob -> {
-              assert blob.getName().startsWith(pathStr);
-              final String suffixName = blob.getName().substring(pathStr.length());
-              if (!suffixName.isEmpty()) {
-                // Remove trailing '/' if present
-                if (suffixName.endsWith("/")) {
-                  result.add(suffixName.substring(0, suffixName.length() - 1));
-                } else {
-                  result.add(suffixName);
-                }
-              }
-            });
+        .forEach(blob -> {
+          assert blob.getName().startsWith(pathStr);
+          final String suffixName = blob.getName().substring(pathStr.length());
+          if (!suffixName.isEmpty()) {
+            // Remove trailing '/' if present
+            if (suffixName.endsWith("/")) {
+              result.add(suffixName.substring(0, suffixName.length() - 1));
+            } else {
+              result.add(suffixName);
+            }
+          }
+        });
 
     return result.toArray(new String[0]);
   }

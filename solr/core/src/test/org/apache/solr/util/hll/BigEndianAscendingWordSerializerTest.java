@@ -33,7 +33,6 @@ public class BigEndianAscendingWordSerializerTest extends SolrTestCase {
                   0 /*wordLength, below minimum of 1*/,
                   1 /*wordCount, arbitrary*/,
                   0 /*bytePadding, arbitrary*/);
-              ;
             });
     assertTrue(e.getMessage().contains("Word length must be"));
 

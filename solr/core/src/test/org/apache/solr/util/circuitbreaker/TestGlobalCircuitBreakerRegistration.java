@@ -89,23 +89,22 @@ public class TestGlobalCircuitBreakerRegistration extends SolrTestCaseJ4 {
       for (int t = 0; t < threadCount; t++) {
         final List<CircuitBreaker> myBreakers = breakersPerThread.get(t);
         futures.add(
-            executor.submit(
-                () -> {
-                  try {
-                    // Release all threads simultaneously to maximize contention on
-                    // the shared ArrayList for the QUERY key in globalCircuitBreakerMap.
-                    barrier.await();
-                    for (CircuitBreaker b : myBreakers) {
-                      CircuitBreakerRegistry.registerGlobal(b);
-                    }
-                  } catch (BrokenBarrierException | InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                  } catch (Throwable ex) {
-                    // Captures ArrayIndexOutOfBoundsException (or similar) from
-                    // concurrent ArrayList.add() when the race is triggered.
-                    failures.add(ex);
-                  }
-                }));
+            executor.submit(() -> {
+              try {
+                // Release all threads simultaneously to maximize contention on
+                // the shared ArrayList for the QUERY key in globalCircuitBreakerMap.
+                barrier.await();
+                for (CircuitBreaker b : myBreakers) {
+                  CircuitBreakerRegistry.registerGlobal(b);
+                }
+              } catch (BrokenBarrierException | InterruptedException e) {
+                Thread.currentThread().interrupt();
+              } catch (Throwable ex) {
+                // Captures ArrayIndexOutOfBoundsException (or similar) from
+                // concurrent ArrayList.add() when the race is triggered.
+                failures.add(ex);
+              }
+            }));
       }
       for (Future<?> f : futures) {
         f.get();

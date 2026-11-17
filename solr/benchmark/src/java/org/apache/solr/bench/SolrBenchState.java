@@ -169,26 +169,24 @@ public class SolrBenchState {
   private void logClusterDirectorySize() throws IOException {
     log("");
     Files.list(miniClusterBaseDir.toAbsolutePath())
-        .forEach(
-            (node) -> {
-              try {
-                long clusterSize =
-                    Files.walk(node)
-                        .filter(Files::isRegularFile)
-                        .mapToLong(
-                            file -> {
-                              try {
-                                return Files.size(file);
-                              } catch (IOException e) {
-                                throw new RuntimeException(e);
-                              }
-                            })
-                        .sum();
-                log("mini cluster node size (bytes) " + node + " " + clusterSize);
-              } catch (IOException e) {
-                throw new RuntimeException(e);
-              }
-            });
+        .forEach(node -> {
+          try {
+            long clusterSize =
+                Files.walk(node)
+                    .filter(Files::isRegularFile)
+                    .mapToLong(file -> {
+                      try {
+                        return Files.size(file);
+                      } catch (IOException e) {
+                        throw new RuntimeException(e);
+                      }
+                    })
+                    .sum();
+            log("mini cluster node size (bytes) " + node + " " + clusterSize);
+          } catch (IOException e) {
+            throw new RuntimeException(e);
+          }
+        });
   }
 
   /**

@@ -639,15 +639,14 @@ public class ChaosMonkey {
             new SolrNamedThreadFactory("ChaosMonkey"),
             false);
     for (JettySolrRunner jetty : jettys) {
-      executor.execute(
-          () -> {
-            try {
-              jetty.stop();
-            } catch (Exception e) {
-              log.error("error stopping jetty", e);
-              throw new RuntimeException(e);
-            }
-          });
+      executor.execute(() -> {
+        try {
+          jetty.stop();
+        } catch (Exception e) {
+          log.error("error stopping jetty", e);
+          throw new RuntimeException(e);
+        }
+      });
     }
     ExecutorUtil.shutdownAndAwaitTermination(executor);
   }
@@ -663,15 +662,14 @@ public class ChaosMonkey {
             new SolrNamedThreadFactory("ChaosMonkey"),
             false);
     for (JettySolrRunner jetty : jettys) {
-      executor.execute(
-          () -> {
-            try {
-              jetty.start();
-            } catch (Exception e) {
-              log.error("error starting jetty", e);
-              throw new RuntimeException(e);
-            }
-          });
+      executor.execute(() -> {
+        try {
+          jetty.start();
+        } catch (Exception e) {
+          log.error("error starting jetty", e);
+          throw new RuntimeException(e);
+        }
+      });
     }
     ExecutorUtil.shutdownAndAwaitTermination(executor);
   }

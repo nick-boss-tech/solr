@@ -139,10 +139,8 @@ public class RestoreCollection extends BackupAPIBase implements CollectionBackup
       // constructing the remote message
       remoteMessage.remove("create-collection");
       CreateCollection.createRemoteMessage(createReqBody).getProperties().entrySet().stream()
-          .filter(
-              e ->
-                  CREATE_PARAM_ALLOWLIST.contains(e.getKey())
-                      || e.getKey().startsWith(PROPERTY_PREFIX))
+          .filter(e ->
+              CREATE_PARAM_ALLOWLIST.contains(e.getKey()) || e.getKey().startsWith(PROPERTY_PREFIX))
           .forEach(e -> remoteMessage.put(e.getKey(), e.getValue()));
     }
 

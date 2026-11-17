@@ -62,16 +62,17 @@ public class JWTIssuerConfigTest extends SolrTestCase {
 
     testIssuerJson =
         """
-            {
-              "aud":"audience",
-              "tokenEndpoint":"https://issuer/token",
-              "wellKnownUrl":"wellknown",
-              "clientId":"clientid",
-              "authorizationFlow":"code_pkce",
-              "jwksUrl":["https://issuer/path"],
-              "name":"name",
-              "iss":"issuer",
-              "authorizationEndpoint":"https://issuer/authz"}""";
+        {
+          "aud":"audience",
+          "tokenEndpoint":"https://issuer/token",
+          "wellKnownUrl":"wellknown",
+          "clientId":"clientid",
+          "authorizationFlow":"code_pkce",
+          "jwksUrl":["https://issuer/path"],
+          "name":"name",
+          "iss":"issuer",
+          "authorizationEndpoint":"https://issuer/authz"}\
+        """;
   }
 
   @Override

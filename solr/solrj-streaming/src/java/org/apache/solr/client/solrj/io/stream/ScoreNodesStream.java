@@ -237,22 +237,20 @@ public class ScoreNodesStream extends TupleStream implements Expressible {
       @SuppressWarnings({"unchecked"})
       NamedList<NamedList<Number>> fields = (NamedList<NamedList<Number>>) response.get("terms");
 
-      fields.forEach(
-          (fieldName, terms) ->
-              terms.forEach(
-                  (term, docFreq) -> {
-                    Tuple tuple = nodes.get(term);
-                    if (!tuple.getFields().containsKey(termFreq)) {
-                      throw new RuntimeException("termFreq field not present in the Tuple");
-                    }
-                    Number termFreqValue = (Number) tuple.get(termFreq);
-                    float score =
-                        (float) (Math.log(termFreqValue.floatValue()) + 1.0)
-                            * (float) (Math.log((numDocs + 1) / (docFreq.doubleValue() + 1)) + 1.0);
-                    tuple.put("nodeScore", score);
-                    tuple.put("docFreq", docFreq);
-                    tuple.put("numDocs", numDocs);
-                  }));
+      fields.forEach((fieldName, terms) ->
+          terms.forEach((term, docFreq) -> {
+            Tuple tuple = nodes.get(term);
+            if (!tuple.getFields().containsKey(termFreq)) {
+              throw new RuntimeException("termFreq field not present in the Tuple");
+            }
+            Number termFreqValue = (Number) tuple.get(termFreq);
+            float score =
+                (float) (Math.log(termFreqValue.floatValue()) + 1.0)
+                    * (float) (Math.log((numDocs + 1) / (docFreq.doubleValue() + 1)) + 1.0);
+            tuple.put("nodeScore", score);
+            tuple.put("docFreq", docFreq);
+            tuple.put("numDocs", numDocs);
+          }));
     } catch (SolrServerException e) {
       throw new IOException(e);
     }

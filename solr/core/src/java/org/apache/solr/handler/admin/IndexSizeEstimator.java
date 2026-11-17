@@ -230,37 +230,32 @@ public class IndexSizeEstimator {
       details.put("samplingStep", samplingStep);
     }
     ItemPriorityQueue fieldSizeQueue = new ItemPriorityQueue(summary.size());
-    summary.forEach(
-        (field, perField) -> {
-          long size = ((AtomicLong) ((Map<String, Object>) perField).get("totalSize")).get();
-          if (size > 0) {
-            fieldSizeQueue.insertWithOverflow(new Item(field, size));
-          }
-        });
+    summary.forEach((field, perField) -> {
+      long size = ((AtomicLong) ((Map<String, Object>) perField).get("totalSize")).get();
+      if (size > 0) {
+        fieldSizeQueue.insertWithOverflow(new Item(field, size));
+      }
+    });
     Map<String, Long> fieldsBySize = new LinkedHashMap<>();
     fieldSizeQueue._forEachEntry((k, v) -> fieldsBySize.put((String) k, (Long) v));
     Map<String, AtomicLong> typeSizes = new HashMap<>();
-    summary.forEach(
-        (field, perField) -> {
-          Map<String, Object> perType =
-              (Map<String, Object>) ((Map<String, Object>) perField).get("perType");
-          perType.forEach(
-              (type, size) -> {
-                if (type.contains("_lengths")) {
-                  AtomicLong totalSize =
-                      typeSizes.computeIfAbsent(
-                          type.replace("_lengths", ""), t -> new AtomicLong());
-                  totalSize.addAndGet(((AtomicLong) size).get());
-                }
-              });
-        });
+    summary.forEach((field, perField) -> {
+      Map<String, Object> perType =
+          (Map<String, Object>) ((Map<String, Object>) perField).get("perType");
+      perType.forEach((type, size) -> {
+        if (type.contains("_lengths")) {
+          AtomicLong totalSize =
+              typeSizes.computeIfAbsent(type.replace("_lengths", ""), t -> new AtomicLong());
+          totalSize.addAndGet(((AtomicLong) size).get());
+        }
+      });
+    });
     ItemPriorityQueue typesSizeQueue = new ItemPriorityQueue(typeSizes.size());
-    typeSizes.forEach(
-        (type, size) -> {
-          if (size.get() > 0) {
-            typesSizeQueue.insertWithOverflow(new Item(type, size.get()));
-          }
-        });
+    typeSizes.forEach((type, size) -> {
+      if (size.get() > 0) {
+        typesSizeQueue.insertWithOverflow(new Item(type, size.get()));
+      }
+    });
     Map<String, Long> typesBySize = new LinkedHashMap<>();
     typesSizeQueue._forEachEntry((k, v) -> typesBySize.put((String) k, (Long) v));
     // sort summary by field size
@@ -295,37 +290,31 @@ public class IndexSizeEstimator {
   @SuppressWarnings({"unchecked"})
   private void estimateSummary(Map<String, Object> details, Map<String, Object> summary) {
     log.info("- preparing summary...");
-    details.forEach(
-        (type, perType) -> {
-          ((Map<String, Object>) perType)
-              .forEach(
-                  (field, perField) -> {
-                    Map<String, Object> perFieldSummary =
-                        (Map<String, Object>) summary.computeIfAbsent(field, f -> new HashMap<>());
-                    ((Map<String, Object>) perField)
-                        .forEach(
-                            (k, val) -> {
-                              if (val instanceof SummaryStatistics stats) {
-                                if (k.startsWith("lengths")) {
-                                  AtomicLong total =
-                                      (AtomicLong)
-                                          perFieldSummary.computeIfAbsent(
-                                              "totalSize", kt -> new AtomicLong());
-                                  total.addAndGet((long) stats.getSum());
-                                }
-                                Map<String, Object> perTypeSummary =
-                                    (Map<String, Object>)
-                                        perFieldSummary.computeIfAbsent(
-                                            "perType", pt -> new HashMap<>());
-                                AtomicLong total =
-                                    (AtomicLong)
-                                        perTypeSummary.computeIfAbsent(
-                                            type + "_" + k, t -> new AtomicLong());
-                                total.addAndGet((long) stats.getSum());
-                              }
-                            });
-                  });
-        });
+    details.forEach((type, perType) -> {
+      ((Map<String, Object>) perType)
+          .forEach((field, perField) -> {
+            Map<String, Object> perFieldSummary =
+                (Map<String, Object>) summary.computeIfAbsent(field, f -> new HashMap<>());
+            ((Map<String, Object>) perField)
+                .forEach((k, val) -> {
+                  if (val instanceof SummaryStatistics stats) {
+                    if (k.startsWith("lengths")) {
+                      AtomicLong total =
+                          (AtomicLong)
+                              perFieldSummary.computeIfAbsent("totalSize", kt -> new AtomicLong());
+                      total.addAndGet((long) stats.getSum());
+                    }
+                    Map<String, Object> perTypeSummary =
+                        (Map<String, Object>)
+                            perFieldSummary.computeIfAbsent("perType", pt -> new HashMap<>());
+                    AtomicLong total =
+                        (AtomicLong)
+                            perTypeSummary.computeIfAbsent(type + "_" + k, t -> new AtomicLong());
+                    total.addAndGet((long) stats.getSum());
+                  }
+                });
+          });
+    });
   }
 
   private void estimateNorms(Map<String, Object> result) throws IOException {

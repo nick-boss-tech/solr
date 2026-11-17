@@ -1008,39 +1008,36 @@ public abstract class AbstractIncrementalBackupTest extends SolrCloudTestCase {
 
             Collection<String> newBackupFiles =
                 newIndexFilesComparedToLastBackup(slice.getName(), lastCommit).stream()
-                    .map(
-                        indexFile -> {
-                          Optional<ShardBackupMetadata.BackedFile> backedFile =
-                              shardBackupMetadata.getFile(indexFile);
-                          assertTrue(backedFile.isPresent());
-                          return backedFile.get().uniqueFileName;
-                        })
+                    .map(indexFile -> {
+                      Optional<ShardBackupMetadata.BackedFile> backedFile =
+                          shardBackupMetadata.getFile(indexFile);
+                      assertTrue(backedFile.isPresent());
+                      return backedFile.get().uniqueFileName;
+                    })
                     .collect(Collectors.toList());
 
             lastCommit
                 .getFileNames()
-                .forEach(
-                    f -> {
-                      Optional<ShardBackupMetadata.BackedFile> backedFile =
-                          shardBackupMetadata.getFile(f);
-                      assertTrue(backedFile.isPresent());
-                      String uniqueFileName = backedFile.get().uniqueFileName;
+                .forEach(f -> {
+                  Optional<ShardBackupMetadata.BackedFile> backedFile =
+                      shardBackupMetadata.getFile(f);
+                  assertTrue(backedFile.isPresent());
+                  String uniqueFileName = backedFile.get().uniqueFileName;
 
-                      if (newBackupFiles.contains(uniqueFileName)) {
-                        assertTrue(
-                            newFilesCopiedOver.contains(
-                                repository.resolve(indexDir, uniqueFileName)));
-                      }
+                  if (newBackupFiles.contains(uniqueFileName)) {
+                    assertTrue(
+                        newFilesCopiedOver.contains(repository.resolve(indexDir, uniqueFileName)));
+                  }
 
-                      try {
-                        Checksum localChecksum = repository.checksum(dir, f);
-                        Checksum remoteChecksum = backedFile.get().fileChecksum;
-                        assertEquals(localChecksum.checksum, remoteChecksum.checksum);
-                        assertEquals(localChecksum.size, remoteChecksum.size);
-                      } catch (IOException e) {
-                        throw new AssertionError(e);
-                      }
-                    });
+                  try {
+                    Checksum localChecksum = repository.checksum(dir, f);
+                    Checksum remoteChecksum = backedFile.get().fileChecksum;
+                    assertEquals(localChecksum.checksum, remoteChecksum.checksum);
+                    assertEquals(localChecksum.size, remoteChecksum.size);
+                  } catch (IOException e) {
+                    throw new AssertionError(e);
+                  }
+                });
 
             assertEquals(
                 "Incremental backup stored more files than needed",

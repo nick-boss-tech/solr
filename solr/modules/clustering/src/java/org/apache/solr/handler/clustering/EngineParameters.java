@@ -159,55 +159,54 @@ public final class EngineParameters implements Cloneable {
   /** Extract parameter values from the given {@link SolrParams}. */
   private EngineParameters extractFrom(SolrParams params) {
     params.stream()
-        .forEachOrdered(
-            e -> {
-              switch (e.getKey()) {
-                case PARAM_MAX_LABELS:
-                  maxLabels = params.getInt(PARAM_MAX_LABELS);
-                  break;
-                case PARAM_INCLUDE_SUBCLUSTERS:
-                  includeSubclusters = params.getBool(PARAM_INCLUDE_SUBCLUSTERS);
-                  break;
-                case PARAM_INCLUDE_OTHER_TOPICS:
-                  includeOtherTopics = params.getBool(PARAM_INCLUDE_OTHER_TOPICS);
-                  break;
-                case PARAM_ALGORITHM:
-                  algorithmName = params.get(PARAM_ALGORITHM);
-                  break;
-                case PARAM_RESOURCES:
-                  resources = params.get(PARAM_RESOURCES);
-                  break;
-                case PARAM_LANGUAGE:
-                  language = params.get(PARAM_LANGUAGE);
-                  break;
-                case PARAM_LANGUAGE_FIELD:
-                  languageField = params.get(PARAM_LANGUAGE_FIELD);
-                  break;
-                case PARAM_PREFER_QUERY_CONTEXT:
-                  preferQueryContext = params.getBool(PARAM_PREFER_QUERY_CONTEXT);
-                  break;
-                case PARAM_CONTEXT_COUNT:
-                  contextCount = params.getPrimitiveInt(PARAM_CONTEXT_COUNT);
-                  break;
-                case PARAM_CONTEXT_SIZE:
-                  contextSize = params.getPrimitiveInt(PARAM_CONTEXT_SIZE);
-                  break;
-                case PARAM_FIELDS:
-                  fields.addAll(Arrays.asList(params.get(PARAM_FIELDS).split("[,]\\s*")));
-                  break;
-                default:
-                  // Unrecognized parameter. Preserve it.
-                  String[] value = e.getValue();
-                  if (value != null) {
-                    if (value.length == 1) {
-                      otherParameters.put(e.getKey(), value[0]);
-                    } else {
-                      otherParameters.put(e.getKey(), String.join(", ", value));
-                    }
-                  }
-                  break;
+        .forEachOrdered(e -> {
+          switch (e.getKey()) {
+            case PARAM_MAX_LABELS:
+              maxLabels = params.getInt(PARAM_MAX_LABELS);
+              break;
+            case PARAM_INCLUDE_SUBCLUSTERS:
+              includeSubclusters = params.getBool(PARAM_INCLUDE_SUBCLUSTERS);
+              break;
+            case PARAM_INCLUDE_OTHER_TOPICS:
+              includeOtherTopics = params.getBool(PARAM_INCLUDE_OTHER_TOPICS);
+              break;
+            case PARAM_ALGORITHM:
+              algorithmName = params.get(PARAM_ALGORITHM);
+              break;
+            case PARAM_RESOURCES:
+              resources = params.get(PARAM_RESOURCES);
+              break;
+            case PARAM_LANGUAGE:
+              language = params.get(PARAM_LANGUAGE);
+              break;
+            case PARAM_LANGUAGE_FIELD:
+              languageField = params.get(PARAM_LANGUAGE_FIELD);
+              break;
+            case PARAM_PREFER_QUERY_CONTEXT:
+              preferQueryContext = params.getBool(PARAM_PREFER_QUERY_CONTEXT);
+              break;
+            case PARAM_CONTEXT_COUNT:
+              contextCount = params.getPrimitiveInt(PARAM_CONTEXT_COUNT);
+              break;
+            case PARAM_CONTEXT_SIZE:
+              contextSize = params.getPrimitiveInt(PARAM_CONTEXT_SIZE);
+              break;
+            case PARAM_FIELDS:
+              fields.addAll(Arrays.asList(params.get(PARAM_FIELDS).split("[,]\\s*")));
+              break;
+            default:
+              // Unrecognized parameter. Preserve it.
+              String[] value = e.getValue();
+              if (value != null) {
+                if (value.length == 1) {
+                  otherParameters.put(e.getKey(), value[0]);
+                } else {
+                  otherParameters.put(e.getKey(), String.join(", ", value));
+                }
               }
-            });
+              break;
+          }
+        });
     return this;
   }
 

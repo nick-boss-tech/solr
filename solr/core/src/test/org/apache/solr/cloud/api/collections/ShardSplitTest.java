@@ -459,20 +459,19 @@ public class ShardSplitTest extends BasicDistributedZkTest {
     AtomicInteger actualTlog = new AtomicInteger();
     AtomicInteger actualPull = new AtomicInteger();
     s.getReplicas()
-        .forEach(
-            r -> {
-              switch (r.getType()) {
-                case NRT:
-                  actualNrt.incrementAndGet();
-                  break;
-                case TLOG:
-                  actualTlog.incrementAndGet();
-                  break;
-                case PULL:
-                  actualPull.incrementAndGet();
-                  break;
-              }
-            });
+        .forEach(r -> {
+          switch (r.getType()) {
+            case NRT:
+              actualNrt.incrementAndGet();
+              break;
+            case TLOG:
+              actualTlog.incrementAndGet();
+              break;
+            case PULL:
+              actualPull.incrementAndGet();
+              break;
+          }
+        });
     assertEquals("actual NRT", numNrt, actualNrt.get());
     assertEquals("actual TLOG", numTlog, actualTlog.get());
     assertEquals("actual PULL", numPull, actualPull.get());
@@ -865,42 +864,39 @@ public class ShardSplitTest extends BasicDistributedZkTest {
 
     List<String> errors = new CopyOnWriteArrayList<>();
     Thread indexThread =
-        new Thread(
-            () -> {
-              Random random = random();
-              int max = atLeast(random, 401);
-              int sleep = atLeast(random, 25);
-              log.info(
-                  "SHARDSPLITTEST: Going to add {} number of docs at 1 doc per {} ms", max, sleep);
-              Set<String> deleted = new HashSet<>();
-              for (int id = 101; id < max; id++) {
-                try {
-                  indexAndUpdateCount(
-                      router, ranges, docCounts, String.valueOf(id), id, documentIds);
-                  Thread.sleep(sleep);
-                } catch (Exception e) {
-                  log.error("Exception while adding doc id = {}", id, e);
-                  // do not select this id for deletion ever
-                  deleted.add(String.valueOf(id));
-                  errors.add(e.getMessage());
-                }
+        new Thread(() -> {
+          Random random = random();
+          int max = atLeast(random, 401);
+          int sleep = atLeast(random, 25);
+          log.info("SHARDSPLITTEST: Going to add {} number of docs at 1 doc per {} ms", max, sleep);
+          Set<String> deleted = new HashSet<>();
+          for (int id = 101; id < max; id++) {
+            try {
+              indexAndUpdateCount(router, ranges, docCounts, String.valueOf(id), id, documentIds);
+              Thread.sleep(sleep);
+            } catch (Exception e) {
+              log.error("Exception while adding doc id = {}", id, e);
+              // do not select this id for deletion ever
+              deleted.add(String.valueOf(id));
+              errors.add(e.getMessage());
+            }
 
-                if (usually(random)) {
-                  String delId = String.valueOf(random.nextInt(id - 101 + 1) + 101);
-                  if (deleted.contains(delId)) {
-                    continue;
-                  }
-                  try {
-                    deleteAndUpdateCount(router, ranges, docCounts, delId);
-                    deleted.add(delId);
-                    documentIds.remove(delId);
-                  } catch (Exception e) {
-                    log.error("Exception while deleting doc id = {}", delId, e);
-                    errors.add(e.getMessage());
-                  }
-                }
+            if (usually(random)) {
+              String delId = String.valueOf(random.nextInt(id - 101 + 1) + 101);
+              if (deleted.contains(delId)) {
+                continue;
               }
-            });
+              try {
+                deleteAndUpdateCount(router, ranges, docCounts, delId);
+                deleted.add(delId);
+                documentIds.remove(delId);
+              } catch (Exception e) {
+                log.error("Exception while deleting doc id = {}", delId, e);
+                errors.add(e.getMessage());
+              }
+            }
+          }
+        });
     indexThread.start();
 
     try {

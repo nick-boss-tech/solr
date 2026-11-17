@@ -166,14 +166,12 @@ public class MetricsHandlerTest extends SolrTestCaseJ4 {
         resp);
     var metrics = (MetricSnapshots) resp.getValues().get("metrics");
 
-    metrics.forEach(
-        (ms) -> {
-          ms.getDataPoints()
-              .forEach(
-                  (dp) -> {
-                    assertEquals("QUERY", dp.getLabels().get(MetricUtils.CATEGORY_PARAM));
-                  });
-        });
+    metrics.forEach(ms -> {
+      ms.getDataPoints()
+          .forEach(dp -> {
+            assertEquals("QUERY", dp.getLabels().get(MetricUtils.CATEGORY_PARAM));
+          });
+    });
 
     handler.close();
   }
@@ -195,16 +193,14 @@ public class MetricsHandlerTest extends SolrTestCaseJ4 {
         resp);
 
     var metrics = (MetricSnapshots) resp.getValues().get("metrics");
-    metrics.forEach(
-        (ms) -> {
-          ms.getDataPoints()
-              .forEach(
-                  (dp) -> {
-                    assertTrue(
-                        dp.getLabels().get(MetricUtils.CATEGORY_PARAM).equals("QUERY")
-                            || dp.getLabels().get(MetricUtils.CATEGORY_PARAM).equals("SEARCHER"));
-                  });
-        });
+    metrics.forEach(ms -> {
+      ms.getDataPoints()
+          .forEach(dp -> {
+            assertTrue(
+                dp.getLabels().get(MetricUtils.CATEGORY_PARAM).equals("QUERY")
+                    || dp.getLabels().get(MetricUtils.CATEGORY_PARAM).equals("SEARCHER"));
+          });
+    });
 
     handler.close();
   }
@@ -247,16 +243,14 @@ public class MetricsHandlerTest extends SolrTestCaseJ4 {
         resp);
 
     var metrics = (MetricSnapshots) resp.getValues().get("metrics");
-    metrics.forEach(
-        (ms) -> {
-          ms.getDataPoints()
-              .forEach(
-                  (dp) -> {
-                    assertTrue(
-                        dp.getLabels().get(MetricUtils.CATEGORY_PARAM).equals("SEARCHER")
-                            && dp.getLabels().get(MetricUtils.CORE_PARAM).equals("collection1"));
-                  });
-        });
+    metrics.forEach(ms -> {
+      ms.getDataPoints()
+          .forEach(dp -> {
+            assertTrue(
+                dp.getLabels().get(MetricUtils.CATEGORY_PARAM).equals("SEARCHER")
+                    && dp.getLabels().get(MetricUtils.CORE_PARAM).equals("collection1"));
+          });
+    });
 
     handler.close();
   }

@@ -112,11 +112,10 @@ public class SolrProcessManagerTest extends SolrTestCase {
     assertFalse(solrProcessManager.getAllRunning().isEmpty());
     solrProcessManager
         .getAllRunning()
-        .forEach(
-            p ->
-                assertEquals(
-                    (p.isHttps() ? "https" : "http") + "://localhost:" + p.port() + "/solr",
-                    p.getLocalUrl()));
+        .forEach(p ->
+            assertEquals(
+                (p.isHttps() ? "https" : "http") + "://localhost:" + p.port() + "/solr",
+                p.getLocalUrl()));
   }
 
   public void testIsRunningWithPort() {

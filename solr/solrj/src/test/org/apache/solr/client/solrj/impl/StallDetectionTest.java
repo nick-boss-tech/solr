@@ -343,112 +343,110 @@ public class StallDetectionTest extends SolrTestCase {
       for (int i = 0; i < NUM_INCREMENTERS; i++) {
         final int incrementerId = i;
         futures.add(
-            executor.submit(
-                () -> {
-                  try {
-                    log.debug("Incrementer {} waiting at barrier", incrementerId);
-                    startBarrier.await(10, TimeUnit.SECONDS);
-                    log.debug("Incrementer {} started", incrementerId);
+            executor.submit(() -> {
+              try {
+                log.debug("Incrementer {} waiting at barrier", incrementerId);
+                startBarrier.await(10, TimeUnit.SECONDS);
+                log.debug("Incrementer {} started", incrementerId);
 
-                    // Phase 1: Normal operation
-                    while (keepRunning.get() && !shouldStall.get()) {
-                      // Process items from queue
-                      Integer item = testQueue.poll();
-                      if (item != null) {
-                        stallDetection.incrementProcessedCount();
-                        // Simulate some work
-                        Thread.sleep(random().nextInt(5));
-                        // Add a new item to keep queue non-empty
-                        if (random().nextBoolean()) {
-                          testQueue.add(random().nextInt(100));
-                        }
-                      } else {
-                        // Queue is empty, nothing to process
-                        if (!queueWasEmpty.getAndSet(true)) {
-                          queueTransitionCount.getAndIncrement();
-                          log.debug("Queue became empty");
-                        }
-                        Thread.sleep(5); // Wait briefly before checking again
-                      }
-
-                      // Occasionally empty the queue completely to test transitions
-                      if (random().nextInt(100) == 0) {
-                        testQueue.clear();
-                        log.debug("Queue cleared by incrementer {}", incrementerId);
-                      }
+                // Phase 1: Normal operation
+                while (keepRunning.get() && !shouldStall.get()) {
+                  // Process items from queue
+                  Integer item = testQueue.poll();
+                  if (item != null) {
+                    stallDetection.incrementProcessedCount();
+                    // Simulate some work
+                    Thread.sleep(random().nextInt(5));
+                    // Add a new item to keep queue non-empty
+                    if (random().nextBoolean()) {
+                      testQueue.add(random().nextInt(100));
                     }
-
-                    // Phase 2: Stall if instructed
-                    if (shouldStall.get()) {
-                      log.debug("Incrementer {} stopping to induce stall", incrementerId);
-                      // Stop incrementing, but don't exit yet
-                      phase2Complete.await(20, TimeUnit.SECONDS);
+                  } else {
+                    // Queue is empty, nothing to process
+                    if (!queueWasEmpty.getAndSet(true)) {
+                      queueTransitionCount.getAndIncrement();
+                      log.debug("Queue became empty");
                     }
-
-                  } catch (Exception e) {
-                    if (!(e instanceof InterruptedException)) {
-                      log.error("Incrementer {} failed", incrementerId, e);
-                      unexpectedException.compareAndSet(null, e);
-                    }
-                  } finally {
-                    log.debug("Incrementer {} completing", incrementerId);
-                    allComplete.countDown();
+                    Thread.sleep(5); // Wait briefly before checking again
                   }
-                }));
+
+                  // Occasionally empty the queue completely to test transitions
+                  if (random().nextInt(100) == 0) {
+                    testQueue.clear();
+                    log.debug("Queue cleared by incrementer {}", incrementerId);
+                  }
+                }
+
+                // Phase 2: Stall if instructed
+                if (shouldStall.get()) {
+                  log.debug("Incrementer {} stopping to induce stall", incrementerId);
+                  // Stop incrementing, but don't exit yet
+                  phase2Complete.await(20, TimeUnit.SECONDS);
+                }
+
+              } catch (Exception e) {
+                if (!(e instanceof InterruptedException)) {
+                  log.error("Incrementer {} failed", incrementerId, e);
+                  unexpectedException.compareAndSet(null, e);
+                }
+              } finally {
+                log.debug("Incrementer {} completing", incrementerId);
+                allComplete.countDown();
+              }
+            }));
       }
 
       // Submit checker tasks
       for (int i = 0; i < NUM_CHECKERS; i++) {
         final int checkerId = i;
         futures.add(
-            executor.submit(
-                () -> {
+            executor.submit(() -> {
+              try {
+                log.debug("Checker {} waiting at barrier", checkerId);
+                startBarrier.await(10, TimeUnit.SECONDS);
+                log.debug("Checker {} started", checkerId);
+
+                while (keepRunning.get()) {
                   try {
-                    log.debug("Checker {} waiting at barrier", checkerId);
-                    startBarrier.await(10, TimeUnit.SECONDS);
-                    log.debug("Checker {} started", checkerId);
-
-                    while (keepRunning.get()) {
-                      try {
-                        stallDetection.stallCheck();
-                      } catch (IOException e) {
-                        if (shouldStall.get()) {
-                          if (log.isWarnEnabled()) {
-                            log.warn("Checker {} detected expected stall: {}", checkerId, e);
-                          }
-                          expectedStallException.compareAndSet(null, e);
-                          correctStallCount.incrementAndGet();
-                          phase2Complete.countDown(); // Signal to complete phase 2
-                          break; // Exit loop after detecting stall
-                        } else {
-                          if (log.isErrorEnabled()) {
-                            log.error("Checker {} detected unexpected stall in phase 1", checkerId);
-                          }
-                          prematureStallCount.incrementAndGet();
-                          unexpectedException.compareAndSet(null, e);
-                        }
+                    stallDetection.stallCheck();
+                  } catch (IOException e) {
+                    if (shouldStall.get()) {
+                      if (log.isWarnEnabled()) {
+                        log.warn("Checker {} detected expected stall: {}", checkerId, e);
                       }
-
-                      // Check less frequently than incrementers
-                      Thread.sleep(CHECKER_INTERVAL_MILLIS);
-
-                      // Occasionally reset the stall timer to test that functionality
-                      if (random().nextInt(50) == 0) {
-                        stallDetection.resetStallTimer();
-                        log.debug("Checker {} reset stall timer", checkerId);
+                      expectedStallException.compareAndSet(null, e);
+                      correctStallCount.incrementAndGet();
+                      phase2Complete.countDown(); // Signal to complete phase 2
+                      break; // Exit loop after detecting stall
+                    } else {
+                      if (log.isErrorEnabled()) {
+                        log.error("Checker {} detected unexpected stall in phase 1", checkerId);
                       }
-                    }
-
-                  } catch (Exception e) {
-                    if (!(e instanceof InterruptedException)) {
-                      log.error("Checker {} failed", checkerId, e);
+                      prematureStallCount.incrementAndGet();
                       unexpectedException.compareAndSet(null, e);
                     }
-                  } finally {
-                    log.debug("Checker {} completing", checkerId);
-                    allComplete.countDown();
                   }
-                }));
+
+                  // Check less frequently than incrementers
+                  Thread.sleep(CHECKER_INTERVAL_MILLIS);
+
+                  // Occasionally reset the stall timer to test that functionality
+                  if (random().nextInt(50) == 0) {
+                    stallDetection.resetStallTimer();
+                    log.debug("Checker {} reset stall timer", checkerId);
+                  }
+                }
+
+              } catch (Exception e) {
+                if (!(e instanceof InterruptedException)) {
+                  log.error("Checker {} failed", checkerId, e);
+                  unexpectedException.compareAndSet(null, e);
+                }
+              } finally {
+                log.debug("Checker {} completing", checkerId);
+                allComplete.countDown();
+              }
+            }));
       }
 
       log.info("Starting all threads");

@@ -1698,14 +1698,13 @@ public class IndexFetcher {
         cleanup(invalidIndexGeneration);
         if (!invalidIndexGeneration) {
           // if cleanup succeeds, and the file is downloaded fully, then do a fsync.
-          fsyncService.execute(
-              () -> {
-                try {
-                  file.sync();
-                } catch (IOException | AlreadyClosedException e) {
-                  fsyncException = e;
-                }
-              });
+          fsyncService.execute(() -> {
+            try {
+              file.sync();
+            } catch (IOException | AlreadyClosedException e) {
+              fsyncException = e;
+            }
+          });
         }
       }
     }

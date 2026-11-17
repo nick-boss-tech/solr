@@ -399,10 +399,8 @@ public class BJQParserTest extends SolrTestCaseJ4 {
 
     // Get initial values
     long parentLookupsBefore = getCacheLookups(PER_SEG_FILTER_CACHE_NAME);
-    ;
     long parentHitsBefore = getCacheHits(PER_SEG_FILTER_CACHE_NAME);
     long parentInsertsBefore = getCacheInserts(PER_SEG_FILTER_CACHE_NAME);
-    ;
 
     long filterHitsBefore = getCacheHits(FILTER_CACHE_NAME);
     long filterInsertsBefore = getCacheInserts(FILTER_CACHE_NAME);

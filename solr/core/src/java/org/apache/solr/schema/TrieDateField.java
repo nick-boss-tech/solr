@@ -27,12 +27,10 @@ import org.apache.solr.util.DateMathParser;
  * <p>Date Format for the XML, incoming and outgoing:
  *
  * <blockquote>
- *
  * A date field shall be of the form 1995-12-31T23:59:59Z The trailing "Z" designates UTC time and
  * is mandatory (See below for an explanation of UTC). Optional fractional seconds are allowed, as
  * long as they do not end in a trailing 0 (but any precision beyond milliseconds will be ignored).
  * All other parts are mandatory.
- *
  * </blockquote>
  *
  * <p>This format was derived to be standards compliant (ISO 8601) and is a more restricted form of
@@ -62,13 +60,11 @@ import org.apache.solr.util.DateMathParser;
  * <p>Explanation of "UTC"...
  *
  * <blockquote>
- *
  * "In 1970 the Coordinated Universal Time system was devised by an international advisory group of
  * technical experts within the International Telecommunication Union (ITU). The ITU felt it was
  * best to designate a single abbreviation for use in all languages in order to minimize confusion.
  * Since unanimous agreement could not be achieved on using either the English word order, CUT, or
  * the French word order, TUC, the acronym UTC was chosen as a compromise."
- *
  * </blockquote>
  *
  * @see TrieField

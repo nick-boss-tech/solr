@@ -198,16 +198,14 @@ public class SolrCloudAuthTestCase extends SolrCloudTestCase {
     List<Map<String, DataPointSnapshot>> metrics = new ArrayList<>();
     cluster
         .getJettySolrRunners()
-        .forEach(
-            r -> {
-              metrics.add(getMetricValues(r.getCoreContainer(), keys, registryName, labels));
-            });
+        .forEach(r -> {
+          metrics.add(getMetricValues(r.getCoreContainer(), keys, registryName, labels));
+        });
 
     Map<String, Long> counts = new HashMap<>();
-    keys.forEach(
-        k -> {
-          counts.put(k, sumCountPrometheus(k, metrics));
-        });
+    keys.forEach(k -> {
+      counts.put(k, sumCountPrometheus(k, metrics));
+    });
     return counts;
   }
 
@@ -236,10 +234,8 @@ public class SolrCloudAuthTestCase extends SolrCloudTestCase {
     } else if (AUTH_METRICS_TIMER_KEYS.contains(key)) {
       // Sum of the count of timer metrics (NOT the sum of their values)
       return metricsPerNode.stream()
-          .mapToLong(
-              nodeMap ->
-                  histogramToLongCount(
-                      (HistogramSnapshot.HistogramDataPointSnapshot) nodeMap.get(key)))
+          .mapToLong(nodeMap ->
+              histogramToLongCount((HistogramSnapshot.HistogramDataPointSnapshot) nodeMap.get(key)))
           .sum();
     } else {
       return metricsPerNode.stream()

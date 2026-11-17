@@ -311,11 +311,10 @@ public class MirroringUpdateProcessor extends UpdateRequestProcessor {
       throws SolrServerException, IOException {
     SolrDocumentList results = rsp.getResults();
     List<String> ids = new ArrayList<>(results.size());
-    results.forEach(
-        entries -> {
-          String id = entries.getFirstValue(uniqueField).toString();
-          ids.add(id);
-        });
+    results.forEach(entries -> {
+      String id = entries.getFirstValue(uniqueField).toString();
+      ids.add(id);
+    });
     if (!ids.isEmpty()) {
       client.deleteById(collection, ids);
     }

@@ -345,30 +345,28 @@ public abstract class BaseDistributedSearchTestCase extends SolrTestCaseJ4 {
 
     customThreadPool.execute(() -> IOUtils.closeQuietly(controlClient));
 
-    customThreadPool.execute(
-        () -> {
-          try {
-            controlJetty.stop();
-          } catch (NullPointerException e) {
-            // ignore
-          } catch (Exception e) {
-            log.error("Error stopping Control Jetty", e);
-          }
-        });
+    customThreadPool.execute(() -> {
+      try {
+        controlJetty.stop();
+      } catch (NullPointerException e) {
+        // ignore
+      } catch (Exception e) {
+        log.error("Error stopping Control Jetty", e);
+      }
+    });
 
     for (SolrClient client : clients) {
       customThreadPool.execute(() -> IOUtils.closeQuietly(client));
     }
 
     for (JettySolrRunner jetty : jettys) {
-      customThreadPool.execute(
-          () -> {
-            try {
-              jetty.stop();
-            } catch (Exception e) {
-              log.error("Error stopping Jetty", e);
-            }
-          });
+      customThreadPool.execute(() -> {
+        try {
+          jetty.stop();
+        } catch (Exception e) {
+          log.error("Error stopping Jetty", e);
+        }
+      });
     }
 
     ExecutorUtil.shutdownAndAwaitTermination(customThreadPool);

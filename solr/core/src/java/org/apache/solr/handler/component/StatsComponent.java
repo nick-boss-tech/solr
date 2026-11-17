@@ -96,7 +96,6 @@ public class StatsComponent extends SearchComponent {
       NamedList<NamedList<NamedList<?>>> stats =
           (NamedList<NamedList<NamedList<?>>>)
               SolrResponseUtil.getSubsectionFromShardResponse(rb, srsp, "stats", false);
-      ;
       if (stats == null) {
         continue;
       }

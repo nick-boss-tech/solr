@@ -159,10 +159,9 @@ class AuxIndexJoinQuery extends Query {
     for (LeafReaderContext ctx : fromLeafs) {
       futuresByLeafOrds.putLast(
           ctx.ord, // the heaviest is submitted first, and accessed first as well
-          this.fromExecutorService.submit(
-              () ->
-                  FromLeafJoinContext.heavyLoadFromLeaf(
-                      fromWeight, fromField, ctx, fromLeafsToLoad.contains(ctx.ord))));
+          this.fromExecutorService.submit(() ->
+              FromLeafJoinContext.heavyLoadFromLeaf(
+                  fromWeight, fromField, ctx, fromLeafsToLoad.contains(ctx.ord))));
     }
 
     return futuresByLeafOrds;

@@ -1125,15 +1125,14 @@ public class PhrasesIdentificationComponent extends SearchComponent {
 
         final double max_wrapper_phrase_probability =
             words.getIndexedSuperPhrases().stream()
-                .mapToDouble(
-                    p ->
-                        p.getConjunctionDocCount(field) <= 0
-                            ?
-                            // special case check -- we already know *our* conj count > 0,
-                            // but we need a similar check for wrapper phrases: if <= 0, their
-                            // probability is 0
-                            0.0D
-                            : ((double) p.getDocFreq(field) / p.getConjunctionDocCount(field)))
+                .mapToDouble(p ->
+                    p.getConjunctionDocCount(field) <= 0
+                        ?
+                        // special case check -- we already know *our* conj count > 0,
+                        // but we need a similar check for wrapper phrases: if <= 0, their
+                        // probability is 0
+                        0.0D
+                        : ((double) p.getDocFreq(field) / p.getConjunctionDocCount(field)))
                 .max()
                 .orElse(0.0D);
 

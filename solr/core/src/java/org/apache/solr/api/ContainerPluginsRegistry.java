@@ -134,12 +134,11 @@ public class ContainerPluginsRegistry implements ClusterPropertiesListener, MapW
   public synchronized void close() throws IOException {
     currentPlugins
         .values()
-        .forEach(
-            apiInfo -> {
-              if (apiInfo.instance instanceof Closeable) {
-                IOUtils.closeQuietly((Closeable) apiInfo.instance);
-              }
-            });
+        .forEach(apiInfo -> {
+          if (apiInfo.instance instanceof Closeable) {
+            IOUtils.closeQuietly((Closeable) apiInfo.instance);
+          }
+        });
   }
 
   public synchronized ApiInfo getPlugin(String name) {
@@ -495,20 +494,18 @@ public class ContainerPluginsRegistry implements ClusterPropertiesListener, MapW
   public static Map<String, Diff> compareMaps(Map<String, ?> a, Map<String, ?> b) {
     if (a.isEmpty() && b.isEmpty()) return null;
     Map<String, Diff> result = CollectionUtil.newHashMap(Math.max(a.size(), b.size()));
-    a.forEach(
-        (k, v) -> {
-          Object newVal = b.get(k);
-          if (newVal == null) {
-            result.put(k, Diff.REMOVED);
-            return;
-          }
-          result.put(k, Objects.equals(v, newVal) ? Diff.UNCHANGED : Diff.UPDATED);
-        });
+    a.forEach((k, v) -> {
+      Object newVal = b.get(k);
+      if (newVal == null) {
+        result.put(k, Diff.REMOVED);
+        return;
+      }
+      result.put(k, Objects.equals(v, newVal) ? Diff.UNCHANGED : Diff.UPDATED);
+    });
 
-    b.forEach(
-        (k, v) -> {
-          if (a.get(k) == null) result.put(k, Diff.ADDED);
-        });
+    b.forEach((k, v) -> {
+      if (a.get(k) == null) result.put(k, Diff.ADDED);
+    });
 
     for (Diff value : result.values()) {
       if (value != Diff.UNCHANGED) return result;

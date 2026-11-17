@@ -74,13 +74,12 @@ public final class StartupLoggingUtils {
       Configuration config = ctx.getConfiguration();
       LoggerConfig loggerConfig = config.getLoggerConfig(LogManager.ROOT_LOGGER_NAME);
       Map<String, Appender> appenders = loggerConfig.getAppenders();
-      appenders.forEach(
-          (name, appender) -> {
-            if (appender instanceof ConsoleAppender) {
-              loggerConfig.removeAppender(name);
-              ctx.updateLoggers();
-            }
-          });
+      appenders.forEach((name, appender) -> {
+        if (appender instanceof ConsoleAppender) {
+          loggerConfig.removeAppender(name);
+          ctx.updateLoggers();
+        }
+      });
       return true;
     } catch (Exception e) {
       logNotSupported("Could not mute logging to console.");

@@ -207,16 +207,15 @@ public class AuditLoggerIntegrationTest extends SolrCloudAuthTestCase {
     // Do this in a background thread because it blocks...
     final Thread shutdownThread =
         new SolrNamedThreadFactory("shutdown")
-            .newThread(
-                () -> {
-                  try {
-                    log.info("START Shutting down Cluster.");
-                    harness.shutdownCluster();
-                    log.info("END   Shutting down Cluster.");
-                  } catch (Exception e) {
-                    throw new RuntimeException(e);
-                  }
-                });
+            .newThread(() -> {
+              try {
+                log.info("START Shutting down Cluster.");
+                harness.shutdownCluster();
+                log.info("END   Shutting down Cluster.");
+              } catch (Exception e) {
+                throw new RuntimeException(e);
+              }
+            });
     try {
       shutdownThread.start();
       // release the ticket so the event can be processed

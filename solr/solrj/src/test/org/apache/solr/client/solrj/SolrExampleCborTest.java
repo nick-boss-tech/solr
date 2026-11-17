@@ -295,17 +295,16 @@ public class SolrExampleCborTest extends SolrExampleTests {
         ObjectMapper objectMapper = new ObjectMapper(new CBORFactory());
         Map m = (Map) objectMapper.readValue(b, Object.class);
         NamedList nl = new NamedList();
-        m.forEach(
-            (k, v) -> {
-              if (v instanceof Map map) {
-                if ("response".equals(k)) {
-                  v = convertResponse((Map) v);
-                } else {
-                  v = new NamedList(map);
-                }
-              }
-              nl.add(k.toString(), v);
-            });
+        m.forEach((k, v) -> {
+          if (v instanceof Map map) {
+            if ("response".equals(k)) {
+              v = convertResponse((Map) v);
+            } else {
+              v = new NamedList(map);
+            }
+          }
+          nl.add(k.toString(), v);
+        });
         return nl;
       }
 

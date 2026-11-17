@@ -3345,15 +3345,12 @@ public class TestPointFields extends SolrTestCaseJ4 {
         req("q", field + ":[* TO *]"),
         "//*[@numFound='0']");
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              IndexReader ir = searcher.getIndexReader();
-              assertEquals(
-                  "Field " + field + " should have no point values",
-                  0,
-                  PointValues.size(ir, field));
-              return null;
-            });
+        .withSearcher(searcher -> {
+          IndexReader ir = searcher.getIndexReader();
+          assertEquals(
+              "Field " + field + " should have no point values", 0, PointValues.size(ir, field));
+          return null;
+        });
   }
 
   private void doTestIntPointFieldExactQuery(final String field, final boolean testLong)
@@ -5746,84 +5743,79 @@ public class TestPointFields extends SolrTestCaseJ4 {
     SchemaField sf = h.getCore().getLatestSchema().getField(field);
     boolean ignoredField = !(sf.indexed() || sf.stored() || sf.hasDocValues());
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              DirectoryReader ir = searcher.getIndexReader();
-              // our own SlowCompositeReader to check DocValues on disk w/o the UninvertingReader
-              // added by SolrIndexSearcher
-              final LeafReader leafReaderForCheckingDVs =
-                  SlowCompositeReaderWrapper.wrap(searcher.getRawReader());
+        .withSearcher(searcher -> {
+          DirectoryReader ir = searcher.getIndexReader();
+          // our own SlowCompositeReader to check DocValues on disk w/o the UninvertingReader
+          // added by SolrIndexSearcher
+          final LeafReader leafReaderForCheckingDVs =
+              SlowCompositeReaderWrapper.wrap(searcher.getRawReader());
 
-              if (sf.indexed()) {
-                assertEquals(
-                    "Field " + field + " should have point values",
-                    10,
-                    PointValues.size(ir, field));
-              } else {
-                assertEquals(
-                    "Field " + field + " should have no point values",
-                    0,
-                    PointValues.size(ir, field));
-              }
-              if (ignoredField) {
-                assertEquals(
-                    "Field " + field + " should not have docValues",
+          if (sf.indexed()) {
+            assertEquals(
+                "Field " + field + " should have point values", 10, PointValues.size(ir, field));
+          } else {
+            assertEquals(
+                "Field " + field + " should have no point values", 0, PointValues.size(ir, field));
+          }
+          if (ignoredField) {
+            assertEquals(
+                "Field " + field + " should not have docValues",
+                DocIdSetIterator.NO_MORE_DOCS,
+                DocValues.getSortedNumeric(leafReaderForCheckingDVs, field).nextDoc());
+            assertEquals(
+                "Field " + field + " should not have docValues",
+                DocIdSetIterator.NO_MORE_DOCS,
+                DocValues.getNumeric(leafReaderForCheckingDVs, field).nextDoc());
+            assertEquals(
+                "Field " + field + " should not have docValues",
+                DocIdSetIterator.NO_MORE_DOCS,
+                DocValues.getSorted(leafReaderForCheckingDVs, field).nextDoc());
+            assertEquals(
+                "Field " + field + " should not have docValues",
+                DocIdSetIterator.NO_MORE_DOCS,
+                DocValues.getBinary(leafReaderForCheckingDVs, field).nextDoc());
+          } else {
+            if (sf.hasDocValues()) {
+              if (sf.multiValued()) {
+                assertNotEquals(
+                    "Field " + field + " should have docValues",
                     DocIdSetIterator.NO_MORE_DOCS,
                     DocValues.getSortedNumeric(leafReaderForCheckingDVs, field).nextDoc());
-                assertEquals(
-                    "Field " + field + " should not have docValues",
+              } else {
+                assertNotEquals(
+                    "Field " + field + " should have docValues",
                     DocIdSetIterator.NO_MORE_DOCS,
                     DocValues.getNumeric(leafReaderForCheckingDVs, field).nextDoc());
-                assertEquals(
-                    "Field " + field + " should not have docValues",
-                    DocIdSetIterator.NO_MORE_DOCS,
-                    DocValues.getSorted(leafReaderForCheckingDVs, field).nextDoc());
-                assertEquals(
-                    "Field " + field + " should not have docValues",
-                    DocIdSetIterator.NO_MORE_DOCS,
-                    DocValues.getBinary(leafReaderForCheckingDVs, field).nextDoc());
+              }
+            } else {
+              expectThrows(
+                  IllegalStateException.class,
+                  () -> DocValues.getSortedNumeric(leafReaderForCheckingDVs, field));
+              expectThrows(
+                  IllegalStateException.class,
+                  () -> DocValues.getNumeric(leafReaderForCheckingDVs, field));
+            }
+            expectThrows(
+                IllegalStateException.class,
+                () -> DocValues.getSorted(leafReaderForCheckingDVs, field));
+            expectThrows(
+                IllegalStateException.class,
+                () -> DocValues.getBinary(leafReaderForCheckingDVs, field));
+          }
+          for (LeafReaderContext leave : ir.leaves()) {
+            LeafReader reader = leave.reader();
+            StoredFields storedFields = reader.storedFields();
+            for (int i = 0; i < reader.numDocs(); i++) {
+              Document doc = storedFields.document(i);
+              if (sf.stored()) {
+                assertNotNull("Field " + field + " not found. Doc: " + doc, doc.get(field));
               } else {
-                if (sf.hasDocValues()) {
-                  if (sf.multiValued()) {
-                    assertNotEquals(
-                        "Field " + field + " should have docValues",
-                        DocIdSetIterator.NO_MORE_DOCS,
-                        DocValues.getSortedNumeric(leafReaderForCheckingDVs, field).nextDoc());
-                  } else {
-                    assertNotEquals(
-                        "Field " + field + " should have docValues",
-                        DocIdSetIterator.NO_MORE_DOCS,
-                        DocValues.getNumeric(leafReaderForCheckingDVs, field).nextDoc());
-                  }
-                } else {
-                  expectThrows(
-                      IllegalStateException.class,
-                      () -> DocValues.getSortedNumeric(leafReaderForCheckingDVs, field));
-                  expectThrows(
-                      IllegalStateException.class,
-                      () -> DocValues.getNumeric(leafReaderForCheckingDVs, field));
-                }
-                expectThrows(
-                    IllegalStateException.class,
-                    () -> DocValues.getSorted(leafReaderForCheckingDVs, field));
-                expectThrows(
-                    IllegalStateException.class,
-                    () -> DocValues.getBinary(leafReaderForCheckingDVs, field));
+                assertNull(doc.get(field));
               }
-              for (LeafReaderContext leave : ir.leaves()) {
-                LeafReader reader = leave.reader();
-                StoredFields storedFields = reader.storedFields();
-                for (int i = 0; i < reader.numDocs(); i++) {
-                  Document doc = storedFields.document(i);
-                  if (sf.stored()) {
-                    assertNotNull("Field " + field + " not found. Doc: " + doc, doc.get(field));
-                  } else {
-                    assertNull(doc.get(field));
-                  }
-                }
-              }
-              return null;
-            });
+            }
+          }
+          return null;
+        });
     clearIndex();
     assertU(commit());
   }

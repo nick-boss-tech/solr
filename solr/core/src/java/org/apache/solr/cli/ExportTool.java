@@ -444,24 +444,23 @@ public class ExportTool extends ToolBase {
     /** Process a SolrDocument into a Map, handling special fields and date conversion. */
     protected Map<String, Object> processDocument(SolrDocument doc) {
       Map<String, Object> m = CollectionUtil.newLinkedHashMap(doc.size());
-      doc.forEach(
-          (s, field) -> {
-            if (s.equals("_version_") || s.equals("_roor_")) return;
-            if (field instanceof List) {
-              if (((List<?>) field).size() == 1) {
-                field = ((List<?>) field).getFirst();
-              }
-            }
-            field = constructDateStr(field);
-            if (field instanceof List<?> list) {
-              if (hasDate(list)) {
-                ArrayList<Object> listCopy = new ArrayList<>(list.size());
-                for (Object o : list) listCopy.add(constructDateStr(o));
-                field = listCopy;
-              }
-            }
-            m.put(s, field);
-          });
+      doc.forEach((s, field) -> {
+        if (s.equals("_version_") || s.equals("_roor_")) return;
+        if (field instanceof List) {
+          if (((List<?>) field).size() == 1) {
+            field = ((List<?>) field).getFirst();
+          }
+        }
+        field = constructDateStr(field);
+        if (field instanceof List<?> list) {
+          if (hasDate(list)) {
+            ArrayList<Object> listCopy = new ArrayList<>(list.size());
+            for (Object o : list) listCopy.add(constructDateStr(o));
+            field = listCopy;
+          }
+        }
+        m.put(s, field);
+      });
       return m;
     }
 
@@ -679,17 +678,15 @@ public class ExportTool extends ToolBase {
         addProducers(m);
         runtime.println("Number of shards : " + corehandlers.size());
         CountDownLatch producerLatch = new CountDownLatch(corehandlers.size());
-        corehandlers.forEach(
-            (s, coreHandler) ->
-                producerThreadpool.execute(
-                    () -> {
-                      try {
-                        coreHandler.exportDocsFromCore();
-                      } catch (Exception e) {
-                        runtime.println("Error exporting docs from : " + s);
-                      }
-                      producerLatch.countDown();
-                    }));
+        corehandlers.forEach((s, coreHandler) ->
+            producerThreadpool.execute(() -> {
+              try {
+                coreHandler.exportDocsFromCore();
+              } catch (Exception e) {
+                runtime.println("Error exporting docs from : " + s);
+              }
+              producerLatch.countDown();
+            }));
 
         producerLatch.await();
         queue.offer(EOFDOC, 10, TimeUnit.SECONDS);
@@ -729,30 +726,29 @@ public class ExportTool extends ToolBase {
     @SuppressWarnings(
         "ReferenceEquality") // EOFDOC is a unique sentinel; identity check is intentional
     private void addConsumer(CountDownLatch consumerlatch) {
-      consumerThreadpool.execute(
-          () -> {
-            while (true) {
-              SolrDocument doc;
-              try {
-                doc = queue.poll(30, TimeUnit.SECONDS);
-              } catch (InterruptedException e) {
-                runtime.println("Consumer interrupted");
-                failed = true;
-                break;
-              }
-              if (doc == EOFDOC) break;
-              try {
-                if (docsWritten.get() >= limit) {
-                  continue;
-                }
-                sink.accept(doc);
-              } catch (Exception e) {
-                runtime.println("Failed to write to file " + e.getMessage());
-                failed = true;
-              }
+      consumerThreadpool.execute(() -> {
+        while (true) {
+          SolrDocument doc;
+          try {
+            doc = queue.poll(30, TimeUnit.SECONDS);
+          } catch (InterruptedException e) {
+            runtime.println("Consumer interrupted");
+            failed = true;
+            break;
+          }
+          if (doc == EOFDOC) break;
+          try {
+            if (docsWritten.get() >= limit) {
+              continue;
             }
-            consumerlatch.countDown();
-          });
+            sink.accept(doc);
+          } catch (Exception e) {
+            runtime.println("Failed to write to file " + e.getMessage());
+            failed = true;
+          }
+        }
+        consumerlatch.countDown();
+      });
     }
 
     class CoreHandler {

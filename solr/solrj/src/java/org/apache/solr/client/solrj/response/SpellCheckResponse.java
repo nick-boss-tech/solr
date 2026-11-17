@@ -40,13 +40,12 @@ public class SpellCheckResponse {
       correctlySpelled = true;
       return;
     }
-    sugg.forEach(
-        (n, val) -> {
-          @SuppressWarnings("unchecked")
-          Suggestion s = new Suggestion(n, (NamedList<Object>) val);
-          suggestionMap.put(n, s);
-          suggestions.add(s);
-        });
+    sugg.forEach((n, val) -> {
+      @SuppressWarnings("unchecked")
+      Suggestion s = new Suggestion(n, (NamedList<Object>) val);
+      suggestionMap.put(n, s);
+      suggestions.add(s);
+    });
 
     Boolean correctlySpelled = (Boolean) spellInfo.get("correctlySpelled");
     if (correctlySpelled != null) {
@@ -75,9 +74,8 @@ public class SpellCheckResponse {
           collation.setCollationQueryString(collationQuery);
           collation.setNumberOfHits(hits);
 
-          misspellingsAndCorrections.forEach(
-              (misspelling, correction) ->
-                  collation.addMisspellingsAndCorrection(new Correction(misspelling, correction)));
+          misspellingsAndCorrections.forEach((misspelling, correction) ->
+              collation.addMisspellingsAndCorrection(new Correction(misspelling, correction)));
           collations.add(collation);
         } else {
           throw new AssertionError("Should get Lists of Strings or List of NamedLists here.");
@@ -141,32 +139,31 @@ public class SpellCheckResponse {
 
     public Suggestion(String token, NamedList<Object> suggestion) {
       this.token = token;
-      suggestion.forEach(
-          (n, val) -> {
-            switch (n) {
-              case "numFound" -> numFound = ((Number) val).intValue();
-              case "startOffset" -> startOffset = ((Number) val).intValue();
-              case "endOffset" -> endOffset = ((Number) val).intValue();
-              case "origFreq" -> originalFrequency = ((Number) val).intValue();
-              case "suggestion" -> {
-                List<?> list = (List<?>) val;
-                if (!list.isEmpty() && list.get(0) instanceof NamedList) {
-                  // extended results detected
-                  @SuppressWarnings("unchecked")
-                  List<NamedList<?>> extended = (List<NamedList<?>>) list;
-                  alternativeFrequencies = new ArrayList<>();
-                  for (NamedList<?> nl : extended) {
-                    alternatives.add((String) nl.get("word"));
-                    alternativeFrequencies.add(((Number) nl.get("freq")).intValue());
-                  }
-                } else {
-                  @SuppressWarnings("unchecked")
-                  List<String> alts = (List<String>) list;
-                  alternatives.addAll(alts);
-                }
+      suggestion.forEach((n, val) -> {
+        switch (n) {
+          case "numFound" -> numFound = ((Number) val).intValue();
+          case "startOffset" -> startOffset = ((Number) val).intValue();
+          case "endOffset" -> endOffset = ((Number) val).intValue();
+          case "origFreq" -> originalFrequency = ((Number) val).intValue();
+          case "suggestion" -> {
+            List<?> list = (List<?>) val;
+            if (!list.isEmpty() && list.get(0) instanceof NamedList) {
+              // extended results detected
+              @SuppressWarnings("unchecked")
+              List<NamedList<?>> extended = (List<NamedList<?>>) list;
+              alternativeFrequencies = new ArrayList<>();
+              for (NamedList<?> nl : extended) {
+                alternatives.add((String) nl.get("word"));
+                alternativeFrequencies.add(((Number) nl.get("freq")).intValue());
               }
+            } else {
+              @SuppressWarnings("unchecked")
+              List<String> alts = (List<String>) list;
+              alternatives.addAll(alts);
             }
-          });
+          }
+        }
+      });
     }
 
     public String getToken() {

@@ -54,14 +54,12 @@ public class TestSimpleTextCodec extends SolrTestCaseJ4 {
     assertU(commit());
 
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              SegmentInfos infos =
-                  SegmentInfos.readLatestCommit(searcher.getIndexReader().directory());
-              SegmentInfo info = infos.info(infos.size() - 1).info;
-              assertEquals("Unexpected segment codec", "SimpleText", info.getCodec().getName());
-              return null;
-            });
+        .withSearcher(searcher -> {
+          SegmentInfos infos = SegmentInfos.readLatestCommit(searcher.getIndexReader().directory());
+          SegmentInfo info = infos.info(infos.size() - 1).info;
+          assertEquals("Unexpected segment codec", "SimpleText", info.getCodec().getName());
+          return null;
+        });
 
     assertQ(req("q", "id:1"), "*[count(//doc)=1]");
   }

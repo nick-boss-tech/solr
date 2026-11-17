@@ -869,11 +869,10 @@ public class CollectionsAPISolrJTest extends SolrCloudTestCase {
     //   - there should be at least 1 entry and...
     //   - all keys/values should be non-empty
     assertTrue(largeFileList.size() > 0);
-    largeFileList.forEach(
-        (fileName, size) -> {
-          assertThat(fileName, is(not(emptyString())));
-          assertThat(size, is(not(emptyString())));
-        });
+    largeFileList.forEach((fileName, size) -> {
+      assertThat(fileName, is(not(emptyString())));
+      assertThat(size, is(not(emptyString())));
+    });
     // Ensure field, etc. data not provided
     assertNull(segmentData.segments.get("_0").fields);
   }

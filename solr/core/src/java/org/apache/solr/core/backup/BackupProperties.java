@@ -117,17 +117,15 @@ public class BackupProperties {
     Map<String, String> extraProperties = new HashMap<>();
     props
         .entrySet()
-        .removeIf(
-            e -> {
-              String entryKey = e.getKey().toString();
-              if (entryKey.startsWith(EXTRA_PROPERTY_PREFIX)) {
-                extraProperties.put(
-                    entryKey.substring(EXTRA_PROPERTY_PREFIX.length()),
-                    String.valueOf(e.getValue()));
-                return true;
-              }
-              return false;
-            });
+        .removeIf(e -> {
+          String entryKey = e.getKey().toString();
+          if (entryKey.startsWith(EXTRA_PROPERTY_PREFIX)) {
+            extraProperties.put(
+                entryKey.substring(EXTRA_PROPERTY_PREFIX.length()), String.valueOf(e.getValue()));
+            return true;
+          }
+          return false;
+        });
     return extraProperties;
   }
 

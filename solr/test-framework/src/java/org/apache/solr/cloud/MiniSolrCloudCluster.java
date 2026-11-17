@@ -535,12 +535,11 @@ public class MiniSolrCloudCluster implements SolrBackend {
   public void deleteAllCollections() throws Exception {
     try (ZkStateReader reader = new ZkStateReader(getZkClient())) {
       final CountDownLatch latch = new CountDownLatch(1);
-      reader.registerCloudCollectionsListener(
-          (oldCollections, newCollections) -> {
-            if (newCollections != null && newCollections.size() == 0) {
-              latch.countDown();
-            }
-          });
+      reader.registerCloudCollectionsListener((oldCollections, newCollections) -> {
+        if (newCollections != null && newCollections.size() == 0) {
+          latch.countDown();
+        }
+      });
 
       reader.createClusterStateWatchersAndUpdate(); // up-to-date aliases & collections
       reader.aliasesManager.applyModificationAndExportToZk(aliases -> Aliases.EMPTY);
@@ -618,10 +617,9 @@ public class MiniSolrCloudCluster implements SolrBackend {
       IOUtils.closeQuietly(solrClient);
 
       solrClientByCollection.values().parallelStream()
-          .forEach(
-              c -> {
-                IOUtils.closeQuietly(c);
-              });
+          .forEach(c -> {
+            IOUtils.closeQuietly(c);
+          });
       solrClientByCollection.clear();
 
       List<Callable<JettySolrRunner>> shutdowns = new ArrayList<>(jettys.size());

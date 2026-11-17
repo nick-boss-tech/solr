@@ -76,12 +76,10 @@ final class EngineContext {
     if (!resourceLocations.isEmpty()) {
       log.info("Clustering algorithm resources first looked up relative to: {}", resourceLocations);
 
-      loader.withResourceLookup(
-          (provider) ->
-              new ChainedResourceLookup(
-                  Arrays.asList(
-                      new PathResourceLookup(resourceLocations),
-                      provider.defaultResourceLookup())));
+      loader.withResourceLookup(provider ->
+          new ChainedResourceLookup(
+              Arrays.asList(
+                  new PathResourceLookup(resourceLocations), provider.defaultResourceLookup())));
     } else {
       log.info("Resources read from defaults (JARs).");
     }
@@ -125,19 +123,18 @@ final class EngineContext {
         .entrySet()
         .removeIf(e -> !isAlgorithmAvailable(e.getValue(), languages.values()));
 
-    algorithmProviders.forEach(
-        (name, prov) -> {
-          String supportedLanguages =
-              languages.values().stream()
-                  .filter(lc -> prov.get().supports(lc))
-                  .map(LanguageComponents::language)
-                  .collect(Collectors.joining(", "));
+    algorithmProviders.forEach((name, prov) -> {
+      String supportedLanguages =
+          languages.values().stream()
+              .filter(lc -> prov.get().supports(lc))
+              .map(LanguageComponents::language)
+              .collect(Collectors.joining(", "));
 
-          log.info(
-              "Clustering algorithm {} loaded with support for the following languages: {}",
-              name,
-              supportedLanguages);
-        });
+      log.info(
+          "Clustering algorithm {} loaded with support for the following languages: {}",
+          name,
+          supportedLanguages);
+    });
   }
 
   ClusteringAlgorithm getAlgorithm(String algorithmName) {

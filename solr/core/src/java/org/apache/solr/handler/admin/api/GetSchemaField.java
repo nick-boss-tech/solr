@@ -223,10 +223,9 @@ public class GetSchemaField extends JerseyResource implements GetSchemaApi.Field
     } else if (o instanceof NamedList) {
       @SuppressWarnings("unchecked")
       NamedList<Object> nl = (NamedList<Object>) o;
-      nl.forEach(
-          (n, v) -> {
-            if (v instanceof NamedList || v instanceof List) insertPackageInfo(v);
-          });
+      nl.forEach((n, v) -> {
+        if (v instanceof NamedList || v instanceof List) insertPackageInfo(v);
+      });
       Object v = nl.get("class");
       if (v instanceof String klas) {
         PluginInfo.ClassName parsedClassName = new PluginInfo.ClassName(klas);

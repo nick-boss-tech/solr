@@ -168,11 +168,10 @@ public class DenseVectorField extends FloatPointField {
     this.dimension =
         ofNullable(args.get(KNN_VECTOR_DIMENSION))
             .map(Integer::parseInt)
-            .orElseThrow(
-                () ->
-                    new SolrException(
-                        SolrException.ErrorCode.SERVER_ERROR,
-                        "the vector dimension is a mandatory parameter"));
+            .orElseThrow(() ->
+                new SolrException(
+                    SolrException.ErrorCode.SERVER_ERROR,
+                    "the vector dimension is a mandatory parameter"));
     args.remove(KNN_VECTOR_DIMENSION);
 
     this.similarityFunction =
@@ -193,22 +192,20 @@ public class DenseVectorField extends FloatPointField {
     this.hnswM =
         ofNullable(args.get(HNSW_M))
             .map(Integer::parseInt)
-            .orElseGet(
-                () ->
-                    ofNullable(args.get(HNSW_MAX_CONNECTIONS))
-                        .map(Integer::parseInt)
-                        .orElse(DEFAULT_MAX_CONN));
+            .orElseGet(() ->
+                ofNullable(args.get(HNSW_MAX_CONNECTIONS))
+                    .map(Integer::parseInt)
+                    .orElse(DEFAULT_MAX_CONN));
     args.remove(HNSW_M);
     args.remove(HNSW_MAX_CONNECTIONS);
 
     this.hnswEfConstruction =
         ofNullable(args.get(HNSW_EF_CONSTRUCTION))
             .map(Integer::parseInt)
-            .orElseGet(
-                () ->
-                    ofNullable(args.get(HNSW_BEAM_WIDTH))
-                        .map(Integer::parseInt)
-                        .orElse(DEFAULT_BEAM_WIDTH));
+            .orElseGet(() ->
+                ofNullable(args.get(HNSW_BEAM_WIDTH))
+                    .map(Integer::parseInt)
+                    .orElse(DEFAULT_BEAM_WIDTH));
     args.remove(HNSW_EF_CONSTRUCTION);
     args.remove(HNSW_BEAM_WIDTH);
 

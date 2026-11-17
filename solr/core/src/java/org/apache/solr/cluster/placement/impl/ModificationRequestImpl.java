@@ -76,10 +76,9 @@ public class ModificationRequestImpl {
         SimpleClusterAbstractionsImpl.SolrCollectionImpl.fromDocCollection(docCollection);
     Shard shard = solrCollection.getShard(shardName);
     Set<Replica> solrReplicas = new HashSet<>();
-    replicas.forEach(
-        replica -> {
-          solrReplicas.add(shard.getReplica(replica.getName()));
-        });
+    replicas.forEach(replica -> {
+      solrReplicas.add(shard.getReplica(replica.getName()));
+    });
     return createDeleteReplicasRequest(solrCollection, solrReplicas);
   }
 }

@@ -308,7 +308,6 @@ public class CreateCollectionCmd implements CollApiCmds.CollectionApiCommand {
         scr =
             ccc.getDistributedClusterStateUpdater()
                 .createStateChangeRecorder(collectionName, false);
-        ;
       } else {
         scr = null;
       }

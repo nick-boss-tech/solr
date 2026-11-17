@@ -85,11 +85,10 @@ class Permission {
               e.getValue() instanceof List ? (List) e.getValue() : List.of(e.getValue().toString());
           List<?> patterns =
               patternStrs.stream()
-                  .map(
-                      it ->
-                          it.startsWith("REGEX:")
-                              ? Pattern.compile(it.substring("REGEX:".length()))
-                              : it)
+                  .map(it ->
+                      it.startsWith("REGEX:")
+                          ? Pattern.compile(it.substring("REGEX:".length()))
+                          : it)
                   .toList();
           p.params.put(
               e.getKey(),

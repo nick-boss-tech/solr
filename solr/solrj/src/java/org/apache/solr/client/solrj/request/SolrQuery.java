@@ -332,7 +332,6 @@ public class SolrQuery extends ModifiableSolrParams {
    */
   public String[] removeIntervalFacets(String field) {
     while (remove(FacetParams.FACET_INTERVAL, field)) {}
-    ;
     return remove(String.format(Locale.ROOT, "f.%s.facet.interval.set", field));
   }
 

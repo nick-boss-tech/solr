@@ -523,19 +523,18 @@ public class SolrAndKafkaIntegrationTest extends SolrCloudTestCase {
     for (int i = 0; i < 5000; i++) {
       final int docId = i;
       Future<Boolean> future =
-          executorService.submit(
-              () -> {
-                try {
-                  SolrInputDocument doc = new SolrInputDocument();
-                  doc.addField("id", String.valueOf(docId));
-                  doc.addField("text", "parallel test");
-                  client1.add(doc);
-                  return true;
-                } catch (Exception e) {
-                  log.error("Exception while adding doc", e);
-                  return false;
-                }
-              });
+          executorService.submit(() -> {
+            try {
+              SolrInputDocument doc = new SolrInputDocument();
+              doc.addField("id", String.valueOf(docId));
+              doc.addField("text", "parallel test");
+              client1.add(doc);
+              return true;
+            } catch (Exception e) {
+              log.error("Exception while adding doc", e);
+              return false;
+            }
+          });
       futures.add(future);
     }
 

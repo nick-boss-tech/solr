@@ -1056,8 +1056,7 @@ public abstract class ValueSourceParser implements NamedListInitializedPlugin {
             ValueSource lhsValSource = fp.parseValueSource();
             ValueSource rhsValSource = fp.parseValueSource();
 
-            return new SolrComparisonBoolFunction(
-                lhsValSource, rhsValSource, "gt", (cmp) -> cmp > 0);
+            return new SolrComparisonBoolFunction(lhsValSource, rhsValSource, "gt", cmp -> cmp > 0);
           }
         });
 
@@ -1069,8 +1068,7 @@ public abstract class ValueSourceParser implements NamedListInitializedPlugin {
             ValueSource lhsValSource = fp.parseValueSource();
             ValueSource rhsValSource = fp.parseValueSource();
 
-            return new SolrComparisonBoolFunction(
-                lhsValSource, rhsValSource, "lt", (cmp) -> cmp < 0);
+            return new SolrComparisonBoolFunction(lhsValSource, rhsValSource, "lt", cmp -> cmp < 0);
           }
         });
 
@@ -1083,7 +1081,7 @@ public abstract class ValueSourceParser implements NamedListInitializedPlugin {
             ValueSource rhsValSource = fp.parseValueSource();
 
             return new SolrComparisonBoolFunction(
-                lhsValSource, rhsValSource, "gte", (cmp) -> cmp >= 0);
+                lhsValSource, rhsValSource, "gte", cmp -> cmp >= 0);
           }
         });
 
@@ -1096,7 +1094,7 @@ public abstract class ValueSourceParser implements NamedListInitializedPlugin {
             ValueSource rhsValSource = fp.parseValueSource();
 
             return new SolrComparisonBoolFunction(
-                lhsValSource, rhsValSource, "lte", (cmp) -> cmp <= 0);
+                lhsValSource, rhsValSource, "lte", cmp -> cmp <= 0);
           }
         });
 

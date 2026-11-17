@@ -80,7 +80,6 @@ public class HistogramEvaluator extends RecursiveNumericEvaluator implements Man
     distribution.load(
         ((List<?>) sourceValues)
             .stream().mapToDouble(value -> ((Number) value).doubleValue()).toArray());
-    ;
 
     List<Tuple> histogramBins = new ArrayList<>();
     for (SummaryStatistics binSummary : distribution.getBinStats()) {

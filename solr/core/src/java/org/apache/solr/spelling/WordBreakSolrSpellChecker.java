@@ -75,7 +75,7 @@ public class WordBreakSolrSpellChecker extends SolrSpellChecker {
     MAX_FREQ,
     /** See {@link BreakSuggestionSortMethod#NUM_CHANGES_THEN_SUMMED_FREQUENCY} */
     SUM_FREQ
-  };
+  }
 
   private WordBreakSpellChecker wbsp = null;
   private boolean combineWords = false;

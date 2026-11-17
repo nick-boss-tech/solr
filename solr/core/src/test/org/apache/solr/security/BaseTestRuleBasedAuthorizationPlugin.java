@@ -730,7 +730,7 @@ public class BaseTestRuleBasedAuthorizationPlugin extends SolrTestCaseJ4 {
           plugin.getPermissionNamesForRoles(Collections.singletonList(null)));
       assertEquals(Set.of("freeforall"), plugin.getPermissionNamesForRoles(List.of("*")));
     } catch (IOException e) {
-      ; // swallow error, otherwise you have to add a _lot_ of exceptions to methods.
+      // swallow error, otherwise you have to add a _lot_ of exceptions to methods.
     }
   }
 
@@ -842,7 +842,7 @@ public class BaseTestRuleBasedAuthorizationPlugin extends SolrTestCaseJ4 {
       AuthorizationResponse authResp = plugin.authorize(context);
       assertEquals(expected, authResp.statusCode);
     } catch (IOException e) {
-      ; // swallow error, otherwise you have to add a _lot_ of exceptions to methods.
+      // swallow error, otherwise you have to add a _lot_ of exceptions to methods.
     }
   }
 

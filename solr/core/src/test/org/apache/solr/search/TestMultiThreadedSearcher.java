@@ -94,64 +94,61 @@ public class TestMultiThreadedSearcher extends SolrTestCaseJ4 {
   public void testReRankWithMultiThreadedSearch() throws Exception {
     float fixedScore = 5.0f;
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              int numSegments = searcher.getTopReaderContext().leaves().size();
-              assertTrue("Expected > 5 segments, got " + numSegments, numSegments > 5);
-              assertTrue(
-                  "Expected > 1 slice, got " + searcher.getSlices().length,
-                  searcher.getSlices().length > 1);
+        .withSearcher(searcher -> {
+          int numSegments = searcher.getTopReaderContext().leaves().size();
+          assertTrue("Expected > 5 segments, got " + numSegments, numSegments > 5);
+          assertTrue(
+              "Expected > 1 slice, got " + searcher.getSlices().length,
+              searcher.getSlices().length > 1);
 
-              final QueryCommand cmd = new QueryCommand();
-              cmd.setFlags(SolrIndexSearcher.GET_SCORES);
-              cmd.setLen(10);
-              cmd.setMultiThreaded(true);
-              cmd.setSort(
-                  new Sort(SortField.FIELD_SCORE, new SortField("id", SortField.Type.STRING)));
-              cmd.setQuery(
-                  new SimpleReRankQuery(
-                      new TermQuery(new Term("field1_s", "xyzrareterm")), fixedScore));
+          final QueryCommand cmd = new QueryCommand();
+          cmd.setFlags(SolrIndexSearcher.GET_SCORES);
+          cmd.setLen(10);
+          cmd.setMultiThreaded(true);
+          cmd.setSort(new Sort(SortField.FIELD_SCORE, new SortField("id", SortField.Type.STRING)));
+          cmd.setQuery(
+              new SimpleReRankQuery(
+                  new TermQuery(new Term("field1_s", "xyzrareterm")), fixedScore));
 
-              final QueryResult qr = searcher.search(cmd);
+          final QueryResult qr = searcher.search(cmd);
 
-              assertTrue(qr.getDocList().matches() >= 1);
-              final DocIterator iter = qr.getDocList().iterator();
-              assertTrue(iter.hasNext());
-              iter.next();
-              assertEquals(fixedScore, iter.score(), 0);
-              return null;
-            });
+          assertTrue(qr.getDocList().matches() >= 1);
+          final DocIterator iter = qr.getDocList().iterator();
+          assertTrue(iter.hasNext());
+          iter.next();
+          assertEquals(fixedScore, iter.score(), 0);
+          return null;
+        });
   }
 
   /** Multi-threaded DocSet collection must match single-threaded for the same query. */
   public void testMultiThreadedDocSetMatchesSingleThreaded() throws Exception {
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              assertTrue(searcher.getSlices().length > 1);
+        .withSearcher(searcher -> {
+          assertTrue(searcher.getSlices().length > 1);
 
-              final Query query = new TermQuery(new Term("field1_s", "xyzrareterm"));
-              final QueryCommand cmdSingle = new QueryCommand();
-              cmdSingle.setQuery(query);
-              cmdSingle.setNeedDocSet(true);
-              cmdSingle.setLen(10);
-              cmdSingle.setMultiThreaded(false);
+          final Query query = new TermQuery(new Term("field1_s", "xyzrareterm"));
+          final QueryCommand cmdSingle = new QueryCommand();
+          cmdSingle.setQuery(query);
+          cmdSingle.setNeedDocSet(true);
+          cmdSingle.setLen(10);
+          cmdSingle.setMultiThreaded(false);
 
-              final QueryCommand cmdMulti = new QueryCommand();
-              cmdMulti.setQuery(query);
-              cmdMulti.setNeedDocSet(true);
-              cmdMulti.setLen(10);
-              cmdMulti.setMultiThreaded(true);
+          final QueryCommand cmdMulti = new QueryCommand();
+          cmdMulti.setQuery(query);
+          cmdMulti.setNeedDocSet(true);
+          cmdMulti.setLen(10);
+          cmdMulti.setMultiThreaded(true);
 
-              final QueryResult singleThreaded = searcher.search(cmdSingle);
-              final QueryResult multiThreaded = searcher.search(cmdMulti);
+          final QueryResult singleThreaded = searcher.search(cmdSingle);
+          final QueryResult multiThreaded = searcher.search(cmdMulti);
 
-              final DocSet stSet = singleThreaded.getDocListAndSet().docSet;
-              final DocSet mtSet = multiThreaded.getDocListAndSet().docSet;
-              assertEquals(stSet.size(), mtSet.size());
-              assertTrue(DocSetUtil.equals(stSet, mtSet));
-              return null;
-            });
+          final DocSet stSet = singleThreaded.getDocListAndSet().docSet;
+          final DocSet mtSet = multiThreaded.getDocListAndSet().docSet;
+          assertEquals(stSet.size(), mtSet.size());
+          assertTrue(DocSetUtil.equals(stSet, mtSet));
+          return null;
+        });
   }
 
   private static final class SimpleReRankQuery extends RankQuery {

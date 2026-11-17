@@ -1468,16 +1468,15 @@ public class TestConfigSetsAPI extends SolrCloudTestCase {
     try (ZipOutputStream zout = new ZipOutputStream(out)) {
       // Copy in all files from the directory
       try (Stream<Path> files = Objects.requireNonNull(Files.list(directory))) {
-        files.forEach(
-            (file) -> {
-              try {
-                zout.putNextEntry(new ZipEntry(file.getFileName().toString()));
-                zout.write(Files.readAllBytes(file));
-                zout.closeEntry();
-              } catch (IOException e) {
-                throw new RuntimeException("Failed to write zip file", e);
-              }
-            });
+        files.forEach(file -> {
+          try {
+            zout.putNextEntry(new ZipEntry(file.getFileName().toString()));
+            zout.write(Files.readAllBytes(file));
+            zout.closeEntry();
+          } catch (IOException e) {
+            throw new RuntimeException("Failed to write zip file", e);
+          }
+        });
       }
     }
   }
@@ -1501,16 +1500,15 @@ public class TestConfigSetsAPI extends SolrCloudTestCase {
       if (Files.isDirectory(fileOrDirectory)) {
         // Copy in all files from the directory
         try (Stream<Path> files = Objects.requireNonNull(Files.list(fileOrDirectory))) {
-          files.forEach(
-              (file) -> {
-                try {
-                  zout.putNextEntry(new ZipEntry(file.getFileName().toString()));
-                  zout.write(Files.readAllBytes(file));
-                  zout.closeEntry();
-                } catch (IOException e) {
-                  throw new RuntimeException(e);
-                }
-              });
+          files.forEach(file -> {
+            try {
+              zout.putNextEntry(new ZipEntry(file.getFileName().toString()));
+              zout.write(Files.readAllBytes(file));
+              zout.closeEntry();
+            } catch (IOException e) {
+              throw new RuntimeException(e);
+            }
+          });
         }
       }
     }
@@ -1525,25 +1523,24 @@ public class TestConfigSetsAPI extends SolrCloudTestCase {
       while (!queue.isEmpty()) {
         directory = queue.pop();
         try (Stream<Path> files = Files.list(directory)) {
-          files.forEach(
-              (kid) -> {
-                try {
-                  String name = base.relativize(kid.toUri()).getPath();
-                  if (Files.isDirectory(kid)) {
-                    queue.push(kid);
-                    name = name.endsWith("/") ? name : name + "/";
-                    zout.putNextEntry(new ZipEntry(name));
-                  } else {
-                    zout.putNextEntry(new ZipEntry(name));
-                    try (InputStream in = Files.newInputStream(kid)) {
-                      in.transferTo(zout);
-                    }
-                    zout.closeEntry();
-                  }
-                } catch (IOException e) {
-                  throw new RuntimeException(e);
+          files.forEach(kid -> {
+            try {
+              String name = base.relativize(kid.toUri()).getPath();
+              if (Files.isDirectory(kid)) {
+                queue.push(kid);
+                name = name.endsWith("/") ? name : name + "/";
+                zout.putNextEntry(new ZipEntry(name));
+              } else {
+                zout.putNextEntry(new ZipEntry(name));
+                try (InputStream in = Files.newInputStream(kid)) {
+                  in.transferTo(zout);
                 }
-              });
+                zout.closeEntry();
+              }
+            } catch (IOException e) {
+              throw new RuntimeException(e);
+            }
+          });
         }
       }
     }

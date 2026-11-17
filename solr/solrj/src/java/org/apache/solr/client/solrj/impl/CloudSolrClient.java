@@ -327,10 +327,9 @@ public abstract class CloudSolrClient extends SolrClient {
           MDC.put("CloudSolrClient.url", url);
           responseFutures.put(
               url,
-              threadPool.submit(
-                  () -> {
-                    return getLbClient().request(lbRequest).getResponse();
-                  }));
+              threadPool.submit(() -> {
+                return getLbClient().request(lbRequest).getResponse();
+              }));
         } finally {
           MDC.remove("CloudSolrClient.url");
         }
@@ -1028,20 +1027,19 @@ public abstract class CloudSolrClient extends SolrClient {
 
       String joinedInputCollections = StrUtils.join(inputCollections, ',');
       Set<String> seenNodes = new HashSet<>();
-      sortedReplicas.forEach(
-          replica -> {
-            if (seenNodes.add(replica.getNodeName())) {
-              if (inputCollections.size() == 1 && collectionNames.size() == 1) {
-                // If we have a single collection name (and not an alias to multiple collection),
-                // send the query directly to a replica of this collection.
-                requestEndpoints.add(
-                    new LBSolrClient.Endpoint(replica.getBaseUrl(), replica.getCoreName()));
-              } else {
-                requestEndpoints.add(
-                    new LBSolrClient.Endpoint(replica.getBaseUrl(), joinedInputCollections));
-              }
-            }
-          });
+      sortedReplicas.forEach(replica -> {
+        if (seenNodes.add(replica.getNodeName())) {
+          if (inputCollections.size() == 1 && collectionNames.size() == 1) {
+            // If we have a single collection name (and not an alias to multiple collection),
+            // send the query directly to a replica of this collection.
+            requestEndpoints.add(
+                new LBSolrClient.Endpoint(replica.getBaseUrl(), replica.getCoreName()));
+          } else {
+            requestEndpoints.add(
+                new LBSolrClient.Endpoint(replica.getBaseUrl(), joinedInputCollections));
+          }
+        }
+      });
 
       if (requestEndpoints.isEmpty()) {
         collectionStateCache.keySet().removeAll(collectionNames);

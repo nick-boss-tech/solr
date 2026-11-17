@@ -66,7 +66,7 @@ class FacetFieldProcessorByEnumTermsStream extends FacetFieldProcessor implement
 
   // at any point in processing where we need a SlotContext, all we care about is the current 'term'
   private IntFunction<SlotContext> slotContext =
-      (slotNum) -> {
+      slotNum -> {
         assert null != term;
         return new SlotAcc.SlotContext(new TermQuery(new Term(sf.getName(), term)));
       };

@@ -75,17 +75,15 @@ public class SimpleClusterAbstractionsTest extends SolrCloudTestCase {
       assertEquals(slice.getLeader().getName(), replica.getReplicaName());
       slice
           .getReplicas()
-          .forEach(
-              sreplica -> {
-                Replica r = shard.getReplica(sreplica.getName());
-                assertNotNull("missing replica " + sreplica.getName(), r);
-                assertEquals(r.getCoreName(), sreplica.getCoreName());
-                assertEquals(r.getNode().getName(), sreplica.getNodeName());
-                assertEquals(
-                    r.getState().toString().toLowerCase(Locale.ROOT),
-                    sreplica.getState().toString());
-                assertEquals(r.getType().toString(), sreplica.getType().toString());
-              });
+          .forEach(sreplica -> {
+            Replica r = shard.getReplica(sreplica.getName());
+            assertNotNull("missing replica " + sreplica.getName(), r);
+            assertEquals(r.getCoreName(), sreplica.getCoreName());
+            assertEquals(r.getNode().getName(), sreplica.getNodeName());
+            assertEquals(
+                r.getState().toString().toLowerCase(Locale.ROOT), sreplica.getState().toString());
+            assertEquals(r.getType().toString(), sreplica.getType().toString());
+          });
     }
   }
 }

@@ -98,15 +98,13 @@ public class PerReplicaStates implements ReflectMapWriter {
       result.addAll(old.states.keySet());
       return result;
     }
-    old.states.forEach(
-        (s, state) -> {
-          // the state is modified or missing
-          if (!Objects.equals(fresh.get(s), state)) result.add(s);
-        });
-    fresh.states.forEach(
-        (s, state) -> {
-          if (old.get(s) == null) result.add(s);
-        });
+    old.states.forEach((s, state) -> {
+      // the state is modified or missing
+      if (!Objects.equals(fresh.get(s), state)) result.add(s);
+    });
+    fresh.states.forEach((s, state) -> {
+      if (old.get(s) == null) result.add(s);
+    });
     return result;
   }
 

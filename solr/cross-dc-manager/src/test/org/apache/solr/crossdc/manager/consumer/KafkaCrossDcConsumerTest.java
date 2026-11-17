@@ -290,14 +290,13 @@ public class KafkaCrossDcConsumerTest {
     // Verify that the valid MirroredSolrRequest was processed.
     verify(spyConsumer, times(1))
         .sendBatch(
-            argThat(
-                solrRequest -> {
-                  // Check if the UpdateRequest has the same content as the original validRequest
-                  return ((UpdateRequest) solrRequest)
-                          .getDocuments()
-                          .equals(validRequest.getDocuments())
-                      && solrRequest.getParams().equals(validRequest.getParams());
-                }),
+            argThat(solrRequest -> {
+              // Check if the UpdateRequest has the same content as the original validRequest
+              return ((UpdateRequest) solrRequest)
+                      .getDocuments()
+                      .equals(validRequest.getDocuments())
+                  && solrRequest.getParams().equals(validRequest.getParams());
+            }),
             eq(MirroredSolrRequest.Type.UPDATE),
             eq(record),
             any());
@@ -338,11 +337,10 @@ public class KafkaCrossDcConsumerTest {
     // Verify that the valid MirroredSolrRequest was processed.
     verify(spyConsumer, times(1))
         .sendBatch(
-            argThat(
-                solrRequest -> {
-                  // Check if the SolrRequest has the same content as the original validRequest
-                  return solrRequest.getParams().equals(create.getParams());
-                }),
+            argThat(solrRequest -> {
+              // Check if the SolrRequest has the same content as the original validRequest
+              return solrRequest.getParams().equals(create.getParams());
+            }),
             eq(MirroredSolrRequest.Type.ADMIN),
             eq(record1),
             any());
@@ -517,13 +515,12 @@ public class KafkaCrossDcConsumerTest {
     // Verify that the valid MirroredSolrRequest was processed.
     verify(spyConsumer, times(1))
         .sendBatch(
-            argThat(
-                solrRequest -> {
-                  System.out.println(Utils.toJSONString(solrRequest));
-                  // Check if the UpdateRequest has the same content as the original invalidRequest
-                  return ((UpdateRequest) solrRequest).getDocuments() == null
-                      && solrRequest.getParams().equals(invalidRequest.getParams());
-                }),
+            argThat(solrRequest -> {
+              System.out.println(Utils.toJSONString(solrRequest));
+              // Check if the UpdateRequest has the same content as the original invalidRequest
+              return ((UpdateRequest) solrRequest).getDocuments() == null
+                  && solrRequest.getParams().equals(invalidRequest.getParams());
+            }),
             any(),
             eq(record),
             any());

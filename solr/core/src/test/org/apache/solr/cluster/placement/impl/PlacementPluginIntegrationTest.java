@@ -162,11 +162,10 @@ public class PlacementPluginIntegrationTest extends SolrCloudTestCase {
     DocCollection collection = clusterState.getCollectionOrNull(COLLECTION);
     assertNotNull(collection);
     Map<String, AtomicInteger> coresByNode = new HashMap<>();
-    collection.forEachReplica(
-        (shard, replica) ->
-            coresByNode
-                .computeIfAbsent(replica.getNodeName(), n -> new AtomicInteger())
-                .incrementAndGet());
+    collection.forEachReplica((shard, replica) ->
+        coresByNode
+            .computeIfAbsent(replica.getNodeName(), n -> new AtomicInteger())
+            .incrementAndGet());
     int maxCores = 0;
     int minCores = Integer.MAX_VALUE;
     for (Map.Entry<String, AtomicInteger> entry : coresByNode.entrySet()) {
@@ -338,10 +337,9 @@ public class PlacementPluginIntegrationTest extends SolrCloudTestCase {
     cluster.waitForActiveCollection(COLLECTION, 2, 4);
     // make sure the primary replicas were placed on the nodeset
     DocCollection primary = cloudManager.getClusterState().getCollection(COLLECTION);
-    primary.forEachReplica(
-        (shard, replica) ->
-            assertTrue(
-                "primary replica not on secondary node!", nodeSet.contains(replica.getNodeName())));
+    primary.forEachReplica((shard, replica) ->
+        assertTrue(
+            "primary replica not on secondary node!", nodeSet.contains(replica.getNodeName())));
 
     // try deleting secondary replica from node without the primary replica
     Optional<String> onlySecondaryReplica =
@@ -507,30 +505,28 @@ public class PlacementPluginIntegrationTest extends SolrCloudTestCase {
     CollectionMetrics collectionMetrics = attributeValues.getCollectionMetrics(COLLECTION).get();
     collection
         .shards()
-        .forEach(
-            shard -> {
-              Optional<ShardMetrics> shardMetricsOpt =
-                  collectionMetrics.getShardMetrics(shard.getShardName());
-              assertTrue("shard metrics", shardMetricsOpt.isPresent());
-              shard
-                  .replicas()
-                  .forEach(
-                      replica -> {
-                        Optional<ReplicaMetrics> replicaMetricsOpt =
-                            shardMetricsOpt.get().getReplicaMetrics(replica.getReplicaName());
-                        assertTrue("replica metrics", replicaMetricsOpt.isPresent());
-                        ReplicaMetrics replicaMetrics = replicaMetricsOpt.get();
-                        Optional<Double> indexSizeOpt =
-                            replicaMetrics.getReplicaMetric(ReplicaMetricImpl.INDEX_SIZE_GB);
-                        assertTrue("indexSize", indexSizeOpt.isPresent());
-                        indexSizeOpt.get();
-                        assertTrue(
-                            "indexSize should be > 0 but was " + indexSizeOpt.get(),
-                            indexSizeOpt.get() > 0);
-                        assertTrue(
-                            "indexSize should be < 0.01 but was " + indexSizeOpt.get(),
-                            indexSizeOpt.get() < 0.01);
-                      });
-            });
+        .forEach(shard -> {
+          Optional<ShardMetrics> shardMetricsOpt =
+              collectionMetrics.getShardMetrics(shard.getShardName());
+          assertTrue("shard metrics", shardMetricsOpt.isPresent());
+          shard
+              .replicas()
+              .forEach(replica -> {
+                Optional<ReplicaMetrics> replicaMetricsOpt =
+                    shardMetricsOpt.get().getReplicaMetrics(replica.getReplicaName());
+                assertTrue("replica metrics", replicaMetricsOpt.isPresent());
+                ReplicaMetrics replicaMetrics = replicaMetricsOpt.get();
+                Optional<Double> indexSizeOpt =
+                    replicaMetrics.getReplicaMetric(ReplicaMetricImpl.INDEX_SIZE_GB);
+                assertTrue("indexSize", indexSizeOpt.isPresent());
+                indexSizeOpt.get();
+                assertTrue(
+                    "indexSize should be > 0 but was " + indexSizeOpt.get(),
+                    indexSizeOpt.get() > 0);
+                assertTrue(
+                    "indexSize should be < 0.01 but was " + indexSizeOpt.get(),
+                    indexSizeOpt.get() < 0.01);
+              });
+        });
   }
 }

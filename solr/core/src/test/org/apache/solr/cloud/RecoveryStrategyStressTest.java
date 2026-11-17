@@ -57,25 +57,24 @@ public class RecoveryStrategyStressTest extends SolrCloudTestCase {
 
       final var startAndStopCount = new CountDownLatch(50);
       final Thread startAndStopRandomReplicas =
-          new Thread(
-              () -> {
-                try {
-                  while (startAndStopCount.getCount() > 0) {
-                    DocCollection state = getCollectionState(collection);
-                    Replica leader = state.getLeader("shard1");
-                    Replica replica =
-                        getRandomReplica(state.getSlice("shard1"), (r) -> !leader.equals(r));
+          new Thread(() -> {
+            try {
+              while (startAndStopCount.getCount() > 0) {
+                DocCollection state = getCollectionState(collection);
+                Replica leader = state.getLeader("shard1");
+                Replica replica =
+                    getRandomReplica(state.getSlice("shard1"), r -> !leader.equals(r));
 
-                    JettySolrRunner jetty = cluster.getReplicaJetty(replica);
-                    jetty.stop();
-                    Thread.sleep(100);
-                    jetty.start();
-                    startAndStopCount.countDown();
-                  }
-                } catch (Exception e) {
-                  throw new RuntimeException(e);
-                }
-              });
+                JettySolrRunner jetty = cluster.getReplicaJetty(replica);
+                jetty.stop();
+                Thread.sleep(100);
+                jetty.start();
+                startAndStopCount.countDown();
+              }
+            } catch (Exception e) {
+              throw new RuntimeException(e);
+            }
+          });
       startAndStopRandomReplicas.start();
       // index and commit doc after fixed interval of 10 sec
       scheduledExecutorService.scheduleWithFixedDelay(

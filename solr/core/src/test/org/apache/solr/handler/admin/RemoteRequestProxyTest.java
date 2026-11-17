@@ -73,19 +73,18 @@ public class RemoteRequestProxyTest extends SolrCloudTestCase {
   public void proxySystemInfoHandlerOneNode() {
     Set<String> nodes = solrClient.getClusterStateProvider().getLiveNodes();
     assertEquals(2, nodes.size());
-    nodes.forEach(
-        node -> {
-          MapSolrParams params = new MapSolrParams(Map.of("nodes", node));
-          SystemInfoRequest req = new SystemInfoRequest(params);
-          try {
-            SystemInfoResponse rsp = req.process(solrClient, null);
-            NamedList<Object> nl = rsp.getResponse();
-            assertEquals(2, nl.size());
-            assertEquals("solrcloud", rsp.getMode());
-            assertEquals(nl.getName(1), rsp.getNode());
-          } catch (Exception e) {
-            fail("Exception while proxying request to node " + node);
-          }
-        });
+    nodes.forEach(node -> {
+      MapSolrParams params = new MapSolrParams(Map.of("nodes", node));
+      SystemInfoRequest req = new SystemInfoRequest(params);
+      try {
+        SystemInfoResponse rsp = req.process(solrClient, null);
+        NamedList<Object> nl = rsp.getResponse();
+        assertEquals(2, nl.size());
+        assertEquals("solrcloud", rsp.getMode());
+        assertEquals(nl.getName(1), rsp.getNode());
+      } catch (Exception e) {
+        fail("Exception while proxying request to node " + node);
+      }
+    });
   }
 }

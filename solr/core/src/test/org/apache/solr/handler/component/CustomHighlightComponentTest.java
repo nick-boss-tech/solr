@@ -51,13 +51,12 @@ public class CustomHighlightComponentTest extends SolrCloudTestCase {
     @Override
     protected Object convertHighlights(NamedList<Object> hl) {
       final ArrayList<SimpleOrderedMap<Object>> hlMaps = new ArrayList<>();
-      hl.forEach(
-          (name, val) -> {
-            SimpleOrderedMap<Object> hlMap = new SimpleOrderedMap<>();
-            hlMap.add(id_key, name);
-            hlMap.add(snippets_key, val);
-            hlMaps.add(hlMap);
-          });
+      hl.forEach((name, val) -> {
+        SimpleOrderedMap<Object> hlMap = new SimpleOrderedMap<>();
+        hlMap.add(id_key, name);
+        hlMap.add(snippets_key, val);
+        hlMaps.add(hlMap);
+      });
       return hlMaps;
     }
 

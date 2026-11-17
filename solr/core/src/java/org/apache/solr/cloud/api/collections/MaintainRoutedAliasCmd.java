@@ -69,40 +69,38 @@ public class MaintainRoutedAliasCmd extends AliasCmd {
 
   void addCollectionToAlias(
       String aliasName, ZkStateReader.AliasesManager aliasesManager, String createCollName) {
-    aliasesManager.applyModificationAndExportToZk(
-        curAliases -> {
-          final List<String> curTargetCollections =
-              curAliases.getCollectionAliasListMap().get(aliasName);
-          if (curTargetCollections.contains(createCollName)) {
-            return curAliases;
-          } else {
-            List<String> newTargetCollections = new ArrayList<>(curTargetCollections.size() + 1);
-            // prepend it on purpose (thus reverse sorted). Solr alias resolution defaults to the
-            // first collection in a list
-            newTargetCollections.add(createCollName);
-            newTargetCollections.addAll(curTargetCollections);
-            return curAliases.cloneWithCollectionAlias(
-                aliasName, StrUtils.join(newTargetCollections, ','));
-          }
-        });
+    aliasesManager.applyModificationAndExportToZk(curAliases -> {
+      final List<String> curTargetCollections =
+          curAliases.getCollectionAliasListMap().get(aliasName);
+      if (curTargetCollections.contains(createCollName)) {
+        return curAliases;
+      } else {
+        List<String> newTargetCollections = new ArrayList<>(curTargetCollections.size() + 1);
+        // prepend it on purpose (thus reverse sorted). Solr alias resolution defaults to the
+        // first collection in a list
+        newTargetCollections.add(createCollName);
+        newTargetCollections.addAll(curTargetCollections);
+        return curAliases.cloneWithCollectionAlias(
+            aliasName, StrUtils.join(newTargetCollections, ','));
+      }
+    });
   }
 
   private void removeCollectionFromAlias(
       String aliasName, ZkStateReader.AliasesManager aliasesManager, String createCollName) {
-    aliasesManager.applyModificationAndExportToZk(
-        curAliases -> {
-          final List<String> curTargetCollections =
-              curAliases.getCollectionAliasListMap().get(aliasName);
-          if (curTargetCollections.contains(createCollName)) {
-            List<String> newTargetCollections = new ArrayList<>(curTargetCollections.size());
-            newTargetCollections.addAll(curTargetCollections);
-            newTargetCollections.remove(createCollName);
-            return curAliases.cloneWithCollectionAlias(
-                aliasName, StrUtils.join(newTargetCollections, ','));
-          } else {
-            return curAliases;
-          }
-        });
+    aliasesManager.applyModificationAndExportToZk(curAliases -> {
+      final List<String> curTargetCollections =
+          curAliases.getCollectionAliasListMap().get(aliasName);
+      if (curTargetCollections.contains(createCollName)) {
+        List<String> newTargetCollections = new ArrayList<>(curTargetCollections.size());
+        newTargetCollections.addAll(curTargetCollections);
+        newTargetCollections.remove(createCollName);
+        return curAliases.cloneWithCollectionAlias(
+            aliasName, StrUtils.join(newTargetCollections, ','));
+      } else {
+        return curAliases;
+      }
+    });
   }
 
   @Override
@@ -139,20 +137,19 @@ public class MaintainRoutedAliasCmd extends AliasCmd {
         case ENSURE_REMOVED:
           if (exists) {
             ccc.getExecutorService()
-                .execute(
-                    () -> {
-                      try {
-                        deleteTargetCollection(
-                            adminCmdContext, results, aliasName, aliasesManager, action);
-                      } catch (Exception e) {
-                        log.warn(
-                            "Deletion of {} by {} {} failed (this might be ok if two clients were",
-                            action.targetCollection,
-                            ra.getAliasName(),
-                            " writing to a routed alias at the same time and both caused a deletion)");
-                        log.debug("Exception for last message:", e);
-                      }
-                    });
+                .execute(() -> {
+                  try {
+                    deleteTargetCollection(
+                        adminCmdContext, results, aliasName, aliasesManager, action);
+                  } catch (Exception e) {
+                    log.warn(
+                        "Deletion of {} by {} {} failed (this might be ok if two clients were",
+                        action.targetCollection,
+                        ra.getAliasName(),
+                        " writing to a routed alias at the same time and both caused a deletion)");
+                    log.debug("Exception for last message:", e);
+                  }
+                });
           }
           break;
         case ENSURE_EXISTS:

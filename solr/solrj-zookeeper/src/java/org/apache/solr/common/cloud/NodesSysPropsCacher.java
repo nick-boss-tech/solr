@@ -39,16 +39,15 @@ public class NodesSysPropsCacher implements NodesSysProps, AutoCloseable {
   public NodesSysPropsCacher(HttpSolrClient solrClient, ZkStateReader zkStateReader) {
     this.zkStateReader = zkStateReader;
     this.solrClient = solrClient;
-    zkStateReader.registerLiveNodesListener(
-        (oldNodes, newNodes) -> {
-          for (String n : oldNodes) {
-            if (!newNodes.contains(n)) {
-              // this node has gone down, clear data
-              nodeVsTagsCache.remove(n);
-            }
-          }
-          return isClosed;
-        });
+    zkStateReader.registerLiveNodesListener((oldNodes, newNodes) -> {
+      for (String n : oldNodes) {
+        if (!newNodes.contains(n)) {
+          // this node has gone down, clear data
+          nodeVsTagsCache.remove(n);
+        }
+      }
+      return isClosed;
+    });
   }
 
   @Override
@@ -85,7 +84,7 @@ public class NodesSysPropsCacher implements NodesSysProps, AutoCloseable {
       NavigableObject response =
           solrClient.requestWithBaseUrl(zkStateReader.getBaseUrlForNodeName(nodeName), req, null);
       var metrics = NavigableObject.wrap(response._get("system.properties"));
-      tags.forEach((tag) -> result.put(tag, metrics._get(tag)));
+      tags.forEach(tag -> result.put(tag, metrics._get(tag)));
       return result;
     } catch (Exception e) {
       throw new SolrException(SolrException.ErrorCode.SERVER_ERROR, e);

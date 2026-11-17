@@ -1614,10 +1614,9 @@ public class IndexSchema {
           sp ->
               Stream.of(sp.schema.dynamicFields)
                   .filter(it -> !it.getRegex().startsWith(INTERNAL_POLY_FIELD_PREFIX))
-                  .filter(
-                      it ->
-                          sp.requestedFields == null
-                              || sp.requestedFields.contains(it.getPrototype().getName()))
+                  .filter(it ->
+                      sp.requestedFields == null
+                          || sp.requestedFields.contains(it.getPrototype().getName()))
                   .map(it -> sp.getProperties(it.getPrototype()))
                   .collect(Collectors.toList())),
 
@@ -1728,11 +1727,10 @@ public class IndexSchema {
     SortedMap<String, List<CopyField>> sortedCopyFields = new TreeMap<>(copyFieldsMap);
     for (List<CopyField> copyFields : sortedCopyFields.values()) {
       copyFields = new ArrayList<>(copyFields);
-      copyFields.sort(
-          (cf1, cf2) -> {
-            // sources are all the same, just sorting by destination here
-            return cf1.getDestination().getName().compareTo(cf2.getDestination().getName());
-          });
+      copyFields.sort((cf1, cf2) -> {
+        // sources are all the same, just sorting by destination here
+        return cf1.getDestination().getName().compareTo(cf2.getDestination().getName());
+      });
       for (CopyField copyField : copyFields) {
         final String source = copyField.getSource().getName();
         final String destination = copyField.getDestination().getName();

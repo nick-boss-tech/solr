@@ -70,32 +70,30 @@ public class TestDocCollectionWatcher extends SolrCloudTestCase {
 
   private Future<Boolean> waitInBackground(
       String collection, long timeout, TimeUnit unit, Predicate<DocCollection> predicate) {
-    return executor.submit(
-        () -> {
-          try {
-            cluster.getZkStateReader().waitForState(collection, timeout, unit, predicate);
-          } catch (InterruptedException | TimeoutException e) {
-            return Boolean.FALSE;
-          }
-          return Boolean.TRUE;
-        });
+    return executor.submit(() -> {
+      try {
+        cluster.getZkStateReader().waitForState(collection, timeout, unit, predicate);
+      } catch (InterruptedException | TimeoutException e) {
+        return Boolean.FALSE;
+      }
+      return Boolean.TRUE;
+    });
   }
 
   private void waitFor(String message, long timeout, TimeUnit unit, Callable<Boolean> predicate)
       throws InterruptedException, ExecutionException {
 
     Future<Boolean> future =
-        executor.submit(
-            () -> {
-              try {
-                while (true) {
-                  if (predicate.call()) return true;
-                  TimeUnit.MILLISECONDS.sleep(10);
-                }
-              } catch (InterruptedException e) {
-                return false;
-              }
-            });
+        executor.submit(() -> {
+          try {
+            while (true) {
+              if (predicate.call()) return true;
+              TimeUnit.MILLISECONDS.sleep(10);
+            }
+          } catch (InterruptedException e) {
+            return false;
+          }
+        });
     try {
       if (future.get(timeout, unit)) {
         return;
@@ -118,7 +116,7 @@ public class TestDocCollectionWatcher extends SolrCloudTestCase {
     ZkStateReader.from(client)
         .registerDocCollectionWatcher(
             "currentstate",
-            (c) -> {
+            c -> {
               latch.countDown();
               return false;
             });
@@ -135,7 +133,7 @@ public class TestDocCollectionWatcher extends SolrCloudTestCase {
     ZkStateReader.from(client)
         .registerDocCollectionWatcher(
             "currentstate",
-            (c) -> {
+            c -> {
               latch2.countDown();
               return true;
             });
@@ -232,7 +230,7 @@ public class TestDocCollectionWatcher extends SolrCloudTestCase {
             "falsepredicate",
             MAX_WAIT_TIMEOUT,
             TimeUnit.SECONDS,
-            (collectionState) -> {
+            collectionState -> {
               runCount.incrementAndGet();
               int replicas = 0;
               for (Slice slice : collectionState) {
@@ -282,7 +280,7 @@ public class TestDocCollectionWatcher extends SolrCloudTestCase {
         TimeoutException.class,
         () -> {
           ZkStateReader.from(client)
-              .waitForState("no-such-collection", 10, TimeUnit.MILLISECONDS, (c) -> (false));
+              .waitForState("no-such-collection", 10, TimeUnit.MILLISECONDS, c -> (false));
         });
 
     waitFor(

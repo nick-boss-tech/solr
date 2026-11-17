@@ -194,15 +194,14 @@ public class ClusterAPI {
 
   public static SolrQueryRequest wrapParams(SolrQueryRequest req, Map<String, Object> m) {
     ModifiableSolrParams solrParams = new ModifiableSolrParams();
-    m.forEach(
-        (k, v) -> {
-          if (v == null) return;
-          if (v instanceof String[]) {
-            solrParams.add(k, (String[]) v);
-          } else {
-            solrParams.add(k, String.valueOf(v));
-          }
-        });
+    m.forEach((k, v) -> {
+      if (v == null) return;
+      if (v instanceof String[]) {
+        solrParams.add(k, (String[]) v);
+      } else {
+        solrParams.add(k, String.valueOf(v));
+      }
+    });
     DefaultSolrParams dsp = new DefaultSolrParams(req.getParams(), solrParams);
     req.setParams(dsp);
     return req;

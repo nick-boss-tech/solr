@@ -390,7 +390,7 @@ public class SuggestComponent extends SearchComponent
     this.solrMetricsContext.observableLongGauge(
         "solr.core.suggester.total.size",
         "Total memory size in bytes of all suggester",
-        (observableLongMeasurement) -> {
+        observableLongMeasurement -> {
           observableLongMeasurement.record(ramBytesUsed(), suggesterAttributes);
         },
         OtelUnit.BYTES);
@@ -490,24 +490,21 @@ public class SuggestComponent extends SearchComponent
         List<LookupResult> lookupResults = new ArrayList<>();
         tokenEntry
             .getValue()
-            .forEach(
-                (property, value) -> {
-                  if (property.equals(SuggesterResultLabels.SUGGESTIONS)) {
-                    @SuppressWarnings("unchecked")
-                    List<NamedList<Object>> suggestionEntries = (List<NamedList<Object>>) value;
-                    for (NamedList<Object> suggestionEntry : suggestionEntries) {
-                      String term =
-                          (String) suggestionEntry.get(SuggesterResultLabels.SUGGESTION_TERM);
-                      Long weight =
-                          (Long) suggestionEntry.get(SuggesterResultLabels.SUGGESTION_WEIGHT);
-                      String payload =
-                          (String) suggestionEntry.get(SuggesterResultLabels.SUGGESTION_PAYLOAD);
-                      LookupResult res =
-                          new LookupResult(new CharsRef(term), weight, new BytesRef(payload));
-                      lookupResults.add(res);
-                    }
-                  }
-                });
+            .forEach((property, value) -> {
+              if (property.equals(SuggesterResultLabels.SUGGESTIONS)) {
+                @SuppressWarnings("unchecked")
+                List<NamedList<Object>> suggestionEntries = (List<NamedList<Object>>) value;
+                for (NamedList<Object> suggestionEntry : suggestionEntries) {
+                  String term = (String) suggestionEntry.get(SuggesterResultLabels.SUGGESTION_TERM);
+                  Long weight = (Long) suggestionEntry.get(SuggesterResultLabels.SUGGESTION_WEIGHT);
+                  String payload =
+                      (String) suggestionEntry.get(SuggesterResultLabels.SUGGESTION_PAYLOAD);
+                  LookupResult res =
+                      new LookupResult(new CharsRef(term), weight, new BytesRef(payload));
+                  lookupResults.add(res);
+                }
+              }
+            });
         result.add(suggesterName, tokenString, lookupResults);
       }
     }

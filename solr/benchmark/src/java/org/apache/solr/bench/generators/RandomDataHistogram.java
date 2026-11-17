@@ -498,28 +498,26 @@ public class RandomDataHistogram {
         int sum = values.stream().mapToInt(AtomicInteger::get).sum();
         entries =
             objectToCount.entrySet().stream()
-                .sorted(
-                    (e1, e2) -> {
-                      List<Surrogate> k1 = e1.getKey();
-                      List<Surrogate> k2 = e2.getKey();
+                .sorted((e1, e2) -> {
+                  List<Surrogate> k1 = e1.getKey();
+                  List<Surrogate> k2 = e2.getKey();
 
-                      if (k1.size() != k2.size()) {
-                        return Integer.compare(k1.size(), k2.size());
-                      }
-                      return Integer.compare(e2.getValue().get(), e1.getValue().get());
-                    })
+                  if (k1.size() != k2.size()) {
+                    return Integer.compare(k1.size(), k2.size());
+                  }
+                  return Integer.compare(e2.getValue().get(), e1.getValue().get());
+                })
                 .filter(entry -> !entry.getKey().equals(List.of()))
-                .map(
-                    entry -> {
-                      double percentage = entry.getValue().get() * 100.0 / sum;
-                      return new Tracker(
-                          entry.getKey(),
-                          entry.getKey().stream()
-                              .map(Objects::toString)
-                              .collect(Collectors.joining(" ")),
-                          entry.getValue().get(),
-                          percentage);
-                    })
+                .map(entry -> {
+                  double percentage = entry.getValue().get() * 100.0 / sum;
+                  return new Tracker(
+                      entry.getKey(),
+                      entry.getKey().stream()
+                          .map(Objects::toString)
+                          .collect(Collectors.joining(" ")),
+                      entry.getValue().get(),
+                      percentage);
+                })
                 .collect(Collectors.toList());
       }
 

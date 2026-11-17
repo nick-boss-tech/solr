@@ -282,11 +282,10 @@ public class RoutedAliasUpdateProcessor extends UpdateRequestProcessor {
     final Slice slice =
         activeSlices.stream()
             .findAny()
-            .orElseThrow(
-                () ->
-                    new SolrException(
-                        SolrException.ErrorCode.SERVICE_UNAVAILABLE,
-                        "Cannot route to collection " + collection));
+            .orElseThrow(() ->
+                new SolrException(
+                    SolrException.ErrorCode.SERVICE_UNAVAILABLE,
+                    "Cannot route to collection " + collection));
 
     return getLeaderNode(collection, slice);
   }

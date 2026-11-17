@@ -97,10 +97,9 @@ public class TestGracefulJettyShutdown extends SolrTestCase {
         // check inflight requests using both clients...
         for (SolrClient client : Arrays.asList(cloudClient, jettyClient)) {
           results.add(
-              exec.submit(
-                  () -> {
-                    return req.process(client, collection);
-                  }));
+              exec.submit(() -> {
+                return req.process(client, collection);
+              }));
         }
 
         // wait for our handlers to indicate they have recieved the requests and started processing
@@ -110,11 +109,10 @@ public class TestGracefulJettyShutdown extends SolrTestCase {
         // stop our node (via executor so it doesn't block) and open the gate for our handlers
         log.info("Stopping jetty node");
         final Future<Boolean> stopped =
-            exec.submit(
-                () -> {
-                  nodeToStop.stop();
-                  return true;
-                });
+            exec.submit(() -> {
+              nodeToStop.stop();
+              return true;
+            });
         log.info("Releasing gate for requests");
         handlerGate.release(2);
         log.info("Released gate for requests");

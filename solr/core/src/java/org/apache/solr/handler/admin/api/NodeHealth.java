@@ -152,17 +152,15 @@ public class NodeHealth extends JerseyResource implements NodeHealthApi {
       }
 
       AtomicBoolean allCoresAreInSync = new AtomicBoolean(true);
-      coreContainer.forEachLoadedCore(
-          core -> {
-            ReplicationHandler replicationHandler =
-                (ReplicationHandler) core.getRequestHandler(ReplicationHandler.PATH);
-            if (replicationHandler.isFollower()) {
-              boolean isCoreInSync =
-                  isWithinGenerationLag(
-                      core, replicationHandler, maxGenerationLag, laggingCoresInfo);
-              allCoresAreInSync.set(allCoresAreInSync.get() & isCoreInSync);
-            }
-          });
+      coreContainer.forEachLoadedCore(core -> {
+        ReplicationHandler replicationHandler =
+            (ReplicationHandler) core.getRequestHandler(ReplicationHandler.PATH);
+        if (replicationHandler.isFollower()) {
+          boolean isCoreInSync =
+              isWithinGenerationLag(core, replicationHandler, maxGenerationLag, laggingCoresInfo);
+          allCoresAreInSync.set(allCoresAreInSync.get() & isCoreInSync);
+        }
+      });
 
       if (allCoresAreInSync.get()) {
         response.message =
@@ -260,21 +258,17 @@ public class NodeHealth extends JerseyResource implements NodeHealthApi {
       Collection<CloudDescriptor> cores, ClusterState clusterState) {
     return Math.toIntExact(
         cores.stream()
-            .filter(
-                c ->
-                    !c.hasRegistered()
-                        || UNHEALTHY_STATES.contains(
-                            c.getLastPublished())) // Find candidates locally
-            .filter(
-                c ->
-                    clusterState.hasCollection(
-                        c.getCollectionName())) // Only care about cores for actual collections
-            .filter(
-                c ->
-                    clusterState
-                        .getCollection(c.getCollectionName())
-                        .getActiveSlicesMap()
-                        .containsKey(c.getShardId()))
+            .filter(c ->
+                !c.hasRegistered()
+                    || UNHEALTHY_STATES.contains(c.getLastPublished())) // Find candidates locally
+            .filter(c ->
+                clusterState.hasCollection(
+                    c.getCollectionName())) // Only care about cores for actual collections
+            .filter(c ->
+                clusterState
+                    .getCollection(c.getCollectionName())
+                    .getActiveSlicesMap()
+                    .containsKey(c.getShardId()))
             .count());
   }
 }

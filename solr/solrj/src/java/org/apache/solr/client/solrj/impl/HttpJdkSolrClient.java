@@ -171,15 +171,14 @@ public class HttpJdkSolrClient extends HttpSolrClient {
       return httpClient
           .sendAsync(pReq.reqb.build(), HttpResponse.BodyHandlers.ofInputStream())
           .whenComplete((httpResponse, throwable) -> pReq.releaseContentWriting())
-          .thenApply(
-              httpResponse -> {
-                try {
-                  return processErrorsAndResponse(
-                      solrRequest, pReq.parserToUse, httpResponse, pReq.url);
-                } catch (SolrServerException e) {
-                  throw new RuntimeException(e);
-                }
-              });
+          .thenApply(httpResponse -> {
+            try {
+              return processErrorsAndResponse(
+                  solrRequest, pReq.parserToUse, httpResponse, pReq.url);
+            } catch (SolrServerException e) {
+              throw new RuntimeException(e);
+            }
+          });
     } catch (Exception e) {
       CompletableFuture<NamedList<Object>> cf = new CompletableFuture<>();
       cf.completeExceptionally(e);
@@ -366,15 +365,14 @@ public class HttpJdkSolrClient extends HttpSolrClient {
       }
 
       contentWritingFuture =
-          bodyExecutor.submit(
-              () -> {
-                // note: doesn't need to synchronize with PreparedRequest.this
-                try (source) {
-                  contentWriter.write(source);
-                } catch (Exception e) {
-                  log.error("Cannot write Content Stream", e);
-                }
-              });
+          bodyExecutor.submit(() -> {
+            // note: doesn't need to synchronize with PreparedRequest.this
+            try (source) {
+              contentWriter.write(source);
+            } catch (Exception e) {
+              log.error("Cannot write Content Stream", e);
+            }
+          });
       return contentWritingSink;
     }
 

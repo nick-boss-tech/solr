@@ -782,8 +782,8 @@ public class UpdateLog implements PluginInfoInitialized, SolrMetricProducer {
     final String prefix = TLOG_NAME + '.';
     try (Stream<Path> files = Files.list(directory)) {
       return files
-          .map((file) -> file.getFileName().toString())
-          .filter((name) -> name.startsWith(prefix))
+          .map(file -> file.getFileName().toString())
+          .filter(name -> name.startsWith(prefix))
           .sorted()
           .toArray(String[]::new);
     } catch (IOException e) {
@@ -2233,15 +2233,13 @@ public class UpdateLog implements PluginInfoInitialized, SolrMetricProducer {
         Collection<UpdateRequestProcessor> procPool =
             Collections.synchronizedList(new ArrayList<>());
         ThreadLocal<UpdateRequestProcessor> procThreadLocal =
-            ThreadLocal.withInitial(
-                () -> {
-                  // SolrQueryRequest is not thread-safe, so use a copy when creating URPs
-                  final var localRequest =
-                      new SolrQueryRequestBase(uhandler.core, BASE_REPLAY_PARAMS);
-                  var proc = processorChain.createProcessor(localRequest, rsp);
-                  procPool.add(proc);
-                  return proc;
-                });
+            ThreadLocal.withInitial(() -> {
+              // SolrQueryRequest is not thread-safe, so use a copy when creating URPs
+              final var localRequest = new SolrQueryRequestBase(uhandler.core, BASE_REPLAY_PARAMS);
+              var proc = processorChain.createProcessor(localRequest, rsp);
+              procPool.add(proc);
+              return proc;
+            });
 
         OrderedExecutor<BytesRef> executor =
             inSortedOrder ? null : req.getCoreContainer().getReplayUpdatesExecutor();
@@ -2583,15 +2581,14 @@ public class UpdateLog implements PluginInfoInitialized, SolrMetricProducer {
       try (Stream<Path> paths = Files.walk(tlogPath)) {
         paths
             .filter(Files::isRegularFile)
-            .forEach(
-                path -> {
-                  try {
-                    Files.delete(path);
-                  } catch (IOException cause) {
-                    // NOTE: still throws SecurityException as before.
-                    log.error("Could not remove tlog file: {}", path, cause);
-                  }
-                });
+            .forEach(path -> {
+              try {
+                Files.delete(path);
+              } catch (IOException cause) {
+                // NOTE: still throws SecurityException as before.
+                log.error("Could not remove tlog file: {}", path, cause);
+              }
+            });
       } catch (IOException e) {
         log.error("Could not clear old tlogs in {}", tlogPath);
       }

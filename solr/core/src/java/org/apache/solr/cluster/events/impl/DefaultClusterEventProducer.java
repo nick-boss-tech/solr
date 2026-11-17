@@ -185,7 +185,7 @@ public class DefaultClusterEventProducer extends ClusterEventProducerBase {
     zkController.zkStateReader.registerCloudCollectionsListener(cloudCollectionsListener);
 
     clusterPropertiesListener =
-        (newProperties) -> {
+        newProperties -> {
           fireEvent(
               new ClusterPropertiesChangedEvent() {
                 final Instant now = Instant.now();

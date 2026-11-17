@@ -84,11 +84,10 @@ public class NoCacheHeaderTest extends CacheHeaderTestBase {
         getHttpClient()
             .newRequest(url)
             .method(method)
-            .headers(
-                h ->
-                    h.add(
-                        HttpHeader.IF_MODIFIED_SINCE,
-                        DateTimeFormatter.RFC_1123_DATE_TIME.format(ZonedDateTime.now())))
+            .headers(h ->
+                h.add(
+                    HttpHeader.IF_MODIFIED_SINCE,
+                    DateTimeFormatter.RFC_1123_DATE_TIME.format(ZonedDateTime.now())))
             .send();
     checkResponseBody(method, response);
     assertEquals(
@@ -100,12 +99,11 @@ public class NoCacheHeaderTest extends CacheHeaderTestBase {
         getHttpClient()
             .newRequest(url)
             .method(method)
-            .headers(
-                h ->
-                    h.add(
-                        HttpHeader.IF_MODIFIED_SINCE,
-                        DateTimeFormatter.RFC_1123_DATE_TIME.format(
-                            ZonedDateTime.now().minusSeconds(10))))
+            .headers(h ->
+                h.add(
+                    HttpHeader.IF_MODIFIED_SINCE,
+                    DateTimeFormatter.RFC_1123_DATE_TIME.format(
+                        ZonedDateTime.now().minusSeconds(10))))
             .send();
     checkResponseBody(method, response);
     assertEquals(
@@ -118,12 +116,11 @@ public class NoCacheHeaderTest extends CacheHeaderTestBase {
         getHttpClient()
             .newRequest(url)
             .method(method)
-            .headers(
-                h ->
-                    h.add(
-                        HttpHeader.IF_UNMODIFIED_SINCE,
-                        DateTimeFormatter.RFC_1123_DATE_TIME.format(
-                            ZonedDateTime.now().minusSeconds(10))))
+            .headers(h ->
+                h.add(
+                    HttpHeader.IF_UNMODIFIED_SINCE,
+                    DateTimeFormatter.RFC_1123_DATE_TIME.format(
+                        ZonedDateTime.now().minusSeconds(10))))
             .send();
     checkResponseBody(method, response);
     assertEquals(
@@ -135,11 +132,10 @@ public class NoCacheHeaderTest extends CacheHeaderTestBase {
         getHttpClient()
             .newRequest(url)
             .method(method)
-            .headers(
-                h ->
-                    h.add(
-                        HttpHeader.IF_UNMODIFIED_SINCE,
-                        DateTimeFormatter.RFC_1123_DATE_TIME.format(ZonedDateTime.now())))
+            .headers(h ->
+                h.add(
+                    HttpHeader.IF_UNMODIFIED_SINCE,
+                    DateTimeFormatter.RFC_1123_DATE_TIME.format(ZonedDateTime.now())))
             .send();
     checkResponseBody(method, response);
     assertEquals(

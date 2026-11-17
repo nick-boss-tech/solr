@@ -254,10 +254,8 @@ public class CloudSolrStream extends TupleStream implements Expressible {
       ModifiableSolrParams mParams = new ModifiableSolrParams(params);
       child.setExpression(
           mParams.getMap().entrySet().stream()
-              .map(
-                  e ->
-                      String.format(
-                          Locale.ROOT, "%s=%s", e.getKey(), Arrays.toString(e.getValue())))
+              .map(e ->
+                  String.format(Locale.ROOT, "%s=%s", e.getKey(), Arrays.toString(e.getValue())))
               .collect(Collectors.joining(",")));
     }
     explanation.addChild(child);
@@ -423,13 +421,12 @@ public class CloudSolrStream extends TupleStream implements Expressible {
           throw new IOException("No shards available from ZooKeeper: " + this.solrConnection);
         streamOfSolrStream =
             shards.stream()
-                .map(
-                    s ->
-                        new SolrStream(
-                            URLUtil.extractBaseUrl(s),
-                            URLUtil.extractCoreFromCoreUrl(s),
-                            path,
-                            mParams));
+                .map(s ->
+                    new SolrStream(
+                        URLUtil.extractBaseUrl(s),
+                        URLUtil.extractCoreFromCoreUrl(s),
+                        path,
+                        mParams));
       } else {
         // stream of replicas to reuse the same SolrHttpClient per baseUrl
         // avoids re-parsing data we already have in the replicas
@@ -442,20 +439,19 @@ public class CloudSolrStream extends TupleStream implements Expressible {
                 .map(r -> new SolrStream(r.getBaseUrl(), r.getCoreName(), path, mParams));
       }
 
-      streamOfSolrStream.forEach(
-          ss -> {
-            if (streamContext != null) {
-              ss.setStreamContext(streamContext);
-              if (streamContext.isLocal()) {
-                ss.setDistrib(false);
-              }
-            }
-            if (contextCache == null) {
-              ss.setClientCache(localSolrClientCache);
-            }
-            ss.setFieldMappings(this.fieldMappings);
-            solrStreams.add(ss);
-          });
+      streamOfSolrStream.forEach(ss -> {
+        if (streamContext != null) {
+          ss.setStreamContext(streamContext);
+          if (streamContext.isLocal()) {
+            ss.setDistrib(false);
+          }
+        }
+        if (contextCache == null) {
+          ss.setClientCache(localSolrClientCache);
+        }
+        ss.setFieldMappings(this.fieldMappings);
+        solrStreams.add(ss);
+      });
     } catch (Exception e) {
       throw new IOException(e);
     }

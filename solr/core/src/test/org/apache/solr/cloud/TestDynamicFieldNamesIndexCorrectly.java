@@ -94,18 +94,17 @@ public class TestDynamicFieldNamesIndexCorrectly extends AbstractFullDistribZkTe
       final Collection<String> resultFieldNames = resultDoc.getFieldNames();
       inDoc
           .getFieldNames()
-          .forEach(
-              fieldName -> {
-                assertThat(
-                    String.format(
-                        Locale.ROOT,
-                        "Doc %s does not have field %s, it has %s",
-                        id,
-                        fieldName,
-                        resultFieldNames),
-                    resultFieldNames,
-                    new IsIterableContaining<>(new IsEqual<>(fieldName)));
-              });
+          .forEach(fieldName -> {
+            assertThat(
+                String.format(
+                    Locale.ROOT,
+                    "Doc %s does not have field %s, it has %s",
+                    id,
+                    fieldName,
+                    resultFieldNames),
+                resultFieldNames,
+                new IsIterableContaining<>(new IsEqual<>(fieldName)));
+          });
     }
   }
 

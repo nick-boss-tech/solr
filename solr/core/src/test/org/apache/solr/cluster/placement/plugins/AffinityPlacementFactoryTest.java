@@ -604,19 +604,16 @@ public class AffinityPlacementFactoryTest extends AbstractPlacementFactoryTest {
           .computeIfAbsent(az, zone -> new AtomicInteger())
           .incrementAndGet();
     }
-    replicas.forEach(
-        (type, perTypeReplicas) -> {
-          perTypeReplicas.forEach(
-              (shard, azCounts) -> {
-                assertEquals("number of AZs", 2, azCounts.size());
-                azCounts.forEach(
-                    (az, count) -> {
-                      assertTrue(
-                          "too few replicas shard=" + shard + ", type=" + type + ", az=" + az,
-                          count.get() >= 1);
-                    });
-              });
+    replicas.forEach((type, perTypeReplicas) -> {
+      perTypeReplicas.forEach((shard, azCounts) -> {
+        assertEquals("number of AZs", 2, azCounts.size());
+        azCounts.forEach((az, count) -> {
+          assertTrue(
+              "too few replicas shard=" + shard + ", type=" + type + ", az=" + az,
+              count.get() >= 1);
         });
+      });
+    });
   }
 
   @Test
@@ -683,19 +680,16 @@ public class AffinityPlacementFactoryTest extends AbstractPlacementFactoryTest {
           .computeIfAbsent(group, g -> new AtomicInteger())
           .incrementAndGet();
     }
-    replicas.forEach(
-        (type, perTypeReplicas) -> {
-          perTypeReplicas.forEach(
-              (shard, groupCounts) -> {
-                assertEquals("number of groups", 1, groupCounts.size());
-                groupCounts.forEach(
-                    (group, count) -> {
-                      assertTrue(
-                          "too few replicas shard=" + shard + ", type=" + type + ", group=" + group,
-                          count.get() >= 1);
-                    });
-              });
+    replicas.forEach((type, perTypeReplicas) -> {
+      perTypeReplicas.forEach((shard, groupCounts) -> {
+        assertEquals("number of groups", 1, groupCounts.size());
+        groupCounts.forEach((group, count) -> {
+          assertTrue(
+              "too few replicas shard=" + shard + ", type=" + type + ", group=" + group,
+              count.get() >= 1);
         });
+      });
+    });
   }
 
   @Test
@@ -859,11 +853,10 @@ public class AffinityPlacementFactoryTest extends AbstractPlacementFactoryTest {
     assertEquals(2, pp.getReplicaPlacements().size());
     // verify that all placements are on nodes with the secondary replica
     pp.getReplicaPlacements()
-        .forEach(
-            placement ->
-                assertTrue(
-                    "placement node " + placement.getNode() + " not in secondary=" + secondaryNodes,
-                    secondaryNodes.contains(placement.getNode())));
+        .forEach(placement ->
+            assertTrue(
+                "placement node " + placement.getNode() + " not in secondary=" + secondaryNodes,
+                secondaryNodes.contains(placement.getNode())));
 
     placementRequest =
         new PlacementRequestImpl(
@@ -923,25 +916,24 @@ public class AffinityPlacementFactoryTest extends AbstractPlacementFactoryTest {
     assertEquals(2, pp.getReplicaPlacements().size());
     // verify that all placements are on nodes with the secondary replica
     pp.getReplicaPlacements()
-        .forEach(
-            placement -> {
-              assertTrue(
-                  "placement node " + placement.getNode() + " not in secondary=" + secondaryNodes,
-                  secondaryNodes.contains(placement.getNode()));
-              boolean collocated = false;
-              final Shard shard = secondaryCollection.getShard(placement.getShardName());
-              StringBuilder msg = new StringBuilder();
-              for (Iterator<Replica> secReplicas = shard.iterator();
-                  secReplicas.hasNext() && !collocated; ) {
-                final Replica secReplica = secReplicas.next();
-                collocated |= placement.getNode().getName().equals(secReplica.getNode().getName());
-                msg.append(secReplica.getReplicaName());
-                msg.append("@");
-                msg.append(secReplica.getNode().getName());
-                msg.append(", ");
-              }
-              assertTrue(placement + " is expected to be collocated with " + msg, collocated);
-            });
+        .forEach(placement -> {
+          assertTrue(
+              "placement node " + placement.getNode() + " not in secondary=" + secondaryNodes,
+              secondaryNodes.contains(placement.getNode()));
+          boolean collocated = false;
+          final Shard shard = secondaryCollection.getShard(placement.getShardName());
+          StringBuilder msg = new StringBuilder();
+          for (Iterator<Replica> secReplicas = shard.iterator();
+              secReplicas.hasNext() && !collocated; ) {
+            final Replica secReplica = secReplicas.next();
+            collocated |= placement.getNode().getName().equals(secReplica.getNode().getName());
+            msg.append(secReplica.getReplicaName());
+            msg.append("@");
+            msg.append(secReplica.getNode().getName());
+            msg.append(", ");
+          }
+          assertTrue(placement + " is expected to be collocated with " + msg, collocated);
+        });
 
     placementRequest =
         new PlacementRequestImpl(
@@ -996,16 +988,14 @@ public class AffinityPlacementFactoryTest extends AbstractPlacementFactoryTest {
     Set<Replica> secondaryReplicas = new HashSet<>();
     secondaryCollection
         .shards()
-        .forEach(
-            shard ->
-                shard
-                    .replicas()
-                    .forEach(
-                        replica -> {
-                          if (secondaryReplicas.size() < 1 && replica.getNode().equals(node)) {
-                            secondaryReplicas.add(replica);
-                          }
-                        }));
+        .forEach(shard ->
+            shard
+                .replicas()
+                .forEach(replica -> {
+                  if (secondaryReplicas.size() < 1 && replica.getNode().equals(node)) {
+                    secondaryReplicas.add(replica);
+                  }
+                }));
 
     DeleteReplicasRequest deleteReplicasRequest =
         ModificationRequestImpl.createDeleteReplicasRequest(secondaryCollection, secondaryReplicas);
@@ -1017,16 +1007,14 @@ public class AffinityPlacementFactoryTest extends AbstractPlacementFactoryTest {
 
     secondaryCollection
         .shards()
-        .forEach(
-            shard ->
-                shard
-                    .replicas()
-                    .forEach(
-                        replica -> {
-                          if (secondaryReplicas.size() < 2 && replica.getNode().equals(node)) {
-                            secondaryReplicas.add(replica);
-                          }
-                        }));
+        .forEach(shard ->
+            shard
+                .replicas()
+                .forEach(replica -> {
+                  if (secondaryReplicas.size() < 2 && replica.getNode().equals(node)) {
+                    secondaryReplicas.add(replica);
+                  }
+                }));
 
     deleteReplicasRequest =
         ModificationRequestImpl.createDeleteReplicasRequest(secondaryCollection, secondaryReplicas);
@@ -1081,19 +1069,18 @@ public class AffinityPlacementFactoryTest extends AbstractPlacementFactoryTest {
 
       replicas(secondaryCollection)
           .filter(r -> r.getNode().getName().equals(node.getName()))
-          .forEach(
-              r -> {
-                final String secRepShard = r.getShard().getShardName();
-                if (mustHaveShards.contains(secRepShard)) {
-                  if (seen.contains(secRepShard)) {
-                    toRemove.add(r);
-                  } else {
-                    seen.add(secRepShard);
-                  }
-                } else {
-                  toRemove.add(r);
-                }
-              });
+          .forEach(r -> {
+            final String secRepShard = r.getShard().getShardName();
+            if (mustHaveShards.contains(secRepShard)) {
+              if (seen.contains(secRepShard)) {
+                toRemove.add(r);
+              } else {
+                seen.add(secRepShard);
+              }
+            } else {
+              toRemove.add(r);
+            }
+          });
 
       assertFalse(toRemove.isEmpty());
       deleteReplicasRequest =
@@ -1165,15 +1152,14 @@ public class AffinityPlacementFactoryTest extends AbstractPlacementFactoryTest {
     placementContext
         .getCluster()
         .getLiveNodes()
-        .forEach(
-            n ->
-                nodeNamesByType
-                    .computeIfAbsent(
-                        attributeValues
-                            .getSystemProperty(n, AffinityPlacementConfig.NODE_TYPE_SYSPROP)
-                            .get(),
-                        type -> new HashSet<>())
-                    .add(n.getName()));
+        .forEach(n ->
+            nodeNamesByType
+                .computeIfAbsent(
+                    attributeValues
+                        .getSystemProperty(n, AffinityPlacementConfig.NODE_TYPE_SYSPROP)
+                        .get(),
+                    type -> new HashSet<>())
+                .add(n.getName()));
     SolrCollection collection = placementContext.getCluster().getCollection(collectionName);
     PlacementRequestImpl placementRequest =
         new PlacementRequestImpl(
@@ -1247,16 +1233,15 @@ public class AffinityPlacementFactoryTest extends AbstractPlacementFactoryTest {
     placementContext
         .getCluster()
         .getLiveNodes()
-        .forEach(
-            n -> {
-              String nodeTypesStr =
-                  attributeValues2
-                      .getSystemProperty(n, AffinityPlacementConfig.NODE_TYPE_SYSPROP)
-                      .get();
-              for (String nodeType : StrUtils.splitSmart(nodeTypesStr, ',')) {
-                nodeNamesByType.computeIfAbsent(nodeType, type -> new HashSet<>()).add(n.getName());
-              }
-            });
+        .forEach(n -> {
+          String nodeTypesStr =
+              attributeValues2
+                  .getSystemProperty(n, AffinityPlacementConfig.NODE_TYPE_SYSPROP)
+                  .get();
+          for (String nodeType : StrUtils.splitSmart(nodeTypesStr, ',')) {
+            nodeNamesByType.computeIfAbsent(nodeType, type -> new HashSet<>()).add(n.getName());
+          }
+        });
     type0nodes = nodeNamesByType.get("type_0");
     type1nodes = nodeNamesByType.get("type_1");
 
@@ -1392,20 +1377,16 @@ public class AffinityPlacementFactoryTest extends AbstractPlacementFactoryTest {
           .incrementAndGet();
     }
     int perNode = TOTAL_REPLICAS > numNodes ? TOTAL_REPLICAS / numNodes : 1;
-    replicasPerNode.forEach(
-        (node, count) -> {
-          assertEquals(
-              "Wrong number of replicas for node: " + node.getName(), perNode, count.get());
-        });
-    shardsPerNode.forEach(
-        (node, names) -> {
-          assertEquals("Wrong number of shards for node: " + node.getName(), perNode, names.size());
-        });
+    replicasPerNode.forEach((node, count) -> {
+      assertEquals("Wrong number of replicas for node: " + node.getName(), perNode, count.get());
+    });
+    shardsPerNode.forEach((node, names) -> {
+      assertEquals("Wrong number of shards for node: " + node.getName(), perNode, names.size());
+    });
 
-    replicasPerShard.forEach(
-        (shard, count) -> {
-          assertEquals(REPLICAS_PER_SHARD, count.get());
-        });
+    replicasPerShard.forEach((shard, count) -> {
+      assertEquals(REPLICAS_PER_SHARD, count.get());
+    });
   }
 
   @Test

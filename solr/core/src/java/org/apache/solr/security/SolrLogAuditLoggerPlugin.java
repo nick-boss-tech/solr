@@ -40,34 +40,33 @@ public class SolrLogAuditLoggerPlugin extends AuditLoggerPlugin {
   @Override
   public void init(Map<String, Object> pluginConfig) {
     super.init(pluginConfig);
-    setFormatter(
-        event ->
-            "type=\""
-                + event.getEventType().name()
-                + "\""
-                + " message=\""
-                + event.getMessage()
-                + "\""
-                + " method=\""
-                + event.getHttpMethod()
-                + "\""
-                + " status=\""
-                + event.getStatus()
-                + "\""
-                + " requestType=\""
-                + event.getRequestType()
-                + "\""
-                + " username=\""
-                + event.getUsername()
-                + "\""
-                + " resource=\""
-                + event.getResource()
-                + "\""
-                + " queryString=\""
-                + event.getHttpQueryString()
-                + "\""
-                + " collections="
-                + event.getCollections());
+    setFormatter(event ->
+        "type=\""
+            + event.getEventType().name()
+            + "\""
+            + " message=\""
+            + event.getMessage()
+            + "\""
+            + " method=\""
+            + event.getHttpMethod()
+            + "\""
+            + " status=\""
+            + event.getStatus()
+            + "\""
+            + " requestType=\""
+            + event.getRequestType()
+            + "\""
+            + " username=\""
+            + event.getUsername()
+            + "\""
+            + " resource=\""
+            + event.getResource()
+            + "\""
+            + " queryString=\""
+            + event.getHttpQueryString()
+            + "\""
+            + " collections="
+            + event.getCollections());
     if (pluginConfig.size() > 0) {
       throw new SolrException(
           SolrException.ErrorCode.INVALID_STATE,

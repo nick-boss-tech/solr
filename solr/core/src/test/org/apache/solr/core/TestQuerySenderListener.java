@@ -67,39 +67,37 @@ public class TestQuerySenderListener extends SolrTestCaseJ4 {
     QuerySenderListener qsl = (QuerySenderListener) newSearcherListener;
 
     h.getCore()
-        .withSearcher(
-            currentSearcher -> {
-              qsl.newSearcher(currentSearcher, null); // test new Searcher
+        .withSearcher(currentSearcher -> {
+          qsl.newSearcher(currentSearcher, null); // test new Searcher
 
-              MockQuerySenderListenerReqHandler mock =
-                  (MockQuerySenderListenerReqHandler) core.getRequestHandler("/mock");
-              assertNotNull("Mock is null", mock);
+          MockQuerySenderListenerReqHandler mock =
+              (MockQuerySenderListenerReqHandler) core.getRequestHandler("/mock");
+          assertNotNull("Mock is null", mock);
 
-              {
+          {
+            String evt = mock.req.getParams().get(EventParams.EVENT);
+            assertNotNull("Event is null", evt);
+            assertEquals(
+                evt + " is not equal to " + EventParams.FIRST_SEARCHER,
+                EventParams.FIRST_SEARCHER,
+                evt);
+
+            assertU(adoc("id", "1"));
+            assertU(commit());
+          }
+
+          h.getCore()
+              .withSearcher(newSearcher -> {
                 String evt = mock.req.getParams().get(EventParams.EVENT);
                 assertNotNull("Event is null", evt);
                 assertEquals(
-                    evt + " is not equal to " + EventParams.FIRST_SEARCHER,
-                    EventParams.FIRST_SEARCHER,
+                    evt + " is not equal to " + EventParams.NEW_SEARCHER,
+                    EventParams.NEW_SEARCHER,
                     evt);
+                return null;
+              });
 
-                assertU(adoc("id", "1"));
-                assertU(commit());
-              }
-
-              h.getCore()
-                  .withSearcher(
-                      newSearcher -> {
-                        String evt = mock.req.getParams().get(EventParams.EVENT);
-                        assertNotNull("Event is null", evt);
-                        assertEquals(
-                            evt + " is not equal to " + EventParams.NEW_SEARCHER,
-                            EventParams.NEW_SEARCHER,
-                            evt);
-                        return null;
-                      });
-
-              return null;
-            });
+          return null;
+        });
   }
 }

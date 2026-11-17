@@ -84,10 +84,9 @@ public class Docs {
 
   private Docs(Long seed) {
     this.random =
-        ThreadLocal.withInitial(
-            () ->
-                new BenchmarkRandomSource(
-                    new SplittableRandomGenerator(seed))); // TODO: pluggable RandomGenerator
+        ThreadLocal.withInitial(() ->
+            new BenchmarkRandomSource(
+                new SplittableRandomGenerator(seed))); // TODO: pluggable RandomGenerator
   }
 
   /**

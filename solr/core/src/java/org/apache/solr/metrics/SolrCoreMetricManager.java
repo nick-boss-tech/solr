@@ -104,12 +104,11 @@ public class SolrCoreMetricManager implements Closeable {
     // registerMetricProducer
     core.initializeMetrics(solrMetricsContext, core.getCoreAttributes());
 
-    registeredProducers.forEach(
-        metricProducer -> {
-          metricProducer.producer.initializeMetrics(
-              solrMetricsContext,
-              metricProducer.attributes.toBuilder().putAll(core.getCoreAttributes()).build());
-        });
+    registeredProducers.forEach(metricProducer -> {
+      metricProducer.producer.initializeMetrics(
+          solrMetricsContext,
+          metricProducer.attributes.toBuilder().putAll(core.getCoreAttributes()).build());
+    });
   }
 
   /**

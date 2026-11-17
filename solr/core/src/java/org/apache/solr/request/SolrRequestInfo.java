@@ -255,7 +255,7 @@ public class SolrRequestInfo {
 
   public static QueryLimits getQueryLimits(SolrQueryRequest request, SolrQueryResponse response) {
     return (QueryLimits)
-        request.getContext().computeIfAbsent(LIMITS_KEY, (k) -> new QueryLimits(request, response));
+        request.getContext().computeIfAbsent(LIMITS_KEY, k -> new QueryLimits(request, response));
   }
 
   public HttpSolrCall.Action getAction() {

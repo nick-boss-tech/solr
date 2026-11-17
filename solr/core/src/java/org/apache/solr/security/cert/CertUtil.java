@@ -144,11 +144,10 @@ public class CertUtil {
     List<String> filteredSANValues =
         altNames.stream()
             .filter(entry -> entry != null && entry.size() >= 2)
-            .filter(
-                entry -> {
-                  SANType sanType = SANType.fromValue((Integer) entry.get(0));
-                  return sanType != null && sanType.pathLowerCase().equals(path);
-                })
+            .filter(entry -> {
+              SANType sanType = SANType.fromValue((Integer) entry.get(0));
+              return sanType != null && sanType.pathLowerCase().equals(path);
+            })
             .map(entry -> (String) entry.get(1))
             .filter(valueMatcher)
             .collect(Collectors.toList());

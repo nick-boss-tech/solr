@@ -153,13 +153,12 @@ public class SimplePlacementFactoryTest extends AbstractPlacementFactoryTest {
 
     List<PlacementRequest> placementRequests =
         solrCollection.getShardNames().stream()
-            .map(
-                shard ->
-                    new PlacementRequestImpl(
-                        solrCollection,
-                        Set.of(shard),
-                        new HashSet<>(liveNodes),
-                        ReplicaCount.of(1, 0, 0)))
+            .map(shard ->
+                new PlacementRequestImpl(
+                    solrCollection,
+                    Set.of(shard),
+                    new HashSet<>(liveNodes),
+                    ReplicaCount.of(1, 0, 0)))
             .collect(Collectors.toList());
     // Randomize the order of the requests
     Collections.shuffle(placementRequests, random());
@@ -173,12 +172,11 @@ public class SimplePlacementFactoryTest extends AbstractPlacementFactoryTest {
 
     List<ReplicaPlacement> replicaPlacements =
         pps.stream().flatMap(pp -> pp.getReplicaPlacements().stream()).collect(Collectors.toList());
-    replicaPlacements.forEach(
-        rp ->
-            assertNotEquals(
-                "Two replicas of the same shard on the same node",
-                solrCollection.getShard(rp.getShardName()).iterator().next().getNode(),
-                rp.getNode()));
+    replicaPlacements.forEach(rp ->
+        assertNotEquals(
+            "Two replicas of the same shard on the same node",
+            solrCollection.getShard(rp.getShardName()).iterator().next().getNode(),
+            rp.getNode()));
     Map<Node, List<ReplicaPlacement>> placementsByNode =
         replicaPlacements.stream()
             .collect(Collectors.groupingBy(ReplicaPlacement::getNode, Collectors.toList()));

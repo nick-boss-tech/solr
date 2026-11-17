@@ -296,36 +296,34 @@ public class HttpShardHandler extends ShardHandler {
     }
     // Add the callback explicitly after adding the future to the map, because the callback relies
     // on the map already having the future.
-    future.whenComplete(
-        (LBSolrClient.Rsp rsp, Throwable throwable) -> {
-          try {
-            if (rsp != null) {
-              ssr.nl = rsp.getResponse();
-              srsp.setShardAddress(rsp.getServer());
-            } else if (throwable != null) {
-              srsp.setException(throwable);
-              if (throwable instanceof SolrException) {
-                srsp.setResponseCode(((SolrException) throwable).code());
-              }
-            }
-            ssr.elapsedTime =
-                TimeUnit.MILLISECONDS.convert(
-                    System.nanoTime() - startTimeNS, TimeUnit.NANOSECONDS);
-            enqueueIfTracked(srsp, HttpShardHandler.this.transformResponse(sreq, srsp, shard));
-          } catch (Exception e) {
-            // If response processing throws (a subclass transformResponse, a malformed Rsp, etc.)
-            // the response would never be enqueued — yet responseFutureMap still tracks srsp, so a
-            // consumer in take() would park forever. Turn the failure into the shard's response and
-            // enqueue it raw, bypassing transformResponse (which may itself be the thrower). We
-            // deliberately catch Exception, not Throwable, so a JVM Error (e.g. OutOfMemoryError)
-            // propagates instead of being silently downgraded to a shard error.
-            srsp.setException(e);
-            if (e instanceof SolrException) {
-              srsp.setResponseCode(((SolrException) e).code());
-            }
-            enqueueIfTracked(srsp, srsp);
+    future.whenComplete((LBSolrClient.Rsp rsp, Throwable throwable) -> {
+      try {
+        if (rsp != null) {
+          ssr.nl = rsp.getResponse();
+          srsp.setShardAddress(rsp.getServer());
+        } else if (throwable != null) {
+          srsp.setException(throwable);
+          if (throwable instanceof SolrException) {
+            srsp.setResponseCode(((SolrException) throwable).code());
           }
-        });
+        }
+        ssr.elapsedTime =
+            TimeUnit.MILLISECONDS.convert(System.nanoTime() - startTimeNS, TimeUnit.NANOSECONDS);
+        enqueueIfTracked(srsp, HttpShardHandler.this.transformResponse(sreq, srsp, shard));
+      } catch (Exception e) {
+        // If response processing throws (a subclass transformResponse, a malformed Rsp, etc.)
+        // the response would never be enqueued — yet responseFutureMap still tracks srsp, so a
+        // consumer in take() would park forever. Turn the failure into the shard's response and
+        // enqueue it raw, bypassing transformResponse (which may itself be the thrower). We
+        // deliberately catch Exception, not Throwable, so a JVM Error (e.g. OutOfMemoryError)
+        // propagates instead of being silently downgraded to a shard error.
+        srsp.setException(e);
+        if (e instanceof SolrException) {
+          srsp.setResponseCode(((SolrException) e).code());
+        }
+        enqueueIfTracked(srsp, srsp);
+      }
+    });
   }
 
   /**

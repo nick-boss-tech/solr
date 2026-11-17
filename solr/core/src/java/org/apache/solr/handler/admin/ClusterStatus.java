@@ -356,33 +356,32 @@ public class ClusterStatus {
             ? (Map<String, Map<String, Object>>) collection.getOrDefault("shards", Map.of())
             : Map.of();
     final List<Health> healthStates = new ArrayList<>(shards.size());
-    shards.forEach(
-        (shardName, s) -> {
-          final Map<String, Map<String, Object>> replicas =
-              (Map<String, Map<String, Object>>) s.getOrDefault("replicas", Map.of());
-          int[] totalVsActive = new int[2];
-          boolean hasLeader = false;
-          for (Map<String, Object> r : replicas.values()) {
-            totalVsActive[0]++;
-            boolean active = false;
-            if (Replica.State.ACTIVE.toString().equals(r.get("state"))) {
-              totalVsActive[1]++;
-              active = true;
-            }
-            if ("true".equals(r.get("leader")) && active) {
-              hasLeader = true;
-            }
-          }
-          float ratioActive;
-          if (totalVsActive[0] == 0) {
-            ratioActive = 0.0f;
-          } else {
-            ratioActive = (float) totalVsActive[1] / totalVsActive[0];
-          }
-          Health health = Health.calcShardHealth(ratioActive, hasLeader);
-          s.put("health", health.toString());
-          healthStates.add(health);
-        });
+    shards.forEach((shardName, s) -> {
+      final Map<String, Map<String, Object>> replicas =
+          (Map<String, Map<String, Object>>) s.getOrDefault("replicas", Map.of());
+      int[] totalVsActive = new int[2];
+      boolean hasLeader = false;
+      for (Map<String, Object> r : replicas.values()) {
+        totalVsActive[0]++;
+        boolean active = false;
+        if (Replica.State.ACTIVE.toString().equals(r.get("state"))) {
+          totalVsActive[1]++;
+          active = true;
+        }
+        if ("true".equals(r.get("leader")) && active) {
+          hasLeader = true;
+        }
+      }
+      float ratioActive;
+      if (totalVsActive[0] == 0) {
+        ratioActive = 0.0f;
+      } else {
+        ratioActive = (float) totalVsActive[1] / totalVsActive[0];
+      }
+      Health health = Health.calcShardHealth(ratioActive, hasLeader);
+      s.put("health", health.toString());
+      healthStates.add(health);
+    });
     collection.put("health", Health.combine(healthStates).toString());
     return collection;
   }
@@ -401,7 +400,7 @@ public class ClusterStatus {
       clusterStateCollection
           .getRouter()
           .getSearchSlices(routeKey, null, clusterStateCollection)
-          .forEach((slice) -> shards.add(slice.getName()));
+          .forEach(slice -> shards.add(slice.getName()));
 
     if (requestedShards != null) shards.addAll(requestedShards);
 

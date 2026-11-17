@@ -348,11 +348,10 @@ public class SolrCmdDistributor implements Closeable {
       // so we make it async to prevent commits from happening
       // serially across multiple nodes
       pending.add(
-          completionService.submit(
-              () -> {
-                doRequest(req);
-                return null;
-              }));
+          completionService.submit(() -> {
+            doRequest(req);
+            return null;
+          }));
     } else {
       doRequest(req);
     }

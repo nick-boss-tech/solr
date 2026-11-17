@@ -66,8 +66,8 @@ public abstract class AbstractNumericRangeField extends PrimitiveFieldType {
 
   /**
    * Marker interface for parsed range value objects. Implemented by the inner {@code RangeValue}
-   * classes of concrete subclasses so that {@link #toNativeType(Object)} can identify already-
-   * parsed values without knowing the concrete type.
+   * classes of concrete subclasses so that {@link #toNativeType(Object)} can identify
+   * already-parsed values without knowing the concrete type.
    *
    * <p>Concrete subclasses override {@link #parseRangeValue(String)} with a covariant return type
    * so callers within the subclass receive the concrete type directly (e.g. {@code

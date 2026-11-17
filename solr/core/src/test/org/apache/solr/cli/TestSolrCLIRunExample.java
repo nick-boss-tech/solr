@@ -218,18 +218,17 @@ public class TestSolrCLIRunExample extends SolrTestCaseJ4 {
 
       standaloneSolr = new JettySolrRunner(solrHomeDir.toString(), port);
       Thread bg =
-          new Thread(
-              () -> {
-                try {
-                  standaloneSolr.start();
-                } catch (Exception e) {
-                  if (e instanceof RuntimeException) {
-                    throw (RuntimeException) e;
-                  } else {
-                    throw new RuntimeException(e);
-                  }
-                }
-              });
+          new Thread(() -> {
+            try {
+              standaloneSolr.start();
+            } catch (Exception e) {
+              if (e instanceof RuntimeException) {
+                throw (RuntimeException) e;
+              } else {
+                throw new RuntimeException(e);
+              }
+            }
+          });
       bg.start();
 
       return 0;

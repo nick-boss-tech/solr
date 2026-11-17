@@ -118,10 +118,9 @@ public class InstallShardDataCmd implements CollApiCmds.CollectionApiCommand {
     Set<Replica> successfulReplicas =
         leaderEligibleReplicas.stream()
             .filter(replica -> !notLiveReplicas.contains(replica))
-            .filter(
-                replica ->
-                    failures == null
-                        || failures.get(CollectionHandlingUtils.requestKey(replica)) == null)
+            .filter(replica ->
+                failures == null
+                    || failures.get(CollectionHandlingUtils.requestKey(replica)) == null)
             .collect(Collectors.toSet());
 
     if (successfulReplicas.isEmpty()) {
@@ -166,17 +165,16 @@ public class InstallShardDataCmd implements CollApiCmds.CollectionApiCommand {
       // In order for the async request to succeed, we need to ensure that there is no failure
       // message
       NamedList<Object> successes = (NamedList<Object>) results.get("success");
-      failures.forEach(
-          (replicaKey, value) -> {
-            successes.add(
-                replicaKey,
-                new NamedList<>(
-                    Map.of(
-                        "explanation",
-                        "Core install failed, but is now recovering from the leader",
-                        "failure",
-                        value)));
-          });
+      failures.forEach((replicaKey, value) -> {
+        successes.add(
+            replicaKey,
+            new NamedList<>(
+                Map.of(
+                    "explanation",
+                    "Core install failed, but is now recovering from the leader",
+                    "failure",
+                    value)));
+      });
       results.remove("failure");
     } else {
       // other replicas to-be-created will know that they are out of date by

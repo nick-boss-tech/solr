@@ -203,7 +203,7 @@ class FlatKeysAttrVisitor implements AttrVisitor {
   private void ifKeyExists(String key, BiConsumer<String, String> pathConsumer) {
     withKey(
         key,
-        (path) -> {
+        path -> {
           if (attrs.containsKey(path)) {
             String value = attrs.get(path);
             if (value.trim().isEmpty()) {

@@ -708,7 +708,7 @@ public class ReplicationHandler extends RequestHandlerBase
           commitName,
           name,
           core,
-          (nl) -> snapShootDetails = nl);
+          nl -> snapShootDetails = nl);
       rsp.add(STATUS, OK_STATUS);
     } catch (SolrException e) {
       throw e;
@@ -1664,7 +1664,7 @@ public class ReplicationHandler extends RequestHandlerBase
             SnapShooter snapShooter =
                 new SnapShooter(new LocalFileSystemRepository(), core, locationUri, null, null);
             snapShooter.validateCreateSnapshot();
-            snapShooter.createSnapAsync(numberToKeep, (nl) -> snapShootDetails = nl);
+            snapShooter.createSnapAsync(numberToKeep, nl -> snapShootDetails = nl);
           } catch (Exception e) {
             log.error("Exception while snapshooting", e);
           }

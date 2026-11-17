@@ -357,15 +357,13 @@ public class AtomicUpdateDocumentMerger {
       // not in full doc, it will not be filtered, and therefore List#containsAll will return false
       Stream<Object> nonChildDocElements =
           partialFieldValues.stream()
-              .filter(
-                  x ->
-                      !(isChildDoc(x)
-                          && (fieldValues.stream()
-                              .anyMatch(
-                                  y ->
-                                      (isChildDoc(x)
-                                          && isDerivedFromDoc(
-                                              (SolrInputDocument) y, (SolrInputDocument) x))))));
+              .filter(x ->
+                  !(isChildDoc(x)
+                      && (fieldValues.stream()
+                          .anyMatch(y ->
+                              (isChildDoc(x)
+                                  && isDerivedFromDoc(
+                                      (SolrInputDocument) y, (SolrInputDocument) x))))));
       if (!nonChildDocElements.allMatch(fieldValues::contains)) return false;
     }
     return true;
@@ -495,12 +493,11 @@ public class AtomicUpdateDocumentMerger {
 
     final SolrInputField existingField =
         Optional.ofNullable(toDoc.get(name))
-            .orElseGet(
-                () -> {
-                  final SolrInputField replacement = new SolrInputField(name);
-                  replacement.setValue(List.of());
-                  return replacement;
-                });
+            .orElseGet(() -> {
+              final SolrInputField replacement = new SolrInputField(name);
+              replacement.setValue(List.of());
+              return replacement;
+            });
 
     Map<BytesRef, SolrInputDocument> originalChildrenById =
         existingField.getValues().stream()
@@ -777,35 +774,32 @@ public class AtomicUpdateDocumentMerger {
     if (nativeValue instanceof Double || nativeValue instanceof Float) {
       final Number nativeAsNumber = (Number) nativeValue;
       return original.stream()
-          .filter(
-              val ->
-                  val.equals(rawValue)
-                      || val.equals(nativeValue)
-                      || (val instanceof Number
-                          && ((Number) val).doubleValue() == nativeAsNumber.doubleValue())
-                      || (val instanceof String && val.equals(nativeAsNumber.toString())))
+          .filter(val ->
+              val.equals(rawValue)
+                  || val.equals(nativeValue)
+                  || (val instanceof Number
+                      && ((Number) val).doubleValue() == nativeAsNumber.doubleValue())
+                  || (val instanceof String && val.equals(nativeAsNumber.toString())))
           .findFirst();
     } else if (nativeValue instanceof Long || nativeValue instanceof Integer) {
       final Number nativeAsNumber = (Number) nativeValue;
       return original.stream()
-          .filter(
-              val ->
-                  val.equals(rawValue)
-                      || val.equals(nativeValue)
-                      || (val instanceof Number
-                          && ((Number) val).longValue() == nativeAsNumber.longValue())
-                      || (val instanceof String && val.equals(nativeAsNumber.toString())))
+          .filter(val ->
+              val.equals(rawValue)
+                  || val.equals(nativeValue)
+                  || (val instanceof Number
+                      && ((Number) val).longValue() == nativeAsNumber.longValue())
+                  || (val instanceof String && val.equals(nativeAsNumber.toString())))
           .findFirst();
     } else if (nativeValue instanceof Date) {
       return original.stream()
-          .filter(
-              val ->
-                  val.equals(rawValue)
-                      || val.equals(nativeValue)
-                      || (val instanceof String
-                          && DateMathParser.parseMath(null, (String) val)
-                              .toInstant()
-                              .equals(((Date) nativeValue).toInstant())))
+          .filter(val ->
+              val.equals(rawValue)
+                  || val.equals(nativeValue)
+                  || (val instanceof String
+                      && DateMathParser.parseMath(null, (String) val)
+                          .toInstant()
+                          .equals(((Date) nativeValue).toInstant())))
           .findFirst();
     } else if (original.contains(nativeValue)) {
       return Optional.of(nativeValue);

@@ -167,10 +167,9 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
         Map.of(collName, new TestCollectionRef(currentDoc::get, refGets, null, null, -1));
     try (ClusterStateProvider provider = getStateProvider(liveNodes, refs);
         RecordingCloudSolrClient client = new RecordingCloudSolrClient(provider, 3)) {
-      client.enqueue(
-          (req, cols) -> {
-            throw new SolrException(SolrException.ErrorCode.INVALID_STATE, "stale");
-          });
+      client.enqueue((req, cols) -> {
+        throw new SolrException(SolrException.ErrorCode.INVALID_STATE, "stale");
+      });
       client.enqueue((req, cols) -> null);
 
       DummyRequest request = new DummyRequest(collName);
@@ -195,10 +194,9 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     try (ClusterStateProvider provider = getStateProvider(liveNodes, refs);
         RecordingCloudSolrClient client =
             new RecordingCloudSolrClient(provider, true, true, true, 3)) {
-      client.enqueue(
-          (req, cols) -> {
-            throw new SolrException(SolrException.ErrorCode.INVALID_STATE, "stale");
-          });
+      client.enqueue((req, cols) -> {
+        throw new SolrException(SolrException.ErrorCode.INVALID_STATE, "stale");
+      });
       client.enqueue((req, cols) -> null);
 
       DummyUpdateRequest request = new DummyUpdateRequest(collName);
@@ -226,15 +224,13 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     try (ClusterStateProvider provider = getStateProvider(liveNodes, refs);
         RecordingCloudSolrClient client = new RecordingCloudSolrClient(provider, 2)) {
       // First attempt: returns stale error, triggers skipStateVersion retry
-      client.enqueue(
-          (req, cols) -> {
-            throw new SolrException(SolrException.ErrorCode.INVALID_STATE, "stale-first");
-          });
+      client.enqueue((req, cols) -> {
+        throw new SolrException(SolrException.ErrorCode.INVALID_STATE, "stale-first");
+      });
       // Second attempt (skipStateVersion retry): also returns stale error
-      client.enqueue(
-          (req, cols) -> {
-            throw new SolrException(SolrException.ErrorCode.INVALID_STATE, "stale-second");
-          });
+      client.enqueue((req, cols) -> {
+        throw new SolrException(SolrException.ErrorCode.INVALID_STATE, "stale-second");
+      });
       // Third attempt (after waiting for refresh): succeeds
       client.enqueue((req, cols) -> null);
 
@@ -289,13 +285,12 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     try (ClusterStateProvider provider = getStateProvider(liveNodes, refs);
         RecordingCloudSolrClient client = new RecordingCloudSolrClient(provider, 2)) {
       AtomicInteger sendCount = new AtomicInteger();
-      client.setDefaultInvocation(
-          (req, cols) -> {
-            if (sendCount.incrementAndGet() <= 2) {
-              throw new SolrException(SolrException.ErrorCode.INVALID_STATE, "stale");
-            }
-            return null;
-          });
+      client.setDefaultInvocation((req, cols) -> {
+        if (sendCount.incrementAndGet() <= 2) {
+          throw new SolrException(SolrException.ErrorCode.INVALID_STATE, "stale");
+        }
+        return null;
+      });
 
       DummyRequest request = new DummyRequest(collName);
       ExecutorService executor =
@@ -327,18 +322,17 @@ public class CloudSolrClientCacheTest extends SolrTestCaseJ4 {
     var mockLbclient = mock(LBJettySolrClient.class);
 
     when(mockLbclient.request(any(LBSolrClient.Req.class)))
-        .then(
-            invocationOnMock -> {
-              LBSolrClient.Req req = invocationOnMock.getArgument(0);
-              Function<?, ?> f = responses.get("request");
-              if (f == null) return null;
-              Object res = f.apply(null);
-              if (res instanceof Exception) throw (Throwable) res;
-              LBSolrClient.Rsp rsp = new LBSolrClient.Rsp();
-              rsp.rsp = (NamedList<Object>) res;
-              rsp.server = req.endpoints.get(0).toString();
-              return rsp;
-            });
+        .then(invocationOnMock -> {
+          LBSolrClient.Req req = invocationOnMock.getArgument(0);
+          Function<?, ?> f = responses.get("request");
+          if (f == null) return null;
+          Object res = f.apply(null);
+          if (res instanceof Exception) throw (Throwable) res;
+          LBSolrClient.Rsp rsp = new LBSolrClient.Rsp();
+          rsp.rsp = (NamedList<Object>) res;
+          rsp.server = req.endpoints.get(0).toString();
+          return rsp;
+        });
     return mockLbclient;
   }
 

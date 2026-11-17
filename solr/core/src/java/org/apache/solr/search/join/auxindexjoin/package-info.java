@@ -16,8 +16,6 @@
  */
 
 /**
- *
- *
  * <h2>Auxiliary Index Join</h2>
  *
  * Persists doc-nums to doc-nums relation in auxiliary index.

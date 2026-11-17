@@ -699,7 +699,7 @@ public class JavaBinCodec implements PushWriter {
     writeTag(SOLRDOC);
     writeTag(ORDERED_MAP, sz);
     if (cew == null)
-      cew = new ConditionalKeyMapWriter.EntryWriterWrapper(ew, (k) -> toWrite(k.toString()));
+      cew = new ConditionalKeyMapWriter.EntryWriterWrapper(ew, k -> toWrite(k.toString()));
     doc.writeMap(cew);
     if (children != null) {
       try {

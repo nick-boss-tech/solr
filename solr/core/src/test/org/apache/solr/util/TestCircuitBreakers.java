@@ -101,26 +101,24 @@ public class TestCircuitBreakers extends SolrTestCaseJ4 {
               SolrException.ErrorCode.TOO_MANY_REQUESTS.code,
               SolrException.ErrorCode.SERVICE_UNAVAILABLE.code,
               SolrException.ErrorCode.BAD_REQUEST.code)
-          .forEach(
-              code -> {
-                removeAllExistingCircuitBreakers();
-                if (code > 0) {
-                  System.setProperty(
-                      CircuitBreaker.SYSPROP_SOLR_CIRCUITBREAKER_ERRORCODE, String.valueOf(code));
-                }
-                CircuitBreaker circuitBreaker = new MockCircuitBreaker(true);
-                h.getCore().getCircuitBreakerRegistry().register(circuitBreaker);
-                SolrException ex =
-                    expectThrows(
-                        SolrException.class,
-                        () -> {
-                          h.query(req("name:\"john smith\""));
-                        });
-                assertEquals(
-                    (code == -1) ? SolrException.ErrorCode.TOO_MANY_REQUESTS.code : code,
-                    ex.code());
-                System.clearProperty(CircuitBreaker.SYSPROP_SOLR_CIRCUITBREAKER_ERRORCODE);
-              });
+          .forEach(code -> {
+            removeAllExistingCircuitBreakers();
+            if (code > 0) {
+              System.setProperty(
+                  CircuitBreaker.SYSPROP_SOLR_CIRCUITBREAKER_ERRORCODE, String.valueOf(code));
+            }
+            CircuitBreaker circuitBreaker = new MockCircuitBreaker(true);
+            h.getCore().getCircuitBreakerRegistry().register(circuitBreaker);
+            SolrException ex =
+                expectThrows(
+                    SolrException.class,
+                    () -> {
+                      h.query(req("name:\"john smith\""));
+                    });
+            assertEquals(
+                (code == -1) ? SolrException.ErrorCode.TOO_MANY_REQUESTS.code : code, ex.code());
+            System.clearProperty(CircuitBreaker.SYSPROP_SOLR_CIRCUITBREAKER_ERRORCODE);
+          });
     }
   }
 
@@ -204,14 +202,13 @@ public class TestCircuitBreakers extends SolrTestCaseJ4 {
   public void testCBAlwaysTripsInvalidErrorCodeSysProp() {
     synchronized (this) {
       List.of("foo", 123, 999, 888)
-          .forEach(
-              code -> {
-                System.setProperty(
-                    CircuitBreaker.SYSPROP_SOLR_CIRCUITBREAKER_ERRORCODE, String.valueOf(code));
-                SolrException ex =
-                    expectThrows(SolrException.class, () -> new MockCircuitBreaker(true));
-                assertTrue(ex.getMessage().contains("Invalid error code"));
-              });
+          .forEach(code -> {
+            System.setProperty(
+                CircuitBreaker.SYSPROP_SOLR_CIRCUITBREAKER_ERRORCODE, String.valueOf(code));
+            SolrException ex =
+                expectThrows(SolrException.class, () -> new MockCircuitBreaker(true));
+            assertTrue(ex.getMessage().contains("Invalid error code"));
+          });
     }
   }
 
@@ -328,17 +325,16 @@ public class TestCircuitBreakers extends SolrTestCaseJ4 {
 
       for (int i = 0; i < 5; i++) {
         Future<?> future =
-            executor.submit(
-                () -> {
-                  try {
-                    h.query(req("name:\"john smith\""));
-                  } catch (SolrException e) {
-                    assertThat(e.getMessage(), containsString("Circuit Breakers tripped"));
-                    failureCount.incrementAndGet();
-                  } catch (Exception e) {
-                    throw new RuntimeException(e.getMessage());
-                  }
-                });
+            executor.submit(() -> {
+              try {
+                h.query(req("name:\"john smith\""));
+              } catch (SolrException e) {
+                assertThat(e.getMessage(), containsString("Circuit Breakers tripped"));
+                failureCount.incrementAndGet();
+              } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+              }
+            });
 
         futures.add(future);
       }

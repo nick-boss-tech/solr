@@ -88,7 +88,7 @@ public class DocValuesIteratorCache {
     this.nLeaves = searcher.getTopReaderContext().leaves().size();
     if (cache) {
       HashMap<String, FieldDocValuesSupplier> map = new HashMap<>();
-      getSupplier = (f) -> map.computeIfAbsent(f, this::newEntry);
+      getSupplier = f -> map.computeIfAbsent(f, this::newEntry);
     } else {
       getSupplier = this::newEntry;
     }

@@ -86,13 +86,13 @@ public class XML {
    */
   public static void writeUnescapedXML(Writer out, String tag, String val, Object... attrs)
       throws IOException {
-    writeXML(out, tag, (writer1) -> writer1.write(val), attrs);
+    writeXML(out, tag, writer1 -> writer1.write(val), attrs);
   }
 
   /** escapes character data in val and attributes */
   public static void writeXML(Writer out, String tag, String val, Object... attrs)
       throws IOException {
-    final Writable writable = val != null ? (writer1) -> XML.escapeCharData(val, writer1) : null;
+    final Writable writable = val != null ? writer1 -> XML.escapeCharData(val, writer1) : null;
     writeXML(out, tag, writable, attrs);
   }
 

@@ -163,20 +163,19 @@ public class TestRequestRateLimiter extends SolrCloudTestCase {
       for (int i = 0; i < slotLimit; i++) {
         int idx = i;
         futures.add(
-            exec.submit(
-                () -> {
-                  try {
-                    long start = System.nanoTime();
-                    RequestRateLimiter.SlotReservation res = mgr.handleRequest(QUERY_REQ);
-                    assertNotNull(res);
-                    acquired[idx] = res;
-                    // we should never have to wait to acquire a slot.
-                    assertTrue(System.nanoTime() - start < threshold);
-                  } finally {
-                    cdl.countDown();
-                  }
-                  return null;
-                }));
+            exec.submit(() -> {
+              try {
+                long start = System.nanoTime();
+                RequestRateLimiter.SlotReservation res = mgr.handleRequest(QUERY_REQ);
+                assertNotNull(res);
+                acquired[idx] = res;
+                // we should never have to wait to acquire a slot.
+                assertTrue(System.nanoTime() - start < threshold);
+              } finally {
+                cdl.countDown();
+              }
+              return null;
+            }));
       }
 
       cdl.await();
@@ -204,23 +203,22 @@ public class TestRequestRateLimiter extends SolrCloudTestCase {
       for (int i = 0; i < otherAcquire; i++) {
         int idx = i;
         futures.add(
-            exec.submit(
-                () -> {
-                  try {
-                    long startL = System.nanoTime();
-                    RequestRateLimiter.SlotReservation res = mgr.handleRequest(UPDATE_REQ);
-                    assertNotNull(res);
-                    acquired[idx] = res;
-                    // we should never have to wait to acquire a slot -- borrow many of these
-                    long waited = System.nanoTime() - startL;
-                    assertTrue(
-                        idx + " waited " + TimeUnit.NANOSECONDS.toMillis(waited) + "ms",
-                        waited < borrowThreshold);
-                  } finally {
-                    otherLatch.countDown();
-                  }
-                  return null;
-                }));
+            exec.submit(() -> {
+              try {
+                long startL = System.nanoTime();
+                RequestRateLimiter.SlotReservation res = mgr.handleRequest(UPDATE_REQ);
+                assertNotNull(res);
+                acquired[idx] = res;
+                // we should never have to wait to acquire a slot -- borrow many of these
+                long waited = System.nanoTime() - startL;
+                assertTrue(
+                    idx + " waited " + TimeUnit.NANOSECONDS.toMillis(waited) + "ms",
+                    waited < borrowThreshold);
+              } finally {
+                otherLatch.countDown();
+              }
+              return null;
+            }));
       }
 
       otherLatch.await();
@@ -242,20 +240,19 @@ public class TestRequestRateLimiter extends SolrCloudTestCase {
       for (int i = otherAcquire; i <= slotLimit; i++) {
         int idx = i;
         futures.add(
-            exec.submit(
-                () -> {
-                  try {
-                    long startL = System.nanoTime();
-                    RequestRateLimiter.SlotReservation res = mgr.handleRequest(QUERY_REQ);
-                    assertNotNull(res);
-                    acquired[idx] = res;
-                    // we should never have to wait to acquire guaranteed slots
-                    assertTrue(System.nanoTime() - startL < threshold);
-                  } finally {
-                    guaranteedLatch.countDown();
-                  }
-                  return null;
-                }));
+            exec.submit(() -> {
+              try {
+                long startL = System.nanoTime();
+                RequestRateLimiter.SlotReservation res = mgr.handleRequest(QUERY_REQ);
+                assertNotNull(res);
+                acquired[idx] = res;
+                // we should never have to wait to acquire guaranteed slots
+                assertTrue(System.nanoTime() - startL < threshold);
+              } finally {
+                guaranteedLatch.countDown();
+              }
+              return null;
+            }));
       }
 
       guaranteedLatch.await();
@@ -356,18 +353,17 @@ public class TestRequestRateLimiter extends SolrCloudTestCase {
 
     try {
       for (int i = 0; i < numQueries; i++) {
-        callableList.add(
-            () -> {
-              try {
-                QueryResponse response = client.query(new SolrQuery("*:*"));
+        callableList.add(() -> {
+          try {
+            QueryResponse response = client.query(new SolrQuery("*:*"));
 
-                assertEquals(numDocuments, response.getResults().getNumFound());
-              } catch (Exception e) {
-                throw new RuntimeException(e.getMessage(), e);
-              }
+            assertEquals(numDocuments, response.getResults().getNumFound());
+          } catch (Exception e) {
+            throw new RuntimeException(e.getMessage(), e);
+          }
 
-              return true;
-            });
+          return true;
+        });
       }
 
       futures = executor.invokeAll(callableList);
@@ -508,59 +504,57 @@ public class TestRequestRateLimiter extends SolrCloudTestCase {
         for (int i = nativeClients; i > 0; i--) {
           Random tRandom = new Random(r.nextLong());
           futures.add(
-              exec.submit(
-                  () -> {
-                    while (!finish.get()) {
-                      try (RequestRateLimiter.SlotReservation slotReservation =
-                          limiterF.handleRequest()) {
-                        if (slotReservation != null) {
-                          executed.increment();
-                          int ct = outstanding.incrementAndGet();
-                          assertTrue(ct + " <= " + allowedF, ct <= allowedF);
-                          ct = outstandingBorrowed.get();
-                          assertTrue(ct + " <= " + borrowLimitF, ct <= borrowLimitF);
-                          Thread.sleep(tRandom.nextInt(200));
-                          int ct1 = outstandingBorrowed.get();
-                          assertTrue(ct1 + " <= " + borrowLimitF, ct1 <= borrowLimitF);
-                          int ct2 = outstanding.getAndDecrement();
-                          assertTrue(ct2 + " <= " + allowedF, ct2 <= allowedF);
-                        } else {
-                          skipped.increment();
-                          Thread.sleep(tRandom.nextInt(10));
-                        }
-                      }
+              exec.submit(() -> {
+                while (!finish.get()) {
+                  try (RequestRateLimiter.SlotReservation slotReservation =
+                      limiterF.handleRequest()) {
+                    if (slotReservation != null) {
+                      executed.increment();
+                      int ct = outstanding.incrementAndGet();
+                      assertTrue(ct + " <= " + allowedF, ct <= allowedF);
+                      ct = outstandingBorrowed.get();
+                      assertTrue(ct + " <= " + borrowLimitF, ct <= borrowLimitF);
+                      Thread.sleep(tRandom.nextInt(200));
+                      int ct1 = outstandingBorrowed.get();
+                      assertTrue(ct1 + " <= " + borrowLimitF, ct1 <= borrowLimitF);
+                      int ct2 = outstanding.getAndDecrement();
+                      assertTrue(ct2 + " <= " + allowedF, ct2 <= allowedF);
+                    } else {
+                      skipped.increment();
+                      Thread.sleep(tRandom.nextInt(10));
                     }
-                    return null;
-                  }));
+                  }
+                }
+                return null;
+              }));
         }
         int borrowClients = r.nextInt(allowed << 1);
         for (int i = borrowClients; i > 0; i--) {
           Random tRandom = new Random(r.nextLong());
           futures.add(
-              exec.submit(
-                  () -> {
-                    while (!finish.get()) {
-                      try (RequestRateLimiter.SlotReservation slotReservation =
-                          limiterF.allowSlotBorrowing()) {
-                        if (slotReservation != null) {
-                          borrowedExecuted.increment();
-                          int ct = outstanding.incrementAndGet();
-                          assertTrue(ct + " <= " + allowedF, ct <= allowedF);
-                          ct = outstandingBorrowed.incrementAndGet();
-                          assertTrue(ct + " <= " + borrowLimitF, ct <= borrowLimitF);
-                          Thread.sleep(tRandom.nextInt(200));
-                          int ct1 = outstandingBorrowed.getAndDecrement();
-                          assertTrue(ct1 + " <= " + borrowLimitF, ct1 <= borrowLimitF);
-                          int ct2 = outstanding.getAndDecrement();
-                          assertTrue(ct2 + " <= " + allowedF, ct2 <= allowedF);
-                        } else {
-                          borrowedSkipped.increment();
-                          Thread.sleep(tRandom.nextInt(10));
-                        }
-                      }
+              exec.submit(() -> {
+                while (!finish.get()) {
+                  try (RequestRateLimiter.SlotReservation slotReservation =
+                      limiterF.allowSlotBorrowing()) {
+                    if (slotReservation != null) {
+                      borrowedExecuted.increment();
+                      int ct = outstanding.incrementAndGet();
+                      assertTrue(ct + " <= " + allowedF, ct <= allowedF);
+                      ct = outstandingBorrowed.incrementAndGet();
+                      assertTrue(ct + " <= " + borrowLimitF, ct <= borrowLimitF);
+                      Thread.sleep(tRandom.nextInt(200));
+                      int ct1 = outstandingBorrowed.getAndDecrement();
+                      assertTrue(ct1 + " <= " + borrowLimitF, ct1 <= borrowLimitF);
+                      int ct2 = outstanding.getAndDecrement();
+                      assertTrue(ct2 + " <= " + allowedF, ct2 <= allowedF);
+                    } else {
+                      borrowedSkipped.increment();
+                      Thread.sleep(tRandom.nextInt(10));
                     }
-                    return null;
-                  }));
+                  }
+                }
+                return null;
+              }));
         }
         Thread.sleep(5000); // let it run for a while
         finish.set(true);

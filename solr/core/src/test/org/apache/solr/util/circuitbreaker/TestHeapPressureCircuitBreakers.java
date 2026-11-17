@@ -27,8 +27,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Verifies that {@link MemoryCircuitBreaker} reads post-GC live data — not the raw, garbage-
- * inflated heap usage — so it does not trip on transient pre-collection peaks that GC will reclaim.
+ * Verifies that {@link MemoryCircuitBreaker} reads post-GC live data — not the raw,
+ * garbage-inflated heap usage — so it does not trip on transient pre-collection peaks that GC will
+ * reclaim.
  */
 public class TestHeapPressureCircuitBreakers extends SolrTestCase {
 

@@ -188,17 +188,16 @@ public class PerReplicaStatesOps {
     return new PerReplicaStatesOps(
             prs -> {
               List<PerReplicaStates.Operation> result = new ArrayList<>();
-              coll.forEachReplica(
-                  (s, r) -> {
-                    PerReplicaStates.State old = prs.states.get(r.getName());
-                    int version = old == null ? 0 : old.version + 1;
-                    result.add(
-                        new PerReplicaStates.Operation(
-                            PerReplicaStates.Operation.Type.ADD,
-                            new PerReplicaStates.State(
-                                r.getName(), r.getState(), r.isLeader(), version)));
-                    addDeleteStaleNodes(result, old);
-                  });
+              coll.forEachReplica((s, r) -> {
+                PerReplicaStates.State old = prs.states.get(r.getName());
+                int version = old == null ? 0 : old.version + 1;
+                result.add(
+                    new PerReplicaStates.Operation(
+                        PerReplicaStates.Operation.Type.ADD,
+                        new PerReplicaStates.State(
+                            r.getName(), r.getState(), r.isLeader(), version)));
+                addDeleteStaleNodes(result, old);
+              });
               return result;
             })
         .init(rs);
@@ -207,16 +206,13 @@ public class PerReplicaStatesOps {
   /** Switch a collection /to perReplicaState=false */
   public static PerReplicaStatesOps disable(PerReplicaStates rs) {
     PerReplicaStatesOps ops =
-        new PerReplicaStatesOps(
-            prs -> {
-              List<PerReplicaStates.Operation> result = new ArrayList<>();
-              prs.states.forEach(
-                  (s, state) ->
-                      result.add(
-                          new PerReplicaStates.Operation(
-                              PerReplicaStates.Operation.Type.DELETE, state)));
-              return result;
-            });
+        new PerReplicaStatesOps(prs -> {
+          List<PerReplicaStates.Operation> result = new ArrayList<>();
+          prs.states.forEach((s, state) ->
+              result.add(
+                  new PerReplicaStates.Operation(PerReplicaStates.Operation.Type.DELETE, state)));
+          return result;
+        });
     ops.preOp = false;
     return ops.init(rs);
   }
@@ -302,12 +298,11 @@ public class PerReplicaStatesOps {
 
   public static PerReplicaStatesOps addReplica(
       String replica, Replica.State state, boolean isLeader, PerReplicaStates rs) {
-    return new PerReplicaStatesOps(
-            perReplicaStates ->
-                List.of(
-                    new PerReplicaStates.Operation(
-                        PerReplicaStates.Operation.Type.ADD,
-                        new PerReplicaStates.State(replica, state, isLeader, 0))))
+    return new PerReplicaStatesOps(perReplicaStates ->
+        List.of(
+            new PerReplicaStates.Operation(
+                PerReplicaStates.Operation.Type.ADD,
+                new PerReplicaStates.State(replica, state, isLeader, 0))))
         .init(rs);
   }
 

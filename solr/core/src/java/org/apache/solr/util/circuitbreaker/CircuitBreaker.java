@@ -121,16 +121,15 @@ public abstract class CircuitBreaker implements NamedListInitializedPlugin, Clos
     this.requestTypes =
         requestTypes.stream()
             .map(t -> SolrRequestType.valueOf(t.toUpperCase(Locale.ROOT)))
-            .peek(
-                t -> {
-                  if (!SUPPORTED_TYPES.contains(t)) {
-                    throw new IllegalArgumentException(
-                        String.format(
-                            Locale.ROOT,
-                            "Request type %s is not supported for circuit breakers",
-                            t.name()));
-                  }
-                })
+            .peek(t -> {
+              if (!SUPPORTED_TYPES.contains(t)) {
+                throw new IllegalArgumentException(
+                    String.format(
+                        Locale.ROOT,
+                        "Request type %s is not supported for circuit breakers",
+                        t.name()));
+              }
+            })
             .collect(Collectors.toSet());
   }
 

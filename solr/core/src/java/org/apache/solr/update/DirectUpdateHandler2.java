@@ -382,7 +382,7 @@ public class DirectUpdateHandler2 extends UpdateHandler
     solrMetricsContext.observableLongGauge(
         "solr.core.update.docs.pending_commit",
         "Current number of documents pending commit. Value is reset to 0 on commit.",
-        (observableLongMeasurement) -> {
+        observableLongMeasurement -> {
           observableLongMeasurement.record(
               numDocsPending.longValue(),
               baseAttributes.toBuilder().put(OPERATION_ATTR, "docs_pending").build());

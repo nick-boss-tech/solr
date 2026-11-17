@@ -130,17 +130,16 @@ public class StringsDSL {
                 .describedAs("Realistic Unicode")
                 .generate(in);
           }
-        }.assuming(
-            str -> {
-              // The string must not have whitespace
-              for (int i = 0; i < str.length(); i++) {
-                char c = str.charAt(i);
-                if (Character.isWhitespace(c)) {
-                  return false;
-                }
-              }
-              return true;
-            });
+        }.assuming(str -> {
+          // The string must not have whitespace
+          for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (Character.isWhitespace(c)) {
+              return false;
+            }
+          }
+          return true;
+        });
     return new RealisticUnicodeGeneratorBuilder(
         new SolrDescribingGenerator<>(randomUnicodeGen, Objects::toString));
   }

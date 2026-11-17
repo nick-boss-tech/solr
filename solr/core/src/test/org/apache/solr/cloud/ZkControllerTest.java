@@ -233,17 +233,16 @@ public class ZkControllerTest extends SolrCloudTestCase {
           // Remove the leftovers shortly after the check starts waiting on them
           AtomicReference<Exception> deleterFailure = new AtomicReference<>();
           Thread deleter =
-              new Thread(
-                  () -> {
-                    try {
-                      Thread.sleep(1000);
-                      for (String path : leftoverPaths) {
-                        otherClient.delete(path, -1);
-                      }
-                    } catch (Exception e) {
-                      deleterFailure.set(e);
-                    }
-                  });
+              new Thread(() -> {
+                try {
+                  Thread.sleep(1000);
+                  for (String path : leftoverPaths) {
+                    otherClient.delete(path, -1);
+                  }
+                } catch (Exception e) {
+                  deleterFailure.set(e);
+                }
+              });
           deleter.start();
           try {
             // Returns normally once everything is gone
@@ -746,24 +745,23 @@ public class ZkControllerTest extends SolrCloudTestCase {
       CountDownLatch done = new CountDownLatch(nThreads);
       AtomicReference<Exception> exception = new AtomicReference<>();
       for (int i = 0; i < nThreads; i++) {
-        svc.execute(
-            () -> {
-              int index = idx.getAndIncrement();
-              latch.countDown();
-              try {
-                latch.await();
-                controllers[index] =
-                    new ZkController(
-                        cc,
-                        server.getZkAddress(),
-                        TIMEOUT,
-                        new CloudConfig.CloudConfigBuilder("127.0.0.1", 8983 + index).build());
-              } catch (Exception e) {
-                exception.compareAndSet(null, e);
-              } finally {
-                done.countDown();
-              }
-            });
+        svc.execute(() -> {
+          int index = idx.getAndIncrement();
+          latch.countDown();
+          try {
+            latch.await();
+            controllers[index] =
+                new ZkController(
+                    cc,
+                    server.getZkAddress(),
+                    TIMEOUT,
+                    new CloudConfig.CloudConfigBuilder("127.0.0.1", 8983 + index).build());
+          } catch (Exception e) {
+            exception.compareAndSet(null, e);
+          } finally {
+            done.countDown();
+          }
+        });
       }
       done.await();
       assertFalse(server.getZkClient().exists("/clusterstate.json"));

@@ -227,12 +227,11 @@ public class TestPKIAuthenticationPlugin extends SolrTestCaseJ4 {
   private HttpServletRequest createMockRequest(final AtomicReference<String> headerValue) {
     HttpServletRequest mockReq = mock(HttpServletRequest.class);
     when(mockReq.getHeader(any(String.class)))
-        .then(
-            invocation -> {
-              if (headerKey.equals(invocation.getArgument(0))) {
-                return headerValue.get();
-              } else return null;
-            });
+        .then(invocation -> {
+          if (headerKey.equals(invocation.getArgument(0))) {
+            return headerValue.get();
+          } else return null;
+        });
     when(mockReq.getRequestURI()).thenReturn("/collection1/select");
     return mockReq;
   }

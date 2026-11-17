@@ -86,11 +86,10 @@ public class StrFloatLateInteractionVectorField extends FieldType
     this.dimension =
         ofNullable(args.remove(VECTOR_DIMENSION))
             .map(Integer::parseInt)
-            .orElseThrow(
-                () ->
-                    new SolrException(
-                        SolrException.ErrorCode.SERVER_ERROR,
-                        VECTOR_DIMENSION + " is a mandatory parameter"));
+            .orElseThrow(() ->
+                new SolrException(
+                    SolrException.ErrorCode.SERVER_ERROR,
+                    VECTOR_DIMENSION + " is a mandatory parameter"));
 
     this.similarityFunction =
         optionalEnumArg(

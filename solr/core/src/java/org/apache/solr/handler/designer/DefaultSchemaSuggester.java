@@ -196,26 +196,24 @@ public class DefaultSchemaSuggester implements SchemaSuggester {
   @Override
   public Map<String, List<Object>> transposeDocs(List<SolrInputDocument> docs) {
     Map<String, List<Object>> mapByField = new HashMap<>();
-    docs.forEach(
-        doc ->
-            doc.getFieldNames()
-                .forEach(
-                    f -> {
-                      // skip the version field on incoming docs
-                      if (!VERSION_FIELD.equals(f)) {
-                        List<Object> values = mapByField.computeIfAbsent(f, k -> new ArrayList<>());
-                        Collection<Object> fieldValues = doc.getFieldValues(f);
-                        if (fieldValues != null && !fieldValues.isEmpty()) {
-                          if (fieldValues.size() == 1) {
-                            // flatten so every field doesn't end up multivalued
-                            values.add(fieldValues.iterator().next());
-                          } else {
-                            // truly multi-valued
-                            values.add(fieldValues);
-                          }
-                        }
-                      }
-                    }));
+    docs.forEach(doc ->
+        doc.getFieldNames()
+            .forEach(f -> {
+              // skip the version field on incoming docs
+              if (!VERSION_FIELD.equals(f)) {
+                List<Object> values = mapByField.computeIfAbsent(f, k -> new ArrayList<>());
+                Collection<Object> fieldValues = doc.getFieldValues(f);
+                if (fieldValues != null && !fieldValues.isEmpty()) {
+                  if (fieldValues.size() == 1) {
+                    // flatten so every field doesn't end up multivalued
+                    values.add(fieldValues.iterator().next());
+                  } else {
+                    // truly multi-valued
+                    values.add(fieldValues);
+                  }
+                }
+              }
+            }));
     return mapByField;
   }
 

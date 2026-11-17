@@ -99,12 +99,11 @@ public class CacheHeaderTest extends CacheHeaderTestBase {
         getHttpClient()
             .newRequest(url)
             .method(method)
-            .headers(
-                h ->
-                    h.add(
-                        HttpHeader.IF_MODIFIED_SINCE,
-                        DateTimeFormatter.RFC_1123_DATE_TIME.format(
-                            Instant.now().atZone(ZoneOffset.UTC))))
+            .headers(h ->
+                h.add(
+                    HttpHeader.IF_MODIFIED_SINCE,
+                    DateTimeFormatter.RFC_1123_DATE_TIME.format(
+                        Instant.now().atZone(ZoneOffset.UTC))))
             .send();
     checkResponseBody(method, response);
     assertEquals("Expected 304 NotModified response with current date", 304, response.getStatus());
@@ -113,11 +112,10 @@ public class CacheHeaderTest extends CacheHeaderTestBase {
         getHttpClient()
             .newRequest(url)
             .method(method)
-            .headers(
-                h ->
-                    h.add(
-                        HttpHeader.IF_MODIFIED_SINCE,
-                        DateTimeFormatter.RFC_1123_DATE_TIME.format(lastModified.minusSeconds(10))))
+            .headers(h ->
+                h.add(
+                    HttpHeader.IF_MODIFIED_SINCE,
+                    DateTimeFormatter.RFC_1123_DATE_TIME.format(lastModified.minusSeconds(10))))
             .send();
     checkResponseBody(method, response);
     assertEquals(
@@ -128,11 +126,10 @@ public class CacheHeaderTest extends CacheHeaderTestBase {
         getHttpClient()
             .newRequest(url)
             .method(method)
-            .headers(
-                h ->
-                    h.add(
-                        HttpHeader.IF_UNMODIFIED_SINCE,
-                        DateTimeFormatter.RFC_1123_DATE_TIME.format(lastModified.minusSeconds(10))))
+            .headers(h ->
+                h.add(
+                    HttpHeader.IF_UNMODIFIED_SINCE,
+                    DateTimeFormatter.RFC_1123_DATE_TIME.format(lastModified.minusSeconds(10))))
             .send();
     checkResponseBody(method, response);
     assertEquals(
@@ -144,12 +141,11 @@ public class CacheHeaderTest extends CacheHeaderTestBase {
         getHttpClient()
             .newRequest(url)
             .method(method)
-            .headers(
-                h ->
-                    h.add(
-                        HttpHeader.IF_UNMODIFIED_SINCE,
-                        DateTimeFormatter.RFC_1123_DATE_TIME.format(
-                            Instant.now().atZone(ZoneOffset.UTC))))
+            .headers(h ->
+                h.add(
+                    HttpHeader.IF_UNMODIFIED_SINCE,
+                    DateTimeFormatter.RFC_1123_DATE_TIME.format(
+                        Instant.now().atZone(ZoneOffset.UTC))))
             .send();
     checkResponseBody(method, response);
     assertEquals(
@@ -192,11 +188,10 @@ public class CacheHeaderTest extends CacheHeaderTestBase {
         getHttpClient()
             .newRequest(url)
             .method(method)
-            .headers(
-                h -> {
-                  h.add(HttpHeader.IF_NONE_MATCH, "\"xyz1223\"");
-                  h.add(HttpHeader.IF_NONE_MATCH, "\"1231323423\", \"1211211\",   " + etag);
-                })
+            .headers(h -> {
+              h.add(HttpHeader.IF_NONE_MATCH, "\"xyz1223\"");
+              h.add(HttpHeader.IF_NONE_MATCH, "\"1231323423\", \"1211211\",   " + etag);
+            })
             .send();
     checkResponseBody(method, response);
     assertEquals("If-None-Match: Got no response 304 to matching ETag", 304, response.getStatus());
@@ -230,11 +225,10 @@ public class CacheHeaderTest extends CacheHeaderTestBase {
         getHttpClient()
             .newRequest(url)
             .method(method)
-            .headers(
-                h -> {
-                  h.add(HttpHeader.IF_MATCH, "\"xyz1223\"");
-                  h.add(HttpHeader.IF_MATCH, "\"1231323423\", \"1211211\",   " + etag);
-                })
+            .headers(h -> {
+              h.add(HttpHeader.IF_MATCH, "\"xyz1223\"");
+              h.add(HttpHeader.IF_MATCH, "\"1231323423\", \"1211211\",   " + etag);
+            })
             .send();
     checkResponseBody(method, response);
     assertEquals("If-Match: Got no response 200 to matching ETag", 200, response.getStatus());

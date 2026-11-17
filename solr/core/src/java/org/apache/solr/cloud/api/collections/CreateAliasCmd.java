@@ -162,10 +162,9 @@ public class CreateAliasCmd extends AliasCmd {
       collectionListStr = String.join(",", collectionList);
     }
     // Create/update the alias
-    zkStateReader.aliasesManager.applyModificationAndExportToZk(
-        a ->
-            a.cloneWithCollectionAlias(aliasName, collectionListStr)
-                .cloneWithCollectionAliasProperties(aliasName, routedAlias.getAliasMetadata()));
+    zkStateReader.aliasesManager.applyModificationAndExportToZk(a ->
+        a.cloneWithCollectionAlias(aliasName, collectionListStr)
+            .cloneWithCollectionAliasProperties(aliasName, routedAlias.getAliasMetadata()));
   }
 
   private void ensureAliasCollection(

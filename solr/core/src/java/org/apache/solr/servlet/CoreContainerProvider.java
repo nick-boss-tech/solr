@@ -168,15 +168,14 @@ public class CoreContainerProvider implements ServletContextListener {
       // Do initial logs for experimental Lucene classes.
       final var lookup = MethodHandles.lookup();
       Stream.of(MMapDirectory.class, VectorUtil.class)
-          .forEach(
-              cls -> {
-                try {
-                  lookup.ensureInitialized(cls);
-                } catch (ReflectiveOperationException re) {
-                  throw new SolrException(
-                      ErrorCode.SERVER_ERROR, "Could not load Lucene class: " + cls.getName());
-                }
-              });
+          .forEach(cls -> {
+            try {
+              lookup.ensureInitialized(cls);
+            } catch (ReflectiveOperationException re) {
+              throw new SolrException(
+                  ErrorCode.SERVER_ERROR, "Could not load Lucene class: " + cls.getName());
+            }
+          });
 
       coresInit = createCoreContainer(computeSolrHome(servletContext), extraProperties);
 

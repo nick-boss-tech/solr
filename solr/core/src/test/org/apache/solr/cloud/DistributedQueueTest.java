@@ -265,15 +265,14 @@ public class DistributedQueueTest extends SolrTestCaseJ4 {
     assertTrue(System.nanoTime() - start >= TimeUnit.MILLISECONDS.toNanos(500));
 
     // If someone adds a new matching element while we're waiting, we should return immediately.
-    executor.execute(
-        () -> {
-          try {
-            Thread.sleep(500);
-            dq.offer(data);
-          } catch (Exception e) {
-            // ignore
-          }
-        });
+    executor.execute(() -> {
+      try {
+        Thread.sleep(500);
+        dq.offer(data);
+      } catch (Exception e) {
+        // ignore
+      }
+    });
     start = System.nanoTime();
     assertEquals(
         1,
@@ -297,7 +296,7 @@ public class DistributedQueueTest extends SolrTestCaseJ4 {
         .getConnectionStateListenable()
         .addListener(
             (OnDisconnect)
-                ((sessionExpired) -> {
+                (sessionExpired -> {
                   if (sessionExpired) {
                     hasDisconnected.countDown();
                   }

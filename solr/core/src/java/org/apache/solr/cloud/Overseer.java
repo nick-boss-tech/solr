@@ -204,7 +204,7 @@ public class Overseer implements SolrCloseable {
       parentContext.observableLongGauge(
           "solr_overseer_state_update_queue_size",
           "Size of overseer's update queue",
-          (observableLongMeasurement) -> {
+          observableLongMeasurement -> {
             observableLongMeasurement.record(
                 stateUpdateQueue.getZkStats().getQueueLength(), attributes);
           });
@@ -317,7 +317,7 @@ public class Overseer implements SolrCloseable {
           try {
             // We do not need to filter any nodes here cause all processed nodes are removed once we
             // flush clusterstate
-            queue = new ArrayDeque<>(stateUpdateQueue.peekElements(1000, 3000L, (x) -> true));
+            queue = new ArrayDeque<>(stateUpdateQueue.peekElements(1000, 3000L, x -> true));
           } catch (KeeperException.SessionExpiredException e) {
             log.warn("Solr cannot talk to ZK, exiting Overseer main queue loop", e);
             return;
@@ -907,7 +907,7 @@ public class Overseer implements SolrCloseable {
         zkClient,
         "/overseer/collection-map-completed",
         NUM_RESPONSES_TO_STORE,
-        (child) -> getAsyncIdsMap(zkClient).remove(child));
+        child -> getAsyncIdsMap(zkClient).remove(child));
   }
 
   /* Map for failed tasks, not to be used outside of the Overseer */
@@ -916,7 +916,7 @@ public class Overseer implements SolrCloseable {
         zkClient,
         "/overseer/collection-map-failure",
         NUM_RESPONSES_TO_STORE,
-        (child) -> getAsyncIdsMap(zkClient).remove(child));
+        child -> getAsyncIdsMap(zkClient).remove(child));
   }
 
   /* Map of async IDs currently in use*/
@@ -1070,9 +1070,7 @@ public class Overseer implements SolrCloseable {
    */
   public void sendQuitToOverseer(String overseerId) throws KeeperException, InterruptedException {
     getOverseerQuitNotificationQueue()
-        .offer(
-            ew ->
-                ew.put(Overseer.QUEUE_OPERATION, OverseerAction.QUIT.toLower())
-                    .put(ID, overseerId));
+        .offer(ew ->
+            ew.put(Overseer.QUEUE_OPERATION, OverseerAction.QUIT.toLower()).put(ID, overseerId));
   }
 }

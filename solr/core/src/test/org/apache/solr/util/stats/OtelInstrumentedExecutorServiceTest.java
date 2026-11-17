@@ -122,24 +122,20 @@ public class OtelInstrumentedExecutorServiceTest extends SolrTestCase {
     try (var exec = testExecutor("taskTimers", newFixedThreadPoolExecutor())) {
       final long durationMs = 200;
       final double durationDeltaMs = 10.0;
-      exec.submit(
-          () -> {
-            try {
-              Thread.sleep(durationMs);
-            } catch (InterruptedException e) {
-            }
-          });
+      exec.submit(() -> {
+        try {
+          Thread.sleep(durationMs);
+        } catch (InterruptedException e) {
+        }
+      });
       exec.awaitTermination(EXEC_TIMEOUT, EXEC_TIMEOUT_UNITS);
 
       MetricSnapshots metrics =
           metricsContext.getMetricManager().getPrometheusMetricReader(REGISTRY_NAME).collect();
       HistogramSnapshot taskTimers =
           metrics.stream()
-              .filter(
-                  m ->
-                      m.getMetadata()
-                          .getPrometheusName()
-                          .startsWith("solr_node_executor_task_times"))
+              .filter(m ->
+                  m.getMetadata().getPrometheusName().startsWith("solr_node_executor_task_times"))
               .findFirst()
               .map(HistogramSnapshot.class::cast)
               .get();

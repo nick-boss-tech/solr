@@ -65,13 +65,12 @@ public class DocumentExpressionDictionaryFactory extends DictionaryFactory {
     if (weightExpression == null) {
       throw new IllegalArgumentException(WEIGHT_EXPRESSION + " is a mandatory parameter");
     }
-    params.forEach(
-        (name, value) -> {
-          if (name.equals(SORT_FIELD)) {
-            String sortFieldName = (String) value;
-            sortFields.add(getSortField(core, sortFieldName));
-          }
-        });
+    params.forEach((name, value) -> {
+      if (name.equals(SORT_FIELD)) {
+        String sortFieldName = (String) value;
+        sortFields.add(getSortField(core, sortFieldName));
+      }
+    });
 
     return new DocumentValueSourceDictionary(
         searcher.getIndexReader(),

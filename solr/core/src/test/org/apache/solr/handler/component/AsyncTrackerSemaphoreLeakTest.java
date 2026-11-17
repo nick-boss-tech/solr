@@ -286,11 +286,10 @@ public class AsyncTrackerSemaphoreLeakTest extends SolrCloudTestCase {
       Request fakeRequest = Mockito.mock(Request.class);
       Mockito.when(fakeRequest.getAttributes()).thenReturn(reqAttributes);
       Mockito.when(fakeRequest.attribute(ArgumentMatchers.anyString(), ArgumentMatchers.any()))
-          .thenAnswer(
-              inv -> {
-                reqAttributes.put(inv.getArgument(0), inv.getArgument(1));
-                return fakeRequest;
-              });
+          .thenAnswer(inv -> {
+            reqAttributes.put(inv.getArgument(0), inv.getArgument(1));
+            return fakeRequest;
+          });
 
       // Simulate the GOAWAY double-fire: 1st call acquires a permit; 2nd is the bug trigger.
       queuedListener.onQueued(fakeRequest);

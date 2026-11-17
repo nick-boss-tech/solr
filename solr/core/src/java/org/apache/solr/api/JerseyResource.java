@@ -67,14 +67,13 @@ public class JerseyResource {
    */
   @SuppressWarnings("unchecked")
   protected <T extends SolrJerseyResponse> T instantiateJerseyResponse(Class<T> clazz) {
-    return instantiateJerseyResponse(
-        () -> {
-          try {
-            return (T) clazz.getConstructors()[0].newInstance();
-          } catch (Exception e) {
-            throw new RuntimeException(e);
-          }
-        });
+    return instantiateJerseyResponse(() -> {
+      try {
+        return (T) clazz.getConstructors()[0].newInstance();
+      } catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+    });
   }
 
   /**

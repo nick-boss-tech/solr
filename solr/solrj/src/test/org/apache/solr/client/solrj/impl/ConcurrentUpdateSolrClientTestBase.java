@@ -432,15 +432,14 @@ public abstract class ConcurrentUpdateSolrClientTestBase extends SolrTestCaseJ4 
     assertFalse("expected a connection error to be reported", errors.isEmpty());
     boolean anyMentionsUrl =
         errors.stream()
-            .anyMatch(
-                e -> {
-                  for (Throwable t = e; t != null; t = t.getCause()) {
-                    if (t.getMessage() != null && t.getMessage().contains("127.0.0.1:1")) {
-                      return true;
-                    }
-                  }
-                  return false;
-                });
+            .anyMatch(e -> {
+              for (Throwable t = e; t != null; t = t.getCause()) {
+                if (t.getMessage() != null && t.getMessage().contains("127.0.0.1:1")) {
+                  return true;
+                }
+              }
+              return false;
+            });
     assertTrue(
         "connection error should identify the target server; got: " + errors, anyMentionsUrl);
   }

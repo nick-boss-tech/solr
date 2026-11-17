@@ -200,12 +200,11 @@ public class S3IncrementalBackupTest extends AbstractIncrementalBackupTest {
           keys.stream().anyMatch(k -> k.endsWith("/")));
 
       for (String key : keys) {
-        s3.copyObject(
-            b ->
-                b.sourceBucket(BUCKET_NAME)
-                    .sourceKey(key)
-                    .destinationBucket(BUCKET_NAME)
-                    .destinationKey(copyLocation + "/" + key));
+        s3.copyObject(b ->
+            b.sourceBucket(BUCKET_NAME)
+                .sourceKey(key)
+                .destinationBucket(BUCKET_NAME)
+                .destinationKey(copyLocation + "/" + key));
       }
     }
 

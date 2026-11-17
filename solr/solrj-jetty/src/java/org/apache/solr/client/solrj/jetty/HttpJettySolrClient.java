@@ -408,30 +408,28 @@ public class HttpJettySolrClient extends HttpSolrClient {
           public void onHeaders(Response response) {
             super.onHeaders(response);
             InputStreamResponseListener listener = this;
-            executor.execute(
-                () -> {
-                  InputStream is = listener.getInputStream();
-                  try {
-                    NamedList<Object> body =
-                        processErrorsAndResponse(solrRequest, response, is, url);
-                    mdcCopyHelper.onBegin(null);
-                    log.debug("response processing success");
-                    future.complete(body);
-                  } catch (CancellationException e) {
-                    mdcCopyHelper.onBegin(null);
-                    log.debug("response processing cancelled", e);
-                    if (!future.isDone()) {
-                      future.cancel(true);
-                    }
-                  } catch (Throwable e) {
-                    mdcCopyHelper.onBegin(null);
-                    log.debug("response processing failed", e);
-                    future.completeExceptionally(e);
-                  } finally {
-                    log.debug("response processing completed");
-                    mdcCopyHelper.onComplete(null);
-                  }
-                });
+            executor.execute(() -> {
+              InputStream is = listener.getInputStream();
+              try {
+                NamedList<Object> body = processErrorsAndResponse(solrRequest, response, is, url);
+                mdcCopyHelper.onBegin(null);
+                log.debug("response processing success");
+                future.complete(body);
+              } catch (CancellationException e) {
+                mdcCopyHelper.onBegin(null);
+                log.debug("response processing cancelled", e);
+                if (!future.isDone()) {
+                  future.cancel(true);
+                }
+              } catch (Throwable e) {
+                mdcCopyHelper.onBegin(null);
+                log.debug("response processing failed", e);
+                future.completeExceptionally(e);
+              } finally {
+                log.debug("response processing completed");
+                mdcCopyHelper.onComplete(null);
+              }
+            });
           }
 
           @Override
@@ -661,12 +659,11 @@ public class HttpJettySolrClient extends HttpSolrClient {
       req.headers(h -> customHeaders.forEach(h::add));
     }
     // note: if subsequent headers already added, the existing values win (first value considered)
-    req.headers(
-        h -> {
-          h.add(CommonParams.SOLR_REQUEST_TYPE_PARAM, solrRequest.getRequestType().toString());
-          // TODO: validate request context here: https://issues.apache.org/jira/browse/SOLR-14720
-          h.add(CommonParams.SOLR_REQUEST_CONTEXT_PARAM, getContext().toString());
-        });
+    req.headers(h -> {
+      h.add(CommonParams.SOLR_REQUEST_TYPE_PARAM, solrRequest.getRequestType().toString());
+      // TODO: validate request context here: https://issues.apache.org/jira/browse/SOLR-14720
+      h.add(CommonParams.SOLR_REQUEST_CONTEXT_PARAM, getContext().toString());
+    });
 
     req.idleTimeout(idleTimeoutMillis, TimeUnit.MILLISECONDS);
     req.timeout(requestTimeoutMillis, TimeUnit.MILLISECONDS);
@@ -686,24 +683,22 @@ public class HttpJettySolrClient extends HttpSolrClient {
       // queued request completes it synchronously, and a permit taken after that is never
       // released. Requests still waiting for a permit get one as aborted in-flight requests
       // complete, and are then aborted here.
-      req.onRequestQueued(
-          request -> {
-            if (asyncTracker != null) {
-              asyncTracker.queuedListener.onQueued(request);
-            }
-            if (abortTracker != null) {
-              abortTracker.track(request);
-            }
-          });
-      req.onComplete(
-          result -> {
-            if (asyncTracker != null) {
-              asyncTracker.completeListener.onComplete(result);
-            }
-            if (abortTracker != null) {
-              abortTracker.untrack(result.getRequest());
-            }
-          });
+      req.onRequestQueued(request -> {
+        if (asyncTracker != null) {
+          asyncTracker.queuedListener.onQueued(request);
+        }
+        if (abortTracker != null) {
+          abortTracker.track(request);
+        }
+      });
+      req.onComplete(result -> {
+        if (asyncTracker != null) {
+          asyncTracker.completeListener.onComplete(result);
+        }
+        if (abortTracker != null) {
+          abortTracker.untrack(result.getRequest());
+        }
+      });
     }
   }
 

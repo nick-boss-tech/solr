@@ -340,11 +340,10 @@ public class TestApiFramework extends SolrTestCaseJ4 {
 
     CoreContainer mockCC = mock(CoreContainer.class);
     when(mockCC.create(any(String.class), any(Path.class), any(Map.class), anyBoolean()))
-        .thenAnswer(
-            invocationOnMock -> {
-              in.put("create", invocationOnMock.getArguments());
-              return null;
-            });
+        .thenAnswer(invocationOnMock -> {
+          in.put("create", invocationOnMock.getArguments());
+          return null;
+        });
 
     doAnswer(
             invocationOnMock -> {

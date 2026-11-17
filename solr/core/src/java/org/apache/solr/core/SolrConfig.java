@@ -208,15 +208,14 @@ public class SolrConfig implements MapWriter {
     this.root = cfg.data;
     this.znodeVersion = cfg.version;
 
-    ConfigNode.SUBSTITUTES.set(
-        key -> {
-          if (substitutableProperties != null && substitutableProperties.containsKey(key)) {
-            return substitutableProperties.getProperty(key);
-          } else {
-            Object o = overlay.getUserProps().get(key);
-            return o == null ? null : o.toString();
-          }
-        });
+    ConfigNode.SUBSTITUTES.set(key -> {
+      if (substitutableProperties != null && substitutableProperties.containsKey(key)) {
+        return substitutableProperties.getProperty(key);
+      } else {
+        Object o = overlay.getUserProps().get(key);
+        return o == null ? null : o.toString();
+      }
+    });
     try {
       // This will hash the solrconfig.xml and user properties.
       rootDataHashCode = this.root.txt().hashCode();

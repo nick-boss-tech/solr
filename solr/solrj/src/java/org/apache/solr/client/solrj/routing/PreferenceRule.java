@@ -34,15 +34,14 @@ public class PreferenceRule {
   public static List<PreferenceRule> from(String rules) {
     List<String> prefs = StrUtils.splitSmart(rules, ',');
     ArrayList<PreferenceRule> preferenceRules = new ArrayList<>(prefs.size());
-    prefs.forEach(
-        rule -> {
-          String[] parts = rule.split(":", 2);
-          if (parts.length != 2) {
-            throw new IllegalArgumentException(
-                "Invalid " + ShardParams.SHARDS_PREFERENCE + " rule: " + rule);
-          }
-          preferenceRules.add(new PreferenceRule(parts[0], parts[1]));
-        });
+    prefs.forEach(rule -> {
+      String[] parts = rule.split(":", 2);
+      if (parts.length != 2) {
+        throw new IllegalArgumentException(
+            "Invalid " + ShardParams.SHARDS_PREFERENCE + " rule: " + rule);
+      }
+      preferenceRules.add(new PreferenceRule(parts[0], parts[1]));
+    });
     return preferenceRules;
   }
 

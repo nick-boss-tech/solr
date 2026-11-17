@@ -61,12 +61,11 @@ public final class SolrJMetricTestUtils {
 
         return output
             .lines()
-            .filter(
-                l ->
-                    l.contains(metricName)
-                        && l.contains("category=\"" + category + "\"")
-                        && l.contains("collection=\"" + collectionName + "\"")
-                        && l.contains("handler=\"" + handler + "\""))
+            .filter(l ->
+                l.contains(metricName)
+                    && l.contains("category=\"" + category + "\"")
+                    && l.contains("collection=\"" + collectionName + "\"")
+                    && l.contains("handler=\"" + handler + "\""))
             .mapToDouble(s -> Double.parseDouble(s.substring(s.lastIndexOf(" "))))
             .sum();
       }
@@ -88,11 +87,10 @@ public final class SolrJMetricTestUtils {
         // Sum both client and server errors
         return output
             .lines()
-            .filter(
-                l ->
-                    l.contains(metricName)
-                        && l.contains("category=\"" + category + "\"")
-                        && l.contains("handler=\"" + handler + "\""))
+            .filter(l ->
+                l.contains(metricName)
+                    && l.contains("category=\"" + category + "\"")
+                    && l.contains("handler=\"" + handler + "\""))
             .mapToDouble(s -> Double.parseDouble(s.substring(s.lastIndexOf(" "))))
             .sum();
       }

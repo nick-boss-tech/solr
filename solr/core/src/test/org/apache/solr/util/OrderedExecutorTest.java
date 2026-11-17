@@ -88,14 +88,13 @@ public class OrderedExecutorTest extends SolrTestCase {
           });
       // BBB doesn't care about the latch, but because it uses the same lockId, it's blocked on AAA,
       // so we execute it in a background thread...
-      controlExecutor.execute(
-          () -> {
-            orderedExecutor.execute(
-                lockId,
-                () -> {
-                  events.add("BBB");
-                });
-          });
+      controlExecutor.execute(() -> {
+        orderedExecutor.execute(
+            lockId,
+            () -> {
+              events.add("BBB");
+            });
+      });
 
       // now if we release the latchAAA, AAA should be guaranteed to fire first, then BBB
       latchAAA.countDown();
@@ -131,26 +130,25 @@ public class OrderedExecutorTest extends SolrTestCase {
 
       for (int i = 0; i < parallelism; i++) {
         final int lockId = i;
-        controlExecutor.execute(
-            () -> {
-              orderedExecutor.execute(
-                  lockId,
-                  () -> {
-                    try {
-                      log.info("Worker #{} starting", lockId);
-                      preBarrierLatch.countDown();
-                      barrier.await(120, TimeUnit.SECONDS);
-                      postBarrierLatch.countDown();
-                    } catch (TimeoutException t) {
-                      log.error("Timeout in worker# {} awaiting barrier", lockId, t);
-                    } catch (BrokenBarrierException b) {
-                      log.error("Broken Barrier in worker#{}", lockId, b);
-                    } catch (InterruptedException e) {
-                      log.error("Interrupt in worker#{} awaiting barrier", lockId, e);
-                      Thread.currentThread().interrupt();
-                    }
-                  });
-            });
+        controlExecutor.execute(() -> {
+          orderedExecutor.execute(
+              lockId,
+              () -> {
+                try {
+                  log.info("Worker #{} starting", lockId);
+                  preBarrierLatch.countDown();
+                  barrier.await(120, TimeUnit.SECONDS);
+                  postBarrierLatch.countDown();
+                } catch (TimeoutException t) {
+                  log.error("Timeout in worker# {} awaiting barrier", lockId, t);
+                } catch (BrokenBarrierException b) {
+                  log.error("Broken Barrier in worker#{}", lockId, b);
+                } catch (InterruptedException e) {
+                  log.error("Interrupt in worker#{} awaiting barrier", lockId, e);
+                  Thread.currentThread().interrupt();
+                }
+              });
+        });
       }
 
       if (log.isInfoEnabled()) {
@@ -244,17 +242,16 @@ public class OrderedExecutorTest extends SolrTestCase {
     CountDownLatch blockingLatch = new CountDownLatch(1);
 
     try {
-      orderedExecutor.execute(
-          () -> {
-            // This will acquire and hold the single max size semaphore permit
-            try {
-              isRunning.countDown();
-              blockingLatch.await();
-            } catch (InterruptedException e) {
-              Thread.currentThread().interrupt();
-              log.error("interrupted", e);
-            }
-          });
+      orderedExecutor.execute(() -> {
+        // This will acquire and hold the single max size semaphore permit
+        try {
+          isRunning.countDown();
+          blockingLatch.await();
+        } catch (InterruptedException e) {
+          Thread.currentThread().interrupt();
+          log.error("interrupted", e);
+        }
+      });
 
       isRunning.await(2, TimeUnit.SECONDS);
 

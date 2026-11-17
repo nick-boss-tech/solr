@@ -268,10 +268,9 @@ public class PerReplicaStatesIntegrationTest extends SolrCloudTestCase {
             PerReplicaStates prs2 =
                 PerReplicaStatesOps.fetch(
                     DocCollection.getCollectionPath(COLL), cluster.getZkClient(), null);
-            prs2.states.forEach(
-                (r, newState) -> {
-                  if (newState.getDuplicate() != null) anyFail.set(true);
-                });
+            prs2.states.forEach((r, newState) -> {
+              if (newState.getDuplicate() != null) anyFail.set(true);
+            });
             return !anyFail.get();
           });
 

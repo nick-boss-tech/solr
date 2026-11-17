@@ -1007,7 +1007,7 @@ public class DocValuesTest extends SolrTestCaseJ4 {
     Number largestValue[] = new Number[] {Float.MAX_VALUE, Double.MAX_VALUE};
     Number zero[] = new Number[] {0f, 0d};
     Function<Supplier<Number>, Number> noNaN =
-        (next) -> {
+        next -> {
           Number num;
           while (String.valueOf(num = next.get()).equals("NaN"))
             ;
@@ -1019,8 +1019,8 @@ public class DocValuesTest extends SolrTestCaseJ4 {
             () -> noNaN.apply(() -> Double.longBitsToDouble(random().nextLong())));
     List<Function<Number, Long>> toSortableLong =
         Arrays.asList(
-            (num) -> (long) NumericUtils.floatToSortableInt(num.floatValue()),
-            (num) -> NumericUtils.doubleToSortableLong(num.doubleValue()));
+            num -> (long) NumericUtils.floatToSortableInt(num.floatValue()),
+            num -> NumericUtils.doubleToSortableLong(num.doubleValue()));
 
     // Number minusZero[] = new Number[] {-0f, -0d}; // -0 == 0, so we should not treat them
     // differently (and we should not guarantee that sign is preserved... we should be able to index

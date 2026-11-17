@@ -230,9 +230,8 @@ public class CommandHandler {
       queryResult.setPartialResults(
           partialResultsStatus(
               SolrRequestInfo.getRequest()
-                  .map(
-                      solrQueryRequest ->
-                          SolrQueryRequest.disallowPartialResults(solrQueryRequest.getParams()))
+                  .map(solrQueryRequest ->
+                      SolrQueryRequest.disallowPartialResults(solrQueryRequest.getParams()))
                   .orElse(false)));
     }
     return transformer.transform(commands);

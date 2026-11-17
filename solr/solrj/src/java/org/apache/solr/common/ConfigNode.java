@@ -50,11 +50,10 @@ public interface ConfigNode {
     assert exclusions.length < 5 : "non-performant exclusion list";
     final var attributes = attributes();
     Map<String, String> args = CollectionUtil.newHashMap(attributes.size());
-    attributes.forEach(
-        (k, v) -> {
-          for (String ex : exclusions) if (ex.equals(k)) return;
-          args.put(k, v);
-        });
+    attributes.forEach((k, v) -> {
+      for (String ex : exclusions) if (ex.equals(k)) return;
+      args.put(k, v);
+    });
     return args;
   }
 
@@ -140,15 +139,14 @@ public interface ConfigNode {
   /** Iterate through child nodes with the tag/element name and return the first matching */
   default ConfigNode child(String name, Predicate<ConfigNode> test) {
     ConfigNode[] result = new ConfigNode[1];
-    forEachChild(
-        it -> {
-          if (name != null && !name.equals(it.name())) return Boolean.TRUE;
-          if (test == null || test.test(it)) {
-            result[0] = it;
-            return Boolean.FALSE;
-          }
-          return Boolean.TRUE;
-        });
+    forEachChild(it -> {
+      if (name != null && !name.equals(it.name())) return Boolean.TRUE;
+      if (test == null || test.test(it)) {
+        result[0] = it;
+        return Boolean.FALSE;
+      }
+      return Boolean.TRUE;
+    });
     return result[0];
   }
 
@@ -161,12 +159,11 @@ public interface ConfigNode {
   default List<ConfigNode> getAll(Set<String> names, Predicate<ConfigNode> test) {
     assert names == null || !names.isEmpty() : "Intended to pass null?";
     List<ConfigNode> result = new ArrayList<>();
-    forEachChild(
-        it -> {
-          if ((names == null || names.contains(it.name())) && (test == null || test.test(it)))
-            result.add(it);
-          return Boolean.TRUE;
-        });
+    forEachChild(it -> {
+      if ((names == null || names.contains(it.name())) && (test == null || test.test(it)))
+        result.add(it);
+      return Boolean.TRUE;
+    });
     return result;
   }
 
@@ -192,30 +189,28 @@ public interface ConfigNode {
 
   default NamedList<Object> childNodesToNamedList() {
     NamedList<Object> result = new NamedList<>();
-    forEachChild(
-        it -> {
-          String tag = it.name();
-          String varName = it.attributes().get("name");
-          if (DOMUtil.NL_TAGS.contains(tag)) {
-            result.add(varName, DOMUtil.parseVal(tag, varName, it.txt()));
-          }
-          if ("lst".equals(tag)) {
-            result.add(varName, it.childNodesToNamedList());
-          } else if ("arr".equals(tag)) {
-            List<Object> l = new ArrayList<>();
-            result.add(varName, l);
-            it.forEachChild(
-                n -> {
-                  if (DOMUtil.NL_TAGS.contains(n.name())) {
-                    l.add(DOMUtil.parseVal(n.name(), null, n.txt()));
-                  } else if ("lst".equals(n.name())) {
-                    l.add(n.childNodesToNamedList());
-                  }
-                  return Boolean.TRUE;
-                });
+    forEachChild(it -> {
+      String tag = it.name();
+      String varName = it.attributes().get("name");
+      if (DOMUtil.NL_TAGS.contains(tag)) {
+        result.add(varName, DOMUtil.parseVal(tag, varName, it.txt()));
+      }
+      if ("lst".equals(tag)) {
+        result.add(varName, it.childNodesToNamedList());
+      } else if ("arr".equals(tag)) {
+        List<Object> l = new ArrayList<>();
+        result.add(varName, l);
+        it.forEachChild(n -> {
+          if (DOMUtil.NL_TAGS.contains(n.name())) {
+            l.add(DOMUtil.parseVal(n.name(), null, n.txt()));
+          } else if ("lst".equals(n.name())) {
+            l.add(n.childNodesToNamedList());
           }
           return Boolean.TRUE;
         });
+      }
+      return Boolean.TRUE;
+    });
     return result;
   }
 

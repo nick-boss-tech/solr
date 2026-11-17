@@ -232,7 +232,6 @@ public abstract class StatsCache implements PluginInfoInitialized, SolrInfoBean 
   public void clear() {
     statsCacheMetrics.clear();
   }
-  ;
 
   /**
    * Check if the <code>statsSource</code> is missing some term or field statistics info, which then

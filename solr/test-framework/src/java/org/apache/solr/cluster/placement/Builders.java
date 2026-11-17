@@ -168,18 +168,16 @@ public class Builders {
         if (nodeBuilder.getSysprops() != null) {
           nodeBuilder
               .getSysprops()
-              .forEach(
-                  (name, value) -> {
-                    sysprops.computeIfAbsent(name, n -> new HashMap<>()).put(node, value);
-                  });
+              .forEach((name, value) -> {
+                sysprops.computeIfAbsent(name, n -> new HashMap<>()).put(node, value);
+              });
         }
         if (nodeBuilder.getMetrics() != null) {
           nodeBuilder
               .getMetrics()
-              .forEach(
-                  (name, value) -> {
-                    metrics.computeIfAbsent(name, n -> new HashMap<>()).put(node, value);
-                  });
+              .forEach((name, value) -> {
+                metrics.computeIfAbsent(name, n -> new HashMap<>()).put(node, value);
+              });
         }
       }
 
@@ -188,38 +186,30 @@ public class Builders {
             metrics.computeIfAbsent(NodeMetricImpl.NUM_CORES, n -> new HashMap<>());
         Map<Node, Object> nodeToFreeDisk =
             metrics.computeIfAbsent(NodeMetricImpl.FREE_DISK_GB, n -> new HashMap<>());
-        collectionBuilders.forEach(
-            builder -> {
-              CollectionMetrics thisCollMetrics = builder.collectionMetricsBuilder.build();
-              collectionMetrics.put(builder.collectionName, thisCollMetrics);
-              SolrCollection collection = builder.build();
-              collection
-                  .iterator()
-                  .forEachRemaining(
-                      shard ->
-                          shard
-                              .iterator()
-                              .forEachRemaining(
-                                  replica -> {
-                                    nodeToCoreCount.compute(
-                                        replica.getNode(),
-                                        (node, count) ->
-                                            (count == null) ? 1 : ((Number) count).intValue() + 1);
-                                    double leaderDiskSpace =
-                                        thisCollMetrics
-                                            .getShardMetrics(shard.getShardName())
-                                            .flatMap(
-                                                m -> m.getReplicaMetrics(replica.getReplicaName()))
-                                            .flatMap(
-                                                m ->
-                                                    m.getReplicaMetric(
-                                                        ReplicaMetricImpl.INDEX_SIZE_GB))
-                                            .orElse(0D);
-                                    nodeToFreeDisk.computeIfPresent(
-                                        replica.getNode(),
-                                        (node, freeDisk) -> ((Double) freeDisk) - leaderDiskSpace);
-                                  }));
-            });
+        collectionBuilders.forEach(builder -> {
+          CollectionMetrics thisCollMetrics = builder.collectionMetricsBuilder.build();
+          collectionMetrics.put(builder.collectionName, thisCollMetrics);
+          SolrCollection collection = builder.build();
+          collection
+              .iterator()
+              .forEachRemaining(shard ->
+                  shard
+                      .iterator()
+                      .forEachRemaining(replica -> {
+                        nodeToCoreCount.compute(
+                            replica.getNode(),
+                            (node, count) -> (count == null) ? 1 : ((Number) count).intValue() + 1);
+                        double leaderDiskSpace =
+                            thisCollMetrics
+                                .getShardMetrics(shard.getShardName())
+                                .flatMap(m -> m.getReplicaMetrics(replica.getReplicaName()))
+                                .flatMap(m -> m.getReplicaMetric(ReplicaMetricImpl.INDEX_SIZE_GB))
+                                .orElse(0D);
+                        nodeToFreeDisk.computeIfPresent(
+                            replica.getNode(),
+                            (node, freeDisk) -> ((Double) freeDisk) - leaderDiskSpace);
+                      }));
+        });
       }
 
       AttributeValues attributeValues =

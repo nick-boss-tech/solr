@@ -83,11 +83,10 @@ public class JavaBinResponseWriter implements QueryResponseWriter {
           returnFields = res.getReturnFields();
         }
         //        if (useUtf8CharSeq) {
-        ResultContext.READASBYTES.set(
-            fieldName -> {
-              SchemaField fld = res.getRequest().getSchema().getFieldOrNull(fieldName);
-              return fld != null && fld.getType().isUtf8Field();
-            });
+        ResultContext.READASBYTES.set(fieldName -> {
+          SchemaField fld = res.getRequest().getSchema().getFieldOrNull(fieldName);
+          return fld != null && fld.getType().isUtf8Field();
+        });
 
         try {
           writeResults(res, codec);

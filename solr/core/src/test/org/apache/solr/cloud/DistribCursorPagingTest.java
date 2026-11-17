@@ -780,7 +780,7 @@ public class DistribCursorPagingTest extends AbstractFullDistribZkTestBase {
     assertFullWalkNoDups(
         "/elevate",
         params,
-        (doc) -> {
+        doc -> {
           final int id = Integer.parseInt(doc.get("id").toString());
           final boolean elevated =
               Boolean.parseBoolean(doc.getOrDefault("[elevated]", "false").toString());
@@ -838,7 +838,7 @@ public class DistribCursorPagingTest extends AbstractFullDistribZkTestBase {
     final SentinelIntSet ids = new SentinelIntSet(maxSize, -1);
     assertFullWalkNoDups(
         params,
-        (doc) -> {
+        doc -> {
           int id = Integer.parseInt(doc.getFieldValue("id").toString());
           if (ids.exists(id)) {
             String msg = "walk already seen: " + id;

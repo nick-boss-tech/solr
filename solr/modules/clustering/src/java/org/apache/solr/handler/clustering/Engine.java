@@ -94,11 +94,10 @@ final class Engine {
       Map<String, List<InputDocument>> documentsByLanguage =
           documents.stream()
               .collect(
-                  Collectors.groupingBy(
-                      doc -> {
-                        String lang = doc.language();
-                        return lang == null ? defaultLanguage : lang;
-                      }));
+                  Collectors.groupingBy(doc -> {
+                    String lang = doc.language();
+                    return lang == null ? defaultLanguage : lang;
+                  }));
 
       // Cluster documents within each language group.
       HashSet<String> warnOnce = new HashSet<>();
@@ -135,13 +134,12 @@ final class Engine {
       } else {
         clusters =
             clustersByLanguage.entrySet().stream()
-                .map(
-                    e -> {
-                      Cluster<InputDocument> cluster = new Cluster<>();
-                      cluster.addLabel(e.getKey());
-                      e.getValue().forEach(cluster::addCluster);
-                      return cluster;
-                    })
+                .map(e -> {
+                  Cluster<InputDocument> cluster = new Cluster<>();
+                  cluster.addLabel(e.getKey());
+                  e.getValue().forEach(cluster::addCluster);
+                  return cluster;
+                })
                 .collect(Collectors.toList());
       }
 

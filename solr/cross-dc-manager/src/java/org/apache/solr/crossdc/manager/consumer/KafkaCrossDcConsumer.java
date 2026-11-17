@@ -582,24 +582,23 @@ public class KafkaCrossDcConsumer extends Consumer.CrossDcConsumer {
       PartitionManager.WorkUnit workUnit) {
     // Kafka client is not thread-safe !!!
     Future<?> future =
-        executor.submit(
-            () -> {
-              try {
-                final var mirroredSolrRequest =
-                    new MirroredSolrRequest<>(type, lastRecord.value().getAttempt(), solrReqBatch);
-                final IQueueHandler.Result<MirroredSolrRequest<?>> result =
-                    messageProcessor.handleItem(mirroredSolrRequest);
+        executor.submit(() -> {
+          try {
+            final var mirroredSolrRequest =
+                new MirroredSolrRequest<>(type, lastRecord.value().getAttempt(), solrReqBatch);
+            final IQueueHandler.Result<MirroredSolrRequest<?>> result =
+                messageProcessor.handleItem(mirroredSolrRequest);
 
-                metrics.recordOutputBatchSize(type, solrReqBatch);
-                processResult(type, result);
-              } catch (MirroringException e) {
-                // We don't really know what to do here
-                log.error(
-                    "Mirroring exception occurred while resubmitting to Kafka. We are going to stop the consumer thread now.",
-                    e);
-                throw new RuntimeException(e);
-              }
-            });
+            metrics.recordOutputBatchSize(type, solrReqBatch);
+            processResult(type, result);
+          } catch (MirroringException e) {
+            // We don't really know what to do here
+            log.error(
+                "Mirroring exception occurred while resubmitting to Kafka. We are going to stop the consumer thread now.",
+                e);
+            throw new RuntimeException(e);
+          }
+        });
     workUnit.workItems.add(future);
   }
 

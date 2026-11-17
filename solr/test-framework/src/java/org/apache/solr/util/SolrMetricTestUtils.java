@@ -86,9 +86,8 @@ public final class SolrMetricTestUtils {
     return metricSnapshots.stream()
         .filter(ms -> ms.getMetadata().getPrometheusName().equals(metricName))
         .findFirst()
-        .flatMap(
-            ms ->
-                ms.getDataPoints().stream().filter(dp -> dp.getLabels().equals(labels)).findFirst())
+        .flatMap(ms ->
+            ms.getDataPoints().stream().filter(dp -> dp.getLabels().equals(labels)).findFirst())
         .orElse(null);
   }
 

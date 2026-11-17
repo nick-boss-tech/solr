@@ -95,16 +95,14 @@ public class InfixSuggestersTest extends SolrTestCaseJ4 {
     try {
       // Build the suggester in the background with a long dictionary
       Future<?> job =
-          executor.submit(
-              () ->
-                  expectThrows(
-                      RuntimeException.class,
-                      SolrCoreState.CoreIsClosedException.class,
-                      () ->
-                          assertQ(
-                              reqWithPath(
-                                  rh_analyzing_long, SuggesterParams.SUGGEST_BUILD_ALL, "true"),
-                              "//str[@name='command'][.='buildAll']")));
+          executor.submit(() ->
+              expectThrows(
+                  RuntimeException.class,
+                  SolrCoreState.CoreIsClosedException.class,
+                  () ->
+                      assertQ(
+                          reqWithPath(rh_analyzing_long, SuggesterParams.SUGGEST_BUILD_ALL, "true"),
+                          "//str[@name='command'][.='buildAll']")));
       h.reload();
       // Stop the dictionary's input iterator
       System.clearProperty(
@@ -132,16 +130,15 @@ public class InfixSuggestersTest extends SolrTestCaseJ4 {
       final Throwable[] outerException = new Throwable[1];
       // Build the suggester in the background with a long dictionary
       Future<?> job =
-          executor.submit(
-              () ->
-                  outerException[0] =
-                      expectThrowsAnyOf(
-                          expected,
-                          () ->
-                              assertQ(
-                                  reqWithPath(
-                                      rh_analyzing_long, SuggesterParams.SUGGEST_BUILD_ALL, "true"),
-                                  "//str[@name='command'][.='buildAll']")));
+          executor.submit(() ->
+              outerException[0] =
+                  expectThrowsAnyOf(
+                      expected,
+                      () ->
+                          assertQ(
+                              reqWithPath(
+                                  rh_analyzing_long, SuggesterParams.SUGGEST_BUILD_ALL, "true"),
+                              "//str[@name='command'][.='buildAll']")));
       Thread.sleep(100); // TODO: is there a better way to ensure that the build has begun?
       h.close();
       // Stop the dictionary's input iterator

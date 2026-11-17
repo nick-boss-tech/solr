@@ -166,13 +166,14 @@ public class JWTAuthPluginIntegrationTest extends SolrCloudAuthTestCase {
     String authData = new String(Base64.getDecoder().decode(headers.get("X-Solr-AuthData")), UTF_8);
     assertEquals(
         """
-            {
-              "tokenEndpoint":"http://acmepaymentscorp/oauth/oauth20/token",
-              "authorization_flow":"code_pkce",
-              "scope":"solr:admin",
-              "redirect_uris":[],
-              "authorizationEndpoint":"http://acmepaymentscorp/oauth/auz/authorize",
-              "client_id":"solr-cluster"}""",
+        {
+          "tokenEndpoint":"http://acmepaymentscorp/oauth/oauth20/token",
+          "authorization_flow":"code_pkce",
+          "scope":"solr:admin",
+          "redirect_uris":[],
+          "authorizationEndpoint":"http://acmepaymentscorp/oauth/auz/authorize",
+          "client_id":"solr-cluster"}\
+        """,
         authData);
     myCluster.shutdown();
   }
@@ -191,13 +192,14 @@ public class JWTAuthPluginIntegrationTest extends SolrCloudAuthTestCase {
     String authData = new String(Base64.getDecoder().decode(headers.get("X-Solr-AuthData")), UTF_8);
     assertEquals(
         """
-            {
-              "tokenEndpoint":"http://acmepaymentscorp/oauth/oauth20/token",
-              "authorization_flow":"code_pkce",
-              "scope":"solr:admin",
-              "redirect_uris":[],
-              "authorizationEndpoint":"http://acmepaymentscorp/oauth/auz/authorize",
-              "client_id":"solr-cluster"}""",
+        {
+          "tokenEndpoint":"http://acmepaymentscorp/oauth/oauth20/token",
+          "authorization_flow":"code_pkce",
+          "scope":"solr:admin",
+          "redirect_uris":[],
+          "authorizationEndpoint":"http://acmepaymentscorp/oauth/auz/authorize",
+          "client_id":"solr-cluster"}\
+        """,
         authData);
     myCluster.shutdown();
   }
@@ -420,15 +422,16 @@ public class JWTAuthPluginIntegrationTest extends SolrCloudAuthTestCase {
   private static void initStaticJwt() throws Exception {
     String jwkJSON =
         """
-            {
-              "kty": "RSA",
-              "d": "i6pyv2z3o-MlYytWsOr3IE1olu2RXZBzjPRBNgWAP1TlLNaphHEvH5aHhe_CtBAastgFFMuP29CFhaL3_tGczkvWJkSveZQN2AHWHgRShKgoSVMspkhOt3Ghha4CvpnZ9BnQzVHnaBnHDTTTfVgXz7P1ZNBhQY4URG61DKIF-JSSClyh1xKuMoJX0lILXDYGGcjVTZL_hci4IXPPTpOJHV51-pxuO7WU5M9252UYoiYyCJ56ai8N49aKIMsqhdGuO4aWUwsGIW4oQpjtce5eEojCprYl-9rDhTwLAFoBtjy6LvkqlR2Ae5dKZYpStljBjK8PJrBvWZjXAEMDdQ8PuQ",
-              "e": "AQAB",
-              "use": "sig",
-              "kid": "test",
-              "alg": "RS256",
-              "n": "jeyrvOaZrmKWjyNXt0myAc_pJ1hNt3aRupExJEx1ewPaL9J9HFgSCjMrYxCB1ETO1NDyZ3nSgjZis-jHHDqBxBjRdq_t1E2rkGFaYbxAyKt220Pwgme_SFTB9MXVrFQGkKyjmQeVmOmV6zM3KK8uMdKQJ4aoKmwBcF5Zg7EZdDcKOFgpgva1Jq-FlEsaJ2xrYDYo3KnGcOHIt9_0NQeLsqZbeWYLxYni7uROFncXYV5FhSJCeR4A_rrbwlaCydGxE0ToC_9HNYibUHlkJjqyUhAgORCbNS8JLCJH8NUi5sDdIawK9GTSyvsJXZ-QHqo4cMUuxWV5AJtaRGghuMUfqQ"
-            }""";
+        {
+          "kty": "RSA",
+          "d": "i6pyv2z3o-MlYytWsOr3IE1olu2RXZBzjPRBNgWAP1TlLNaphHEvH5aHhe_CtBAastgFFMuP29CFhaL3_tGczkvWJkSveZQN2AHWHgRShKgoSVMspkhOt3Ghha4CvpnZ9BnQzVHnaBnHDTTTfVgXz7P1ZNBhQY4URG61DKIF-JSSClyh1xKuMoJX0lILXDYGGcjVTZL_hci4IXPPTpOJHV51-pxuO7WU5M9252UYoiYyCJ56ai8N49aKIMsqhdGuO4aWUwsGIW4oQpjtce5eEojCprYl-9rDhTwLAFoBtjy6LvkqlR2Ae5dKZYpStljBjK8PJrBvWZjXAEMDdQ8PuQ",
+          "e": "AQAB",
+          "use": "sig",
+          "kid": "test",
+          "alg": "RS256",
+          "n": "jeyrvOaZrmKWjyNXt0myAc_pJ1hNt3aRupExJEx1ewPaL9J9HFgSCjMrYxCB1ETO1NDyZ3nSgjZis-jHHDqBxBjRdq_t1E2rkGFaYbxAyKt220Pwgme_SFTB9MXVrFQGkKyjmQeVmOmV6zM3KK8uMdKQJ4aoKmwBcF5Zg7EZdDcKOFgpgva1Jq-FlEsaJ2xrYDYo3KnGcOHIt9_0NQeLsqZbeWYLxYni7uROFncXYV5FhSJCeR4A_rrbwlaCydGxE0ToC_9HNYibUHlkJjqyUhAgORCbNS8JLCJH8NUi5sDdIawK9GTSyvsJXZ-QHqo4cMUuxWV5AJtaRGghuMUfqQ"
+        }\
+        """;
 
     PublicJsonWebKey jwk = RsaJsonWebKey.Factory.newPublicJwk(jwkJSON);
     JwtClaims claims = JWTAuthPluginTest.generateClaims();

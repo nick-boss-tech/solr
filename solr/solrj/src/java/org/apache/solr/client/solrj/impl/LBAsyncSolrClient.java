@@ -116,13 +116,12 @@ public abstract class LBAsyncSolrClient extends LBSolrClient {
       apiFuture.completeExceptionally(e);
       return apiFuture;
     }
-    apiFuture.exceptionally(
-        (error) -> {
-          if (apiFuture.isCancelled()) {
-            currentFuture.get().cancel(true);
-          }
-          return null;
-        });
+    apiFuture.exceptionally(error -> {
+      if (apiFuture.isCancelled()) {
+        currentFuture.get().cancel(true);
+      }
+      return null;
+    });
     return apiFuture;
   }
 
@@ -144,14 +143,13 @@ public abstract class LBAsyncSolrClient extends LBSolrClient {
     try {
       CompletableFuture<NamedList<Object>> future =
           requestAsyncWithUrl(getClient(endpoint), baseUrl, req.getRequest());
-      future.whenComplete(
-          (result, throwable) -> {
-            if (!future.isCompletedExceptionally()) {
-              onSuccessfulRequest(result, endpoint, rsp, isZombie, listener);
-            } else if (!future.isCancelled()) {
-              onFailedRequest(throwable, endpoint, isNonRetryable, isZombie, listener);
-            }
-          });
+      future.whenComplete((result, throwable) -> {
+        if (!future.isCompletedExceptionally()) {
+          onSuccessfulRequest(result, endpoint, rsp, isZombie, listener);
+        } else if (!future.isCancelled()) {
+          onFailedRequest(throwable, endpoint, isNonRetryable, isZombie, listener);
+        }
+      });
       return future;
     } catch (SolrServerException | IOException e) {
       // Unreachable, since 'requestAsyncWithUrl' above is running the request asynchronously

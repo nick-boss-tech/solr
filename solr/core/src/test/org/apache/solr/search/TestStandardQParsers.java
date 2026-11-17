@@ -52,7 +52,6 @@ public class TestStandardQParsers extends SolrTestCase {
     for (Map.Entry<String, QParserPlugin> pair : QParserPlugin.standardPlugins.entrySet()) {
       String regName = pair.getKey();
       Class<? extends QParserPlugin> clazz = pair.getValue().getClass();
-      ;
 
       Field nameField = clazz.getField(FIELD_NAME);
       int modifiers = nameField.getModifiers();

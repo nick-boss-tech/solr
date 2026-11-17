@@ -233,28 +233,27 @@ public class ShowFileRequestHandler extends RequestHandlerBase implements Permis
       // it's really a directory, just go for it.
       NamedList<SimpleOrderedMap<Object>> files = new SimpleOrderedMap<>();
       try (Stream<Path> directoryFiles = Files.list(adminFile)) {
-        directoryFiles.forEach(
-            (f) -> {
-              if (isHiddenFile(req, rsp, f.getFileName().toString(), false, hiddenFiles)) {
-                return;
-              }
-              String path = f.getFileName().toString();
-              SimpleOrderedMap<Object> fileInfo = new SimpleOrderedMap<>();
-              files.add(path, fileInfo);
-              if (Files.isDirectory(f)) {
-                fileInfo.add("directory", true);
-              } else {
-                try {
-                  fileInfo.add("size", Files.size(f));
-                  fileInfo.add("modified", new Date(Files.getLastModifiedTime(f).toMillis()));
-                } catch (Exception e) {
-                  throw new SolrException(
-                      SolrException.ErrorCode.SERVER_ERROR,
-                      "Unable to retrieve file metadata: " + f,
-                      e);
-                }
-              }
-            });
+        directoryFiles.forEach(f -> {
+          if (isHiddenFile(req, rsp, f.getFileName().toString(), false, hiddenFiles)) {
+            return;
+          }
+          String path = f.getFileName().toString();
+          SimpleOrderedMap<Object> fileInfo = new SimpleOrderedMap<>();
+          files.add(path, fileInfo);
+          if (Files.isDirectory(f)) {
+            fileInfo.add("directory", true);
+          } else {
+            try {
+              fileInfo.add("size", Files.size(f));
+              fileInfo.add("modified", new Date(Files.getLastModifiedTime(f).toMillis()));
+            } catch (Exception e) {
+              throw new SolrException(
+                  SolrException.ErrorCode.SERVER_ERROR,
+                  "Unable to retrieve file metadata: " + f,
+                  e);
+            }
+          }
+        });
       }
       rsp.add("files", files);
     } else {

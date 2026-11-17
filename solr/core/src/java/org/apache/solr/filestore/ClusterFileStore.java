@@ -374,16 +374,15 @@ public class ClusterFileStore extends JerseyResource implements ClusterFileStore
     coreContainer
         .getUpdateShardHandler()
         .getUpdateExecutor()
-        .submit(
-            () -> {
-              log.debug("Downloading file {}", path);
-              try {
-                fileStore.fetch(path, getFrom);
-              } catch (Exception e) {
-                log.error("Failed to download file: {}", path, e);
-              }
-              log.info("downloaded file: {}", path);
-            });
+        .submit(() -> {
+          log.debug("Downloading file {}", path);
+          try {
+            fileStore.fetch(path, getFrom);
+          } catch (Exception e) {
+            log.error("Failed to download file: {}", path, e);
+          }
+          log.info("downloaded file: {}", path);
+        });
   }
 
   private List<String> readSignatures(List<String> signatures, byte[] buf)

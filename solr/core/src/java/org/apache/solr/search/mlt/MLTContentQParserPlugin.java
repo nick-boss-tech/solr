@@ -43,7 +43,7 @@ public class MLTContentQParserPlugin extends QParserPlugin {
       public Query parse() throws SyntaxError {
         String content = localParams.get(QueryParsing.V);
         try {
-          return parseMLTQuery(this::getFieldsFromSchema, (mlt) -> likeContent(mlt, content));
+          return parseMLTQuery(this::getFieldsFromSchema, mlt -> likeContent(mlt, content));
         } catch (IOException e) {
           throw new SolrException(
               SolrException.ErrorCode.BAD_REQUEST, "Error completing MLT request" + e.getMessage());

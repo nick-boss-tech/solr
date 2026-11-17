@@ -45,16 +45,14 @@ public class EchoClusteringAlgorithm extends AttrComposite implements Clustering
   public <T extends Document> List<Cluster<T>> cluster(
       Stream<? extends T> documentStream, LanguageComponents languageComponents) {
     List<Cluster<T>> clusters = new ArrayList<>();
-    documentStream.forEach(
-        document -> {
-          final Cluster<T> cluster = new Cluster<>();
-          cluster.addDocument(document);
-          document.visitFields(
-              (field, value) -> {
-                cluster.addLabel(field + ":" + value);
-              });
-          clusters.add(cluster);
-        });
+    documentStream.forEach(document -> {
+      final Cluster<T> cluster = new Cluster<>();
+      cluster.addDocument(document);
+      document.visitFields((field, value) -> {
+        cluster.addLabel(field + ":" + value);
+      });
+      clusters.add(cluster);
+    });
 
     return clusters;
   }

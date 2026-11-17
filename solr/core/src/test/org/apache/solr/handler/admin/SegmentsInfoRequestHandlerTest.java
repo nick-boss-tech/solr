@@ -68,17 +68,16 @@ public class SegmentsInfoRequestHandlerTest extends SolrTestCaseJ4 {
     }
     assertU(commit());
     h.getCore()
-        .withSearcher(
-            (searcher) -> {
-              int numSegments =
-                  SegmentInfos.readLatestCommit(searcher.getIndexReader().directory()).size();
-              // if this is not NUM_SEGMENTS, there was some unexpected flush or merge
-              assertEquals(
-                  "Unexpected number of segment in the index: " + numSegments,
-                  NUM_SEGMENTS,
-                  numSegments);
-              return null;
-            });
+        .withSearcher(searcher -> {
+          int numSegments =
+              SegmentInfos.readLatestCommit(searcher.getIndexReader().directory()).size();
+          // if this is not NUM_SEGMENTS, there was some unexpected flush or merge
+          assertEquals(
+              "Unexpected number of segment in the index: " + numSegments,
+              NUM_SEGMENTS,
+              numSegments);
+          return null;
+        });
     // see SOLR-14431
     RefCounted<IndexWriter> iwRef = h.getCore().getSolrCoreState().getIndexWriter(h.getCore());
     initialRefCount = iwRef.getRefcount();
@@ -116,19 +115,18 @@ public class SegmentsInfoRequestHandlerTest extends SolrTestCaseJ4 {
   public void testSegmentNames() throws IOException {
     String[] segmentNamePatterns = new String[NUM_SEGMENTS];
     h.getCore()
-        .withSearcher(
-            (searcher) -> {
-              int i = 0;
-              for (SegmentCommitInfo sInfo :
-                  SegmentInfos.readLatestCommit(searcher.getIndexReader().directory())) {
-                assertTrue("Unexpected number of segment in the index: " + i, i < NUM_SEGMENTS);
-                segmentNamePatterns[i] =
-                    "//lst[@name='segments']/lst/str[@name='name'][.='" + sInfo.info.name + "']";
-                i++;
-              }
+        .withSearcher(searcher -> {
+          int i = 0;
+          for (SegmentCommitInfo sInfo :
+              SegmentInfos.readLatestCommit(searcher.getIndexReader().directory())) {
+            assertTrue("Unexpected number of segment in the index: " + i, i < NUM_SEGMENTS);
+            segmentNamePatterns[i] =
+                "//lst[@name='segments']/lst/str[@name='name'][.='" + sInfo.info.name + "']";
+            i++;
+          }
 
-              return null;
-            });
+          return null;
+        });
     assertQ(
         "Unexpected segment names returned", reqWithPath("/admin/segments"), segmentNamePatterns);
   }
@@ -156,42 +154,41 @@ public class SegmentsInfoRequestHandlerTest extends SolrTestCaseJ4 {
   public void testFieldInfo() throws Exception {
     String[] segmentNamePatterns = new String[NUM_SEGMENTS * NUM_FIELD_INFO_PROPERTIES];
     h.getCore()
-        .withSearcher(
-            (searcher) -> {
-              int i = 0, j = 0;
+        .withSearcher(searcher -> {
+          int i = 0, j = 0;
 
-              for (SegmentCommitInfo sInfo :
-                  SegmentInfos.readLatestCommit(searcher.getIndexReader().directory())) {
-                assertTrue("Unexpected number of segment in the index: " + i, i < NUM_SEGMENTS);
-                segmentNamePatterns[j++] =
-                    "boolean(//lst[@name='segments']/lst[@name='"
-                        + sInfo.info.name
-                        + "']/lst[@name='fields']/lst[@name='id']/str[@name='flags'])";
-                segmentNamePatterns[j++] =
-                    "boolean(//lst[@name='segments']/lst[@name='"
-                        + sInfo.info.name
-                        + "']/lst[@name='fields']/lst[@name='id']/int[@name='docCount'])";
-                segmentNamePatterns[j++] =
-                    "boolean(//lst[@name='segments']/lst[@name='"
-                        + sInfo.info.name
-                        + "']/lst[@name='fields']/lst[@name='id']/long[@name='termCount'])";
-                segmentNamePatterns[j++] =
-                    "boolean(//lst[@name='segments']/lst[@name='"
-                        + sInfo.info.name
-                        + "']/lst[@name='fields']/lst[@name='id']/long[@name='sumDocFreq'])";
-                segmentNamePatterns[j++] =
-                    "boolean(//lst[@name='segments']/lst[@name='"
-                        + sInfo.info.name
-                        + "']/lst[@name='fields']/lst[@name='id']/long[@name='sumTotalTermFreq'])";
-                segmentNamePatterns[j++] =
-                    "boolean(//lst[@name='segments']/lst[@name='"
-                        + sInfo.info.name
-                        + "']/lst[@name='fields']/lst[@name='id']/str[@name='schemaType'])";
-                i++;
-              }
+          for (SegmentCommitInfo sInfo :
+              SegmentInfos.readLatestCommit(searcher.getIndexReader().directory())) {
+            assertTrue("Unexpected number of segment in the index: " + i, i < NUM_SEGMENTS);
+            segmentNamePatterns[j++] =
+                "boolean(//lst[@name='segments']/lst[@name='"
+                    + sInfo.info.name
+                    + "']/lst[@name='fields']/lst[@name='id']/str[@name='flags'])";
+            segmentNamePatterns[j++] =
+                "boolean(//lst[@name='segments']/lst[@name='"
+                    + sInfo.info.name
+                    + "']/lst[@name='fields']/lst[@name='id']/int[@name='docCount'])";
+            segmentNamePatterns[j++] =
+                "boolean(//lst[@name='segments']/lst[@name='"
+                    + sInfo.info.name
+                    + "']/lst[@name='fields']/lst[@name='id']/long[@name='termCount'])";
+            segmentNamePatterns[j++] =
+                "boolean(//lst[@name='segments']/lst[@name='"
+                    + sInfo.info.name
+                    + "']/lst[@name='fields']/lst[@name='id']/long[@name='sumDocFreq'])";
+            segmentNamePatterns[j++] =
+                "boolean(//lst[@name='segments']/lst[@name='"
+                    + sInfo.info.name
+                    + "']/lst[@name='fields']/lst[@name='id']/long[@name='sumTotalTermFreq'])";
+            segmentNamePatterns[j++] =
+                "boolean(//lst[@name='segments']/lst[@name='"
+                    + sInfo.info.name
+                    + "']/lst[@name='fields']/lst[@name='id']/str[@name='schemaType'])";
+            i++;
+          }
 
-              return null;
-            });
+          return null;
+        });
     assertQ(
         "Unexpected field infos returned",
         reqWithPath("/admin/segments", "fieldInfo", "true"),

@@ -34,25 +34,24 @@ public class SuggesterResponse {
   private final Map<String, List<Suggestion>> suggestionsPerDictionary = new LinkedHashMap<>();
 
   public SuggesterResponse(NamedList<NamedList<Object>> suggestInfo) {
-    suggestInfo.forEach(
-        (outerName, outerValue) -> {
-          SimpleOrderedMap<?> suggestionsNode = (SimpleOrderedMap<?>) outerValue.getVal(0);
-          List<Suggestion> suggestionList = new ArrayList<>();
-          if (suggestionsNode != null) {
-            @SuppressWarnings("unchecked")
-            var suggestionListToParse =
-                (List<SimpleOrderedMap<?>>) suggestionsNode.get(SUGGESTIONS_NODE_NAME);
-            for (SimpleOrderedMap<?> suggestion : suggestionListToParse) {
-              String term = (String) suggestion.get(TERM_NODE_NAME);
-              long weight = (long) suggestion.get(WEIGHT_NODE_NAME);
-              String payload = (String) suggestion.get(PAYLOAD_NODE_NAME);
+    suggestInfo.forEach((outerName, outerValue) -> {
+      SimpleOrderedMap<?> suggestionsNode = (SimpleOrderedMap<?>) outerValue.getVal(0);
+      List<Suggestion> suggestionList = new ArrayList<>();
+      if (suggestionsNode != null) {
+        @SuppressWarnings("unchecked")
+        var suggestionListToParse =
+            (List<SimpleOrderedMap<?>>) suggestionsNode.get(SUGGESTIONS_NODE_NAME);
+        for (SimpleOrderedMap<?> suggestion : suggestionListToParse) {
+          String term = (String) suggestion.get(TERM_NODE_NAME);
+          long weight = (long) suggestion.get(WEIGHT_NODE_NAME);
+          String payload = (String) suggestion.get(PAYLOAD_NODE_NAME);
 
-              Suggestion parsedSuggestion = new Suggestion(term, weight, payload);
-              suggestionList.add(parsedSuggestion);
-            }
-            suggestionsPerDictionary.put(outerName, suggestionList);
-          }
-        });
+          Suggestion parsedSuggestion = new Suggestion(term, weight, payload);
+          suggestionList.add(parsedSuggestion);
+        }
+        suggestionsPerDictionary.put(outerName, suggestionList);
+      }
+    });
   }
 
   /**

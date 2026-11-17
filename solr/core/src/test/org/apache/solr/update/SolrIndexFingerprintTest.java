@@ -65,27 +65,26 @@ public class SolrIndexFingerprintTest extends SolrTestCaseJ4 {
       // Compute fingerprint sequentially to compare with parallel computation
       IndexFingerprint expectedFingerprint =
           searcher.getTopReaderContext().leaves().stream()
-              .map(
-                  ctx -> {
-                    try {
-                      LeafReader noCacheLeafReader =
-                          new FilterLeafReader(ctx.reader()) {
-                            @Override
-                            public CacheHelper getReaderCacheHelper() {
-                              return null;
-                            }
+              .map(ctx -> {
+                try {
+                  LeafReader noCacheLeafReader =
+                      new FilterLeafReader(ctx.reader()) {
+                        @Override
+                        public CacheHelper getReaderCacheHelper() {
+                          return null;
+                        }
 
-                            @Override
-                            public CacheHelper getCoreCacheHelper() {
-                              return null;
-                            }
-                          };
-                      return core.getIndexFingerprint(
-                          searcher, noCacheLeafReader.getContext(), maxVersion);
-                    } catch (IOException e) {
-                      throw new RuntimeException(e);
-                    }
-                  })
+                        @Override
+                        public CacheHelper getCoreCacheHelper() {
+                          return null;
+                        }
+                      };
+                  return core.getIndexFingerprint(
+                      searcher, noCacheLeafReader.getContext(), maxVersion);
+                } catch (IOException e) {
+                  throw new RuntimeException(e);
+                }
+              })
               .reduce(new IndexFingerprint(maxVersion), IndexFingerprint::reduce);
 
       IndexFingerprint actualFingerprint = searcher.getIndexFingerprint(maxVersion);

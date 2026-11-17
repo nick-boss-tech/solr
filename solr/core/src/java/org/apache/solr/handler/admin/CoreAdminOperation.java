@@ -119,7 +119,6 @@ public enum CoreAdminOperation implements CoreAdminOp {
         final String cname = params.required().get(CoreAdminParams.CORE);
         final var swapCoresRequestBody = new SwapCoresRequestBody();
         swapCoresRequestBody.with = params.required().get(CoreAdminParams.OTHER);
-        ;
         SwapCoresApi swapCoresApi =
             new SwapCores(
                 it.handler.coreContainer, it.handler.getCoreAdminAsyncTracker(), it.req, it.rsp);

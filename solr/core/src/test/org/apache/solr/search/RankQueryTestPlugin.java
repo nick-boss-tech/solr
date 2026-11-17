@@ -294,16 +294,15 @@ public class RankQueryTestPlugin extends QParserPlugin {
         } // end for-each-doc-in-response
       } // end for-each-response
 
-      shardDocs.sort(
-          (o1, o2) -> {
-            if (o1.score < o2.score) {
-              return 1;
-            } else if (o1.score > o2.score) {
-              return -1;
-            } else {
-              return 0;
-            }
-          });
+      shardDocs.sort((o1, o2) -> {
+        if (o1.score < o2.score) {
+          return 1;
+        } else if (o1.score > o2.score) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
 
       int resultSize = shardDocs.size();
 
@@ -605,16 +604,15 @@ public class RankQueryTestPlugin extends QParserPlugin {
         } // end for-each-doc-in-response
       } // end for-each-response
 
-      shardDocs.sort(
-          (o1, o2) -> {
-            if (o1.score < o2.score) {
-              return 1;
-            } else if (o1.score > o2.score) {
-              return -1;
-            } else {
-              return 0;
-            }
-          });
+      shardDocs.sort((o1, o2) -> {
+        if (o1.score < o2.score) {
+          return 1;
+        } else if (o1.score > o2.score) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
 
       int resultSize = shardDocs.size();
 

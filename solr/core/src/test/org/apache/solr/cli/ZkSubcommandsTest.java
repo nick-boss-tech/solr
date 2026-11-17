@@ -396,31 +396,29 @@ public class ZkSubcommandsTest extends SolrTestCaseJ4 {
     try (Stream<Path> stream = Files.walk(ExternalPaths.TECHPRODUCTS_CONFIGSET)) {
       stream
           .filter(Files::isRegularFile)
-          .forEach(
-              (sourceFile) -> {
-                Path sourceFileRelative =
-                    ExternalPaths.TECHPRODUCTS_CONFIGSET.relativize(sourceFile);
-                Path downloadedFile = destDir.resolve("conf").resolve(sourceFileRelative);
-                if (ConfigSetService.UPLOAD_FILENAME_EXCLUDE_PATTERN
-                    .matcher(sourceFileRelative.toString())
-                    .matches()) {
-                  assertFalse(
-                      sourceFile + " exists in ZK, downloaded:" + downloadedFile,
-                      Files.exists(downloadedFile));
-                } else {
-                  assertTrue(
-                      downloadedFile + " does not exist source:" + sourceFile,
-                      Files.exists(downloadedFile));
-                  try {
-                    assertEquals(
-                        sourceFileRelative + " content changed",
-                        -1,
-                        Files.mismatch(sourceFile, downloadedFile));
-                  } catch (IOException e) {
-                    throw new RuntimeException(e);
-                  }
-                }
-              });
+          .forEach(sourceFile -> {
+            Path sourceFileRelative = ExternalPaths.TECHPRODUCTS_CONFIGSET.relativize(sourceFile);
+            Path downloadedFile = destDir.resolve("conf").resolve(sourceFileRelative);
+            if (ConfigSetService.UPLOAD_FILENAME_EXCLUDE_PATTERN
+                .matcher(sourceFileRelative.toString())
+                .matches()) {
+              assertFalse(
+                  sourceFile + " exists in ZK, downloaded:" + downloadedFile,
+                  Files.exists(downloadedFile));
+            } else {
+              assertTrue(
+                  downloadedFile + " does not exist source:" + sourceFile,
+                  Files.exists(downloadedFile));
+              try {
+                assertEquals(
+                    sourceFileRelative + " content changed",
+                    -1,
+                    Files.mismatch(sourceFile, downloadedFile));
+              } catch (IOException e) {
+                throw new RuntimeException(e);
+              }
+            }
+          });
     }
 
     // test reset zk

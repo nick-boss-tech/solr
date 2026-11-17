@@ -508,10 +508,9 @@ public class SolrMetricManager {
   public void closeAllRegistries() {
     meterProviderAndReaders
         .values()
-        .forEach(
-            meterAndReader -> {
-              IOUtils.closeQuietly(meterAndReader.sdkMeterProvider);
-            });
+        .forEach(meterAndReader -> {
+          IOUtils.closeQuietly(meterAndReader.sdkMeterProvider);
+        });
     meterProviderAndReaders.clear();
     if (otelRuntimeJvmMetrics != null) {
       otelRuntimeJvmMetrics.close();

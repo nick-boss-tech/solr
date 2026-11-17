@@ -94,7 +94,8 @@ public class JacksonDataBindResponseParserTest extends SolrTestCase {
                     "root-error-class": "java.lang.IllegalStateException"
                 }
             }
-        }""";
+        }\
+        """;
 
     final NamedList<Object> result = parser.processResponse(toStream(json), null);
 

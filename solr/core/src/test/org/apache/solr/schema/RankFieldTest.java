@@ -109,19 +109,18 @@ public class RankFieldTest extends SolrTestCaseJ4 {
     // assert that the document made it in
     assertQ(req("q", "id:testBasicAdd"), "//*[@numFound='1']");
     h.getCore()
-        .withSearcher(
-            (searcher) -> {
-              LeafReader reader = searcher.getIndexReader().getContext().leaves().get(0).reader();
-              // assert that the field made it in
-              assertNotNull(reader.getFieldInfos().fieldInfo(RankField.INTERNAL_RANK_FIELD_NAME));
-              // assert that the feature made it in
-              assertTrue(
-                  reader
-                      .terms(RankField.INTERNAL_RANK_FIELD_NAME)
-                      .iterator()
-                      .seekExact(new BytesRef(RANK_1.getBytes(StandardCharsets.UTF_8))));
-              return null;
-            });
+        .withSearcher(searcher -> {
+          LeafReader reader = searcher.getIndexReader().getContext().leaves().get(0).reader();
+          // assert that the field made it in
+          assertNotNull(reader.getFieldInfos().fieldInfo(RankField.INTERNAL_RANK_FIELD_NAME));
+          // assert that the feature made it in
+          assertTrue(
+              reader
+                  .terms(RankField.INTERNAL_RANK_FIELD_NAME)
+                  .iterator()
+                  .seekExact(new BytesRef(RANK_1.getBytes(StandardCharsets.UTF_8))));
+          return null;
+        });
   }
 
   public void testMultipleRankFields() throws IOException {
@@ -130,24 +129,23 @@ public class RankFieldTest extends SolrTestCaseJ4 {
     // assert that the document made it in
     assertQ(req("q", "id:testMultiValueAdd"), "//*[@numFound='1']");
     h.getCore()
-        .withSearcher(
-            (searcher) -> {
-              LeafReader reader = searcher.getIndexReader().getContext().leaves().get(0).reader();
-              // assert that the field made it in
-              assertNotNull(reader.getFieldInfos().fieldInfo(RankField.INTERNAL_RANK_FIELD_NAME));
-              // assert that the features made it in
-              assertTrue(
-                  reader
-                      .terms(RankField.INTERNAL_RANK_FIELD_NAME)
-                      .iterator()
-                      .seekExact(new BytesRef(RANK_2.getBytes(StandardCharsets.UTF_8))));
-              assertTrue(
-                  reader
-                      .terms(RankField.INTERNAL_RANK_FIELD_NAME)
-                      .iterator()
-                      .seekExact(new BytesRef(RANK_1.getBytes(StandardCharsets.UTF_8))));
-              return null;
-            });
+        .withSearcher(searcher -> {
+          LeafReader reader = searcher.getIndexReader().getContext().leaves().get(0).reader();
+          // assert that the field made it in
+          assertNotNull(reader.getFieldInfos().fieldInfo(RankField.INTERNAL_RANK_FIELD_NAME));
+          // assert that the features made it in
+          assertTrue(
+              reader
+                  .terms(RankField.INTERNAL_RANK_FIELD_NAME)
+                  .iterator()
+                  .seekExact(new BytesRef(RANK_2.getBytes(StandardCharsets.UTF_8))));
+          assertTrue(
+              reader
+                  .terms(RankField.INTERNAL_RANK_FIELD_NAME)
+                  .iterator()
+                  .seekExact(new BytesRef(RANK_1.getBytes(StandardCharsets.UTF_8))));
+          return null;
+        });
   }
 
   public void testSortFails() {

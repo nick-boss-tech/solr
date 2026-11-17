@@ -162,11 +162,10 @@ public class DistributedUpdateProcessorTest extends SolrTestCaseJ4 {
       Collection<Future<Boolean>> futures = new ArrayList<>();
       for (int t = 0; t < threads; ++t) {
         futures.add(
-            executor.submit(
-                () -> {
-                  latch.await();
-                  return function.apply(processor);
-                }));
+            executor.submit(() -> {
+              latch.await();
+              return function.apply(processor);
+            }));
       }
       latch.countDown();
 

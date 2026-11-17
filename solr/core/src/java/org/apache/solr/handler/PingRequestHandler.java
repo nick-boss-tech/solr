@@ -136,7 +136,7 @@ public class PingRequestHandler extends RequestHandlerBase implements SolrCoreAw
     ENABLE,
     DISABLE,
     PING
-  };
+  }
 
   private String healthFileName = null;
   private Path healthcheck = null;

@@ -136,12 +136,11 @@ public class SimpleCollectionCreateDeleteTest extends AbstractFullDistribZkTestB
 
     Set<String> knownKeys =
         Set.of("core", "leader", "node_name", "base_url", "state", "type", "force_set_state");
-    c.forEachReplica(
-        (s, replica) -> {
-          for (String k : replica.getProperties().keySet()) {
-            assertTrue(knownKeys.contains(k));
-          }
-        });
+    c.forEachReplica((s, replica) -> {
+      for (String k : replica.getProperties().keySet()) {
+        assertTrue(knownKeys.contains(k));
+      }
+    });
   }
 
   @Test

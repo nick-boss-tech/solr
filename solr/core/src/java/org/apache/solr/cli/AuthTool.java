@@ -218,18 +218,19 @@ public class AuthTool extends ToolBase {
   public String getUsage() {
     return """
 
-          bin/solr auth enable [--type basicAuth] --credentials user:pass [--block-unknown <true|false>] [--update-include-file-only <true|false>] [-v]
-          bin/solr auth enable [--type basicAuth] --prompt <true|false> [--block-unknown <true|false>] [--update-include-file-only <true|false>] [-v]
-          bin/solr auth disable [--update-include-file-only <true|false>] [-v]
-        """;
+      bin/solr auth enable [--type basicAuth] --credentials user:pass [--block-unknown <true|false>] [--update-include-file-only <true|false>] [-v]
+      bin/solr auth enable [--type basicAuth] --prompt <true|false> [--block-unknown <true|false>] [--update-include-file-only <true|false>] [-v]
+      bin/solr auth disable [--update-include-file-only <true|false>] [-v]
+    """;
   }
 
   @Override
   public String getHeader() {
     return """
-        Updates or enables/disables authentication.  Must be run on the Solr server itself.
+    Updates or enables/disables authentication.  Must be run on the Solr server itself.
 
-        List of options:""";
+    List of options:\
+    """;
   }
 
   List<String> authenticationVariables =

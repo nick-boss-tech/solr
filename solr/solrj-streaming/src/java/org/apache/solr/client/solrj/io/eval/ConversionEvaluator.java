@@ -38,7 +38,7 @@ public class ConversionEvaluator extends RecursiveNumericEvaluator implements On
     CENTIMETERS,
     METERS,
     KILOMETERS
-  };
+  }
 
   private LENGTH_CONSTANT from;
   private LENGTH_CONSTANT to;
@@ -59,9 +59,8 @@ public class ConversionEvaluator extends RecursiveNumericEvaluator implements On
     }
 
     if (containedEvaluators.subList(0, 2).stream()
-        .anyMatch(
-            item ->
-                !(item instanceof RawValueEvaluator) && !(item instanceof FieldValueEvaluator))) {
+        .anyMatch(item ->
+            !(item instanceof RawValueEvaluator) && !(item instanceof FieldValueEvaluator))) {
       throw new IOException(
           String.format(
               Locale.ROOT,

@@ -357,17 +357,15 @@ public abstract class DirectoryFactory implements NamedListInitializedPlugin, Cl
     try (Stream<Path> oldIndexDirs = Files.list(dataDirFile)) {
       dirsList =
           oldIndexDirs
-              .filter(
-                  (file) -> {
-                    String fileName = file.getFileName().toString();
-                    return Files.isDirectory(file)
-                        && !file.equals(currentIndexDir)
-                        && (fileName.equals("index") || fileName.matches(INDEX_W_TIMESTAMP_REGEX));
-                  })
+              .filter(file -> {
+                String fileName = file.getFileName().toString();
+                return Files.isDirectory(file)
+                    && !file.equals(currentIndexDir)
+                    && (fileName.equals("index") || fileName.matches(INDEX_W_TIMESTAMP_REGEX));
+              })
               .sorted(Comparator.reverseOrder())
               .toList();
     }
-    ;
 
     if (dirsList.isEmpty()) {
       return; // nothing to do (no log message needed)
@@ -389,20 +387,18 @@ public abstract class DirectoryFactory implements NamedListInitializedPlugin, Cl
 
     dirsList.stream()
         .skip(i)
-        .forEach(
-            (entry) -> {
-              String dirToRmPath = entry.toAbsolutePath().toString();
-              try {
-                if (deleteOldIndexDirectory(dirToRmPath)) {
-                  log.info("Deleted old index directory: {}", dirToRmPath);
-                } else {
-                  log.warn("Delete old index directory {} failed.", dirToRmPath);
-                }
-              } catch (IOException ioExc) {
-                log.error(
-                    "Failed to delete old directory {} due to: ", entry.toAbsolutePath(), ioExc);
-              }
-            });
+        .forEach(entry -> {
+          String dirToRmPath = entry.toAbsolutePath().toString();
+          try {
+            if (deleteOldIndexDirectory(dirToRmPath)) {
+              log.info("Deleted old index directory: {}", dirToRmPath);
+            } else {
+              log.warn("Delete old index directory {} failed.", dirToRmPath);
+            }
+          } catch (IOException ioExc) {
+            log.error("Failed to delete old directory {} due to: ", entry.toAbsolutePath(), ioExc);
+          }
+        });
   }
 
   // Extension point to allow subclasses to infuse additional code when deleting old index

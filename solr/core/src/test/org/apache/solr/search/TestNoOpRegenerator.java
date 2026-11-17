@@ -35,30 +35,28 @@ public class TestNoOpRegenerator extends SolrTestCaseJ4 {
 
     // add some items
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              assertEquals(2, searcher.maxDoc());
-              SolrCache<Object, Object> cache = searcher.getCache("myPerSegmentCache");
-              assertEquals(0, cache.size());
-              cache.put("key1", "value1");
-              cache.put("key2", "value2");
-              assertEquals(2, cache.size());
-              return null;
-            });
+        .withSearcher(searcher -> {
+          assertEquals(2, searcher.maxDoc());
+          SolrCache<Object, Object> cache = searcher.getCache("myPerSegmentCache");
+          assertEquals(0, cache.size());
+          cache.put("key1", "value1");
+          cache.put("key2", "value2");
+          assertEquals(2, cache.size());
+          return null;
+        });
 
     // add a doc and commit: we should see our cached items still there
     assertU(adoc("id", "3"));
     assertU(commit());
 
     h.getCore()
-        .withSearcher(
-            searcher -> {
-              assertEquals(3, searcher.maxDoc());
-              SolrCache<Object, Object> cache = searcher.getCache("myPerSegmentCache");
-              assertEquals(2, cache.size());
-              assertEquals("value1", cache.get("key1"));
-              assertEquals("value2", cache.get("key2"));
-              return null;
-            });
+        .withSearcher(searcher -> {
+          assertEquals(3, searcher.maxDoc());
+          SolrCache<Object, Object> cache = searcher.getCache("myPerSegmentCache");
+          assertEquals(2, cache.size());
+          assertEquals("value1", cache.get("key1"));
+          assertEquals("value2", cache.get("key2"));
+          return null;
+        });
   }
 }

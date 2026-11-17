@@ -109,24 +109,21 @@ public class AttributeFetcherImpl implements AttributeFetcher {
     for (NodeMetric<?> metric : requestedNodeMetricSnitchTags) {
       metricSnitchToNodeToValue.put(metric, new HashMap<>());
     }
-    requestedCollectionMetrics.forEach(
-        (collection, tags) -> {
-          Set<String> collectionTags =
-              tags.stream().map(tag -> tag.getInternalName()).collect(Collectors.toSet());
-          collection
-              .shards()
-              .forEach(
-                  shard ->
-                      shard
-                          .replicas()
-                          .forEach(
-                              replica -> {
-                                Set<String> perNodeInternalTags =
-                                    nodeToReplicaInternalTags.computeIfAbsent(
-                                        replica.getNode(), n -> new HashSet<>());
-                                perNodeInternalTags.addAll(collectionTags);
-                              }));
-        });
+    requestedCollectionMetrics.forEach((collection, tags) -> {
+      Set<String> collectionTags =
+          tags.stream().map(tag -> tag.getInternalName()).collect(Collectors.toSet());
+      collection
+          .shards()
+          .forEach(shard ->
+              shard
+                  .replicas()
+                  .forEach(replica -> {
+                    Set<String> perNodeInternalTags =
+                        nodeToReplicaInternalTags.computeIfAbsent(
+                            replica.getNode(), n -> new HashSet<>());
+                    perNodeInternalTags.addAll(collectionTags);
+                  }));
+    });
 
     final NodeStateProvider nodeStateProvider = cloudManager.getNodeStateProvider();
 
@@ -147,46 +144,38 @@ public class AttributeFetcherImpl implements AttributeFetcher {
           nodeStateProvider.getReplicaInfo(node.getName(), tags);
       infos.entrySet().stream()
           .filter(entry -> requestedCollectionNamesMetrics.containsKey(entry.getKey()))
-          .forEach(
-              entry -> {
-                CollectionMetricsBuilder collectionMetricsBuilder =
-                    collectionMetricsBuilders.computeIfAbsent(
-                        entry.getKey(), c -> new CollectionMetricsBuilder());
-                entry
-                    .getValue()
-                    .forEach(
-                        (shardName, replicas) -> {
-                          CollectionMetricsBuilder.ShardMetricsBuilder shardMetricsBuilder =
-                              collectionMetricsBuilder
-                                  .getShardMetricsBuilders()
-                                  .computeIfAbsent(
-                                      shardName,
-                                      s -> new CollectionMetricsBuilder.ShardMetricsBuilder(s));
-                          replicas.forEach(
-                              replica -> {
-                                CollectionMetricsBuilder.ReplicaMetricsBuilder
-                                    replicaMetricsBuilder =
-                                        shardMetricsBuilder
-                                            .getReplicaMetricsBuilders()
-                                            .computeIfAbsent(
-                                                replica.getName(),
-                                                n ->
-                                                    new CollectionMetricsBuilder
-                                                        .ReplicaMetricsBuilder(n));
-                                replicaMetricsBuilder.setLeader(replica.isLeader());
-                                if (replica.isLeader()) {
-                                  shardMetricsBuilder.setLeaderMetrics(replicaMetricsBuilder);
-                                }
-                                Set<ReplicaMetric<?>> requestedMetrics =
-                                    requestedCollectionNamesMetrics.get(replica.getCollection());
-                                requestedMetrics.forEach(
-                                    metric -> {
-                                      replicaMetricsBuilder.addMetric(
-                                          metric, replica.get(metric.getInternalName()));
-                                    });
-                              });
-                        });
-              });
+          .forEach(entry -> {
+            CollectionMetricsBuilder collectionMetricsBuilder =
+                collectionMetricsBuilders.computeIfAbsent(
+                    entry.getKey(), c -> new CollectionMetricsBuilder());
+            entry
+                .getValue()
+                .forEach((shardName, replicas) -> {
+                  CollectionMetricsBuilder.ShardMetricsBuilder shardMetricsBuilder =
+                      collectionMetricsBuilder
+                          .getShardMetricsBuilders()
+                          .computeIfAbsent(
+                              shardName, s -> new CollectionMetricsBuilder.ShardMetricsBuilder(s));
+                  replicas.forEach(replica -> {
+                    CollectionMetricsBuilder.ReplicaMetricsBuilder replicaMetricsBuilder =
+                        shardMetricsBuilder
+                            .getReplicaMetricsBuilders()
+                            .computeIfAbsent(
+                                replica.getName(),
+                                n -> new CollectionMetricsBuilder.ReplicaMetricsBuilder(n));
+                    replicaMetricsBuilder.setLeader(replica.isLeader());
+                    if (replica.isLeader()) {
+                      shardMetricsBuilder.setLeaderMetrics(replicaMetricsBuilder);
+                    }
+                    Set<ReplicaMetric<?>> requestedMetrics =
+                        requestedCollectionNamesMetrics.get(replica.getCollection());
+                    requestedMetrics.forEach(metric -> {
+                      replicaMetricsBuilder.addMetric(
+                          metric, replica.get(metric.getInternalName()));
+                    });
+                  });
+                });
+          });
     }
 
     Map<String, CollectionMetrics> collectionMetrics = new HashMap<>();

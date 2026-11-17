@@ -252,48 +252,47 @@ public class TestCoordinatorRole extends SolrCloudTestCase {
       // the coordinator node's own state reader: the state its routing decisions are made from
       ZkStateReader zkStateReader = qaJetty.getCoreContainer().getZkController().getZkStateReader();
       Future<?> jettyManipulationFuture =
-          executor.submit(
-              () -> {
-                // we manipulate the jetty instances in a separate thread to more closely mimic
-                // the behavior we'd see irl.
-                try {
-                  if (!stopNrtJetty.await(2, TimeUnit.MINUTES)) {
-                    log.warn("phase1 NRT queries did not start in time; stopping NRT anyway");
-                  }
-                  log.info("stopping NRT jetty ...");
-                  nrtJettyF.stop();
-                  log.info("NRT jetty stopped.");
-                  // keep NRT down until the cluster state shows the node as down and the main
-                  // thread has exercised the outage by observing the failover to PULL, instead
-                  // of holding it down for a fixed time
-                  try {
-                    zkStateReader.waitForState(
-                        COLL,
-                        2,
-                        TimeUnit.MINUTES,
-                        (liveNodes, collectionState) -> !liveNodes.contains(nrtNodeName));
-                  } catch (TimeoutException e) {
-                    log.warn("cluster state did not show the NRT node down in time", e);
-                  }
-                  if (!outageExercised.await(2, TimeUnit.MINUTES)) {
-                    log.warn("failover to PULL was not observed in time; restarting NRT anyway");
-                  }
-                  log.info("restarting NRT jetty ...");
-                  nrtJettyF.start(true);
-                  log.info("NRT jetty restarted.");
-                  // once NRT is back up, we expect PULL to continue serving until the TTL on ZK
-                  // state used for query request routing has expired (60s). But here we force a
-                  // return to NRT by stopping the PULL replica once the NRT add has completed ...
-                  if (!addDone.await(2, TimeUnit.MINUTES)) {
-                    log.warn("NRT add did not succeed in time; stopping PULL anyway");
-                  }
-                  log.info("stopping PULL jetty ...");
-                  pullJettyF.stop();
-                  log.info("PULL jetty stopped.");
-                } catch (Exception e) {
-                  throw new RuntimeException(e);
-                }
-              });
+          executor.submit(() -> {
+            // we manipulate the jetty instances in a separate thread to more closely mimic
+            // the behavior we'd see irl.
+            try {
+              if (!stopNrtJetty.await(2, TimeUnit.MINUTES)) {
+                log.warn("phase1 NRT queries did not start in time; stopping NRT anyway");
+              }
+              log.info("stopping NRT jetty ...");
+              nrtJettyF.stop();
+              log.info("NRT jetty stopped.");
+              // keep NRT down until the cluster state shows the node as down and the main
+              // thread has exercised the outage by observing the failover to PULL, instead
+              // of holding it down for a fixed time
+              try {
+                zkStateReader.waitForState(
+                    COLL,
+                    2,
+                    TimeUnit.MINUTES,
+                    (liveNodes, collectionState) -> !liveNodes.contains(nrtNodeName));
+              } catch (TimeoutException e) {
+                log.warn("cluster state did not show the NRT node down in time", e);
+              }
+              if (!outageExercised.await(2, TimeUnit.MINUTES)) {
+                log.warn("failover to PULL was not observed in time; restarting NRT anyway");
+              }
+              log.info("restarting NRT jetty ...");
+              nrtJettyF.start(true);
+              log.info("NRT jetty restarted.");
+              // once NRT is back up, we expect PULL to continue serving until the TTL on ZK
+              // state used for query request routing has expired (60s). But here we force a
+              // return to NRT by stopping the PULL replica once the NRT add has completed ...
+              if (!addDone.await(2, TimeUnit.MINUTES)) {
+                log.warn("NRT add did not succeed in time; stopping PULL anyway");
+              }
+              log.info("stopping PULL jetty ...");
+              pullJettyF.stop();
+              log.info("PULL jetty stopped.");
+            } catch (Exception e) {
+              throw new RuntimeException(e);
+            }
+          });
       String hostCore;
       long start = new Date().getTime();
       long individualRequestStart = start;
@@ -441,42 +440,41 @@ public class TestCoordinatorRole extends SolrCloudTestCase {
       AtomicReference<CountDownLatch> phaseLatch = new AtomicReference<>();
       boolean failoverObserved = false;
       Future<Integer> f =
-          executor.submit(
-              () -> {
-                int iteration = 0;
-                while (new Date().getTime() < finishTimeMs && !done.get()) {
-                  int idx = iteration++ % jettys.length;
-                  JettySolrRunner toManipulate = jettys[idx];
-                  try {
-                    // The old phase duration was random from 0 to 7000ms, around 0 to 70 queries
-                    // at the old ~100ms query pace. These phase lengths are now expressed as
-                    // completed query counts.
-                    int serveTogetherQueries = threadRandom.nextInt(70);
-                    int downQueries = threadRandom.nextInt(70);
-                    log.info("serving together for {} queries", serveTogetherQueries);
-                    if (!awaitQueryCount(phaseLatch, serveTogetherQueries, finishTimeMs, done)) {
-                      break;
-                    }
-                    log.info("stopping {} ...", idx);
-                    toManipulate.stop();
-                    log.info("stopped {}.", idx);
-                    awaitQueryCount(phaseLatch, downQueries, finishTimeMs, done);
-                    log.info("restarting {} ...", idx);
-                    toManipulate.start(true);
-                    log.info("restarted {}.", idx);
-                    waitForState(
-                        toManipulate.getNodeName() + " replicas didn't become active in time",
-                        COLL,
-                        ((liveNodes, collectionState) ->
-                            collectionState.getReplicasOnNode(toManipulate.getNodeName()).stream()
-                                .allMatch(rep -> rep.getState() == Replica.State.ACTIVE)));
-                  } catch (Exception e) {
-                    throw new RuntimeException(e);
-                  }
+          executor.submit(() -> {
+            int iteration = 0;
+            while (new Date().getTime() < finishTimeMs && !done.get()) {
+              int idx = iteration++ % jettys.length;
+              JettySolrRunner toManipulate = jettys[idx];
+              try {
+                // The old phase duration was random from 0 to 7000ms, around 0 to 70 queries
+                // at the old ~100ms query pace. These phase lengths are now expressed as
+                // completed query counts.
+                int serveTogetherQueries = threadRandom.nextInt(70);
+                int downQueries = threadRandom.nextInt(70);
+                log.info("serving together for {} queries", serveTogetherQueries);
+                if (!awaitQueryCount(phaseLatch, serveTogetherQueries, finishTimeMs, done)) {
+                  break;
                 }
-                done.set(true);
-                return iteration;
-              });
+                log.info("stopping {} ...", idx);
+                toManipulate.stop();
+                log.info("stopped {}.", idx);
+                awaitQueryCount(phaseLatch, downQueries, finishTimeMs, done);
+                log.info("restarting {} ...", idx);
+                toManipulate.start(true);
+                log.info("restarted {}.", idx);
+                waitForState(
+                    toManipulate.getNodeName() + " replicas didn't become active in time",
+                    COLL,
+                    ((liveNodes, collectionState) ->
+                        collectionState.getReplicasOnNode(toManipulate.getNodeName()).stream()
+                            .allMatch(rep -> rep.getState() == Replica.State.ACTIVE)));
+              } catch (Exception e) {
+                throw new RuntimeException(e);
+              }
+            }
+            done.set(true);
+            return iteration;
+          });
       count = 0;
       start = new Date().getTime();
       long toggleEndMs;
@@ -703,23 +701,22 @@ public class TestCoordinatorRole extends SolrCloudTestCase {
       for (int i = 0; i < RUN_COUNT; i++) {
         final int currentRun = i;
         testFutures.add(
-            executorService.submit(
-                () -> {
-                  final String collectionName =
-                      collectionNames.get(currentRun % collectionNames.size());
-                  final String coordinatorNode =
-                      coordinatorNodes.get(currentRun % coordinatorNodes.size());
-                  QueryResponse response =
-                      new QueryRequest(new SolrQuery("*:*"))
-                          .setPreferredNodes(List.of(coordinatorNode))
-                          .process(client, collectionName);
-                  assertEquals(DOC_PER_COLLECTION_COUNT, response.getResults().getNumFound());
-                  // ensure docs have the correct id (ie not mixing up with other collections)
-                  for (SolrDocument doc : response.getResults()) {
-                    assertTrue(((String) doc.getFieldValue("id")).startsWith(collectionName));
-                  }
-                  return null;
-                }));
+            executorService.submit(() -> {
+              final String collectionName =
+                  collectionNames.get(currentRun % collectionNames.size());
+              final String coordinatorNode =
+                  coordinatorNodes.get(currentRun % coordinatorNodes.size());
+              QueryResponse response =
+                  new QueryRequest(new SolrQuery("*:*"))
+                      .setPreferredNodes(List.of(coordinatorNode))
+                      .process(client, collectionName);
+              assertEquals(DOC_PER_COLLECTION_COUNT, response.getResults().getNumFound());
+              // ensure docs have the correct id (ie not mixing up with other collections)
+              for (SolrDocument doc : response.getResults()) {
+                assertTrue(((String) doc.getFieldValue("id")).startsWith(collectionName));
+              }
+              return null;
+            }));
       }
       for (Future<?> testFuture : testFutures) {
         testFuture.get(); // check for any exceptions/failures

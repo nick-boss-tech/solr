@@ -60,14 +60,13 @@ public class PackageListDeployed extends PackageSubCommand {
       return 1;
     }
 
-    return runWithManagers(
-        (packageManager, repositoryManager) -> {
-          if (collection != null) {
-            packageTool.listPackagesDeployedOnCollection(packageManager, collection);
-          } else {
-            packageTool.listCollectionsWithPackageDeployed(packageManager, packageName);
-          }
-        });
+    return runWithManagers((packageManager, repositoryManager) -> {
+      if (collection != null) {
+        packageTool.listPackagesDeployedOnCollection(packageManager, collection);
+      } else {
+        packageTool.listCollectionsWithPackageDeployed(packageManager, packageName);
+      }
+    });
   }
 
   @Override

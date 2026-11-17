@@ -285,10 +285,8 @@ public class SolrMetricManagerTest extends SolrTestCaseJ4 {
           return metrics.stream()
               .filter(m -> "my_counter".equals(m.getName()))
               .findFirst()
-              .map(
-                  actual ->
-                      actual.getLongSumData().getPoints().stream()
-                          .anyMatch(p -> p.getValue() == 8L))
+              .map(actual ->
+                  actual.getLongSumData().getPoints().stream().anyMatch(p -> p.getValue() == 8L))
               .orElse(false);
         });
   }

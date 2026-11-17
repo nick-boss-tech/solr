@@ -93,10 +93,9 @@ public class TestSchemaChangeDuringMerge extends RestTestBase {
     writerClosing = new CountDownLatch(1);
 
     Future<?> addField =
-        executor.submit(
-            () ->
-                new SchemaRequest.AddField(Map.of("name", "new_field", "type", "string"))
-                    .process(getSolrClient()));
+        executor.submit(() ->
+            new SchemaRequest.AddField(Map.of("name", "new_field", "type", "string"))
+                .process(getSolrClient()));
 
     TimeOut timeOut = new TimeOut(30, TimeUnit.SECONDS, TimeSource.NANO_TIME);
     timeOut.waitFor(
@@ -124,20 +123,19 @@ public class TestSchemaChangeDuringMerge extends RestTestBase {
       MergePolicy.OneMerge merge;
       while ((merge = mergeSource.getNextMerge()) != null) {
         MergePolicy.OneMerge oneMerge = merge;
-        mergeExecutor.execute(
-            () -> {
-              mergeStarted.countDown();
-              try {
-                releaseMerges.await();
-              } catch (InterruptedException ignored) {
-                // the merge must still run, or closing the IndexWriter hangs
-              }
-              try {
-                mergeSource.merge(oneMerge);
-              } catch (IOException e) {
-                throw new UncheckedIOException(e);
-              }
-            });
+        mergeExecutor.execute(() -> {
+          mergeStarted.countDown();
+          try {
+            releaseMerges.await();
+          } catch (InterruptedException ignored) {
+            // the merge must still run, or closing the IndexWriter hangs
+          }
+          try {
+            mergeSource.merge(oneMerge);
+          } catch (IOException e) {
+            throw new UncheckedIOException(e);
+          }
+        });
       }
     }
   }

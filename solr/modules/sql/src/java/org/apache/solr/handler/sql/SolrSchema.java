@@ -173,11 +173,10 @@ class SolrSchema extends AbstractSchema implements Closeable {
     Map<String, LukeResponse.FieldInfo> combinedFields =
         Stream.of(fieldsInUseMap, storedFields)
             .flatMap(map -> map.entrySet().stream())
-            .filter(
-                e ->
-                    isStoredIndexedOrDocValues(
-                        getFieldFlags(
-                            e.getValue()))) // Only want fields that are stored, indexed, or have
+            .filter(e ->
+                isStoredIndexedOrDocValues(
+                    getFieldFlags(
+                        e.getValue()))) // Only want fields that are stored, indexed, or have
             // docValues enabled
             .collect(
                 Collectors.toMap(

@@ -110,7 +110,7 @@ public class CloudExitableDirectoryReaderTest extends SolrCloudTestCase {
         if (errorSnapshot != null) {
           errorCount =
               errorSnapshot.getDataPoints().stream()
-                  .mapToLong((value) -> (long) value.getValue())
+                  .mapToLong(value -> (long) value.getValue())
                   .sum();
         }
       }
@@ -365,8 +365,7 @@ public class CloudExitableDirectoryReaderTest extends SolrCloudTestCase {
   }
 
   public void assertNo500s(String msg) {
-    assertTrue(
-        msg, fiveHundredsByNode.values().stream().allMatch((errorCount) -> errorCount == 0L));
+    assertTrue(msg, fiveHundredsByNode.values().stream().allMatch(errorCount -> errorCount == 0L));
   }
 
   /** execute a request, verify that we get an expected error */

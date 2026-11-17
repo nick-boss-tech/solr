@@ -50,12 +50,11 @@ public class SampleDocuments {
               .collect(Collectors.toSet());
       final List<SolrInputDocument> toAdd =
           add.stream()
-              .filter(
-                  doc -> {
-                    Object id = doc.getFieldValue(idFieldName);
-                    return id != null
-                        && !ids.contains(id); // doc has ID, and it's not already in the set
-                  })
+              .filter(doc -> {
+                Object id = doc.getFieldValue(idFieldName);
+                return id != null
+                    && !ids.contains(id); // doc has ID, and it's not already in the set
+              })
               .toList();
       parsed.addAll(toAdd);
       if (maxDocsToLoad > 0 && parsed.size() > maxDocsToLoad) {

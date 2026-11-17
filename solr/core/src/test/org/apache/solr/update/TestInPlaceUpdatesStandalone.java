@@ -773,12 +773,11 @@ public class TestInPlaceUpdatesStandalone extends SolrTestCaseJ4 {
     // schema sanity check: assert that the nonexistent_field_i_dvo doesn't exist already
     FieldInfo fi =
         h.getCore()
-            .withSearcher(
-                searcher ->
-                    searcher
-                        .getSlowAtomicReader()
-                        .getFieldInfos()
-                        .fieldInfo("nonexistent_field_i_dvo"));
+            .withSearcher(searcher ->
+                searcher
+                    .getSlowAtomicReader()
+                    .getFieldInfos()
+                    .fieldInfo("nonexistent_field_i_dvo"));
     assertNull(fi);
 
     // Partial update

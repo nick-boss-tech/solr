@@ -112,16 +112,15 @@ public class MergeIndexes extends CoreAdminAPIBase implements MergeIndexesApi {
                       SolrException.ErrorCode.BAD_REQUEST,
                       "At least one indexDir or srcCore must be specified");
                 sources.stream()
-                    .forEach(
-                        src -> {
-                          String source = src;
-                          SolrCore srcCore = coreContainer.getCore(source);
-                          if (srcCore == null)
-                            throw new SolrException(
-                                SolrException.ErrorCode.BAD_REQUEST,
-                                "Core: " + source + " does not exist");
-                          sourceCores.add(srcCore);
-                        });
+                    .forEach(src -> {
+                      String source = src;
+                      SolrCore srcCore = coreContainer.getCore(source);
+                      if (srcCore == null)
+                        throw new SolrException(
+                            SolrException.ErrorCode.BAD_REQUEST,
+                            "Core: " + source + " does not exist");
+                      sourceCores.add(srcCore);
+                    });
               } else {
                 // Validate each 'indexDir' input as valid
                 dirNames.stream()
@@ -129,29 +128,26 @@ public class MergeIndexes extends CoreAdminAPIBase implements MergeIndexesApi {
                         indexDir -> core.getCoreContainer().assertPathAllowed(Path.of(indexDir)));
                 DirectoryFactory dirFactory = core.getDirectoryFactory();
                 dirNames.stream()
-                    .forEach(
-                        dir -> {
-                          boolean markAsDone = false;
-                          if (dirFactory instanceof CachingDirectoryFactory) {
-                            if (!((CachingDirectoryFactory) dirFactory)
-                                .getLivePaths()
-                                .contains(dir)) {
-                              markAsDone = true;
-                            }
-                          }
-                          try {
-                            Directory dirTemp =
-                                dirFactory.get(
-                                    dir,
-                                    DirectoryFactory.DirContext.DEFAULT,
-                                    core.getSolrConfig().indexConfig.lockType);
-                            dirsToBeReleased.put(dirTemp, markAsDone);
-                            // TODO: why doesn't this use the IR factory? what is going on here?
-                            readersToBeClosed.add(DirectoryReader.open(dirTemp));
-                          } catch (IOException e) {
-                            throw new RuntimeException(e);
-                          }
-                        });
+                    .forEach(dir -> {
+                      boolean markAsDone = false;
+                      if (dirFactory instanceof CachingDirectoryFactory) {
+                        if (!((CachingDirectoryFactory) dirFactory).getLivePaths().contains(dir)) {
+                          markAsDone = true;
+                        }
+                      }
+                      try {
+                        Directory dirTemp =
+                            dirFactory.get(
+                                dir,
+                                DirectoryFactory.DirContext.DEFAULT,
+                                core.getSolrConfig().indexConfig.lockType);
+                        dirsToBeReleased.put(dirTemp, markAsDone);
+                        // TODO: why doesn't this use the IR factory? what is going on here?
+                        readersToBeClosed.add(DirectoryReader.open(dirTemp));
+                      } catch (IOException e) {
+                        throw new RuntimeException(e);
+                      }
+                    });
               }
 
               List<DirectoryReader> readers = null;

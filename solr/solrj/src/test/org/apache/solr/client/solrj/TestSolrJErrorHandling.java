@@ -156,7 +156,6 @@ public class TestSolrJErrorHandling extends SolrTestCaseJ4 {
       public void remove() {}
     };
   }
-  ;
 
   void doThreads(final SolrClient client, final int numThreads, final int numRequests)
       throws Exception {

@@ -91,13 +91,12 @@ public class OtelTracerConfigurator extends OpenTelemetryConfigurator {
    * system properties take precedence)
    */
   private void injectPluginSettingsIfNotConfigured(NamedList<?> args) {
-    args.forEach(
-        (k, v) -> {
-          var asSysName = envNameToSyspropName(k);
-          if (asSysName.startsWith("otel.")) {
-            setDefaultIfNotConfigured(asSysName, v.toString());
-          }
-        });
+    args.forEach((k, v) -> {
+      var asSysName = envNameToSyspropName(k);
+      if (asSysName.startsWith("otel.")) {
+        setDefaultIfNotConfigured(asSysName, v.toString());
+      }
+    });
   }
 
   /**
@@ -143,13 +142,12 @@ public class OtelTracerConfigurator extends OpenTelemetryConfigurator {
         .forEach(entry -> currentConfig.put(entry.getKey(), entry.getValue()));
     EnvUtils.getProperties().entrySet().stream()
         .filter(e -> e.getKey().startsWith("otel."))
-        .forEach(
-            entry -> {
-              String key = entry.getKey();
-              String envKey = key.toUpperCase(Locale.ROOT).replace('.', '_');
-              String value = entry.getValue();
-              currentConfig.put(envKey, value);
-            });
+        .forEach(entry -> {
+          String key = entry.getKey();
+          String envKey = key.toUpperCase(Locale.ROOT).replace('.', '_');
+          String value = entry.getValue();
+          currentConfig.put(envKey, value);
+        });
     return currentConfig;
   }
 

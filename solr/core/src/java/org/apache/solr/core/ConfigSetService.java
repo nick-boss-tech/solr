@@ -316,7 +316,7 @@ public abstract class ConfigSetService {
                 + solrConfig.luceneMatchVersion;
         return schemaCache.get(
             cacheKey,
-            (key) -> indexSchemaFactory.create(cdSchemaName, solrConfig, ConfigSetService.this));
+            key -> indexSchemaFactory.create(cdSchemaName, solrConfig, ConfigSetService.this));
       } else {
         log.warn(
             "Unable to get schema modification version, configSet={} schema={}",

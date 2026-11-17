@@ -672,10 +672,11 @@ public class SolrRequestParsers {
       return new SolrException(
           ErrorCode.SERVER_ERROR,
           """
-              Solr requires that request parameters sent using application/x-www-form-urlencoded \
-              content-type can be read through the request input stream. Unfortunately, the \
-              stream was empty / not available. This may be caused by a servlet filter calling \
-              ServletRequest.getParameter*(). Please remove it.""");
+          Solr requires that request parameters sent using application/x-www-form-urlencoded \
+          content-type can be read through the request input stream. Unfortunately, the \
+          stream was empty / not available. This may be caused by a servlet filter calling \
+          ServletRequest.getParameter*(). Please remove it.\
+          """);
     }
 
     public boolean isFormData(HttpServletRequest req) {

@@ -901,10 +901,9 @@ class SchemaDesignerConfigSetHelper implements SchemaDesignerConstants {
     final Map<String, FieldType> existingTypes = schema.getFieldTypes();
     List<FieldType> addTypes =
         copyFromSchema.getFieldTypes().values().stream()
-            .filter(
-                t ->
-                    isLangTextType(t, restoreAllLangs ? null : langSet)
-                        && !existingTypes.containsKey(t.getTypeName()))
+            .filter(t ->
+                isLangTextType(t, restoreAllLangs ? null : langSet)
+                    && !existingTypes.containsKey(t.getTypeName()))
             .collect(Collectors.toList());
     if (!addTypes.isEmpty()) {
       schema = schema.addFieldTypes(addTypes, false);
@@ -1009,10 +1008,9 @@ class SchemaDesignerConfigSetHelper implements SchemaDesignerConstants {
       langSet.addAll(langs);
       toAdd =
           toAdd.stream()
-              .filter(
-                  df ->
-                      !df.getName().startsWith("*_txt_")
-                          || langSet.contains(df.getName().substring("*_txt_".length())))
+              .filter(df ->
+                  !df.getName().startsWith("*_txt_")
+                      || langSet.contains(df.getName().substring("*_txt_".length())))
               .collect(Collectors.toList());
     }
 

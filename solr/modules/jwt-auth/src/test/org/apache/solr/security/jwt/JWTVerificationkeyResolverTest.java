@@ -89,12 +89,11 @@ public class JWTVerificationkeyResolverTest extends SolrTestCaseJ4 {
         .when(secondJwkList)
         .refresh();
     when(secondJwkList.getJsonWebKeys())
-        .then(
-            inv -> {
-              if (keysToReturnFromSecondJwk == null)
-                keysToReturnFromSecondJwk = refreshSequenceForSecondJwk.next();
-              return keysToReturnFromSecondJwk;
-            });
+        .then(inv -> {
+          if (keysToReturnFromSecondJwk == null)
+            keysToReturnFromSecondJwk = refreshSequenceForSecondJwk.next();
+          return keysToReturnFromSecondJwk;
+        });
     when(httpsJwksFactory.createList(ArgumentMatchers.anyList()))
         .thenReturn(asList(firstJwkList, secondJwkList));
 

@@ -64,9 +64,7 @@ public class ShardsAllowListTest extends MultiSolrCloudTestCase {
 
   private static void appendClusterNodes(
       final StringBuilder sb, final MiniSolrCloudCluster cluster) {
-    cluster
-        .getJettySolrRunners()
-        .forEach((jetty) -> sb.append(jetty.getBaseUrl().toString() + ","));
+    cluster.getJettySolrRunners().forEach(jetty -> sb.append(jetty.getBaseUrl().toString() + ","));
   }
 
   @BeforeClass

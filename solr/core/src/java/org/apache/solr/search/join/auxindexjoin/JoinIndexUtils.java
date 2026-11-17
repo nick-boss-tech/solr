@@ -608,7 +608,7 @@ final class JoinIndexUtils {
 
     @Override
     public PagedMutable apply(LeafReaderContext toContext) {
-      return cache.computeIfAbsent(toContext.ord, (i) -> computeToDoc(toContext));
+      return cache.computeIfAbsent(toContext.ord, i -> computeToDoc(toContext));
     }
 
     /** {@code toDoc + 1} at each to-ord, {@code 0} where no live to-doc carries that ordinal. */

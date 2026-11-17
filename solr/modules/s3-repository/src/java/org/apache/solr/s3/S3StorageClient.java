@@ -233,13 +233,8 @@ public class S3StorageClient {
 
     try {
       ListObjectsV2Iterable objectListing =
-          s3Client.listObjectsV2Paginator(
-              builder ->
-                  builder
-                      .bucket(bucketName)
-                      .prefix(prefix)
-                      .delimiter(S3_FILE_PATH_DELIMITER)
-                      .build());
+          s3Client.listObjectsV2Paginator(builder ->
+              builder.bucket(bucketName).prefix(prefix).delimiter(S3_FILE_PATH_DELIMITER).build());
 
       return Stream.concat(
               objectListing.contents().stream().map(S3Object::key),
@@ -247,18 +242,16 @@ public class S3StorageClient {
           .filter(s -> s.startsWith(prefix))
           .map(s -> s.substring(prefix.length()))
           .filter(s -> !s.isEmpty())
-          .filter(
-              s -> {
-                int slashIndex = s.indexOf(S3_FILE_PATH_DELIMITER);
-                return slashIndex == -1 || slashIndex == s.length() - 1;
-              })
-          .map(
-              s -> {
-                if (s.endsWith(S3_FILE_PATH_DELIMITER)) {
-                  return s.substring(0, s.length() - 1);
-                }
-                return s;
-              })
+          .filter(s -> {
+            int slashIndex = s.indexOf(S3_FILE_PATH_DELIMITER);
+            return slashIndex == -1 || slashIndex == s.length() - 1;
+          })
+          .map(s -> {
+            if (s.endsWith(S3_FILE_PATH_DELIMITER)) {
+              return s.substring(0, s.length() - 1);
+            }
+            return s;
+          })
           .toArray(String[]::new);
     } catch (SdkException sdke) {
       throw handleAmazonException(sdke);

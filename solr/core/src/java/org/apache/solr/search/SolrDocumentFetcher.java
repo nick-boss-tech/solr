@@ -839,23 +839,22 @@ public class SolrDocumentFetcher {
         }
       } else if (fnames != null) {
         storedFields.addAll(fnames);
-        storedFields.removeIf(
-            (String name) -> {
-              SchemaField schemaField = searcher.getSchema().getFieldOrNull(name);
-              if (schemaField == null) {
-                // Get it from the stored fields if, for some reason, we can't get the schema.
-                return false;
-              }
-              if (schemaField.stored() && schemaField.multiValued()) {
-                // must return multivalued fields from stored data if possible.
-                return false;
-              }
-              if (schemaField.stored() == false) {
-                // if it's not stored, no choice but to return from DV.
-                return true;
-              }
-              return false;
-            });
+        storedFields.removeIf((String name) -> {
+          SchemaField schemaField = searcher.getSchema().getFieldOrNull(name);
+          if (schemaField == null) {
+            // Get it from the stored fields if, for some reason, we can't get the schema.
+            return false;
+          }
+          if (schemaField.stored() && schemaField.multiValued()) {
+            // must return multivalued fields from stored data if possible.
+            return false;
+          }
+          if (schemaField.stored() == false) {
+            // if it's not stored, no choice but to return from DV.
+            return true;
+          }
+          return false;
+        });
       }
       storedFields.remove(SolrReturnFields.SCORE);
       return storedFields;

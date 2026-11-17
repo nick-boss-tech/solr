@@ -611,9 +611,8 @@ public class CombinedQueryComponent extends QueryComponent implements SolrCoreAw
       rb.addDebugInfo("combinerExplanations", explanations);
     }
     Map<String, ShardDoc> shardDocIdMap = new HashMap<>();
-    shardDocMap.forEach(
-        (shardKey, shardDocs) ->
-            shardDocs.forEach(shardDoc -> shardDocIdMap.put(shardDoc.id.toString(), shardDoc)));
+    shardDocMap.forEach((shardKey, shardDocs) ->
+        shardDocs.forEach(shardDoc -> shardDocIdMap.put(shardDoc.id.toString(), shardDoc)));
 
     // creating a queue to sort basis on all the comparator and tie-break on docId
     Map<Object, ShardDoc> resultIds = new HashMap<>();

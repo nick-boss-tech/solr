@@ -91,7 +91,8 @@ public class SchemaRequestBodyTest extends SolrTestCase {
         """
         {"add-field":{"name":"f1","type":"string"},\
         "add-field":{"name":"f2","type":"string"},\
-        "delete-field":{"name":"f0"}}""",
+        "delete-field":{"name":"f0"}}\
+        """,
         body(multiUpdate));
   }
 

@@ -225,21 +225,20 @@ public class ZkShardTermsTest extends SolrCloudTestCase {
     for (int i = 0; i < failedReplicas.size(); i++) {
       String replica = failedReplicas.get(i);
       threads[i] =
-          new Thread(
-              () -> {
-                try (ZkShardTerms zkShardTerms =
-                    new ZkShardTerms(collection, "shard1", cluster.getZkClient())) {
-                  while (!stop.get()) {
-                    try {
-                      Thread.sleep(random().nextInt(200));
-                      zkShardTerms.setTermEqualsToLeader(replica);
-                    } catch (InterruptedException e) {
-                      Thread.currentThread().interrupt();
-                      log.error("interrupted", e);
-                    }
-                  }
+          new Thread(() -> {
+            try (ZkShardTerms zkShardTerms =
+                new ZkShardTerms(collection, "shard1", cluster.getZkClient())) {
+              while (!stop.get()) {
+                try {
+                  Thread.sleep(random().nextInt(200));
+                  zkShardTerms.setTermEqualsToLeader(replica);
+                } catch (InterruptedException e) {
+                  Thread.currentThread().interrupt();
+                  log.error("interrupted", e);
                 }
-              });
+              }
+            }
+          });
       threads[i].start();
     }
 

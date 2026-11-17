@@ -186,9 +186,9 @@ public class StreamTool extends ToolBase {
   public String getUsage() {
     // Specify that the last argument is the streaming expression
     return """
-        bin/solr stream [--array-delimiter <CHARACTER>] [-c <NAME>] [--delimiter <CHARACTER>] [--execution <ENVIRONMENT>] [--fields
-               <FIELDS>] [-h] [--header] [-s <HOST>] [-u <credentials>] [-v] [-z <HOST>]  <streaming expression OR stream_file.expr>
-        """;
+    bin/solr stream [--array-delimiter <CHARACTER>] [-c <NAME>] [--delimiter <CHARACTER>] [--execution <ENVIRONMENT>] [--fields
+           <FIELDS>] [-h] [--header] [-s <HOST>] [-u <credentials>] [-v] [-z <HOST>]  <streaming expression OR stream_file.expr>
+    """;
   }
 
   /**

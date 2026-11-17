@@ -214,10 +214,8 @@ public class DeepRandomStream extends TupleStream implements Expressible {
       ModifiableSolrParams mParams = new ModifiableSolrParams(params);
       child.setExpression(
           mParams.getMap().entrySet().stream()
-              .map(
-                  e ->
-                      String.format(
-                          Locale.ROOT, "%s=%s", e.getKey(), Arrays.toString(e.getValue())))
+              .map(e ->
+                  String.format(Locale.ROOT, "%s=%s", e.getKey(), Arrays.toString(e.getValue())))
               .collect(Collectors.joining(",")));
     }
     explanation.addChild(child);

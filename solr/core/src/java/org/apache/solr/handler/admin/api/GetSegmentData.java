@@ -339,25 +339,23 @@ public class GetSegmentData extends JerseyResource implements SegmentsApi {
       Directory dir = segmentCommitInfo.info.dir;
       List<Pair<String, Long>> files =
           segmentCommitInfo.files().stream()
-              .map(
-                  f -> {
-                    long size = -1;
-                    try {
-                      size = dir.fileLength(f);
-                    } catch (IOException e) {
-                    }
-                    return new Pair<String, Long>(f, size);
-                  })
-              .sorted(
-                  (p1, p2) -> {
-                    if (p1.second() > p2.second()) {
-                      return -1;
-                    } else if (p1.second() < p2.second()) {
-                      return 1;
-                    } else {
-                      return 0;
-                    }
-                  })
+              .map(f -> {
+                long size = -1;
+                try {
+                  size = dir.fileLength(f);
+                } catch (IOException e) {
+                }
+                return new Pair<String, Long>(f, size);
+              })
+              .sorted((p1, p2) -> {
+                if (p1.second() > p2.second()) {
+                  return -1;
+                } else if (p1.second() < p2.second()) {
+                  return 1;
+                } else {
+                  return 0;
+                }
+              })
               .collect(Collectors.toList());
       if (!files.isEmpty()) {
         final var topFiles = new HashMap<String, String>();

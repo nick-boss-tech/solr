@@ -201,26 +201,24 @@ public class MetricUtils {
   /** Gather label filters */
   public static SortedMap<String, Set<String>> labelFilters(SolrParams params) {
     SortedMap<String, Set<String>> labelFilters = new TreeMap<>();
-    labelFilterKeys.forEach(
-        (paramName) -> {
-          Set<String> filterValues = readParamsAsSet(params, paramName);
-          if (!filterValues.isEmpty()) {
-            labelFilters.put(paramName, filterValues);
-          }
-        });
+    labelFilterKeys.forEach(paramName -> {
+      Set<String> filterValues = readParamsAsSet(params, paramName);
+      if (!filterValues.isEmpty()) {
+        labelFilters.put(paramName, filterValues);
+      }
+    });
 
     return labelFilters;
   }
 
   /** Add label filters to the filters map */
   public static void addLabelFilters(String value, Map<String, Set<String>> filters) {
-    labelFilterKeys.forEach(
-        (paramName) -> {
-          Set<String> filterValues = paramValueAsSet(value);
-          if (!filterValues.isEmpty()) {
-            filters.put(paramName, filterValues);
-          }
-        });
+    labelFilterKeys.forEach(paramName -> {
+      Set<String> filterValues = paramValueAsSet(value);
+      if (!filterValues.isEmpty()) {
+        filters.put(paramName, filterValues);
+      }
+    });
   }
 
   /** Split the coma-separated param values into a set */

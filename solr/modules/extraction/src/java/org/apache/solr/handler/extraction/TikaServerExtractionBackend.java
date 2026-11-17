@@ -197,12 +197,10 @@ public class TikaServerExtractionBackend implements ExtractionBackend {
       req.headers(h -> h.add("Content-Type", contentType));
     }
     if (!request.tikaServerRequestHeaders.isEmpty()) {
-      req.headers(
-          h ->
-              request.tikaServerRequestHeaders.forEach(
-                  (k, v) -> {
-                    if (k != null && v != null) h.add(k, v);
-                  }));
+      req.headers(h ->
+          request.tikaServerRequestHeaders.forEach((k, v) -> {
+            if (k != null && v != null) h.add(k, v);
+          }));
     }
 
     ExtractionMetadata md = buildMetadataFromRequest(request);
@@ -220,10 +218,8 @@ public class TikaServerExtractionBackend implements ExtractionBackend {
       }
     }
     if (request.resourceName != null) {
-      req.headers(
-          h ->
-              h.add(
-                  "Content-Disposition", "attachment; filename=\"" + request.resourceName + "\""));
+      req.headers(h ->
+          h.add("Content-Disposition", "attachment; filename=\"" + request.resourceName + "\""));
     }
 
     if (contentType != null) {

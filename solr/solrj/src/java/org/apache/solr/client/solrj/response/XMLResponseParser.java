@@ -252,7 +252,7 @@ public class XMLResponseParser extends ResponseParser {
       }
       return null;
     }
-  };
+  }
 
   protected NamedList<Object> readNamedList(XMLStreamReader parser) throws XMLStreamException {
     if (XMLStreamConstants.START_ELEMENT != parser.getEventType()) {

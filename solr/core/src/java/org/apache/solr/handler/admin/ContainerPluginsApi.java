@@ -78,27 +78,25 @@ public class ContainerPluginsApi {
       PluginMeta info = payload.get();
       validateConfig(payload, info);
       if (payload.hasError()) return;
-      pluginsSource.persistPlugins(
-          map -> {
-            if (map.containsKey(info.name)) {
-              payload.addError(info.name + " already exists");
-              return null;
-            }
-            map.put(info.name, payload.getDataMap());
-            return map;
-          });
+      pluginsSource.persistPlugins(map -> {
+        if (map.containsKey(info.name)) {
+          payload.addError(info.name + " already exists");
+          return null;
+        }
+        map.put(info.name, payload.getDataMap());
+        return map;
+      });
     }
 
     @Command(name = "remove")
     public void remove(PayloadObj<String> payload) throws IOException {
-      pluginsSource.persistPlugins(
-          map -> {
-            if (map.remove(payload.get()) == null) {
-              payload.addError("No such plugin: " + payload.get());
-              return null;
-            }
-            return map;
-          });
+      pluginsSource.persistPlugins(map -> {
+        if (map.remove(payload.get()) == null) {
+          payload.addError("No such plugin: " + payload.get());
+          return null;
+        }
+        return map;
+      });
     }
 
     @Command(name = "update")
@@ -107,22 +105,21 @@ public class ContainerPluginsApi {
       PluginMeta info = payload.get();
       validateConfig(payload, info);
       if (payload.hasError()) return;
-      pluginsSource.persistPlugins(
-          map -> {
-            Map<String, Object> existing = (Map<String, Object>) map.get(info.name);
-            if (existing == null) {
-              payload.addError("No such plugin: " + info.name);
-              return null;
-            } else {
-              Map<String, Object> jsonObj = payload.getDataMap();
-              if (Objects.equals(jsonObj, existing)) {
-                // no need to change anything
-                return null;
-              }
-              map.put(info.name, jsonObj);
-              return map;
-            }
-          });
+      pluginsSource.persistPlugins(map -> {
+        Map<String, Object> existing = (Map<String, Object>) map.get(info.name);
+        if (existing == null) {
+          payload.addError("No such plugin: " + info.name);
+          return null;
+        } else {
+          Map<String, Object> jsonObj = payload.getDataMap();
+          if (Objects.equals(jsonObj, existing)) {
+            // no need to change anything
+            return null;
+          }
+          map.put(info.name, jsonObj);
+          return map;
+        }
+      });
     }
   }
 

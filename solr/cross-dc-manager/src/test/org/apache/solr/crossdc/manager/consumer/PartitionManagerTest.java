@@ -248,10 +248,9 @@ public class PartitionManagerTest {
         ExecutorUtil.newMDCAwareSingleThreadExecutor(new SolrNamedThreadFactory("test"));
     try {
       Future<?> future =
-          executor.submit(
-              () -> {
-                // Simulate the task being completed
-              });
+          executor.submit(() -> {
+            // Simulate the task being completed
+          });
 
       workUnit.workItems.add(future);
 

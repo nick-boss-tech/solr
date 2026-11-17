@@ -77,7 +77,6 @@ public class SchemaHandler extends RequestHandlerBase
     level2.put(DYNAMIC_FIELDS.nameLower, "fl");
     level2.put(COPY_FIELDS.nameLower, null);
   }
-  ;
 
   @Override
   public void handleRequestBody(SolrQueryRequest req, SolrQueryResponse rsp) throws Exception {

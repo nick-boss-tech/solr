@@ -171,21 +171,18 @@ public class SolrCLI implements CLIO, java.util.concurrent.Callable<Integer> {
    */
   @VisibleForTesting
   static void installFirstLineOnlyHelpFactory(picocli.CommandLine cmd) {
-    cmd.setHelpFactory(
-        (spec, colorScheme) ->
-            new picocli.CommandLine.Help(spec, colorScheme) {
-              @Override
-              public picocli.CommandLine.Help.IOptionRenderer createDefaultOptionRenderer() {
-                picocli.CommandLine.Help.IOptionRenderer base = super.createDefaultOptionRenderer();
-                return (option, paramLabelRenderer, scheme) -> {
-                  picocli.CommandLine.Help.Ansi.Text[][] rows =
-                      base.render(option, paramLabelRenderer, scheme);
-                  return rows.length <= 1
-                      ? rows
-                      : new picocli.CommandLine.Help.Ansi.Text[][] {rows[0]};
-                };
-              }
-            });
+    cmd.setHelpFactory((spec, colorScheme) ->
+        new picocli.CommandLine.Help(spec, colorScheme) {
+          @Override
+          public picocli.CommandLine.Help.IOptionRenderer createDefaultOptionRenderer() {
+            picocli.CommandLine.Help.IOptionRenderer base = super.createDefaultOptionRenderer();
+            return (option, paramLabelRenderer, scheme) -> {
+              picocli.CommandLine.Help.Ansi.Text[][] rows =
+                  base.render(option, paramLabelRenderer, scheme);
+              return rows.length <= 1 ? rows : new picocli.CommandLine.Help.Ansi.Text[][] {rows[0]};
+            };
+          }
+        });
   }
 
   /** Propagates common settings to all subcommands. */

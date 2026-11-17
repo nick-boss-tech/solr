@@ -95,19 +95,15 @@ public abstract class PathBasedCertResolverBase {
             path.startsWith(SUBJECT_DN_PREFIX)
                 ? CertUtil.extractFromSubjectDN(certificate, path)
                 : CertUtil.extractFromIssuerDN(certificate, path);
-        value.ifPresent(
-            val ->
-                fieldValuesMap
-                    .computeIfAbsent(pattern.getName(), k -> new LinkedHashSet<>())
-                    .add(val));
+        value.ifPresent(val ->
+            fieldValuesMap.computeIfAbsent(pattern.getName(), k -> new LinkedHashSet<>()).add(val));
       } else if (path.startsWith(SAN_PREFIX)) {
         Optional<List<String>> sanValues =
             CertUtil.extractFromSAN(certificate, path, value -> matchesPattern(value, pattern));
-        sanValues.ifPresent(
-            values ->
-                fieldValuesMap
-                    .computeIfAbsent(pattern.getName(), k -> new LinkedHashSet<>())
-                    .addAll(values));
+        sanValues.ifPresent(values ->
+            fieldValuesMap
+                .computeIfAbsent(pattern.getName(), k -> new LinkedHashSet<>())
+                .addAll(values));
       } else {
         throw new IllegalArgumentException(
             "Invalid path in the certificate resolver pattern: " + path);

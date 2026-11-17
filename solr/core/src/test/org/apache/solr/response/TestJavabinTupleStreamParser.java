@@ -84,12 +84,11 @@ public class TestJavabinTupleStreamParser extends SolrTestCaseJ4 {
   @SuppressWarnings({"unchecked", "rawtypes"})
   public SimpleOrderedMap convert2OrderedMap(Map m) {
     SimpleOrderedMap result = new SimpleOrderedMap<>();
-    m.forEach(
-        (k, v) -> {
-          if (v instanceof List) v = ((List) v).iterator();
-          if (v instanceof Map) v = convert2OrderedMap((Map) v);
-          result.add((String) k, v);
-        });
+    m.forEach((k, v) -> {
+      if (v instanceof List) v = ((List) v).iterator();
+      if (v instanceof Map) v = convert2OrderedMap((Map) v);
+      result.add((String) k, v);
+    });
     return result;
   }
 

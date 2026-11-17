@@ -163,7 +163,7 @@ public class CollectionHandlingUtils {
           collectionName,
           timeoutms,
           TimeUnit.MILLISECONDS,
-          (c) -> {
+          c -> {
             if (c == null) return true;
             Slice slice = c.getSlice(shard);
             if (slice == null || slice.getReplica(replicaName) == null) {
@@ -368,10 +368,8 @@ public class CollectionHandlingUtils {
             // multiple threads
             c.getSlices().stream()
                 .flatMap(slice -> slice.getReplicas().stream())
-                .filter(
-                    r ->
-                        coreNames.contains(
-                            r.getCoreName())) // Only the elements that were asked for...
+                .filter(r ->
+                    coreNames.contains(r.getCoreName())) // Only the elements that were asked for...
                 .forEach(r -> results.putIfAbsent(r.getCoreName(), r)); // ...get added to the map
 
             log.debug("Expecting {} cores, found {}", coreNames, results);

@@ -174,12 +174,11 @@ public class TestAuxIndexJoin extends SolrTestCase {
 
     List<String> childrenOf(String parentId) {
       List<String> children = new ArrayList<>();
-      parentIdByChildId.forEach(
-          (childId, pid) -> {
-            if (pid.equals(parentId)) {
-              children.add(childId);
-            }
-          });
+      parentIdByChildId.forEach((childId, pid) -> {
+        if (pid.equals(parentId)) {
+          children.add(childId);
+        }
+      });
       return children;
     }
 

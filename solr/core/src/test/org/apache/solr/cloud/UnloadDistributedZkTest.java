@@ -69,12 +69,11 @@ public class UnloadDistributedZkTest extends AbstractFullDistribZkTestBase {
 
   @Test
   public void test() throws Exception {
-    jettys.forEach(
-        j -> {
-          Set<Path> allowPath = j.getCoreContainer().getAllowPaths();
-          allowPath.clear();
-          allowPath.add(SolrPaths.ALL_PATH); // Allow non-standard core instance path
-        });
+    jettys.forEach(j -> {
+      Set<Path> allowPath = j.getCoreContainer().getAllowPaths();
+      allowPath.clear();
+      allowPath.add(SolrPaths.ALL_PATH); // Allow non-standard core instance path
+    });
     log.info("###Starting testCoreUnloadAndLeaders");
     testCoreUnloadAndLeaders(); // long
     log.info("###Starting testUnloadOfCores");
@@ -419,16 +418,15 @@ public class UnloadDistributedZkTest extends AbstractFullDistribZkTestBase {
     try {
       for (int j = 0; j < numReplicas; j++) {
         final int freezeJ = j;
-        executor.execute(
-            () -> {
-              Unload unloadCmd = new Unload(true);
-              unloadCmd.setCoreName("multiunload" + freezeJ);
-              try {
-                adminClient.request(unloadCmd);
-              } catch (SolrServerException | IOException e) {
-                throw new RuntimeException(e);
-              }
-            });
+        executor.execute(() -> {
+          Unload unloadCmd = new Unload(true);
+          unloadCmd.setCoreName("multiunload" + freezeJ);
+          try {
+            adminClient.request(unloadCmd);
+          } catch (SolrServerException | IOException e) {
+            throw new RuntimeException(e);
+          }
+        });
         Thread.sleep(random().nextInt(50));
       }
     } finally {

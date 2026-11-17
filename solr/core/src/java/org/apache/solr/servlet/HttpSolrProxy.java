@@ -138,18 +138,17 @@ class HttpSolrProxy {
     servletReq
         .getHeaderNames()
         .asIterator()
-        .forEachRemaining(
-            headerName -> {
-              HttpHeader knownHeader = HttpHeader.CACHE.get(headerName); // maybe null
-              // Strip Content-Length too; it's supplied by the request body's getLength() above.
-              if (!HOP_BY_HOP_HEADERS.contains(knownHeader)
-                  && knownHeader != HttpHeader.CONTENT_LENGTH) {
-                servletReq
-                    .getHeaders(headerName)
-                    .asIterator()
-                    .forEachRemaining(headerVal -> proxyFields.add(headerName, headerVal));
-              }
-            });
+        .forEachRemaining(headerName -> {
+          HttpHeader knownHeader = HttpHeader.CACHE.get(headerName); // maybe null
+          // Strip Content-Length too; it's supplied by the request body's getLength() above.
+          if (!HOP_BY_HOP_HEADERS.contains(knownHeader)
+              && knownHeader != HttpHeader.CONTENT_LENGTH) {
+            servletReq
+                .getHeaders(headerName)
+                .asIterator()
+                .forEachRemaining(headerVal -> proxyFields.add(headerName, headerVal));
+          }
+        });
   }
 
   private static void copyResponseHeaders(Response proxyRsp, HttpServletResponse servletRsp) {

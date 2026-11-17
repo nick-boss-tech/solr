@@ -574,10 +574,9 @@ public abstract class AdminUiTestBase extends SolrCloudTestCase {
     List<LogEntry> severe =
         entries.stream()
             .filter(entry -> entry.getLevel().intValue() >= Level.SEVERE.intValue())
-            .filter(
-                entry ->
-                    Arrays.stream(allowedSubstrings)
-                        .noneMatch(allowed -> entry.getMessage().contains(allowed)))
+            .filter(entry ->
+                Arrays.stream(allowedSubstrings)
+                    .noneMatch(allowed -> entry.getMessage().contains(allowed)))
             .filter(entry -> !entry.getMessage().contains("favicon.ico"))
             .toList();
     assertTrue("Severe browser console errors: " + severe, severe.isEmpty());

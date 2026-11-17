@@ -1065,12 +1065,11 @@ public class SolrZkClient implements Closeable {
     public void process(final WatchedEvent event) {
       log.debug("Submitting job to respond to event {}", event);
       try {
-        zkCallbackExecutor.execute(
-            () -> {
-              // Curator still does not have a way of counting fired watches natively
-              metricsListener.watchesFired.increment();
-              watcher.process(event);
-            });
+        zkCallbackExecutor.execute(() -> {
+          // Curator still does not have a way of counting fired watches natively
+          metricsListener.watchesFired.increment();
+          watcher.process(event);
+        });
       } catch (RejectedExecutionException e) {
         // If not a graceful shutdown
         if (!isClosed()) {

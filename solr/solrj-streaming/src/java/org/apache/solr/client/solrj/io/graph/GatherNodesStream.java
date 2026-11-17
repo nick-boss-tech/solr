@@ -437,10 +437,9 @@ public class GatherNodesStream extends TupleStream implements Expressible {
     child.setExpressionType(ExpressionType.DATASTORE);
     String expression =
         queryParams.stream()
-            .flatMap(
-                e ->
-                    Arrays.stream(e.getValue())
-                        .map(v -> String.format(Locale.ROOT, "%s=%s", e.getKey(), v)))
+            .flatMap(e ->
+                Arrays.stream(e.getValue())
+                    .map(v -> String.format(Locale.ROOT, "%s=%s", e.getKey(), v)))
             .collect(Collectors.joining(","));
     child.setExpression(expression);
     explanation.addChild(child);

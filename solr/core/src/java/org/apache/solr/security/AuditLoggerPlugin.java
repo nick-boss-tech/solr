@@ -425,16 +425,15 @@ public abstract class AuditLoggerPlugin implements Closeable, Runnable, SolrInfo
       if (o != null) {
         if (o instanceof List) {
           ((List<?>) o)
-              .forEach(
-                  l -> {
-                    if (l instanceof String) {
-                      rules.add(List.of(parseRule(l)));
-                    } else if (l instanceof List) {
-                      List<MuteRule> rl = new ArrayList<>();
-                      ((List<?>) l).forEach(r -> rl.add(parseRule(r)));
-                      rules.add(rl);
-                    }
-                  });
+              .forEach(l -> {
+                if (l instanceof String) {
+                  rules.add(List.of(parseRule(l)));
+                } else if (l instanceof List) {
+                  List<MuteRule> rl = new ArrayList<>();
+                  ((List<?>) l).forEach(r -> rl.add(parseRule(r)));
+                  rules.add(rl);
+                }
+              });
         } else {
           throw new SolrException(
               SolrException.ErrorCode.SERVER_ERROR,

@@ -86,7 +86,7 @@ public final class ErrorLogMuter implements Closeable, AutoCloseable {
     log.info("Creating {} for ERROR logs containing the substring: {}", name, substr);
     return new ErrorLogMuter(
         name,
-        (str) -> {
+        str -> {
           return str.contains(substr);
         });
   }
@@ -110,7 +110,7 @@ public final class ErrorLogMuter implements Closeable, AutoCloseable {
     log.info("Creating {} for ERROR logs matching regex: {}", name, pat);
     return new ErrorLogMuter(
         name,
-        (str) -> {
+        str -> {
           return pat.matcher(str).find();
         });
   }

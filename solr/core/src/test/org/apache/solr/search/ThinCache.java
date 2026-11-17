@@ -434,7 +434,7 @@ public class ThinCache<S, K, V> extends SolrCacheBase
     V ret =
         backing.computeIfAbsent(
             new ScopedKey<>(scope, key),
-            (k) -> {
+            k -> {
               hit[0] = false;
               inserts.increment();
               V innerRet = mappingFunction.apply(k.key);

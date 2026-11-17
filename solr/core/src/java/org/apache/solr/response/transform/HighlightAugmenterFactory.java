@@ -71,14 +71,13 @@ public class HighlightAugmenterFactory extends TransformerFactory {
   private static final Set<String> HL_PARAM_NAMES =
       Arrays.stream(HighlightParams.class.getFields())
           .filter(f -> f.getType() == String.class && Modifier.isStatic(f.getModifiers()))
-          .map(
-              f -> {
-                try {
-                  return (String) f.get(null);
-                } catch (IllegalAccessException e) {
-                  throw new IllegalStateException(e);
-                }
-              })
+          .map(f -> {
+            try {
+              return (String) f.get(null);
+            } catch (IllegalAccessException e) {
+              throw new IllegalStateException(e);
+            }
+          })
           .filter(name -> name.startsWith(HL_PREFIX))
           .map(name -> name.substring(HL_PREFIX.length()))
           .collect(Collectors.toUnmodifiableSet());

@@ -62,9 +62,8 @@ public class PackageUndeploy extends PackageSubCommand {
           "Either specify --cluster to undeploy cluster level plugins or --collections <list-of-collections> to undeploy collection level plugins");
       return 1;
     }
-    return runWithManagers(
-        (packageManager, repositoryManager) ->
-            packageTool.undeploy(packageManager, packageName, cluster, collections));
+    return runWithManagers((packageManager, repositoryManager) ->
+        packageTool.undeploy(packageManager, packageName, cluster, collections));
   }
 
   @Override

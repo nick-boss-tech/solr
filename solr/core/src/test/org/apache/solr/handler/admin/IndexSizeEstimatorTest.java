@@ -124,18 +124,17 @@ public class IndexSizeEstimatorTest extends SolrCloudTestCase {
       Map<String, Long> sampledFieldsBySize = sampledEstimate.getFieldsBySize();
       assertFalse("empty fieldsBySize", sampledFieldsBySize.isEmpty());
       // verify that the sampled values are within 50% of the original values
-      fieldsBySize.forEach(
-          (field, size) -> {
-            Long sampledSize = sampledFieldsBySize.get(field);
-            assertNotNull(
-                "sampled size for " + field + " is missing in " + sampledFieldsBySize, sampledSize);
-            double delta = (double) size * 0.5;
-            assertEquals(
-                "sampled size of " + field + " is wildly off",
-                (double) size,
-                (double) sampledSize,
-                delta);
-          });
+      fieldsBySize.forEach((field, size) -> {
+        Long sampledSize = sampledFieldsBySize.get(field);
+        assertNotNull(
+            "sampled size for " + field + " is missing in " + sampledFieldsBySize, sampledSize);
+        double delta = (double) size * 0.5;
+        assertEquals(
+            "sampled size of " + field + " is wildly off",
+            (double) size,
+            (double) sampledSize,
+            delta);
+      });
       // verify the reader is still usable - SOLR-13694
       IndexReader reader = searcher.getRawReader();
       for (LeafReaderContext context : reader.leaves()) {
@@ -212,13 +211,12 @@ public class IndexSizeEstimatorTest extends SolrCloudTestCase {
       assertNotNull("sampled rawSize missing", sampledRawSize);
       Map<String, String> sampledFieldsBySize = sampledRawSize.fieldsBySize;
       assertNotNull("sampled fieldsBySize missing", sampledFieldsBySize);
-      fieldsBySize.forEach(
-          (k, v) -> {
-            double size = fromHumanReadableUnits(v);
-            double sampledSize = fromHumanReadableUnits(sampledFieldsBySize.get(k));
-            double delta = size * 0.5;
-            assertEquals("sampled size of " + k + " is wildly off", size, sampledSize, delta);
-          });
+      fieldsBySize.forEach((k, v) -> {
+        double size = fromHumanReadableUnits(v);
+        double sampledSize = fromHumanReadableUnits(sampledFieldsBySize.get(k));
+        double delta = size * 0.5;
+        assertEquals("sampled size of " + k + " is wildly off", size, sampledSize, delta);
+      });
     }
   }
 

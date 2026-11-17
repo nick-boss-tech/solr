@@ -3153,8 +3153,7 @@ public class CollapsingQParserPlugin extends QParserPlugin {
       Object[] stash = new Object[numClauses];
       int lastCompare = 0;
       int testClause = 0;
-      for (
-      /* testClause */ ; testClause < numClauses; testClause++) {
+      for (/* testClause */ ; testClause < numClauses; testClause++) {
         if (values[testClause] instanceof LazyStringValue headVal) {
           SortedDocValues segDV = stringSortDVs[testClause];
           if (segDV != null && segDV == headVal.dv) {

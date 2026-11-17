@@ -131,7 +131,7 @@ public class DistributedMap {
   public Collection<String> keys() throws KeeperException, InterruptedException {
     List<String> childs = zookeeper.getChildren(dir, null);
     final List<String> ids = new ArrayList<>(childs.size());
-    childs.stream().forEach((child) -> ids.add(child.substring(PREFIX.length())));
+    childs.stream().forEach(child -> ids.add(child.substring(PREFIX.length())));
     return ids;
   }
 }

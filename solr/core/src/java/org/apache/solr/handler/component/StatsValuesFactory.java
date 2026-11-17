@@ -244,16 +244,13 @@ public class StatsValuesFactory {
         return;
       }
 
-      f.forEach(
-          (field, vals) -> {
-            Map<String, StatsValues> addTo = facets.computeIfAbsent(field, k -> new HashMap<>());
-            vals.forEach(
-                (val, vval) -> {
-                  StatsValues vvals =
-                      addTo.computeIfAbsent(val, k -> createStatsValues(statsField));
-                  vvals.accumulate(vval);
-                });
-          });
+      f.forEach((field, vals) -> {
+        Map<String, StatsValues> addTo = facets.computeIfAbsent(field, k -> new HashMap<>());
+        vals.forEach((val, vval) -> {
+          StatsValues vvals = addTo.computeIfAbsent(val, k -> createStatsValues(statsField));
+          vvals.accumulate(vval);
+        });
+      });
     }
 
     @Override

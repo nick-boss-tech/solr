@@ -218,11 +218,10 @@ public class TestJsonFacets extends SolrTestCaseHS {
     for (int i = 0; i < honda_model_counts.length - 1; i++) {
       idx.add(i);
     }
-    idx.sort(
-        (o1, o2) -> {
-          int cmp = honda_model_counts[o2] - honda_model_counts[o1];
-          return cmp == 0 ? o1 - o2 : cmp;
-        });
+    idx.sort((o1, o2) -> {
+      int cmp = honda_model_counts[o2] - honda_model_counts[o1];
+      return cmp == 0 ? o1 - o2 : cmp;
+    });
 
     // straight query facets
     client.testJQ(

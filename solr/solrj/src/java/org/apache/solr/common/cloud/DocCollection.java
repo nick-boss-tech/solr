@@ -288,9 +288,8 @@ public class DocCollection extends ZkNodeProps implements Iterable<Slice> {
    * @param consumer consume shardName vs. replica
    */
   public void forEachReplica(BiConsumer<String, Replica> consumer) {
-    slices.forEach(
-        (shard, slice) ->
-            slice.getReplicasMap().forEach((s, replica) -> consumer.accept(shard, replica)));
+    slices.forEach((shard, slice) ->
+        slice.getReplicasMap().forEach((s, replica) -> consumer.accept(shard, replica)));
   }
 
   /** Gets the list of all slices for this collection. */

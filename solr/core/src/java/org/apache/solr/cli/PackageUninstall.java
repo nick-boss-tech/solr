@@ -43,9 +43,8 @@ public class PackageUninstall extends PackageSubCommand {
 
   @Override
   public int callTool() throws Exception {
-    return runWithManagers(
-        (packageManager, repositoryManager) ->
-            packageTool.uninstall(packageManager, packageNameAndVersion));
+    return runWithManagers((packageManager, repositoryManager) ->
+        packageTool.uninstall(packageManager, packageNameAndVersion));
   }
 
   @Override

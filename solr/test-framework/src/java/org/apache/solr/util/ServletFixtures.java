@@ -161,16 +161,15 @@ public class ServletFixtures {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
       String countStr = req.getParameter("count");
       IntStream.range(0, countStr == null ? 10 : Integer.parseInt(countStr))
-          .forEach(
-              i -> {
-                try {
-                  Thread.sleep(PACKET_MS);
-                  resp.getOutputStream().write(String.valueOf(i).getBytes(StandardCharsets.UTF_8));
-                  resp.getOutputStream().flush();
-                } catch (IOException | InterruptedException e) {
-                  throw new RuntimeException(e);
-                }
-              });
+          .forEach(i -> {
+            try {
+              Thread.sleep(PACKET_MS);
+              resp.getOutputStream().write(String.valueOf(i).getBytes(StandardCharsets.UTF_8));
+              resp.getOutputStream().flush();
+            } catch (IOException | InterruptedException e) {
+              throw new RuntimeException(e);
+            }
+          });
     }
   }
 

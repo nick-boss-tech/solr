@@ -190,15 +190,14 @@ public class UpdateSchema extends JerseyResource implements UpdateSchemaApi {
     final var messages =
         errorDetails.stream()
             .map(detail -> detail.get(ERR_MSGS))
-            .flatMap(
-                msgs -> {
-                  if (msgs instanceof List<?> msgList) {
-                    return msgList.stream();
-                  } else if (msgs != null) {
-                    return Stream.of(msgs);
-                  }
-                  return Stream.empty();
-                })
+            .flatMap(msgs -> {
+              if (msgs instanceof List<?> msgList) {
+                return msgList.stream();
+              } else if (msgs != null) {
+                return Stream.of(msgs);
+              }
+              return Stream.empty();
+            })
             .map(String::valueOf)
             .collect(Collectors.joining(" "));
     return messages.isBlank() ? "error processing commands" : messages;

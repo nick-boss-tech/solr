@@ -97,20 +97,19 @@ public class ReplicateFromLeader {
 
       replicationProcess = new ReplicationHandler();
       if (switchTransactionLog) {
-        replicationProcess.setPollListener(
-            (solrCore, fetchResult) -> {
-              if (fetchResult == IndexFetcher.IndexFetchResult.INDEX_FETCH_SUCCESS) {
-                String commitVersion = getCommitVersion(core);
-                if (commitVersion == null) return;
-                if (Long.parseLong(commitVersion) == lastVersion) return;
-                UpdateLog updateLog = solrCore.getUpdateHandler().getUpdateLog();
-                SolrQueryRequest req = new SolrQueryRequestBase(core, new ModifiableSolrParams());
-                CommitUpdateCommand cuc = new CommitUpdateCommand(req, false);
-                cuc.setVersion(Long.parseLong(commitVersion));
-                updateLog.commitAndSwitchToNewTlog(cuc);
-                lastVersion = Long.parseLong(commitVersion);
-              }
-            });
+        replicationProcess.setPollListener((solrCore, fetchResult) -> {
+          if (fetchResult == IndexFetcher.IndexFetchResult.INDEX_FETCH_SUCCESS) {
+            String commitVersion = getCommitVersion(core);
+            if (commitVersion == null) return;
+            if (Long.parseLong(commitVersion) == lastVersion) return;
+            UpdateLog updateLog = solrCore.getUpdateHandler().getUpdateLog();
+            SolrQueryRequest req = new SolrQueryRequestBase(core, new ModifiableSolrParams());
+            CommitUpdateCommand cuc = new CommitUpdateCommand(req, false);
+            cuc.setVersion(Long.parseLong(commitVersion));
+            updateLog.commitAndSwitchToNewTlog(cuc);
+            lastVersion = Long.parseLong(commitVersion);
+          }
+        });
       }
       replicationProcess.init(replicationConfig);
       replicationProcess.inform(core);

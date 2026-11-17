@@ -409,33 +409,32 @@ public class TestMainQueryCaching extends SolrTestCaseJ4 {
     for (int i = 0; i < nThreads; i++) {
       final int myI = i;
       followup[i] =
-          executor.submit(
-              () -> {
-                try {
-                  /*
-                  NOTE: we use cursorMark=* here because it prevents consulting the
-                  queryResultCache, which can interfere with DocSet fetching (which
-                  is what we care about in this test).
-                   */
-                  String response =
-                      JQ(
-                          req(
-                              "q",
-                              MATCH_ALL_DOCS_QUERY,
-                              "request_id",
-                              Integer.toString(myI),
-                              "cursorMark",
-                              "*",
-                              "sort",
-                              "id asc"));
-                  Map<?, ?> res = (Map<?, ?>) fromJSONString(response);
-                  Map<?, ?> body = (Map<?, ?>) (res.get("response"));
-                  assertEquals(
-                      "Should have exactly " + ALL_DOCS, ALL_DOCS, (long) (body.get("numFound")));
-                } catch (Exception ex) {
-                  throw new RuntimeException(ex);
-                }
-              });
+          executor.submit(() -> {
+            try {
+              /*
+              NOTE: we use cursorMark=* here because it prevents consulting the
+              queryResultCache, which can interfere with DocSet fetching (which
+              is what we care about in this test).
+               */
+              String response =
+                  JQ(
+                      req(
+                          "q",
+                          MATCH_ALL_DOCS_QUERY,
+                          "request_id",
+                          Integer.toString(myI),
+                          "cursorMark",
+                          "*",
+                          "sort",
+                          "id asc"));
+              Map<?, ?> res = (Map<?, ?>) fromJSONString(response);
+              Map<?, ?> body = (Map<?, ?>) (res.get("response"));
+              assertEquals(
+                  "Should have exactly " + ALL_DOCS, ALL_DOCS, (long) (body.get("numFound")));
+            } catch (Exception ex) {
+              throw new RuntimeException(ex);
+            }
+          });
     }
     try {
       for (Future<?> f : followup) {

@@ -38,7 +38,8 @@ public class ResponseParserCanonicalResponseTest extends SolrTestCase {
   private static final String JSON =
       """
       {"responseHeader":{"status":0,"QTime":1},\
-      "response":{"numFound":1,"start":0,"numFoundExact":true,"docs":[{"id":"1"}]}}""";
+      "response":{"numFound":1,"start":0,"numFoundExact":true,"docs":[{"id":"1"}]}}\
+      """;
 
   private static InputStream json() {
     return new ByteArrayInputStream(JSON.getBytes(UTF_8));
@@ -72,7 +73,8 @@ public class ResponseParserCanonicalResponseTest extends SolrTestCase {
     String xml =
         """
         <?xml version="1.0" encoding="UTF-8"?>
-        <response><lst name="responseHeader"><int name="status">0</int></lst></response>""";
+        <response><lst name="responseHeader"><int name="status">0</int></lst></response>\
+        """;
     NamedList<Object> out =
         new XMLResponseParser()
             .processResponse(new ByteArrayInputStream(xml.getBytes(UTF_8)), null);

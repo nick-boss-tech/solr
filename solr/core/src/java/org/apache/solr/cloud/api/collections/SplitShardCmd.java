@@ -762,7 +762,7 @@ public class SplitShardCmd implements CollApiCmds.CollectionApiCommand {
             collectionName,
             60,
             TimeUnit.SECONDS,
-            (collectionState) -> {
+            collectionState -> {
               for (String subSlice : subSlices) {
                 if (!collectionState.getSlice(subSlice).getState().equals(Slice.State.RECOVERY)) {
                   return false;
@@ -884,14 +884,13 @@ public class SplitShardCmd implements CollApiCmds.CollectionApiCommand {
 
       lines
           .filter(line -> !line.isBlank() && !line.startsWith("#"))
-          .forEach(
-              line -> {
-                if (line.contains(indexSizeMetric) && line.contains(coreLabel)) {
-                  indexSizeRef.set(NodeValueFetcher.Metrics.extractPrometheusValue(line));
-                } else if (line.contains(freeDiskSpaceMetric) && line.contains("usable_space")) {
-                  freeSizeRef.set(NodeValueFetcher.Metrics.extractPrometheusValue(line));
-                }
-              });
+          .forEach(line -> {
+            if (line.contains(indexSizeMetric) && line.contains(coreLabel)) {
+              indexSizeRef.set(NodeValueFetcher.Metrics.extractPrometheusValue(line));
+            } else if (line.contains(freeDiskSpaceMetric) && line.contains("usable_space")) {
+              freeSizeRef.set(NodeValueFetcher.Metrics.extractPrometheusValue(line));
+            }
+          });
     }
 
     double indexSize = indexSizeRef.get();

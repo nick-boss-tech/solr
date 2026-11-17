@@ -442,7 +442,7 @@ public class OverseerTaskProcessor implements SolrInfoBean, Runnable, Closeable 
     parentContext.observableLongGauge(
         "solr_overseer_collection_work_queue_size",
         "Size of overseer's collection work queue",
-        (observableLongMeasurement) -> {
+        observableLongMeasurement -> {
           observableLongMeasurement.record(workQueue.getZkStats().getQueueLength(), attributes);
         });
   }

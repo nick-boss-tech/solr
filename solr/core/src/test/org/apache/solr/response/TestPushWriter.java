@@ -98,24 +98,23 @@ public class TestPushWriter extends SolrTestCaseJ4 {
   }
 
   protected void writeData(PushWriter pw) throws IOException {
-    pw.writeMap(
-        m -> {
-          m.put("responseHeader", Map.of("status", 0))
-              .put(
-                  "response",
-                  (MapWriter)
-                      m1 -> {
-                        m1.put("numFound", 10)
-                            .put(
-                                "docs",
-                                (IteratorWriter)
-                                    w -> {
-                                      w.add((MapWriter) m3 -> m3.put("id", 1))
-                                          .add(Map.of("id", 2))
-                                          .add(Map.of("id", 3));
-                                    });
-                      });
-        });
+    pw.writeMap(m -> {
+      m.put("responseHeader", Map.of("status", 0))
+          .put(
+              "response",
+              (MapWriter)
+                  m1 -> {
+                    m1.put("numFound", 10)
+                        .put(
+                            "docs",
+                            (IteratorWriter)
+                                w -> {
+                                  w.add((MapWriter) m3 -> m3.put("id", 1))
+                                      .add(Map.of("id", 2))
+                                      .add(Map.of("id", 3));
+                                });
+                  });
+    });
     pw.close();
   }
 

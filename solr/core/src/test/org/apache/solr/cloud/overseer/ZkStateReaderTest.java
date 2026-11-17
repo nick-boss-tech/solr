@@ -633,35 +633,32 @@ public class ZkStateReaderTest extends SolrTestCaseJ4 {
 
       // start another thread to constantly updating the state
       final AtomicReference<Exception> updateException = new AtomicReference<>();
-      executorService.execute(
-          () -> {
-            try {
-              ClusterState clusterState = reader.getClusterState();
-              while (!stopMutatingThread.get()) {
-                DocCollection collection = clusterState.getCollectionOrNull("c1");
-                int currentVersion = collection != null ? collection.getZNodeVersion() : 0;
-                // create new collection
-                DocCollection state =
-                    DocCollection.create(
-                        "c1",
-                        new HashMap<>(),
-                        Map.of(
-                            ZkStateReader.CONFIGNAME_PROP,
-                            ConfigSetsHandler.DEFAULT_CONFIGSET_NAME),
-                        DocRouter.DEFAULT,
-                        currentVersion,
-                        Instant.now(),
-                        PerReplicaStatesOps.getZkClientPrsSupplier(
-                            fixture.zkClient, DocCollection.getCollectionPath("c1")));
-                ZkWriteCommand wc = new ZkWriteCommand("c1", state);
-                writer.enqueueUpdate(clusterState, List.of(wc), null);
-                clusterState = writer.writePendingUpdates();
-                TimeUnit.MILLISECONDS.sleep(100);
-              }
-            } catch (Exception e) {
-              updateException.set(e);
-            }
-          });
+      executorService.execute(() -> {
+        try {
+          ClusterState clusterState = reader.getClusterState();
+          while (!stopMutatingThread.get()) {
+            DocCollection collection = clusterState.getCollectionOrNull("c1");
+            int currentVersion = collection != null ? collection.getZNodeVersion() : 0;
+            // create new collection
+            DocCollection state =
+                DocCollection.create(
+                    "c1",
+                    new HashMap<>(),
+                    Map.of(ZkStateReader.CONFIGNAME_PROP, ConfigSetsHandler.DEFAULT_CONFIGSET_NAME),
+                    DocRouter.DEFAULT,
+                    currentVersion,
+                    Instant.now(),
+                    PerReplicaStatesOps.getZkClientPrsSupplier(
+                        fixture.zkClient, DocCollection.getCollectionPath("c1")));
+            ZkWriteCommand wc = new ZkWriteCommand("c1", state);
+            writer.enqueueUpdate(clusterState, List.of(wc), null);
+            clusterState = writer.writePendingUpdates();
+            TimeUnit.MILLISECONDS.sleep(100);
+          }
+        } catch (Exception e) {
+          updateException.set(e);
+        }
+      });
       executorService.shutdown();
 
       reader.waitForState(
@@ -724,7 +721,7 @@ public class ZkStateReaderTest extends SolrTestCaseJ4 {
     int iterations = 10;
     for (int i = 0; i < extraWatchers; i++) {
       // add and remove a bunch of watchers
-      DocCollectionWatcher w = (coll) -> false;
+      DocCollectionWatcher w = coll -> false;
       try {
         reader.registerDocCollectionWatcher("c1", w);
       } finally {
@@ -735,10 +732,10 @@ public class ZkStateReaderTest extends SolrTestCaseJ4 {
     CyclicBarrier barrier = new CyclicBarrier(2);
     reader.registerDocCollectionWatcher(
         "c1",
-        (coll) -> {
+        coll -> {
           // add a watcher that tracks how many times it's invoked per znode version
           if (coll != null) {
-            invoked.computeIfAbsent(coll.getZNodeVersion(), (k) -> new LongAdder()).increment();
+            invoked.computeIfAbsent(coll.getZNodeVersion(), k -> new LongAdder()).increment();
             try {
               barrier.await(250, TimeUnit.MILLISECONDS);
             } catch (InterruptedException | TimeoutException | BrokenBarrierException e) {
@@ -774,7 +771,7 @@ public class ZkStateReaderTest extends SolrTestCaseJ4 {
     // ... and only _once_ for each iteration
     assertTrue(
         "wrong number of watchers (expected 1): " + invoked,
-        invoked.values().stream().mapToLong(LongAdder::sum).allMatch((l) -> l == 1));
+        invoked.values().stream().mapToLong(LongAdder::sum).allMatch(l -> l == 1));
   }
 
   /**
@@ -857,7 +854,7 @@ public class ZkStateReaderTest extends SolrTestCaseJ4 {
       // the state.json and PRS entries to trigger the race condition
       breakpointSetter.setImplementation(
           PerReplicaStatesOps.class.getName() + "/beforePrsFetch",
-          (args) -> {
+          args -> {
             try {
               // this is invoked after ZkStateReader.fetchCollectionState has fetched the state.json
               // but before PRS entries.
@@ -877,7 +874,7 @@ public class ZkStateReaderTest extends SolrTestCaseJ4 {
       AtomicBoolean prsZkNodeNotFoundExceptionThrown = new AtomicBoolean(false);
       breakpointSetter.setImplementation(
           ZkStateReader.class.getName() + "/exercised",
-          (args) -> {
+          args -> {
             if (args[0] instanceof PerReplicaStatesOps.PrsZkNodeNotFoundException) {
               prsZkNodeNotFoundExceptionThrown.set(true);
             }

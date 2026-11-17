@@ -169,12 +169,11 @@ class CloudReplicaSource implements ReplicaSource {
       List<Replica> list =
           slice.getReplicas().stream()
               .filter(replica -> replica.isActive(clusterState.getLiveNodes()))
-              .filter(
-                  replica ->
-                      !builder.onlyNrt
-                          || (replica.getType() == Replica.Type.NRT
-                              || (replica.getType() == Replica.Type.TLOG
-                                  && isShardLeader.test(replica))))
+              .filter(replica ->
+                  !builder.onlyNrt
+                      || (replica.getType() == Replica.Type.NRT
+                          || (replica.getType() == Replica.Type.TLOG
+                              && isShardLeader.test(replica))))
               .collect(Collectors.toList());
       builder.replicaListTransformer.transform(list);
       List<String> coreUrls = list.stream().map(Replica::getCoreUrl).collect(Collectors.toList());

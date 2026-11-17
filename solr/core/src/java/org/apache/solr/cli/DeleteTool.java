@@ -136,10 +136,11 @@ public class DeleteTool extends ToolBase {
   @Override
   public String getHeader() {
     return """
-        Deletes a collection or core depending on whether Solr is running in SolrCloud or standalone mode. \
-        Deleting a collection does not delete it's configuration unless you pass in the --delete-config flag.
+    Deletes a collection or core depending on whether Solr is running in SolrCloud or standalone mode. \
+    Deleting a collection does not delete it's configuration unless you pass in the --delete-config flag.
 
-        List of options:""";
+    List of options:\
+    """;
   }
 
   @Override

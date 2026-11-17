@@ -703,14 +703,12 @@ class JoinIndexScorerSupplier extends ScorerSupplier {
     // when confirming docs, we want to start from heaviest leafs first
     if (leafJoins.size() > 1) {
       leafJoins.sort(
-          Comparator.<LeafJoin>comparingInt(
-                  leafJoin ->
-                      Math.toIntExact(
-                          Math.min(
-                              leafJoin
-                                  .fromMatchCount, // use a min of both side as an estimate of join
-                              // cardinality
-                              leafJoin.edges.toCount())))
+          Comparator.<LeafJoin>comparingInt(leafJoin ->
+                  Math.toIntExact(
+                      Math.min(
+                          leafJoin.fromMatchCount, // use a min of both side as an estimate of join
+                          // cardinality
+                          leafJoin.edges.toCount())))
               .reversed());
     }
   }

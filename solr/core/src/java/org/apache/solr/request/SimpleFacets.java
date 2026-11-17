@@ -976,7 +976,7 @@ public class SimpleFacets {
     }
     Stream<SimpleImmutableEntry<String, Integer>> termCountEntries =
         inputStream.map(
-            (term) -> new SimpleImmutableEntry<>(term, numDocs(term, sf, ft, baseDocset)));
+            term -> new SimpleImmutableEntry<>(term, numDocs(term, sf, ft, baseDocset)));
     if (sort.equals(FacetParams.FACET_SORT_COUNT)) {
       termCountEntries =
           termCountEntries.sorted(Collections.reverseOrder(Map.Entry.comparingByValue()));

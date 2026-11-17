@@ -200,7 +200,7 @@ public class DeleteShardCmd implements CollApiCmds.CollectionApiCommand {
       }
       cleanupZooKeeperShardMetadata(collectionName, sliceId);
       zkStateReader.waitForState(
-          collectionName, 45, TimeUnit.SECONDS, (c) -> c.getSlice(sliceId) == null);
+          collectionName, 45, TimeUnit.SECONDS, c -> c.getSlice(sliceId) == null);
 
       log.info("Successfully deleted collection: {} , shard: {}", collectionName, sliceId);
     } catch (SolrException e) {

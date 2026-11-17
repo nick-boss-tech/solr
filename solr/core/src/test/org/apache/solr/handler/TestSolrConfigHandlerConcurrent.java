@@ -64,14 +64,13 @@ public class TestSolrConfigHandlerConcurrent extends AbstractFullDistribZkTestBa
         List<String> errs = new ArrayList<>();
         collectErrors.add(errs);
         Thread t =
-            new Thread(
-                () -> {
-                  try {
-                    invokeBulkCall((String) e.getKey(), errs);
-                  } catch (Exception e1) {
-                    log.error("error invoking bulk call", e1);
-                  }
-                });
+            new Thread(() -> {
+              try {
+                invokeBulkCall((String) e.getKey(), errs);
+              } catch (Exception e1) {
+                log.error("error invoking bulk call", e1);
+              }
+            });
         threads.add(t);
         t.start();
       }

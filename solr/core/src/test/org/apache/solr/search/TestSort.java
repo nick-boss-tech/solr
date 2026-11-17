@@ -346,24 +346,23 @@ public class TestSort extends SolrTestCaseJ4 {
 
         searcher.search(query, myCollector);
 
-        collectedDocs.sort(
-            (o1, o2) -> {
-              String v1 = o1.val == null ? nullRep : o1.val;
-              String v2 = o2.val == null ? nullRep : o2.val;
-              int cmp = v1.compareTo(v2);
-              if (reverse) cmp = -cmp;
-              if (cmp != 0) return cmp;
+        collectedDocs.sort((o1, o2) -> {
+          String v1 = o1.val == null ? nullRep : o1.val;
+          String v2 = o2.val == null ? nullRep : o2.val;
+          int cmp = v1.compareTo(v2);
+          if (reverse) cmp = -cmp;
+          if (cmp != 0) return cmp;
 
-              if (secondary) {
-                v1 = o1.val2 == null ? nullRep2 : o1.val2;
-                v2 = o2.val2 == null ? nullRep2 : o2.val2;
-                cmp = v1.compareTo(v2);
-                if (reverse2) cmp = -cmp;
-              }
+          if (secondary) {
+            v1 = o1.val2 == null ? nullRep2 : o1.val2;
+            v2 = o2.val2 == null ? nullRep2 : o2.val2;
+            cmp = v1.compareTo(v2);
+            if (reverse2) cmp = -cmp;
+          }
 
-              cmp = cmp == 0 ? o1.doc - o2.doc : cmp;
-              return cmp;
-            });
+          cmp = cmp == 0 ? o1.doc - o2.doc : cmp;
+          return cmp;
+        });
 
         TopDocs topDocs = topCollector.topDocs();
         ScoreDoc[] sdocs = topDocs.scoreDocs;
