@@ -99,12 +99,16 @@ public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
         field.add("dynamicBase", schema.getDynamicPattern(fieldName));
       }
       field.add("docCount", fieldCount.count());
+      field.add("countAccuracy", "exact");
       field.add("countSource", fieldCount.source());
       fields.add(fieldName, field);
     }
 
     rsp.add("scope", "local-core");
+    rsp.add("countDomain", "q+fq");
+    rsp.add("countsUseLiveDocuments", true);
     rsp.add("numFound", domain.size());
+    rsp.add("numFoundAccuracy", "exact");
     rsp.add("fields", fields);
     rsp.setHttpCaching(false);
   }
