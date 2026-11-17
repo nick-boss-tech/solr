@@ -1,0 +1,9 @@
+{
+  "actor": "codex-windows",
+  "evidence": "Implementation report: records/report/discovery-fields-count-availability-20261117-report.json. Fork branch discovery-fields-prototype is verified at ee564187eaa67c72c8f9c4eab610433aefe56c3a. Windows implementation work is complete and no local build or test executor ran. Linux gate assignment and gate are records/assignment/discovery-fields-count-availability-linux-20261117.json and records/gate/discovery-fields-count-availability-linux-20261117.json; the gate had no claim at board snapshot 1a596321536b9091b280650ffe8ee6da977eab83.",
+  "id": "discovery-fields-count-availability-20261117",
+  "job": "discovery-fields-count-availability-20261117",
+  "reason": "The scoped implementation is complete, pushed, and handed to a separate exact-head Linux compile-format gate.",
+  "recorded": "2026-11-17",
+  "type": "release"
+}
