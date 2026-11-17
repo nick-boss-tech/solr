@@ -1,0 +1,26 @@
+{
+  "acceptance_criteria": [
+    "Both commands pass at the recorded head without changing tracked files.",
+    "The receipt identifies the missing behavioral proof."
+  ],
+  "claim_path": "records/claim/discovery-review-fixes-linux-20261117.json",
+  "environment": "Linux gate host vm2",
+  "head": "6333f09b2e35f9000cd1d927133eab308194b2a4",
+  "id": "discovery-review-fixes-linux-20261117",
+  "job": "discovery-review-fixes-linux-20261117",
+  "phase": "compile-format",
+  "receipt_path": "records/receipt/discovery-review-fixes-linux-20261117.json",
+  "requirements": [
+    "Confirm the checkout and fork branch both equal the recorded source head.",
+    "Run ./gradlew :solr:core:tidy; record exit status and tracked file changes. Stop if formatting changes the source head.",
+    "Run ./gradlew :solr:core:check -x test; record exit status and evidence.",
+    "Report as compile and formatting proof only. No focused endpoint tests are included, and endpoint behavior, workload limits, rank fields, and cloud rejection remain unverified."
+  ],
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "6333f09b2e35f9000cd1d927133eab308194b2a4",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes_gate": "records/gate/discovery-fields-count-availability-linux-20261117.json",
+  "type": "gate"
+}
