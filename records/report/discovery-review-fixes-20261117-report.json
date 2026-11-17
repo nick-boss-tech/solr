@@ -1,0 +1,30 @@
+{
+  "changes": [
+    "Require explicit distrib=false for SolrCloud local-core requests; collection-wide aggregation remains unimplemented.",
+    "Require a request timeAllowed between 1 and 5000 ms and active Solr time limit; permit one discovery request in a JVM and reject more than 256 fields; use uncached filtered field queries and check limits during point traversal.",
+    "Reconstruct logical RankField names and exclude the internal rank field; document other composite field limitations.",
+    "Omit exact zero-count fields, retain unavailable counts, and document handler registration and prototype limitations."
+  ],
+  "id": "discovery-review-fixes-20261117-report",
+  "job": "discovery-review-fixes-20261117",
+  "linux_gate": {
+    "assignment_path": "records/assignment/discovery-review-fixes-linux-20261117.json",
+    "claim_path": "records/claim/discovery-review-fixes-linux-20261117.json",
+    "gate_path": "records/gate/discovery-review-fixes-linux-20261117.json",
+    "receipt_path": "records/receipt/discovery-review-fixes-linux-20261117.json",
+    "status": "compile-format pending; not behavior proof"
+  },
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "6333f09b2e35f9000cd1d927133eab308194b2a4",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Bound discovery work and make local results explicit",
+  "type": "report",
+  "verification": {
+    "behavior": "not verified; no focused endpoint tests",
+    "git_diff_check": "passed",
+    "remote_branch": "confirmed at source head",
+    "windows_gradle_tests": "not run; Windows host restriction"
+  }
+}
