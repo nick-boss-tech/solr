@@ -1,0 +1,9 @@
+{
+  "actor": "codex-windows",
+  "evidence": "records/report/atomic-skip-repro-prep-20261118-report.json; Linux handoff records records/assignment/pr-5361-atomic-skip-repro-linux-r1-20261118.json and records/gate/pr-5361-atomic-skip-repro-r1-20261118.json.",
+  "id": "atomic-skip-repro-prep-20261118",
+  "job": "atomic-skip-repro-prep-20261118",
+  "reason": "Preparation completed and handed to the Linux gate. No Solr executor was started on Windows; the focused repro is pending the separate Linux job.",
+  "recorded": "2026-11-18",
+  "type": "release"
+}
