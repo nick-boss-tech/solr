@@ -1,0 +1,28 @@
+{
+  "findings": [
+    "Previous default-time-limit and match-all-domain findings have source changes and new focused tests; Linux behavior proof remains pending.",
+    "The patch also changes QueryLimits and two dependency lockfiles; these require Linux verification at the source head.",
+    "The handler enumerates index fields and uses field-presence queries directly; it contains no Luke request. A detailed Luke request on two live collections received no client response before a 20-second wrapper deadline; server completion and cancellation are unknown.",
+    "Timeouts can still return a partial header without the accumulated field listing; this remains a separate design decision."
+  ],
+  "id": "discovery-presence-review-20261118-report",
+  "job": "discovery-presence-review-20261118",
+  "linux_gate": {
+    "assignment_path": "records/assignment/discovery-presence-linux-20261118.json",
+    "claim_path": "records/claim/discovery-presence-linux-20261118.json",
+    "gate_path": "records/gate/discovery-presence-linux-20261118.json",
+    "receipt_path": "records/receipt/discovery-presence-linux-20261118.json"
+  },
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "6295240718d913872192f1bd5edafecdd49e1768",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Reviewed and pushed presence and configurable limits prototype",
+  "type": "report",
+  "verification": {
+    "diff_check": "passed",
+    "remote_head": "confirmed",
+    "windows_build": "not run in this session; prior worker reported a focused pass and tidy on Windows, outside the workspace host policy; Linux gate is authoritative"
+  }
+}
