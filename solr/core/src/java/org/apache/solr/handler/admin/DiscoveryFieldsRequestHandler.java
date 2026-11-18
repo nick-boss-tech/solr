@@ -57,7 +57,6 @@ import org.apache.solr.search.SolrIndexSearcher;
 import org.apache.solr.search.TimeAllowedLimit;
 import org.apache.solr.search.WrappedQuery;
 import org.apache.solr.security.AuthorizationContext;
-import org.apache.solr.security.PermissionNameProvider.Name;
 
 /** Reports field presence and optional document counts for one core's live index. */
 public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
