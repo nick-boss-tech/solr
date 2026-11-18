@@ -1,0 +1,35 @@
+{
+  "type": "receipt",
+  "id": "pr-5361-atomic-skip-repro-linux-r1-20261118",
+  "job": "pr-5361-atomic-skip-repro-linux-r1-20261118",
+  "gate": "pr-5361-atomic-skip-repro-r1-20261118",
+  "head": "3a1589ba490b432ceeca2f098e458f0af5a0d8d7",
+  "source": {
+    "repository": "iprithv/solr",
+    "branch": "SOLR-18251-docvalues-skip-list",
+    "live_head_before_run": "3a1589ba490b432ceeca2f098e458f0af5a0d8d7",
+    "live_head_before_publication": "3a1589ba490b432ceeca2f098e458f0af5a0d8d7"
+  },
+  "verdict": "reproduced",
+  "environment": "Linux sandbox phone-agent; vendored OpenJDK 21 via the host's solr-gradle.sh runner in place of ./gradlew; existing full clone fetched to the exact PR head and verified clean before the run (fresh clones currently fail on this host with a disk quota error); Gradle invocation serialized under the host test-queue flock.",
+  "command": "./gradlew :solr:core:test --tests org.apache.solr.schema.DocValuesSkipListTest.testAtomicUpdateWithSkipIndexedDocValues -Ptests.seed=5361",
+  "command_exit": 1,
+  "overlay": {
+    "committed": false,
+    "diff_sha256": "54eea29366de6ef681d53c51a080a20c7c97e0f5362fd281e79912f5edb2f6e5",
+    "changes": [
+      "schema-docValuesSkipList.xml: added the _version_ field exactly as the setup correction record specifies, before uniqueKey.",
+      "DocValuesSkipListTest.beforeTests: set solr.index.updatelog.enabled=true and switched initCore to solrconfig.xml with schema-docValuesSkipList.xml.",
+      "DocValuesSkipListTest: added testAtomicUpdateWithSkipIndexedDocValues, which first asserts the schema exposes an in-place-capable _version_ field, indexes the control (id 1, long_plain=10) and target (id 2, longdv=10), commits, applies the control atomic inc and asserts value 11, then applies the target atomic inc and asserts value 11.",
+      "Document ids are numeric (1 and 2) rather than the assignment's role names, because the schema's id field parses values numerically under the test randomization; run 1 with string ids failed at indexing and was classified as a setup failure (see runs-note.txt in the evidence archive)."
+    ]
+  },
+  "results": {
+    "control": "The long_plain atomic inc succeeded and the value read back as 11; the test passed the control update (line 161) and its assertions before reaching the target update.",
+    "target": "The longdv atomic inc failed at DocValuesSkipListTest.java:171 with SolrException: Exception writing document id 2 to the index, caused by java.lang.IllegalArgumentException: Can't update [NUMERIC] doc values; the field [longdv] must be doc values only field, bit it has doc values skip index (Lucene's DocValues update validation, verbatim including its wording).",
+    "junit": "1 test, 0 skipped, 1 failure, 0 errors",
+    "classification": "Reproduced under the gate's criteria: the control update succeeded and returned 11, and the target update failed in the Lucene DocValues-update guard because longdv has a RANGE skip index. The guard firing on the DocValues update path, with _version_ present and the update log enabled, also confirms the in-place path was the one exercised."
+  },
+  "run_history": "Run 1 failed on the string-id setup issue and is recorded as incomplete in runs-note.txt; run 2 was killed by a sandbox service restart before the test executed and was not counted; run 3 is the decisive run reported here.",
+  "evidence": "records/evidence/pr-5361-atomic-skip-repro-linux-r1-20261118.json; records/evidence/pr-5361-atomic-skip-repro-linux-r1-20261118-evidence.tar.gz (sha256 4472b71f264d98c89d418f62631cec75911c026df42f65439424f72edb83fb5b)"
+}
