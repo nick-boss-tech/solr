@@ -1,0 +1,20 @@
+{
+  "claim_path": "records/claim/discovery-presence-linux-r3-20261118.json",
+  "gate_id": "discovery-presence-linux-r3-20261118",
+  "gate_record": "records/gate/discovery-presence-linux-r3-20261118.json",
+  "id": "discovery-presence-linux-r3-20261118",
+  "intended_host": "Linux gate host",
+  "job": "discovery-presence-linux-r3-20261118",
+  "phase": "presence-and-config proof after gate-agent import patch",
+  "receipt_path": "records/receipt/discovery-presence-linux-r3-20261118.json",
+  "scope": "Re-run the full discovery gate at head 363c2fefdebf14c14c2a2031bbfd373b8167450d, which is the r2 gated head plus one gate-agent commit removing the unused PermissionNameProvider.Name import that failed :solr:core:ecjLintMain in the r2 gate. Focused test, tidy, and root check, with no --write-locks.",
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "363c2fefdebf14c14c2a2031bbfd373b8167450d",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "discovery-presence-linux-r2-20261118",
+  "summary": "Prove discovery presence gate after the unused-import patch",
+  "supersedes_gate": "records/gate/discovery-presence-linux-r2-20261118.json",
+  "type": "assignment"
+}
