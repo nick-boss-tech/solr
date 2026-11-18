@@ -1,0 +1,14 @@
+{
+  "claimed": "2026-11-18T22:31:00Z",
+  "host": "phone-agent Linux sandbox",
+  "id": "pr-5361-atomic-skip-repro-linux-r1-20261118",
+  "job": "pr-5361-atomic-skip-repro-linux-r1-20261118",
+  "note": "Claimed by the phone agent. The test overlay stays uncommitted and nothing is pushed to the contributor branch. Host runner is solr-gradle.sh (vendored JDK 21) in place of ./gradlew; fresh clones currently fail on this host with a disk quota error, so the run uses the existing full clone fetched to the exact PR head and verified clean, recorded in the receipt.",
+  "owner": "phone-agent",
+  "source": {
+    "branch": "SOLR-18251-docvalues-skip-list",
+    "head": "3a1589ba490b432ceeca2f098e458f0af5a0d8d7",
+    "repository": "iprithv/solr"
+  },
+  "type": "claim"
+}
