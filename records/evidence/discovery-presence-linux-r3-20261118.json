@@ -1,0 +1,17 @@
+{
+  "type": "evidence",
+  "id": "discovery-presence-linux-r3-20261118",
+  "job": "discovery-presence-linux-r3-20261118",
+  "gate": "discovery-presence-linux-r3-20261118",
+  "head": "363c2fefdebf14c14c2a2031bbfd373b8167450d",
+  "archive": "records/evidence/discovery-presence-linux-r3-20261118-evidence.tar.gz",
+  "sha256": "689023c93d732c0a51f9929d8a1324a9ba00e65ab240e1ea730d0d9f68f25bfc",
+  "contents": [
+    "summary.txt (head, clean-start and clean-end status, leg exit codes)",
+    "test.log and TEST-org.apache.solr.handler.admin.DiscoveryFieldsRequestHandlerTest.xml (focused test: 6 tests, 0 skipped, 0 failures, 0 errors, seed F13D610B)",
+    "tidy.log, tidy-changed-files.txt, tidy.diff (tidy exit 0, zero tracked changes)",
+    "check.log (root check exit 1 at :solr:core:forbiddenApisTest; dependency resolution and ecjLint passed; 210 tasks executed)",
+    "patch-tidy.log, patch-lint.log, patch-test.log, patch-verify-summary.txt (gate-agent patch verification: tidy clean, forbiddenApisTest and ecjLintMain exit 0, focused test 6 of 6)"
+  ],
+  "note": "Evidence produced by the phone agent in a clean full clone at head 363c2fefdebf14c14c2a2031bbfd373b8167450d. The clone was the existing full fork clone cleaned with git clean because fresh clones currently fail on this host with a disk quota error; the gated tree was verified clean at the exact head before and after the run."
+}
