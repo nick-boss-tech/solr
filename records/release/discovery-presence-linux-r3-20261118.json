@@ -1,0 +1,15 @@
+{
+  "type": "release",
+  "id": "discovery-presence-linux-r3-20261118",
+  "job": "discovery-presence-linux-r3-20261118",
+  "executor": "phone-agent",
+  "released": "2026-11-18T12:10:13-07:00",
+  "status": "released",
+  "verdict": "failed",
+  "completion_status": "complete; gate ran and the next blocker was patched by the gate agent under the owner's simple-patch rule",
+  "supersedes_gate": "records/gate/discovery-presence-linux-r2-20261118.json",
+  "receipt": "records/receipt/discovery-presence-linux-r3-20261118.json",
+  "evidence": "records/evidence/discovery-presence-linux-r3-20261118.json; records/evidence/discovery-presence-linux-r3-20261118-evidence.tar.gz (sha256 689023c93d732c0a51f9929d8a1324a9ba00e65ab240e1ea730d0d9f68f25bfc)",
+  "receipt_commit": "8943b7a899a1e8d3aa44ebddb00b1d6462228963",
+  "note": "Focused test 6 of 6 and tidy clean at 363c2fef. Root check passed dependency resolution and ecjLintMain, then failed at :solr:core:forbiddenApisTest on the test class's reflective setAccessible read of DISCOVERY_PERMITS. The gate agent patched it directly (package-visible field, direct read in the test), verified forbiddenApisTest, ecjLintMain, tidy, and the focused test green in the working clone, and the successor gate discovery-presence-linux-r4-20261118 proves the patched head."
+}
