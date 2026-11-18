@@ -1,0 +1,21 @@
+{
+  "claim_path": "records/claim/discovery-lock-investigation-linux-20261118.json",
+  "gate_id": "discovery-lock-investigation-linux-20261118",
+  "gate_record": "records/gate/discovery-lock-investigation-linux-20261118.json",
+  "id": "discovery-lock-investigation-linux-20261118",
+  "intended_host": "Linux gate host with Gradle capability",
+  "job": "discovery-lock-investigation-linux-20261118",
+  "phase": "dependency-lock diagnosis and repair",
+  "prior_receipt": "records/receipt/discovery-presence-linux-20261118.json",
+  "receipt_path": "records/receipt/discovery-lock-investigation-linux-20261118.json",
+  "scope": "Investigate why root check fails dependency-lock resolution for analysis-extras jarValidation at the exact head after the focused core test passed. Compare a clean baseline where useful. Determine whether the existing committed lock edits and remaining lock gaps are expected, incomplete generated state, or environment-specific. If a narrow lock-only repair is established, generate and review it using the supported Linux workflow, push it non-force to the fork branch, and publish a separate exact-head successor gate; otherwise document the blocker and proposed repair. This investigative job does not itself establish a green discovery gate. No live collection writes or public upstream writes.",
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "6295240718d913872192f1bd5edafecdd49e1768",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "discovery-presence-linux-20261118",
+  "summary": "Investigate and repair discovery gate dependency-lock blocker",
+  "supersedes_gate": "records/gate/discovery-presence-linux-20261118.json",
+  "type": "assignment"
+}
