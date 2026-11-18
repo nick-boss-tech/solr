@@ -1,0 +1,14 @@
+{
+  "id": "discovery-presence-review-20261118",
+  "intended_host": "Windows implementation; Linux gate separately",
+  "job": "discovery-presence-review-20261118",
+  "scope": "Review and preserve the existing uncommitted discovery presence, configuration, timeout, tests and dependency-lock changes from the completed local worker; repair scoped issues, commit and push to the fork, and publish an exact-head Linux gate. The discovery handler must not call Luke. A prior detailed Luke request on each of two live collections yielded no client response within a 20-second wrapper deadline; this does not establish server completion or cancellation. Do not perform live collection writes or run Gradle on Windows.",
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "9db4daca489dcca3a8441268316462111752bd35",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "discovery-field-glob-20261117",
+  "summary": "Review and finish local discovery presence changes",
+  "type": "assignment"
+}
