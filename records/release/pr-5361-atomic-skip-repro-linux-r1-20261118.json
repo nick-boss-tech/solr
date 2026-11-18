@@ -1,0 +1,14 @@
+{
+  "type": "release",
+  "id": "pr-5361-atomic-skip-repro-linux-r1-20261118",
+  "job": "pr-5361-atomic-skip-repro-linux-r1-20261118",
+  "executor": "phone-agent",
+  "released": "2026-11-18T15:46:17-07:00",
+  "status": "released",
+  "verdict": "reproduced",
+  "completion_status": "complete; the atomic update failure on the skip-indexed field is reproduced at the recorded PR head",
+  "receipt": "records/receipt/pr-5361-atomic-skip-repro-linux-r1-20261118-receipt.json",
+  "evidence": "records/evidence/pr-5361-atomic-skip-repro-linux-r1-20261118.json; records/evidence/pr-5361-atomic-skip-repro-linux-r1-20261118-evidence.tar.gz (sha256 4472b71f264d98c89d418f62631cec75911c026df42f65439424f72edb83fb5b)",
+  "receipt_commit": "55c64fcacf82c8d76d6c06815af05fef5a4bc9af",
+  "note": "At head 3a1589ba of iprithv/solr SOLR-18251-docvalues-skip-list, with the corrected uncommitted overlay (update log on, solrconfig.xml, _version_ added to the schema): the control atomic inc on long_plain succeeded and read back 11, and the target atomic inc on longdv failed at the update with Lucene's IllegalArgumentException: Can't update [NUMERIC] doc values; the field [longdv] must be doc values only field, bit it has doc values skip index. The overlay was never committed and has been removed; the contributor branch was not pushed to."
+}
