@@ -1,0 +1,8 @@
+{
+  "id": "atomic-skip-repro-prep-20261118",
+  "intended_host": "Windows",
+  "job": "atomic-skip-repro-prep-20261118",
+  "source_head": "3a1589ba490b432ceeca2f098e458f0af5a0d8d7",
+  "summary": "Prepare a focused atomic update reproduction for PR 5361 and hand it to Linux.",
+  "type": "assignment"
+}
