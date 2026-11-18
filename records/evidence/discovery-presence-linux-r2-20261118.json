@@ -1,0 +1,16 @@
+{
+  "type": "evidence",
+  "id": "discovery-presence-linux-r2-20261118",
+  "job": "discovery-presence-linux-r2-20261118",
+  "gate": "discovery-presence-linux-r2-20261118",
+  "head": "1f1cf6c7f8d230be126e42596424944c10579acf",
+  "archive": "records/evidence/discovery-presence-linux-r2-20261118-evidence.tar.gz",
+  "sha256": "88bc9980933958371ab860d2133be9076d3fdd4f77c889b87e1f8bc9f1a6cbb4",
+  "contents": [
+    "summary.txt (recorded head, merged head gated, clean-start and clean-end status, and every leg exit code)",
+    "test.log and TEST-org.apache.solr.handler.admin.DiscoveryFieldsRequestHandlerTest.xml (focused test: 6 tests, 0 skipped, 0 failures, 0 errors, seed F13D610B)",
+    "tidy.log, tidy-changed-files.txt, tidy.diff (tidy exit 0, zero tracked changes)",
+    "check.log (root check exit 1 at :solr:core:ecjLintMain after dependency resolution passed; 204 tasks executed)"
+  ],
+  "note": "Evidence produced by the phone agent in a clean full clone of the merged branch head 1f1cf6c7f8d230be126e42596424944c10579acf."
+}
