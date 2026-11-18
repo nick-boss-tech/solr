@@ -196,6 +196,21 @@ public final class QueryLimits implements QueryTimeout {
     return Optional.empty();
   }
 
+  /**
+   * Add a limit after request-handler defaults have been applied, unless that limit already exists.
+   */
+  public synchronized void addLimitIfAbsent(QueryLimit limit) {
+    if (this == NONE) {
+      throw new IllegalStateException("Cannot add a limit to QueryLimits.NONE.");
+    }
+    for (QueryLimit existingLimit : limits) {
+      if (existingLimit.getClass() == limit.getClass()) {
+        return;
+      }
+    }
+    limits.add(limit);
+  }
+
   /** Return true if there are any limits enabled for the current request. */
   public boolean isLimitsEnabled() {
     return !limits.isEmpty();

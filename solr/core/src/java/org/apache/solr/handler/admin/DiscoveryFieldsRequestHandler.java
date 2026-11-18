@@ -28,20 +28,27 @@ import org.apache.lucene.index.LeafReaderContext;
 import org.apache.lucene.index.PointValues;
 import org.apache.lucene.index.Terms;
 import org.apache.lucene.index.TermsEnum;
+import org.apache.lucene.search.BooleanClause.Occur;
+import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.FieldExistsQuery;
 import org.apache.lucene.search.Query;
+import org.apache.lucene.search.ScoreMode;
+import org.apache.lucene.search.SimpleCollector;
 import org.apache.lucene.search.TermRangeQuery;
 import org.apache.lucene.util.BytesRef;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.params.CommonParams;
+import org.apache.solr.common.util.EnvUtils;
 import org.apache.solr.common.util.SimpleOrderedMap;
 import org.apache.solr.handler.RequestHandlerBase;
 import org.apache.solr.request.SolrQueryRequest;
+import org.apache.solr.request.SolrRequestInfo;
 import org.apache.solr.response.SolrQueryResponse;
 import org.apache.solr.schema.IndexSchema;
 import org.apache.solr.schema.RankField;
 import org.apache.solr.schema.SchemaField;
 import org.apache.solr.search.DocSet;
+import org.apache.solr.search.ExtendedQuery;
 import org.apache.solr.search.QParser;
 import org.apache.solr.search.QueryLimits;
 import org.apache.solr.search.QueryLimitsExceededException;
@@ -52,15 +59,41 @@ import org.apache.solr.search.WrappedQuery;
 import org.apache.solr.security.AuthorizationContext;
 import org.apache.solr.security.PermissionNameProvider.Name;
 
-/** Reports field names and available document counts for one core's live index. */
+/** Reports field presence and optional document counts for one core's live index. */
 public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
 
-  private static final int MAX_FIELDS = 256;
+  private static final String MAX_FIELDS_PROPERTY = "solr.discovery.fields.maxFields";
+  private static final String MAX_TIME_ALLOWED_PROPERTY = "solr.discovery.fields.maxTimeAllowedMs";
+  private static final String MAX_CONCURRENT_REQUESTS_PROPERTY =
+      "solr.discovery.fields.maxConcurrentRequests";
+  private static final String USE_FILTER_CACHE_PROPERTY = "solr.discovery.fields.useFilterCache";
+  private static final int MAX_FIELDS = positiveIntProperty(MAX_FIELDS_PROPERTY, 256);
   private static final int MAX_GLOB_LENGTH = 256;
-  private static final long MAX_TIME_ALLOWED_MS = 5000;
-  private static final Semaphore DISCOVERY_PERMIT = new Semaphore(1);
+  private static final int MAX_TIME_ALLOWED_MS =
+      positiveIntProperty(MAX_TIME_ALLOWED_PROPERTY, 5000);
+  private static final Semaphore DISCOVERY_PERMITS =
+      new Semaphore(positiveIntProperty(MAX_CONCURRENT_REQUESTS_PROPERTY, 1));
+  private static final boolean USE_FILTER_CACHE =
+      EnvUtils.getPropertyAsBool(USE_FILTER_CACHE_PROPERTY, false);
+
+  private static final String COUNT_MODE_PRESENCE = "presence";
+  private static final String COUNT_MODE_EXACT = "exact";
 
   private record FieldCount(Integer count, String accuracy, String source) {}
+
+  private record FieldPresence(String status, String source) {}
+
+  private record FieldExistenceQuery(Query query, String source) {}
+
+  private static final class MatchFoundException extends RuntimeException {
+    private static final long serialVersionUID = 1L;
+
+    private MatchFoundException() {
+      super(null, null, false, false);
+    }
+  }
+
+  private static final MatchFoundException MATCH_FOUND = new MatchFoundException();
 
   @Override
   public void handleRequestBody(SolrQueryRequest req, SolrQueryResponse rsp) throws Exception {
@@ -71,27 +104,40 @@ public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
           "Discovery is local to one core. Set distrib=false to request local results explicitly.");
     }
     long timeAllowed = req.getParams().getLong(CommonParams.TIME_ALLOWED, -1);
-    if (timeAllowed <= 0
-        || timeAllowed > MAX_TIME_ALLOWED_MS
-        || QueryLimits.getCurrentLimits().currentLimitValueFor(TimeAllowedLimit.class).isEmpty()) {
+    if (timeAllowed <= 0 || timeAllowed > MAX_TIME_ALLOWED_MS) {
       throw new SolrException(
           SolrException.ErrorCode.BAD_REQUEST,
           "Supply timeAllowed between 1 and " + MAX_TIME_ALLOWED_MS + " milliseconds.");
     }
-    if (!DISCOVERY_PERMIT.tryAcquire()) {
+    SolrRequestInfo requestInfo = SolrRequestInfo.getRequestInfo();
+    if (requestInfo == null) {
       throw new SolrException(
-          SolrException.ErrorCode.TOO_MANY_REQUESTS, "Another discovery request is running.");
+          SolrException.ErrorCode.SERVER_ERROR,
+          "Discovery requires an active SolrRequestInfo to enforce timeAllowed.");
+    }
+    QueryLimits queryLimits = requestInfo.getLimits();
+    if (queryLimits.currentLimitValueFor(TimeAllowedLimit.class).isEmpty()) {
+      queryLimits.addLimitIfAbsent(new TimeAllowedLimit(req));
+    }
+    if (!DISCOVERY_PERMITS.tryAcquire()) {
+      throw new SolrException(
+          SolrException.ErrorCode.TOO_MANY_REQUESTS, "Discovery concurrency limit reached.");
     }
     try {
       discover(req, rsp);
     } finally {
-      DISCOVERY_PERMIT.release();
+      DISCOVERY_PERMITS.release();
     }
   }
 
   private void discover(SolrQueryRequest req, SolrQueryResponse rsp) throws Exception {
     SolrIndexSearcher searcher = req.getSearcher();
     IndexSchema schema = searcher.getSchema();
+    String countMode = req.getParams().get("countMode", COUNT_MODE_EXACT);
+    if (!COUNT_MODE_PRESENCE.equals(countMode) && !COUNT_MODE_EXACT.equals(countMode)) {
+      throw new SolrException(
+          SolrException.ErrorCode.BAD_REQUEST, "countMode must be 'presence' or 'exact'.");
+    }
     String fieldGlob = req.getParams().get("fieldGlob", "*");
     if (fieldGlob.length() > MAX_GLOB_LENGTH) {
       throw new SolrException(
@@ -101,8 +147,13 @@ public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
 
     List<Query> domainQueries = new ArrayList<>();
     String queryString = req.getParams().get(CommonParams.Q, "*:*").trim();
-    domainQueries.add(QParser.getParser(queryString, req).getQuery());
+    if (!"*:*".equals(queryString)) {
+      domainQueries.add(QParser.getParser(queryString, req).getQuery());
+    }
     domainQueries.addAll(QueryUtils.parseFilterQueries(req));
+    if (!USE_FILTER_CACHE) {
+      domainQueries.replaceAll(DiscoveryFieldsRequestHandler::disableCache);
+    }
     DocSet domain = searcher.getDocSet(domainQueries);
 
     TreeSet<String> fieldNames = new TreeSet<>();
@@ -136,12 +187,6 @@ public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
     for (String fieldName : fieldNames) {
       checkLimits();
       SchemaField schemaField = schema.getFieldOrNull(fieldName);
-      FieldCount fieldCount = countField(fieldName, schemaField, domain, searcher, existenceParser);
-
-      if (fieldCount.count() != null && fieldCount.count() == 0) {
-        continue;
-      }
-
       SimpleOrderedMap<Object> field = new SimpleOrderedMap<>();
       field.add("type", schemaField == null ? null : schemaField.getType().getTypeName());
       if (schemaField != null
@@ -149,20 +194,54 @@ public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
           && schema.getDynamicPattern(fieldName) != null) {
         field.add("dynamicBase", schema.getDynamicPattern(fieldName));
       }
-      field.add("docCount", fieldCount.count());
-      field.add("countAccuracy", fieldCount.accuracy());
-      field.add("countSource", fieldCount.source());
+
+      if (COUNT_MODE_PRESENCE.equals(countMode)) {
+        FieldPresence presence =
+            fieldPresence(fieldName, schemaField, domain, searcher, existenceParser);
+        field.add("presence", presence.status());
+        field.add("presenceSource", presence.source());
+      } else {
+        FieldCount fieldCount =
+            countField(fieldName, schemaField, domain, searcher, existenceParser);
+        if (fieldCount.count() != null && fieldCount.count() == 0) {
+          continue;
+        }
+        field.add("presence", fieldCount.count() == null ? "unknown" : "present");
+        field.add("docCount", fieldCount.count());
+        field.add("countAccuracy", fieldCount.accuracy());
+        field.add("countSource", fieldCount.source());
+      }
       fields.add(fieldName, field);
     }
 
     rsp.add("scope", "local-core");
     rsp.add("countDomain", "q+fq");
+    rsp.add("countMode", countMode);
+    rsp.add("domainFilterCacheEnabled", USE_FILTER_CACHE);
     rsp.add("countsUseLiveDocuments", true);
     rsp.add("fieldNameScope", "index-fields-and-rank-fields");
     rsp.add("numFound", domain.size());
     rsp.add("numFoundAccuracy", "exact");
     rsp.add("fields", fields);
     rsp.setHttpCaching(false);
+  }
+
+  private static int positiveIntProperty(String property, int defaultValue) {
+    int value = EnvUtils.getPropertyAsInteger(property, defaultValue);
+    if (value <= 0) {
+      throw new IllegalArgumentException(property + " must be greater than zero.");
+    }
+    return value;
+  }
+
+  private static Query disableCache(Query query) {
+    if (query instanceof ExtendedQuery extendedQuery) {
+      extendedQuery.setCache(false);
+      return query;
+    }
+    WrappedQuery uncached = new WrappedQuery(query);
+    uncached.setCache(false);
+    return uncached;
   }
 
   private static void checkFieldLimit(TreeSet<String> fieldNames) {
@@ -212,6 +291,34 @@ public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
     return searcher.getDocSet(uncached, domain).size();
   }
 
+  private static FieldExistenceQuery getFieldExistenceQuery(
+      String fieldName,
+      SchemaField schemaField,
+      SolrIndexSearcher searcher,
+      QParser existenceParser)
+      throws IOException {
+    if (schemaField != null && (schemaField.indexed() || schemaField.hasDocValues())) {
+      return new FieldExistenceQuery(
+          schemaField.getType().getExistenceQuery(existenceParser, schemaField),
+          "field-type-query");
+    }
+
+    FieldInfo fieldInfo = searcher.getFieldInfos().fieldInfo(fieldName);
+    if (fieldInfo.getDocValuesType() != DocValuesType.NONE
+        || fieldInfo.hasNorms()
+        || fieldInfo.getVectorDimension() > 0) {
+      return new FieldExistenceQuery(new FieldExistsQuery(fieldName), "field-exists-query");
+    }
+
+    Terms terms = searcher.getSlowAtomicReader().terms(fieldName);
+    if (terms != null) {
+      return new FieldExistenceQuery(
+          TermRangeQuery.newStringRange(fieldName, null, null, true, true), "term-range-query");
+    }
+
+    return null;
+  }
+
   private static FieldCount countField(
       String fieldName,
       SchemaField schemaField,
@@ -219,34 +326,66 @@ public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
       SolrIndexSearcher searcher,
       QParser existenceParser)
       throws IOException {
-    if (schemaField != null && (schemaField.indexed() || schemaField.hasDocValues())) {
-      Query existsQuery = schemaField.getType().getExistenceQuery(existenceParser, schemaField);
+    FieldExistenceQuery existenceQuery =
+        getFieldExistenceQuery(fieldName, schemaField, searcher, existenceParser);
+    if (existenceQuery != null) {
       return new FieldCount(
-          countQuery(existsQuery, domain, searcher), "exact", "field-type-query");
+          countQuery(existenceQuery.query(), domain, searcher), "exact", existenceQuery.source());
     }
 
     FieldInfo fieldInfo = searcher.getFieldInfos().fieldInfo(fieldName);
-    if (fieldInfo.getDocValuesType() != DocValuesType.NONE
-        || fieldInfo.hasNorms()
-        || fieldInfo.getVectorDimension() > 0) {
-      Query existsQuery = new FieldExistsQuery(fieldName);
-      return new FieldCount(
-          countQuery(existsQuery, domain, searcher), "exact", "field-exists-query");
-    }
-
-    Terms terms = searcher.getSlowAtomicReader().terms(fieldName);
-    if (terms != null) {
-      Query existsQuery = TermRangeQuery.newStringRange(fieldName, null, null, true, true);
-      return new FieldCount(
-          countQuery(existsQuery, domain, searcher), "exact", "term-range-query");
-    }
-
     if (fieldInfo.getPointDimensionCount() > 0) {
       return new FieldCount(
           countPointFieldDocuments(fieldName, domain, searcher), "exact", "point-values-scan");
     }
 
     return new FieldCount(null, "unavailable", "no-supported-index-presence-data");
+  }
+
+  private static FieldPresence fieldPresence(
+      String fieldName,
+      SchemaField schemaField,
+      DocSet domain,
+      SolrIndexSearcher searcher,
+      QParser existenceParser)
+      throws IOException {
+    FieldExistenceQuery existenceQuery =
+        getFieldExistenceQuery(fieldName, schemaField, searcher, existenceParser);
+    if (existenceQuery != null) {
+      BooleanQuery query =
+          new BooleanQuery.Builder()
+              .add(existenceQuery.query(), Occur.MUST)
+              .add(domain.makeQuery(), Occur.FILTER)
+              .build();
+      try {
+        searcher.search(
+            query,
+            new SimpleCollector() {
+              @Override
+              public void collect(int doc) throws IOException {
+                checkLimits();
+                throw MATCH_FOUND;
+              }
+
+              @Override
+              public ScoreMode scoreMode() {
+                return ScoreMode.COMPLETE_NO_SCORES;
+              }
+            });
+        return new FieldPresence("absent", existenceQuery.source());
+      } catch (MatchFoundException matchFound) {
+        return new FieldPresence("present", existenceQuery.source());
+      }
+    }
+
+    FieldInfo fieldInfo = searcher.getFieldInfos().fieldInfo(fieldName);
+    if (fieldInfo.getPointDimensionCount() > 0) {
+      return new FieldPresence(
+          hasPointFieldDocument(fieldName, domain, searcher) ? "present" : "absent",
+          "point-values-first-match");
+    }
+
+    return new FieldPresence("unknown", "no-supported-index-presence-data");
   }
 
   private static int countPointFieldDocuments(
@@ -290,9 +429,49 @@ public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
     return count;
   }
 
+  private static boolean hasPointFieldDocument(
+      String fieldName, DocSet domain, SolrIndexSearcher searcher) throws IOException {
+    try {
+      for (LeafReaderContext context : searcher.getIndexReader().leaves()) {
+        PointValues points = context.reader().getPointValues(fieldName);
+        if (points == null) {
+          continue;
+        }
+
+        points.intersect(
+            new PointValues.IntersectVisitor() {
+              private void checkIfInDomain(int docID) throws QueryLimitsExceededException {
+                checkLimits();
+                if (domain.exists(context.docBase + docID)) {
+                  throw MATCH_FOUND;
+                }
+              }
+
+              @Override
+              public void visit(int docID) throws IOException {
+                checkIfInDomain(docID);
+              }
+
+              @Override
+              public void visit(int docID, byte[] packedValue) throws IOException {
+                checkIfInDomain(docID);
+              }
+
+              @Override
+              public PointValues.Relation compare(byte[] minPackedValue, byte[] maxPackedValue) {
+                return PointValues.Relation.CELL_CROSSES_QUERY;
+              }
+            });
+      }
+      return false;
+    } catch (MatchFoundException matchFound) {
+      return true;
+    }
+  }
+
   @Override
   public String getDescription() {
-    return "Field names and available document counts for the local core.";
+    return "Field names and presence, with optional document counts, for the local core.";
   }
 
   @Override

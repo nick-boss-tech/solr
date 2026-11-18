@@ -608,10 +608,15 @@
     </lst>
   </requestHandler>
 
-  <!-- Reports populated field counts for the local core only. -->
+  <!-- Reports field presence and optional counts for the local core only. -->
   <requestHandler
       name="/discovery/fields"
-      class="org.apache.solr.handler.admin.DiscoveryFieldsRequestHandler" />
+      class="org.apache.solr.handler.admin.DiscoveryFieldsRequestHandler">
+    <lst name="defaults">
+      <str name="countMode">${solr.discovery.fields.countMode:presence}</str>
+      <int name="timeAllowed">${solr.discovery.fields.maxTimeAllowedMs:5000}</int>
+    </lst>
+  </requestHandler>
 
   <!-- Shared parameters for multiple Request Handlers -->
   <initParams path="/update/**,/query,/select,/spell,/discovery/fields">
