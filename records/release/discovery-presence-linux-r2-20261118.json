@@ -1,0 +1,15 @@
+{
+  "type": "release",
+  "id": "discovery-presence-linux-r2-20261118",
+  "job": "discovery-presence-linux-r2-20261118",
+  "executor": "phone-agent",
+  "released": "2026-11-18T11:31:25-07:00",
+  "status": "released",
+  "verdict": "failed",
+  "completion_status": "complete; gate ran at the merged head and one blocker remains",
+  "supersedes_gate": "records/gate/discovery-presence-linux-20261118.json",
+  "receipt": "records/receipt/discovery-presence-linux-r2-20261118.json",
+  "evidence": "records/evidence/discovery-presence-linux-r2-20261118.json; records/evidence/discovery-presence-linux-r2-20261118-evidence.tar.gz (sha256 88bc9980933958371ab860d2133be9076d3fdd4f77c889b87e1f8bc9f1a6cbb4)",
+  "receipt_commit": "f28cea70209d1e03e73fe3fa711a4f3b77b79faf",
+  "note": "At the owner's direction upstream main 8b2e99721e was merged into discovery-fields-prototype first (merge commit 1f1cf6c7, no conflicts, pushed and verified), and this gate ran at the merged head. Focused test passed 6 of 6 with seed F13D610B; tidy clean. Root check now passes dependency resolution, closing the lock failure, and fails only at :solr:core:ecjLintMain on the unused import at DiscoveryFieldsRequestHandler.java line 60, the defect already recorded in the lock investigation receipt. Removing that one import is the only known remaining blocker; a successor gate at the fixed head should be able to complete."
+}
