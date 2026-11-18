@@ -1,0 +1,15 @@
+{
+  "type": "release",
+  "id": "discovery-presence-linux-r4-20261118",
+  "job": "discovery-presence-linux-r4-20261118",
+  "executor": "phone-agent",
+  "released": "2026-11-18T12:22:31-07:00",
+  "status": "released",
+  "verdict": "passed",
+  "completion_status": "complete; full gate green at f42d0a7c, closing the discovery gate chain",
+  "supersedes_gate": "records/gate/discovery-presence-linux-r3-20261118.json",
+  "receipt": "records/receipt/discovery-presence-linux-r4-20261118.json",
+  "evidence": "records/evidence/discovery-presence-linux-r4-20261118.json; records/evidence/discovery-presence-linux-r4-20261118-evidence.tar.gz (sha256 95f2e15b664e63fc9b73d1adc3281c777404aa89e6eacec5d2eea1fb2f6314ae)",
+  "receipt_commit": "28f1e52a582c24609e2b2b8d250a56a5db355286",
+  "note": "All three legs green at f42d0a7c: focused test 6 of 6 (seed F13D610B), tidy clean, root check BUILD SUCCESSFUL across 515 tasks. The branch now carries upstream main, the lockfile repair, and the two gate-agent patches (unused import, forbidden-APIs reflection). Standing coverage limits from the whole chain still apply: the focused proof is embedded-handler only with no HTTP run, and QueryLimits timeout behavior is unproved."
+}
