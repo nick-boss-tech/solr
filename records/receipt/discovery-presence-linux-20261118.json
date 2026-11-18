@@ -1,0 +1,48 @@
+{
+  "type": "receipt",
+  "id": "discovery-presence-linux-20261118",
+  "job": "discovery-presence-linux-20261118",
+  "gate": "discovery-presence-linux-20261118",
+  "head": "6295240718d913872192f1bd5edafecdd49e1768",
+  "source": {
+    "repository": "nick-boss-tech/solr",
+    "branch": "discovery-fields-prototype",
+    "assigned_head": "6295240718d913872192f1bd5edafecdd49e1768",
+    "live_head_before_run": "6295240718d913872192f1bd5edafecdd49e1768",
+    "live_head_before_publication": "6295240718d913872192f1bd5edafecdd49e1768",
+    "checkout_clean_before_run": true,
+    "checkout_clean_after_cleanup": true
+  },
+  "verdict": "failed",
+  "completion_status": "complete as a gate run; the root check leg failed during dependency resolution on the dependency lock state, so the branch does not pass the gate",
+  "environment": "Linux sandbox phone-agent; vendored OpenJDK 21 via the host's solr-gradle.sh runner (used in place of ./gradlew per host rules; same Gradle 9.7.0 and arguments); clean full clone at the exact assigned head (a full clone, not a worktree, because the root check leg cannot run in a worktree); all Gradle invocations serialized under the host test-queue flock.",
+  "commands": {
+    "focused_test": "./gradlew :solr:core:test --tests org.apache.solr.handler.admin.DiscoveryFieldsRequestHandlerTest -Dtests.seed=F13D610B",
+    "tidy": "./gradlew :solr:core:tidy",
+    "root_check": "./gradlew check -x test -Prefguide.include=false"
+  },
+  "results": {
+    "focused_test": {
+      "exit_code": 0,
+      "seed": "F13D610B",
+      "status": "passed",
+      "tests_executed": 6,
+      "junit_counts": { "tests": 6, "skipped": 0, "failures": 0, "errors": 0 },
+      "junit_xml": "TEST-org.apache.solr.handler.admin.DiscoveryFieldsRequestHandlerTest.xml in the evidence archive",
+      "coverage_note": "The class extends SolrTestCaseJ4 and drives the handler through the embedded TestHarness (h.getCore().getRequestHandler, req/assertQ); it does not exercise HTTP. It contains no QueryLimits or timeout coverage, so shared QueryLimits behavior and the HTTP default path are not proven by this leg."
+    },
+    "tidy": {
+      "exit_code": 0,
+      "tracked_changes": false,
+      "status": "passed; the rebuilt head is formatting-clean, unlike the prior head where tidy reformatted two files"
+    },
+    "root_check": {
+      "exit_code": 1,
+      "status": "failed before check execution during dependency resolution",
+      "failure": "Could not determine the dependencies of task ':solr:modules:analysis-extras:collectJarInfos': configuration ':solr:modules:analysis-extras:jarValidation' resolved seven artifacts that are not part of the dependency lock state: com.github.docker-java:docker-java-api:3.7.1; org.rnorth.duct-tape:duct-tape:1.0.8; com.github.docker-java:docker-java-transport-zerodep:3.7.1; com.github.docker-java:docker-java-transport:3.7.1; org.jetbrains:annotations:26.1.0; org.apache.commons:commons-compress:1.28.0; org.testcontainers:testcontainers:2.0.5.",
+      "dependency_lock_finding": "The same seven artifacts blocked the prior gate (discovery-field-glob-linux-20261117) in the focused test leg. At this head the focused test leg resolves and runs, so the committed lock changes fixed the core test path; the root check path still hits the identical lock-state gap through analysis-extras jarValidation. Locks were not modified and no --write-locks was used, per the gate requirements."
+    }
+  },
+  "limitations": "Compile, formatting, and embedded-handler proof only. No HTTP proof, no live collection writes, and no QueryLimits or timeout behavior was exercised. The root check failure is a build-level dependency lock state gap, not a test or check finding against the branch's code.",
+  "evidence": "records/evidence/discovery-presence-linux-20261118.json; records/evidence/discovery-presence-linux-20261118-evidence.tar.gz (sha256 6dd44e2f53f2538ebda76306bdfc153677cb4ce47e84af2a48dfe2e32b62213c)"
+}
