@@ -1,0 +1,25 @@
+{
+  "commands": [
+    "./gradlew :solr:core:test --tests org.apache.solr.schema.DocValuesSkipListTest.testAtomicUpdateWithSkipIndexedDocValues -Ptests.seed=5361"
+  ],
+  "environment": "Linux gate host; clean worktree at the exact PR head; JDK 21 and the host build lock as described in docs/vm2-gate-handoff.md.",
+  "expected_receipt_path": "records/receipt/pr-5361-atomic-skip-repro-linux-r1-20261118-receipt.json",
+  "head": "3a1589ba490b432ceeca2f098e458f0af5a0d8d7",
+  "id": "pr-5361-atomic-skip-repro-r1-20261118",
+  "job": "pr-5361-atomic-skip-repro-linux-r1-20261118",
+  "phase": "reproduction-r1",
+  "recorded": "2026-11-18",
+  "requirements": [
+    "Claim records/claim/pr-5361-atomic-skip-repro-linux-r1-20261118.json before running. Confirm iprithv/solr branch SOLR-18251-docvalues-skip-list is still at 3a1589ba490b432ceeca2f098e458f0af5a0d8d7.",
+    "Use the exact uncommitted test overlay described by the assignment. Enable the update log and use solrconfig.xml; solrconfig-basic.xml would bypass in-place updates.",
+    "The test must first show the long_plain control update succeeds and returns 11, then exercise an existing longdv value with atomic inc +1. Capture whether the target fails with the Lucene skip-index DocValues-update rejection.",
+    "Do not commit or push the temporary test overlay. Record its diff or hash, exact command and exit code, complete failure cause, fresh JUnit XML path, and whether the control succeeded.",
+    "A failure matching the Lucene skip-index update guard is a successful reproduction. A passing target update after proving in-place eligibility is non-reproduced. Compile, fixture, setup, or unrelated harness failures are incomplete."
+  ],
+  "source": {
+    "branch": "SOLR-18251-docvalues-skip-list",
+    "head": "3a1589ba490b432ceeca2f098e458f0af5a0d8d7",
+    "repository": "iprithv/solr"
+  },
+  "type": "gate"
+}
