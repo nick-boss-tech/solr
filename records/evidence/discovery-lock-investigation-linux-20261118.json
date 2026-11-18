@@ -1,0 +1,17 @@
+{
+  "type": "evidence",
+  "id": "discovery-lock-investigation-linux-20261118",
+  "job": "discovery-lock-investigation-linux-20261118",
+  "gate": "discovery-lock-investigation-linux-20261118",
+  "head": "6295240718d913872192f1bd5edafecdd49e1768",
+  "archive": "records/evidence/discovery-lock-investigation-linux-20261118-evidence.tar.gz",
+  "sha256": "5140d00595ff7333d2baf1c3d19ecf94b837dd7df1c5d0cae49609de8757a52d",
+  "contents": [
+    "diag-summary.txt (exit codes for all diagnosis runs)",
+    "diag-head-dependencies.log and diag-head-collectjarinfos.log (branch head: dependencies report exit 0; collectJarInfos exit 1 with the seven-artifact lock failure)",
+    "diag-baseline-dependencies.log and diag-baseline-collectjarinfos.log (baseline 064d7ef8: identical seven-artifact lock failure)",
+    "repair-check.log and repair-summary.txt (root check with --write-locks: resolution passed, build failed later at :solr:core:ecjLintMain on an unused import; Gradle persisted no lockfiles on the failed build)",
+    "repair2-collectall.log, repair2-verify-ae.log, repair2-verify-clustering.log, repair2-summary.txt, repair2-changed-files.txt, repair2-diff-stat.txt (collectJarInfos --write-locks across all projects exit 0; 22 lockfiles changed; verification without --write-locks passes for analysis-extras and clustering)"
+  ],
+  "note": "Diagnosis and repair evidence produced by the phone agent in clean full clones at the exact assigned head and at baseline 064d7ef8d7a7a4f4e7998aea14b3a6db49f865d1."
+}
