@@ -1,0 +1,17 @@
+{
+  "type": "evidence",
+  "id": "pr-5361-atomic-skip-repro-linux-r1-20261118",
+  "job": "pr-5361-atomic-skip-repro-linux-r1-20261118",
+  "gate": "pr-5361-atomic-skip-repro-r1-20261118",
+  "head": "3a1589ba490b432ceeca2f098e458f0af5a0d8d7",
+  "archive": "records/evidence/pr-5361-atomic-skip-repro-linux-r1-20261118-evidence.tar.gz",
+  "sha256": "4472b71f264d98c89d418f62631cec75911c026df42f65439424f72edb83fb5b",
+  "contents": [
+    "summary.txt (head, overlay file count, test exit code, JUnit counts)",
+    "test.log (decisive run: test failure at the target atomic update with the Lucene skip-index DocValues error text)",
+    "TEST-org.apache.solr.schema.DocValuesSkipListTest.xml (fresh JUnit XML: 1 test, 1 failure, failure at DocValuesSkipListTest.java:171)",
+    "overlay.diff (the exact uncommitted overlay applied, sha256 54eea29366de6ef681d53c51a080a20c7c97e0f5362fd281e79912f5edb2f6e5)",
+    "runs-note.txt (run 1 setup failure and run 2 service-restart kill, neither counted)"
+  ],
+  "note": "Evidence produced by the phone agent at the exact PR head in an existing full clone fetched to that head and verified clean (fresh clones currently fail on this host with a disk quota error). The overlay was removed after the run; the checkout is clean and nothing was committed or pushed."
+}
