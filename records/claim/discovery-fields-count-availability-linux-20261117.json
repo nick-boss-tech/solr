@@ -1,0 +1,14 @@
+{
+  "claimed": "2026-11-18T02:01:20Z",
+  "host": "phone-agent Linux sandbox",
+  "id": "discovery-fields-count-availability-linux-20261117",
+  "job": "discovery-fields-count-availability-linux-20261117",
+  "note": "Claimed by the phone agent under the owner's standing direction to check the board for gate tasks and take them; assignment intended_host names vm2, and the owner's routing rule assigns work to any capable host.",
+  "owner": "phone-agent",
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "ee564187eaa67c72c8f9c4eab610433aefe56c3a",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "claim"
+}
