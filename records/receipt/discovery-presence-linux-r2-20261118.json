@@ -1,0 +1,34 @@
+{
+  "type": "receipt",
+  "id": "discovery-presence-linux-r2-20261118",
+  "job": "discovery-presence-linux-r2-20261118",
+  "gate": "discovery-presence-linux-r2-20261118",
+  "head": "1f1cf6c7f8d230be126e42596424944c10579acf",
+  "source": {
+    "repository": "nick-boss-tech/solr",
+    "branch": "discovery-fields-prototype",
+    "gate_recorded_head": "35204fa7da37588cdb695a84df25b2cda554fb37",
+    "gated_head": "1f1cf6c7f8d230be126e42596424944c10579acf",
+    "head_composition": "At the owner's direction, upstream main 8b2e99721e28c66b96654d0dff440d74785febb2 (11 commits past the branch point) was merged into the branch before this gate ran, producing merge commit 1f1cf6c7f8d230be126e42596424944c10579acf with no conflicts; the merge was pushed non-force and the remote SHA verified. This gate ran at the merged head.",
+    "live_head_before_run": "1f1cf6c7f8d230be126e42596424944c10579acf",
+    "live_head_before_publication": "1f1cf6c7f8d230be126e42596424944c10579acf"
+  },
+  "verdict": "failed",
+  "environment": "Linux sandbox phone-agent; vendored OpenJDK 21 via the host's solr-gradle.sh runner in place of ./gradlew; clean full clone of the merged head; all Gradle invocations serialized under the host test-queue flock; no --write-locks used anywhere in this gate.",
+  "commands": {
+    "focused_test": "./gradlew :solr:core:test --tests org.apache.solr.handler.admin.DiscoveryFieldsRequestHandlerTest -Dtests.seed=F13D610B",
+    "tidy": "./gradlew :solr:core:tidy",
+    "root_check": "./gradlew check -x test -Prefguide.include=false"
+  },
+  "results": {
+    "focused_test": "exit 0; fresh JUnit XML reports 6 tests, 0 skipped, 0 failures, 0 errors",
+    "tidy": "exit 0; zero tracked changes; the merged head is formatting-clean",
+    "root_check": "exit 1; dependency resolution now passes (the lock failure from the predecessor gate is closed) and the build executed 204 tasks before failing at :solr:core:ecjLintMain"
+  },
+  "remaining_blocker": ":solr:core:ecjLintMain fails on the branch's own handler source: DiscoveryFieldsRequestHandler.java line 60 imports org.apache.solr.security.PermissionNameProvider.Name, which ECJ reports as never used (1 error, ECJ process exit 255). This is the same defect recorded as a trial finding in the lock investigation receipt; the merge with upstream main does not touch that branch-only file. Removing that single unused import is the only known blocker between this head and a green root check.",
+  "coverage_limits": [
+    "Focused proof remains embedded-handler only: the test class extends SolrTestCaseJ4 and drives the handler through the embedded TestHarness, so there is still no HTTP proof of the endpoint.",
+    "The focused class contains no QueryLimits or timeout coverage; shared QueryLimits timeout behavior remains unproved."
+  ],
+  "evidence": "records/evidence/discovery-presence-linux-r2-20261118.json; records/evidence/discovery-presence-linux-r2-20261118-evidence.tar.gz (sha256 88bc9980933958371ab860d2133be9076d3fdd4f77c889b87e1f8bc9f1a6cbb4)"
+}
