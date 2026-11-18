@@ -1,0 +1,31 @@
+{
+  "type": "receipt",
+  "id": "discovery-presence-linux-r4-20261118",
+  "job": "discovery-presence-linux-r4-20261118",
+  "gate": "discovery-presence-linux-r4-20261118",
+  "head": "f42d0a7c60b1660e66016b88d3254244e889ce16",
+  "source": {
+    "repository": "nick-boss-tech/solr",
+    "branch": "discovery-fields-prototype",
+    "live_head_before_run": "f42d0a7c60b1660e66016b88d3254244e889ce16",
+    "live_head_before_publication": "f42d0a7c60b1660e66016b88d3254244e889ce16"
+  },
+  "verdict": "passed",
+  "environment": "Linux sandbox phone-agent; vendored OpenJDK 21 via the host's solr-gradle.sh runner in place of ./gradlew; clean full clone at the exact head (existing full fork clone cleaned with git clean after fresh clones failed with a host disk quota error); all Gradle invocations serialized under the host test-queue flock; no --write-locks used.",
+  "commands": {
+    "focused_test": "./gradlew :solr:core:test --tests org.apache.solr.handler.admin.DiscoveryFieldsRequestHandlerTest -Dtests.seed=F13D610B",
+    "tidy": "./gradlew :solr:core:tidy",
+    "root_check": "./gradlew check -x test -Prefguide.include=false"
+  },
+  "results": {
+    "focused_test": "exit 0; fresh JUnit XML reports 6 tests, 0 skipped, 0 failures, 0 errors",
+    "tidy": "exit 0; zero tracked changes",
+    "root_check": "exit 0; BUILD SUCCESSFUL, 515 actionable tasks (474 executed, 6 from cache, 35 up-to-date). Dependency resolution, ecjLint, and forbiddenApis legs all pass at this head."
+  },
+  "chain_summary": "This green gate closes the discovery gate chain: the original head 62952407 failed root check on a pre-existing dependency-lock gap (lock investigation: repaired at 35204fa7 with lockfiles only); upstream main was then merged at the owner's direction (1f1cf6c7, no conflicts) and the r2 gate failed only on an unused import (gate-agent patch 363c2fef); the r3 gate failed only on a forbidden reflective setAccessible call in the test (gate-agent patch f42d0a7c, this head). Each blocker was recorded in its own gate receipt.",
+  "coverage_limits": [
+    "Focused proof remains embedded-handler only: the test class extends SolrTestCaseJ4 and drives the handler through the embedded TestHarness, so there is still no HTTP proof of the endpoint.",
+    "The focused class contains no QueryLimits or timeout coverage; shared QueryLimits timeout behavior remains unproved."
+  ],
+  "evidence": "records/evidence/discovery-presence-linux-r4-20261118.json; records/evidence/discovery-presence-linux-r4-20261118-evidence.tar.gz (sha256 95f2e15b664e63fc9b73d1adc3281c777404aa89e6eacec5d2eea1fb2f6314ae)"
+}
