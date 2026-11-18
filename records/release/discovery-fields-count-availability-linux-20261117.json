@@ -1,0 +1,13 @@
+{
+  "type": "release",
+  "id": "discovery-fields-count-availability-linux-20261117",
+  "job": "discovery-fields-count-availability-linux-20261117",
+  "executor": "phone-agent",
+  "released": "2026-11-17T19:02:15-07:00",
+  "status": "released",
+  "verdict": "incomplete",
+  "completion_status": "not started; recorded head superseded by branch movement",
+  "receipt": "records/receipt/discovery-fields-count-availability-linux-20261117.json",
+  "report": "records/report/discovery-fields-count-availability-linux-20261117.json",
+  "note": "Claim released without running the gate: the recorded head ee564187eaa67c72c8f9c4eab610433aefe56c3a is an ancestor of the live branch tip 9db4daca489dcca3a8441268316462111752bd35, so the gate's head-equality criterion cannot be met. No source branch, public PR, or Jira state was changed."
+}
