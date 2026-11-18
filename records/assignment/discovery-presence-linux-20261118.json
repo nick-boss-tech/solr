@@ -1,0 +1,20 @@
+{
+  "claim_path": "records/claim/discovery-presence-linux-20261118.json",
+  "gate_id": "discovery-presence-linux-20261118",
+  "gate_record": "records/gate/discovery-presence-linux-20261118.json",
+  "id": "discovery-presence-linux-20261118",
+  "intended_host": "Linux gate host",
+  "job": "discovery-presence-linux-20261118",
+  "phase": "presence-and-config review follow-up",
+  "receipt_path": "records/receipt/discovery-presence-linux-20261118.json",
+  "scope": "Run focused discovery behavior, formatting and root check at the exact remote head. Confirm the earlier seven dependency-lock failures are resolved without rewriting locks during the proof. No live collection writes. The current handler does not call Luke; preserve that property. Record HTTP default-path and shared QueryLimits limitations accurately.",
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "6295240718d913872192f1bd5edafecdd49e1768",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "discovery-field-glob-linux-20261117",
+  "summary": "Prove discovery presence, configured defaults and bounded counting",
+  "supersedes_gate": "records/gate/discovery-field-glob-linux-20261117.json",
+  "type": "assignment"
+}
