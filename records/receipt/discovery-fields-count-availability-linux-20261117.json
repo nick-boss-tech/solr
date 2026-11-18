@@ -1,0 +1,34 @@
+{
+  "type": "receipt",
+  "id": "discovery-fields-count-availability-linux-20261117",
+  "job": "discovery-fields-count-availability-linux-20261117",
+  "gate": "discovery-fields-count-availability-linux-20261117",
+  "head": "ee564187eaa67c72c8f9c4eab610433aefe56c3a",
+  "source": {
+    "repository": "nick-boss-tech/solr",
+    "branch": "discovery-fields-prototype",
+    "assigned_head": "ee564187eaa67c72c8f9c4eab610433aefe56c3a",
+    "live_head_before_run": "9db4daca489dcca3a8441268316462111752bd35",
+    "assigned_head_is_ancestor_of_live_head": true,
+    "commits_between": [
+      "6333f09b2e Bound field discovery and clarify local scope",
+      "9db4daca48 Filter discovered field names with globs"
+    ]
+  },
+  "verdict": "incomplete",
+  "completion_status": "not started; the gate's first acceptance criterion (remote branch equals recorded head) fails because the branch advanced two commits past the recorded head",
+  "environment": "Linux sandbox phone-agent; no checkout was created and no Gradle command was run.",
+  "commands": {
+    "tidy": "./gradlew :solr:core:tidy (not run)",
+    "core_check": "./gradlew :solr:core:check -x test (not run)"
+  },
+  "results": {
+    "head_verification": {
+      "status": "failed",
+      "detail": "git ls-remote fork refs/heads/discovery-fields-prototype returned 9db4daca489dcca3a8441268316462111752bd35; git merge-base --is-ancestor confirmed ee564187eaa67c72c8f9c4eab610433aefe56c3a is an ancestor of that tip."
+    },
+    "tidy": { "status": "not run" },
+    "core_check": { "status": "not run" }
+  },
+  "note": "Compile-format proof only was ever in scope for this gate; no behavioral validation is claimed or implied. See records/report/discovery-fields-count-availability-linux-20261117.json for the full finding and the retarget recommendation."
+}
