@@ -1,0 +1,15 @@
+{
+  "type": "release",
+  "id": "discovery-presence-linux-20261118",
+  "job": "discovery-presence-linux-20261118",
+  "executor": "phone-agent",
+  "released": "2026-11-18T09:22:25-07:00",
+  "status": "released",
+  "verdict": "failed",
+  "completion_status": "complete; root check leg failed on dependency lock state",
+  "supersedes_gate": "records/gate/discovery-field-glob-linux-20261117.json",
+  "receipt": "records/receipt/discovery-presence-linux-20261118.json",
+  "evidence": "records/evidence/discovery-presence-linux-20261118.json; records/evidence/discovery-presence-linux-20261118-evidence.tar.gz (sha256 6dd44e2f53f2538ebda76306bdfc153677cb4ce47e84af2a48dfe2e32b62213c)",
+  "receipt_commit": "afec050550160aafa52ef43e93271723c4185272",
+  "note": "Gate run at exact head 6295240718d913872192f1bd5edafecdd49e1768 in a clean full clone. Focused test passed (6 tests, 0 failures, seed F13D610B) and :solr:core:tidy changed nothing, but root check -x test failed during dependency resolution: the same seven artifacts as the prior gate are outside the dependency lock state, reached through :solr:modules:analysis-extras:jarValidation. The committed lock changes fixed the core test path only. Locks were not modified. Focused proof is embedded-handler only, with no HTTP and no QueryLimits coverage. No source branch, public PR, or Jira state was changed."
+}
