@@ -1,0 +1,16 @@
+{
+  "type": "evidence",
+  "id": "discovery-presence-linux-r4-20261118",
+  "job": "discovery-presence-linux-r4-20261118",
+  "gate": "discovery-presence-linux-r4-20261118",
+  "head": "f42d0a7c60b1660e66016b88d3254244e889ce16",
+  "archive": "records/evidence/discovery-presence-linux-r4-20261118-evidence.tar.gz",
+  "sha256": "95f2e15b664e63fc9b73d1adc3281c777404aa89e6eacec5d2eea1fb2f6314ae",
+  "contents": [
+    "summary.txt (head, clean-start and clean-end status, leg exit codes)",
+    "test.log and TEST-org.apache.solr.handler.admin.DiscoveryFieldsRequestHandlerTest.xml (focused test: 6 tests, 0 skipped, 0 failures, 0 errors, seed F13D610B)",
+    "tidy.log, tidy-changed-files.txt, tidy.diff (tidy exit 0, zero tracked changes)",
+    "check.log (root check exit 0, BUILD SUCCESSFUL, 515 actionable tasks)"
+  ],
+  "note": "Evidence produced by the phone agent in a clean full clone at head f42d0a7c60b1660e66016b88d3254244e889ce16. The clone was the existing full fork clone cleaned with git clean because fresh clones currently fail on this host with a disk quota error; the gated tree was verified clean at the exact head before and after the run."
+}
