@@ -1,0 +1,14 @@
+{
+  "claimed": "2026-11-18T17:00:14Z",
+  "host": "phone-agent Linux sandbox",
+  "id": "discovery-lock-investigation-linux-20261118",
+  "job": "discovery-lock-investigation-linux-20261118",
+  "note": "Claimed by the phone agent, the gate host that ran discovery-presence-linux-20261118 and recorded the lock-state failure. Diagnosis runs in the same clean full clone at the exact assigned head; the host runner is solr-gradle.sh (vendored JDK 21) in place of ./gradlew, recorded in the receipt.",
+  "owner": "phone-agent",
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "6295240718d913872192f1bd5edafecdd49e1768",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "claim"
+}
