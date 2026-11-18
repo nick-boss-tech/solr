@@ -1,0 +1,13 @@
+{
+  "type": "report",
+  "id": "discovery-fields-count-availability-linux-20261117",
+  "job": "discovery-fields-count-availability-linux-20261117",
+  "gate": "discovery-fields-count-availability-linux-20261117",
+  "reporter": "phone-agent",
+  "reported": "2026-11-18T02:02:15Z",
+  "board_snapshot": "6ac405aea0dbd441a5dbd1f805d8d8f153ed7a73",
+  "finding": "The gate cannot start: its recorded source head is no longer the branch head. The gate record requires the remote branch and the checked-out HEAD to both equal ee564187eaa67c72c8f9c4eab610433aefe56c3a before the gate starts. The live nick-boss-tech/solr discovery-fields-prototype ref is 9db4daca489dcca3a8441268316462111752bd35. ee564187 is an ancestor of that tip, two commits behind it: 6333f09b2e (Bound field discovery and clarify local scope) and 9db4daca48 (Filter discovered field names with globs).",
+  "consequence": "No tidy or check leg was run. A detached checkout at ee564187 would still fail the gate's first acceptance criterion (remote branch equals recorded head), and a compile-format result at that head would say nothing about the branch as it stands.",
+  "related_state": "The live tip 9db4daca has its own gate (discovery-field-glob-linux-20261117), which stopped at the tidy leg when tidy reformatted two tracked files; its :solr:core:check -x test leg was not run either. So no completed compile-format proof exists for the current tip.",
+  "recommendation": "Close this gate as superseded by branch movement and post a retargeted compile-format gate at the live tip (or fold the check leg into the field-glob successor gate), rather than re-pointing this record silently."
+}
