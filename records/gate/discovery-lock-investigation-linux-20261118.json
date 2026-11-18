@@ -1,0 +1,29 @@
+{
+  "commands": {
+    "previous_failed_root_check": "./gradlew check -x test -Prefguide.include=false",
+    "targeted_dependency_diagnosis": "./gradlew :solr:modules:analysis-extras:dependencies --configuration jarValidation"
+  },
+  "failure_signature": "Seven resolved artifacts absent from lock state: docker-java-api 3.7.1, docker-java-transport-zerodep 3.7.1, docker-java-transport 3.7.1, duct-tape 1.0.8, annotations 26.1.0, commons-compress 1.28.0, testcontainers 2.0.5.",
+  "head": "6295240718d913872192f1bd5edafecdd49e1768",
+  "id": "discovery-lock-investigation-linux-20261118",
+  "job": "discovery-lock-investigation-linux-20261118",
+  "phase": "dependency-lock diagnosis and repair",
+  "prior_evidence": "records/evidence/discovery-presence-linux-20261118.json",
+  "prior_receipt": "records/receipt/discovery-presence-linux-20261118.json",
+  "receipt_path": "records/receipt/discovery-lock-investigation-linux-20261118.json",
+  "requirements": [
+    "Claim before work and verify the remote branch still equals the assigned head; stop and reconcile if moved. Use a clean full Linux clone, host runner, locks, and supported JDK.",
+    "Read the previous receipt and evidence. The focused test passed six cases and tidy was clean; root check failed before execution on seven artifacts not in the analysis-extras jarValidation lock state. Do not recast these outcomes as a passed full gate.",
+    "Diagnose the dependency graph and lock state for :solr:modules:analysis-extras:jarValidation at the assigned head. Compare an appropriate clean baseline, including 064d7ef8d7a7a4f4e7998aea14b3a6db49f865d1 when needed, to distinguish pre-existing and branch-introduced effects. Record exact commands, exits, logs, toolchain and conclusions.",
+    "Investigate supported lock generation in an isolated checkout; do not bypass lock enforcement or hand-edit entries simply to mask the failure. If a narrow lock-only change is justified, review all generated changes, commit with safe message and ICLA identity, push non-force to the fork branch, verify remote SHA, and publish a separate successor gate against that new head. If not justified or if broader changes are needed, stop and report evidence and recommendation.",
+    "Record any trial results separately from proof. Existing six passing embedded tests and tidy at the original head do not validate a changed head. The HTTP default path and shared QueryLimits timeout behavior remain unproved.",
+    "Publish a diagnostic receipt and evidence, then release; record final source and board states and whether follow-up was created. A passing diagnostic verdict means the cause and disposition were established, not that the discovery feature passed its full gate."
+  ],
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "6295240718d913872192f1bd5edafecdd49e1768",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes_gate": "records/gate/discovery-presence-linux-20261118.json",
+  "type": "gate"
+}
