@@ -70,7 +70,7 @@ public class DiscoveryFieldsRequestHandler extends RequestHandlerBase {
   private static final int MAX_GLOB_LENGTH = 256;
   private static final int MAX_TIME_ALLOWED_MS =
       positiveIntProperty(MAX_TIME_ALLOWED_PROPERTY, 5000);
-  private static final Semaphore DISCOVERY_PERMITS =
+  static final Semaphore DISCOVERY_PERMITS =
       new Semaphore(positiveIntProperty(MAX_CONCURRENT_REQUESTS_PROPERTY, 1));
   private static final boolean USE_FILTER_CACHE =
       EnvUtils.getPropertyAsBool(USE_FILTER_CACHE_PROPERTY, false);

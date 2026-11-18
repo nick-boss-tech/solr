@@ -16,7 +16,6 @@
  */
 package org.apache.solr.handler.admin;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Semaphore;
@@ -148,9 +147,7 @@ public class DiscoveryFieldsRequestHandlerTest extends SolrTestCaseJ4 {
 
   @Test
   public void testConfiguredConcurrencyLimit() throws Exception {
-    Field permitsField = DiscoveryFieldsRequestHandler.class.getDeclaredField("DISCOVERY_PERMITS");
-    permitsField.setAccessible(true);
-    Semaphore permits = (Semaphore) permitsField.get(null);
+    Semaphore permits = DiscoveryFieldsRequestHandler.DISCOVERY_PERMITS;
     assertTrue(permits.tryAcquire());
     assertTrue(permits.tryAcquire());
     try {
