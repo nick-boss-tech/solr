@@ -122,6 +122,28 @@ public class TestInPlaceUpdatesStandalone extends SolrTestCaseJ4 {
   }
 
   @Test
+  public void testAtomicUpdateWithoutSkipIndexControl() throws Exception {
+    checkAtomicNumericUpdate("inplace_updatable_int");
+  }
+
+  @Test
+  public void testAtomicUpdateWithSkipIndex() throws Exception {
+    checkAtomicNumericUpdate("atomic_skip_int");
+  }
+
+  private void checkAtomicNumericUpdate(String field) throws Exception {
+    addAndGetVersion(sdoc("id", "1", "title_s", "original", field, 10), null);
+    assertU(commit("softCommit", "false"));
+    addAndGetVersion(sdoc("id", "1", field, map("inc", 5)), null);
+    assertU(commit("softCommit", "false"));
+    assertQ(
+        req("q", "id:1", "fl", "id,title_s," + field),
+        "//*[@numFound='1']",
+        "//result/doc/int[@name='" + field + "'][.='15']",
+        "//result/doc/str[@name='title_s'][.='original']");
+  }
+
+  @Test
   public void testUpdateBadRequest() throws Exception {
     final long version1 =
         addAndGetVersion(sdoc("id", "1", "title_s", "first", "inplace_updatable_float", 41), null);
