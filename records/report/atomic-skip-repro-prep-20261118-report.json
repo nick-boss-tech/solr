@@ -1,0 +1,20 @@
+{
+  "board_snapshot_before_write": "1200b234b2d0cab2b042e2e0924493f2e2a34d76",
+  "claim_state_at_handoff_snapshot": "No claim, receipt, or release exists for the Linux gate job at this snapshot.",
+  "execution": "No Solr test or Gradle command was run on Windows. The workspace forbids Gradle here; reproduction remains pending Linux execution.",
+  "findings": [
+    "AtomicUpdateDocumentMerger.isSupportedFieldForInPlaceUpdate checks indexed, stored, DocValues, cardinality and numeric type, but not the new skip-index property. The later in-place checks only exclude index-sort fields.",
+    "The PR test schema already provides longdv with a RANGE skip index and long_plain without one, so the control and target can share the same fixture.",
+    "The existing DocValuesSkipListTest starts with solrconfig-basic.xml, which has no update log. The gate overlay must enable solr.index.updatelog.enabled and use solrconfig.xml or the atomic update will not take the in-place path."
+  ],
+  "handoff_assignment": "records/assignment/pr-5361-atomic-skip-repro-linux-r1-20261118.json",
+  "handoff_gate": "records/gate/pr-5361-atomic-skip-repro-r1-20261118.json",
+  "handoff_readback_snapshot": "d69d0a74c00108a1991cf3518cbd10aa344ae672",
+  "id": "atomic-skip-repro-prep-20261118-report",
+  "job": "atomic-skip-repro-prep-20261118",
+  "owner": "codex-windows",
+  "recorded": "2026-11-18",
+  "source_head": "3a1589ba490b432ceeca2f098e458f0af5a0d8d7",
+  "summary": "Prepared a focused Linux reproduction overlay for the atomic update finding in PR 5361.",
+  "type": "report"
+}
