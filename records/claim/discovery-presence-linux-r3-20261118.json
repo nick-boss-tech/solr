@@ -1,0 +1,14 @@
+{
+  "claimed": "2026-11-18T18:34:44Z",
+  "host": "phone-agent Linux sandbox",
+  "id": "discovery-presence-linux-r3-20261118",
+  "job": "discovery-presence-linux-r3-20261118",
+  "note": "Claimed by the phone agent, which also authored the gate-agent import patch at this head under the owner's rule that the gate agent applies simple patches itself. Host runner is solr-gradle.sh (vendored JDK 21) in place of ./gradlew.",
+  "owner": "phone-agent",
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "363c2fefdebf14c14c2a2031bbfd373b8167450d",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "claim"
+}
