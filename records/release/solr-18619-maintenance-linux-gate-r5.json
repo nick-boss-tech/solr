@@ -1,0 +1,12 @@
+{
+  "type": "release",
+  "id": "solr-18619-maintenance-linux-gate-r5",
+  "job": "solr-18619-maintenance-linux-gate-r5",
+  "executor": "phone-agent",
+  "released": "2026-11-17T19:55:25-07:00",
+  "status": "released",
+  "verdict": "incomplete",
+  "completion_status": "closed as won't-do under owner decision; no gate-host execution performed",
+  "receipt": "records/receipt/solr-18619-maintenance-linux-gate-r5.json",
+  "note": "Release posted by the phone agent on 2026-11-17 at the owner's direction to close the record. Per the receipt, this gate was withdrawn by owner decision on 2026-11-13 (too heavy for the gate hosts; CI covers the proof), no claim was ever created, and no legs were run. This release is bookkeeping only; it asserts no execution."
+}
