@@ -1,0 +1,28 @@
+{
+  "commands": {
+    "focused_test": "./gradlew :solr:core:test --tests org.apache.solr.handler.admin.DiscoveryFieldsRequestHandlerTest -Dtests.seed=F13D610B",
+    "root_check": "./gradlew check -x test -Prefguide.include=false",
+    "tidy": "./gradlew :solr:core:tidy"
+  },
+  "head": "363c2fefdebf14c14c2a2031bbfd373b8167450d",
+  "id": "discovery-presence-linux-r3-20261118",
+  "job": "discovery-presence-linux-r3-20261118",
+  "phase": "presence-and-config proof after gate-agent import patch",
+  "prior_evidence": "records/receipt/discovery-presence-linux-r2-20261118.json",
+  "receipt_path": "records/receipt/discovery-presence-linux-r3-20261118.json",
+  "requirements": [
+    "Confirm fork head and clean checkout before and after every proof leg; use the Linux host gate runner and required locks. Do not use --write-locks anywhere in this gate.",
+    "Run the focused class org.apache.solr.handler.admin.DiscoveryFieldsRequestHandlerTest with seed F13D610B; save fresh XML, test counts and logs.",
+    "Run :solr:core:tidy; record whether tracked files changed. If formatting changes tracked files, preserve diff, restore the checkout, stop and report failure.",
+    "Run root check -x test with -Prefguide.include=false; record exit status and logs. Dependency resolution and :solr:core:ecjLintMain must both pass at this head; any later failure is the verdict-determining result and must be recorded with its task and message.",
+    "Report whether the focused tests exercise HTTP or only the embedded handler, and whether timeout and QueryLimits shared behavior were actually covered. The focused test alone must not be represented as HTTP proof.",
+    "Publish receipt and evidence before release."
+  ],
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "363c2fefdebf14c14c2a2031bbfd373b8167450d",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes_gate": "records/gate/discovery-presence-linux-r2-20261118.json",
+  "type": "gate"
+}
