@@ -1,0 +1,32 @@
+{
+  "type": "receipt",
+  "id": "discovery-presence-linux-r3-20261118",
+  "job": "discovery-presence-linux-r3-20261118",
+  "gate": "discovery-presence-linux-r3-20261118",
+  "head": "363c2fefdebf14c14c2a2031bbfd373b8167450d",
+  "source": {
+    "repository": "nick-boss-tech/solr",
+    "branch": "discovery-fields-prototype",
+    "live_head_before_run": "363c2fefdebf14c14c2a2031bbfd373b8167450d",
+    "live_head_before_publication": "363c2fefdebf14c14c2a2031bbfd373b8167450d"
+  },
+  "verdict": "failed",
+  "environment": "Linux sandbox phone-agent; vendored OpenJDK 21 via the host's solr-gradle.sh runner in place of ./gradlew; clean full clone at the exact head (existing full fork clone cleaned with git clean after fresh clones failed with a host disk quota error); all Gradle invocations serialized under the host test-queue flock; no --write-locks used.",
+  "commands": {
+    "focused_test": "./gradlew :solr:core:test --tests org.apache.solr.handler.admin.DiscoveryFieldsRequestHandlerTest -Dtests.seed=F13D610B",
+    "tidy": "./gradlew :solr:core:tidy",
+    "root_check": "./gradlew check -x test -Prefguide.include=false"
+  },
+  "results": {
+    "focused_test": "exit 0; fresh JUnit XML reports 6 tests, 0 skipped, 0 failures, 0 errors",
+    "tidy": "exit 0; zero tracked changes",
+    "root_check": "exit 1; dependency resolution passed and :solr:core:ecjLintMain passed (the r2 blocker is fixed at this head); the build executed 210 tasks before failing at :solr:core:forbiddenApisTest"
+  },
+  "remaining_blocker": ":solr:core:forbiddenApisTest reports one forbidden invocation: java.lang.reflect.AccessibleObject#setAccessible(boolean) in DiscoveryFieldsRequestHandlerTest.java line 152, where the concurrency test reflectively reads the handler's private DISCOVERY_PERMITS semaphore to drain its permits.",
+  "gate_agent_patch": "Under the owner's rule that the gate agent applies simple patches itself, the blocking pattern was patched after this gate run: DISCOVERY_PERMITS is now package-visible in DiscoveryFieldsRequestHandler (the test class shares its package), and the test reads the field directly, dropping the reflection and the unused Field import. Verification in the working clone: tidy exit 0 with no further changes, :solr:core:forbiddenApisTest and :solr:core:ecjLintMain exit 0, focused test exit 0 with 6 of 6 at seed F13D610B. The patch is committed on top of this head and a successor gate (discovery-presence-linux-r4-20261118) proves the new head.",
+  "coverage_limits": [
+    "Focused proof remains embedded-handler only: the test class extends SolrTestCaseJ4 and drives the handler through the embedded TestHarness, so there is still no HTTP proof of the endpoint.",
+    "The focused class contains no QueryLimits or timeout coverage; shared QueryLimits timeout behavior remains unproved."
+  ],
+  "evidence": "records/evidence/discovery-presence-linux-r3-20261118.json; records/evidence/discovery-presence-linux-r3-20261118-evidence.tar.gz (sha256 689023c93d732c0a51f9929d8a1324a9ba00e65ab240e1ea730d0d9f68f25bfc)"
+}
