@@ -1,0 +1,35 @@
+{
+  "type": "receipt",
+  "id": "discovery-lock-investigation-linux-20261118",
+  "job": "discovery-lock-investigation-linux-20261118",
+  "gate": "discovery-lock-investigation-linux-20261118",
+  "head": "6295240718d913872192f1bd5edafecdd49e1768",
+  "source": {
+    "repository": "nick-boss-tech/solr",
+    "branch": "discovery-fields-prototype",
+    "assigned_head": "6295240718d913872192f1bd5edafecdd49e1768",
+    "live_head_before_run": "6295240718d913872192f1bd5edafecdd49e1768",
+    "head_after_repair": "35204fa7da37588cdb695a84df25b2cda554fb37",
+    "live_head_before_publication": "35204fa7da37588cdb695a84df25b2cda554fb37"
+  },
+  "verdict": "passed",
+  "completion_status": "complete; cause established and the narrow lock-only repair was generated, reviewed, committed, and pushed; a successor gate is published at the repaired head. This verdict means the diagnosis and disposition are established, not that the discovery feature passed its full gate.",
+  "environment": "Linux sandbox phone-agent; vendored OpenJDK 21 via the host's solr-gradle.sh runner in place of ./gradlew; clean full clones at the assigned head and at baseline 064d7ef8d7a7a4f4e7998aea14b3a6db49f865d1; all Gradle invocations serialized under the host test-queue flock.",
+  "diagnosis": {
+    "cause": "Pre-existing lock-state gap at the branch point, not branch-introduced and not environment-specific. solr-test-framework declares implementation libs.testcontainers, so every module consuming test-framework resolves the testcontainers/docker-java stack in its jarValidation and test configurations. At baseline 064d7ef8 the committed lockfiles do not contain those seven artifacts for the consuming modules, and :solr:modules:analysis-extras:collectJarInfos fails there with the identical seven-artifact signature as at the branch head (measured in a clean baseline clone; both logs in evidence). Upstream resolved the identical state 17 minutes after the baseline commit in c344a16b51 (solr-test-framework now depends on docker), which regenerated the lockfiles including analysis-extras; upstream main's analysis-extras lockfile carries the seven artifacts for jarValidation today. The branch was cut from inside that window and its own lock edits covered only solr/core and solr/test-framework, the configurations its focused test resolves, leaving the remaining modules' jarValidation state stale.",
+    "baseline_comparison": "collectJarInfos exit 1 at both heads with the same seven artifacts; dependencies --configuration jarValidation exit 0 at both (the report does not enforce lock state).",
+    "commands": {
+      "targeted_dependency_diagnosis": "./gradlew :solr:modules:analysis-extras:dependencies --configuration jarValidation (exit 0 at head and baseline)",
+      "failing_task_reproduction": "./gradlew :solr:modules:analysis-extras:collectJarInfos (exit 1 at head and baseline, identical signature)"
+    }
+  },
+  "repair": {
+    "method": "Supported generation only: ./gradlew collectJarInfos --write-locks across all projects in the isolated head clone (exit 0). An earlier trial, root check with --write-locks, passed dependency resolution but failed later at :solr:core:ecjLintMain and Gradle persisted no lockfiles from that failed build (0 files changed), which is why the collectJarInfos pass was used.",
+    "diff_review": "22 files changed, all of them gradle.lockfile; 156 insertions, 17 deletions. Additions are the seven artifacts (docker-java-api, docker-java-transport, docker-java-transport-zerodep 3.7.1; duct-tape 1.0.8; org.jetbrains:annotations 26.1.0; commons-compress 1.28.0; testcontainers 2.0.5) for the affected configurations, plus configuration-list expansions on three already-locked artifacts (commons-codec, jna, commons-lang3) at unchanged versions. No version changes, no unrelated artifacts, no non-lockfile files.",
+    "verification": "Without --write-locks after regeneration: :solr:modules:analysis-extras:collectJarInfos exit 0 and :solr:modules:clustering:collectJarInfos exit 0.",
+    "commit": "35204fa7da37588cdb695a84df25b2cda554fb37 (Regenerate dependency lockfiles for the testcontainers stack), authored as Nick Shanin, pushed non-force to nick-boss-tech/solr discovery-fields-prototype; remote SHA verified by ls-remote after push."
+  },
+  "trial_finding_beyond_scope": "With lock enforcement bypassed by --write-locks, the root check trial ran 204 tasks and failed at :solr:core:ecjLintMain: DiscoveryFieldsRequestHandler.java line 60 imports org.apache.solr.security.PermissionNameProvider.Name, which ECJ reports as never used (1 error). This is a branch code defect separate from the lock state; it was not fixed here because this job's repair scope is lock-only. Until the implementation side removes the import, the successor gate's root check leg is expected to fail at ecjLintMain. This trial result is recorded as diagnosis context, not as gate proof.",
+  "follow_up": "Successor gate published: records/gate/discovery-presence-linux-r2-20261118.json at head 35204fa7da37588cdb695a84df25b2cda554fb37, with the ecjLint expectation recorded in its assignment. The six passing embedded tests and clean tidy at the original head do not validate the repaired head; the HTTP default path and shared QueryLimits timeout behavior remain unproved.",
+  "evidence": "records/evidence/discovery-lock-investigation-linux-20261118.json; records/evidence/discovery-lock-investigation-linux-20261118-evidence.tar.gz (sha256 5140d00595ff7333d2baf1c3d19ecf94b837dd7df1c5d0cae49609de8757a52d)"
+}
