@@ -1,0 +1,14 @@
+{
+  "claimed": "2026-11-18T18:07:37Z",
+  "host": "phone-agent Linux sandbox",
+  "id": "discovery-presence-linux-r2-20261118",
+  "job": "discovery-presence-linux-r2-20261118",
+  "note": "Claimed by the phone agent at Nick's direction to merge upstream main into the branch first and then run this gate at the resulting new head. The gate record names head 35204fa7da37588cdb695a84df25b2cda554fb37; the merge produces a successor head, and the receipt will record both the recorded head and the merged head actually gated. Host runner is solr-gradle.sh (vendored JDK 21) in place of ./gradlew.",
+  "owner": "phone-agent",
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "35204fa7da37588cdb695a84df25b2cda554fb37",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "claim"
+}
