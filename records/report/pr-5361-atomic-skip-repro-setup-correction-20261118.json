@@ -1,0 +1,20 @@
+{
+  "acceptance": "Only a failure on the target update caused by Lucene's skip-index DocValues-update validation establishes reproduction. If the target succeeds, first confirm that _version_ exists and the in-place path was enabled.",
+  "correction": "schema-docValuesSkipList.xml does not declare _version_. AtomicUpdateDocumentMerger.getInPlaceUpdatableFields returns an empty set when _version_ is absent or unsupported, which would turn the request into a full atomic update and hide the reported failure.",
+  "id": "pr-5361-atomic-skip-repro-setup-correction-20261118",
+  "job": "pr-5361-atomic-skip-repro-linux-r1-20261118",
+  "recorded": "2026-11-18",
+  "required_overlay_changes": [
+    "In schema-docValuesSkipList.xml, add <field name=\"_version_\" type=\"long\" indexed=\"false\" stored=\"false\" docValues=\"true\" multiValued=\"false\" useDocValuesAsStored=\"true\"/> before <uniqueKey>.",
+    "In DocValuesSkipListTest.beforeTests, enable solr.index.updatelog.enabled and load solrconfig.xml with schema-docValuesSkipList.xml.",
+    "The overlay must remain uncommitted. Before sending updates, verify the schema exposes _version_ and the longdv target as single-valued numeric DocValues fields eligible for in-place updates. Then use long_plain as the control and longdv as the skip-indexed target."
+  ],
+  "source_head": "3a1589ba490b432ceeca2f098e458f0af5a0d8d7",
+  "summary": "Corrected the reproduction overlay setup: the custom schema also needs an in-place-capable _version_ field.",
+  "supplements": [
+    "records/assignment/pr-5361-atomic-skip-repro-linux-r1-20261118.json",
+    "records/gate/pr-5361-atomic-skip-repro-r1-20261118.json",
+    "records/report/atomic-skip-repro-prep-20261118-report.json"
+  ],
+  "type": "report"
+}
