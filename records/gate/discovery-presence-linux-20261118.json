@@ -1,0 +1,29 @@
+{
+  "commands": {
+    "focused_test": "./gradlew :solr:core:test --tests org.apache.solr.handler.admin.DiscoveryFieldsRequestHandlerTest -Dtests.seed=F13D610B",
+    "root_check": "./gradlew check -x test -Prefguide.include=false",
+    "tidy": "./gradlew :solr:core:tidy"
+  },
+  "head": "6295240718d913872192f1bd5edafecdd49e1768",
+  "id": "discovery-presence-linux-20261118",
+  "job": "discovery-presence-linux-20261118",
+  "phase": "presence-and-config review follow-up",
+  "prior_evidence": "records/receipt/discovery-field-glob-linux-20261117.json",
+  "receipt_path": "records/receipt/discovery-presence-linux-20261118.json",
+  "requirements": [
+    "Confirm fork head and clean checkout before and after every proof leg; use the Linux host gate runner and required locks.",
+    "Run the focused class org.apache.solr.handler.admin.DiscoveryFieldsRequestHandlerTest with seed F13D610B; save fresh XML, test counts and logs. Report each failure and do not claim pass if assertions do not execute.",
+    "Run :solr:core:tidy; record whether tracked files changed. If formatting changes tracked files, preserve diff, restore the checkout, stop and report failure; a new source head and gate are required.",
+    "Run root check -x test with -Prefguide.include=false; record exit status and logs.",
+    "Report whether the focused tests exercise HTTP or only the embedded handler, and whether timeout and QueryLimits shared behavior were actually covered. The existing focused test alone must not be represented as HTTP proof.",
+    "Record prior dependency-lock failure and determine whether the committed lock changes resolve it without --write-locks. Do not modify locks or weaken checks during the proof.",
+    "Report host, toolchain, exact head, results, cleanup and limitations; publish receipt and evidence before release."
+  ],
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "6295240718d913872192f1bd5edafecdd49e1768",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes_gate": "records/gate/discovery-field-glob-linux-20261117.json",
+  "type": "gate"
+}
