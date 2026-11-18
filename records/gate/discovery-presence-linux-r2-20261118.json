@@ -1,0 +1,28 @@
+{
+  "commands": {
+    "focused_test": "./gradlew :solr:core:test --tests org.apache.solr.handler.admin.DiscoveryFieldsRequestHandlerTest -Dtests.seed=F13D610B",
+    "root_check": "./gradlew check -x test -Prefguide.include=false",
+    "tidy": "./gradlew :solr:core:tidy"
+  },
+  "head": "35204fa7da37588cdb695a84df25b2cda554fb37",
+  "id": "discovery-presence-linux-r2-20261118",
+  "job": "discovery-presence-linux-r2-20261118",
+  "phase": "presence-and-config proof after dependency-lock repair",
+  "prior_evidence": "records/receipt/discovery-lock-investigation-linux-20261118.json",
+  "receipt_path": "records/receipt/discovery-presence-linux-r2-20261118.json",
+  "requirements": [
+    "Confirm fork head and clean checkout before and after every proof leg; use the Linux host gate runner and required locks. Do not use --write-locks anywhere in this gate.",
+    "Run the focused class org.apache.solr.handler.admin.DiscoveryFieldsRequestHandlerTest with seed F13D610B; save fresh XML, test counts and logs.",
+    "Run :solr:core:tidy; record whether tracked files changed. If formatting changes tracked files, preserve diff, restore the checkout, stop and report failure.",
+    "Run root check -x test with -Prefguide.include=false; record exit status and logs. Dependency resolution must now pass; the trial run in the lock investigation reached :solr:core:ecjLintMain and failed on an unused import in DiscoveryFieldsRequestHandler.java line 60. If that import is still present, record the ecjLint failure as the verdict-determining result.",
+    "Report whether the focused tests exercise HTTP or only the embedded handler, and whether timeout and QueryLimits shared behavior were actually covered. The focused test alone must not be represented as HTTP proof.",
+    "Publish receipt and evidence before release."
+  ],
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "35204fa7da37588cdb695a84df25b2cda554fb37",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes_gate": "records/gate/discovery-presence-linux-20261118.json",
+  "type": "gate"
+}
