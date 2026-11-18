@@ -1,0 +1,17 @@
+{
+  "type": "evidence",
+  "id": "discovery-presence-linux-20261118",
+  "job": "discovery-presence-linux-20261118",
+  "gate": "discovery-presence-linux-20261118",
+  "head": "6295240718d913872192f1bd5edafecdd49e1768",
+  "archive": "records/evidence/discovery-presence-linux-20261118-evidence.tar.gz",
+  "sha256": "6dd44e2f53f2538ebda76306bdfc153677cb4ce47e84af2a48dfe2e32b62213c",
+  "contents": [
+    "summary.txt (per-leg exit codes, head and clean-tree verification)",
+    "focused-test.log (full Gradle output for the focused test leg)",
+    "tidy.log (full Gradle output for the :solr:core:tidy leg)",
+    "root-check.log (full Gradle output for the root check leg, including the dependency lock state failure)",
+    "TEST-org.apache.solr.handler.admin.DiscoveryFieldsRequestHandlerTest.xml (fresh JUnit XML: 6 tests, 0 skipped, 0 failures, 0 errors)"
+  ],
+  "note": "Evidence produced by the phone agent's gate run at the exact recorded head in a clean full clone; the checkout was clean before and after every leg and the head never changed."
+}
