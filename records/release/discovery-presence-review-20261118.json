@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "records/report/discovery-presence-review-20261118-report.json and records/gate/discovery-presence-linux-20261118.json; no Windows build or test was launched in this session.",
+  "id": "discovery-presence-review-20261118",
+  "job": "discovery-presence-review-20261118",
+  "reason": "Source review completed, pushed and handed to Linux gate.",
+  "type": "release"
+}
