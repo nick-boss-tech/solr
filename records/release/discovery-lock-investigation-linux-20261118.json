@@ -1,0 +1,15 @@
+{
+  "type": "release",
+  "id": "discovery-lock-investigation-linux-20261118",
+  "job": "discovery-lock-investigation-linux-20261118",
+  "executor": "phone-agent",
+  "released": "2026-11-18T10:13:26-07:00",
+  "status": "released",
+  "verdict": "passed",
+  "completion_status": "complete; cause established, lock-only repair pushed, successor gate published",
+  "supersedes_gate": "records/gate/discovery-presence-linux-20261118.json",
+  "receipt": "records/receipt/discovery-lock-investigation-linux-20261118.json",
+  "evidence": "records/evidence/discovery-lock-investigation-linux-20261118.json; records/evidence/discovery-lock-investigation-linux-20261118-evidence.tar.gz (sha256 5140d00595ff7333d2baf1c3d19ecf94b837dd7df1c5d0cae49609de8757a52d)",
+  "receipt_commit": "fc54de688594e93f243bff557ef9ec36093a3c2b",
+  "note": "Diagnosis: the seven-artifact lock gap is pre-existing at the branch base 064d7ef8 (identical collectJarInfos failure measured in a clean baseline clone) and matches the state upstream repaired in c344a16b51 by regenerating lockfiles. Repair: collectJarInfos --write-locks across all projects changed 22 gradle.lockfile files only (no version changes); committed as 35204fa7da37588cdb695a84df25b2cda554fb37 and pushed non-force to discovery-fields-prototype, remote SHA verified. Successor gate discovery-presence-linux-r2-20261118 is published at that head. A trial root check with locks bypassed also found a separate branch defect, an unused import failing :solr:core:ecjLintMain in DiscoveryFieldsRequestHandler.java line 60, recorded in the receipt and in the successor gate assignment; it was outside this job's lock-only repair scope and remains for the implementation side."
+}
