@@ -1,0 +1,20 @@
+{
+  "claim_path": "records/claim/discovery-presence-linux-r2-20261118.json",
+  "gate_id": "discovery-presence-linux-r2-20261118",
+  "gate_record": "records/gate/discovery-presence-linux-r2-20261118.json",
+  "id": "discovery-presence-linux-r2-20261118",
+  "intended_host": "Linux gate host",
+  "job": "discovery-presence-linux-r2-20261118",
+  "phase": "presence-and-config proof after dependency-lock repair",
+  "receipt_path": "records/receipt/discovery-presence-linux-r2-20261118.json",
+  "scope": "Re-run the full discovery gate at the lock-repaired head: focused test, tidy, and root check. The dependency-lock repair is commit 35204fa7da37588cdb695a84df25b2cda554fb37 (lockfiles only). Trial evidence from the lock investigation shows that with lock enforcement bypassed, root check proceeds past resolution and fails at :solr:core:ecjLintMain on an unused import in DiscoveryFieldsRequestHandler.java (line 60, PermissionNameProvider.Name); unless the implementation side removes that import first, the check leg is expected to stop there, and the gate receipt must record that as the remaining blocker rather than a lock problem.",
+  "source": {
+    "branch": "discovery-fields-prototype",
+    "head": "35204fa7da37588cdb695a84df25b2cda554fb37",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "discovery-presence-linux-20261118",
+  "summary": "Prove discovery presence gate at the lock-repaired head",
+  "supersedes_gate": "records/gate/discovery-presence-linux-20261118.json",
+  "type": "assignment"
+}
