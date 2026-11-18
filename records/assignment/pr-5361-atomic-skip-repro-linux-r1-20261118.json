@@ -1,0 +1,30 @@
+{
+  "claim_path": "records/claim/pr-5361-atomic-skip-repro-linux-r1-20261118.json",
+  "gate_id": "pr-5361-atomic-skip-repro-r1-20261118",
+  "gate_record": "records/gate/pr-5361-atomic-skip-repro-r1-20261118.json",
+  "id": "pr-5361-atomic-skip-repro-linux-r1-20261118",
+  "intended_host": "Linux",
+  "job": "pr-5361-atomic-skip-repro-linux-r1-20261118",
+  "phase": "reproduction-r1",
+  "receipt_path": "records/receipt/pr-5361-atomic-skip-repro-linux-r1-20261118-receipt.json",
+  "recorded": "2026-11-18",
+  "requirements": [
+    "Claim this Linux job before executing it. Confirm the PR branch still resolves to the recorded full head and use a clean worktree.",
+    "Apply an uncommitted test overlay to solr/core/src/test/org/apache/solr/schema/DocValuesSkipListTest.java. Do not commit or push the overlay.",
+    "Enable the update log before initCore and use solrconfig.xml with the existing schema-docValuesSkipList.xml. The current basic config has no update log and would not exercise in-place updates.",
+    "Use the existing long_plain field as the no-skip control and longdv as the skip-indexed numeric target. Index existing documents, commit, apply atomic inc updates, and verify the control reaches 11 while the target is expected to reach 11.",
+    "Run only the named focused test. Capture the test output, the actual Lucene/Solr error text and fresh JUnit XML. Classify a compile or setup failure as incomplete, not as reproduction.",
+    "Reproduced means the control update succeeds and the target update fails in the Lucene DocValues-update guard because the field has a skip index. If the target update succeeds, verify that in-place eligibility was exercised before recording non-reproduced."
+  ],
+  "source": {
+    "branch": "SOLR-18251-docvalues-skip-list",
+    "head": "3a1589ba490b432ceeca2f098e458f0af5a0d8d7",
+    "repository": "iprithv/solr"
+  },
+  "summary": "Reproduce the atomic update failure for a skip-indexed numeric DocValues field on PR 5361.",
+  "test_overlay": {
+    "method": "Add testAtomicUpdateWithSkipIndexedDocValues. Index id=control,long_plain=10 and id=skip,longdv=10; commit. Apply atomic inc +1 to long_plain and assert success plus value 11. Then apply atomic inc +1 to longdv and assert success plus value 11. At the recorded PR head, the final update is expected to fail in Lucene updateDocValues because longdv carries a RANGE skip index. The test should fail at that assertion and expose the underlying error.",
+    "setup": "In beforeTests, set System.setProperty(\"solr.index.updatelog.enabled\", \"true\") before initCore(\"solrconfig.xml\", \"schema-docValuesSkipList.xml\")."
+  },
+  "type": "assignment"
+}
