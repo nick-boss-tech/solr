@@ -1,0 +1,35 @@
+{
+  "claim_path": "records/claim/index-query-current-head-linux-20261119-r5.json",
+  "deliverables": [
+    "Run and record all required Linux proof legs for the exact source head.",
+    "Publish a receipt at the expected path with actual commands, results, skips, and evidence links."
+  ],
+  "gate_id": "index-query-current-head-linux-gate-20261119-r5",
+  "gate_record": "records/gate/index-query-current-head-linux-gate-20261119-r5.json",
+  "id": "index-query-current-head-linux-20261119-r5",
+  "intended_host": "Linux UI-capable gate host",
+  "job": "index-query-current-head-linux-20261119-r5",
+  "phase": "review response round 5, access failure messages",
+  "receipt_path": "records/receipt/index-query-current-head-linux-20261119-r5.json",
+  "related_gate": {
+    "branch": "solr-17849-review-response",
+    "head": "844e0438d9c2e9635215c436b54b789d1f373a1c",
+    "job": "pr-5257-review-response-linux-20261119",
+    "note": "That exact-head gate remains independent and is not superseded or cancelled by this current-head gate."
+  },
+  "source": {
+    "branch": "index-query-review-fixes",
+    "head": "4b5971cdabc742be5b16a9e9259913d53de1602c",
+    "pr": "https://github.com/apache/solr/pull/5257",
+    "pr_head": "e92a34eefd6adf0ec2fe5d3018abc332af77e246",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Validate access failure messages and prior review fixes on the current Index and Query branch.",
+  "supersedes": {
+    "gate_id": "index-query-current-head-linux-gate-20261119-r4",
+    "head": "fe820769904bdacf4d63d23a0dbdcc8864b15e8c",
+    "job": "index-query-current-head-linux-20261119-r4",
+    "reason": "Source changed before the previous gate was claimed; no claim or receipt existed at board snapshot cd1da81058abd3d9db73939fd46c27c45d028dd9."
+  },
+  "type": "assignment"
+}
