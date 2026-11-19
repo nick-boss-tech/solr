@@ -1,0 +1,22 @@
+{
+  "claim_path": "records/claim/index-access-messages-linux-20261119.json",
+  "deliverables": [
+    "Run required proof legs and publish a receipt with actual commands, results and evidence."
+  ],
+  "gate_id": "index-access-messages-linux-20261119-gate",
+  "gate_record": "records/gate/index-access-messages-linux-20261119-gate.json",
+  "id": "index-access-messages-linux-20261119",
+  "intended_host": "Linux UI-capable gate host",
+  "job": "index-access-messages-linux-20261119",
+  "phase": "optional access message follow-up",
+  "receipt_path": "records/receipt/index-access-messages-linux-20261119.json",
+  "source": {
+    "branch": "index-query-access-messages",
+    "head": "4b5971cdabc742be5b16a9e9259913d53de1602c",
+    "pr": "https://github.com/apache/solr/pull/5257",
+    "pr_head": "e92a34eefd6adf0ec2fe5d3018abc332af77e246",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify optional access message follow-up at the named fork head",
+  "type": "assignment"
+}
