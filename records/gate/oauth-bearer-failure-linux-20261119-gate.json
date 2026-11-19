@@ -1,0 +1,21 @@
+{
+  "environment": "Clean Linux checkout with JDK and UI browser/software-renderer prerequisites",
+  "head": "12b273875cb12a8047f672b80e24e585511bf162",
+  "id": "oauth-bearer-failure-linux-20261119-gate",
+  "job": "oauth-bearer-failure-linux-20261119",
+  "phase": "independent bearer failure handling",
+  "receipt_path": "records/receipt/oauth-bearer-failure-linux-20261119.json",
+  "requirements": [
+    "Run ./gradlew -p ui check --no-build-cache and root ./gradlew check -x test -Prefguide.include=false; record commands, formatting, JVM and wasm results, skips, counts and evidence.",
+    "Exercise the actual shared bearer client with 401 responses, with and without a refresh token, and verify it returns 401 without throwing or retrying. Verify success and 403 behavior and a neighboring consumer. Show the 401 probe fails on the unmodified base if practical.",
+    "This branch does not implement token refresh and has no dependency on the header branch; report any uncovered platform behavior."
+  ],
+  "source": {
+    "branch": "oauth-bearer-401-handling",
+    "head": "12b273875cb12a8047f672b80e24e585511bf162",
+    "pr": "https://github.com/apache/solr/pull/5257",
+    "pr_head": "e92a34eefd6adf0ec2fe5d3018abc332af77e246",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "gate"
+}
