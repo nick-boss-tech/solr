@@ -1,0 +1,18 @@
+{
+  "deliverables": [
+    "Push separate fork branch",
+    "Publish exact-head Linux gate",
+    "Report scope and proof pending"
+  ],
+  "id": "pr-5257-review-response-windows-20261119",
+  "intended_host": "Windows implementation; Linux gate separately",
+  "job": "pr-5257-review-response-windows-20261119",
+  "source": {
+    "head": "90d4efb8486a0ce04ec6a9614b56b8b239b487a0",
+    "pr": "https://github.com/apache/solr/pull/5257",
+    "related_branch": "solr-17849-index-query-content",
+    "related_head": "dc8c1c75c678d5923f4825398df04b83cc35685f"
+  },
+  "summary": "Address the new review of PR 5257 on a separate fork branch, including ViewModel and UI integration; request Linux proof.",
+  "type": "assignment"
+}
