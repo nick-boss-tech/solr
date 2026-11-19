@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "records/report/index-query-rollout-windows-20261119-report.json; worker has finished its source work and no executor was started.",
+  "id": "index-query-rollout-windows-20261119",
+  "job": "index-query-rollout-windows-20261119",
+  "reason": "Implementation and handoff complete; Linux gates remain separate jobs.",
+  "type": "release"
+}
