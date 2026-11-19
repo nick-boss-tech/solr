@@ -1,0 +1,14 @@
+{
+  "gate": "records/gate/pr-5257-review-response-linux-20261119.json",
+  "id": "pr-5257-review-response-windows-20261119-report",
+  "job": "pr-5257-review-response-windows-20261119",
+  "result": "Separate branch incorporates the existing screen integration, replaces the state holder with a ViewModel, preserves a selected handler when present in the newly selected collection, clears it if absent, and addresses DTO, use, preview and readability review points. Git diff --check passed; no build or tests ran on Windows. Linux gate pending. Existing PR 5269 overlaps the integration and needs reconciliation before submission. No PR head or public comment changed.",
+  "source": {
+    "branch": "solr-17849-review-response",
+    "head": "844e0438d9c2e9635215c436b54b789d1f373a1c",
+    "pr_head": "90d4efb8486a0ce04ec6a9614b56b8b239b487a0",
+    "repository": "nick-boss-tech/solr",
+    "screen_branch_head": "dc8c1c75c678d5923f4825398df04b83cc35685f"
+  },
+  "type": "report"
+}
