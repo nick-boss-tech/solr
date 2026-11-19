@@ -1,0 +1,21 @@
+{
+  "deliverables": [
+    "Publish reviewable fork branches and record dependencies",
+    "Publish separate exact-head Linux gates",
+    "Preserve existing branches and public PR state"
+  ],
+  "id": "index-query-rollout-windows-20261119",
+  "intended_host": "Windows implementation; Linux gates separately",
+  "job": "index-query-rollout-windows-20261119",
+  "source": {
+    "branch": "index-query-review-fixes",
+    "head": "d709199cf4c0a556ee3cfe5049a699bdc948215a",
+    "pr": "https://github.com/apache/solr/pull/5257",
+    "pr_head": "e92a34eefd6adf0ec2fe5d3018abc332af77e246",
+    "related_head": "3ec4a1ae626191d9cb2a8c42e7f69356f31b862d",
+    "related_pr": "https://github.com/apache/solr/pull/5269",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Prepare separate fork branches for the integrated header, shared bearer failure handling, and optional access messages; reconcile the related screen PR and publish exact-head Linux gates.",
+  "type": "assignment"
+}
