@@ -1,0 +1,30 @@
+{
+  "claim_path": "records/claim/index-main-section-linux-20261119.json",
+  "deliverables": [
+    "Run required proof legs and publish a receipt with actual commands, results and evidence."
+  ],
+  "gate_id": "index-main-section-linux-20261119-gate",
+  "gate_record": "records/gate/index-main-section-linux-20261119-gate.json",
+  "id": "index-main-section-linux-20261119",
+  "intended_host": "Linux UI-capable gate host",
+  "job": "index-main-section-linux-20261119",
+  "phase": "main navigation integration",
+  "receipt_path": "records/receipt/index-main-section-linux-20261119.json",
+  "source": {
+    "branch": "index-query-main-section",
+    "head": "7fa00860af3f335c6611410314ed9ec69ac5c70e",
+    "pr": "https://github.com/apache/solr/pull/5257",
+    "pr_head": "e92a34eefd6adf0ec2fe5d3018abc332af77e246",
+    "related_head": "3ec4a1ae626191d9cb2a8c42e7f69356f31b862d",
+    "related_pr": "https://github.com/apache/solr/pull/5269",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify main navigation integration at the named fork head",
+  "supersedes": {
+    "gate_id": "index-header-integrated-linux-20261119-gate",
+    "head": "fe820769904bdacf4d63d23a0dbdcc8864b15e8c",
+    "job": "index-header-integrated-linux-20261119",
+    "reason": "The earlier branch hosted Index and Query in Configsets despite the maintainer review; no claim or receipt existed at board snapshot 2cfe160f93c3d0dad035dc481e1d1253ba9df035."
+  },
+  "type": "assignment"
+}
