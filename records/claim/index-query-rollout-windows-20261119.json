@@ -1,0 +1,7 @@
+{
+  "id": "index-query-rollout-windows-20261119",
+  "job": "index-query-rollout-windows-20261119",
+  "owner": "codex-windows",
+  "scope": "Prepare and push three separate fork branches and Linux gate handoffs; no public PR writes.",
+  "type": "claim"
+}
