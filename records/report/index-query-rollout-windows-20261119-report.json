@@ -1,0 +1,35 @@
+{
+  "branches": [
+    {
+      "assignment": "records/assignment/index-header-integrated-linux-20261119.json",
+      "base": "e92a34eefd6adf0ec2fe5d3018abc332af77e246",
+      "branch": "index-query-header-integrated",
+      "gate": "records/gate/index-header-integrated-linux-20261119-gate.json",
+      "head": "fe820769904bdacf4d63d23a0dbdcc8864b15e8c"
+    },
+    {
+      "assignment": "records/assignment/oauth-bearer-failure-linux-20261119.json",
+      "base": "f2873bb7783d43d636cc4343ac8b7e84d528c493",
+      "branch": "oauth-bearer-401-handling",
+      "gate": "records/gate/oauth-bearer-failure-linux-20261119-gate.json",
+      "head": "12b273875cb12a8047f672b80e24e585511bf162"
+    },
+    {
+      "assignment": "records/assignment/index-access-messages-linux-20261119.json",
+      "base": "fe820769904bdacf4d63d23a0dbdcc8864b15e8c",
+      "branch": "index-query-access-messages",
+      "gate": "records/gate/index-access-messages-linux-20261119-gate.json",
+      "head": "4b5971cdabc742be5b16a9e9259913d53de1602c"
+    }
+  ],
+  "id": "index-query-rollout-windows-20261119-report",
+  "job": "index-query-rollout-windows-20261119",
+  "notes": [
+    "PR 5269 at 3ec4a1ae626191d9cb2a8c42e7f69356f31b862d overlaps integrated header routing and requires reconciliation; no public change authorized.",
+    "The original index-query-review-fixes branch and its r6 gate remain independent; these new gates do not supersede it.",
+    "Access-message branch omits the independent bearer fix; OAuth 401 behavior requires combined-head proof.",
+    "Diff checks passed; no Windows Gradle or tests were run. All new gates were unclaimed at b7ed1d7fc749d176964d2dbf5e20c82eae2dbf25."
+  ],
+  "summary": "Prepared three review branches and exact-head Linux gates; no public PR action.",
+  "type": "report"
+}
