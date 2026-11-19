@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "records/report/pr-5257-review-response-windows-20261119-report.json; clean source worktree at 844e0438d9c2e9635215c436b54b789d1f373a1c; implementation work stopped.",
+  "id": "pr-5257-review-response-windows-20261119",
+  "job": "pr-5257-review-response-windows-20261119",
+  "reason": "Implementation handed to the Linux gate; no executor started on Windows.",
+  "type": "release"
+}
