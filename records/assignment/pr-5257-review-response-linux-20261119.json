@@ -1,0 +1,18 @@
+{
+  "claim_path": "records/claim/pr-5257-review-response-linux-20261119.json",
+  "gate_id": "pr-5257-review-response-linux-20261119",
+  "gate_record": "records/gate/pr-5257-review-response-linux-20261119.json",
+  "id": "pr-5257-review-response-linux-20261119",
+  "intended_host": "Linux UI-capable gate host",
+  "job": "pr-5257-review-response-linux-20261119",
+  "phase": "review response round 1",
+  "receipt_path": "records/receipt/pr-5257-review-response-linux-20261119.json",
+  "source": {
+    "branch": "solr-17849-review-response",
+    "head": "844e0438d9c2e9635215c436b54b789d1f373a1c",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Validate the Index and Query review-response branch on Linux",
+  "supersedes": null,
+  "type": "assignment"
+}
