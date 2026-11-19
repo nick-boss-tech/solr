@@ -1,0 +1,29 @@
+{
+  "environment": "Clean Linux checkout with JDK and UI browser/software-renderer prerequisites. Use the configured gate-host runner if it wraps Gradle, record the actual commands, and do not mutate the source head.",
+  "head": "941bfb1736e8040f5a2bf8dbab792ade6b148fd3",
+  "id": "index-query-current-head-linux-gate-20261119",
+  "job": "index-query-current-head-linux-20261119",
+  "phase": "review response round 2, refreshed PR head",
+  "receipt_path": "records/receipt/index-query-current-head-linux-20261119.json",
+  "related_gate": {
+    "head": "844e0438d9c2e9635215c436b54b789d1f373a1c",
+    "job": "pr-5257-review-response-linux-20261119",
+    "note": "Independent exact-head gate; do not treat its receipt as proof for this source head."
+  },
+  "requirements": [
+    "Run ./gradlew -p ui check with --no-build-cache (or the gate-host equivalent) and record the exact command, exit code, formatting result, JVM and wasm browser test results, fresh XML counts, and logs.",
+    "Explicitly report HttpIndexQueryRepositoryTest, IndexQueryViewModelTest, IndexQueryHeaderTest, and ConfigsetsRouteViewModelTest on their applicable runners. Do not count skipped tests as passes; confirm the repository tests compile and run on wasm.",
+    "Confirm the request-handler test uses /api/collections/{collection}/config/requestHandlers and parses config.requestHandlers.",
+    "Run the new invalid-collection test and report that empty, dot, dot-dot, leading-hyphen, slash, query, and percent-encoded path inputs fail before any HTTP request is sent.",
+    "Exercise the Index / Query tab in a running UI connected to a Solr instance with two collections: load collections and handlers, select a handler, switch to a collection exposing the same endpoint and confirm the selection is preserved; switch to one without it and confirm the selection clears. Record the environment, observations, and evidence; mocked or preview tests are not live integration.",
+    "Run root ./gradlew check -x test -Prefguide.include=false and record the result; the ref-guide remains excluded under board policy.",
+    "Where practical, adapt the selection-preservation assertion to the old state holder at PR head 90d4efb8486a0ce04ec6a9614b56b8b239b487a0 and show it fails there and passes on this head. If not practical, record why and the coverage limit."
+  ],
+  "source": {
+    "branch": "index-query-review-fixes",
+    "head": "941bfb1736e8040f5a2bf8dbab792ade6b148fd3",
+    "pr_head": "e92a34eefd6adf0ec2fe5d3018abc332af77e246",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "gate"
+}
