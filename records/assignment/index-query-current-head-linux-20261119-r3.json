@@ -1,0 +1,35 @@
+{
+  "claim_path": "records/claim/index-query-current-head-linux-20261119-r3.json",
+  "deliverables": [
+    "Run and record all required Linux proof legs for the exact source head.",
+    "Publish a receipt at the expected path with actual commands, results, skips, and evidence links."
+  ],
+  "gate_id": "index-query-current-head-linux-gate-20261119-r3",
+  "gate_record": "records/gate/index-query-current-head-linux-gate-20261119-r3.json",
+  "id": "index-query-current-head-linux-20261119-r3",
+  "intended_host": "Linux UI-capable gate host",
+  "job": "index-query-current-head-linux-20261119-r3",
+  "phase": "review response round 3, request failures and unfinished tabs",
+  "receipt_path": "records/receipt/index-query-current-head-linux-20261119-r3.json",
+  "related_gate": {
+    "branch": "solr-17849-review-response",
+    "head": "844e0438d9c2e9635215c436b54b789d1f373a1c",
+    "job": "pr-5257-review-response-linux-20261119",
+    "note": "That exact-head gate remains independent and is not superseded or cancelled by this current-head gate."
+  },
+  "source": {
+    "branch": "index-query-review-fixes",
+    "head": "05756b6cf3afe1cbed78bc399430700f746b3373",
+    "pr": "https://github.com/apache/solr/pull/5257",
+    "pr_head": "e92a34eefd6adf0ec2fe5d3018abc332af77e246",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Validate request exception handling and unfinished Configsets tabs on the current Index and Query branch.",
+  "supersedes": {
+    "gate_id": "index-query-current-head-linux-gate-20261119-r2",
+    "head": "7ad4bdb2edd7c8cb1bbdd7476c362452ccc6f026",
+    "job": "index-query-current-head-linux-20261119-r2",
+    "reason": "Source changed before the previous gate was claimed; no claim or receipt existed at board snapshot 45e3fa654f1c558da6f80fe63dcd2b69fa789db5."
+  },
+  "type": "assignment"
+}
