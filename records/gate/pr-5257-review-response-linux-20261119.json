@@ -1,0 +1,22 @@
+{
+  "environment": "Clean Linux checkout, JDK and UI browser/software-renderer prerequisites; do not mutate the source head.",
+  "head": "844e0438d9c2e9635215c436b54b789d1f373a1c",
+  "id": "pr-5257-review-response-linux-20261119",
+  "job": "pr-5257-review-response-linux-20261119",
+  "phase": "review response round 1",
+  "receipt_path": "records/receipt/pr-5257-review-response-linux-20261119.json",
+  "requirements": [
+    "Run ./gradlew -p ui check with no build cache, including formatting, JVM and wasm browser tests; record commands, exit codes, fresh XML counts and logs. Confirm the use-based repository tests compile and run on wasm.",
+    "Specifically report IndexQueryViewModelTest, HttpIndexQueryRepositoryTest, IndexQueryHeaderTest and ConfigsetsRouteViewModelTest on the applicable runners; skips are not passes.",
+    "Exercise the actual Index / Query tab in a running UI connected to a Solr instance with two collections: load collections and handlers, select a handler, switch to a collection exposing the same endpoint and confirm selection is preserved; switch to one without it and confirm it clears. Record environment, observations and evidence; do not represent mocked or preview tests as live integration.",
+    "Run root ./gradlew check -x test -Prefguide.include=false and record result, keeping ref-guide excluded per board policy.",
+    "Selection-preservation test is a behavioral change. Where practical adapt the new assertion to the old state holder at PR head 90d4efb8486a0ce04ec6a9614b56b8b239b487a0, show the expected selection assertion fails and the new branch passes. Compilation or setup failures are not fail-before proof. If adaptation is not practical, record why and the coverage limit."
+  ],
+  "source": {
+    "branch": "solr-17849-review-response",
+    "pr_head": "90d4efb8486a0ce04ec6a9614b56b8b239b487a0",
+    "prior_screen_head": "dc8c1c75c678d5923f4825398df04b83cc35685f",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "gate"
+}
