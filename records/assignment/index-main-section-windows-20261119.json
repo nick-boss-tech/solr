@@ -1,0 +1,20 @@
+{
+  "deliverables": [
+    "Push a corrected separate fork branch",
+    "Publish an exact-head Linux gate",
+    "Report relationship to existing PRs and branches"
+  ],
+  "id": "index-main-section-windows-20261119",
+  "intended_host": "Windows implementation; Linux gate separately",
+  "job": "index-main-section-windows-20261119",
+  "source": {
+    "branch": "index-query-header-integrated",
+    "head": "fe820769904bdacf4d63d23a0dbdcc8864b15e8c",
+    "pr": "https://github.com/apache/solr/pull/5269",
+    "pr_head": "3ec4a1ae626191d9cb2a8c42e7f69356f31b862d",
+    "repository": "nick-boss-tech/solr",
+    "review_pr": "https://github.com/apache/solr/pull/5257"
+  },
+  "summary": "Reconcile the Index and Query UI integration with the maintainer review by preparing a separate main navigation section and retaining the Configsets tab for configuration.",
+  "type": "assignment"
+}
