@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "records/report/index-main-section-windows-20261119-report.json; no local executor was started and source work is complete.",
+  "id": "index-main-section-windows-20261119",
+  "job": "index-main-section-windows-20261119",
+  "reason": "Review and source handoff complete; Linux gates are separate jobs.",
+  "type": "release"
+}
