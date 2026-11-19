@@ -1,0 +1,7 @@
+{
+  "id": "pr-5257-review-response-windows-20261119",
+  "job": "pr-5257-review-response-windows-20261119",
+  "owner": "codex-windows",
+  "scope": "Implement review response on a separate branch; no public PR or comment writes.",
+  "type": "claim"
+}
