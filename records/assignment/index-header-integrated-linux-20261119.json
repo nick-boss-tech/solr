@@ -1,0 +1,22 @@
+{
+  "claim_path": "records/claim/index-header-integrated-linux-20261119.json",
+  "deliverables": [
+    "Run required proof legs and publish a receipt with actual commands, results and evidence."
+  ],
+  "gate_id": "index-header-integrated-linux-20261119-gate",
+  "gate_record": "records/gate/index-header-integrated-linux-20261119-gate.json",
+  "id": "index-header-integrated-linux-20261119",
+  "intended_host": "Linux UI-capable gate host",
+  "job": "index-header-integrated-linux-20261119",
+  "phase": "integrated header",
+  "receipt_path": "records/receipt/index-header-integrated-linux-20261119.json",
+  "source": {
+    "branch": "index-query-header-integrated",
+    "head": "fe820769904bdacf4d63d23a0dbdcc8864b15e8c",
+    "pr": "https://github.com/apache/solr/pull/5257",
+    "pr_head": "e92a34eefd6adf0ec2fe5d3018abc332af77e246",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify integrated header at the named fork head",
+  "type": "assignment"
+}
