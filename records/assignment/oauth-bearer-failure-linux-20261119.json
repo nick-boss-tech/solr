@@ -1,0 +1,22 @@
+{
+  "claim_path": "records/claim/oauth-bearer-failure-linux-20261119.json",
+  "deliverables": [
+    "Run required proof legs and publish a receipt with actual commands, results and evidence."
+  ],
+  "gate_id": "oauth-bearer-failure-linux-20261119-gate",
+  "gate_record": "records/gate/oauth-bearer-failure-linux-20261119-gate.json",
+  "id": "oauth-bearer-failure-linux-20261119",
+  "intended_host": "Linux UI-capable gate host",
+  "job": "oauth-bearer-failure-linux-20261119",
+  "phase": "independent bearer failure handling",
+  "receipt_path": "records/receipt/oauth-bearer-failure-linux-20261119.json",
+  "source": {
+    "branch": "oauth-bearer-401-handling",
+    "head": "12b273875cb12a8047f672b80e24e585511bf162",
+    "pr": "https://github.com/apache/solr/pull/5257",
+    "pr_head": "e92a34eefd6adf0ec2fe5d3018abc332af77e246",
+    "repository": "nick-boss-tech/solr"
+  },
+  "summary": "Verify independent bearer failure handling at the named fork head",
+  "type": "assignment"
+}
