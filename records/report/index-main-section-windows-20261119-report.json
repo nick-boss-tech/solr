@@ -1,0 +1,34 @@
+{
+  "branches": [
+    {
+      "assignment": "records/assignment/index-main-section-linux-20261119.json",
+      "branch": "index-query-main-section",
+      "gate": "records/gate/index-main-section-linux-20261119-gate.json",
+      "head": "7fa00860af3f335c6611410314ed9ec69ac5c70e"
+    },
+    {
+      "assignment": "records/assignment/index-main-access-linux-20261119.json",
+      "base": "7fa00860af3f335c6611410314ed9ec69ac5c70e",
+      "branch": "index-query-main-access-messages",
+      "gate": "records/gate/index-main-access-linux-20261119-gate.json",
+      "head": "71faba6e41f108163784ed295d7903467cace8a0"
+    }
+  ],
+  "id": "index-main-section-windows-20261119-report",
+  "job": "index-main-section-windows-20261119",
+  "notes": [
+    "The earlier integrated-header and access-message gates are superseded by the new gates because they implement the wrong placement; no claims or receipts existed at snapshot 2cfe160f93c3d0dad035dc481e1d1253ba9df035.",
+    "The old combined index-query-current-head-linux-20261119-r6 gate also targets the wrong Configsets placement and is no longer the recommended rollout; no claim or receipt existed at snapshot 4bd29906fa4d3c945af02b35b586dea38869d2df. The independent OAuth gate remains valid for its own head.",
+    "The access branch omits the independent OAuth bearer fix, so combined OAuth proof remains needed after integration.",
+    "Static diff checks passed; no Windows Gradle or test runs. Both new gates were unclaimed at snapshot 4bd29906fa4d3c945af02b35b586dea38869d2df."
+  ],
+  "review": {
+    "disposition": "The corrected branch replaces the misplaced screen integration while retaining the requested header and direct ViewModel. PR 5269 remains open and overlaps; do not close, edit or update it without authorization.",
+    "finding": "The maintainer states Index and Query is a separate main section; the similarly named Configsets tab configures handlers. The prior integrated branch and this PR host the screen in the wrong place.",
+    "head": "3ec4a1ae626191d9cb2a8c42e7f69356f31b862d",
+    "pr": "https://github.com/apache/solr/pull/5269",
+    "reviewer_note": "https://github.com/apache/solr/pull/5269#pullrequestreview-5968118886"
+  },
+  "summary": "Reviewed the separate screen PR and prepared corrected main navigation branches.",
+  "type": "report"
+}
