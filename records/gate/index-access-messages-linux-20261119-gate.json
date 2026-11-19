@@ -1,0 +1,22 @@
+{
+  "environment": "Clean Linux checkout with JDK and UI browser/software-renderer prerequisites",
+  "head": "4b5971cdabc742be5b16a9e9259913d53de1602c",
+  "id": "index-access-messages-linux-20261119-gate",
+  "job": "index-access-messages-linux-20261119",
+  "phase": "optional access message follow-up",
+  "receipt_path": "records/receipt/index-access-messages-linux-20261119.json",
+  "requirements": [
+    "Run ./gradlew -p ui check --no-build-cache and root ./gradlew check -x test -Prefguide.include=false; record commands, formatting, JVM and wasm results, skips, counts and evidence.",
+    "Exercise 401 and 403 for both collection and handler discovery, a 5xx response and success, using a client that returns the response; verify correct request-specific messages and suppressed empty-state messages.",
+    "Use secured Solr with rule-based authorization to check a query-capable user denied collection discovery, a user allowed collection discovery but denied configuration access, and a user allowed both. Record policies, actual status codes and UI behavior.",
+    "This branch is stacked on index-query-header-integrated at fe820769904bdacf4d63d23a0dbdcc8864b15e8c and does not include the separate bearer callback fix. Do not claim OAuth 401 coverage without a combined-head proof."
+  ],
+  "source": {
+    "branch": "index-query-access-messages",
+    "head": "4b5971cdabc742be5b16a9e9259913d53de1602c",
+    "pr": "https://github.com/apache/solr/pull/5257",
+    "pr_head": "e92a34eefd6adf0ec2fe5d3018abc332af77e246",
+    "repository": "nick-boss-tech/solr"
+  },
+  "type": "gate"
+}
