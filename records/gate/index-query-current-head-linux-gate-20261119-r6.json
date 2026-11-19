@@ -1,0 +1,43 @@
+{
+  "environment": "Clean Linux checkout with JDK and UI browser/software-renderer prerequisites. Use the configured gate-host runner if it wraps Gradle, record actual commands, and do not mutate the source head.",
+  "head": "d709199cf4c0a556ee3cfe5049a699bdc948215a",
+  "id": "index-query-current-head-linux-gate-20261119-r6",
+  "job": "index-query-current-head-linux-20261119-r6",
+  "phase": "review response round 6, bearer authentication failure",
+  "receipt_path": "records/receipt/index-query-current-head-linux-20261119-r6.json",
+  "related_gate": {
+    "head": "844e0438d9c2e9635215c436b54b789d1f373a1c",
+    "job": "pr-5257-review-response-linux-20261119",
+    "note": "Independent exact-head gate; do not treat its receipt as proof for this source head."
+  },
+  "requirements": [
+    "Run ./gradlew -p ui check with --no-build-cache (or the gate-host equivalent) and record the exact command, exit code, formatting result, JVM and wasm browser test results, fresh XML counts, and logs.",
+    "Explicitly report HttpIndexQueryRepositoryTest, IndexQueryViewModelTest, IndexQueryHeaderTest, and ConfigsetsRouteViewModelTest on their applicable runners. Do not count skipped tests as passes; confirm the repository tests compile and run on wasm.",
+    "Confirm the request-handler test uses /api/collections/{collection}/config/requestHandlers and parses config.requestHandlers.",
+    "Run the invalid-collection test and report that empty, dot, dot-dot, leading-hyphen, slash, query, and percent-encoded path inputs fail before any HTTP request is sent.",
+    "Verify a failed handler lookup clears the prior selected handler, leaves the loading state, and displays the error without showing the successful-empty 'No request handlers' message.",
+    "Verify a failed collection lookup displays the error without showing the successful-empty 'No collections available' message.",
+    "Exercise the Index / Query tab in a running UI connected to a Solr instance with two collections: load collections and handlers, select a handler, switch to a collection exposing the same endpoint and confirm selection is preserved; switch to one without it and confirm selection clears. Record the environment, observations, and evidence; mocked or preview tests are not live integration.",
+    "Run root ./gradlew check -x test -Prefguide.include=false and record the result; the ref-guide remains excluded under board policy.",
+    "Where practical, adapt the selection-preservation assertion to the old state holder at PR head 90d4efb8486a0ce04ec6a9614b56b8b239b487a0 and show it fails there and passes on this head. If not practical, record why and the coverage limit.",
+    "Exercise connection and response decoding failures for collections and handlers: each must reach the error state and leave loading. Verify cancellation propagates when switching collections and does not publish stale results.",
+    "In the running UI, select each unfinished Configsets tab and verify it displays the unavailable message; check Overview and Index / Query remain reachable.",
+    "Exercise successful responses with missing collections and missing config.requestHandlers fields; both must produce a failure and error state. Confirm explicit empty collections and requestHandlers remain valid empty results and compare these cases with actual Solr responses.",
+    "Exercise HTTP 401 and 403 for both collection and handler discovery, a 5xx response, and success. Confirm the authentication message, the correct request-specific access message, generic error, and suppressed empty messages, including recovery when a new collection is selected.",
+    "With secured Solr and rule-based authorization, verify an authenticated query-capable user denied collection discovery and a user allowed collection discovery but denied handler configuration, as well as a user allowed both. Record policies, response codes and UI behavior.",
+    "Exercise the actual shared bearer client with a 401, with and without a refresh token, and confirm it returns the 401 without throwing or retrying; Index and Query must leave loading and show its authentication message. Check a neighboring consumer of the shared client and successful bearer requests. Token refresh is not implemented; do not claim it is."
+  ],
+  "source": {
+    "branch": "index-query-review-fixes",
+    "head": "d709199cf4c0a556ee3cfe5049a699bdc948215a",
+    "pr_head": "e92a34eefd6adf0ec2fe5d3018abc332af77e246",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes": {
+    "gate_id": "index-query-current-head-linux-gate-20261119-r5",
+    "head": "4b5971cdabc742be5b16a9e9259913d53de1602c",
+    "job": "index-query-current-head-linux-20261119-r5",
+    "reason": "Source changed before the previous gate was claimed; no claim or receipt existed at board snapshot 1bcd8282252ae807a250009ad2a03b1d095d3d76."
+  },
+  "type": "gate"
+}
