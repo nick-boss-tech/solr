@@ -1,0 +1,8 @@
+{
+  "host": "Windows implementation host",
+  "id": "index-query-split-windows-20261120",
+  "job": "index-query-split-windows-20261120",
+  "note": "Prepare isolated source branches; existing Linux claims remain independent and must be reconciled before overlapping execution.",
+  "owner": "codex-windows",
+  "type": "claim"
+}
