@@ -1,0 +1,33 @@
+{
+  "id": "filetree-icon-previews-linux-20261120-r2-receipt",
+  "type": "receipt",
+  "job": "filetree-icon-previews-linux-20261120-r2",
+  "gate": "filetree-icon-previews-linux-20261120-r2-gate",
+  "owner": "vm2",
+  "host": "linux",
+  "head": "75c02edd662b5b9c590fe6a4c3915ffaacc24591",
+  "base": "9de6208ffd3111ded8ffcb24af28f2d7d15f529e",
+  "verdict": "failed",
+  "summary": "JVM is clean, but the wasm accessibility test still fails. The test-only commit preloads the string resources with getString before setContent; on wasm that throws org.jetbrains.compose.resources.MissingResourceException: Missing resource with path ./composeResources/org.apache.solr.ui.shared.generated.resources/values/strings.commonMain.cvr, so testChevronExposesAccessibleFolderState fails before its assertions. The review-only commit is 8c52ff437639911ca71663ece22309ec2057e213, followed by test-only commit 75c02edd662b5b9c590fe6a4c3915ffaacc24591. The review-only tree is byte-identical to the r1 gate commit 25cdc685c7fc (git diff empty).",
+  "legs": {
+    "jvm_test": "passed: 56 run, 2 skipped, 0 failed, 0 errors; FileTreeTest 9/9",
+    "wasm_test": "failed: 60 run, 3 skipped, 1 failed, 0 errors; FileTreeTest 9 tests with 1 failure (testChevronExposesAccessibleFolderState, MissingResourceException for strings.commonMain.cvr)",
+    "spotless": "passed",
+    "previews": "passed (compiled, not rendered): PreviewFileTreeKt.class contains PreviewFileTreeEmpty, PreviewFileTreeTypicalConfigset and PreviewFileTreeLongNames, each annotated androidx.compose.ui.tooling.preview.Preview"
+  },
+  "commands": {
+    "ui_check": "./gradlew -p ui check --no-build-cache (CHROME_BIN=headless Chromium, software renderer, EGL stub)"
+  },
+  "commits": {
+    "review_only": "8c52ff437639911ca71663ece22309ec2057e213",
+    "test_only": "75c02edd662b5b9c590fe6a4c3915ffaacc24591",
+    "tested_head": "75c02edd662b5b9c590fe6a4c3915ffaacc24591"
+  },
+  "evidence": "records/evidence/filetree-icon-previews-linux-20261120-r2-evidence.tar.gz (SHA-256 0c5fade9cdcdce53269e81030ae530ea30bbf29b33e60b00e4a10fa6ecbfed5f)",
+  "coverage_limits": [
+    "Previews are verified as compiled @Preview composables in the JVM bytecode; no IDE preview renderer is installed on this host.",
+    "The first run was invalidated by a missing EGL stub after a host restart; all 28 JVM failures were UnsatisfiedLinkError at Skiko load. The re-run with the rebuilt stub is the recorded result (56 run / 2 skipped / 0 failed).",
+    "Suggested repair, not applied: wait for the semantics with waitUntil in the accessibility test instead of preloading via getString before composition, which is what the other FileTree wasm tests already do."
+  ],
+  "recorded": "2026-11-20"
+}
