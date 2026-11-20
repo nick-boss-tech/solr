@@ -1,0 +1,15 @@
+{
+  "id": "filetree-icon-previews-linux-20261120-gate",
+  "job": "filetree-icon-previews-linux-20261120",
+  "type": "gate",
+  "head": "25cdc685c7fc36981eeca05879b8ae33a84297ea",
+  "base": "9de6208ffd3111ded8ffcb24af28f2d7d15f529e",
+  "environment": "Clean Linux checkout with JDK 21 and the software-renderer EGL stub; headless Chromium for wasm browser tests.",
+  "requirements": [
+    "Run ./gradlew -p ui check --no-build-cache; record formatting, JVM and wasm results, counts and evidence.",
+    "Confirm FileTreeTest passes on JVM and wasm, or show any failure reproduces at the base.",
+    "Confirm the three @Preview composables (empty, typical configset, long names) compile into the JVM artifact.",
+    "Report the exact tested commit and the diff from base 9de6208ffd3111ded8ffcb24af28f2d7d15f529e."
+  ],
+  "receipt_path": "records/receipt/filetree-icon-previews-linux-20261120.json"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "filetree-icon-previews-linux-20261120",
+  "job": "filetree-icon-previews-linux-20261120",
+  "type": "claim",
+  "owner": "vm2",
+  "host": "linux",
+  "head": "25cdc685c7fc36981eeca05879b8ae33a84297ea",
+  "claimed": "2026-11-20T05:10:00Z",
+  "note": "vm2 applied the review patch on top of live fork head 9de6208ffd3111ded8ffcb24af28f2d7d15f529e and claimed the resulting commit for the UI gate."
+}

@@ -1,0 +1,24 @@
+{
+  "id": "filetree-icon-previews-linux-20261120",
+  "job": "filetree-icon-previews-linux-20261120",
+  "type": "assignment",
+  "summary": "Apply the two FileTree review fixes and three previews to solr-17887-file-tree, then gate the resulting commit on Linux.",
+  "source": {
+    "branch": "solr-17887-file-tree",
+    "head": "25cdc685c7fc36981eeca05879b8ae33a84297ea",
+    "base": "9de6208ffd3111ded8ffcb24af28f2d7d15f529e",
+    "pr": "https://github.com/apache/solr/pull/5256",
+    "review": "https://github.com/apache/solr/pull/5256#pullrequestreview-5970765866",
+    "repository": "nick-boss-tech/solr"
+  },
+  "deliverables": [
+    "Apply the FileTypeIcon tint and simple-folder review requests.",
+    "Add previews for an empty list, a typical configset, and very long names.",
+    "Run ./gradlew -p ui check --no-build-cache and report JVM, wasm and formatting results.",
+    "Publish an exact-head receipt with evidence."
+  ],
+  "gate_id": "filetree-icon-previews-linux-20261120-gate",
+  "gate_record": "records/gate/filetree-icon-previews-linux-20261120-gate.json",
+  "claim_path": "records/claim/filetree-icon-previews-linux-20261120.json",
+  "receipt_path": "records/receipt/filetree-icon-previews-linux-20261120.json"
+}
