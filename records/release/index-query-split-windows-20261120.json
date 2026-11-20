@@ -1,0 +1,8 @@
+{
+  "actor": "codex-windows",
+  "evidence": "records/report/index-query-split-windows-20261120-report.json; both pushed source heads verified; no Linux or background executor was started by this worker.",
+  "id": "index-query-split-windows-20261120",
+  "job": "index-query-split-windows-20261120",
+  "reason": "Source branch preparation is complete; gate publication is held for claim and executor reconciliation.",
+  "type": "release"
+}
