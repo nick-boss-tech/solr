@@ -1,0 +1,19 @@
+{
+  "constraints": [
+    "Do not edit existing PR comments.",
+    "Publish only to coordination-v2.",
+    "Retain the AI disclosure header and applicable PR responsibility wording."
+  ],
+  "deliverables": [
+    "docs/pr-formula-ste80.md"
+  ],
+  "id": "pr-formula-disclosure-attribution-20261119",
+  "intended_host": "Windows documentation",
+  "job": "pr-formula-disclosure-attribution-20261119",
+  "summary": "Update the active PR and review-comment formula to omit reviewer attribution from AI disclosure headers.",
+  "tags": [
+    "documentation",
+    "policy"
+  ],
+  "type": "assignment"
+}
