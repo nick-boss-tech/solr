@@ -1,0 +1,48 @@
+{
+  "id": "pr-5298-glob-prefetch-review-linux-20261120-r2-receipt",
+  "type": "receipt",
+  "job": "pr-5298-glob-prefetch-review-linux-20261120-r2",
+  "gate": "pr-5298-glob-prefetch-review-linux-20261120-r2-gate",
+  "owner": "vm2",
+  "host": "linux",
+  "head": "8a45fcf229db7eaca1e32cf1d7f46ac36a96adda",
+  "base": "78404ec851c433a844152fbb55e6b7ca460615a4",
+  "seed": "5298C0DE",
+  "verdict": "failed",
+  "summary": "The behavioural gate passes, but the candidate fails the required Error Prone compile. At the exact head, ./gradlew :solr:core:compileJava -Pvalidation.errorprone=true fails with [ReferenceEquality] at RealTimeGetComponent.java:356: 'if (docFetcher == null || searcher != fieldSelectionSearcher)' and -Werror turns it into an error. The identifier fieldSelectionSearcher does not exist at base 78404ec8, so this head introduces the warning; the same file already suppresses ReferenceEquality where identity is intentional (lines 662 and 776). Fail-before is isolated and reproduces as required: the committed iteration fails at base with the missing nested related doc while val_i and marker pass, and the uncommitted iteration passes at base. At the candidate, pass-after passes with both iterations, all six suites pass with 120 tests and no failures/errors/skips, tidy exits 0 with a clean tracked tree, and root check -x test passes. The candidate tree and fork ref were unchanged before and after.",
+  "legs": {
+    "fail_before_committed": "failed as expected: base 78404ec8 + candidate test only, array {true}; 1 test completed, 1 failed, exit 1, 2026-11-20T16:15:33Z. AssertionError at xpath /response/doc/result[@name='related'][@numFound='1']/doc/str[@name='id'][.='44']; val_i and marker assertions passed, so the nested result is missing because the prefetched parent row lacks the unrequested stored subject used by {!terms f=subject v=$row.subject}.",
+    "fail_before_uncommitted": "passed (comparison): base + candidate test only, array {false}; 1 test completed, 0 failed, BUILD SUCCESSFUL in 1m49s, 2026-11-20T16:19:00Z. The isolated uncommitted iteration passes at the base; the r1 combined stock-run failure therefore belongs to the committed iteration, not to the uncommitted case.",
+    "pass_after": "passed: candidate both iterations; 1 test, 0 failed, BUILD SUCCESSFUL in 4m36s, 2026-11-20T16:23:49Z",
+    "suites": "passed: 120 tests, 0 failures, 0 errors, 0 skips across BasicFunctionalityTest 32, TestUnifiedSolrHighlighter 33, TestPseudoReturnFields 37, ReturnFieldsTest 16, TestRetrieveFieldsOptimizer 1, LargeFieldTest 1; 2026-11-20T16:25:41Z. XML archived before any further cleanTest.",
+    "tidy": "passed: exit 0, git status empty, 2026-11-20T16:27:05Z",
+    "error_prone": "failed: exit 1, RealTimeGetComponent.java:356 [ReferenceEquality] escalated by -Werror, BUILD FAILED in 2m42s, 2026-11-20T16:29:52Z",
+    "root_check": "passed: ./gradlew check -x test -Prefguide.include=false exit 0, BUILD SUCCESSFUL in 10m7s, 2026-11-20T16:40:02Z"
+  },
+  "commands": {
+    "fail_before": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.search.TestPseudoReturnFields.testGlobRTGSubqueryUsesUnrequestedStoredField -Ptests.seed=5298C0DE",
+    "pass_after": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.search.TestPseudoReturnFields.testGlobRTGSubqueryUsesUnrequestedStoredField -Ptests.seed=5298C0DE",
+    "suites": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.BasicFunctionalityTest --tests org.apache.solr.search.TestPseudoReturnFields --tests org.apache.solr.response.TestRetrieveFieldsOptimizer --tests org.apache.solr.search.ReturnFieldsTest --tests org.apache.solr.highlight.TestUnifiedSolrHighlighter --tests org.apache.solr.search.LargeFieldTest -Ptests.seed=5298C0DE",
+    "tidy": "./gradlew tidy",
+    "error_prone": "./gradlew :solr:core:compileJava :solr:core:compileTestJava -Pvalidation.errorprone=true",
+    "root_check": "./gradlew check -x test -Prefguide.include=false"
+  },
+  "coverage": {
+    "batched_rtg": "TestPseudoReturnFields.testBatchedGlobRTGAcrossCommittedAndUncommittedDocs ran",
+    "no_prefetch_transformer": "TestPseudoReturnFields.testGlobsAndTransformerField and testGlobsAndTransformerFieldRTG ran",
+    "all_fields": "TestPseudoReturnFields.testAllRealFields and testAllRealFieldsRTG ran",
+    "other": "glob-only, no-match, DocValues-only prefetch, warm/cold RTG, multi-valued and score variants all ran in the 37-test TestPseudoReturnFields suite; LargeFieldTest, ReturnFieldsTest, TestRetrieveFieldsOptimizer and TestUnifiedSolrHighlighter ran as named"
+  },
+  "heads": {
+    "fork_ref_before_and_after": "8a45fcf229db7eaca1e32cf1d7f46ac36a96adda",
+    "candidate_tree": "clean before and after",
+    "base_worktree": "78404ec851c433a844152fbb55e6b7ca460615a4"
+  },
+  "evidence": "records/evidence/pr-5298-glob-prefetch-review-linux-20261120-r2-evidence.tar.gz (SHA-256 e2212a96c3eb00a97a89be77569a210c2323676d23e630dc35947e7e3e528500)",
+  "coverage_limits": [
+    "The uncommitted iteration passes at the base in isolation; the earlier combined stock run failed as a whole. This receipt records the isolated outcomes rather than asserting that the uncommitted case fails.",
+    "Root check excludes Antora/ref-guide per standing policy.",
+    "Error Prone failure is reported from the required command; no source change was made at the candidate."
+  ],
+  "recorded": "2026-11-20"
+}
