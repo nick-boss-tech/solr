@@ -10,7 +10,7 @@ State what you observed and why it matters, then ask about the intended behavior
 
 Do not attach a prepared branch, diff, or merge commands to a first-touch review, including when a patch is already tested. Wait for the author to engage, ask for help, or agree on a direction before preparing or offering code. A green gate verifies a patch; it does not establish that the author wants to take it.
 
-Once the author engages, a focused patch can be useful. Tie any follow-up offer to the author's request or agreed direction. Verify the live PR head first, and state the exact tested head, checks, limits, and relevant commands. Keep the established AI disclosure for multi-sentence GitHub comments.
+Once the author engages, a focused patch can be useful. Tie any follow-up offer to the author's request or agreed direction. Verify the live PR head first, and state the exact tested head, checks, limits, and relevant commands. For multi-sentence GitHub comments, use the header `🤖 *AI text below* 🤖` without a parenthetical reviewer attribution.
 
 GitHub supports inline comments through its Pull Request Review Comments REST API. I verified a request to `POST /repos/{owner}/{repo}/pulls/{pull_number}/comments` using `commit_id`, `path`, `line`, and `side`; the read-back identified it as a line comment. Anchor comments to a changed line in the current diff, and refresh the PR head before posting.
 
