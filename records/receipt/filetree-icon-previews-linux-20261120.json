@@ -1,0 +1,30 @@
+{
+  "id": "filetree-icon-previews-linux-20261120",
+  "type": "receipt",
+  "job": "filetree-icon-previews-linux-20261120",
+  "gate": "filetree-icon-previews-linux-20261120-gate",
+  "owner": "vm2",
+  "host": "linux",
+  "head": "25cdc685c7fc36981eeca05879b8ae33a84297ea",
+  "base": "9de6208ffd3111ded8ffcb24af28f2d7d15f529e",
+  "verdict": "failed",
+  "summary": "The two review fixes and all three previews are applied and compile. The patch-specific checks pass: spotless is clean, JVM tests are 56 run / 2 skipped / 0 failed, FileTreeTest is 9/9 on JVM, and the compiled JVM artifact contains the three @Preview functions. './gradlew -p ui check --no-build-cache' still exits 1 because shared wasm runs 60 tests with 1 failure / 3 skipped: FileTreeTest.testChevronExposesAccessibleFolderState asserts the async string resource before it loads. The same test fails identically at base 9de6208ffd3111ded8ffcb24af28f2d7d15f529e with only FileTreeTest selected, so the failure is pre-existing and not introduced by this diff.",
+  "legs": {
+    "spotless": "passed (:shared:spotlessCheck, :webApp:spotlessCheck)",
+    "jvm_test": "passed: 56 run, 2 skipped, 0 failed, 0 errors; FileTreeTest 9/9",
+    "wasm_test": "60 run, 1 failed, 3 skipped; failure is FileTreeTest.testChevronExposesAccessibleFolderState (ContentDescription empty before async string load), reproduced identically at base 9de6208ffd3111ded8ffcb24af28f2d7d15f529e",
+    "previews": "passed: PreviewFileTreeKt.class contains PreviewFileTreeEmpty, PreviewFileTreeTypicalConfigset and PreviewFileTreeLongNames, each annotated androidx.compose.ui.tooling.preview.Preview"
+  },
+  "commands": {
+    "ui_check": "./gradlew -p ui check --no-build-cache",
+    "base_wasm_repro": "./gradlew -p ui :shared:wasmJsBrowserTest --tests org.apache.solr.ui.views.files.FileTreeTest --no-build-cache"
+  },
+  "diff": "9de6208ffd31..25cdc685c7fc, 4 files, +175/-50; review.patch in the evidence archive",
+  "evidence": "records/evidence/filetree-icon-previews-linux-20261120-evidence.tar.gz (SHA-256 6cc07a62f23eba7ff37919d62cb3563fd21e83838b4473853fdde26ad0bc187a)",
+  "coverage_limits": [
+    "The wasm failure is pre-existing; it was proven by running only FileTreeTest at base 9de6208ffd3111ded8ffcb24af28f2d7d15f529e, not by a full base check.",
+    "Previews were verified as compiled @Preview composables in bytecode; they were not rendered because this host has no IDE preview renderer.",
+    "The commit is local only; it has not been pushed to the fork branch."
+  ],
+  "recorded": "2026-11-20"
+}
