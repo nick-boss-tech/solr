@@ -1,0 +1,37 @@
+{
+  "id": "index-main-section-linux-20261119-r2-receipt",
+  "type": "receipt",
+  "job": "index-main-section-linux-20261119-r2",
+  "gate": "index-main-section-linux-20261119-r2-gate",
+  "owner": "vm2",
+  "host": "linux",
+  "head": "c5955f3d47ffc8ff21bd59f77ae6846263ced4c6",
+  "verdict": "passed",
+  "summary": "The exact head passes the UI check, the root check and the selection-preservation proof, and the live main-navigation integration works against real Solr. ./gradlew -p ui check --no-build-cache --rerun-tasks exits 0 with JVM 63 run / 2 skipped / 0 failed and wasm 67 run / 3 skipped / 0 failed; IndexQueryViewModelTest 4/4, HttpIndexQueryRepositoryTest 4/4 and IndexQueryHeaderTest 8/8. Root check -x test exits 0. The adapted regression test fails on the old state holder at 90d4efb ('expected </select> but was <null>') and passes at this head. Live Solr cloud on 8983 exposed books/films/no_select; the UI loaded the collection and handler lists from Solr, preserved /select across films to books, cleared it on no_select (which exposes only /select_hidden), and kept its state through Configsets and back to Index & Query. Two edge cases in the gate list were not exercised live: a response missing required fields, and cancellation of an in-flight handler load.",
+  "legs": {
+    "exact_head_ui_check": "passed: ./gradlew -p ui check --no-build-cache --rerun-tasks exit 0, BUILD SUCCESSFUL in 3m40s; JVM 63 run / 2 skipped / 0 failed (18 suites); wasm 67 run / 3 skipped / 0 failed (19 suites); 2026-11-20T16:42Z",
+    "named_tests": "IndexQueryViewModelTest 4/4, HttpIndexQueryRepositoryTest 4/4, IndexQueryHeaderTest 8/8 on JVM",
+    "fail_before": "passed proof: at 90d4efb (state holder before the fix) with only the adapted assertion added, IndexQueryStateHolderTest.testSelectingCollectionPreservesAvailableHandlerAndClearsUnavailableHandler fails: 4 tests completed, 1 failed, AssertionError 'expected:</select> but was:<null>' at line 85; the same assertion passes at this head",
+    "root_check": "passed: ./gradlew check -x test -Prefguide.include=false exit 0, BUILD SUCCESSFUL in 3m01s",
+    "live_ui": "passed: packaged Solr 11.0.0-SNAPSHOT on 8983 with collections films, books and no_select (configset with /select renamed /select_hidden); wasm bundle served at /solr/ui/. Collections and handlers loaded from Solr; films + /select selected; books selection preserved /select; no_select cleared it; sidebar Configsets, Configsets tabs (Overview/Files/Schema/Index / Query) and return to Index & Query all navigated and kept the selected item",
+    "invalid_collection_path": "passed: repository rejects empty, dot, dot-dot, leading dash, slash, query and percent-encoded path segments before any request (0 requests in the unit test); live request for a nonexistent collection returns HTTP 404 with a SolrException body",
+    "explicit_empty_fields": "passed: no_select returns a requestHandlers map without /select and the UI clears the handler; IndexQueryHeader tests cover empty option lists with the no-collections/no-handlers message",
+    "network_failure": "partial: HttpIndexQueryRepositoryTest asserts a non-success (503) response becomes Result.failure; no live UI run against an unreachable host",
+    "missing_fields_and_cancellation": "not exercised"
+  },
+  "commands": {
+    "ui_check": "./gradlew -p ui check --no-build-cache --rerun-tasks (CHROME_BIN=/opt/playwright-browsers/chromium-current, LD_LIBRARY_PATH=/tmp/ui-egl-stub, JAVA_TOOL_OPTIONS=-Dskiko.renderApi=SOFTWARE_FAST)",
+    "root_check": "./gradlew check -x test -Prefguide.include=false",
+    "fail_before": "./gradlew -p ui :shared:jvmTest --tests org.apache.solr.ui.components.indexquery.IndexQueryStateHolderTest",
+    "live_build": "./gradlew :solr:packaging:assemble -x test -PdisableJsClient=true; ./gradlew -p ui :webApp:wasmJsBrowserDistribution"
+  },
+  "evidence": "records/evidence/index-main-section-linux-20261119-r2-evidence.tar.gz (SHA-256 a8037cb55a2ea072bb37413d87ebe0a42c220c2b845d698936cea65ca95657ec)",
+  "coverage_limits": [
+    "A response missing required JSON fields was not exercised in the UI; the decoding path is only covered indirectly by the failure tests.",
+    "Cancellation of an in-flight handler load (selecting a second collection while the first request is pending) was not exercised on this host.",
+    "The wasm UI was run only from the real Solr origin; attempts to serve the bundle from an alternate host for edge-case injection did not get past the app's startup resources on this host.",
+    "wasm browser tests ran under Chrome Headless Shell with the software renderer; GL-only rendering is not covered.",
+    "Root check excludes Antora/ref-guide per standing policy."
+  ],
+  "recorded": "2026-11-20"
+}
