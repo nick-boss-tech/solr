@@ -1,0 +1,35 @@
+{
+  "id": "filetree-icon-previews-linux-20261120-r3-receipt",
+  "type": "receipt",
+  "job": "filetree-icon-previews-linux-20261120-r3",
+  "gate": "filetree-icon-previews-linux-20261120-r3-gate",
+  "owner": "vm2",
+  "host": "linux",
+  "head": "2812e96f3ba8a64f5fca505a0093cb0a47cab162",
+  "base": "9de6208ffd3111ded8ffcb24af28f2d7d15f529e",
+  "verdict": "passed",
+  "summary": "The patched head passes the UI check on both targets. The wasm accessibility failure in r2 was caused by the wasm test bundle not packaging Compose string resources, so the localized assertion could never resolve there. The assertion now runs in the JVM test source set, where resources load, and still checks the exact expand/collapse content descriptions, state descriptions and button role; the common FileTree tests are unchanged otherwise. JVM 56 run / 2 skipped / 0 failed including FileTreeAccessibilityTest 1/1; wasm 59 run / 3 skipped / 0 failed; spotless passes; the three preview composables are present in the compiled class.",
+  "legs": {
+    "ui_check": "passed: ./gradlew -p ui check --no-build-cache --rerun-tasks exit 0, BUILD SUCCESSFUL in 3m28s, 2026-11-20T18:16:28Z",
+    "jvm_test": "passed: 56 run / 2 skipped / 0 failed / 0 errors; FileTreeAccessibilityTest 1/1, FileTreeTest 8/8",
+    "wasm_test": "passed: 59 run / 3 skipped / 0 failed / 0 errors",
+    "spotless": "passed (part of check)",
+    "previews": "compiled: PreviewFileTreeKt.class defines PreviewFileTreeEmpty, PreviewFileTreeTypicalConfigset and PreviewFileTreeLongNames; the class Kotlin metadata references androidx.compose.ui.tooling.preview.Preview and each source function is annotated @Preview. No IDE preview renderer is installed on this host."
+  },
+  "commands": {
+    "ui_check": "./gradlew -p ui check --no-build-cache --rerun-tasks (CHROME_BIN=headless Chromium, software renderer, EGL stub)"
+  },
+  "fix": "testChevronExposesAccessibleFolderState moved from commonTest FileTreeTest to ui/shared/src/jvmTest/.../FileTreeAccessibilityTest.kt; it preloads the expected strings with getString on the JVM. Reason: processedResources/wasmJs/test has no composeResources files, so stringResource/getString cannot resolve there.",
+  "heads": {
+    "fork_ref": "2812e96f3ba8a64f5fca505a0093cb0a47cab162",
+    "review_only_commit": "8c52ff437639911ca71663ece22309ec2057e213",
+    "tree": "clean before and after"
+  },
+  "evidence": "records/evidence/filetree-icon-previews-linux-20261120-r3-evidence.tar.gz (SHA-256 610d93397ceb569b49317be3d386dbd5b048f2d43a7bae86ec956c8d57130e30)",
+  "coverage_limits": [
+    "Localized accessibility text is asserted on the JVM only; the wasm test bundle does not package Compose resources, so the semantics are covered there by the shared FileTree tests without text assertions.",
+    "Previews are verified as compiled @Preview composables in the JVM bytecode; no IDE preview renderer is installed on this host.",
+    "wasm browser tests ran under Chrome Headless Shell with the software renderer; GL-only rendering is not covered."
+  ],
+  "recorded": "2026-11-20"
+}

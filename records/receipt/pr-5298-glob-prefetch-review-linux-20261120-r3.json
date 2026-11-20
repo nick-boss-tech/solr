@@ -1,0 +1,42 @@
+{
+  "id": "pr-5298-glob-prefetch-review-linux-20261120-r3-receipt",
+  "type": "receipt",
+  "job": "pr-5298-glob-prefetch-review-linux-20261120-r3",
+  "gate": "pr-5298-glob-prefetch-review-linux-20261120-r3-gate",
+  "owner": "vm2",
+  "host": "linux",
+  "head": "739317e94679cdafc6d232139a182945ac4cefe2",
+  "base": "78404ec851c433a844152fbb55e6b7ca460615a4",
+  "seed": "5298C0DE",
+  "verdict": "passed",
+  "summary": "The patched head passes every required leg. Error Prone now compiles clean at the exact head (the r2 failure at RealTimeGetComponent.java:356 is fixed by a scoped ReferenceEquality suppression on the searcher cache check). Fail-before still reproduces as required: on the unmodified base the isolated committed iteration fails at the missing nested related doc while val_i and marker pass, and the isolated uncommitted iteration passes. Pass-after passes both iterations; all six suites pass with 120 tests and no failures, errors or skips; tidy exits 0 with a clean tree; root check -x test passes. Fork ref and candidate tree matched before and after.",
+  "legs": {
+    "fail_before_committed": "failed as expected: base 78404ec8 + candidate test only, array {true}; 1 test completed, 1 failed, exit 1, 2026-11-20T17:48:21Z",
+    "fail_before_uncommitted": "passed (comparison): base + candidate test only, array {false}; 0 failed, exit 0, 2026-11-20T17:50:02Z",
+    "pass_after": "passed: both iterations, 1 test, 0 failed, exit 0, 2026-11-20T17:52:51Z",
+    "suites": "passed: 120 tests, 0 failures, 0 errors, 0 skips; BasicFunctionalityTest 32, TestUnifiedSolrHighlighter 33, TestPseudoReturnFields 37, ReturnFieldsTest 16, TestRetrieveFieldsOptimizer 1, LargeFieldTest 1; 2026-11-20T17:54:39Z; XML archived",
+    "tidy": "passed: exit 0, git status empty, 2026-11-20T17:56:07Z",
+    "error_prone": "passed: exit 0, BUILD SUCCESSFUL in 7m11s, 2026-11-20T18:03:29Z",
+    "root_check": "passed: ./gradlew check -x test -Prefguide.include=false exit 0, 2026-11-20T18:12:59Z"
+  },
+  "commands": {
+    "fail_before": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.search.TestPseudoReturnFields.testGlobRTGSubqueryUsesUnrequestedStoredField -Ptests.seed=5298C0DE",
+    "pass_after": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.search.TestPseudoReturnFields.testGlobRTGSubqueryUsesUnrequestedStoredField -Ptests.seed=5298C0DE",
+    "suites": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.BasicFunctionalityTest --tests org.apache.solr.search.TestPseudoReturnFields --tests org.apache.solr.response.TestRetrieveFieldsOptimizer --tests org.apache.solr.search.ReturnFieldsTest --tests org.apache.solr.highlight.TestUnifiedSolrHighlighter --tests org.apache.solr.search.LargeFieldTest -Ptests.seed=5298C0DE",
+    "tidy": "./gradlew tidy",
+    "error_prone": "./gradlew :solr:core:compileJava :solr:core:compileTestJava -Pvalidation.errorprone=true",
+    "root_check": "./gradlew check -x test -Prefguide.include=false"
+  },
+  "fix": "RealTimeGetComponent.java:356 now reads '@SuppressWarnings(\"ReferenceEquality\") final boolean searcherChanged = docFetcher == null || searcher != fieldSelectionSearcher; if (searcherChanged)' - no behaviour change; identity is the intended cache key.",
+  "heads": {
+    "fork_ref": "739317e94679cdafc6d232139a182945ac4cefe2",
+    "candidate_tree": "clean before and after",
+    "base_worktree": "78404ec851c433a844152fbb55e6b7ca460615a4"
+  },
+  "evidence": "records/evidence/pr-5298-glob-prefetch-review-linux-20261120-r3-evidence.tar.gz (SHA-256 192d83f5a34d3b80b181e37f6b2224ec4ac0ba791a8be1ee08ddd21e76feec4a)",
+  "coverage_limits": [
+    "Root check excludes Antora/ref-guide per standing policy.",
+    "The uncommitted baseline passes at the base in isolation, as in r2; the committed iteration is the one that reproduces the defect."
+  ],
+  "recorded": "2026-11-20"
+}
