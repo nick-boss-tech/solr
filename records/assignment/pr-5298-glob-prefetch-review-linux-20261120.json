@@ -1,0 +1,27 @@
+{
+  "type": "assignment",
+  "id": "pr-5298-glob-prefetch-review-linux-20261120",
+  "job": "pr-5298-glob-prefetch-review-linux-20261120",
+  "phase": "review follow-up verification",
+  "summary": "Verify the reviewed RTG and glob prefetch changes at the exact fork head for Solr PR 5298.",
+  "intended_host": "Linux CPU gate host with JDK 21 and a working pinned Gradle wrapper; use host build lock.",
+  "source": {
+    "repository": "nick-boss-tech/solr",
+    "branch": "solr-18608-glob-prefetch-review",
+    "head": "244b5645c0a566486d142413201ff65300a49bca",
+    "pr": "https://github.com/apache/solr/pull/5298",
+    "pr_head": "78404ec851c433a844152fbb55e6b7ca460615a4",
+    "review_diff": "https://github.com/nick-boss-tech/solr/compare/78404ec851c433a844152fbb55e6b7ca460615a4...244b5645c0a566486d142413201ff65300a49bca"
+  },
+  "claim_path": "records/claim/pr-5298-glob-prefetch-review-linux-20261120.json",
+  "gate_id": "pr-5298-glob-prefetch-review-linux-20261120-gate",
+  "gate_record": "records/gate/pr-5298-glob-prefetch-review-linux-20261120-gate.json",
+  "receipt_path": "records/receipt/pr-5298-glob-prefetch-review-linux-20261120.json",
+  "deliverables": [
+    "Claim the canonical job before running. Publish an exact-head receipt with proof results, fresh XML and durable logs. Report an incomplete result honestly if a required leg cannot run."
+  ],
+  "boundaries": [
+    "Do not edit or push source; any repair needs a new exact-head gate.",
+    "Do not update the live PR, post comments, or merge."
+  ]
+}

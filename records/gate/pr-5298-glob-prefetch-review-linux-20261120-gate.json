@@ -1,0 +1,27 @@
+{
+  "type": "gate",
+  "id": "pr-5298-glob-prefetch-review-linux-20261120-gate",
+  "job": "pr-5298-glob-prefetch-review-linux-20261120",
+  "head": "244b5645c0a566486d142413201ff65300a49bca",
+  "phase": "review follow-up verification",
+  "source": {
+    "repository": "nick-boss-tech/solr",
+    "branch": "solr-18608-glob-prefetch-review",
+    "head": "244b5645c0a566486d142413201ff65300a49bca",
+    "pr": "https://github.com/apache/solr/pull/5298",
+    "pr_head": "78404ec851c433a844152fbb55e6b7ca460615a4",
+    "review_diff": "https://github.com/nick-boss-tech/solr/compare/78404ec851c433a844152fbb55e6b7ca460615a4...244b5645c0a566486d142413201ff65300a49bca"
+  },
+  "receipt_path": "records/receipt/pr-5298-glob-prefetch-review-linux-20261120.json",
+  "environment": "Clean Linux detached checkout of the named head; JDK 21, pinned Gradle wrapper and dependencies. Serialize builds with the host lock and use the established runner if needed.",
+  "seed": "5298C0DE",
+  "requirements": [
+    "Verify the fork ref and clean checked-out SHA before and after proof. The public PR head is the fail-before baseline, not the candidate.",
+    "Fail-before: at detached 78404ec851c433a844152fbb55e6b7ca460615a4, overlay only the candidate TestPseudoReturnFields.java, confirm production blobs are unchanged, and run ./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.search.TestPseudoReturnFields.testGlobRTGSubqueryUsesUnrequestedStoredField -Ptests.seed=5298C0DE. Require execution to reach the missing row dependency on the committed leg, either as the expected missing nested result or an error whose cause is the absent parent-row field; setup, compile, unrelated fixture failure, and unmatched filters are not proof. Check the uncommitted leg works. If the result differs, record the actual outcome and investigate rather than forcing the expected result.",
+    "Pass-after: at the unmodified candidate head execute ./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.search.TestPseudoReturnFields.testGlobRTGSubqueryUsesUnrequestedStoredField -Ptests.seed=5298C0DE and require both committed and uncommitted assertions to pass.",
+    "Run ./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.BasicFunctionalityTest --tests org.apache.solr.search.TestPseudoReturnFields --tests org.apache.solr.response.TestRetrieveFieldsOptimizer --tests org.apache.solr.search.ReturnFieldsTest --tests org.apache.solr.highlight.TestUnifiedSolrHighlighter --tests org.apache.solr.search.LargeFieldTest -Ptests.seed=5298C0DE. Record fresh JUnit counts by class, no failures/errors/skips; archive XML before another cleanTest. Confirm the batched RTG and no-prefetch transformer/all-fields tests ran. Preserve coverage for LargeFieldTest, both highlighters, warm/cold RTG, glob-only, no-match and DocValues-only prefetch, and the shard and 50-document limits.",
+    "At the same candidate head run ./gradlew tidy, ensure the tracked tree stays clean, and run ./gradlew :solr:core:compileJava :solr:core:compileTestJava -Pvalidation.errorprone=true and ./gradlew check -x test -Prefguide.include=false. Do not let Antora/ref-guide checks block this gate under the standing policy. If tidy changes the source, record it and stop rather than claiming a clean exact-head pass.",
+    "Report exact commands, seed, head, UTC times, exits, actual XML and durable evidence. The historical receipt is comparison evidence only; no class counts are assumed for the current run."
+  ],
+  "historical_receipt": "https://github.com/nick-boss-tech/solr/blob/8214708a4b7f047a66d33e314eea2ce02b834208/receipts/PR-5298-dv-prefetch-round-2.md"
+}
