@@ -1,0 +1,10 @@
+{
+  "id": "pr-5298-glob-prefetch-review-linux-20261120",
+  "job": "pr-5298-glob-prefetch-review-linux-20261120",
+  "type": "claim",
+  "owner": "vm2",
+  "host": "linux",
+  "head": "244b5645c0a566486d142413201ff65300a49bca",
+  "claimed": "2026-11-20T05:25:00Z",
+  "note": "Claimed at board tip after verifying the live fork ref solr-18608-glob-prefetch-review at 244b5645c0a566486d142413201ff65300a49bca with git ls-remote. No prior claim existed."
+}
