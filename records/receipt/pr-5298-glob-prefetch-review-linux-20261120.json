@@ -1,0 +1,37 @@
+{
+  "id": "pr-5298-glob-prefetch-review-linux-20261120-receipt",
+  "type": "receipt",
+  "job": "pr-5298-glob-prefetch-review-linux-20261120",
+  "gate": "pr-5298-glob-prefetch-review-linux-20261120-gate",
+  "owner": "vm2",
+  "host": "linux",
+  "head": "244b5645c0a566486d142413201ff65300a49bca",
+  "base": "78404ec851c433a844152fbb55e6b7ca460615a4",
+  "seed": "5298C0DE",
+  "verdict": "failed",
+  "summary": "The regression proof and all test legs pass, but the candidate is not tidy-clean: ./gradlew tidy reflows the Javadoc in solr/core/src/java/org/apache/solr/response/transform/DocTransformer.java (2 lines changed, formatting only). Per the gate instruction I recorded the drift, restored the exact head, and stopped before Error Prone and the root check rather than claiming a clean exact-head pass. Fail-before is proven on the base with only the candidate test overlaid: the stock test fails at the first loop iteration with related numFound=0, and an isolated committed-only iteration fails the same way because the parent doc lacks the unrequested stored field subject. On the candidate the method passes (1/1), and the six suites run 120 tests with 0 failures, 0 errors, 0 skips.",
+  "legs": {
+    "fail_before_stock": "failed as required: base 78404ec8 + candidate TestPseudoReturnFields.java only; testGlobRTGSubqueryUsesUnrequestedStoredField fails on the first loop iteration with related numFound=0 (response has val_i=4 and marker=ok but no subject)",
+    "fail_before_committed_only": "failed as required: isolated committed=true iteration fails with related numFound=0; request fl=val_*,related:[subquery],marker:[value v=ok] returns no parent subject, so {!terms f=subject v=$row.subject} cannot resolve",
+    "pass_after": "passed: candidate 244b5645, same command, 1 test / 0 failures / 0 errors / 0 skips; the method asserts both committed=false and committed=true",
+    "six_suites": "passed: 120 tests, 0 failures, 0 errors, 0 skips; BasicFunctionalityTest 32, TestPseudoReturnFields 37, TestUnifiedSolrHighlighter 33, ReturnFieldsTest 16, TestRetrieveFieldsOptimizer 1, LargeFieldTest 1",
+    "targeted_coverage": "confirmed in fresh XML: testBatchedGlobRTGAcrossCommittedAndUncommittedDocs, testGlobRTGUncommittedFields, testGlobRTGSubqueryUsesUnrequestedStoredField, testGlobsAndTransformerField, testGlobsAndTransformerFieldRTG, testGlobsRTG, testGlobs",
+    "tidy": "failed: ./gradlew tidy exit 0 but leaves DocTransformer.java modified (Javadoc line reflow); tracked tree not clean",
+    "errorprone": "not run: stopped after tidy drift per gate instruction",
+    "root_check": "not run: stopped after tidy drift per gate instruction"
+  },
+  "commands": {
+    "fail_before": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.search.TestPseudoReturnFields.testGlobRTGSubqueryUsesUnrequestedStoredField -Ptests.seed=5298C0DE",
+    "pass_after": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.search.TestPseudoReturnFields.testGlobRTGSubqueryUsesUnrequestedStoredField -Ptests.seed=5298C0DE",
+    "six_suites": "./gradlew :solr:core:cleanTest :solr:core:test --tests org.apache.solr.BasicFunctionalityTest --tests org.apache.solr.search.TestPseudoReturnFields --tests org.apache.solr.response.TestRetrieveFieldsOptimizer --tests org.apache.solr.search.ReturnFieldsTest --tests org.apache.solr.highlight.TestUnifiedSolrHighlighter --tests org.apache.solr.search.LargeFieldTest -Ptests.seed=5298C0DE",
+    "tidy": "./gradlew tidy"
+  },
+  "tidy_drift": "solr/core/src/java/org/apache/solr/response/transform/DocTransformer.java:118-121 Javadoc reflow (see tidy-drift.diff)",
+  "evidence": "records/evidence/pr-5298-glob-prefetch-review-linux-20261120-evidence.tar.gz (SHA-256 a36b65500915c69a90f93304edb1753ef2e114309b211c8cb7ce05b30077b6ff)",
+  "coverage_limits": [
+    "The stock fail-before aborts on the uncommitted iteration; the committed leg was isolated by changing only the loop array to {true} in the base worktree overlay, then the stock overlay was restored.",
+    "Error Prone and the root check did not run because tidy changed tracked source; a repair and a new exact-head gate are required.",
+    "The fork ref solr-18608-glob-prefetch-review was 244b5645 before and after the runs; no source was pushed."
+  ],
+  "recorded": "2026-11-20"
+}
