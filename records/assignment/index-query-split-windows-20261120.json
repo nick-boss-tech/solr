@@ -1,0 +1,23 @@
+{
+  "coordination": "Existing index-main-section-linux-20261119-r2 and pr-5257-review-response-linux-20261119 are claimed; verify their workers and executors stopped before assigning overlapping gate execution.",
+  "deliverables": [
+    "Prepare and push isolated header and stacked content branches",
+    "Arrange exact-head Linux proof only after reconciling conflicting claims",
+    "Leave public PR heads and comments unchanged"
+  ],
+  "id": "index-query-split-windows-20261120",
+  "intended_host": "Windows implementation; Linux proof separately",
+  "job": "index-query-split-windows-20261120",
+  "source": {
+    "combined_branch": "index-query-main-section",
+    "combined_head": "c5955f3d47ffc8ff21bd59f77ae6846263ced4c6",
+    "content_head": "3ec4a1ae626191d9cb2a8c42e7f69356f31b862d",
+    "content_pr": "https://github.com/apache/solr/pull/5269",
+    "header_head": "e92a34eefd6adf0ec2fe5d3018abc332af77e246",
+    "header_pr": "https://github.com/apache/solr/pull/5257",
+    "repository": "nick-boss-tech/solr"
+  },
+  "successor_of": "index-main-section-windows-20261119",
+  "summary": "Prepare separate header and stacked main navigation review branches",
+  "type": "assignment"
+}
