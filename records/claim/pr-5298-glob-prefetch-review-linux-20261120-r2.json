@@ -1,0 +1,11 @@
+{
+  "id": "pr-5298-glob-prefetch-review-linux-20261120-r2",
+  "job": "pr-5298-glob-prefetch-review-linux-20261120-r2",
+  "type": "claim",
+  "owner": "vm2",
+  "host": "linux",
+  "head": "8a45fcf229db7eaca1e32cf1d7f46ac36a96adda",
+  "source": {"repository": "nick-boss-tech/solr", "branch": "solr-18608-glob-prefetch-review", "head": "8a45fcf229db7eaca1e32cf1d7f46ac36a96adda"},
+  "claimed": "2026-11-20T06:05:00Z",
+  "note": "vm2 claimed at board tip after verifying the live fork ref solr-18608-glob-prefetch-review at 8a45fcf229db7eaca1e32cf1d7f46ac36a96adda with git ls-remote and confirming predecessor release. No r2 claim existed."
+}

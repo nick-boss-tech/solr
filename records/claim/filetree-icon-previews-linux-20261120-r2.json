@@ -1,0 +1,11 @@
+{
+  "id": "filetree-icon-previews-linux-20261120-r2",
+  "job": "filetree-icon-previews-linux-20261120-r2",
+  "type": "claim",
+  "owner": "vm2",
+  "host": "linux",
+  "head": "75c02edd662b5b9c590fe6a4c3915ffaacc24591",
+  "source": {"repository": "nick-boss-tech/solr", "branch": "solr-17887-file-tree-review-gate", "head": "75c02edd662b5b9c590fe6a4c3915ffaacc24591"},
+  "claimed": "2026-11-20T06:05:00Z",
+  "note": "vm2 claimed at board tip after verifying the live fork ref solr-17887-file-tree-review-gate at 75c02edd662b5b9c590fe6a4c3915ffaacc24591 with git ls-remote and confirming predecessor release. No r2 claim existed."
+}

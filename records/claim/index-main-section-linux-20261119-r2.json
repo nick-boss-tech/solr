@@ -1,0 +1,11 @@
+{
+  "id": "index-main-section-linux-20261119-r2",
+  "job": "index-main-section-linux-20261119-r2",
+  "type": "claim",
+  "owner": "vm2",
+  "host": "linux",
+  "head": "c5955f3d47ffc8ff21bd59f77ae6846263ced4c6",
+  "source": {"repository": "nick-boss-tech/solr", "branch": "index-query-main-section", "head": "c5955f3d47ffc8ff21bd59f77ae6846263ced4c6"},
+  "claimed": "2026-11-20T06:05:00Z",
+  "note": "vm2 claimed at board tip after verifying the live fork ref index-query-main-section at c5955f3d47ffc8ff21bd59f77ae6846263ced4c6 with git ls-remote and confirming predecessor release. No r2 claim existed."
+}
