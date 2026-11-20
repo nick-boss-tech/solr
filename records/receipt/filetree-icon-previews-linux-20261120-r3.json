@@ -31,5 +31,6 @@
     "Previews are verified as compiled @Preview composables in the JVM bytecode; no IDE preview renderer is installed on this host.",
     "wasm browser tests ran under Chrome Headless Shell with the software renderer; GL-only rendering is not covered."
   ],
-  "recorded": "2026-11-20"
+  "recorded": "2026-11-20",
+  "provenance": "No r3 assignment or gate record was posted on the board when this gate ran. The repository owner asked vm2 directly to run the fresh gate at the patched head after the r2 receipt. This receipt is filed by vm2, references the r3 gate id for linkage, and carries the r2 gate requirements forward unchanged; the r2 receipt and evidence remain in place for the previous head."
 }

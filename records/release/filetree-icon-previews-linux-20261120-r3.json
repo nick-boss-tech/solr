@@ -1,0 +1,8 @@
+{
+  "type": "release",
+  "id": "filetree-icon-previews-linux-20261120-r3",
+  "job": "filetree-icon-previews-linux-20261120-r3",
+  "actor": "vm2",
+  "reason": "Fresh gate at the patched head 2812e96f3ba8a64f5fca505a0093cb0a47cab162 finished with verdict passed. Release the job.",
+  "evidence": "records/receipt/filetree-icon-previews-linux-20261120-r3.json; records/evidence/filetree-icon-previews-linux-20261120-r3-evidence.tar.gz"
+}

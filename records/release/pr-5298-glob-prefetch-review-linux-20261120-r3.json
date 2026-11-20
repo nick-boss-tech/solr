@@ -1,0 +1,8 @@
+{
+  "type": "release",
+  "id": "pr-5298-glob-prefetch-review-linux-20261120-r3",
+  "job": "pr-5298-glob-prefetch-review-linux-20261120-r3",
+  "actor": "vm2",
+  "reason": "Fresh gate at the patched head 739317e94679cdafc6d232139a182945ac4cefe2 finished with verdict passed. Release the job.",
+  "evidence": "records/receipt/pr-5298-glob-prefetch-review-linux-20261120-r3.json; records/evidence/pr-5298-glob-prefetch-review-linux-20261120-r3-evidence.tar.gz"
+}
