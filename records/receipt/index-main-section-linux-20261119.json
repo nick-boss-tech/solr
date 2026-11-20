@@ -1,0 +1,31 @@
+{
+  "id": "index-main-section-linux-20261119-receipt",
+  "type": "receipt",
+  "job": "index-main-section-linux-20261119",
+  "gate": "index-main-section-linux-20261119-gate",
+  "owner": "vm2",
+  "host": "linux",
+  "head": "7fa00860af3f335c6611410314ed9ec69ac5c70e",
+  "verdict": "failed",
+  "summary": "The exact head does not compile its test sources, so the UI check fails before any test runs. At 7fa00860, :shared:compileTestKotlinJvm reports 'Unresolved reference assertDoesNotExist' at ui/shared/src/commonTest/kotlin/org/apache/solr/ui/views/indexquery/IndexQueryHeaderTest.kt:21:33; assertDoesNotExist is a member of SemanticsNodeInteraction, not an importable top-level function. A diagnostic run with only that import line removed completed 'BUILD SUCCESSFUL' (JVM 63 run / 2 skipped / 0 failed; wasm 67 run / 3 skipped / 0 failed), showing no second blocker. The selection-preservation fail-before proof passes: the adapted assertion fails on the old IndexQueryStateHolder at 90d4efb with 'expected </select> but was <null>'. Root check -x test passes at the exact head.",
+  "legs": {
+    "exact_head_ui_check": "failed: ./gradlew -p ui check --no-build-cache exit 1 at :shared:compileTestKotlinJvm; no JVM or wasm tests ran",
+    "fail_before": "passed proof: at 90d4efb with only the adapted assertion added, IndexQueryStateHolderTest.testSelectingCollectionPreservesAvailableHandlerAndClearsUnavailableHandler fails at line 85 with expected </select> but was <null>; the same assertion passes on the new IndexQueryViewModel at 7fa00860 (diagnostic run)",
+    "diagnostic_ui_check": "passed: with only the bad import removed, ./gradlew -p ui check --no-build-cache exit 0; JVM 63 run / 2 skipped / 0 failed; wasm 67 run / 3 skipped / 0 failed",
+    "named_tests": "IndexQueryViewModelTest 4/4, HttpIndexQueryRepositoryTest 4/4, IndexQueryHeaderTest 8/8 on JVM; ConfigsetsRouteViewModelTest does not exist at this head",
+    "root_check": "passed: ./gradlew check -x test -Prefguide.include=false exit 0 in 11m03s"
+  },
+  "commands": {
+    "exact_head_ui_check": "./gradlew -p ui check --no-build-cache (CHROME_BIN=/opt/playwright-browsers/chromium-current, software renderer)",
+    "fail_before": "./gradlew -p ui :shared:jvmTest --tests org.apache.solr.ui.components.indexquery.IndexQueryStateHolderTest",
+    "diagnostic_ui_check": "./gradlew -p ui check --no-build-cache (bad import removed in the worktree only, then reverted)",
+    "root_check": "./gradlew check -x test -Prefguide.include=false"
+  },
+  "evidence": "records/evidence/index-main-section-linux-20261119-evidence.tar.gz (SHA-256 835c0ffa8832399724abfd91f99be5483a635e09c2e551191ff7c5febd06e542)",
+  "coverage_limits": [
+    "The live Index and Query tab exercise was not run: the exact head fails to compile its test sources, and a live run was not substituted for the exact-head gate.",
+    "The diagnostic UI pass removes one import line in the worktree only; it is not the gated head and was reverted.",
+    "The wasm browser tests ran under Chrome Headless Shell with the software renderer; GL-only rendering is not covered."
+  ],
+  "recorded": "2026-11-20"
+}
