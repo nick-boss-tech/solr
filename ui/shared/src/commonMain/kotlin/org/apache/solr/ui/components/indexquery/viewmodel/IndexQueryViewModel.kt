@@ -17,7 +17,10 @@
 
 package org.apache.solr.ui.components.indexquery.viewmodel
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -35,14 +38,24 @@ data class IndexQueryUiState(
     val error: Boolean = false,
 )
 
-class IndexQueryStateHolder(
+/** Loads and manages the Index & Query header state. */
+class IndexQueryViewModel internal constructor(
     private val repository: IndexQueryRepository,
-    private val scope: CoroutineScope,
-) {
+    private val testScope: CoroutineScope?,
+) : ViewModel() {
+    constructor(repository: IndexQueryRepository) : this(repository, null)
+
     val uiState: StateFlow<IndexQueryUiState>
         field = MutableStateFlow(IndexQueryUiState())
 
-    fun loadCollections() {
+    private val scope get() = testScope ?: viewModelScope
+    private var handlersJob: Job? = null
+
+    init {
+        loadCollections()
+    }
+
+    private fun loadCollections() {
         uiState.update { it.copy(collectionsLoading = true, error = false) }
         scope.launch {
             repository.listCollections()
@@ -56,33 +69,35 @@ class IndexQueryStateHolder(
     }
 
     fun selectCollection(collection: String) {
+        handlersJob?.cancel()
         uiState.update {
             it.copy(
                 selectedCollection = collection,
                 handlers = emptyList(),
                 handlersLoading = true,
-                selectedHandler = null,
                 error = false,
             )
         }
-        scope.launch {
+        handlersJob = scope.launch {
             repository.listRequestHandlers(collection)
                 .onSuccess { handlers ->
                     uiState.update { state ->
-                        if (state.selectedCollection == collection) {
-                            state.copy(handlers = handlers, handlersLoading = false)
-                        } else {
-                            state
-                        }
+                        state.copy(
+                            handlers = handlers,
+                            handlersLoading = false,
+                            selectedHandler = state.selectedHandler?.takeIf { selected ->
+                                handlers.any { it.name == selected }
+                            },
+                        )
                     }
                 }
                 .onFailure {
-                    uiState.update { state ->
-                        if (state.selectedCollection == collection) {
-                            state.copy(handlersLoading = false, error = true)
-                        } else {
-                            state
-                        }
+                    uiState.update {
+                        it.copy(
+                            handlersLoading = false,
+                            selectedHandler = null,
+                            error = true,
+                        )
                     }
                 }
         }

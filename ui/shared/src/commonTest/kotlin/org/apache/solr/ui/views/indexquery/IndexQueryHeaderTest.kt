@@ -55,6 +55,34 @@ class IndexQueryHeaderTest {
 
     @OptIn(ExperimentalTestApi::class)
     @Test
+    fun testCollectionLoadErrorDoesNotShowEmptyMessage() = runComposeUiTest {
+        setContent {
+            IndexQueryHeader(
+                collectionDropdown = collectionDropdown(options = emptyList(), selectedKey = null),
+                requestHandlers = requestHandlersDropdown(options = emptyList()),
+                hasError = true,
+            )
+        }
+
+        onNodeWithTag("index_query_no_collections").assertDoesNotExist()
+    }
+
+    @OptIn(ExperimentalTestApi::class)
+    @Test
+    fun testHandlerLoadErrorDoesNotShowEmptyMessage() = runComposeUiTest {
+        setContent {
+            IndexQueryHeader(
+                collectionDropdown = collectionDropdown(),
+                requestHandlers = requestHandlersDropdown(options = emptyList()),
+                hasError = true,
+            )
+        }
+
+        onNodeWithTag("index_query_no_handlers").assertDoesNotExist()
+    }
+
+    @OptIn(ExperimentalTestApi::class)
+    @Test
     fun testCollectionsLoadingDisablesBothDropdowns() = runComposeUiTest {
         setContent {
             IndexQueryHeader(
