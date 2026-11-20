@@ -1,0 +1,33 @@
+{
+  "type": "assignment",
+  "id": "pr-5298-glob-prefetch-review-linux-20261120-r2",
+  "job": "pr-5298-glob-prefetch-review-linux-20261120-r2",
+  "successor_of": "pr-5298-glob-prefetch-review-linux-20261120",
+  "gate_id": "pr-5298-glob-prefetch-review-linux-20261120-r2-gate",
+  "gate_record": "records/gate/pr-5298-glob-prefetch-review-linux-20261120-r2-gate.json",
+  "claim_path": "records/claim/pr-5298-glob-prefetch-review-linux-20261120-r2.json",
+  "receipt_path": "records/receipt/pr-5298-glob-prefetch-review-linux-20261120-r2.json",
+  "source": {
+    "repository": "nick-boss-tech/solr",
+    "branch": "solr-18608-glob-prefetch-review",
+    "head": "8a45fcf229db7eaca1e32cf1d7f46ac36a96adda",
+    "pr": "https://github.com/apache/solr/pull/5298",
+    "pr_head": "78404ec851c433a844152fbb55e6b7ca460615a4",
+    "review_diff": "https://github.com/nick-boss-tech/solr/compare/78404ec851c433a844152fbb55e6b7ca460615a4...8a45fcf229db7eaca1e32cf1d7f46ac36a96adda"
+  },
+  "phase": "review follow-up verification",
+  "intended_host": "Linux CPU gate host with JDK 21 and a working pinned Gradle wrapper; use host build lock.",
+  "summary": "Linux re-gate: review follow-up verification",
+  "supersedes": {
+    "job": "pr-5298-glob-prefetch-review-linux-20261120",
+    "gate_id": "pr-5298-glob-prefetch-review-linux-20261120-gate",
+    "head": "244b5645c0a566486d142413201ff65300a49bca",
+    "receipt_path": "records/receipt/pr-5298-glob-prefetch-review-linux-20261120.json"
+  },
+  "deliverables": [
+    "Claim the canonical job after checking predecessor release and exact fork branch head. Execute required legs, file the exact-head receipt and evidence, then release."
+  ],
+  "boundaries": [
+    "Board-only writes; no source changes, public PR changes, or Jira changes."
+  ]
+}

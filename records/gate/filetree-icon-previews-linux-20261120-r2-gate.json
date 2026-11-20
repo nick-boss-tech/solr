@@ -1,0 +1,30 @@
+{
+  "id": "filetree-icon-previews-linux-20261120-r2-gate",
+  "job": "filetree-icon-previews-linux-20261120-r2",
+  "type": "gate",
+  "head": "75c02edd662b5b9c590fe6a4c3915ffaacc24591",
+  "base": "9de6208ffd3111ded8ffcb24af28f2d7d15f529e",
+  "environment": "Clean Linux checkout with JDK 21 and the software-renderer EGL stub; headless Chromium for wasm browser tests.",
+  "requirements": [
+    "Run ./gradlew -p ui check --no-build-cache; record formatting, JVM and wasm results, counts and evidence.",
+    "Require the accessibility semantics test and full FileTreeTest to pass on both JVM and wasm; preserve exact role, content description and state description assertions. Record headless browser and software renderer. Compare against the prior same-base failure; initial one-test reproduction is in the r1 receipt.",
+    "Confirm the three @Preview composables (empty, typical configset, long names) compile into the JVM artifact.",
+    "Report the exact tested commit, the recovered review-only commit 8c52ff437639911ca71663ece22309ec2057e213, and the separate test-only commit. Distinguish compiled previews from rendered previews."
+  ],
+  "receipt_path": "records/receipt/filetree-icon-previews-linux-20261120-r2.json",
+  "phase": "FileTree review and browser proof",
+  "source": {
+    "branch": "solr-17887-file-tree-review-gate",
+    "head": "75c02edd662b5b9c590fe6a4c3915ffaacc24591",
+    "base": "9de6208ffd3111ded8ffcb24af28f2d7d15f529e",
+    "pr": "https://github.com/apache/solr/pull/5256",
+    "review": "https://github.com/apache/solr/pull/5256#pullrequestreview-5970765866",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes": {
+    "job": "filetree-icon-previews-linux-20261120",
+    "gate_id": "filetree-icon-previews-linux-20261120-gate",
+    "head": "25cdc685c7fc36981eeca05879b8ae33a84297ea",
+    "receipt_path": "records/receipt/filetree-icon-previews-linux-20261120.json"
+  }
+}

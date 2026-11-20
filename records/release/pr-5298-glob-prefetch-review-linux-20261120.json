@@ -1,0 +1,8 @@
+{
+  "actor": "dotty",
+  "evidence": "records/receipt/pr-5298-glob-prefetch-review-linux-20261120.json; the repository owner confirmed that vm2 completed this gate and the previous run is no longer active.",
+  "id": "pr-5298-glob-prefetch-review-linux-20261120",
+  "job": "pr-5298-glob-prefetch-review-linux-20261120",
+  "reason": "Prior verification finished. Release the completed assignment for a new exact-head Linux gate.",
+  "type": "release"
+}

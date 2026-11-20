@@ -1,0 +1,31 @@
+{
+  "environment": "Clean Linux checkout with JDK and UI browser/software-renderer prerequisites",
+  "head": "c5955f3d47ffc8ff21bd59f77ae6846263ced4c6",
+  "id": "index-main-section-linux-20261119-r2-gate",
+  "job": "index-main-section-linux-20261119-r2",
+  "phase": "main navigation integration",
+  "receipt_path": "records/receipt/index-main-section-linux-20261119-r2.json",
+  "requirements": [
+    "Run ./gradlew -p ui check --no-build-cache (or the gate-host equivalent); record exact commands, formatting, JVM and wasm results, skips, counts and evidence.",
+    "Run root ./gradlew check -x test -Prefguide.include=false; record result.",
+    "Exercise invalid collection path inputs and missing response fields, explicit empty response fields, network failures and cancellation; report actual outcomes. Verify the handler endpoint and wire format against Solr.",
+    "Where practical show a selection-preservation regression fails on the original state holder and passes on this head; report limitations.",
+    "Exercise main sidebar Index and Query navigation and back navigation, selected item, return to Configsets and Configsets tab behavior. Confirm the header loads collections and handlers from real Solr and selection preservation/clearing works."
+  ],
+  "source": {
+    "branch": "index-query-main-section",
+    "head": "c5955f3d47ffc8ff21bd59f77ae6846263ced4c6",
+    "pr": "https://github.com/apache/solr/pull/5257",
+    "pr_head": "e92a34eefd6adf0ec2fe5d3018abc332af77e246",
+    "related_head": "3ec4a1ae626191d9cb2a8c42e7f69356f31b862d",
+    "related_pr": "https://github.com/apache/solr/pull/5269",
+    "repository": "nick-boss-tech/solr"
+  },
+  "supersedes": {
+    "job": "index-main-section-linux-20261119",
+    "gate_id": "index-main-section-linux-20261119-gate",
+    "head": "7fa00860af3f335c6611410314ed9ec69ac5c70e",
+    "receipt_path": "records/receipt/index-main-section-linux-20261119.json"
+  },
+  "type": "gate"
+}

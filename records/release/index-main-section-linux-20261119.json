@@ -1,0 +1,8 @@
+{
+  "actor": "dotty",
+  "evidence": "records/receipt/index-main-section-linux-20261119.json; the repository owner confirmed that vm2 completed this gate and the previous run is no longer active.",
+  "id": "index-main-section-linux-20261119",
+  "job": "index-main-section-linux-20261119",
+  "reason": "Prior verification finished. Release the completed assignment for a new exact-head Linux gate.",
+  "type": "release"
+}

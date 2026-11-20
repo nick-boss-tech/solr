@@ -1,0 +1,33 @@
+{
+  "type": "assignment",
+  "id": "filetree-icon-previews-linux-20261120-r2",
+  "job": "filetree-icon-previews-linux-20261120-r2",
+  "successor_of": "filetree-icon-previews-linux-20261120",
+  "gate_id": "filetree-icon-previews-linux-20261120-r2-gate",
+  "gate_record": "records/gate/filetree-icon-previews-linux-20261120-r2-gate.json",
+  "claim_path": "records/claim/filetree-icon-previews-linux-20261120-r2.json",
+  "receipt_path": "records/receipt/filetree-icon-previews-linux-20261120-r2.json",
+  "source": {
+    "branch": "solr-17887-file-tree-review-gate",
+    "head": "75c02edd662b5b9c590fe6a4c3915ffaacc24591",
+    "base": "9de6208ffd3111ded8ffcb24af28f2d7d15f529e",
+    "pr": "https://github.com/apache/solr/pull/5256",
+    "review": "https://github.com/apache/solr/pull/5256#pullrequestreview-5970765866",
+    "repository": "nick-boss-tech/solr"
+  },
+  "phase": "FileTree review and browser proof",
+  "intended_host": "vm2 Linux UI-capable gate host",
+  "summary": "Linux re-gate: FileTree review and browser proof",
+  "supersedes": {
+    "job": "filetree-icon-previews-linux-20261120",
+    "gate_id": "filetree-icon-previews-linux-20261120-gate",
+    "head": "25cdc685c7fc36981eeca05879b8ae33a84297ea",
+    "receipt_path": "records/receipt/filetree-icon-previews-linux-20261120.json"
+  },
+  "deliverables": [
+    "Claim the canonical job after checking predecessor release and exact fork branch head. Execute required legs, file the exact-head receipt and evidence, then release."
+  ],
+  "boundaries": [
+    "Board-only writes; no source changes, public PR changes, or Jira changes."
+  ]
+}

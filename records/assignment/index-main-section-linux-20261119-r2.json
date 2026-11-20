@@ -1,0 +1,34 @@
+{
+  "type": "assignment",
+  "id": "index-main-section-linux-20261119-r2",
+  "job": "index-main-section-linux-20261119-r2",
+  "successor_of": "index-main-section-linux-20261119",
+  "gate_id": "index-main-section-linux-20261119-r2-gate",
+  "gate_record": "records/gate/index-main-section-linux-20261119-r2-gate.json",
+  "claim_path": "records/claim/index-main-section-linux-20261119-r2.json",
+  "receipt_path": "records/receipt/index-main-section-linux-20261119-r2.json",
+  "source": {
+    "branch": "index-query-main-section",
+    "head": "c5955f3d47ffc8ff21bd59f77ae6846263ced4c6",
+    "pr": "https://github.com/apache/solr/pull/5257",
+    "pr_head": "e92a34eefd6adf0ec2fe5d3018abc332af77e246",
+    "related_head": "3ec4a1ae626191d9cb2a8c42e7f69356f31b862d",
+    "related_pr": "https://github.com/apache/solr/pull/5269",
+    "repository": "nick-boss-tech/solr"
+  },
+  "phase": "main navigation integration",
+  "intended_host": "Linux UI-capable gate host",
+  "summary": "Linux re-gate: main navigation integration",
+  "supersedes": {
+    "job": "index-main-section-linux-20261119",
+    "gate_id": "index-main-section-linux-20261119-gate",
+    "head": "7fa00860af3f335c6611410314ed9ec69ac5c70e",
+    "receipt_path": "records/receipt/index-main-section-linux-20261119.json"
+  },
+  "deliverables": [
+    "Claim the canonical job after checking predecessor release and exact fork branch head. Execute required legs, file the exact-head receipt and evidence, then release."
+  ],
+  "boundaries": [
+    "Board-only writes; no source changes, public PR changes, or Jira changes."
+  ]
+}
