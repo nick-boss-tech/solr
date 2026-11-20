@@ -1,0 +1,33 @@
+{
+  "branches": [
+    {
+      "base": "e92a34eefd6adf0ec2fe5d3018abc332af77e246",
+      "branch": "solr-17849-split-header",
+      "head": "91598d064dd4c657cddb0641b80dee23e311a0ed",
+      "repository": "nick-boss-tech/solr"
+    },
+    {
+      "base": "91598d064dd4c657cddb0641b80dee23e311a0ed",
+      "branch": "solr-17849-split-screen",
+      "head": "b3579cc1cab81d881e346a5675f48f5f54ffccc1",
+      "repository": "nick-boss-tech/solr"
+    }
+  ],
+  "gate_drafts": [
+    "research/coordination-v2-preview/index-query-split-header-gate-assignment.json",
+    "research/coordination-v2-preview/index-query-split-header-gate.json",
+    "research/coordination-v2-preview/index-query-split-screen-gate-assignment.json",
+    "research/coordination-v2-preview/index-query-split-screen-gate.json"
+  ],
+  "gate_status": "Gate assignment and gate drafts prepared locally only. Do not publish or claim overlapping successor jobs until the existing pr-5257-review-response-linux-20261119 and index-main-section-linux-20261119-r2 claims are reconciled with worker/executor stop evidence and releases. No gate execution was started in this assignment.",
+  "id": "index-query-split-windows-20261120-report",
+  "job": "index-query-split-windows-20261120",
+  "results": [
+    "Both fork refs were verified at the recorded heads. The screen tree matches c5955f3d47ffc8ff21bd59f77ae6846263ced4c6 except for new focused tests in three files.",
+    "Header includes direct ViewModel, repository and header review changes and tests for cancellation, missing/empty responses and connection failures. Screen includes corrected main navigation and MainNavigationTest.",
+    "git diff --check passed for both staged diffs. No Gradle or tests ran on Windows; both heads require Linux proof.",
+    "PR 5257 and PR 5269 heads and comments were not changed. PR 5269's existing branch needs history reconciliation before any later update."
+  ],
+  "summary": "Prepared and pushed separate header and stacked screen branches; Linux gates require reconciliation of existing claims.",
+  "type": "report"
+}
