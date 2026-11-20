@@ -1,0 +1,15 @@
+{
+  "id": "index-main-section-linux-20261119",
+  "job": "index-main-section-linux-20261119",
+  "owner": "vm2",
+  "host": "linux",
+  "head": "7fa00860af3f335c6611410314ed9ec69ac5c70e",
+  "source": {
+    "branch": "index-query-main-section",
+    "head": "7fa00860af3f335c6611410314ed9ec69ac5c70e",
+    "repository": "nick-boss-tech/solr"
+  },
+  "claimed": "2026-11-20T05:00:00Z",
+  "note": "Claimed at board tip 2bc2be84e2ea after verifying the live fork head with git ls-remote. No claim existed for this Linux gate job.",
+  "type": "claim"
+}
