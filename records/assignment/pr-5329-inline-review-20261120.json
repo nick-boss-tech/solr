@@ -1,0 +1,24 @@
+{
+  "type": "assignment",
+  "id": "pr-5329-inline-review-20261120",
+  "job": "pr-5329-inline-review-20261120",
+  "summary": "Review the draft inline comments on Solr PR 5329 before any public PR comment is considered.",
+  "phase": "static review follow-up",
+  "source": {
+    "repository": "epugh/solr",
+    "branch": "SOLR-18527-add-zk-tls",
+    "head": "201446e25e676d85860e3ed378635eab7d7235dd",
+    "pr": "https://github.com/apache/solr/pull/5329"
+  },
+  "claim_path": "records/claim/pr-5329-inline-review-20261120.json",
+  "draft_path": "drafts/pr-5329-inline-review-20261120.md",
+  "draft_blob": "10dddf09463cbe2043da2fb079f5882d0f7f6701",
+  "draft_commit": "3376c04d39128fd504c097501e0aaaa93529c597",
+  "deliverables": [
+    "Check the draft against the current PR head, confirm or narrow each finding, and return the recommended set and any verification gaps."
+  ],
+  "boundaries": [
+    "No GitHub PR comments, Jira comments, PR changes, or source edits under this assignment.",
+    "No builds or runtime tests were performed by the drafter; handle any runtime verification as separate authorized work."
+  ]
+}
