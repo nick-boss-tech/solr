@@ -1,0 +1,6 @@
+{
+  "id": "pr-formula-disclosure-attribution-20261119-report",
+  "job": "pr-formula-disclosure-attribution-20261119",
+  "result": "Updated docs/pr-formula-ste80.md at board commit 70f526d00235fece5d77e7951c3a77dfd7c8830e. Multi-sentence GitHub comments use the AI header without a parenthetical reviewer attribution. No existing PR comments were edited. Documentation-only; no tests run.",
+  "type": "report"
+}
