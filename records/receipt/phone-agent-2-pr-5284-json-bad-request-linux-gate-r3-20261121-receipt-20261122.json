@@ -1,0 +1,98 @@
+{
+  "environment": {
+    "docker": "not installed or used",
+    "gradle_user_home": "/workspace/gradle-home",
+    "host": "phone-agent-2 Linux sandbox",
+    "jdk": "21",
+    "locks": [
+      "/workspace/tools/.gradle-phone-agent-2.lock",
+      "/workspace/tools/.gradle-0609f7968656.lock"
+    ],
+    "runner": "/workspace/tools/solr-live-build.py",
+    "timeout_seconds_per_gradle_phase": 3600
+  },
+  "evidence": {
+    "archive_bytes": 183031,
+    "archive_sha256": "56e56de7ee624e04d5cba7f4542f3f8ebc234f870cb354e6d0d8f594ab8c094a",
+    "pointer_record_path": "records/evidence/evidence-pr-5284-json-bad-request-linux-gate-r3-20261121.json",
+    "remote_artifact_readback": "downloaded archive and checksum sidecar matched local bytes; SHA-256 verified"
+  },
+  "gate": "pr-5284-json-bad-request-linux-gate-r3-20261121",
+  "head": "6de41c880893d8e5b1f0011a09f3c06aba7825bb",
+  "id": "phone-agent-2-pr-5284-json-bad-request-linux-gate-r3-20261121-receipt-20261122",
+  "job": "pr-5284-json-bad-request-linux-gate-r3-20261121",
+  "limits": [
+    "The positive suite's @Nightly test org.apache.solr.cloud.TestRebalanceLeaders.testRebalanceLeaders was skipped because nightly tests were disabled; this behavior is not established by this gate.",
+    "The regression covers Jackson invalid-format JSON fields; truncated or syntactically invalid JSON input was not separately runtime-tested.",
+    "Blank-string collection, zero/negative maxAtOnce, response failure/inactivePreferreds shapes, and wire-level Summary capitalization are not runtime-proven; see boundary-review evidence.",
+    "Lock ID is runtime-proven to reach the constructed operation; forwarding past the mocked operation is static-only.",
+    "This is Linux-only evidence and not Windows/Cygwin proof."
+  ],
+  "results": {
+    "error_prone_compile": {
+      "command": "./gradlew --no-daemon :solr:core:compileJava -Pvalidation.errorprone=true",
+      "exit_code": 0,
+      "status": "passed"
+    },
+    "focused_regression": {
+      "command": "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.handler.V2ApiIntegrationTest.testException --console=plain -Dtests.seed=16398C0DE:3DACA04CB608CB66 --rerun-tasks",
+      "exit_code": 0,
+      "http_400_assertion": "passed",
+      "status": "passed",
+      "test_count": 1
+    },
+    "mutation_checks": {
+      "expected_assertion_level_failures": 8,
+      "probe_names": [
+        "M1-MigrateDocs-collection",
+        "M2-MigrateDocs-target-collection",
+        "M3-MigrateDocs-split-key",
+        "M4-MigrateDocs-forward-timeout",
+        "M5-MigrateDocs-follow-aliases",
+        "M6-MigrateDocs-async-id",
+        "R1-RebalanceLeaders-maxAtOnce",
+        "R2-RebalanceLeaders-maxWaitSeconds"
+      ],
+      "probes": 8,
+      "status": "passed",
+      "unexpected_results": 0
+    },
+    "positive_suite": {
+      "classes": 8,
+      "errors": 0,
+      "failures": 0,
+      "passed": 46,
+      "skip_reason": "@Nightly test group is not enabled in this suite invocation.",
+      "skipped": 1,
+      "skipped_test": "org.apache.solr.cloud.TestRebalanceLeaders.testRebalanceLeaders",
+      "status": "passed_with_one_disclosed_nightly_skip",
+      "testException": "passed",
+      "tests": 47
+    },
+    "root_check": {
+      "command": "./gradlew --no-daemon check -x test -x :solr:solr-ref-guide:checkSiteLinks -x :solr:solr-ref-guide:buildLocalSite -x :solr:solr-ref-guide:buildLocalAntoraSite",
+      "excluded_tasks": [
+        ":solr:solr-ref-guide:checkSiteLinks",
+        ":solr:solr-ref-guide:buildLocalSite",
+        ":solr:solr-ref-guide:buildLocalAntoraSite"
+      ],
+      "exit_code": 0,
+      "status": "passed"
+    },
+    "tidy": {
+      "command": "./gradlew --no-daemon tidy",
+      "exit_code": 0,
+      "status": "passed",
+      "tracked_changes": 0
+    }
+  },
+  "source_refs": {
+    "base_branch": "apache/solr:main",
+    "base_head": "c44af90f3fe328fda3fbba254f9757f440627f0d",
+    "pr": "https://github.com/apache/solr/pull/5284",
+    "source_branch": "nick-boss-tech/solr:solr-16398-rebalance-migrate",
+    "source_head": "6de41c880893d8e5b1f0011a09f3c06aba7825bb"
+  },
+  "type": "receipt",
+  "verdict": "passed"
+}
