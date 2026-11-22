@@ -1,0 +1,181 @@
+{
+  "base": {
+    "branch": "apache/solr:main",
+    "head": "c44af90f3fe328fda3fbba254f9757f440627f0d"
+  },
+  "compatibility_boundary_assessment": {
+    "blank_collection": "Unproven at runtime. Source validation rejects null; no blank-string test was run.",
+    "failures_and_inactivePreferreds_shapes": "Static-only; producer/resource/model mapping was reviewed but executed tests do not assert these shapes.",
+    "lock_id_propagation": "Runtime-proven from API input to constructed operation callingLockId; submission forwarding is static-only because the test stubs executeRebalance.",
+    "nonpositive_maxAtOnce": "Static-only. No zero/negative test was run; lower-level operation normalizes values <=0 to Integer.MAX_VALUE.",
+    "response_capitalization_and_null_omission": "Runtime-proven for migration mapping/subresponses and RebalanceLeaders Summary/success/already-leaders API-model assertions. Wire-level Summary capitalization was not isolated from API-model serialization."
+  },
+  "environment": {
+    "docker": "Never installed or used.",
+    "final_state": "Source worktree clean; no Gradle/build process remains; both locks free; about 39 GiB free disk and 47.9% free inodes.",
+    "gradle_user_home": "/workspace/gradle-home",
+    "host": "phone-agent-2 Linux sandbox",
+    "java": "JDK 21",
+    "serialization_locks": [
+      "/workspace/tools/.gradle-phone-agent-2.lock",
+      "/workspace/tools/.gradle-0609f7968656.lock"
+    ],
+    "windows_cygwin": "Not covered by Linux results."
+  },
+  "evidence": {
+    "contents": "All fresh JUnit XMLs, positive suite output, logs and monitor traces, eight mutation diffs/results, tidy/Error Prone/root-check logs, provenance snapshots, mutation runner and run notes.",
+    "record": "records/evidence/evidence-pr-5284-merge-main-linux-gate-r2-20261121.json",
+    "sha256": "f227e3aa2bfdf65b401e0b74d6c2d2c01a10bb811864a4d762bc88e70bd70e9a",
+    "size_bytes": 188508
+  },
+  "head": "2cac1f8ccab414b17b52b31ccde0c62c4e024491",
+  "id": "phone-agent-2-pr-5284-merge-main-linux-gate-r2-20261121-report-20261121",
+  "job": "pr-5284-merge-main-linux-gate-r2-20261121",
+  "mutations": {
+    "all_expected_assertion_failures": true,
+    "cases": [
+      {
+        "assertion": "captured request map lacks collection=sourceAlias",
+        "name": "M1-MigrateDocs-collection",
+        "target": "MigrateDocsAPITest.testAllPropertiesAndAsyncId"
+      },
+      {
+        "assertion": "captured request map lacks target.collection=targetAlias",
+        "name": "M2-MigrateDocs-target-collection",
+        "target": "MigrateDocsAPITest.testAllPropertiesAndAsyncId"
+      },
+      {
+        "assertion": "captured request map lacks split.key=tenant!",
+        "name": "M3-MigrateDocs-split-key",
+        "target": "MigrateDocsAPITest.testAllPropertiesAndAsyncId"
+      },
+      {
+        "assertion": "captured request map lacks forward.timeout=45",
+        "name": "M4-MigrateDocs-forward-timeout",
+        "target": "MigrateDocsAPITest.testAllPropertiesAndAsyncId"
+      },
+      {
+        "assertion": "captured request map lacks followAliases=true",
+        "name": "M5-MigrateDocs-follow-aliases",
+        "target": "MigrateDocsAPITest.testAllPropertiesAndAsyncId"
+      },
+      {
+        "assertion": "expected migrateAsyncId but was null",
+        "name": "M6-MigrateDocs-async-id",
+        "target": "MigrateDocsAPITest.testAllPropertiesAndAsyncId"
+      },
+      {
+        "assertion": "expected 2 but was 99",
+        "name": "R1-RebalanceLeaders-maxAtOnce",
+        "target": "RebalanceLeadersAPITest.testBodyParametersReachOperation"
+      },
+      {
+        "assertion": "expected 30 but was 999",
+        "name": "R2-RebalanceLeaders-maxWaitSeconds",
+        "target": "RebalanceLeadersAPITest.testBodyParametersReachOperation"
+      }
+    ],
+    "count": 8,
+    "diff_caveat": "M1-M5 exact preserved diffs include incidental whitespace-only reindentation on the next line (M5 whitespace on a following blank line) because the mechanical deletion anchors omit leading indentation. The intended field omission is the only behavioral change, and each unchanged test failed at that specific missing field. M6, R1 and R2 diffs change only the intended async/argument value."
+  },
+  "owner": "phone-agent-2",
+  "parents": [
+    "9bffc4abca263837ccf7eb2f8202048c9927fe87",
+    "c44af90f3fe328fda3fbba254f9757f440627f0d"
+  ],
+  "positive_suite": {
+    "classes": {
+      "org.apache.solr.cloud.MigrateRouteKeyTest": {
+        "failed": 0,
+        "passed": 5,
+        "skipped": 0,
+        "tests": 5
+      },
+      "org.apache.solr.cloud.TestRebalanceLeaders": {
+        "failed": 0,
+        "passed": 4,
+        "skipped": 1,
+        "tests": 5
+      },
+      "org.apache.solr.handler.V2ApiIntegrationTest": {
+        "failed": 1,
+        "passed": 13,
+        "skipped": 0,
+        "tests": 14
+      },
+      "org.apache.solr.handler.admin.TestApiFramework": {
+        "failed": 0,
+        "passed": 3,
+        "skipped": 0,
+        "tests": 3
+      },
+      "org.apache.solr.handler.admin.TestCollectionAPIs": {
+        "failed": 0,
+        "passed": 2,
+        "skipped": 0,
+        "tests": 2
+      },
+      "org.apache.solr.handler.admin.api.MigrateDocsAPITest": {
+        "failed": 0,
+        "passed": 10,
+        "skipped": 0,
+        "tests": 10
+      },
+      "org.apache.solr.handler.admin.api.RebalanceLeadersAPITest": {
+        "failed": 0,
+        "passed": 6,
+        "skipped": 0,
+        "tests": 6
+      },
+      "org.apache.solr.handler.admin.api.V2CollectionAPIMappingTest": {
+        "failed": 0,
+        "passed": 2,
+        "skipped": 0,
+        "tests": 2
+      }
+    },
+    "failed": 1,
+    "failure": {
+      "actual": "HTTP 500; Jackson InvalidFormatException while converting abc to integer RebalanceLeadersRequestBody.maxAtOnce",
+      "expected": "HTTP 400 for malformed maxAtOnce=abc",
+      "relation_to_predecessor": "Same failure and value shape as the predecessor gate; no retry was made and this is not counted as a pass.",
+      "test": "org.apache.solr.handler.V2ApiIntegrationTest.testException"
+    },
+    "passed": 45,
+    "seed": "16398C0DE",
+    "skipped": 1,
+    "tests": 47
+  },
+  "pr": "https://github.com/apache/solr/pull/5284",
+  "recorded": "2026-11-21",
+  "remaining_gate_legs": {
+    "error_prone_compile": {
+      "command": "./gradlew --no-daemon :solr:core:compileJava -Pvalidation.errorprone=true",
+      "exit_code": 0,
+      "status": "passed"
+    },
+    "root_check": {
+      "command": "./gradlew --no-daemon check -x test -x :solr:solr-ref-guide:checkSiteLinks -x :solr:solr-ref-guide:buildLocalSite -x :solr:solr-ref-guide:buildLocalAntoraSite",
+      "exclusions": [
+        ":solr:solr-ref-guide:checkSiteLinks",
+        ":solr:solr-ref-guide:buildLocalSite",
+        ":solr:solr-ref-guide:buildLocalAntoraSite"
+      ],
+      "exit_code": 0,
+      "result": "BUILD SUCCESSFUL in 3m 18s",
+      "status": "passed"
+    },
+    "tidy": {
+      "exit_code": 0,
+      "status": "passed",
+      "tracked_changes": 0
+    }
+  },
+  "setup_attempt": "The first direct executable launch of the positive-suite wrapper failed with exit 126 (permission denied) before tests. The successful proof run invoked the wrapper via python3; both the setup attempt and successful run logs are archived.",
+  "source_branch": "nick-boss-tech/solr:solr-16398-rebalance-migrate",
+  "source_verification": "At filing the open PR API, fork branch and local clean worktree all reported the exact head above; upstream apache/solr main and PR base remained c44af90f3fe328fda3fbba254f9757f440627f0d. No PR metadata/comment or Jira changes were made during the gate.",
+  "status": "completed",
+  "summary": "Merged current base main into PR #5284 and re-gated the exact merge head. The named suites, eight mutation probes, tidy, Error Prone compile, and root check all ran with preserved evidence. The required combined suite still fails only at V2ApiIntegrationTest.testException: malformed maxAtOnce=\"abc\" returns HTTP 500 instead of the asserted 400. The gate is therefore failed, not passed.",
+  "type": "report",
+  "verdict": "failed"
+}
