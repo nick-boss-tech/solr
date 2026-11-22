@@ -1,0 +1,107 @@
+{
+  "base_branch": "apache/solr:main",
+  "base_head": "c44af90f3fe328fda3fbba254f9757f440627f0d",
+  "build_checks": {
+    "error_prone_compile": {
+      "command": "./gradlew --no-daemon :solr:core:compileJava -Pvalidation.errorprone=true --console=plain",
+      "exit_code": 0
+    },
+    "root_check": {
+      "command": "./gradlew --no-daemon check -x test -x :solr:solr-ref-guide:checkSiteLinks -x :solr:solr-ref-guide:buildLocalSite -x :solr:solr-ref-guide:buildLocalAntoraSite --console=plain",
+      "excluded_tasks": [
+        ":solr:solr-ref-guide:checkSiteLinks",
+        ":solr:solr-ref-guide:buildLocalSite",
+        ":solr:solr-ref-guide:buildLocalAntoraSite"
+      ],
+      "exit_code": 0
+    },
+    "tidy": {
+      "exit_code": 0,
+      "tracked_changes": 0
+    }
+  },
+  "closeout": {
+    "both_host_locks_free": true,
+    "disk_available": "39 GiB",
+    "gradle_processes_remaining": 0,
+    "inode_free_percent": 46,
+    "source_head": "6de41c880893d8e5b1f0011a09f3c06aba7825bb",
+    "source_worktree_clean": true,
+    "task_created_build_worktree_removed": true
+  },
+  "compatibility_limits": {
+    "blank_collection": "Null rejection is runtime-tested; blank string behavior is source-only (StrUtils.isBlank in the operation), not runtime-tested.",
+    "lock_id": "Runtime-tested through construction of the operation; operation-to-command submission is source-only because the test stubs executeRebalance.",
+    "malformed_json": "Runtime-proven for Jackson invalid-format fields maxAtOnce=abc and maxWaitSeconds=xyz; truncated/syntactically invalid JSON bytes not separately tested.",
+    "nonpositive_maxAtOnce": "Source normalizes values <= 0 to Integer.MAX_VALUE; zero/negative inputs were not runtime-tested.",
+    "platform": "Linux evidence does not prove Windows/Cygwin behavior.",
+    "responses": "Success summary model mapping is runtime-tested; failure/inactivePreferreds shapes are source-only; wire-level Summary capitalization is not independently proven.",
+    "review": "evidence/closeout/boundary-review.json"
+  },
+  "docker": "Never installed or used.",
+  "evidence": {
+    "archive_bytes": 183031,
+    "archive_entries": 152,
+    "archive_sha256": "56e56de7ee624e04d5cba7f4542f3f8ebc234f870cb354e6d0d8f594ab8c094a",
+    "manifest_entries": 133,
+    "pointer_record": "records/evidence-pointer.json",
+    "remote_download_verified_byte_for_byte": true
+  },
+  "focused_regression": {
+    "asserted_http_status": 400,
+    "command": "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.handler.V2ApiIntegrationTest.testException --console=plain -Dtests.seed=16398C0DE:3DACA04CB608CB66 --rerun-tasks",
+    "exit_code": 0,
+    "result": "passed",
+    "tests": 1
+  },
+  "id": "phone-agent-2-pr-5284-json-bad-request-linux-gate-r3-20261121-report-20261122",
+  "job": "pr-5284-json-bad-request-linux-gate-r3-20261121",
+  "live_ref_readback": "evidence/closeout/refs-final.json",
+  "mutation_checks": {
+    "evidence": "evidence/mutations/",
+    "expected_assertion_level_failures": 8,
+    "probes": [
+      "M1-MigrateDocs-collection",
+      "M2-MigrateDocs-target-collection",
+      "M3-MigrateDocs-split-key",
+      "M4-MigrateDocs-forward-timeout",
+      "M5-MigrateDocs-follow-aliases",
+      "M6-MigrateDocs-async-id",
+      "R1-RebalanceLeaders-maxAtOnce",
+      "R2-RebalanceLeaders-maxWaitSeconds"
+    ],
+    "unexpected_results": 0
+  },
+  "patch_review": {
+    "change": "Map Jackson JsonProcessingException to BAD_REQUEST using a generic invalid-request-body message; preserve other exception handling.",
+    "commit": "6de41c880893d8e5b1f0011a09f3c06aba7825bb",
+    "deletions": 0,
+    "diff_check": "passed",
+    "files": [
+      "solr/core/src/java/org/apache/solr/jersey/CatchAllExceptionMapper.java"
+    ],
+    "insertions": 7
+  },
+  "positive_suite": {
+    "classes": 8,
+    "errors": 0,
+    "failures": 0,
+    "junit_xml_directory": "evidence/positive-suites/",
+    "passed": 46,
+    "per_class_counts": "evidence/positive-suites/positive-summary.json",
+    "skip_reason": "The test is annotated @Nightly; the nightly test group was disabled under the suite configuration.",
+    "skipped": 1,
+    "skipped_test": "org.apache.solr.cloud.TestRebalanceLeaders.testRebalanceLeaders",
+    "tests": 47
+  },
+  "pr": "https://github.com/apache/solr/pull/5284",
+  "pr_state": "open",
+  "predecessor_job": "pr-5284-merge-main-linux-gate-r2-20261121",
+  "source_branch": "nick-boss-tech/solr:solr-16398-rebalance-migrate",
+  "source_head": "6de41c880893d8e5b1f0011a09f3c06aba7825bb",
+  "source_parent": "2cac1f8ccab414b17b52b31ccde0c62c4e024491",
+  "summary": "The narrow JsonProcessingException mapping fixes the previously failing malformed numeric request-field path: the exact-seed V2 integration assertion expecting HTTP 400 passed at the pushed head. All required gate legs completed successfully; the eight-class suite had one disclosed @Nightly test skip, with no failures or errors.",
+  "title": "Apache Solr PR #5284 r3 malformed-JSON patch and Linux gate",
+  "type": "report",
+  "verdict": "passed"
+}
