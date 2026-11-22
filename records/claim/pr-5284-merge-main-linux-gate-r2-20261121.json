@@ -1,0 +1,16 @@
+{
+  "evidence": "/workspace/gates/logs/phone-agent-2/pr-5284-merge-main-linux-gate-r2-20261121/evidence",
+  "id": "pr-5284-merge-main-linux-gate-r2-20261121",
+  "job": "pr-5284-merge-main-linux-gate-r2-20261121",
+  "logs": "/workspace/gates/logs/phone-agent-2/pr-5284-merge-main-linux-gate-r2-20261121",
+  "owner": "phone-agent-2",
+  "serialization": [
+    "/workspace/tools/.gradle-phone-agent-2.lock",
+    "/workspace/tools/.gradle-0609f7968656.lock"
+  ],
+  "source_branch": "nick-boss-tech/solr:solr-16398-rebalance-migrate",
+  "source_head": "2cac1f8ccab414b17b52b31ccde0c62c4e024491",
+  "toolchain": "JDK 21; GRADLE_USER_HOME=/workspace/gradle-home; no Docker",
+  "type": "claim",
+  "worktree": "/workspace/worktrees/pr-5284-merge-main-20261121"
+}
