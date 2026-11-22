@@ -1,0 +1,14 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "The report and receipt and the evidence pointer were independently fetched from live coordination-v2 and semantically matched to their local payloads at board head 13653f79a6d6f8d4828806ef234f66167037a77c. The uploaded archive and checksum sidecar were downloaded and matched local bytes; archive SHA-256 is 56e56de7ee624e04d5cba7f4542f3f8ebc234f870cb354e6d0d8f594ab8c094a. Final pre-release audit in records/pre-release-audit.json: source worktree clean at 6de41c880893d8e5b1f0011a09f3c06aba7825bb; task-created build worktree absent; no active Gradle process; nonblocking probes acquired both host locks; PR head refs and base/main refs still match; inode headroom 47%; no unrelated board worktree changes.",
+  "evidence_pointer": "records/evidence/evidence-pr-5284-json-bad-request-linux-gate-r3-20261121.json",
+  "final_audit": "records/pre-release-audit.json",
+  "id": "pr-5284-json-bad-request-linux-gate-r3-20261121",
+  "job": "pr-5284-json-bad-request-linux-gate-r3-20261121",
+  "last_verified_board_head_before_release": "13653f79a6d6f8d4828806ef234f66167037a77c",
+  "reason": "The fresh exact-head Linux gate is complete; the evidence pointer, report, and receipt are published and live-verified, and no further execution is planned.",
+  "receipt": "records/receipt/phone-agent-2-pr-5284-json-bad-request-linux-gate-r3-20261121-receipt-20261122.json",
+  "report": "records/report/phone-agent-2-pr-5284-json-bad-request-linux-gate-r3-20261121-report-20261122.json",
+  "source_head": "6de41c880893d8e5b1f0011a09f3c06aba7825bb",
+  "type": "release"
+}
