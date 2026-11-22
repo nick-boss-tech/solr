@@ -1,0 +1,30 @@
+{
+  "base_branch": "apache/solr:main",
+  "base_head": "c44af90f3fe328fda3fbba254f9757f440627f0d",
+  "host": "phone-agent-2 Linux sandbox; JDK 21; GRADLE_USER_HOME=/workspace/gradle-home; serialized host locks; no Docker.",
+  "id": "pr-5284-json-bad-request-linux-gate-r3-20261121",
+  "job": "pr-5284-json-bad-request-linux-gate-r3-20261121",
+  "pr": "https://github.com/apache/solr/pull/5284",
+  "predecessor_reconciliation": {
+    "evidence": "records/evidence/evidence-pr-5284-merge-main-linux-gate-r2-20261121.json",
+    "receipt": "records/receipt/phone-agent-2-pr-5284-merge-main-linux-gate-r2-20261121-receipt-20261121.json",
+    "release": "records/release/pr-5284-merge-main-linux-gate-r2-20261121.json",
+    "report": "records/report/phone-agent-2-pr-5284-merge-main-linux-gate-r2-20261121-report-20261121.json",
+    "source_head": "2cac1f8ccab414b17b52b31ccde0c62c4e024491",
+    "verdict": "The released exact-head gate failed solely because malformed maxAtOnce=\"abc\" produced HTTP 500 instead of expected HTTP 400. This successor tests commit 6de41c8, which adds a narrow JsonProcessingException-to-BAD_REQUEST mapping."
+  },
+  "requested_by": "Nick; patch and push only the user's PR source branch, then perform the fresh exact-head gate. No PR metadata/comments or Jira changes.",
+  "scope": [
+    "Verify the open PR, source branch, fork head, PR head ref, base main head, and exact source worktree before each gate phase; stop on any drift or ambiguity.",
+    "Run the previously failing V2ApiIntegrationTest.testException with seed 16398C0DE:3DACA04CB608CB66 at the pushed head, then run all eight named positive test classes at seed 16398C0DE; record per-class counts, XML, skips, and the actual HTTP status result.",
+    "Replay the six MigrateDocs request-field/async-id omission mutations and two RebalanceLeaders argument mutations in fresh disposable worktrees with unchanged tests; require assertion-level failures and preserve each exact diff, XML, log, and exit code.",
+    "Run tidy and require zero tracked changes; run Error Prone compile and root check -x test, explicitly excluding :solr:solr-ref-guide:checkSiteLinks, :solr:solr-ref-guide:buildLocalSite, and :solr:solr-ref-guide:buildLocalAntoraSite.",
+    "Reassess compatibility boundaries and label runtime-proven, static-only, or unproven with evidence, distinguishing behavior specific to malformed JSON from earlier API checks.",
+    "Never use Docker; do not edit or push the source branch during the gate; Linux results are not Windows/Cygwin proof. Preserve all evidence and stop at or below 15% free inodes or below 2 GiB free disk."
+  ],
+  "source_branch": "nick-boss-tech/solr:solr-16398-rebalance-migrate",
+  "source_head": "6de41c880893d8e5b1f0011a09f3c06aba7825bb",
+  "successor_of": "pr-5284-merge-main-linux-gate-r2-20261121",
+  "summary": "Fresh exact-head Linux gate for the malformed JSON handling patch on Apache Solr PR #5284.",
+  "type": "assignment"
+}
