@@ -1,0 +1,19 @@
+{
+  "base_head": "c44af90f3fe328fda3fbba254f9757f440627f0d",
+  "evidence": "/workspace/gates/logs/phone-agent-2/pr-5284-json-bad-request-linux-gate-r3-20261121/evidence",
+  "id": "pr-5284-json-bad-request-linux-gate-r3-20261121",
+  "job": "pr-5284-json-bad-request-linux-gate-r3-20261121",
+  "logs": "/workspace/gates/logs/phone-agent-2/pr-5284-json-bad-request-linux-gate-r3-20261121",
+  "owner": "phone-agent-2",
+  "pr": "https://github.com/apache/solr/pull/5284",
+  "serialization": [
+    "/workspace/tools/.gradle-phone-agent-2.lock",
+    "/workspace/tools/.gradle-0609f7968656.lock"
+  ],
+  "source_branch": "nick-boss-tech/solr:solr-16398-rebalance-migrate",
+  "source_head": "6de41c880893d8e5b1f0011a09f3c06aba7825bb",
+  "toolchain": "JDK 21; GRADLE_USER_HOME=/workspace/gradle-home; every Gradle invocation through /workspace/tools/solr-live-build.py with finite timeout and disk/inode monitoring; no Docker.",
+  "type": "claim",
+  "type_note": "Fresh successor claim for the exact source head; no other active PR #5284 claim was present at the live board tip.",
+  "worktree": "/workspace/worktrees/pr-5284-merge-main-20261121"
+}
