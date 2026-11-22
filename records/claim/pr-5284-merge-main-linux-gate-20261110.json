@@ -1,0 +1,10 @@
+{
+  "id": "pr-5284-merge-main-linux-gate-20261110",
+  "job": "pr-5284-merge-main-linux-gate-20261110",
+  "owner": "phone-agent",
+  "reconciles_noncanonical_claim": "records/claim/phone-agent-pr-5284-merge-main-linux-gate-20261110-claim-20261110.json",
+  "reconciliation_by": "phone-agent-2",
+  "reconciliation_reason": "Additive canonical-path copy of the same prior claim so the v2 writer can recognize the already-recorded closure. This does not transfer or reopen the completed job; the original claim remains unchanged.",
+  "source_snapshot": "9156bdd2f8c3802d029d436663ff05fcbfcf5e71",
+  "type": "claim"
+}
