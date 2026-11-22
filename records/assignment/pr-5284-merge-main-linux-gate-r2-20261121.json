@@ -1,0 +1,33 @@
+{
+  "base_branch": "apache/solr:main",
+  "base_head": "c44af90f3fe328fda3fbba254f9757f440627f0d",
+  "host": "phone-agent-2 Linux sandbox; JDK 21; serialized host locks; no Docker.",
+  "id": "pr-5284-merge-main-linux-gate-r2-20261121",
+  "job": "pr-5284-merge-main-linux-gate-r2-20261121",
+  "pr": "https://github.com/apache/solr/pull/5284",
+  "predecessor_reconciliation": {
+    "canonical_claim": "records/claim/pr-5284-merge-main-linux-gate-20261110.json",
+    "canonical_release": "records/release/pr-5284-merge-main-linux-gate-20261110.json",
+    "evidence_archive_sha256": "c0a085e962461c555a2410c5debcf59aea34aff27e1b62f490839fe0518355c8",
+    "original_claim": "records/claim/phone-agent-pr-5284-merge-main-linux-gate-20261110-claim-20261110.json",
+    "original_release": "records/release/phone-agent-pr-5284-merge-main-linux-gate-20261110-release-20261110.json",
+    "receipt": "records/receipt/phone-agent-pr-5284-merge-main-linux-gate-20261110-receipt-20261110.json",
+    "report": "records/report/phone-agent-pr-5284-merge-main-linux-gate-20261110-report-20261110.json",
+    "source_snapshot": "9156bdd2f8c3802d029d436663ff05fcbfcf5e71",
+    "verdict_note": "The predecessor remains failed for its documented V2ApiIntegrationTest.testException HTTP 500 vs 400 result; reconciliation changes only canonical paths and does not convert that verdict."
+  },
+  "requested_by": "Nick; proceed with exact-head Linux gate only, no PR metadata/comment or Jira changes.",
+  "scope": [
+    "Verify the open PR, fork branch, base main and exact head before every gate phase; stop if either source ref changes.",
+    "Run the named positive suites at this exact head and record fresh per-class counts, XML, skips and the actual V2ApiIntegrationTest.testException result.",
+    "Repeat six migration request-field/async-id omission mutations and two rebalance argument mutations in disposable worktrees with unchanged tests; require assertion-level failures and preserve each exact diff and XML.",
+    "Run tidy with zero tracked changes, Error Prone compile, and root check -x test. Explicitly exclude and name :solr:solr-ref-guide:checkSiteLinks, :solr:solr-ref-guide:buildLocalSite and :solr:solr-ref-guide:buildLocalAntoraSite.",
+    "Assess the prior compatibility boundaries, distinguishing runtime proof from static review; record environmental limits and exact evidence.",
+    "Never use Docker, never edit or push the PR branch as part of this gate, and do not call any failed, skipped, setup-error or unrun leg a pass. Linux results do not replace Windows/Cygwin proof."
+  ],
+  "source_branch": "nick-boss-tech/solr:solr-16398-rebalance-migrate",
+  "source_head": "2cac1f8ccab414b17b52b31ccde0c62c4e024491",
+  "successor_of": "pr-5284-merge-main-linux-gate-20261110",
+  "summary": "Fresh exact-head Linux re-gate of Apache Solr PR #5284 after merging current main into the PR source branch.",
+  "type": "assignment"
+}
