@@ -1,0 +1,43 @@
+{
+  "commands": [
+    "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.handler.V2ApiIntegrationTest.testException --console=plain -Dtests.seed=16398C0DE:3DACA04CB608CB66 --rerun-tasks",
+    "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.cloud.TestRebalanceLeaders --tests org.apache.solr.cloud.MigrateRouteKeyTest --tests org.apache.solr.handler.admin.api.MigrateDocsAPITest --tests org.apache.solr.handler.admin.api.RebalanceLeadersAPITest --tests org.apache.solr.handler.admin.api.V2CollectionAPIMappingTest --tests org.apache.solr.handler.admin.TestCollectionAPIs --tests org.apache.solr.handler.admin.TestApiFramework --tests org.apache.solr.handler.V2ApiIntegrationTest -Ptests.seed=16398C0DE --rerun-tasks",
+    "For each of eight fresh single-production-mutation disposable worktrees, run the unchanged target test with -Ptests.seed=16398C0DE --rerun-tasks; preserve exact diff, fresh XML, complete log, monitor output, and exit code.",
+    "./gradlew --no-daemon tidy",
+    "./gradlew --no-daemon :solr:core:compileJava -Pvalidation.errorprone=true",
+    "./gradlew --no-daemon check -x test -x :solr:solr-ref-guide:checkSiteLinks -x :solr:solr-ref-guide:buildLocalSite -x :solr:solr-ref-guide:buildLocalAntoraSite"
+  ],
+  "environment": "Exact pushed PR source head 6de41c880893d8e5b1f0011a09f3c06aba7825bb in /workspace/worktrees/pr-5284-merge-main-20261121; phone-agent-2 Linux sandbox; JDK 21; GRADLE_USER_HOME=/workspace/gradle-home; each Gradle command via /workspace/tools/solr-live-build.py, SOLR_GATE_TIMEOUT_SECONDS=3600, SOLR_GATE_HEARTBEAT_SECONDS=30, monitor interval 5 seconds, serialized under /workspace/tools/.gradle-phone-agent-2.lock and /workspace/tools/.gradle-0609f7968656.lock. Never use Docker. Linux is not Windows/Cygwin proof.",
+  "exclusions": [
+    ":solr:solr-ref-guide:checkSiteLinks",
+    ":solr:solr-ref-guide:buildLocalSite",
+    ":solr:solr-ref-guide:buildLocalAntoraSite"
+  ],
+  "head": "6de41c880893d8e5b1f0011a09f3c06aba7825bb",
+  "id": "pr-5284-json-bad-request-linux-gate-r3-20261121",
+  "job": "pr-5284-json-bad-request-linux-gate-r3-20261121",
+  "mutations": [
+    "M1 MigrateDocs collection omission",
+    "M2 MigrateDocs target.collection omission",
+    "M3 MigrateDocs split.key omission",
+    "M4 MigrateDocs forward.timeout omission",
+    "M5 MigrateDocs followAliases omission",
+    "M6 MigrateDocs asyncId omission",
+    "R1 RebalanceLeaders maxAtOnce argument changed to 99",
+    "R2 RebalanceLeaders maxWaitSeconds argument changed to 999"
+  ],
+  "parents": [
+    "2cac1f8ccab414b17b52b31ccde0c62c4e024491"
+  ],
+  "requirements": [
+    "Before each Gradle phase recheck the open PR API head/source/base, fork source ref, upstream refs/pull/5284/head, and base main head; stop if any expected ref changes.",
+    "The exact-seed test must run at this head and be preserved. In the combined positive suite, record every class's test count and all skips; do not suppress V2ApiIntegrationTest.testException.",
+    "M1 removes MigrateDocs messageProps.put(COLLECTION_PROP, collectionName); M2 removes messageProps.put(\"target.collection\", requestBody.target); M3 removes messageProps.put(SPLIT_KEY, requestBody.splitKey); M4 removes insertIfNotNull(messageProps, \"forward.timeout\", requestBody.forwardTimeout); M5 removes insertIfNotNull(messageProps, \"followAliases\", requestBody.followAliases); M6 replaces requestBody.async with null. Each unchanged MigrateDocsAPITest.testAllPropertiesAndAsyncId must fail at an assertion.",
+    "R1 changes RebalanceLeaders maxAtOnce to 99; R2 changes maxWaitSeconds to 999. Each unchanged RebalanceLeadersAPITest.testBodyParametersReachOperation must fail at the corresponding assertion.",
+    "Tidy must exit 0 with zero tracked changes. Run Error Prone compile. Run root check -x test and name all three Antora/site/link-check exclusions in the receipt.",
+    "Assess blank collection, nonpositive maxAtOnce, lock-id propagation, response capitalization/null omission, failures/inactivePreferreds shapes, and malformed JSON mapping; label runtime-proven, static-only, or unproven with evidence.",
+    "Stop at <=15% free inodes or <2 GiB free disk; use finite timeouts and monitor for stalls; never duplicate a live command. Preserve logs/XML/diffs and do not release while an executor/process remains active. Verdict cannot be passed if any required proof fails, is skipped, or is incomplete."
+  ],
+  "source": "https://github.com/nick-boss-tech/solr/tree/solr-16398-rebalance-migrate",
+  "type": "gate"
+}
