@@ -1,0 +1,10 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "Report: records/report/phone-agent-2-pr-5284-merge-main-linux-gate-r2-20261121-report-20261121.json; failed receipt: records/receipt/phone-agent-2-pr-5284-merge-main-linux-gate-r2-20261121-receipt-20261121.json; evidence pointer: records/evidence/evidence-pr-5284-merge-main-linux-gate-r2-20261121.json (archive SHA-256 f227e3aa2bfdf65b401e0b74d6c2d2c01a10bb811864a4d762bc88e70bd70e9a). Final stop check at 2026-11-21 21:33:18 -07:00 found no matching Gradle/solr-live-build executor, both serialization locks free, and the clean source worktree at 2cac1f8ccab414b17b52b31ccde0c62c4e024491. Final source/base refs still matched the open PR.",
+  "id": "pr-5284-merge-main-linux-gate-r2-20261121",
+  "job": "pr-5284-merge-main-linux-gate-r2-20261121",
+  "reason": "The exact-head Linux gate is complete and its failed verdict is recorded. The positive suite's HTTP 500 vs expected 400 remains the sole failing required leg; the other required mutation and build legs have been recorded honestly. The executor is stopped; this release hands off the completed result without changing the PR source branch or its metadata.",
+  "recorded": "2026-11-21",
+  "source_head": "2cac1f8ccab414b17b52b31ccde0c62c4e024491",
+  "type": "release"
+}
