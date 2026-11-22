@@ -1,0 +1,142 @@
+{
+  "commands": [
+    {
+      "command": "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.cloud.TestRebalanceLeaders --tests org.apache.solr.cloud.MigrateRouteKeyTest --tests org.apache.solr.handler.admin.api.MigrateDocsAPITest --tests org.apache.solr.handler.admin.api.RebalanceLeadersAPITest --tests org.apache.solr.handler.admin.api.V2CollectionAPIMappingTest --tests org.apache.solr.handler.admin.TestCollectionAPIs --tests org.apache.solr.handler.admin.TestApiFramework --tests org.apache.solr.handler.V2ApiIntegrationTest -Ptests.seed=16398C0DE --rerun-tasks",
+      "exit_code": 1,
+      "purpose": "Combined positive suites",
+      "result": "47 tests: 45 passed, 1 failed, 1 skipped; see positive-suite class counts."
+    },
+    {
+      "command": "./gradlew --no-daemon tidy",
+      "exit_code": 0,
+      "purpose": "tidy",
+      "result": "Passed; exit 0; zero tracked worktree changes."
+    },
+    {
+      "command": "./gradlew --no-daemon :solr:core:compileJava -Pvalidation.errorprone=true",
+      "exit_code": 0,
+      "purpose": "Error Prone compile",
+      "result": "BUILD SUCCESSFUL"
+    },
+    {
+      "command": "./gradlew --no-daemon check -x test -x :solr:solr-ref-guide:checkSiteLinks -x :solr:solr-ref-guide:buildLocalSite -x :solr:solr-ref-guide:buildLocalAntoraSite",
+      "exit_code": 0,
+      "explicit_exclusions": [
+        ":solr:solr-ref-guide:checkSiteLinks",
+        ":solr:solr-ref-guide:buildLocalSite",
+        ":solr:solr-ref-guide:buildLocalAntoraSite"
+      ],
+      "purpose": "Root check",
+      "result": "BUILD SUCCESSFUL in 3m 18s; `-x test` was applied."
+    }
+  ],
+  "compatibility_boundary_assessment": {
+    "blank_collection": "Unproven at runtime; no blank-string test, source null-only validation.",
+    "failures_and_inactivePreferreds_shapes": "Static-only; no executed test asserts those response shapes.",
+    "lock_id_propagation": "Runtime-proven from API to constructed operation; forwarding to actual submission static-only because executeRebalance is stubbed in the test.",
+    "nonpositive_maxAtOnce": "Static-only; no zero/negative test, lower operation normalizes <=0 to Integer.MAX_VALUE.",
+    "response_capitalization_and_null_omission": "Runtime-proven for tested migration mapping/subresponses and RebalanceLeaders Summary/success/already-leaders API-model assertions; wire-level Summary casing not isolated."
+  },
+  "environment": {
+    "docker": "Not installed or used.",
+    "end_state": "All executor/build processes stopped; both locks free; clean source worktree.",
+    "gradle_user_home": "/workspace/gradle-home",
+    "host": "phone-agent-2 Linux sandbox",
+    "java": "JDK 21",
+    "locks": [
+      "/workspace/tools/.gradle-phone-agent-2.lock",
+      "/workspace/tools/.gradle-0609f7968656.lock"
+    ],
+    "windows_cygwin": "Not proven by Linux gate."
+  },
+  "evidence": {
+    "contents": "Fresh positive-suite JUnit XML and failure output; all eight mutation diffs/results/XML/logs; tidy, Error Prone and root-check logs; monitor logs; provenance and checksums.",
+    "record": "records/evidence/evidence-pr-5284-merge-main-linux-gate-r2-20261121.json",
+    "sha256": "f227e3aa2bfdf65b401e0b74d6c2d2c01a10bb811864a4d762bc88e70bd70e9a",
+    "size_bytes": 188508
+  },
+  "failing_test": {
+    "actual": "HTTP 500",
+    "expected": "HTTP 400",
+    "input": "maxAtOnce=\"abc\"; Jackson InvalidFormatException while converting the string to integer request field",
+    "retry": "None; the single failure is preserved as observed and matches the predecessor failure shape.",
+    "test": "org.apache.solr.handler.V2ApiIntegrationTest.testException"
+  },
+  "gate": "pr-5284-merge-main-linux-gate-r2-20261121",
+  "head": "2cac1f8ccab414b17b52b31ccde0c62c4e024491",
+  "id": "phone-agent-2-pr-5284-merge-main-linux-gate-r2-20261121-receipt-20261121",
+  "job": "pr-5284-merge-main-linux-gate-r2-20261121",
+  "mutation_proofs": {
+    "all_eight_assertion_detected": true,
+    "diff_caveat": "M1–M5 exact preserved diffs also show incidental whitespace-only reindentation on the following line (M5 whitespace on a following blank line) due to removal anchors without leading indentation. The expected field omission is the only behavioral change; unchanged tests fail at the intended missing entry. M6/R1/R2 diffs contain only the intended value change.",
+    "results": [
+      {
+        "name": "M1 MigrateDocs collection omission",
+        "result": "AssertionError: expected captured map entry collection=sourceAlias is absent",
+        "test": "MigrateDocsAPITest.testAllPropertiesAndAsyncId"
+      },
+      {
+        "name": "M2 MigrateDocs target.collection omission",
+        "result": "AssertionError: expected target.collection=targetAlias is absent",
+        "test": "MigrateDocsAPITest.testAllPropertiesAndAsyncId"
+      },
+      {
+        "name": "M3 MigrateDocs split.key omission",
+        "result": "AssertionError: expected split.key=tenant! is absent",
+        "test": "MigrateDocsAPITest.testAllPropertiesAndAsyncId"
+      },
+      {
+        "name": "M4 MigrateDocs forward.timeout omission",
+        "result": "AssertionError: expected forward.timeout=45 is absent",
+        "test": "MigrateDocsAPITest.testAllPropertiesAndAsyncId"
+      },
+      {
+        "name": "M5 MigrateDocs followAliases omission",
+        "result": "AssertionError: expected followAliases=true is absent",
+        "test": "MigrateDocsAPITest.testAllPropertiesAndAsyncId"
+      },
+      {
+        "name": "M6 MigrateDocs asyncId replaced by null",
+        "result": "AssertionError: expected migrateAsyncId but was null",
+        "test": "MigrateDocsAPITest.testAllPropertiesAndAsyncId"
+      },
+      {
+        "name": "R1 maxAtOnce replaced by 99",
+        "result": "AssertionError: expected 2 but was 99",
+        "test": "RebalanceLeadersAPITest.testBodyParametersReachOperation"
+      },
+      {
+        "name": "R2 maxWaitSeconds replaced by 999",
+        "result": "AssertionError: expected 30 but was 999",
+        "test": "RebalanceLeadersAPITest.testBodyParametersReachOperation"
+      }
+    ],
+    "seed": "16398C0DE"
+  },
+  "owner": "phone-agent-2",
+  "positive_suite_counts": {
+    "org.apache.solr.cloud.MigrateRouteKeyTest": "5 passed",
+    "org.apache.solr.cloud.TestRebalanceLeaders": "4 passed, 1 nightly skipped",
+    "org.apache.solr.handler.V2ApiIntegrationTest": "13 passed, 1 failed",
+    "org.apache.solr.handler.admin.TestApiFramework": "3 passed",
+    "org.apache.solr.handler.admin.TestCollectionAPIs": "2 passed",
+    "org.apache.solr.handler.admin.api.MigrateDocsAPITest": "10 passed",
+    "org.apache.solr.handler.admin.api.RebalanceLeadersAPITest": "6 passed",
+    "org.apache.solr.handler.admin.api.V2CollectionAPIMappingTest": "2 passed"
+  },
+  "recorded": "2026-11-21",
+  "source": {
+    "base": "apache/solr:main@c44af90f3fe328fda3fbba254f9757f440627f0d",
+    "branch": "nick-boss-tech/solr:solr-16398-rebalance-migrate",
+    "head": "2cac1f8ccab414b17b52b31ccde0c62c4e024491",
+    "parents": [
+      "9bffc4abca263837ccf7eb2f8202048c9927fe87",
+      "c44af90f3fe328fda3fbba254f9757f440627f0d"
+    ],
+    "pr": "https://github.com/apache/solr/pull/5284"
+  },
+  "summary": "Exact-head Linux gate after merging upstream main into PR #5284. Source head and PR/base were verified before gate phases and remained unchanged. No PR metadata/comments or Jira changes were made.",
+  "type": "receipt",
+  "verdict": "failed",
+  "verdict_basis": "The required positive combined suite fails at V2ApiIntegrationTest.testException: malformed maxAtOnce=\"abc\" returned HTTP 500 instead of expected HTTP 400. Other named tests pass except the one nightly skip; all eight mutation checks discriminated by assertion, and tidy, Error Prone compile and root check passed. The gate forbids a pass with a required failing leg, so this receipt is failed for the HTTP status mismatch alone."
+}
