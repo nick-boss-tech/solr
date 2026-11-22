@@ -1,0 +1,42 @@
+{
+  "commands": [
+    "./gradlew --no-daemon :solr:core:test --tests org.apache.solr.cloud.TestRebalanceLeaders --tests org.apache.solr.cloud.MigrateRouteKeyTest --tests org.apache.solr.handler.admin.api.MigrateDocsAPITest --tests org.apache.solr.handler.admin.api.RebalanceLeadersAPITest --tests org.apache.solr.handler.admin.api.V2CollectionAPIMappingTest --tests org.apache.solr.handler.admin.TestCollectionAPIs --tests org.apache.solr.handler.admin.TestApiFramework --tests org.apache.solr.handler.V2ApiIntegrationTest -Ptests.seed=16398C0DE --rerun-tasks",
+    "For each of eight single-production-mutation disposable worktrees, run the unchanged targeted test with -Ptests.seed=16398C0DE --rerun-tasks and retain the exact diff, fresh XML, full log and exit code.",
+    "./gradlew --no-daemon tidy",
+    "./gradlew --no-daemon :solr:core:compileJava -Pvalidation.errorprone=true",
+    "./gradlew --no-daemon check -x test -x :solr:solr-ref-guide:checkSiteLinks -x :solr:solr-ref-guide:buildLocalSite -x :solr:solr-ref-guide:buildLocalAntoraSite"
+  ],
+  "environment": "Isolated Linux worktree at the exact pushed PR head 2cac1f8ccab414b17b52b31ccde0c62c4e024491; JDK 21; GRADLE_USER_HOME=/workspace/gradle-home; every Gradle invocation via /workspace/tools/solr-live-build.py with finite timeout and monitoring, serialized under /workspace/tools/.gradle-phone-agent-2.lock and /workspace/tools/.gradle-0609f7968656.lock. Never use Docker. Linux is not Windows/Cygwin proof.",
+  "exclusions": [
+    ":solr:solr-ref-guide:checkSiteLinks",
+    ":solr:solr-ref-guide:buildLocalSite",
+    ":solr:solr-ref-guide:buildLocalAntoraSite"
+  ],
+  "head": "2cac1f8ccab414b17b52b31ccde0c62c4e024491",
+  "id": "pr-5284-merge-main-linux-gate-r2-20261121",
+  "job": "pr-5284-merge-main-linux-gate-r2-20261121",
+  "mutations": [
+    "M1 MigrateDocs collection omission",
+    "M2 MigrateDocs target.collection omission",
+    "M3 MigrateDocs split.key omission",
+    "M4 MigrateDocs forward.timeout omission",
+    "M5 MigrateDocs followAliases omission",
+    "M6 MigrateDocs asyncId omission",
+    "R1 RebalanceLeaders maxAtOnce argument changed to 99",
+    "R2 RebalanceLeaders maxWaitSeconds argument changed to 999"
+  ],
+  "parents": [
+    "9bffc4abca263837ccf7eb2f8202048c9927fe87",
+    "c44af90f3fe328fda3fbba254f9757f440627f0d"
+  ],
+  "requirements": [
+    "The positive combined suites must run at the exact head; record each class's counts and all skips. Run V2ApiIntegrationTest.testException without suppressing it and preserve the actual result.",
+    "Mutation M1 removes MigrateDocs messageProps.put(COLLECTION_PROP, collectionName); M2 removes messageProps.put(\"target.collection\", requestBody.target); M3 removes messageProps.put(SPLIT_KEY, requestBody.splitKey); M4 removes insertIfNotNull(messageProps, \"forward.timeout\", requestBody.forwardTimeout); M5 removes insertIfNotNull(messageProps, \"followAliases\", requestBody.followAliases); M6 replaces requestBody.async with null. For each, unchanged MigrateDocsAPITest.testAllPropertiesAndAsyncId must fail at an assertion.",
+    "Mutation R1 replaces the RebalanceLeaders constructor argument maxAtOnce with 99; R2 replaces maxWaitSeconds with 999. For each, unchanged RebalanceLeadersAPITest.testBodyParametersReachOperation must fail at the corresponding assertion.",
+    "Run tidy and require exit 0 and zero tracked changes. Run Error Prone compile. Run root check -x test, explicitly excluding :solr:solr-ref-guide:checkSiteLinks, :solr:solr-ref-guide:buildLocalSite and :solr:solr-ref-guide:buildLocalAntoraSite; name all three exclusions in the receipt.",
+    "Assess blank collection, nonpositive maxAtOnce, lock-id propagation, response capitalization/null omission, and failures/inactivePreferreds shapes; label each runtime-proven, static-only or unproven, with evidence.",
+    "Stop at <=15% free inodes or <2 GiB free disk; investigate any stall, never duplicate a live command, preserve logs/XML/diffs, and release only after the executor and processes have stopped. Verdict cannot be passed if any required proof leg fails or is incomplete."
+  ],
+  "source": "https://github.com/nick-boss-tech/solr/tree/solr-16398-rebalance-migrate",
+  "type": "gate"
+}
