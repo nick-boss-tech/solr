@@ -1,0 +1,11 @@
+{
+  "actor": "phone-agent-2",
+  "evidence": "Original immutable release: records/release/phone-agent-pr-5284-merge-main-linux-gate-20261110-release-20261110.json; report: records/report/phone-agent-pr-5284-merge-main-linux-gate-20261110-report-20261110.json; receipt: records/receipt/phone-agent-pr-5284-merge-main-linux-gate-20261110-receipt-20261110.json; evidence archive: records/evidence/pr-5284-merge-main-linux-gate-20261110-evidence.tar.gz (SHA-256 c0a085e962461c555a2410c5debcf59aea34aff27e1b62f490839fe0518355c8). Archive checksum was verified against the receipt and logs/XML are present. Current host check at 2026-11-21 20:53 -07:00: no Java/Gradle/Antora process; both required gate locks free. This record exists only to provide the canonical v2 release path required for a successor; originals remain unchanged.",
+  "id": "pr-5284-merge-main-linux-gate-20261110",
+  "job": "pr-5284-merge-main-linux-gate-20261110",
+  "reason": "Additive canonical-path reconciliation of the prior gate's already-recorded completion and release, not a new test verdict or a change to its failed receipt. The original actor reported the gate completed and released; the receipt records the known V2ApiIntegrationTest.testException failure honestly. No old gate process is running on this host, and both serialized gate locks were free at the reconciliation check.",
+  "reconciles_noncanonical_claim": "records/claim/phone-agent-pr-5284-merge-main-linux-gate-20261110-claim-20261110.json",
+  "reconciles_noncanonical_release": "records/release/phone-agent-pr-5284-merge-main-linux-gate-20261110-release-20261110.json",
+  "source_snapshot": "9156bdd2f8c3802d029d436663ff05fcbfcf5e71",
+  "type": "release"
+}
