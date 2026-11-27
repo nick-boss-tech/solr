@@ -1,0 +1,27 @@
+{
+  "acceptance": "This gate completes when the focused run and requested probe are classified with fresh logs/XML, exact commands and evidence at the recorded head. A successful investigation may reproduce a defect; it does not mean the PR implementation is correct. Do not treat this as full PR validation.",
+  "environment": "Linux gate host vm2; clean worktree at the exact recorded head; record JDK and environment. Keep all test-only overlays local and remove them before release.",
+  "expected_commands": [
+    "./gradlew :solr:modules:s3-repository:test -Ptests.seed=5383C0DE",
+    "./gradlew :solr:modules:gcs-repository:test -Ptests.seed=5383C0DE"
+  ],
+  "head": "dd366f488e33e143fa1ea960ba7407e7f09cea65",
+  "id": "backup-close-failure-probe-linux-r1",
+  "job": "backup-close-failure-probe-linux-r1",
+  "phase": "investigation probe round 1",
+  "receipt_path": "records/receipt/backup-close-failure-probe-linux-r1.json",
+  "requirements": [
+    "Before execution, verify the source ref still resolves to dd366f488e33e143fa1ea960ba7407e7f09cea65; stop and report if it moved.",
+    "On the clean exact-head worktree, run ./gradlew :solr:modules:s3-repository:test -Ptests.seed=5383C0DE and ./gradlew :solr:modules:gcs-repository:test -Ptests.seed=5383C0DE; retain fresh logs and test XML.",
+    "Use an isolated test-only overlay to make the destination Directory IndexOutput throw from close after data was written. Exercise copyIndexFileTo for both S3 and GCS and record whether the destination is removed.",
+    "Use an isolated test-only overlay for S3 multipart completion throwing from S3OutputStream.close. Record whether abort is attempted and what upload state is observable; distinguish an ambiguous lost completion response from a confirmed incomplete upload.",
+    "Record the overlay diff and its SHA-256, actual commands, exit codes, exceptions and residual artifacts. Remove the overlay and verify the worktree is clean.",
+    "This is a behavior probe, not implementation proof. Do not commit or push to the contributor branch, do not post PR comments, and do not call a reproduction a passing fix."
+  ],
+  "source": {
+    "branch": "SOLR-18643-cleanup-on-failed-backup-copy",
+    "head": "dd366f488e33e143fa1ea960ba7407e7f09cea65",
+    "repository": "gerlowskija/solr"
+  },
+  "type": "gate"
+}
