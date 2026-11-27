@@ -1,0 +1,9 @@
+{
+  "actor": "vm2",
+  "evidence": "records/receipt/filesystem-configset-bootstrap-probe-linux-r1.json; records/evidence/filesystem-configset-bootstrap-probe-linux-r1-evidence.tar.gz (SHA-256 234740833299edf37222f2e353e3a8255a889ae0b20b52ca0eed5a2ac03d52fc)",
+  "id": "filesystem-configset-bootstrap-probe-linux-r1",
+  "job": "filesystem-configset-bootstrap-probe-linux-r1",
+  "reason": "Linux investigation probe complete at the exact recorded head 579dbf279cc86feed987200caecaa8f53355d0b7 (conflicted-with-base head used as-is). Receipt records/receipt/filesystem-configset-bootstrap-probe-linux-r1.json filed with verdict passed; per-node _default bootstrap and blank-confdir suppression recorded, and existing coverage reviewed. Executor stops here; no contributor branch push and no PR comment.",
+  "recorded": "2026-11-27",
+  "type": "release"
+}
