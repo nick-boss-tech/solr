@@ -1,0 +1,15 @@
+{
+  "claimed": "2026-11-27T06:18:30Z",
+  "head": "dd366f488e33e143fa1ea960ba7407e7f09cea65",
+  "host": "linux",
+  "id": "backup-close-failure-probe-linux-r1",
+  "job": "backup-close-failure-probe-linux-r1",
+  "note": "Claiming Linux investigation probe at the recorded exact head. Verified git ls-remote https://github.com/gerlowskija/solr.git refs/heads/SOLR-18643-cleanup-on-failed-backup-copy == dd366f488e33e143fa1ea960ba7407e7f09cea65 at claim time. No claim record exists at the coordination-v2 snapshot 406ea6429eaf08aa85fc045cea9c367c1e8dc865.",
+  "owner": "vm2",
+  "source": {
+    "branch": "SOLR-18643-cleanup-on-failed-backup-copy",
+    "head": "dd366f488e33e143fa1ea960ba7407e7f09cea65",
+    "repository": "gerlowskija/solr"
+  },
+  "type": "claim"
+}
