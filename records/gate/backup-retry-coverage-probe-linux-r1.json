@@ -1,0 +1,25 @@
+{
+  "acceptance": "This gate completes when the focused run and requested probe are classified with fresh logs/XML, exact commands and evidence at the recorded head. A successful investigation may reproduce a defect; it does not mean the PR implementation is correct. Do not treat this as full PR validation.",
+  "environment": "Linux gate host vm2; clean worktree at the exact recorded head; record JDK and environment. Keep all test-only overlays local and remove them before release.",
+  "expected_commands": [
+    "./gradlew :solr:core:test --tests org.apache.solr.core.backup.repository.RetryingBackupRepositoryTest -Ptests.seed=5387C0DE"
+  ],
+  "head": "58578d704b601d68289dd667dbd75cf0224c7a50",
+  "id": "backup-retry-coverage-probe-linux-r1",
+  "job": "backup-retry-coverage-probe-linux-r1",
+  "phase": "investigation probe round 1",
+  "receipt_path": "records/receipt/backup-retry-coverage-probe-linux-r1.json",
+  "requirements": [
+    "Before execution, verify the source ref still resolves to 58578d704b601d68289dd667dbd75cf0224c7a50; stop and report if it moved.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.core.backup.repository.RetryingBackupRepositoryTest -Ptests.seed=5387C0DE on the clean exact-head worktree and retain fresh logs and test XML.",
+    "Apply a temporary mutation that disables retry delegation only for copyFileTo and copyFileFrom, leaving the other two methods unchanged. Re-run the focused test and record whether it still passes; this tests the coverage gap, not production correctness.",
+    "Record the mutation diff and SHA-256, exact commands, exit codes and evidence. Remove the mutation and verify the worktree is clean.",
+    "Do not rerun or attribute the unrelated TestConfigSetsAPI.testList failure in this focused probe. Do not duplicate the existing negative-backoff or S3 SDK retry threads, commit or push to the contributor branch, or post PR comments."
+  ],
+  "source": {
+    "branch": "SOLR-18684-retry-backup-file-copies",
+    "head": "58578d704b601d68289dd667dbd75cf0224c7a50",
+    "repository": "gerlowskija/solr"
+  },
+  "type": "gate"
+}
