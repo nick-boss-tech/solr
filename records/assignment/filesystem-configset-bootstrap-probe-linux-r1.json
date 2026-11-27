@@ -1,0 +1,25 @@
+{
+  "claim_path": "records/claim/filesystem-configset-bootstrap-probe-linux-r1.json",
+  "current_state": "The PR is open but currently conflicts with its base; only labeler is listed as passing at this head. Treat results as exact-head diagnostics, not final PR proof.",
+  "deliverables": [
+    "Fresh logs and JUnit XML for each named command.",
+    "Exact setup, commands, exit codes, observed behavior and limitations.",
+    "For temporary probes, the overlay or mutation diff and SHA-256, followed by a clean worktree check."
+  ],
+  "gate_id": "filesystem-configset-bootstrap-probe-linux-r1",
+  "gate_record": "records/gate/filesystem-configset-bootstrap-probe-linux-r1.json",
+  "id": "filesystem-configset-bootstrap-probe-linux-r1",
+  "intended_host": "Linux gate host (vm2)",
+  "job": "filesystem-configset-bootstrap-probe-linux-r1",
+  "phase": "investigation probe round 1",
+  "pull_request": "https://github.com/apache/solr/pull/5384",
+  "receipt_path": "records/receipt/filesystem-configset-bootstrap-probe-linux-r1.json",
+  "source": {
+    "branch": "SOLR-18685-cloud-FileSystemConfigSetService",
+    "head": "579dbf279cc86feed987200caecaa8f53355d0b7",
+    "repository": "dsmiley/solr"
+  },
+  "summary": "Probe FileSystemConfigSetService bootstrap behavior on the current PR head.",
+  "supersedes": null,
+  "type": "assignment"
+}
