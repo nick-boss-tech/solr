@@ -1,0 +1,41 @@
+{
+  "commands": {
+    "gcs_module": "./gradlew :solr:modules:gcs-repository:test -Ptests.seed=5383C0DE",
+    "gcs_probe": "./gradlew :solr:modules:gcs-repository:test --tests org.apache.solr.gcs.ProbeGcsBackupCloseFailureTest -Ptests.seed=5383C0DE",
+    "s3_module": "./gradlew :solr:modules:s3-repository:test -Ptests.seed=5383C0DE",
+    "s3_probe": "./gradlew :solr:modules:s3-repository:test --tests org.apache.solr.s3.ProbeBackupCloseFailureTest -Ptests.seed=5383C0DE"
+  },
+  "evidence": "records/evidence/backup-close-failure-probe-linux-r1-evidence.tar.gz (SHA-256 821ffb139fee0633186f45dc1fcda0609d284c56c798a50835612bc3d8116d2f): per-leg logs and exit codes, baseline and probe JUnit XML, overlay diffs and SHA-256s, environment, and the clean-worktree check.",
+  "gate": "backup-close-failure-probe-linux-r1",
+  "head": "dd366f488e33e143fa1ea960ba7407e7f09cea65",
+  "id": "backup-close-failure-probe-linux-r1",
+  "job": "backup-close-failure-probe-linux-r1",
+  "legs": {
+    "gcs_module_baseline": "rc 0; 30 tests (16 GCSBackupRepositoryTest, 8 skipped GCSIncrementalBackupTest, 6 GCSInstallShardTest), 0 failures, 0 errors; BUILD SUCCESSFUL in 1m58s.",
+    "gcs_probe": "rc 0; 1/1 passed. copyIndexFileTo made the destination IndexOutput flush then throw from close(); destinationDeleted=false, and dest.bin still exists on disk in the destination directory.",
+    "gcs_probe_first_attempt": "rc 1, compile failure only: the GCS module test classpath has no org.mockito, so the initial Mockito-based overlay did not compile. No product behavior was measured in that attempt. The probe was rewritten to use the module's LocalStorageHelper plus a real FSDirectory-backed IndexOutput and re-run successfully.",
+    "overlay_and_cleanliness": "Two test-only overlay files were added under the module test trees, then removed. Final git status --porcelain at the worktree is empty and HEAD is dd366f488e33e143fa1ea960ba7407e7f09cea65.",
+    "s3_module_baseline": "rc 0; 70 tests, 64 skipped (Testcontainers/Docker unavailable), 0 failures, 0 errors; BUILD SUCCESSFUL in 5m46s.",
+    "s3_probe": "rc 0; 3/3 passed. copyIndexFileTo with destination close failure: destinationDeleted=false (deleteFile never called). copyIndexFileFrom with completeMultipartUpload throwing: abortAttempted=false; createMultipartUpload once, uploadPart once, complete once, abort never. S3OutputStream.close with completion throwing: abortAttempted=false, uploadId=upload-2, partsUploaded=2, completed=false, aborted=false."
+  },
+  "limits": [
+    "Behavior characterization only; it does not prove the PR implementation is correct and is not full PR validation.",
+    "S3 module Testcontainers tests were skipped because Docker is unavailable; the S3 probes use a mocked S3Client/S3StorageClient and do not contact a real S3 service.",
+    "The S3 completion failure is injected as a synchronous SDK exception from completeMultipartUpload. The probe records the local API-call sequence; it cannot observe the server-side object state. An ambiguous lost completion response and a confirmed incomplete upload are therefore distinguished only by whether complete returned, not by durable server state.",
+    "GCS uses the in-memory LocalStorageHelper, not a real GCS service.",
+    "Linux aarch64 and Temurin JDK 21.0.12.1+1 only.",
+    "No contributor branch was pushed and no PR comment was posted."
+  ],
+  "overlay": {
+    "diff": "Full diffs are in the evidence archive (overlay.diff); each file is new-only and was deleted before release.",
+    "files": [
+      "solr/modules/s3-repository/src/test/org/apache/solr/s3/ProbeBackupCloseFailureTest.java (SHA-256 ece02a7d73d164e230b68b3b287aa66df9f3b9f578b5a8e5f94ffab0c8fe3ef2)",
+      "solr/modules/gcs-repository/src/test/org/apache/solr/gcs/ProbeGcsBackupCloseFailureTest.java (SHA-256 abf05d880e5719271e64d6363b603c604238ba522b04b6cfa6db42c0f3ba94d3)"
+    ]
+  },
+  "owner": "vm2",
+  "recorded": "2026-11-27",
+  "summary": "Investigation completed at the exact head with fresh logs and JUnit XML. Both module baselines passed. Two cleanup gaps were reproduced on the PR's new paths: (1) copyIndexFileTo in both S3 and GCS marks success before the destination IndexOutput is closed, so an IndexOutput.close() failure after the body was written leaves the destination file (S3 deleteFile is never called; GCS dest.bin still exists on disk); (2) an S3 multipart completion failure raised from S3OutputStream.close() (and therefore from copyIndexFileFrom's try-with-resources close) is not followed by abort(), leaving the multipart upload initiated and its parts uploaded with neither completion nor abort observable. This is behavior evidence for the investigation, not implementation proof or PR validation.",
+  "type": "receipt",
+  "verdict": "passed"
+}
