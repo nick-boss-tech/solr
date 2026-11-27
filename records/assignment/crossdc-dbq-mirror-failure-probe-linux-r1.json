@@ -1,0 +1,25 @@
+{
+  "claim_path": "records/claim/crossdc-dbq-mirror-failure-probe-linux-r1.json",
+  "current_state": "The PR is merged; listed checks passed at the merged source head. Later commits changed documentation and test setup but not the delete-then-mirror order.",
+  "deliverables": [
+    "Fresh logs and JUnit XML for each named command.",
+    "Exact setup, commands, exit codes, observed behavior and limitations.",
+    "For temporary probes, the overlay or mutation diff and SHA-256, followed by a clean worktree check."
+  ],
+  "gate_id": "crossdc-dbq-mirror-failure-probe-linux-r1",
+  "gate_record": "records/gate/crossdc-dbq-mirror-failure-probe-linux-r1.json",
+  "id": "crossdc-dbq-mirror-failure-probe-linux-r1",
+  "intended_host": "Linux gate host (vm2)",
+  "job": "crossdc-dbq-mirror-failure-probe-linux-r1",
+  "phase": "investigation probe round 1",
+  "pull_request": "https://github.com/apache/solr/pull/5388",
+  "receipt_path": "records/receipt/crossdc-dbq-mirror-failure-probe-linux-r1.json",
+  "source": {
+    "branch": "jira/solr-18687-crossdc-expandDbq-fix",
+    "head": "e00a8a1933aee673241c66c0c1b13bbcf5b5fcba",
+    "repository": "sigram/solr"
+  },
+  "summary": "Probe expanded DBQ retry behavior after mirror submission failure.",
+  "supersedes": null,
+  "type": "assignment"
+}
