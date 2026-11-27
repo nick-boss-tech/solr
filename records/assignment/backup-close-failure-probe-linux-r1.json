@@ -1,0 +1,25 @@
+{
+  "claim_path": "records/claim/backup-close-failure-probe-linux-r1.json",
+  "current_state": "GitHub checks passed at this head. Existing shared coverage injects write failure, not destination close failure.",
+  "deliverables": [
+    "Fresh logs and JUnit XML for each named command.",
+    "Exact setup, commands, exit codes, observed behavior and limitations.",
+    "For temporary probes, the overlay or mutation diff and SHA-256, followed by a clean worktree check."
+  ],
+  "gate_id": "backup-close-failure-probe-linux-r1",
+  "gate_record": "records/gate/backup-close-failure-probe-linux-r1.json",
+  "id": "backup-close-failure-probe-linux-r1",
+  "intended_host": "Linux gate host (vm2)",
+  "job": "backup-close-failure-probe-linux-r1",
+  "phase": "investigation probe round 1",
+  "pull_request": "https://github.com/apache/solr/pull/5383",
+  "receipt_path": "records/receipt/backup-close-failure-probe-linux-r1.json",
+  "source": {
+    "branch": "SOLR-18643-cleanup-on-failed-backup-copy",
+    "head": "dd366f488e33e143fa1ea960ba7407e7f09cea65",
+    "repository": "gerlowskija/solr"
+  },
+  "summary": "Probe close-failure cleanup in S3 and GCS backup copy paths.",
+  "supersedes": null,
+  "type": "assignment"
+}
