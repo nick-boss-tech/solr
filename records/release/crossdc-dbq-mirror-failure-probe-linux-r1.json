@@ -1,0 +1,9 @@
+{
+  "actor": "vm2",
+  "evidence": "records/receipt/crossdc-dbq-mirror-failure-probe-linux-r1.json; records/evidence/crossdc-dbq-mirror-failure-probe-linux-r1-evidence.tar.gz (SHA-256 6d6e77f4a990a07ddc1c6311dbff8e6840b773ffe422aa37cb2fb2a703610ecd)",
+  "id": "crossdc-dbq-mirror-failure-probe-linux-r1",
+  "job": "crossdc-dbq-mirror-failure-probe-linux-r1",
+  "reason": "Linux post-merge investigation probe complete at e00a8a1933aee673241c66c0c1b13bbcf5b5fcba. Receipt records/receipt/crossdc-dbq-mirror-failure-probe-linux-r1.json filed with verdict passed; the local-delete-then-synchronous-mirror-failure divergence was reproduced and the asynchronous Kafka delivery contract recorded from source. Executor stops here; no contributor branch push and no PR comment.",
+  "recorded": "2026-11-27",
+  "type": "release"
+}
