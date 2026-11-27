@@ -1,0 +1,25 @@
+{
+  "claim_path": "records/claim/backup-retry-coverage-probe-linux-r1.json",
+  "current_state": "The current cloud suite failure is TestConfigSetsAPI.testList and is not attributed to this PR. Existing negative-backoff and S3 SDK retry questions already have review threads.",
+  "deliverables": [
+    "Fresh logs and JUnit XML for each named command.",
+    "Exact setup, commands, exit codes, observed behavior and limitations.",
+    "For temporary probes, the overlay or mutation diff and SHA-256, followed by a clean worktree check."
+  ],
+  "gate_id": "backup-retry-coverage-probe-linux-r1",
+  "gate_record": "records/gate/backup-retry-coverage-probe-linux-r1.json",
+  "id": "backup-retry-coverage-probe-linux-r1",
+  "intended_host": "Linux gate host (vm2)",
+  "job": "backup-retry-coverage-probe-linux-r1",
+  "phase": "investigation probe round 1",
+  "pull_request": "https://github.com/apache/solr/pull/5387",
+  "receipt_path": "records/receipt/backup-retry-coverage-probe-linux-r1.json",
+  "source": {
+    "branch": "SOLR-18684-retry-backup-file-copies",
+    "head": "58578d704b601d68289dd667dbd75cf0224c7a50",
+    "repository": "gerlowskija/solr"
+  },
+  "summary": "Verify whether the retry test detects missing retries in copyFileTo and copyFileFrom.",
+  "supersedes": null,
+  "type": "assignment"
+}
