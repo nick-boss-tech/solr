@@ -1,0 +1,26 @@
+{
+  "acceptance": "This gate completes when the focused run and requested probe are classified with fresh logs/XML, exact commands and evidence at the recorded head. A successful investigation may reproduce a defect; it does not mean the PR implementation is correct. Do not treat this as full PR validation.",
+  "environment": "Linux gate host vm2; clean worktree at the exact recorded head; record JDK and environment. Keep all test-only overlays local and remove them before release.",
+  "expected_commands": [
+    "./gradlew :solr:core:test --tests org.apache.solr.cloud.TestFileSystemConfigSetServiceCloud -Ptests.seed=5384C0DE"
+  ],
+  "head": "579dbf279cc86feed987200caecaa8f53355d0b7",
+  "id": "filesystem-configset-bootstrap-probe-linux-r1",
+  "job": "filesystem-configset-bootstrap-probe-linux-r1",
+  "phase": "investigation probe round 1",
+  "receipt_path": "records/receipt/filesystem-configset-bootstrap-probe-linux-r1.json",
+  "requirements": [
+    "Before execution, verify the source ref still resolves to 579dbf279cc86feed987200caecaa8f53355d0b7; stop if it moved or the conflict resolution replaced this head.",
+    "Run ./gradlew :solr:core:test --tests org.apache.solr.cloud.TestFileSystemConfigSetServiceCloud -Ptests.seed=5384C0DE on the clean exact-head worktree and retain fresh logs and test XML.",
+    "Review existing tests for explicit coverage of ConfigSetService default bootstrap and the blank solr.configset.default.confdir setting.",
+    "Using isolated test-only probes, start a SolrCloud cluster with FileSystemConfigSetService and a temporary configSetBaseDir lacking _default; record whether bootstrap creates _default on each node. Repeat with solr.configset.default.confdir blank and record whether startup avoids that bootstrap while a named configset remains usable.",
+    "Record exact setup, commands, exit codes, test XML, overlay diff and SHA-256, and any harness limitations. Remove the overlay and verify the worktree is clean.",
+    "This is a focused behavior probe, not PR approval or full validation. Do not modify the contributor branch, run ref-guide/Antora tasks, or post PR comments. The documentation wording finding is separate from this gate."
+  ],
+  "source": {
+    "branch": "SOLR-18685-cloud-FileSystemConfigSetService",
+    "head": "579dbf279cc86feed987200caecaa8f53355d0b7",
+    "repository": "dsmiley/solr"
+  },
+  "type": "gate"
+}
