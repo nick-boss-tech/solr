@@ -1,0 +1,9 @@
+{
+  "actor": "vm2",
+  "evidence": "records/receipt/backup-retry-coverage-probe-linux-r1.json; records/evidence/backup-retry-coverage-probe-linux-r1-evidence.tar.gz (SHA-256 91a7155b17565cc0f406aaf5209f7f048ac32b07a62b84e5e4c49a0892387d68)",
+  "id": "backup-retry-coverage-probe-linux-r1",
+  "job": "backup-retry-coverage-probe-linux-r1",
+  "reason": "Linux investigation probe complete at 58578d704b601d68289dd667dbd75cf0224c7a50. Receipt records/receipt/backup-retry-coverage-probe-linux-r1.json filed with verdict passed; disabling retry delegation only for copyFileTo/copyFileFrom left all 5 focused tests passing, confirming the coverage gap. Mutation reverted and worktree clean. Executor stops here; no contributor branch push and no PR comment.",
+  "recorded": "2026-11-27",
+  "type": "release"
+}
