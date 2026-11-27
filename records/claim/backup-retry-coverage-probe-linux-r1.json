@@ -1,0 +1,15 @@
+{
+  "claimed": "2026-11-27T06:18:30Z",
+  "head": "58578d704b601d68289dd667dbd75cf0224c7a50",
+  "host": "linux",
+  "id": "backup-retry-coverage-probe-linux-r1",
+  "job": "backup-retry-coverage-probe-linux-r1",
+  "note": "Claiming Linux investigation probe at the recorded exact head. Verified git ls-remote https://github.com/gerlowskija/solr.git refs/heads/SOLR-18684-retry-backup-file-copies == 58578d704b601d68289dd667dbd75cf0224c7a50 at claim time. No claim record exists at the coordination-v2 snapshot 406ea6429eaf08aa85fc045cea9c367c1e8dc865.",
+  "owner": "vm2",
+  "source": {
+    "branch": "SOLR-18684-retry-backup-file-copies",
+    "head": "58578d704b601d68289dd667dbd75cf0224c7a50",
+    "repository": "gerlowskija/solr"
+  },
+  "type": "claim"
+}
