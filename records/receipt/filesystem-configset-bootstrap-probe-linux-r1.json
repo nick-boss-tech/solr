@@ -1,0 +1,37 @@
+{
+  "commands": {
+    "baseline": "./gradlew :solr:core:test --tests org.apache.solr.cloud.TestFileSystemConfigSetServiceCloud -Ptests.seed=5384C0DE",
+    "baseline_rerun": "./gradlew :solr:core:test --tests org.apache.solr.cloud.TestFileSystemConfigSetServiceCloud -Ptests.seed=5384C0DE",
+    "probe": "./gradlew :solr:core:test --tests org.apache.solr.cloud.TestFileSystemConfigSetBootstrapProbe -Ptests.seed=5384C0DE"
+  },
+  "evidence": "records/evidence/filesystem-configset-bootstrap-probe-linux-r1-evidence.tar.gz (SHA-256 234740833299edf37222f2e353e3a8255a889ae0b20b52ca0eed5a2ac03d52fc): per-leg logs and exit codes, baseline and probe JUnit XML, overlay diff and SHA-256, environment, and the clean-worktree check.",
+  "gate": "filesystem-configset-bootstrap-probe-linux-r1",
+  "head": "579dbf279cc86feed987200caecaa8f53355d0b7",
+  "id": "filesystem-configset-bootstrap-probe-linux-r1",
+  "job": "filesystem-configset-bootstrap-probe-linux-r1",
+  "legs": {
+    "baseline": "rc 0; TestFileSystemConfigSetServiceCloud 1/1 passed; BUILD SUCCESSFUL in 6m37s. The probe run later replaced this run's JUnit XML in the shared test-results directory, so the baseline was re-run at the same seed to regenerate fresh XML.",
+    "baseline_rerun": "rc 0; 1/1 passed; BUILD SUCCESSFUL in 1m44s; fresh JUnit XML retained in evidence.",
+    "bootstrap_probe": "rc 0; 1/1 passed. Scenario A (default confdir set): per-node bases were distinct (node1 and node2 each <solrHome>/probe-configsets-a-...), and both reported _default=true after startup. Scenario B (solr.configset.default.confdir set to blank): both per-node bases reported _default=false. In both scenarios a named configset copied into each node's base was usable: collection created, document indexed, query returned 1, and reload preserved 1.",
+    "existing_coverage_review": "TestFileSystemConfigSetServiceCloud deliberately points configSetBaseDir at a read-only test configset tree that already contains _default ('so it isn't bootstrapped') and does not assert bootstrap behavior. TestConfigSetsAPI.testUserAndTestDefaultConfigsetsAreSame only checks that ConfigSetService.getDefaultConfigDirPath() equals ExternalPaths.DEFAULT_CONFIGSET. No existing test sets solr.configset.default.confdir blank or asserts that startup suppresses the _default upload.",
+    "overlay_and_cleanliness": "One test-only overlay file was added under the cloud test tree and removed. Final git status --porcelain is empty and HEAD is 579dbf279cc86feed987200caecaa8f53355d0b7."
+  },
+  "limits": [
+    "Exact-head diagnostics only. The assignment notes this head conflicts with its base; this probe does not resolve or evaluate the conflict and says nothing about the merged result.",
+    "The cluster nodes are in-process and share one system property. A relative configSetBaseDir was resolved against each node's own solr home to obtain genuinely separate per-node directories; the named configset was copied into each node's base after startup, which FileSystemConfigSetService reads from disk on demand.",
+    "The probe verifies that a named configset remains usable, not the full configset management API or every ConfigSetService operation.",
+    "The documentation-wording finding is out of scope for this gate.",
+    "Linux aarch64 and Temurin JDK 21.0.12.1+1 only.",
+    "No contributor branch was pushed and no PR comment was posted."
+  ],
+  "overlay": {
+    "diff": "Full new-file diff is in the evidence archive (overlay.diff); the file was deleted before release.",
+    "file": "solr/core/src/test/org/apache/solr/cloud/TestFileSystemConfigSetBootstrapProbe.java",
+    "sha256": "3a84c5fc069860ea11549bc4def0a34a3792a61eddcb6a186a3eaac1047ed25f"
+  },
+  "owner": "vm2",
+  "recorded": "2026-11-27",
+  "summary": "Investigation completed at the exact head with fresh logs and JUnit XML. The focused baseline passed. A test-only probe used a relative configSetBaseDir so each in-process node resolved a distinct directory, then started SolrCloud with FileSystemConfigSetService on a base lacking _default. With solr.configset.default.confdir pointing at the real _default conf, both nodes bootstrapped _default. With the property set to a blank string, neither node created _default, and a named configset copied into each node's base remained usable (collection create, index, query, reload) in both scenarios. Existing tests contain no explicit assertion of startup bootstrap and no blank-confdir suppression case.",
+  "type": "receipt",
+  "verdict": "passed"
+}
