@@ -1,0 +1,26 @@
+{
+  "acceptance": "This gate completes when the focused run and requested probe are classified with fresh logs/XML, exact commands and evidence at the recorded head. A successful investigation may reproduce a defect; it does not mean the PR implementation is correct. Do not treat this as full PR validation.",
+  "environment": "Linux gate host vm2; clean worktree at the exact recorded head; record JDK and environment. Keep all test-only overlays local and remove them before release.",
+  "expected_commands": [
+    "./gradlew :solr:modules:cross-dc:test --tests org.apache.solr.crossdc.update.processor.MirroringDbqExpansionCloudTest -Ptests.seed=5388C0DE"
+  ],
+  "head": "e00a8a1933aee673241c66c0c1b13bbcf5b5fcba",
+  "id": "crossdc-dbq-mirror-failure-probe-linux-r1",
+  "job": "crossdc-dbq-mirror-failure-probe-linux-r1",
+  "phase": "investigation probe round 1",
+  "receipt_path": "records/receipt/crossdc-dbq-mirror-failure-probe-linux-r1.json",
+  "requirements": [
+    "Before execution, verify the source ref still resolves to e00a8a1933aee673241c66c0c1b13bbcf5b5fcba; stop and report if it moved.",
+    "Run ./gradlew :solr:modules:cross-dc:test --tests org.apache.solr.crossdc.update.processor.MirroringDbqExpansionCloudTest -Ptests.seed=5388C0DE on the clean exact-head worktree and retain fresh logs and test XML.",
+    "Use an isolated test-only overlay that throws synchronously from the recording mirror handler after the local expanded delete succeeds. Make the deletion visible to searchers before retrying the original DBQ. Record the request error, visible source state, retry results and mirrored IDs.",
+    "Inspect the production mirror-handler/Kafka path and report whether mirror submission failures are synchronous, asynchronous, or acknowledged only after durable delivery. The injected synchronous test does not prove asynchronous delivery behavior.",
+    "Record the overlay diff and SHA-256, actual commands, exit codes, evidence and limitations. Remove the overlay and verify the worktree is clean.",
+    "This is a post-merge behavior investigation, not PR validation. Do not commit or push to the contributor branch, do not post comments, and do not propose a recovery design until the delivery contract is established."
+  ],
+  "source": {
+    "branch": "jira/solr-18687-crossdc-expandDbq-fix",
+    "head": "e00a8a1933aee673241c66c0c1b13bbcf5b5fcba",
+    "repository": "sigram/solr"
+  },
+  "type": "gate"
+}
