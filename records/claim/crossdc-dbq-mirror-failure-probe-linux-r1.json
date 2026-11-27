@@ -1,0 +1,15 @@
+{
+  "claimed": "2026-11-27T06:18:30Z",
+  "head": "e00a8a1933aee673241c66c0c1b13bbcf5b5fcba",
+  "host": "linux",
+  "id": "crossdc-dbq-mirror-failure-probe-linux-r1",
+  "job": "crossdc-dbq-mirror-failure-probe-linux-r1",
+  "note": "Claiming Linux investigation probe at the recorded exact head. Verified git ls-remote https://github.com/sigram/solr.git refs/heads/jira/solr-18687-crossdc-expandDbq-fix == e00a8a1933aee673241c66c0c1b13bbcf5b5fcba at claim time. No claim record exists at the coordination-v2 snapshot 406ea6429eaf08aa85fc045cea9c367c1e8dc865.",
+  "owner": "vm2",
+  "source": {
+    "branch": "jira/solr-18687-crossdc-expandDbq-fix",
+    "head": "e00a8a1933aee673241c66c0c1b13bbcf5b5fcba",
+    "repository": "sigram/solr"
+  },
+  "type": "claim"
+}
