@@ -1,0 +1,9 @@
+{
+  "actor": "vm2",
+  "evidence": "records/receipt/backup-close-failure-probe-linux-r1.json; records/evidence/backup-close-failure-probe-linux-r1-evidence.tar.gz (SHA-256 821ffb139fee0633186f45dc1fcda0609d284c56c798a50835612bc3d8116d2f)",
+  "id": "backup-close-failure-probe-linux-r1",
+  "job": "backup-close-failure-probe-linux-r1",
+  "reason": "Linux investigation probe complete at dd366f488e33e143fa1ea960ba7407e7f09cea65. Receipt records/receipt/backup-close-failure-probe-linux-r1.json filed with verdict passed; both cleanup gaps were reproduced and classified. Executor stops here; no contributor branch push and no PR comment.",
+  "recorded": "2026-11-27",
+  "type": "release"
+}
