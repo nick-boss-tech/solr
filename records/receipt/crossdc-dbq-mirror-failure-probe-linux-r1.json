@@ -1,0 +1,34 @@
+{
+  "commands": {
+    "baseline": "./gradlew :solr:modules:cross-dc:test --tests org.apache.solr.crossdc.update.processor.MirroringDbqExpansionCloudTest -Ptests.seed=5388C0DE",
+    "probe": "./gradlew :solr:modules:cross-dc:test --tests org.apache.solr.crossdc.update.processor.MirroringDbqMirrorFailureProbeTest -Ptests.seed=5388C0DE"
+  },
+  "evidence": "records/evidence/crossdc-dbq-mirror-failure-probe-linux-r1-evidence.tar.gz (SHA-256 6d6e77f4a990a07ddc1c6311dbff8e6840b773ffe422aa37cb2fb2a703610ecd): per-leg logs and exit codes, baseline and probe JUnit XML, overlay diff and SHA-256, environment, and the clean-worktree check.",
+  "gate": "crossdc-dbq-mirror-failure-probe-linux-r1",
+  "head": "e00a8a1933aee673241c66c0c1b13bbcf5b5fcba",
+  "id": "crossdc-dbq-mirror-failure-probe-linux-r1",
+  "job": "crossdc-dbq-mirror-failure-probe-linux-r1",
+  "legs": {
+    "baseline": "rc 0; MirroringDbqExpansionCloudTest 5/5 passed (testExpand, testDefaultIsExpand, testNone, testMatchAllQueryIsNeverExpanded, testExpandPagesThroughCursor); BUILD SUCCESSFUL in 5m8s.",
+    "delivery_contract_source_review": "KafkaRequestMirroringHandler.mirror builds a MirroredSolrRequest and calls KafkaMirroringSink.submit. submitRequest calls producer.send(record, callback) and returns without waiting; the callback only logs a delivery exception. A synchronous exception from send() (for example buffer exhaustion or max.block timeout) is caught, converted to MirroringException, optionally submitted to the DLQ, and rethrown. Submission is therefore asynchronous and acknowledged only when handed to the producer buffer, not acknowledged after durable delivery. The injected synchronous failure exercises the enqueue/submit-failure path; it does not prove behavior for asynchronous broker or delivery failures.",
+    "mirror_failure_probe": "rc 0; 1/1 passed. First attempt: RemoteSolrException from the update endpoint, root message 'mirror submit failed'. After commit: visibleDocs=3 (doc02 plus two keep docs), mirroredDeleteIds=[]; the page-one local deletes of doc00/doc01 had applied. Retry of the original DBQ after the failure: visibleDocs=2, mirroredDeleteIds=[doc02], mirroredDeleteQueries=[]; the cursor no longer saw doc00/doc01. Result: doc00/doc01 were removed locally and never reached the mirror.",
+    "overlay_and_cleanliness": "One test-only overlay file was added under the module test tree and removed. Final git status --porcelain is empty and HEAD is e00a8a1933aee673241c66c0c1b13bbcf5b5fcba."
+  },
+  "limits": [
+    "Post-merge behavior investigation only; it does not validate the merged implementation or propose a recovery design. No recovery design is proposed because the delivery contract is not a durable acknowledgement.",
+    "The failure is injected synchronously in a recording in-memory handler; no Kafka broker is used. The production delivery contract is reported from source inspection at this head, not from an executable Kafka probe.",
+    "The source cluster uses 3 shards x 2 replicas with the cloud-minimal config; the mirror is a recording list, not a second cluster.",
+    "Linux aarch64 and Temurin JDK 21.0.12.1+1 only.",
+    "No contributor branch was pushed and no PR comment was posted."
+  ],
+  "overlay": {
+    "diff": "Full new-file diff is in the evidence archive (overlay.diff); the file was deleted before release.",
+    "file": "solr/modules/cross-dc/src/test/org/apache/solr/crossdc/update/processor/MirroringDbqMirrorFailureProbeTest.java",
+    "sha256": "1652f59d54063721d3f5c236c8cb03f4b4353c1a6583c565e3e95f1710f23c1a"
+  },
+  "owner": "vm2",
+  "recorded": "2026-11-27",
+  "summary": "Investigation completed at the exact head with fresh logs and JUnit XML. The focused baseline passed 5/5. A test-only overlay made the recording mirror handler throw synchronously after the first expanded DBQ page had already been deleted locally; the caller saw a mirror-submit error. Making those deletes visible and retrying the original DBQ found only the remaining doc, so the retry mirrored doc02 while doc00/doc01 had already been deleted locally and never mirrored. The production Kafka submission path is asynchronous: producer.send(record, callback) is not waited on and the callback only logs delivery failures, so a synchronous throw proves local enqueue/submission failure handling, not durable delivery behavior.",
+  "type": "receipt",
+  "verdict": "passed"
+}
