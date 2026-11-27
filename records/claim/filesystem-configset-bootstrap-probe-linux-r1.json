@@ -1,0 +1,15 @@
+{
+  "claimed": "2026-11-27T06:18:30Z",
+  "head": "579dbf279cc86feed987200caecaa8f53355d0b7",
+  "host": "linux",
+  "id": "filesystem-configset-bootstrap-probe-linux-r1",
+  "job": "filesystem-configset-bootstrap-probe-linux-r1",
+  "note": "Claiming Linux investigation probe at the recorded exact head. Verified git ls-remote https://github.com/dsmiley/solr.git refs/heads/SOLR-18685-cloud-FileSystemConfigSetService == 579dbf279cc86feed987200caecaa8f53355d0b7 at claim time. Head matches the recorded conflicted revision; results are exact-head diagnostics only. No claim record exists at the coordination-v2 snapshot 406ea6429eaf08aa85fc045cea9c367c1e8dc865.",
+  "owner": "vm2",
+  "source": {
+    "branch": "SOLR-18685-cloud-FileSystemConfigSetService",
+    "head": "579dbf279cc86feed987200caecaa8f53355d0b7",
+    "repository": "dsmiley/solr"
+  },
+  "type": "claim"
+}
