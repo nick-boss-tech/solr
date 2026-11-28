@@ -1,0 +1,78 @@
+{
+  "background_docs": [
+    "records/report/review-reconcile-pr-5257-context-20261128.json",
+    "records/report/review-reconcile-pr-5269-context-20261128.json",
+    "records/report/review-reconcile-pr-5284-context-20261128.json"
+  ],
+  "claim_path": "records/claim/review-reconcile-prs-5257-5269-5284-20261128.json",
+  "completion_criteria": [
+    "All current human review submissions and inline review threads have a documented disposition against the live PR head.",
+    "Historical chat conclusions are reconciled with current GitHub state and the exact-head v2 receipts; stale statements are labeled historical.",
+    "No existing claim or gate is duplicated, transferred, or treated as proof for another branch head.",
+    "The final reports and completion report are stored and read back at one coordination-v2 snapshot."
+  ],
+  "coordination_notes": [
+    "This is a read-only review and documentation assignment. It does not authorize source edits, PR head changes, PR comments or body edits, JIRA comments, builds, tests, or new gate jobs.",
+    "The background docs are a snapshot from 2026-11-28 and are not a disposition of the live PRs.",
+    "PR 5257 and PR 5269 share related SOLR-17849 work. Do not assume a fix on one branch updates the other public PR.",
+    "At the source snapshot, the PR 5257 review-response Linux claim had been released without a receipt or verdict. The PR 5269 main-section Linux r2 receipt passed at c5955f3d47ffc8ff21bd59f77ae6846263ced4c6, but its claim had no matching release record in that snapshot.",
+    "At the source snapshot, PR 5284's merge-main r2 gate failed at 2cac1f8ccab414b17b52b31ccde0c62c4e024491, while its JSON bad-request r3 gate passed at 6de41c880893d8e5b1f0011a09f3c06aba7825bb and had a release record.",
+    "If any code change or Linux proof is later requested, create a separate exact-head assignment or gate after checking the current claim, release, worker state, and live source head."
+  ],
+  "created_on": "2026-11-28",
+  "deliverables": [
+    "A per-review reconciliation matrix for each PR, including unresolved inline threads and current-head evidence.",
+    "A clear account of which branch or PR head each existing gate receipt covers, plus any gaps, unclaimed work, or missing release records.",
+    "Three final per-PR report records and one concise completion report linked to this assignment.",
+    "A read-back of each published record from a single resulting coordination-v2 snapshot."
+  ],
+  "id": "review-reconcile-prs-5257-5269-5284-20261128",
+  "intended_host": "Windows read-only review and documentation",
+  "job": "review-reconcile-prs-5257-5269-5284-20261128",
+  "pull_requests_at_assignment_creation": [
+    {
+      "draft": true,
+      "head": "e92a34eefd6adf0ec2fe5d3018abc332af77e246",
+      "head_ref": "solr-17849-header-submit",
+      "merge_state_status": "UNSTABLE",
+      "mergeable": "MERGEABLE",
+      "number": 5257,
+      "review_decision": "CHANGES_REQUESTED",
+      "state": "OPEN",
+      "url": "https://github.com/apache/solr/pull/5257"
+    },
+    {
+      "draft": true,
+      "head": "3ec4a1ae626191d9cb2a8c42e7f69356f31b862d",
+      "head_ref": "solr-17849-index-query-content",
+      "merge_state_status": "UNSTABLE",
+      "mergeable": "MERGEABLE",
+      "number": 5269,
+      "review_decision": "CHANGES_REQUESTED",
+      "state": "OPEN",
+      "url": "https://github.com/apache/solr/pull/5269"
+    },
+    {
+      "draft": true,
+      "head": "6de41c880893d8e5b1f0011a09f3c06aba7825bb",
+      "head_ref": "solr-16398-rebalance-migrate",
+      "merge_state_status": "UNKNOWN",
+      "mergeable": "UNKNOWN",
+      "number": 5284,
+      "review_decision": "CHANGES_REQUESTED",
+      "state": "OPEN",
+      "url": "https://github.com/apache/solr/pull/5284"
+    }
+  ],
+  "scope": [
+    "Refresh the live PR head, review decision, checks, issue comments, review submissions, and inline review threads before reconciling any prior note.",
+    "Map each reviewer request to the exact current diff and classify it as addressed, partially addressed, open, superseded, or outside the current PR scope. Cite the evidence and exact heads.",
+    "Reconcile the stacked SOLR-17849 work across PRs 5257 and 5269. Keep the public PR heads distinct from the corrected fork branches and their Linux receipts.",
+    "Reconcile PR 5284's failed round-two gate and passing round-three gate against the current PR head and the still-requested review decision.",
+    "Inspect the referenced coordination-v2 assignments, claims, releases, gates, receipts, and reports. Do not infer that a claim is inactive from a receipt or release alone; verify the recorded stop evidence and exact source head.",
+    "Publish immutable final documentation reports under records/report, one for each PR, and a completion report that links them."
+  ],
+  "source_board_snapshot": "b53116116a9778d3399b2a7a6951eda66868264b",
+  "summary": "Reconcile current reviewer feedback, PR heads, related branches, and exact-head board evidence for Apache Solr PRs 5257, 5269, and 5284. Publish final per-PR documentation reports.",
+  "type": "assignment"
+}
