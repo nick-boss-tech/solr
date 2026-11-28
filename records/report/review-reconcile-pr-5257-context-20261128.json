@@ -1,0 +1,69 @@
+{
+  "checked_on": "2026-11-28",
+  "codex_chat_sources": [
+    {
+      "conversation_date": "2026-11-18",
+      "summary": "Prepared solr-17849-review-response at 844e0438d9c2e9635215c436b54b789d1f373a1c. The response branch included the ViewModel and UI integration, handler-selection behavior, DTO and test cleanup, preview, and readability changes. The public PR 5257 head remained e92a34eefd6adf0ec2fe5d3018abc332af77e246. The chat noted overlap with PR 5269.",
+      "thread_id": "01a1f1a1-46e3-7c00-a085-bca6db7e3114",
+      "title": "Address PR 5257 review"
+    },
+    {
+      "conversation_date": "2026-11-19",
+      "summary": "The thread also found PR 5269's changes-requested navigation-placement review, prepared corrected Index & Query main-section branches, and handed off Linux proof. Treat the chat's branch and gate state as historical.",
+      "thread_id": "01a1f471-409d-7550-989e-39efdc6e785f",
+      "title": "Review PR 5257 security changes"
+    }
+  ],
+  "coordination_v2_records_at_snapshot": [
+    {
+      "assignment": "records/assignment/pr-5257-review-response-linux-20261119.json",
+      "release": "records/release/pr-5257-review-response-linux-20261119.json",
+      "source_branch": "solr-17849-review-response",
+      "source_head": "844e0438d9c2e9635215c436b54b789d1f373a1c",
+      "status": "The claim was released without a receipt, report, or verdict. This does not establish passing Linux proof."
+    },
+    {
+      "assignment": "records/assignment/index-query-current-head-linux-20261119-r6.json",
+      "source_branch": "index-query-review-fixes",
+      "source_head": "d709199cf4c0a556ee3cfe5049a699bdc948215a",
+      "status": "A separate current-head Linux gate assignment exists for the review-fixes branch. Check its current claim, release, and receipt before relying on it."
+    },
+    {
+      "assignment": "records/assignment/index-query-split-windows-20261120.json",
+      "release": "records/release/index-query-split-windows-20261120.json",
+      "report": "records/report/index-query-split-windows-20261120-report.json",
+      "status": "Separate header and screen branches were prepared. The report says no Windows tests ran and the public PR heads and comments were unchanged."
+    }
+  ],
+  "id": "review-reconcile-pr-5257-context-20261128",
+  "job": "review-reconcile-prs-5257-5269-5284-20261128",
+  "next_worker_actions": [
+    "Read every current PR 5257 review comment and inline thread at the live head, then map it to the current diff.",
+    "Check whether the requested ViewModel/UI changes are on the public PR head or only on the separate review-response branch.",
+    "Record the exact gate, claim, release, and receipt state for each relevant branch without combining evidence across heads."
+  ],
+  "public_pr_snapshot": {
+    "draft": true,
+    "head": "e92a34eefd6adf0ec2fe5d3018abc332af77e246",
+    "head_ref": "solr-17849-header-submit",
+    "latest_changes_requested_review": {
+      "reviewer": "malliaridis",
+      "submitted_at": "2026-11-19T01:47:12Z",
+      "summary": "The reviewer asked for the state holder to be replaced by a ViewModel and integrated into the UI. Error handling was described as imperfect but acceptable for separate follow-up."
+    },
+    "merge_state_status": "UNSTABLE",
+    "mergeable": "MERGEABLE",
+    "review_decision": "CHANGES_REQUESTED",
+    "state": "OPEN",
+    "url": "https://github.com/apache/solr/pull/5257"
+  },
+  "reconciliation_cautions": [
+    "The current PR 5257 head is e92a34eefd6adf0ec2fe5d3018abc332af77e246; the 844e0438 review-response branch is separate and was not pushed to the public PR head.",
+    "Do not treat PR 5269's main-section gate receipt as proof for the 844e0438 review-response branch or for the current PR 5257 head.",
+    "Refresh the full current review discussion and checks before classifying any request as resolved."
+  ],
+  "source_board_snapshot": "b53116116a9778d3399b2a7a6951eda66868264b",
+  "status": "background context only; not a final review disposition",
+  "summary": "Background notes for reconciling PR 5257 review feedback with its current head and the related PR 5269 work.",
+  "type": "report"
+}
