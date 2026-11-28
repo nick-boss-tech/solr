@@ -1,0 +1,74 @@
+{
+  "checked_on": "2026-11-28",
+  "codex_chat_sources": [
+    {
+      "conversation_date": "2026-11-03",
+      "summary": "Reported a pushed coverage and documentation update at 08d13e33495689b67561f451b62a3e2d017df720, including unit and cloud-test strengthening. Linux proof was pending in that conversation.",
+      "thread_id": "01a1a267-c319-76e1-9cc9-5bed5d0afe75",
+      "title": "Review PR 5284"
+    },
+    {
+      "conversation_date": "2026-11-10",
+      "summary": "Resolved a TestCollectionAPIs.java merge conflict by merging current main and reported the PR branch at a225b9d4af9f295e3c84b7ff6f35ef7e71ababc1. The exact-head gate was pending at the time.",
+      "thread_id": "01a1c644-1e21-7c40-9f35-06dd490bae3b",
+      "title": "Review PR 5284 comments"
+    },
+    {
+      "conversation_date": "2026-11-11",
+      "summary": "Reconciled successive exact-head receipts and later branch updates. Its 3d530d7639eeb0b4bd8ee11227a1133fe66aa672 state is historical and was superseded by later board work.",
+      "thread_id": "01a1c909-cb49-7730-81ba-7114a60c9979",
+      "title": "Check receipt for current head"
+    }
+  ],
+  "coordination_v2_records_at_snapshot": [
+    {
+      "assignment": "records/assignment/pr-5284-merge-main-linux-gate-r2-20261121.json",
+      "head": "2cac1f8ccab414b17b52b31ccde0c62c4e024491",
+      "receipt": "records/receipt/phone-agent-2-pr-5284-merge-main-linux-gate-r2-20261121-receipt-20261121.json",
+      "release": "records/release/pr-5284-merge-main-linux-gate-r2-20261121.json",
+      "report": "records/report/phone-agent-2-pr-5284-merge-main-linux-gate-r2-20261121-report-20261121.json",
+      "result": "The required V2ApiIntegrationTest.testException assertion expected HTTP 400 and received HTTP 500. The source records associate this with the malformed maxAtOnce request and the related PR 5285 failure.",
+      "verdict": "failed"
+    },
+    {
+      "assignment": "records/assignment/pr-5284-json-bad-request-linux-gate-r3-20261121.json",
+      "head": "6de41c880893d8e5b1f0011a09f3c06aba7825bb",
+      "receipt": "records/receipt/phone-agent-2-pr-5284-json-bad-request-linux-gate-r3-20261121-receipt-20261122.json",
+      "release": "records/release/pr-5284-json-bad-request-linux-gate-r3-20261121.json",
+      "report": "records/report/phone-agent-2-pr-5284-json-bad-request-linux-gate-r3-20261121-report-20261122.json",
+      "result": "The malformed-field HTTP 400 regression passed, all eight listed mutation probes were detected, tidy, Error Prone compile, and root check passed. The positive suite reported 46 passed and one disclosed @Nightly skip.",
+      "verdict": "passed"
+    }
+  ],
+  "id": "review-reconcile-pr-5284-context-20261128",
+  "job": "review-reconcile-prs-5257-5269-5284-20261128",
+  "next_worker_actions": [
+    "Read and map each current inline review comment to the 6de41c880893d8e5b1f0011a09f3c06aba7825bb diff.",
+    "Verify that the PR head and required checks still match the r3 receipt.",
+    "Document review-thread status separately from gate status and identify any remaining reviewer decision."
+  ],
+  "public_pr_snapshot": {
+    "draft": true,
+    "head": "6de41c880893d8e5b1f0011a09f3c06aba7825bb",
+    "head_ref": "solr-16398-rebalance-migrate",
+    "latest_changes_requested_review": {
+      "reviewer": "gerlowskija",
+      "submitted_at": "2026-11-10T15:56:39Z",
+      "summary": "The reviewer acknowledged the changes and left inline comments. The current review decision remains changes requested."
+    },
+    "merge_state_status": "UNKNOWN",
+    "mergeable": "UNKNOWN",
+    "review_decision": "CHANGES_REQUESTED",
+    "state": "OPEN",
+    "url": "https://github.com/apache/solr/pull/5284"
+  },
+  "reconciliation_cautions": [
+    "The live PR head matches the r3 passed receipt at this check, but PR reviewDecision remains CHANGES_REQUESTED. Gate success does not resolve a human review thread.",
+    "The failed r2 receipt is for a different head and remains part of the history; do not call the old failure unexplained or treat it as a passing result.",
+    "Check all current inline review threads, PR checks, and mergeability again before making a disposition. Current mergeability was UNKNOWN."
+  ],
+  "source_board_snapshot": "b53116116a9778d3399b2a7a6951eda66868264b",
+  "status": "background context only; not a final review disposition",
+  "summary": "Background notes for reconciling PR 5284's review feedback, exact-head gate results, and current public review decision.",
+  "type": "report"
+}
