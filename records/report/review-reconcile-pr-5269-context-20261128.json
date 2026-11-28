@@ -1,0 +1,68 @@
+{
+  "checked_on": "2026-11-28",
+  "codex_chat_sources": [
+    {
+      "conversation_date": "2026-11-19",
+      "summary": "This shared thread found the PR 5269 changes-requested review, described the incorrect Configsets placement, and reported corrected branches index-query-main-section at 7fa00860af3f335c6611410314ed9ec69ac5c70e and index-query-main-access-messages at 71faba6e41f108163784ed295d7903467cace8a0. The chat reported that public PR heads were not changed and proof was pending.",
+      "thread_id": "01a1f471-409d-7550-989e-39efdc6e785f",
+      "title": "Review PR 5257 security changes"
+    },
+    {
+      "conversation_date": "2026-11-18",
+      "summary": "The separate solr-17849-review-response branch at 844e0438d9c2e9635215c436b54b789d1f373a1c overlaps the PR 5269 integration. The chat explicitly called for reconciling the two PRs before submission.",
+      "thread_id": "01a1f1a1-46e3-7c00-a085-bca6db7e3114",
+      "title": "Address PR 5257 review"
+    }
+  ],
+  "coordination_v2_records_at_snapshot": [
+    {
+      "assignment": "records/assignment/index-main-section-linux-20261119-r2.json",
+      "claim": "records/claim/index-main-section-linux-20261119-r2.json",
+      "receipt": "records/receipt/index-main-section-linux-20261119-r2.json",
+      "receipt_verdict": "passed",
+      "related_pr_5269_head": "3ec4a1ae626191d9cb2a8c42e7f69356f31b862d",
+      "source_branch": "index-query-main-section",
+      "source_head": "c5955f3d47ffc8ff21bd59f77ae6846263ced4c6",
+      "source_pr_5257_head": "e92a34eefd6adf0ec2fe5d3018abc332af77e246",
+      "status": "The exact-head receipt passed UI and root checks and the live main-navigation exercise. It says two live edge cases were not exercised: missing required response fields and cancellation of an in-flight handler load. No matching release record was found at the source snapshot."
+    },
+    {
+      "assignment": "records/assignment/index-query-split-windows-20261120.json",
+      "release": "records/release/index-query-split-windows-20261120.json",
+      "report": "records/report/index-query-split-windows-20261120-report.json",
+      "status": "Separate header and screen branches were prepared; the report says the public PR heads and comments were unchanged and no tests ran on Windows."
+    }
+  ],
+  "id": "review-reconcile-pr-5269-context-20261128",
+  "job": "review-reconcile-prs-5257-5269-5284-20261128",
+  "next_worker_actions": [
+    "Refresh the current PR 5269 review and inline-comment threads and compare each request with the current public diff.",
+    "Verify the exact current fork branch head, claim, release, gate, and receipt for the main-section correction before using the r2 result.",
+    "Document whether each correction is on PR 5269, only on a fork branch, or superseded by later work."
+  ],
+  "public_pr_snapshot": {
+    "draft": true,
+    "head": "3ec4a1ae626191d9cb2a8c42e7f69356f31b862d",
+    "head_ref": "solr-17849-index-query-content",
+    "latest_changes_requested_review": {
+      "reviewer": "malliaridis",
+      "submitted_at": "2026-11-19T01:48:44Z",
+      "summary": "Index & Query belongs in its own main section. The similarly named Configsets sub-page is for configuring handlers, not using them.",
+      "url": "https://github.com/apache/solr/pull/5269#pullrequestreview-5968118886"
+    },
+    "merge_state_status": "UNSTABLE",
+    "mergeable": "MERGEABLE",
+    "review_decision": "CHANGES_REQUESTED",
+    "state": "OPEN",
+    "url": "https://github.com/apache/solr/pull/5269"
+  },
+  "reconciliation_cautions": [
+    "The current public PR 5269 head is still 3ec4a1ae626191d9cb2a8c42e7f69356f31b862d. The corrected index-query-main-section head c5955f3d47ffc8ff21bd59f77ae6846263ced4c6 is a separate fork branch.",
+    "The passing c5955 receipt covers only that exact branch head. Its claim has no matching release record at snapshot b53116116a9778d3399b2a7a6951eda66868264b; inspect execution state before overlapping gate work.",
+    "Reconcile PR 5257's header branch and PR 5269's content branch as a stack. Do not infer that either public PR was updated by the corrected fork branches."
+  ],
+  "source_board_snapshot": "b53116116a9778d3399b2a7a6951eda66868264b",
+  "status": "background context only; not a final review disposition",
+  "summary": "Background notes for reconciling PR 5269's navigation-placement review with the related PR 5257 header work.",
+  "type": "report"
+}
